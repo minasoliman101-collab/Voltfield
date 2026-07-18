@@ -13,6 +13,8 @@ A self‑contained, **fully static website** — plain HTML, CSS, and JavaScript
 | `voltfield-suppliers.html` | **All Suppliers** — supplier & distributor directory. |
 | `voltfield-bom.html` | **Quick Order** — paste/upload a BOM; matches each line to the catalog. |
 | `voltfield-bom-generator.html` | **BOM Generator** — pick any engineered part and generate its full component-level Bill of Materials (quantities, materials, indicative cost roll-up; CSV/print export). |
+| `voltfield-pcb.html` | **Custom PCB Builder** — fab configurator (size, layers, material, copper, finish, mask, tolerances, vias) with live board preview, parametric budgetary pricing + quantity breaks, Gerber attach, printable spec sheet, add-to-quote. Pricing multipliers live at the top of the page script. |
+| `voltfield-eol.html` / `voltfield-eol-data.js` | **Obsolete/EOL reference** — discontinued series with OEM-recommended successors (see §10). |
 | `voltfield-bom-engine.js` | Component-template engine behind the BOM Generator (per-category teardowns that scale with configuration). |
 | `voltfield-site-config.js` | **Site config** — production domain (canonical/OG URLs) + ad monetization settings and slot renderer. |
 | `robots.txt` / `sitemap.xml` | Crawl control + sitemap (replace `YOUR-DOMAIN` before submitting to Search Console). |

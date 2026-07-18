@@ -60,21 +60,8 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .supban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:8px}
 .supban h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.6vw,40px);letter-spacing:.01em;line-height:1}
 .supban p{color:#AFC0D3;font-size:14.5px;max-width:620px;margin-top:10px;line-height:1.55}
-/* distributor integrations */
-.integrate{max-width:1240px;margin:0 auto;padding:26px 20px 4px}
-.integrate h2{font-family:var(--disp);font-weight:700;font-size:24px;margin-bottom:4px}
-.integrate .sub{font-size:13px;color:var(--slate);margin-bottom:16px}
-.intgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-.intcard{background:var(--card);border:1px solid var(--line-dark);border-left:5px solid var(--mro);padding:16px 16px 14px;display:flex;flex-direction:column}
-.intcard.live{border-left-color:var(--ok)}
-.intcard .itop{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.intcard .iname{font-family:var(--disp);font-weight:700;font-size:22px}
-.intcard .status{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px}
 .status.live{background:#E7F1EB;color:var(--ok)}
 .status.road{background:#FBF0DA;color:var(--warn)}
-.intcard p{font-size:12.5px;color:var(--slate);margin-top:8px;line-height:1.5;flex:1}
-.intcard .imeta{font-family:var(--mono);font-size:10.5px;color:var(--ink-2);margin-top:10px;border-top:1px solid var(--line);padding-top:9px}
-.intcard .imeta b{color:var(--ink)}
 /* directory */
 .dirwrap{max-width:1240px;margin:0 auto;padding:30px 20px 60px}
 .dirhead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:16px}
@@ -133,6 +120,7 @@ footer a{color:#9FB0C3}
     <a href="voltfield-suppliers.html" class="on">All Suppliers</a>
     <a href="voltfield-bom.html">Quick Order</a>
     <a href="voltfield-bom-generator.html">BOM Generator</a>
+    <a href="voltfield-pcb.html">PCB Builder</a>
     <a href="voltfield-eol.html">Obsolete/EOL</a>
     <a href="voltfield-insights.html">Insights</a>
     <a href="voltfield-account.html">Account</a>
@@ -147,34 +135,7 @@ footer a{color:#9FB0C3}
   <div class="supban-in">
     <div class="eyebrow">All Suppliers · Sourcing Network</div>
     <h1>The manufacturers, mills, and distributors behind the catalog</h1>
-    <p>Voltfield aggregates OEMs, tubular mills, integrators, and full-line distributors into one catalog. The Grainger, Uline, Graybar, and MSC Industrial assortments are all live in the All Parts catalog. Filter by sector or supplier type to see who backs each part.</p>
-  </div>
-</section>
-
-<section class="integrate">
-  <h2>Distributor catalog integrations</h2>
-  <div class="sub">Full-line distributors mirrored into the All Parts catalog. Grainger, Uline, Graybar, and MSC Industrial are all live and share one taxonomy — more can be added as data.</div>
-  <div class="intgrid">
-    <div class="intcard live">
-      <div class="itop"><span class="iname">Grainger</span><span class="status live">Catalog live</span></div>
-      <p>Full-line industrial supply: fasteners &amp; hardware, raw materials, safety &amp; PPE, tools, motors, electrical, plumbing, and 13 more categories.</p>
-      <div class="imeta"><b>1,096,732</b> SKUs · 20 categories · mirrored July 2026</div>
-    </div>
-    <div class="intcard live">
-      <div class="itop"><span class="iname">Uline</span><span class="status live">Catalog live</span></div>
-      <p>Shipping boxes, protective packaging, tape &amp; labels, bags &amp; poly, warehouse material handling, janitorial, and safety supply.</p>
-      <div class="imeta"><b>41,000</b> SKUs · 8 categories · mirrored July 2026</div>
-    </div>
-    <div class="intcard live">
-      <div class="itop"><span class="iname">Graybar</span><span class="status live">Catalog live</span></div>
-      <p>Electrical distribution, building wire &amp; cable, datacomm/networking, lighting &amp; controls, conduit, automation, and security/life-safety.</p>
-      <div class="imeta"><b>300,000</b> SKUs · 7 categories · mirrored July 2026</div>
-    </div>
-    <div class="intcard live">
-      <div class="itop"><span class="iname">MSC Industrial</span><span class="status live">Catalog live</span></div>
-      <p>Metalworking depth: cutting tools, precision measuring &amp; inspection, toolholding/workholding, abrasives, coolants, machine accessories, and industrial fasteners.</p>
-      <div class="imeta"><b>600,000</b> SKUs · 7 categories · mirrored July 2026</div>
-    </div>
+    <p>Voltfield aggregates OEMs, tubular mills, integrators, and full-line distributors into one catalog — every listed supplier's assortment is buyable in All Parts. Filter by sector or supplier type to see who backs each part.</p>
   </div>
 </section>
 
@@ -199,7 +160,7 @@ footer a{color:#9FB0C3}
   <div class="in">
     <div>
       <h5>Voltfield Supply Co.</h5>
-      <p>Stocking distributor and sourcing agent for long-lead electrical, storage, oilfield, and MRO/industrial supply equipment. Regional manufacturer/mill profiles are a modeled sourcing network for demonstration; sector coverage, lead-time posture, and compliance scopes are indicative and confirmed at quote. OEM brand listings (SMA, Schneider Electric, Siemens, ABB, Eaton, and others) identify product lines Voltfield sources and cross-references as an <b>independent</b> distributor — Voltfield is not affiliated with, sponsored by, or endorsed by these manufacturers, and all trademarks belong to their owners. Distributor catalog integrations mirror each distributor's publicly published assortment.</p>
+      <p>Stocking distributor and sourcing agent for long-lead electrical, storage, oilfield, and MRO/industrial supply equipment. Regional manufacturer/mill profiles are a modeled sourcing network for demonstration; sector coverage, lead-time posture, and compliance scopes are indicative and confirmed at quote. OEM brand listings (SMA, Schneider Electric, Siemens, ABB, Eaton, and others) identify product lines Voltfield sources and cross-references as an <b>independent</b> distributor — Voltfield is not affiliated with, sponsored by, or endorsed by these manufacturers, and all trademarks belong to their owners. Distributor assortments in the All Parts catalog mirror each distributor's publicly published product range.</p>
     </div>
     <div>
       <h5>Explore</h5>
