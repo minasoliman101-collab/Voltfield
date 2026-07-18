@@ -16,8 +16,8 @@
 'use strict';
 
 const SITE_CONFIG = {
-  /* e.g. 'https://www.voltfieldsupply.com' — leave '' until you have a domain */
-  siteUrl: '',
+  /* production domain (no trailing slash) — update if you attach a custom domain */
+  siteUrl: 'https://ornate-queijadas-cb9933.netlify.app',
 
   ads: {
     provider: 'none',      /* 'none' | 'adsense' */

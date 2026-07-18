@@ -1,6 +1,6 @@
 /* VOLTFIELD service worker — offline-first app shell.
    Bump VERSION whenever you redeploy changed files so clients update. */
-const VERSION = 'voltfield-v3';
+const VERSION = 'voltfield-v4';
 
 const CORE = [
   './',
@@ -27,8 +27,15 @@ const CORE = [
 ];
 
 self.addEventListener('install', e => {
+  /* tolerant precache: one missing file must not brick the whole install */
   e.waitUntil(
-    caches.open(VERSION).then(c => c.addAll(CORE)).then(() => self.skipWaiting())
+    caches.open(VERSION)
+      .then(c => Promise.allSettled(CORE.map(u => c.add(u))))
+      .then(results => {
+        const failed = results.filter(r => r.status === 'rejected').length;
+        if (failed) console.warn('[sw] precache: ' + failed + ' of ' + CORE.length + ' files failed; continuing');
+      })
+      .then(() => self.skipWaiting())
   );
 });
 
