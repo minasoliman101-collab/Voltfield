@@ -1,0 +1,42 @@
+{
+  "name": "VOLTFIELD Supply Co. — Energy & Industrial Parts",
+  "short_name": "VOLTFIELD",
+  "description": "Search 2M+ configurable SKUs, generate component BOMs for OEM parts, match parts lists, and build quotes — data centers, renewables, battery storage, oil & gas, and MRO.",
+  "id": "./",
+  "start_url": "./index.html?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#101B2D",
+  "theme_color": "#101B2D",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "BOM Generator",
+      "short_name": "BOM Gen",
+      "description": "Generate a component-level BOM for any engineered part",
+      "url": "./voltfield-bom-generator.html?source=pwa",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Quick Order / BOM Match",
+      "short_name": "Quick Order",
+      "description": "Paste a parts list and match every line to the catalog",
+      "url": "./voltfield-bom.html?source=pwa",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "All Parts",
+      "short_name": "Catalog",
+      "description": "Browse the full 2M+ SKU catalog",
+      "url": "./voltfield-supply-catalog.html?source=pwa",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

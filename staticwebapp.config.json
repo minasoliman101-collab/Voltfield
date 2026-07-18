@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json.schemastore.org/staticwebapp.config.json",
+  "responseOverrides": {
+    "404": { "rewrite": "/404.html" }
+  },
+  "mimeTypes": {
+    ".json": "application/json",
+    ".js": "text/javascript",
+    ".html": "text/html",
+    ".xml": "application/xml",
+    ".txt": "text/plain"
+  },
+  "globalHeaders": {
+    "cache-control": "public, max-age=3600",
+    "x-content-type-options": "nosniff",
+    "referrer-policy": "strict-origin-when-cross-origin"
+  },
+  "routes": [
+    { "route": "/sw.js", "headers": { "cache-control": "no-cache" } },
+    { "route": "/manifest.json", "headers": { "cache-control": "public, max-age=86400" } },
+    { "route": "/icons/*", "headers": { "cache-control": "public, max-age=2592000" } },
+    { "route": "/voltfield-catalog-data.js", "headers": { "cache-control": "public, max-age=604800, stale-while-revalidate=86400" } },
+    { "route": "/voltfield-bom-engine.js", "headers": { "cache-control": "public, max-age=86400, stale-while-revalidate=86400" } },
+    { "route": "/voltfield-site-config.js", "headers": { "cache-control": "public, max-age=3600" } },
+    { "route": "/*.html", "headers": { "cache-control": "public, max-age=600, stale-while-revalidate=3600" } },
+    { "route": "/sitemap.xml", "headers": { "cache-control": "public, max-age=86400" } },
+    { "route": "/robots.txt", "headers": { "cache-control": "public, max-age=86400" } },
+    { "route": "/ads.txt", "headers": { "cache-control": "public, max-age=86400" } }
+  ]
+}

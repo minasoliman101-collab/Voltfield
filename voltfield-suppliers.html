@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Suppliers — Distributor &amp; OEM Directory | VOLTFIELD Supply Co.</title>
+<meta name="description" content="Directory of the distributors and OEM lines behind the VOLTFIELD catalog — Grainger, Uline, Graybar, MSC Industrial and Voltfield's direct energy-infrastructure lines — with SKU counts, sectors and lead-time profiles.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:title" content="All Suppliers — distributor & OEM directory">
+<meta property="og:description" content="See which suppliers stock each sector and jump straight into their catalog assortments.">
+<meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#101B2D;--ink-2:#22334C;--slate:#5B6B7E;--paper:#DDE5EC;--card:#F3F6FA;
+  --line:#C4CFDA;--line-dark:#A7B6C6;--signal:#FFC400;--signal-deep:#E5AC00;
+  --crit:#C43D2E;--warn:#D98E04;--ok:#2E7D4F;
+  --dc:#2B6CB0;--re:#2E7D4F;--bess:#B7791F;--og:#9C4221;--mro:#5B6B7E;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;--body:'IBM Plex Sans',system-ui,sans-serif;--disp:'Barlow Condensed',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5}
+button,a,input{font-family:inherit}
+button,a{cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+.utilbar{background:var(--ink);color:#C9D3DF;font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:6px 20px;display:flex;justify-content:space-between;gap:12px}
+.utilbar b{color:var(--signal);font-weight:600}
+.utilbar .right{display:none}
+@media(min-width:720px){.utilbar .right{display:block}}
+header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:60}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo .bolt{width:34px;height:34px;background:var(--signal);display:grid;place-items:center;border:2px solid var(--ink)}
+.logo .bolt svg{width:18px;height:18px}
+.logo .wordmark{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.02em;line-height:1}
+.logo .wordmark small{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.18em;color:var(--slate)}
+.hnav{display:none;gap:4px}
+.navtoggle{display:none;background:var(--ink);color:#fff;border:2px solid var(--ink);width:42px;height:38px;font-size:20px;line-height:1;align-items:center;justify-content:center;flex-shrink:0}
+@media(max-width:899px){.navtoggle{display:inline-flex}.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:2px solid var(--ink);padding:6px 12px 10px;gap:0;box-shadow:0 10px 20px rgba(16,27,45,.14);z-index:59}.hnav.open a{padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}.hnav.open a:last-child{border-bottom:0}.hnav.open a.on{border-left-color:var(--signal);color:var(--ink)}}
+@media(min-width:900px){.hnav{display:flex}}
+.hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
+.hnav a:hover{color:var(--ink);background:var(--paper)}
+.hnav a.on{color:var(--ink);border-bottom-color:var(--signal)}
+.headright{margin-left:auto;display:flex;align-items:center;gap:10px}
+.quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
+.quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
+/* banner */
+.supban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:24px 20px 26px}
+.supban-in{max-width:1240px;margin:0 auto}
+.supban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:8px}
+.supban h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.6vw,40px);letter-spacing:.01em;line-height:1}
+.supban p{color:#AFC0D3;font-size:14.5px;max-width:620px;margin-top:10px;line-height:1.55}
+/* distributor integrations */
+.integrate{max-width:1240px;margin:0 auto;padding:26px 20px 4px}
+.integrate h2{font-family:var(--disp);font-weight:700;font-size:24px;margin-bottom:4px}
+.integrate .sub{font-size:13px;color:var(--slate);margin-bottom:16px}
+.intgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.intcard{background:var(--card);border:1px solid var(--line-dark);border-left:5px solid var(--mro);padding:16px 16px 14px;display:flex;flex-direction:column}
+.intcard.live{border-left-color:var(--ok)}
+.intcard .itop{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.intcard .iname{font-family:var(--disp);font-weight:700;font-size:22px}
+.intcard .status{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px}
+.status.live{background:#E7F1EB;color:var(--ok)}
+.status.road{background:#FBF0DA;color:var(--warn)}
+.intcard p{font-size:12.5px;color:var(--slate);margin-top:8px;line-height:1.5;flex:1}
+.intcard .imeta{font-family:var(--mono);font-size:10.5px;color:var(--ink-2);margin-top:10px;border-top:1px solid var(--line);padding-top:9px}
+.intcard .imeta b{color:var(--ink)}
+/* directory */
+.dirwrap{max-width:1240px;margin:0 auto;padding:30px 20px 60px}
+.dirhead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.dirhead h2{font-family:var(--disp);font-weight:700;font-size:26px}
+.dirsearch{display:flex;border:2px solid var(--ink);background:#fff;max-width:340px;width:100%}
+.dirsearch input{flex:1;border:0;padding:10px 12px;font-family:var(--mono);font-size:13px;background:transparent}
+.dirsearch button{background:var(--ink);color:#fff;border:0;padding:0 16px;font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.04em}
+.filters{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.filterrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.filterrow .flabel{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);min-width:64px}
+.fbtn{border:1px solid var(--line-dark);background:var(--card);padding:6px 12px;font-family:var(--disp);font-weight:600;font-size:13.5px;letter-spacing:.02em;color:var(--ink-2);text-transform:uppercase;display:inline-flex;align-items:center;gap:6px}
+.fbtn:hover{border-color:var(--ink)}
+.fbtn.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.fbtn .sw{width:9px;height:9px}
+.dircount{font-family:var(--mono);font-size:12px;color:var(--slate);margin-bottom:14px}
+.supgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.supcard{background:var(--card);border:1px solid var(--line-dark);display:flex;flex-direction:column}
+.supcard .stripe{height:5px;display:flex}
+.supcard .stripe span{flex:1}
+.supcard .sc-in{padding:15px 16px 14px;flex:1;display:flex;flex-direction:column}
+.supcard .sc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.supcard h3{font-family:var(--disp);font-weight:700;font-size:21px;line-height:1.05;letter-spacing:.01em}
+.supcard .stype{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;background:var(--paper);border:1px solid var(--line-dark);color:var(--ink-2);padding:3px 7px;white-space:nowrap;flex-shrink:0}
+.supcard .sfocus{font-size:12.5px;color:var(--slate);margin-top:9px;line-height:1.5;flex:1}
+.supcard .stags{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px}
+.supcard .sectag{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#fff;padding:2px 7px}
+.supcard .sc-foot{border-top:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;color:var(--slate)}
+.supcard .sc-foot .region{color:var(--ink-2)}
+.supcard .lead{font-family:var(--mono);font-size:9.5px;font-weight:500;padding:2px 6px}
+.lead.ok{background:#E7F1EB;color:var(--ok)}
+.lead.warn{background:#FBF0DA;color:var(--warn)}
+.lead.crit{background:#F7E4E1;color:var(--crit)}
+.supcard .cmpline{font-family:var(--mono);font-size:9.5px;color:var(--slate);padding:0 16px 12px;line-height:1.5}
+.empty{background:var(--card);border:1px dashed var(--line-dark);padding:40px;text-align:center;color:var(--slate)}
+footer{background:var(--ink);color:#9FB0C3;padding:30px 20px;font-size:12px}
+footer .in{max-width:1240px;margin:0 auto;display:grid;gap:16px}
+@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr}}
+footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer p{line-height:1.6;max-width:560px}
+footer a{color:#9FB0C3}
+</style>
+</head>
+<body>
+<div class="utilbar">
+  <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
+  <span class="right">HOUSTON · PHOENIX · COLUMBUS &nbsp;|&nbsp; +1 (800) 555-0119 &nbsp;|&nbsp; RFQ@VOLTFIELD.CO</span>
+</div>
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — ENERGY INFRASTRUCTURE PARTS</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="index.html">Home</a>
+    <a href="voltfield-supply-catalog.html">All Parts</a>
+    <a href="voltfield-suppliers.html" class="on">All Suppliers</a>
+    <a href="voltfield-bom.html">Quick Order</a>
+    <a href="voltfield-bom-generator.html">BOM Generator</a>
+    <a href="voltfield-insights.html">Insights</a>
+    <a href="voltfield-account.html">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View quote list on catalog page">QUOTE LIST <span class="ct" id="quoteCount">0</span></a>
+  </div>
+</header>
+
+<section class="supban">
+  <div class="supban-in">
+    <div class="eyebrow">All Suppliers · Sourcing Network</div>
+    <h1>The manufacturers, mills, and distributors behind the catalog</h1>
+    <p>Voltfield aggregates OEMs, tubular mills, integrators, and full-line distributors into one catalog. The Grainger, Uline, Graybar, and MSC Industrial assortments are all live in the All Parts catalog. Filter by sector or supplier type to see who backs each part.</p>
+  </div>
+</section>
+
+<section class="integrate">
+  <h2>Distributor catalog integrations</h2>
+  <div class="sub">Full-line distributors mirrored into the All Parts catalog. Grainger, Uline, Graybar, and MSC Industrial are all live and share one taxonomy — more can be added as data.</div>
+  <div class="intgrid">
+    <div class="intcard live">
+      <div class="itop"><span class="iname">Grainger</span><span class="status live">Catalog live</span></div>
+      <p>Full-line industrial supply: fasteners &amp; hardware, raw materials, safety &amp; PPE, tools, motors, electrical, plumbing, and 13 more categories.</p>
+      <div class="imeta"><b>1,096,732</b> SKUs · 20 categories · mirrored July 2026</div>
+    </div>
+    <div class="intcard live">
+      <div class="itop"><span class="iname">Uline</span><span class="status live">Catalog live</span></div>
+      <p>Shipping boxes, protective packaging, tape &amp; labels, bags &amp; poly, warehouse material handling, janitorial, and safety supply.</p>
+      <div class="imeta"><b>41,000</b> SKUs · 8 categories · mirrored July 2026</div>
+    </div>
+    <div class="intcard live">
+      <div class="itop"><span class="iname">Graybar</span><span class="status live">Catalog live</span></div>
+      <p>Electrical distribution, building wire &amp; cable, datacomm/networking, lighting &amp; controls, conduit, automation, and security/life-safety.</p>
+      <div class="imeta"><b>300,000</b> SKUs · 7 categories · mirrored July 2026</div>
+    </div>
+    <div class="intcard live">
+      <div class="itop"><span class="iname">MSC Industrial</span><span class="status live">Catalog live</span></div>
+      <p>Metalworking depth: cutting tools, precision measuring &amp; inspection, toolholding/workholding, abrasives, coolants, machine accessories, and industrial fasteners.</p>
+      <div class="imeta"><b>600,000</b> SKUs · 7 categories · mirrored July 2026</div>
+    </div>
+  </div>
+</section>
+
+<div class="dirwrap">
+  <div class="dirhead">
+    <h2>Supplier directory</h2>
+    <form class="dirsearch" id="dirForm" role="search">
+      <input id="dirInput" type="search" placeholder="Search supplier or product…" aria-label="Search suppliers">
+      <button type="submit">SEARCH</button>
+    </form>
+  </div>
+  <div class="filters">
+    <div class="filterrow" id="fSector"><span class="flabel">Sector</span></div>
+    <div class="filterrow" id="fType"><span class="flabel">Type</span></div>
+  </div>
+  <div class="dircount" id="dirCount"></div>
+  <div class="supgrid" id="supgrid"></div>
+  <div class="empty" id="supEmpty" style="display:none">No suppliers match those filters. <a href="#" id="resetLink">Reset</a></div>
+</div>
+
+<footer>
+  <div class="in">
+    <div>
+      <h5>Voltfield Supply Co.</h5>
+      <p>Stocking distributor and sourcing agent for long-lead electrical, storage, oilfield, and MRO/industrial supply equipment. Supplier profiles shown here are a modeled sourcing network for demonstration; sector coverage, lead-time posture, and compliance scopes are indicative and confirmed at quote. Distributor catalog integrations (Grainger live; Uline, Graybar on roadmap) mirror each distributor's publicly published assortment.</p>
+    </div>
+    <div>
+      <h5>Explore</h5>
+      <p><a href="index.html">Home</a> &nbsp;·&nbsp; <a href="voltfield-supply-catalog.html">All Parts catalog</a><br><br>
+      <a href="voltfield-supply-catalog.html?sector=dc">Data Centers</a> · <a href="voltfield-supply-catalog.html?sector=re">Renewables</a> · <a href="voltfield-supply-catalog.html?sector=bess">Storage</a> · <a href="voltfield-supply-catalog.html?sector=og">Oil &amp; Gas</a> · <a href="voltfield-supply-catalog.html?sector=mro">MRO</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const SECTORS={
+  dc:{label:'Data Centers',code:'DC',color:'#2B6CB0'},
+  re:{label:'Renewables',code:'RE',color:'#2E7D4F'},
+  bess:{label:'Battery Storage',code:'BESS',color:'#B7791F'},
+  og:{label:'Oil & Gas',code:'O&G',color:'#9C4221'},
+  mro:{label:'Industrial Supply (MRO)',code:'MRO',color:'#5B6B7E'}
+};
+const TYPES=['Distributor','Manufacturer','Mill / Foundry','Integrator','Recert / Rebuild'];
+// lead posture: ok (short), warn (long-lead), crit (very long / allocation)
+const SUP=[
+  {n:'Grainger',t:'Distributor',s:['mro'],f:'Full-line MRO: fasteners, raw stock, safety, tools, motors, electrical, plumbing. Mirrored into the All Parts catalog.',r:'National · Lake Forest, IL',lead:'ok',leadTxt:'Mostly in-stock',cmp:['ISO 9001'],status:'live'},
+  {n:'Uline',t:'Distributor',s:['mro'],f:'Shipping, packaging, material handling, janitorial, and safety supply. Live in the All Parts catalog (41,000 SKUs).',r:'National · Pleasant Prairie, WI',lead:'ok',leadTxt:'In-stock',cmp:['ISO 9001'],status:'live'},
+  {n:'Graybar',t:'Distributor',s:['mro','dc','re'],f:'Electrical, comm/data, and industrial distribution overlapping data-center and BOS lines. Live in the All Parts catalog (300,000 SKUs).',r:'National · St. Louis, MO',lead:'ok',leadTxt:'In-stock',cmp:['ISO 9001'],status:'live'},
+  {n:'MSC Industrial',t:'Distributor',s:['mro'],f:'Metalworking and MRO: cutting tools, measuring &amp; inspection, toolholding, abrasives, coolants, and machine accessories. Live in the All Parts catalog (600,000 SKUs).',r:'National · Melville, NY',lead:'ok',leadTxt:'In-stock–1 wk',cmp:['ISO 9001'],status:'live'},
+  {n:'Meridian Transformer Works',t:'Manufacturer',s:['dc','re'],f:'Large power transformers, GSUs, and pad-mount distribution units. Grain-oriented electrical steel supply constrains output.',r:'Columbus, OH',lead:'crit',leadTxt:'120–160 wk',cmp:['IEEE C57','ANSI'],status:'live'},
+  {n:'Cascade Switchgear Systems',t:'Manufacturer',s:['dc'],f:'Medium- and low-voltage metal-clad switchgear, air and molded-case breakers, protective relays.',r:'Phoenix, AZ',lead:'warn',leadTxt:'24–130 wk',cmp:['ANSI C37','UL 1558'],status:'live'},
+  {n:'Anvil Power Systems',t:'Manufacturer',s:['dc'],f:'Standby and prime diesel and natural-gas gensets, static UPS, and flywheel ride-through.',r:'Houston, TX',lead:'warn',leadTxt:'22–90 wk',cmp:['UL 2200','NFPA 110'],status:'live'},
+  {n:'ColdLoop Thermal',t:'Manufacturer',s:['dc','bess'],f:'Coolant distribution units, CRAH/CRAC, rear-door heat exchangers, and adiabatic chillers for high-density racks.',r:'Austin, TX',lead:'ok',leadTxt:'14–24 wk',cmp:['ASHRAE','AHRI'],status:'live'},
+  {n:'BusRail Distribution',t:'Manufacturer',s:['dc'],f:'Feeder and plug-in busway, rack and floor PDUs, static transfer switches.',r:'Columbus, OH',lead:'ok',leadTxt:'8–22 wk',cmp:['UL 857','UL 1008'],status:'live'},
+  {n:'Helios Module Co.',t:'Manufacturer',s:['re'],f:'Mono PERC, TOPCon, and bifacial modules with FEOC-screened and US-assembled sourcing options.',r:'Import + Phoenix, AZ',lead:'warn',leadTxt:'16–26 wk',cmp:['UL 61730','FEOC-screen'],status:'live'},
+  {n:'AmpereVolt Inverters',t:'Manufacturer',s:['re','bess'],f:'Central and string inverters plus grid-forming/following PCS. US-assembled, FEOC-clean lines.',r:'Phoenix, AZ',lead:'warn',leadTxt:'20–32 wk',cmp:['UL 1741-SB','IEEE 1547'],status:'live'},
+  {n:'SunTrack Structures',t:'Manufacturer',s:['re'],f:'Single-axis trackers, fixed-tilt racking, driven and helical foundation piles, module hardware.',r:'Albuquerque, NM',lead:'ok',leadTxt:'4–22 wk',cmp:['ASCE 7','UL 3703'],status:'live'},
+  {n:'GridKnit Cable',t:'Manufacturer',s:['re','dc'],f:'PV wire, MV collection cable, MC4 connectors, and copper busbar for collection systems.',r:'Houston, TX',lead:'ok',leadTxt:'2–18 wk',cmp:['UL 4703','ICEA'],status:'live'},
+  {n:'IronCell Storage',t:'Integrator',s:['bess'],f:'LFP and NMC DC blocks, modular racks, and containerized BESS integration at current $/kWh benchmarks.',r:'Dallas, TX',lead:'warn',leadTxt:'18–30 wk',cmp:['UL 9540A','NFPA 855'],status:'live'},
+  {n:'SentinelFire Safety',t:'Manufacturer',s:['bess'],f:'Aerosol and clean-agent suppression, off-gas detection, and deflagration venting for storage enclosures.',r:'Columbus, OH',lead:'ok',leadTxt:'12–14 wk',cmp:['NFPA 855','UL 9540A'],status:'live'},
+  {n:'ThermaCore Skids',t:'Manufacturer',s:['bess','dc'],f:'Liquid cooling skids and containerized HVAC/chiller units for storage and data-center thermal loops.',r:'Austin, TX',lead:'ok',leadTxt:'16–20 wk',cmp:['ASHRAE','UL 60335'],status:'live'},
+  {n:'Fairline Tubular Mill',t:'Mill / Foundry',s:['og'],f:'OCTG casing and tubing, API 5L line pipe. Domestic quench-and-temper capacity expanding through 2029.',r:'Birmingham, AL',lead:'warn',leadTxt:'20–28 wk',cmp:['API 5CT','API 5L'],status:'live'},
+  {n:'DrillEdge Pipe & Tool',t:'Manufacturer',s:['og'],f:'Drill pipe (S-135/G-105), packers, bridge plugs, and completion tools.',r:'Midland, TX',lead:'warn',leadTxt:'16–34 wk',cmp:['API 5DP','API 11D1'],status:'live'},
+  {n:'WellGuard Pressure Control',t:'Manufacturer',s:['og'],f:'Wellheads, Christmas trees, annular and ram BOPs, frac and choke/kill valves.',r:'Houston, TX',lead:'crit',leadTxt:'18–36 wk',cmp:['API 6A','API 16A'],status:'live'},
+  {n:'Rampart Valve & Flange',t:'Manufacturer',s:['og'],f:'Gate, globe, check, and ball valves; weld/threaded fittings and flanges across ASME classes.',r:'Houston, TX',lead:'ok',leadTxt:'6–14 wk',cmp:['API 600','API 6D','ASME B16'],status:'live'},
+  {n:'LiftPro Artificial Lift',t:'Manufacturer',s:['og'],f:'ESP systems, rod pumps, sucker rods, and beam-lift completions.',r:'Odessa, TX',lead:'warn',leadTxt:'10–22 wk',cmp:['API 11S','API 11B'],status:'live'},
+  {n:'Cordova Recert Services',t:'Recert / Rebuild',s:['og'],f:'API-scope recertification and rebuild of BOPs, valves, and wellheads — new-alternative lead times.',r:'Odessa, TX',lead:'ok',leadTxt:'4–10 wk',cmp:['API Q1','API 6A rebuild'],status:'live'},
+  {n:'Titan Fastener Supply',t:'Distributor',s:['mro','og'],f:'Fasteners, stud bolts and heavy hex nuts (B7/2H), ring-joint and spiral-wound gaskets.',r:'Houston, TX',lead:'ok',leadTxt:'In-stock–2 wk',cmp:['ASTM A193','ASME B16.20'],status:'live'},
+  {n:'Foundry Metals Direct',t:'Mill / Foundry',s:['mro'],f:'Bar, sheet, plate, structural shapes, and tube/pipe raw stock in steel, aluminum, and stainless.',r:'Cleveland, OH',lead:'ok',leadTxt:'In-stock–2 wk',cmp:['ASTM A36','ASTM B209'],status:'live'},
+  {n:'GuardWell PPE',t:'Distributor',s:['mro'],f:'Head/eye/face protection, respiratory, hearing, cut-resistant gloves, and hi-vis clothing.',r:'National · Columbus, OH',lead:'ok',leadTxt:'In-stock',cmp:['ANSI Z87','NIOSH'],status:'live'},
+  {n:'MotorWorks Industrial',t:'Manufacturer',s:['mro'],f:'AC and DC motors, gearmotors, VFDs, and motor controls (NEMA frames).',r:'Columbus, OH',lead:'ok',leadTxt:'2–3 wk',cmp:['NEMA MG1','UL 1004'],status:'live'},
+  {n:'FlowPath Fluid Power',t:'Distributor',s:['mro','og'],f:'Hydraulic hose and fittings (same-week crimp), pneumatic fittings, FRLs, cylinders, and valves.',r:'Houston, TX',lead:'ok',leadTxt:'Same-week crimp',cmp:['SAE J517','ISO 18752'],status:'live'},
+  {n:'BrightArc Electrical',t:'Distributor',s:['mro','dc'],f:'Wire and cable, conduit and fittings, wiring devices, and LED lighting.',r:'National · Phoenix, AZ',lead:'ok',leadTxt:'In-stock–1 wk',cmp:['UL 83','UL 1598'],status:'live'},
+  {n:'ToolForge Supply',t:'Distributor',s:['mro'],f:'Hand and power tools, abrasives, cutting tools, and toolholding/workholding.',r:'National · Columbus, OH',lead:'ok',leadTxt:'In-stock',cmp:['ASME B107','ANSI B94'],status:'live'}
+];
+
+let fSector=null, fType=null, fQ='';
+function el(tag,cls,html){const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+
+function renderFilters(){
+  const fs=document.getElementById('fSector');
+  fs.querySelectorAll('.fbtn').forEach(b=>b.remove());
+  const allS=el('button','fbtn'+(fSector?'':' on'),'All');allS.onclick=()=>{fSector=null;render();};fs.appendChild(allS);
+  Object.keys(SECTORS).forEach(k=>{
+    const b=el('button','fbtn'+(fSector===k?' on':''),`<span class="sw" style="background:${SECTORS[k].color}"></span>${SECTORS[k].label}`);
+    b.onclick=()=>{fSector=(fSector===k?null:k);render();};fs.appendChild(b);
+  });
+  const ft=document.getElementById('fType');
+  ft.querySelectorAll('.fbtn').forEach(b=>b.remove());
+  const allT=el('button','fbtn'+(fType?'':' on'),'All');allT.onclick=()=>{fType=null;render();};ft.appendChild(allT);
+  TYPES.forEach(t=>{
+    const b=el('button','fbtn'+(fType===t?' on':''),t);
+    b.onclick=()=>{fType=(fType===t?null:t);render();};ft.appendChild(b);
+  });
+}
+function matched(){
+  const toks=fQ.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  return SUP.filter(x=>{
+    if(fSector&&!x.s.includes(fSector))return false;
+    if(fType&&x.t!==fType)return false;
+    if(toks.length){const hay=(x.n+' '+x.f+' '+x.t+' '+x.s.map(k=>SECTORS[k].label).join(' ')).toLowerCase();if(!toks.every(t=>hay.includes(t)))return false;}
+    return true;
+  });
+}
+function render(){
+  renderFilters();
+  const list=matched();
+  const grid=document.getElementById('supgrid'), empty=document.getElementById('supEmpty');
+  document.getElementById('dirCount').textContent=`${list.length} supplier${list.length!==1?'s':''}`+(fSector?` · ${SECTORS[fSector].label}`:'')+(fType?` · ${fType}`:'')+(fQ?` · “${fQ}”`:'');
+  if(!list.length){grid.innerHTML='';empty.style.display='';return;}
+  empty.style.display='none';
+  grid.innerHTML=list.map(x=>{
+    const stripe=x.s.map(k=>`<span style="background:${SECTORS[k].color}"></span>`).join('');
+    const tags=x.s.map(k=>`<span class="sectag" style="background:${SECTORS[k].color}">${SECTORS[k].code}</span>`).join('');
+    const statusChip=x.status==='roadmap'?'<span class="lead warn">Roadmap</span>':`<span class="lead ${x.lead}">${x.leadTxt}</span>`;
+    return `<div class="supcard">
+      <div class="stripe">${stripe}</div>
+      <div class="sc-in">
+        <div class="sc-top"><h3>${x.n}</h3><span class="stype">${x.t}</span></div>
+        <div class="sfocus">${x.f}</div>
+        <div class="stags">${tags}</div>
+      </div>
+      <div class="cmpline">${x.cmp.join(' · ')}</div>
+      <div class="sc-foot"><span class="region">${x.r}</span>${statusChip}</div>
+    </div>`;
+  }).join('');
+}
+document.getElementById('dirForm').addEventListener('submit',e=>{e.preventDefault();fQ=document.getElementById('dirInput').value.trim();render();});
+document.getElementById('resetLink').addEventListener('click',e=>{e.preventDefault();fSector=null;fType=null;fQ='';document.getElementById('dirInput').value='';render();});
+
+/* read sector from URL if arriving from a sector link */
+(function(){const p=new URLSearchParams(location.search);const s=p.get('sector');if(s&&SECTORS[s])fSector=s;})();
+/* quote counter shared across pages */
+(function(){try{const q=JSON.parse(localStorage.getItem('vf_quote')||'[]');document.getElementById('quoteCount').textContent=Array.isArray(q)?q.length:0;}catch(e){}})();
+render();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script src="voltfield-site-config.js"></script>
+</body>
+</html>

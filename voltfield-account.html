@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Account &amp; Plans — Streamline Parts Buying | VOLTFIELD Supply Co.</title>
+<meta name="description" content="Create a VOLTFIELD account and pick a plan: saved BOMs and quote history, shared team quote lists, lead-time alerts, priority quoting, and ERP/API integration for procurement teams.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:title" content="VOLTFIELD Accounts & Plans">
+<meta property="og:description" content="Free catalog access, plus Pro and Enterprise plans that streamline parts buying and repairs for teams.">
+<meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#101B2D;--ink-2:#22334C;--slate:#5B6B7E;--paper:#DDE5EC;--card:#F3F6FA;
+  --line:#C4CFDA;--line-dark:#A7B6C6;--signal:#FFC400;--signal-deep:#E5AC00;
+  --crit:#C43D2E;--warn:#D98E04;--ok:#2E7D4F;
+  --dc:#2B6CB0;--re:#2E7D4F;--bess:#B7791F;--og:#9C4221;--mro:#5B6B7E;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;--body:'IBM Plex Sans',system-ui,sans-serif;--disp:'Barlow Condensed',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5}
+button,a,input{font-family:inherit}
+button,a{cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+.utilbar{background:var(--ink);color:#C9D3DF;font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:6px 20px;display:flex;justify-content:space-between;gap:12px}
+.utilbar b{color:var(--signal);font-weight:600}
+.utilbar .right{display:none}
+@media(min-width:720px){.utilbar .right{display:block}}
+header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:60}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo .bolt{width:34px;height:34px;background:var(--signal);display:grid;place-items:center;border:2px solid var(--ink)}
+.logo .bolt svg{width:18px;height:18px}
+.logo .wordmark{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.02em;line-height:1}
+.logo .wordmark small{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.18em;color:var(--slate)}
+.hnav{display:none;gap:4px}
+.navtoggle{display:none;background:var(--ink);color:#fff;border:2px solid var(--ink);width:42px;height:38px;font-size:20px;line-height:1;align-items:center;justify-content:center;flex-shrink:0}
+@media(max-width:899px){.navtoggle{display:inline-flex}.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:2px solid var(--ink);padding:6px 12px 10px;gap:0;box-shadow:0 10px 20px rgba(16,27,45,.14);z-index:59}.hnav.open a{padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}.hnav.open a:last-child{border-bottom:0}.hnav.open a.on{border-left-color:var(--signal);color:var(--ink)}}
+@media(min-width:900px){.hnav{display:flex}}
+.hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
+.hnav a:hover{color:var(--ink);background:var(--paper)}
+.hnav a.on{color:var(--ink);border-bottom-color:var(--signal)}
+.headright{margin-left:auto;display:flex;align-items:center;gap:10px}
+.quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
+.quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
+/* banner */
+.accban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:24px 20px 26px}
+.accban-in{max-width:1240px;margin:0 auto}
+.accban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:8px}
+.accban h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.6vw,40px);letter-spacing:.01em;line-height:1}
+.accban p{color:#AFC0D3;font-size:14.5px;max-width:660px;margin-top:10px;line-height:1.55}
+.wrap{max-width:1240px;margin:0 auto;padding:26px 20px 60px}
+/* auth card */
+.authcard{background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--signal);padding:18px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.authcard .who{flex:1;min-width:240px}
+.authcard h2{font-family:var(--disp);font-weight:700;font-size:22px}
+.authcard p{font-size:13px;color:var(--slate);margin-top:4px;max-width:560px}
+.authbtns{display:flex;gap:10px;flex-wrap:wrap}
+.abtn{border:2px solid var(--ink);padding:11px 18px;font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:var(--card);color:var(--ink)}
+.abtn:hover{background:var(--ink);color:#fff}
+.abtn.primary{background:var(--signal)}
+.abtn.primary:hover{background:var(--ink);color:var(--signal)}
+.authnote{font-family:var(--mono);font-size:11px;color:var(--slate);margin-top:10px;line-height:1.6}
+.signedin{display:none;font-family:var(--mono);font-size:12.5px}
+.signedin b{color:var(--ok)}
+/* plans */
+.planhead{margin:34px 0 16px}
+.planhead h2{font-family:var(--disp);font-weight:700;font-size:28px}
+.planhead p{font-size:13.5px;color:var(--slate);max-width:640px;margin-top:4px}
+.plans{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:900px){.plans{grid-template-columns:repeat(3,1fr)}}
+.plan{background:var(--card);border:1px solid var(--line-dark);display:flex;flex-direction:column}
+.plan.hot{border:2px solid var(--ink);position:relative}
+.plan.hot::before{content:"MOST POPULAR";position:absolute;top:-12px;left:18px;background:var(--signal);color:var(--ink);font-family:var(--disp);font-weight:700;font-size:12px;letter-spacing:.1em;padding:2px 10px}
+.plan .p-band{height:5px}
+.plan .p-body{padding:20px 20px 16px;flex:1;display:flex;flex-direction:column}
+.plan h3{font-family:var(--disp);font-weight:700;font-size:24px}
+.plan .price{font-family:var(--disp);font-weight:700;font-size:34px;margin-top:8px}
+.plan .price small{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--slate)}
+.plan .for{font-family:var(--mono);font-size:11px;color:var(--slate);margin-top:2px}
+.plan ul{list-style:none;margin-top:14px;flex:1}
+.plan li{font-size:13px;color:var(--ink-2);padding:6px 0 6px 24px;position:relative;border-bottom:1px solid var(--line)}
+.plan li:last-child{border-bottom:0}
+.plan li::before{content:"✓";position:absolute;left:2px;color:var(--ok);font-weight:700}
+.plan li.soon::before{content:"◷";color:var(--warn)}
+.plan li.soon{color:var(--slate)}
+.plan .p-foot{padding:16px 20px 20px}
+.pbtn{display:block;text-align:center;border:2px solid var(--ink);padding:12px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;background:var(--card);color:var(--ink)}
+.pbtn:hover{background:var(--ink);color:#fff}
+.pbtn.primary{background:var(--signal)}
+.pbtn.primary:hover{background:var(--ink);color:var(--signal)}
+.plannote{font-family:var(--mono);font-size:11px;color:var(--slate);line-height:1.7;margin-top:16px;max-width:860px}
+/* how it streamlines */
+.howgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:16px}
+.how{background:var(--card);border:1px solid var(--line-dark);border-top:4px solid var(--signal);padding:16px}
+.how h4{font-family:var(--disp);font-weight:700;font-size:18px}
+.how p{font-size:12.5px;color:var(--slate);margin-top:6px;line-height:1.55}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;font-family:var(--mono);font-size:12.5px;padding:11px 18px;border-left:4px solid var(--signal);z-index:120;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+footer{background:var(--ink);color:#9FB0C3;padding:30px 20px;font-size:12px}
+footer .in{max-width:1240px;margin:0 auto}
+footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer p{line-height:1.6;max-width:760px}
+footer a{color:#9FB0C3}
+</style>
+</head>
+<body>
+<div class="utilbar">
+  <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
+  <span class="right">HOUSTON · PHOENIX · COLUMBUS &nbsp;|&nbsp; +1 (800) 555-0119 &nbsp;|&nbsp; RFQ@VOLTFIELD.CO</span>
+</div>
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — ENERGY INFRASTRUCTURE PARTS</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="index.html">Home</a>
+    <a href="voltfield-supply-catalog.html">All Parts</a>
+    <a href="voltfield-suppliers.html">All Suppliers</a>
+    <a href="voltfield-bom.html">Quick Order</a>
+    <a href="voltfield-bom-generator.html">BOM Generator</a>
+    <a href="voltfield-insights.html">Insights</a>
+    <a href="voltfield-account.html" class="on">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View quote list on catalog page">QUOTE LIST <span class="ct" id="quoteCount">0</span></a>
+  </div>
+</header>
+
+<section class="accban">
+  <div class="accban-in">
+    <div class="eyebrow">Account &amp; Plans</div>
+    <h1>One account for your whole parts workflow</h1>
+    <p>Browse free forever. Sign in to keep your quote lists and generated BOMs with you across devices — and upgrade when your team needs shared lists, lead-time alerts, priority quoting, and ERP integration for streamlined buying and repairs.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="authcard" id="authCard">
+    <div class="who">
+      <h2 id="authTitle">Sign in or create your account</h2>
+      <p id="authSub">Use your work identity — no new password to manage. Your on-device quote list keeps working either way; signing in is what lets us attach it to your account.</p>
+      <div class="authnote" id="authNote"></div>
+    </div>
+    <div class="authbtns" id="authBtns">
+      <a class="abtn primary" href="/.auth/login/aad?post_login_redirect_uri=/voltfield-account.html">Sign in with Microsoft</a>
+      <a class="abtn" href="/.auth/login/github?post_login_redirect_uri=/voltfield-account.html">Sign in with GitHub</a>
+    </div>
+    <div class="signedin" id="signedIn">Signed in as <b id="userName"></b> &nbsp;·&nbsp; <a href="/.auth/logout?post_logout_redirect_uri=/voltfield-account.html">Sign out</a></div>
+  </div>
+
+  <div class="planhead">
+    <h2>Plans that streamline parts buying &amp; repairs</h2>
+    <p>Start free. Upgrade when procurement becomes a team sport — every paid feature exists to cut the hours between "we need this part" and "it's on a PO."</p>
+  </div>
+
+  <div class="plans">
+    <div class="plan">
+      <div class="p-band" style="background:var(--mro)"></div>
+      <div class="p-body">
+        <h3>Starter</h3>
+        <div class="price">$0<small> /forever</small></div>
+        <div class="for">For individual engineers &amp; buyers</div>
+        <ul>
+          <li>Full 2M+ SKU catalog &amp; configurator</li>
+          <li>BOM Generator with CSV export</li>
+          <li>Quick Order parts-list matching</li>
+          <li>Quote list &amp; printable RFQs (on this device)</li>
+          <li>Works offline as an installed app</li>
+        </ul>
+      </div>
+      <div class="p-foot"><a class="pbtn" href="voltfield-supply-catalog.html">Start browsing</a></div>
+    </div>
+
+    <div class="plan hot">
+      <div class="p-band" style="background:var(--signal)"></div>
+      <div class="p-body">
+        <h3>Pro Procurement</h3>
+        <div class="price">$49<small> /user/mo · placeholder pricing</small></div>
+        <div class="for">For maintenance &amp; procurement teams</div>
+        <ul>
+          <li>Everything in Starter</li>
+          <li class="soon">Saved BOMs &amp; quote history in the cloud</li>
+          <li class="soon">Shared team quote lists &amp; approvals</li>
+          <li class="soon">Lead-time &amp; price-change alerts on watched parts</li>
+          <li class="soon">Priority quote turnaround (4-hr target)</li>
+          <li class="soon">Repair-kit suggestions from generated BOMs</li>
+        </ul>
+      </div>
+      <div class="p-foot"><a class="pbtn primary" id="proBtn" href="#">Start Pro</a></div>
+    </div>
+
+    <div class="plan">
+      <div class="p-band" style="background:var(--dc)"></div>
+      <div class="p-body">
+        <h3>Enterprise</h3>
+        <div class="price">Custom</div>
+        <div class="for">For multi-site operators &amp; EPCs</div>
+        <ul>
+          <li>Everything in Pro</li>
+          <li class="soon">Catalog &amp; pricing API access</li>
+          <li class="soon">ERP / punchout integration (Ariba, Coupa, SAP)</li>
+          <li class="soon">Negotiated pricing &amp; stocking agreements</li>
+          <li class="soon">Dedicated sourcing desk &amp; SSO/SCIM</li>
+        </ul>
+      </div>
+      <div class="p-foot"><a class="pbtn" id="entBtn" href="#">Contact sales</a></div>
+    </div>
+  </div>
+
+  <p class="plannote"><b>Transparency note:</b> Starter is fully functional today. Features marked ◷ are the paid roadmap — they require the cloud backend described in the README (§9) and are not yet live; the Start Pro button takes payment only once a checkout link is configured, and otherwise opens a sales conversation. Pricing shown is a placeholder to validate demand.</p>
+
+  <div class="planhead" style="margin-top:40px">
+    <h2>How a subscription streamlines buying &amp; repairs</h2>
+  </div>
+  <div class="howgrid">
+    <div class="how"><h4>From breakdown to PO, faster</h4><p>Generate the component BOM for the failed asset, tick the parts that need replacing, and the shared quote list routes to whoever holds the budget — no spreadsheet ping-pong.</p></div>
+    <div class="how"><h4>Repair kits, not part hunts</h4><p>Saved BOMs become reorderable repair kits: seals, gaskets, bolting and wear parts for each asset class, one click to re-quote at current pricing and lead times.</p></div>
+    <div class="how"><h4>Lead-time risk, surfaced early</h4><p>Watch the long-lead items that can idle a project — transformers, switchgear, PCS — and get alerted when quoted lead times or indicative pricing move.</p></div>
+    <div class="how"><h4>Procurement systems, connected</h4><p>Enterprise punchout and API access put the catalog inside your ERP, so requisitions carry real part numbers, prices, and lead times from the start.</p></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  <div class="in">
+    <h5>Voltfield Supply Co. — Accounts</h5>
+    <p>Sign-in is provided by the hosting platform's identity service (Microsoft Entra ID or GitHub via Azure Static Web Apps built-in authentication) — we never see or store passwords. Paid-plan features ship with the cloud backend; until then, all core tools remain free and your data stays on your device. Questions: <a href="mailto:RFQ@VOLTFIELD.CO">RFQ@VOLTFIELD.CO</a> &nbsp;·&nbsp; <a href="privacy-policy.html">Privacy policy</a></p>
+  </div>
+</footer>
+
+<script src="voltfield-site-config.js"></script>
+<script>
+function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._tm);t._tm=setTimeout(function(){t.classList.remove('show');},2400);}
+try{var q=JSON.parse(localStorage.getItem('vf_quote')||'[]');document.getElementById('quoteCount').textContent=Array.isArray(q)?q.length:0;}catch(e){}
+
+/* ---------- auth state (Azure Static Web Apps built-in auth) ---------- */
+(function(){
+  var isLocal=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)||location.protocol==='file:';
+  fetch('/.auth/me',{credentials:'include'}).then(function(r){
+    if(!r.ok) throw new Error('no auth endpoint');
+    return r.json();
+  }).then(function(d){
+    var p=d&&d.clientPrincipal;
+    if(p){
+      document.getElementById('authBtns').style.display='none';
+      document.getElementById('signedIn').style.display='block';
+      document.getElementById('userName').textContent=p.userDetails;
+      document.getElementById('authTitle').textContent='You’re signed in';
+      document.getElementById('authSub').textContent='Your account is active. Saved BOMs and shared quote lists appear here as those features roll out.';
+    }
+  }).catch(function(){
+    if(isLocal){
+      document.getElementById('authNote').innerHTML='Sign-in activates automatically once the site is deployed to Azure Static Web Apps (README &sect;3, Option C) &mdash; the buttons above use its built-in identity endpoints. On other hosts, wire an identity provider per README &sect;9.';
+    }
+  });
+})();
+
+/* ---------- plan buttons ---------- */
+(function(){
+  var B=(typeof SITE_CONFIG!=='undefined'&&SITE_CONFIG.billing)||{};
+  var pro=document.getElementById('proBtn'), ent=document.getElementById('entBtn');
+  if(B.proMonthlyUrl){ pro.href=B.proMonthlyUrl; }
+  else{
+    pro.href='mailto:'+(B.salesEmail||'RFQ@VOLTFIELD.CO')+'?subject='+encodeURIComponent('VOLTFIELD Pro Procurement — early access')+'&body='+encodeURIComponent('We’re interested in the Pro plan. Team size and use case: ');
+    pro.addEventListener('click',function(){toast('Checkout isn’t wired yet — this opens a sales email instead');});
+  }
+  ent.href='mailto:'+(B.salesEmail||'RFQ@VOLTFIELD.CO')+'?subject='+encodeURIComponent('VOLTFIELD Enterprise — pricing & integration')+'&body='+encodeURIComponent('Sites/locations: \nERP system: \nAnnual parts spend (rough): ');
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+</body>
+</html>

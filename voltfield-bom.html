@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quick Order — Paste a BOM, Match Every Line to 2M+ Parts | VOLTFIELD Supply Co.</title>
+<meta name="description" content="Paste a parts list or upload a CSV and match every line against 2M+ configurable SKUs from Grainger, Uline, Graybar, MSC and Voltfield energy lines — priced, lead-timed, and added to your quote in one click.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:title" content="Quick Order — match your whole BOM in seconds">
+<meta property="og:description" content="Free-text or CSV parts lists matched, configured and priced against a 2M+ SKU industrial catalog.">
+<meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#101B2D;--ink-2:#22334C;--slate:#5B6B7E;--paper:#DDE5EC;--card:#F3F6FA;
+  --line:#C4CFDA;--line-dark:#A7B6C6;--signal:#FFC400;--signal-deep:#E5AC00;
+  --crit:#C43D2E;--warn:#D98E04;--ok:#2E7D4F;
+  --dc:#2B6CB0;--re:#2E7D4F;--bess:#B7791F;--og:#9C4221;--mro:#5B6B7E;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;--body:'IBM Plex Sans',system-ui,sans-serif;--disp:'Barlow Condensed',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5}
+button,a,input,select,textarea{font-family:inherit}
+button,a{cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+.utilbar{background:var(--ink);color:#C9D3DF;font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:6px 20px;display:flex;justify-content:space-between;gap:12px}
+.utilbar b{color:var(--signal);font-weight:600}
+.utilbar .right{display:none}
+@media(min-width:720px){.utilbar .right{display:block}}
+header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:60}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo .bolt{width:34px;height:34px;background:var(--signal);display:grid;place-items:center;border:2px solid var(--ink)}
+.logo .bolt svg{width:18px;height:18px}
+.logo .wordmark{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.02em;line-height:1}
+.logo .wordmark small{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.18em;color:var(--slate)}
+.hnav{display:none;gap:4px}
+.navtoggle{display:none;background:var(--ink);color:#fff;border:2px solid var(--ink);width:42px;height:38px;font-size:20px;line-height:1;align-items:center;justify-content:center;flex-shrink:0}
+@media(max-width:899px){.navtoggle{display:inline-flex}.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:2px solid var(--ink);padding:6px 12px 10px;gap:0;box-shadow:0 10px 20px rgba(16,27,45,.14);z-index:59}.hnav.open a{padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}.hnav.open a:last-child{border-bottom:0}.hnav.open a.on{border-left-color:var(--signal);color:var(--ink)}}
+@media(min-width:900px){.hnav{display:flex}}
+.hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
+.hnav a:hover{color:var(--ink);background:var(--paper)}
+.hnav a.on{color:var(--ink);border-bottom-color:var(--signal)}
+.headright{margin-left:auto;display:flex;align-items:center;gap:10px}
+.quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
+.quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
+/* banner */
+.bomban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:24px 20px 26px}
+.bomban-in{max-width:1240px;margin:0 auto}
+.bomban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:8px}
+.bomban h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.6vw,40px);letter-spacing:.01em;line-height:1}
+.bomban p{color:#AFC0D3;font-size:14.5px;max-width:640px;margin-top:10px;line-height:1.55}
+.wrap{max-width:1240px;margin:0 auto;padding:26px 20px 60px}
+/* input panel */
+.inpanel{background:var(--card);border:1px solid var(--line-dark);padding:18px}
+.inpanel h2{font-family:var(--disp);font-weight:700;font-size:22px;margin-bottom:4px}
+.inpanel .hint{font-family:var(--mono);font-size:11px;color:var(--slate);line-height:1.6;margin-bottom:12px}
+.inpanel .hint code{background:var(--paper);border:1px solid var(--line);padding:1px 5px;color:var(--ink-2)}
+textarea#bomText{width:100%;min-height:180px;border:1px solid var(--line-dark);padding:12px;font-family:var(--mono);font-size:13px;line-height:1.7;resize:vertical;color:var(--ink)}
+.inrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.btn{border:2px solid var(--ink);padding:11px 18px;font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase}
+.btn.primary{background:var(--signal);color:var(--ink)}
+.btn.primary:hover{background:var(--ink);color:var(--signal)}
+.btn.ghost{background:var(--card);color:var(--ink-2);font-weight:600}
+.btn.ghost:hover{border-color:var(--ink);color:var(--ink)}
+.btn.dark{background:var(--ink);color:#fff}
+.btn.dark:hover{background:var(--ink-2)}
+.filelbl{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--slate)}
+.filelbl input{display:none}
+.filepick{border:1px dashed var(--line-dark);padding:9px 14px;font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-2)}
+.filepick:hover{border-color:var(--ink);color:var(--ink)}
+/* summary */
+.summary{display:none;margin-top:24px}
+.summary.show{display:block}
+.sumbar{background:var(--ink);color:#E8EDF3;padding:14px 18px;display:flex;gap:26px;flex-wrap:wrap;align-items:center;border-left:4px solid var(--signal)}
+.sumstat .k{font-family:var(--disp);font-weight:700;font-size:24px;color:var(--signal);line-height:1}
+.sumstat .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:#9FB0C3;margin-top:2px}
+.sumact{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap}
+.sumnote{font-family:var(--mono);font-size:12px;color:var(--ok);margin-top:10px;min-height:16px}
+/* results table */
+.tablewrap{overflow-x:auto;margin-top:14px;border:1px solid var(--line-dark);background:var(--card)}
+table.bom{border-collapse:collapse;width:100%;min-width:820px}
+table.bom th{background:var(--paper);font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line-dark);position:sticky;top:0}
+table.bom td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;font-size:13px}
+table.bom tr.nomatch{background:#FBF2F0}
+.bom .yourline{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);max-width:180px}
+.bom .m-pn{font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--ink)}
+.bom .m-name{font-family:var(--disp);font-weight:600;font-size:15px;line-height:1.1;margin-top:1px}
+.bom .m-spec{font-family:var(--mono);font-size:10px;color:var(--slate);margin-top:3px;line-height:1.4;max-width:260px}
+.bom .m-src{display:inline-block;font-family:var(--mono);font-size:8.5px;letter-spacing:.05em;text-transform:uppercase;color:#fff;padding:1px 5px;margin-top:4px}
+.bom .price{font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+.bom .price small{color:var(--slate)}
+.bom .qty input{width:64px;border:1px solid var(--line-dark);padding:5px 6px;font-family:var(--mono);font-size:12px;text-align:center}
+.lead{font-family:var(--mono);font-size:9.5px;font-weight:500;padding:2px 6px;white-space:nowrap}
+.lead.ok{background:#E7F1EB;color:var(--ok)}
+.lead.warn{background:#FBF0DA;color:var(--warn)}
+.lead.crit{background:#F7E4E1;color:var(--crit)}
+.conf{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;white-space:nowrap}
+.conf.hi{background:#E7F1EB;color:var(--ok)}
+.conf.md{background:#FBF0DA;color:var(--warn)}
+.conf.lo{background:#F7E4E1;color:var(--crit)}
+.conf.none{background:var(--paper);color:var(--slate);border:1px solid var(--line-dark)}
+.inc{width:17px;height:17px;accent-color:var(--ok)}
+.emptyhint{font-family:var(--mono);font-size:12px;color:var(--slate);padding:16px;text-align:center}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;font-family:var(--mono);font-size:12.5px;padding:11px 18px;border-left:4px solid var(--signal);z-index:120;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+footer{background:var(--ink);color:#9FB0C3;padding:30px 20px;font-size:12px}
+footer .in{max-width:1240px;margin:0 auto;display:grid;gap:16px}
+@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr}}
+footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer p{line-height:1.6;max-width:560px}
+footer a{color:#9FB0C3}
+</style>
+</head>
+<body>
+<div class="utilbar">
+  <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
+  <span class="right">HOUSTON · PHOENIX · COLUMBUS &nbsp;|&nbsp; +1 (800) 555-0119 &nbsp;|&nbsp; RFQ@VOLTFIELD.CO</span>
+</div>
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — ENERGY INFRASTRUCTURE PARTS</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="index.html">Home</a>
+    <a href="voltfield-supply-catalog.html">All Parts</a>
+    <a href="voltfield-suppliers.html">All Suppliers</a>
+    <a href="voltfield-bom.html" class="on">Quick Order</a>
+    <a href="voltfield-bom-generator.html">BOM Generator</a>
+    <a href="voltfield-insights.html">Insights</a>
+    <a href="voltfield-account.html">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View quote list on catalog page">QUOTE LIST <span class="ct" id="quoteCount">0</span></a>
+  </div>
+</header>
+
+<section class="bomban">
+  <div class="bomban-in">
+    <div class="eyebrow">Quick Order · BOM Match</div>
+    <h1>Paste a BOM — we match every line to the catalog</h1>
+    <p>Drop in a parts list or upload a CSV. We match each line against all 2M+ configurable SKUs across Grainger, Uline, Graybar, MSC Industrial, and Voltfield's energy lines, configure the closest variant, and price it — then add the whole list to your quote in one click.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="inpanel">
+    <h2>1 · Enter your parts</h2>
+    <div class="hint">
+      One item per line. Add a quantity with a leading <code>100x</code> or a trailing <code>, 100</code>.
+      Free text works (<code>hex cap screw 1/2 grade 8 zinc</code>), or paste a Voltfield part number (<code>VF-MRO-HCSB-...</code>) for an exact family match.
+    </div>
+    <textarea id="bomText" spellcheck="false" placeholder="100x hex cap screw 1/2-13 grade 8 zinc&#10;24 x THHN wire 12 AWG copper&#10;pad-mount transformer 500 kVA, 4&#10;LFP DC block 5MWh&#10;bubble wrap roll, 40&#10;cat6 plenum cable, 30"></textarea>
+    <div class="inrow">
+      <button class="btn primary" id="matchBtn">Match parts &rarr;</button>
+      <label class="filelbl"><span class="filepick">Upload CSV</span><input type="file" id="csvFile" accept=".csv,.txt"></label>
+      <button class="btn ghost" id="exampleBtn">Load example</button>
+      <button class="btn ghost" id="clearBtn">Clear</button>
+    </div>
+  </div>
+
+  <div class="summary" id="summary">
+    <h2 style="font-family:var(--disp);font-weight:700;font-size:22px;margin:24px 0 10px">2 · Matched results</h2>
+    <div class="sumbar">
+      <div class="sumstat"><div class="k" id="sMatched">0/0</div><div class="l">Lines matched</div></div>
+      <div class="sumstat"><div class="k" id="sValue">$0</div><div class="l">Est. total value</div></div>
+      <div class="sumstat"><div class="k" id="sLead">—</div><div class="l">Longest lead time</div></div>
+      <div class="sumact">
+        <button class="btn primary" id="addAllBtn">Add matched to quote</button>
+        <button class="btn dark" id="csvBtn">Download results (CSV)</button>
+      </div>
+    </div>
+    <div class="sumnote" id="sumNote"></div>
+    <div class="ad-unit" data-ad="incontent" style="padding:0"></div>
+    <div class="tablewrap">
+      <table class="bom">
+        <thead><tr>
+          <th style="width:34px">Use</th><th>Your line</th><th>Matched part</th><th>Unit price</th><th>Lead</th><th style="width:70px">Qty</th><th>Line total</th><th>Confidence</th>
+        </tr></thead>
+        <tbody id="bomBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  <div class="in">
+    <div>
+      <h5>Voltfield Supply Co.</h5>
+      <p>Quick Order matches free-text or CSV part lists against the configurable catalog using name, keyword, category, and attribute tokens. Matches are best-effort and clearly confidence-scored; part numbers, pricing, and lead times are indicative and confirmed at quote. Nothing is ordered automatically — matched lines are added to your quote list for review.</p>
+    </div>
+    <div>
+      <h5>Explore</h5>
+      <p><a href="index.html">Home</a> &nbsp;·&nbsp; <a href="voltfield-supply-catalog.html">All Parts catalog</a> &nbsp;·&nbsp; <a href="voltfield-suppliers.html">All Suppliers</a><br><br><a href="voltfield-supply-catalog.html?quote=1">View quote list &rarr;</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-catalog-data.js"></script>
+<script>
+/* ===== BOM / Quick-Order matcher — uses shared catalog data (FAM, SECTORS, genSKU, priceFor, ...) ===== */
+const DL={grainger:'Grainger',uline:'Uline',graybar:'Graybar',msc:'MSC',voltfield:'Voltfield'};
+let ROWS=[];
+
+function hashStr(s){let x=0;for(let i=0;i<s.length;i++){x=((x<<5)-x+s.charCodeAt(i))>>>0;}return x;}
+function tokenize(s){return s.toLowerCase().replace(/[^a-z0-9\/".\-]+/g,' ').split(/\s+/).filter(Boolean);}
+function parseLine(raw){
+  let qty=1, desc=raw.trim(), m;
+  if(m=desc.match(/^(\d+)\s*[xX]\s+(.+)$/)){qty=+m[1];desc=m[2];}
+  else if(m=desc.match(/^(.+?)[,\t|;]\s*(\d+)\s*$/)){desc=m[1];qty=+m[2];}
+  return {desc:desc.trim(), qty:Math.max(1,qty||1)};
+}
+function tokenDF(t){let n=0;for(const f of FAM)if(f.search.includes(t))n++;return n;}
+function matchFamily(desc){
+  const toks=tokenize(desc);
+  const meaningful=toks.filter(t=>/[a-z]/.test(t)&&t.length>=3);
+  // exact part-number family match
+  const pnm=desc.toUpperCase().match(/VF-([A-Z]+)-([A-Z0-9]+)-/);
+  if(pnm){const fam=FAM.find(f=>SECTORS[f.s].code===pnm[1]&&f.abbr===pnm[2]); if(fam) return {fam,conf:1,exact:true,toks};}
+  if(!meaningful.length) return {fam:null,conf:0,exact:false,toks};
+  // weight rarer, more distinctive tokens higher (inverse document frequency)
+  const wt={}; meaningful.forEach(t=>{const df=tokenDF(t); wt[t]=df===0?0:(df<=2?3:df<=6?1.6:1);});
+  const maxPossible=meaningful.reduce((a,t)=>a+1.5*(wt[t]||0),0);
+  let best=null,bestScore=0;
+  for(const f of FAM){
+    const nm=f.n.toLowerCase();
+    let sc=0;
+    for(const t of meaningful){ const w=wt[t]||0; if(!w)continue; if(nm.includes(t))sc+=1.5*w; else if(f.search.includes(t))sc+=w; }
+    if(sc>bestScore){bestScore=sc;best=f;}
+  }
+  const conf=best&&maxPossible>0?Math.min(1,bestScore/maxPossible):0;
+  return {fam:best,conf,exact:false,toks};
+}
+function configFromTokens(fam,toks){
+  const seed=hashStr(toks.join(' '))%Math.max(1,fam.ct);
+  const picks=genSKU(fam,seed).picks.slice();
+  const norm=s=>s.toLowerCase().replace(/[^a-z0-9\/".]/g,'');
+  const tset=toks.map(norm).filter(t=>t.length>=1);
+  const optToks=o=>o.toLowerCase().split(/[^a-z0-9\/".]+/).map(norm).filter(Boolean);
+  fam.ax.forEach((axis,ai)=>{
+    let bestOpt=null,bestFrac=0;
+    axis.slice(1).forEach(o=>{
+      const ot=optToks(o); if(!ot.length)return;
+      let sc=0; ot.forEach(x=>{ if(tset.some(t=>t===x||(x.length>=2&&t.length>=2&&(t.includes(x)||x.includes(t))))) sc++; });
+      const frac=sc/ot.length;
+      if(sc>0 && frac>bestFrac){bestFrac=frac;bestOpt=o;}
+    });
+    if(bestOpt && bestFrac>=0.5) picks[ai]=bestOpt;
+  });
+  return picks;
+}
+function buildRow(raw){
+  const {desc,qty}=parseLine(raw);
+  const m=matchFamily(desc);
+  if(!m.fam) return {raw,desc,qty,match:null,include:false};
+  const picks=configFromTokens(m.fam,m.toks);
+  const f=m.fam, pn=configuredPN(f,picks,String((hashStr(desc)%90)+10)), name=configuredName(f,picks);
+  const spec=f.ax.map((ax,i)=>`${ax[0]}: ${picks[i]}`).join('  ·  ');
+  const price=priceFor(f,picks), lb=leadBadge(f);
+  return {raw,desc,qty,match:{f,pn,name,spec,price,lb,conf:m.conf,exact:m.exact,sec:f.s},include:true};
+}
+function confClass(c,exact){if(exact||c>=0.6)return['hi','High'];if(c>=0.3)return['md','Medium'];if(c>0)return['lo','Low'];return['none','No match'];}
+function lineTotal(r){return r.match?r.match.price*r.qty:0;}
+
+function render(){
+  const body=document.getElementById('bomBody');
+  if(!ROWS.length){body.innerHTML='<tr><td colspan="8" class="emptyhint">No lines to match yet.</td></tr>';return;}
+  body.innerHTML=ROWS.map((r,i)=>{
+    if(!r.match){
+      return `<tr class="nomatch">
+        <td><input class="inc" type="checkbox" disabled></td>
+        <td class="yourline">${escapeHtml(r.raw)}</td>
+        <td colspan="5" style="color:var(--slate);font-family:var(--mono);font-size:12px">No confident match — try more detail or search the catalog.</td>
+        <td><span class="conf none">No match</span></td>
+      </tr>`;
+    }
+    const m=r.match, col=SECTORS[m.sec].color, [cc,cl]=confClass(m.conf,m.exact);
+    return `<tr>
+      <td><input class="inc" type="checkbox" data-i="${i}" ${r.include?'checked':''}></td>
+      <td class="yourline">${escapeHtml(r.raw)}</td>
+      <td>
+        <div class="m-pn">${m.pn}</div>
+        <div class="m-name">${escapeHtml(m.name)}</div>
+        <div class="m-spec">${escapeHtml(m.spec)}</div>
+        <span class="m-src" style="background:${col}">${DL[m.f.d]} · ${m.f.c}</span>
+      </td>
+      <td class="price">${money(m.price,m.f.pu)}</td>
+      <td><span class="lead ${m.lb.c}">${m.lb.t}</span></td>
+      <td class="qty"><input type="number" min="1" value="${r.qty}" data-qi="${i}"></td>
+      <td class="price">${money(lineTotal(r),m.f.pu)}</td>
+      <td><span class="conf ${cc}">${cl}</span></td>
+    </tr>`;
+  }).join('');
+  body.querySelectorAll('.inc').forEach(cb=>cb.onchange=()=>{ROWS[+cb.dataset.i].include=cb.checked;updateSummary();});
+  body.querySelectorAll('input[data-qi]').forEach(q=>q.onchange=()=>{ROWS[+q.dataset.qi].qty=Math.max(1,parseInt(q.value,10)||1);render();});
+  updateSummary();
+}
+function updateSummary(){
+  const matched=ROWS.filter(r=>r.match), inc=matched.filter(r=>r.include);
+  document.getElementById('sMatched').textContent=matched.length+'/'+ROWS.length;
+  const val=inc.reduce((a,r)=>a+lineTotal(r),0);
+  document.getElementById('sValue').textContent=val>=1000?'$'+Math.round(val).toLocaleString():'$'+val.toFixed(2);
+  let maxLw=-1,lead='—';
+  inc.forEach(r=>{const lw=r.match.f.lw; if(lw>maxLw){maxLw=lw;lead=r.match.lb.t;}});
+  document.getElementById('sLead').textContent=inc.length?lead:'—';
+}
+function escapeHtml(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+function runMatch(text){
+  const lines=text.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+  // drop a header row if it looks like column titles
+  if(lines.length && /desc|part|item|qty|quantity/i.test(lines[0]) && !/\d/.test(lines[0].replace(/[^0-9]/g,''))) lines.shift();
+  ROWS=lines.map(buildRow);
+  document.getElementById('summary').classList.add('show');
+  document.getElementById('sumNote').textContent='';
+  render();
+  document.getElementById('summary').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* ---------- quote integration ---------- */
+function loadQuote(){try{const q=JSON.parse(localStorage.getItem('vf_quote')||'[]');return Array.isArray(q)?q:[];}catch(e){return [];}}
+function saveQuote(q){localStorage.setItem('vf_quote',JSON.stringify(q));document.getElementById('quoteCount').textContent=q.length;}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._tm);t._tm=setTimeout(()=>t.classList.remove('show'),2000);}
+
+document.getElementById('addAllBtn').onclick=()=>{
+  const inc=ROWS.filter(r=>r.match&&r.include);
+  if(!inc.length){toast('No matched lines selected');return;}
+  const q=loadQuote();
+  let added=0;
+  inc.forEach(r=>{const m=r.match; const ex=q.find(x=>x.pn===m.pn);
+    if(ex){ex.qty=(ex.qty||1)+r.qty;} else {q.push({pn:m.pn,name:m.name,price:money(m.price,m.f.pu).replace(/<[^>]+>/g,''),lead:m.lb.t,sec:m.sec,qty:r.qty,up:m.price,pu:m.f.pu,d:m.f.d});added++;}
+  });
+  saveQuote(q);
+  document.getElementById('sumNote').innerHTML=`Added ${inc.length} line${inc.length>1?'s':''} to your quote list (${added} new). <a href="voltfield-supply-catalog.html?quote=1">View quote list &rarr;</a>`;
+  toast(`Added ${inc.length} line${inc.length>1?'s':''} to quote`);
+};
+document.getElementById('csvBtn').onclick=()=>{
+  const inc=ROWS.filter(r=>r.match&&r.include);
+  if(!inc.length){toast('Nothing to export');return;}
+  const rows=[['Your line','Matched part number','Description','Source','Category','Unit price','Qty','Line total','Confidence']];
+  inc.forEach(r=>{const m=r.match,[_,cl]=confClass(m.conf,m.exact);
+    rows.push([r.raw,m.pn,m.name,DL[m.f.d],m.f.c,money(m.price,m.f.pu).replace(/<[^>]+>/g,''),r.qty,money(lineTotal(r),m.f.pu).replace(/<[^>]+>/g,''),cl]);});
+  const csv=rows.map(row=>row.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\r\n');
+  const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='voltfield-bom-match.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+  toast('Results downloaded');
+};
+
+/* ---------- inputs ---------- */
+const EXAMPLE=`100x hex cap screw 1/2-13 grade 8 zinc
+24 x THHN building wire 12 AWG copper
+pad-mount transformer 500 kVA, 4
+MV switchgear 15kV 2000A
+LFP DC block 5MWh, 2
+grid-forming PCS 3MW
+drill pipe S-135 5 inch, 60
+gate valve 6 inch 300#, 12
+bubble wrap roll, 40
+cat6 plenum cable 1000ft, 30
+LED high bay 24000 lumen, 50
+ring joint gasket R BX 316ss`;
+document.getElementById('matchBtn').onclick=()=>{const t=document.getElementById('bomText').value.trim(); if(!t){toast('Paste a parts list first');return;} runMatch(t);};
+document.getElementById('exampleBtn').onclick=()=>{document.getElementById('bomText').value=EXAMPLE;runMatch(EXAMPLE);};
+document.getElementById('clearBtn').onclick=()=>{document.getElementById('bomText').value='';ROWS=[];document.getElementById('summary').classList.remove('show');};
+document.getElementById('csvFile').onchange=e=>{const file=e.target.files[0];if(!file)return;const rd=new FileReader();rd.onload=()=>{document.getElementById('bomText').value=rd.result;runMatch(rd.result);};rd.readAsText(file);e.target.value='';};
+
+/* header quote counter */
+saveQuote(loadQuote());
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+</body>
+</html>

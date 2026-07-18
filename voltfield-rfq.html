@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request for Quotation — VOLTFIELD Supply Co.</title>
+<meta name="description" content="Build and print a Request for Quotation from your quote list — configured part numbers, quantities, indicative pricing and lead times, ready to send.">
+<meta name="robots" content="noindex,follow">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#101B2D;--ink-2:#22334C;--slate:#5B6B7E;--paper:#DDE5EC;--card:#F3F6FA;
+  --line:#C4CFDA;--line-dark:#A7B6C6;--signal:#FFC400;--signal-deep:#E5AC00;
+  --crit:#C43D2E;--warn:#D98E04;--ok:#2E7D4F;
+  --dc:#2B6CB0;--re:#2E7D4F;--bess:#B7791F;--og:#9C4221;--mro:#5B6B7E;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;--body:'IBM Plex Sans',system-ui,sans-serif;--disp:'Barlow Condensed',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5}
+button,a,input,select,textarea{font-family:inherit}
+button,a{cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+.utilbar{background:var(--ink);color:#C9D3DF;font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:6px 20px;display:flex;justify-content:space-between;gap:12px}
+.utilbar b{color:var(--signal);font-weight:600}
+.utilbar .right{display:none}
+@media(min-width:720px){.utilbar .right{display:block}}
+header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:60}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo .bolt{width:34px;height:34px;background:var(--signal);display:grid;place-items:center;border:2px solid var(--ink)}
+.logo .bolt svg{width:18px;height:18px}
+.logo .wordmark{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.02em;line-height:1}
+.logo .wordmark small{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.18em;color:var(--slate)}
+.hnav{display:none;gap:4px}
+.navtoggle{display:none;background:var(--ink);color:#fff;border:2px solid var(--ink);width:42px;height:38px;font-size:20px;line-height:1;align-items:center;justify-content:center;flex-shrink:0}
+@media(max-width:899px){.navtoggle{display:inline-flex}.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:2px solid var(--ink);padding:6px 12px 10px;gap:0;box-shadow:0 10px 20px rgba(16,27,45,.14);z-index:59}.hnav.open a{padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}.hnav.open a:last-child{border-bottom:0}.hnav.open a.on{border-left-color:var(--signal);color:var(--ink)}}
+@media(min-width:900px){.hnav{display:flex}}
+.hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
+.hnav a:hover{color:var(--ink);background:var(--paper)}
+.headright{margin-left:auto;display:flex;align-items:center;gap:10px}
+.quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
+.quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
+/* actions bar */
+.actbar{max-width:900px;margin:18px auto 0;padding:0 20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{border:2px solid var(--ink);padding:11px 18px;font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase}
+.btn.primary{background:var(--signal);color:var(--ink)}
+.btn.primary:hover{background:var(--ink);color:var(--signal)}
+.btn.dark{background:var(--ink);color:#fff}
+.btn.dark:hover{background:var(--ink-2)}
+.btn.ghost{background:var(--card);color:var(--ink-2);font-weight:600}
+.btn.ghost:hover{border-color:var(--ink);color:var(--ink)}
+.acthint{font-family:var(--mono);font-size:11px;color:var(--slate)}
+/* RFQ document */
+.rfqdoc{max-width:900px;margin:18px auto 40px;background:var(--card);border:1px solid var(--line-dark);padding:34px 38px}
+.rfqhead{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-bottom:3px solid var(--ink);padding-bottom:16px}
+.rfqhead .co .nm{font-family:var(--disp);font-weight:700;font-size:30px;letter-spacing:.02em;line-height:1;display:flex;align-items:center;gap:9px}
+.rfqhead .co .nm .bolt{width:30px;height:30px;background:var(--signal);display:grid;place-items:center;border:2px solid var(--ink)}
+.rfqhead .co .nm .bolt svg{width:16px;height:16px}
+.rfqhead .co .addr{font-family:var(--mono);font-size:10.5px;color:var(--slate);line-height:1.7;margin-top:8px}
+.rfqhead .doc{text-align:right}
+.rfqhead .doc h1{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.06em;color:var(--ink)}
+.rfqhead .doc .meta{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);margin-top:6px;line-height:1.8}
+.rfqhead .doc .meta b{color:var(--ink)}
+.buyer{display:grid;grid-template-columns:1fr 1fr;gap:12px 26px;margin:18px 0 6px}
+@media(max-width:640px){.buyer{grid-template-columns:1fr}}
+.bf{display:flex;flex-direction:column;gap:3px}
+.bf label{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}
+.bf input{border:0;border-bottom:1px solid var(--line-dark);padding:6px 2px;font-family:var(--body);font-size:14px;background:transparent}
+.bf input:focus{border-bottom-color:var(--signal);outline:none}
+table.rfq{width:100%;border-collapse:collapse;margin-top:18px}
+table.rfq th{background:var(--ink);color:#E8EDF3;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;text-align:left;padding:9px 10px}
+table.rfq th.r,table.rfq td.r{text-align:right}
+table.rfq td{padding:9px 10px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:top}
+table.rfq .pn{font-family:var(--mono);font-size:11.5px;font-weight:600}
+table.rfq .desc{font-family:var(--disp);font-weight:600;font-size:14.5px;line-height:1.15}
+table.rfq .src{font-family:var(--mono);font-size:9px;letter-spacing:.04em;text-transform:uppercase;color:#fff;padding:1px 5px;display:inline-block;margin-top:3px}
+table.rfq .num{font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+table.rfq input.q{width:60px;border:1px solid var(--line-dark);padding:5px 6px;font-family:var(--mono);font-size:12px;text-align:center}
+.leadcell{font-family:var(--mono);font-size:11px}
+.rm{background:none;border:0;color:var(--slate);font-size:16px;line-height:1}
+.rm:hover{color:var(--crit)}
+.totrow td{border-top:2px solid var(--ink);border-bottom:0;padding-top:12px;font-weight:600}
+.totrow .lbl{font-family:var(--disp);font-weight:700;font-size:16px;text-transform:uppercase;letter-spacing:.03em}
+.totrow .amt{font-family:var(--mono);font-size:16px;font-weight:600}
+.rfqsum{display:flex;gap:26px;flex-wrap:wrap;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.rfqsum .s .k{font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink)}
+.rfqsum .s .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--slate);margin-top:1px}
+.notes{margin-top:20px}
+.notes label{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);display:block;margin-bottom:5px}
+.notes textarea{width:100%;min-height:64px;border:1px solid var(--line-dark);padding:9px;font-family:var(--body);font-size:13px;resize:vertical}
+.terms{font-family:var(--mono);font-size:10px;color:var(--slate);line-height:1.6;margin-top:18px;border-top:1px solid var(--line);padding-top:12px}
+.empty{max-width:900px;margin:40px auto;background:var(--card);border:1px dashed var(--line-dark);padding:48px 20px;text-align:center}
+.empty h2{font-family:var(--disp);font-weight:700;font-size:24px;margin-bottom:6px}
+.empty p{color:var(--slate);margin-bottom:16px}
+.empty a{display:inline-block;background:var(--signal);color:var(--ink);border:2px solid var(--ink);padding:11px 20px;font-family:var(--disp);font-weight:700;letter-spacing:.04em;text-transform:uppercase;text-decoration:none}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;font-family:var(--mono);font-size:12.5px;padding:11px 18px;border-left:4px solid var(--signal);z-index:120;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media print{
+  .noprint{display:none!important}
+  body{background:#fff}
+  .rfqdoc{border:0;margin:0;max-width:100%;padding:0}
+  table.rfq input.q{border:0;text-align:left;width:auto}
+  .bf input{border-bottom:1px solid #ccc}
+  .notes textarea{border:1px solid #ccc}
+  @page{margin:14mm}
+}
+</style>
+</head>
+<body>
+<div class="utilbar noprint">
+  <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
+  <span class="right">HOUSTON · PHOENIX · COLUMBUS &nbsp;|&nbsp; +1 (800) 555-0119 &nbsp;|&nbsp; RFQ@VOLTFIELD.CO</span>
+</div>
+<header class="site noprint">
+  <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — ENERGY INFRASTRUCTURE PARTS</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="index.html">Home</a>
+    <a href="voltfield-supply-catalog.html">All Parts</a>
+    <a href="voltfield-suppliers.html">All Suppliers</a>
+    <a href="voltfield-bom.html">Quick Order</a>
+    <a href="voltfield-bom-generator.html">BOM Generator</a>
+    <a href="voltfield-insights.html">Insights</a>
+    <a href="voltfield-account.html">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View quote list on catalog page">QUOTE LIST <span class="ct" id="quoteCount">0</span></a>
+  </div>
+</header>
+
+<div class="actbar noprint" id="actbar" style="display:none">
+  <button class="btn primary" id="printBtn">Print / Save as PDF</button>
+  <button class="btn dark" id="emailBtn">Email RFQ</button>
+  <a class="btn dark" href="voltfield-supply-catalog.html">Continue shopping</a>
+  <button class="btn ghost" id="clearBtn">Clear quote</button>
+  <span class="acthint">“Print / Save as PDF” makes a clean PDF to attach; “Email RFQ” opens a pre-filled message.</span>
+</div>
+
+<div id="mount"></div>
+<div class="toast" id="toast"></div>
+
+<script src="voltfield-catalog-data.js"></script>
+<script>
+/* ===== Printable RFQ built from the quote list ===== */
+function loadQuote(){try{const q=JSON.parse(localStorage.getItem('vf_quote')||'[]');return Array.isArray(q)?q:[];}catch(e){return [];}}
+function saveQuote(q){localStorage.setItem('vf_quote',JSON.stringify(q));const el=document.getElementById('quoteCount');if(el)el.textContent=q.length;}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._tm);t._tm=setTimeout(()=>t.classList.remove('show'),1900);}
+let QUOTE=loadQuote(); saveQuote(QUOTE);
+
+function unitOf(it){return (it.up!=null&&!isNaN(it.up))?+it.up:(parseFloat(String(it.price).replace(/[^0-9.]/g,''))||0);}
+function puOf(it){return it.pu||(String(it.price).match(/\/(W|kWh|ft|ea)/)?('/'+String(it.price).match(/\/(W|kWh|ft|ea)/)[1]):'');}
+function leadWeeks(it){const m=String(it.lead||'').match(/(\d+)\s*wk/);if(m)return +m[1];if(/stock|same-week/i.test(it.lead||''))return 0;return 900;}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+const now=new Date();
+const pad=n=>String(n).padStart(2,'0');
+const rfqNo='RFQ-'+now.getFullYear()+pad(now.getMonth()+1)+pad(now.getDate())+'-'+pad(now.getHours())+pad(now.getMinutes());
+const dateStr=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+const validUntil=new Date(now.getTime()+30*864e5).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+
+function mount(){
+  if(!QUOTE.length){
+    document.getElementById('actbar').style.display='none';
+    document.getElementById('mount').innerHTML=`<div class="empty"><h2>Your quote list is empty</h2><p>Add parts from the catalog, configurator, or Quick Order matcher, then come back to generate a printable RFQ.</p><a href="voltfield-supply-catalog.html">Browse All Parts &rarr;</a></div>`;
+    return;
+  }
+  document.getElementById('actbar').style.display='flex';
+  document.getElementById('mount').innerHTML=`
+  <div class="rfqdoc">
+    <div class="rfqhead">
+      <div class="co">
+        <div class="nm"><span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>VOLTFIELD SUPPLY CO.</div>
+        <div class="addr">Energy Infrastructure &amp; Industrial Supply<br>Houston · Phoenix · Columbus<br>+1 (800) 555-0119 · RFQ@VOLTFIELD.CO</div>
+      </div>
+      <div class="doc">
+        <h1>REQUEST FOR QUOTATION</h1>
+        <div class="meta">RFQ #: <b>${rfqNo}</b><br>Date: <b>${dateStr}</b><br>Valid until: <b>${validUntil}</b></div>
+      </div>
+    </div>
+    <div class="buyer">
+      <div class="bf"><label>Company</label><input id="bCompany" placeholder="Your company"></div>
+      <div class="bf"><label>Project / Job</label><input id="bProject" placeholder="Project name or number"></div>
+      <div class="bf"><label>Contact name</label><input id="bContact" placeholder="Full name"></div>
+      <div class="bf"><label>Email</label><input id="bEmail" placeholder="name@company.com"></div>
+      <div class="bf"><label>Phone</label><input id="bPhone" placeholder="(   )   -"></div>
+      <div class="bf"><label>Needed by</label><input id="bNeeded" placeholder="Target date"></div>
+    </div>
+    <table class="rfq">
+      <thead><tr>
+        <th style="width:26px">#</th><th>Part</th><th>Source</th><th>Lead</th><th class="r" style="width:60px">Qty</th><th class="r">Unit price</th><th class="r">Line total</th><th class="noprint" style="width:24px"></th>
+      </tr></thead>
+      <tbody id="rfqBody"></tbody>
+    </table>
+    <div class="rfqsum">
+      <div class="s"><div class="k" id="sItems">0</div><div class="l">Line items</div></div>
+      <div class="s"><div class="k" id="sUnits">0</div><div class="l">Total units</div></div>
+      <div class="s"><div class="k" id="sLead">—</div><div class="l">Longest lead time</div></div>
+      <div class="s"><div class="k" id="sTotal">$0</div><div class="l">Estimated total</div></div>
+    </div>
+    <div class="notes"><label>Notes to supplier</label><textarea id="bNotes" placeholder="Delivery address, freight terms, certifications required, tagging, etc."></textarea></div>
+    <div class="terms">Pricing is indicative market range (North America, ${now.getFullYear()}) and is not a firm offer. Final price, availability, and lead time are confirmed on Voltfield's written quotation. Configured part numbers reference a family + attribute selection and may be substituted with an equivalent on confirmation. This RFQ is valid for 30 days from the date shown.</div>
+  </div>`;
+  const an=localStorage.getItem('vf_active_name'); if(an){const bp=document.getElementById('bProject'); if(bp)bp.value=an;}
+  renderRows();
+}
+
+function renderRows(){
+  const body=document.getElementById('rfqBody'); if(!body)return;
+  let total=0, units=0, maxLw=-1, leadTxt='—';
+  body.innerHTML=QUOTE.map((it,i)=>{
+    const up=unitOf(it), pu=puOf(it), qty=Math.max(1,it.qty||1), line=up*qty;
+    total+=line; units+=qty;
+    const lw=leadWeeks(it); if(lw>maxLw){maxLw=lw;leadTxt=it.lead||'—';}
+    const col=SECTORS[it.sec]?SECTORS[it.sec].color:'#5B6B7E';
+    const money=v=>{if(pu==='/W'||pu==='/kWh')return '$'+v.toFixed(v<1?3:2)+' '+pu;if(v<10)return '$'+v.toFixed(2)+(pu?' '+pu:'');if(v<1000)return '$'+v.toFixed(0)+(pu?' '+pu:'');return '$'+Math.round(v).toLocaleString()+(pu?' '+pu:'');};
+    return `<tr>
+      <td class="num">${i+1}</td>
+      <td><div class="pn">${esc(it.pn)}</div><div class="desc">${esc(it.name)}</div></td>
+      <td><span class="src" style="background:${col}">${esc(srcLabel(it))}</span></td>
+      <td class="leadcell">${esc(it.lead||'—')}</td>
+      <td class="r"><input class="q" type="number" min="1" value="${qty}" data-i="${i}"></td>
+      <td class="r num">${money(up)}</td>
+      <td class="r num">${money(line)}</td>
+      <td class="noprint"><button class="rm" data-r="${i}" aria-label="Remove">&times;</button></td>
+    </tr>`;
+  }).join('');
+  const money=v=>v>=1000?'$'+Math.round(v).toLocaleString():'$'+v.toFixed(2);
+  body.insertAdjacentHTML('beforeend',`<tr class="totrow"><td></td><td colspan="4" class="lbl">Estimated total</td><td></td><td class="r amt">${money(total)}</td><td class="noprint"></td></tr>`);
+  document.getElementById('sItems').textContent=QUOTE.length;
+  document.getElementById('sUnits').textContent=units.toLocaleString();
+  document.getElementById('sLead').textContent=QUOTE.length?leadTxt:'—';
+  document.getElementById('sTotal').textContent=money(total);
+  body.querySelectorAll('input.q').forEach(q=>q.onchange=()=>{QUOTE[+q.dataset.i].qty=Math.max(1,parseInt(q.value,10)||1);saveQuote(QUOTE);renderRows();});
+  body.querySelectorAll('.rm').forEach(b=>b.onclick=()=>{QUOTE.splice(+b.dataset.r,1);saveQuote(QUOTE);if(!QUOTE.length){mount();}else{renderRows();}});
+}
+/* source label: prefer stored distributor, else sector label */
+function srcLabel(it){return (it.d&&DIST_NAME[it.d])?DIST_NAME[it.d]:(SECTORS[it.sec]?SECTORS[it.sec].label:'—');}
+
+document.getElementById('printBtn').onclick=()=>window.print();
+document.getElementById('emailBtn').onclick=()=>{
+  if(!QUOTE.length){toast('Nothing to send');return;}
+  const g=id=>{const el=document.getElementById(id);return el?el.value.trim():'';};
+  const company=g('bCompany'),contact=g('bContact'),email=g('bEmail'),phone=g('bPhone'),project=g('bProject'),needed=g('bNeeded'),notes=g('bNotes');
+  let total=0,units=0;
+  const lines=QUOTE.map((it,i)=>{const up=unitOf(it),qty=Math.max(1,it.qty||1),pu=puOf(it);total+=up*qty;units+=qty;return (i+1)+'. '+qty+' x '+it.pn+' — '+it.name+' ['+srcLabel(it)+'] @ $'+up.toFixed(up<10?2:0)+(pu?(' '+pu):'')+' = $'+(up*qty).toFixed(2);});
+  const CAP=25, body=['REQUEST FOR QUOTATION','RFQ #: '+rfqNo,'Date: '+dateStr,''];
+  if(company)body.push('Company: '+company);
+  if(contact)body.push('Contact: '+contact);
+  if(email)body.push('Email: '+email);
+  if(phone)body.push('Phone: '+phone);
+  if(project)body.push('Project: '+project);
+  if(needed)body.push('Needed by: '+needed);
+  body.push('','LINE ITEMS ('+QUOTE.length+'):',...lines.slice(0,CAP));
+  if(lines.length>CAP)body.push('... and '+(lines.length-CAP)+' more line(s) — see attached printed RFQ.');
+  body.push('','Total units: '+units,'Estimated total: $'+(total>=1000?Math.round(total).toLocaleString():total.toFixed(2)));
+  if(notes)body.push('','Notes: '+notes);
+  body.push('','(Indicative pricing — please confirm price, availability, and lead time.)');
+  const subj='RFQ '+rfqNo+(project?(' — '+project):(company?(' — '+company):''));
+  location.href='mailto:RFQ@VOLTFIELD.CO?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body.join('\n'));
+};
+document.getElementById('clearBtn').onclick=()=>{if(confirm('Clear all parts from your quote list?')){QUOTE=[];saveQuote(QUOTE);mount();toast('Quote list cleared');}};
+mount();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catalog Insights — Lead Times, SKU Mix &amp; Category Trends | VOLTFIELD Supply Co.</title>
+<meta name="description" content="Live dashboard of the VOLTFIELD catalog: SKU counts by source and sector, top categories, and the lead-time mix across transformers, switchgear, BESS, oilfield and MRO lines.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:title" content="Catalog Insights — lead times and SKU mix at a glance">
+<meta property="og:description" content="SKUs by source and sector, top categories, and lead-time distribution across the 2M+ SKU catalog.">
+<meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#101B2D;--ink-2:#22334C;--slate:#5B6B7E;--paper:#DDE5EC;--card:#F3F6FA;
+  --line:#C4CFDA;--line-dark:#A7B6C6;--signal:#FFC400;--signal-deep:#E5AC00;
+  --crit:#C43D2E;--warn:#D98E04;--ok:#2E7D4F;
+  --dc:#2B6CB0;--re:#2E7D4F;--bess:#B7791F;--og:#9C4221;--mro:#5B6B7E;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;--body:'IBM Plex Sans',system-ui,sans-serif;--disp:'Barlow Condensed',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5}
+button,a{font-family:inherit;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+.utilbar{background:var(--ink);color:#C9D3DF;font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:6px 20px;display:flex;justify-content:space-between;gap:12px}
+.utilbar b{color:var(--signal);font-weight:600}
+.utilbar .right{display:none}
+@media(min-width:720px){.utilbar .right{display:block}}
+header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:60}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo .bolt{width:34px;height:34px;background:var(--signal);display:grid;place-items:center;border:2px solid var(--ink)}
+.logo .bolt svg{width:18px;height:18px}
+.logo .wordmark{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.02em;line-height:1}
+.logo .wordmark small{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.18em;color:var(--slate)}
+.hnav{display:none;gap:4px}
+.navtoggle{display:none;background:var(--ink);color:#fff;border:2px solid var(--ink);width:42px;height:38px;font-size:20px;line-height:1;align-items:center;justify-content:center;flex-shrink:0}
+@media(max-width:899px){.navtoggle{display:inline-flex}.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:2px solid var(--ink);padding:6px 12px 10px;gap:0;box-shadow:0 10px 20px rgba(16,27,45,.14);z-index:59}.hnav.open a{padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}.hnav.open a:last-child{border-bottom:0}.hnav.open a.on{border-left-color:var(--signal);color:var(--ink)}}
+@media(min-width:900px){.hnav{display:flex}}
+.hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
+.hnav a:hover{color:var(--ink);background:var(--paper)}
+.hnav a.on{color:var(--ink);border-bottom-color:var(--signal)}
+.headright{margin-left:auto;display:flex;align-items:center;gap:10px}
+.quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
+.quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
+/* banner */
+.insban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:22px 20px 24px}
+.insban-in{max-width:1240px;margin:0 auto}
+.insban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:8px}
+.insban h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.6vw,40px);letter-spacing:.01em;line-height:1}
+.insban p{color:#AFC0D3;font-size:14px;max-width:640px;margin-top:9px;line-height:1.55}
+.wrap{max-width:1240px;margin:0 auto;padding:24px 20px 60px}
+/* KPI */
+.kpigrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:22px}
+@media(min-width:640px){.kpigrid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:980px){.kpigrid{grid-template-columns:repeat(6,1fr)}}
+.kpi{background:var(--card);border:1px solid var(--line-dark);border-top:4px solid var(--signal);padding:15px 16px}
+.kpi .k{font-family:var(--disp);font-weight:700;font-size:clamp(24px,3vw,30px);line-height:1;color:var(--ink)}
+.kpi .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);margin-top:5px;line-height:1.4}
+/* panels */
+.pgrid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:900px){.pgrid{grid-template-columns:1fr 1fr}}
+.ipanel{background:var(--card);border:1px solid var(--line-dark);padding:18px 18px 20px;display:flex;flex-direction:column}
+.ipanel.wide{grid-column:1/-1}
+.ipanel h2{font-family:var(--disp);font-weight:700;font-size:20px;letter-spacing:.01em}
+.ipanel .sub{font-family:var(--mono);font-size:10.5px;color:var(--slate);margin-top:3px;margin-bottom:14px}
+/* bars */
+.barrow{display:grid;grid-template-columns:130px 1fr auto;align-items:center;gap:10px;padding:5px 0}
+.barlbl{font-size:12.5px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bartrack{background:var(--paper);height:16px;border:1px solid var(--line);position:relative}
+.barfill{height:100%;min-width:2px}
+.barval{font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--ink);white-space:nowrap;text-align:right}
+.barval span{font-weight:400;color:var(--slate)}
+@media(max-width:520px){.barrow{grid-template-columns:96px 1fr auto;gap:7px}.barlbl{font-size:11px}}
+/* donut */
+.donut-wrap{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.donut-wrap svg{flex-shrink:0}
+.donut-c{font-family:var(--disp);font-weight:700;font-size:19px;fill:var(--ink)}
+.donut-l{font-family:var(--mono);font-size:8px;letter-spacing:.1em;fill:var(--slate);text-transform:uppercase}
+.legend{display:flex;flex-direction:column;gap:7px;flex:1;min-width:180px}
+.legrow{display:grid;grid-template-columns:12px 1fr auto auto;gap:9px;align-items:center;font-size:12.5px}
+.legrow .sw{width:12px;height:12px}
+.legrow .lv{font-family:var(--mono);font-size:11.5px;font-weight:600;text-align:right}
+.legrow .lp{font-family:var(--mono);font-size:10.5px;color:var(--slate);text-align:right;min-width:40px}
+/* tables */
+table.ins{width:100%;border-collapse:collapse}
+table.ins th{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--slate);text-align:left;padding:8px 10px;border-bottom:1px solid var(--line-dark)}
+table.ins th.r,table.ins td.r{text-align:right}
+table.ins td{padding:8px 10px;border-bottom:1px solid var(--line);font-size:13px}
+table.ins .nm{font-family:var(--disp);font-weight:600;font-size:14.5px}
+table.ins .sec{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;color:#fff;padding:1px 6px}
+table.ins .num{font-family:var(--mono);font-size:12.5px}
+.lead{font-family:var(--mono);font-size:10px;font-weight:500;padding:2px 6px;white-space:nowrap}
+.lead.ok{background:#E7F1EB;color:var(--ok)}
+.lead.warn{background:#FBF0DA;color:var(--warn)}
+.lead.crit{background:#F7E4E1;color:var(--crit)}
+.note{font-family:var(--mono);font-size:10px;color:var(--slate);line-height:1.6;margin-top:12px}
+.clickhint{font-family:var(--mono);font-size:11px;color:var(--slate);background:var(--card);border:1px solid var(--line-dark);border-left:3px solid var(--signal);padding:9px 12px;margin-bottom:20px}
+.clickable{cursor:pointer}
+.barrow.clickable:hover .barlbl{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.barrow.clickable:hover .bartrack{outline:2px solid var(--signal);outline-offset:1px}
+.legrow.clickable:hover{background:var(--paper)}
+table.ins tr.clickable:hover td{background:var(--paper)}
+footer{background:var(--ink);color:#9FB0C3;padding:30px 20px;font-size:12px;margin-top:30px}
+footer .in{max-width:1240px;margin:0 auto}
+footer p{line-height:1.6;max-width:640px}
+footer a{color:#9FB0C3}
+</style>
+</head>
+<body>
+<div class="utilbar">
+  <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
+  <span class="right">HOUSTON · PHOENIX · COLUMBUS &nbsp;|&nbsp; +1 (800) 555-0119 &nbsp;|&nbsp; RFQ@VOLTFIELD.CO</span>
+</div>
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — ENERGY INFRASTRUCTURE PARTS</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="index.html">Home</a>
+    <a href="voltfield-supply-catalog.html">All Parts</a>
+    <a href="voltfield-suppliers.html">All Suppliers</a>
+    <a href="voltfield-bom.html">Quick Order</a>
+    <a href="voltfield-bom-generator.html">BOM Generator</a>
+    <a href="voltfield-insights.html" class="on">Insights</a>
+    <a href="voltfield-account.html">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View quote list on catalog page">QUOTE LIST <span class="ct" id="quoteCount">0</span></a>
+  </div>
+</header>
+
+<section class="insban">
+  <div class="insban-in">
+    <div class="eyebrow">Catalog Insights · Live from the taxonomy</div>
+    <h1>What's in the catalog, at a glance</h1>
+    <p>Every number below is computed in your browser from the same data that powers the catalog — SKU counts by source and sector, the biggest categories, the lead-time mix, and where the long-pole items sit.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="kpigrid" id="kpis"></div>
+  <div class="clickhint">Tip: click any bar, legend item, or table row to open it pre‑filtered in the All Parts catalog.</div>
+  <div class="pgrid">
+    <div class="ipanel">
+      <h2>Catalog by source</h2>
+      <div class="sub">Share of all configurable SKUs by distributor / network</div>
+      <div class="donut-wrap"><div id="srcDonut"></div><div class="legend" id="srcLegend"></div></div>
+    </div>
+    <div class="ipanel">
+      <h2>Industrial Supply by distributor</h2>
+      <div class="sub">MRO SKUs mirrored from each distributor catalog</div>
+      <div id="mroBars"></div>
+    </div>
+    <div class="ipanel">
+      <h2>Energy infrastructure by sector</h2>
+      <div class="sub">SKUs across the four energy-infrastructure sectors</div>
+      <div id="energyBars"></div>
+    </div>
+    <div class="ipanel">
+      <h2>Lead-time mix</h2>
+      <div class="sub">Share of SKUs by quoted lead time</div>
+      <div class="donut-wrap"><div id="leadDonut"></div><div class="legend" id="leadLegend"></div></div>
+      <div class="note" id="leadNote"></div>
+    </div>
+    <div class="ipanel wide">
+      <h2>Largest categories</h2>
+      <div class="sub">Top 12 categories by SKU count, across all sectors</div>
+      <div id="catBars"></div>
+    </div>
+    <div class="ipanel">
+      <h2>Longest lead-time families</h2>
+      <div class="sub">Where the schedule risk sits</div>
+      <table class="ins"><thead><tr><th>Family</th><th>Sector</th><th class="r">Lead</th></tr></thead><tbody id="leadTable"></tbody></table>
+    </div>
+    <div class="ipanel">
+      <h2>Coverage by sector</h2>
+      <div class="sub">Families, categories and SKUs per sector</div>
+      <table class="ins"><thead><tr><th>Sector</th><th class="r">Families</th><th class="r">Categories</th><th class="r">SKUs</th></tr></thead><tbody id="covTable"></tbody></table>
+    </div>
+  </div>
+</div>
+<div class="ad-unit" data-ad="leaderboard"></div>
+
+<footer>
+  <div class="in">
+    <p>All figures are derived live from the catalog taxonomy (<b id="fTotal">0</b> configurable SKUs across <b id="fFam">0</b> product families). The dataset is modeled for demonstration; distributor assortments are modeled on public catalogs and pricing/lead times are indicative. <a href="voltfield-supply-catalog.html">Back to All Parts &rarr;</a></p>
+  </div>
+</footer>
+
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-catalog-data.js"></script>
+<script>
+/* ===== Catalog insights — computed from shared catalog data ===== */
+(function(){try{const q=JSON.parse(localStorage.getItem('vf_quote')||'[]');document.getElementById('quoteCount').textContent=Array.isArray(q)?q.length:0;}catch(e){}})();
+
+const DCOL={grainger:'#5B6B7E',msc:'#9C4221',graybar:'#2E7D4F',uline:'#B7791F',voltfield:'#2B6CB0'};
+const el=id=>document.getElementById(id);
+
+/* ---- chart builders ---- */
+function barsHTML(items){
+  const max=Math.max.apply(null,items.map(x=>x.value))||1;
+  return items.map(it=>`<div class="barrow${it.href?' clickable':''}"${it.href?` data-href="${it.href}"`:''}><div class="barlbl" title="${it.label}">${it.label}</div><div class="bartrack"><div class="barfill" style="width:${Math.max(1.5,it.value/max*100).toFixed(2)}%;background:${it.color}"></div></div><div class="barval">${fmt(it.value)}${it.note?' <span>'+it.note+'</span>':''}</div></div>`).join('');
+}
+function donutSVG(items){
+  const total=items.reduce((a,x)=>a+x.value,0)||1;
+  const r=52,C=2*Math.PI*r,cx=64,cy=64,sw=22; let off=0,segs='';
+  items.forEach(it=>{const seg=it.value/total*C; if(seg<=0)return;
+    segs+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${it.color}" stroke-width="${sw}" stroke-dasharray="${seg.toFixed(2)} ${(C-seg).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}" transform="rotate(-90 ${cx} ${cy})"></circle>`;
+    off+=seg;});
+  return `<svg viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="donut chart"><circle cx="64" cy="64" r="52" fill="none" stroke="#EEF1F4" stroke-width="22"></circle>${segs}<text x="64" y="60" class="donut-c" text-anchor="middle">${fmt(total)}</text><text x="64" y="76" class="donut-l" text-anchor="middle">SKUs</text></svg>`;
+}
+function legendHTML(items){
+  const total=items.reduce((a,x)=>a+x.value,0)||1;
+  return items.map(it=>`<div class="legrow${it.href?' clickable':''}"${it.href?` data-href="${it.href}"`:''}><span class="sw" style="background:${it.color}"></span><span>${it.label}</span><span class="lv">${fmt(it.value)}</span><span class="lp">${(it.value/total*100).toFixed(1)}%</span></div>`).join('');
+}
+
+/* ---- data ---- */
+const secColor=k=>SECTORS[k].color;
+// KPIs
+const longestLw=FAM.reduce((m,f)=>Math.max(m,f.lw||0),0);
+const kpis=[
+  {k:fmt(GRAND_TOTAL),l:'Configurable SKUs'},
+  {k:fmt(FAM.length),l:'Product families'},
+  {k:'5',l:'Sectors'},
+  {k:String(Object.values(SECTOR_CATS).reduce((a,c)=>a+c.length,0)),l:'Categories'},
+  {k:String(Object.keys(DIST_TOTALS).length),l:'Catalog sources'},
+  {k:longestLw+' wk',l:'Longest lead time'}
+];
+el('kpis').innerHTML=kpis.map(x=>`<div class="kpi"><div class="k">${x.k}</div><div class="l">${x.l}</div></div>`).join('');
+el('fTotal').textContent=fmt(GRAND_TOTAL);
+el('fFam').textContent=fmt(FAM.length);
+
+// By source (donut)
+const srcOrder=['grainger','msc','graybar','uline','voltfield'];
+const srcItems=srcOrder.filter(d=>DIST_TOTALS[d]).map(d=>({label:DIST_NAME[d],value:DIST_TOTALS[d],color:DCOL[d],href:'voltfield-supply-catalog.html?dist='+d}));
+el('srcDonut').innerHTML=donutSVG(srcItems);
+el('srcLegend').innerHTML=legendHTML(srcItems);
+
+// MRO by distributor (bars)
+const mroBars=[['grainger','Grainger'],['msc','MSC Industrial'],['graybar','Graybar'],['uline','Uline']]
+  .map(([d,lbl])=>({label:lbl,value:DIST_TOTALS[d]||0,color:DCOL[d],href:'voltfield-supply-catalog.html?sector=mro&dist='+d}))
+  .sort((a,b)=>b.value-a.value);
+el('mroBars').innerHTML=barsHTML(mroBars);
+
+// Energy by sector (bars)
+const energyBars=['dc','re','og','bess'].map(k=>({label:SECTORS[k].label,value:SECTOR_TOTALS[k],color:secColor(k),href:'voltfield-supply-catalog.html?sector='+k})).sort((a,b)=>b.value-a.value);
+el('energyBars').innerHTML=barsHTML(energyBars);
+
+// Top categories (bars, colored by sector)
+const cats=[];
+Object.keys(CAT_TOTALS).forEach(s=>Object.keys(CAT_TOTALS[s]).forEach(c=>cats.push({s,c,v:CAT_TOTALS[s][c]})));
+cats.sort((a,b)=>b.v-a.v);
+el('catBars').innerHTML=barsHTML(cats.slice(0,12).map(x=>({label:x.c,value:x.v,color:secColor(x.s),note:SECTORS[x.s].code,href:'voltfield-supply-catalog.html?sector='+x.s+'&cat='+encodeURIComponent(x.c)})));
+
+// Lead-time mix (by SKUs)
+const buckets={ok:0,warn:0,crit:0}, bucketFams={ok:0,warn:0,crit:0};
+FAM.forEach(f=>{const b=f.lw<=12?'ok':(f.lw<=52?'warn':'crit');buckets[b]+=f.ct;bucketFams[b]++;});
+const leadItems=[
+  {label:'In-stock / short (≤12 wk)',value:buckets.ok,color:'#2E7D4F',href:'voltfield-supply-catalog.html?lt=short'},
+  {label:'Standard (13–52 wk)',value:buckets.warn,color:'#D98E04',href:'voltfield-supply-catalog.html?lt=long'},
+  {label:'Long-lead (>52 wk)',value:buckets.crit,color:'#C43D2E',href:'voltfield-supply-catalog.html?lt=long'}
+];
+el('leadDonut').innerHTML=donutSVG(leadItems);
+el('leadLegend').innerHTML=legendHTML(leadItems);
+el('leadNote').textContent=`By product family: ${bucketFams.ok} short-lead, ${bucketFams.warn} standard, ${bucketFams.crit} long-lead families. Short-lead SKUs are dominated by industrial-supply (MRO) lines.`;
+
+// Longest lead families (table)
+const lf=FAM.slice().sort((a,b)=>(b.lw||0)-(a.lw||0)).slice(0,8);
+el('leadTable').innerHTML=lf.map(f=>{const lb=leadBadge(f);return `<tr class="clickable" data-href="voltfield-supply-catalog.html?sector=${f.s}&cat=${encodeURIComponent(f.c)}"><td class="nm">${f.n}</td><td><span class="sec" style="background:${secColor(f.s)}">${SECTORS[f.s].code}</span></td><td class="r"><span class="lead ${lb.c}">${lb.t}</span></td></tr>`;}).join('');
+
+// Coverage by sector (table)
+const covOrder=['dc','re','bess','og','mro'];
+el('covTable').innerHTML=covOrder.map(k=>{
+  const fams=FAM.filter(f=>f.s===k).length, catn=SECTOR_CATS[k].length, sku=SECTOR_TOTALS[k];
+  return `<tr class="clickable" data-href="voltfield-supply-catalog.html?sector=${k}"><td><span class="sec" style="background:${secColor(k)}">${SECTORS[k].code}</span> ${SECTORS[k].label}</td><td class="r num">${fmt(fams)}</td><td class="r num">${fmt(catn)}</td><td class="r num">${fmt(sku)}</td></tr>`;
+}).join('')+`<tr style="border-top:2px solid var(--ink)"><td style="font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:14px">Total</td><td class="r num"><b>${fmt(FAM.length)}</b></td><td class="r num"><b>${fmt(Object.values(SECTOR_CATS).reduce((a,c)=>a+c.length,0))}</b></td><td class="r num"><b>${fmt(GRAND_TOTAL)}</b></td></tr>`;
+/* clickable charts -> catalog, pre-filtered */
+document.addEventListener('click',function(e){var t=e.target.closest('[data-href]');if(t)location.href=t.getAttribute('data-href');});
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+# VOLTFIELD Supply Co. — Website (static site)
+
+A self‑contained, **fully static website** — plain HTML, CSS, and JavaScript. There is **no server, database, or build step**. Every page runs entirely in the browser, so it can be hosted on any static‑file host and works offline once loaded.
+
+---
+
+## 1. What's in this folder
+
+| File | Purpose |
+|------|---------|
+| `index.html` | **Home page** — the entry point (open this one). |
+| `voltfield-supply-catalog.html` | **All Parts** — searchable/filterable catalog + configurator + quote list. |
+| `voltfield-suppliers.html` | **All Suppliers** — supplier & distributor directory. |
+| `voltfield-bom.html` | **Quick Order** — paste/upload a BOM; matches each line to the catalog. |
+| `voltfield-bom-generator.html` | **BOM Generator** — pick any engineered part and generate its full component-level Bill of Materials (quantities, materials, indicative cost roll-up; CSV/print export). |
+| `voltfield-bom-engine.js` | Component-template engine behind the BOM Generator (per-category teardowns that scale with configuration). |
+| `voltfield-site-config.js` | **Site config** — production domain (canonical/OG URLs) + ad monetization settings and slot renderer. |
+| `robots.txt` / `sitemap.xml` | Crawl control + sitemap (replace `YOUR-DOMAIN` before submitting to Search Console). |
+| `ads.txt` | Authorized-sellers file for ad networks (instructions inside). |
+| `manifest.json` / `sw.js` / `icons/` | **PWA layer** — makes the site installable (Add to Home Screen) and fully offline-capable. Bump `VERSION` in `sw.js` when you redeploy changed files. |
+| `privacy-policy.html` | Privacy policy **template** — required by both app stores; fill in bracketed fields before publishing. |
+| `APP-STORES.md` | **Step-by-step guide to publishing on Google Play and the Apple App Store.** |
+| `app-wrapper/` | Ready-made Capacitor scaffold for building native Android/iOS binaries (see APP-STORES.md Route C). |
+| `voltfield-insights.html` | **Insights** — live dashboard of the catalog (SKUs by source & sector, top categories, lead‑time mix). |
+| `voltfield-part.html` | **Part detail** — shareable, configurable single‑part page (opened via links). |
+| `voltfield-rfq.html` | **RFQ** — printable Request for Quotation built from the quote list. |
+| `voltfield-catalog-data.js` | **Shared data + logic** — the whole product taxonomy and SKU engine. **Single source of truth.** |
+| `404.html` | Friendly "page not found" page. |
+| `staticwebapp.config.json` | Config for Azure Static Web Apps (404 + MIME + caching). Ignored by other hosts. |
+| `voltfield-home.html` | Redirect stub → `index.html` (keeps old links working). |
+
+> **Keep every file in the same folder.** The catalog, Quick Order, Part, and RFQ pages all load `voltfield-catalog-data.js` from alongside them. If you split them up, the catalog data won't load.
+
+---
+
+## 2. Preview it locally (no hosting)
+
+- **Simplest:** double‑click `index.html` — it opens in your browser and everything works (search, filters, configurator, quote list, RFQ, print).
+- **Optional local server** (nice clean URLs). From this folder:
+  - Python: `python -m http.server 8080` → visit `http://localhost:8080`
+  - Node: `npx serve .`
+
+Fonts load from Google Fonts over the internet; with no connection the site still works, just in a fallback system font.
+
+---
+
+## 3. Put it on the web (pick ONE)
+
+All options below serve `index.html` at the root automatically.
+
+### Option A — Netlify Drop (fastest, free, ~1 minute)
+1. Go to **https://app.netlify.com/drop**
+2. **Drag this whole folder** (or `voltfield-site.zip`) onto the page.
+3. You immediately get a public URL like `https://your-site-name.netlify.app`.
+4. (Optional) Create a free account to keep it, rename it, or add a custom domain.
+
+### Option B — Cloudflare Pages or GitHub Pages (free)
+- **Cloudflare Pages:** dashboard → Workers & Pages → Create → Pages → **Upload assets** → drag the folder → Deploy.
+- **GitHub Pages:** push these files to a repo → Settings → Pages → Source = your branch, root folder → Save. URL: `https://<user>.github.io/<repo>/`.
+
+### Option C — Azure Static Web Apps (recommended for a Microsoft 365 / Azure org)
+Best fit if your org already uses Azure — custom domains and HTTPS are included free.
+- **Easiest (VS Code):** install the **Azure Static Web Apps** extension → sign in → "Create Static Web App (Advanced)" → point **App location** at this folder, leave **Api location** blank, **Output location** blank (no build).
+- **CLI:**
+  ```bash
+  npm install -g @azure/static-web-apps-cli
+  swa deploy ./ --env production
+  ```
+- The included `staticwebapp.config.json` wires up the custom 404 page automatically.
+
+### Option D — Azure Blob Storage static website (simple & cheap)
+1. Create a Storage account → **Static website** → Enable.
+2. Set **Index document name** = `index.html`, **Error document path** = `404.html`.
+3. Upload all files to the **`$web`** container.
+4. Use the **Primary endpoint** URL it gives you.
+
+---
+
+## 4. Custom domain & HTTPS
+Every option above supports a custom domain (e.g. `parts.yourcompany.com`) with free automatic HTTPS. In the host's dashboard, add the domain and create the CNAME record it shows you with your DNS provider. Certificates are issued automatically.
+
+---
+
+## 5. Important notes before sharing publicly
+- **No secrets or keys.** Everything is client‑side; there is nothing sensitive to leak.
+- **The catalog data is illustrative/modeled** for demonstration — SKUs are generated from a taxonomy, and pricing/lead times are indicative market ranges, not live inventory or firm quotes. The distributor catalogs (Grainger, Uline, Graybar, MSC) are **modeled on public assortments**, not live feeds or partnerships. Product images are original, AI‑generated illustrations of each part type (not vendor photography); the exact item shipped may differ. Review this before putting it in front of customers.
+- **News links** on the home page point to third‑party publishers.
+
+### ⚠️ SharePoint / OneDrive is **not** a website host
+Dropping these files in a SharePoint document library or your OneDrive **will not** serve them as a working website — modern SharePoint blocks custom page scripts and serves `.html` as a download, so the catalog's JavaScript won't run. Use one of the static hosts above instead. (This folder living in OneDrive is fine for **storage/preview**, just not for hosting.)
+
+---
+
+## 6. Traffic (SEO) & ad revenue
+
+**SEO — already wired in.** Every page has unique titles, meta descriptions, and Open Graph/Twitter tags; the home page carries Organization + WebSite (sitewide search) structured data and the BOM Generator carries WebApplication structured data. Part pages set a descriptive `<title>` per configuration. To finish setup after you deploy:
+1. Open `voltfield-site-config.js` and set `siteUrl` to your production domain — this turns on canonical URLs and correct share links.
+2. Replace `YOUR-DOMAIN` in `sitemap.xml` and uncomment the `Sitemap:` line in `robots.txt`.
+3. Add the site to **Google Search Console** and **Bing Webmaster Tools** and submit the sitemap.
+4. Traffic levers that matter most for this site: the BOM Generator and Quick Order pages are the linkable/shareable assets — every generated BOM and configured part has a copyable deep link.
+
+**Ads — ready to switch on.** Ad slots (leaderboard / in-content / footer) are already placed on the home, Insights, Quick Order, and BOM Generator pages. They render as labeled placeholders until you add a publisher ID:
+1. Sign up for **Google AdSense**, add and verify your domain.
+2. In `voltfield-site-config.js` set `ads.provider='adsense'`, paste your `ca-pub-…` ID into `ads.client`, and (optionally) per-placement slot IDs into `ads.slots`.
+3. Update `ads.txt` with your `pub-…` ID (instructions in the file). It must be served from the domain root.
+4. To hide the placeholders before then, set `ads.preview=false`.
+> Note: ad networks review sites before serving ads. The catalog data is modeled/illustrative (see §5) — make sure the site presents real value and truthful content before applying, and expect policy review for "demo" datasets.
+
+---
+
+## 7. Mobile app & app stores
+
+The site is an installable **PWA**: on a phone, visiting the deployed site offers "Add to Home Screen," launches full-screen with the VOLTFIELD icon, and works completely offline (the service worker pre-caches every page including the full catalog). App-launcher shortcuts jump straight to the BOM Generator, Quick Order, and the catalog.
+
+To publish real store apps (Google Play via Trusted Web Activity, Apple App Store via Capacitor/WKWebView), follow **`APP-STORES.md`** — it covers accounts and costs, packaging with PWABuilder, the included `app-wrapper/` Capacitor project, the privacy-policy requirement, and the AdSense-vs-AdMob rules inside apps.
+
+---
+
+## 8. Updating the catalog later
+Everything data‑related lives in **`voltfield-catalog-data.js`** — one file drives all pages.
+- **Change counts, prices, categories, or attributes:** edit the `FAM` array entries.
+- **Add another distributor** (e.g. Fastenal, Rexel): add a block of `{s:'mro', d0:'<name>', c:'<Category>', n:'<Family>', ct:<count>, ...}` rows and add the label to the distributor maps in the catalog page. Totals, facets, and search update automatically.
+
+No rebuild needed — just re‑upload the changed file(s) to your host.
+
+---
+
+## 9. Accounts & subscriptions
+
+`voltfield-account.html` is the Accounts & Plans page (in the nav on every page).
+
+**Sign-in (works today on Azure Static Web Apps).** The page's buttons use SWA's built-in authentication (`/.auth/login/aad`, `/.auth/login/github`) — no code, no password storage; deploy via §3 Option C and sign-in just works. The page reads `/.auth/me` to show the signed-in user. On other hosts, swap in an identity provider (Auth0, Clerk, Supabase Auth) and update the two button URLs + the `/.auth/me` fetch.
+
+**Subscriptions.** Plan cards are live; paid features are honestly labeled as roadmap (◷) until there's a backend. To start charging:
+1. Create a Stripe account → Products → **Payment Links** for Pro monthly/annual.
+2. Paste the links into `SITE_CONFIG.billing` in `voltfield-site-config.js` (`proMonthlyUrl`, etc.). The "Start Pro" button uses them automatically; until then it opens a sales email.
+3. Entitlements (who has an active subscription) need a small backend — the natural pairing is SWA's **managed Azure Functions** (free tier): a `/api/me/plan` function that checks the Stripe customer by the signed-in email, plus Stripe webhooks. Supabase or Firebase are equivalent alternatives.
+4. Pro features (saved BOMs, shared quote lists, alerts) then store per-user data keyed to the signed-in identity — the front-end already centralizes quote state in `vf_quote` localStorage, which is the natural sync point.
+
+**Honesty guardrail:** don't flip features from ◷ to ✓ on the page until they actually exist — the plan cards and the transparency note under them are written to avoid selling vaporware.

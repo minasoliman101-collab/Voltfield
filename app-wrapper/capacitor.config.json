@@ -1,0 +1,15 @@
+{
+  "appId": "com.voltfield.supply",
+  "appName": "VOLTFIELD Supply",
+  "webDir": "www",
+  "backgroundColor": "#101B2D",
+  "android": {
+    "allowMixedContent": false
+  },
+  "ios": {
+    "contentInset": "automatic"
+  },
+  "server": {
+    "androidScheme": "https"
+  }
+}

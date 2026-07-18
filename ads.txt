@@ -1,0 +1,13 @@
+# ads.txt — authorized digital sellers for this domain (IAB spec)
+# This file must live at the ROOT of your production domain.
+#
+# HOW TO ACTIVATE ADS:
+# 1. Sign up at https://adsense.google.com and add your domain.
+# 2. AdSense gives you a publisher ID like pub-1234567890123456.
+# 3. Replace the line below with yours and remove the leading '#':
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+#
+# 4. Then open voltfield-site-config.js and set:
+#      ads.provider = 'adsense'
+#      ads.client   = 'ca-pub-XXXXXXXXXXXXXXXX'
+#    and paste your per-placement slot IDs into ads.slots.

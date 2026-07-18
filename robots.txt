@@ -1,0 +1,10 @@
+# VOLTFIELD Supply Co. — robots.txt
+User-agent: *
+Allow: /
+# Utility pages with no search value
+Disallow: /voltfield-rfq.html
+Disallow: /404.html
+Disallow: /voltfield-home.html
+
+# After you deploy on a real domain, replace YOUR-DOMAIN below and uncomment:
+# Sitemap: https://YOUR-DOMAIN/sitemap.xml

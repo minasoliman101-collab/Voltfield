@@ -1,0 +1,6 @@
+# host-generated / not for deploy
+node_modules/
+app-wrapper/www/
+app-wrapper/android/
+app-wrapper/ios/
+voltfield-site.zip

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BOM Generator — Component Breakdown of Any OEM Part | VOLTFIELD Supply Co.</title>
+<meta name="description" content="Free Bill of Materials generator for energy-infrastructure and industrial OEM parts. Pick any transformer, inverter, valve, motor, battery block or breaker and get every component inside it — with quantities, materials, and an indicative cost roll-up.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:title" content="BOM Generator — see every component inside an OEM part">
+<meta property="og:description" content="Generate a full component-level Bill of Materials for 150+ engineered part families: transformers, switchgear, inverters, BESS blocks, valves, pumps, motors and more.">
+<meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#101B2D;--ink-2:#22334C;--slate:#5B6B7E;--paper:#DDE5EC;--card:#F3F6FA;
+  --line:#C4CFDA;--line-dark:#A7B6C6;--signal:#FFC400;--signal-deep:#E5AC00;
+  --crit:#C43D2E;--warn:#D98E04;--ok:#2E7D4F;
+  --dc:#2B6CB0;--re:#2E7D4F;--bess:#B7791F;--og:#9C4221;--mro:#5B6B7E;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;--body:'IBM Plex Sans',system-ui,sans-serif;--disp:'Barlow Condensed',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5}
+button,a,input,select,textarea{font-family:inherit}
+button,a{cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+.utilbar{background:var(--ink);color:#C9D3DF;font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:6px 20px;display:flex;justify-content:space-between;gap:12px}
+.utilbar b{color:var(--signal);font-weight:600}
+.utilbar .right{display:none}
+@media(min-width:720px){.utilbar .right{display:block}}
+header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:60}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo .bolt{width:34px;height:34px;background:var(--signal);display:grid;place-items:center;border:2px solid var(--ink)}
+.logo .bolt svg{width:18px;height:18px}
+.logo .wordmark{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.02em;line-height:1}
+.logo .wordmark small{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.18em;color:var(--slate)}
+.hnav{display:none;gap:4px}
+.navtoggle{display:none;background:var(--ink);color:#fff;border:2px solid var(--ink);width:42px;height:38px;font-size:20px;line-height:1;align-items:center;justify-content:center;flex-shrink:0}
+@media(max-width:899px){.navtoggle{display:inline-flex}.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:2px solid var(--ink);padding:6px 12px 10px;gap:0;box-shadow:0 10px 20px rgba(16,27,45,.14);z-index:59}.hnav.open a{padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}.hnav.open a:last-child{border-bottom:0}.hnav.open a.on{border-left-color:var(--signal);color:var(--ink)}}
+@media(min-width:900px){.hnav{display:flex}}
+.hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
+.hnav a:hover{color:var(--ink);background:var(--paper)}
+.hnav a.on{color:var(--ink);border-bottom-color:var(--signal)}
+.headright{margin-left:auto;display:flex;align-items:center;gap:10px}
+.quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
+.quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
+/* banner */
+.bomban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:24px 20px 26px}
+.bomban-in{max-width:1240px;margin:0 auto}
+.bomban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:8px}
+.bomban h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.6vw,40px);letter-spacing:.01em;line-height:1}
+.bomban p{color:#AFC0D3;font-size:14.5px;max-width:680px;margin-top:10px;line-height:1.55}
+.wrap{max-width:1240px;margin:0 auto;padding:26px 20px 60px}
+/* picker */
+.pickpanel{background:var(--card);border:1px solid var(--line-dark);padding:18px}
+.pickpanel h2{font-family:var(--disp);font-weight:700;font-size:22px;margin-bottom:4px}
+.pickpanel .hint{font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px}
+.searchrow{position:relative;max-width:640px}
+.searchrow input{width:100%;border:2px solid var(--ink);padding:13px 15px;font-family:var(--mono);font-size:14px}
+.sresults{position:absolute;top:100%;left:0;right:0;background:var(--card);border:2px solid var(--ink);border-top:0;max-height:340px;overflow:auto;z-index:40;display:none}
+.sresults.show{display:block}
+.sresults button{display:flex;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:10px 14px;gap:10px;align-items:center}
+.sresults button:hover,.sresults button.hl{background:var(--paper)}
+.sresults .tag{font-family:var(--mono);font-size:8.5px;letter-spacing:.05em;text-transform:uppercase;color:#fff;padding:2px 6px;flex-shrink:0}
+.sresults .nm{font-family:var(--disp);font-weight:600;font-size:15.5px}
+.sresults .ct2{font-family:var(--mono);font-size:10px;color:var(--slate);margin-left:auto;white-space:nowrap}
+.sresults .na{font-family:var(--mono);font-size:9px;color:var(--crit);white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chips button{font-family:var(--mono);font-size:11px;border:1px solid var(--line-dark);background:var(--card);padding:6px 11px;color:var(--ink-2)}
+.chips button:hover{border-color:var(--ink);color:var(--ink)}
+/* configurator */
+.cfgcard{display:none;background:var(--card);border:1px solid var(--line-dark);margin-top:22px}
+.cfgcard.show{display:block}
+.cfg-band{height:5px}
+.cfg-hd{padding:16px 18px 0;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.cfg-cat{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:#fff;padding:2px 7px}
+.cfg-dist{font-family:var(--mono);font-size:10.5px;color:var(--slate)}
+.cfg-hd .swap{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--slate);background:none;border:0;text-decoration:underline;text-underline-offset:2px}
+.cfg-body{padding:8px 18px 18px}
+.cfg-pn{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ink-2)}
+.cfg-name{font-family:var(--disp);font-weight:700;font-size:26px;line-height:1.05;margin:2px 0 12px}
+.cfg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;max-width:900px}
+.cfg-row{display:flex;flex-direction:column;gap:4px}
+.cfg-row span{font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate)}
+.cfg-row select{border:1px solid var(--line-dark);padding:9px 10px;font-family:var(--mono);font-size:12.5px;background:var(--card)}
+.cfg-act{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center}
+.btn{border:2px solid var(--ink);padding:11px 18px;font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;display:inline-block}
+.btn.primary{background:var(--signal);color:var(--ink)}
+.btn.primary:hover{background:var(--ink);color:var(--signal)}
+.btn.ghost{background:var(--card);color:var(--ink-2);font-weight:600}
+.btn.ghost:hover{border-color:var(--ink);color:var(--ink)}
+.btn.dark{background:var(--ink);color:#fff}
+.btn.dark:hover{background:var(--ink-2)}
+/* results */
+.bomout{display:none;margin-top:26px}
+.bomout.show{display:block}
+.sumbar{background:var(--ink);color:#E8EDF3;padding:14px 18px;display:flex;gap:26px;flex-wrap:wrap;align-items:center;border-left:4px solid var(--signal)}
+.sumstat .k{font-family:var(--disp);font-weight:700;font-size:24px;color:var(--signal);line-height:1}
+.sumstat .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:#9FB0C3;margin-top:2px}
+.sumact{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap}
+.tablewrap{overflow-x:auto;margin-top:14px;border:1px solid var(--line-dark);background:var(--card)}
+table.bomt{border-collapse:collapse;width:100%;min-width:900px}
+table.bomt th{background:var(--paper);font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line-dark)}
+table.bomt th.r,table.bomt td.r{text-align:right}
+table.bomt td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top;font-size:13px}
+tr.grp td{background:var(--ink-2);color:#E8EDF3;font-family:var(--disp);font-weight:600;font-size:14.5px;letter-spacing:.05em;text-transform:uppercase;padding:7px 12px}
+tr.grp td .gx{float:right;font-family:var(--mono);font-size:11px;color:var(--signal)}
+.c-no{font-family:var(--mono);font-size:11px;color:var(--slate);white-space:nowrap}
+.c-name{font-weight:600;font-size:13.5px}
+.c-name a{font-family:var(--mono);font-size:10px;color:var(--dc);text-decoration:underline;text-underline-offset:2px;white-space:nowrap}
+.c-mat,.c-spec{font-family:var(--mono);font-size:10.5px;color:var(--slate);line-height:1.45;max-width:230px}
+.c-qty{font-family:var(--mono);font-size:12px;white-space:nowrap}
+.c-cost{font-family:var(--mono);font-size:12px;white-space:nowrap}
+.c-pct{font-family:var(--mono);font-size:10.5px;color:var(--slate);white-space:nowrap}
+.pctbar{display:inline-block;height:7px;background:var(--signal);vertical-align:middle;margin-right:6px;min-width:1px}
+tr.ovh td{background:#F7F9FA;color:var(--ink-2)}
+tr.ovh .c-name{font-weight:500;font-style:italic}
+tr.total td{background:var(--ink);color:#fff;font-family:var(--mono);font-weight:600;font-size:13px;border-bottom:0}
+tr.total td b{color:var(--signal)}
+.bomnote{font-family:var(--mono);font-size:11px;color:var(--slate);line-height:1.7;margin-top:12px;max-width:860px}
+/* not applicable */
+.nacard{display:none;margin-top:26px;background:#FBF2F0;border:1px solid #E5C0B9;border-left:4px solid var(--crit);padding:18px}
+.nacard.show{display:block}
+.nacard h3{font-family:var(--disp);font-weight:700;font-size:20px;color:var(--crit)}
+.nacard p{font-size:13.5px;color:var(--ink-2);margin-top:6px;max-width:640px}
+.nacard a{font-weight:600}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;font-family:var(--mono);font-size:12.5px;padding:11px 18px;border-left:4px solid var(--signal);z-index:120;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+footer{background:var(--ink);color:#9FB0C3;padding:30px 20px;font-size:12px}
+footer .in{max-width:1240px;margin:0 auto;display:grid;gap:16px}
+@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr}}
+footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer p{line-height:1.6;max-width:560px}
+footer a{color:#9FB0C3}
+@media print{
+  .utilbar,header.site,.pickpanel,.cfg-act,.sumact,footer,.toast,.chips,.cfg-hd .swap{display:none!important}
+  body{background:#fff}
+  .bomban{border-bottom-width:2px;padding:10px 0}
+  .wrap{padding:10px 0}
+  .tablewrap{border:0;overflow:visible}
+}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"VOLTFIELD BOM Generator","applicationCategory":"EngineeringApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Generates an indicative component-level Bill of Materials for engineered OEM parts: transformers, switchgear, inverters, battery storage blocks, valves, pumps, motors and more."}
+</script>
+</head>
+<body>
+<div class="utilbar">
+  <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
+  <span class="right">HOUSTON · PHOENIX · COLUMBUS &nbsp;|&nbsp; +1 (800) 555-0119 &nbsp;|&nbsp; RFQ@VOLTFIELD.CO</span>
+</div>
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — ENERGY INFRASTRUCTURE PARTS</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="index.html">Home</a>
+    <a href="voltfield-supply-catalog.html">All Parts</a>
+    <a href="voltfield-suppliers.html">All Suppliers</a>
+    <a href="voltfield-bom.html">Quick Order</a>
+    <a href="voltfield-bom-generator.html" class="on">BOM Generator</a>
+    <a href="voltfield-insights.html">Insights</a>
+    <a href="voltfield-account.html">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View quote list on catalog page">QUOTE LIST <span class="ct" id="quoteCount">0</span></a>
+  </div>
+</header>
+
+<section class="bomban">
+  <div class="bomban-in">
+    <div class="eyebrow">BOM Generator · Component Teardown</div>
+    <h1>Every component inside the part — generated as a Bill of Materials</h1>
+    <p>Pick any engineered part in the catalog — a transformer, inverter, valve, motor, battery block, breaker — and configure it. We generate the full component-level BOM: what's inside, in what quantity, of what material, with an indicative cost roll-up that reconciles to the catalog unit price. Commodity single-piece items (a bolt, a gasket, raw stock) are flagged as not applicable.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="pickpanel">
+    <h2>1 · Pick the OEM part</h2>
+    <div class="hint">Search 150+ engineered families by name, category, or sector — or paste a Voltfield part number (VF-…).</div>
+    <div class="searchrow">
+      <input id="famSearch" type="search" placeholder="Try &ldquo;pad-mount transformer&rdquo;, &ldquo;grid-forming PCS&rdquo;, &ldquo;ball valve&rdquo;&hellip;" autocomplete="off" aria-label="Search part families">
+      <div class="sresults" id="sResults" role="listbox"></div>
+    </div>
+    <div class="chips" id="chips"></div>
+  </div>
+
+  <div class="cfgcard" id="cfgCard">
+    <div class="cfg-band" id="cfgBand"></div>
+    <div class="cfg-hd">
+      <span class="cfg-cat" id="cfgCat"></span>
+      <span class="cfg-dist" id="cfgDist"></span>
+      <button class="swap" id="swapBtn">change part</button>
+    </div>
+    <div class="cfg-body">
+      <div class="cfg-pn" id="cfgPN"></div>
+      <div class="cfg-name" id="cfgName"></div>
+      <div style="font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);margin-bottom:8px">2 · Configure it — the BOM scales with the configuration</div>
+      <div class="cfg-grid" id="cfgGrid"></div>
+      <div class="cfg-act">
+        <button class="btn primary" id="genBtn">Generate BOM &darr;</button>
+        <a class="btn ghost" id="partLink" href="#">Part page &rsaquo;</a>
+        <button class="btn ghost" id="copyBtn">Copy link</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="nacard" id="naCard">
+    <h3>Component BOM not applicable for this item</h3>
+    <p id="naReason"></p>
+    <p style="margin-top:10px"><a href="voltfield-bom.html">Have a parts list instead? Use Quick Order / BOM Match &rarr;</a></p>
+  </div>
+
+  <div class="bomout" id="bomOut">
+    <h2 style="font-family:var(--disp);font-weight:700;font-size:22px;margin:0 0 10px">3 · Generated Bill of Materials</h2>
+    <div class="sumbar">
+      <div class="sumstat"><div class="k" id="sLines">0</div><div class="l">Component lines</div></div>
+      <div class="sumstat"><div class="k" id="sPieces">0</div><div class="l">Discrete pieces</div></div>
+      <div class="sumstat"><div class="k" id="sMat">$0</div><div class="l">Materials (est.)</div></div>
+      <div class="sumstat"><div class="k" id="sPrice">$0</div><div class="l">Assembly price (est.)</div></div>
+      <div class="sumact">
+        <button class="btn primary" id="csvBtn">Download CSV</button>
+        <button class="btn dark" id="printBtn">Print / PDF</button>
+      </div>
+    </div>
+    <div class="tablewrap">
+      <table class="bomt" id="bomTable">
+        <thead><tr>
+          <th style="width:56px">Item</th><th>Component</th><th>Material</th><th>Spec / notes</th>
+          <th class="r">Qty</th><th class="r">Unit cost (est.)</th><th class="r">Ext. cost (est.)</th><th>% of unit price</th>
+        </tr></thead>
+        <tbody id="bomBody"></tbody>
+      </table>
+    </div>
+    <p class="bomnote"><b>How to read this BOM:</b> component structure and quantities are engineering-typical for this class of equipment and scale with your configuration; costs are an indicative allocation of the catalog unit price (materials ≈ 70%, with labor, test, logistics and margin shown as roll-up lines), not supplier cost data. Actual OEM designs vary by manufacturer. Linked components (&ldquo;shop this part&rdquo;) jump to the matching buyable family in the catalog.</p>
+    <div class="ad-unit" data-ad="incontent"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  <div class="in">
+    <div>
+      <h5>Voltfield Supply Co. — BOM Generator</h5>
+      <p>The BOM Generator produces an indicative component-level breakdown for engineered assemblies across data-center power, renewables, battery storage, oil &amp; gas, and industrial MRO. Use it for budgeting teardowns, spares planning, and RFQ scoping — then price the components themselves through <a href="voltfield-bom.html">Quick Order</a> or the <a href="voltfield-supply-catalog.html">full catalog</a>.</p>
+    </div>
+    <div>
+      <h5>Explore</h5>
+      <p><a href="index.html">Home</a> &nbsp;·&nbsp; <a href="voltfield-supply-catalog.html">All Parts catalog</a> &nbsp;·&nbsp; <a href="voltfield-suppliers.html">All Suppliers</a> &nbsp;·&nbsp; <a href="voltfield-insights.html">Insights</a>
+    <a href="voltfield-account.html">Account</a><br><br><a href="voltfield-supply-catalog.html?quote=1">View quote list &rarr;</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-catalog-data.js"></script>
+<script src="voltfield-bom-engine.js"></script>
+<script>
+/* ===== BOM Generator page logic ===== */
+function loadQuote(){try{const q=JSON.parse(localStorage.getItem('vf_quote')||'[]');return Array.isArray(q)?q:[];}catch(e){return [];}}
+document.getElementById('quoteCount').textContent=loadQuote().length;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._tm);t._tm=setTimeout(()=>t.classList.remove('show'),1900);}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function $(id){return document.getElementById(id);}
+
+let CUR=null; /* {f,picks} */
+
+/* ---------- search ---------- */
+const APPLICABLE=FAM.map(f=>({f,app:bomApplicability(f)}));
+function searchFams(q){
+  const toks=q.toLowerCase().split(/\s+/).filter(Boolean);
+  if(!toks.length)return [];
+  const pn=q.toUpperCase().match(/VF-([A-Z]+)-([A-Z0-9]+)-/);
+  if(pn){const hit=APPLICABLE.find(x=>SECTORS[x.f.s].code===pn[1]&&x.f.abbr===pn[2]);if(hit)return [hit];}
+  return APPLICABLE
+    .map(x=>{let sc=0;toks.forEach(t=>{if(x.f.n.toLowerCase().includes(t))sc+=3;else if(x.f.search.includes(t))sc+=1;});return {...x,sc};})
+    .filter(x=>x.sc>0)
+    .sort((a,b)=>b.sc-a.sc||(b.app.ok?1:0)-(a.app.ok?1:0))
+    .slice(0,12);
+}
+const inp=$('famSearch'),res=$('sResults');
+inp.addEventListener('input',()=>{
+  const q=inp.value.trim();
+  if(q.length<2){res.classList.remove('show');return;}
+  const hits=searchFams(q);
+  res.innerHTML=hits.length?hits.map(x=>`
+    <button data-fi="${x.f._i}" role="option">
+      <span class="tag" style="background:${SECTORS[x.f.s].color}">${SECTORS[x.f.s].code}</span>
+      <span><span class="nm">${esc(x.f.n)}</span><br><span style="font-family:var(--mono);font-size:10px;color:var(--slate)">${esc(x.f.c)}</span></span>
+      ${x.app.ok?`<span class="ct2">${fmt(x.f.ct)} SKUs</span>`:'<span class="na">BOM N/A</span>'}
+    </button>`).join(''):'<button disabled style="color:var(--slate);font-family:var(--mono);font-size:12px">No families match.</button>';
+  res.classList.add('show');
+  res.querySelectorAll('button[data-fi]').forEach(b=>b.onclick=()=>{selectFam(+b.dataset.fi);res.classList.remove('show');inp.value='';});
+});
+document.addEventListener('click',e=>{if(!e.target.closest('.searchrow'))res.classList.remove('show');});
+
+/* popular quick-picks */
+const POPULAR=['Pad-Mount Transformers','Grid-Forming PCS','LFP DC Blocks (5MWh)','Central Inverters (Utility)','Ball Valves','AC Motors','Diesel Gensets','Mono PERC Modules','Single-Axis Trackers','ESP Systems','Rack PDUs','LED Fixtures & Lamps'];
+$('chips').innerHTML='<span style="font-family:var(--mono);font-size:10px;color:var(--slate);align-self:center">POPULAR:</span>'+POPULAR.map(n=>{
+  const f=FAM.find(x=>x.n===n);return f?`<button data-fi="${f._i}">${esc(n)}</button>`:'';}).join('');
+$('chips').querySelectorAll('button[data-fi]').forEach(b=>b.onclick=()=>selectFam(+b.dataset.fi));
+
+/* ---------- select + configure ---------- */
+function selectFam(fi,picksParam){
+  const f=FAM[fi];if(!f)return;
+  const picks=picksParam?paramToPicks(f,picksParam):genSKU(f,fi).picks.slice();
+  CUR={f,picks};
+  renderCfg();
+  const app=bomApplicability(f);
+  $('naCard').classList.toggle('show',!app.ok);
+  $('bomOut').classList.remove('show');
+  if(!app.ok){$('naReason').textContent=app.reason;}
+  else generate();
+  syncURL();
+  $('cfgCard').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function renderCfg(){
+  const {f,picks}=CUR,col=SECTORS[f.s].color;
+  $('cfgCard').classList.add('show');
+  $('cfgBand').style.background=col;
+  $('cfgCat').style.background=col;$('cfgCat').textContent=f.c;
+  $('cfgDist').textContent=DIST_NAME[f.d]+' · '+SECTORS[f.s].label;
+  $('cfgPN').textContent=configuredPN(f,picks,String((f._i%90)+10));
+  $('cfgName').textContent=configuredName(f,picks);
+  $('cfgGrid').innerHTML=f.ax.map((axis,ai)=>`<label class="cfg-row"><span>${esc(axis[0])}</span><select data-ai="${ai}">${axis.slice(1).map(o=>`<option${o===picks[ai]?' selected':''}>${esc(o)}</option>`).join('')}</select></label>`).join('');
+  $('cfgGrid').querySelectorAll('select').forEach(sel=>sel.onchange=()=>{CUR.picks[+sel.dataset.ai]=sel.value;renderCfg();syncURL();if(bomApplicability(f).ok)generate();});
+  $('partLink').href=`voltfield-part.html?fi=${f._i}&o=${picksToParam(f,picks)}`;
+}
+function syncURL(){if(!CUR)return;history.replaceState(null,'',`voltfield-bom-generator.html?fi=${CUR.f._i}&o=${picksToParam(CUR.f,CUR.picks)}`);}
+$('swapBtn').onclick=()=>{inp.focus();window.scrollTo({top:0,behavior:'smooth'});};
+$('copyBtn').onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(location.href).then(()=>toast('Link copied'),()=>toast('Copy failed'));};
+$('genBtn').onclick=()=>{if(CUR&&bomApplicability(CUR.f).ok){generate();$('bomOut').scrollIntoView({behavior:'smooth',block:'start'});}else toast('BOM not applicable for this item');};
+
+/* ---------- generate + render ---------- */
+let LASTBOM=null;
+function m$(v){return v>=1000?'$'+Math.round(v).toLocaleString():v>=10?'$'+v.toFixed(0):'$'+v.toFixed(2);}
+function generate(){
+  const {f,picks}=CUR;
+  const bom=generateBOM(f,picks);
+  LASTBOM=bom;
+  if(!bom.applicable){$('naCard').classList.add('show');$('naReason').textContent=bom.reason;$('bomOut').classList.remove('show');return;}
+  $('naCard').classList.remove('show');
+  $('bomOut').classList.add('show');
+  $('sLines').textContent=bom.lineCount;
+  $('sPieces').textContent=Math.round(bom.pieceCount).toLocaleString();
+  $('sMat').textContent=m$(bom.materialTotal);
+  $('sPrice').textContent=m$(bom.price);
+  const maxPct=Math.max(...bom.groups.flatMap(g=>g.items.map(x=>x.pct)));
+  let html='';
+  bom.groups.forEach(g=>{
+    html+=`<tr class="grp"><td colspan="8">${esc(g.g)}<span class="gx">${m$(g.ext)}</span></td></tr>`;
+    g.items.forEach(x=>{
+      html+=`<tr>
+        <td class="c-no">${String(x.no).padStart(3,'0')}</td>
+        <td class="c-name">${esc(x.name)}${x.link?` &nbsp;<a href="${x.link}">shop this part &rsaquo;</a>`:''}</td>
+        <td class="c-mat">${esc(x.mat)}</td>
+        <td class="c-spec">${esc(x.spec)}</td>
+        <td class="c-qty r">${x.qty.toLocaleString()} ${esc(x.unit)}</td>
+        <td class="c-cost r">${m$(x.unitCost)}</td>
+        <td class="c-cost r">${m$(x.ext)}</td>
+        <td class="c-pct"><span class="pctbar" style="width:${Math.max(2,Math.round(x.pct/maxPct*70))}px"></span>${(x.pct*100).toFixed(1)}%</td>
+      </tr>`;
+    });
+  });
+  html+=`<tr class="grp"><td colspan="8">Assembly, test &amp; logistics roll-up<span class="gx">${m$(bom.overhead.reduce((a,x)=>a+x.ext,0))}</span></td></tr>`;
+  bom.overhead.forEach(o=>{
+    html+=`<tr class="ovh"><td class="c-no">—</td><td class="c-name">${esc(o.n)}</td><td class="c-mat"></td><td class="c-spec"></td><td class="c-qty r">1 lot</td><td class="c-cost r">${m$(o.ext)}</td><td class="c-cost r">${m$(o.ext)}</td><td class="c-pct">${(o.pct*100).toFixed(1)}%</td></tr>`;
+  });
+  html+=`<tr class="total"><td colspan="6">TOTAL — reconciles to assembly price: ${esc(bom.unitDesc)}</td><td class="r"><b>${m$(bom.total)}</b></td><td></td></tr>`;
+  $('bomBody').innerHTML=html;
+}
+
+/* ---------- export ---------- */
+$('csvBtn').onclick=()=>{
+  if(!LASTBOM||!LASTBOM.applicable){toast('Generate a BOM first');return;}
+  const {f,picks}=CUR;
+  const rows=[['Assembly',configuredName(f,picks)],['Part number',configuredPN(f,picks,String((f._i%90)+10))],['Configuration',f.ax.map((ax,i)=>ax[0]+': '+picks[i]).join(' | ')],['Unit description',LASTBOM.unitDesc],[],
+    ['Item','Group','Component','Material','Spec','Qty','Unit','Unit cost (est.)','Ext cost (est.)','% of unit price']];
+  LASTBOM.groups.forEach(g=>g.items.forEach(x=>rows.push([x.no,g.g,x.name,x.mat,x.spec,x.qty,x.unit,x.unitCost.toFixed(2),x.ext.toFixed(2),(x.pct*100).toFixed(2)+'%'])));
+  LASTBOM.overhead.forEach(o=>rows.push(['','Roll-up',o.n,'','',1,'lot',o.ext.toFixed(2),o.ext.toFixed(2),(o.pct*100).toFixed(2)+'%']));
+  rows.push(['','TOTAL','','','','','','',LASTBOM.total.toFixed(2),'100%']);
+  const csv=rows.map(r=>r.map(c=>`"${String(c==null?'':c).replace(/"/g,'""')}"`).join(',')).join('\r\n');
+  const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='voltfield-component-bom.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+  toast('BOM downloaded');
+};
+$('printBtn').onclick=()=>window.print();
+
+/* ---------- deep link ---------- */
+(function(){
+  const P=new URLSearchParams(location.search);
+  const fi=parseInt(P.get('fi'),10);
+  if(Number.isInteger(fi)&&fi>=0&&fi<FAM.length)selectFam(fi,P.get('o'));
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+</body>
+</html>

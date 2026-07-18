@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Part Detail — VOLTFIELD Supply Co.</title>
+<meta name="description" content="Configurable part detail with live pricing, lead time, compliance data, and a shareable link for this exact configuration — from VOLTFIELD Supply Co.'s 2M+ SKU energy-infrastructure and MRO catalog.">
+<meta property="og:type" content="product">
+<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:title" content="Configured part — VOLTFIELD Supply Co.">
+<meta property="og:description" content="Configure this part, see indicative price and lead time, generate its component BOM, and add it to a quote.">
+<meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#101B2D;--ink-2:#22334C;--slate:#5B6B7E;--paper:#DDE5EC;--card:#F3F6FA;
+  --line:#C4CFDA;--line-dark:#A7B6C6;--signal:#FFC400;--signal-deep:#E5AC00;
+  --crit:#C43D2E;--warn:#D98E04;--ok:#2E7D4F;
+  --dc:#2B6CB0;--re:#2E7D4F;--bess:#B7791F;--og:#9C4221;--mro:#5B6B7E;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;--body:'IBM Plex Sans',system-ui,sans-serif;--disp:'Barlow Condensed',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5}
+button,a,input,select{font-family:inherit}
+button,a{cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+.utilbar{background:var(--ink);color:#C9D3DF;font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:6px 20px;display:flex;justify-content:space-between;gap:12px}
+.utilbar b{color:var(--signal);font-weight:600}
+.utilbar .right{display:none}
+@media(min-width:720px){.utilbar .right{display:block}}
+header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:60}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo .bolt{width:34px;height:34px;background:var(--signal);display:grid;place-items:center;border:2px solid var(--ink)}
+.logo .bolt svg{width:18px;height:18px}
+.logo .wordmark{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.02em;line-height:1}
+.logo .wordmark small{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.18em;color:var(--slate)}
+.hnav{display:none;gap:4px}
+.navtoggle{display:none;background:var(--ink);color:#fff;border:2px solid var(--ink);width:42px;height:38px;font-size:20px;line-height:1;align-items:center;justify-content:center;flex-shrink:0}
+@media(max-width:899px){.navtoggle{display:inline-flex}.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:2px solid var(--ink);padding:6px 12px 10px;gap:0;box-shadow:0 10px 20px rgba(16,27,45,.14);z-index:59}.hnav.open a{padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}.hnav.open a:last-child{border-bottom:0}.hnav.open a.on{border-left-color:var(--signal);color:var(--ink)}}
+@media(min-width:900px){.hnav{display:flex}}
+.hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
+.hnav a:hover{color:var(--ink);background:var(--paper)}
+.hnav a.on{color:var(--ink);border-bottom-color:var(--signal)}
+.headright{margin-left:auto;display:flex;align-items:center;gap:10px}
+.quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
+.quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
+.wrap{max-width:720px;margin:0 auto;padding:22px 20px 60px}
+.crumb{font-family:var(--mono);font-size:11.5px;color:var(--slate);margin-bottom:14px;display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.crumb a{color:var(--ink-2);text-decoration:none}
+.crumb a:hover{color:var(--ink);text-decoration:underline}
+.crumb .sep{color:var(--line-dark)}
+.pcard{background:var(--card);border:2px solid var(--ink)}
+.p-band{height:7px}
+.p-imgwrap{height:230px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:16px}
+.p-img{max-width:100%;max-height:100%;object-fit:contain;mix-blend-mode:multiply}
+.p-hd{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 20px;border-bottom:1px solid var(--line)}
+.p-cat{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#fff;padding:3px 8px}
+.p-dist{font-family:var(--mono);font-size:11px;color:var(--slate)}
+.p-body{padding:18px 20px}
+.p-pn{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--ink)}
+.p-name{font-family:var(--disp);font-weight:700;font-size:clamp(26px,4vw,34px);line-height:1.03;margin-top:4px}
+.p-cfg-t{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin:20px 0 9px}
+.p-cfg{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+@media(max-width:520px){.p-cfg{grid-template-columns:1fr}}
+.cfg-row{display:flex;flex-direction:column;gap:4px}
+.cfg-row span{font-family:var(--mono);font-size:10px;color:var(--ink-2);text-transform:uppercase;letter-spacing:.04em}
+.cfg-row select{border:1px solid var(--line-dark);padding:9px 10px;font-family:var(--body);font-size:14px;background:#fff}
+.p-cmp{display:flex;flex-wrap:wrap;gap:5px;margin-top:16px}
+.p-cmp span{font-family:var(--mono);font-size:9.5px;border:1px solid var(--line-dark);padding:2px 7px;color:var(--ink-2)}
+.p-facts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px;border-top:1px solid var(--line);padding-top:16px}
+@media(max-width:520px){.p-facts{grid-template-columns:1fr 1fr}}
+.p-facts>div{display:flex;flex-direction:column;gap:4px}
+.p-facts span{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--slate)}
+.p-facts b{font-family:var(--mono);font-size:17px;color:var(--ink)}
+.p-facts .lead{font-size:12px;align-self:flex-start}
+.p-facts input{width:88px;border:1px solid var(--line-dark);padding:6px 8px;font-family:var(--mono);font-size:14px}
+.lead{font-family:var(--mono);font-size:11px;font-weight:500;padding:2px 7px;white-space:nowrap}
+.lead.ok{background:#E7F1EB;color:var(--ok)}
+.lead.warn{background:#FBF0DA;color:var(--warn)}
+.lead.crit{background:#F7E4E1;color:var(--crit)}
+.p-note{font-family:var(--mono);font-size:10.5px;color:var(--slate);line-height:1.6;margin-top:16px}
+.p-foot{display:flex;gap:10px;flex-wrap:wrap;padding:16px 20px;border-top:1px solid var(--line);background:var(--paper)}
+.p-add{flex:1;min-width:160px;background:var(--signal);color:var(--ink);border:2px solid var(--ink);padding:12px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.04em;text-transform:uppercase}
+.p-add:hover{background:var(--ink);color:var(--signal)}
+.p-add.in{background:var(--ok);color:#fff;border-color:var(--ok)}
+.p-rfq{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:12px 16px;font-family:var(--disp);font-weight:600;font-size:16px;letter-spacing:.04em;text-transform:uppercase}
+.p-rfq:hover{background:var(--ink-2)}
+.p-copy{background:var(--card);color:var(--ink-2);border:2px solid var(--line-dark);padding:12px 16px;font-family:var(--disp);font-weight:600;font-size:16px;letter-spacing:.04em;text-transform:uppercase}
+.p-copy:hover{border-color:var(--ink);color:var(--ink)}
+.p-bom{background:var(--card);color:var(--ink-2);border:2px solid var(--line-dark);padding:12px 16px;font-family:var(--disp);font-weight:600;font-size:16px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;display:inline-block}
+.p-bom:hover{border-color:var(--ink);color:var(--ink)}
+.notfound{background:var(--card);border:1px dashed var(--line-dark);padding:44px 20px;text-align:center}
+.notfound h2{font-family:var(--disp);font-weight:700;font-size:24px;margin-bottom:6px}
+.notfound p{color:var(--slate);margin-bottom:14px}
+.notfound a{display:inline-block;background:var(--signal);color:var(--ink);border:2px solid var(--ink);padding:11px 20px;font-family:var(--disp);font-weight:700;letter-spacing:.04em;text-transform:uppercase;text-decoration:none}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;font-family:var(--mono);font-size:12.5px;padding:11px 18px;border-left:4px solid var(--signal);z-index:120;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+footer{background:var(--ink);color:#9FB0C3;padding:30px 20px;font-size:12px;margin-top:30px}
+footer .in{max-width:720px;margin:0 auto}
+footer p{line-height:1.6}
+footer a{color:#9FB0C3}
+</style>
+</head>
+<body>
+<div class="utilbar">
+  <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
+  <span class="right">HOUSTON · PHOENIX · COLUMBUS &nbsp;|&nbsp; +1 (800) 555-0119 &nbsp;|&nbsp; RFQ@VOLTFIELD.CO</span>
+</div>
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — ENERGY INFRASTRUCTURE PARTS</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="index.html">Home</a>
+    <a href="voltfield-supply-catalog.html">All Parts</a>
+    <a href="voltfield-suppliers.html">All Suppliers</a>
+    <a href="voltfield-bom.html">Quick Order</a>
+    <a href="voltfield-bom-generator.html">BOM Generator</a>
+    <a href="voltfield-insights.html">Insights</a>
+    <a href="voltfield-account.html">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View quote list on catalog page">QUOTE LIST <span class="ct" id="quoteCount">0</span></a>
+  </div>
+</header>
+
+<div class="wrap" id="wrap"></div>
+
+<footer>
+  <div class="in">
+    <p>Configured part detail. This part is one configuration of a family spanning many SKUs; change any option to reconfigure it, and the link above updates so you can share this exact configuration. Pricing is indicative and confirmed at quote. <a href="voltfield-supply-catalog.html">Back to All Parts &rarr;</a></p>
+  </div>
+</footer>
+<div class="toast" id="toast"></div>
+
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-catalog-data.js"></script>
+<script src="voltfield-bom-engine.js"></script>
+<script>
+/* ===== Standalone part-detail / configurator (uses shared catalog data) ===== */
+function loadQuote(){try{const q=JSON.parse(localStorage.getItem('vf_quote')||'[]');return Array.isArray(q)?q:[];}catch(e){return [];}}
+function saveQuote(q){localStorage.setItem('vf_quote',JSON.stringify(q));const el=document.getElementById('quoteCount');if(el)el.textContent=q.length;}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._tm);t._tm=setTimeout(()=>t.classList.remove('show'),1900);}
+saveQuote(loadQuote());
+
+const P=new URLSearchParams(location.search);
+const fi=parseInt(P.get('fi'),10);
+const f=(Number.isInteger(fi)&&fi>=0&&fi<FAM.length)?FAM[fi]:null;
+let PS=null;
+
+if(!f){
+  document.getElementById('wrap').innerHTML=`<div class="notfound"><h2>Part not found</h2><p>That part link isn't valid. Browse the full catalog to find and configure a part.</p><a href="voltfield-supply-catalog.html">Go to All Parts &rarr;</a></div>`;
+} else {
+  const picks=P.get('o')?paramToPicks(f,P.get('o')):genSKU(f,fi).picks.slice();
+  const chk=P.get('chk')||genSKU(f,fi).chk;
+  PS={f,picks,chk,qty:Math.max(1,parseInt(P.get('qty'),10)||1)};
+  renderPart();
+}
+
+function partURL(){return `voltfield-part.html?fi=${f._i}&o=${picksToParam(f,PS.picks)}&chk=${PS.chk}`+(PS.qty>1?`&qty=${PS.qty}`:'');}
+function syncURL(){history.replaceState(null,'',partURL());}
+
+function renderPart(){
+  const {picks,qty}=PS;
+  const pn=configuredPN(f,picks,PS.chk), price=priceFor(f,picks), lb=leadBadge(f), col=SECTORS[f.s].color;
+  document.title=configuredName(f,picks)+' | '+f.c+' — VOLTFIELD Supply Co.';
+  const distLbl=DIST_NAME[f.d];
+  const inq=loadQuote().some(x=>x.pn===pn);
+  document.getElementById('wrap').innerHTML=`
+    <div class="crumb">
+      <a href="index.html">Home</a><span class="sep">/</span>
+      <a href="voltfield-supply-catalog.html?sector=${f.s}">${SECTORS[f.s].label}</a><span class="sep">/</span>
+      <a href="voltfield-supply-catalog.html?sector=${f.s}&cat=${encodeURIComponent(f.c)}">${f.c}</a><span class="sep">/</span>
+      <span>${f.n}</span>
+    </div>
+    <div class="pcard">
+      <div class="p-band" style="background:${col}"></div>
+      <div class="p-hd">
+        <span class="p-cat" style="background:${col}">${f.c}</span>
+        <span class="p-dist">${distLbl} · ${SECTORS[f.s].label}</span>
+      </div>
+      ${f.img?`<div class="p-imgwrap"><img class="p-img" src="${f.img}" alt="${configuredName(f,picks)}"></div>`:''}
+      <div class="p-body">
+        <div class="p-pn">${pn}</div>
+        <h1 class="p-name">${configuredName(f,picks)}</h1>
+        <div class="p-cfg-t">Configure this part</div>
+        <div class="p-cfg">${f.ax.map((axis,ai)=>`<label class="cfg-row"><span>${axis[0]}</span><select data-ai="${ai}">${axis.slice(1).map(o=>`<option${o===picks[ai]?' selected':''}>${o}</option>`).join('')}</select></label>`).join('')}</div>
+        <div class="p-cmp">${f.cmp.map(x=>`<span>${x}</span>`).join('')}</div>
+        <div class="p-facts">
+          <div><span>Unit price</span><b>${money(price,f.pu)}</b></div>
+          <div><span>Lead time</span><b class="lead ${lb.c}">${lb.t}</b></div>
+          <div><span>Quantity</span><input type="number" id="pQty" min="1" value="${qty}"></div>
+          <div><span>Est. line total</span><b>${money(price*qty,f.pu)}</b></div>
+        </div>
+        <div class="p-note">This is one configuration within the <b>${f.n}</b> family (${fmt(f.ct)} SKUs). Change any option above and the shareable link updates automatically.</div>
+      </div>
+      <div class="p-foot">
+        <button class="p-add${inq?' in':''}" id="pAdd">${inq?'In quote ✓':'Add to quote'}</button>
+        <button class="p-rfq" id="pRfq">Request quote &rsaquo;</button>
+        ${(typeof bomApplicability==='function'&&bomApplicability(f).ok)?`<a class="p-bom" href="voltfield-bom-generator.html?fi=${f._i}&o=${picksToParam(f,picks)}">Component BOM &rsaquo;</a>`:''}
+        <button class="p-copy" id="pCopy">Copy link</button>
+      </div>
+    </div>`;
+  document.querySelectorAll('select[data-ai]').forEach(sel=>sel.onchange=()=>{PS.picks[+sel.dataset.ai]=sel.value;syncURL();renderPart();});
+  const qi=document.getElementById('pQty'); qi.onchange=()=>{PS.qty=Math.max(1,parseInt(qi.value,10)||1);syncURL();renderPart();};
+  document.getElementById('pAdd').onclick=()=>{
+    const cur=loadQuote();
+    if(cur.some(x=>x.pn===pn)){saveQuote(cur.filter(x=>x.pn!==pn));toast('Removed from quote');}
+    else{cur.push({pn,name:configuredName(f,picks),price:money(price,f.pu).replace(/<[^>]+>/g,''),lead:lb.t,sec:f.s,qty:PS.qty,up:price,pu:f.pu,d:f.d});saveQuote(cur);toast('Added to quote list');}
+    renderPart();
+  };
+  document.getElementById('pRfq').onclick=()=>{
+    const cur=loadQuote();
+    if(!cur.some(x=>x.pn===pn)){cur.push({pn,name:configuredName(f,picks),price:money(price,f.pu).replace(/<[^>]+>/g,''),lead:lb.t,sec:f.s,qty:PS.qty,up:price,pu:f.pu,d:f.d});saveQuote(cur);}
+    location.href='voltfield-rfq.html';
+  };
+  document.getElementById('pCopy').onclick=()=>{
+    const url=location.href;
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(()=>toast('Link copied'),()=>fallbackCopy(url));}
+    else fallbackCopy(url);
+  };
+}
+function fallbackCopy(text){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Link copied');}catch(e){toast('Copy failed — select the address bar');}ta.remove();}
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+</body>
+</html>

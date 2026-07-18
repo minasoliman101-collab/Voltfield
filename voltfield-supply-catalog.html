@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Parts — Search 2M+ Industrial &amp; Energy Parts | VOLTFIELD Supply Co.</title>
+<meta name="description" content="Searchable, filterable catalog of 2M+ configurable SKUs: transformers, switchgear, inverters, battery storage, oilfield equipment, and full MRO lines from Grainger, Uline, Graybar and MSC — with indicative pricing and live lead times.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:title" content="All Parts — the full 2M+ SKU catalog">
+<meta property="og:description" content="Filter by sector, category, lead time and attributes; configure exact SKUs and build a quote list.">
+<meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#101B2D;--ink-2:#22334C;--slate:#5B6B7E;--paper:#DDE5EC;--card:#F3F6FA;
+  --line:#C4CFDA;--line-dark:#A7B6C6;--signal:#FFC400;--signal-deep:#E5AC00;
+  --crit:#C43D2E;--warn:#D98E04;--ok:#2E7D4F;
+  --dc:#2B6CB0;--re:#2E7D4F;--bess:#B7791F;--og:#9C4221;--mro:#5B6B7E;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;--body:'IBM Plex Sans',system-ui,sans-serif;--disp:'Barlow Condensed',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5}
+button,a,input,select{font-family:inherit}
+button,a{cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+.utilbar{background:var(--ink);color:#C9D3DF;font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:6px 20px;display:flex;justify-content:space-between;gap:12px}
+.utilbar b{color:var(--signal);font-weight:600}
+.utilbar .right{display:none}
+@media(min-width:720px){.utilbar .right{display:block}}
+header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:60}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo .bolt{width:34px;height:34px;background:var(--signal);display:grid;place-items:center;border:2px solid var(--ink)}
+.logo .bolt svg{width:18px;height:18px}
+.logo .wordmark{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.02em;line-height:1}
+.logo .wordmark small{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.18em;color:var(--slate)}
+.hnav{display:none;gap:4px}
+.navtoggle{display:none;background:var(--ink);color:#fff;border:2px solid var(--ink);width:42px;height:38px;font-size:20px;line-height:1;align-items:center;justify-content:center;flex-shrink:0}
+@media(max-width:899px){.navtoggle{display:inline-flex}.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:2px solid var(--ink);padding:6px 12px 10px;gap:0;box-shadow:0 10px 20px rgba(16,27,45,.14);z-index:59}.hnav.open a{padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}.hnav.open a:last-child{border-bottom:0}.hnav.open a.on{border-left-color:var(--signal);color:var(--ink)}}
+@media(min-width:900px){.hnav{display:flex}}
+.hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
+.hnav a:hover{color:var(--ink);background:var(--paper)}
+.hnav a.on{color:var(--ink);border-bottom-color:var(--signal)}
+.headright{margin-left:auto;display:flex;align-items:center;gap:10px}
+.quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
+.quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
+/* ---------- catalog banner ---------- */
+.catban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:22px 20px 24px}
+.catban-in{max-width:1240px;margin:0 auto}
+.catban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:8px}
+.catban h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.6vw,40px);letter-spacing:.01em;line-height:1}
+.catsearch{margin-top:16px;display:flex;max-width:680px;border:2px solid var(--signal);background:#fff}
+.catsearch input{flex:1;border:0;padding:13px 16px;font-family:var(--mono);font-size:14.5px;color:var(--ink);background:transparent}
+.catsearch input::placeholder{color:#8896A6}
+.catsearch button{background:var(--signal);border:0;border-left:2px solid var(--ink);padding:0 22px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.05em;color:var(--ink)}
+.catban .metaline{font-family:var(--mono);font-size:11.5px;color:#9FB0C3;margin-top:12px;display:flex;gap:18px;flex-wrap:wrap}
+.catban .metaline b{color:var(--signal);font-weight:600}
+/* ---------- layout ---------- */
+.catlayout{max-width:1240px;margin:0 auto;padding:22px 20px 60px;display:grid;grid-template-columns:1fr;gap:22px}
+@media(min-width:920px){.catlayout{grid-template-columns:260px 1fr}}
+.sidebar{align-self:start}
+@media(min-width:920px){.sidebar{position:sticky;top:84px;max-height:calc(100vh - 100px);overflow:auto}}
+.facet{background:var(--card);border:1px solid var(--line-dark);margin-bottom:14px}
+.facet h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);padding:12px 14px 8px;border-bottom:1px solid var(--line)}
+.facet .opts{padding:6px 0}
+.opt{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 14px;font-size:13px;cursor:pointer;border-left:3px solid transparent}
+.opt:hover{background:var(--paper)}
+.opt.on{background:#F4F6F9;border-left-color:var(--signal);font-weight:600}
+.opt.on .dot{opacity:1}
+.opt .lbl{display:flex;align-items:center;gap:8px;min-width:0}
+.opt .dot{width:9px;height:9px;flex-shrink:0;opacity:.35}
+.opt .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.opt .n{font-family:var(--mono);font-size:11px;color:var(--slate);flex-shrink:0}
+.opt.disabled{cursor:not-allowed;color:var(--line-dark)}
+.opt.disabled:hover{background:transparent}
+.opt .soon{font-family:var(--mono);font-size:9px;letter-spacing:.06em;background:var(--paper);border:1px solid var(--line-dark);color:var(--slate);padding:1px 5px;text-transform:uppercase}
+.facetnote{font-family:var(--mono);font-size:10px;color:var(--slate);padding:0 14px 12px;line-height:1.5}
+.clearbtn{width:100%;background:var(--ink);color:#fff;border:0;padding:11px;font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.05em;text-transform:uppercase}
+.clearbtn:hover{background:var(--ink-2)}
+/* ---------- results ---------- */
+.resbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.resbar .count{font-size:14px}
+.resbar .count b{font-family:var(--disp);font-weight:700;font-size:22px;color:var(--ink)}
+.resbar .count .sub{font-family:var(--mono);font-size:11px;color:var(--slate);display:block;margin-top:1px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line-dark);font-family:var(--mono);font-size:11px;padding:4px 8px;color:var(--ink-2)}
+.chip b{color:var(--ink)}
+.chip button{background:none;border:0;color:var(--slate);font-size:13px;line-height:1;padding:0}
+.chip button:hover{color:var(--crit)}
+.skugrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:14px}
+.skucard{background:var(--card);border:1px solid var(--line-dark);display:flex;flex-direction:column;transition:box-shadow .15s,transform .12s}
+.skucard:hover{box-shadow:0 6px 16px rgba(16,27,45,.12);transform:translateY(-2px)}
+.skucard .sk-band{height:5px}
+.skucard .sk-imgwrap{height:150px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:8px;cursor:pointer;overflow:hidden}
+.skucard .sk-img{max-width:100%;max-height:100%;object-fit:contain;mix-blend-mode:multiply}
+.skucard:hover .sk-img{transform:scale(1.03);transition:transform .18s}
+.skucard .sk-body{padding:12px 14px 10px;flex:1;display:flex;flex-direction:column}
+.skucard .sk-cat{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.skucard .sk-cat .c{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:#fff;padding:2px 6px}
+.skucard .sk-cat .d{font-family:var(--mono);font-size:9.5px;color:var(--slate)}
+.skucard .sk-pn{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--ink);margin-top:9px;letter-spacing:.01em}
+.skucard h4{font-family:var(--disp);font-weight:600;font-size:17.5px;line-height:1.12;margin-top:3px;letter-spacing:.005em}
+.skucard .sk-spec{font-family:var(--mono);font-size:10.5px;color:var(--slate);margin-top:7px;line-height:1.5;flex:1}
+.skucard .sk-cmp{display:flex;flex-wrap:wrap;gap:4px;margin-top:9px}
+.skucard .sk-cmp span{font-family:var(--mono);font-size:9px;border:1px solid var(--line-dark);padding:2px 5px;color:var(--ink-2)}
+.skucard .sk-foot{border-top:1px solid var(--line);padding:9px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.skucard .sk-price{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--ink)}
+.skucard .sk-price small{font-weight:400;color:var(--slate)}
+.lead{font-family:var(--mono);font-size:10px;font-weight:500;padding:2px 6px;white-space:nowrap}
+.lead.ok{background:#E7F1EB;color:var(--ok)}
+.lead.warn{background:#FBF0DA;color:var(--warn)}
+.lead.crit{background:#F7E4E1;color:var(--crit)}
+.addbtn{background:var(--signal);color:var(--ink);border:1.5px solid var(--ink);padding:5px 10px;font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:.03em;text-transform:uppercase}
+.addbtn:hover{background:var(--ink);color:var(--signal)}
+.addbtn.in{background:var(--ok);color:#fff;border-color:var(--ok)}
+.sk-actions{display:flex;gap:8px;align-items:center}
+/* ---------- pagination ---------- */
+.pager{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:26px;flex-wrap:wrap}
+.pager button{background:var(--card);border:1px solid var(--line-dark);padding:8px 12px;font-family:var(--mono);font-size:12px;color:var(--ink-2)}
+.pager button:hover:not(:disabled){border-color:var(--ink);color:var(--ink)}
+.pager button:disabled{opacity:.4;cursor:default}
+.pager .pageinfo{font-family:var(--mono);font-size:12px;color:var(--slate);padding:0 8px}
+.pager input{width:74px;border:1px solid var(--line-dark);padding:7px 8px;font-family:var(--mono);font-size:12px;text-align:center}
+.empty{background:var(--card);border:1px dashed var(--line-dark);padding:44px 20px;text-align:center;color:var(--slate)}
+.empty h3{font-family:var(--disp);font-weight:600;font-size:22px;color:var(--ink-2);margin-bottom:6px}
+/* ---------- quote drawer ---------- */
+.scrim{position:fixed;inset:0;background:rgba(16,27,45,.5);z-index:90;display:none}
+.scrim.open{display:block}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(420px,100%);background:var(--paper);z-index:100;transform:translateX(100%);transition:transform .2s;display:flex;flex-direction:column;border-left:2px solid var(--ink)}
+.drawer.open{transform:translateX(0)}
+.drawer-hd{background:var(--ink);color:#fff;padding:16px 18px;display:flex;justify-content:space-between;align-items:center}
+.drawer-hd h3{font-family:var(--disp);font-weight:700;font-size:20px;letter-spacing:.03em}
+.drawer-hd button{background:none;border:0;color:#9FB0C3;font-size:24px;line-height:1}
+.drawer-hd button:hover{color:#fff}
+.drawer-body{flex:1;overflow:auto;padding:14px}
+.drawer-proj{padding:12px 16px;border-bottom:1px solid var(--line-dark);background:#F7F9FB}
+.proj-active{font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:8px}
+.proj-active b{color:var(--ink)}
+.proj-row{display:flex;gap:6px;margin-bottom:6px}
+.proj-row:last-child{margin-bottom:0}
+.proj-row input,.proj-row select{flex:1;min-width:0;border:1px solid var(--line-dark);padding:7px 8px;font-family:var(--body);font-size:13px;background:#fff}
+.proj-row button{background:var(--ink);color:#fff;border:0;padding:7px 12px;font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap}
+.proj-row button:hover{background:var(--ink-2)}
+#delProj{background:var(--card);color:var(--slate);border:1px solid var(--line-dark)}
+#delProj:hover{border-color:var(--crit);color:var(--crit)}
+.proj-row .proj-sec{flex:1;background:var(--card);color:var(--ink-2);border:1px solid var(--line-dark)}
+.proj-row .proj-sec:hover{border-color:var(--ink);color:var(--ink)}
+.implbl{display:flex;align-items:center;justify-content:center;cursor:pointer;text-align:center}
+.implbl input{display:none}
+.qitem{background:var(--card);border:1px solid var(--line-dark);padding:11px 12px;margin-bottom:10px}
+.qitem .qtop{display:flex;justify-content:space-between;gap:8px}
+.qitem .qpn{font-family:var(--mono);font-size:11.5px;font-weight:600}
+.qitem .qname{font-family:var(--disp);font-weight:600;font-size:15px;margin-top:2px}
+.qitem .qmeta{font-family:var(--mono);font-size:10.5px;color:var(--slate);margin-top:5px;display:flex;justify-content:space-between;gap:8px}
+.qitem .qx{background:none;border:0;color:var(--slate);font-size:16px;line-height:1}
+.qitem .qx:hover{color:var(--crit)}
+.drawer-ft{border-top:1px solid var(--line-dark);padding:14px 16px;background:var(--card)}
+.drawer-ft .rfqbtn{width:100%;background:var(--signal);color:var(--ink);border:2px solid var(--ink);padding:13px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.05em;text-transform:uppercase}
+.drawer-ft .rfqbtn:hover{background:var(--ink);color:var(--signal)}
+.drawer-ft .note{font-family:var(--mono);font-size:10px;color:var(--slate);margin-top:9px;line-height:1.5;text-align:center}
+.qempty{text-align:center;color:var(--slate);padding:40px 16px;font-size:13.5px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;font-family:var(--mono);font-size:12.5px;padding:11px 18px;border-left:4px solid var(--signal);z-index:120;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* ---------- detail / configurator modal ---------- */
+.sk-body{cursor:pointer}
+.sk-more{font-family:var(--mono);font-size:10px;color:var(--signal-deep);margin-top:9px;font-weight:600;letter-spacing:.03em}
+.skucard:hover .sk-more{text-decoration:underline;text-underline-offset:2px}
+.modal-scrim{position:fixed;inset:0;background:rgba(16,27,45,.55);z-index:110;display:none}
+.modal-scrim.open{display:block}
+.detail-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-46%);width:min(540px,94vw);max-height:90vh;overflow:auto;background:var(--card);z-index:120;border:2px solid var(--ink);opacity:0;visibility:hidden;transition:opacity .16s,transform .16s}
+.detail-modal.open{opacity:1;visibility:visible;transform:translate(-50%,-50%)}
+.dm-band{height:6px}
+.dm-imgwrap{height:180px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:14px}
+.dm-img{max-width:100%;max-height:100%;object-fit:contain;mix-blend-mode:multiply}
+.dm-hd{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.dm-cat{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:#fff;padding:2px 7px}
+.dm-dist{font-family:var(--mono);font-size:10.5px;color:var(--slate)}
+.dm-x{background:none;border:0;font-size:24px;line-height:1;color:var(--slate)}
+.dm-x:hover{color:var(--crit)}
+.dm-body{padding:14px 16px}
+.dm-pn{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--ink)}
+.dm-name{font-family:var(--disp);font-weight:700;font-size:24px;line-height:1.05;margin-top:3px}
+.dm-share{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--signal-deep);text-decoration:none;margin-top:6px}
+.dm-share:hover{text-decoration:underline;text-underline-offset:2px}
+.dm-cfg-t{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin:16px 0 8px}
+.dm-cfg{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+@media(max-width:460px){.dm-cfg{grid-template-columns:1fr}}
+.cfg-row{display:flex;flex-direction:column;gap:3px}
+.cfg-row span{font-family:var(--mono);font-size:10px;color:var(--ink-2);text-transform:uppercase;letter-spacing:.04em}
+.cfg-row select{border:1px solid var(--line-dark);padding:7px 8px;font-family:var(--body);font-size:13px;background:#fff}
+.dm-cmp{display:flex;flex-wrap:wrap;gap:5px;margin-top:14px}
+.dm-cmp span{font-family:var(--mono);font-size:9px;border:1px solid var(--line-dark);padding:2px 6px;color:var(--ink-2)}
+.dm-facts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+.dm-facts>div{display:flex;flex-direction:column;gap:3px}
+.dm-facts span{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--slate)}
+.dm-facts b{font-family:var(--mono);font-size:15px;color:var(--ink)}
+.dm-facts .lead{font-size:11px;align-self:flex-start}
+.dm-facts input{width:80px;border:1px solid var(--line-dark);padding:5px 8px;font-family:var(--mono);font-size:13px}
+.dm-note{font-family:var(--mono);font-size:10px;color:var(--slate);line-height:1.5;margin-top:14px}
+.dm-foot{display:flex;gap:10px;padding:14px 16px;border-top:1px solid var(--line);background:var(--paper)}
+.dm-add{flex:1;background:var(--signal);color:var(--ink);border:2px solid var(--ink);padding:11px;font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase}
+.dm-add:hover{background:var(--ink);color:var(--signal)}
+.dm-add.in{background:var(--ok);color:#fff;border-color:var(--ok)}
+.dm-rfq{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:11px 16px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;text-transform:uppercase}
+.dm-rfq:hover{background:var(--ink-2)}
+footer{background:var(--ink);color:#9FB0C3;padding:30px 20px;font-size:12px}
+footer .in{max-width:1240px;margin:0 auto;display:grid;gap:16px}
+@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr}}
+footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer p{line-height:1.6;max-width:560px}
+footer a{color:#9FB0C3}
+</style>
+</head>
+<body>
+<div class="utilbar">
+  <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
+  <span class="right">HOUSTON · PHOENIX · COLUMBUS &nbsp;|&nbsp; +1 (800) 555-0119 &nbsp;|&nbsp; RFQ@VOLTFIELD.CO</span>
+</div>
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — ENERGY INFRASTRUCTURE PARTS</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="index.html">Home</a>
+    <a href="voltfield-supply-catalog.html" class="on">All Parts</a>
+    <a href="voltfield-suppliers.html">All Suppliers</a>
+    <a href="voltfield-bom.html">Quick Order</a>
+    <a href="voltfield-bom-generator.html">BOM Generator</a>
+    <a href="voltfield-insights.html">Insights</a>
+    <a href="voltfield-account.html">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <button class="quotebtn" id="openQuote" aria-label="Open quote list">QUOTE LIST <span class="ct" id="quoteCount">0</span></button>
+  </div>
+</header>
+
+<section class="catban">
+  <div class="catban-in">
+    <div class="eyebrow">All Parts · Configurable Catalog</div>
+    <h1>Search 2M+ configurable SKUs across five sectors</h1>
+    <form class="catsearch" id="searchForm" role="search">
+      <input id="searchInput" type="search" placeholder="Search part name, spec, or number — e.g. &ldquo;hex cap screw SS316&rdquo;, &ldquo;15kV switchgear&rdquo;" aria-label="Search catalog">
+      <button type="submit">SEARCH</button>
+    </form>
+    <div class="metaline">
+      <span><b id="mTotal">0</b> configurable SKUs</span>
+      <span><b id="mFam">0</b> product families</span>
+      <span><b>5</b> sectors · <b id="mCat">0</b> categories</span>
+      <span>Grainger · Uline · Graybar · MSC catalogs live</span>
+    </div>
+  </div>
+</section>
+
+<div class="catlayout">
+  <aside class="sidebar">
+    <div class="facet">
+      <h3>Sector</h3>
+      <div class="opts" id="facetSector"></div>
+    </div>
+    <div class="facet" id="facetCatWrap" style="display:none">
+      <h3 id="facetCatTitle">Category</h3>
+      <div class="opts" id="facetCat"></div>
+    </div>
+    <div class="facet">
+      <h3>Lead time</h3>
+      <div class="opts" id="facetLead"></div>
+    </div>
+    <div class="facet">
+      <h3>Distributor / Source</h3>
+      <div class="opts" id="facetDist"></div>
+      <div class="facetnote">Grainger, Uline, Graybar, and MSC Industrial catalogs are all live. The taxonomy carries a source field, so more distributors can be added as a data load — not a rebuild.</div>
+    </div>
+    <button class="clearbtn" id="clearBtn">Clear all filters</button>
+  </aside>
+
+  <main>
+    <div class="resbar">
+      <div class="count">
+        <b id="resCount">0</b>
+        <span class="sub" id="resSub">configurable SKUs</span>
+      </div>
+      <div class="chips" id="activeChips"></div>
+    </div>
+    <div class="skugrid" id="skugrid"></div>
+    <div class="empty" id="emptyState" style="display:none">
+      <h3>No families match those filters</h3>
+      <p>Try clearing a filter or searching a broader term.</p>
+    </div>
+    <div class="pager" id="pager"></div>
+  </main>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Quote list">
+  <div class="drawer-hd">
+    <h3>Quote List</h3>
+    <button id="closeQuote" aria-label="Close">&times;</button>
+  </div>
+  <div class="drawer-proj">
+    <div class="proj-active">Project: <b id="projActive">Working list</b></div>
+    <div class="proj-row">
+      <input id="projName" placeholder="Name this list&hellip;" aria-label="Project name">
+      <button id="saveProj">Save</button>
+      <button id="newProj">New</button>
+    </div>
+    <div class="proj-row" id="loadRow" style="display:none">
+      <select id="loadProj" aria-label="Load a saved list"></select>
+      <button id="delProj" title="Delete selected saved list">Delete</button>
+    </div>
+    <div class="proj-row">
+      <button id="exportProj" class="proj-sec" title="Download all your lists as a file">Export</button>
+      <label class="proj-sec implbl" title="Import lists from a file"><span>Import</span><input type="file" id="importProj" accept=".json,application/json"></label>
+    </div>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-ft">
+    <button class="rfqbtn" id="rfqBtn">Request quote &mdash; 24 hr turnaround</button>
+    <div class="note">Indicative pricing only. Final price, availability &amp; lead time confirmed at quote. Your list is saved on this device.</div>
+  </div>
+</aside>
+<div class="toast" id="toast"></div>
+<div class="modal-scrim" id="modalScrim"></div>
+<div class="detail-modal" id="detailModal" role="dialog" aria-modal="true" aria-label="Part detail"><div id="detailContent"></div></div>
+
+<footer>
+  <div class="in">
+    <div>
+      <h5>Voltfield Supply Co.</h5>
+      <p>Configurable catalog spanning grid &amp; data-center power, renewables BOS, battery storage, oilfield equipment, and Grainger-scale MRO/industrial supply. SKUs are configured on demand from a taxonomy of product families and attribute options; pricing is indicative market range (North America, July 2026) confirmed at quote. Additional distributor catalogs — Uline, Graybar and others — are on the roadmap.</p>
+    </div>
+    <div>
+      <h5>Jump to sector</h5>
+      <p><a href="voltfield-supply-catalog.html?sector=dc">Data Centers</a> &nbsp;·&nbsp; <a href="voltfield-supply-catalog.html?sector=re">Renewables</a> &nbsp;·&nbsp; <a href="voltfield-supply-catalog.html?sector=bess">Battery Storage</a> &nbsp;·&nbsp; <a href="voltfield-supply-catalog.html?sector=og">Oil &amp; Gas</a> &nbsp;·&nbsp; <a href="voltfield-supply-catalog.html?sector=mro">Industrial Supply (MRO)</a><br><br><a href="voltfield-suppliers.html">Browse all suppliers &rarr;</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-catalog-data.js"></script>
+<script>
+/* ---------- state ---------- */
+const PAGE_SIZE=24;
+let state={sector:null,cat:null,q:'',lt:null,dist:null,page:0};
+
+function readURL(){
+  const p=new URLSearchParams(location.search);
+  if(p.get('sector')&&SECTORS[p.get('sector')])state.sector=p.get('sector');
+  if(p.get('cat'))state.cat=p.get('cat');
+  if(p.get('q'))state.q=p.get('q');
+  if(p.get('lt'))state.lt=p.get('lt');
+  if(p.get('dist'))state.dist=p.get('dist');
+}
+function writeURL(){
+  const p=new URLSearchParams();
+  if(state.sector)p.set('sector',state.sector);
+  if(state.cat)p.set('cat',state.cat);
+  if(state.q)p.set('q',state.q);
+  if(state.lt)p.set('lt',state.lt);
+  if(state.dist)p.set('dist',state.dist);
+  history.replaceState(null,'','voltfield-supply-catalog.html'+(p.toString()?'?'+p.toString():''));
+}
+
+function famPass(f,skip){
+  const toks=state.q.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  if(skip!=='sector'&&state.sector&&f.s!==state.sector)return false;
+  if(skip!=='cat'&&state.cat&&f.c!==state.cat)return false;
+  if(skip!=='dist'&&state.dist&&f.d!==state.dist)return false;
+  if(skip!=='lt'){if(state.lt==='short'&&f.lw>12)return false;if(state.lt==='long'&&f.lw<=12)return false;}
+  if(skip!=='q'&&toks.length&&!toks.every(t=>f.search.includes(t)))return false;
+  return true;
+}
+function countDim(keyFn,skip){const m={};FAM.forEach(f=>{if(famPass(f,skip)){const k=keyFn(f);if(k!=null)m[k]=(m[k]||0)+f.ct;}});return m;}
+function matchedFamilies(){return FAM.filter(f=>famPass(f));}
+
+/* ---------- render facets ---------- */
+function el(tag,cls,html){const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+
+const DIST_LABEL={grainger:'Grainger (MRO)',uline:'Uline',graybar:'Graybar',msc:'MSC Industrial',voltfield:'Voltfield Direct'};
+const DIST_ORDER=['grainger','uline','graybar','msc','voltfield'];
+function renderFacets(){
+  // Sector — counts respect distributor/lead/search
+  const secCounts=countDim(f=>f.s,'sector');
+  const secTotal=Object.values(secCounts).reduce((a,b)=>a+b,0);
+  const fs=document.getElementById('facetSector'); fs.innerHTML='';
+  const allOpt=el('div','opt'+(state.sector?'':' on'),`<span class="lbl"><span class="dot" style="background:var(--ink)"></span><span class="nm">All sectors</span></span><span class="n">${fmt(secTotal)}</span>`);
+  allOpt.onclick=()=>{state.sector=null;state.cat=null;state.page=0;apply();};
+  fs.appendChild(allOpt);
+  Object.keys(SECTORS).forEach(k=>{
+    const on=state.sector===k, c=secCounts[k]||0;
+    const o=el('div','opt'+(on?' on':'')+(c===0&&!on?' disabled':''),`<span class="lbl"><span class="dot" style="background:${SECTORS[k].color}"></span><span class="nm">${SECTORS[k].label}</span></span><span class="n">${fmt(c)}</span>`);
+    if(c>0||on)o.onclick=()=>{state.sector=k;state.cat=null;state.page=0;apply();};
+    fs.appendChild(o);
+  });
+  // Category (only when a sector is chosen) — counts respect distributor/lead/search
+  const wrap=document.getElementById('facetCatWrap'), fc=document.getElementById('facetCat');
+  if(state.sector){
+    wrap.style.display='';
+    document.getElementById('facetCatTitle').textContent='Category · '+SECTORS[state.sector].label;
+    const catCounts=countDim(f=>f.c,'cat');
+    const catTotal=Object.values(catCounts).reduce((a,b)=>a+b,0);
+    fc.innerHTML='';
+    const anyCat=el('div','opt'+(state.cat?'':' on'),`<span class="lbl"><span class="dot" style="background:${SECTORS[state.sector].color}"></span><span class="nm">All categories</span></span><span class="n">${fmt(catTotal)}</span>`);
+    anyCat.onclick=()=>{state.cat=null;state.page=0;apply();};
+    fc.appendChild(anyCat);
+    SECTOR_CATS[state.sector].forEach(c=>{
+      const cc=catCounts[c]||0; if(cc===0&&state.cat!==c)return;
+      const on=state.cat===c;
+      const o=el('div','opt'+(on?' on':''),`<span class="lbl"><span class="dot" style="background:${SECTORS[state.sector].color}"></span><span class="nm">${c}</span></span><span class="n">${fmt(cc)}</span>`);
+      o.onclick=()=>{state.cat=c;state.page=0;apply();};
+      fc.appendChild(o);
+    });
+  } else { wrap.style.display='none'; }
+  // Lead time
+  const fl=document.getElementById('facetLead'); fl.innerHTML='';
+  [['',null,'Any lead time'],['short','short','Short / in-stock (≤12 wk)'],['long','long','Long-lead (>12 wk)']].forEach(([_,v,lbl])=>{
+    const on=(state.lt||null)===v;
+    const o=el('div','opt'+(on?' on':''),`<span class="lbl"><span class="dot" style="background:var(--signal)"></span><span class="nm">${lbl}</span></span>`);
+    o.onclick=()=>{state.lt=v;state.page=0;apply();};
+    fl.appendChild(o);
+  });
+  // Distributor — all sources live, counts respect sector/lead/search
+  const distCounts=countDim(f=>f.d,'dist');
+  const distTotal=Object.values(distCounts).reduce((a,b)=>a+b,0);
+  const fd=document.getElementById('facetDist'); fd.innerHTML='';
+  const anyD=el('div','opt'+(state.dist?'':' on'),`<span class="lbl"><span class="dot" style="background:var(--ink)"></span><span class="nm">All sources</span></span><span class="n">${fmt(distTotal)}</span>`);
+  anyD.onclick=()=>{state.dist=null;state.page=0;apply();};
+  fd.appendChild(anyD);
+  DIST_ORDER.forEach(d=>{
+    const c=distCounts[d]||0; if(c===0&&state.dist!==d)return;
+    const on=state.dist===d;
+    const o=el('div','opt'+(on?' on':''),`<span class="lbl"><span class="dot" style="background:${d==='voltfield'?'var(--dc)':'var(--mro)'}"></span><span class="nm">${DIST_LABEL[d]}</span></span><span class="n">${fmt(c)}</span>`);
+    o.onclick=()=>{state.dist=d;state.page=0;apply();};
+    fd.appendChild(o);
+  });
+}
+
+/* ---------- active chips ---------- */
+function renderChips(){
+  const c=document.getElementById('activeChips'); c.innerHTML='';
+  const add=(label,val,clear)=>{const chip=el('span','chip',`${label} <b>${val}</b> <button aria-label="Remove">&times;</button>`);chip.querySelector('button').onclick=clear;c.appendChild(chip);};
+  if(state.sector)add('Sector:',SECTORS[state.sector].label,()=>{state.sector=null;state.cat=null;state.page=0;apply();});
+  if(state.cat)add('Category:',state.cat,()=>{state.cat=null;state.page=0;apply();});
+  if(state.q)add('Search:',state.q,()=>{state.q='';document.getElementById('searchInput').value='';state.page=0;apply();});
+  if(state.lt)add('Lead:',state.lt==='short'?'≤12 wk':'>12 wk',()=>{state.lt=null;state.page=0;apply();});
+  if(state.dist)add('Source:',({grainger:'Grainger',uline:'Uline',graybar:'Graybar',msc:'MSC',voltfield:'Voltfield'})[state.dist],()=>{state.dist=null;state.page=0;apply();});
+}
+
+/* ---------- render results ---------- */
+function renderResults(){
+  const matched=matchedFamilies();
+  const N=matched.reduce((a,f)=>a+f.ct,0);
+  const grid=document.getElementById('skugrid'), empty=document.getElementById('emptyState');
+  document.getElementById('resCount').textContent=fmt(N);
+  document.getElementById('resSub').textContent=state.q?`configurable SKUs match “${state.q}” · ${matched.length} families`:`configurable SKUs · ${matched.length} families`;
+  if(N===0){grid.innerHTML='';empty.style.display='';document.getElementById('pager').innerHTML='';return;}
+  empty.style.display='none';
+  const maxPage=Math.ceil(N/PAGE_SIZE)-1;
+  if(state.page>maxPage)state.page=maxPage;
+  if(state.page<0)state.page=0;
+  const start=state.page*PAGE_SIZE, end=Math.min(start+PAGE_SIZE,N);
+  // cumulative offsets
+  const offs=[]; let acc=0; matched.forEach(f=>{offs.push(acc);acc+=f.ct;});
+  function locate(gi){let lo=0,hi=matched.length-1;while(lo<hi){const mid=(lo+hi+1)>>1;if(offs[mid]<=gi)lo=mid;else hi=mid-1;}return {f:matched[lo],local:gi-offs[lo]};}
+  const q=loadQuote(); const qset=new Set(q.map(x=>x.pn));
+  const DL={grainger:'Grainger',uline:'Uline',graybar:'Graybar',msc:'MSC',voltfield:'Voltfield'};
+  let html='';
+  for(let gi=start;gi<end;gi++){
+    const {f,local}=locate(gi);
+    const seed=local*2654435761%f.ct + local;
+    const sku=genSKU(f,seed);
+    const col=SECTORS[f.s].color; const lb=leadBadge(f);
+    const inq=qset.has(sku.pn);
+    html+=`<div class="skucard" data-fi="${f._i}" data-seed="${seed}">
+      <div class="sk-band" style="background:${col}"></div>
+      ${f.img?`<div class="sk-imgwrap"><img class="sk-img" src="${f.img}" alt="${f.n}" loading="lazy"></div>`:''}
+      <div class="sk-body">
+        <div class="sk-cat"><span class="c" style="background:${col}">${f.c}</span><span class="d">${DL[f.d]}</span></div>
+        <div class="sk-pn">${sku.pn}</div>
+        <h4>${sku.name}</h4>
+        <div class="sk-spec">${sku.spec}</div>
+        <div class="sk-cmp">${f.cmp.map(x=>`<span>${x}</span>`).join('')}</div>
+        <div class="sk-more">Configure &amp; details &rsaquo;</div>
+      </div>
+      <div class="sk-foot">
+        <span class="sk-price">${money(sku.price,f.pu)}</span>
+        <div class="sk-actions">
+          <span class="lead ${lb.c}">${lb.t}</span>
+          <button class="addbtn${inq?' in':''}" data-pn="${sku.pn}" data-name="${encodeURIComponent(sku.name)}" data-price="${money(sku.price,f.pu).replace(/<[^>]+>/g,'')}" data-lead="${lb.t}" data-sec="${f.s}" data-up="${sku.price}" data-pu="${f.pu}" data-d="${f.d}">${inq?'Added ✓':'Add'}</button>
+        </div>
+      </div>
+    </div>`;
+  }
+  grid.innerHTML=html;
+  grid.querySelectorAll('.addbtn').forEach(b=>b.onclick=e=>{e.stopPropagation();addToQuote(b);});
+  grid.querySelectorAll('.skucard').forEach(card=>{const fi=+card.dataset.fi,seed=+card.dataset.seed;card.querySelectorAll('.sk-body,.sk-imgwrap').forEach(elm=>elm.onclick=()=>openDetail(fi,seed));});
+  renderPager(N,maxPage);
+}
+function renderPager(N,maxPage){
+  const p=document.getElementById('pager'); p.innerHTML='';
+  const start=state.page*PAGE_SIZE+1, end=Math.min((state.page+1)*PAGE_SIZE,N);
+  const mk=(txt,dis,fn)=>{const b=el('button',null,txt);b.disabled=dis;if(!dis)b.onclick=fn;return b;};
+  p.appendChild(mk('« First',state.page===0,()=>{state.page=0;renderResults();scrollTop();}));
+  p.appendChild(mk('‹ Prev',state.page===0,()=>{state.page--;renderResults();scrollTop();}));
+  p.appendChild(el('span','pageinfo',`${fmt(start)}–${fmt(end)} of ${fmt(N)} &nbsp;·&nbsp; page ${fmt(state.page+1)} / ${fmt(maxPage+1)}`));
+  p.appendChild(mk('Next ›',state.page>=maxPage,()=>{state.page++;renderResults();scrollTop();}));
+  p.appendChild(mk('Last »',state.page>=maxPage,()=>{state.page=maxPage;renderResults();scrollTop();}));
+  if(maxPage>0){
+    const jump=el('input');jump.type='number';jump.min=1;jump.max=maxPage+1;jump.placeholder='Go to…';jump.setAttribute('aria-label','Jump to page');
+    jump.onkeydown=e=>{if(e.key==='Enter'){const v=parseInt(jump.value,10);if(v>=1&&v<=maxPage+1){state.page=v-1;renderResults();scrollTop();}}};
+    p.appendChild(jump);
+  }
+}
+function scrollTop(){document.querySelector('.catlayout').scrollIntoView({behavior:'smooth',block:'start'});}
+
+/* ---------- quote list (localStorage) ---------- */
+function loadQuote(){try{const q=JSON.parse(localStorage.getItem('vf_quote')||'[]');return Array.isArray(q)?q:[];}catch(e){return [];}}
+function saveQuote(q){localStorage.setItem('vf_quote',JSON.stringify(q));document.getElementById('quoteCount').textContent=q.length;}
+/* ---------- saved / named quote lists (projects) ---------- */
+function escP(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function loadSaved(){try{const s=JSON.parse(localStorage.getItem('vf_saved')||'{}');return (s&&typeof s==='object'&&!Array.isArray(s))?s:{};}catch(e){return {};}}
+function saveSaved(s){localStorage.setItem('vf_saved',JSON.stringify(s));}
+function activeName(){return localStorage.getItem('vf_active_name')||'';}
+function setActiveName(n){localStorage.setItem('vf_active_name',n||'');}
+function exportProjects(){
+  const saved=loadSaved(), working=loadQuote();
+  if(!working.length && !Object.keys(saved).length){toast('No lists to export');return;}
+  const data={voltfield_quotes:1,exported:new Date().toISOString(),working,saved};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob), a=document.createElement('a');
+  const d=new Date(), stamp=d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');
+  a.href=url;a.download='voltfield-quotes-'+stamp+'.json';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+  toast('Exported your quote lists');
+}
+function uniqueName(s,base){if(!s[base])return base;let k=2;while(s[base+' ('+k+')'])k++;return base+' ('+k+')';}
+function importProjects(file){
+  const rd=new FileReader();
+  rd.onload=()=>{
+    let data; try{data=JSON.parse(rd.result);}catch(e){toast('That file isn’t a valid quotes file');return;}
+    if(!data||typeof data!=='object'||(!data.saved&&!data.working)){toast('No quote lists found in that file');return;}
+    const s=loadSaved(); let added=0;
+    const incoming=(data.saved&&typeof data.saved==='object'&&!Array.isArray(data.saved))?data.saved:{};
+    Object.keys(incoming).forEach(nm=>{ if(!Array.isArray(incoming[nm]))return; s[uniqueName(s,nm)]=incoming[nm]; added++; });
+    if(Array.isArray(data.working)&&data.working.length){ s[uniqueName(s,'Imported list')]=data.working; added++; }
+    if(!added){toast('No lists found in that file');return;}
+    saveSaved(s); renderProjects(); toast('Imported '+added+' list'+(added===1?'':'s'));
+  };
+  rd.readAsText(file);
+}
+function renderProjects(){
+  const pa=document.getElementById('projActive'); if(!pa)return;
+  const active=activeName();
+  pa.textContent=active||'Working list';
+  const pn=document.getElementById('projName'); if(document.activeElement!==pn)pn.value=active||'';
+  const saved=loadSaved(), names=Object.keys(saved).sort((a,b)=>a.localeCompare(b));
+  const row=document.getElementById('loadRow'), sel=document.getElementById('loadProj');
+  if(!names.length){row.style.display='none';sel.innerHTML='';return;}
+  row.style.display='flex';
+  sel.innerHTML='<option value="">Load a saved list&hellip;</option>'+names.map(n=>`<option value="${escP(n)}"${n===active?' selected':''}>${escP(n)} (${saved[n].length})</option>`).join('');
+}
+function addToQuote(btn){
+  const q=loadQuote(); const pn=btn.dataset.pn;
+  if(q.some(x=>x.pn===pn)){ // toggle off
+    saveQuote(q.filter(x=>x.pn!==pn)); btn.classList.remove('in'); btn.textContent='Add';
+  } else {
+    q.push({pn,name:decodeURIComponent(btn.dataset.name),price:btn.dataset.price,lead:btn.dataset.lead,sec:btn.dataset.sec,qty:1,up:parseFloat(btn.dataset.up)||0,pu:btn.dataset.pu||'',d:btn.dataset.d});
+    saveQuote(q); btn.classList.add('in'); btn.textContent='Added ✓'; toast('Added to quote list');
+  }
+  renderDrawer();
+}
+function renderDrawer(){
+  const q=loadQuote(); const body=document.getElementById('drawerBody');
+  if(!q.length){body.innerHTML='<div class="qempty">Your quote list is empty.<br>Add parts and request a quote — we turn RFQs around in 24 hours.</div>';return;}
+  body.innerHTML=q.map(x=>`<div class="qitem">
+    <div class="qtop"><div><div class="qpn">${x.pn}</div><div class="qname">${x.name}</div></div><button class="qx" data-pn="${x.pn}" aria-label="Remove">&times;</button></div>
+    <div class="qmeta"><span>${x.price}${x.qty>1?` &times; ${x.qty}`:''}</span><span style="color:var(--${x.sec==='bess'?'bess':x.sec});text-transform:uppercase">${SECTORS[x.sec].code}</span><span>${x.lead}</span></div>
+  </div>`).join('');
+  body.querySelectorAll('.qx').forEach(b=>b.onclick=()=>{saveQuote(loadQuote().filter(x=>x.pn!==b.dataset.pn));renderDrawer();renderResults();});
+}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._tm);t._tm=setTimeout(()=>t.classList.remove('show'),1800);}
+
+/* ---------- detail + configurator modal ---------- */
+let MS=null;
+function openDetail(fi,seed){const f=FAM[fi];if(!f)return;const base=genSKU(f,seed);MS={f,picks:base.picks.slice(),chk:base.chk,qty:1};renderModal();document.getElementById('detailModal').classList.add('open');document.getElementById('modalScrim').classList.add('open');}
+function closeModal(){document.getElementById('detailModal').classList.remove('open');document.getElementById('modalScrim').classList.remove('open');}
+function renderModal(){
+  const {f,picks,chk,qty}=MS;
+  const pn=configuredPN(f,picks,chk), price=priceFor(f,picks), lb=leadBadge(f), col=SECTORS[f.s].color;
+  const distLbl={grainger:'Grainger',uline:'Uline',graybar:'Graybar',msc:'MSC Industrial',voltfield:'Voltfield Direct'}[f.d];
+  const inq=loadQuote().some(x=>x.pn===pn);
+  document.getElementById('detailContent').innerHTML=`
+    <div class="dm-band" style="background:${col}"></div>
+    <div class="dm-hd">
+      <div><span class="dm-cat" style="background:${col}">${f.c}</span> <span class="dm-dist">${distLbl} · ${SECTORS[f.s].label}</span></div>
+      <button class="dm-x" id="dmClose" aria-label="Close">&times;</button>
+    </div>
+    ${f.img?`<div class="dm-imgwrap"><img class="dm-img" src="${f.img}" alt="${configuredName(f,picks)}"></div>`:''}
+    <div class="dm-body">
+      <div class="dm-pn">${pn}</div>
+      <h3 class="dm-name">${configuredName(f,picks)}</h3>
+      <a class="dm-share" href="voltfield-part.html?fi=${f._i}&o=${picksToParam(f,picks)}&chk=${chk}">Open as shareable page &rsaquo;</a>
+      <div class="dm-cfg-t">Configure this part</div>
+      <div class="dm-cfg">${f.ax.map((axis,ai)=>`<label class="cfg-row"><span>${axis[0]}</span><select data-ai="${ai}">${axis.slice(1).map(o=>`<option${o===picks[ai]?' selected':''}>${o}</option>`).join('')}</select></label>`).join('')}</div>
+      <div class="dm-cmp">${f.cmp.map(x=>`<span>${x}</span>`).join('')}</div>
+      <div class="dm-facts">
+        <div><span>Unit price</span><b>${money(price,f.pu)}</b></div>
+        <div><span>Lead time</span><b class="lead ${lb.c}">${lb.t}</b></div>
+        <div><span>Quantity</span><input type="number" id="dmQty" min="1" value="${qty}"></div>
+        <div><span>Est. line total</span><b>${money(price*qty,f.pu)}</b></div>
+      </div>
+      <div class="dm-note">Configured from ${f.ax.length} attribute axes across ${fmt(f.ct)} SKUs in this family. Indicative pricing; final price, availability &amp; lead time confirmed at quote.</div>
+    </div>
+    <div class="dm-foot">
+      <button class="dm-add${inq?' in':''}" id="dmAdd">${inq?'In quote ✓':'Add to quote'}</button>
+      <button class="dm-rfq" id="dmRfq">Request quote &rsaquo;</button>
+    </div>`;
+  document.getElementById('dmClose').onclick=closeModal;
+  document.getElementById('detailContent').querySelectorAll('select[data-ai]').forEach(sel=>sel.onchange=()=>{MS.picks[+sel.dataset.ai]=sel.value;renderModal();});
+  const qi=document.getElementById('dmQty'); qi.onchange=()=>{MS.qty=Math.max(1,parseInt(qi.value,10)||1);renderModal();};
+  document.getElementById('dmAdd').onclick=()=>{
+    const cur=loadQuote();
+    if(cur.some(x=>x.pn===pn)){saveQuote(cur.filter(x=>x.pn!==pn));toast('Removed from quote');}
+    else{cur.push({pn,name:configuredName(f,picks),price:money(price,f.pu).replace(/<[^>]+>/g,''),lead:lb.t,sec:f.s,qty:MS.qty,up:price,pu:f.pu,d:f.d});saveQuote(cur);toast('Added to quote list');}
+    renderModal();renderDrawer();renderResults();
+  };
+  document.getElementById('dmRfq').onclick=()=>{
+    const cur=loadQuote();
+    if(!cur.some(x=>x.pn===pn)){cur.push({pn,name:configuredName(f,picks),price:money(price,f.pu).replace(/<[^>]+>/g,''),lead:lb.t,sec:f.s,qty:MS.qty,up:price,pu:f.pu,d:f.d});saveQuote(cur);renderResults();}
+    closeModal();openQuoteDrawer();
+  };
+}
+
+/* ---------- apply / wire ---------- */
+function apply(){writeURL();renderFacets();renderChips();renderResults();}
+function openQuoteDrawer(){renderDrawer();renderProjects();document.getElementById('drawer').classList.add('open');document.getElementById('scrim').classList.add('open');}
+function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('scrim').classList.remove('open');}
+document.getElementById('searchForm').addEventListener('submit',e=>{e.preventDefault();state.q=document.getElementById('searchInput').value.trim();state.page=0;apply();});
+document.getElementById('clearBtn').onclick=()=>{state={sector:null,cat:null,q:'',lt:null,dist:null,page:0};document.getElementById('searchInput').value='';apply();};
+document.getElementById('openQuote').onclick=openQuoteDrawer;
+document.getElementById('closeQuote').onclick=closeDrawer;
+document.getElementById('scrim').onclick=closeDrawer;
+document.getElementById('modalScrim').onclick=closeModal;
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeDrawer();}});
+document.getElementById('rfqBtn').onclick=()=>{const q=loadQuote();if(!q.length){toast('Add parts first');return;}location.href='voltfield-rfq.html';};
+document.getElementById('saveProj').onclick=()=>{
+  const q=loadQuote(); if(!q.length){toast('Add parts before saving');return;}
+  const nm=(document.getElementById('projName').value.trim())||activeName()||'Untitled list';
+  const s=loadSaved(); s[nm]=q; saveSaved(s); setActiveName(nm); renderProjects(); toast('Saved “'+nm+'”');
+};
+document.getElementById('newProj').onclick=()=>{
+  if(loadQuote().length && !confirm('Start a new list? The current working list will be cleared. Saved projects are kept.'))return;
+  saveQuote([]); setActiveName(''); renderDrawer(); renderProjects(); renderResults();
+};
+document.getElementById('loadProj').onchange=function(){
+  const nm=this.value; if(!nm)return; const s=loadSaved(); if(!s[nm])return;
+  saveQuote(s[nm].slice()); setActiveName(nm); renderDrawer(); renderProjects(); renderResults(); toast('Loaded “'+nm+'”');
+};
+document.getElementById('delProj').onclick=()=>{
+  const nm=document.getElementById('loadProj').value; if(!nm){toast('Pick a saved list first');return;}
+  if(!confirm('Delete saved list “'+nm+'”? Your current working list is untouched.'))return;
+  const s=loadSaved(); delete s[nm]; saveSaved(s); if(activeName()===nm)setActiveName(''); renderProjects(); toast('Deleted “'+nm+'”');
+};
+document.getElementById('exportProj').onclick=exportProjects;
+document.getElementById('importProj').onchange=e=>{const f=e.target.files[0];if(f)importProjects(f);e.target.value='';};
+
+/* ---------- init ---------- */
+document.getElementById('mTotal').textContent=fmt(GRAND_TOTAL);
+document.getElementById('mFam').textContent=fmt(FAM.length);
+document.getElementById('mCat').textContent=Object.values(SECTOR_CATS).reduce((a,c)=>a+c.length,0);
+saveQuote(loadQuote()); // sync header counter
+const wantQuote=new URLSearchParams(location.search).get('quote');
+readURL();
+document.getElementById('searchInput').value=state.q;
+apply();
+if(wantQuote)openQuoteDrawer();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+</body>
+</html>
