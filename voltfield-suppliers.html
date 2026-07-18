@@ -133,6 +133,7 @@ footer a{color:#9FB0C3}
     <a href="voltfield-suppliers.html" class="on">All Suppliers</a>
     <a href="voltfield-bom.html">Quick Order</a>
     <a href="voltfield-bom-generator.html">BOM Generator</a>
+    <a href="voltfield-eol.html">Obsolete/EOL</a>
     <a href="voltfield-insights.html">Insights</a>
     <a href="voltfield-account.html">Account</a>
   </nav>
@@ -198,7 +199,7 @@ footer a{color:#9FB0C3}
   <div class="in">
     <div>
       <h5>Voltfield Supply Co.</h5>
-      <p>Stocking distributor and sourcing agent for long-lead electrical, storage, oilfield, and MRO/industrial supply equipment. Supplier profiles shown here are a modeled sourcing network for demonstration; sector coverage, lead-time posture, and compliance scopes are indicative and confirmed at quote. Distributor catalog integrations (Grainger live; Uline, Graybar on roadmap) mirror each distributor's publicly published assortment.</p>
+      <p>Stocking distributor and sourcing agent for long-lead electrical, storage, oilfield, and MRO/industrial supply equipment. Regional manufacturer/mill profiles are a modeled sourcing network for demonstration; sector coverage, lead-time posture, and compliance scopes are indicative and confirmed at quote. OEM brand listings (SMA, Schneider Electric, Siemens, ABB, Eaton, and others) identify product lines Voltfield sources and cross-references as an <b>independent</b> distributor — Voltfield is not affiliated with, sponsored by, or endorsed by these manufacturers, and all trademarks belong to their owners. Distributor catalog integrations mirror each distributor's publicly published assortment.</p>
     </div>
     <div>
       <h5>Explore</h5>
@@ -216,7 +217,7 @@ const SECTORS={
   og:{label:'Oil & Gas',code:'O&G',color:'#9C4221'},
   mro:{label:'Industrial Supply (MRO)',code:'MRO',color:'#5B6B7E'}
 };
-const TYPES=['Distributor','Manufacturer','Mill / Foundry','Integrator','Recert / Rebuild'];
+const TYPES=['OEM','Distributor','Manufacturer','Mill / Foundry','Integrator','Recert / Rebuild'];
 // lead posture: ok (short), warn (long-lead), crit (very long / allocation)
 const SUP=[
   {n:'Grainger',t:'Distributor',s:['mro'],f:'Full-line MRO: fasteners, raw stock, safety, tools, motors, electrical, plumbing. Mirrored into the All Parts catalog.',r:'National · Lake Forest, IL',lead:'ok',leadTxt:'Mostly in-stock',cmp:['ISO 9001'],status:'live'},
@@ -247,7 +248,30 @@ const SUP=[
   {n:'MotorWorks Industrial',t:'Manufacturer',s:['mro'],f:'AC and DC motors, gearmotors, VFDs, and motor controls (NEMA frames).',r:'Columbus, OH',lead:'ok',leadTxt:'2–3 wk',cmp:['NEMA MG1','UL 1004'],status:'live'},
   {n:'FlowPath Fluid Power',t:'Distributor',s:['mro','og'],f:'Hydraulic hose and fittings (same-week crimp), pneumatic fittings, FRLs, cylinders, and valves.',r:'Houston, TX',lead:'ok',leadTxt:'Same-week crimp',cmp:['SAE J517','ISO 18752'],status:'live'},
   {n:'BrightArc Electrical',t:'Distributor',s:['mro','dc'],f:'Wire and cable, conduit and fittings, wiring devices, and LED lighting.',r:'National · Phoenix, AZ',lead:'ok',leadTxt:'In-stock–1 wk',cmp:['UL 83','UL 1598'],status:'live'},
-  {n:'ToolForge Supply',t:'Distributor',s:['mro'],f:'Hand and power tools, abrasives, cutting tools, and toolholding/workholding.',r:'National · Columbus, OH',lead:'ok',leadTxt:'In-stock',cmp:['ASME B107','ANSI B94'],status:'live'}
+  {n:'ToolForge Supply',t:'Distributor',s:['mro'],f:'Hand and power tools, abrasives, cutting tools, and toolholding/workholding.',r:'National · Columbus, OH',lead:'ok',leadTxt:'In-stock',cmp:['ASME B107','ANSI B94'],status:'live'},
+  /* ===== OEM lines — brands we source new equipment, successor platforms, and legacy spares for ===== */
+  {n:'SMA',t:'OEM',s:['re'],f:'Utility and C&amp;I solar inverters — Sunny Central UP/UP-S, Sunny Tripower — plus spares and migration support for legacy CP-XT and TL-US fleets.',r:'Niestetal, DE · US: Rocklin, CA',lead:'warn',leadTxt:'Varies by line',cmp:['UL 1741-SB','IEEE 1547'],status:'live',eol:'SMA'},
+  {n:'Schneider Electric',t:'OEM',s:['dc','mro','bess'],f:'MasterPact MTZ breakers, Galaxy UPS (APC), Modicon PLCs, switchgear and power distribution — including NT/NW and Quantum migration paths.',r:'Global · US: Boston, MA',lead:'warn',leadTxt:'Varies by line',cmp:['UL 489','IEC 61439'],status:'live',eol:'Schneider'},
+  {n:'Siemens / Siemens Energy',t:'OEM',s:['dc','re','og','mro'],f:'SIMATIC automation, SINAMICS drives, LV/MV switchgear, transformers and grid technology — with published S5→S7 and MASTERDRIVES→SINAMICS migrations.',r:'Global · US: multiple',lead:'warn',leadTxt:'Varies by line',cmp:['UL','IEC','IEEE'],status:'live',eol:'Siemens'},
+  {n:'Advanced Energy',t:'OEM',s:['re','dc'],f:'Precision power-conversion products; legacy Solaron / AE NX solar-inverter fleets (market exit 2015) supported via spares sourcing and repowering paths.',r:'Denver, CO',lead:'warn',leadTxt:'Legacy: sourcing desk',cmp:['UL','CE'],status:'live',eol:'Advanced Energy'},
+  {n:'ABB',t:'OEM',s:['dc','mro'],f:'Electrification and motion: Emax 2 air breakers, MCCBs, drives, motors — plus retrofit programs for legacy GE AK/AKR switchgear frames.',r:'Global · US: Cary, NC',lead:'ok',leadTxt:'Varies by line',cmp:['UL 1066','IEC 60947'],status:'live',eol:'ABB'},
+  {n:'FIMER',t:'OEM',s:['re'],f:'PVS980 central inverters and string platforms; service successor for the ABB / Power-One Aurora solar-inverter installed base.',r:'Vimercate, IT',lead:'warn',leadTxt:'Varies by line',cmp:['UL 1741','IEC 62109'],status:'live',eol:'ABB'},
+  {n:'Eaton',t:'OEM',s:['dc','mro'],f:'Power Defense MCCBs, Magnum air breakers, UPS and PDU lines — plus legacy Westinghouse DS/DSII replacement and retrofit programs.',r:'Cleveland, OH',lead:'ok',leadTxt:'Varies by line',cmp:['UL 489','UL 1066'],status:'live',eol:'Eaton'},
+  {n:'GE Vernova',t:'OEM',s:['dc','re'],f:'Grid solutions, Multilin protection and control (SR→8 Series migrations), power conversion and wind platforms.',r:'Cambridge, MA',lead:'warn',leadTxt:'Varies by line',cmp:['IEEE C37','IEC 61850'],status:'live',eol:'GE'},
+  {n:'Hitachi Energy',t:'OEM',s:['dc','re'],f:'Power transformers, HVDC, high-voltage products and grid automation for utility and data-center interconnection.',r:'Zurich, CH · US: Raleigh, NC',lead:'crit',leadTxt:'Long-lead',cmp:['IEEE C57','IEC 60076'],status:'live'},
+  {n:'Vertiv',t:'OEM',s:['dc'],f:'Liebert UPS (EXL S1) and thermal management, rack PDUs and integrated data-center infrastructure; Liebert NX successor paths.',r:'Westerville, OH',lead:'warn',leadTxt:'Varies by line',cmp:['UL 1778'],status:'live',eol:'Vertiv'},
+  {n:'Caterpillar',t:'OEM',s:['dc','og'],f:'Diesel and gas generator sets (C-series, 3500), ATS/switchgear and oilfield power systems.',r:'Irving, TX',lead:'warn',leadTxt:'22–90 wk',cmp:['UL 2200','EPA'],status:'live'},
+  {n:'Cummins',t:'OEM',s:['dc'],f:'Standby and prime gensets, PowerCommand controls, and transfer switches for data-center and facility backup.',r:'Columbus, IN',lead:'warn',leadTxt:'20–80 wk',cmp:['UL 2200','NFPA 110'],status:'live'},
+  {n:'First Solar',t:'OEM',s:['re'],f:'Series 6 and Series 7 CdTe thin-film modules (US-made); Series 4 legacy fleet support and re-stringing guidance.',r:'Tempe, AZ',lead:'warn',leadTxt:'Allocation-based',cmp:['UL 61730','FEOC-clean'],status:'live',eol:'First Solar'},
+  {n:'Sungrow',t:'OEM',s:['re','bess'],f:'Central and string inverters, MV turnkey stations, and BESS power-conversion systems.',r:'Hefei, CN · US: Phoenix, AZ',lead:'warn',leadTxt:'16–28 wk',cmp:['UL 1741-SB','UL 9540'],status:'live'},
+  {n:'Power Electronics',t:'OEM',s:['re','bess'],f:'Utility-scale solar inverters and storage PCS with US manufacturing and field-service network.',r:'Valencia, ES · US: Phoenix, AZ',lead:'warn',leadTxt:'18–30 wk',cmp:['UL 1741-SB','IEEE 1547'],status:'live'},
+  {n:'Fronius',t:'OEM',s:['re'],f:'Symo and Tauro string inverters; service and replacement guidance for the legacy IG / IG Plus installed base.',r:'Pettenbach, AT · US: Portage, IN',lead:'ok',leadTxt:'8–16 wk',cmp:['UL 1741-SB'],status:'live',eol:'Fronius'},
+  {n:'Rockwell Automation',t:'OEM',s:['og','mro','dc'],f:'Allen-Bradley ControlLogix/CompactLogix, PowerFlex drives, and formal PLC-5 / SLC 500 migration programs.',r:'Milwaukee, WI',lead:'ok',leadTxt:'Varies by line',cmp:['UL 508A','ODVA'],status:'live',eol:'Rockwell'},
+  {n:'Emerson',t:'OEM',s:['og','mro'],f:'Rosemount instrumentation (1151→3051 migrations), Fisher control valves, and reliability solutions.',r:'St. Louis, MO',lead:'ok',leadTxt:'4–16 wk',cmp:['ISA','IEC 61508'],status:'live',eol:'Emerson'},
+  {n:'Baker Hughes',t:'OEM',s:['og'],f:'Bently Nevada condition monitoring (3300→3500/Orbit 60 upgrades), oilfield equipment and turbomachinery services.',r:'Houston, TX',lead:'warn',leadTxt:'Varies by line',cmp:['API','ISO 13372'],status:'live',eol:'Baker Hughes'},
+  {n:'SLB (Cameron)',t:'OEM',s:['og'],f:'Wellheads, Christmas trees, BOPs, valves and surface production systems.',r:'Houston, TX',lead:'crit',leadTxt:'Long-lead',cmp:['API 6A','API 16A'],status:'live'},
+  {n:'NOV',t:'OEM',s:['og'],f:'Drilling equipment, drill pipe and downhole tools across the well lifecycle.',r:'Houston, TX',lead:'warn',leadTxt:'Varies by line',cmp:['API 7-1','API Q1'],status:'live'},
+  {n:'CATL',t:'OEM',s:['bess'],f:'LFP battery cells, modules, and containerized storage systems supplied into utility-scale BESS integrations.',r:'Ningde, CN',lead:'warn',leadTxt:'Allocation-based',cmp:['UL 1973','UN 38.3'],status:'live'}
 ];
 
 let fSector=null, fType=null, fQ='';
@@ -295,6 +319,7 @@ function render(){
         <div class="sc-top"><h3>${x.n}</h3><span class="stype">${x.t}</span></div>
         <div class="sfocus">${x.f}</div>
         <div class="stags">${tags}</div>
+        ${x.eol?`<div style="margin-top:9px"><a href="voltfield-eol.html?oem=${encodeURIComponent(x.eol)}" style="font-family:var(--mono);font-size:11px;color:var(--dc);text-decoration:underline;text-underline-offset:2px">Obsolete/EOL records &rsaquo;</a></div>`:''}
       </div>
       <div class="cmpline">${x.cmp.join(' · ')}</div>
       <div class="sc-foot"><span class="region">${x.r}</span>${statusChip}</div>

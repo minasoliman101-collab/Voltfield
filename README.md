@@ -138,3 +138,13 @@ No rebuild needed — just re‑upload the changed file(s) to your host.
 4. Pro features (saved BOMs, shared quote lists, alerts) then store per-user data keyed to the signed-in identity — the front-end already centralizes quote state in `vf_quote` localStorage, which is the natural sync point.
 
 **Honesty guardrail:** don't flip features from ◷ to ✓ on the page until they actually exist — the plan cards and the transparency note under them are written to avoid selling vaporware.
+
+---
+
+## 10. BOM coverage guarantee, EOL section & OEM suppliers
+
+**Every BOM line is sourceable.** The catalog carries dedicated *Components & Spares* families per sector (Transformer Components, Switchgear Components, Genset Components, Inverter & PE Components, Module & BOS Components, Battery Components, Valve & Wellhead Components, Power Transmission, and additions to existing MRO categories). Every line the BOM engine can generate carries an explicit mapping to one of these families — the coverage harness (run in the browser console on the BOM Generator page) asserts **100% of ~1,035 unique component lines resolve to a real part page**. If you add or edit templates in `voltfield-bom-engine.js`, re-run the harness and keep it at zero failures.
+
+**Obsolete/EOL section** (`voltfield-eol.html` + `voltfield-eol-data.js`): series-level discontinuation records with the OEM-recommended successor (or the honest status when the OEM exited/transferred the line). Records are editorial, maintained at product-series level from public OEM lifecycle notices — always verify model-for-model against OEM migration docs before quoting, and keep the on-page disclaimer intact. Add records by appending to the `EOL` array.
+
+**OEM suppliers**: real OEM brands (SMA, Schneider Electric, Siemens, Advanced Energy, ABB, FIMER, Eaton, GE Vernova, Hitachi Energy, Vertiv, Caterpillar, Cummins, First Solar, Sungrow, Power Electronics, Fronius, Rockwell, Emerson, Baker Hughes, SLB, NOV, CATL) are listed in the suppliers directory as an independent distributor's line card, cross-linked to their EOL records. Keep the trademark/non-affiliation disclaimer in the suppliers footer.

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Obsolete &amp; End-of-Life Parts — OEM Replacement Paths | VOLTFIELD Supply Co.</title>
+<meta name="description" content="Discontinued and end-of-life industrial equipment reference: SMA, Schneider Electric, Siemens, ABB/FIMER, Eaton, GE, Satcon, Advanced Energy and more — with the OEM-recommended successor series and sourcing paths for legacy spares.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:title" content="Obsolete & EOL Parts — what the OEM recommends you replace it with">
+<meta property="og:description" content="Series-level EOL records across solar inverters, breakers, UPS, PLCs and instrumentation, each with its documented migration path.">
+<meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#101B2D;--ink-2:#22334C;--slate:#5B6B7E;--paper:#DDE5EC;--card:#F3F6FA;
+  --line:#C4CFDA;--line-dark:#A7B6C6;--signal:#FFC400;--signal-deep:#E5AC00;
+  --crit:#C43D2E;--warn:#D98E04;--ok:#2E7D4F;
+  --dc:#2B6CB0;--re:#2E7D4F;--bess:#B7791F;--og:#9C4221;--mro:#5B6B7E;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;--body:'IBM Plex Sans',system-ui,sans-serif;--disp:'Barlow Condensed',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5}
+button,a,input{font-family:inherit}
+button,a{cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+.utilbar{background:var(--ink);color:#C9D3DF;font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:6px 20px;display:flex;justify-content:space-between;gap:12px}
+.utilbar b{color:var(--signal);font-weight:600}
+.utilbar .right{display:none}
+@media(min-width:720px){.utilbar .right{display:block}}
+header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:60}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo .bolt{width:34px;height:34px;background:var(--signal);display:grid;place-items:center;border:2px solid var(--ink)}
+.logo .bolt svg{width:18px;height:18px}
+.logo .wordmark{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.02em;line-height:1}
+.logo .wordmark small{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.18em;color:var(--slate)}
+.hnav{display:none;gap:4px}
+.navtoggle{display:none;background:var(--ink);color:#fff;border:2px solid var(--ink);width:42px;height:38px;font-size:20px;line-height:1;align-items:center;justify-content:center;flex-shrink:0}
+@media(max-width:899px){.navtoggle{display:inline-flex}.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:2px solid var(--ink);padding:6px 12px 10px;gap:0;box-shadow:0 10px 20px rgba(16,27,45,.14);z-index:59}.hnav.open a{padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}.hnav.open a:last-child{border-bottom:0}.hnav.open a.on{border-left-color:var(--signal);color:var(--ink)}}
+@media(min-width:900px){.hnav{display:flex}}
+.hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
+.hnav a:hover{color:var(--ink);background:var(--paper)}
+.hnav a.on{color:var(--ink);border-bottom-color:var(--signal)}
+.headright{margin-left:auto;display:flex;align-items:center;gap:10px}
+.quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
+.quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
+/* banner */
+.eolban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:24px 20px 26px}
+.eolban-in{max-width:1240px;margin:0 auto}
+.eolban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:8px}
+.eolban h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.6vw,40px);letter-spacing:.01em;line-height:1}
+.eolban p{color:#AFC0D3;font-size:14.5px;max-width:700px;margin-top:10px;line-height:1.55}
+.wrap{max-width:1240px;margin:0 auto;padding:24px 20px 60px}
+/* disclaimer */
+.disclaim{background:#FFF6DA;border:1px solid var(--signal);border-left:5px solid var(--signal);padding:13px 16px;font-size:13px;line-height:1.55;color:var(--ink-2);margin-bottom:20px;max-width:960px}
+/* filters */
+.filters{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.filterrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.flabel{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);min-width:56px}
+.fbtn{border:1px solid var(--line-dark);background:var(--card);padding:6px 12px;font-family:var(--disp);font-weight:600;font-size:13.5px;letter-spacing:.02em;color:var(--ink-2);text-transform:uppercase}
+.fbtn:hover{border-color:var(--ink)}
+.fbtn.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.searchrow{display:flex;border:2px solid var(--ink);background:#fff;max-width:380px;width:100%}
+.searchrow input{flex:1;border:0;padding:10px 12px;font-family:var(--mono);font-size:13px;background:transparent}
+.searchrow button{background:var(--ink);color:#fff;border:0;padding:0 16px;font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.04em}
+.count{font-family:var(--mono);font-size:12px;color:var(--slate);margin-bottom:14px}
+/* cards */
+.eolgrid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:860px){.eolgrid{grid-template-columns:1fr 1fr}}
+.eolcard{background:var(--card);border:1px solid var(--line-dark);display:flex;flex-direction:column}
+.eolcard .band{height:5px}
+.eolcard .in{padding:16px 18px 14px;flex:1}
+.eolcard .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap}
+.eolcard .oem{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--slate)}
+.eolcard h3{font-family:var(--disp);font-weight:700;font-size:20px;line-height:1.15;margin-top:2px}
+.sectag{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:#fff;padding:2px 7px;white-space:nowrap}
+.status{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;white-space:nowrap}
+.status.ok{background:#E7F1EB;color:var(--ok)}
+.status.warn{background:#FBF0DA;color:var(--warn)}
+.status.crit{background:#F7E4E1;color:var(--crit)}
+.eolmeta{font-family:var(--mono);font-size:10.5px;color:var(--slate);margin-top:6px}
+.succ{margin-top:12px;background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--ok);padding:10px 12px}
+.succ .l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate)}
+.succ .v{font-family:var(--disp);font-weight:700;font-size:16.5px;margin-top:2px}
+.succ.crit{border-left-color:var(--crit)}
+.eolnote{font-size:12.5px;color:var(--slate);line-height:1.55;margin-top:10px}
+.eolfoot{border-top:1px solid var(--line);padding:11px 18px;display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:11.5px}
+.eolfoot a{color:var(--dc);text-decoration:underline;text-underline-offset:2px}
+.empty{font-family:var(--mono);font-size:12.5px;color:var(--slate);padding:24px;text-align:center}
+footer{background:var(--ink);color:#9FB0C3;padding:30px 20px;font-size:12px}
+footer .in{max-width:1240px;margin:0 auto}
+footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer p{line-height:1.6;max-width:820px}
+footer a{color:#9FB0C3}
+</style>
+</head>
+<body>
+<div class="utilbar">
+  <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
+  <span class="right">HOUSTON · PHOENIX · COLUMBUS &nbsp;|&nbsp; +1 (800) 555-0119 &nbsp;|&nbsp; RFQ@VOLTFIELD.CO</span>
+</div>
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — ENERGY INFRASTRUCTURE PARTS</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="index.html">Home</a>
+    <a href="voltfield-supply-catalog.html">All Parts</a>
+    <a href="voltfield-suppliers.html">All Suppliers</a>
+    <a href="voltfield-bom.html">Quick Order</a>
+    <a href="voltfield-bom-generator.html">BOM Generator</a>
+    <a href="voltfield-eol.html" class="on">Obsolete/EOL</a>
+    <a href="voltfield-insights.html">Insights</a>
+    <a href="voltfield-account.html">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View quote list on catalog page">QUOTE LIST <span class="ct" id="quoteCount">0</span></a>
+  </div>
+</header>
+
+<section class="eolban">
+  <div class="eolban-in">
+    <div class="eyebrow">Obsolete &amp; End-of-Life Reference</div>
+    <h1>Discontinued equipment — and what the OEM says to replace it with</h1>
+    <p>Series-level end-of-life records for the platforms our customers still run: legacy solar inverters, air and molded-case breakers, UPS, PLCs, drives, relays and instrumentation. Each record shows the manufacturer's documented migration path — or the honest answer when there isn't one — plus where Voltfield can help source legacy spares or the successor.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="disclaim"><b>Verify before you buy:</b> these mappings are series-level and directional. Model-for-model replacements depend on frame size, ratings, firmware, and site conditions — always confirm against the OEM's current migration documentation (we'll do this with you at quote). Voltfield is an independent distributor/sourcing agent and is not affiliated with or endorsed by the manufacturers listed.</div>
+
+  <div class="filters">
+    <div class="filterrow"><span class="flabel">OEM</span><span id="fOem" style="display:contents"></span></div>
+    <div class="filterrow"><span class="flabel">Sector</span><span id="fSector" style="display:contents"></span></div>
+    <div class="filterrow"><span class="flabel">Search</span>
+      <form class="searchrow" id="eolForm"><input id="eolInput" type="search" placeholder="Series, model family, or category…" aria-label="Search EOL records"><button type="submit">GO</button></form>
+    </div>
+  </div>
+  <div class="count" id="eolCount"></div>
+  <div class="eolgrid" id="eolGrid"></div>
+  <div class="empty" id="eolEmpty" style="display:none">No records match. <a href="voltfield-eol.html">Reset filters</a> — or <a href="mailto:RFQ@VOLTFIELD.CO?subject=EOL%20sourcing%20request">ask us about a platform not listed &rarr;</a></div>
+</div>
+
+<footer>
+  <div class="in">
+    <h5>Voltfield Supply Co. — Obsolete &amp; EOL desk</h5>
+    <p>We source three ways around end-of-life equipment: (1) remaining new/surplus and recertified legacy spares, (2) the OEM-recommended successor with cross-reference support, and (3) retrofit programs where a successor OEM offers them. Records here are maintained editorially at series level from public OEM lifecycle notices; they are reference information, not an OEM communication. Missing a platform you run? <a href="mailto:RFQ@VOLTFIELD.CO?subject=EOL%20platform%20request">Tell us and we'll research it &rarr;</a></p>
+  </div>
+</footer>
+
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-eol-data.js"></script>
+<script>
+const SECTORS={dc:{label:'Data Centers / Electrical',color:'#2B6CB0'},re:{label:'Renewables',color:'#2E7D4F'},bess:{label:'Storage',color:'#B7791F'},og:{label:'Oil & Gas / Industrial Automation',color:'#9C4221'},mro:{label:'MRO / Plant',color:'#5B6B7E'}};
+try{var q=JSON.parse(localStorage.getItem('vf_quote')||'[]');document.getElementById('quoteCount').textContent=Array.isArray(q)?q.length:0;}catch(e){}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+let fOem=null,fSector=null,fQ='';
+const OEMS=[...new Set(EOL.map(x=>x.oem.split(' (')[0].split(' /')[0]))].sort();
+
+function el(tag,cls,html){const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+function renderFilters(){
+  const fo=document.getElementById('fOem');fo.innerHTML='';
+  const allO=el('button','fbtn'+(fOem?'':' on'),'All');allO.onclick=()=>{fOem=null;render();};fo.appendChild(allO);
+  OEMS.forEach(o=>{const b=el('button','fbtn'+(fOem===o?' on':''),esc(o));b.onclick=()=>{fOem=(fOem===o?null:o);render();};fo.appendChild(b);});
+  const fs=document.getElementById('fSector');fs.innerHTML='';
+  const allS=el('button','fbtn'+(fSector?'':' on'),'All');allS.onclick=()=>{fSector=null;render();};fs.appendChild(allS);
+  Object.keys(SECTORS).forEach(k=>{if(!EOL.some(x=>x.sector===k))return;
+    const b=el('button','fbtn'+(fSector===k?' on':''),SECTORS[k].label);b.onclick=()=>{fSector=(fSector===k?null:k);render();};fs.appendChild(b);});
+}
+function matched(){
+  const toks=fQ.toLowerCase().split(/\s+/).filter(Boolean);
+  return EOL.filter(x=>{
+    if(fOem&&!x.oem.toLowerCase().includes(fOem.toLowerCase()))return false;
+    if(fSector&&x.sector!==fSector)return false;
+    if(toks.length){const hay=(x.oem+' '+x.series+' '+x.cat+' '+x.succ+' '+x.succOem+' '+x.note).toLowerCase();if(!toks.every(t=>hay.includes(t)))return false;}
+    return true;
+  });
+}
+function render(){
+  renderFilters();
+  const list=matched();
+  document.getElementById('eolCount').textContent=`${list.length} record${list.length!==1?'s':''}`+(fOem?` · ${fOem}`:'')+(fSector?` · ${SECTORS[fSector].label}`:'')+(fQ?` · “${fQ}”`:'');
+  const grid=document.getElementById('eolGrid'),empty=document.getElementById('eolEmpty');
+  if(!list.length){grid.innerHTML='';empty.style.display='';return;}
+  empty.style.display='none';
+  grid.innerHTML=list.map(x=>{
+    const st=EOL_STATUS[x.status], col=SECTORS[x.sector].color;
+    const noSucc=x.status==='exited';
+    return `<div class="eolcard">
+      <div class="band" style="background:${col}"></div>
+      <div class="in">
+        <div class="top">
+          <div><div class="oem">${esc(x.oem)} · ${esc(x.cat)}</div><h3>${esc(x.series)}</h3></div>
+          <div style="display:flex;gap:6px;flex-direction:column;align-items:flex-end">
+            <span class="sectag" style="background:${col}">${esc(SECTORS[x.sector].label)}</span>
+            <span class="status ${st.c}">${st.label}</span>
+          </div>
+        </div>
+        <div class="eolmeta">Discontinued: ${esc(x.year)}</div>
+        <div class="succ${noSucc?' crit':''}">
+          <div class="l">${noSucc?'Replacement path':'OEM-recommended replacement'}</div>
+          <div class="v">${noSucc?'':esc(x.succOem)+' — '}${esc(x.succ)}</div>
+        </div>
+        <div class="eolnote">${esc(x.note)}</div>
+      </div>
+      <div class="eolfoot">
+        <a href="voltfield-supply-catalog.html?q=${encodeURIComponent(x.q)}">Shop the replacement class &rsaquo;</a>
+        <a href="mailto:RFQ@VOLTFIELD.CO?subject=${encodeURIComponent('EOL sourcing: '+x.oem+' '+x.series)}">Source legacy spares / successor &rsaquo;</a>
+      </div>
+    </div>`;
+  }).join('');
+}
+document.getElementById('eolForm').addEventListener('submit',e=>{e.preventDefault();fQ=document.getElementById('eolInput').value.trim();render();});
+(function(){const P=new URLSearchParams(location.search);
+  if(P.get('oem'))fOem=P.get('oem');
+  if(P.get('sector'))fSector=P.get('sector');
+  render();})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+</body>
+</html>
