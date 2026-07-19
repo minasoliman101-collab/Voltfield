@@ -30,6 +30,16 @@ const SITE_CONFIG = {
     preview: true,         /* show placeholder boxes until a real client ID is set */
   },
 
+  /* Part identification (voltfield-identify.html).
+     v1 runs fully on-device: OCR (Tesseract.js) + token matching against the
+     catalog/EOL data. To upgrade to full photo recognition (no label needed),
+     stand up a backend that accepts an image and returns candidate keywords
+     (e.g. Azure Function -> Claude/GPT-4o vision), then set its URL here.
+     The page will POST {image: dataURL} and expects {keywords: [...], text: ''}. */
+  vision: {
+    endpoint: '',          /* e.g. 'https://<your-app>.azurestaticapps.net/api/identify' */
+  },
+
   /* Subscriptions (see voltfield-account.html + README §9).
      Create Payment Links in your Stripe dashboard and paste them here —
      until then the plan buttons fall back to a sales-contact email. */
