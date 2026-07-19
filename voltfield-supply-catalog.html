@@ -353,6 +353,7 @@ footer a{color:#9FB0C3}
   <div class="drawer-body" id="drawerBody"></div>
   <div class="drawer-ft">
     <button class="rfqbtn" id="rfqBtn">Request quote &mdash; 24 hr turnaround</button>
+    <button class="rfqbtn" id="checkoutBtn" style="background:var(--ink);color:#fff;margin-top:8px">Request to purchase</button>
     <div class="note">Indicative pricing only. Final price, availability &amp; lead time confirmed at quote. Your list is saved on this device.</div>
   </div>
 </aside>
@@ -679,6 +680,7 @@ document.getElementById('scrim').onclick=closeDrawer;
 document.getElementById('modalScrim').onclick=closeModal;
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeDrawer();}});
 document.getElementById('rfqBtn').onclick=()=>{const q=loadQuote();if(!q.length){toast('Add parts first');return;}location.href='voltfield-rfq.html';};
+document.getElementById('checkoutBtn').onclick=()=>{const q=loadQuote();if(!q.length){toast('Add parts first');return;}location.href='voltfield-checkout.html';};
 document.getElementById('saveProj').onclick=()=>{
   const q=loadQuote(); if(!q.length){toast('Add parts before saving');return;}
   const nm=(document.getElementById('projName').value.trim())||activeName()||'Untitled list';

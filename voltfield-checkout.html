@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Request for Quotation — VOLTFIELD Supply Co.</title>
-<meta name="description" content="Build and print a Request for Quotation from your quote list — configured part numbers, quantities, indicative pricing and lead times, ready to send.">
+<title>Request to Purchase — VOLTFIELD Supply Co.</title>
+<meta name="description" content="Submit a purchase request from your cart — shipping details, PO number, and line items sent directly to our order desk. No payment collected online.">
 <meta name="robots" content="noindex,follow">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#101B2D">
@@ -75,7 +75,11 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .btn.ghost{background:var(--card);color:var(--ink-2);font-weight:600}
 .btn.ghost:hover{border-color:var(--ink);color:var(--ink)}
 .acthint{font-family:var(--mono);font-size:11px;color:var(--slate)}
-/* RFQ document */
+.signedin{max-width:900px;margin:14px auto 0;padding:0 20px}
+.signedin .pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line-dark);padding:6px 12px;font-family:var(--mono);font-size:11.5px;color:var(--ink-2)}
+.signedin .pill button{background:none;border:0;color:var(--slate);text-decoration:underline;font-size:11.5px}
+.signedin .pill button:hover{color:var(--ink)}
+/* order document */
 .rfqdoc{max-width:900px;margin:18px auto 40px;background:var(--card);border:1px solid var(--line-dark);padding:34px 38px}
 .rfqhead{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-bottom:3px solid var(--ink);padding-bottom:16px}
 .rfqhead .co .nm{font-family:var(--disp);font-weight:700;font-size:30px;letter-spacing:.02em;line-height:1;display:flex;align-items:center;gap:9px}
@@ -86,9 +90,12 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .rfqhead .doc h1{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.06em;color:var(--ink)}
 .rfqhead .doc .meta{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);margin-top:6px;line-height:1.8}
 .rfqhead .doc .meta b{color:var(--ink)}
-.buyer{display:grid;grid-template-columns:1fr 1fr;gap:12px 26px;margin:18px 0 6px}
+.sectitle{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin:20px 0 6px;padding-top:14px;border-top:1px solid var(--line)}
+.sectitle:first-of-type{border-top:0;padding-top:0}
+.buyer{display:grid;grid-template-columns:1fr 1fr;gap:12px 26px}
 @media(max-width:640px){.buyer{grid-template-columns:1fr}}
 .bf{display:flex;flex-direction:column;gap:3px}
+.bf.full{grid-column:1/-1}
 .bf label{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}
 .bf input{border:0;border-bottom:1px solid var(--line-dark);padding:6px 2px;font-family:var(--body);font-size:14px;background:transparent}
 .bf input:focus{border-bottom-color:var(--signal);outline:none}
@@ -139,19 +146,21 @@ table.rfq input.q{width:60px;border:1px solid var(--line-dark);padding:5px 6px;f
 </head>
 <body>
 <!-- Static Netlify Forms detector. Never shown or submitted directly — its sole
-     purpose is to exist in the deployed HTML so Netlify registers the "rfq-quote"
+     purpose is to exist in the deployed HTML so Netlify registers the "purchase-request"
      form and its fields at build time. The real submission (see script below) is
      an AJAX POST to "/" with a matching form-name and these same field names. -->
-<form name="rfq-quote" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="hidden-field" aria-hidden="true">
-  <input type="hidden" name="form-name" value="rfq-quote">
+<form name="purchase-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="hidden-field" aria-hidden="true">
+  <input type="hidden" name="form-name" value="purchase-request">
   <input name="bot-field">
-  <input type="text" name="rfq_number"><input type="text" name="company"><input type="text" name="project">
+  <input type="text" name="order_number"><input type="text" name="po_number"><input type="text" name="company">
   <input type="text" name="contact"><input type="email" name="email"><input type="text" name="phone">
-  <input type="text" name="needed_by"><textarea name="notes"></textarea><input type="text" name="item_count">
+  <input type="text" name="ship_address1"><input type="text" name="ship_address2"><input type="text" name="ship_city">
+  <input type="text" name="ship_state"><input type="text" name="ship_zip"><input type="text" name="ship_country">
+  <input type="text" name="requested_delivery"><textarea name="notes"></textarea><input type="text" name="item_count">
   <input type="text" name="total_units"><input type="text" name="estimated_total"><textarea name="line_items"></textarea>
 </form>
 <div class="utilbar noprint">
-  <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
+  <span>API · IEEE · UL LISTED VENDORS · <b>ORDER DESK REPLIES IN 24 HRS</b></span>
   <span class="right">+1 (850) 686-1378 &nbsp;|&nbsp; RFQ@voltfield.com</span>
 </div>
 <header class="site noprint">
@@ -182,26 +191,30 @@ table.rfq input.q{width:60px;border:1px solid var(--line-dark);padding:5px 6px;f
   </div>
 </header>
 
+<div class="signedin noprint" id="signedInNote" style="display:none">
+  <span class="pill">Signed in as <b id="siEmail"></b> · <button type="button" id="siSignOut">Sign out</button></span>
+</div>
+
 <div class="actbar noprint" id="actbar" style="display:none">
-  <button class="btn primary" id="sendBtn">Send RFQ</button>
-  <a class="btn dark" href="voltfield-checkout.html">Proceed to Purchase</a>
+  <button class="btn primary" id="sendBtn">Submit Purchase Request</button>
   <button class="btn dark" id="printBtn">Print / Save as PDF</button>
   <button class="btn ghost" id="emailBtn">Email instead</button>
   <a class="btn dark" href="voltfield-supply-catalog.html">Continue shopping</a>
-  <button class="btn ghost" id="clearBtn">Clear quote</button>
-  <span class="acthint">“Send RFQ” submits directly to our sourcing desk (fill in your email first); “Email instead” opens a pre-filled message in your own mail app; “Print / Save as PDF” makes a clean copy to attach.</span>
+  <button class="btn ghost" id="clearBtn">Clear cart</button>
+  <span class="acthint">This submits an order request to our sourcing desk — we don't process payment here. Pricing is indicative until we send a formal invoice/quote to confirm.</span>
 </div>
 <div class="rfqsuccess noprint" id="rfqSuccess">
-  <h3>RFQ sent — reference <span id="rfqRefNo"></span></h3>
-  <p>We've received your request and a copy has been logged with our sourcing desk. Expect a reply at the email you provided within 24 hours. You can keep browsing, print a copy for your records, or clear this list to start a new one.</p>
+  <h3>Purchase request sent — order <span id="rfqRefNo"></span></h3>
+  <p>We've received your request and a copy has been logged with our order desk. Expect a formal quote/invoice at the email you provided within 24 hours to confirm pricing, availability, and payment. You can keep browsing or print a copy for your records.</p>
 </div>
 
 <div id="mount"></div>
 <div class="toast" id="toast"></div>
 
 <script src="voltfield-catalog-data.js"></script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
-/* ===== Printable RFQ built from the quote list ===== */
+/* ===== Purchase request built from the cart (vf_quote) ===== */
 function loadQuote(){try{const q=JSON.parse(localStorage.getItem('vf_quote')||'[]');return Array.isArray(q)?q:[];}catch(e){return [];}}
 function saveQuote(q){localStorage.setItem('vf_quote',JSON.stringify(q));const el=document.getElementById('quoteCount');if(el)el.textContent=q.length;}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._tm);t._tm=setTimeout(()=>t.classList.remove('show'),1900);}
@@ -214,14 +227,13 @@ function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','
 
 const now=new Date();
 const pad=n=>String(n).padStart(2,'0');
-const rfqNo='RFQ-'+now.getFullYear()+pad(now.getMonth()+1)+pad(now.getDate())+'-'+pad(now.getHours())+pad(now.getMinutes());
+const orderNo='ORD-'+now.getFullYear()+pad(now.getMonth()+1)+pad(now.getDate())+'-'+pad(now.getHours())+pad(now.getMinutes());
 const dateStr=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
-const validUntil=new Date(now.getTime()+30*864e5).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
 
 function mount(){
   if(!QUOTE.length){
     document.getElementById('actbar').style.display='none';
-    document.getElementById('mount').innerHTML=`<div class="empty"><h2>Your quote list is empty</h2><p>Add parts from the catalog, configurator, or Quick Order matcher, then come back to generate a printable RFQ.</p><a href="voltfield-supply-catalog.html">Browse All Parts &rarr;</a></div>`;
+    document.getElementById('mount').innerHTML=`<div class="empty"><h2>Your cart is empty</h2><p>Add parts from the catalog, configurator, or Quick Order matcher, then come back to submit a purchase request.</p><a href="voltfield-supply-catalog.html">Browse All Parts &rarr;</a></div>`;
     return;
   }
   document.getElementById('actbar').style.display='flex';
@@ -233,17 +245,27 @@ function mount(){
         <div class="addr">Energy Infrastructure &amp; Industrial Supply<br>4043 Star Trek Ln, Garland, TX 75044<br>+1 (850) 686-1378 · RFQ@voltfield.com</div>
       </div>
       <div class="doc">
-        <h1>REQUEST FOR QUOTATION</h1>
-        <div class="meta">RFQ #: <b>${rfqNo}</b><br>Date: <b>${dateStr}</b><br>Valid until: <b>${validUntil}</b></div>
+        <h1>PURCHASE REQUEST</h1>
+        <div class="meta">Order #: <b>${orderNo}</b><br>Date: <b>${dateStr}</b></div>
       </div>
     </div>
+    <div class="sectitle">Buyer</div>
     <div class="buyer">
       <div class="bf"><label>Company</label><input id="bCompany" placeholder="Your company"></div>
-      <div class="bf"><label>Project / Job</label><input id="bProject" placeholder="Project name or number"></div>
+      <div class="bf"><label>PO number (optional)</label><input id="bPO" placeholder="Your internal PO #"></div>
       <div class="bf"><label>Contact name</label><input id="bContact" placeholder="Full name"></div>
       <div class="bf"><label>Email</label><input id="bEmail" placeholder="name@company.com"></div>
       <div class="bf"><label>Phone</label><input id="bPhone" placeholder="(   )   -"></div>
-      <div class="bf"><label>Needed by</label><input id="bNeeded" placeholder="Target date"></div>
+      <div class="bf"><label>Requested delivery</label><input id="bNeeded" placeholder="Target date"></div>
+    </div>
+    <div class="sectitle">Ship to</div>
+    <div class="buyer">
+      <div class="bf full"><label>Address line 1</label><input id="sAddr1" placeholder="Street address"></div>
+      <div class="bf full"><label>Address line 2 (optional)</label><input id="sAddr2" placeholder="Suite, unit, building"></div>
+      <div class="bf"><label>City</label><input id="sCity" placeholder="City"></div>
+      <div class="bf"><label>State / Province</label><input id="sState" placeholder="State"></div>
+      <div class="bf"><label>ZIP / Postal code</label><input id="sZip" placeholder="ZIP"></div>
+      <div class="bf"><label>Country</label><input id="sCountry" placeholder="Country" value="United States"></div>
     </div>
     <table class="rfq">
       <thead><tr>
@@ -257,10 +279,11 @@ function mount(){
       <div class="s"><div class="k" id="sLead">—</div><div class="l">Longest lead time</div></div>
       <div class="s"><div class="k" id="sTotal">$0</div><div class="l">Estimated total</div></div>
     </div>
-    <div class="notes"><label>Notes to supplier</label><textarea id="bNotes" placeholder="Delivery address, freight terms, certifications required, tagging, etc."></textarea></div>
-    <div class="terms">Pricing is indicative market range (North America, ${now.getFullYear()}) and is not a firm offer. Final price, availability, and lead time are confirmed on Voltfield's written quotation. Configured part numbers reference a family + attribute selection and may be substituted with an equivalent on confirmation. This RFQ is valid for 30 days from the date shown.</div>
+    <div class="notes"><label>Notes to order desk</label><textarea id="bNotes" placeholder="Freight terms, certifications required, tagging, dock hours, etc."></textarea></div>
+    <div class="terms">Pricing shown is indicative market range (North America, ${now.getFullYear()}) and is not a firm offer. No payment is collected on this page — submitting sends this order request to our sourcing desk, who will follow up with a formal, priced quote/invoice for confirmation before anything ships. Configured part numbers reference a family + attribute selection and may be substituted with an equivalent on confirmation.</div>
   </div>`;
-  const an=localStorage.getItem('vf_active_name'); if(an){const bp=document.getElementById('bProject'); if(bp)bp.value=an;}
+  const an=localStorage.getItem('vf_active_name'); if(an){const bp=document.getElementById('bCompany'); if(bp&&!bp.value)bp.placeholder=an;}
+  prefillFromIdentity();
   renderRows();
 }
 
@@ -296,13 +319,38 @@ function renderRows(){
 /* source label: prefer stored distributor, else sector label */
 function srcLabel(it){return (it.d&&DIST_NAME[it.d])?DIST_NAME[it.d]:(SECTORS[it.sec]?SECTORS[it.sec].label:'—');}
 
-/* ---------- shared: gather buyer fields + build a plain-text line-item summary ---------- */
-function gatherRFQ(){
+/* ---------- Netlify Identity: optional sign-in prefill, guest checkout still allowed ---------- */
+function prefillFromIdentity(){
+  if(typeof netlifyIdentity==='undefined')return;
+  const user=netlifyIdentity.currentUser();
+  const note=document.getElementById('signedInNote');
+  if(user){
+    note.style.display='block';
+    document.getElementById('siEmail').textContent=user.email;
+    const bContact=document.getElementById('bContact'), bEmail=document.getElementById('bEmail');
+    const fullName=user.user_metadata&&user.user_metadata.full_name;
+    if(bContact&&!bContact.value&&fullName)bContact.value=fullName;
+    if(bEmail&&!bEmail.value)bEmail.value=user.email;
+  }else{
+    note.style.display='none';
+  }
+}
+(function(){
+  if(typeof netlifyIdentity==='undefined')return;
+  netlifyIdentity.init();
+  netlifyIdentity.on('login',()=>{prefillFromIdentity();netlifyIdentity.close();});
+  netlifyIdentity.on('logout',prefillFromIdentity);
+  const so=document.getElementById('siSignOut'); if(so)so.onclick=()=>netlifyIdentity.logout();
+})();
+
+/* ---------- shared: gather buyer/shipping fields + build a plain-text line-item summary ---------- */
+function gatherOrder(){
   const g=id=>{const el=document.getElementById(id);return el?el.value.trim():'';};
-  const company=g('bCompany'),contact=g('bContact'),email=g('bEmail'),phone=g('bPhone'),project=g('bProject'),needed=g('bNeeded'),notes=g('bNotes');
+  const company=g('bCompany'),po=g('bPO'),contact=g('bContact'),email=g('bEmail'),phone=g('bPhone'),needed=g('bNeeded'),notes=g('bNotes'),
+        addr1=g('sAddr1'),addr2=g('sAddr2'),city=g('sCity'),state=g('sState'),zip=g('sZip'),country=g('sCountry');
   let total=0,units=0;
   const lines=QUOTE.map((it,i)=>{const up=unitOf(it),qty=Math.max(1,it.qty||1),pu=puOf(it);total+=up*qty;units+=qty;return (i+1)+'. '+qty+' x '+it.pn+' — '+it.name+' ['+srcLabel(it)+'] @ $'+up.toFixed(up<10?2:0)+(pu?(' '+pu):'')+' = $'+(up*qty).toFixed(2);});
-  return {company,contact,email,phone,project,needed,notes,lines,total,units};
+  return {company,po,contact,email,phone,needed,notes,addr1,addr2,city,state,zip,country,lines,total,units};
 }
 function validEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);}
 function markFieldError(id,on){const el=document.getElementById(id);if(el)el.classList.toggle('fielderr',!!on);}
@@ -311,41 +359,46 @@ document.getElementById('printBtn').onclick=()=>window.print();
 
 document.getElementById('emailBtn').onclick=()=>{
   if(!QUOTE.length){toast('Nothing to send');return;}
-  const {company,contact,email,phone,project,needed,notes,lines,total,units}=gatherRFQ();
-  const CAP=25, body=['REQUEST FOR QUOTATION','RFQ #: '+rfqNo,'Date: '+dateStr,''];
+  const {company,po,contact,email,phone,needed,notes,addr1,addr2,city,state,zip,country,lines,total,units}=gatherOrder();
+  const CAP=25, body=['PURCHASE REQUEST','Order #: '+orderNo,'Date: '+dateStr,''];
   if(company)body.push('Company: '+company);
+  if(po)body.push('PO number: '+po);
   if(contact)body.push('Contact: '+contact);
   if(email)body.push('Email: '+email);
   if(phone)body.push('Phone: '+phone);
-  if(project)body.push('Project: '+project);
-  if(needed)body.push('Needed by: '+needed);
+  if(needed)body.push('Requested delivery: '+needed);
+  const shipLines=[addr1,addr2,[city,state,zip].filter(Boolean).join(', '),country].filter(Boolean);
+  if(shipLines.length)body.push('','Ship to:',...shipLines);
   body.push('','LINE ITEMS ('+QUOTE.length+'):',...lines.slice(0,CAP));
-  if(lines.length>CAP)body.push('... and '+(lines.length-CAP)+' more line(s) — see attached printed RFQ.');
+  if(lines.length>CAP)body.push('... and '+(lines.length-CAP)+' more line(s) — see attached printed copy.');
   body.push('','Total units: '+units,'Estimated total: $'+(total>=1000?Math.round(total).toLocaleString():total.toFixed(2)));
   if(notes)body.push('','Notes: '+notes);
-  body.push('','(Indicative pricing — please confirm price, availability, and lead time.)');
-  const subj='RFQ '+rfqNo+(project?(' — '+project):(company?(' — '+company):''));
+  body.push('','(Indicative pricing — no payment collected; please follow up with a formal invoice/quote.)');
+  const subj='Purchase request '+orderNo+(company?(' — '+company):'');
   location.href='mailto:RFQ@voltfield.com?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body.join('\n'));
 };
 
-/* ---------- primary path: submit to Netlify Forms (see the hidden "rfq-quote" form) ---------- */
+/* ---------- primary path: submit to Netlify Forms (see the hidden "purchase-request" form) ---------- */
 function encodeForm(data){return Object.keys(data).map(k=>encodeURIComponent(k)+'='+encodeURIComponent(data[k])).join('&');}
 document.getElementById('sendBtn').onclick=async()=>{
   if(!QUOTE.length){toast('Nothing to send');return;}
-  const {company,contact,email,phone,project,needed,notes,lines,total,units}=gatherRFQ();
+  const {company,po,contact,email,phone,needed,notes,addr1,addr2,city,state,zip,country,lines,total,units}=gatherOrder();
   markFieldError('bEmail',false);
   if(!validEmail(email)){toast('Add a valid email so we can reply');markFieldError('bEmail',true);document.getElementById('bEmail').focus();return;}
   const btn=document.getElementById('sendBtn'); const orig=btn.textContent; btn.textContent='Sending…'; btn.disabled=true;
-  const payload={'form-name':'rfq-quote',rfq_number:rfqNo,company,project,contact,email,phone,needed_by:needed,notes,
+  const payload={'form-name':'purchase-request',order_number:orderNo,po_number:po,company,contact,email,phone,
+    ship_address1:addr1,ship_address2:addr2,ship_city:city,ship_state:state,ship_zip:zip,ship_country:country,
+    requested_delivery:needed,notes,
     item_count:String(QUOTE.length),total_units:String(units),estimated_total:(total>=1000?Math.round(total).toLocaleString():total.toFixed(2)),
     line_items:lines.join('\n')};
   try{
     const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:encodeForm(payload)});
     if(!r.ok)throw new Error('status '+r.status);
-    document.getElementById('rfqRefNo').textContent=rfqNo;
+    document.getElementById('rfqRefNo').textContent=orderNo;
     document.getElementById('rfqSuccess').classList.add('show');
     document.getElementById('rfqSuccess').scrollIntoView({behavior:'smooth',block:'start'});
-    toast('RFQ sent');
+    toast('Purchase request sent');
+    QUOTE=[]; saveQuote(QUOTE); document.getElementById('actbar').style.display='none';
   }catch(err){
     toast('Online submission unavailable here — opening your email client instead');
     document.getElementById('emailBtn').click();
@@ -354,7 +407,7 @@ document.getElementById('sendBtn').onclick=async()=>{
   }
 };
 
-document.getElementById('clearBtn').onclick=()=>{if(confirm('Clear all parts from your quote list?')){QUOTE=[];saveQuote(QUOTE);document.getElementById('rfqSuccess').classList.remove('show');mount();toast('Quote list cleared');}};
+document.getElementById('clearBtn').onclick=()=>{if(confirm('Clear all parts from your cart?')){QUOTE=[];saveQuote(QUOTE);document.getElementById('rfqSuccess').classList.remove('show');mount();toast('Cart cleared');}};
 mount();
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
