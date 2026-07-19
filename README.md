@@ -132,13 +132,15 @@ No rebuild needed — just re‑upload the changed file(s) to your host.
 
 `voltfield-account.html` is the Accounts & Plans page (in the nav on every page).
 
-**Sign-in (works today on Azure Static Web Apps).** The page's buttons use SWA's built-in authentication (`/.auth/login/aad`, `/.auth/login/github`) — no code, no password storage; deploy via §3 Option C and sign-in just works. The page reads `/.auth/me` to show the signed-in user. On other hosts, swap in an identity provider (Auth0, Clerk, Supabase Auth) and update the two button URLs + the `/.auth/me` fetch.
+**Sign-in — Netlify Identity.** The page loads `netlify-identity-widget.js` and calls `netlifyIdentity.init()`; the "Create account"/"Log in" buttons open its built-in signup/login modal, no separate OAuth provider or backend code needed. **One-time setup after deploying to Netlify:** Site configuration → **Identity** → **Enable Identity**. Until that's toggled on, the buttons will error when clicked (the page shows a note explaining this). Once enabled, you can optionally also turn on external providers (Google, GitHub) under Identity → External providers if you want those alongside email/password — the widget picks them up automatically, no code change needed.
+- By default, Netlify Identity is **invite-only** for new sites. Go to Identity → **Registration** and switch it to **Open** so the public "Create account" button actually works for visitors.
+- Signed-in users are visible under Identity → **Users**. There's no built-in per-user data storage yet — see below for wiring that up.
 
 **Subscriptions.** Plan cards are live; paid features are honestly labeled as roadmap (◷) until there's a backend. To start charging:
 1. Create a Stripe account → Products → **Payment Links** for Pro monthly/annual.
 2. Paste the links into `SITE_CONFIG.billing` in `voltfield-site-config.js` (`proMonthlyUrl`, etc.). The "Start Pro" button uses them automatically; until then it opens a sales email.
-3. Entitlements (who has an active subscription) need a small backend — the natural pairing is SWA's **managed Azure Functions** (free tier): a `/api/me/plan` function that checks the Stripe customer by the signed-in email, plus Stripe webhooks. Supabase or Firebase are equivalent alternatives.
-4. Pro features (saved BOMs, shared quote lists, alerts) then store per-user data keyed to the signed-in identity — the front-end already centralizes quote state in `vf_quote` localStorage, which is the natural sync point.
+3. Entitlements (who has an active subscription) need a small backend — the natural pairing on Netlify is a **Netlify Function** (free tier) that checks the Stripe customer against the signed-in Identity user (`context.clientContext.user`), plus Stripe webhooks.
+4. Pro features (saved BOMs, shared quote lists, alerts) then store per-user data keyed to the signed-in identity — the front-end already centralizes quote state in `vf_quote` localStorage, which is the natural sync point. Netlify Blobs (built-in key/value storage) is the simplest place to persist it server-side once you're ready.
 
 **Honesty guardrail:** don't flip features from ◷ to ✓ on the page until they actually exist — the plan cards and the transparency note under them are written to avoid selling vaporware.
 
@@ -173,3 +175,17 @@ The RFQ page's **Send RFQ** button submits the buyer info + quote lines directly
 4. Free Netlify tier includes 100 form submissions/month; the honeypot field (`bot-field`) filters most spam automatically.
 
 If you move hosts away from Netlify, this specific submission path stops working (falls back to mailto automatically) — swap in the target host's form/backend equivalent and update `sendBtn`'s handler in `voltfield-rfq.html`.
+
+---
+
+## 13. Analytics
+
+**Recommendation: Google Analytics 4 (GA4).** Both practical reasons point the same way here: it's free with no volume limits worth worrying about at this stage, and it lives in the same Google account/ecosystem as Search Console (already set up) and AdSense (the plan once traffic justifies it) — GA4 links directly to both, so audience data flows into ad-revenue reporting later without extra setup. Plausible/Fathom are perfectly good privacy-first alternatives (simpler, no cookie banner debate, ~$9+/mo) if you'd rather not have another Google property — but given the AdSense plan already means accepting Google's ad cookies, GA4 doesn't add new tradeoffs on top of that.
+
+**Setup (the account-creation part is yours to do — same reasoning as AdSense, this needs your Google login):**
+1. Go to **analytics.google.com** → Admin → Create a **GA4 property** for `voltfield.org`.
+2. In the property setup, add a **Web data stream** for `https://voltfield.org` — this gives you a **Measurement ID** (`G-XXXXXXXXXX`).
+3. Paste that ID into `SITE_CONFIG.analytics` in `voltfield-site-config.js`: set `provider: 'ga4'` and `measurementId: 'G-...'`. Nothing loads at all until both are set — every page already includes the loader, so this is the only file that needs touching.
+4. Update the **Analytics** section of `privacy-policy.html` (currently states "We do not use analytics tools") to disclose GA4 once it's live — this is a real disclosure obligation, not just tidiness.
+
+No dashboard toggle needed beyond creating the property — unlike Netlify Identity or Forms, GA4 works the moment the Measurement ID is in the config and deployed.

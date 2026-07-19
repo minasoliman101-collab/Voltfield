@@ -51,6 +51,24 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
 .hnav a:hover{color:var(--ink);background:var(--paper)}
 .hnav a.on{color:var(--ink);border-bottom-color:var(--signal)}
+.navdrop{position:relative}
+.navdrop-btn{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-transform:uppercase;border:0;border-bottom:3px solid transparent;background:none;display:inline-flex;align-items:center;gap:4px}
+.navdrop-btn:hover{color:var(--ink);background:var(--paper)}
+.navdrop-btn.on{color:var(--ink);border-bottom-color:var(--signal)}
+.navdrop-btn .car{width:8px;height:8px;flex-shrink:0}
+.navdrop-menu{display:none;position:absolute;top:100%;left:0;background:var(--card);border:2px solid var(--ink);min-width:190px;z-index:70;flex-direction:column}
+.navdrop.open .navdrop-menu,.navdrop:hover .navdrop-menu,.navdrop:focus-within .navdrop-menu{display:flex}
+.navdrop-menu a{padding:10px 14px;font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line)}
+.navdrop-menu a:last-child{border-bottom:0}
+.navdrop-menu a:hover{background:var(--paper);color:var(--ink)}
+.navdrop-menu a.on{color:var(--ink);background:var(--paper);border-left:3px solid var(--signal)}
+@media(max-width:899px){
+.navdrop-btn{width:100%;justify-content:space-between;padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}
+.navdrop-btn.on{border-left-color:var(--signal);border-bottom-color:var(--line)}
+.navdrop-menu{display:flex!important;position:static;border:0;min-width:0;background:var(--paper)}
+.navdrop-menu a{padding-left:26px;border-bottom:1px solid var(--line)}
+.navdrop-btn .car{display:none}
+}
 .headright{margin-left:auto;display:flex;align-items:center;gap:10px}
 .quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
 .quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
@@ -142,10 +160,15 @@ footer a{color:#9FB0C3}
     <a href="voltfield-supply-catalog.html">All Parts</a>
     <a href="voltfield-suppliers.html">All Suppliers</a>
     <a href="voltfield-bom.html">Quick Order</a>
-    <a href="voltfield-bom-generator.html">BOM Generator</a>
-    <a href="voltfield-pcb.html" class="on">PCB Builder</a>
-    <a href="voltfield-identify.html">Part ID</a>
-    <a href="voltfield-eol.html">Obsolete/EOL</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn on" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu">
+        <a href="voltfield-bom-generator.html">BOM Generator</a>
+        <a href="voltfield-pcb.html" class="on">PCB Builder</a>
+        <a href="voltfield-identify.html">Part ID</a>
+        <a href="voltfield-eol.html">Obsolete/EOL</a>
+      </div>
+    </div>
     <a href="voltfield-insights.html">Insights</a>
     <a href="voltfield-account.html">Account</a>
   </nav>
@@ -253,6 +276,24 @@ function saveQuote(q){localStorage.setItem('vf_quote',JSON.stringify(q));$('quot
 saveQuote(loadQuote());
 
 const MASKS=[['green','#0E6B37'],['red','#B32821'],['blue','#1F4FA3'],['black','#20242A'],['white','#E9ECEF'],['purple','#5B2E8C'],['yellow','#D8B400']];
+/* ---------- pricing calibration notes ----------
+   Checked against public reference points (verified live, 2026):
+   - JLCPCB advertises ~$2-4 total for 5pcs of a 2-layer board <=100x100mm
+     (jlcpcb.com/quote) — but that's a loss-leader hobbyist-tier price
+     designed to be recouped on shipping/assembly, not a sustainable
+     "vetted partner, IPC-A-600 Class 2" fab rate like this page claims.
+   - This model's reference config (2L, 100x80mm, FR-4, lead-free HASL,
+     qty 100, bare board) computes to ~$394 all-in ($2.62/board + $132
+     NRE) — positioned between JLCPCB hobbyist pricing (~$20-30 for the
+     same spec) and premium domestic quick-turn fabs (~$500-800+), which
+     is the right band for "better than the cheapest China-direct option,
+     not aerospace-grade." Re-check this comparison if constants below
+     are changed materially.
+   - Relative multipliers (material/finish/via/tolerance premiums) and
+     the PCBA placement rates ($0.045/SMT, $0.22/TH joint) already track
+     commonly-published contract-assembly and material-cost ratios
+     (Rogers ~3x FR-4, ENIG ~25% over HASL, etc.) — left as-is.
+   ---------------------------------------------- */
 const MAT={fr4:{l:'FR-4 (Tg 140)',m:1.0,lead:0},fr4h:{l:'High-Tg FR-4',m:1.15,lead:0},alu:{l:'Aluminum MCPCB',m:1.35,lead:3},rog:{l:'Rogers 4350B-class',m:3.2,lead:5},flex:{l:'Flex polyimide',m:2.6,lead:5}};
 const FIN={hasl:{l:'HASL',m:1.0},lfh:{l:'Lead-free HASL',m:1.05},enig:{l:'ENIG',m:1.25},iag:{l:'Immersion Ag',m:1.18},enepig:{l:'ENEPIG',m:1.5}};
 const TR={6:1.0,5:1.12,4:1.3,35:1.55};
@@ -501,5 +542,6 @@ loadURL();
 update();
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
 </body>
 </html>

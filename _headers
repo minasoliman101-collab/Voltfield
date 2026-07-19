@@ -1,0 +1,40 @@
+# Netlify _headers — Netlify does NOT read staticwebapp.config.json (that's Azure-only),
+# so caching rules need to live here instead. Same intent as that file: long cache for
+# large/rarely-changing data files, short cache for HTML, no-cache for the service worker.
+
+/sw.js
+  Cache-Control: no-cache
+
+/manifest.json
+  Cache-Control: public, max-age=86400
+
+/icons/*
+  Cache-Control: public, max-age=2592000
+
+/voltfield-catalog-data.js
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/voltfield-bom-engine.js
+  Cache-Control: public, max-age=86400, stale-while-revalidate=86400
+
+/voltfield-eol-data.js
+  Cache-Control: public, max-age=86400, stale-while-revalidate=86400
+
+/voltfield-site-config.js
+  Cache-Control: public, max-age=3600
+
+/*.html
+  Cache-Control: public, max-age=600, stale-while-revalidate=3600
+
+/sitemap.xml
+  Cache-Control: public, max-age=86400
+
+/robots.txt
+  Cache-Control: public, max-age=86400
+
+/ads.txt
+  Cache-Control: public, max-age=86400
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin

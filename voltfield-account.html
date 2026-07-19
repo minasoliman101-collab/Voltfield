@@ -51,6 +51,24 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
 .hnav a:hover{color:var(--ink);background:var(--paper)}
 .hnav a.on{color:var(--ink);border-bottom-color:var(--signal)}
+.navdrop{position:relative}
+.navdrop-btn{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-transform:uppercase;border:0;border-bottom:3px solid transparent;background:none;display:inline-flex;align-items:center;gap:4px}
+.navdrop-btn:hover{color:var(--ink);background:var(--paper)}
+.navdrop-btn.on{color:var(--ink);border-bottom-color:var(--signal)}
+.navdrop-btn .car{width:8px;height:8px;flex-shrink:0}
+.navdrop-menu{display:none;position:absolute;top:100%;left:0;background:var(--card);border:2px solid var(--ink);min-width:190px;z-index:70;flex-direction:column}
+.navdrop.open .navdrop-menu,.navdrop:hover .navdrop-menu,.navdrop:focus-within .navdrop-menu{display:flex}
+.navdrop-menu a{padding:10px 14px;font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line)}
+.navdrop-menu a:last-child{border-bottom:0}
+.navdrop-menu a:hover{background:var(--paper);color:var(--ink)}
+.navdrop-menu a.on{color:var(--ink);background:var(--paper);border-left:3px solid var(--signal)}
+@media(max-width:899px){
+.navdrop-btn{width:100%;justify-content:space-between;padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}
+.navdrop-btn.on{border-left-color:var(--signal);border-bottom-color:var(--line)}
+.navdrop-menu{display:flex!important;position:static;border:0;min-width:0;background:var(--paper)}
+.navdrop-menu a{padding-left:26px;border-bottom:1px solid var(--line)}
+.navdrop-btn .car{display:none}
+}
 .headright{margin-left:auto;display:flex;align-items:center;gap:10px}
 .quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
 .quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
@@ -130,10 +148,15 @@ footer a{color:#9FB0C3}
     <a href="voltfield-supply-catalog.html">All Parts</a>
     <a href="voltfield-suppliers.html">All Suppliers</a>
     <a href="voltfield-bom.html">Quick Order</a>
-    <a href="voltfield-bom-generator.html">BOM Generator</a>
-    <a href="voltfield-pcb.html">PCB Builder</a>
-    <a href="voltfield-identify.html">Part ID</a>
-    <a href="voltfield-eol.html">Obsolete/EOL</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu">
+        <a href="voltfield-bom-generator.html">BOM Generator</a>
+        <a href="voltfield-pcb.html">PCB Builder</a>
+        <a href="voltfield-identify.html">Part ID</a>
+        <a href="voltfield-eol.html">Obsolete/EOL</a>
+      </div>
+    </div>
     <a href="voltfield-insights.html">Insights</a>
     <a href="voltfield-account.html" class="on">Account</a>
   </nav>
@@ -155,14 +178,14 @@ footer a{color:#9FB0C3}
   <div class="authcard" id="authCard">
     <div class="who">
       <h2 id="authTitle">Sign in or create your account</h2>
-      <p id="authSub">Use your work identity — no new password to manage. Your on-device quote list keeps working either way; signing in is what lets us attach it to your account.</p>
+      <p id="authSub">Create a free account to keep your quote lists and generated BOMs with you across devices. Your on-device quote list keeps working either way; signing in is what lets us attach it to your account.</p>
       <div class="authnote" id="authNote"></div>
     </div>
     <div class="authbtns" id="authBtns">
-      <a class="abtn primary" href="/.auth/login/aad?post_login_redirect_uri=/voltfield-account.html">Sign in with Microsoft</a>
-      <a class="abtn" href="/.auth/login/github?post_login_redirect_uri=/voltfield-account.html">Sign in with GitHub</a>
+      <button class="abtn primary" id="signupBtn" type="button">Create account</button>
+      <button class="abtn" id="loginBtn" type="button">Log in</button>
     </div>
-    <div class="signedin" id="signedIn">Signed in as <b id="userName"></b> &nbsp;·&nbsp; <a href="/.auth/logout?post_logout_redirect_uri=/voltfield-account.html">Sign out</a></div>
+    <div class="signedin" id="signedIn">Signed in as <b id="userName"></b> &nbsp;·&nbsp; <button class="abtn" id="logoutBtn" type="button" style="padding:4px 10px;font-size:12px">Sign out</button></div>
   </div>
 
   <div class="planhead">
@@ -242,35 +265,52 @@ footer a{color:#9FB0C3}
 <footer>
   <div class="in">
     <h5>Voltfield Supply Co. — Accounts</h5>
-    <p>Sign-in is provided by the hosting platform's identity service (Microsoft Entra ID or GitHub via Azure Static Web Apps built-in authentication) — we never see or store passwords. Paid-plan features ship with the cloud backend; until then, all core tools remain free and your data stays on your device. Questions: <a href="mailto:Help@voltfield.com">Help@voltfield.com</a> &nbsp;·&nbsp; <a href="privacy-policy.html">Privacy policy</a></p>
+    <p>Accounts are handled by our hosting platform's identity service (Netlify Identity) — passwords are stored and managed there, not by Voltfield directly. Paid-plan features ship with the cloud backend; until then, all core tools remain free and your on-device quote list works whether or not you're signed in. Questions: <a href="mailto:Help@voltfield.com">Help@voltfield.com</a> &nbsp;·&nbsp; <a href="privacy-policy.html">Privacy policy</a></p>
   </div>
 </footer>
 
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script src="voltfield-site-config.js"></script>
 <script>
 function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._tm);t._tm=setTimeout(function(){t.classList.remove('show');},2400);}
 try{var q=JSON.parse(localStorage.getItem('vf_quote')||'[]');document.getElementById('quoteCount').textContent=Array.isArray(q)?q.length:0;}catch(e){}
 
-/* ---------- auth state (Azure Static Web Apps built-in auth) ---------- */
+/* ---------- auth state (Netlify Identity) ---------- */
 (function(){
   var isLocal=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)||location.protocol==='file:';
-  fetch('/.auth/me',{credentials:'include'}).then(function(r){
-    if(!r.ok) throw new Error('no auth endpoint');
-    return r.json();
-  }).then(function(d){
-    var p=d&&d.clientPrincipal;
-    if(p){
-      document.getElementById('authBtns').style.display='none';
-      document.getElementById('signedIn').style.display='block';
-      document.getElementById('userName').textContent=p.userDetails;
-      document.getElementById('authTitle').textContent='You’re signed in';
-      document.getElementById('authSub').textContent='Your account is active. Saved BOMs and shared quote lists appear here as those features roll out.';
-    }
-  }).catch(function(){
-    if(isLocal){
-      document.getElementById('authNote').innerHTML='Sign-in activates automatically once the site is deployed to Azure Static Web Apps (README &sect;3, Option C) &mdash; the buttons above use its built-in identity endpoints. On other hosts, wire an identity provider per README &sect;9.';
-    }
-  });
+
+  function showSignedIn(user){
+    document.getElementById('authBtns').style.display='none';
+    document.getElementById('signedIn').style.display='block';
+    document.getElementById('userName').textContent=(user.user_metadata&&user.user_metadata.full_name)||user.email;
+    document.getElementById('authTitle').textContent='You’re signed in';
+    document.getElementById('authSub').textContent='Your account is active. Saved BOMs and shared quote lists appear here as those features roll out.';
+  }
+  function showSignedOut(){
+    document.getElementById('authBtns').style.display='flex';
+    document.getElementById('signedIn').style.display='none';
+    document.getElementById('authTitle').textContent='Sign in or create your account';
+    document.getElementById('authSub').textContent='Create a free account to keep your quote lists and generated BOMs with you across devices. Your on-device quote list keeps working either way; signing in is what lets us attach it to your account.';
+  }
+
+  if(typeof netlifyIdentity==='undefined'){
+    if(isLocal)document.getElementById('authNote').innerHTML='Accounts run on Netlify Identity, which only responds when the page is served from your live Netlify domain (identity.netlify.com couldn’t be reached from here) — this will work once you\'re on voltfield.org.';
+    return;
+  }
+
+  netlifyIdentity.init();
+  var current=netlifyIdentity.currentUser();
+  if(current)showSignedIn(current);
+
+  netlifyIdentity.on('login',function(user){showSignedIn(user);netlifyIdentity.close();toast('Signed in');});
+  netlifyIdentity.on('logout',function(){showSignedOut();toast('Signed out');});
+  netlifyIdentity.on('error',function(err){toast('Identity error — see console');console.error(err);});
+
+  document.getElementById('signupBtn').onclick=function(){netlifyIdentity.open('signup');};
+  document.getElementById('loginBtn').onclick=function(){netlifyIdentity.open('login');};
+  document.getElementById('logoutBtn').onclick=function(){netlifyIdentity.logout();};
+
+  if(!current)document.getElementById('authNote').innerHTML='New here? <b>Create account</b> signs you up directly — no separate provider needed. If this is your first visit after launch and the button doesn’t open a form, Identity may not be enabled yet on the Netlify dashboard (Site configuration → Identity → Enable Identity).';
 })();
 
 /* ---------- plan buttons ---------- */
@@ -286,5 +326,6 @@ try{var q=JSON.parse(localStorage.getItem('vf_quote')||'[]');document.getElement
 })();
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
 </body>
 </html>

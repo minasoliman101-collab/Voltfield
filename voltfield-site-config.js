@@ -27,7 +27,7 @@ const SITE_CONFIG = {
       incontent: '',
       footer: '',
     },
-    preview: true,         /* show placeholder boxes until a real client ID is set */
+    preview: false,        /* show placeholder boxes until a real client ID is set — off until AdSense is approved */
   },
 
   /* Part identification (voltfield-identify.html).
@@ -48,6 +48,15 @@ const SITE_CONFIG = {
     proAnnualUrl: '',
     portalUrl: '',         /* Stripe customer-portal login link */
     salesEmail: 'Sales@voltfield.com',
+  },
+
+  /* Analytics (see README §13). Create a free GA4 property at
+     analytics.google.com, then paste its Measurement ID (looks like
+     'G-XXXXXXXXXX') below. Nothing loads at all until it's set —
+     update privacy-policy.html's Analytics section when you do. */
+  analytics: {
+    provider: 'none',      /* 'none' | 'ga4' */
+    measurementId: '',     /* e.g. 'G-XXXXXXXXXX' */
   },
 };
 
@@ -120,4 +129,19 @@ const SITE_CONFIG = {
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
+})();
+
+/* ---------- analytics: GA4, loaded only if a Measurement ID is configured ---------- */
+(function () {
+  const A = SITE_CONFIG.analytics;
+  if (!A || A.provider !== 'ga4' || !A.measurementId) return;
+  const s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(A.measurementId);
+  document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { window.dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', A.measurementId);
+  window.vfGtag = gtag; /* available for future event tracking, e.g. vfGtag('event','add_to_quote') */
 })();
