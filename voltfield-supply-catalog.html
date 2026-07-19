@@ -121,6 +121,7 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .skucard .sk-band{height:5px}
 .skucard .sk-imgwrap{height:150px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:8px;cursor:pointer;overflow:hidden}
 .skucard .sk-img{max-width:100%;max-height:100%;object-fit:contain;mix-blend-mode:multiply}
+.sk-icon svg{width:64%;height:64%}
 .skucard:hover .sk-img{transform:scale(1.03);transition:transform .18s}
 .skucard .sk-body{padding:12px 14px 10px;flex:1;display:flex;flex-direction:column}
 .skucard .sk-cat{display:flex;justify-content:space-between;align-items:center;gap:8px}
@@ -200,6 +201,7 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .dm-band{height:6px}
 .dm-imgwrap{height:180px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:14px}
 .dm-img{max-width:100%;max-height:100%;object-fit:contain;mix-blend-mode:multiply}
+.dm-icon svg{width:56%;height:56%}
 .dm-hd{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line)}
 .dm-cat{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:#fff;padding:2px 7px}
 .dm-dist{font-family:var(--mono);font-size:10.5px;color:var(--slate)}
@@ -376,6 +378,7 @@ footer a{color:#9FB0C3}
 
 <script src="voltfield-site-config.js"></script>
 <script src="voltfield-catalog-data.js"></script>
+<script src="voltfield-part-icons.js"></script>
 <script>
 /* ---------- state ---------- */
 const PAGE_SIZE=24;
@@ -511,7 +514,7 @@ function renderResults(){
     const inq=qset.has(sku.pn);
     html+=`<div class="skucard" data-fi="${f._i}" data-seed="${seed}">
       <div class="sk-band" style="background:${col}"></div>
-      ${f.img?`<div class="sk-imgwrap"><img class="sk-img" src="${f.img}" alt="${f.n}" loading="lazy"></div>`:''}
+      <div class="sk-imgwrap sk-icon">${partIconSvg(f,SECTORS[f.s]?SECTORS[f.s].color:'')}</div>
       <div class="sk-body">
         <div class="sk-cat"><span class="c" style="background:${col}">${f.c}</span><span class="d">${DL[f.d]}</span></div>
         <div class="sk-pn">${sku.pn}</div>
@@ -632,7 +635,7 @@ function renderModal(){
       <div><span class="dm-cat" style="background:${col}">${f.c}</span> <span class="dm-dist">${distLbl} · ${SECTORS[f.s].label}</span></div>
       <button class="dm-x" id="dmClose" aria-label="Close">&times;</button>
     </div>
-    ${f.img?`<div class="dm-imgwrap"><img class="dm-img" src="${f.img}" alt="${configuredName(f,picks)}"></div>`:''}
+    <div class="dm-imgwrap dm-icon">${partIconSvg(f,SECTORS[f.s]?SECTORS[f.s].color:'')}</div>
     <div class="dm-body">
       <div class="dm-pn">${pn}</div>
       <h3 class="dm-name">${configuredName(f,picks)}</h3>
