@@ -80,7 +80,6 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .p-band{height:7px}
 .p-imgwrap{height:230px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:16px}
 .p-img{max-width:100%;max-height:100%;object-fit:contain;mix-blend-mode:multiply}
-.p-icon svg{width:52%;height:52%}
 .p-hd{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 20px;border-bottom:1px solid var(--line)}
 .p-cat{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#fff;padding:3px 8px}
 .p-dist{font-family:var(--mono);font-size:11px;color:var(--slate)}
@@ -173,7 +172,6 @@ footer a{color:#9FB0C3}
 
 <script src="voltfield-site-config.js"></script>
 <script src="voltfield-catalog-data.js"></script>
-<script src="voltfield-part-icons.js"></script>
 <script src="voltfield-bom-engine.js"></script>
 <script>
 /* ===== Standalone part-detail / configurator (uses shared catalog data) ===== */
@@ -218,7 +216,7 @@ function renderPart(){
         <span class="p-cat" style="background:${col}">${f.c}</span>
         <span class="p-dist">${distLbl} · ${SECTORS[f.s].label}</span>
       </div>
-      <div class="p-imgwrap p-icon">${partIconSvg(f,SECTORS[f.s]?SECTORS[f.s].color:'')}</div>
+      ${f.img?`<div class="p-imgwrap"><img class="p-img" src="${f.img}" alt="${configuredName(f,picks)}"></div>`:''}
       <div class="p-body">
         <div class="p-pn">${pn}</div>
         <h1 class="p-name">${configuredName(f,picks)}</h1>
