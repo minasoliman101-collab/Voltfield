@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Set to the live Netlify domain. If you attach a custom domain later,
-     replace it here, in robots.txt, and in voltfield-site-config.js (siteUrl). -->
+<!-- Production domain: voltfield.org. If this ever changes, update it
+     here, in robots.txt, and in voltfield-site-config.js (siteUrl). -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://ornate-queijadas-cb9933.netlify.app/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://ornate-queijadas-cb9933.netlify.app/voltfield-supply-catalog.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://ornate-queijadas-cb9933.netlify.app/voltfield-bom-generator.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://ornate-queijadas-cb9933.netlify.app/voltfield-bom.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ornate-queijadas-cb9933.netlify.app/voltfield-suppliers.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://ornate-queijadas-cb9933.netlify.app/voltfield-insights.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://ornate-queijadas-cb9933.netlify.app/voltfield-part.html</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://ornate-queijadas-cb9933.netlify.app/voltfield-account.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://ornate-queijadas-cb9933.netlify.app/voltfield-eol.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ornate-queijadas-cb9933.netlify.app/voltfield-pcb.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ornate-queijadas-cb9933.netlify.app/voltfield-identify.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://voltfield.org/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://voltfield.org/voltfield-supply-catalog.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://voltfield.org/voltfield-bom-generator.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://voltfield.org/voltfield-bom.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://voltfield.org/voltfield-suppliers.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://voltfield.org/voltfield-insights.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://voltfield.org/voltfield-part.html</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://voltfield.org/voltfield-account.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://voltfield.org/voltfield-eol.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://voltfield.org/voltfield-pcb.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://voltfield.org/voltfield-identify.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>

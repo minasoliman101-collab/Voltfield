@@ -17,7 +17,7 @@
 
 const SITE_CONFIG = {
   /* production domain (no trailing slash) — update if you attach a custom domain */
-  siteUrl: 'https://ornate-queijadas-cb9933.netlify.app',
+  siteUrl: 'https://voltfield.org',
 
   ads: {
     provider: 'none',      /* 'none' | 'adsense' */

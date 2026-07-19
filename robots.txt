@@ -6,4 +6,4 @@ Disallow: /voltfield-rfq.html
 Disallow: /404.html
 Disallow: /voltfield-home.html
 
-Sitemap: https://ornate-queijadas-cb9933.netlify.app/sitemap.xml
+Sitemap: https://voltfield.org/sitemap.xml
