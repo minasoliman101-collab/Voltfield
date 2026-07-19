@@ -158,7 +158,7 @@ footer a{color:#9FB0C3}
   <div class="pcbban-in">
     <div class="eyebrow">Custom PCB Builder · Fab Configurator</div>
     <h1>Spec your board. Watch it build. Price it instantly.</h1>
-    <p>Set dimensions, stack-up, material, copper, finish and tolerances — the board preview and budgetary pricing update live, with quantity breaks and lead times. Attach your Gerbers for a DFM check, then add the build to your quote list like any other part.</p>
+    <p>Set dimensions, stack-up, material, copper, finish and tolerances — the board preview and budgetary pricing update live, with quantity breaks and lead times. Need it populated? Switch on the assembly tier, upload your BOM (we read the line and placement counts automatically), and the PCBA price flows into the same quote list as everything else.</p>
   </div>
 </section>
 
@@ -184,6 +184,17 @@ footer a{color:#9FB0C3}
       <div class="frow"><label>Min hole size</label><select id="pHole"><option value="30">0.30 mm</option><option value="25">0.25 mm</option><option value="20">0.20 mm</option><option value="15">0.15 mm</option></select></div>
       <div class="frow"><label>Via structure</label><select id="pVia"><option value="th">Through-hole only</option><option value="blind">+ Blind vias</option><option value="bb">+ Blind &amp; buried</option></select></div>
       <div class="frow"><label>Controlled impedance</label><div class="seg" data-k="imp"><button data-v="no">No</button><button data-v="yes">Yes (+12%)</button></div></div>
+      <div class="secthead">Assembly (PCBA)</div>
+      <div class="frow"><label>Assembly service</label><div class="seg" data-k="asm"><button data-v="no">Bare board</button><button data-v="yes">Fab + assembly</button></div></div>
+      <div class="frow asmf"><label>Sides</label><div class="seg" data-k="sides"><button data-v="1">Top only</button><button data-v="2">Double-sided</button></div></div>
+      <div class="frow asmf"><label>Unique parts (BOM lines)</label><input type="number" id="aLines" min="1" max="500" value="25"></div>
+      <div class="frow asmf"><label>SMT placements / board</label><input type="number" id="aSmt" min="0" max="5000" value="120"></div>
+      <div class="frow asmf"><label>Through-hole joints / board</label><input type="number" id="aTh" min="0" max="1000" value="12"></div>
+      <div class="frow asmf"><label>BGA / fine-pitch parts / board</label><input type="number" id="aBga" min="0" max="100" value="0"></div>
+      <div class="frow asmf"><label>Component sourcing</label><div class="seg" data-k="src"><button data-v="turnkey">Turnkey (we buy)</button><button data-v="consigned">Consigned (you supply)</button></div></div>
+      <div class="frow asmf full"><label>BOM file (CSV/XLSX — CSVs are auto-read to fill line &amp; placement counts)</label>
+        <div class="filelbl"><label class="filepick" for="aBom">Attach BOM</label><input type="file" id="aBom" accept=".csv,.txt,.xlsx,.xls"><span class="filename" id="bomName">No BOM attached — counts can be entered manually above.</span></div>
+      </div>
       <div class="secthead">Order</div>
       <div class="frow"><label>Quantity (boards)</label><input type="number" id="pQty" min="5" max="100000" value="100"></div>
       <div class="frow"><label>Lead time</label><div class="seg" data-k="lead"><button data-v="std">Standard</button><button data-v="exp">Expedited (+60%)</button></div></div>
@@ -201,7 +212,8 @@ footer a{color:#9FB0C3}
       <div class="prevmeta"><span id="mArea"></span><span id="mStack"></span><span id="mFin"></span><span id="mEtest">100% e-test included</span></div>
     </div>
     <div class="pricebar">
-      <div class="pstat"><div class="k" id="prUnit">$0</div><div class="l">Per board</div></div>
+      <div class="pstat"><div class="k" id="prUnit">$0</div><div class="l" id="prUnitL">Per board</div></div>
+      <div class="pstat" id="asmStat" style="display:none"><div class="k" id="prAsm">$0</div><div class="l">Assembly / board</div></div>
       <div class="pstat"><div class="k" id="prSetup">$0</div><div class="l">Tooling / NRE</div></div>
       <div class="pstat"><div class="k" id="prTotal">$0</div><div class="l" id="prTotalL">Total (100 pcs)</div></div>
       <div class="pstat"><div class="k" id="prLead">—</div><div class="l">Lead time</div></div>
@@ -217,7 +229,7 @@ footer a{color:#9FB0C3}
       <a class="btn ghost" id="dfmBtn" href="#">Engineering / DFM review &rsaquo;</a>
     </div>
     <div class="specline" id="specLine"></div>
-    <p class="pcbnote"><b>Pricing basis:</b> budgetary estimate from a parametric fab model (area × stack-up × material × finish × tolerance multipliers, quantity curve, tooling amortized separately). Final pricing and stack-up confirmation follow DFM review of your Gerbers by our fabrication partners — nothing is ordered automatically. IPC-A-600 Class 2 acceptance standard; Class 3 available at quote.</p>
+    <p class="pcbnote"><b>Pricing basis:</b> budgetary estimate from a parametric model — fab (area × stack-up × material × finish × tolerance multipliers) plus, when assembly is on, placement labor (SMT/TH/BGA), programming &amp; first-article NRE, and turnkey procurement or consigned kitting fees. <b>Turnkey component cost is quoted separately from your BOM</b> — the figures here cover fab + assembly labor. Final pricing follows DFM/BOM review by our fabrication partners — nothing is ordered automatically. IPC-A-600 (fab) and IPC-A-610 (assembly) Class 2; Class 3 at quote.</p>
   </div>
 </div>
 
@@ -248,7 +260,7 @@ const VIA={th:{m:1.0,lead:0,l:'Through-hole'},blind:{m:1.35,lead:4,l:'Blind vias
 const CU={1:1.0,2:1.18,3:1.4};
 const BREAKS=[10,25,50,100,250,500,1000];
 
-const S={shape:'rounded',layers:'2',silk:'white',imp:'no',lead:'std',sten:'no',mask:'green'};
+const S={shape:'rounded',layers:'2',silk:'white',imp:'no',lead:'std',sten:'no',mask:'green',asm:'no',sides:'1',src:'turnkey'};
 
 /* segmented controls */
 document.querySelectorAll('.seg').forEach(seg=>{
@@ -264,14 +276,55 @@ MASKS.forEach(([name,hex])=>{
   d.onclick=()=>{S.mask=name;document.querySelectorAll('#maskSw .sw').forEach(x=>x.classList.toggle('on',x===d));update();};
   $('maskSw').appendChild(d);
 });
-['pName','pW','pH','pThk','pMat','pCu','pFin','pTr','pHole','pVia','pQty'].forEach(id=>{$(id).addEventListener('input',update);$(id).addEventListener('change',update);});
+['pName','pW','pH','pThk','pMat','pCu','pFin','pTr','pHole','pVia','pQty','aLines','aSmt','aTh','aBga'].forEach(id=>{$(id).addEventListener('input',update);$(id).addEventListener('change',update);});
 $('pGerber').addEventListener('change',e=>{const f=e.target.files[0];$('gerberName').textContent=f?f.name+' ('+Math.round(f.size/1024)+' KB) — attached to spec; include it with your RFQ email.':'No file attached.';update();});
+
+/* BOM upload: CSVs are parsed client-side to auto-fill line & placement counts */
+$('aBom').addEventListener('change',e=>{
+  const f=e.target.files[0];
+  if(!f){$('bomName').textContent='No BOM attached.';return;}
+  const kb=Math.round(f.size/1024);
+  if(!/\.(csv|txt)$/i.test(f.name)){
+    $('bomName').textContent=f.name+' ('+kb+' KB) attached — enter counts manually (auto-read supports CSV).';update();return;
+  }
+  const rd=new FileReader();
+  rd.onload=()=>{
+    try{
+      const rows=String(rd.result).split(/\r?\n/).map(r=>r.trim()).filter(Boolean)
+        .map(r=>r.split(/[,;\t]/).map(c=>c.replace(/^"|"$/g,'').trim()));
+      let hdrIdx=-1,qtyCol=-1;
+      if(rows.length&&rows[0].some(c=>/^(qty|quantity|ref|reference|designator|part|mpn|value)/i.test(c))){
+        hdrIdx=0;qtyCol=rows[0].findIndex(c=>/^(qty|quantity)/i.test(c));
+      }
+      const data=rows.slice(hdrIdx+1).filter(r=>r.some(c=>c));
+      if(!data.length)throw new Error('empty');
+      $('aLines').value=Math.min(500,data.length);
+      if(qtyCol>=0){
+        const placements=data.reduce((a,r)=>a+(parseInt(r[qtyCol],10)||0),0);
+        if(placements>0)$('aSmt').value=Math.min(5000,placements);
+      }
+      if(S.asm!=='yes'){S.asm='yes';document.querySelectorAll('.seg[data-k="asm"] button').forEach(b=>b.classList.toggle('on',b.dataset.v==='yes'));}
+      $('bomName').textContent=f.name+' ('+kb+' KB) — read '+data.length+' BOM lines'+(qtyCol>=0?', '+$('aSmt').value+' placements/board':'')+'.';
+      toast('BOM read: '+data.length+' lines');
+    }catch(err){$('bomName').textContent=f.name+' ('+kb+' KB) attached — couldn’t auto-read; enter counts manually.';}
+    update();
+  };
+  rd.readAsText(f);
+});
 
 function clampDims(){
   let w=Math.min(500,Math.max(10,parseFloat($('pW').value)||100));
   let h=Math.min(500,Math.max(10,parseFloat($('pH').value)||80));
   if(S.shape==='circle')h=w;
   return {w,h};
+}
+function asmCounts(){
+  return {
+    lines: Math.min(500,Math.max(1,parseInt($('aLines').value,10)||25)),
+    smt:   Math.min(5000,Math.max(0,parseInt($('aSmt').value,10)||0)),
+    th:    Math.min(1000,Math.max(0,parseInt($('aTh').value,10)||0)),
+    bga:   Math.min(100,Math.max(0,parseInt($('aBga').value,10)||0)),
+  };
 }
 function calc(qty){
   const {w,h}=clampDims();
@@ -287,11 +340,25 @@ function calc(qty){
   unit*=disc;
   let setup=80+layers*26+(via.m>1?90:0)+(S.imp==='yes'?60:0)+(mat.m>1.2?70:0);
   let leadDays=8+Math.max(0,(layers-2))*1.5+mat.lead+via.lead+(S.imp==='yes'?2:0);
+  /* ---- assembly (PCBA) tier ---- */
+  let asmUnit=0, asmNre=0;
+  const asm=S.asm==='yes', A=asmCounts();
+  if(asm){
+    asmUnit=A.smt*0.045+A.th*0.22+A.bga*0.6;                    /* placement labor */
+    if(S.sides==='2')asmUnit*=1.25;
+    asmUnit=Math.max(asmUnit*disc,2.5);                          /* qty curve + floor */
+    asmNre=120+0.9*A.lines+(S.sides==='2'?40:0)+(A.bga>0?60:0)   /* program + first article (+X-ray) */
+          +(S.src==='turnkey'?4*A.lines:25);                     /* procurement vs kitting fee */
+    leadDays+=5+(A.bga>0?2:0);
+  }
   let mult=1;
   if(S.lead==='exp'){mult=1.6;leadDays=Math.max(4,Math.ceil(leadDays*0.55));}
-  unit*=mult;setup*=S.lead==='exp'?1.25:1;
-  const sten=S.sten==='yes'?45:0;
-  return {unit,setup,sten,leadDays:Math.ceil(leadDays),total:unit*qty+setup+sten,area,layers,w,h};
+  unit*=mult;asmUnit*=mult;
+  setup*=S.lead==='exp'?1.25:1;asmNre*=S.lead==='exp'?1.25:1;
+  const sten=(S.sten==='yes'||asm)?45:0;                         /* stencil required for assembly */
+  const allUnit=unit+asmUnit;
+  return {unit,asmUnit,allUnit,setup,asmNre,sten,leadDays:Math.ceil(leadDays),
+          total:allUnit*qty+setup+asmNre+sten,area,layers,w,h,asm,A};
 }
 function m$(v){return v>=1000?'$'+Math.round(v).toLocaleString():v>=100?'$'+v.toFixed(0):'$'+v.toFixed(2);}
 
@@ -341,39 +408,49 @@ function drawBoard(){
 
 function specString(){
   const {w,h}=clampDims();
+  const A=asmCounts();
   return [`${S.shape==='circle'?'Ø'+w:w+'×'+h} mm ${S.shape}`,`${S.layers} layer`,$('pThk').value,MAT[$('pMat').value].l,
     `${$('pCu').value} oz Cu`,FIN[$('pFin').value].l,`${S.mask} mask / ${S.silk} silk`,
     `${$('pTr').options[$('pTr').selectedIndex].text} trace`,`${$('pHole').options[$('pHole').selectedIndex].text} min hole`,
-    VIA[$('pVia').value].l,(S.imp==='yes'?'controlled impedance':null),(S.sten==='yes'?'+ SMT stencil':null)].filter(Boolean).join(' · ');
+    VIA[$('pVia').value].l,(S.imp==='yes'?'controlled impedance':null),(S.sten==='yes'?'+ SMT stencil':null),
+    (S.asm==='yes'?`PCBA ${S.sides==='2'?'2-side':'1-side'}: ${A.lines} lines, ${A.smt} SMT + ${A.th} TH${A.bga?` + ${A.bga} BGA`:''}/board, ${S.src}`:null)].filter(Boolean).join(' · ');
 }
 function pcbPN(){
   const {w,h}=clampDims();
   const s=specString();let hsh=0;for(let i=0;i<s.length;i++)hsh=((hsh<<5)-hsh+s.charCodeAt(i))>>>0;
-  return `VF-PCB-${S.layers}L-${Math.round(w)}X${Math.round(h)}-${$('pFin').value.toUpperCase()}-${(hsh%9000+1000)}`;
+  return `VF-PCB${S.asm==='yes'?'A':''}-${S.layers}L-${Math.round(w)}X${Math.round(h)}-${$('pFin').value.toUpperCase()}-${(hsh%9000+1000)}`;
 }
 
 function update(){
   const qty=Math.max(5,parseInt($('pQty').value,10)||100);
+  /* assembly forces a stencil */
+  if(S.asm==='yes'&&S.sten==='no'){S.sten='yes';document.querySelectorAll('.seg[data-k="sten"] button').forEach(b=>b.classList.toggle('on',b.dataset.v==='yes'));}
+  document.querySelectorAll('.asmf').forEach(el=>el.style.display=S.asm==='yes'?'':'none');
   const r=calc(qty);
   drawBoard();
   $('mArea').textContent=`Board area: ${r.area.toFixed(1)} cm²`;
   $('mStack').textContent=`${r.layers}-layer · ${$('pThk').value} · ${MAT[$('pMat').value].l}`;
   $('mFin').textContent=`${FIN[$('pFin').value].l} · ${$('pCu').value} oz`;
-  $('prUnit').textContent=m$(r.unit);
-  $('prSetup').textContent=m$(r.setup+r.sten);
+  $('mEtest').textContent=r.asm?'100% e-test + AOI'+(r.A.bga>0?' + X-ray':'')+' · IPC-A-610 Class 2':'100% e-test included';
+  $('prUnit').textContent=m$(r.allUnit);
+  $('prUnitL').textContent=r.asm?'Per assembled board':'Per board';
+  $('asmStat').style.display=r.asm?'':'none';
+  $('prAsm').textContent=m$(r.asmUnit);
+  $('prSetup').textContent=m$(r.setup+r.sten+r.asmNre);
   $('prTotal').textContent=m$(r.total);
-  $('prTotalL').textContent=`Total (${qty.toLocaleString()} pcs)`;
+  $('prTotalL').textContent=`Total (${qty.toLocaleString()} pcs)`+(r.asm&&S.src==='turnkey'?' + components':'');
   $('prLead').textContent=r.leadDays+' bd';
   $('breaksBody').innerHTML=BREAKS.map(q=>{
     const b=calc(q);
-    return `<tr${q===BREAKS.reduce((a,x)=>Math.abs(x-qty)<Math.abs(a-qty)?x:a,BREAKS[0])&&q<=qty*1.0001&&qty<=q*1.0001?' class="cur"':''}><td>${q.toLocaleString()}</td><td>${m$(b.unit)}</td><td>${m$(b.total)}</td></tr>`;
+    return `<tr${q===BREAKS.reduce((a,x)=>Math.abs(x-qty)<Math.abs(a-qty)?x:a,BREAKS[0])&&q<=qty*1.0001&&qty<=q*1.0001?' class="cur"':''}><td>${q.toLocaleString()}</td><td>${m$(b.allUnit)}</td><td>${m$(b.total)}</td></tr>`;
   }).join('');
   $('specLine').textContent=pcbPN()+' — '+specString();
   syncURL();
 }
 function syncURL(){
   const {w,h}=clampDims();
-  const p=new URLSearchParams({w,h,sh:S.shape,l:S.layers,thk:$('pThk').selectedIndex,mat:$('pMat').value,cu:$('pCu').value,fin:$('pFin').value,mask:S.mask,silk:S.silk,tr:$('pTr').value,hole:$('pHole').value,via:$('pVia').value,imp:S.imp,q:$('pQty').value,ld:S.lead,st:S.sten,nm:$('pName').value});
+  const p=new URLSearchParams({w,h,sh:S.shape,l:S.layers,thk:$('pThk').selectedIndex,mat:$('pMat').value,cu:$('pCu').value,fin:$('pFin').value,mask:S.mask,silk:S.silk,tr:$('pTr').value,hole:$('pHole').value,via:$('pVia').value,imp:S.imp,q:$('pQty').value,ld:S.lead,st:S.sten,nm:$('pName').value,
+    asm:S.asm,sd:S.sides,src:S.src,ln:$('aLines').value,sm:$('aSmt').value,thj:$('aTh').value,bg:$('aBga').value});
   history.replaceState(null,'','voltfield-pcb.html?'+p.toString());
 }
 function loadURL(){
@@ -383,6 +460,11 @@ function loadURL(){
   ['shape','sh'].forEach(()=>{});
   S.shape=P.get('sh')||S.shape;S.layers=P.get('l')||S.layers;S.mask=P.get('mask')||S.mask;S.silk=P.get('silk')||S.silk;
   S.imp=P.get('imp')||S.imp;S.lead=P.get('ld')||S.lead;S.sten=P.get('st')||S.sten;
+  S.asm=P.get('asm')||S.asm;S.sides=P.get('sd')||S.sides;S.src=P.get('src')||S.src;
+  if(P.get('ln'))$('aLines').value=P.get('ln');
+  if(P.get('sm'))$('aSmt').value=P.get('sm');
+  if(P.get('thj'))$('aTh').value=P.get('thj');
+  if(P.get('bg'))$('aBga').value=P.get('bg');
   if(P.get('thk'))$('pThk').selectedIndex=Math.min(4,parseInt(P.get('thk'),10)||2);
   if(P.get('mat'))$('pMat').value=P.get('mat');
   if(P.get('cu'))$('pCu').value=P.get('cu');
@@ -400,16 +482,19 @@ $('addBtn').onclick=()=>{
   const qty=Math.max(5,parseInt($('pQty').value,10)||100);
   const r=calc(qty), pn=pcbPN();
   const q=loadQuote();
-  const name=`Custom PCB — ${S.layers}L ${clampDims().w}×${clampDims().h}mm ${FIN[$('pFin').value].l}, ${S.mask} (${$('pName').value||'unnamed'})`;
+  const A=asmCounts();
+  const name=r.asm
+    ? `Custom PCBA — ${S.layers}L ${clampDims().w}×${clampDims().h}mm ${FIN[$('pFin').value].l}, ${A.smt} SMT/${A.th} TH placements, ${S.src} (${$('pName').value||'unnamed'})`
+    : `Custom PCB — ${S.layers}L ${clampDims().w}×${clampDims().h}mm ${FIN[$('pFin').value].l}, ${S.mask} (${$('pName').value||'unnamed'})`;
   const ex=q.find(x=>x.pn===pn);
-  if(ex){ex.qty=qty;}else{q.push({pn,name,price:'$'+r.unit.toFixed(2),lead:r.leadDays+' bd',sec:'dc',qty,up:r.unit,pu:'/ea',d:'voltfield'});}
+  if(ex){ex.qty=qty;}else{q.push({pn,name,price:'$'+r.allUnit.toFixed(2),lead:r.leadDays+' bd',sec:'dc',qty,up:r.allUnit,pu:'/ea',d:'voltfield'});}
   saveQuote(q);
-  toast('PCB build added to quote ('+qty.toLocaleString()+' pcs)');
+  toast((r.asm?'PCBA build':'PCB build')+' added to quote ('+qty.toLocaleString()+' pcs)');
 };
 $('printBtn').onclick=()=>window.print();
 $('copyBtn').onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(location.href).then(()=>toast('Config link copied'),()=>toast('Copy failed'));};
 document.addEventListener('click',e=>{if(e.target.id==='dfmBtn'){e.preventDefault();
-  location.href='mailto:RFQ@VOLTFIELD.CO?subject='+encodeURIComponent('PCB DFM review: '+pcbPN())+'&body='+encodeURIComponent('Spec: '+specString()+'\nConfig link: '+location.href+'\n\n(Attach your Gerber/ODB++ package to this email.)');}});
+  location.href='mailto:RFQ@VOLTFIELD.CO?subject='+encodeURIComponent('PCB'+(S.asm==='yes'?'A':'')+' DFM review: '+pcbPN())+'&body='+encodeURIComponent('Spec: '+specString()+'\nConfig link: '+location.href+'\n\n(Attach your Gerber/ODB++ package'+(S.asm==='yes'?' and BOM/centroid files':'')+' to this email.)');}});
 
 loadURL();
 update();
