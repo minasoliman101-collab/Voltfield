@@ -107,7 +107,7 @@ footer a{color:#9FB0C3}
 <body>
 <div class="utilbar">
   <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
-  <span class="right">HOUSTON · PHOENIX · COLUMBUS &nbsp;|&nbsp; +1 (800) 555-0119 &nbsp;|&nbsp; RFQ@VOLTFIELD.CO</span>
+  <span class="right">+1 (850) 686-1378 &nbsp;|&nbsp; RFQ@voltfield.com</span>
 </div>
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
@@ -161,7 +161,7 @@ footer a{color:#9FB0C3}
   <div class="in">
     <div>
       <h5>Voltfield Supply Co.</h5>
-      <p>Stocking distributor and sourcing agent for long-lead electrical, storage, oilfield, and MRO/industrial supply equipment. Regional manufacturer/mill profiles are a modeled sourcing network for demonstration; sector coverage, lead-time posture, and compliance scopes are indicative and confirmed at quote. OEM brand listings (SMA, Schneider Electric, Siemens, ABB, Eaton, and others) identify product lines Voltfield sources and cross-references as an <b>independent</b> distributor — Voltfield is not affiliated with, sponsored by, or endorsed by these manufacturers, and all trademarks belong to their owners. Distributor assortments in the All Parts catalog mirror each distributor's publicly published product range.</p>
+      <p>Stocking distributor and sourcing agent for long-lead electrical, storage, oilfield, and MRO/industrial supply equipment. Regional manufacturer/mill profiles are a modeled sourcing network for demonstration; sector coverage, lead-time posture, and compliance scopes are indicative and confirmed at quote. OEM brand listings (SMA, Schneider Electric, Siemens, ABB, Eaton, and others) identify product lines Voltfield sources and cross-references as an <b>independent</b> distributor — Voltfield is not affiliated with, sponsored by, or endorsed by these manufacturers, and all trademarks belong to their owners. Every part in the All Parts catalog — including items sourced through Grainger, Uline, Graybar, and MSC Industrial — is sold and fulfilled directly by Voltfield Supply Co.; catalog scope and indicative pricing are modeled on each distributor's publicly published product range, not a live data feed.</p>
     </div>
     <div>
       <h5>Explore</h5>
@@ -182,10 +182,10 @@ const SECTORS={
 const TYPES=['OEM','Distributor','Manufacturer','Mill / Foundry','Integrator','Recert / Rebuild'];
 // lead posture: ok (short), warn (long-lead), crit (very long / allocation)
 const SUP=[
-  {n:'Grainger',t:'Distributor',s:['mro'],f:'Full-line MRO: fasteners, raw stock, safety, tools, motors, electrical, plumbing. Mirrored into the All Parts catalog.',r:'National · Lake Forest, IL',lead:'ok',leadTxt:'Mostly in-stock',cmp:['ISO 9001'],status:'live'},
-  {n:'Uline',t:'Distributor',s:['mro'],f:'Shipping, packaging, material handling, janitorial, and safety supply. Live in the All Parts catalog (41,000 SKUs).',r:'National · Pleasant Prairie, WI',lead:'ok',leadTxt:'In-stock',cmp:['ISO 9001'],status:'live'},
-  {n:'Graybar',t:'Distributor',s:['mro','dc','re'],f:'Electrical, comm/data, and industrial distribution overlapping data-center and BOS lines. Live in the All Parts catalog (300,000 SKUs).',r:'National · St. Louis, MO',lead:'ok',leadTxt:'In-stock',cmp:['ISO 9001'],status:'live'},
-  {n:'MSC Industrial',t:'Distributor',s:['mro'],f:'Metalworking and MRO: cutting tools, measuring &amp; inspection, toolholding, abrasives, coolants, and machine accessories. Live in the All Parts catalog (600,000 SKUs).',r:'National · Melville, NY',lead:'ok',leadTxt:'In-stock–1 wk',cmp:['ISO 9001'],status:'live'},
+  {n:'Grainger',t:'Distributor',s:['mro'],f:'Full-line MRO: fasteners, raw stock, safety, tools, motors, electrical, plumbing. Sourced by Voltfield and sold direct through the All Parts catalog.',r:'National · Lake Forest, IL',lead:'ok',leadTxt:'Mostly in-stock',cmp:['ISO 9001'],status:'live'},
+  {n:'Uline',t:'Distributor',s:['mro'],f:'Shipping, packaging, material handling, janitorial, and safety supply. Sourced by Voltfield and sold direct through the All Parts catalog (41,000 SKUs).',r:'National · Pleasant Prairie, WI',lead:'ok',leadTxt:'In-stock',cmp:['ISO 9001'],status:'live'},
+  {n:'Graybar',t:'Distributor',s:['mro','dc','re'],f:'Electrical, comm/data, and industrial distribution overlapping data-center and BOS lines. Sourced by Voltfield and sold direct through the All Parts catalog (300,000 SKUs).',r:'National · St. Louis, MO',lead:'ok',leadTxt:'In-stock',cmp:['ISO 9001'],status:'live'},
+  {n:'MSC Industrial',t:'Distributor',s:['mro'],f:'Metalworking and MRO: cutting tools, measuring &amp; inspection, toolholding, abrasives, coolants, and machine accessories. Sourced by Voltfield and sold direct through the All Parts catalog (600,000 SKUs).',r:'National · Melville, NY',lead:'ok',leadTxt:'In-stock–1 wk',cmp:['ISO 9001'],status:'live'},
   {n:'Meridian Transformer Works',t:'Manufacturer',s:['dc','re'],f:'Large power transformers, GSUs, and pad-mount distribution units. Grain-oriented electrical steel supply constrains output.',r:'Columbus, OH',lead:'crit',leadTxt:'120–160 wk',cmp:['IEEE C57','ANSI'],status:'live'},
   {n:'Cascade Switchgear Systems',t:'Manufacturer',s:['dc'],f:'Medium- and low-voltage metal-clad switchgear, air and molded-case breakers, protective relays.',r:'Phoenix, AZ',lead:'warn',leadTxt:'24–130 wk',cmp:['ANSI C37','UL 1558'],status:'live'},
   {n:'Anvil Power Systems',t:'Manufacturer',s:['dc'],f:'Standby and prime diesel and natural-gas gensets, static UPS, and flywheel ride-through.',r:'Houston, TX',lead:'warn',leadTxt:'22–90 wk',cmp:['UL 2200','NFPA 110'],status:'live'},

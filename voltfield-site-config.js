@@ -47,7 +47,7 @@ const SITE_CONFIG = {
     proMonthlyUrl: '',     /* e.g. 'https://buy.stripe.com/xxxx' */
     proAnnualUrl: '',
     portalUrl: '',         /* Stripe customer-portal login link */
-    salesEmail: 'RFQ@VOLTFIELD.CO',
+    salesEmail: 'Sales@voltfield.com',
   },
 };
 

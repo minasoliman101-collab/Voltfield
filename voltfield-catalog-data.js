@@ -352,4 +352,4 @@ function genSKU(f,i){
 /* config <-> URL helpers (used by the shareable part page) */
 function picksToParam(f,picks){return f.ax.map((axis,ai)=>Math.max(0,axis.slice(1).indexOf(picks[ai]))).join('.');}
 function paramToPicks(f,param){const arr=(param||'').split('.');return f.ax.map((axis,ai)=>{const o=axis.slice(1);const idx=Math.max(0,Math.min(o.length-1,parseInt(arr[ai],10)||0));return o[idx];});}
-const DIST_NAME={grainger:'Grainger',uline:'Uline',graybar:'Graybar',msc:'MSC Industrial',voltfield:'Voltfield Direct'};
+const DIST_NAME={grainger:'Sourced via Grainger',uline:'Sourced via Uline',graybar:'Sourced via Graybar',msc:'Sourced via MSC Industrial',voltfield:'Voltfield Direct'};

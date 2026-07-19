@@ -102,6 +102,12 @@ table.rfq input.q{width:60px;border:1px solid var(--line-dark);padding:5px 6px;f
 .empty a{display:inline-block;background:var(--signal);color:var(--ink);border:2px solid var(--ink);padding:11px 20px;font-family:var(--disp);font-weight:700;letter-spacing:.04em;text-transform:uppercase;text-decoration:none}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;font-family:var(--mono);font-size:12.5px;padding:11px 18px;border-left:4px solid var(--signal);z-index:120;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.hidden-field{position:absolute;left:-9999px;top:-9999px}
+.rfqsuccess{max-width:900px;margin:18px auto 0;padding:16px 20px;background:#E7F1EB;border:1px solid var(--ok);border-left:5px solid var(--ok);display:none}
+.rfqsuccess.show{display:block}
+.rfqsuccess h3{font-family:var(--disp);font-weight:700;font-size:19px;color:var(--ok)}
+.rfqsuccess p{font-size:13px;color:var(--ink-2);margin-top:5px;line-height:1.5}
+.fielderr{border-bottom-color:var(--crit)!important}
 @media print{
   .noprint{display:none!important}
   body{background:#fff}
@@ -114,9 +120,21 @@ table.rfq input.q{width:60px;border:1px solid var(--line-dark);padding:5px 6px;f
 </style>
 </head>
 <body>
+<!-- Static Netlify Forms detector. Never shown or submitted directly — its sole
+     purpose is to exist in the deployed HTML so Netlify registers the "rfq-quote"
+     form and its fields at build time. The real submission (see script below) is
+     an AJAX POST to "/" with a matching form-name and these same field names. -->
+<form name="rfq-quote" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="hidden-field" aria-hidden="true">
+  <input type="hidden" name="form-name" value="rfq-quote">
+  <input name="bot-field">
+  <input type="text" name="rfq_number"><input type="text" name="company"><input type="text" name="project">
+  <input type="text" name="contact"><input type="email" name="email"><input type="text" name="phone">
+  <input type="text" name="needed_by"><textarea name="notes"></textarea><input type="text" name="item_count">
+  <input type="text" name="total_units"><input type="text" name="estimated_total"><textarea name="line_items"></textarea>
+</form>
 <div class="utilbar noprint">
   <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
-  <span class="right">HOUSTON · PHOENIX · COLUMBUS &nbsp;|&nbsp; +1 (800) 555-0119 &nbsp;|&nbsp; RFQ@VOLTFIELD.CO</span>
+  <span class="right">+1 (850) 686-1378 &nbsp;|&nbsp; RFQ@voltfield.com</span>
 </div>
 <header class="site noprint">
   <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
@@ -142,11 +160,16 @@ table.rfq input.q{width:60px;border:1px solid var(--line-dark);padding:5px 6px;f
 </header>
 
 <div class="actbar noprint" id="actbar" style="display:none">
-  <button class="btn primary" id="printBtn">Print / Save as PDF</button>
-  <button class="btn dark" id="emailBtn">Email RFQ</button>
+  <button class="btn primary" id="sendBtn">Send RFQ</button>
+  <button class="btn dark" id="printBtn">Print / Save as PDF</button>
+  <button class="btn ghost" id="emailBtn">Email instead</button>
   <a class="btn dark" href="voltfield-supply-catalog.html">Continue shopping</a>
   <button class="btn ghost" id="clearBtn">Clear quote</button>
-  <span class="acthint">“Print / Save as PDF” makes a clean PDF to attach; “Email RFQ” opens a pre-filled message.</span>
+  <span class="acthint">“Send RFQ” submits directly to our sourcing desk (fill in your email first); “Email instead” opens a pre-filled message in your own mail app; “Print / Save as PDF” makes a clean copy to attach.</span>
+</div>
+<div class="rfqsuccess noprint" id="rfqSuccess">
+  <h3>RFQ sent — reference <span id="rfqRefNo"></span></h3>
+  <p>We've received your request and a copy has been logged with our sourcing desk. Expect a reply at the email you provided within 24 hours. You can keep browsing, print a copy for your records, or clear this list to start a new one.</p>
 </div>
 
 <div id="mount"></div>
@@ -183,7 +206,7 @@ function mount(){
     <div class="rfqhead">
       <div class="co">
         <div class="nm"><span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>VOLTFIELD SUPPLY CO.</div>
-        <div class="addr">Energy Infrastructure &amp; Industrial Supply<br>Houston · Phoenix · Columbus<br>+1 (800) 555-0119 · RFQ@VOLTFIELD.CO</div>
+        <div class="addr">Energy Infrastructure &amp; Industrial Supply<br>4043 Star Trek Ln, Garland, TX 75044<br>+1 (850) 686-1378 · RFQ@voltfield.com</div>
       </div>
       <div class="doc">
         <h1>REQUEST FOR QUOTATION</h1>
@@ -249,13 +272,22 @@ function renderRows(){
 /* source label: prefer stored distributor, else sector label */
 function srcLabel(it){return (it.d&&DIST_NAME[it.d])?DIST_NAME[it.d]:(SECTORS[it.sec]?SECTORS[it.sec].label:'—');}
 
-document.getElementById('printBtn').onclick=()=>window.print();
-document.getElementById('emailBtn').onclick=()=>{
-  if(!QUOTE.length){toast('Nothing to send');return;}
+/* ---------- shared: gather buyer fields + build a plain-text line-item summary ---------- */
+function gatherRFQ(){
   const g=id=>{const el=document.getElementById(id);return el?el.value.trim():'';};
   const company=g('bCompany'),contact=g('bContact'),email=g('bEmail'),phone=g('bPhone'),project=g('bProject'),needed=g('bNeeded'),notes=g('bNotes');
   let total=0,units=0;
   const lines=QUOTE.map((it,i)=>{const up=unitOf(it),qty=Math.max(1,it.qty||1),pu=puOf(it);total+=up*qty;units+=qty;return (i+1)+'. '+qty+' x '+it.pn+' — '+it.name+' ['+srcLabel(it)+'] @ $'+up.toFixed(up<10?2:0)+(pu?(' '+pu):'')+' = $'+(up*qty).toFixed(2);});
+  return {company,contact,email,phone,project,needed,notes,lines,total,units};
+}
+function validEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);}
+function markFieldError(id,on){const el=document.getElementById(id);if(el)el.classList.toggle('fielderr',!!on);}
+
+document.getElementById('printBtn').onclick=()=>window.print();
+
+document.getElementById('emailBtn').onclick=()=>{
+  if(!QUOTE.length){toast('Nothing to send');return;}
+  const {company,contact,email,phone,project,needed,notes,lines,total,units}=gatherRFQ();
   const CAP=25, body=['REQUEST FOR QUOTATION','RFQ #: '+rfqNo,'Date: '+dateStr,''];
   if(company)body.push('Company: '+company);
   if(contact)body.push('Contact: '+contact);
@@ -269,9 +301,36 @@ document.getElementById('emailBtn').onclick=()=>{
   if(notes)body.push('','Notes: '+notes);
   body.push('','(Indicative pricing — please confirm price, availability, and lead time.)');
   const subj='RFQ '+rfqNo+(project?(' — '+project):(company?(' — '+company):''));
-  location.href='mailto:RFQ@VOLTFIELD.CO?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body.join('\n'));
+  location.href='mailto:RFQ@voltfield.com?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body.join('\n'));
 };
-document.getElementById('clearBtn').onclick=()=>{if(confirm('Clear all parts from your quote list?')){QUOTE=[];saveQuote(QUOTE);mount();toast('Quote list cleared');}};
+
+/* ---------- primary path: submit to Netlify Forms (see the hidden "rfq-quote" form) ---------- */
+function encodeForm(data){return Object.keys(data).map(k=>encodeURIComponent(k)+'='+encodeURIComponent(data[k])).join('&');}
+document.getElementById('sendBtn').onclick=async()=>{
+  if(!QUOTE.length){toast('Nothing to send');return;}
+  const {company,contact,email,phone,project,needed,notes,lines,total,units}=gatherRFQ();
+  markFieldError('bEmail',false);
+  if(!validEmail(email)){toast('Add a valid email so we can reply');markFieldError('bEmail',true);document.getElementById('bEmail').focus();return;}
+  const btn=document.getElementById('sendBtn'); const orig=btn.textContent; btn.textContent='Sending…'; btn.disabled=true;
+  const payload={'form-name':'rfq-quote',rfq_number:rfqNo,company,project,contact,email,phone,needed_by:needed,notes,
+    item_count:String(QUOTE.length),total_units:String(units),estimated_total:(total>=1000?Math.round(total).toLocaleString():total.toFixed(2)),
+    line_items:lines.join('\n')};
+  try{
+    const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:encodeForm(payload)});
+    if(!r.ok)throw new Error('status '+r.status);
+    document.getElementById('rfqRefNo').textContent=rfqNo;
+    document.getElementById('rfqSuccess').classList.add('show');
+    document.getElementById('rfqSuccess').scrollIntoView({behavior:'smooth',block:'start'});
+    toast('RFQ sent');
+  }catch(err){
+    toast('Online submission unavailable here — opening your email client instead');
+    document.getElementById('emailBtn').click();
+  }finally{
+    btn.textContent=orig; btn.disabled=false;
+  }
+};
+
+document.getElementById('clearBtn').onclick=()=>{if(confirm('Clear all parts from your quote list?')){QUOTE=[];saveQuote(QUOTE);document.getElementById('rfqSuccess').classList.remove('show');mount();toast('Quote list cleared');}};
 mount();
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>

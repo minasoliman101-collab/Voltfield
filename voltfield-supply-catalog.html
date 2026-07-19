@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>All Parts — Search 2M+ Industrial &amp; Energy Parts | VOLTFIELD Supply Co.</title>
-<meta name="description" content="Searchable, filterable catalog of 2M+ configurable SKUs: transformers, switchgear, inverters, battery storage, oilfield equipment, and full MRO lines from Grainger, Uline, Graybar and MSC — with indicative pricing and live lead times.">
+<meta name="description" content="Searchable, filterable catalog of 2M+ configurable SKUs: transformers, switchgear, inverters, battery storage, oilfield equipment, and full MRO/industrial lines — sold directly by Voltfield with indicative pricing and live lead times.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VOLTFIELD Supply Co.">
 <meta property="og:title" content="All Parts — the full 2M+ SKU catalog">
@@ -224,7 +224,7 @@ footer a{color:#9FB0C3}
 <body>
 <div class="utilbar">
   <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
-  <span class="right">HOUSTON · PHOENIX · COLUMBUS &nbsp;|&nbsp; +1 (800) 555-0119 &nbsp;|&nbsp; RFQ@VOLTFIELD.CO</span>
+  <span class="right">+1 (850) 686-1378 &nbsp;|&nbsp; RFQ@voltfield.com</span>
 </div>
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
@@ -281,9 +281,9 @@ footer a{color:#9FB0C3}
       <div class="opts" id="facetLead"></div>
     </div>
     <div class="facet">
-      <h3>Distributor / Source</h3>
+      <h3>Sourcing Channel</h3>
       <div class="opts" id="facetDist"></div>
-      <div class="facetnote">Grainger, Uline, Graybar, and MSC Industrial catalogs are all live. The taxonomy carries a source field, so more distributors can be added as a data load — not a rebuild.</div>
+      <div class="facetnote">Every part is sold and fulfilled directly by Voltfield Supply Co. This filter shows which distributor or mill network we source each item through — handy if you have an existing vendor preference. More sourcing channels can be added as a data load — not a rebuild.</div>
     </div>
     <button class="clearbtn" id="clearBtn">Clear all filters</button>
   </aside>
@@ -341,7 +341,7 @@ footer a{color:#9FB0C3}
   <div class="in">
     <div>
       <h5>Voltfield Supply Co.</h5>
-      <p>Configurable catalog spanning grid &amp; data-center power, renewables BOS, battery storage, oilfield equipment, and Grainger-scale MRO/industrial supply. SKUs are configured on demand from a taxonomy of product families and attribute options; pricing is indicative market range (North America, July 2026) confirmed at quote. Additional distributor catalogs — Uline, Graybar and others — are on the roadmap.</p>
+      <p>Configurable catalog spanning grid &amp; data-center power, renewables BOS, battery storage, oilfield equipment, and industrial-scale MRO supply — sold and fulfilled directly by Voltfield Supply Co. SKUs are configured on demand from a taxonomy of product families and attribute options; pricing is Voltfield's own, sourced through distributor and mill partners and confirmed at quote.</p>
     </div>
     <div>
       <h5>Jump to sector</h5>
@@ -457,7 +457,7 @@ function renderChips(){
   if(state.cat)add('Category:',state.cat,()=>{state.cat=null;state.page=0;apply();});
   if(state.q)add('Search:',state.q,()=>{state.q='';document.getElementById('searchInput').value='';state.page=0;apply();});
   if(state.lt)add('Lead:',state.lt==='short'?'≤12 wk':'>12 wk',()=>{state.lt=null;state.page=0;apply();});
-  if(state.dist)add('Source:',({grainger:'Grainger',uline:'Uline',graybar:'Graybar',msc:'MSC',voltfield:'Voltfield'})[state.dist],()=>{state.dist=null;state.page=0;apply();});
+  if(state.dist)add('Sourced via:',({grainger:'Grainger',uline:'Uline',graybar:'Graybar',msc:'MSC',voltfield:'Voltfield Direct'})[state.dist],()=>{state.dist=null;state.page=0;apply();});
 }
 
 /* ---------- render results ---------- */
@@ -477,7 +477,7 @@ function renderResults(){
   const offs=[]; let acc=0; matched.forEach(f=>{offs.push(acc);acc+=f.ct;});
   function locate(gi){let lo=0,hi=matched.length-1;while(lo<hi){const mid=(lo+hi+1)>>1;if(offs[mid]<=gi)lo=mid;else hi=mid-1;}return {f:matched[lo],local:gi-offs[lo]};}
   const q=loadQuote(); const qset=new Set(q.map(x=>x.pn));
-  const DL={grainger:'Grainger',uline:'Uline',graybar:'Graybar',msc:'MSC',voltfield:'Voltfield'};
+  const DL={grainger:'Sourced via Grainger',uline:'Sourced via Uline',graybar:'Sourced via Graybar',msc:'Sourced via MSC',voltfield:'Voltfield Direct'};
   let html='';
   for(let gi=start;gi<end;gi++){
     const {f,local}=locate(gi);
