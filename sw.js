@@ -1,6 +1,6 @@
 /* VOLTFIELD service worker — offline-first app shell.
    Bump VERSION whenever you redeploy changed files so clients update. */
-const VERSION = 'voltfield-v11';
+const VERSION = 'voltfield-v12';
 
 const CORE = [
   './',
@@ -59,6 +59,7 @@ self.addEventListener('fetch', e => {
   /* never intercept ad-network traffic or auth endpoints */
   if (/googlesyndication|doubleclick|adsbygoogle/.test(url.host)) return;
   if (url.pathname.startsWith('/.auth/')) return;
+  if (url.pathname.startsWith('/.netlify/identity/')) return;
 
   /* HTML pages: network-first (so deployed updates show), cache fallback for offline */
   if (req.mode === 'navigate' || req.destination === 'document') {
