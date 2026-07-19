@@ -645,8 +645,9 @@ function renderModal(){
         <div><span>Lead time</span><b class="lead ${lb.c}">${lb.t}</b></div>
         <div><span>Quantity</span><input type="number" id="dmQty" min="1" value="${qty}"></div>
         <div><span>Est. line total</span><b>${money(price*qty,f.pu)}</b></div>
+        <div><span>Voltfield sourcing ref</span><b>${sourcingRef(pn)}</b></div>
       </div>
-      <div class="dm-note">Configured from ${f.ax.length} attribute axes across ${fmt(f.ct)} SKUs in this family. Indicative pricing; final price, availability &amp; lead time confirmed at quote.</div>
+      <div class="dm-note">Configured from ${f.ax.length} attribute axes across ${fmt(f.ct)} SKUs in this family. Indicative pricing; final price, availability &amp; lead time confirmed at quote. The sourcing ref is Voltfield's own internal tracking code for this configuration — not a manufacturer SKU or UPC.</div>
     </div>
     <div class="dm-foot">
       <button class="dm-add${inq?' in':''}" id="dmAdd">${inq?'In quote ✓':'Add to quote'}</button>

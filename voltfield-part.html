@@ -228,8 +228,9 @@ function renderPart(){
           <div><span>Lead time</span><b class="lead ${lb.c}">${lb.t}</b></div>
           <div><span>Quantity</span><input type="number" id="pQty" min="1" value="${qty}"></div>
           <div><span>Est. line total</span><b>${money(price*qty,f.pu)}</b></div>
+          <div><span>Voltfield sourcing ref</span><b>${sourcingRef(pn)}</b></div>
         </div>
-        <div class="p-note">This is one configuration within the <b>${f.n}</b> family (${fmt(f.ct)} SKUs). Change any option above and the shareable link updates automatically.</div>
+        <div class="p-note">This is one configuration within the <b>${f.n}</b> family (${fmt(f.ct)} SKUs). Change any option above and the shareable link updates automatically. The sourcing ref is Voltfield's own internal tracking code for this configuration — not a manufacturer SKU or UPC.</div>
       </div>
       <div class="p-foot">
         <button class="p-add${inq?' in':''}" id="pAdd">${inq?'In quote ✓':'Add to quote'}</button>

@@ -340,6 +340,15 @@ function skuCode(f,picks){return f.ax.map((axis,ai)=>{const o=axis.slice(1);cons
 function priceFor(f,picks){let t=0;f.ax.forEach((axis,ai)=>{const o=axis.slice(1);const idx=Math.max(0,o.indexOf(picks[ai]));t+=o.length>1?idx/(o.length-1):0.5;});t=f.ax.length?t/f.ax.length:0.5;return f.lo+t*(f.hi-f.lo);}
 function configuredName(f,picks){const v=picks.slice(0,2).filter(Boolean).join(' ');return f.n+(v?' — '+v:'');}
 function configuredPN(f,picks,chk){return `VF-${SECTORS[f.s].code}-${f.abbr}-${skuCode(f,picks)}${chk}`;}
+/* Voltfield's own internal sourcing/tracking code, derived deterministically from the
+   configured part number. This is NOT a manufacturer SKU and NOT a UPC -- Voltfield's
+   catalog is built from procedurally-generated part numbers with no real per-SKU
+   manufacturer data feed, so it would be misleading to fabricate those. This code exists
+   purely for Voltfield's internal cross-referencing/tracking of a given configuration. */
+function sourcingRef(pn){
+  let x=0; for(let i=0;i<pn.length;i++) x=h(x,pn.charCodeAt(i));
+  return 'VFS-'+x.toString(36).toUpperCase().padStart(7,'0').slice(0,7);
+}
 function genSKU(f,i){
   const picks=f.ax.map((axis,ai)=>{const o=axis.slice(1); return o[h(i,ai+7)%o.length];});
   const chk=String((h(i,3)%90)+10);
