@@ -189,3 +189,4 @@ If you move hosts away from Netlify, this specific submission path stops working
 4. Update the **Analytics** section of `privacy-policy.html` (currently states "We do not use analytics tools") to disclose GA4 once it's live — this is a real disclosure obligation, not just tidiness.
 
 No dashboard toggle needed beyond creating the property — unlike Netlify Identity or Forms, GA4 works the moment the Measurement ID is in the config and deployed.
+
