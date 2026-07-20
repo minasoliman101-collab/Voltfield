@@ -23,6 +23,9 @@
 /voltfield-eol-data.js
   Cache-Control: public, max-age=86400, stale-while-revalidate=86400
 
+/voltfield-oem-data.js
+  Cache-Control: public, max-age=3600, stale-while-revalidate=3600
+
 /voltfield-site-config.js
   Cache-Control: public, max-age=3600
 

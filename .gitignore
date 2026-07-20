@@ -4,3 +4,8 @@ app-wrapper/www/
 app-wrapper/android/
 app-wrapper/ios/
 voltfield-site.zip
+
+# local secrets - never commit
+.env.icecat
+.env.icecat.txt
+.env
