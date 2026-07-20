@@ -190,3 +190,4 @@ If you move hosts away from Netlify, this specific submission path stops working
 
 No dashboard toggle needed beyond creating the property — unlike Netlify Identity or Forms, GA4 works the moment the Measurement ID is in the config and deployed.
 
+
