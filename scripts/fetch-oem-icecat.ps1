@@ -34,8 +34,33 @@ if (-not $envMap.ICECAT_USERNAME -or -not $envMap.ICECAT_APP_KEY) {
 }
 
 # Add real lookups here. One of: @{icecat_id='...'} / @{Brand='...';ProductCode='...'} / @{GTIN='...'}
+# All icecat_ids below were confirmed reachable on this account's free Open Icecat tier
+# (found by probing -- everything else tried, incl. ABB/Fluke/Milwaukee/Logitech, is Full-Icecat-gated).
+$TEST_NOTE = 'Icecat free-tier product -- pipeline test entry, not a real Voltfield offering'
 $LOOKUPS = @(
-    @{ icecat_id = '1445'; note = 'Icecat demo product -- pipeline test entry, not a real Voltfield offering' }
+    @{ icecat_id = '1445'; note = $TEST_NOTE }
+    @{ icecat_id = '1440'; note = $TEST_NOTE }
+    @{ icecat_id = '1441'; note = $TEST_NOTE }
+    @{ icecat_id = '1447'; note = $TEST_NOTE }
+    @{ icecat_id = '1448'; note = $TEST_NOTE }
+    @{ icecat_id = '1449'; note = $TEST_NOTE }
+    @{ icecat_id = '1452'; note = $TEST_NOTE }
+    @{ icecat_id = '1453'; note = $TEST_NOTE }
+    @{ icecat_id = '1470'; note = $TEST_NOTE }
+    @{ icecat_id = '1490'; note = $TEST_NOTE }
+    @{ icecat_id = '1550'; note = $TEST_NOTE }
+    @{ icecat_id = '1600'; note = $TEST_NOTE }
+    @{ icecat_id = '1800'; note = $TEST_NOTE }
+    @{ icecat_id = '9990'; note = $TEST_NOTE }
+    @{ icecat_id = '9995'; note = $TEST_NOTE }
+    @{ icecat_id = '10000'; note = $TEST_NOTE }
+    @{ icecat_id = '10001'; note = $TEST_NOTE }
+    @{ icecat_id = '10002'; note = $TEST_NOTE }
+    @{ icecat_id = '10003'; note = $TEST_NOTE }
+    @{ icecat_id = '10005'; note = $TEST_NOTE }
+    @{ icecat_id = '10010'; note = $TEST_NOTE }
+    @{ icecat_id = '10050'; note = $TEST_NOTE }
+    @{ icecat_id = '10100'; note = $TEST_NOTE }
 )
 
 function Get-IcecatProduct($lookup) {
