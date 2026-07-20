@@ -195,7 +195,7 @@ footer a{color:#9FB0C3}
   <div class="empty" id="supEmpty" style="display:none">No suppliers match those filters. <a href="#" id="resetLink">Reset</a></div>
 </div>
 
-<div class="oemtest">
+<div class="oemtest" id="oemTest" style="display:none">
   <h2>OEM data pipeline — test</h2>
   <p class="oemtest-note">The card below is a real product record fetched live from Icecat's product database — real brand, real manufacturer part number, real GTIN, real image. It's <b>not</b> a Voltfield product; it exists to prove the OEM-data integration works end to end (fetch → verify → display) using a source our current Icecat access tier can actually reach. Voltfield-relevant OEM data (e.g. real ABB circuit breaker part numbers) will appear here the same way once a working data source for those is in place.</p>
   <div class="oemgrid" id="oemTestGrid"></div>
@@ -344,8 +344,13 @@ render();
 <script src="voltfield-oem-data.js"></script>
 <script>
 (function(){
+  /* Hidden from regular visitors -- this is a pipeline-proof section, not a real
+     catalog offering. Add ?dev=1 to the URL to view it while demonstrating it. */
+  if(new URLSearchParams(location.search).get('dev')!=='1')return;
+  const wrap=document.getElementById('oemTest');
   const grid=document.getElementById('oemTestGrid');
   if(!grid||typeof OEM_REF==='undefined')return;
+  wrap.style.display='block';
   const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   grid.innerHTML=OEM_REF.map(r=>`<div class="oemcard">
     <div class="oemtag">${r.test?'Test data — Icecat':'Verified OEM'}</div>
