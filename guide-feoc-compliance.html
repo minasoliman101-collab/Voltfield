@@ -103,6 +103,17 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .artwrap li{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:6px}
 .artwrap a.inline{color:var(--signal-deep);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
 .callout{background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--signal);padding:16px 18px;margin:20px 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.estimator{background:var(--card);border:1px solid var(--line-dark);padding:20px;margin:20px 0}
+.estimator h3{font-family:var(--disp);font-weight:700;font-size:17px;color:var(--ink);margin-bottom:10px}
+.est-row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:10px}
+.est-field{display:flex;flex-direction:column;gap:4px}
+.est-field label{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--slate)}
+.est-field input{width:140px;border:1px solid var(--line-dark);padding:8px 10px;font-family:var(--mono);font-size:14px}
+.est-field button{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase}
+.est-field button:hover{background:transparent;color:var(--ink)}
+.est-result{font-family:var(--mono);font-size:13.5px;color:var(--ink);background:#fff;border:1px solid var(--line);padding:10px 12px;margin-top:4px;display:none}
+.est-result.show{display:block}
+.est-result b{color:var(--signal-deep)}
 .ctaband{background:linear-gradient(120deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;border-top:4px solid var(--signal)}
 .ctaband-in{max-width:1240px;margin:0 auto;padding:44px 20px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
 .ctaband h3{font-family:var(--disp);font-weight:700;font-size:28px;letter-spacing:.01em}
@@ -181,6 +192,29 @@ footer a:hover{color:#fff}
     <li><b>A sourcing decision record for every major component</b>, made at time of purchase — reconstructing this after the fact for an ITC filing is far harder than documenting it during procurement.</li>
   </ul>
 
+  <h2>Estimate your sourcing cost</h2>
+  <p>These estimators use the same indicative equipment pricing published in the <a class="inline" href="lead-time-index.html">Lead-Time Index</a> — they estimate <b>equipment cost only</b>, not tax credit value. They are not a quote, and not tax advice.</p>
+
+  <div class="estimator">
+    <h3>Solar modules</h3>
+    <div class="est-row">
+      <div class="est-field"><label for="estMw">Project size (MW-DC)</label><input type="number" id="estMw" min="0" step="0.1" placeholder="e.g. 5"></div>
+      <div class="est-field"><button type="button" id="estMwBtn">Estimate</button></div>
+    </div>
+    <div class="est-result" id="estMwResult"></div>
+  </div>
+
+  <div class="estimator">
+    <h3>BESS DC blocks</h3>
+    <div class="est-row">
+      <div class="est-field"><label for="estMwh">Project size (MWh)</label><input type="number" id="estMwh" min="0" step="0.1" placeholder="e.g. 20"></div>
+      <div class="est-field"><button type="button" id="estMwhBtn">Estimate</button></div>
+    </div>
+    <div class="est-result" id="estMwhResult"></div>
+  </div>
+
+  <div class="callout"><b>Not tax advice.</b> This is an equipment-cost estimate only. The <a class="inline" href="glossary.html#itc">ITC</a> and <a class="inline" href="glossary.html#domestic-content-bonus">domestic content bonus</a> depend on project-specific factors (prevailing wage/apprenticeship compliance, project size, and sourcing documentation) that this tool doesn't evaluate — a project can qualify for a 10-percentage-point domestic content bonus or just 2 percentage points depending on those factors. Confirm actual credit eligibility and value with a qualified tax professional.</div>
+
   <h2>Where Voltfield fits in</h2>
   <p>The <a class="inline" href="renewables.html">Renewables</a> desk flags FEOC-clean sourcing options where they apply across modules, inverters, and PCS, and the <a class="inline" href="battery-storage.html">Battery Storage</a> desk carries the same FEOC-compliant sourcing premium noted above on its LFP DC blocks — so the compliance question is visible at the configuration stage rather than discovered after the order is placed. If you're evaluating a full BOM against current sourcing status, <a class="inline" href="voltfield-bom.html">Quick Order</a> matches every line against the catalog in one pass.</p>
   <p style="font-size:13px;color:var(--slate)">Unfamiliar with a term above? See <a class="inline" href="glossary.html#feoc">FEOC</a>, <a class="inline" href="glossary.html#itc">ITC</a>, <a class="inline" href="glossary.html#domestic-content-bonus">domestic content bonus</a>, or <a class="inline" href="glossary.html#safe-harbor">safe harbor</a> in the glossary.</p>
@@ -236,6 +270,31 @@ footer a:hover{color:#fff}
     const el=document.getElementById("quoteCount");
     if(el)el.textContent=Array.isArray(q)?q.length:0;
   }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  function fmtMoney(v){return '$'+Math.round(v).toLocaleString('en-US');}
+  const mwBtn=document.getElementById('estMwBtn');
+  if(mwBtn)mwBtn.addEventListener('click',function(){
+    const mw=parseFloat(document.getElementById('estMw').value);
+    const r=document.getElementById('estMwResult');
+    if(!(mw>0)){r.textContent='Enter a project size in MW-DC.';r.className='est-result show';return;}
+    const watts=mw*1e6;
+    const lo=watts*0.09, hi=watts*0.13;
+    r.innerHTML='Estimated module cost for '+mw+' MW-DC: <b>'+fmtMoney(lo)+' – '+fmtMoney(hi)+'</b> (at $0.09–0.13/W, current indicative import pricing).';
+    r.className='est-result show';
+  });
+  const mwhBtn=document.getElementById('estMwhBtn');
+  if(mwhBtn)mwhBtn.addEventListener('click',function(){
+    const mwh=parseFloat(document.getElementById('estMwh').value);
+    const r=document.getElementById('estMwhResult');
+    if(!(mwh>0)){r.textContent='Enter a project size in MWh.';r.className='est-result show';return;}
+    const kwh=mwh*1000;
+    const lo=kwh*110, hi=kwh*140;
+    r.innerHTML='Estimated DC block cost for '+mwh+' MWh: <b>'+fmtMoney(lo)+' – '+fmtMoney(hi)+'</b> (at $110–140/kWh, current indicative market pricing).';
+    r.className='est-result show';
+  });
 })();
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
