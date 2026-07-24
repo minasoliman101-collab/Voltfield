@@ -307,13 +307,16 @@ try{var q=JSON.parse(localStorage.getItem('vf_quote')||'[]');document.getElement
 
   netlifyIdentity.on('login',function(user){showSignedIn(user);netlifyIdentity.close();toast('Signed in');});
   netlifyIdentity.on('logout',function(){showSignedOut();toast('Signed out');});
-  netlifyIdentity.on('error',function(err){toast('Identity error — see console');console.error(err);});
+  netlifyIdentity.on('error',function(err){
+    toast('Account sign-in isn’t available right now — please try again shortly.');
+    console.warn('Netlify Identity error (visitors just see the toast above). If this persists, check the Netlify dashboard: Site configuration → Identity → Enable Identity (and Identity → Registration → Open for public signup).',err);
+  });
 
   document.getElementById('signupBtn').onclick=function(){netlifyIdentity.open('signup');};
   document.getElementById('loginBtn').onclick=function(){netlifyIdentity.open('login');};
   document.getElementById('logoutBtn').onclick=function(){netlifyIdentity.logout();};
 
-  if(!current)document.getElementById('authNote').innerHTML='New here? <b>Create account</b> signs you up directly — no separate provider needed. If this is your first visit after launch and the button doesn’t open a form, Identity may not be enabled yet on the Netlify dashboard (Site configuration → Identity → Enable Identity).';
+  if(!current)document.getElementById('authNote').innerHTML='New here? <b>Create account</b> signs you up directly — no separate provider needed.';
 })();
 
 /* ---------- plan buttons ---------- */
