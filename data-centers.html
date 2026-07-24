@@ -19,7 +19,12 @@
    {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
    {"@type":"ListItem","position":2,"name":"Data Centers","item":"https://voltfield.org/data-centers.html"}
  ]},
- {"@type":"CollectionPage","name":"Data Center Power & Infrastructure Equipment","description":"Transformers, switchgear, generators, UPS, CDUs, and busway for hyperscale and colocation builds.","url":"https://voltfield.org/data-centers.html","isPartOf":{"@type":"WebSite","name":"VOLTFIELD Supply Co.","url":"https://voltfield.org/"}}
+ {"@type":"CollectionPage","name":"Data Center Power & Infrastructure Equipment","description":"Transformers, switchgear, generators, UPS, CDUs, and busway for hyperscale and colocation builds.","url":"https://voltfield.org/data-centers.html","isPartOf":{"@type":"WebSite","name":"VOLTFIELD Supply Co.","url":"https://voltfield.org/"}},
+ {"@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"How long is the lead time for a data center transformer?","acceptedAnswer":{"@type":"Answer","text":"Pad-mount transformers are quoting around 85 weeks and GSU transformers around 144 weeks industry-wide. Configure the exact spec for an indicative lead time."}},
+   {"@type":"Question","name":"What's included in the Data Centers desk?","acceptedAnswer":{"@type":"Answer","text":"Pad-mount and GSU transformers, MV switchgear and breakers, generators and UPS, CDUs, and busway — 21,180 SKUs."}},
+   {"@type":"Question","name":"Why are data center transformers so hard to source right now?","acceptedAnswer":{"@type":"Answer","text":"Utilities and hyperscale developers are now bidding for the same limited pool of transformers and switchgear, on top of an existing electrical-steel and skilled-labor shortage."}}
+ ]}
 ]}
 </script>
 <link rel="manifest" href="manifest.json">
@@ -29,6 +34,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -192,8 +198,24 @@ footer a:hover{color:#fff}
     <p>Power procurement for new data center capacity is running into the same bottleneck everywhere: large power transformers. Lead times on the largest units are stretching toward four years industry-wide, and utilities are now bidding against hyperscale developers for the same limited pool of transformers and switchgear — pushing some orders three to five years out. Sourcing data center power equipment has become as much a lead-time exercise as a spec exercise.</p>
     <p>On the cooling side, rising GPU rack densities are pushing new builds from air to liquid cooling, with direct-to-chip CDU deployments becoming standard rather than exceptional — a shift that reshapes what mechanical and electrical procurement lists look like for both new construction and retrofits.</p>
     <p>The Data Centers desk covers pad-mount and GSU transformers, MV switchgear and breakers, generators and UPS, CDUs, and busway — 21,180 SKUs configurable to spec, each carrying an indicative lead time so you know what you're actually waiting for before you commit to a design.</p>
+    <p>For a deeper look at what's driving these lead times and how to plan around them, see <a href="guide-transformer-lead-times.html" style="color:var(--signal-deep);font-weight:600;text-decoration:underline">Why Transformer Lead Times Stretch Past 3 Years</a>.</p>
   </div>
   <a class="ctabtn" style="display:inline-block;margin-top:22px" href="voltfield-supply-catalog.html?sector=dc">BROWSE ALL DATA CENTER PARTS &rarr;</a>
+</div>
+<div class="section" style="padding-top:0">
+  <div class="section-head"><div><div class="section-eyebrow">FAQ</div><h2>Common questions</h2></div></div>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How long is the lead time for a data center transformer?</summary>
+    <p style="margin-top:10px;font-size:13.5px;color:var(--ink-2)">Pad-mount transformers are quoting around 85 weeks and GSU transformers around 144 weeks industry-wide. Configure the exact spec for an indicative lead time.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What's included in the Data Centers desk?</summary>
+    <p style="margin-top:10px;font-size:13.5px;color:var(--ink-2)">Pad-mount and GSU transformers, MV switchgear and breakers, generators and UPS, CDUs, and busway — 21,180 SKUs.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why are data center transformers so hard to source right now?</summary>
+    <p style="margin-top:10px;font-size:13.5px;color:var(--ink-2)">Utilities and hyperscale developers are now bidding for the same limited pool of transformers and switchgear, on top of an existing electrical-steel and skilled-labor shortage.</p>
+  </details>
 </div>
 <div class="section">
   <div class="section-head"><div><div class="section-eyebrow">Popular categories</div><h2>Top data center families</h2></div></div>
