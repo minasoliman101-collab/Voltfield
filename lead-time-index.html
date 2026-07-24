@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Voltfield Lead-Time Index — Live Equipment Lead Times | VOLTFIELD Supply Co.</title>
+<meta name="description" content="Current lead times and pricing across transformers, switchgear, generators, inverters, battery storage, and oilfield equipment — updated from the same data driving Voltfield's catalog.">
+<meta name="keywords" content="transformer lead time index, switchgear lead time, equipment lead times 2026, BESS pricing index, oilfield equipment lead times, power equipment shortage data">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:title" content="The Voltfield Lead-Time Index — Live Equipment Lead Times">
+<meta property="og:description" content="Current lead times and pricing across transformers, switchgear, generators, inverters, battery storage, and oilfield equipment.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Voltfield Lead-Time Index">
+<meta name="twitter:description" content="Current lead times and pricing across data center, renewable, storage, and oilfield equipment.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"BreadcrumbList","itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
+   {"@type":"ListItem","position":2,"name":"Insights","item":"https://voltfield.org/voltfield-insights.html"},
+   {"@type":"ListItem","position":3,"name":"Lead-Time Index","item":"https://voltfield.org/lead-time-index.html"}
+ ]},
+ {"@type":"Dataset","name":"Voltfield Lead-Time Index","description":"Indicative market lead times and pricing across data center, renewable, battery storage, and oilfield equipment, compiled from the same catalog data and vendor/mill network Voltfield quotes against.","creator":{"@type":"Organization","name":"VOLTFIELD Supply Co.","url":"https://voltfield.org/"},"temporalCoverage":"2026-07","url":"https://voltfield.org/lead-time-index.html","isAccessibleForFree":true}
+]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<style>
+:root{
+  --ink:#101B2D;--ink-2:#22334C;--slate:#5B6B7E;--paper:#DDE5EC;--card:#F3F6FA;
+  --line:#C4CFDA;--line-dark:#A7B6C6;--signal:#FFC400;--signal-deep:#E5AC00;
+  --dc:#2B6CB0;--re:#2E7D4F;--bess:#B7791F;--og:#9C4221;--mro:#5B6B7E;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;--body:'IBM Plex Sans',system-ui,sans-serif;--disp:'Barlow Condensed',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5}
+button,a{font-family:inherit;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+.utilbar{background:var(--ink);color:#C9D3DF;font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:6px 20px;display:flex;justify-content:space-between;gap:12px}
+.utilbar b{color:var(--signal);font-weight:600}
+.utilbar .right{display:none}
+@media(min-width:720px){.utilbar .right{display:block}}
+header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:60}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo .bolt{width:34px;height:34px;background:var(--signal);display:grid;place-items:center;border:2px solid var(--ink)}
+.logo .bolt svg{width:18px;height:18px}
+.logo .wordmark{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.02em;line-height:1}
+.logo .wordmark small{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.18em;color:var(--slate)}
+.hnav{display:none;gap:4px}
+.navtoggle{display:none;background:var(--ink);color:#fff;border:2px solid var(--ink);width:42px;height:38px;font-size:20px;line-height:1;align-items:center;justify-content:center;flex-shrink:0}
+@media(max-width:899px){.navtoggle{display:inline-flex}.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:2px solid var(--ink);padding:6px 12px 10px;gap:0;box-shadow:0 10px 20px rgba(16,27,45,.14);z-index:59}.hnav.open a{padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}.hnav.open a:last-child{border-bottom:0}}
+@media(min-width:900px){.hnav{display:flex}}
+.hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
+.hnav a:hover{color:var(--ink);background:var(--paper)}
+.navdrop{position:relative}
+.navdrop-btn{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-transform:uppercase;border:0;border-bottom:3px solid transparent;background:none;display:inline-flex;align-items:center;gap:4px}
+.navdrop-btn:hover{color:var(--ink);background:var(--paper)}
+.navdrop-btn .car{width:8px;height:8px;flex-shrink:0}
+.navdrop-menu{display:none;position:absolute;top:100%;left:0;background:var(--card);border:2px solid var(--ink);min-width:190px;z-index:70;flex-direction:column}
+.navdrop.open .navdrop-menu,.navdrop:hover .navdrop-menu,.navdrop:focus-within .navdrop-menu{display:flex}
+.navdrop-menu a{padding:10px 14px;font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line)}
+.navdrop-menu a:last-child{border-bottom:0}
+.navdrop-menu a:hover{background:var(--paper);color:var(--ink)}
+@media(max-width:899px){
+.navdrop-btn{width:100%;justify-content:space-between;padding:12px 6px;border-bottom:1px solid var(--line)}
+.navdrop-menu{display:flex!important;position:static;border:0;min-width:0;background:var(--paper)}
+.navdrop-menu a{padding-left:26px;border-bottom:1px solid var(--line)}
+.navdrop-btn .car{display:none}
+}
+.headright{margin-left:auto;display:flex;align-items:center;gap:10px}
+.quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
+.quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
+.artban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:32px 20px 34px}
+.artban-in{max-width:900px;margin:0 auto}
+.artban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:10px}
+.artban h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,46px);letter-spacing:.01em;line-height:1.06}
+.artban p.dek{color:#AFC0D3;font-size:15.5px;margin-top:14px;line-height:1.55;max-width:680px}
+.artban .meta{font-family:var(--mono);font-size:11.5px;color:#8DA0B8;margin-top:16px}
+.artwrap{max-width:900px;margin:0 auto;padding:40px 20px 8px}
+.artwrap h2{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:.01em;color:var(--ink);margin:34px 0 12px}
+.artwrap p{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:14px;max-width:720px}
+.artwrap a.inline{color:var(--signal-deep);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
+.callout{background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--signal);padding:16px 18px;margin:20px 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.idxtable{width:100%;border-collapse:collapse;margin:16px 0 8px;font-size:13.5px}
+.idxtable caption{text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--SECCOLOR,var(--ink-2));padding:8px 12px}
+.idxtable th{text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);padding:9px 12px;border-bottom:2px solid var(--ink)}
+.idxtable td{padding:11px 12px;border-bottom:1px solid var(--line);color:var(--ink-2)}
+.idxtable tr:last-child td{border-bottom:1px solid var(--line-dark)}
+.idxtable .val{font-family:var(--mono);font-weight:600;color:var(--ink)}
+.idxtable .trend-up{color:var(--crit,#C43D2E)}
+.idxtable .trend-down{color:var(--ok,#2E7D4F)}
+.idxtable .trend-flat{color:var(--slate)}
+.ctaband{background:linear-gradient(120deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;border-top:4px solid var(--signal)}
+.ctaband-in{max-width:1240px;margin:0 auto;padding:44px 20px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.ctaband h3{font-family:var(--disp);font-weight:700;font-size:28px;letter-spacing:.01em}
+.ctaband p{color:#AFC0D3;font-size:14px;margin-top:6px;max-width:460px}
+.ctabtn{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:14px 26px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.05em;text-decoration:none;flex-shrink:0}
+.ctabtn:hover{background:transparent;color:var(--signal)}
+footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
+footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
+@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
+footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer p{line-height:1.6;max-width:460px}
+footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
+footer a{color:#9FB0C3;text-decoration:none}
+footer a:hover{color:#fff}
+</style>
+</head>
+<body>
+<div class="utilbar">
+  <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
+  <span class="right">+1 (850) 686-1378 &nbsp;|&nbsp; RFQ@voltfield.com</span>
+</div>
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — ENERGY INFRASTRUCTURE PARTS</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="index.html">Home</a>
+    <a href="voltfield-supply-catalog.html">All Parts</a>
+    <a href="voltfield-suppliers.html">All Suppliers</a>
+    <a href="voltfield-bom.html">Quick Order</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu">
+        <a href="voltfield-bom-generator.html">BOM Generator</a>
+        <a href="voltfield-pcb.html">PCB Builder</a>
+        <a href="voltfield-identify.html">Part ID</a>
+        <a href="voltfield-eol.html">Obsolete/EOL</a>
+      </div>
+    </div>
+    <a href="voltfield-insights.html">Insights</a>
+    <a href="voltfield-account.html">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View quote list on catalog page">QUOTE LIST <span class="ct" id="quoteCount">0</span></a>
+  </div>
+</header>
+<section class="artban">
+  <div class="artban-in">
+    <div style="font-family:var(--mono);font-size:11px;color:#8DA0B8;margin-bottom:12px"><a href="index.html" style="color:#8DA0B8;text-decoration:none">Home</a> / <a href="voltfield-insights.html" style="color:#8DA0B8;text-decoration:none">Insights</a> / <span style="color:#E8EDF3">Lead-Time Index</span></div>
+    <div class="eyebrow">Live Reference Data</div>
+    <h1>The Voltfield Lead-Time Index</h1>
+    <p class="dek">Current indicative lead times and pricing across data center power, renewables, battery storage, and oilfield equipment — the same figures driving the catalog's lead-time flags, in one reference table.</p>
+    <div class="meta">Last updated: July 2026 · North America · Updated as catalog data changes</div>
+  </div>
+</section>
+<div class="artwrap" style="padding-bottom:0">
+  <h2>Methodology</h2>
+  <p>Figures below are indicative market lead times and pricing ranges observed across Voltfield's distributor and mill network, compiled from the same data that drives lead-time flags across the catalog. They are directional reference points for planning, not a quote for any specific order — final lead time and price are confirmed when a specific configuration is quoted. "Trend" reflects the recent direction (lengthening, holding, or shortening) based on the same market conditions covered in <a class="inline" href="voltfield-insights.html">Insights</a>.</p>
+  <div class="callout"><b>Using this data elsewhere?</b> Feel free to cite or link to this page (<code>voltfield.org/lead-time-index.html</code>) as a reference for current equipment lead times — that's exactly what it's here for.</div>
+
+  <h2>Data Centers</h2>
+  <table class="idxtable" style="--SECCOLOR:var(--dc)">
+    <caption>Data Center Power &amp; Backup Equipment</caption>
+    <thead><tr><th>Equipment</th><th>Current lead time / price</th><th>Trend</th></tr></thead>
+    <tbody>
+      <tr><td>Large power transformers</td><td class="val">160 wk</td><td class="trend-up">&#9650; Lengthening</td></tr>
+      <tr><td>Pad-mount transformers</td><td class="val">85 wk</td><td class="trend-up">&#9650; Lengthening</td></tr>
+      <tr><td>MV switchgear</td><td class="val">Sold out through 2028</td><td class="trend-flat">&#9632; Holding</td></tr>
+      <tr><td>Gas turbines</td><td class="val">2029+ delivery slots</td><td class="trend-up">&#9650; Lengthening</td></tr>
+      <tr><td>Diesel gensets</td><td class="val">90 wk</td><td class="trend-up">&#9650; Lengthening</td></tr>
+      <tr><td>MCCBs (15–1200 A)</td><td class="val">12 wk</td><td class="trend-flat">&#9632; Holding</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Renewables</h2>
+  <table class="idxtable" style="--SECCOLOR:var(--re)">
+    <caption>Solar, Wind &amp; Hybrid Equipment</caption>
+    <thead><tr><th>Equipment</th><th>Current lead time / price</th><th>Trend</th></tr></thead>
+    <tbody>
+      <tr><td>GSU transformers</td><td class="val">144 wk</td><td class="trend-up">&#9650; Lengthening</td></tr>
+      <tr><td>Grid-forming PCS</td><td class="val">32 wk</td><td class="trend-flat">&#9632; Holding</td></tr>
+      <tr><td>FEOC-clean inverters</td><td class="val">20 wk</td><td class="trend-up">&#9650; Lengthening</td></tr>
+      <tr><td>PV modules (import)</td><td class="val">$0.09–0.13/W</td><td class="trend-down">&#9660; Falling</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Battery Storage</h2>
+  <table class="idxtable" style="--SECCOLOR:var(--bess)">
+    <caption>Utility-Scale BESS Equipment</caption>
+    <thead><tr><th>Equipment</th><th>Current lead time / price</th><th>Trend</th></tr></thead>
+    <tbody>
+      <tr><td>LFP DC blocks</td><td class="val">$110–140/kWh</td><td class="trend-down">&#9660; Falling</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Oil &amp; Gas</h2>
+  <table class="idxtable" style="--SECCOLOR:var(--og)">
+    <caption>Drilling &amp; Completions Equipment</caption>
+    <thead><tr><th>Equipment</th><th>Current lead time / price</th><th>Trend</th></tr></thead>
+    <tbody>
+      <tr><td>Drill pipe (S-135)</td><td class="val">34 wk</td><td class="trend-flat">&#9632; Holding</td></tr>
+      <tr><td>Frac valves</td><td class="val">24 wk</td><td class="trend-down">&#9660; Falling</td></tr>
+      <tr><td>Hydraulic hose assemblies</td><td class="val">Same-week crimp</td><td class="trend-down">&#9660; Falling</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Why lead times are the real constraint</h2>
+  <p>Across every sector here, the equipment itself isn't the bottleneck — the wait is. Data center developers and utilities are bidding for the same transformer and switchgear capacity; see <a class="inline" href="guide-transformer-lead-times.html">why transformer lead times stretch past 3 years</a> for what's driving it and how to plan around it. Solar and storage buyers are layering FEOC and tariff compliance on top of already-long inverter and GSU lead times; see the <a class="inline" href="guide-feoc-compliance.html">FEOC compliance guide</a> for what to document. Configure any of the equipment above against your exact spec on the <a class="inline" href="data-centers.html">Data Centers</a>, <a class="inline" href="renewables.html">Renewables</a>, <a class="inline" href="battery-storage.html">Battery Storage</a>, or <a class="inline" href="oil-gas.html">Oil &amp; Gas</a> desks for a configuration-specific lead time.</p>
+</div>
+<div class="ctaband">
+  <div class="ctaband-in">
+    <div>
+      <h3>Need a lead time for your exact configuration?</h3>
+      <p>These are indicative ranges — configure the specific part and get a real quote in 24 hours.</p>
+    </div>
+    <a class="ctabtn" href="voltfield-supply-catalog.html">BROWSE THE CATALOG &rarr;</a>
+  </div>
+</div>
+<footer>
+  <div class="in">
+    <div>
+      <h5>Voltfield Supply Co.</h5>
+      <p>Stocking distributor and sourcing agent for long-lead electrical, storage, oilfield, and MRO/industrial supply equipment. Pricing shown across the catalog is indicative market range (North America, July 2026) — final pricing, availability, and lead time confirmed at quote. This index reflects the same indicative data and is not a quote for any specific order.</p>
+    </div>
+    <div><h5>Desks</h5><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+      <li><a href="oil-gas.html">Drilling &amp; Completions</a></li>
+      <li><a href="industrial-supply.html">Industrial Supply (MRO)</a></li>
+    </ul></div>
+    <div><h5>Compliance</h5><ul><li>UL · IEEE · ANSI C57</li><li>API 5CT/6A/7K/16A/Q1</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script>
+(function(){
+  try{
+    const q=JSON.parse(localStorage.getItem("vf_quote")||"[]");
+    const el=document.getElementById("quoteCount");
+    if(el)el.textContent=Array.isArray(q)?q.length:0;
+  }catch(e){}
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>
