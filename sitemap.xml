@@ -3,11 +3,18 @@
      here, in robots.txt, and in voltfield-site-config.js (siteUrl). -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://voltfield.org/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://voltfield.org/voltfield-supply-catalog.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://voltfield.org/data-centers.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://voltfield.org/renewables.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://voltfield.org/battery-storage.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://voltfield.org/oil-gas.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://voltfield.org/industrial-supply.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://voltfield.org/voltfield-supply-catalog.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://voltfield.org/voltfield-bom-generator.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://voltfield.org/voltfield-bom.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://voltfield.org/voltfield-suppliers.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://voltfield.org/voltfield-insights.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://voltfield.org/guide-transformer-lead-times.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://voltfield.org/guide-feoc-compliance.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://voltfield.org/voltfield-part.html</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
   <url><loc>https://voltfield.org/voltfield-account.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://voltfield.org/voltfield-eol.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>

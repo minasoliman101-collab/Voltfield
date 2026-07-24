@@ -73,7 +73,18 @@ const SITE_CONFIG = {
 (function () {
   if (!SITE_CONFIG.siteUrl) return;
   const path = location.pathname.replace(/\/index\.html$/, '/');
-  const href = SITE_CONFIG.siteUrl + path + location.search.replace(/([?&])(quote|qty)=[^&]*/g, '').replace(/^&/, '?');
+  /* The catalog page renders the same shell for every search/filter combo (?q=, ?sector=,
+     ?cat=, ?lt=, ?page=, ?sort=) with no per-combo title/description — indexing every
+     combination would spread the same thin content across thousands of URLs. Canonicalize
+     those views to the bare catalog page and keep them out of the index; the dedicated
+     sector landing pages (data-centers.html etc.) carry the real, unique, indexable content
+     and link into these filtered views for browsing. */
+  const isCatalogSearch = /voltfield-supply-catalog\.html$/.test(location.pathname) &&
+    /[?&](q|sector|cat|lt|page|sort)=/.test(location.search);
+  const cleanSearch = isCatalogSearch
+    ? ''
+    : location.search.replace(/([?&])(quote|qty)=[^&]*/g, '').replace(/^&/, '?');
+  const href = SITE_CONFIG.siteUrl + path + cleanSearch;
   if (!document.querySelector('link[rel="canonical"]')) {
     const l = document.createElement('link'); l.rel = 'canonical'; l.href = href;
     document.head.appendChild(l);
@@ -81,6 +92,10 @@ const SITE_CONFIG = {
   if (!document.querySelector('meta[property="og:url"]')) {
     const m = document.createElement('meta'); m.setAttribute('property', 'og:url'); m.content = href;
     document.head.appendChild(m);
+  }
+  if (isCatalogSearch && !document.querySelector('meta[name="robots"]')) {
+    const r = document.createElement('meta'); r.name = 'robots'; r.content = 'noindex,follow';
+    document.head.appendChild(r);
   }
 })();
 
