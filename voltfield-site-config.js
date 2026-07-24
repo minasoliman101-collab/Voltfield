@@ -55,8 +55,8 @@ const SITE_CONFIG = {
      'G-XXXXXXXXXX') below. Nothing loads at all until it's set —
      update privacy-policy.html's Analytics section when you do. */
   analytics: {
-    provider: 'none',      /* 'none' | 'ga4' */
-    measurementId: '',     /* e.g. 'G-XXXXXXXXXX' */
+    provider: 'ga4',       /* 'none' | 'ga4' */
+    measurementId: 'G-02QLZGR9ZE',
   },
 };
 
