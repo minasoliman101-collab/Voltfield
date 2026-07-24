@@ -101,6 +101,22 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .idxtable .trend-up{color:var(--crit,#C43D2E)}
 .idxtable .trend-down{color:var(--ok,#2E7D4F)}
 .idxtable .trend-flat{color:var(--slate)}
+.alertbox{background:var(--ink);color:#E8EDF3;padding:24px;margin:20px 0 30px;border-left:4px solid var(--signal)}
+.alertbox h3{font-family:var(--disp);font-weight:700;font-size:20px;margin-bottom:6px}
+.alertbox p{color:#AFC0D3;font-size:13px;margin-bottom:14px;max-width:560px}
+.alertform{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start}
+.alertform input[type=email]{flex:1;min-width:220px;border:2px solid #354866;background:#0F1B2D;color:#fff;padding:11px 12px;font-family:var(--mono);font-size:13.5px}
+.alertform input[type=email]::placeholder{color:#7C8CA3}
+.alertform .sectors{display:flex;flex-wrap:wrap;gap:10px;font-family:var(--mono);font-size:11.5px;color:#C9D3DF;align-items:center;width:100%}
+.alertform .sectors label{display:flex;align-items:center;gap:5px;cursor:pointer}
+.alertform button{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:11px 20px;font-family:var(--disp);font-weight:700;font-size:14.5px;letter-spacing:.04em;text-transform:uppercase}
+.alertform button:hover{background:transparent;color:var(--signal)}
+.alertform button:disabled{opacity:.6;cursor:default}
+.alert-msg{font-family:var(--mono);font-size:12px;margin-top:10px;display:none}
+.alert-msg.show{display:block}
+.alert-msg.ok{color:#7FCB9E}
+.alert-msg.err{color:#E8A79A}
+.hidden-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .ctaband{background:linear-gradient(120deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;border-top:4px solid var(--signal)}
 .ctaband-in{max-width:1240px;margin:0 auto;padding:44px 20px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
 .ctaband h3{font-family:var(--disp);font-weight:700;font-size:28px;letter-spacing:.01em}
@@ -118,6 +134,16 @@ footer a:hover{color:#fff}
 </style>
 </head>
 <body>
+<!-- Static Netlify Forms detector. Never shown or submitted directly — its sole
+     purpose is to exist in the deployed HTML so Netlify registers the
+     "lead-time-alerts" form and its fields at build time. The real submission
+     (see script below) is an AJAX POST to "/" with a matching form-name and
+     these same field names. -->
+<form name="lead-time-alerts" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="hidden-field" aria-hidden="true">
+  <input type="hidden" name="form-name" value="lead-time-alerts">
+  <input name="bot-field">
+  <input type="email" name="email"><input type="text" name="sectors">
+</form>
 <div class="utilbar">
   <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
   <span class="right">+1 (850) 686-1378 &nbsp;|&nbsp; RFQ@voltfield.com</span>
@@ -162,6 +188,22 @@ footer a:hover{color:#fff}
   <h2>Methodology</h2>
   <p>Figures below are indicative market lead times and pricing ranges observed across Voltfield's distributor and mill network, compiled from the same data that drives lead-time flags across the catalog. They are directional reference points for planning, not a quote for any specific order — final lead time and price are confirmed when a specific configuration is quoted. "Trend" reflects the recent direction (lengthening, holding, or shortening) based on the same market conditions covered in <a class="inline" href="voltfield-insights.html">Insights</a>.</p>
   <div class="callout"><b>Using this data elsewhere?</b> Feel free to cite or link to this page (<code>voltfield.org/lead-time-index.html</code>) as a reference for current equipment lead times — that's exactly what it's here for.</div>
+
+  <div class="alertbox">
+    <h3>Get lead-time alerts</h3>
+    <p>We'll email you when a lead time or price range you're tracking actually moves — not a general newsletter, just changes to this index.</p>
+    <form id="alertForm" class="alertform">
+      <input type="email" id="alertEmail" placeholder="you@company.com" required>
+      <div class="sectors">
+        <label><input type="checkbox" value="dc" checked> Data Centers</label>
+        <label><input type="checkbox" value="re" checked> Renewables</label>
+        <label><input type="checkbox" value="bess" checked> Battery Storage</label>
+        <label><input type="checkbox" value="og" checked> Oil &amp; Gas</label>
+      </div>
+      <button type="submit" id="alertBtn">Get Alerts</button>
+    </form>
+    <div class="alert-msg" id="alertMsg"></div>
+  </div>
 
   <h2>Data Centers</h2>
   <table class="idxtable" style="--SECCOLOR:var(--dc)">
@@ -245,6 +287,35 @@ footer a:hover{color:#fff}
     const el=document.getElementById("quoteCount");
     if(el)el.textContent=Array.isArray(q)?q.length:0;
   }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  const form=document.getElementById('alertForm');
+  if(!form)return;
+  function encodeForm(data){return Object.keys(data).map(k=>encodeURIComponent(k)+'='+encodeURIComponent(data[k])).join('&');}
+  function validEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);}
+  function showMsg(text,cls){const m=document.getElementById('alertMsg');m.textContent=text;m.className='alert-msg show '+cls;}
+  form.addEventListener('submit',async function(e){
+    e.preventDefault();
+    const email=document.getElementById('alertEmail').value.trim();
+    const sectors=[...form.querySelectorAll('.sectors input:checked')].map(c=>c.value);
+    if(!validEmail(email)){showMsg('Add a valid email address.','err');return;}
+    if(!sectors.length){showMsg('Pick at least one sector to track.','err');return;}
+    const btn=document.getElementById('alertBtn'); const orig=btn.textContent; btn.textContent='Sending…'; btn.disabled=true;
+    try{
+      const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+        body:encodeForm({'form-name':'lead-time-alerts',email,sectors:sectors.join(',')})});
+      if(!r.ok)throw new Error('status '+r.status);
+      showMsg('You\'re on the list — we\'ll email you when tracked lead times change.','ok');
+      form.reset();
+      form.querySelectorAll('.sectors input').forEach(c=>c.checked=true);
+    }catch(err){
+      showMsg('Online signup isn\'t reachable here — email RFQ@voltfield.com to be added manually.','err');
+    }finally{
+      btn.textContent=orig; btn.disabled=false;
+    }
+  });
 })();
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
