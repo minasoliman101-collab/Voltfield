@@ -158,6 +158,20 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .pager input{width:74px;border:1px solid var(--line-dark);padding:7px 8px;font-family:var(--mono);font-size:12px;text-align:center}
 .empty{background:var(--card);border:1px dashed var(--line-dark);padding:44px 20px;text-align:center;color:var(--slate)}
 .empty h3{font-family:var(--disp);font-weight:600;font-size:22px;color:var(--ink-2);margin-bottom:6px}
+.reqpart{max-width:460px;margin:26px auto 0;text-align:left;background:#fff;border:1px solid var(--line-dark);padding:18px}
+.reqpart h4{font-family:var(--disp);font-weight:700;font-size:16px;color:var(--ink);margin-bottom:4px}
+.reqpart p{font-size:12.5px;color:var(--slate);margin-bottom:12px}
+.reqpart label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);margin-bottom:4px}
+.reqpart input,.reqpart textarea{width:100%;border:1px solid var(--line-dark);padding:9px 10px;font-family:var(--body);font-size:13.5px;margin-bottom:10px}
+.reqpart textarea{resize:vertical;min-height:60px}
+.reqpart button{background:var(--signal);color:var(--ink);border:2px solid var(--ink);padding:10px 18px;font-family:var(--disp);font-weight:700;font-size:14px;letter-spacing:.04em;text-transform:uppercase}
+.reqpart button:hover{background:var(--ink);color:var(--signal)}
+.reqpart button:disabled{opacity:.6;cursor:default}
+.reqpart .req-msg{font-family:var(--mono);font-size:11.5px;margin-top:10px;display:none}
+.reqpart .req-msg.show{display:block}
+.reqpart .req-msg.ok{color:var(--ok)}
+.reqpart .req-msg.err{color:var(--crit)}
+.hidden-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 /* ---------- quote drawer ---------- */
 .scrim{position:fixed;inset:0;background:rgba(16,27,45,.5);z-index:90;display:none}
 .scrim.open{display:block}
@@ -247,6 +261,16 @@ footer a{color:#9FB0C3}
 </style>
 </head>
 <body>
+<!-- Static Netlify Forms detector. Never shown or submitted directly — its sole
+     purpose is to exist in the deployed HTML so Netlify registers the
+     "request-a-part" form and its fields at build time. The real submission
+     (see script below) is an AJAX POST to "/" with a matching form-name and
+     these same field names. -->
+<form name="request-a-part" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="hidden-field" aria-hidden="true">
+  <input type="hidden" name="form-name" value="request-a-part">
+  <input name="bot-field">
+  <input type="email" name="email"><input type="text" name="company"><textarea name="part_description"></textarea>
+</form>
 <div class="utilbar">
   <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
   <span class="right">+1 (850) 686-1378 &nbsp;|&nbsp; RFQ@voltfield.com</span>
@@ -329,7 +353,21 @@ footer a{color:#9FB0C3}
     <div class="skugrid" id="skugrid"></div>
     <div class="empty" id="emptyState" style="display:none">
       <h3>No families match those filters</h3>
-      <p>Try clearing a filter or searching a broader term.</p>
+      <p>Try clearing a filter or searching a broader term — or tell us what you need and we'll source it.</p>
+      <div class="reqpart">
+        <h4>Request this part</h4>
+        <p>Not in the catalog yet doesn't mean we can't get it. Tell us what you're looking for and we'll follow up with sourcing options.</p>
+        <form id="reqPartForm">
+          <label for="reqDesc">What are you looking for?</label>
+          <textarea id="reqDesc" required placeholder="e.g. 500kVA pad-mount transformer, 15kV class"></textarea>
+          <label for="reqEmail">Email</label>
+          <input type="email" id="reqEmail" required placeholder="you@company.com">
+          <label for="reqCompany">Company (optional)</label>
+          <input type="text" id="reqCompany" placeholder="Company name">
+          <button type="submit" id="reqBtn">Send Request</button>
+        </form>
+        <div class="req-msg" id="reqMsg"></div>
+      </div>
     </div>
     <div class="pager" id="pager"></div>
   </main>
@@ -498,7 +536,9 @@ function renderResults(){
   const grid=document.getElementById('skugrid'), empty=document.getElementById('emptyState');
   document.getElementById('resCount').textContent=fmt(N);
   document.getElementById('resSub').textContent=state.q?`configurable SKUs match “${state.q}” · ${matched.length} families`:`configurable SKUs · ${matched.length} families`;
-  if(N===0){grid.innerHTML='';empty.style.display='';document.getElementById('pager').innerHTML='';return;}
+  if(N===0){grid.innerHTML='';empty.style.display='';document.getElementById('pager').innerHTML='';
+    const rd=document.getElementById('reqDesc'); if(rd&&!rd.value&&state.q)rd.value=state.q;
+    return;}
   empty.style.display='none';
   const maxPage=Math.ceil(N/PAGE_SIZE)-1;
   if(state.page>maxPage)state.page=maxPage;
@@ -720,6 +760,34 @@ readURL();
 document.getElementById('searchInput').value=state.q;
 apply();
 if(wantQuote)openQuoteDrawer();
+
+(function(){
+  const form=document.getElementById('reqPartForm');
+  if(!form)return;
+  function encodeForm(data){return Object.keys(data).map(k=>encodeURIComponent(k)+'='+encodeURIComponent(data[k])).join('&');}
+  function validEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);}
+  function showMsg(text,cls){const m=document.getElementById('reqMsg');m.textContent=text;m.className='req-msg show '+cls;}
+  form.addEventListener('submit',async function(e){
+    e.preventDefault();
+    const part_description=document.getElementById('reqDesc').value.trim();
+    const email=document.getElementById('reqEmail').value.trim();
+    const company=document.getElementById('reqCompany').value.trim();
+    if(!part_description){showMsg('Tell us what you\'re looking for.','err');return;}
+    if(!validEmail(email)){showMsg('Add a valid email so we can follow up.','err');return;}
+    const btn=document.getElementById('reqBtn'); const orig=btn.textContent; btn.textContent='Sending…'; btn.disabled=true;
+    try{
+      const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+        body:encodeForm({'form-name':'request-a-part',email,company,part_description})});
+      if(!r.ok)throw new Error('status '+r.status);
+      showMsg('Got it — we\'ll follow up with sourcing options.','ok');
+      form.reset();
+    }catch(err){
+      showMsg('Online submission unavailable here — email RFQ@voltfield.com with what you need.','err');
+    }finally{
+      btn.textContent=orig; btn.disabled=false;
+    }
+  });
+})();
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
 <script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
