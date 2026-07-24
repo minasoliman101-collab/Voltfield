@@ -200,10 +200,35 @@ if(!f){
 function partURL(){return `voltfield-part.html?fi=${f._i}&o=${picksToParam(f,PS.picks)}&chk=${PS.chk}`+(PS.qty>1?`&qty=${PS.qty}`:'');}
 function syncURL(){history.replaceState(null,'',partURL());}
 
+function updateProductSchema(pn,price,lb){
+  const name=configuredName(f,PS.picks);
+  const valid=new Date(); valid.setDate(valid.getDate()+90);
+  const data={"@context":"https://schema.org","@graph":[
+    {"@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":SITE_CONFIG.siteUrl+"/"},
+      {"@type":"ListItem","position":2,"name":SECTORS[f.s].label,"item":SITE_CONFIG.siteUrl+"/voltfield-supply-catalog.html?sector="+f.s},
+      {"@type":"ListItem","position":3,"name":f.c,"item":SITE_CONFIG.siteUrl+"/voltfield-supply-catalog.html?sector="+f.s+"&cat="+encodeURIComponent(f.c)},
+      {"@type":"ListItem","position":4,"name":name}
+    ]},
+    Object.assign({"@type":"Product","name":name,"sku":pn,"category":f.c,
+      "description":name+" — configurable "+SECTORS[f.s].label+" part from VOLTFIELD Supply Co.'s energy-infrastructure and MRO catalog. Indicative pricing and lead time; confirmed at quote.",
+      "brand":{"@type":"Brand","name":"VOLTFIELD Supply Co."},
+      "offers":{"@type":"Offer","url":partURL(),"priceCurrency":"USD","price":price.toFixed(2),
+        "priceValidUntil":valid.toISOString().slice(0,10),
+        "availability":f.lw===0?"https://schema.org/InStock":"https://schema.org/PreOrder",
+        "itemCondition":"https://schema.org/NewCondition",
+        "seller":{"@type":"Organization","name":"VOLTFIELD Supply Co."}}
+    }, f.img?{"image":f.img}:{})
+  ]};
+  let el=document.getElementById('productSchema');
+  if(!el){el=document.createElement('script');el.type='application/ld+json';el.id='productSchema';document.head.appendChild(el);}
+  el.textContent=JSON.stringify(data);
+}
 function renderPart(){
   const {picks,qty}=PS;
   const pn=configuredPN(f,picks,PS.chk), price=priceFor(f,picks), lb=leadBadge(f), col=SECTORS[f.s].color;
   document.title=configuredName(f,picks)+' | '+f.c+' — VOLTFIELD Supply Co.';
+  updateProductSchema(pn,price,lb);
   const distLbl=DIST_NAME[f.d];
   const inq=loadQuote().some(x=>x.pn===pn);
   document.getElementById('wrap').innerHTML=`
