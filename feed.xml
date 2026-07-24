@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>VOLTFIELD Supply Co. — Insights &amp; Guides</title>
+  <link>https://voltfield.org/voltfield-insights.html</link>
+  <description>Procurement guides, buying guides, and reference data for energy infrastructure and industrial MRO sourcing, from VOLTFIELD Supply Co.</description>
+  <language>en-us</language>
+  <atom:link href="https://voltfield.org/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Pad-Mount vs. GSU Transformers: Which Do You Need?</title>
+    <link>https://voltfield.org/guide-pad-mount-vs-gsu-transformers.html</link>
+    <guid>https://voltfield.org/guide-pad-mount-vs-gsu-transformers.html</guid>
+    <description>Pad-mount and GSU transformers solve different problems and carry different lead times (85 weeks vs. 144 weeks). How to tell which one your project actually needs.</description>
+    <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>Glossary — Energy &amp; Industrial Equipment Terms Explained</title>
+    <link>https://voltfield.org/glossary.html</link>
+    <guid>https://voltfield.org/glossary.html</guid>
+    <description>Plain-language definitions for the standards and terms that show up across energy infrastructure and industrial procurement: ANSI C57, API 5CT/6A/7K/16A, NFPA 855, UL 9540A, FEOC, and more.</description>
+    <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>The Voltfield Lead-Time Index</title>
+    <link>https://voltfield.org/lead-time-index.html</link>
+    <guid>https://voltfield.org/lead-time-index.html</guid>
+    <description>Current indicative lead times and pricing across data center power, renewables, battery storage, and oilfield equipment, compiled from the same data driving the catalog's lead-time flags.</description>
+    <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>FEOC Compliance for Solar &amp; Storage Procurement: A Practical Guide</title>
+    <link>https://voltfield.org/guide-feoc-compliance.html</link>
+    <guid>https://voltfield.org/guide-feoc-compliance.html</guid>
+    <description>What FEOC rules mean for solar and storage procurement, what changed with Treasury's safe-harbor guidance, and what documentation buying teams should be gathering now.</description>
+    <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>Why Transformer Lead Times Stretch Past 3 Years — And How to Plan Around It</title>
+    <link>https://voltfield.org/guide-transformer-lead-times.html</link>
+    <guid>https://voltfield.org/guide-transformer-lead-times.html</guid>
+    <description>What's driving the multi-year power transformer shortage, and practical steps procurement teams can take to protect their project timeline.</description>
+    <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
+  </item>
+</channel>
+</rss>
