@@ -220,6 +220,25 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .modal-scrim.open{display:block}
 .detail-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-46%);width:min(540px,94vw);max-height:90vh;overflow:auto;background:var(--card);z-index:120;border:2px solid var(--ink);opacity:0;visibility:hidden;transition:opacity .16s,transform .16s}
 .detail-modal.open{opacity:1;visibility:visible;transform:translate(-50%,-50%)}
+.cmp-check{display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:10px;color:var(--slate);cursor:pointer;white-space:nowrap}
+.comparebar{position:fixed;bottom:0;left:0;right:0;background:var(--ink);color:#fff;z-index:95;padding:10px 20px;display:none;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;border-top:3px solid var(--signal)}
+.comparebar.show{display:flex}
+.comparebar .cb-item{font-family:var(--mono);font-size:11.5px;background:var(--ink-2);padding:5px 10px;display:flex;align-items:center;gap:7px;max-width:220px}
+.comparebar .cb-item span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.comparebar .cb-item button{background:none;border:0;color:#fff;font-size:14px;line-height:1;flex-shrink:0}
+.comparebar .cb-go{background:var(--signal);color:var(--ink);border:0;padding:9px 18px;font-family:var(--disp);font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+.comparebar .cb-hint{font-family:var(--mono);font-size:11px;color:#AFC0D3}
+.cmp-scrim{position:fixed;inset:0;background:rgba(16,27,45,.55);z-index:130;display:none}
+.cmp-scrim.open{display:block}
+.cmp-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:min(920px,94vw);max-height:88vh;overflow:auto;background:#fff;z-index:131;border:2px solid var(--ink);display:none}
+.cmp-modal.open{display:block}
+.cmp-modal .cmp-hd{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:2px solid var(--ink);background:var(--card);position:sticky;top:0}
+.cmp-modal .cmp-hd h3{font-family:var(--disp);font-weight:700;font-size:19px}
+.cmp-modal .cmp-hd button{background:var(--ink);color:#fff;border:0;width:30px;height:30px;font-size:16px;cursor:pointer}
+.cmp-table{width:100%;border-collapse:collapse}
+.cmp-table th,.cmp-table td{padding:10px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:13px}
+.cmp-table th{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--slate);width:120px}
+.cmp-table img{width:70px;height:70px;object-fit:contain;mix-blend-mode:multiply}
 .dm-band{height:6px}
 .dm-imgwrap{height:180px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:14px}
 .dm-img{max-width:100%;max-height:100%;object-fit:contain;mix-blend-mode:multiply}
@@ -408,6 +427,12 @@ footer a{color:#9FB0C3}
 <div class="toast" id="toast"></div>
 <div class="modal-scrim" id="modalScrim"></div>
 <div class="detail-modal" id="detailModal" role="dialog" aria-modal="true" aria-label="Part detail"><div id="detailContent"></div></div>
+<div class="comparebar" id="compareBar"></div>
+<div class="cmp-scrim" id="cmpScrim"></div>
+<div class="cmp-modal" id="cmpModal" role="dialog" aria-modal="true" aria-label="Compare parts">
+  <div class="cmp-hd"><h3>Compare parts</h3><button id="cmpClose" aria-label="Close">&times;</button></div>
+  <div id="cmpTableWrap" style="overflow-x:auto"></div>
+</div>
 
 <footer>
   <div class="in">
@@ -428,6 +453,7 @@ footer a{color:#9FB0C3}
 /* ---------- state ---------- */
 const PAGE_SIZE=24;
 let state={sector:null,cat:null,q:'',lt:null,dist:null,page:0};
+let COMPARE=[];
 
 function readURL(){
   const p=new URLSearchParams(location.search);
@@ -573,6 +599,7 @@ function renderResults(){
       <div class="sk-foot">
         <span class="sk-price">${money(sku.price,f.pu)}</span>
         <div class="sk-actions">
+          <label class="cmp-check"><input type="checkbox" class="cmp-cb" data-fi="${f._i}" data-seed="${seed}"${COMPARE.some(c=>c.fi===f._i&&c.seed===seed)?' checked':''}> Compare</label>
           <span class="lead ${lb.c}">${lb.t}</span>
           <button class="addbtn${inq?' in':''}" data-pn="${sku.pn}" data-name="${encodeURIComponent(sku.name)}" data-price="${money(sku.price,f.pu).replace(/<[^>]+>/g,'')}" data-lead="${lb.t}" data-sec="${f.s}" data-up="${sku.price}" data-pu="${f.pu}" data-d="${f.d}">${inq?'Added ✓':'Add'}</button>
         </div>
@@ -581,6 +608,10 @@ function renderResults(){
   }
   grid.innerHTML=html;
   grid.querySelectorAll('.addbtn').forEach(b=>b.onclick=e=>{e.stopPropagation();addToQuote(b);});
+  grid.querySelectorAll('.cmp-cb').forEach(cb=>{
+    cb.onclick=e=>e.stopPropagation();
+    cb.onchange=()=>toggleCompare(+cb.dataset.fi,+cb.dataset.seed,cb.checked,cb);
+  });
   grid.querySelectorAll('.skucard').forEach(card=>{const fi=+card.dataset.fi,seed=+card.dataset.seed;card.querySelectorAll('.sk-body,.sk-imgwrap').forEach(elm=>elm.onclick=()=>openDetail(fi,seed));});
   renderPager(N,maxPage);
 }
@@ -763,6 +794,62 @@ readURL();
 document.getElementById('searchInput').value=state.q;
 apply();
 if(wantQuote)openQuoteDrawer();
+
+function toggleCompare(fi,seed,checked,cbEl){
+  if(checked){
+    if(COMPARE.length>=3){
+      toast('You can compare up to 3 parts at a time');
+      if(cbEl)cbEl.checked=false;
+      return;
+    }
+    if(!COMPARE.some(c=>c.fi===fi&&c.seed===seed))COMPARE.push({fi,seed});
+  } else {
+    COMPARE=COMPARE.filter(c=>!(c.fi===fi&&c.seed===seed));
+  }
+  renderCompareBar();
+}
+function renderCompareBar(){
+  const bar=document.getElementById('compareBar');
+  if(!COMPARE.length){bar.classList.remove('show');bar.innerHTML='';return;}
+  bar.classList.add('show');
+  bar.innerHTML=COMPARE.map(c=>{
+    const f=FAM[c.fi]; const sku=genSKU(f,c.seed);
+    return `<span class="cb-item"><span>${sku.name}</span><button data-fi="${c.fi}" data-seed="${c.seed}" aria-label="Remove from compare">&times;</button></span>`;
+  }).join('') + (COMPARE.length>=2
+    ? `<button class="cb-go" id="cbGo">Compare (${COMPARE.length}) &rsaquo;</button>`
+    : `<span class="cb-hint">Pick 1 more part to compare</span>`);
+  bar.querySelectorAll('button[data-fi]').forEach(b=>b.onclick=()=>{
+    const fi=+b.dataset.fi,seed=+b.dataset.seed;
+    COMPARE=COMPARE.filter(c=>!(c.fi===fi&&c.seed===seed));
+    const cb=document.querySelector(`.cmp-cb[data-fi="${fi}"][data-seed="${seed}"]`);
+    if(cb)cb.checked=false;
+    renderCompareBar();
+  });
+  const go=document.getElementById('cbGo');
+  if(go)go.onclick=openCompareModal;
+}
+function openCompareModal(){
+  const items=COMPARE.map(c=>({f:FAM[c.fi],sku:genSKU(FAM[c.fi],c.seed),fi:c.fi,seed:c.seed}));
+  const rows=[
+    ['Category',it=>it.f.c],
+    ['Sector',it=>SECTORS[it.f.s].label],
+    ['Configuration',it=>it.sku.spec],
+    ['Price',it=>money(it.sku.price,it.f.pu)],
+    ['Lead time',it=>{const lb=leadBadge(it.f);return `<span class="lead ${lb.c}">${lb.t}</span>`;}],
+    ['Compliance',it=>it.f.cmp.join(', ')||'—'],
+    ['SKUs in family',it=>fmt(it.f.ct)]
+  ];
+  let html='<table class="cmp-table"><tr><th>Part</th>'+items.map(it=>`<td><strong>${it.sku.name}</strong>${it.f.img?`<div style="margin-top:6px"><img src="${it.f.img}" alt=""></div>`:''}</td>`).join('')+'</tr>';
+  rows.forEach(([label,fn])=>{html+=`<tr><th>${label}</th>`+items.map(it=>`<td>${fn(it)}</td>`).join('')+'</tr>';});
+  html+='<tr><th></th>'+items.map(it=>`<td><a href="voltfield-part.html?fi=${it.fi}&o=${picksToParam(it.f,it.sku.picks)}&chk=${it.sku.chk}" style="color:var(--signal-deep);font-weight:600;text-decoration:underline">View details &rsaquo;</a></td>`).join('')+'</tr>';
+  html+='</table>';
+  document.getElementById('cmpTableWrap').innerHTML=html;
+  document.getElementById('cmpScrim').classList.add('open');
+  document.getElementById('cmpModal').classList.add('open');
+}
+function closeCompareModal(){document.getElementById('cmpScrim').classList.remove('open');document.getElementById('cmpModal').classList.remove('open');}
+document.getElementById('cmpClose').onclick=closeCompareModal;
+document.getElementById('cmpScrim').onclick=closeCompareModal;
 
 (function(){
   const btn=document.getElementById('exportCsvBtn');
