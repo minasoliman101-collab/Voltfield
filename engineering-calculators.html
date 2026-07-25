@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engineering Calculators: Voltage Drop, Transformer &amp; BESS Sizing, Fault Current | VOLTFIELD Supply Co.</title>
+<meta name="description" content="Free engineering calculators for power and energy procurement: voltage drop / cable sizing, transformer sizing, BESS sizing, solar string sizing, fault current estimate, power factor correction, and a kVA/AWG/NEMA-IP unit converter.">
+<meta name="keywords" content="voltage drop calculator, transformer sizing calculator, BESS sizing calculator, solar string sizing calculator, fault current calculator, power factor correction calculator, AWG to mm2 converter, NEMA to IP rating">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:title" content="Engineering Calculators for Power &amp; Energy Procurement">
+<meta property="og:description" content="Seven free calculators for cable sizing, transformer/BESS sizing, solar strings, fault current, power factor correction, and unit conversion.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-engineering-calculators.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-engineering-calculators.jpg">
+<meta name="twitter:title" content="Engineering Calculators for Power &amp; Energy Procurement">
+<meta name="twitter:description" content="Voltage drop, transformer/BESS sizing, solar strings, fault current, PF correction &amp; unit conversion — free, client-side, no signup.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"BreadcrumbList","itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
+   {"@type":"ListItem","position":2,"name":"Engineering Calculators","item":"https://voltfield.org/engineering-calculators.html"}
+ ]},
+ {"@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"How do you calculate voltage drop for a cable run?","acceptedAnswer":{"@type":"Answer","text":"Using the K-factor method: VD = (2 x K x I x D) / CM for single-phase or VD = (1.732 x K x I x D) / CM for three-phase, where K is a resistivity constant (about 12.9 for copper, 21.2 for aluminum), I is load current in amps, D is one-way distance in feet, and CM is the conductor's circular mil area. This is an approximation that ignores reactance and is best suited to feeders under about 250 feet."}},
+   {"@type":"Question","name":"What size transformer do I need for my load?","acceptedAnswer":{"@type":"Answer","text":"Divide your real load in kW by its power factor to get required kVA, then round up to the nearest standard transformer nameplate rating (common ANSI/IEEE sizes include 75, 112.5, 150, 225, 300, 500, 750, and 1000 kVA). Always leave margin for future load growth."}},
+   {"@type":"Question","name":"How do I size a battery energy storage system (BESS)?","acceptedAnswer":{"@type":"Answer","text":"Multiply the critical load in kW by the required backup duration in hours to get usable energy in kWh, then divide by your assumed depth of discharge and round-trip efficiency (commonly around 90% each for LFP systems) to get the nameplate energy rating you need to procure."}},
+   {"@type":"Question","name":"Are these calculators a substitute for a stamped engineering study?","acceptedAnswer":{"@type":"Answer","text":"No. These tools use standard simplified formulas for early-stage budgetary sizing and procurement planning. Final designs, especially fault current and arc-flash coordination, require a licensed engineer's study using actual system impedances."}}
+ ]}
+]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<style>
+:root{
+  --ink:#101B2D;--ink-2:#22334C;--slate:#5B6B7E;--paper:#DDE5EC;--card:#F3F6FA;
+  --line:#C4CFDA;--line-dark:#A7B6C6;--signal:#FFC400;--signal-deep:#E5AC00;
+  --dc:#2B6CB0;--re:#2E7D4F;--bess:#B7791F;--og:#9C4221;--mro:#5B6B7E;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;--body:'IBM Plex Sans',system-ui,sans-serif;--disp:'Barlow Condensed',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5}
+button,a{font-family:inherit;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+.utilbar{background:var(--ink);color:#C9D3DF;font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:6px 20px;display:flex;justify-content:space-between;gap:12px}
+.utilbar b{color:var(--signal);font-weight:600}
+.utilbar .right{display:none}
+@media(min-width:720px){.utilbar .right{display:block}}
+header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:60}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo .bolt{width:34px;height:34px;background:var(--signal);display:grid;place-items:center;border:2px solid var(--ink)}
+.logo .bolt svg{width:18px;height:18px}
+.logo .wordmark{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.02em;line-height:1}
+.logo .wordmark small{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.18em;color:var(--slate)}
+.hnav{display:none;gap:4px}
+.navtoggle{display:none;background:var(--ink);color:#fff;border:2px solid var(--ink);width:42px;height:38px;font-size:20px;line-height:1;align-items:center;justify-content:center;flex-shrink:0}
+@media(max-width:899px){.navtoggle{display:inline-flex}.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:2px solid var(--ink);padding:6px 12px 10px;gap:0;box-shadow:0 10px 20px rgba(16,27,45,.14);z-index:59}.hnav.open a{padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}.hnav.open a:last-child{border-bottom:0}}
+@media(min-width:900px){.hnav{display:flex}}
+.hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
+.hnav a:hover{color:var(--ink);background:var(--paper)}
+.navdrop{position:relative}
+.navdrop-btn{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-transform:uppercase;border:0;border-bottom:3px solid transparent;background:none;display:inline-flex;align-items:center;gap:4px}
+.navdrop-btn:hover{color:var(--ink);background:var(--paper)}
+.navdrop-btn .car{width:8px;height:8px;flex-shrink:0}
+.navdrop-menu{display:none;position:absolute;top:100%;left:0;background:var(--card);border:2px solid var(--ink);min-width:190px;z-index:70;flex-direction:column}
+.navdrop.open .navdrop-menu,.navdrop:hover .navdrop-menu,.navdrop:focus-within .navdrop-menu{display:flex}
+.navdrop-menu a{padding:10px 14px;font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line)}
+.navdrop-menu a:last-child{border-bottom:0}
+.navdrop-menu a:hover{background:var(--paper);color:var(--ink)}
+@media(max-width:899px){
+.navdrop-btn{width:100%;justify-content:space-between;padding:12px 6px;border-bottom:1px solid var(--line)}
+.navdrop-menu{display:flex!important;position:static;border:0;min-width:0;background:var(--paper)}
+.navdrop-menu a{padding-left:26px;border-bottom:1px solid var(--line)}
+.navdrop-btn .car{display:none}
+}
+.headright{margin-left:auto;display:flex;align-items:center;gap:10px}
+.quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
+.quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
+.artban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:32px 20px 34px}
+.artban-in{max-width:900px;margin:0 auto}
+.artban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:10px}
+.artban h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,44px);letter-spacing:.01em;line-height:1.06}
+.artban p.dek{color:#AFC0D3;font-size:15.5px;margin-top:14px;line-height:1.55;max-width:680px}
+.artwrap{max-width:900px;margin:0 auto;padding:36px 20px 8px}
+.artwrap h2{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:.01em;color:var(--ink);margin:34px 0 8px}
+.artwrap p{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:14px}
+.artwrap ul{margin:0 0 14px 20px}
+.artwrap li{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:6px}
+.artwrap a.inline{color:var(--signal-deep);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
+.toc{background:var(--card);border:1px solid var(--line-dark);padding:16px 20px;margin:22px 0;display:grid;gap:6px}
+@media(min-width:600px){.toc{grid-template-columns:1fr 1fr}}
+.toc b{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);grid-column:1/-1;margin-bottom:2px}
+.toc a{font-family:var(--disp);font-weight:600;font-size:14.5px;color:var(--ink-2);text-decoration:none;padding:4px 0}
+.toc a:hover{color:var(--signal-deep)}
+.toc a::before{content:"→ ";color:var(--signal-deep)}
+.callout{background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--signal);padding:16px 18px;margin:20px 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.estimator{background:var(--card);border:1px solid var(--line-dark);padding:20px;margin:16px 0 26px;scroll-margin-top:80px}
+.estimator h3{font-family:var(--disp);font-weight:700;font-size:19px;color:var(--ink);margin-bottom:4px}
+.estimator .sub{font-size:12.5px;color:var(--slate);margin-bottom:14px}
+.est-row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:10px}
+.est-field{display:flex;flex-direction:column;gap:4px}
+.est-field label{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--slate)}
+.est-field input,.est-field select{width:140px;border:1px solid var(--line-dark);padding:8px 10px;font-family:var(--mono);font-size:14px;background:#fff}
+.est-field button{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase}
+.est-field button:hover{background:transparent;color:var(--ink)}
+.est-result{font-family:var(--mono);font-size:13.5px;color:var(--ink);background:#fff;border:1px solid var(--line);padding:12px 14px;margin-top:4px;display:none;line-height:1.6}
+.est-result.show{display:block}
+.est-result b{color:var(--signal-deep)}
+.est-result.warn{border-color:var(--og);background:#FBF1EC}
+.formula{font-family:var(--mono);font-size:11.5px;color:var(--slate);background:#fff;border:1px dashed var(--line-dark);padding:8px 10px;margin-bottom:12px;display:inline-block}
+.reftable{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+.reftable th,.reftable td{border:1px solid var(--line);padding:6px 8px;text-align:left;font-family:var(--mono)}
+.reftable th{background:var(--ink);color:#fff;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase}
+.reftable tr:nth-child(even) td{background:#fff}
+.reftable tr:nth-child(odd) td{background:var(--card)}
+.ctaband{background:linear-gradient(120deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;border-top:4px solid var(--signal)}
+.ctaband-in{max-width:1240px;margin:0 auto;padding:44px 20px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.ctaband h3{font-family:var(--disp);font-weight:700;font-size:28px;letter-spacing:.01em}
+.ctaband p{color:#AFC0D3;font-size:14px;margin-top:6px;max-width:460px}
+.ctabtn{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:14px 26px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.05em;text-decoration:none;flex-shrink:0}
+.ctabtn:hover{background:transparent;color:var(--signal)}
+footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
+footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
+@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
+footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer p{line-height:1.6;max-width:460px}
+footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
+footer a{color:#9FB0C3;text-decoration:none}
+footer a:hover{color:#fff}
+</style>
+</head>
+<body>
+<div class="utilbar">
+  <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
+  <span class="right">+1 (850) 686-1378 &nbsp;|&nbsp; RFQ@voltfield.com</span>
+</div>
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — ENERGY INFRASTRUCTURE PARTS</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="index.html">Home</a>
+    <a href="voltfield-supply-catalog.html">All Parts</a>
+    <a href="voltfield-suppliers.html">All Suppliers</a>
+    <a href="voltfield-bom.html">Quick Order</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu">
+        <a href="voltfield-bom-generator.html">BOM Generator</a>
+        <a href="voltfield-pcb.html">PCB Builder</a>
+        <a href="voltfield-identify.html">Part ID</a>
+        <a href="voltfield-eol.html">Obsolete/EOL</a>
+        <a href="engineering-calculators.html" class="on">Calculators</a>
+      </div>
+    </div>
+    <a href="voltfield-insights.html">Insights</a>
+    <a href="voltfield-account.html">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View quote list on catalog page">QUOTE LIST <span class="ct" id="quoteCount">0</span></a>
+  </div>
+</header>
+<section class="artban">
+  <div class="artban-in">
+    <div style="font-family:var(--mono);font-size:11px;color:#8DA0B8;margin-bottom:12px"><a href="index.html" style="color:#8DA0B8;text-decoration:none">Home</a> / <span style="color:#E8EDF3">Engineering Calculators</span></div>
+    <div class="eyebrow">Free Tools · No Signup</div>
+    <h1>Engineering Calculators for Power &amp; Energy Procurement</h1>
+    <p class="dek">Seven client-side calculators for early-stage sizing and budgetary planning — cable sizing, transformer &amp; BESS sizing, solar strings, fault current, power factor correction, and unit conversion. Standard formulas, your inputs, nothing sent to a server.</p>
+  </div>
+</section>
+<div class="artwrap">
+  <div class="toc" aria-label="Jump to a calculator">
+    <b>Jump to a calculator</b>
+    <a href="#voltage-drop">Voltage Drop / Cable Sizing</a>
+    <a href="#transformer-sizing">Transformer Sizing</a>
+    <a href="#bess-sizing">BESS Sizing</a>
+    <a href="#solar-string">Solar String Sizing</a>
+    <a href="#fault-current">Fault Current Estimate</a>
+    <a href="#power-factor">Power Factor Correction</a>
+    <a href="#unit-converter">Unit &amp; Spec Converter</a>
+  </div>
+
+  <p>These tools are built for the budgetary and early-design stage of a project — sizing a feeder, roughing in a transformer or BESS order, or checking a string configuration before it goes to a stamped design. They run entirely in your browser: nothing you enter is sent anywhere. None of them replace a licensed engineer's calculation for final design, protective device coordination, or code compliance sign-off.</p>
+
+  <h2 id="voltage-drop">Voltage Drop / Cable Sizing Calculator</h2>
+  <p>Estimates voltage drop across a feeder using the standard K-factor method, then flags runs that exceed the commonly used 3% branch-circuit / 5% total design guideline (NEC 210.19(A) informational note — a recommendation, not a hard limit).</p>
+  <div class="formula">VD = (2 &times; K &times; I &times; D) / CM &nbsp;[single-phase]&nbsp; &middot; &nbsp;VD = (1.732 &times; K &times; I &times; D) / CM &nbsp;[three-phase]</div>
+  <div class="estimator" id="vdCalc">
+    <h3>Voltage Drop</h3>
+    <div class="sub">K = 12.9 (copper) or 21.2 (aluminum) ohm&middot;cmil/ft — approximate, ignores conductor reactance. Best for runs under ~250 ft.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="vdPhase">Phase</label><select id="vdPhase"><option value="1">Single-phase</option><option value="3" selected>Three-phase</option></select></div>
+      <div class="est-field"><label for="vdMat">Conductor</label><select id="vdMat"><option value="12.9">Copper</option><option value="21.2">Aluminum</option></select></div>
+      <div class="est-field"><label for="vdSize">Wire size</label><select id="vdSize"></select></div>
+      <div class="est-field"><label for="vdI">Load current (A)</label><input type="number" id="vdI" min="0" step="1" placeholder="e.g. 100"></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="vdD">One-way distance (ft)</label><input type="number" id="vdD" min="0" step="1" placeholder="e.g. 150"></div>
+      <div class="est-field"><label for="vdV">System voltage (V)</label><input type="number" id="vdV" min="0" step="1" placeholder="e.g. 480"></div>
+      <div class="est-field"><button type="button" id="vdBtn">Calculate</button></div>
+    </div>
+    <div class="est-result" id="vdResult"></div>
+  </div>
+
+  <h2 id="transformer-sizing">Transformer Sizing Calculator</h2>
+  <p>Converts a real load in kW to required kVA and rounds up to the nearest standard ANSI/IEEE C57.12.00 transformer nameplate rating, plus estimated full-load amps on the secondary.</p>
+  <div class="formula">kVA = kW / PF &nbsp;&middot;&nbsp; FLA = kVA &times; 1000 / (1.732 &times; V) &nbsp;[3&phi;]&nbsp; or &nbsp;kVA &times; 1000 / V &nbsp;[1&phi;]</div>
+  <div class="estimator" id="xfCalc">
+    <h3>Transformer Size</h3>
+    <div class="sub">Rounds up to the nearest standard kVA nameplate rating. Add your own margin for future load growth — this doesn't assume any.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="xfPhase">Phase</label><select id="xfPhase"><option value="1">Single-phase</option><option value="3" selected>Three-phase</option></select></div>
+      <div class="est-field"><label for="xfKw">Load (kW)</label><input type="number" id="xfKw" min="0" step="1" placeholder="e.g. 300"></div>
+      <div class="est-field"><label for="xfPf">Power factor</label><input type="number" id="xfPf" min="0.1" max="1" step="0.01" placeholder="e.g. 0.9"></div>
+      <div class="est-field"><label for="xfV">Secondary voltage (V)</label><input type="number" id="xfV" min="0" step="1" placeholder="e.g. 480"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="xfBtn">Calculate</button></div></div>
+    <div class="est-result" id="xfResult"></div>
+  </div>
+
+  <h2 id="bess-sizing">BESS Sizing Calculator</h2>
+  <p>Converts a critical load and backup duration into usable energy, then to the nameplate energy rating you'd need to procure once depth of discharge and round-trip efficiency losses are factored in. See <a class="inline" href="battery-storage.html">Battery Storage</a> for DC block configurations.</p>
+  <div class="formula">Usable kWh = kW &times; hours &nbsp;&middot;&nbsp; Nameplate kWh = Usable kWh / (DoD &times; RTE)</div>
+  <div class="estimator" id="bessCalc">
+    <h3>BESS Size</h3>
+    <div class="sub">Defaults (90% DoD, 90% RTE) are typical for utility-scale LFP systems — adjust to your spec sheet.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="bessKw">Critical load (kW)</label><input type="number" id="bessKw" min="0" step="1" placeholder="e.g. 500"></div>
+      <div class="est-field"><label for="bessHrs">Backup duration (hrs)</label><input type="number" id="bessHrs" min="0" step="0.5" placeholder="e.g. 4"></div>
+      <div class="est-field"><label for="bessDod">Depth of discharge (%)</label><input type="number" id="bessDod" min="1" max="100" step="1" value="90"></div>
+      <div class="est-field"><label for="bessRte">Round-trip efficiency (%)</label><input type="number" id="bessRte" min="1" max="100" step="1" value="90"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="bessBtn">Calculate</button></div></div>
+    <div class="est-result" id="bessResult"></div>
+  </div>
+
+  <h2 id="solar-string">Solar String Sizing Calculator</h2>
+  <p>Applies module temperature coefficients to your site's design temperatures to find the maximum string length (cold-weather Voc must stay under the inverter's max input voltage) and minimum string length (hot-weather Vmp must stay in the inverter's MPPT window).</p>
+  <div class="formula">Voc(cold) = Voc &times; (1 + (Tc&middot;Voc/100) &times; (Tmin&minus;25)) &nbsp;&middot;&nbsp; Vmp(hot) = Vmp &times; (1 + (Tc&middot;Vmp/100) &times; (Tmax&minus;25))</div>
+  <div class="estimator" id="strCalc">
+    <h3>String Size</h3>
+    <div class="sub">All values from the module and inverter datasheets — this tool does no lookups of its own.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="strVoc">Module Voc, STC (V)</label><input type="number" id="strVoc" min="0" step="0.1" placeholder="e.g. 49.5"></div>
+      <div class="est-field"><label for="strVmp">Module Vmp, STC (V)</label><input type="number" id="strVmp" min="0" step="0.1" placeholder="e.g. 41.4"></div>
+      <div class="est-field"><label for="strTcVoc">Voc temp coeff (%/&deg;C)</label><input type="number" id="strTcVoc" step="0.01" placeholder="e.g. -0.27"></div>
+      <div class="est-field"><label for="strTcVmp">Vmp temp coeff (%/&deg;C)</label><input type="number" id="strTcVmp" step="0.01" placeholder="e.g. -0.35"></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="strTmin">Design min temp (&deg;C)</label><input type="number" id="strTmin" step="1" placeholder="e.g. -10"></div>
+      <div class="est-field"><label for="strTmax">Design max temp (&deg;C)</label><input type="number" id="strTmax" step="1" placeholder="e.g. 45"></div>
+      <div class="est-field"><label for="strVmax">Inverter max input (V)</label><input type="number" id="strVmax" step="1" placeholder="e.g. 1500"></div>
+      <div class="est-field"><label for="strVmppt">Inverter MPPT min (V)</label><input type="number" id="strVmppt" step="1" placeholder="e.g. 200"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="strBtn">Calculate</button></div></div>
+    <div class="est-result" id="strResult"></div>
+  </div>
+
+  <h2 id="fault-current">Fault Current Estimate</h2>
+  <p>A simplified, infinite-source estimate of available symmetrical fault current at a transformer's secondary terminals — useful for a first-pass equipment rating check, not a substitute for a full short-circuit/coordination study that accounts for source and cable impedance.</p>
+  <div class="formula">Isc = (100,000 &times; kVA) / (1.732 &times; V &times; %Z)</div>
+  <div class="estimator" id="faultCalc">
+    <h3>Available Fault Current</h3>
+    <div class="sub">%Z comes from the transformer nameplate — typical distribution transformers run 5.75%&ndash;6.5%, but always use the actual nameplate value.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="faultKva">Transformer (kVA)</label><input type="number" id="faultKva" min="0" step="1" placeholder="e.g. 1500"></div>
+      <div class="est-field"><label for="faultZ">Impedance %Z</label><input type="number" id="faultZ" min="0.1" step="0.01" placeholder="e.g. 5.75"></div>
+      <div class="est-field"><label for="faultV">Secondary voltage, L-L (V)</label><input type="number" id="faultV" min="0" step="1" placeholder="e.g. 480"></div>
+      <div class="est-field"><button type="button" id="faultBtn">Calculate</button></div>
+    </div>
+    <div class="est-result" id="faultResult"></div>
+  </div>
+
+  <h2 id="power-factor">Power Factor Correction Calculator</h2>
+  <p>Sizes the capacitor bank (kVAR) needed to raise real power at an existing power factor up to a target power factor.</p>
+  <div class="formula">kVAR = kW &times; (tan(cos&sup1;&sup2;PF1) &minus; tan(cos&sup1;&sup2;PF2))</div>
+  <div class="estimator" id="pfCalc">
+    <h3>PF Correction Size</h3>
+    <div class="est-row">
+      <div class="est-field"><label for="pfKw">Real power (kW)</label><input type="number" id="pfKw" min="0" step="1" placeholder="e.g. 400"></div>
+      <div class="est-field"><label for="pfExisting">Existing PF</label><input type="number" id="pfExisting" min="0.1" max="1" step="0.01" placeholder="e.g. 0.75"></div>
+      <div class="est-field"><label for="pfTarget">Target PF</label><input type="number" id="pfTarget" min="0.1" max="1" step="0.01" placeholder="e.g. 0.95"></div>
+      <div class="est-field"><button type="button" id="pfBtn">Calculate</button></div>
+    </div>
+    <div class="est-result" id="pfResult"></div>
+  </div>
+
+  <h2 id="unit-converter">Unit &amp; Spec Converter</h2>
+  <p>Quick conversions between <a class="inline" href="glossary.html#kva-vs-kw">kVA, kW, and power factor</a>, AWG wire gauge and mm&sup2;, and an approximate NEMA-to-IP enclosure rating cross-reference.</p>
+  <div class="estimator" id="convCalc">
+    <h3>kVA &harr; kW &harr; PF</h3>
+    <div class="sub">Enter any two fields to solve the third.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="cvKva">kVA</label><input type="number" id="cvKva" step="0.1"></div>
+      <div class="est-field"><label for="cvKw">kW</label><input type="number" id="cvKw" step="0.1"></div>
+      <div class="est-field"><label for="cvPf">Power factor</label><input type="number" id="cvPf" step="0.01" min="0.1" max="1"></div>
+      <div class="est-field"><button type="button" id="cvBtn">Solve</button></div>
+    </div>
+    <div class="est-result" id="cvResult"></div>
+  </div>
+  <div class="estimator" id="awgCalc">
+    <h3>AWG &harr; mm&sup2;</h3>
+    <div class="est-row">
+      <div class="est-field"><label for="awgSize">AWG / kcmil size</label><select id="awgSize"></select></div>
+      <div class="est-field"><label for="mm2In">or enter mm&sup2;</label><input type="number" id="mm2In" step="0.1" placeholder="e.g. 16"></div>
+      <div class="est-field"><button type="button" id="awgBtn">Convert</button></div>
+    </div>
+    <div class="est-result" id="awgResult"></div>
+  </div>
+  <div class="estimator">
+    <h3>NEMA &harr; IP Enclosure Rating (approximate)</h3>
+    <div class="sub">NEMA (UL 50/50E) and IP (IEC 60529) use different test methods, so this is a commonly cited approximate cross-reference, not an exact regulatory equivalence — always verify against the enclosure's actual dual listing.</div>
+    <div style="overflow-x:auto"><table class="reftable">
+      <tr><th>NEMA type</th><th>Approx. IP equivalent</th><th>Typical use</th></tr>
+      <tr><td>1</td><td>IP20</td><td>Indoor, general purpose</td></tr>
+      <tr><td>2</td><td>IP21</td><td>Indoor, light dripping water</td></tr>
+      <tr><td>3</td><td>IP54</td><td>Outdoor, windblown dust/rain</td></tr>
+      <tr><td>3R</td><td>IP14</td><td>Outdoor, rain/sleet (vented)</td></tr>
+      <tr><td>4</td><td>IP56</td><td>Outdoor, hosedown/splashing water</td></tr>
+      <tr><td>4X</td><td>IP66</td><td>Outdoor, corrosion-resistant + hosedown</td></tr>
+      <tr><td>6</td><td>IP67</td><td>Occasional temporary submersion</td></tr>
+      <tr><td>6P</td><td>IP67</td><td>Prolonged submersion + corrosion-resistant</td></tr>
+      <tr><td>12</td><td>IP52</td><td>Indoor, dust/dripping non-corrosive liquids</td></tr>
+    </table></div>
+  </div>
+
+  <div class="callout"><b>Not a substitute for a licensed engineer's calculation.</b> These calculators use standard simplified formulas intended for early-stage budgetary sizing and procurement planning. Final designs — especially fault current, protective device coordination, and code compliance — need a full study with actual system impedances, performed or stamped by a licensed engineer as required by your jurisdiction.</div>
+
+  <h2>Where Voltfield fits in</h2>
+  <p>Once you've got a size in hand, configure the actual part: <a class="inline" href="voltfield-supply-catalog.html?sector=dc">transformers and switchgear</a> for the data-center desk, <a class="inline" href="battery-storage.html">BESS DC blocks and PCS</a> for storage, or <a class="inline" href="renewables.html">inverters and BOS</a> for solar. Building a full BOM instead of one part? <a class="inline" href="voltfield-bom.html">Quick Order</a> matches every line to the catalog in one pass, and the <a class="inline" href="lead-time-index.html">Lead-Time Index</a> shows current lead times across major equipment categories before you commit to a design.</p>
+
+  <h2>Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How do you calculate voltage drop for a cable run?</summary>
+    <p style="margin-top:10px">Using the K-factor method: VD = (2 &times; K &times; I &times; D) / CM for single-phase or VD = (1.732 &times; K &times; I &times; D) / CM for three-phase, where K is a resistivity constant (about 12.9 for copper, 21.2 for aluminum), I is load current in amps, D is one-way distance in feet, and CM is the conductor's circular mil area. This is an approximation that ignores reactance and is best suited to feeders under about 250 feet.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What size transformer do I need for my load?</summary>
+    <p style="margin-top:10px">Divide your real load in kW by its power factor to get required kVA, then round up to the nearest standard transformer nameplate rating (common ANSI/IEEE sizes include 75, 112.5, 150, 225, 300, 500, 750, and 1000 kVA). Always leave margin for future load growth.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How do I size a battery energy storage system (BESS)?</summary>
+    <p style="margin-top:10px">Multiply the critical load in kW by the required backup duration in hours to get usable energy in kWh, then divide by your assumed depth of discharge and round-trip efficiency (commonly around 90% each for LFP systems) to get the nameplate energy rating you need to procure.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Are these calculators a substitute for a stamped engineering study?</summary>
+    <p style="margin-top:10px">No. These tools use standard simplified formulas for early-stage budgetary sizing and procurement planning. Final designs, especially fault current and arc-flash coordination, require a licensed engineer's study using actual system impedances.</p>
+  </details>
+</div>
+<div class="ctaband">
+  <div class="ctaband-in">
+    <div>
+      <h3>Ready to configure the actual part?</h3>
+      <p>Search 2M+ configurable SKUs across transformers, switchgear, inverters, storage, and MRO — with live lead times and quotes in 24 hours.</p>
+    </div>
+    <a class="ctabtn" href="voltfield-supply-catalog.html">BROWSE THE CATALOG &rarr;</a>
+  </div>
+</div>
+<footer>
+  <div class="in">
+    <div>
+      <h5>Voltfield Supply Co.</h5>
+      <p>Stocking distributor and sourcing agent for long-lead electrical, storage, oilfield, and MRO/industrial supply equipment. These calculators use standard, publicly documented engineering formulas for budgetary planning — they are not a substitute for a licensed engineer's final design calculations.</p>
+    </div>
+    <div><h5>Desks</h5><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+      <li><a href="oil-gas.html">Drilling &amp; Completions</a></li>
+      <li><a href="industrial-supply.html">Industrial Supply (MRO)</a></li>
+    </ul></div>
+    <div><h5>Reference</h5><ul>
+      <li><a href="glossary.html">Glossary</a></li>
+      <li><a href="lead-time-index.html">Lead-Time Index</a></li>
+      <li><a href="voltfield-insights.html">Insights &amp; Guides</a></li>
+    </ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script>
+(function(){
+  try{
+    const q=JSON.parse(localStorage.getItem("vf_quote")||"[]");
+    const el=document.getElementById("quoteCount");
+    if(el)el.textContent=Array.isArray(q)?q.length:0;
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  const AWG=[
+    {n:'14 AWG',cm:4110},{n:'12 AWG',cm:6530},{n:'10 AWG',cm:10380},{n:'8 AWG',cm:16510},
+    {n:'6 AWG',cm:26240},{n:'4 AWG',cm:41740},{n:'3 AWG',cm:52620},{n:'2 AWG',cm:66360},
+    {n:'1 AWG',cm:83690},{n:'1/0 AWG',cm:105600},{n:'2/0 AWG',cm:133100},{n:'3/0 AWG',cm:167800},
+    {n:'4/0 AWG',cm:211600},{n:'250 kcmil',cm:250000},{n:'300 kcmil',cm:300000},{n:'350 kcmil',cm:350000},
+    {n:'400 kcmil',cm:400000},{n:'500 kcmil',cm:500000},{n:'600 kcmil',cm:600000},{n:'750 kcmil',cm:750000},
+    {n:'1000 kcmil',cm:1000000}
+  ];
+  const STD_KVA=[15,25,37.5,50,75,100,112.5,150,167,225,300,500,750,1000,1500,2000,2500,3000,3750,5000,7500,10000];
+  const vdSel=document.getElementById('vdSize'), awgSel=document.getElementById('awgSize');
+  [vdSel,awgSel].forEach(sel=>{ if(!sel)return; sel.innerHTML=AWG.map((a,i)=>'<option value="'+i+'"'+(a.n==='4/0 AWG'?' selected':'')+'>'+a.n+'</option>').join(''); });
+
+  function fmt(v,d){d=d===undefined?2:d;return Number(v).toLocaleString('en-US',{maximumFractionDigits:d});}
+
+  const vdBtn=document.getElementById('vdBtn');
+  if(vdBtn)vdBtn.addEventListener('click',function(){
+    const r=document.getElementById('vdResult');
+    const I=parseFloat(document.getElementById('vdI').value), D=parseFloat(document.getElementById('vdD').value), V=parseFloat(document.getElementById('vdV').value);
+    const K=parseFloat(document.getElementById('vdMat').value), phase=document.getElementById('vdPhase').value;
+    const cm=AWG[+vdSel.value].cm;
+    if(!(I>0)||!(D>0)||!(V>0)){r.textContent='Enter current, distance, and voltage.';r.className='est-result show';return;}
+    const mult=phase==='3'?1.732:2;
+    const vd=(mult*K*I*D)/cm;
+    const pct=(vd/V)*100;
+    const warn=pct>3;
+    r.innerHTML='Voltage drop: <b>'+fmt(vd)+' V</b> ('+fmt(pct)+'%) over '+D+' ft of '+AWG[+vdSel.value].n+'.'+(warn?' <br>This exceeds the common 3% branch-circuit guideline — consider a larger conductor.':' Within the common 3% branch-circuit guideline.');
+    r.className='est-result show'+(warn?' warn':'');
+  });
+
+  const xfBtn=document.getElementById('xfBtn');
+  if(xfBtn)xfBtn.addEventListener('click',function(){
+    const r=document.getElementById('xfResult');
+    const kw=parseFloat(document.getElementById('xfKw').value), pf=parseFloat(document.getElementById('xfPf').value), V=parseFloat(document.getElementById('xfV').value);
+    const phase=document.getElementById('xfPhase').value;
+    if(!(kw>0)||!(pf>0&&pf<=1)||!(V>0)){r.textContent='Enter load, power factor (0-1), and voltage.';r.className='est-result show';return;}
+    const kvaReq=kw/pf;
+    const std=STD_KVA.find(s=>s>=kvaReq)||STD_KVA[STD_KVA.length-1];
+    const fla=phase==='3'?(std*1000)/(1.732*V):(std*1000)/V;
+    r.innerHTML='Required: <b>'+fmt(kvaReq)+' kVA</b> &rarr; nearest standard size: <b>'+fmt(std,1)+' kVA</b>. Estimated secondary FLA at that rating: <b>'+fmt(fla)+' A</b>.';
+    r.className='est-result show';
+  });
+
+  const bessBtn=document.getElementById('bessBtn');
+  if(bessBtn)bessBtn.addEventListener('click',function(){
+    const r=document.getElementById('bessResult');
+    const kw=parseFloat(document.getElementById('bessKw').value), hrs=parseFloat(document.getElementById('bessHrs').value);
+    const dod=parseFloat(document.getElementById('bessDod').value)/100, rte=parseFloat(document.getElementById('bessRte').value)/100;
+    if(!(kw>0)||!(hrs>0)||!(dod>0&&dod<=1)||!(rte>0&&rte<=1)){r.textContent='Enter load, duration, DoD, and RTE.';r.className='est-result show';return;}
+    const usable=kw*hrs;
+    const nameplate=usable/(dod*rte);
+    r.innerHTML='Usable energy needed: <b>'+fmt(usable)+' kWh</b>. Nameplate energy to procure (after DoD/RTE losses): <b>'+fmt(nameplate)+' kWh</b>.';
+    r.className='est-result show';
+  });
+
+  const strBtn=document.getElementById('strBtn');
+  if(strBtn)strBtn.addEventListener('click',function(){
+    const r=document.getElementById('strResult');
+    const voc=parseFloat(document.getElementById('strVoc').value), vmp=parseFloat(document.getElementById('strVmp').value);
+    const tcVoc=parseFloat(document.getElementById('strTcVoc').value), tcVmp=parseFloat(document.getElementById('strTcVmp').value);
+    const tmin=parseFloat(document.getElementById('strTmin').value), tmax=parseFloat(document.getElementById('strTmax').value);
+    const vmax=parseFloat(document.getElementById('strVmax').value), vmppt=parseFloat(document.getElementById('strVmppt').value);
+    if(![voc,vmp,tcVoc,tcVmp,tmin,tmax,vmax,vmppt].every(v=>!isNaN(v))){r.textContent='Fill in every field (temp coefficients are typically negative).';r.className='est-result show';return;}
+    const vocCold=voc*(1+(tcVoc/100)*(tmin-25));
+    const vmpHot=vmp*(1+(tcVmp/100)*(tmax-25));
+    const maxLen=Math.floor(vmax/vocCold);
+    const minLen=Math.ceil(vmppt/vmpHot);
+    const bad=minLen>maxLen;
+    r.innerHTML='Cold Voc: <b>'+fmt(vocCold)+' V</b>/module. Hot Vmp: <b>'+fmt(vmpHot)+' V</b>/module. Max string length: <b>'+maxLen+' modules</b>. Min string length: <b>'+minLen+' modules</b>.'+(bad?' <br>No valid string length fits this window — recheck your inputs or inverter selection.':'');
+    r.className='est-result show'+(bad?' warn':'');
+  });
+
+  const faultBtn=document.getElementById('faultBtn');
+  if(faultBtn)faultBtn.addEventListener('click',function(){
+    const r=document.getElementById('faultResult');
+    const kva=parseFloat(document.getElementById('faultKva').value), z=parseFloat(document.getElementById('faultZ').value), V=parseFloat(document.getElementById('faultV').value);
+    if(!(kva>0)||!(z>0)||!(V>0)){r.textContent='Enter transformer kVA, %Z, and secondary voltage.';r.className='est-result show';return;}
+    const isc=(100000*kva)/(1.732*V*z);
+    r.innerHTML='Estimated available symmetrical fault current: <b>'+fmt(isc,0)+' A</b> ('+fmt(isc/1000)+' kA) at the transformer secondary, assuming an infinite source and ignoring cable impedance.';
+    r.className='est-result show';
+  });
+
+  const pfBtn=document.getElementById('pfBtn');
+  if(pfBtn)pfBtn.addEventListener('click',function(){
+    const r=document.getElementById('pfResult');
+    const kw=parseFloat(document.getElementById('pfKw').value), pf1=parseFloat(document.getElementById('pfExisting').value), pf2=parseFloat(document.getElementById('pfTarget').value);
+    if(!(kw>0)||!(pf1>0&&pf1<=1)||!(pf2>0&&pf2<=1)){r.textContent='Enter real power and both power factors (0-1).';r.className='est-result show';return;}
+    if(pf2<pf1){r.textContent='Target PF should be higher than existing PF.';r.className='est-result show warn';return;}
+    const kvar=kw*(Math.tan(Math.acos(pf1))-Math.tan(Math.acos(pf2)));
+    r.innerHTML='Capacitor bank required: <b>'+fmt(Math.max(kvar,0))+' kVAR</b> to raise PF from '+pf1+' to '+pf2+' at '+kw+' kW.';
+    r.className='est-result show';
+  });
+
+  const cvBtn=document.getElementById('cvBtn');
+  if(cvBtn)cvBtn.addEventListener('click',function(){
+    const r=document.getElementById('cvResult');
+    const kva=parseFloat(document.getElementById('cvKva').value), kw=parseFloat(document.getElementById('cvKw').value), pf=parseFloat(document.getElementById('cvPf').value);
+    const has=[!isNaN(kva),!isNaN(kw),!isNaN(pf)].filter(Boolean).length;
+    if(has<2){r.textContent='Enter any two of kVA, kW, PF to solve for the third.';r.className='est-result show';return;}
+    let out;
+    if(isNaN(pf)){out='Power factor: <b>'+fmt(kw/kva)+'</b>';}
+    else if(isNaN(kw)){out='kW: <b>'+fmt(kva*pf)+'</b>';}
+    else{out='kVA: <b>'+fmt(kw/pf)+'</b>';}
+    r.innerHTML=out;
+    r.className='est-result show';
+  });
+
+  const awgBtn=document.getElementById('awgBtn');
+  if(awgBtn)awgBtn.addEventListener('click',function(){
+    const r=document.getElementById('awgResult');
+    const mm2In=parseFloat(document.getElementById('mm2In').value);
+    const CM_PER_MM2=1973.53;
+    if(mm2In>0){
+      const cm=mm2In*CM_PER_MM2;
+      let best=AWG[0],bd=Infinity;
+      AWG.forEach(a=>{const d=Math.abs(a.cm-cm);if(d<bd){bd=d;best=a;}});
+      r.innerHTML=fmt(mm2In)+' mm&sup2; = <b>'+fmt(cm,0)+' cmil</b> &rarr; closest standard size: <b>'+best.n+'</b>.';
+    } else {
+      const a=AWG[+awgSel.value];
+      const mm2=a.cm/CM_PER_MM2;
+      r.innerHTML=a.n+' = <b>'+fmt(a.cm)+' cmil</b> = <b>'+fmt(mm2)+' mm&sup2;</b>.';
+    }
+    r.className='est-result show';
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

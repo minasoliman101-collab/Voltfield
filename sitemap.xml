@@ -23,4 +23,5 @@
   <url><loc>https://voltfield.org/voltfield-eol.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://voltfield.org/voltfield-pcb.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://voltfield.org/voltfield-identify.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://voltfield.org/engineering-calculators.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
 </urlset>
