@@ -121,6 +121,18 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .alt-item a{color:var(--ink-2);text-decoration:none;font-family:var(--disp);font-weight:600;font-size:14.5px}
 .alt-item a:hover{color:var(--ink);text-decoration:underline}
 .alt-item .alt-lead{font-family:var(--mono);font-size:12px;white-space:nowrap}
+.rvstrip{background:var(--paper)}
+.rvstrip-in{max-width:900px;margin:0 auto;padding:8px 20px 32px}
+.rvstrip h2{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin-bottom:10px}
+.rv-track{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}
+.rv-card{flex:0 0 140px;background:var(--card);border:1px solid var(--line-dark);text-decoration:none;color:var(--ink);display:block}
+.rv-card:hover{box-shadow:0 4px 10px rgba(16,27,45,.12)}
+.rv-card .rv-imgwrap{height:90px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:6px;overflow:hidden}
+.rv-card .rv-imgwrap img{max-width:100%;max-height:100%;object-fit:contain;mix-blend-mode:multiply}
+.rv-card .rv-noimg{width:100%;height:100%}
+.rv-card .rv-body{padding:8px 9px}
+.rv-card .rv-name{font-size:11.5px;font-weight:600;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:29px}
+.rv-card .rv-price{font-family:var(--mono);font-size:11px;color:var(--slate);margin-top:4px}
 .p-foot{display:flex;gap:10px;flex-wrap:wrap;padding:16px 20px;border-top:1px solid var(--line);background:var(--paper)}
 .p-add{flex:1;min-width:160px;background:var(--signal);color:var(--ink);border:2px solid var(--ink);padding:12px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.04em;text-transform:uppercase}
 .p-add:hover{background:var(--ink);color:var(--signal)}
@@ -141,7 +153,7 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .print-header{display:none}
 .cfg-print{display:none}
 @media print{
-  .utilbar,header.site,footer,.p-foot,.toast,.altcard,.crumb,.navtoggle{display:none!important}
+  .utilbar,header.site,footer,.p-foot,.toast,.altcard,.crumb,.navtoggle,.rvstrip{display:none!important}
   .print-header{display:block;margin-bottom:18px;border-bottom:2px solid #000;padding-bottom:10px}
   .print-header .ph-brand{font-family:var(--disp);font-weight:700;font-size:20px}
   .print-header .ph-meta{font-family:var(--mono);font-size:10.5px;color:#555;margin-top:4px}
@@ -192,6 +204,12 @@ footer a{color:#9FB0C3}
 </header>
 
 <div class="wrap" id="wrap"></div>
+<div class="rvstrip" id="recentlyViewed" style="display:none">
+  <div class="rvstrip-in">
+    <h2>Recently viewed</h2>
+    <div class="rv-track"></div>
+  </div>
+</div>
 
 <footer>
   <div class="in">
@@ -215,6 +233,39 @@ const fi=parseInt(P.get('fi'),10);
 const f=(Number.isInteger(fi)&&fi>=0&&fi<FAM.length)?FAM[fi]:null;
 let PS=null;
 
+function recordRecentlyViewed(fi,picks,chk){
+  try{
+    const o=picksToParam(f,picks);
+    let arr=JSON.parse(localStorage.getItem('vf_recent')||'[]');
+    if(!Array.isArray(arr))arr=[];
+    arr=arr.filter(x=>!(x.fi===fi&&x.o===o));
+    arr.unshift({fi,o,chk,t:Date.now()});
+    localStorage.setItem('vf_recent',JSON.stringify(arr.slice(0,12)));
+  }catch(e){}
+}
+function renderRecentlyViewed(excludeFi){
+  const wrap=document.getElementById('recentlyViewed');
+  if(!wrap)return;
+  let arr=[]; try{arr=JSON.parse(localStorage.getItem('vf_recent')||'[]');}catch(e){}
+  if(!Array.isArray(arr))arr=[];
+  arr=arr.filter(x=>x.fi!==excludeFi).slice(0,8);
+  if(!arr.length){wrap.style.display='none';return;}
+  const html=arr.map(x=>{
+    const rf=FAM[x.fi]; if(!rf)return '';
+    const rpicks=paramToPicks(rf,x.o);
+    const name=configuredName(rf,rpicks);
+    const price=priceFor(rf,rpicks);
+    const col=SECTORS[rf.s].color;
+    return `<a class="rv-card" href="voltfield-part.html?fi=${x.fi}&o=${x.o}&chk=${x.chk}">
+      <div class="rv-imgwrap">${rf.img?`<img src="${rf.img}" alt="">`:`<div class="rv-noimg" style="background:${col}"></div>`}</div>
+      <div class="rv-body"><div class="rv-name">${name}</div><div class="rv-price">${money(price,rf.pu)}</div></div>
+    </a>`;
+  }).join('');
+  if(!html){wrap.style.display='none';return;}
+  wrap.querySelector('.rv-track').innerHTML=html;
+  wrap.style.display='';
+}
+
 if(!f){
   document.getElementById('wrap').innerHTML=`<div class="notfound"><h2>Part not found</h2><p>That part link isn't valid. Browse the full catalog to find and configure a part.</p><a href="voltfield-supply-catalog.html">Go to All Parts &rarr;</a></div>`;
 } else {
@@ -222,6 +273,8 @@ if(!f){
   const chk=P.get('chk')||genSKU(f,fi).chk;
   PS={f,picks,chk,qty:Math.max(1,parseInt(P.get('qty'),10)||1)};
   renderPart();
+  recordRecentlyViewed(f._i,picks,chk);
+  renderRecentlyViewed(f._i);
 }
 
 function partURL(){return `voltfield-part.html?fi=${f._i}&o=${picksToParam(f,PS.picks)}&chk=${PS.chk}`+(PS.qty>1?`&qty=${PS.qty}`:'');}

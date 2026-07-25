@@ -90,6 +90,17 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .catsearch button{background:var(--signal);border:0;border-left:2px solid var(--ink);padding:0 22px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.05em;color:var(--ink)}
 .catban .metaline{font-family:var(--mono);font-size:11.5px;color:#9FB0C3;margin-top:12px;display:flex;gap:18px;flex-wrap:wrap}
 .catban .metaline b{color:var(--signal);font-weight:600}
+.rvstrip{max-width:1240px;margin:0 auto;padding:16px 20px 4px}
+.rvstrip h2{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin-bottom:10px}
+.rv-track{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}
+.rv-card{flex:0 0 140px;background:var(--card);border:1px solid var(--line-dark);text-decoration:none;color:var(--ink);display:block}
+.rv-card:hover{box-shadow:0 4px 10px rgba(16,27,45,.12)}
+.rv-card .rv-imgwrap{height:90px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:6px;overflow:hidden}
+.rv-card .rv-imgwrap img{max-width:100%;max-height:100%;object-fit:contain;mix-blend-mode:multiply}
+.rv-card .rv-noimg{width:100%;height:100%}
+.rv-card .rv-body{padding:8px 9px}
+.rv-card .rv-name{font-size:11.5px;font-weight:600;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:29px}
+.rv-card .rv-price{font-family:var(--mono);font-size:11px;color:var(--slate);margin-top:4px}
 /* ---------- layout ---------- */
 .catlayout{max-width:1240px;margin:0 auto;padding:22px 20px 60px;display:grid;grid-template-columns:1fr;gap:22px}
 @media(min-width:920px){.catlayout{grid-template-columns:260px 1fr}}
@@ -341,6 +352,11 @@ footer a{color:#9FB0C3}
     </div>
   </div>
 </section>
+
+<div class="rvstrip" id="recentlyViewed" style="display:none">
+  <h2>Recently viewed</h2>
+  <div class="rv-track"></div>
+</div>
 
 <div class="catlayout">
   <aside class="sidebar">
@@ -785,11 +801,33 @@ document.getElementById('delProj').onclick=()=>{
 document.getElementById('exportProj').onclick=exportProjects;
 document.getElementById('importProj').onchange=e=>{const f=e.target.files[0];if(f)importProjects(f);e.target.value='';};
 
+function renderRecentlyViewed(){
+  const wrap=document.getElementById('recentlyViewed');
+  if(!wrap)return;
+  let arr=[]; try{arr=JSON.parse(localStorage.getItem('vf_recent')||'[]');}catch(e){}
+  if(!Array.isArray(arr)||!arr.length){wrap.style.display='none';return;}
+  const html=arr.map(x=>{
+    const rf=FAM[x.fi]; if(!rf)return '';
+    const picks=paramToPicks(rf,x.o);
+    const name=configuredName(rf,picks);
+    const price=priceFor(rf,picks);
+    const col=SECTORS[rf.s].color;
+    return `<a class="rv-card" href="voltfield-part.html?fi=${x.fi}&o=${x.o}&chk=${x.chk}">
+      <div class="rv-imgwrap">${rf.img?`<img src="${rf.img}" alt="">`:`<div class="rv-noimg" style="background:${col}"></div>`}</div>
+      <div class="rv-body"><div class="rv-name">${name}</div><div class="rv-price">${money(price,rf.pu)}</div></div>
+    </a>`;
+  }).join('');
+  if(!html){wrap.style.display='none';return;}
+  wrap.querySelector('.rv-track').innerHTML=html;
+  wrap.style.display='';
+}
+
 /* ---------- init ---------- */
 document.getElementById('mTotal').textContent=fmt(GRAND_TOTAL);
 document.getElementById('mFam').textContent=fmt(FAM.length);
 document.getElementById('mCat').textContent=Object.values(SECTOR_CATS).reduce((a,c)=>a+c.length,0);
 saveQuote(loadQuote()); // sync header counter
+renderRecentlyViewed();
 const wantQuote=new URLSearchParams(location.search).get('quote');
 readURL();
 document.getElementById('searchInput').value=state.q;
