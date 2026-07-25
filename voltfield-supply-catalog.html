@@ -114,6 +114,8 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .clearbtn:hover{background:var(--ink-2)}
 /* ---------- results ---------- */
 .resbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.exportbtn{background:#fff;color:var(--ink-2);border:1px solid var(--line-dark);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap}
+.exportbtn:hover{border-color:var(--ink);color:var(--ink)}
 .resbar .count{font-size:14px}
 .resbar .count b{font-family:var(--disp);font-weight:700;font-size:22px;color:var(--ink)}
 .resbar .count .sub{font-family:var(--mono);font-size:11px;color:var(--slate);display:block;margin-top:1px}
@@ -349,6 +351,7 @@ footer a{color:#9FB0C3}
         <span class="sub" id="resSub">configurable SKUs</span>
       </div>
       <div class="chips" id="activeChips"></div>
+      <button class="exportbtn" id="exportCsvBtn" type="button">Export CSV</button>
     </div>
     <div class="skugrid" id="skugrid"></div>
     <div class="empty" id="emptyState" style="display:none">
@@ -760,6 +763,26 @@ readURL();
 document.getElementById('searchInput').value=state.q;
 apply();
 if(wantQuote)openQuoteDrawer();
+
+(function(){
+  const btn=document.getElementById('exportCsvBtn');
+  if(!btn)return;
+  function csvCell(v){const s=String(v==null?'':v);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}
+  btn.addEventListener('click',function(){
+    const matched=matchedFamilies();
+    if(!matched.length){toast('Nothing to export — no families match the current filters.');return;}
+    const header=['Family','Category','Sector','Distributor','Price Low','Price High','Price Unit','Lead Time (wk)','SKU Count'];
+    const rows=matched.map(f=>[f.n,f.c,SECTORS[f.s].label,DIST_LABEL[f.d]||f.d,f.lo,f.hi,f.pu||'',f.lw,f.ct]);
+    const csv=[header,...rows].map(r=>r.map(csvCell).join(',')).join('\r\n');
+    const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url; a.download='voltfield-catalog-export-'+new Date().toISOString().slice(0,10)+'.csv';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    toast('Exported '+matched.length+' families to CSV');
+  });
+})();
 
 (function(){
   const form=document.getElementById('reqPartForm');
