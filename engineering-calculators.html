@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Engineering Calculators: Voltage Drop, Transformer &amp; BESS Sizing, Fault Current | VOLTFIELD Supply Co.</title>
-<meta name="description" content="Free engineering calculators for power and energy procurement: voltage drop / cable sizing, transformer sizing, BESS sizing, solar string sizing, fault current estimate, power factor correction, transformer TCO, MACRS depreciation, and a kVA/AWG/NEMA-IP unit converter.">
-<meta name="keywords" content="voltage drop calculator, transformer sizing calculator, BESS sizing calculator, solar string sizing calculator, fault current calculator, power factor correction calculator, transformer TCO calculator, MACRS depreciation calculator, AWG to mm2 converter, NEMA to IP rating">
+<meta name="description" content="Free engineering calculators for power and energy procurement: voltage drop / cable sizing, transformer sizing, BESS sizing, solar string sizing, fault current estimate, power factor correction, transformer TCO, MACRS depreciation, landed cost, generator runtime, and a kVA/AWG/NEMA-IP unit converter.">
+<meta name="keywords" content="voltage drop calculator, transformer sizing calculator, BESS sizing calculator, solar string sizing calculator, fault current calculator, power factor correction calculator, transformer TCO calculator, MACRS depreciation calculator, landed cost calculator, generator runtime calculator, HS code lookup, UL vs ETL vs CSA, AWG to mm2 converter, NEMA to IP rating">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VOLTFIELD Supply Co.">
 <meta property="og:title" content="Engineering Calculators for Power &amp; Energy Procurement">
@@ -29,7 +29,9 @@
    {"@type":"Question","name":"How do I size a battery energy storage system (BESS)?","acceptedAnswer":{"@type":"Answer","text":"Multiply the critical load in kW by the required backup duration in hours to get usable energy in kWh, then divide by your assumed depth of discharge and round-trip efficiency (commonly around 90% each for LFP systems) to get the nameplate energy rating you need to procure."}},
    {"@type":"Question","name":"Are these calculators a substitute for a stamped engineering study?","acceptedAnswer":{"@type":"Answer","text":"No. These tools use standard simplified formulas for early-stage budgetary sizing and procurement planning. Final designs, especially fault current and arc-flash coordination, require a licensed engineer's study using actual system impedances."}},
    {"@type":"Question","name":"How do you calculate the total cost of ownership of a transformer?","acceptedAnswer":{"@type":"Answer","text":"Add the purchase price to the lifetime cost of its energy losses. No-load loss (core loss) runs continuously whenever the transformer is energized; load loss (winding loss) scales with the square of the load factor. Multiply each by 8760 hours/year and your electricity rate to get an annual loss cost, then extend it over the transformer's service life."}},
-   {"@type":"Question","name":"What is MACRS depreciation and how is it calculated for energy equipment?","acceptedAnswer":{"@type":"Answer","text":"MACRS (Modified Accelerated Cost Recovery System) lets businesses depreciate equipment faster than its useful life using IRS-published percentage tables (5-year and 7-year property are common for energy equipment). This is a simplified estimate only — it doesn't account for bonus depreciation or Section 179 expensing, and isn't tax advice."}}
+   {"@type":"Question","name":"What is MACRS depreciation and how is it calculated for energy equipment?","acceptedAnswer":{"@type":"Answer","text":"MACRS (Modified Accelerated Cost Recovery System) lets businesses depreciate equipment faster than its useful life using IRS-published percentage tables (5-year and 7-year property are common for energy equipment). This is a simplified estimate only — it doesn't account for bonus depreciation or Section 179 expensing, and isn't tax advice."}},
+   {"@type":"Question","name":"How do you calculate the landed or delivered cost of imported equipment?","acceptedAnswer":{"@type":"Answer","text":"Add the equipment price, freight, duty (equipment price multiplied by the applicable duty rate), and cargo insurance together. The duty rate depends on the item's actual customs classification, which should come from a licensed customs broker, not an estimate."}},
+   {"@type":"Question","name":"How do you estimate how long a generator will run on a full tank?","acceptedAnswer":{"@type":"Answer","text":"Divide the fuel tank capacity (gallons) by the fuel consumption rate at your expected load (gallons per hour), taken from the generator's own spec sheet — most gensets publish consumption rates at 50%, 75%, and 100% load."}}
  ]}
 ]}
 </script>
@@ -199,6 +201,10 @@ footer a:hover{color:#fff}
     <a href="#macrs-depreciation">MACRS Depreciation Estimator</a>
     <a href="#standards-crossref">Standards Cross-Reference</a>
     <a href="#external-data">External Data &amp; Price Trackers</a>
+    <a href="#landed-cost">Landed/Delivered Cost Calculator</a>
+    <a href="#hs-codes">HS Code Reference</a>
+    <a href="#compliance-marks">Compliance Mark Quick-Reference</a>
+    <a href="#generator-runtime">Generator Runtime Estimator</a>
   </div>
 
   <p>These tools are built for the budgetary and early-design stage of a project — sizing a feeder, roughing in a transformer or BESS order, or checking a string configuration before it goes to a stamped design. They run entirely in your browser: nothing you enter is sent anywhere. None of them replace a licensed engineer's calculation for final design, protective device coordination, or code compliance sign-off.</p>
@@ -403,6 +409,64 @@ footer a:hover{color:#fff}
     <li><b><a class="inline" href="https://emp.lbl.gov/queues" target="_blank" rel="noopener">Berkeley Lab "Queued Up"</a></b> — Lawrence Berkeley National Laboratory's annual survey of US interconnection queues, aggregating data from ISOs/RTOs and utility balancing areas nationwide.</li>
   </ul>
 
+  <h2 id="landed-cost">Landed/Delivered Cost Calculator</h2>
+  <p>Sticker price and delivered cost are rarely the same number once freight, duty, and insurance are added — this rolls them into one figure for budgeting.</p>
+  <div class="formula">Landed cost = Equipment price + Freight + (Equipment price &times; Duty rate) + Insurance</div>
+  <div class="estimator" id="landedCalc">
+    <h3>Landed Cost</h3>
+    <div class="sub">Freight and insurance are your own estimates or quotes; duty rate should come from an actual customs classification (see HS code reference below) — always confirm with a licensed customs broker before relying on this for a real shipment.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="landedPrice">Equipment price ($)</label><input type="number" id="landedPrice" min="0" step="1" placeholder="e.g. 500000"></div>
+      <div class="est-field"><label for="landedFreight">Freight ($)</label><input type="number" id="landedFreight" min="0" step="1" placeholder="e.g. 15000"></div>
+      <div class="est-field"><label for="landedDuty">Duty/tariff rate (%)</label><input type="number" id="landedDuty" min="0" step="0.1" placeholder="e.g. 25"></div>
+      <div class="est-field"><label for="landedIns">Insurance ($, optional)</label><input type="number" id="landedIns" min="0" step="1" placeholder="e.g. 2000"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="landedBtn">Calculate</button></div></div>
+    <div class="est-result" id="landedResult"></div>
+  </div>
+
+  <h2 id="hs-codes">HS Code Reference (Common Equipment Categories)</h2>
+  <p>The Harmonized System (HS) is the WCO's internationally standardized product classification, used as the basis for every country's customs tariff schedule. The 4-digit headings below are stable across countries; the more specific 6&ndash;10-digit subheading that actually sets your duty rate depends on technical details (voltage class, power rating, technology) and the importing country's own tariff schedule — always confirm final classification with a licensed customs broker.</p>
+  <div style="overflow-x:auto"><table class="reftable">
+    <tr><th>Equipment category</th><th>HS heading</th><th>Description</th></tr>
+    <tr><td>Transformers</td><td>8504</td><td>Electrical transformers, static converters, and inductors</td></tr>
+    <tr><td>Switchgear &gt;1000V</td><td>8535</td><td>Electrical apparatus for switching/protecting circuits, voltage &gt;1000V</td></tr>
+    <tr><td>Switchgear/breakers &le;1000V</td><td>8536</td><td>Electrical apparatus for switching/protecting circuits, voltage &le;1000V</td></tr>
+    <tr><td>Panels &amp; switchboards</td><td>8537</td><td>Boards, panels, and consoles for electric control or distribution</td></tr>
+    <tr><td>Generating sets</td><td>8502</td><td>Electric generating sets and rotary converters</td></tr>
+    <tr><td>Motors</td><td>8501</td><td>Electric motors and generators (other than generating sets)</td></tr>
+    <tr><td>Batteries / accumulators</td><td>8507</td><td>Electric accumulators, including separators</td></tr>
+    <tr><td>Solar cells / modules</td><td>8541</td><td>Semiconductor and photosensitive devices, including photovoltaic cells</td></tr>
+    <tr><td>Insulated wire &amp; cable</td><td>8544</td><td>Insulated wire, cable, and other insulated electric conductors</td></tr>
+  </table></div>
+
+  <h2 id="compliance-marks">Compliance Mark Quick-Reference</h2>
+  <p>Buyers often treat these marks as interchangeable — they aren't. Some are independent third-party certifications; one is a manufacturer's own self-declaration.</p>
+  <div style="overflow-x:auto"><table class="reftable">
+    <tr><th>Mark</th><th>Issued by</th><th>What it actually means</th></tr>
+    <tr><td>UL Listed</td><td>UL (Underwriters Laboratories)</td><td>Third-party safety testing and certification to a US standard — the most common NRTL mark in North America.</td></tr>
+    <tr><td>ETL Listed</td><td>Intertek</td><td>An equivalent third-party NRTL certification to UL, testing against the same underlying US safety standards.</td></tr>
+    <tr><td>cULus</td><td>UL</td><td>Certifies compliance with both US and Canadian safety standards in a single mark.</td></tr>
+    <tr><td>CSA (or cCSAus)</td><td>CSA Group</td><td>Canadian safety certification; the cCSAus variant covers both Canada and the US.</td></tr>
+    <tr><td>CE Marking</td><td>Manufacturer (self-declared)</td><td>The manufacturer's own declaration of conformity to applicable EU directives, required for sale in the European Economic Area — not a third-party lab certification like UL.</td></tr>
+    <tr><td>RoHS</td><td>EU directive compliance</td><td>Restricts specific hazardous substances (lead, mercury, cadmium, and others) in electrical and electronic equipment.</td></tr>
+    <tr><td>FCC</td><td>US Federal Communications Commission</td><td>Certifies electromagnetic interference / radio-frequency emissions compliance for equipment containing electronics.</td></tr>
+  </table></div>
+
+  <h2 id="generator-runtime">Generator Runtime Estimator</h2>
+  <p>How long a generator will actually run on a full tank at a given load — use the fuel consumption rate from the genset's own spec sheet at your expected load point (most spec sheets publish gal/hr at 50%, 75%, and 100% load).</p>
+  <div class="formula">Runtime (hrs) = Fuel tank capacity (gal) / Fuel consumption rate (gal/hr)</div>
+  <div class="estimator" id="genCalc">
+    <h3>Generator Runtime</h3>
+    <div class="sub">Looking for battery/UPS backup runtime instead? See the <a class="inline" href="#bess-sizing">BESS sizing calculator</a> above.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="genTank">Fuel tank capacity (gal)</label><input type="number" id="genTank" min="0" step="1" placeholder="e.g. 500"></div>
+      <div class="est-field"><label for="genRate">Consumption rate at load (gal/hr)</label><input type="number" id="genRate" min="0" step="0.1" placeholder="e.g. 22"></div>
+      <div class="est-field"><button type="button" id="genBtn">Calculate</button></div>
+    </div>
+    <div class="est-result" id="genResult"></div>
+  </div>
+
   <h2>Where Voltfield fits in</h2>
   <p>Once you've got a size in hand, configure the actual part: <a class="inline" href="voltfield-supply-catalog.html?sector=dc">transformers and switchgear</a> for the data-center desk, <a class="inline" href="battery-storage.html">BESS DC blocks and PCS</a> for storage, or <a class="inline" href="renewables.html">inverters and BOS</a> for solar. Building a full BOM instead of one part? <a class="inline" href="voltfield-bom.html">Quick Order</a> matches every line to the catalog in one pass, and the <a class="inline" href="lead-time-index.html">Lead-Time Index</a> shows current lead times across major equipment categories before you commit to a design.</p>
 
@@ -430,6 +494,14 @@ footer a:hover{color:#fff}
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is MACRS depreciation and how is it calculated for energy equipment?</summary>
     <p style="margin-top:10px">MACRS (Modified Accelerated Cost Recovery System) lets businesses depreciate equipment faster than its useful life using IRS-published percentage tables (5-year and 7-year property are common for energy equipment). This is a simplified estimate only — it doesn't account for bonus depreciation or Section 179 expensing, and isn't tax advice.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How do you calculate the landed or delivered cost of imported equipment?</summary>
+    <p style="margin-top:10px">Add the equipment price, freight, duty (equipment price multiplied by the applicable duty rate), and cargo insurance together. The duty rate depends on the item's actual customs classification, which should come from a licensed customs broker, not an estimate.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How do you estimate how long a generator will run on a full tank?</summary>
+    <p style="margin-top:10px">Divide the fuel tank capacity (gallons) by the fuel consumption rate at your expected load (gallons per hour), taken from the generator's own spec sheet — most gensets publish consumption rates at 50%, 75%, and 100% load.</p>
   </details>
 </div>
 <div class="ctaband">
@@ -637,6 +709,33 @@ footer a:hover{color:#fff}
     });
     rows+='</table></div>';
     r.innerHTML='MACRS '+cls+'-year schedule for $'+fmt(cost,0)+' of equipment (half-year convention):'+rows+'<div style="margin-top:8px">Total depreciated: <b>$'+fmt(total,0)+'</b></div>';
+    r.className='est-result show';
+  });
+
+  const landedBtn=document.getElementById('landedBtn');
+  if(landedBtn)landedBtn.addEventListener('click',function(){
+    const r=document.getElementById('landedResult');
+    const price=parseFloat(document.getElementById('landedPrice').value);
+    const freight=parseFloat(document.getElementById('landedFreight').value)||0;
+    const duty=parseFloat(document.getElementById('landedDuty').value)||0;
+    const ins=parseFloat(document.getElementById('landedIns').value)||0;
+    if(!(price>0)){r.textContent='Enter equipment price.';r.className='est-result show';return;}
+    const dutyAmt=price*duty/100;
+    const landed=price+freight+dutyAmt+ins;
+    const pct=(landed-price)/price*100;
+    r.innerHTML='Duty amount: <b>$'+fmt(dutyAmt,0)+'</b>. Total landed cost: <b>$'+fmt(landed,0)+'</b> ('+fmt(pct,1)+'% above equipment price).';
+    r.className='est-result show';
+  });
+
+  const genBtn=document.getElementById('genBtn');
+  if(genBtn)genBtn.addEventListener('click',function(){
+    const r=document.getElementById('genResult');
+    const tank=parseFloat(document.getElementById('genTank').value);
+    const rate=parseFloat(document.getElementById('genRate').value);
+    if(!(tank>0)||!(rate>0)){r.textContent='Enter fuel tank capacity and consumption rate.';r.className='est-result show';return;}
+    const hrs=tank/rate;
+    const days=hrs/24;
+    r.innerHTML='Estimated runtime: <b>'+fmt(hrs,1)+' hours</b> ('+fmt(days,1)+' days) on a full tank at this load.';
     r.className='est-result show';
   });
 })();
