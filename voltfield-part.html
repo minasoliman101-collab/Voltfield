@@ -319,7 +319,7 @@ function updateProductSchema(pn,price,lb){
         "availability":f.lw===0?"https://schema.org/InStock":"https://schema.org/PreOrder",
         "itemCondition":"https://schema.org/NewCondition",
         "seller":{"@type":"Organization","name":"VOLTFIELD Supply Co."}}
-    }, f.img?{"image":f.img}:{})
+    })
   ]};
   let el=document.getElementById('productSchema');
   if(!el){el=document.createElement('script');el.type='application/ld+json';el.id='productSchema';document.head.appendChild(el);}
