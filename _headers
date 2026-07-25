@@ -32,6 +32,14 @@
 /*.html
   Cache-Control: public, max-age=600, stale-while-revalidate=3600
 
+/lead-time-index.json
+  Cache-Control: public, max-age=1800, stale-while-revalidate=3600
+  Access-Control-Allow-Origin: *
+
+/embed/lead-time-widget.js
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Access-Control-Allow-Origin: *
+
 /sitemap.xml
   Cache-Control: public, max-age=86400
 

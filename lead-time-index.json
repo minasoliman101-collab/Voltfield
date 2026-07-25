@@ -1,0 +1,51 @@
+{
+  "source": "VOLTFIELD Supply Co.",
+  "url": "https://voltfield.org/lead-time-index.html",
+  "region": "North America",
+  "lastUpdated": "2026-07",
+  "license": "Free to cite or embed with attribution and a link back to https://voltfield.org/lead-time-index.html",
+  "sectors": [
+    {
+      "key": "dc",
+      "label": "Data Centers",
+      "caption": "Data Center Power & Backup Equipment",
+      "items": [
+        {"equipment": "Large power transformers", "value": "160 wk", "trend": "up"},
+        {"equipment": "Pad-mount transformers", "value": "85 wk", "trend": "up"},
+        {"equipment": "MV switchgear", "value": "Sold out through 2028", "trend": "flat"},
+        {"equipment": "Gas turbines", "value": "2029+ delivery slots", "trend": "up"},
+        {"equipment": "Diesel gensets", "value": "90 wk", "trend": "up"},
+        {"equipment": "MCCBs (15–1200 A)", "value": "12 wk", "trend": "flat"}
+      ]
+    },
+    {
+      "key": "re",
+      "label": "Renewables",
+      "caption": "Solar, Wind & Hybrid Equipment",
+      "items": [
+        {"equipment": "GSU transformers", "value": "144 wk", "trend": "up"},
+        {"equipment": "Grid-forming PCS", "value": "32 wk", "trend": "flat"},
+        {"equipment": "FEOC-clean inverters", "value": "20 wk", "trend": "up"},
+        {"equipment": "PV modules (import)", "value": "$0.09–0.13/W", "trend": "down"}
+      ]
+    },
+    {
+      "key": "bess",
+      "label": "Battery Storage",
+      "caption": "Utility-Scale BESS Equipment",
+      "items": [
+        {"equipment": "LFP DC blocks", "value": "$110–140/kWh", "trend": "down"}
+      ]
+    },
+    {
+      "key": "og",
+      "label": "Oil & Gas",
+      "caption": "Drilling & Completions Equipment",
+      "items": [
+        {"equipment": "Drill pipe (S-135)", "value": "34 wk", "trend": "flat"},
+        {"equipment": "Frac valves", "value": "24 wk", "trend": "down"},
+        {"equipment": "Hydraulic hose assemblies", "value": "Same-week crimp", "trend": "down"}
+      ]
+    }
+  ]
+}

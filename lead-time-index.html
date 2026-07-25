@@ -24,7 +24,7 @@
    {"@type":"ListItem","position":2,"name":"Insights","item":"https://voltfield.org/voltfield-insights.html"},
    {"@type":"ListItem","position":3,"name":"Lead-Time Index","item":"https://voltfield.org/lead-time-index.html"}
  ]},
- {"@type":"Dataset","name":"Voltfield Lead-Time Index","description":"Indicative market lead times and pricing across data center, renewable, battery storage, and oilfield equipment, compiled from the same catalog data and vendor/mill network Voltfield quotes against.","creator":{"@type":"Organization","name":"VOLTFIELD Supply Co.","url":"https://voltfield.org/"},"temporalCoverage":"2026-07","url":"https://voltfield.org/lead-time-index.html","isAccessibleForFree":true}
+ {"@type":"Dataset","name":"Voltfield Lead-Time Index","description":"Indicative market lead times and pricing across data center, renewable, battery storage, and oilfield equipment, compiled from the same catalog data and vendor/mill network Voltfield quotes against.","creator":{"@type":"Organization","name":"VOLTFIELD Supply Co.","url":"https://voltfield.org/"},"temporalCoverage":"2026-07","url":"https://voltfield.org/lead-time-index.html","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://voltfield.org/lead-time-index.json"}]}
 ]}
 </script>
 <link rel="manifest" href="manifest.json">
@@ -105,6 +105,16 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .idxtable .trend-up{color:var(--crit,#C43D2E)}
 .idxtable .trend-down{color:var(--ok,#2E7D4F)}
 .idxtable .trend-flat{color:var(--slate)}
+.embedbox{display:grid;gap:16px;margin:16px 0 20px;background:var(--card);border:1px solid var(--line-dark);padding:18px}
+@media(min-width:640px){.embedbox{grid-template-columns:auto 1fr;align-items:start}}
+.embedbox-demo{display:flex;justify-content:center}
+.ec-label{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);margin-bottom:6px}
+.embedbox-code pre{background:#0F1B2D;color:#C9D3DF;padding:12px 14px;font-family:var(--mono);font-size:11.5px;line-height:1.6;overflow-x:auto;white-space:pre}
+.embedbox-code button{margin-top:8px;background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:700;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase}
+.embedbox-code button:hover{background:transparent;color:var(--ink)}
+.embedbox-code button.copied{background:var(--signal);border-color:var(--signal);color:var(--ink)}
+.ec-note{font-size:12px;color:var(--slate);margin-top:10px;line-height:1.6}
+.ec-note code{font-family:var(--mono);background:#fff;padding:1px 4px;border:1px solid var(--line)}
 .alertbox{background:var(--ink);color:#E8EDF3;padding:24px;margin:20px 0 30px;border-left:4px solid var(--signal)}
 .alertbox h3{font-family:var(--disp);font-weight:700;font-size:20px;margin-bottom:6px}
 .alertbox p{color:#AFC0D3;font-size:13px;margin-bottom:14px;max-width:560px}
@@ -193,6 +203,22 @@ footer a:hover{color:#fff}
   <h2>Methodology</h2>
   <p>Figures below are indicative market lead times and pricing ranges observed across Voltfield's distributor and mill network, compiled from the same data that drives lead-time flags across the catalog. They are directional reference points for planning, not a quote for any specific order — final lead time and price are confirmed when a specific configuration is quoted. "Trend" reflects the recent direction (lengthening, holding, or shortening) based on the same market conditions covered in <a class="inline" href="voltfield-insights.html">Insights</a>.</p>
   <div class="callout"><b>Using this data elsewhere?</b> Feel free to cite or link to this page (<code>voltfield.org/lead-time-index.html</code>) as a reference for current equipment lead times — that's exactly what it's here for.</div>
+
+  <h2>Embed this data on your site</h2>
+  <p>Publishing about equipment lead times or grid buildout? Drop this snippet into your page to embed a live, self-updating lead-time widget for any sector below — it fetches the same data as this page and always reflects the current numbers. Free to use, attribution link included automatically.</p>
+  <div class="embedbox">
+    <div class="embedbox-demo">
+      <div class="vf-lead-time-widget" data-sector="dc" data-limit="4"></div>
+    </div>
+    <div class="embedbox-code">
+      <div class="ec-label">Paste this where you want the widget to appear</div>
+      <pre id="embedSnippet">&lt;div class="vf-lead-time-widget" data-sector="dc" data-limit="4"&gt;&lt;/div&gt;
+&lt;script src="https://voltfield.org/embed/lead-time-widget.js" async&gt;&lt;/script&gt;</pre>
+      <button type="button" id="copyEmbedBtn">Copy snippet</button>
+      <div class="ec-note">Sectors: <code>dc</code> (data centers), <code>re</code> (renewables), <code>bess</code> (battery storage), <code>og</code> (oil &amp; gas). Drop <code>data-limit</code> to show every item in the sector.</div>
+    </div>
+  </div>
+  <p style="font-size:13px;color:var(--slate)">Prefer raw data? The same figures are published as JSON at <a class="inline" href="lead-time-index.json">lead-time-index.json</a>.</p>
 
   <div class="alertbox">
     <h3>Get lead-time alerts</h3>
@@ -285,6 +311,7 @@ footer a:hover{color:#fff}
   </div>
 </footer>
 <script src="voltfield-site-config.js"></script>
+<script src="embed/lead-time-widget.js" async></script>
 <script>
 (function(){
   try{
@@ -292,6 +319,23 @@ footer a:hover{color:#fff}
     const el=document.getElementById("quoteCount");
     if(el)el.textContent=Array.isArray(q)?q.length:0;
   }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  const btn=document.getElementById('copyEmbedBtn');
+  if(!btn)return;
+  btn.addEventListener('click',async function(){
+    const text=document.getElementById('embedSnippet').textContent;
+    try{
+      await navigator.clipboard.writeText(text);
+      btn.textContent='Copied ✓'; btn.classList.add('copied');
+      setTimeout(()=>{btn.textContent='Copy snippet'; btn.classList.remove('copied');},1800);
+    }catch(e){
+      btn.textContent='Select the text above to copy';
+      setTimeout(()=>{btn.textContent='Copy snippet';},2200);
+    }
+  });
 })();
 </script>
 <script>
