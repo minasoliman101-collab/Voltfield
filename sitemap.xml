@@ -24,4 +24,7 @@
   <url><loc>https://voltfield.org/voltfield-pcb.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://voltfield.org/voltfield-identify.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://voltfield.org/engineering-calculators.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://voltfield.org/guide-transformer-nameplate.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://voltfield.org/guide-switchgear-compartments.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://voltfield.org/guide-arc-flash-boundary-basics.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>

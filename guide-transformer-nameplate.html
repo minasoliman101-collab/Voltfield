@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Read a Transformer Nameplate: A Field Guide | VOLTFIELD Supply Co.</title>
+<meta name="description" content="What every field on a power or distribution transformer nameplate actually means — kVA ratings, cooling class codes, impedance, BIL, vector group, and how to use them when specifying or comparing units.">
+<meta name="keywords" content="transformer nameplate, how to read transformer nameplate, transformer cooling class ONAN ONAF OFAF, transformer impedance percent, BIL rating, transformer vector group">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:title" content="How to Read a Transformer Nameplate: A Field Guide">
+<meta property="og:description" content="What every field on a power or distribution transformer nameplate actually means, and how to use them when specifying or comparing units.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-guide-transformer-nameplate.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-guide-transformer-nameplate.jpg">
+<meta name="twitter:title" content="How to Read a Transformer Nameplate">
+<meta name="twitter:description" content="Every field on a transformer nameplate explained — kVA, cooling class, impedance, BIL, and vector group.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"BreadcrumbList","itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
+   {"@type":"ListItem","position":2,"name":"Insights","item":"https://voltfield.org/voltfield-insights.html"},
+   {"@type":"ListItem","position":3,"name":"How to Read a Transformer Nameplate","item":"https://voltfield.org/guide-transformer-nameplate.html"}
+ ]},
+ {"@type":"Article","headline":"How to Read a Transformer Nameplate: A Field Guide","description":"What every field on a power or distribution transformer nameplate actually means, and how to use them when specifying or comparing units.","author":{"@type":"Organization","name":"VOLTFIELD Supply Co."},"publisher":{"@type":"Organization","name":"VOLTFIELD Supply Co."},"datePublished":"2026-07-25","url":"https://voltfield.org/guide-transformer-nameplate.html"},
+ {"@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"What does the cooling class code on a transformer nameplate mean?","acceptedAnswer":{"@type":"Answer","text":"Codes like ONAN, ONAF, and OFAF describe the cooling method under IEEE C57.12.00: the first letter pair describes the internal cooling medium and circulation (O = mineral oil, N = natural circulation, F = forced circulation), and the second pair describes the external cooling medium and circulation (A = air, F = forced air, W = water). A transformer often carries multiple ratings — for example 21/28/35 MVA at ONAN/ONAF/ONAF2 — where forced cooling stages raise the effective capacity above the base natural-cooling rating."}},
+   {"@type":"Question","name":"What is transformer impedance (%Z) used for?","acceptedAnswer":{"@type":"Answer","text":"Percent impedance sets how much the output voltage sags under load and, more importantly for procurement, how much available fault current a transformer will let through on a downstream fault — higher %Z means lower fault current but more voltage drop under load. It's a required input for any fault current or protective device coordination calculation."}},
+   {"@type":"Question","name":"What is BIL on a transformer nameplate?","acceptedAnswer":{"@type":"Answer","text":"BIL (Basic Insulation Level) is the withstand voltage rating, in kV, that the transformer's insulation is designed to survive during a lightning-impulse or switching-surge event. It has to be matched or exceeded by the insulation levels of everything else connected to that voltage class — switchgear, bushings, surge arresters — not just the transformer itself."}},
+   {"@type":"Question","name":"What does a transformer vector group like Dyn11 mean?","acceptedAnswer":{"@type":"Answer","text":"The vector group describes the winding connections and phase-shift relationship between primary and secondary: the first letter is the primary winding connection (D = delta, Y = wye), the second is the secondary (lowercase y or d), and the number is the phase displacement in multiples of 30 degrees. Dyn11 means a delta primary, grounded wye secondary, with the secondary leading the primary by 330 degrees (11 x 30) — critical for paralleling transformers or matching an existing system."}}
+ ]}
+]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<style>
+:root{
+  --ink:#101B2D;--ink-2:#22334C;--slate:#5B6B7E;--paper:#DDE5EC;--card:#F3F6FA;
+  --line:#C4CFDA;--line-dark:#A7B6C6;--signal:#FFC400;--signal-deep:#E5AC00;
+  --dc:#2B6CB0;--re:#2E7D4F;--bess:#B7791F;--og:#9C4221;--mro:#5B6B7E;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;--body:'IBM Plex Sans',system-ui,sans-serif;--disp:'Barlow Condensed',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5}
+button,a{font-family:inherit;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+.utilbar{background:var(--ink);color:#C9D3DF;font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:6px 20px;display:flex;justify-content:space-between;gap:12px}
+.utilbar b{color:var(--signal);font-weight:600}
+.utilbar .right{display:none}
+@media(min-width:720px){.utilbar .right{display:block}}
+header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:60}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo .bolt{width:34px;height:34px;background:var(--signal);display:grid;place-items:center;border:2px solid var(--ink)}
+.logo .bolt svg{width:18px;height:18px}
+.logo .wordmark{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.02em;line-height:1}
+.logo .wordmark small{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.18em;color:var(--slate)}
+.hnav{display:none;gap:4px}
+.navtoggle{display:none;background:var(--ink);color:#fff;border:2px solid var(--ink);width:42px;height:38px;font-size:20px;line-height:1;align-items:center;justify-content:center;flex-shrink:0}
+@media(max-width:899px){.navtoggle{display:inline-flex}.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:2px solid var(--ink);padding:6px 12px 10px;gap:0;box-shadow:0 10px 20px rgba(16,27,45,.14);z-index:59}.hnav.open a{padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}.hnav.open a:last-child{border-bottom:0}}
+@media(min-width:900px){.hnav{display:flex}}
+.hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
+.hnav a:hover{color:var(--ink);background:var(--paper)}
+.navdrop{position:relative}
+.navdrop-btn{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-transform:uppercase;border:0;border-bottom:3px solid transparent;background:none;display:inline-flex;align-items:center;gap:4px}
+.navdrop-btn:hover{color:var(--ink);background:var(--paper)}
+.navdrop-btn .car{width:8px;height:8px;flex-shrink:0}
+.navdrop-menu{display:none;position:absolute;top:100%;left:0;background:var(--card);border:2px solid var(--ink);min-width:190px;z-index:70;flex-direction:column}
+.navdrop.open .navdrop-menu,.navdrop:hover .navdrop-menu,.navdrop:focus-within .navdrop-menu{display:flex}
+.navdrop-menu a{padding:10px 14px;font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line)}
+.navdrop-menu a:last-child{border-bottom:0}
+.navdrop-menu a:hover{background:var(--paper);color:var(--ink)}
+@media(max-width:899px){
+.navdrop-btn{width:100%;justify-content:space-between;padding:12px 6px;border-bottom:1px solid var(--line)}
+.navdrop-menu{display:flex!important;position:static;border:0;min-width:0;background:var(--paper)}
+.navdrop-menu a{padding-left:26px;border-bottom:1px solid var(--line)}
+.navdrop-btn .car{display:none}
+}
+.headright{margin-left:auto;display:flex;align-items:center;gap:10px}
+.quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
+.quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
+.artban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:32px 20px 34px}
+.artban-in{max-width:780px;margin:0 auto}
+.artban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:10px}
+.artban h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,44px);letter-spacing:.01em;line-height:1.06}
+.artban p.dek{color:#AFC0D3;font-size:15.5px;margin-top:14px;line-height:1.55}
+.artwrap{max-width:780px;margin:0 auto;padding:40px 20px 8px}
+.artwrap h2{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:.01em;color:var(--ink);margin:34px 0 12px}
+.artwrap p{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:14px}
+.artwrap ul{margin:0 0 14px 20px}
+.artwrap li{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:6px}
+.artwrap a.inline{color:var(--signal-deep);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
+.callout{background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--signal);padding:16px 18px;margin:20px 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.reftable{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0}
+.reftable th,.reftable td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.reftable th{background:var(--ink);color:#fff;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase}
+.reftable tr:nth-child(even) td{background:#fff}
+.reftable tr:nth-child(odd) td{background:var(--card)}
+.reftable td:first-child{font-family:var(--mono);font-weight:600;white-space:nowrap}
+.ctaband{background:linear-gradient(120deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;border-top:4px solid var(--signal)}
+.ctaband-in{max-width:1240px;margin:0 auto;padding:44px 20px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.ctaband h3{font-family:var(--disp);font-weight:700;font-size:28px;letter-spacing:.01em}
+.ctaband p{color:#AFC0D3;font-size:14px;margin-top:6px;max-width:460px}
+.ctabtn{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:14px 26px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.05em;text-decoration:none;flex-shrink:0}
+.ctabtn:hover{background:transparent;color:var(--signal)}
+footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
+footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
+@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
+footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer p{line-height:1.6;max-width:460px}
+footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
+footer a{color:#9FB0C3;text-decoration:none}
+footer a:hover{color:#fff}
+</style>
+</head>
+<body>
+<div class="utilbar">
+  <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
+  <span class="right">+1 (850) 686-1378 &nbsp;|&nbsp; RFQ@voltfield.com</span>
+</div>
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — ENERGY INFRASTRUCTURE PARTS</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="index.html">Home</a>
+    <a href="voltfield-supply-catalog.html">All Parts</a>
+    <a href="voltfield-suppliers.html">All Suppliers</a>
+    <a href="voltfield-bom.html">Quick Order</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu">
+        <a href="voltfield-bom-generator.html">BOM Generator</a>
+        <a href="voltfield-pcb.html">PCB Builder</a>
+        <a href="voltfield-identify.html">Part ID</a>
+        <a href="voltfield-eol.html">Obsolete/EOL</a>
+        <a href="engineering-calculators.html">Calculators</a>
+      </div>
+    </div>
+    <a href="voltfield-insights.html">Insights</a>
+    <a href="voltfield-account.html">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View quote list on catalog page">QUOTE LIST <span class="ct" id="quoteCount">0</span></a>
+  </div>
+</header>
+<section class="artban">
+  <div class="artban-in">
+    <div style="font-family:var(--mono);font-size:11px;color:#8DA0B8;margin-bottom:12px"><a href="index.html" style="color:#8DA0B8;text-decoration:none">Home</a> / <a href="voltfield-insights.html" style="color:#8DA0B8;text-decoration:none">Insights</a> / <span style="color:#E8EDF3">Transformer Nameplate Guide</span></div>
+    <div class="eyebrow">Field Guide</div>
+    <h1>How to Read a Transformer Nameplate</h1>
+    <p class="dek">Every transformer carries the same handful of facts on its nameplate — but knowing what each one actually controls, not just what it says, is what separates a real spec comparison from a coin flip.</p>
+  </div>
+</section>
+<div class="artwrap">
+  <p>A transformer nameplate is required by <a class="inline" href="engineering-calculators.html#standards-crossref">IEEE/ANSI C57.12.00</a> to carry a specific set of ratings and markings — but the standard only requires that the information be present, not that everyone reads it the same way. Here's what each field controls, in the order you'll usually find it.</p>
+
+  <h2>Rating plate: kVA, voltage, and cooling class</h2>
+  <p>The headline numbers are kVA (or MVA) rating, primary and secondary voltage, and a cooling class code like <b>ONAN</b>, <b>ONAF</b>, or <b>OFAF</b>. The cooling code isn't decorative — it's a four-letter description of how the unit is cooled, and it often carries multiple ratings on one nameplate because forced cooling stages raise capacity above the base natural-cooling number.</p>
+  <table class="reftable">
+    <tr><th>Position</th><th>Meaning</th><th>Common values</th></tr>
+    <tr><td>1st letter</td><td>Internal cooling medium</td><td>O = mineral oil, K = less-flammable liquid, A = dry-type (air)</td></tr>
+    <tr><td>2nd letter</td><td>Internal circulation</td><td>N = natural, F = forced (pumped)</td></tr>
+    <tr><td>3rd letter</td><td>External cooling medium</td><td>A = air, W = water</td></tr>
+    <tr><td>4th letter</td><td>External circulation</td><td>N = natural, F = forced (fans/pumps)</td></tr>
+  </table>
+  <p>So a nameplate reading <b>21/28/35 MVA ONAN/ONAF/ONAF2</b> means: 21 MVA on natural oil and air cooling alone, 28 MVA once the first stage of cooling fans kicks on, 35 MVA with a second fan stage running. The base ONAN number is what the unit can carry indefinitely with no fans running at all — the number procurement should size against if fan failure is a real operating scenario.</p>
+
+  <h2>Impedance (%Z) — the number that sets fault current</h2>
+  <p>Percent impedance shows up as a single number, typically 4–8% for distribution-class units, but it does two jobs: it sets how much the secondary voltage sags under load, and it caps how much fault current the transformer will pass through to a downstream fault. Lower %Z means less voltage drop under load but higher available fault current — which drives the interrupting rating required of every breaker downstream. It's the direct input to a fault current estimate; see the <a class="inline" href="engineering-calculators.html#fault-current">fault current calculator</a> for the formula that uses it.</p>
+
+  <h2>BIL — Basic Insulation Level</h2>
+  <p>BIL, given in kV, is the surge/lightning-impulse withstand rating of the transformer's insulation system. It has to be coordinated with everything else at that voltage class on the system — bushings, switchgear, surge arresters — not evaluated on the transformer alone. A transformer with a higher BIL than the switchgear feeding it doesn't buy any extra protection; the weakest link in the chain sets the real withstand level.</p>
+
+  <h2>Vector group — how the windings are connected</h2>
+  <p>A code like <b>Dyn11</b> describes the winding connection and phase relationship: the first letter is the primary connection (D = delta, Y = wye), the second is the secondary (lowercase, same letters, with "n" if the neutral is brought out and grounded), and the number is the phase displacement between primary and secondary in multiples of 30 degrees. Dyn11 is delta primary, grounded-wye secondary, secondary leading by 330 degrees. This matters most when paralleling transformers or matching an existing installation — units with different vector groups generally can't be paralleled, full stop.</p>
+
+  <h2>Terminal markings and polarity</h2>
+  <p>High-voltage terminals are marked H1, H2, H3 (and H0 for a grounded neutral); low-voltage terminals are marked X1, X2, X3 (and X0). These markings, combined with the vector group, are what a field crew uses to confirm phasing before energizing — getting this wrong is one of the more expensive mistakes possible during commissioning.</p>
+
+  <h2>Losses, temperature rise, and weight</h2>
+  <p>No-load loss (core loss, present continuously) and load loss (winding loss at rated load) are sometimes printed on the nameplate and sometimes only on the factory test report — either way, they're the two figures needed for a lifetime <a class="inline" href="engineering-calculators.html#transformer-tco">total-cost-of-ownership estimate</a>. Temperature rise (commonly 55&deg;C or 65&deg;C rise above ambient) sets how hard the unit can be loaded before insulation life is affected; total and oil weight matter for foundation design and rigging, not electrical performance.</p>
+
+  <div class="callout"><b>Buying against a nameplate you don't have yet?</b> If you're comparing bids before a specific unit is selected, ask each bidder for the expected nameplate data up front — kVA/cooling class, %Z, BIL, and vector group — rather than discovering a mismatch (wrong vector group, insufficient BIL for the switchgear already ordered) after the transformer arrives.</div>
+
+  <h2>Where Voltfield fits in</h2>
+  <p>Every configurable transformer on the <a class="inline" href="data-centers.html">Data Centers</a> and <a class="inline" href="renewables.html">Renewables</a> desks exposes cooling class, voltage class, and lead time at the configuration stage — no need to wait for a nameplate to know what you're ordering. Run the numbers once you have a real nameplate through the <a class="inline" href="engineering-calculators.html">engineering calculators</a>: fault current from %Z, or lifetime loss cost from no-load/load loss. Unfamiliar with a related term? Check the <a class="inline" href="glossary.html">glossary</a>, or see current <a class="inline" href="lead-time-index.html">transformer lead times</a> across cooling classes and voltage tiers.</p>
+
+  <h2>Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What does the cooling class code on a transformer nameplate mean?</summary>
+    <p style="margin-top:10px">Codes like ONAN, ONAF, and OFAF describe the cooling method under IEEE C57.12.00: the first letter pair describes the internal cooling medium and circulation (O = mineral oil, N = natural circulation, F = forced circulation), and the second pair describes the external cooling medium and circulation (A = air, F = forced air, W = water). A transformer often carries multiple ratings — for example 21/28/35 MVA at ONAN/ONAF/ONAF2 — where forced cooling stages raise the effective capacity above the base natural-cooling rating.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is transformer impedance (%Z) used for?</summary>
+    <p style="margin-top:10px">Percent impedance sets how much the output voltage sags under load and, more importantly for procurement, how much available fault current a transformer will let through on a downstream fault — higher %Z means lower fault current but more voltage drop under load. It's a required input for any fault current or protective device coordination calculation.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is BIL on a transformer nameplate?</summary>
+    <p style="margin-top:10px">BIL (Basic Insulation Level) is the withstand voltage rating, in kV, that the transformer's insulation is designed to survive during a lightning-impulse or switching-surge event. It has to be matched or exceeded by the insulation levels of everything else connected to that voltage class — switchgear, bushings, surge arresters — not just the transformer itself.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What does a transformer vector group like Dyn11 mean?</summary>
+    <p style="margin-top:10px">The vector group describes the winding connections and phase-shift relationship between primary and secondary: the first letter is the primary winding connection (D = delta, Y = wye), the second is the secondary (lowercase y or d), and the number is the phase displacement in multiples of 30 degrees. Dyn11 means a delta primary, grounded wye secondary, with the secondary leading the primary by 330 degrees (11 x 30) — critical for paralleling transformers or matching an existing system.</p>
+  </details>
+</div>
+<div class="ctaband">
+  <div class="ctaband-in">
+    <div>
+      <h3>Specifying or comparing transformers?</h3>
+      <p>Configure by voltage class, cooling type, and BIL on the catalog, and get a quote with real lead time in 24 hours.</p>
+    </div>
+    <a class="ctabtn" href="voltfield-supply-catalog.html?sector=dc">BROWSE TRANSFORMERS &rarr;</a>
+  </div>
+</div>
+<footer>
+  <div class="in">
+    <div>
+      <h5>Voltfield Supply Co.</h5>
+      <p>Stocking distributor and sourcing agent for long-lead electrical, storage, oilfield, and MRO/industrial supply equipment. Pricing shown across the catalog is indicative market range (North America, July 2026) — final pricing, availability, and lead time confirmed at quote.</p>
+    </div>
+    <div><h5>Desks</h5><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+      <li><a href="oil-gas.html">Drilling &amp; Completions</a></li>
+      <li><a href="industrial-supply.html">Industrial Supply (MRO)</a></li>
+    </ul></div>
+    <div><h5>Compliance</h5><ul><li>UL · IEEE · ANSI C57</li><li>API 5CT/6A/7K/16A/Q1</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script>
+(function(){
+  try{
+    const q=JSON.parse(localStorage.getItem("vf_quote")||"[]");
+    const el=document.getElementById("quoteCount");
+    if(el)el.textContent=Array.isArray(q)?q.length:0;
+  }catch(e){}
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

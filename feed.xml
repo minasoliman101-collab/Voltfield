@@ -41,5 +41,26 @@
     <description>What's driving the multi-year power transformer shortage, and practical steps procurement teams can take to protect their project timeline.</description>
     <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
   </item>
+  <item>
+    <title>How to Read a Transformer Nameplate: A Field Guide</title>
+    <link>https://voltfield.org/guide-transformer-nameplate.html</link>
+    <guid>https://voltfield.org/guide-transformer-nameplate.html</guid>
+    <description>What every field on a power or distribution transformer nameplate actually means, and how to use them when specifying or comparing units.</description>
+    <pubDate>Sat, 25 Jul 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>Switchgear Compartment Types Explained: Metal-Clad vs. Metal-Enclosed</title>
+    <link>https://voltfield.org/guide-switchgear-compartments.html</link>
+    <guid>https://voltfield.org/guide-switchgear-compartments.html</guid>
+    <description>What separates metal-clad from metal-enclosed switchgear, what's inside each compartment of a metal-clad lineup, and why the distinction affects lead time and spec compliance.</description>
+    <pubDate>Sat, 25 Jul 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>Arc-Flash Boundary Basics: What Procurement and Facilities Teams Need to Know</title>
+    <link>https://voltfield.org/guide-arc-flash-boundary-basics.html</link>
+    <guid>https://voltfield.org/guide-arc-flash-boundary-basics.html</guid>
+    <description>What an arc-flash boundary is, how it relates to incident energy and NFPA 70E, and what documentation buying teams should expect — not a substitute for a licensed study.</description>
+    <pubDate>Sat, 25 Jul 2026 00:00:00 GMT</pubDate>
+  </item>
 </channel>
 </rss>
