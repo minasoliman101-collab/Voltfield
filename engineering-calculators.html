@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Engineering Calculators: Voltage Drop, Transformer &amp; BESS Sizing, Fault Current | VOLTFIELD Supply Co.</title>
-<meta name="description" content="Free engineering calculators for power and energy procurement: voltage drop / cable sizing, transformer sizing, BESS sizing, solar string sizing, fault current estimate, power factor correction, and a kVA/AWG/NEMA-IP unit converter.">
-<meta name="keywords" content="voltage drop calculator, transformer sizing calculator, BESS sizing calculator, solar string sizing calculator, fault current calculator, power factor correction calculator, AWG to mm2 converter, NEMA to IP rating">
+<meta name="description" content="Free engineering calculators for power and energy procurement: voltage drop / cable sizing, transformer sizing, BESS sizing, solar string sizing, fault current estimate, power factor correction, transformer TCO, MACRS depreciation, and a kVA/AWG/NEMA-IP unit converter.">
+<meta name="keywords" content="voltage drop calculator, transformer sizing calculator, BESS sizing calculator, solar string sizing calculator, fault current calculator, power factor correction calculator, transformer TCO calculator, MACRS depreciation calculator, AWG to mm2 converter, NEMA to IP rating">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VOLTFIELD Supply Co.">
 <meta property="og:title" content="Engineering Calculators for Power &amp; Energy Procurement">
@@ -27,7 +27,9 @@
    {"@type":"Question","name":"How do you calculate voltage drop for a cable run?","acceptedAnswer":{"@type":"Answer","text":"Using the K-factor method: VD = (2 x K x I x D) / CM for single-phase or VD = (1.732 x K x I x D) / CM for three-phase, where K is a resistivity constant (about 12.9 for copper, 21.2 for aluminum), I is load current in amps, D is one-way distance in feet, and CM is the conductor's circular mil area. This is an approximation that ignores reactance and is best suited to feeders under about 250 feet."}},
    {"@type":"Question","name":"What size transformer do I need for my load?","acceptedAnswer":{"@type":"Answer","text":"Divide your real load in kW by its power factor to get required kVA, then round up to the nearest standard transformer nameplate rating (common ANSI/IEEE sizes include 75, 112.5, 150, 225, 300, 500, 750, and 1000 kVA). Always leave margin for future load growth."}},
    {"@type":"Question","name":"How do I size a battery energy storage system (BESS)?","acceptedAnswer":{"@type":"Answer","text":"Multiply the critical load in kW by the required backup duration in hours to get usable energy in kWh, then divide by your assumed depth of discharge and round-trip efficiency (commonly around 90% each for LFP systems) to get the nameplate energy rating you need to procure."}},
-   {"@type":"Question","name":"Are these calculators a substitute for a stamped engineering study?","acceptedAnswer":{"@type":"Answer","text":"No. These tools use standard simplified formulas for early-stage budgetary sizing and procurement planning. Final designs, especially fault current and arc-flash coordination, require a licensed engineer's study using actual system impedances."}}
+   {"@type":"Question","name":"Are these calculators a substitute for a stamped engineering study?","acceptedAnswer":{"@type":"Answer","text":"No. These tools use standard simplified formulas for early-stage budgetary sizing and procurement planning. Final designs, especially fault current and arc-flash coordination, require a licensed engineer's study using actual system impedances."}},
+   {"@type":"Question","name":"How do you calculate the total cost of ownership of a transformer?","acceptedAnswer":{"@type":"Answer","text":"Add the purchase price to the lifetime cost of its energy losses. No-load loss (core loss) runs continuously whenever the transformer is energized; load loss (winding loss) scales with the square of the load factor. Multiply each by 8760 hours/year and your electricity rate to get an annual loss cost, then extend it over the transformer's service life."}},
+   {"@type":"Question","name":"What is MACRS depreciation and how is it calculated for energy equipment?","acceptedAnswer":{"@type":"Answer","text":"MACRS (Modified Accelerated Cost Recovery System) lets businesses depreciate equipment faster than its useful life using IRS-published percentage tables (5-year and 7-year property are common for energy equipment). This is a simplified estimate only — it doesn't account for bonus depreciation or Section 179 expensing, and isn't tax advice."}}
  ]}
 ]}
 </script>
@@ -193,6 +195,10 @@ footer a:hover{color:#fff}
     <a href="#fault-current">Fault Current Estimate</a>
     <a href="#power-factor">Power Factor Correction</a>
     <a href="#unit-converter">Unit &amp; Spec Converter</a>
+    <a href="#transformer-tco">Transformer TCO Estimator</a>
+    <a href="#macrs-depreciation">MACRS Depreciation Estimator</a>
+    <a href="#standards-crossref">Standards Cross-Reference</a>
+    <a href="#external-data">External Data &amp; Price Trackers</a>
   </div>
 
   <p>These tools are built for the budgetary and early-design stage of a project — sizing a feeder, roughing in a transformer or BESS order, or checking a string configuration before it goes to a stamped design. They run entirely in your browser: nothing you enter is sent anywhere. None of them replace a licensed engineer's calculation for final design, protective device coordination, or code compliance sign-off.</p>
@@ -341,6 +347,62 @@ footer a:hover{color:#fff}
 
   <div class="callout"><b>Not a substitute for a licensed engineer's calculation.</b> These calculators use standard simplified formulas intended for early-stage budgetary sizing and procurement planning. Final designs — especially fault current, protective device coordination, and code compliance — need a full study with actual system impedances, performed or stamped by a licensed engineer as required by your jurisdiction.</div>
 
+  <h2 id="transformer-tco">Transformer TCO Estimator</h2>
+  <p>A transformer loses energy as heat continuously: a fixed <b>no-load loss</b> (core loss, present anytime it's energized, loaded or not) and a <b>load loss</b> (winding loss that scales with the square of the load factor). Over a 20&ndash;30 year service life, that loss can cost more than the transformer itself — so total cost of ownership, not sticker price, is often the better basis for comparing bids of the same kVA size. Enter both loss figures from the nameplate or factory test report.</p>
+  <div class="formula">Annual loss cost = [(Pnl &times; 8760) + (Pll &times; LoadFactor&sup2; &times; 8760)] &times; $/kWh</div>
+  <div class="estimator" id="tcoCalc">
+    <h3>Transformer TCO</h3>
+    <div class="sub">Loss figures come from the transformer's nameplate or factory test report — this tool does no lookups of its own.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="tcoNl">No-load loss (W)</label><input type="number" id="tcoNl" min="0" step="1" placeholder="e.g. 1100"></div>
+      <div class="est-field"><label for="tcoLl">Load loss at rated load (W)</label><input type="number" id="tcoLl" min="0" step="1" placeholder="e.g. 9500"></div>
+      <div class="est-field"><label for="tcoLf">Average load factor (%)</label><input type="number" id="tcoLf" min="1" max="150" step="1" placeholder="e.g. 60"></div>
+      <div class="est-field"><label for="tcoRate">Electricity rate ($/kWh)</label><input type="number" id="tcoRate" min="0" step="0.001" placeholder="e.g. 0.09"></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="tcoYears">Service life (years)</label><input type="number" id="tcoYears" min="1" step="1" placeholder="e.g. 25"></div>
+      <div class="est-field"><label for="tcoDiscount">Discount rate (%, optional)</label><input type="number" id="tcoDiscount" min="0" max="30" step="0.1" placeholder="e.g. 5"></div>
+      <div class="est-field"><button type="button" id="tcoBtn">Calculate</button></div>
+    </div>
+    <div class="est-result" id="tcoResult"></div>
+  </div>
+
+  <h2 id="macrs-depreciation">MACRS Depreciation Estimator</h2>
+  <p>MACRS (Modified Accelerated Cost Recovery System) lets US businesses depreciate equipment faster than its useful life, using the IRS's published 200%-declining-balance, half-year-convention percentage tables (Publication 946, Table A-1). Most energy equipment falls under 5-year or 7-year property.</p>
+  <div class="estimator" id="macrsCalc">
+    <h3>MACRS Schedule</h3>
+    <div class="est-row">
+      <div class="est-field"><label for="macrsCost">Equipment cost ($)</label><input type="number" id="macrsCost" min="0" step="100" placeholder="e.g. 500000"></div>
+      <div class="est-field"><label for="macrsClass">Property class</label><select id="macrsClass"><option value="5">5-year</option><option value="7">7-year</option></select></div>
+      <div class="est-field"><button type="button" id="macrsBtn">Build schedule</button></div>
+    </div>
+    <div class="est-result" id="macrsResult"></div>
+  </div>
+  <div class="callout"><b>Not tax advice.</b> This is the standard MACRS percentage table only — it doesn't account for bonus depreciation (many new energy assets qualify for significant first-year expensing), Section 179 expensing, or your specific tax situation. Confirm your actual depreciation schedule and eligibility with a qualified CPA.</div>
+
+  <h2 id="standards-crossref">Standards Cross-Reference (US &harr; International)</h2>
+  <p>A quick-reference pairing of common US standards (ANSI/IEEE/NEMA/UL) with their closest international (IEC) counterpart for the same equipment category. These are commonly paired equivalents for similar equipment classes, not certified legal equivalencies — a UL listing and an IEC/CE certification are separate compliance processes with their own testing requirements.</p>
+  <div style="overflow-x:auto"><table class="reftable">
+    <tr><th>Equipment category</th><th>US standard</th><th>International (IEC) standard</th></tr>
+    <tr><td>Power transformers</td><td>IEEE/ANSI C57.12.00</td><td>IEC 60076</td></tr>
+    <tr><td>Medium-voltage switchgear</td><td>IEEE C37 series</td><td>IEC 62271 series</td></tr>
+    <tr><td>Low-voltage circuit breakers</td><td>UL 489</td><td>IEC 60947-2</td></tr>
+    <tr><td>AC motors</td><td>NEMA MG-1</td><td>IEC 60034</td></tr>
+    <tr><td>Enclosure ratings</td><td>NEMA 250</td><td>IEC 60529 (IP code)</td></tr>
+    <tr><td>Wire/cable sizing</td><td>AWG / NEC Chapter 9</td><td>IEC 60228 (mm&sup2;)</td></tr>
+    <tr><td>Battery energy storage safety</td><td>UL 9540 / UL 9540A</td><td>IEC 62619 / IEC 63056</td></tr>
+    <tr><td>Grounding / earthing</td><td>IEEE 80</td><td>IEC 61936-1</td></tr>
+    <tr><td>Surge protective devices</td><td>UL 1449</td><td>IEC 61643</td></tr>
+  </table></div>
+
+  <h2 id="external-data">External Data &amp; Price Trackers</h2>
+  <p>Copper/aluminum pricing and interconnection queue congestion both move fast enough that a static number on this page would be stale within days — so rather than publish figures we can't keep current, here are the real sources procurement and interconnection teams actually track:</p>
+  <ul>
+    <li><b><a class="inline" href="https://www.lme.com/metals/non-ferrous/lme-copper" target="_blank" rel="noopener">LME Copper</a></b> and <b><a class="inline" href="https://www.lme.com/metals/non-ferrous/lme-aluminium" target="_blank" rel="noopener">LME Aluminium</a></b> — London Metal Exchange official daily reference prices, the standard benchmark for copper and aluminum used in cable, bus, and transformer winding cost.</li>
+    <li><b><a class="inline" href="https://www.eia.gov/electricity/data.php" target="_blank" rel="noopener">EIA Electricity Data</a></b> — U.S. Energy Information Administration's industrial and commercial electricity price data by state, useful as an input to the TCO calculator above.</li>
+    <li><b><a class="inline" href="https://emp.lbl.gov/queues" target="_blank" rel="noopener">Berkeley Lab "Queued Up"</a></b> — Lawrence Berkeley National Laboratory's annual survey of US interconnection queues, aggregating data from ISOs/RTOs and utility balancing areas nationwide.</li>
+  </ul>
+
   <h2>Where Voltfield fits in</h2>
   <p>Once you've got a size in hand, configure the actual part: <a class="inline" href="voltfield-supply-catalog.html?sector=dc">transformers and switchgear</a> for the data-center desk, <a class="inline" href="battery-storage.html">BESS DC blocks and PCS</a> for storage, or <a class="inline" href="renewables.html">inverters and BOS</a> for solar. Building a full BOM instead of one part? <a class="inline" href="voltfield-bom.html">Quick Order</a> matches every line to the catalog in one pass, and the <a class="inline" href="lead-time-index.html">Lead-Time Index</a> shows current lead times across major equipment categories before you commit to a design.</p>
 
@@ -360,6 +422,14 @@ footer a:hover{color:#fff}
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Are these calculators a substitute for a stamped engineering study?</summary>
     <p style="margin-top:10px">No. These tools use standard simplified formulas for early-stage budgetary sizing and procurement planning. Final designs, especially fault current and arc-flash coordination, require a licensed engineer's study using actual system impedances.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How do you calculate the total cost of ownership of a transformer?</summary>
+    <p style="margin-top:10px">Add the purchase price to the lifetime cost of its energy losses. No-load loss (core loss) runs continuously whenever the transformer is energized; load loss (winding loss) scales with the square of the load factor. Multiply each by 8760 hours/year and your electricity rate to get an annual loss cost, then extend it over the transformer's service life.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is MACRS depreciation and how is it calculated for energy equipment?</summary>
+    <p style="margin-top:10px">MACRS (Modified Accelerated Cost Recovery System) lets businesses depreciate equipment faster than its useful life using IRS-published percentage tables (5-year and 7-year property are common for energy equipment). This is a simplified estimate only — it doesn't account for bonus depreciation or Section 179 expensing, and isn't tax advice.</p>
   </details>
 </div>
 <div class="ctaband">
@@ -524,6 +594,49 @@ footer a:hover{color:#fff}
       const mm2=a.cm/CM_PER_MM2;
       r.innerHTML=a.n+' = <b>'+fmt(a.cm)+' cmil</b> = <b>'+fmt(mm2)+' mm&sup2;</b>.';
     }
+    r.className='est-result show';
+  });
+
+  const tcoBtn=document.getElementById('tcoBtn');
+  if(tcoBtn)tcoBtn.addEventListener('click',function(){
+    const r=document.getElementById('tcoResult');
+    const nl=parseFloat(document.getElementById('tcoNl').value), ll=parseFloat(document.getElementById('tcoLl').value);
+    const lf=parseFloat(document.getElementById('tcoLf').value)/100, rate=parseFloat(document.getElementById('tcoRate').value);
+    const years=parseFloat(document.getElementById('tcoYears').value), disc=parseFloat(document.getElementById('tcoDiscount').value);
+    if(!(nl>=0)||!(ll>=0)||!(lf>0)||!(rate>0)||!(years>0)){r.textContent='Enter no-load loss, load loss, load factor, rate, and service life.';r.className='est-result show';return;}
+    const nlKwh=(nl/1000)*8760;
+    const llKwh=(ll/1000)*Math.pow(lf,2)*8760;
+    const annualCost=(nlKwh+llKwh)*rate;
+    let lifetime,method;
+    if(disc>0){
+      const r_=disc/100;
+      lifetime=annualCost*(1-Math.pow(1+r_,-years))/r_;
+      method='NPV at '+disc+'% discount rate';
+    } else {
+      lifetime=annualCost*years;
+      method='undiscounted total';
+    }
+    r.innerHTML='Annual energy loss: <b>'+fmt(nlKwh+llKwh,0)+' kWh</b> ($'+fmt(annualCost,0)+'/yr). Lifetime cost of losses over '+years+' years ('+method+'): <b>$'+fmt(lifetime,0)+'</b>.';
+    r.className='est-result show';
+  });
+
+  const MACRS_PCT={5:[20.00,32.00,19.20,11.52,11.52,5.76],7:[14.29,24.49,17.49,12.49,8.93,8.92,8.93,4.46]};
+  const macrsBtn=document.getElementById('macrsBtn');
+  if(macrsBtn)macrsBtn.addEventListener('click',function(){
+    const r=document.getElementById('macrsResult');
+    const cost=parseFloat(document.getElementById('macrsCost').value);
+    const cls=document.getElementById('macrsClass').value;
+    if(!(cost>0)){r.textContent='Enter equipment cost.';r.className='est-result show';return;}
+    const pcts=MACRS_PCT[cls];
+    let rows='<div style="overflow-x:auto"><table class="reftable" style="margin-top:8px"><tr><th>Year</th><th>%</th><th>Deduction</th></tr>';
+    let total=0;
+    pcts.forEach((p,i)=>{
+      const amt=cost*p/100;
+      total+=amt;
+      rows+='<tr><td>Year '+(i+1)+'</td><td>'+p.toFixed(2)+'%</td><td>$'+fmt(amt,0)+'</td></tr>';
+    });
+    rows+='</table></div>';
+    r.innerHTML='MACRS '+cls+'-year schedule for $'+fmt(cost,0)+' of equipment (half-year convention):'+rows+'<div style="margin-top:8px">Total depreciated: <b>$'+fmt(total,0)+'</b></div>';
     r.className='est-result show';
   });
 })();
