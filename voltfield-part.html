@@ -113,6 +113,14 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .lead.warn{background:#FBF0DA;color:var(--warn)}
 .lead.crit{background:#F7E4E1;color:var(--crit)}
 .p-note{font-family:var(--mono);font-size:10.5px;color:var(--slate);line-height:1.6;margin-top:16px}
+.altcard{margin-top:16px;background:var(--card);border:1px solid var(--line-dark);padding:16px 20px}
+.altcard h3{font-family:var(--disp);font-weight:700;font-size:16px;color:var(--ink);margin-bottom:4px}
+.altcard .altsub{font-size:11.5px;color:var(--slate);margin-bottom:10px}
+.alt-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.alt-item:last-child{border-bottom:0}
+.alt-item a{color:var(--ink-2);text-decoration:none;font-family:var(--disp);font-weight:600;font-size:14.5px}
+.alt-item a:hover{color:var(--ink);text-decoration:underline}
+.alt-item .alt-lead{font-family:var(--mono);font-size:12px;white-space:nowrap}
 .p-foot{display:flex;gap:10px;flex-wrap:wrap;padding:16px 20px;border-top:1px solid var(--line);background:var(--paper)}
 .p-add{flex:1;min-width:160px;background:var(--signal);color:var(--ink);border:2px solid var(--ink);padding:12px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.04em;text-transform:uppercase}
 .p-add:hover{background:var(--ink);color:var(--signal)}
@@ -235,6 +243,7 @@ function renderPart(){
   updateProductSchema(pn,price,lb);
   const distLbl=DIST_NAME[f.d];
   const inq=loadQuote().some(x=>x.pn===pn);
+  const alternatives=FAM.filter(x=>x.s===f.s&&x.c===f.c&&x._i!==f._i&&x.lw<f.lw).sort((a,b)=>a.lw-b.lw).slice(0,3);
   document.getElementById('wrap').innerHTML=`
     <div class="crumb">
       <a href="index.html">Home</a><span class="sep">/</span>
@@ -270,7 +279,12 @@ function renderPart(){
         ${(typeof bomApplicability==='function'&&bomApplicability(f).ok)?`<a class="p-bom" href="voltfield-bom-generator.html?fi=${f._i}&o=${picksToParam(f,picks)}">Component BOM &rsaquo;</a>`:''}
         <button class="p-copy" id="pCopy">Copy link</button>
       </div>
-    </div>`;
+    </div>
+    ${alternatives.length?`<div class="altcard">
+      <h3>Faster alternatives in ${f.c}</h3>
+      <div class="altsub">Same category, shorter lead time than ${lb.t}.</div>
+      <div id="altList">${alternatives.map(a=>`<div class="alt-item"><a href="voltfield-part.html?fi=${a._i}">${a.n}</a><span class="lead ${leadBadge(a).c} alt-lead">${leadBadge(a).t}</span></div>`).join('')}</div>
+    </div>`:''}`;
   document.querySelectorAll('select[data-ai]').forEach(sel=>sel.onchange=()=>{PS.picks[+sel.dataset.ai]=sel.value;syncURL();renderPart();});
   const qi=document.getElementById('pQty'); qi.onchange=()=>{PS.qty=Math.max(1,parseInt(qi.value,10)||1);syncURL();renderPart();};
   document.getElementById('pAdd').onclick=()=>{
