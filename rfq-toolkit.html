@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RFQ Toolkit: Readiness Checklist &amp; Spec Templates | VOLTFIELD Supply Co.</title>
+<meta name="description" content="A free RFQ readiness checklist and copy-paste technical spec templates for transformers, switchgear, and battery storage — so every vendor you solicit gets the same complete information.">
+<meta name="keywords" content="RFQ checklist, RFQ template, transformer spec template, switchgear spec template, BESS spec template, request for quotation procurement checklist">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:title" content="RFQ Toolkit: Readiness Checklist &amp; Spec Templates">
+<meta property="og:description" content="A free RFQ readiness checklist and copy-paste technical spec templates for transformers, switchgear, and battery storage.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-rfq-toolkit.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-rfq-toolkit.jpg">
+<meta name="twitter:title" content="RFQ Toolkit: Readiness Checklist & Spec Templates">
+<meta name="twitter:description" content="Free RFQ readiness checklist plus copy-paste spec templates for transformers, switchgear, and BESS.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"BreadcrumbList","itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
+   {"@type":"ListItem","position":2,"name":"RFQ Toolkit","item":"https://voltfield.org/rfq-toolkit.html"}
+ ]},
+ {"@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"What should I include in an RFQ for industrial or energy equipment?","acceptedAnswer":{"@type":"Answer","text":"At minimum: the technical spec (voltage class, rating, standard), quantity, required delivery date and location, applicable compliance/certification requirements, budget range if you have one, and your commercial terms. Missing any of these is the most common reason vendor quotes come back inconsistent or hard to compare."}},
+   {"@type":"Question","name":"Why does every vendor need the exact same information in an RFQ?","acceptedAnswer":{"@type":"Answer","text":"If vendors receive different levels of detail, their quotes aren't actually comparable — one bidder might quote a cheaper unit because they weren't told about a certification requirement the others assumed. Sending an identical, complete spec to every bidder is what makes a bid comparison meaningful."}},
+   {"@type":"Question","name":"Are these RFQ templates specific to Voltfield?","acceptedAnswer":{"@type":"Answer","text":"No — they're generic technical specification templates you can send to any vendor, not just Voltfield. They're meant to help you solicit consistent, complete quotes across your whole bidder list."}}
+ ]}
+]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<style>
+:root{
+  --ink:#101B2D;--ink-2:#22334C;--slate:#5B6B7E;--paper:#DDE5EC;--card:#F3F6FA;
+  --line:#C4CFDA;--line-dark:#A7B6C6;--signal:#FFC400;--signal-deep:#E5AC00;
+  --dc:#2B6CB0;--re:#2E7D4F;--bess:#B7791F;--og:#9C4221;--mro:#5B6B7E;--ok:#2E7D4F;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;--body:'IBM Plex Sans',system-ui,sans-serif;--disp:'Barlow Condensed',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5}
+button,a{font-family:inherit;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+.utilbar{background:var(--ink);color:#C9D3DF;font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:6px 20px;display:flex;justify-content:space-between;gap:12px}
+.utilbar b{color:var(--signal);font-weight:600}
+.utilbar .right{display:none}
+@media(min-width:720px){.utilbar .right{display:block}}
+header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:60}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo .bolt{width:34px;height:34px;background:var(--signal);display:grid;place-items:center;border:2px solid var(--ink)}
+.logo .bolt svg{width:18px;height:18px}
+.logo .wordmark{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.02em;line-height:1}
+.logo .wordmark small{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.18em;color:var(--slate)}
+.hnav{display:none;gap:4px}
+.navtoggle{display:none;background:var(--ink);color:#fff;border:2px solid var(--ink);width:42px;height:38px;font-size:20px;line-height:1;align-items:center;justify-content:center;flex-shrink:0}
+@media(max-width:899px){.navtoggle{display:inline-flex}.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:2px solid var(--ink);padding:6px 12px 10px;gap:0;box-shadow:0 10px 20px rgba(16,27,45,.14);z-index:59}.hnav.open a{padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}.hnav.open a:last-child{border-bottom:0}}
+@media(min-width:900px){.hnav{display:flex}}
+.hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
+.hnav a:hover{color:var(--ink);background:var(--paper)}
+.navdrop{position:relative}
+.navdrop-btn{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-transform:uppercase;border:0;border-bottom:3px solid transparent;background:none;display:inline-flex;align-items:center;gap:4px}
+.navdrop-btn:hover{color:var(--ink);background:var(--paper)}
+.navdrop-btn .car{width:8px;height:8px;flex-shrink:0}
+.navdrop-menu{display:none;position:absolute;top:100%;left:0;background:var(--card);border:2px solid var(--ink);min-width:190px;z-index:70;flex-direction:column}
+.navdrop.open .navdrop-menu,.navdrop:hover .navdrop-menu,.navdrop:focus-within .navdrop-menu{display:flex}
+.navdrop-menu a{padding:10px 14px;font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line)}
+.navdrop-menu a:last-child{border-bottom:0}
+.navdrop-menu a:hover{background:var(--paper);color:var(--ink)}
+@media(max-width:899px){
+.navdrop-btn{width:100%;justify-content:space-between;padding:12px 6px;border-bottom:1px solid var(--line)}
+.navdrop-menu{display:flex!important;position:static;border:0;min-width:0;background:var(--paper)}
+.navdrop-menu a{padding-left:26px;border-bottom:1px solid var(--line)}
+.navdrop-btn .car{display:none}
+}
+.headright{margin-left:auto;display:flex;align-items:center;gap:10px}
+.quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
+.quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
+.artban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:32px 20px 34px}
+.artban-in{max-width:900px;margin:0 auto}
+.artban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:10px}
+.artban h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,44px);letter-spacing:.01em;line-height:1.06}
+.artban p.dek{color:#AFC0D3;font-size:15.5px;margin-top:14px;line-height:1.55;max-width:680px}
+.artwrap{max-width:900px;margin:0 auto;padding:36px 20px 8px}
+.artwrap h2{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:.01em;color:var(--ink);margin:34px 0 8px}
+.artwrap p{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:14px}
+.artwrap a.inline{color:var(--signal-deep);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
+.callout{background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--signal);padding:16px 18px;margin:20px 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.checklist{background:var(--card);border:1px solid var(--line-dark);padding:20px;margin:16px 0}
+.cl-score{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line-dark)}
+.cl-score .num{font-family:var(--disp);font-weight:700;font-size:32px;color:var(--ink)}
+.cl-score .num span{color:var(--slate);font-size:20px}
+.cl-score .msg{font-family:var(--mono);font-size:12px;color:var(--slate);max-width:340px}
+.cl-bar{height:8px;background:var(--line);width:100%;margin-top:8px;overflow:hidden}
+.cl-bar-fill{height:100%;background:var(--signal);transition:width .2s}
+.cl-item{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+.cl-item:last-child{border-bottom:0}
+.cl-item input{margin-top:3px;width:18px;height:18px;flex-shrink:0;accent-color:var(--signal)}
+.cl-item label{cursor:pointer}
+.cl-item .t{font-family:var(--disp);font-weight:600;font-size:15.5px;color:var(--ink)}
+.cl-item .d{font-size:12.5px;color:var(--slate);margin-top:2px;line-height:1.5}
+.tmplbox{background:var(--card);border:1px solid var(--line-dark);margin:16px 0}
+.tmplbox h3{font-family:var(--disp);font-weight:700;font-size:18px;padding:14px 18px 0}
+.tmplbox pre{background:#0F1B2D;color:#C9D3DF;padding:14px 18px;font-family:var(--mono);font-size:12px;line-height:1.7;overflow-x:auto;white-space:pre;margin:12px 18px}
+.tmplbox .tb-actions{padding:0 18px 16px}
+.tmplbox button{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 16px;font-family:var(--disp);font-weight:700;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase}
+.tmplbox button:hover{background:transparent;color:var(--ink)}
+.tmplbox button.copied{background:var(--signal);border-color:var(--signal);color:var(--ink)}
+.ctaband{background:linear-gradient(120deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;border-top:4px solid var(--signal)}
+.ctaband-in{max-width:1240px;margin:0 auto;padding:44px 20px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.ctaband h3{font-family:var(--disp);font-weight:700;font-size:28px;letter-spacing:.01em}
+.ctaband p{color:#AFC0D3;font-size:14px;margin-top:6px;max-width:460px}
+.ctabtn{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:14px 26px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.05em;text-decoration:none;flex-shrink:0}
+.ctabtn:hover{background:transparent;color:var(--signal)}
+footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
+footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
+@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
+footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer p{line-height:1.6;max-width:460px}
+footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
+footer a{color:#9FB0C3;text-decoration:none}
+footer a:hover{color:#fff}
+</style>
+</head>
+<body>
+<div class="utilbar">
+  <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
+  <span class="right">+1 (850) 686-1378 &nbsp;|&nbsp; RFQ@voltfield.com</span>
+</div>
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — ENERGY INFRASTRUCTURE PARTS</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="index.html">Home</a>
+    <a href="voltfield-supply-catalog.html">All Parts</a>
+    <a href="voltfield-suppliers.html">All Suppliers</a>
+    <a href="voltfield-bom.html">Quick Order</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu">
+        <a href="voltfield-bom-generator.html">BOM Generator</a>
+        <a href="voltfield-pcb.html">PCB Builder</a>
+        <a href="voltfield-identify.html">Part ID</a>
+        <a href="voltfield-eol.html">Obsolete/EOL</a>
+        <a href="engineering-calculators.html">Calculators</a>
+        <a href="rfq-toolkit.html" class="on">RFQ Toolkit</a>
+      </div>
+    </div>
+    <a href="voltfield-insights.html">Insights</a>
+    <a href="voltfield-account.html">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View quote list on catalog page">QUOTE LIST <span class="ct" id="quoteCount">0</span></a>
+  </div>
+</header>
+<section class="artban">
+  <div class="artban-in">
+    <div style="font-family:var(--mono);font-size:11px;color:#8DA0B8;margin-bottom:12px"><a href="index.html" style="color:#8DA0B8;text-decoration:none">Home</a> / <span style="color:#E8EDF3">RFQ Toolkit</span></div>
+    <div class="eyebrow">Free Tools · No Signup</div>
+    <h1>RFQ Toolkit</h1>
+    <p class="dek">A readiness checklist and copy-paste technical spec templates — send every vendor on your bid list the exact same complete information, so the quotes that come back are actually comparable.</p>
+  </div>
+</section>
+<div class="artwrap">
+  <h2>RFQ Readiness Checklist</h2>
+  <p>Check off what you already have. Anything left unchecked is worth gathering before your RFQ goes out — it's the most common reason vendor quotes come back inconsistent or need a second round of questions.</p>
+  <div class="checklist">
+    <div class="cl-score">
+      <div>
+        <div class="num"><span id="clScore">0</span><span>/9 ready</span></div>
+        <div class="cl-bar"><div class="cl-bar-fill" id="clBarFill" style="width:0%"></div></div>
+      </div>
+      <div class="msg" id="clMsg">Check off items as you confirm you have them.</div>
+    </div>
+    <div id="clList"></div>
+  </div>
+
+  <h2>Spec Templates</h2>
+  <p>Plain-text technical specification templates for three common categories — copy, fill in the blanks, and send to any vendor (not just Voltfield). Sending the identical template to every bidder is what makes their quotes comparable.</p>
+
+  <div class="tmplbox" id="tmplTransformer">
+    <h3>Transformer RFQ Spec Template</h3>
+    <pre id="tmplTransformerText">TRANSFORMER -- TECHNICAL SPECIFICATION FOR RFQ
+================================================
+Project: [name / number]
+Quantity: [ ]
+Rating: [ ] kVA/MVA, [ ] phase
+Voltage class: Primary [ ] kV / Secondary [ ] kV
+Cooling class: [ ] (e.g. ONAN / ONAF / OFAF)
+Impedance (%Z): [ ] % (or "per standard design")
+BIL: [ ] kV
+Vector group: [ ] (e.g. Dyn11)
+Winding material: [ ] Copper / Aluminum
+Applicable standards: [ ] (e.g. IEEE/ANSI C57.12.00)
+Compliance/certifications required: [ ]
+Required delivery date: [ ]
+Delivery location: [ ]
+Domestic content / FEOC requirements (if any): [ ]
+Notes: [ ]</pre>
+    <div class="tb-actions"><button type="button" data-target="tmplTransformerText">Copy template</button></div>
+  </div>
+
+  <div class="tmplbox" id="tmplSwitchgear">
+    <h3>Switchgear RFQ Spec Template</h3>
+    <pre id="tmplSwitchgearText">SWITCHGEAR -- TECHNICAL SPECIFICATION FOR RFQ
+================================================
+Project: [name / number]
+Quantity: [ ] sections / units
+Type: [ ] Metal-clad / Metal-enclosed / Low-voltage
+Voltage class: [ ] kV
+Continuous current rating: [ ] A
+Interrupting rating: [ ] kA
+Arc-resistant rating required: [ ] Yes/No -- Type [1 / 2 / 2B]
+Applicable standards: [ ] (e.g. IEEE C37.20.2, C37.20.1, or UL 1558)
+Compliance/certifications required: [ ]
+Required delivery date: [ ]
+Delivery location: [ ]
+Notes: [ ]</pre>
+    <div class="tb-actions"><button type="button" data-target="tmplSwitchgearText">Copy template</button></div>
+  </div>
+
+  <div class="tmplbox" id="tmplBess">
+    <h3>Battery Energy Storage (BESS) RFQ Spec Template</h3>
+    <pre id="tmplBessText">BATTERY ENERGY STORAGE SYSTEM -- TECHNICAL SPECIFICATION FOR RFQ
+================================================
+Project: [name / number]
+Quantity: [ ]
+Energy rating: [ ] kWh / MWh
+Power rating: [ ] kW / MW
+Chemistry: [ ] (e.g. LFP)
+Depth of discharge assumption: [ ] %
+Round-trip efficiency assumption: [ ] %
+Enclosure rating: [ ] (e.g. NEMA 3R)
+Safety certifications required: [ ] (e.g. UL 9540 / UL 9540A)
+FEOC-clean sourcing required: [ ] Yes/No
+Required delivery date: [ ]
+Delivery location: [ ]
+Notes: [ ]</pre>
+    <div class="tb-actions"><button type="button" data-target="tmplBessText">Copy template</button></div>
+  </div>
+
+  <div class="callout"><b>Need the technical fields explained?</b> See <a class="inline" href="guide-transformer-nameplate.html">how to read a transformer nameplate</a> for the transformer fields above, or <a class="inline" href="guide-switchgear-compartments.html">switchgear compartment types</a> for the switchgear fields. Run the numbers with the <a class="inline" href="engineering-calculators.html">engineering calculators</a> before you fill in the blanks.</div>
+
+  <h2>Where Voltfield fits in</h2>
+  <p>Once your spec is solid, configure the actual part on the <a class="inline" href="voltfield-supply-catalog.html">catalog</a> and get a real quote in 24 hours — or if you already have a full BOM, <a class="inline" href="voltfield-bom.html">Quick Order</a> matches every line in one pass. Building your quote list as you go? The <a class="inline" href="voltfield-rfq.html">RFQ builder</a> turns your saved parts into a printable, sendable request automatically.</p>
+
+  <h2>Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What should I include in an RFQ for industrial or energy equipment?</summary>
+    <p style="margin-top:10px">At minimum: the technical spec (voltage class, rating, standard), quantity, required delivery date and location, applicable compliance/certification requirements, budget range if you have one, and your commercial terms. Missing any of these is the most common reason vendor quotes come back inconsistent or hard to compare.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why does every vendor need the exact same information in an RFQ?</summary>
+    <p style="margin-top:10px">If vendors receive different levels of detail, their quotes aren't actually comparable — one bidder might quote a cheaper unit because they weren't told about a certification requirement the others assumed. Sending an identical, complete spec to every bidder is what makes a bid comparison meaningful.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Are these RFQ templates specific to Voltfield?</summary>
+    <p style="margin-top:10px">No — they're generic technical specification templates you can send to any vendor, not just Voltfield. They're meant to help you solicit consistent, complete quotes across your whole bidder list.</p>
+  </details>
+</div>
+<div class="ctaband">
+  <div class="ctaband-in">
+    <div>
+      <h3>Ready to send your RFQ?</h3>
+      <p>Configure the exact part on the catalog and get a real quote in 24 hours.</p>
+    </div>
+    <a class="ctabtn" href="voltfield-supply-catalog.html">BROWSE THE CATALOG &rarr;</a>
+  </div>
+</div>
+<footer>
+  <div class="in">
+    <div>
+      <h5>Voltfield Supply Co.</h5>
+      <p>Stocking distributor and sourcing agent for long-lead electrical, storage, oilfield, and MRO/industrial supply equipment. These templates and checklist are general procurement guidance, not a substitute for your own commercial or legal review of vendor terms.</p>
+    </div>
+    <div><h5>Desks</h5><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+      <li><a href="oil-gas.html">Drilling &amp; Completions</a></li>
+      <li><a href="industrial-supply.html">Industrial Supply (MRO)</a></li>
+    </ul></div>
+    <div><h5>Reference</h5><ul>
+      <li><a href="glossary.html">Glossary</a></li>
+      <li><a href="engineering-calculators.html">Engineering Calculators</a></li>
+      <li><a href="lead-time-index.html">Lead-Time Index</a></li>
+    </ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script>
+(function(){
+  try{
+    const q=JSON.parse(localStorage.getItem("vf_quote")||"[]");
+    const el=document.getElementById("quoteCount");
+    if(el)el.textContent=Array.isArray(q)?q.length:0;
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  const ITEMS=[
+    {t:'Technical spec', d:'Equipment category, rating, voltage class, and applicable standard.'},
+    {t:'Quantity', d:'Exact number of units or sections needed.'},
+    {t:'Required delivery date', d:'Target date, or the lead time range you can accept.'},
+    {t:'Delivery location', d:'Site address, so vendors can quote real freight.'},
+    {t:'Compliance/certification requirements', d:'UL, IEEE, NEMA, arc-resistant rating, or other certs the equipment must carry.'},
+    {t:'FEOC / domestic content / tariff status', d:'Whether sourcing needs to meet FEOC-clean, domestic-content, or tariff-exposure requirements.'},
+    {t:'Budget range or not-to-exceed price', d:'Even a rough range helps vendors flag a mismatch early.'},
+    {t:'Number of vendors being solicited / bid due date', d:'Sets expectations for how competitive the process is and when you need quotes back.'},
+    {t:'Commercial terms', d:'Payment terms, Incoterms, warranty expectations.'}
+  ];
+  const list=document.getElementById('clList');
+  list.innerHTML=ITEMS.map((it,i)=>`<div class="cl-item"><input type="checkbox" id="cl${i}" data-i="${i}"><label for="cl${i}"><div class="t">${it.t}</div><div class="d">${it.d}</div></label></div>`).join('');
+
+  function loadState(){try{const s=JSON.parse(localStorage.getItem('vf_rfq_checklist')||'[]');return Array.isArray(s)?s:[];}catch(e){return [];}}
+  function saveState(s){localStorage.setItem('vf_rfq_checklist',JSON.stringify(s));}
+  function updateScore(){
+    const checked=[...list.querySelectorAll('input:checked')].length;
+    document.getElementById('clScore').textContent=checked;
+    document.getElementById('clBarFill').style.width=(checked/ITEMS.length*100)+'%';
+    const msg=document.getElementById('clMsg');
+    if(checked===ITEMS.length)msg.textContent='RFQ-ready — send the same spec to every vendor on your list.';
+    else if(checked>=6)msg.textContent='Nearly there — a couple of gaps left to fill in.';
+    else if(checked>=3)msg.textContent='Good start — keep gathering the unchecked items.';
+    else msg.textContent='Check off items as you confirm you have them.';
+  }
+  const state=loadState();
+  list.querySelectorAll('input[type=checkbox]').forEach(cb=>{
+    const i=+cb.dataset.i;
+    cb.checked=!!state[i];
+    cb.addEventListener('change',()=>{
+      const s=loadState(); s[i]=cb.checked; saveState(s); updateScore();
+    });
+  });
+  updateScore();
+
+  document.querySelectorAll('.tmplbox button[data-target]').forEach(btn=>{
+    btn.addEventListener('click',async()=>{
+      const text=document.getElementById(btn.dataset.target).textContent;
+      try{
+        await navigator.clipboard.writeText(text);
+        const orig=btn.textContent; btn.textContent='Copied ✓'; btn.classList.add('copied');
+        setTimeout(()=>{btn.textContent=orig; btn.classList.remove('copied');},1800);
+      }catch(e){
+        const orig=btn.textContent; btn.textContent='Select text above to copy';
+        setTimeout(()=>{btn.textContent=orig;},2200);
+      }
+    });
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>
