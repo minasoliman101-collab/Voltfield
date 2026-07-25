@@ -153,7 +153,7 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .print-header{display:none}
 .cfg-print{display:none}
 @media print{
-  .utilbar,header.site,footer,.p-foot,.toast,.altcard,.crumb,.navtoggle,.rvstrip{display:none!important}
+  .utilbar,header.site,footer,.p-foot,.toast,.altcard,.crumb,.navtoggle,.rvstrip,.p-alert{display:none!important}
   .print-header{display:block;margin-bottom:18px;border-bottom:2px solid #000;padding-bottom:10px}
   .print-header .ph-brand{font-family:var(--disp);font-weight:700;font-size:20px}
   .print-header .ph-meta{font-family:var(--mono);font-size:10.5px;color:#555;margin-top:4px}
@@ -167,9 +167,30 @@ footer{background:var(--ink);color:#9FB0C3;padding:30px 20px;font-size:12px;marg
 footer .in{max-width:720px;margin:0 auto}
 footer p{line-height:1.6}
 footer a{color:#9FB0C3}
+.hidden-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.p-alert{border-top:1px solid var(--line);margin-top:14px;padding-top:12px}
+.p-alert-toggle{background:none;border:0;padding:0;font-family:var(--mono);font-size:12px;color:var(--signal-deep);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.p-alert-form{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.p-alert-form input[type=email]{flex:1;min-width:200px;border:1px solid var(--line-dark);padding:9px 10px;font-family:var(--mono);font-size:13px}
+.p-alert-form button{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase}
+.p-alert-form button:hover{background:transparent;color:var(--ink)}
+.p-alert-msg{font-family:var(--mono);font-size:11.5px;margin-top:8px;display:none}
+.p-alert-msg.show{display:block}
+.p-alert-msg.ok{color:#2E7D4F}
+.p-alert-msg.err{color:#C43D2E}
 </style>
 </head>
 <body>
+<!-- Static Netlify Forms detector. Never shown or submitted directly — its sole
+     purpose is to exist in the deployed HTML so Netlify registers the
+     "part-alert" form and its fields at build time. The real submission (see
+     script below) is an AJAX POST to "/" with a matching form-name and these
+     same field names. -->
+<form name="part-alert" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="hidden-field" aria-hidden="true">
+  <input type="hidden" name="form-name" value="part-alert">
+  <input name="bot-field">
+  <input type="email" name="email"><input type="text" name="part_name"><input type="text" name="part_pn"><input type="text" name="part_url">
+</form>
 <div class="utilbar">
   <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
   <span class="right">+1 (850) 686-1378 &nbsp;|&nbsp; RFQ@voltfield.com</span>
@@ -344,6 +365,14 @@ function renderPart(){
           <div><span>Voltfield sourcing ref</span><b>${sourcingRef(pn)}</b></div>
         </div>
         <div class="p-note">This is one configuration within the <b>${f.n}</b> family (${fmt(f.ct)} SKUs). Change any option above and the shareable link updates automatically. The sourcing ref is Voltfield's own internal tracking code for this configuration — not a manufacturer SKU or UPC.</div>
+        <div class="p-alert" id="pAlertBox">
+          <button type="button" class="p-alert-toggle" id="pAlertToggle">&#128276; Notify me if this part's lead time or price changes</button>
+          <form class="p-alert-form" id="pAlertForm" style="display:none">
+            <input type="email" id="pAlertEmail" placeholder="you@company.com" required>
+            <button type="submit" id="pAlertSubmit">Notify me</button>
+          </form>
+          <div class="p-alert-msg" id="pAlertMsg"></div>
+        </div>
       </div>
       <div class="p-foot">
         <button class="p-add${inq?' in':''}" id="pAdd">${inq?'In quote ✓':'Add to quote'}</button>
@@ -377,6 +406,33 @@ function renderPart(){
     else fallbackCopy(url);
   };
   document.getElementById('pPrint').onclick=()=>{window.print();};
+  const alertToggle=document.getElementById('pAlertToggle');
+  alertToggle.onclick=()=>{
+    const form=document.getElementById('pAlertForm');
+    const showing=form.style.display!=='none';
+    form.style.display=showing?'none':'flex';
+    alertToggle.style.display=showing?'':'none';
+  };
+  document.getElementById('pAlertForm').addEventListener('submit',async e=>{
+    e.preventDefault();
+    const email=document.getElementById('pAlertEmail').value.trim();
+    const msg=document.getElementById('pAlertMsg');
+    function showMsg(text,cls){msg.textContent=text;msg.className='p-alert-msg show '+cls;}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showMsg('Add a valid email address.','err');return;}
+    const btn=document.getElementById('pAlertSubmit'); const orig=btn.textContent; btn.textContent='Sending…'; btn.disabled=true;
+    const body=['form-name=part-alert','email='+encodeURIComponent(email),'part_name='+encodeURIComponent(configuredName(f,picks)),
+      'part_pn='+encodeURIComponent(pn),'part_url='+encodeURIComponent(location.origin+location.pathname+'?'+new URLSearchParams({fi:f._i,o:picksToParam(f,picks),chk:PS.chk}))].join('&');
+    try{
+      const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body});
+      if(!r.ok)throw new Error('status '+r.status);
+      showMsg('You\'re set — we\'ll email you if this part\'s lead time or price changes.','ok');
+      document.getElementById('pAlertForm').style.display='none';
+    }catch(err){
+      showMsg('Online signup isn\'t reachable here — email RFQ@voltfield.com with this part number to be added manually.','err');
+    }finally{
+      btn.textContent=orig; btn.disabled=false;
+    }
+  });
 }
 function fallbackCopy(text){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Link copied');}catch(e){toast('Copy failed — select the address bar');}ta.remove();}
 </script>
