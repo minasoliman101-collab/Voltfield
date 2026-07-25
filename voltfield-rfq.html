@@ -155,7 +155,7 @@ table.rfq input.q{width:60px;border:1px solid var(--line-dark);padding:5px 6px;f
 </form>
 <div class="utilbar noprint">
   <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
-  <span class="right">+1 (850) 686-1378 &nbsp;|&nbsp; RFQ@voltfield.com</span>
+  <span class="right">+1 (850) 686-1378 &nbsp;|&nbsp; RFQ@voltfield.org</span>
 </div>
 <header class="site noprint">
   <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
@@ -235,7 +235,7 @@ function mount(){
     <div class="rfqhead">
       <div class="co">
         <div class="nm"><span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>VOLTFIELD SUPPLY CO.</div>
-        <div class="addr">Energy Infrastructure &amp; Industrial Supply<br>4043 Star Trek Ln, Garland, TX 75044<br>+1 (850) 686-1378 · RFQ@voltfield.com</div>
+        <div class="addr">Energy Infrastructure &amp; Industrial Supply<br>4043 Star Trek Ln, Garland, TX 75044<br>+1 (850) 686-1378 · RFQ@voltfield.org</div>
       </div>
       <div class="doc">
         <h1>REQUEST FOR QUOTATION</h1>
@@ -330,7 +330,7 @@ document.getElementById('emailBtn').onclick=()=>{
   if(notes)body.push('','Notes: '+notes);
   body.push('','(Indicative pricing — please confirm price, availability, and lead time.)');
   const subj='RFQ '+rfqNo+(project?(' — '+project):(company?(' — '+company):''));
-  location.href='mailto:RFQ@voltfield.com?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body.join('\n'));
+  location.href='mailto:RFQ@voltfield.org?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body.join('\n'));
 };
 
 /* ---------- primary path: submit to Netlify Forms (see the hidden "rfq-quote" form) ---------- */

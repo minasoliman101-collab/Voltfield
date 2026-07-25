@@ -170,7 +170,7 @@ The RFQ page's **Send RFQ** button submits the buyer info + quote lines directly
 
 **One-time setup after deploying to Netlify (do this or submissions go unseen):**
 1. Netlify auto-detects the `rfq-quote` form on the next deploy — check **Site configuration → Forms** to confirm it appears.
-2. Under **Forms → Form notifications → Add notification → Email notification**, set the recipient to your monitored inbox (e.g. `Sales@voltfield.com` or `RFQ@voltfield.com` once those mailboxes exist) so every submission emails you immediately.
+2. Under **Forms → Form notifications → Add notification → Email notification**, set the recipient to your monitored inbox (e.g. `Sales@voltfield.org` or `RFQ@voltfield.org` once those mailboxes exist) so every submission emails you immediately.
 3. Submissions are also viewable/exportable anytime under **Site configuration → Forms → rfq-quote**, even without email notifications configured.
 4. Free Netlify tier includes 100 form submissions/month; the honeypot field (`bot-field`) filters most spam automatically.
 

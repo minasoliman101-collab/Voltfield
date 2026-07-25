@@ -47,7 +47,7 @@ const SITE_CONFIG = {
     proMonthlyUrl: '',     /* e.g. 'https://buy.stripe.com/xxxx' */
     proAnnualUrl: '',
     portalUrl: '',         /* Stripe customer-portal login link */
-    salesEmail: 'Sales@voltfield.com',
+    salesEmail: 'Sales@voltfield.org',
   },
 
   /* Analytics (see README §13). Create a free GA4 property at
