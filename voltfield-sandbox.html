@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EE Practice Sandbox — Design &amp; Check a One-Line System | VOLTFIELD Supply Co.</title>
-<meta name="description" content="Free, no-signup one-line system design sandbox. Pick a transformer, main breaker, feeder, and panel loads, then get instant engineering checks on sizing, voltage drop, and fault current. Six built-in challenge scenarios.">
+<meta name="description" content="Free, no-signup one-line system design sandbox. Drag transformer, breaker, feeder, and load tiles onto an open board, then get instant engineering checks on sizing, voltage drop, and fault current. Six built-in challenge scenarios.">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VOLTFIELD Supply Co.">
-<meta property="og:title" content="EE Practice Sandbox — design a one-line, get instant engineering feedback">
-<meta property="og:description" content="A free one-line system builder: size a transformer, main breaker, and feeder for a real panel load, then check your work against sizing, voltage-drop, and fault-current rules.">
+<meta property="og:title" content="EE Practice Sandbox — build a one-line from a legend of parts, get instant feedback">
+<meta property="og:description" content="A free one-line system builder: drag a transformer, breaker, feeder, and load tiles onto an open board, then check your work against sizing, voltage-drop, and fault-current rules.">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
 <meta property="og:image:width" content="1200">
@@ -28,7 +28,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="ordering-hidden.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"VOLTFIELD EE Practice Sandbox","applicationCategory":"EngineeringApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"A one-line system design sandbox for practicing transformer, breaker, feeder, and panel sizing with instant engineering checks on sizing, voltage drop, and fault current."}
+{"@context":"https://schema.org","@type":"WebApplication","name":"VOLTFIELD EE Practice Sandbox","applicationCategory":"EngineeringApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"A drag-and-drop one-line system design sandbox: assemble transformer, breaker, feeder, and load tiles from a legend onto an open board, with instant engineering checks on sizing, voltage drop, and fault current."}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
@@ -99,27 +99,8 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .artwrap{max-width:900px;margin:0 auto;padding:36px 20px 8px}
 .artwrap h2{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:.01em;color:var(--ink);margin:34px 0 8px}
 .artwrap p{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:14px}
-.artwrap ul{margin:0 0 14px 20px}
-.artwrap li{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:6px}
 .artwrap a.inline{color:var(--signal-deep);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
 .callout{background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--signal);padding:16px 18px;margin:20px 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
-.estimator{background:var(--card);border:1px solid var(--line-dark);padding:20px;margin:16px 0 26px;scroll-margin-top:80px}
-.estimator h3{font-family:var(--disp);font-weight:700;font-size:19px;color:var(--ink);margin-bottom:4px}
-.estimator .sub{font-size:12.5px;color:var(--slate);margin-bottom:14px}
-.est-row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:10px}
-.est-field{display:flex;flex-direction:column;gap:4px}
-.est-field label{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--slate)}
-.est-field input,.est-field select{width:140px;border:1px solid var(--line-dark);padding:8px 10px;font-family:var(--mono);font-size:14px;background:#fff}
-.est-field button{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase}
-.est-field button:hover{background:transparent;color:var(--ink)}
-.est-field button.ghost{background:transparent;color:var(--ink)}
-.est-field button.ghost:hover{background:var(--ink);color:#fff}
-.formula{font-family:var(--mono);font-size:11.5px;color:var(--slate);background:#fff;border:1px dashed var(--line-dark);padding:8px 10px;margin-bottom:12px;display:inline-block}
-.reftable{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
-.reftable th,.reftable td{border:1px solid var(--line);padding:6px 8px;text-align:left;font-family:var(--mono)}
-.reftable th{background:var(--ink);color:#fff;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase}
-.reftable tr:nth-child(even) td{background:#fff}
-.reftable tr:nth-child(odd) td{background:var(--card)}
 .modebar{display:flex;gap:0;margin:18px 0 22px;border:2px solid var(--ink);width:fit-content}
 .modebar button{background:#fff;color:var(--ink);border:0;padding:10px 20px;font-family:var(--disp);font-weight:700;font-size:14.5px;letter-spacing:.04em;text-transform:uppercase;border-right:2px solid var(--ink)}
 .modebar button:last-child{border-right:0}
@@ -128,14 +109,31 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .scenariobar.show{display:block}
 .scenariobar select{width:100%;max-width:420px;border:1px solid var(--line-dark);padding:8px 10px;font-family:var(--mono);font-size:13.5px;background:#fff;margin-bottom:10px}
 .scenariobar .prompt{font-size:13.5px;color:var(--ink-2);line-height:1.6}
-.loadsrow{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:8px;padding-bottom:8px;border-bottom:1px dashed var(--line)}
-.loadsrow:last-of-type{border-bottom:0}
-.loadsrow .rm{background:transparent;color:var(--crit);border:1px solid var(--crit);padding:8px 10px;font-family:var(--mono);font-size:11px;text-transform:uppercase}
-.addload{background:transparent;color:var(--ink-2);border:2px dashed var(--line-dark);padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase;width:100%}
-.addload:hover{border-color:var(--ink)}
-.oneline{background:#fff;border:1px solid var(--line-dark);padding:14px;margin:16px 0 26px;overflow-x:auto}
+.oneline{background:#fff;border:1px solid var(--line-dark);padding:14px;margin:16px 0 18px;overflow-x:auto}
 .oneline svg{display:block;min-width:640px}
-.checkpanel{background:var(--card);border:1px solid var(--line-dark);padding:20px;margin:16px 0 26px}
+.board{background:#fff;border:1px solid var(--line-dark);padding:16px;margin:0 0 10px}
+.board-title{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);margin-bottom:8px}
+.board-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px}
+.board-slot{flex:1 1 130px;border:2px dashed var(--line-dark);padding:10px 12px;font-family:var(--mono);font-size:11.5px;cursor:pointer;display:flex;flex-direction:column;justify-content:center;min-height:58px;text-align:center;color:var(--slate);background:none}
+.board-slot .fl{font-family:var(--disp);font-weight:700;font-size:14px;color:var(--ink)}
+.board-slot .fs{font-size:10px;color:var(--slate);margin-top:2px}
+.board-slot.filled{border-style:solid;border-color:var(--ink);background:var(--card);color:var(--ink)}
+.board-slot.target{border-color:var(--signal-deep);background:#FFF7DE;color:var(--ink-2)}
+.legend{margin:20px 0 10px}
+.legend-title{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);margin:16px 0 8px}
+.legend-title:first-child{margin-top:0}
+.tilerow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.tile{background:#fff;border:2px solid var(--line-dark);padding:8px 12px;font-family:var(--mono);font-size:11.5px;text-align:left;cursor:pointer;min-width:96px}
+.tile b{display:block;font-family:var(--disp);font-weight:700;font-size:14px;color:var(--ink)}
+.tile span{display:block;color:var(--slate);font-size:10px;margin-top:2px}
+.tile:hover{border-color:var(--ink)}
+.tile.armed{border-color:var(--signal-deep);background:#FFF7DE;box-shadow:0 0 0 2px var(--signal) inset}
+.est-row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:10px}
+.est-field button{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase}
+.est-field button:hover{background:transparent;color:var(--ink)}
+.est-field button.ghost{background:transparent;color:var(--ink)}
+.est-field button.ghost:hover{background:var(--ink);color:#fff}
+.checkpanel{background:var(--card);border:1px solid var(--line-dark);padding:20px;margin:16px 0 20px}
 .checkrow{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)}
 .checkrow:last-child{border-bottom:0}
 .checkrow .mk{flex-shrink:0;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:14px;color:#fff}
@@ -148,6 +146,13 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .scorebar span{font-family:var(--mono);font-size:12px;color:#AFC0D3;font-weight:400;text-transform:uppercase;letter-spacing:.06em}
 .solvebox{display:none;background:#fff;border:1px dashed var(--line-dark);padding:14px 16px;margin-top:14px;font-family:var(--mono);font-size:12.5px;line-height:1.8;color:var(--ink-2)}
 .solvebox.show{display:block}
+.reveal-card{display:none;background:var(--ink);color:#fff;border-left:6px solid var(--signal);padding:18px 20px;margin:0 0 20px}
+.reveal-card.show{display:block}
+.reveal-card b{font-family:var(--disp);font-weight:700;font-size:21px}
+.reveal-card .sub{color:#AFC0D3;font-size:12.5px;margin-top:3px}
+.reveal-card .nameplate{font-family:var(--mono);font-size:13px;margin-top:12px}
+.reveal-card .standards{font-family:var(--mono);font-size:11px;color:#AFC0D3;margin-top:5px}
+.reveal-card a{color:var(--signal);font-weight:600;text-decoration:underline;display:inline-block;margin-top:12px}
 .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 22px;font-family:var(--disp);font-weight:600;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:100}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .ctaband{background:linear-gradient(120deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;border-top:4px solid var(--signal)}
@@ -205,8 +210,8 @@ footer a:hover{color:#fff}
   <div class="artban-in">
     <div style="font-family:var(--mono);font-size:11px;color:#8DA0B8;margin-bottom:12px"><a href="index.html" style="color:#8DA0B8;text-decoration:none">Home</a> / <span style="color:#E8EDF3">Practice Sandbox</span></div>
     <div class="eyebrow">Free · No Signup · Runs In Your Browser</div>
-    <h1>Design a one-line. Get real engineering feedback.</h1>
-    <p class="dek">Pick a transformer, main breaker, feeder, and panel loads — watch the one-line diagram update live, then check your sizing against the same voltage-drop, fault-current, and ampacity formulas used in the <a href="engineering-calculators.html" style="color:#FFC400">Engineering Calculators</a>. Free Design mode for open-ended practice, or Challenge Mode to hunt for a planted mistake.</p>
+    <h1>Build a one-line from a legend of parts.</h1>
+    <p class="dek">Tap a tile from the legend below, then tap the board slot it belongs in (or drag it, if you'd rather). Assemble a transformer, main breaker, feeder, and panel loads — the diagram updates live as you build, and the right combination is recognized as a real assembly class, the same way the <a href="voltfield-bom-generator.html" style="color:#FFC400">BOM Generator</a> recognizes a part's components in reverse.</p>
   </div>
 </section>
 <div class="artwrap">
@@ -224,41 +229,16 @@ footer a:hover{color:#fff}
 
   <div class="oneline" id="onelineWrap"><svg id="onelineSvg" viewBox="0 0 900 190" xmlns="http://www.w3.org/2000/svg"></svg></div>
 
-  <h2>1 &middot; Transformer</h2>
-  <div class="estimator" id="xfmrCard">
-    <h3>Utility &rarr; Transformer</h3>
-    <div class="sub">Assumes an infinite utility source ahead of the transformer (no upstream impedance).</div>
-    <div class="est-row">
-      <div class="est-field"><label for="sxKva">Size (kVA)</label><select id="sxKva"></select></div>
-      <div class="est-field"><label for="sxZ">Impedance %Z</label><input type="number" id="sxZ" min="0.1" step="0.01" value="5.75"></div>
-      <div class="est-field"><label for="sxV">Secondary voltage, L-L (V)</label><input type="number" id="sxV" min="1" step="1" value="480"></div>
-    </div>
+  <div class="board" id="boardMount"></div>
+
+  <div class="est-row" style="margin:0 0 10px">
+    <div class="est-field" id="exampleWrap"><button type="button" class="ghost" id="loadExampleBtn">Load example</button></div>
+    <div class="est-field"><button type="button" class="ghost" id="clearBoardBtn">Clear board</button></div>
   </div>
 
-  <h2>2 &middot; Main OCPD &amp; Feeder</h2>
-  <div class="estimator" id="ocpdCard">
-    <h3>Main Breaker &amp; Feeder to Panel</h3>
-    <div class="sub">Ampacities are commonly published NEC Table 310.16 75&deg;C values — always verify against the actual conductor/insulation spec.</div>
-    <div class="est-row">
-      <div class="est-field"><label for="sxAt">Main OCPD trip (A)</label><input type="number" id="sxAt" min="1" step="1" value="350"></div>
-      <div class="est-field"><label for="sxAic">OCPD interrupting rating (AIC)</label><select id="sxAic"></select></div>
-      <div class="est-field"><label for="sxMat">Feeder conductor</label><select id="sxMat"><option value="cu">Copper</option><option value="al">Aluminum</option></select></div>
-    </div>
-    <div class="est-row">
-      <div class="est-field"><label for="sxSize">Feeder size</label><select id="sxSize"></select></div>
-      <div class="est-field"><label for="sxLen">One-way feeder length (ft)</label><input type="number" id="sxLen" min="1" step="1" value="150"></div>
-    </div>
-  </div>
+  <div class="legend" id="legendMount"></div>
 
-  <h2>3 &middot; Panel Loads</h2>
-  <div class="estimator" id="loadsCard">
-    <h3>Branch Loads</h3>
-    <div class="sub">Up to 4 branch loads. Motor loads use FLA &asymp; HP&times;746 / (V&times;1.732&times;0.9 eff&times;PF); general loads use kVA directly.</div>
-    <div id="loadsMount"></div>
-    <button type="button" class="addload" id="addLoadBtn">+ Add branch load</button>
-  </div>
-
-  <div class="est-row" style="margin:6px 0 26px">
+  <div class="est-row" style="margin:16px 0 26px">
     <div class="est-field"><button type="button" id="checkBtn">Check My Design</button></div>
     <div class="est-field"><button type="button" class="ghost" id="copyLinkBtn">Copy link</button></div>
     <div class="est-field" id="revealWrap" style="display:none"><button type="button" class="ghost" id="revealBtn">Reveal solution</button></div>
@@ -268,9 +248,10 @@ footer a:hover{color:#fff}
 
   <h2>Results</h2>
   <div class="checkpanel" id="checkPanel">
-    <p style="font-size:13.5px;color:var(--slate)">Click &ldquo;Check My Design&rdquo; above to run the 5 engineering checks.</p>
+    <p style="font-size:13.5px;color:var(--slate)">Place a transformer, main OCPD, conductor, and length tile, then click &ldquo;Check My Design&rdquo;.</p>
   </div>
   <div class="solvebox" id="solveBox"></div>
+  <div class="reveal-card" id="revealCard"></div>
 
   <div class="callout">Want the reference material behind these checks? <a class="inline" href="guide-transformer-nameplate.html">Reading a transformer nameplate (%Z)</a> &middot; <a class="inline" href="guide-switchgear-compartments.html">Switchgear &amp; breaker basics</a> &middot; <a class="inline" href="guide-arc-flash-boundary-basics.html">Arc-flash &amp; interrupting ratings</a></div>
 
@@ -343,37 +324,164 @@ footer a:hover{color:#fff}
     {n:'350 kcmil',cm:350000,cu:310,al:250},{n:'400 kcmil',cm:400000,cu:335,al:270},{n:'500 kcmil',cm:500000,cu:380,al:310},
     {n:'600 kcmil',cm:600000,cu:420,al:340},{n:'750 kcmil',cm:750000,cu:475,al:385},{n:'1000 kcmil',cm:1000000,cu:545,al:445}
   ];
-  const STD_KVA=[15,25,37.5,50,75,100,112.5,150,167,225,300,500,750,1000,1500,2000,2500,3000,3750,5000,7500,10000];
-  const AIC_OPTS=[10000,14000,22000,25000,35000,42000,65000,100000];
   const K={cu:12.9,al:21.2};
   const fmt=(v,d)=>{d=d===undefined?2:d;return Number(v).toLocaleString('en-US',{maximumFractionDigits:d});};
   const $=id=>document.getElementById(id);
 
-  const kvaSel=$('sxKva'), aicSel=$('sxAic'), sizeSel=$('sxSize');
-  kvaSel.innerHTML=STD_KVA.map(k=>`<option value="${k}"${k===300?' selected':''}>${fmt(k,1)} kVA</option>`).join('');
-  aicSel.innerHTML=AIC_OPTS.map(a=>`<option value="${a}"${a===22000?' selected':''}>${fmt(a/1000,0)} kAIC</option>`).join('');
-  sizeSel.innerHTML=AWG.map((a,i)=>`<option value="${i}"${a.n==='500 kcmil'?' selected':''}>${a.n}</option>`).join('');
+  /* ---------- legend tiles ---------- */
+  const XFMR_TILES=[
+    {id:'x75',label:'75 kVA',kva:75,z:5.75,v:480},
+    {id:'x150',label:'150 kVA',kva:150,z:5.75,v:480},
+    {id:'x300',label:'300 kVA',kva:300,z:5.75,v:480},
+    {id:'x500',label:'500 kVA',kva:500,z:5.75,v:480},
+    {id:'x750',label:'750 kVA',kva:750,z:5.75,v:480},
+    {id:'x1000',label:'1000 kVA',kva:1000,z:5.75,v:480},
+    {id:'x1500',label:'1500 kVA',kva:1500,z:5.75,v:480},
+    {id:'x2000',label:'2000 kVA',kva:2000,z:5.75,v:480},
+    {id:'x300lz',label:'300 kVA',kva:300,z:3.5,v:480,note:'stiff source'},
+    {id:'x750lz',label:'750 kVA',kva:750,z:3.5,v:480,note:'stiff source'}
+  ];
+  const OCPD_TILES=[
+    {id:'o100-22',label:'100A',at:100,aic:22000},
+    {id:'o225-22',label:'225A',at:225,aic:22000},
+    {id:'o400-35',label:'400A',at:400,aic:35000},
+    {id:'o400-10',label:'400A',at:400,aic:10000},
+    {id:'o600-35',label:'600A',at:600,aic:35000},
+    {id:'o800-65',label:'800A',at:800,aic:65000},
+    {id:'o1200-65',label:'1200A',at:1200,aic:65000},
+    {id:'o1200-100',label:'1200A',at:1200,aic:100000}
+  ];
+  const COND_TILES=[
+    {id:'c2_0',label:'2/0 AWG Cu',mat:'cu',sizeIdx:10},
+    {id:'c4_0',label:'4/0 AWG Cu',mat:'cu',sizeIdx:12},
+    {id:'c300k',label:'300 kcmil Cu',mat:'cu',sizeIdx:14},
+    {id:'c500k',label:'500 kcmil Cu',mat:'cu',sizeIdx:17},
+    {id:'c600kAl',label:'600 kcmil Al',mat:'al',sizeIdx:18},
+    {id:'c750k',label:'750 kcmil Cu',mat:'cu',sizeIdx:19}
+  ];
+  const LEN_TILES=[
+    {id:'l50',label:'50 ft',len:50},{id:'l100',label:'100 ft',len:100},{id:'l250',label:'250 ft',len:250},
+    {id:'l500',label:'500 ft',len:500},{id:'l1000',label:'1000 ft',len:1000},{id:'l2500',label:'2500 ft',len:2500}
+  ];
+  const MOTOR_TILES=[
+    {id:'m25',label:'25 HP',hp:25,pf:0.87,type:'motor'},{id:'m50',label:'50 HP',hp:50,pf:0.87,type:'motor'},
+    {id:'m100',label:'100 HP',hp:100,pf:0.87,type:'motor'},{id:'m150',label:'150 HP',hp:150,pf:0.87,type:'motor'},
+    {id:'m250',label:'250 HP',hp:250,pf:0.87,type:'motor'},{id:'m400',label:'400 HP',hp:400,pf:0.87,type:'motor'}
+  ];
+  const GEN_TILES=[
+    {id:'g50',label:'50 kVA',kva:50,pf:0.9,type:'general'},{id:'g100',label:'100 kVA',kva:100,pf:0.9,type:'general'},
+    {id:'g200',label:'200 kVA',kva:200,pf:0.9,type:'general'},{id:'g400',label:'400 kVA',kva:400,pf:0.9,type:'general'},
+    {id:'g600',label:'600 kVA',kva:600,pf:0.9,type:'general'}
+  ];
+  const LOAD_TILES=MOTOR_TILES.concat(GEN_TILES);
+  const CAT_TILES={xfmr:XFMR_TILES,ocpd:OCPD_TILES,cond:COND_TILES,len:LEN_TILES,load:LOAD_TILES};
+  const CAT_LABEL={xfmr:'Transformer',ocpd:'Main OCPD',cond:'Feeder conductor',len:'Feeder length',load:'Branch load'};
+  function findTile(cat,id){ return CAT_TILES[cat].find(t=>t.id===id)||null; }
 
-  /* ---------- branch loads ---------- */
-  let loads=[{type:'motor',val:150,pf:0.87},{type:'general',val:80,pf:0.9}];
-  function renderLoads(){
-    $('loadsMount').innerHTML=loads.map((l,i)=>`
-      <div class="loadsrow" data-i="${i}">
-        <div class="est-field"><label>Type</label><select class="ldType"><option value="motor"${l.type==='motor'?' selected':''}>Motor (HP)</option><option value="general"${l.type==='general'?' selected':''}>General (kVA)</option></select></div>
-        <div class="est-field"><label>${l.type==='motor'?'HP':'kVA'}</label><input type="number" class="ldVal" min="0" step="1" value="${l.val}"></div>
-        <div class="est-field"><label>Power factor</label><input type="number" class="ldPf" min="0.1" max="1" step="0.01" value="${l.pf}"></div>
-        ${loads.length>1?'<div class="est-field"><button type="button" class="rm">Remove</button></div>':''}
-      </div>`).join('');
-    $('loadsMount').querySelectorAll('.loadsrow').forEach(row=>{
-      const i=+row.dataset.i;
-      row.querySelector('.ldType').onchange=e=>{loads[i].type=e.target.value;renderLoads();drawOneline();};
-      row.querySelector('.ldVal').oninput=e=>{loads[i].val=parseFloat(e.target.value)||0;drawOneline();};
-      row.querySelector('.ldPf').oninput=e=>{loads[i].pf=parseFloat(e.target.value)||0.01;drawOneline();};
-      const rm=row.querySelector('.rm'); if(rm)rm.onclick=()=>{loads.splice(i,1);renderLoads();drawOneline();};
+  /* ---------- board state ---------- */
+  const board={xfmr:null,ocpd:null,cond:null,len:null,loads:[null,null,null,null]};
+  let armed=null; /* {cat, tile} */
+
+  function tileSub(cat,t){
+    if(cat==='xfmr')return `${t.z}%Z &middot; ${t.v}V${t.note?' &middot; '+t.note:''}`;
+    if(cat==='ocpd')return `${fmt(t.aic/1000,0)}kAIC`;
+    if(cat==='cond'){ const w=AWG[t.sizeIdx]; const amp=t.mat==='al'?(w.al||Math.round(w.cu*0.78)):w.cu; return `${amp}A ampacity`; }
+    if(cat==='len')return '';
+    if(cat==='load')return t.type==='motor'?`Motor &middot; PF ${t.pf}`:`General load &middot; PF ${t.pf}`;
+    return '';
+  }
+
+  function renderLegend(){
+    const groups=[
+      {cat:'xfmr',title:'Transformers',tiles:XFMR_TILES},
+      {cat:'ocpd',title:'Main OCPD (trip / interrupting rating)',tiles:OCPD_TILES},
+      {cat:'cond',title:'Feeder conductor',tiles:COND_TILES},
+      {cat:'len',title:'Feeder length',tiles:LEN_TILES},
+      {cat:'load',title:'Branch loads — motor (HP)',tiles:MOTOR_TILES},
+      {cat:'load',title:'Branch loads — general (kVA)',tiles:GEN_TILES}
+    ];
+    $('legendMount').innerHTML=groups.map(g=>`
+      <div class="legend-title">${g.title}</div>
+      <div class="tilerow">${g.tiles.map(t=>{
+        const isArmed=armed&&armed.cat===g.cat&&armed.tile.id===t.id;
+        return `<button type="button" class="tile${isArmed?' armed':''}" draggable="true" data-cat="${g.cat}" data-id="${t.id}"><b>${t.label}</b><span>${tileSub(g.cat,t)}</span></button>`;
+      }).join('')}</div>
+    `).join('');
+    $('legendMount').querySelectorAll('.tile').forEach(el=>{
+      const cat=el.dataset.cat, id=el.dataset.id;
+      el.addEventListener('click',()=>armTile(cat,findTile(cat,id)));
+      el.addEventListener('dragstart',e=>{ e.dataTransfer.setData('text/plain',JSON.stringify({cat,id})); });
     });
   }
-  $('addLoadBtn').onclick=()=>{ if(loads.length>=4){toast('Up to 4 branch loads in this sandbox.');return;} loads.push({type:'general',val:50,pf:0.9}); renderLoads(); drawOneline(); };
-  renderLoads();
+
+  function armTile(cat,tile){
+    if(armed&&armed.cat===cat&&armed.tile.id===tile.id){ armed=null; } else { armed={cat,tile}; }
+    renderLegend();
+    renderBoard();
+  }
+
+  function boardSlotDef(){
+    return [
+      {key:'xfmr',cat:'xfmr',label:'Transformer'},
+      {key:'ocpd',cat:'ocpd',label:'Main OCPD'},
+      {key:'cond',cat:'cond',label:'Conductor'},
+      {key:'len',cat:'len',label:'Feeder length'}
+    ];
+  }
+
+  function placeTile(cat,tile,loadIdx){
+    if(cat==='load'){ board.loads[loadIdx]=tile; }
+    else { board[cat]=tile; }
+    armed=null;
+    renderLegend();
+    renderBoard();
+    drawOneline();
+  }
+  function clearSlot(cat,loadIdx){
+    if(cat==='load'){ board.loads[loadIdx]=null; } else { board[cat]=null; }
+    renderBoard();
+    drawOneline();
+  }
+
+  function slotHtml(cat,tile,loadIdx){
+    const filled=!!tile;
+    const isTarget=armed&&armed.cat===cat&&!filled;
+    const cls='board-slot'+(filled?' filled':'')+(isTarget?' target':'');
+    const idxAttr=loadIdx!=null?` data-idx="${loadIdx}"`:'';
+    const inner=filled?`<div class="fl">${tile.label}</div><div class="fs">${tileSub(cat,tile)}</div><div class="fs" style="color:var(--crit);margin-top:4px">tap to remove</div>`
+      :`<div class="fl" style="color:var(--slate)">+ ${CAT_LABEL[cat]}</div><div class="fs">${isTarget?'tap to place':'tap a '+CAT_LABEL[cat].toLowerCase()+' tile first'}</div>`;
+    return `<div class="${cls}" data-cat="${cat}"${idxAttr}>${inner}</div>`;
+  }
+
+  function renderBoard(){
+    const top=boardSlotDef().map(s=>slotHtml(s.cat,board[s.key])).join('');
+    const loads=board.loads.map((t,i)=>slotHtml('load',t,i)).join('');
+    $('boardMount').innerHTML=`
+      <div class="board-title">Source &rarr; Transformer &rarr; Main OCPD &rarr; Feeder &rarr; Panel</div>
+      <div class="board-row">${top}</div>
+      <div class="board-title">Panel branch loads (up to 4)</div>
+      <div class="board-row">${loads}</div>
+    `;
+    $('boardMount').querySelectorAll('.board-slot').forEach(el=>{
+      const cat=el.dataset.cat, idx=el.dataset.idx!=null?+el.dataset.idx:null;
+      const filled=cat==='load'?board.loads[idx]:board[cat];
+      el.addEventListener('click',()=>{
+        if(filled){ clearSlot(cat,idx); return; }
+        if(armed&&armed.cat===cat){ placeTile(cat,armed.tile,idx); }
+        else { toast('Tap a '+CAT_LABEL[cat].toLowerCase()+' tile in the legend below first.'); }
+      });
+      el.addEventListener('dragover',e=>e.preventDefault());
+      el.addEventListener('drop',e=>{
+        e.preventDefault();
+        if(filled)return;
+        try{
+          const data=JSON.parse(e.dataTransfer.getData('text/plain'));
+          if(data.cat!==cat){ toast('That tile doesn\'t belong here.'); return; }
+          placeTile(cat,findTile(cat,data.id),idx);
+        }catch(err){}
+      });
+    });
+  }
 
   /* ---------- derived electrical values ---------- */
   function loadKva(l){
@@ -381,11 +489,12 @@ footer a:hover{color:#fff}
     return l.val;
   }
   function state(){
+    const xf=board.xfmr, oc=board.ocpd, cd=board.cond, ln=board.len;
     return {
-      kva:parseFloat(kvaSel.value), z:parseFloat($('sxZ').value)||0.01, v:parseFloat($('sxV').value)||1,
-      at:parseFloat($('sxAt').value)||0, aic:parseFloat(aicSel.value),
-      mat:$('sxMat').value, sizeIdx:parseInt(sizeSel.value,10), len:parseFloat($('sxLen').value)||0,
-      loads: loads.slice()
+      kva: xf?xf.kva:0, z: xf?xf.z:5.75, v: xf?xf.v:480,
+      at: oc?oc.at:0, aic: oc?oc.aic:0,
+      mat: cd?cd.mat:'cu', sizeIdx: cd?cd.sizeIdx:0, len: ln?ln.len:0,
+      loads: board.loads.filter(Boolean).map(t=>t.type==='motor'?{type:'motor',val:t.hp,pf:t.pf}:{type:'general',val:t.kva,pf:t.pf})
     };
   }
   function computed(s){
@@ -393,42 +502,44 @@ footer a:hover{color:#fff}
     const panelI=(totalKva*1000)/(1.732*s.v);
     const wire=AWG[s.sizeIdx];
     const ampacity=s.mat==='al'?(wire.al||wire.cu*0.78):wire.cu;
-    const vd=(1.732*K[s.mat]*panelI*s.len)/wire.cm;
+    const vd=(1.732*K[s.mat]*panelI*s.len)/Math.max(wire.cm,1);
     const vdPct=(vd/s.v)*100;
-    const isc=(100000*s.kva)/(1.732*s.v*s.z);
-    const xfmrFla=(s.kva*1000)/(1.732*s.v);
-    return {totalKva,panelI,ampacity,vd,vdPct,isc,xfmrFla};
+    const isc=(100000*s.kva)/(1.732*s.v*Math.max(s.z,0.01));
+    return {totalKva,panelI,ampacity,vd,vdPct,isc};
   }
 
-  /* ---------- one-line diagram ---------- */
+  /* ---------- one-line diagram (unchanged renderer, now fed by tile state) ---------- */
   function drawOneline(){
     const s=state(), c=computed(s);
     const svg=$('onelineSvg');
     const col='#101B2D';
-    const CY=95, BH=60, BY=CY-BH/2; /* every stage box shares one vertical centerline */
+    const CY=95, BH=60, BY=CY-BH/2;
     const box=(x,w,label,sub)=>`<g><rect x="${x}" y="${BY}" width="${w}" height="${BH}" fill="#fff" stroke="${col}" stroke-width="2"/><text x="${x+w/2}" y="${CY-4}" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="13" fill="${col}">${label}</text><text x="${x+w/2}" y="${CY+13}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="#5B6B7E">${sub}</text></g>`;
     const line=(x1,y1,x2,y2)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="2"/>`;
     const panelX=600, panelW=90, panelCx=panelX+panelW/2, panelBottom=BY+BH;
     const rowH=36, topPad=22, botPad=16;
-    const vbH=Math.max(190, panelBottom+topPad+s.loads.length*rowH+botPad);
+    const nLoads=board.loads.filter(Boolean).length;
+    const vbH=Math.max(190, panelBottom+topPad+Math.max(nLoads,1)*rowH+botPad);
     svg.setAttribute('viewBox','0 0 900 '+vbH);
     let s_='';
     s_+=box(10,90,'UTILITY','&#8734; source');
     s_+=line(100,CY,150,CY);
-    s_+=box(150,110,'XFMR',`${fmt(s.kva,1)} kVA &middot; ${s.z}%Z`);
+    s_+=box(150,110,'XFMR',board.xfmr?`${fmt(s.kva,1)} kVA &middot; ${s.z}%Z`:'empty slot');
     s_+=line(260,CY,310,CY);
-    s_+=box(310,100,'MAIN OCPD',`${fmt(s.at,0)}A / ${fmt(s.aic/1000,0)}kAIC`);
+    s_+=box(310,100,'MAIN OCPD',board.ocpd?`${fmt(s.at,0)}A / ${fmt(s.aic/1000,0)}kAIC`:'empty slot');
     s_+=line(410,CY,460,CY);
-    s_+=`<g><line x1="460" y1="${CY}" x2="${panelX}" y2="${CY}" stroke="${col}" stroke-width="2" stroke-dasharray="6 4"/><text x="${(460+panelX)/2}" y="${CY-9}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="#5B6B7E">${AWG[s.sizeIdx].n} ${s.mat==='cu'?'Cu':'Al'} &middot; ${fmt(s.len,0)} ft</text></g>`;
+    s_+=`<g><line x1="460" y1="${CY}" x2="${panelX}" y2="${CY}" stroke="${col}" stroke-width="2" stroke-dasharray="6 4"/><text x="${(460+panelX)/2}" y="${CY-9}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="#5B6B7E">${board.cond&&board.len?AWG[s.sizeIdx].n+' '+(s.mat==='cu'?'Cu':'Al')+' &middot; '+fmt(s.len,0)+' ft':'empty feeder'}</text></g>`;
     s_+=box(panelX,panelW,'PANEL',`${fmt(c.panelI,0)} A`);
-    const busBottom=panelBottom+topPad+(s.loads.length-1)*rowH+rowH/2;
-    if(s.loads.length)s_+=`<line x1="${panelCx}" y1="${panelBottom}" x2="${panelCx}" y2="${busBottom}" stroke="${col}" stroke-width="1.5"/>`;
-    s.loads.forEach((l,i)=>{
-      const y=panelBottom+topPad+i*rowH;
+    const busBottom=panelBottom+topPad+Math.max(nLoads-1,0)*rowH+rowH/2;
+    if(nLoads)s_+=`<line x1="${panelCx}" y1="${panelBottom}" x2="${panelCx}" y2="${busBottom}" stroke="${col}" stroke-width="1.5"/>`;
+    let li=0;
+    board.loads.forEach(l=>{
+      if(!l)return;
+      const y=panelBottom+topPad+li*rowH; li++;
       const tickX=panelCx+40;
       s_+=`<line x1="${panelCx}" y1="${y}" x2="${tickX}" y2="${y}" stroke="${col}" stroke-width="1.5"/>`;
       s_+=`<circle cx="${tickX}" cy="${y}" r="3" fill="${col}"/>`;
-      s_+=`<text x="${tickX+10}" y="${y+4}" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="${col}">${l.type==='motor'?fmt(l.val,0)+' HP motor':fmt(l.val,1)+' kVA load'} &middot; PF ${l.pf}</text>`;
+      s_+=`<text x="${tickX+10}" y="${y+4}" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="${col}">${l.type==='motor'?fmt(l.hp,0)+' HP motor':fmt(l.kva,1)+' kVA load'} &middot; PF ${l.pf}</text>`;
     });
     svg.innerHTML=s_;
   }
@@ -437,33 +548,28 @@ footer a:hover{color:#fff}
   function runChecks(){
     const s=state(), c=computed(s);
     const checks=[];
-    checks.push({
-      id:'xfmr', pass: s.kva>=c.totalKva,
-      title:'Transformer sizing',
-      detail:`Connected load ${fmt(c.totalKva,1)} kVA vs. selected ${fmt(s.kva,1)} kVA transformer.`
-    });
+    checks.push({title:'Transformer sizing', pass: s.kva>=c.totalKva,
+      detail:`Connected load ${fmt(c.totalKva,1)} kVA vs. selected ${fmt(s.kva,1)} kVA transformer.`});
     const ocpdOk = s.at>=1.25*c.panelI && s.at<=c.ampacity;
-    checks.push({
-      id:'ocpd', pass: ocpdOk,
-      title:'Main OCPD sizing',
-      detail:`Panel FLA ${fmt(c.panelI,0)} A &rarr; needs &ge; ${fmt(1.25*c.panelI,0)} A (125% continuous). Feeder ampacity is ${fmt(c.ampacity,0)} A. Selected: ${fmt(s.at,0)} A.`
-    });
-    checks.push({
-      id:'vd', pass: c.vdPct<=3,
-      title:'Feeder voltage drop',
-      detail:`${fmt(c.vd,1)} V (${fmt(c.vdPct,2)}%) over ${fmt(s.len,0)} ft of ${AWG[s.sizeIdx].n}. Common guideline is &le;3%.`
-    });
-    checks.push({
-      id:'aic', pass: s.aic>=c.isc,
-      title:'OCPD interrupting rating',
-      detail:`Available fault current (simplified, infinite source) &asymp; ${fmt(c.isc,0)} A. Selected OCPD is rated ${fmt(s.aic,0)} A.`
-    });
-    checks.push({
-      id:'load', pass: c.totalKva<=s.kva,
-      title:'Panel loading',
-      detail:`${fmt((c.totalKva/s.kva)*100,0)}% of transformer nameplate kVA.`
-    });
+    checks.push({title:'Main OCPD sizing', pass: ocpdOk,
+      detail:`Panel FLA ${fmt(c.panelI,0)} A &rarr; needs &ge; ${fmt(1.25*c.panelI,0)} A (125% continuous). Feeder ampacity is ${fmt(c.ampacity,0)} A. Selected: ${fmt(s.at,0)} A.`});
+    checks.push({title:'Feeder voltage drop', pass: c.vdPct<=3,
+      detail:`${fmt(c.vd,1)} V (${fmt(c.vdPct,2)}%) over ${fmt(s.len,0)} ft of ${AWG[s.sizeIdx].n}. Common guideline is &le;3%.`});
+    checks.push({title:'OCPD interrupting rating', pass: s.aic>=c.isc,
+      detail:`Available fault current (simplified, infinite source) &asymp; ${fmt(c.isc,0)} A. Selected OCPD is rated ${fmt(s.aic,0)} A.`});
+    checks.push({title:'Panel loading', pass: c.totalKva<=s.kva,
+      detail:`${fmt(s.kva?(c.totalKva/s.kva)*100:0,0)}% of transformer nameplate kVA.`});
     return checks;
+  }
+
+  function assemblyReveal(s,c){
+    const tier = s.kva<=150?'Small Unit Substation':s.kva<=500?'Distribution Unit Substation':s.kva<=1500?'Primary Unit Substation':'Substation-Class Service Entrance';
+    const hasMotor=s.loads.some(l=>l.type==='motor'), hasGen=s.loads.some(l=>l.type==='general');
+    const suffix = hasMotor&&hasGen?'Mixed Motor/General Feed':hasMotor?'Motor-Duty Feed':hasGen?'General Distribution Feed':'Unloaded Package';
+    return `<b>${tier}</b><div class="sub">${suffix} &mdash; recognized from your assembled components</div>
+      <div class="nameplate">${fmt(s.kva,1)} kVA &middot; ${s.v}V secondary &middot; ${fmt(s.at,0)}A main &middot; ${fmt(s.aic/1000,0)}kAIC</div>
+      <div class="standards">Applicable standards: IEEE C57.12.00 &middot; NEC 240/450 &middot; UL 489</div>
+      <a href="voltfield-bom-generator.html">See a similar real part &amp; its component BOM &rsaquo;</a>`;
   }
 
   function renderChecks(checks){
@@ -471,16 +577,16 @@ footer a:hover{color:#fff}
       <div class="checkrow ${c.pass?'pass':'fail'}"><div class="mk">${c.pass?'&#10003;':'&#10007;'}</div><div class="tx"><b>${c.title}</b><span>${c.detail}</span></div></div>
     `).join('');
     const passCount=checks.filter(c=>c.pass).length;
-    if(mode==='challenge'){
-      $('scoreBar').classList.add('show');
-      $('scoreVal').textContent=passCount+' / '+checks.length;
-    } else {
-      $('scoreBar').classList.remove('show');
-    }
+    if(mode==='challenge'){ $('scoreBar').classList.add('show'); $('scoreVal').textContent=passCount+' / '+checks.length; }
+    else { $('scoreBar').classList.remove('show'); }
+    const rc=$('revealCard');
+    if(passCount===checks.length){ rc.innerHTML=assemblyReveal(state(),computed(state())); rc.classList.add('show'); }
+    else { rc.classList.remove('show'); }
     return passCount;
   }
 
   $('checkBtn').onclick=()=>{
+    if(!board.xfmr||!board.ocpd||!board.cond||!board.len){ toast('Place a transformer, main OCPD, conductor, and length tile first.'); return; }
     drawOneline();
     const checks=runChecks();
     const passCount=renderChecks(checks);
@@ -488,54 +594,62 @@ footer a:hover{color:#fff}
     (mode==='challenge'?$('scoreBar'):$('checkPanel')).scrollIntoView({behavior:'smooth',block:'start'});
   };
 
-  ['sxZ','sxV','sxAt','sxLen'].forEach(id=>$(id).addEventListener('input',drawOneline));
-  ['sxKva','sxAic','sxMat','sxSize'].forEach(id=>$(id).addEventListener('change',drawOneline));
+  $('clearBoardBtn').onclick=()=>{
+    board.xfmr=null;board.ocpd=null;board.cond=null;board.len=null;board.loads=[null,null,null,null];
+    armed=null;
+    renderLegend();renderBoard();drawOneline();
+    $('checkPanel').innerHTML='<p style="font-size:13.5px;color:var(--slate)">Place a transformer, main OCPD, conductor, and length tile, then click &ldquo;Check My Design&rdquo;.</p>';
+    $('scoreBar').classList.remove('show');
+    $('revealCard').classList.remove('show');
+  };
 
   /* ---------- toast ---------- */
   function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._tm);t._tm=setTimeout(()=>t.classList.remove('show'),1900);}
 
-  /* ---------- share link ---------- */
-  function applyState(o){
+  /* ---------- board state <-> plain object (shared by scenarios + share link) ---------- */
+  function applyBoard(o){
     if(!o)return;
-    if(o.kva!=null)kvaSel.value=o.kva;
-    if(o.z!=null)$('sxZ').value=o.z;
-    if(o.v!=null)$('sxV').value=o.v;
-    if(o.at!=null)$('sxAt').value=o.at;
-    if(o.aic!=null)aicSel.value=o.aic;
-    if(o.mat!=null)$('sxMat').value=o.mat;
-    if(o.sizeIdx!=null)sizeSel.value=o.sizeIdx;
-    if(o.len!=null)$('sxLen').value=o.len;
-    if(o.loads){loads=o.loads.map(l=>({type:l.t,val:l.v,pf:l.p}));renderLoads();}
+    board.xfmr = o.xfmr?findTile('xfmr',o.xfmr):null;
+    board.ocpd = o.ocpd?findTile('ocpd',o.ocpd):null;
+    board.cond = o.cond?findTile('cond',o.cond):null;
+    board.len = o.len?findTile('len',o.len):null;
+    board.loads = (o.loads||[null,null,null,null]).map(id=>id?findTile('load',id):null);
+    while(board.loads.length<4)board.loads.push(null);
+    renderBoard();
     drawOneline();
   }
-  function toParam(){
-    const s=state();
-    return encodeURIComponent(JSON.stringify({kva:s.kva,z:s.z,v:s.v,at:s.at,aic:s.aic,mat:s.mat,sizeIdx:s.sizeIdx,len:s.len,loads:s.loads.map(l=>({t:l.type,v:l.val,p:l.pf}))}));
+  function boardToObj(){
+    return {xfmr:board.xfmr?board.xfmr.id:null, ocpd:board.ocpd?board.ocpd.id:null,
+      cond:board.cond?board.cond.id:null, len:board.len?board.len.id:null,
+      loads:board.loads.map(t=>t?t.id:null)};
   }
   $('copyLinkBtn').onclick=()=>{
-    const url=location.origin+location.pathname+'?d='+toParam()+(mode==='challenge'?'&scenario='+SCEN[scenarioIdx].id:'');
+    const url=location.origin+location.pathname+'?d='+encodeURIComponent(JSON.stringify(boardToObj()))+(mode==='challenge'?'&scenario='+SCEN[scenarioIdx].id:'');
     navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>toast('Link copied'),()=>toast('Copy failed'));
   };
 
-  /* ---------- challenge scenarios ---------- */
+  const EXAMPLE={xfmr:'x300',ocpd:'o400-35',cond:'c750k',len:'l100',loads:['m150','g100',null,null]};
+  $('loadExampleBtn').onclick=()=>{ applyBoard(EXAMPLE); toast('Example loaded — try Check My Design'); };
+
+  /* ---------- challenge scenarios (tile-based) ---------- */
   const SCEN=[
     {id:'clean', name:'Baseline — everything checks out', prompt:'A control case: run the checks and confirm all 5 pass. Use this to see what a correctly sized system looks like before hunting for problems in the others.',
-      d:{kva:300,z:5.75,v:480,at:350,aic:35000,mat:'cu',sizeIdx:17,len:100,loads:[{t:'motor',v:150,p:0.87},{t:'general',v:80,p:0.9}]}},
-    {id:'undersized-main', name:'Undersized main breaker', prompt:'This 300kVA/480V system feeds a 150HP motor plus 150kVA of general load over 750 kcmil copper. The main was speced at 250A. Find the problem.',
-      d:{kva:300,z:5.75,v:480,at:250,aic:35000,mat:'cu',sizeIdx:19,len:100,loads:[{t:'motor',v:150,p:0.87},{t:'general',v:150,p:0.9}]},
-      fix:{at:450}},
-    {id:'voltage-drop', name:'Voltage drop blowout', prompt:'A panel over 1,000 ft from its transformer, fed by 300 kcmil copper. Everything else about this run is properly sized. Something about the distance should bother you.',
-      d:{kva:225,z:5.75,v:480,at:250,aic:22000,mat:'cu',sizeIdx:14,len:1100,loads:[{t:'general',v:150,p:0.9}]},
-      fix:{sizeIdx:17}},
-    {id:'fault-current', name:'Fault current exceeds breaker rating', prompt:'A stiff 750kVA transformer with a tight 3.5%Z feeds a panel through a 10kAIC main breaker. Check the available fault current against that rating.',
-      d:{kva:750,z:3.5,v:480,at:350,aic:10000,mat:'cu',sizeIdx:17,len:80,loads:[{t:'general',v:200,p:0.9}]},
-      fix:{aic:35000}},
+      d:{xfmr:'x300',ocpd:'o400-35',cond:'c750k',len:'l100',loads:['m150','g100',null,null]}},
+    {id:'undersized-main', name:'Undersized main breaker', prompt:'This 300kVA/480V system feeds a 150HP motor plus 100kVA of general load over 750 kcmil copper. The main is a 225A/22kAIC tile. Find the problem.',
+      d:{xfmr:'x300',ocpd:'o225-22',cond:'c750k',len:'l100',loads:['m150','g100',null,null]},
+      fix:{ocpd:'o400-35'}},
+    {id:'voltage-drop', name:'Voltage drop blowout', prompt:'A 200kVA general load, properly breakered and conductor-sized, runs 2,500 ft back to its transformer. Everything else checks out. Something about that distance should bother you.',
+      d:{xfmr:'x300',ocpd:'o400-35',cond:'c750k',len:'l2500',loads:['g200',null,null,null]},
+      fix:{len:'l500'}},
+    {id:'fault-current', name:'Fault current exceeds breaker rating', prompt:'A stiff 750kVA/3.5%Z transformer feeds a panel through a 400A/10kAIC main breaker. Check the available fault current against that interrupting rating.',
+      d:{xfmr:'x750lz',ocpd:'o400-10',cond:'c750k',len:'l100',loads:['g200',null,null,null]},
+      fix:{ocpd:'o400-35'}},
     {id:'xfmr-overload', name:'Transformer overloaded', prompt:'A 75kVA transformer feeding a 100HP motor plus 100kVA of general load. Total that up before you trust the nameplate.',
-      d:{kva:75,z:5.75,v:480,at:300,aic:22000,mat:'cu',sizeIdx:15,len:80,loads:[{t:'motor',v:100,p:0.87},{t:'general',v:100,p:0.9}]},
-      fix:{kva:225}},
-    {id:'feeder-undersized', name:'Feeder undersized for the breaker', prompt:'A 400A main breaker feeding a panel over 4 AWG copper. The breaker trip rating and the wire it protects don’t agree with each other.',
-      d:{kva:300,z:5.75,v:480,at:400,aic:35000,mat:'cu',sizeIdx:5,len:50,loads:[{t:'motor',v:150,p:0.87},{t:'general',v:60,p:0.9}]},
-      fix:{sizeIdx:18}}
+      d:{xfmr:'x75',ocpd:'o400-35',cond:'c750k',len:'l100',loads:['m100','g100',null,null]},
+      fix:{xfmr:'x300'}},
+    {id:'feeder-undersized', name:'Feeder undersized for the breaker', prompt:'A 400A main breaker feeding a panel over 2/0 AWG copper. The breaker trip rating and the wire it protects don’t agree with each other.',
+      d:{xfmr:'x300',ocpd:'o400-35',cond:'c2_0',len:'l100',loads:['m150','g100',null,null]},
+      fix:{cond:'c750k'}}
   ];
   let mode='free', scenarioIdx=0;
   $('scenarioSel').innerHTML=SCEN.map((s,i)=>`<option value="${i}">${s.name}</option>`).join('');
@@ -543,23 +657,22 @@ footer a:hover{color:#fff}
   function loadScenario(i){
     scenarioIdx=i;
     const s=SCEN[i];
-    applyState(s.d);
+    applyBoard(s.d);
     $('scenarioPrompt').textContent=s.prompt;
     $('revealWrap').style.display=s.fix?'':'none';
     $('solveBox').classList.remove('show');
     $('checkPanel').innerHTML='<p style="font-size:13.5px;color:var(--slate)">Click &ldquo;Check My Design&rdquo; above to run the 5 engineering checks.</p>';
     $('scoreBar').classList.remove('show');
+    $('revealCard').classList.remove('show');
     if(window.vfGtag)window.vfGtag('event','sandbox_scenario_start',{scenario:s.id});
   }
   $('scenarioSel').onchange=e=>loadScenario(parseInt(e.target.value,10));
   $('revealBtn').onclick=()=>{
     const s=SCEN[scenarioIdx];
     if(!s.fix){$('solveBox').classList.remove('show');return;}
-    const labels={kva:'Transformer size (kVA)',z:'Impedance %Z',v:'Secondary voltage (V)',at:'Main OCPD trip (A)',aic:'OCPD AIC rating',mat:'Feeder conductor',sizeIdx:'Feeder size',len:'Feeder length (ft)'};
     const rows=Object.keys(s.fix).map(k=>{
-      let v=s.fix[k];
-      if(k==='sizeIdx')v=AWG[v].n;
-      return `${labels[k]||k}: <b>${v}</b>`;
+      const tile=findTile(k,s.fix[k]);
+      return `${CAT_LABEL[k]}: swap to <b>${tile.label}${tile.aic?' / '+fmt(tile.aic/1000,0)+'kAIC':''}</b>`;
     }).join('<br>');
     $('solveBox').innerHTML='Suggested fix — '+rows;
     $('solveBox').classList.add('show');
@@ -572,14 +685,17 @@ footer a:hover{color:#fff}
     $('modeFreeBtn').setAttribute('aria-selected',m==='free');
     $('modeChalBtn').setAttribute('aria-selected',m==='challenge');
     $('scenarioBar').classList.toggle('show',m==='challenge');
+    $('exampleWrap').style.display=m==='challenge'?'none':'';
     $('revealWrap').style.display=(m==='challenge'&&SCEN[scenarioIdx].fix)?'':'none';
     if(m==='challenge'){ loadScenario(scenarioIdx); }
-    else { $('scoreBar').classList.remove('show'); $('solveBox').classList.remove('show'); }
+    else { $('scoreBar').classList.remove('show'); $('solveBox').classList.remove('show'); $('revealCard').classList.remove('show'); }
   }
   $('modeFreeBtn').onclick=()=>setMode('free');
   $('modeChalBtn').onclick=()=>setMode('challenge');
 
-  /* ---------- initial load: shared link or defaults ---------- */
+  /* ---------- initial render ---------- */
+  renderLegend();
+  renderBoard();
   (function init(){
     const P=new URLSearchParams(location.search);
     const sc=P.get('scenario');
@@ -589,7 +705,7 @@ footer a:hover{color:#fff}
       if(idx>=0){ setMode('challenge'); $('scenarioSel').value=idx; loadScenario(idx); }
     }
     if(d){
-      try{ applyState(JSON.parse(decodeURIComponent(d))); }catch(e){}
+      try{ applyBoard(JSON.parse(decodeURIComponent(d))); }catch(e){}
     }
     drawOneline();
   })();
