@@ -109,6 +109,7 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .scenariobar.show{display:block}
 .scenariobar select{width:100%;max-width:420px;border:1px solid var(--line-dark);padding:8px 10px;font-family:var(--mono);font-size:13.5px;background:#fff;margin-bottom:10px}
 .scenariobar .prompt{font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.progressbadge{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ok);font-weight:600;margin-bottom:10px}
 .oneline{background:#fff;border:1px solid var(--line-dark);padding:14px;margin:16px 0 18px;overflow-x:auto}
 .oneline svg{display:block;min-width:640px}
 .board{background:#fff;border:1px solid var(--line-dark);padding:16px;margin:0 0 10px}
@@ -223,6 +224,7 @@ footer a:hover{color:#fff}
   </div>
 
   <div class="scenariobar" id="scenarioBar">
+    <div class="progressbadge" id="progressBadge"></div>
     <select id="scenarioSel"></select>
     <div class="prompt" id="scenarioPrompt"></div>
   </div>
@@ -580,8 +582,11 @@ footer a:hover{color:#fff}
     if(mode==='challenge'){ $('scoreBar').classList.add('show'); $('scoreVal').textContent=passCount+' / '+checks.length; }
     else { $('scoreBar').classList.remove('show'); }
     const rc=$('revealCard');
-    if(passCount===checks.length){ rc.innerHTML=assemblyReveal(state(),computed(state())); rc.classList.add('show'); }
-    else { rc.classList.remove('show'); }
+    if(passCount===checks.length){
+      rc.innerHTML=assemblyReveal(state(),computed(state()));
+      rc.classList.add('show');
+      if(mode==='challenge'){ saveProgress(SCEN[scenarioIdx].id); renderScenarioOptions(); }
+    } else { rc.classList.remove('show'); }
     return passCount;
   }
 
@@ -652,7 +657,20 @@ footer a:hover{color:#fff}
       fix:{cond:'c750k'}}
   ];
   let mode='free', scenarioIdx=0;
-  $('scenarioSel').innerHTML=SCEN.map((s,i)=>`<option value="${i}">${s.name}</option>`).join('');
+
+  /* ---------- progress (localStorage, no account needed) ---------- */
+  function loadProgress(){ try{ const p=JSON.parse(localStorage.getItem('vf_sandbox_progress')||'[]'); return Array.isArray(p)?p:[]; }catch(e){ return []; } }
+  function saveProgress(id){
+    const p=loadProgress();
+    if(!p.includes(id)){ p.push(id); localStorage.setItem('vf_sandbox_progress',JSON.stringify(p)); }
+  }
+  function renderScenarioOptions(){
+    const solved=loadProgress();
+    $('scenarioSel').innerHTML=SCEN.map((s,i)=>`<option value="${i}">${solved.includes(s.id)?'✓ ':''}${s.name}</option>`).join('');
+    $('scenarioSel').value=scenarioIdx;
+    $('progressBadge').textContent=`Solved ${solved.filter(id=>SCEN.some(s=>s.id===id)).length} / ${SCEN.length} scenarios`;
+  }
+  renderScenarioOptions();
 
   function loadScenario(i){
     scenarioIdx=i;
