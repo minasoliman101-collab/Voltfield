@@ -162,6 +162,18 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .reveal-card .nameplate{font-family:var(--mono);font-size:13px;margin-top:12px}
 .reveal-card .standards{font-family:var(--mono);font-size:11px;color:#AFC0D3;margin-top:5px}
 .reveal-card a{color:var(--signal);font-weight:600;text-decoration:underline;display:inline-block;margin-top:12px}
+.leaderboardcard{background:var(--card);border:1px solid var(--line-dark);padding:18px 20px;margin:0 0 20px}
+.leaderboardcard h4{font-family:var(--disp);font-weight:700;font-size:17px;margin-bottom:4px}
+.leaderboardcard .sub{font-size:12px;color:var(--slate);margin-bottom:12px}
+.lb-submit{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.lb-submit input{border:1px solid var(--line-dark);padding:8px 10px;font-family:var(--mono);font-size:13px;background:#fff;width:160px}
+.lb-submit button{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+.lb-submit button:hover{background:transparent;color:var(--ink)}
+.lb-submit button:disabled{opacity:.6;cursor:default}
+.lb-list{list-style:none;font-family:var(--mono);font-size:12.5px}
+.lb-list li{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--line)}
+.lb-list li:last-child{border-bottom:0}
+.lb-list .rk{color:var(--slate);width:24px;flex-shrink:0}
 .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 22px;font-family:var(--disp);font-weight:600;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:100}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .ctaband{background:linear-gradient(120deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;border-top:4px solid var(--signal)}
@@ -272,6 +284,7 @@ footer a:hover{color:#fff}
   </div>
   <div class="solvebox" id="solveBox"></div>
   <div class="reveal-card" id="revealCard"></div>
+  <div class="leaderboardcard" id="leaderboardCard" style="display:none"></div>
 
   <div class="callout">Want the reference material behind these checks? <a class="inline" href="guide-transformer-nameplate.html">Reading a transformer nameplate (%Z)</a> &middot; <a class="inline" href="guide-switchgear-compartments.html">Switchgear &amp; breaker basics</a> &middot; <a class="inline" href="guide-arc-flash-boundary-basics.html">Arc-flash &amp; interrupting ratings</a></div>
 
@@ -608,6 +621,10 @@ footer a:hover{color:#fff}
         saveProgress(SCEN[scenarioIdx].id);
         renderScenarioOptions();
         if(scenarioIdx===dailyIdx)markDailyDone();
+        if(!submittedThisLoad){
+          submittedThisLoad=true;
+          showSubmitPrompt(SCEN[scenarioIdx].id, Date.now()-scenarioStartTime);
+        }
       }
       const shareBtn=$('shareResultBtn');
       if(shareBtn)shareBtn.onclick=()=>{
@@ -736,8 +753,59 @@ footer a:hover{color:#fff}
     $('scenarioBar').scrollIntoView({behavior:'smooth',block:'start'});
   };
 
+  /* ---------- anonymous leaderboard (Netlify Function + Blobs; fails silently offline/undeployed) ---------- */
+  let scenarioStartTime=0, submittedThisLoad=false;
+  const LB_ENDPOINT='/.netlify/functions/sandbox-leaderboard';
+  function fmtTime(ms){ const s=ms/1000; return s<60?s.toFixed(1)+'s':Math.floor(s/60)+'m '+Math.round(s%60)+'s'; }
+  function renderLeaderboardList(entries){
+    if(!entries.length)return '<p style="font-size:12.5px;color:var(--slate);margin:0">No times submitted yet for this scenario &mdash; be the first.</p>';
+    return '<ul class="lb-list">'+entries.slice(0,10).map((e,i)=>`<li><span><span class="rk">#${i+1}</span>${esc(e.name)}</span><span>${fmtTime(e.timeMs)}</span></li>`).join('')+'</ul>';
+  }
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+  async function refreshLeaderboard(scenarioId){
+    const card=$('leaderboardCard');
+    try{
+      const r=await fetch(LB_ENDPOINT+'?scenario='+encodeURIComponent(scenarioId));
+      if(!r.ok)throw new Error('status '+r.status);
+      const data=await r.json();
+      card.dataset.hasList='1';
+      card.style.display='';
+      card.innerHTML=`<h4>Leaderboard</h4><div class="sub">Fastest solves for this scenario, this device's browser included once you submit.</div><div id="lbList">${renderLeaderboardList(data.entries||[])}</div>`+(card.dataset.submitHtml||'');
+    }catch(e){
+      /* function not deployed / offline / blocked -- hide the whole card, nothing else on the page depends on it */
+      if(!card.dataset.submitHtml){ card.style.display='none'; }
+    }
+  }
+  function showSubmitPrompt(scenarioId,timeMs){
+    const card=$('leaderboardCard');
+    const submitHtml=`<div class="lb-submit"><input type="text" id="lbNameInput" placeholder="Your name (optional)" maxlength="24"><button type="button" id="lbSubmitBtn">Submit my time (${fmtTime(timeMs)})</button></div>`;
+    card.dataset.submitHtml=submitHtml;
+    card.style.display='';
+    if(!card.innerHTML.includes('lb-submit')) card.innerHTML=submitHtml+card.innerHTML;
+    const btn=$('lbSubmitBtn');
+    if(btn)btn.onclick=async()=>{
+      btn.disabled=true; const orig=btn.textContent; btn.textContent='Submitting…';
+      try{
+        const name=($('lbNameInput')&&$('lbNameInput').value)||'';
+        const r=await fetch(LB_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({scenario:scenarioId,name,timeMs})});
+        if(!r.ok)throw new Error('status '+r.status);
+        const data=await r.json();
+        card.dataset.submitHtml='';
+        card.innerHTML=`<h4>Leaderboard</h4><div class="sub">You're on the board.</div><div id="lbList">${renderLeaderboardList(data.entries||[])}</div>`;
+        toast('Time submitted');
+      }catch(e){
+        toast('Leaderboard unavailable here');
+        btn.disabled=false; btn.textContent=orig;
+      }
+    };
+  }
+
   function loadScenario(i){
     scenarioIdx=i;
+    scenarioStartTime=Date.now();
+    submittedThisLoad=false;
+    $('leaderboardCard').dataset.submitHtml='';
+    refreshLeaderboard(SCEN[i].id);
     const s=SCEN[i];
     applyBoard(s.d);
     $('scenarioPrompt').textContent=s.prompt;
@@ -770,7 +838,7 @@ footer a:hover{color:#fff}
     $('exampleWrap').style.display=m==='challenge'?'none':'';
     $('revealWrap').style.display=(m==='challenge'&&SCEN[scenarioIdx].fix)?'':'none';
     if(m==='challenge'){ loadScenario(scenarioIdx); }
-    else { $('scoreBar').classList.remove('show'); $('solveBox').classList.remove('show'); $('revealCard').classList.remove('show'); }
+    else { $('scoreBar').classList.remove('show'); $('solveBox').classList.remove('show'); $('revealCard').classList.remove('show'); $('leaderboardCard').style.display='none'; $('leaderboardCard').dataset.submitHtml=''; }
   }
   $('modeFreeBtn').onclick=()=>setMode('free');
   $('modeChalBtn').onclick=()=>setMode('challenge');

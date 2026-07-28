@@ -1,6 +1,6 @@
 # VOLTFIELD Supply Co. — Website (static site)
 
-A self‑contained, **fully static website** — plain HTML, CSS, and JavaScript. There is **no server, database, or build step**. Every page runs entirely in the browser, so it can be hosted on any static‑file host and works offline once loaded.
+A self‑contained, **static‑first website** — plain HTML, CSS, and JavaScript, with no build step for the site itself. Every page still runs entirely in the browser and works offline once loaded. The one exception is the Practice Sandbox's optional anonymous leaderboard, which uses a single Netlify Function + Netlify Blobs (see `netlify/functions/sandbox-leaderboard.mjs`) — everything else on the site has no server or database at all, and the leaderboard fails silently (the feature just hides itself) if that function isn't deployed.
 
 ---
 

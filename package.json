@@ -1,0 +1,8 @@
+{
+  "name": "voltfield-functions",
+  "private": true,
+  "description": "Dependency manifest for the site's one optional Netlify Function (netlify/functions/sandbox-leaderboard.mjs). The website itself has no build step and no other dependencies -- see README.md.",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  }
+}

@@ -1,0 +1,8 @@
+# VOLTFIELD — Netlify config. The site is otherwise fully static (see README.md);
+# this file exists only to point Netlify at the one optional serverless function
+# (netlify/functions/sandbox-leaderboard.mjs) that powers the Practice Sandbox's
+# anonymous leaderboard. It does not set [build]/publish here on purpose, so it
+# can't conflict with whatever publish directory is already configured in the
+# Netlify dashboard for this site.
+[functions]
+  directory = "netlify/functions"
