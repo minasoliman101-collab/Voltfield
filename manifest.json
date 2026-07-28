@@ -1,7 +1,7 @@
 {
   "name": "VOLTFIELD Supply Co. — Energy & Industrial Parts",
   "short_name": "VOLTFIELD",
-  "description": "Search 2M+ configurable SKUs, generate component BOMs for OEM parts, match parts lists, and build quotes — data centers, renewables, battery storage, oil & gas, and MRO.",
+  "description": "Search configurable SKUs, generate component BOMs for OEM parts, and match parts lists — data centers, renewables, battery storage, oil & gas, and MRO.",
   "id": "./",
   "start_url": "./index.html?source=pwa",
   "scope": "./",
@@ -34,7 +34,7 @@
     {
       "name": "All Parts",
       "short_name": "Catalog",
-      "description": "Browse the full 2M+ SKU catalog",
+      "description": "Browse the full parts catalog",
       "url": "./voltfield-supply-catalog.html?source=pwa",
       "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
     }
