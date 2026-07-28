@@ -404,25 +404,31 @@ footer a:hover{color:#fff}
   function drawOneline(){
     const s=state(), c=computed(s);
     const svg=$('onelineSvg');
-    const col='#101B2D', accent='#FFC400';
-    const box=(x,y,w,h,label,sub)=>`<g><rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#fff" stroke="${col}" stroke-width="2"/><text x="${x+w/2}" y="${y+h/2-4}" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="13" fill="${col}">${label}</text><text x="${x+w/2}" y="${y+h/2+13}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="#5B6B7E">${sub}</text></g>`;
+    const col='#101B2D';
+    const CY=95, BH=60, BY=CY-BH/2; /* every stage box shares one vertical centerline */
+    const box=(x,w,label,sub)=>`<g><rect x="${x}" y="${BY}" width="${w}" height="${BH}" fill="#fff" stroke="${col}" stroke-width="2"/><text x="${x+w/2}" y="${CY-4}" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="13" fill="${col}">${label}</text><text x="${x+w/2}" y="${CY+13}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="#5B6B7E">${sub}</text></g>`;
     const line=(x1,y1,x2,y2)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="2"/>`;
+    const panelX=600, panelW=90, panelCx=panelX+panelW/2, panelBottom=BY+BH;
+    const rowH=36, topPad=22, botPad=16;
+    const vbH=Math.max(190, panelBottom+topPad+s.loads.length*rowH+botPad);
+    svg.setAttribute('viewBox','0 0 900 '+vbH);
     let s_='';
-    s_+=box(10,70,90,50,'UTILITY','&#8734; source');
-    s_+=line(100,95,150,95);
-    s_+=box(150,60,110,70,'XFMR',`${fmt(s.kva,1)} kVA · ${s.z}%Z`);
-    s_+=line(260,95,310,95);
-    s_+=box(310,70,100,50,'MAIN OCPD',`${fmt(s.at,0)}A / ${fmt(s.aic/1000,0)}kAIC`);
-    s_+=line(410,95,460,95);
-    s_+=`<g><line x1="460" y1="95" x2="600" y2="95" stroke="${col}" stroke-width="2" stroke-dasharray="6 4"/><text x="530" y="86" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="#5B6B7E">${AWG[s.sizeIdx].n} ${s.mat==='cu'?'Cu':'Al'} · ${fmt(s.len,0)} ft</text></g>`;
-    s_+=box(600,70,90,50,'PANEL',`${fmt(c.panelI,0)} A`);
-    const ly=[30,72,114,156];
+    s_+=box(10,90,'UTILITY','&#8734; source');
+    s_+=line(100,CY,150,CY);
+    s_+=box(150,110,'XFMR',`${fmt(s.kva,1)} kVA &middot; ${s.z}%Z`);
+    s_+=line(260,CY,310,CY);
+    s_+=box(310,100,'MAIN OCPD',`${fmt(s.at,0)}A / ${fmt(s.aic/1000,0)}kAIC`);
+    s_+=line(410,CY,460,CY);
+    s_+=`<g><line x1="460" y1="${CY}" x2="${panelX}" y2="${CY}" stroke="${col}" stroke-width="2" stroke-dasharray="6 4"/><text x="${(460+panelX)/2}" y="${CY-9}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="#5B6B7E">${AWG[s.sizeIdx].n} ${s.mat==='cu'?'Cu':'Al'} &middot; ${fmt(s.len,0)} ft</text></g>`;
+    s_+=box(panelX,panelW,'PANEL',`${fmt(c.panelI,0)} A`);
+    const busBottom=panelBottom+topPad+(s.loads.length-1)*rowH+rowH/2;
+    if(s.loads.length)s_+=`<line x1="${panelCx}" y1="${panelBottom}" x2="${panelCx}" y2="${busBottom}" stroke="${col}" stroke-width="1.5"/>`;
     s.loads.forEach((l,i)=>{
-      const y=ly[i]||(30+i*42);
-      s_+=`<line x1="645" y1="95" x2="645" y2="${y+15}" stroke="${col}" stroke-width="1.5"/>`;
-      s_+=`<line x1="645" y1="${y+15}" x2="700" y2="${y+15}" stroke="${col}" stroke-width="1.5"/>`;
-      s_+=`<circle cx="700" cy="${y+15}" r="3" fill="${col}"/>`;
-      s_+=`<text x="710" y="${y+19}" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="${col}">${l.type==='motor'?fmt(l.val,0)+' HP motor':fmt(l.val,1)+' kVA load'} · PF ${l.pf}</text>`;
+      const y=panelBottom+topPad+i*rowH;
+      const tickX=panelCx+40;
+      s_+=`<line x1="${panelCx}" y1="${y}" x2="${tickX}" y2="${y}" stroke="${col}" stroke-width="1.5"/>`;
+      s_+=`<circle cx="${tickX}" cy="${y}" r="3" fill="${col}"/>`;
+      s_+=`<text x="${tickX+10}" y="${y+4}" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="${col}">${l.type==='motor'?fmt(l.val,0)+' HP motor':fmt(l.val,1)+' kVA load'} &middot; PF ${l.pf}</text>`;
     });
     svg.innerHTML=s_;
   }
@@ -479,6 +485,7 @@ footer a:hover{color:#fff}
     const checks=runChecks();
     const passCount=renderChecks(checks);
     if(window.vfGtag)window.vfGtag('event','sandbox_check_design',{mode:mode,pass_count:passCount,total_checks:checks.length,scenario:mode==='challenge'?SCEN[scenarioIdx].id:null});
+    (mode==='challenge'?$('scoreBar'):$('checkPanel')).scrollIntoView({behavior:'smooth',block:'start'});
   };
 
   ['sxZ','sxV','sxAt','sxLen'].forEach(id=>$(id).addEventListener('input',drawOneline));
