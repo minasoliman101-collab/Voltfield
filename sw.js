@@ -1,6 +1,6 @@
 /* VOLTFIELD service worker — offline-first app shell.
    Bump VERSION whenever you redeploy changed files so clients update. */
-const VERSION = 'voltfield-v18';
+const VERSION = 'voltfield-v19';
 
 const CORE = [
   './',
@@ -9,6 +9,8 @@ const CORE = [
   './voltfield-suppliers.html',
   './voltfield-bom.html',
   './voltfield-bom-generator.html',
+  './voltfield-sandbox.html',
+  './ordering-hidden.css',
   './voltfield-insights.html',
   './voltfield-part.html',
   './voltfield-rfq.html',

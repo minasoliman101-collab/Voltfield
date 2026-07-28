@@ -11,6 +11,9 @@
 /manifest.json
   Cache-Control: public, max-age=86400
 
+/ordering-hidden.css
+  Cache-Control: public, max-age=600
+
 /icons/*
   Cache-Control: public, max-age=2592000
 

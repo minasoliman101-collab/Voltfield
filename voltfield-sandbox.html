@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EE Practice Sandbox — Design &amp; Check a One-Line System | VOLTFIELD Supply Co.</title>
+<meta name="description" content="Free, no-signup one-line system design sandbox. Pick a transformer, main breaker, feeder, and panel loads, then get instant engineering checks on sizing, voltage drop, and fault current. Six built-in challenge scenarios.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:title" content="EE Practice Sandbox — design a one-line, get instant engineering feedback">
+<meta property="og:description" content="A free one-line system builder: size a transformer, main breaker, and feeder for a real panel load, then check your work against sizing, voltage-drop, and fault-current rules.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ordering-hidden.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"VOLTFIELD EE Practice Sandbox","applicationCategory":"EngineeringApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"A one-line system design sandbox for practicing transformer, breaker, feeder, and panel sizing with instant engineering checks on sizing, voltage drop, and fault current."}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Are these calculations a substitute for a real short-circuit or coordination study?","acceptedAnswer":{"@type":"Answer","text":"No. The sandbox uses simplified, infinite-source, single-voltage-level formulas — the same methods used in the Engineering Calculators page — for learning and first-pass checks only. Always use a licensed engineer's full study for actual design or code compliance sign-off."}},
+{"@type":"Question","name":"Where do these formulas come from?","acceptedAnswer":{"@type":"Answer","text":"Standard K-factor voltage drop, kVA/FLA sizing, and infinite-source fault current formulas, plus commonly published NEC Table 310.16 75°C copper/aluminum ampacities. The same formulas power VOLTFIELD's Engineering Calculators page."}},
+{"@type":"Question","name":"Is this free and does it require an account?","acceptedAnswer":{"@type":"Answer","text":"Yes — it's free, runs entirely in your browser, and needs no signup. Nothing you enter is sent anywhere."}}
+]}
+</script>
+<style>
+:root{
+  --ink:#101B2D;--ink-2:#22334C;--slate:#5B6B7E;--paper:#DDE5EC;--card:#F3F6FA;
+  --line:#C4CFDA;--line-dark:#A7B6C6;--signal:#FFC400;--signal-deep:#E5AC00;
+  --crit:#C43D2E;--warn:#D98E04;--ok:#2E7D4F;
+  --dc:#2B6CB0;--re:#2E7D4F;--bess:#B7791F;--og:#9C4221;--mro:#5B6B7E;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;--body:'IBM Plex Sans',system-ui,sans-serif;--disp:'Barlow Condensed',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5}
+button,a,input,select,textarea{font-family:inherit}
+button,a{cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+.utilbar{background:var(--ink);color:#C9D3DF;font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:6px 20px;display:flex;justify-content:space-between;gap:12px}
+.utilbar b{color:var(--signal);font-weight:600}
+.utilbar .right{display:none}
+@media(min-width:720px){.utilbar .right{display:block}}
+header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:60}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo .bolt{width:34px;height:34px;background:var(--signal);display:grid;place-items:center;border:2px solid var(--ink)}
+.logo .bolt svg{width:18px;height:18px}
+.logo .wordmark{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.02em;line-height:1}
+.logo .wordmark small{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.18em;color:var(--slate)}
+.hnav{display:none;gap:4px}
+.navtoggle{display:none;background:var(--ink);color:#fff;border:2px solid var(--ink);width:42px;height:38px;font-size:20px;line-height:1;align-items:center;justify-content:center;flex-shrink:0}
+@media(max-width:899px){.navtoggle{display:inline-flex}.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:2px solid var(--ink);padding:6px 12px 10px;gap:0;box-shadow:0 10px 20px rgba(16,27,45,.14);z-index:59}.hnav.open a{padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}.hnav.open a:last-child{border-bottom:0}.hnav.open a.on{border-left-color:var(--signal);color:var(--ink)}}
+@media(min-width:900px){.hnav{display:flex}}
+.hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
+.hnav a:hover{color:var(--ink);background:var(--paper)}
+.hnav a.on{color:var(--ink);border-bottom-color:var(--signal)}
+.navdrop{position:relative}
+.navdrop-btn{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-transform:uppercase;border:0;border-bottom:3px solid transparent;background:none;display:inline-flex;align-items:center;gap:4px}
+.navdrop-btn:hover{color:var(--ink);background:var(--paper)}
+.navdrop-btn.on{color:var(--ink);border-bottom-color:var(--signal)}
+.navdrop-btn .car{width:8px;height:8px;flex-shrink:0}
+.navdrop-menu{display:none;position:absolute;top:100%;left:0;background:var(--card);border:2px solid var(--ink);min-width:190px;z-index:70;flex-direction:column}
+.navdrop.open .navdrop-menu,.navdrop:hover .navdrop-menu,.navdrop:focus-within .navdrop-menu{display:flex}
+.navdrop-menu a{padding:10px 14px;font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line)}
+.navdrop-menu a:last-child{border-bottom:0}
+.navdrop-menu a:hover{background:var(--paper);color:var(--ink)}
+.navdrop-menu a.on{color:var(--ink);background:var(--paper);border-left:3px solid var(--signal)}
+@media(max-width:899px){
+.navdrop-btn{width:100%;justify-content:space-between;padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}
+.navdrop-btn.on{border-left-color:var(--signal);border-bottom-color:var(--line)}
+.navdrop-menu{display:flex!important;position:static;border:0;min-width:0;background:var(--paper)}
+.navdrop-menu a{padding-left:26px;border-bottom:1px solid var(--line)}
+.navdrop-btn .car{display:none}
+}
+.headright{margin-left:auto;display:flex;align-items:center;gap:10px}
+.quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
+.quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
+.artban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal)}
+.artban-in{max-width:900px;margin:0 auto;padding:40px 20px 34px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--signal);margin-bottom:10px}
+.artban h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,44px);letter-spacing:.01em;line-height:1.06}
+.artban p.dek{color:#AFC0D3;font-size:15.5px;margin-top:14px;line-height:1.55;max-width:680px}
+.artwrap{max-width:900px;margin:0 auto;padding:36px 20px 8px}
+.artwrap h2{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:.01em;color:var(--ink);margin:34px 0 8px}
+.artwrap p{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:14px}
+.artwrap ul{margin:0 0 14px 20px}
+.artwrap li{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:6px}
+.artwrap a.inline{color:var(--signal-deep);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
+.callout{background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--signal);padding:16px 18px;margin:20px 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.estimator{background:var(--card);border:1px solid var(--line-dark);padding:20px;margin:16px 0 26px;scroll-margin-top:80px}
+.estimator h3{font-family:var(--disp);font-weight:700;font-size:19px;color:var(--ink);margin-bottom:4px}
+.estimator .sub{font-size:12.5px;color:var(--slate);margin-bottom:14px}
+.est-row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:10px}
+.est-field{display:flex;flex-direction:column;gap:4px}
+.est-field label{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--slate)}
+.est-field input,.est-field select{width:140px;border:1px solid var(--line-dark);padding:8px 10px;font-family:var(--mono);font-size:14px;background:#fff}
+.est-field button{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase}
+.est-field button:hover{background:transparent;color:var(--ink)}
+.est-field button.ghost{background:transparent;color:var(--ink)}
+.est-field button.ghost:hover{background:var(--ink);color:#fff}
+.formula{font-family:var(--mono);font-size:11.5px;color:var(--slate);background:#fff;border:1px dashed var(--line-dark);padding:8px 10px;margin-bottom:12px;display:inline-block}
+.reftable{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+.reftable th,.reftable td{border:1px solid var(--line);padding:6px 8px;text-align:left;font-family:var(--mono)}
+.reftable th{background:var(--ink);color:#fff;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase}
+.reftable tr:nth-child(even) td{background:#fff}
+.reftable tr:nth-child(odd) td{background:var(--card)}
+.modebar{display:flex;gap:0;margin:18px 0 22px;border:2px solid var(--ink);width:fit-content}
+.modebar button{background:#fff;color:var(--ink);border:0;padding:10px 20px;font-family:var(--disp);font-weight:700;font-size:14.5px;letter-spacing:.04em;text-transform:uppercase;border-right:2px solid var(--ink)}
+.modebar button:last-child{border-right:0}
+.modebar button.on{background:var(--ink);color:#fff}
+.scenariobar{display:none;background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--signal-deep);padding:16px 18px;margin-bottom:22px}
+.scenariobar.show{display:block}
+.scenariobar select{width:100%;max-width:420px;border:1px solid var(--line-dark);padding:8px 10px;font-family:var(--mono);font-size:13.5px;background:#fff;margin-bottom:10px}
+.scenariobar .prompt{font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.loadsrow{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:8px;padding-bottom:8px;border-bottom:1px dashed var(--line)}
+.loadsrow:last-of-type{border-bottom:0}
+.loadsrow .rm{background:transparent;color:var(--crit);border:1px solid var(--crit);padding:8px 10px;font-family:var(--mono);font-size:11px;text-transform:uppercase}
+.addload{background:transparent;color:var(--ink-2);border:2px dashed var(--line-dark);padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase;width:100%}
+.addload:hover{border-color:var(--ink)}
+.oneline{background:#fff;border:1px solid var(--line-dark);padding:14px;margin:16px 0 26px;overflow-x:auto}
+.oneline svg{display:block;min-width:640px}
+.checkpanel{background:var(--card);border:1px solid var(--line-dark);padding:20px;margin:16px 0 26px}
+.checkrow{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)}
+.checkrow:last-child{border-bottom:0}
+.checkrow .mk{flex-shrink:0;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:14px;color:#fff}
+.checkrow.pass .mk{background:var(--ok)}
+.checkrow.fail .mk{background:var(--crit)}
+.checkrow .tx b{display:block;font-family:var(--disp);font-weight:700;font-size:15px;margin-bottom:2px}
+.checkrow .tx span{font-size:13px;color:var(--ink-2);font-family:var(--mono)}
+.scorebar{display:none;background:var(--ink);color:#fff;padding:14px 18px;margin-bottom:16px;font-family:var(--disp);font-weight:700;font-size:20px;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.scorebar.show{display:flex}
+.scorebar span{font-family:var(--mono);font-size:12px;color:#AFC0D3;font-weight:400;text-transform:uppercase;letter-spacing:.06em}
+.solvebox{display:none;background:#fff;border:1px dashed var(--line-dark);padding:14px 16px;margin-top:14px;font-family:var(--mono);font-size:12.5px;line-height:1.8;color:var(--ink-2)}
+.solvebox.show{display:block}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 22px;font-family:var(--disp);font-weight:600;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:100}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.ctaband{background:linear-gradient(120deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;border-top:4px solid var(--signal)}
+.ctaband-in{max-width:1240px;margin:0 auto;padding:44px 20px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.ctaband h3{font-family:var(--disp);font-weight:700;font-size:28px;letter-spacing:.01em}
+.ctaband p{color:#AFC0D3;font-size:14px;margin-top:6px;max-width:460px}
+.ctabtn{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:14px 26px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.05em;text-decoration:none;flex-shrink:0}
+.ctabtn:hover{background:transparent;color:var(--signal)}
+footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
+footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
+@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
+footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer p{line-height:1.6;max-width:460px}
+footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
+footer a{color:#9FB0C3;text-decoration:none}
+footer a:hover{color:#fff}
+</style>
+</head>
+<body>
+<div class="utilbar">
+  <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
+  <span class="right">+1 (850) 686-1378 &nbsp;|&nbsp; RFQ@voltfield.org</span>
+</div>
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — ENERGY INFRASTRUCTURE PARTS</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="index.html">Home</a>
+    <a href="voltfield-supply-catalog.html">All Parts</a>
+    <a href="voltfield-suppliers.html">All Suppliers</a>
+    <a href="voltfield-bom.html">Quick Order</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu">
+        <a href="voltfield-bom-generator.html">BOM Generator</a>
+        <a href="voltfield-pcb.html">PCB Builder</a>
+        <a href="voltfield-identify.html">Part ID</a>
+        <a href="voltfield-eol.html">Obsolete/EOL</a>
+        <a href="engineering-calculators.html">Calculators</a>
+        <a href="voltfield-sandbox.html" class="on">Practice Sandbox</a>
+        <a href="rfq-toolkit.html">RFQ Toolkit</a>
+      </div>
+    </div>
+    <a href="voltfield-insights.html">Insights</a>
+    <a href="voltfield-account.html">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View quote list on catalog page">QUOTE LIST <span class="ct" id="quoteCount">0</span></a>
+  </div>
+</header>
+<section class="artban">
+  <div class="artban-in">
+    <div style="font-family:var(--mono);font-size:11px;color:#8DA0B8;margin-bottom:12px"><a href="index.html" style="color:#8DA0B8;text-decoration:none">Home</a> / <span style="color:#E8EDF3">Practice Sandbox</span></div>
+    <div class="eyebrow">Free · No Signup · Runs In Your Browser</div>
+    <h1>Design a one-line. Get real engineering feedback.</h1>
+    <p class="dek">Pick a transformer, main breaker, feeder, and panel loads — watch the one-line diagram update live, then check your sizing against the same voltage-drop, fault-current, and ampacity formulas used in the <a href="engineering-calculators.html" style="color:#FFC400">Engineering Calculators</a>. Free Design mode for open-ended practice, or Challenge Mode to hunt for a planted mistake.</p>
+  </div>
+</section>
+<div class="artwrap">
+  <p>This is a learning tool, not a substitute for a licensed engineer's short-circuit, coordination, or code-compliance study. It assumes a single-voltage radial system, an infinite utility source, and ignores feeder impedance in the fault-current estimate — the same simplifications used by the Fault Current Estimate calculator.</p>
+
+  <div class="modebar" role="tablist">
+    <button type="button" id="modeFreeBtn" class="on" role="tab" aria-selected="true">Free Design</button>
+    <button type="button" id="modeChalBtn" role="tab" aria-selected="false">Challenge Mode</button>
+  </div>
+
+  <div class="scenariobar" id="scenarioBar">
+    <select id="scenarioSel"></select>
+    <div class="prompt" id="scenarioPrompt"></div>
+  </div>
+
+  <div class="oneline" id="onelineWrap"><svg id="onelineSvg" viewBox="0 0 900 190" xmlns="http://www.w3.org/2000/svg"></svg></div>
+
+  <h2>1 &middot; Transformer</h2>
+  <div class="estimator" id="xfmrCard">
+    <h3>Utility &rarr; Transformer</h3>
+    <div class="sub">Assumes an infinite utility source ahead of the transformer (no upstream impedance).</div>
+    <div class="est-row">
+      <div class="est-field"><label for="sxKva">Size (kVA)</label><select id="sxKva"></select></div>
+      <div class="est-field"><label for="sxZ">Impedance %Z</label><input type="number" id="sxZ" min="0.1" step="0.01" value="5.75"></div>
+      <div class="est-field"><label for="sxV">Secondary voltage, L-L (V)</label><input type="number" id="sxV" min="1" step="1" value="480"></div>
+    </div>
+  </div>
+
+  <h2>2 &middot; Main OCPD &amp; Feeder</h2>
+  <div class="estimator" id="ocpdCard">
+    <h3>Main Breaker &amp; Feeder to Panel</h3>
+    <div class="sub">Ampacities are commonly published NEC Table 310.16 75&deg;C values — always verify against the actual conductor/insulation spec.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="sxAt">Main OCPD trip (A)</label><input type="number" id="sxAt" min="1" step="1" value="350"></div>
+      <div class="est-field"><label for="sxAic">OCPD interrupting rating (AIC)</label><select id="sxAic"></select></div>
+      <div class="est-field"><label for="sxMat">Feeder conductor</label><select id="sxMat"><option value="cu">Copper</option><option value="al">Aluminum</option></select></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="sxSize">Feeder size</label><select id="sxSize"></select></div>
+      <div class="est-field"><label for="sxLen">One-way feeder length (ft)</label><input type="number" id="sxLen" min="1" step="1" value="150"></div>
+    </div>
+  </div>
+
+  <h2>3 &middot; Panel Loads</h2>
+  <div class="estimator" id="loadsCard">
+    <h3>Branch Loads</h3>
+    <div class="sub">Up to 4 branch loads. Motor loads use FLA &asymp; HP&times;746 / (V&times;1.732&times;0.9 eff&times;PF); general loads use kVA directly.</div>
+    <div id="loadsMount"></div>
+    <button type="button" class="addload" id="addLoadBtn">+ Add branch load</button>
+  </div>
+
+  <div class="est-row" style="margin:6px 0 26px">
+    <div class="est-field"><button type="button" id="checkBtn">Check My Design</button></div>
+    <div class="est-field"><button type="button" class="ghost" id="copyLinkBtn">Copy link</button></div>
+    <div class="est-field" id="revealWrap" style="display:none"><button type="button" class="ghost" id="revealBtn">Reveal solution</button></div>
+  </div>
+
+  <div class="scorebar" id="scoreBar"><span id="scoreLbl">SCORE</span><span id="scoreVal">0 / 5</span></div>
+
+  <h2>Results</h2>
+  <div class="checkpanel" id="checkPanel">
+    <p style="font-size:13.5px;color:var(--slate)">Click &ldquo;Check My Design&rdquo; above to run the 5 engineering checks.</p>
+  </div>
+  <div class="solvebox" id="solveBox"></div>
+
+  <div class="callout">Want the reference material behind these checks? <a class="inline" href="guide-transformer-nameplate.html">Reading a transformer nameplate (%Z)</a> &middot; <a class="inline" href="guide-switchgear-compartments.html">Switchgear &amp; breaker basics</a> &middot; <a class="inline" href="guide-arc-flash-boundary-basics.html">Arc-flash &amp; interrupting ratings</a></div>
+
+  <h2>Frequently asked questions</h2>
+  <details style="margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Are these calculations a substitute for a real short-circuit or coordination study?</summary>
+    <p style="margin-top:10px">No. The sandbox uses simplified, infinite-source, single-voltage-level formulas — the same methods used in the Engineering Calculators page — for learning and first-pass checks only. Always use a licensed engineer's full study for actual design or code compliance sign-off.</p>
+  </details>
+  <details style="margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Where do these formulas come from?</summary>
+    <p style="margin-top:10px">Standard K-factor voltage drop, kVA/FLA sizing, and infinite-source fault current formulas, plus commonly published NEC Table 310.16 75&deg;C copper/aluminum ampacities. The same formulas power VOLTFIELD's Engineering Calculators page.</p>
+  </details>
+  <details>
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Is this free and does it require an account?</summary>
+    <p style="margin-top:10px">Yes — it's free, runs entirely in your browser, and needs no signup. Nothing you enter is sent anywhere.</p>
+  </details>
+</div>
+
+<section class="ctaband">
+  <div class="ctaband-in">
+    <div><h3>Want more sizing tools?</h3><p>Seven more calculators for cable sizing, BESS, solar strings, PF correction, and unit conversion.</p></div>
+    <a class="ctabtn" href="engineering-calculators.html">Open Calculators &rsaquo;</a>
+  </div>
+</section>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  <div class="in">
+    <div>
+      <h5>Voltfield Supply Co. — Practice Sandbox</h5>
+      <p>A free one-line system design sandbox for practicing transformer, breaker, feeder, and panel sizing — with instant checks on sizing, voltage drop, and fault current. Part of Voltfield's engineering knowledge tools, alongside the BOM Generator, PCB Builder, and Engineering Calculators.</p>
+    </div>
+    <div><h5>Explore</h5><ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="engineering-calculators.html">Engineering Calculators</a></li>
+      <li><a href="voltfield-bom-generator.html">BOM Generator</a></li>
+      <li><a href="voltfield-pcb.html">PCB Builder</a></li>
+      <li><a href="voltfield-insights.html">Insights</a></li>
+    </ul></div>
+    <div><h5>Reference Guides</h5><ul>
+      <li><a href="guide-transformer-nameplate.html">Transformer Nameplate</a></li>
+      <li><a href="guide-switchgear-compartments.html">Switchgear Compartments</a></li>
+      <li><a href="guide-arc-flash-boundary-basics.html">Arc-Flash Boundary Basics</a></li>
+      <li><a href="guide-transformer-lead-times.html">Transformer Lead Times</a></li>
+    </ul></div>
+  </div>
+</footer>
+
+<script src="voltfield-site-config.js"></script>
+<script>
+(function(){
+  try{
+    const q=JSON.parse(localStorage.getItem("vf_quote")||"[]");
+    const el=document.getElementById("quoteCount");
+    if(el)el.textContent=Array.isArray(q)?q.length:0;
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  'use strict';
+  /* ---------- shared reference data (mirrors engineering-calculators.html) ---------- */
+  const AWG=[
+    {n:'14 AWG',cm:4110,cu:20,al:null},{n:'12 AWG',cm:6530,cu:25,al:20},{n:'10 AWG',cm:10380,cu:35,al:25},
+    {n:'8 AWG',cm:16510,cu:50,al:40},{n:'6 AWG',cm:26240,cu:65,al:50},{n:'4 AWG',cm:41740,cu:85,al:65},
+    {n:'3 AWG',cm:52620,cu:100,al:75},{n:'2 AWG',cm:66360,cu:115,al:90},{n:'1 AWG',cm:83690,cu:130,al:100},
+    {n:'1/0 AWG',cm:105600,cu:150,al:120},{n:'2/0 AWG',cm:133100,cu:175,al:135},{n:'3/0 AWG',cm:167800,cu:200,al:155},
+    {n:'4/0 AWG',cm:211600,cu:230,al:180},{n:'250 kcmil',cm:250000,cu:255,al:205},{n:'300 kcmil',cm:300000,cu:285,al:230},
+    {n:'350 kcmil',cm:350000,cu:310,al:250},{n:'400 kcmil',cm:400000,cu:335,al:270},{n:'500 kcmil',cm:500000,cu:380,al:310},
+    {n:'600 kcmil',cm:600000,cu:420,al:340},{n:'750 kcmil',cm:750000,cu:475,al:385},{n:'1000 kcmil',cm:1000000,cu:545,al:445}
+  ];
+  const STD_KVA=[15,25,37.5,50,75,100,112.5,150,167,225,300,500,750,1000,1500,2000,2500,3000,3750,5000,7500,10000];
+  const AIC_OPTS=[10000,14000,22000,25000,35000,42000,65000,100000];
+  const K={cu:12.9,al:21.2};
+  const fmt=(v,d)=>{d=d===undefined?2:d;return Number(v).toLocaleString('en-US',{maximumFractionDigits:d});};
+  const $=id=>document.getElementById(id);
+
+  const kvaSel=$('sxKva'), aicSel=$('sxAic'), sizeSel=$('sxSize');
+  kvaSel.innerHTML=STD_KVA.map(k=>`<option value="${k}"${k===300?' selected':''}>${fmt(k,1)} kVA</option>`).join('');
+  aicSel.innerHTML=AIC_OPTS.map(a=>`<option value="${a}"${a===22000?' selected':''}>${fmt(a/1000,0)} kAIC</option>`).join('');
+  sizeSel.innerHTML=AWG.map((a,i)=>`<option value="${i}"${a.n==='500 kcmil'?' selected':''}>${a.n}</option>`).join('');
+
+  /* ---------- branch loads ---------- */
+  let loads=[{type:'motor',val:150,pf:0.87},{type:'general',val:80,pf:0.9}];
+  function renderLoads(){
+    $('loadsMount').innerHTML=loads.map((l,i)=>`
+      <div class="loadsrow" data-i="${i}">
+        <div class="est-field"><label>Type</label><select class="ldType"><option value="motor"${l.type==='motor'?' selected':''}>Motor (HP)</option><option value="general"${l.type==='general'?' selected':''}>General (kVA)</option></select></div>
+        <div class="est-field"><label>${l.type==='motor'?'HP':'kVA'}</label><input type="number" class="ldVal" min="0" step="1" value="${l.val}"></div>
+        <div class="est-field"><label>Power factor</label><input type="number" class="ldPf" min="0.1" max="1" step="0.01" value="${l.pf}"></div>
+        ${loads.length>1?'<div class="est-field"><button type="button" class="rm">Remove</button></div>':''}
+      </div>`).join('');
+    $('loadsMount').querySelectorAll('.loadsrow').forEach(row=>{
+      const i=+row.dataset.i;
+      row.querySelector('.ldType').onchange=e=>{loads[i].type=e.target.value;renderLoads();drawOneline();};
+      row.querySelector('.ldVal').oninput=e=>{loads[i].val=parseFloat(e.target.value)||0;drawOneline();};
+      row.querySelector('.ldPf').oninput=e=>{loads[i].pf=parseFloat(e.target.value)||0.01;drawOneline();};
+      const rm=row.querySelector('.rm'); if(rm)rm.onclick=()=>{loads.splice(i,1);renderLoads();drawOneline();};
+    });
+  }
+  $('addLoadBtn').onclick=()=>{ if(loads.length>=4){toast('Up to 4 branch loads in this sandbox.');return;} loads.push({type:'general',val:50,pf:0.9}); renderLoads(); drawOneline(); };
+  renderLoads();
+
+  /* ---------- derived electrical values ---------- */
+  function loadKva(l){
+    if(l.type==='motor'){ const kw=l.val*0.746/0.9; return kw/Math.max(l.pf,0.01); }
+    return l.val;
+  }
+  function state(){
+    return {
+      kva:parseFloat(kvaSel.value), z:parseFloat($('sxZ').value)||0.01, v:parseFloat($('sxV').value)||1,
+      at:parseFloat($('sxAt').value)||0, aic:parseFloat(aicSel.value),
+      mat:$('sxMat').value, sizeIdx:parseInt(sizeSel.value,10), len:parseFloat($('sxLen').value)||0,
+      loads: loads.slice()
+    };
+  }
+  function computed(s){
+    const totalKva=s.loads.reduce((a,l)=>a+loadKva(l),0);
+    const panelI=(totalKva*1000)/(1.732*s.v);
+    const wire=AWG[s.sizeIdx];
+    const ampacity=s.mat==='al'?(wire.al||wire.cu*0.78):wire.cu;
+    const vd=(1.732*K[s.mat]*panelI*s.len)/wire.cm;
+    const vdPct=(vd/s.v)*100;
+    const isc=(100000*s.kva)/(1.732*s.v*s.z);
+    const xfmrFla=(s.kva*1000)/(1.732*s.v);
+    return {totalKva,panelI,ampacity,vd,vdPct,isc,xfmrFla};
+  }
+
+  /* ---------- one-line diagram ---------- */
+  function drawOneline(){
+    const s=state(), c=computed(s);
+    const svg=$('onelineSvg');
+    const col='#101B2D', accent='#FFC400';
+    const box=(x,y,w,h,label,sub)=>`<g><rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#fff" stroke="${col}" stroke-width="2"/><text x="${x+w/2}" y="${y+h/2-4}" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="13" fill="${col}">${label}</text><text x="${x+w/2}" y="${y+h/2+13}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="#5B6B7E">${sub}</text></g>`;
+    const line=(x1,y1,x2,y2)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="2"/>`;
+    let s_='';
+    s_+=box(10,70,90,50,'UTILITY','&#8734; source');
+    s_+=line(100,95,150,95);
+    s_+=box(150,60,110,70,'XFMR',`${fmt(s.kva,1)} kVA · ${s.z}%Z`);
+    s_+=line(260,95,310,95);
+    s_+=box(310,70,100,50,'MAIN OCPD',`${fmt(s.at,0)}A / ${fmt(s.aic/1000,0)}kAIC`);
+    s_+=line(410,95,460,95);
+    s_+=`<g><line x1="460" y1="95" x2="600" y2="95" stroke="${col}" stroke-width="2" stroke-dasharray="6 4"/><text x="530" y="86" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="#5B6B7E">${AWG[s.sizeIdx].n} ${s.mat==='cu'?'Cu':'Al'} · ${fmt(s.len,0)} ft</text></g>`;
+    s_+=box(600,70,90,50,'PANEL',`${fmt(c.panelI,0)} A`);
+    const ly=[30,72,114,156];
+    s.loads.forEach((l,i)=>{
+      const y=ly[i]||(30+i*42);
+      s_+=`<line x1="645" y1="95" x2="645" y2="${y+15}" stroke="${col}" stroke-width="1.5"/>`;
+      s_+=`<line x1="645" y1="${y+15}" x2="700" y2="${y+15}" stroke="${col}" stroke-width="1.5"/>`;
+      s_+=`<circle cx="700" cy="${y+15}" r="3" fill="${col}"/>`;
+      s_+=`<text x="710" y="${y+19}" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="${col}">${l.type==='motor'?fmt(l.val,0)+' HP motor':fmt(l.val,1)+' kVA load'} · PF ${l.pf}</text>`;
+    });
+    svg.innerHTML=s_;
+  }
+
+  /* ---------- checks ---------- */
+  function runChecks(){
+    const s=state(), c=computed(s);
+    const checks=[];
+    checks.push({
+      id:'xfmr', pass: s.kva>=c.totalKva,
+      title:'Transformer sizing',
+      detail:`Connected load ${fmt(c.totalKva,1)} kVA vs. selected ${fmt(s.kva,1)} kVA transformer.`
+    });
+    const ocpdOk = s.at>=1.25*c.panelI && s.at<=c.ampacity;
+    checks.push({
+      id:'ocpd', pass: ocpdOk,
+      title:'Main OCPD sizing',
+      detail:`Panel FLA ${fmt(c.panelI,0)} A &rarr; needs &ge; ${fmt(1.25*c.panelI,0)} A (125% continuous). Feeder ampacity is ${fmt(c.ampacity,0)} A. Selected: ${fmt(s.at,0)} A.`
+    });
+    checks.push({
+      id:'vd', pass: c.vdPct<=3,
+      title:'Feeder voltage drop',
+      detail:`${fmt(c.vd,1)} V (${fmt(c.vdPct,2)}%) over ${fmt(s.len,0)} ft of ${AWG[s.sizeIdx].n}. Common guideline is &le;3%.`
+    });
+    checks.push({
+      id:'aic', pass: s.aic>=c.isc,
+      title:'OCPD interrupting rating',
+      detail:`Available fault current (simplified, infinite source) &asymp; ${fmt(c.isc,0)} A. Selected OCPD is rated ${fmt(s.aic,0)} A.`
+    });
+    checks.push({
+      id:'load', pass: c.totalKva<=s.kva,
+      title:'Panel loading',
+      detail:`${fmt((c.totalKva/s.kva)*100,0)}% of transformer nameplate kVA.`
+    });
+    return checks;
+  }
+
+  function renderChecks(checks){
+    $('checkPanel').innerHTML=checks.map(c=>`
+      <div class="checkrow ${c.pass?'pass':'fail'}"><div class="mk">${c.pass?'&#10003;':'&#10007;'}</div><div class="tx"><b>${c.title}</b><span>${c.detail}</span></div></div>
+    `).join('');
+    const passCount=checks.filter(c=>c.pass).length;
+    if(mode==='challenge'){
+      $('scoreBar').classList.add('show');
+      $('scoreVal').textContent=passCount+' / '+checks.length;
+    } else {
+      $('scoreBar').classList.remove('show');
+    }
+    return passCount;
+  }
+
+  $('checkBtn').onclick=()=>{
+    drawOneline();
+    const checks=runChecks();
+    const passCount=renderChecks(checks);
+    if(window.vfGtag)window.vfGtag('event','sandbox_check_design',{mode:mode,pass_count:passCount,total_checks:checks.length,scenario:mode==='challenge'?SCEN[scenarioIdx].id:null});
+  };
+
+  ['sxZ','sxV','sxAt','sxLen'].forEach(id=>$(id).addEventListener('input',drawOneline));
+  ['sxKva','sxAic','sxMat','sxSize'].forEach(id=>$(id).addEventListener('change',drawOneline));
+
+  /* ---------- toast ---------- */
+  function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._tm);t._tm=setTimeout(()=>t.classList.remove('show'),1900);}
+
+  /* ---------- share link ---------- */
+  function applyState(o){
+    if(!o)return;
+    if(o.kva!=null)kvaSel.value=o.kva;
+    if(o.z!=null)$('sxZ').value=o.z;
+    if(o.v!=null)$('sxV').value=o.v;
+    if(o.at!=null)$('sxAt').value=o.at;
+    if(o.aic!=null)aicSel.value=o.aic;
+    if(o.mat!=null)$('sxMat').value=o.mat;
+    if(o.sizeIdx!=null)sizeSel.value=o.sizeIdx;
+    if(o.len!=null)$('sxLen').value=o.len;
+    if(o.loads){loads=o.loads.map(l=>({type:l.t,val:l.v,pf:l.p}));renderLoads();}
+    drawOneline();
+  }
+  function toParam(){
+    const s=state();
+    return encodeURIComponent(JSON.stringify({kva:s.kva,z:s.z,v:s.v,at:s.at,aic:s.aic,mat:s.mat,sizeIdx:s.sizeIdx,len:s.len,loads:s.loads.map(l=>({t:l.type,v:l.val,p:l.pf}))}));
+  }
+  $('copyLinkBtn').onclick=()=>{
+    const url=location.origin+location.pathname+'?d='+toParam()+(mode==='challenge'?'&scenario='+SCEN[scenarioIdx].id:'');
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>toast('Link copied'),()=>toast('Copy failed'));
+  };
+
+  /* ---------- challenge scenarios ---------- */
+  const SCEN=[
+    {id:'clean', name:'Baseline — everything checks out', prompt:'A control case: run the checks and confirm all 5 pass. Use this to see what a correctly sized system looks like before hunting for problems in the others.',
+      d:{kva:300,z:5.75,v:480,at:350,aic:35000,mat:'cu',sizeIdx:17,len:100,loads:[{t:'motor',v:150,p:0.87},{t:'general',v:80,p:0.9}]}},
+    {id:'undersized-main', name:'Undersized main breaker', prompt:'This 300kVA/480V system feeds a 150HP motor plus 150kVA of general load over 750 kcmil copper. The main was speced at 250A. Find the problem.',
+      d:{kva:300,z:5.75,v:480,at:250,aic:35000,mat:'cu',sizeIdx:19,len:100,loads:[{t:'motor',v:150,p:0.87},{t:'general',v:150,p:0.9}]},
+      fix:{at:450}},
+    {id:'voltage-drop', name:'Voltage drop blowout', prompt:'A panel over 1,000 ft from its transformer, fed by 300 kcmil copper. Everything else about this run is properly sized. Something about the distance should bother you.',
+      d:{kva:225,z:5.75,v:480,at:250,aic:22000,mat:'cu',sizeIdx:14,len:1100,loads:[{t:'general',v:150,p:0.9}]},
+      fix:{sizeIdx:17}},
+    {id:'fault-current', name:'Fault current exceeds breaker rating', prompt:'A stiff 750kVA transformer with a tight 3.5%Z feeds a panel through a 10kAIC main breaker. Check the available fault current against that rating.',
+      d:{kva:750,z:3.5,v:480,at:350,aic:10000,mat:'cu',sizeIdx:17,len:80,loads:[{t:'general',v:200,p:0.9}]},
+      fix:{aic:35000}},
+    {id:'xfmr-overload', name:'Transformer overloaded', prompt:'A 75kVA transformer feeding a 100HP motor plus 100kVA of general load. Total that up before you trust the nameplate.',
+      d:{kva:75,z:5.75,v:480,at:300,aic:22000,mat:'cu',sizeIdx:15,len:80,loads:[{t:'motor',v:100,p:0.87},{t:'general',v:100,p:0.9}]},
+      fix:{kva:225}},
+    {id:'feeder-undersized', name:'Feeder undersized for the breaker', prompt:'A 400A main breaker feeding a panel over 4 AWG copper. The breaker trip rating and the wire it protects don’t agree with each other.',
+      d:{kva:300,z:5.75,v:480,at:400,aic:35000,mat:'cu',sizeIdx:5,len:50,loads:[{t:'motor',v:150,p:0.87},{t:'general',v:60,p:0.9}]},
+      fix:{sizeIdx:18}}
+  ];
+  let mode='free', scenarioIdx=0;
+  $('scenarioSel').innerHTML=SCEN.map((s,i)=>`<option value="${i}">${s.name}</option>`).join('');
+
+  function loadScenario(i){
+    scenarioIdx=i;
+    const s=SCEN[i];
+    applyState(s.d);
+    $('scenarioPrompt').textContent=s.prompt;
+    $('revealWrap').style.display=s.fix?'':'none';
+    $('solveBox').classList.remove('show');
+    $('checkPanel').innerHTML='<p style="font-size:13.5px;color:var(--slate)">Click &ldquo;Check My Design&rdquo; above to run the 5 engineering checks.</p>';
+    $('scoreBar').classList.remove('show');
+    if(window.vfGtag)window.vfGtag('event','sandbox_scenario_start',{scenario:s.id});
+  }
+  $('scenarioSel').onchange=e=>loadScenario(parseInt(e.target.value,10));
+  $('revealBtn').onclick=()=>{
+    const s=SCEN[scenarioIdx];
+    if(!s.fix){$('solveBox').classList.remove('show');return;}
+    const labels={kva:'Transformer size (kVA)',z:'Impedance %Z',v:'Secondary voltage (V)',at:'Main OCPD trip (A)',aic:'OCPD AIC rating',mat:'Feeder conductor',sizeIdx:'Feeder size',len:'Feeder length (ft)'};
+    const rows=Object.keys(s.fix).map(k=>{
+      let v=s.fix[k];
+      if(k==='sizeIdx')v=AWG[v].n;
+      return `${labels[k]||k}: <b>${v}</b>`;
+    }).join('<br>');
+    $('solveBox').innerHTML='Suggested fix — '+rows;
+    $('solveBox').classList.add('show');
+  };
+
+  function setMode(m){
+    mode=m;
+    $('modeFreeBtn').classList.toggle('on',m==='free');
+    $('modeChalBtn').classList.toggle('on',m==='challenge');
+    $('modeFreeBtn').setAttribute('aria-selected',m==='free');
+    $('modeChalBtn').setAttribute('aria-selected',m==='challenge');
+    $('scenarioBar').classList.toggle('show',m==='challenge');
+    $('revealWrap').style.display=(m==='challenge'&&SCEN[scenarioIdx].fix)?'':'none';
+    if(m==='challenge'){ loadScenario(scenarioIdx); }
+    else { $('scoreBar').classList.remove('show'); $('solveBox').classList.remove('show'); }
+  }
+  $('modeFreeBtn').onclick=()=>setMode('free');
+  $('modeChalBtn').onclick=()=>setMode('challenge');
+
+  /* ---------- initial load: shared link or defaults ---------- */
+  (function init(){
+    const P=new URLSearchParams(location.search);
+    const sc=P.get('scenario');
+    const d=P.get('d');
+    if(sc){
+      const idx=SCEN.findIndex(s=>s.id===sc);
+      if(idx>=0){ setMode('challenge'); $('scenarioSel').value=idx; loadScenario(idx); }
+    }
+    if(d){
+      try{ applyState(JSON.parse(decodeURIComponent(d))); }catch(e){}
+    }
+    drawOneline();
+  })();
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

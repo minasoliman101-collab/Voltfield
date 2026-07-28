@@ -1,0 +1,12 @@
+/* VOLTFIELD — ordering/sales UI paused sitewide (site is pivoting to knowledge/sourcing/engineering-practice).
+   Nothing here deletes any page, script, or data — every hidden element's underlying HTML/JS stays intact
+   and reachable by direct URL. To restore ordering, delete the rule block below (leave the <link> tags in
+   every page alone — an empty stylesheet is a no-op). */
+.quotebtn,
+.hnav a[href="voltfield-bom.html"],
+#checkoutBtn, #rfqBtn, #pAdd, #pRfq, #pAlertBox,
+#addBtn, #addAllBtn,
+.utilbar b,
+.sk-price, .rv-price, .p-facts, .pricebar,
+.planhead, .plans, .plannote, .howgrid
+{ display:none !important; }
