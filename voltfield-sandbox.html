@@ -121,6 +121,9 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .oneline{background:#fff;border:1px solid var(--line-dark);padding:14px;margin:16px 0 18px;overflow-x:auto}
 .oneline svg{display:block;min-width:640px}
 .board{background:#fff;border:1px solid var(--line-dark);padding:16px;margin:0 0 10px}
+.tier2toggle{background:var(--card);border:1px dashed var(--line-dark);padding:12px 16px;margin:0 0 12px;font-size:13.5px;color:var(--ink-2)}
+.tier2toggle label{display:flex;align-items:flex-start;gap:8px;cursor:pointer;line-height:1.5}
+.tier2toggle input{margin-top:3px;flex-shrink:0}
 .board-title{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);margin-bottom:8px}
 .board-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px}
 .board-slot{flex:1 1 130px;border:2px dashed var(--line-dark);padding:10px 12px;font-family:var(--mono);font-size:11.5px;cursor:pointer;display:flex;flex-direction:column;justify-content:center;min-height:58px;text-align:center;color:var(--slate);background:none}
@@ -262,6 +265,12 @@ footer a:hover{color:#fff}
   <div class="oneline" id="onelineWrap"><svg id="onelineSvg" viewBox="0 0 900 190" xmlns="http://www.w3.org/2000/svg"></svg></div>
 
   <div class="board" id="boardMount"></div>
+
+  <div class="tier2toggle" id="tier2ToggleWrap">
+    <label><input type="checkbox" id="tier2Chk"> Add a second voltage tier (step down from Panel 1 to a second transformer, breaker, feeder, and panel — loads move to Panel 2)</label>
+  </div>
+  <div class="oneline" id="oneline2Wrap" style="display:none"><svg id="oneline2Svg" viewBox="0 0 900 190" xmlns="http://www.w3.org/2000/svg"></svg></div>
+  <div class="board" id="board2Mount" style="display:none"></div>
 
   <div class="est-row" style="margin:0 0 10px">
     <div class="est-field" id="exampleWrap"><button type="button" class="ghost" id="loadExampleBtn">Load example</button></div>
@@ -407,20 +416,25 @@ footer a:hover{color:#fff}
     {id:'g600',label:'600 kVA',kva:600,pf:0.9,type:'general'}
   ];
   const LOAD_TILES=MOTOR_TILES.concat(GEN_TILES);
-  const CAT_TILES={xfmr:XFMR_TILES,ocpd:OCPD_TILES,cond:COND_TILES,len:LEN_TILES,load:LOAD_TILES};
-  const CAT_LABEL={xfmr:'Transformer',ocpd:'Main OCPD',cond:'Feeder conductor',len:'Feeder length',load:'Branch load'};
+  const CAT_TILES={xfmr:XFMR_TILES,ocpd:OCPD_TILES,cond:COND_TILES,len:LEN_TILES,load:LOAD_TILES,
+    xfmr2:XFMR_TILES,ocpd2:OCPD_TILES,cond2:COND_TILES,len2:LEN_TILES};
+  const CAT_LABEL={xfmr:'Transformer',ocpd:'Main OCPD',cond:'Feeder conductor',len:'Feeder length',load:'Branch load',
+    xfmr2:'Transformer (Tier 2)',ocpd2:'OCPD (Tier 2)',cond2:'Feeder conductor (Tier 2)',len2:'Feeder length (Tier 2)'};
   function findTile(cat,id){ return CAT_TILES[cat].find(t=>t.id===id)||null; }
 
   /* ---------- board state ---------- */
-  const board={xfmr:null,ocpd:null,cond:null,len:null,loads:[null,null,null,null]};
+  const board={xfmr:null,ocpd:null,cond:null,len:null,loads:[null,null,null,null],
+    xfmr2:null,ocpd2:null,cond2:null,len2:null};
   let armed=null; /* {cat, tile} */
+  let tier2On=false; /* Free Design only -- Challenge Mode always forces this off, so the 6 verified scenarios are untouched */
 
   function tileSub(cat,t){
-    if(cat==='xfmr')return `${t.z}%Z &middot; ${t.v}V${t.note?' &middot; '+t.note:''}`;
-    if(cat==='ocpd')return `${fmt(t.aic/1000,0)}kAIC`;
-    if(cat==='cond'){ const w=AWG[t.sizeIdx]; const amp=t.mat==='al'?(w.al||Math.round(w.cu*0.78)):w.cu; return `${amp}A ampacity`; }
-    if(cat==='len')return '';
-    if(cat==='load')return t.type==='motor'?`Motor &middot; PF ${t.pf}`:`General load &middot; PF ${t.pf}`;
+    const base=cat.replace(/2$/,''); /* 'xfmr2' etc. share the same tile shape as tier 1's 'xfmr' */
+    if(base==='xfmr')return `${t.z}%Z &middot; ${t.v}V${t.note?' &middot; '+t.note:''}`;
+    if(base==='ocpd')return `${fmt(t.aic/1000,0)}kAIC`;
+    if(base==='cond'){ const w=AWG[t.sizeIdx]; const amp=t.mat==='al'?(w.al||Math.round(w.cu*0.78)):w.cu; return `${amp}A ampacity`; }
+    if(base==='len')return '';
+    if(base==='load')return t.type==='motor'?`Motor &middot; PF ${t.pf}`:`General load &middot; PF ${t.pf}`;
     return '';
   }
 
@@ -433,6 +447,14 @@ footer a:hover{color:#fff}
       {cat:'load',title:'Branch loads — motor (HP)',tiles:MOTOR_TILES},
       {cat:'load',title:'Branch loads — general (kVA)',tiles:GEN_TILES}
     ];
+    if(tier2On){
+      groups.push(
+        {cat:'xfmr2',title:'Tier 2 — Transformer',tiles:XFMR_TILES},
+        {cat:'ocpd2',title:'Tier 2 — Main OCPD',tiles:OCPD_TILES},
+        {cat:'cond2',title:'Tier 2 — Feeder conductor',tiles:COND_TILES},
+        {cat:'len2',title:'Tier 2 — Feeder length',tiles:LEN_TILES}
+      );
+    }
     $('legendMount').innerHTML=groups.map(g=>`
       <div class="legend-title">${g.title}</div>
       <div class="tilerow">${g.tiles.map(t=>{
@@ -451,6 +473,7 @@ footer a:hover{color:#fff}
     if(armed&&armed.cat===cat&&armed.tile.id===tile.id){ armed=null; } else { armed={cat,tile}; }
     renderLegend();
     renderBoard();
+    if(tier2On)renderBoard2();
   }
 
   function boardSlotDef(){
@@ -461,6 +484,14 @@ footer a:hover{color:#fff}
       {key:'len',cat:'len',label:'Feeder length'}
     ];
   }
+  function board2SlotDef(){
+    return [
+      {key:'xfmr2',cat:'xfmr2',label:'Transformer 2'},
+      {key:'ocpd2',cat:'ocpd2',label:'OCPD 2'},
+      {key:'cond2',cat:'cond2',label:'Conductor 2'},
+      {key:'len2',cat:'len2',label:'Feeder length 2'}
+    ];
+  }
 
   function placeTile(cat,tile,loadIdx){
     if(cat==='load'){ board.loads[loadIdx]=tile; }
@@ -468,12 +499,16 @@ footer a:hover{color:#fff}
     armed=null;
     renderLegend();
     renderBoard();
+    if(tier2On)renderBoard2();
     drawOneline();
+    if(tier2On)drawOneline2();
   }
   function clearSlot(cat,loadIdx){
     if(cat==='load'){ board.loads[loadIdx]=null; } else { board[cat]=null; }
     renderBoard();
+    if(tier2On)renderBoard2();
     drawOneline();
+    if(tier2On)drawOneline2();
   }
 
   function slotHtml(cat,tile,loadIdx){
@@ -486,16 +521,8 @@ footer a:hover{color:#fff}
     return `<div class="${cls}" data-cat="${cat}"${idxAttr}>${inner}</div>`;
   }
 
-  function renderBoard(){
-    const top=boardSlotDef().map(s=>slotHtml(s.cat,board[s.key])).join('');
-    const loads=board.loads.map((t,i)=>slotHtml('load',t,i)).join('');
-    $('boardMount').innerHTML=`
-      <div class="board-title">Source &rarr; Transformer &rarr; Main OCPD &rarr; Feeder &rarr; Panel</div>
-      <div class="board-row">${top}</div>
-      <div class="board-title">Panel branch loads (up to 4)</div>
-      <div class="board-row">${loads}</div>
-    `;
-    $('boardMount').querySelectorAll('.board-slot').forEach(el=>{
+  function wireSlots(mountEl){
+    mountEl.querySelectorAll('.board-slot').forEach(el=>{
       const cat=el.dataset.cat, idx=el.dataset.idx!=null?+el.dataset.idx:null;
       const filled=cat==='load'?board.loads[idx]:board[cat];
       el.addEventListener('click',()=>{
@@ -515,6 +542,28 @@ footer a:hover{color:#fff}
       });
     });
   }
+  function renderBoard(){
+    const top=boardSlotDef().map(s=>slotHtml(s.cat,board[s.key])).join('');
+    const loadsHtml = tier2On ? '' : `<div class="board-title">Panel branch loads (up to 4)</div><div class="board-row">${board.loads.map((t,i)=>slotHtml('load',t,i)).join('')}</div>`;
+    $('boardMount').innerHTML=`
+      <div class="board-title">Source &rarr; Transformer &rarr; Main OCPD &rarr; Feeder &rarr; Panel 1${tier2On?' (feeds Tier 2 below)':''}</div>
+      <div class="board-row">${top}</div>
+      ${loadsHtml}
+    `;
+    wireSlots($('boardMount'));
+  }
+  function renderBoard2(){
+    if(!tier2On)return;
+    const top=board2SlotDef().map(s=>slotHtml(s.cat,board[s.key])).join('');
+    const loads=board.loads.map((t,i)=>slotHtml('load',t,i)).join('');
+    $('board2Mount').innerHTML=`
+      <div class="board-title">Panel 1 &rarr; Transformer 2 &rarr; OCPD 2 &rarr; Feeder 2 &rarr; Panel 2</div>
+      <div class="board-row">${top}</div>
+      <div class="board-title">Panel 2 branch loads (up to 4)</div>
+      <div class="board-row">${loads}</div>
+    `;
+    wireSlots($('board2Mount'));
+  }
 
   /* ---------- derived electrical values ---------- */
   function loadKva(l){
@@ -523,6 +572,22 @@ footer a:hover{color:#fff}
   }
   function state(){
     const xf=board.xfmr, oc=board.ocpd, cd=board.cond, ln=board.len;
+    /* When Tier 2 is on, loads have moved to Panel 2 -- Tier 1 instead "sees" Tier 2's
+       transformer nameplate kVA as its own connected load (same simplification used
+       everywhere else here: ignore losses). When Tier 2 is off this is byte-identical
+       to the original single-tier behavior. */
+    const loads = (tier2On && board.xfmr2)
+      ? [{type:'general', val:board.xfmr2.kva, pf:1}]
+      : board.loads.filter(Boolean).map(t=>t.type==='motor'?{type:'motor',val:t.hp,pf:t.pf}:{type:'general',val:t.kva,pf:t.pf});
+    return {
+      kva: xf?xf.kva:0, z: xf?xf.z:5.75, v: xf?xf.v:480,
+      at: oc?oc.at:0, aic: oc?oc.aic:0,
+      mat: cd?cd.mat:'cu', sizeIdx: cd?cd.sizeIdx:0, len: ln?ln.len:0,
+      loads: (tier2On && !board.xfmr2) ? [] : loads
+    };
+  }
+  function state2(){
+    const xf=board.xfmr2, oc=board.ocpd2, cd=board.cond2, ln=board.len2;
     return {
       kva: xf?xf.kva:0, z: xf?xf.z:5.75, v: xf?xf.v:480,
       at: oc?oc.at:0, aic: oc?oc.aic:0,
@@ -562,7 +627,47 @@ footer a:hover{color:#fff}
     s_+=box(310,100,'MAIN OCPD',board.ocpd?`${fmt(s.at,0)}A / ${fmt(s.aic/1000,0)}kAIC`:'empty slot');
     s_+=line(410,CY,460,CY);
     s_+=`<g><line x1="460" y1="${CY}" x2="${panelX}" y2="${CY}" stroke="${col}" stroke-width="2" stroke-dasharray="6 4"/><text x="${(460+panelX)/2}" y="${CY-9}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="#5B6B7E">${board.cond&&board.len?AWG[s.sizeIdx].n+' '+(s.mat==='cu'?'Cu':'Al')+' &middot; '+fmt(s.len,0)+' ft':'empty feeder'}</text></g>`;
-    s_+=box(panelX,panelW,'PANEL',`${fmt(c.panelI,0)} A`);
+    s_+=box(panelX,panelW,tier2On?'PANEL 1':'PANEL',`${fmt(c.panelI,0)} A`);
+    if(!tier2On){
+      const busBottom=panelBottom+topPad+Math.max(nLoads-1,0)*rowH+rowH/2;
+      if(nLoads)s_+=`<line x1="${panelCx}" y1="${panelBottom}" x2="${panelCx}" y2="${busBottom}" stroke="${col}" stroke-width="1.5"/>`;
+      let li=0;
+      board.loads.forEach(l=>{
+        if(!l)return;
+        const y=panelBottom+topPad+li*rowH; li++;
+        const tickX=panelCx+40;
+        s_+=`<line x1="${panelCx}" y1="${y}" x2="${tickX}" y2="${y}" stroke="${col}" stroke-width="1.5"/>`;
+        s_+=`<circle cx="${tickX}" cy="${y}" r="3" fill="${col}"/>`;
+        s_+=`<text x="${tickX+10}" y="${y+4}" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="${col}">${l.type==='motor'?fmt(l.hp,0)+' HP motor':fmt(l.kva,1)+' kVA load'} &middot; PF ${l.pf}</text>`;
+      });
+    } else {
+      s_+=`<text x="${panelCx}" y="${panelBottom+16}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#5B6B7E">feeds Tier 2 diagram below</text>`;
+    }
+    svg.innerHTML=s_;
+  }
+
+  function drawOneline2(){
+    if(!tier2On)return;
+    const s=state2(), c=computed(s);
+    const svg=$('oneline2Svg');
+    const col='#101B2D';
+    const CY=95, BH=60, BY=CY-BH/2;
+    const box=(x,w,label,sub)=>`<g><rect x="${x}" y="${BY}" width="${w}" height="${BH}" fill="#fff" stroke="${col}" stroke-width="2"/><text x="${x+w/2}" y="${CY-4}" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="13" fill="${col}">${label}</text><text x="${x+w/2}" y="${CY+13}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="#5B6B7E">${sub}</text></g>`;
+    const line=(x1,y1,x2,y2)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="2"/>`;
+    const panelX=600, panelW=90, panelCx=panelX+panelW/2, panelBottom=BY+BH;
+    const rowH=36, topPad=22, botPad=16;
+    const nLoads=board.loads.filter(Boolean).length;
+    const vbH=Math.max(190, panelBottom+topPad+Math.max(nLoads,1)*rowH+botPad);
+    svg.setAttribute('viewBox','0 0 900 '+vbH);
+    let s_='';
+    s_+=box(10,90,'PANEL 1','feed');
+    s_+=line(100,CY,150,CY);
+    s_+=box(150,110,'XFMR 2',board.xfmr2?`${fmt(s.kva,1)} kVA &middot; ${s.z}%Z`:'empty slot');
+    s_+=line(260,CY,310,CY);
+    s_+=box(310,100,'OCPD 2',board.ocpd2?`${fmt(s.at,0)}A / ${fmt(s.aic/1000,0)}kAIC`:'empty slot');
+    s_+=line(410,CY,460,CY);
+    s_+=`<g><line x1="460" y1="${CY}" x2="${panelX}" y2="${CY}" stroke="${col}" stroke-width="2" stroke-dasharray="6 4"/><text x="${(460+panelX)/2}" y="${CY-9}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="#5B6B7E">${board.cond2&&board.len2?AWG[s.sizeIdx].n+' '+(s.mat==='cu'?'Cu':'Al')+' &middot; '+fmt(s.len,0)+' ft':'empty feeder'}</text></g>`;
+    s_+=box(panelX,panelW,'PANEL 2',`${fmt(c.panelI,0)} A`);
     const busBottom=panelBottom+topPad+Math.max(nLoads-1,0)*rowH+rowH/2;
     if(nLoads)s_+=`<line x1="${panelCx}" y1="${panelBottom}" x2="${panelCx}" y2="${busBottom}" stroke="${col}" stroke-width="1.5"/>`;
     let li=0;
@@ -578,20 +683,29 @@ footer a:hover{color:#fff}
   }
 
   /* ---------- checks ---------- */
-  function runChecks(){
-    const s=state(), c=computed(s);
+  function buildChecks(s,c,suffix){
+    suffix=suffix||'';
     const checks=[];
-    checks.push({title:'Transformer sizing', pass: s.kva>=c.totalKva,
+    checks.push({title:'Transformer sizing'+suffix, pass: s.kva>=c.totalKva,
       detail:`Connected load ${fmt(c.totalKva,1)} kVA vs. selected ${fmt(s.kva,1)} kVA transformer.`});
     const ocpdOk = s.at>=1.25*c.panelI && s.at<=c.ampacity;
-    checks.push({title:'Main OCPD sizing', pass: ocpdOk,
+    checks.push({title:'Main OCPD sizing'+suffix, pass: ocpdOk,
       detail:`Panel FLA ${fmt(c.panelI,0)} A &rarr; needs &ge; ${fmt(1.25*c.panelI,0)} A (125% continuous). Feeder ampacity is ${fmt(c.ampacity,0)} A. Selected: ${fmt(s.at,0)} A.`});
-    checks.push({title:'Feeder voltage drop', pass: c.vdPct<=3,
+    checks.push({title:'Feeder voltage drop'+suffix, pass: c.vdPct<=3,
       detail:`${fmt(c.vd,1)} V (${fmt(c.vdPct,2)}%) over ${fmt(s.len,0)} ft of ${AWG[s.sizeIdx].n}. Common guideline is &le;3%.`});
-    checks.push({title:'OCPD interrupting rating', pass: s.aic>=c.isc,
+    checks.push({title:'OCPD interrupting rating'+suffix, pass: s.aic>=c.isc,
       detail:`Available fault current (simplified, infinite source) &asymp; ${fmt(c.isc,0)} A. Selected OCPD is rated ${fmt(s.aic,0)} A.`});
-    checks.push({title:'Panel loading', pass: c.totalKva<=s.kva,
+    checks.push({title:'Panel loading'+suffix, pass: c.totalKva<=s.kva,
       detail:`${fmt(s.kva?(c.totalKva/s.kva)*100:0,0)}% of transformer nameplate kVA.`});
+    return checks;
+  }
+  function runChecks(){
+    const s=state(), c=computed(s);
+    let checks=buildChecks(s,c,'');
+    if(tier2On){
+      const s2=state2(), c2=computed(s2);
+      checks=checks.concat(buildChecks(s2,c2,' (Tier 2)'));
+    }
     return checks;
   }
 
@@ -639,17 +753,34 @@ footer a:hover{color:#fff}
 
   $('checkBtn').onclick=()=>{
     if(!board.xfmr||!board.ocpd||!board.cond||!board.len){ toast('Place a transformer, main OCPD, conductor, and length tile first.'); return; }
+    if(tier2On&&(!board.xfmr2||!board.ocpd2||!board.cond2||!board.len2)){ toast('Tier 2 is on — place its transformer, OCPD, conductor, and length tile too.'); return; }
     drawOneline();
+    if(tier2On)drawOneline2();
     const checks=runChecks();
     const passCount=renderChecks(checks);
-    if(window.vfGtag)window.vfGtag('event','sandbox_check_design',{mode:mode,pass_count:passCount,total_checks:checks.length,scenario:mode==='challenge'?SCEN[scenarioIdx].id:null});
+    if(window.vfGtag)window.vfGtag('event','sandbox_check_design',{mode:mode,pass_count:passCount,total_checks:checks.length,tier2:tier2On,scenario:mode==='challenge'?SCEN[scenarioIdx].id:null});
     (mode==='challenge'?$('scoreBar'):$('checkPanel')).scrollIntoView({behavior:'smooth',block:'start'});
   };
 
   $('clearBoardBtn').onclick=()=>{
     board.xfmr=null;board.ocpd=null;board.cond=null;board.len=null;board.loads=[null,null,null,null];
+    board.xfmr2=null;board.ocpd2=null;board.cond2=null;board.len2=null;
     armed=null;
-    renderLegend();renderBoard();drawOneline();
+    renderLegend();renderBoard();if(tier2On)renderBoard2();drawOneline();if(tier2On)drawOneline2();
+    $('checkPanel').innerHTML='<p style="font-size:13.5px;color:var(--slate)">Place a transformer, main OCPD, conductor, and length tile, then click &ldquo;Check My Design&rdquo;.</p>';
+    $('scoreBar').classList.remove('show');
+    $('revealCard').classList.remove('show');
+  };
+
+  /* ---------- tier 2 toggle (Free Design only) ---------- */
+  $('tier2Chk').onchange=e=>{
+    tier2On=e.target.checked;
+    $('oneline2Wrap').style.display=tier2On?'':'none';
+    $('board2Mount').style.display=tier2On?'':'none';
+    renderLegend();
+    renderBoard();
+    if(tier2On){ renderBoard2(); drawOneline2(); }
+    drawOneline();
     $('checkPanel').innerHTML='<p style="font-size:13.5px;color:var(--slate)">Place a transformer, main OCPD, conductor, and length tile, then click &ldquo;Check My Design&rdquo;.</p>';
     $('scoreBar').classList.remove('show');
     $('revealCard').classList.remove('show');
@@ -667,13 +798,31 @@ footer a:hover{color:#fff}
     board.len = o.len?findTile('len',o.len):null;
     board.loads = (o.loads||[null,null,null,null]).map(id=>id?findTile('load',id):null);
     while(board.loads.length<4)board.loads.push(null);
+    if(mode==='free'&&o.t2On){
+      board.xfmr2 = o.xfmr2?findTile('xfmr2',o.xfmr2):null;
+      board.ocpd2 = o.ocpd2?findTile('ocpd2',o.ocpd2):null;
+      board.cond2 = o.cond2?findTile('cond2',o.cond2):null;
+      board.len2 = o.len2?findTile('len2',o.len2):null;
+      tier2On=true;
+      $('tier2Chk').checked=true;
+      $('oneline2Wrap').style.display='';
+      $('board2Mount').style.display='';
+    }
+    renderLegend();
     renderBoard();
+    if(tier2On){ renderBoard2(); drawOneline2(); }
     drawOneline();
   }
   function boardToObj(){
-    return {xfmr:board.xfmr?board.xfmr.id:null, ocpd:board.ocpd?board.ocpd.id:null,
+    const o={xfmr:board.xfmr?board.xfmr.id:null, ocpd:board.ocpd?board.ocpd.id:null,
       cond:board.cond?board.cond.id:null, len:board.len?board.len.id:null,
       loads:board.loads.map(t=>t?t.id:null)};
+    if(tier2On){
+      o.t2On=true;
+      o.xfmr2=board.xfmr2?board.xfmr2.id:null; o.ocpd2=board.ocpd2?board.ocpd2.id:null;
+      o.cond2=board.cond2?board.cond2.id:null; o.len2=board.len2?board.len2.id:null;
+    }
+    return o;
   }
   $('copyLinkBtn').onclick=()=>{
     const url=location.origin+location.pathname+'?d='+encodeURIComponent(JSON.stringify(boardToObj()))+(mode==='challenge'?'&scenario='+SCEN[scenarioIdx].id:'');
@@ -837,6 +986,16 @@ footer a:hover{color:#fff}
     $('scenarioBar').classList.toggle('show',m==='challenge');
     $('exampleWrap').style.display=m==='challenge'?'none':'';
     $('revealWrap').style.display=(m==='challenge'&&SCEN[scenarioIdx].fix)?'':'none';
+    $('tier2ToggleWrap').style.display=m==='challenge'?'none':'';
+    if(m==='challenge'&&tier2On){
+      /* Tier 2 is a Free Design exploration feature only -- keep it fully out of Challenge
+         Mode so the 6 verified scenarios and their checks are never affected by it. */
+      tier2On=false;
+      $('tier2Chk').checked=false;
+      $('oneline2Wrap').style.display='none';
+      $('board2Mount').style.display='none';
+      renderLegend();
+    }
     if(m==='challenge'){ loadScenario(scenarioIdx); }
     else { $('scoreBar').classList.remove('show'); $('solveBox').classList.remove('show'); $('revealCard').classList.remove('show'); $('leaderboardCard').style.display='none'; $('leaderboardCard').dataset.submitHtml=''; }
   }
