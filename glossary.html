@@ -115,6 +115,18 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .artwrap{max-width:900px;margin:0 auto;padding:36px 20px 8px}
 .artwrap p.intro{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:20px;max-width:720px}
 .jump{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:30px;padding:14px;background:var(--card);border:1px solid var(--line-dark)}
+.kbsearch{position:relative;margin-bottom:20px}
+.kbsearch input{width:100%;border:2px solid var(--ink);padding:13px 16px;font-family:var(--body);font-size:15px;background:#fff}
+.kbsearch input:focus{outline:3px solid var(--signal);outline-offset:-1px}
+.kbsearch-results{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:2px solid var(--ink);border-top:0;max-height:400px;overflow-y:auto;z-index:50}
+.kbsearch-results.show{display:block}
+.kbsearch-item{display:block;padding:10px 16px;border-bottom:1px solid var(--line);text-decoration:none;color:inherit}
+.kbsearch-item:last-child{border-bottom:0}
+.kbsearch-item:hover,.kbsearch-item:focus-visible{background:var(--paper)}
+.kbsearch-item .kind{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--signal-deep);font-weight:600}
+.kbsearch-item .ttl{font-family:var(--disp);font-weight:600;font-size:15px;display:block;margin:2px 0}
+.kbsearch-item .snip{font-size:12.5px;color:var(--slate);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kbsearch-empty{padding:14px 16px;font-size:13px;color:var(--slate)}
 .quizcallout{background:var(--ink);color:#fff;padding:16px 18px;margin-bottom:24px;border-left:6px solid var(--signal);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
 .quizcallout span{font-size:13.5px;color:#AFC0D3}
 .quizcallout a{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;flex-shrink:0}
@@ -188,6 +200,10 @@ footer a:hover{color:#fff}
 </section>
 <div class="artwrap">
   <p class="intro">These are quick, accurate reference definitions — for the full context behind FEOC compliance or transformer lead times specifically, see the dedicated guides linked at the bottom of this page.</p>
+  <div class="kbsearch">
+    <input type="search" id="kbSearchInput" placeholder="Search glossary terms, guides, and calculators&hellip;" autocomplete="off" aria-label="Search glossary terms, guides, and calculators">
+    <div class="kbsearch-results" id="kbSearchResults" role="listbox"></div>
+  </div>
   <div class="quizcallout"><span>Think you know these terms? Test yourself with a free 10-question quiz — no signup.</span><a href="voltfield-glossary-quiz.html">Test yourself &rarr;</a></div>
   <div class="jump">
     <a href="#ansi-c57">ANSI C57</a><a href="#api-5ct">API 5CT</a><a href="#api-6a">API 6A</a><a href="#api-7k">API 7K</a><a href="#api-16a">API 16A</a>
@@ -316,6 +332,63 @@ footer a:hover{color:#fff}
     const el=document.getElementById("quoteCount");
     if(el)el.textContent=Array.isArray(q)?q.length:0;
   }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  'use strict';
+  /* Cross-content search: glossary terms (scroll in place) + guide pages + calculators (link out).
+     Static index, no backend -- kept in sync by hand when terms/guides/calculators are added. */
+  const TERMS=[...document.querySelectorAll('.term')].map(el=>({
+    kind:'Glossary term', title:el.querySelector('h3').textContent, snippet:el.querySelector('p').textContent,
+    href:'#'+el.id
+  }));
+  const GUIDES=[
+    {title:'Pad-Mount vs. GSU Transformers: Which Do You Need?', snippet:'Pad-mount and GSU transformers solve different problems and carry different lead times.', href:'guide-pad-mount-vs-gsu-transformers.html'},
+    {title:'FEOC Compliance for Solar & Storage Procurement', snippet:'What FEOC rules mean for solar and storage procurement and what documentation to gather.', href:'guide-feoc-compliance.html'},
+    {title:'Why Transformer Lead Times Stretch Past 3 Years', snippet:"What's driving the multi-year power transformer shortage and how to plan around it.", href:'guide-transformer-lead-times.html'},
+    {title:'How to Read a Transformer Nameplate', snippet:'What every field on a power or distribution transformer nameplate actually means.', href:'guide-transformer-nameplate.html'},
+    {title:'Switchgear Compartment Types Explained', snippet:'Metal-clad vs. metal-enclosed switchgear and what is inside each compartment.', href:'guide-switchgear-compartments.html'},
+    {title:'Arc-Flash Boundary Basics', snippet:'What an arc-flash boundary is and how it relates to incident energy and NFPA 70E.', href:'guide-arc-flash-boundary-basics.html'},
+    {title:'BESS Fire Safety Basics: NFPA 855 & UL 9540A', snippet:'What NFPA 855 requires and how UL 9540A testing sets separation distances.', href:'guide-bess-fire-safety-nfpa-855.html'},
+    {title:'Grounding & Bonding Basics', snippet:'What grounding and bonding each actually do in an industrial electrical system.', href:'guide-grounding-bonding-basics.html'},
+    {title:'Short-Circuit Studies & Breaker Coordination Basics', snippet:'What a short-circuit study calculates and how breaker coordination decides trip order.', href:'guide-short-circuit-studies-breaker-coordination.html'}
+  ].map(g=>Object.assign({kind:'Guide'},g));
+  const CALCS=[
+    {title:'Voltage Drop / Cable Sizing Calculator', href:'engineering-calculators.html#voltage-drop'},
+    {title:'Transformer Sizing Calculator', href:'engineering-calculators.html#transformer-sizing'},
+    {title:'BESS Sizing Calculator', href:'engineering-calculators.html#bess-sizing'},
+    {title:'Solar String Sizing Calculator', href:'engineering-calculators.html#solar-string'},
+    {title:'Fault Current Estimate', href:'engineering-calculators.html#fault-current'},
+    {title:'Power Factor Correction Calculator', href:'engineering-calculators.html#power-factor'},
+    {title:'Unit & Spec Converter', href:'engineering-calculators.html#unit-converter'},
+    {title:'Transformer TCO Estimator', href:'engineering-calculators.html#transformer-tco'},
+    {title:'MACRS Depreciation Estimator', href:'engineering-calculators.html#macrs-depreciation'},
+    {title:'Standards Cross-Reference', href:'engineering-calculators.html#standards-crossref'},
+    {title:'Landed/Delivered Cost Calculator', href:'engineering-calculators.html#landed-cost'},
+    {title:'HS Code Reference', href:'engineering-calculators.html#hs-codes'},
+    {title:'Compliance Mark Quick-Reference', href:'engineering-calculators.html#compliance-marks'},
+    {title:'Generator Runtime Estimator', href:'engineering-calculators.html#generator-runtime'}
+  ].map(c=>Object.assign({kind:'Calculator', snippet:'Free engineering calculator -- runs in your browser.'},c));
+  const INDEX=TERMS.concat(GUIDES).concat(CALCS);
+
+  const input=document.getElementById('kbSearchInput'), results=document.getElementById('kbSearchResults');
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+  function render(list,q){
+    if(!q){ results.classList.remove('show'); results.innerHTML=''; return; }
+    if(!list.length){ results.innerHTML='<div class="kbsearch-empty">No matches for &ldquo;'+esc(q)+'&rdquo;.</div>'; results.classList.add('show'); return; }
+    results.innerHTML=list.slice(0,12).map(r=>`<a class="kbsearch-item" href="${r.href}"><span class="kind">${r.kind}</span><span class="ttl">${esc(r.title)}</span><span class="snip">${esc(r.snippet||'')}</span></a>`).join('');
+    results.classList.add('show');
+  }
+  function search(q){
+    const needle=q.trim().toLowerCase();
+    if(!needle)return [];
+    return INDEX.filter(r=>(r.title+' '+(r.snippet||'')).toLowerCase().includes(needle));
+  }
+  input.addEventListener('input',()=>render(search(input.value),input.value));
+  input.addEventListener('focus',()=>{ if(input.value.trim())render(search(input.value),input.value); });
+  document.addEventListener('click',e=>{ if(!e.target.closest('.kbsearch'))results.classList.remove('show'); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape')results.classList.remove('show'); });
 })();
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
