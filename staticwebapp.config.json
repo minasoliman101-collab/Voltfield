@@ -19,6 +19,7 @@
     { "route": "/sw.js", "headers": { "cache-control": "no-cache" } },
     { "route": "/manifest.json", "headers": { "cache-control": "public, max-age=86400" } },
     { "route": "/icons/*", "headers": { "cache-control": "public, max-age=2592000" } },
+    { "route": "/images/*", "headers": { "cache-control": "public, max-age=2592000" } },
     { "route": "/voltfield-catalog-data.js", "headers": { "cache-control": "public, max-age=604800, stale-while-revalidate=86400" } },
     { "route": "/voltfield-bom-engine.js", "headers": { "cache-control": "public, max-age=86400, stale-while-revalidate=86400" } },
     { "route": "/voltfield-site-config.js", "headers": { "cache-control": "public, max-age=3600" } },

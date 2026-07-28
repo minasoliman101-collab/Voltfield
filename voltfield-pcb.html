@@ -541,6 +541,7 @@ $('addBtn').onclick=()=>{
   if(ex){ex.qty=qty;}else{q.push({pn,name,price:'$'+r.allUnit.toFixed(2),lead:r.leadDays+' bd',sec:'dc',qty,up:r.allUnit,pu:'/ea',d:'voltfield'});}
   saveQuote(q);
   toast((r.asm?'PCBA build':'PCB build')+' added to quote ('+qty.toLocaleString()+' pcs)');
+  if(window.vfGtag)window.vfGtag('event','add_to_quote',{method:'pcb_builder',pn,qty,value:r.allUnit*qty});
 };
 $('printBtn').onclick=()=>window.print();
 $('copyBtn').onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(location.href).then(()=>toast('Config link copied'),()=>toast('Copy failed'));};

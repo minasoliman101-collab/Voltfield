@@ -383,6 +383,7 @@ document.getElementById('addAllBtn').onclick=()=>{
   saveQuote(q);
   document.getElementById('sumNote').innerHTML=`Added ${inc.length} line${inc.length>1?'s':''} to your quote list (${added} new). <a href="voltfield-supply-catalog.html?quote=1">View quote list &rarr;</a>`;
   toast(`Added ${inc.length} line${inc.length>1?'s':''} to quote`);
+  if(window.vfGtag)window.vfGtag('event','add_to_quote',{method:'quick_order',lines:inc.length,new_items:added});
 };
 document.getElementById('csvBtn').onclick=()=>{
   const inc=ROWS.filter(r=>r.match&&r.include);

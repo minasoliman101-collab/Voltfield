@@ -395,6 +395,7 @@ function generate(){
   $('sPieces').textContent=Math.round(bom.pieceCount).toLocaleString();
   $('sMat').textContent=m$(bom.materialTotal);
   $('sPrice').textContent=m$(bom.price);
+  if(window.vfGtag)window.vfGtag('event','bom_generate',{family:f.n,sector:f.s,line_count:bom.lineCount,piece_count:Math.round(bom.pieceCount)});
   const maxPct=Math.max(...bom.groups.flatMap(g=>g.items.map(x=>x.pct)));
   let html='';
   bom.groups.forEach(g=>{

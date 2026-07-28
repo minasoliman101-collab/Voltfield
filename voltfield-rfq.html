@@ -351,8 +351,10 @@ document.getElementById('sendBtn').onclick=async()=>{
     document.getElementById('rfqSuccess').classList.add('show');
     document.getElementById('rfqSuccess').scrollIntoView({behavior:'smooth',block:'start'});
     toast('RFQ sent');
+    if(window.vfGtag)window.vfGtag('event','rfq_submit',{method:'netlify_forms',rfq_number:rfqNo,item_count:QUOTE.length,value:total});
   }catch(err){
     toast('Online submission unavailable here — opening your email client instead');
+    if(window.vfGtag)window.vfGtag('event','rfq_submit',{method:'mailto_fallback',rfq_number:rfqNo,item_count:QUOTE.length,value:total});
     document.getElementById('emailBtn').click();
   }finally{
     btn.textContent=orig; btn.disabled=false;

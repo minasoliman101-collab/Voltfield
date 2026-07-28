@@ -605,7 +605,7 @@ function renderResults(){
     const inq=qset.has(sku.pn);
     html+=`<div class="skucard" data-fi="${f._i}" data-seed="${seed}">
       <div class="sk-band" style="background:${col}"></div>
-      ${f.img?`<div class="sk-imgwrap"><img class="sk-img" src="${f.img}" alt="${f.n}" loading="lazy"></div>`:''}
+      ${f.img?`<div class="sk-imgwrap">${pImg(f.img,'sk-img',f.n,true)}</div>`:''}
       <div class="sk-body">
         <div class="sk-cat"><span class="c" style="background:${col}">${f.c}</span><span class="d">${DL[f.d]}</span></div>
         <div class="sk-pn">${sku.pn}</div>
@@ -653,6 +653,8 @@ function scrollTop(){document.querySelector('.catlayout').scrollIntoView({behavi
 /* ---------- quote list (localStorage) ---------- */
 function loadQuote(){try{const q=JSON.parse(localStorage.getItem('vf_quote')||'[]');return Array.isArray(q)?q:[];}catch(e){return [];}}
 function saveQuote(q){localStorage.setItem('vf_quote',JSON.stringify(q));document.getElementById('quoteCount').textContent=q.length;}
+/* WebP-with-JPEG-fallback <picture> for family images (src is a .jpg path from FAM) */
+function pImg(src,cls,alt,lazy){if(!src)return'';const w=src.replace(/\.jpg$/,'.webp');return`<picture><source srcset="${w}" type="image/webp"><img class="${cls||''}" src="${src}" alt="${alt||''}"${lazy?' loading="lazy"':''}></picture>`;}
 /* ---------- saved / named quote lists (projects) ---------- */
 function escP(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function loadSaved(){try{const s=JSON.parse(localStorage.getItem('vf_saved')||'{}');return (s&&typeof s==='object'&&!Array.isArray(s))?s:{};}catch(e){return {};}}
@@ -702,6 +704,7 @@ function addToQuote(btn){
   } else {
     q.push({pn,name:decodeURIComponent(btn.dataset.name),price:btn.dataset.price,lead:btn.dataset.lead,sec:btn.dataset.sec,qty:1,up:parseFloat(btn.dataset.up)||0,pu:btn.dataset.pu||'',d:btn.dataset.d});
     saveQuote(q); btn.classList.add('in'); btn.textContent='Added ✓'; toast('Added to quote list');
+    if(window.vfGtag)window.vfGtag('event','add_to_quote',{pn,sector:btn.dataset.sec,value:parseFloat(btn.dataset.up)||0});
   }
   renderDrawer();
 }
@@ -731,7 +734,7 @@ function renderModal(){
       <div><span class="dm-cat" style="background:${col}">${f.c}</span> <span class="dm-dist">${distLbl} · ${SECTORS[f.s].label}</span></div>
       <button class="dm-x" id="dmClose" aria-label="Close">&times;</button>
     </div>
-    ${f.img?`<div class="dm-imgwrap"><img class="dm-img" src="${f.img}" alt="${configuredName(f,picks)}"></div>`:''}
+    ${f.img?`<div class="dm-imgwrap">${pImg(f.img,'dm-img',configuredName(f,picks))}</div>`:''}
     <div class="dm-body">
       <div class="dm-pn">${pn}</div>
       <h3 class="dm-name">${configuredName(f,picks)}</h3>
@@ -814,7 +817,7 @@ function renderRecentlyViewed(){
     const price=priceFor(rf,picks);
     const col=SECTORS[rf.s].color;
     return `<a class="rv-card" href="voltfield-part.html?fi=${x.fi}&o=${x.o}&chk=${x.chk}">
-      <div class="rv-imgwrap">${rf.img?`<img src="${rf.img}" alt="">`:`<div class="rv-noimg" style="background:${col}"></div>`}</div>
+      <div class="rv-imgwrap">${rf.img?pImg(rf.img,'','',true):`<div class="rv-noimg" style="background:${col}"></div>`}</div>
       <div class="rv-body"><div class="rv-name">${name}</div><div class="rv-price">${money(price,rf.pu)}</div></div>
     </a>`;
   }).join('');
@@ -879,7 +882,7 @@ function openCompareModal(){
     ['Compliance',it=>it.f.cmp.join(', ')||'—'],
     ['SKUs in family',it=>fmt(it.f.ct)]
   ];
-  let html='<table class="cmp-table"><tr><th>Part</th>'+items.map(it=>`<td><strong>${it.sku.name}</strong>${it.f.img?`<div style="margin-top:6px"><img src="${it.f.img}" alt=""></div>`:''}</td>`).join('')+'</tr>';
+  let html='<table class="cmp-table"><tr><th>Part</th>'+items.map(it=>`<td><strong>${it.sku.name}</strong>${it.f.img?`<div style="margin-top:6px">${pImg(it.f.img)}</div>`:''}</td>`).join('')+'</tr>';
   rows.forEach(([label,fn])=>{html+=`<tr><th>${label}</th>`+items.map(it=>`<td>${fn(it)}</td>`).join('')+'</tr>';});
   html+='<tr><th></th>'+items.map(it=>`<td><a href="voltfield-part.html?fi=${it.fi}&o=${picksToParam(it.f,it.sku.picks)}&chk=${it.sku.chk}" style="color:var(--signal-deep);font-weight:600;text-decoration:underline">View details &rsaquo;</a></td>`).join('')+'</tr>';
   html+='</table>';
