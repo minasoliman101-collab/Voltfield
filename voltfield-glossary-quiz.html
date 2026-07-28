@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glossary Quiz — Test Yourself on Energy &amp; Industrial Terms | VOLTFIELD Supply Co.</title>
+<meta name="description" content="Free multiple-choice quiz on 21 energy-infrastructure and industrial procurement terms — transformers, BESS, oil & gas, and FEOC/tax-credit terminology. No signup, runs in your browser.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:title" content="Glossary Quiz — test yourself on energy & industrial terms">
+<meta property="og:description" content="A free multiple-choice quiz built from VOLTFIELD's glossary of transformer, BESS, oil & gas, and tax-credit terminology.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-glossary.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-glossary.jpg">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ordering-hidden.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Quiz","name":"VOLTFIELD Glossary Quiz","about":{"@type":"Thing","name":"Energy infrastructure and industrial procurement terminology"},"educationalAlignment":{"@type":"AlignmentObject","alignmentType":"educationalSubject","targetName":"Electrical engineering and procurement terminology"},"isAccessibleForFree":true}
+</script>
+<style>
+:root{
+  --ink:#101B2D;--ink-2:#22334C;--slate:#5B6B7E;--paper:#DDE5EC;--card:#F3F6FA;
+  --line:#C4CFDA;--line-dark:#A7B6C6;--signal:#FFC400;--signal-deep:#E5AC00;
+  --crit:#C43D2E;--warn:#D98E04;--ok:#2E7D4F;
+  --dc:#2B6CB0;--re:#2E7D4F;--bess:#B7791F;--og:#9C4221;--mro:#5B6B7E;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;--body:'IBM Plex Sans',system-ui,sans-serif;--disp:'Barlow Condensed',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5}
+button,a,input,select{font-family:inherit}
+button,a{cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+.utilbar{background:var(--ink);color:#C9D3DF;font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:6px 20px;display:flex;justify-content:space-between;gap:12px}
+.utilbar b{color:var(--signal);font-weight:600}
+.utilbar .right{display:none}
+@media(min-width:720px){.utilbar .right{display:block}}
+header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:60}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo .bolt{width:34px;height:34px;background:var(--signal);display:grid;place-items:center;border:2px solid var(--ink)}
+.logo .bolt svg{width:18px;height:18px}
+.logo .wordmark{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.02em;line-height:1}
+.logo .wordmark small{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.18em;color:var(--slate)}
+.hnav{display:none;gap:4px}
+.navtoggle{display:none;background:var(--ink);color:#fff;border:2px solid var(--ink);width:42px;height:38px;font-size:20px;line-height:1;align-items:center;justify-content:center;flex-shrink:0}
+@media(max-width:899px){.navtoggle{display:inline-flex}.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:2px solid var(--ink);padding:6px 12px 10px;gap:0;box-shadow:0 10px 20px rgba(16,27,45,.14);z-index:59}.hnav.open a{padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}.hnav.open a:last-child{border-bottom:0}.hnav.open a.on{border-left-color:var(--signal);color:var(--ink)}}
+@media(min-width:900px){.hnav{display:flex}}
+.hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
+.hnav a:hover{color:var(--ink);background:var(--paper)}
+.hnav a.on{color:var(--ink);border-bottom-color:var(--signal)}
+.navdrop{position:relative}
+.navdrop-btn{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-transform:uppercase;border:0;border-bottom:3px solid transparent;background:none;display:inline-flex;align-items:center;gap:4px}
+.navdrop-btn:hover{color:var(--ink);background:var(--paper)}
+.navdrop-btn.on{color:var(--ink);border-bottom-color:var(--signal)}
+.navdrop-btn .car{width:8px;height:8px;flex-shrink:0}
+.navdrop-menu{display:none;position:absolute;top:100%;left:0;background:var(--card);border:2px solid var(--ink);min-width:190px;z-index:70;flex-direction:column}
+.navdrop.open .navdrop-menu,.navdrop:hover .navdrop-menu,.navdrop:focus-within .navdrop-menu{display:flex}
+.navdrop-menu a{padding:10px 14px;font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line)}
+.navdrop-menu a:last-child{border-bottom:0}
+.navdrop-menu a:hover{background:var(--paper);color:var(--ink)}
+.navdrop-menu a.on{color:var(--ink);background:var(--paper);border-left:3px solid var(--signal)}
+@media(max-width:899px){
+.navdrop-btn{width:100%;justify-content:space-between;padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}
+.navdrop-btn.on{border-left-color:var(--signal);border-bottom-color:var(--line)}
+.navdrop-menu{display:flex!important;position:static;border:0;min-width:0;background:var(--paper)}
+.navdrop-menu a{padding-left:26px;border-bottom:1px solid var(--line)}
+.navdrop-btn .car{display:none}
+}
+.headright{margin-left:auto;display:flex;align-items:center;gap:10px}
+.quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
+.quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
+.artban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal)}
+.artban-in{max-width:900px;margin:0 auto;padding:40px 20px 34px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--signal);margin-bottom:10px}
+.artban h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,44px);letter-spacing:.01em;line-height:1.06}
+.artban p.dek{color:#AFC0D3;font-size:15.5px;margin-top:14px;line-height:1.55;max-width:680px}
+.artwrap{max-width:760px;margin:0 auto;padding:36px 20px 8px}
+.artwrap p{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:14px}
+.progressbadge{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ok);font-weight:600;margin-bottom:16px}
+.quizcard{background:var(--card);border:1px solid var(--line-dark);padding:26px 24px;margin-bottom:20px}
+.quiz-progress{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--slate);margin-bottom:10px}
+.quiz-term{font-family:var(--disp);font-weight:700;font-size:24px;margin-bottom:18px}
+.quiz-opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid var(--line-dark);padding:12px 16px;margin-bottom:10px;font-size:14px;color:var(--ink-2);line-height:1.5}
+.quiz-opt:hover:not(:disabled){border-color:var(--ink)}
+.quiz-opt:disabled{cursor:default}
+.quiz-opt.correct{border-color:var(--ok);background:#EAF5EE;color:var(--ink)}
+.quiz-opt.wrong{border-color:var(--crit);background:#FBEDEA;color:var(--ink)}
+.quiz-next{margin-top:6px}
+.quiz-next button{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:10px 20px;font-family:var(--disp);font-weight:700;font-size:14px;letter-spacing:.04em;text-transform:uppercase}
+.quiz-next button:hover{background:transparent;color:var(--ink)}
+.quiz-done{text-align:center}
+.quiz-done .score{font-family:var(--disp);font-weight:700;font-size:44px;margin:10px 0}
+.quiz-done .best{font-family:var(--mono);font-size:12.5px;color:var(--slate);margin-bottom:18px}
+.callout{background:#fff;border:1px solid var(--line-dark);border-left:4px solid var(--signal);padding:16px 18px;margin:20px 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.callout a{color:var(--signal-deep);font-weight:600;text-decoration:underline}
+footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
+footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
+@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
+footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer p{line-height:1.6;max-width:460px}
+footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
+footer a{color:#9FB0C3;text-decoration:none}
+footer a:hover{color:#fff}
+</style>
+</head>
+<body>
+<div class="utilbar">
+  <span>API · IEEE · UL LISTED VENDORS · <b>QUOTES IN 24 HRS</b></span>
+  <span class="right">+1 (850) 686-1378 &nbsp;|&nbsp; RFQ@voltfield.org</span>
+</div>
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — ENERGY INFRASTRUCTURE PARTS</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="index.html">Home</a>
+    <a href="voltfield-supply-catalog.html">All Parts</a>
+    <a href="voltfield-suppliers.html">All Suppliers</a>
+    <a href="voltfield-bom.html">Quick Order</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu">
+        <a href="voltfield-bom-generator.html">BOM Generator</a>
+        <a href="voltfield-pcb.html">PCB Builder</a>
+        <a href="voltfield-identify.html">Part ID</a>
+        <a href="voltfield-eol.html">Obsolete/EOL</a>
+        <a href="engineering-calculators.html">Calculators</a>
+        <a href="voltfield-sandbox.html">Practice Sandbox</a>
+        <a href="voltfield-glossary-quiz.html" class="on">Glossary Quiz</a>
+        <a href="rfq-toolkit.html">RFQ Toolkit</a>
+      </div>
+    </div>
+    <a href="voltfield-insights.html">Insights</a>
+    <a href="voltfield-account.html">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View quote list on catalog page">QUOTE LIST <span class="ct" id="quoteCount">0</span></a>
+  </div>
+</header>
+<section class="artban">
+  <div class="artban-in">
+    <div style="font-family:var(--mono);font-size:11px;color:#8DA0B8;margin-bottom:12px"><a href="index.html" style="color:#8DA0B8;text-decoration:none">Home</a> / <a href="glossary.html" style="color:#8DA0B8;text-decoration:none">Glossary</a> / <span style="color:#E8EDF3">Quiz</span></div>
+    <div class="eyebrow">Free · No Signup · Runs In Your Browser</div>
+    <h1>Test yourself on 21 energy &amp; industrial terms</h1>
+    <p class="dek">Ten random multiple-choice questions pulled from the <a href="glossary.html" style="color:#FFC400">full glossary</a> — transformer standards, BESS compliance, oilfield tubular specs, and FEOC/tax-credit terminology. Your best score is saved on this device.</p>
+  </div>
+</section>
+<div class="artwrap">
+  <div class="progressbadge" id="progressBadge"></div>
+
+  <div class="quizcard" id="quizMount"></div>
+
+  <div class="callout">Want the full definitions with context and cross-links? See the <a href="glossary.html">complete glossary</a>.</div>
+</div>
+
+<footer>
+  <div class="in">
+    <div>
+      <h5>Voltfield Supply Co. — Glossary Quiz</h5>
+      <p>A free self-test built from VOLTFIELD's glossary of energy-infrastructure and industrial procurement terminology. Part of Voltfield's engineering knowledge tools, alongside the Practice Sandbox, BOM Generator, and Engineering Calculators.</p>
+    </div>
+    <div><h5>Explore</h5><ul>
+      <li><a href="glossary.html">Full Glossary</a></li>
+      <li><a href="voltfield-sandbox.html">Practice Sandbox</a></li>
+      <li><a href="engineering-calculators.html">Engineering Calculators</a></li>
+      <li><a href="voltfield-bom-generator.html">BOM Generator</a></li>
+    </ul></div>
+    <div><h5>Reference Guides</h5><ul>
+      <li><a href="guide-transformer-nameplate.html">Transformer Nameplate</a></li>
+      <li><a href="guide-feoc-compliance.html">FEOC Compliance</a></li>
+      <li><a href="guide-switchgear-compartments.html">Switchgear Compartments</a></li>
+    </ul></div>
+  </div>
+</footer>
+
+<script src="voltfield-site-config.js"></script>
+<script>
+(function(){
+  try{
+    const q=JSON.parse(localStorage.getItem("vf_quote")||"[]");
+    const el=document.getElementById("quoteCount");
+    if(el)el.textContent=Array.isArray(q)?q.length:0;
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  'use strict';
+  const TERMS=[
+    {t:'ANSI C57', d:"The IEEE/ANSI C57 standard series governing power transformer design, testing, and performance requirements in North America."},
+    {t:'API 5CT', d:"American Petroleum Institute specification covering casing and tubing (OCTG) used in oil and gas wells."},
+    {t:'API 6A', d:"API specification covering wellhead and christmas tree equipment."},
+    {t:'API 7K', d:"API specification covering drilling and well-servicing structural equipment, including derricks and masts."},
+    {t:'API 16A', d:"API specification covering drill-through equipment, including blowout preventers (BOPs)."},
+    {t:'BOP (Blowout Preventer)', d:"A large valve/stack assembly used to seal, control, and monitor an oil or gas well, preventing an uncontrolled release of fluids."},
+    {t:'BOS (Balance of System)', d:"Every component of a solar or storage installation other than the modules themselves — racking, wiring, trackers, and inverters."},
+    {t:'Christmas tree (wellhead)', d:"The assembly of valves, spools, and fittings mounted on top of a wellhead used to control production flow."},
+    {t:'DC block (BESS)', d:"A modular, pre-integrated battery rack/module unit that serves as a building block of a larger battery energy storage system."},
+    {t:'Domestic content bonus', d:"An additional US tax credit percentage available to projects meeting domestic-manufacturing thresholds for steel, iron, and manufactured components."},
+    {t:'FEOC (Foreign Entity of Concern)', d:"Restrictions on component sourcing that determine whether a solar or storage project's components disqualify it from ITC eligibility and the domestic-content bonus."},
+    {t:'Grid-forming vs. grid-following', d:"Grid-forming inverters/PCS can establish their own voltage and frequency reference; grid-following equipment synchronizes to an existing grid signal."},
+    {t:'GSU transformer', d:"Steps up voltage from a generator to transmission-line levels."},
+    {t:'ITC (Investment Tax Credit)', d:"The federal tax credit for renewable energy and storage projects under IRC Section 48/48E."},
+    {t:'kVA vs. kW', d:"kVA measures apparent power; kW measures real, usable power. The ratio between the two is the power factor."},
+    {t:'MCCB', d:"An overcurrent protection device typically rated up to about 2,500 A."},
+    {t:'NFPA 855', d:"The National Fire Protection Association standard for the installation of stationary energy storage systems."},
+    {t:'OCTG', d:"The collective term for tubulars used in oil and gas wells: casing, tubing, and drill pipe."},
+    {t:'PCS (Power Conversion System)', d:"Equipment that converts DC battery power to AC (and back) for grid interconnection in a BESS."},
+    {t:'Safe harbor (construction)', d:"IRS provisions that let a project lock in tax-credit eligibility by beginning construction or incurring qualifying costs before a deadline."},
+    {t:'UL 9540A', d:"A UL test method evaluating thermal runaway fire propagation in battery energy storage systems."}
+  ];
+  const $=id=>document.getElementById(id);
+  const ROUND_LEN=10;
+  let deck=[], qi=0, score=0, seed=1;
+
+  function rand(){ seed=(seed*1103515245+12345)&0x7fffffff; return seed/0x7fffffff; }
+  function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(rand()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+  function loadBest(){ const v=parseInt(localStorage.getItem('vf_glossary_quiz_best')||'0',10); return isNaN(v)?0:v; }
+  function saveBest(s){ if(s>loadBest())localStorage.setItem('vf_glossary_quiz_best',String(s)); }
+  function renderBadge(){ $('progressBadge').textContent='Best score: '+loadBest()+' / '+ROUND_LEN; }
+
+  function startRound(){
+    seed=Date.now()%2147483647||1;
+    deck=shuffle(TERMS).slice(0,ROUND_LEN);
+    qi=0; score=0;
+    renderQuestion();
+  }
+
+  function renderQuestion(){
+    if(qi>=deck.length){ renderDone(); return; }
+    const q=deck[qi];
+    const distractors=shuffle(TERMS.filter(t=>t.t!==q.t)).slice(0,3).map(t=>t.d);
+    const options=shuffle([q.d].concat(distractors));
+    $('quizMount').innerHTML=`
+      <div class="quiz-progress">Question ${qi+1} of ${deck.length}</div>
+      <div class="quiz-term">${q.t}</div>
+      ${options.map(o=>`<button type="button" class="quiz-opt" data-correct="${o===q.d}">${o}</button>`).join('')}
+    `;
+    $('quizMount').querySelectorAll('.quiz-opt').forEach(btn=>{
+      btn.onclick=()=>{
+        const correct=btn.dataset.correct==='true';
+        if(correct)score++;
+        $('quizMount').querySelectorAll('.quiz-opt').forEach(b=>{
+          b.disabled=true;
+          if(b.dataset.correct==='true')b.classList.add('correct');
+          else if(b===btn)b.classList.add('wrong');
+        });
+        const next=document.createElement('div');
+        next.className='quiz-next';
+        next.innerHTML=`<button type="button">${qi+1<deck.length?'Next question':'See results'} &rarr;</button>`;
+        next.querySelector('button').onclick=()=>{ qi++; renderQuestion(); };
+        $('quizMount').appendChild(next);
+      };
+    });
+  }
+
+  function renderDone(){
+    saveBest(score);
+    renderBadge();
+    $('quizMount').innerHTML=`
+      <div class="quiz-done">
+        <div class="quiz-progress">Round complete</div>
+        <div class="score">${score} / ${deck.length}</div>
+        <div class="best">Best score on this device: ${loadBest()} / ${ROUND_LEN}</div>
+        <div class="quiz-next"><button type="button" id="againBtn">Try again &rarr;</button></div>
+      </div>`;
+    $('againBtn').onclick=startRound;
+    if(window.vfGtag)window.vfGtag('event','glossary_quiz_complete',{score:score,total:deck.length});
+  }
+
+  renderBadge();
+  startRound();
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

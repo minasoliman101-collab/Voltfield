@@ -110,6 +110,14 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .scenariobar select{width:100%;max-width:420px;border:1px solid var(--line-dark);padding:8px 10px;font-family:var(--mono);font-size:13.5px;background:#fff;margin-bottom:10px}
 .scenariobar .prompt{font-size:13.5px;color:var(--ink-2);line-height:1.6}
 .progressbadge{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ok);font-weight:600;margin-bottom:10px}
+.dailyband{background:var(--ink);color:#fff;padding:14px 18px;margin:18px 0 0;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;border-left:6px solid var(--signal)}
+.dailyband-tx{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dailyband-lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#AFC0D3}
+.dailyband b{font-family:var(--disp);font-weight:700;font-size:17px}
+.streakbadge{font-family:var(--mono);font-size:12px;color:var(--signal);font-weight:600}
+.dailyband button{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase;flex-shrink:0}
+.dailyband button:hover{background:transparent;color:var(--signal)}
+.sharebtn{margin-top:12px}
 .oneline{background:#fff;border:1px solid var(--line-dark);padding:14px;margin:16px 0 18px;overflow-x:auto}
 .oneline svg{display:block;min-width:640px}
 .board{background:#fff;border:1px solid var(--line-dark);padding:16px;margin:0 0 10px}
@@ -196,6 +204,7 @@ footer a:hover{color:#fff}
         <a href="voltfield-eol.html">Obsolete/EOL</a>
         <a href="engineering-calculators.html">Calculators</a>
         <a href="voltfield-sandbox.html" class="on">Practice Sandbox</a>
+        <a href="voltfield-glossary-quiz.html">Glossary Quiz</a>
         <a href="rfq-toolkit.html">RFQ Toolkit</a>
       </div>
     </div>
@@ -217,6 +226,15 @@ footer a:hover{color:#fff}
 </section>
 <div class="artwrap">
   <p>This is a learning tool, not a substitute for a licensed engineer's short-circuit, coordination, or code-compliance study. It assumes a single-voltage radial system, an infinite utility source, and ignores feeder impedance in the fault-current estimate — the same simplifications used by the Fault Current Estimate calculator.</p>
+
+  <div class="dailyband" id="dailyBand">
+    <div class="dailyband-tx">
+      <span class="dailyband-lbl">Today's Challenge</span>
+      <b id="dailyName"></b>
+      <span class="streakbadge" id="streakBadge"></span>
+    </div>
+    <button type="button" id="dailyBtn">Start today's challenge</button>
+  </div>
 
   <div class="modebar" role="tablist">
     <button type="button" id="modeFreeBtn" class="on" role="tab" aria-selected="true">Free Design</button>
@@ -571,7 +589,8 @@ footer a:hover{color:#fff}
     return `<b>${tier}</b><div class="sub">${suffix} &mdash; recognized from your assembled components</div>
       <div class="nameplate">${fmt(s.kva,1)} kVA &middot; ${s.v}V secondary &middot; ${fmt(s.at,0)}A main &middot; ${fmt(s.aic/1000,0)}kAIC</div>
       <div class="standards">Applicable standards: IEEE C57.12.00 &middot; NEC 240/450 &middot; UL 489</div>
-      <a href="voltfield-bom-generator.html">See a similar real part &amp; its component BOM &rsaquo;</a>`;
+      <a href="voltfield-bom-generator.html">See a similar real part &amp; its component BOM &rsaquo;</a><br>
+      <button type="button" class="ghost sharebtn" id="shareResultBtn" style="background:transparent;color:#fff;border:2px solid #fff">Copy result to share</button>`;
   }
 
   function renderChecks(checks){
@@ -585,7 +604,18 @@ footer a:hover{color:#fff}
     if(passCount===checks.length){
       rc.innerHTML=assemblyReveal(state(),computed(state()));
       rc.classList.add('show');
-      if(mode==='challenge'){ saveProgress(SCEN[scenarioIdx].id); renderScenarioOptions(); }
+      if(mode==='challenge'){
+        saveProgress(SCEN[scenarioIdx].id);
+        renderScenarioOptions();
+        if(scenarioIdx===dailyIdx)markDailyDone();
+      }
+      const shareBtn=$('shareResultBtn');
+      if(shareBtn)shareBtn.onclick=()=>{
+        const label=mode==='challenge'?SCEN[scenarioIdx].name:'a custom design';
+        const url=location.origin+location.pathname+(mode==='challenge'?'?scenario='+SCEN[scenarioIdx].id:'');
+        const text=`Solved "${label}" on VOLTFIELD's Practice Sandbox — ${url}`;
+        navigator.clipboard&&navigator.clipboard.writeText(text).then(()=>toast('Result copied'),()=>toast('Copy failed'));
+      };
     } else { rc.classList.remove('show'); }
     return passCount;
   }
@@ -671,6 +701,40 @@ footer a:hover{color:#fff}
     $('progressBadge').textContent=`Solved ${solved.filter(id=>SCEN.some(s=>s.id===id)).length} / ${SCEN.length} scenarios`;
   }
   renderScenarioOptions();
+
+  /* ---------- daily challenge + streak (localStorage, no account needed) ---------- */
+  function dateKey(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  function dayOfYear(d){ const start=new Date(d.getFullYear(),0,0); return Math.floor((d-start)/86400000); }
+  const todayKey=dateKey(new Date());
+  const dailyIdx=dayOfYear(new Date())%SCEN.length;
+
+  function loadStreak(){ try{ const s=JSON.parse(localStorage.getItem('vf_sandbox_streak')||'null'); return s&&typeof s==='object'?s:{lastDate:null,current:0,longest:0}; }catch(e){ return {lastDate:null,current:0,longest:0}; } }
+  function renderStreakBadge(){
+    const st=loadStreak();
+    $('streakBadge').textContent = st.current>0 ? `🔥 ${st.current}-day streak` : '';
+  }
+  function markDailyDone(){
+    let done; try{ done=JSON.parse(localStorage.getItem('vf_sandbox_daily_done')||'[]'); }catch(e){ done=[]; }
+    if(!Array.isArray(done))done=[];
+    if(done.includes(todayKey))return;
+    done.push(todayKey);
+    localStorage.setItem('vf_sandbox_daily_done',JSON.stringify(done));
+    const st=loadStreak();
+    const y=new Date(); y.setDate(y.getDate()-1);
+    st.current = st.lastDate===dateKey(y) ? st.current+1 : 1;
+    st.lastDate=todayKey;
+    st.longest = Math.max(st.longest||0, st.current);
+    localStorage.setItem('vf_sandbox_streak',JSON.stringify(st));
+    renderStreakBadge();
+  }
+  $('dailyName').textContent=SCEN[dailyIdx].name;
+  renderStreakBadge();
+  $('dailyBtn').onclick=()=>{
+    setMode('challenge');
+    $('scenarioSel').value=dailyIdx;
+    loadScenario(dailyIdx);
+    $('scenarioBar').scrollIntoView({behavior:'smooth',block:'start'});
+  };
 
   function loadScenario(i){
     scenarioIdx=i;

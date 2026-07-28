@@ -115,6 +115,10 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .artwrap{max-width:900px;margin:0 auto;padding:36px 20px 8px}
 .artwrap p.intro{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:20px;max-width:720px}
 .jump{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:30px;padding:14px;background:var(--card);border:1px solid var(--line-dark)}
+.quizcallout{background:var(--ink);color:#fff;padding:16px 18px;margin-bottom:24px;border-left:6px solid var(--signal);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.quizcallout span{font-size:13.5px;color:#AFC0D3}
+.quizcallout a{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;flex-shrink:0}
+.quizcallout a:hover{background:transparent;color:var(--signal)}
 .jump a{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);text-decoration:none;border:1px solid var(--line-dark);padding:4px 9px;background:#fff}
 .jump a:hover{border-color:var(--ink);color:var(--ink)}
 .term{border-top:1px solid var(--line);padding:20px 0;scroll-margin-top:80px}
@@ -162,6 +166,7 @@ footer a:hover{color:#fff}
         <a href="voltfield-eol.html">Obsolete/EOL</a>
         <a href="engineering-calculators.html">Calculators</a>
         <a href="voltfield-sandbox.html">Practice Sandbox</a>
+        <a href="voltfield-glossary-quiz.html">Glossary Quiz</a>
         <a href="rfq-toolkit.html">RFQ Toolkit</a>
       </div>
     </div>
@@ -183,6 +188,7 @@ footer a:hover{color:#fff}
 </section>
 <div class="artwrap">
   <p class="intro">These are quick, accurate reference definitions — for the full context behind FEOC compliance or transformer lead times specifically, see the dedicated guides linked at the bottom of this page.</p>
+  <div class="quizcallout"><span>Think you know these terms? Test yourself with a free 10-question quiz — no signup.</span><a href="voltfield-glossary-quiz.html">Test yourself &rarr;</a></div>
   <div class="jump">
     <a href="#ansi-c57">ANSI C57</a><a href="#api-5ct">API 5CT</a><a href="#api-6a">API 6A</a><a href="#api-7k">API 7K</a><a href="#api-16a">API 16A</a>
     <a href="#bop">BOP</a><a href="#bos">BOS</a><a href="#christmas-tree">Christmas tree</a><a href="#dc-block">DC block</a>
@@ -258,7 +264,7 @@ footer a:hover{color:#fff}
   </div>
   <div class="term" id="nfpa-855">
     <h3>NFPA 855</h3>
-    <p>The National Fire Protection Association standard for the installation of stationary energy storage systems — a core compliance reference for the <a class="inline" href="battery-storage.html">Battery Storage</a> desk.</p>
+    <p>The National Fire Protection Association standard for the installation of stationary energy storage systems — a core compliance reference for the <a class="inline" href="battery-storage.html">Battery Storage</a> desk. See the <a class="inline" href="guide-bess-fire-safety-nfpa-855.html">BESS fire safety basics guide</a> for what it actually requires.</p>
   </div>
   <div class="term" id="octg">
     <h3>OCTG (Oil Country Tubular Goods)</h3>
@@ -274,7 +280,7 @@ footer a:hover{color:#fff}
   </div>
   <div class="term" id="ul-9540a">
     <h3>UL 9540A</h3>
-    <p>A UL test method evaluating thermal runaway fire propagation in battery energy storage systems, alongside <a class="inline" href="#nfpa-855">NFPA 855</a> installation requirements.</p>
+    <p>A UL test method evaluating thermal runaway fire propagation in battery energy storage systems, alongside <a class="inline" href="#nfpa-855">NFPA 855</a> installation requirements. See the <a class="inline" href="guide-bess-fire-safety-nfpa-855.html">BESS fire safety basics guide</a> for how the two standards fit together.</p>
   </div>
 </div>
 <div class="ctaband">

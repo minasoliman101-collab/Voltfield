@@ -62,5 +62,26 @@
     <description>What an arc-flash boundary is, how it relates to incident energy and NFPA 70E, and what documentation buying teams should expect — not a substitute for a licensed study.</description>
     <pubDate>Sat, 25 Jul 2026 00:00:00 GMT</pubDate>
   </item>
+  <item>
+    <title>BESS Fire Safety Basics: NFPA 855 &amp; UL 9540A Explained</title>
+    <link>https://voltfield.org/guide-bess-fire-safety-nfpa-855.html</link>
+    <guid>https://voltfield.org/guide-bess-fire-safety-nfpa-855.html</guid>
+    <description>What NFPA 855 actually requires for battery energy storage system installations, how UL 9540A large-scale fire testing sets separation distances, and why site layout decisions need to happen before equipment is ordered.</description>
+    <pubDate>Tue, 28 Jul 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>Grounding &amp; Bonding Basics for Industrial Electrical Systems</title>
+    <link>https://voltfield.org/guide-grounding-bonding-basics.html</link>
+    <guid>https://voltfield.org/guide-grounding-bonding-basics.html</guid>
+    <description>Grounding and bonding get used interchangeably in conversation but do two different jobs. What each one actually does, why the equipment grounding conductor matters more than the ground rod, and how separately derived systems change the rules.</description>
+    <pubDate>Tue, 28 Jul 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>Short-Circuit Studies &amp; Breaker Coordination Basics</title>
+    <link>https://voltfield.org/guide-short-circuit-studies-breaker-coordination.html</link>
+    <guid>https://voltfield.org/guide-short-circuit-studies-breaker-coordination.html</guid>
+    <description>What a short-circuit study actually calculates, why a quick infinite-source fault-current estimate isn't a substitute for one, and how breaker coordination decides which device trips first when something goes wrong.</description>
+    <pubDate>Tue, 28 Jul 2026 00:00:00 GMT</pubDate>
+  </item>
 </channel>
 </rss>

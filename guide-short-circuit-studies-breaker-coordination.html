@@ -3,32 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pad-Mount vs. GSU Transformers: Which Do You Need? | VOLTFIELD Supply Co.</title>
-<meta name="description" content="Pad-mount and GSU transformers solve different problems and carry different lead times (85 weeks vs. 144 weeks). Here's how to tell which one your project actually needs.">
-<meta name="keywords" content="pad-mount transformer, GSU transformer, generator step-up transformer, distribution transformer vs GSU, transformer selection guide, substation transformer">
+<title>Short-Circuit Studies &amp; Breaker Coordination Basics | VOLTFIELD Supply Co.</title>
+<meta name="description" content="What a short-circuit study actually calculates, why a quick infinite-source fault-current estimate isn't a substitute for one, and how breaker coordination decides which device trips first when something goes wrong.">
+<meta name="keywords" content="short circuit study, breaker coordination, selective coordination, available fault current, time current curve, series rated equipment">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="VOLTFIELD Supply Co.">
-<meta property="og:title" content="Pad-Mount vs. GSU Transformers: Which Do You Need?">
-<meta property="og:description" content="Different jobs, different lead times. How to tell which transformer type your project actually needs.">
+<meta property="og:title" content="Short-Circuit Studies & Breaker Coordination Basics">
+<meta property="og:description" content="What a short-circuit study calculates, and how breaker coordination decides which device trips first.">
 <meta name="twitter:card" content="summary_large_image">
-<meta property="og:image" content="https://voltfield.org/social/social-guide-pad-mount-vs-gsu.jpg">
+<meta property="og:image" content="https://voltfield.org/social/social-data-centers.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta name="twitter:image" content="https://voltfield.org/social/social-guide-pad-mount-vs-gsu.jpg">
-<meta name="twitter:title" content="Pad-Mount vs. GSU Transformers: Which Do You Need?">
-<meta name="twitter:description" content="Different jobs, different lead times — how to tell which one your project needs.">
+<meta name="twitter:image" content="https://voltfield.org/social/social-data-centers.jpg">
+<meta name="twitter:title" content="Short-Circuit Studies & Breaker Coordination Basics">
+<meta name="twitter:description" content="What a short-circuit study calculates and why breaker coordination matters.">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
  {"@type":"BreadcrumbList","itemListElement":[
    {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
    {"@type":"ListItem","position":2,"name":"Insights","item":"https://voltfield.org/voltfield-insights.html"},
-   {"@type":"ListItem","position":3,"name":"Pad-Mount vs GSU Transformers","item":"https://voltfield.org/guide-pad-mount-vs-gsu-transformers.html"}
+   {"@type":"ListItem","position":3,"name":"Short-Circuit Studies & Breaker Coordination","item":"https://voltfield.org/guide-short-circuit-studies-breaker-coordination.html"}
  ]},
- {"@type":"Article","headline":"Pad-Mount vs. GSU Transformers: Which Do You Need?","description":"Pad-mount and GSU transformers solve different problems and carry different lead times. How to tell which one your project needs.","image":"https://voltfield.org/social/social-guide-pad-mount-vs-gsu.jpg","author":{"@type":"Organization","name":"VOLTFIELD Supply Co.","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"VOLTFIELD Supply Co."},"datePublished":"2026-07-24T00:00:00-05:00","url":"https://voltfield.org/guide-pad-mount-vs-gsu-transformers.html"},
+ {"@type":"Article","headline":"Short-Circuit Studies & Breaker Coordination Basics","description":"What a short-circuit study actually calculates, why a quick infinite-source fault-current estimate isn't a substitute for one, and how breaker coordination decides which device trips first when something goes wrong.","image":"https://voltfield.org/social/social-data-centers.jpg","author":{"@type":"Organization","name":"VOLTFIELD Supply Co.","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"VOLTFIELD Supply Co."},"datePublished":"2026-07-28T00:00:00-05:00","url":"https://voltfield.org/guide-short-circuit-studies-breaker-coordination.html"},
  {"@type":"FAQPage","mainEntity":[
-   {"@type":"Question","name":"What's the main difference between a pad-mount and a GSU transformer?","acceptedAnswer":{"@type":"Answer","text":"Direction and purpose: a pad-mount transformer steps voltage down to serve a load (a building, data center, or distribution feeder), while a GSU (Generator Step-Up) transformer steps voltage up from a generator or inverter to interconnect with the transmission grid."}},
-   {"@type":"Question","name":"Which one has the shorter lead time?","acceptedAnswer":{"@type":"Answer","text":"Pad-mount transformers are currently quoting around 85 weeks industry-wide, versus around 144 weeks for GSU transformers — pad-mount units are smaller, more standardized, and manufactured in higher volume."}},
-   {"@type":"Question","name":"Can a pad-mount transformer be used at a generation site?","acceptedAnswer":{"@type":"Answer","text":"Only for step-down auxiliary/house loads at the site (lighting, controls, HVAC) — not for interconnecting the generator's output to the transmission grid, which is what a GSU is engineered for."}}
+   {"@type":"Question","name":"What does a short-circuit study actually calculate?","acceptedAnswer":{"@type":"Answer","text":"A short-circuit study calculates the available fault current at every bus in a system, working from the utility's actual source impedance through every transformer, cable, and busway in series down to each panel and piece of equipment. It's what confirms every breaker, fuse, and piece of switchgear has an interrupting rating equal to or greater than the fault current it could actually see."}},
+   {"@type":"Question","name":"Is an infinite-source fault current estimate the same as a short-circuit study?","acceptedAnswer":{"@type":"Answer","text":"No. An infinite-source estimate (assuming the utility source has zero impedance, ignoring cable impedance) is a useful first-pass sanity check for early sizing decisions, but it's not a substitute for a full study. Real utility source impedance, series cable/busway impedance, and motor contribution during a fault all typically reduce the available fault current somewhat from the infinite-source number, and a full study is what a licensed engineer stamps for actual equipment ratings and code compliance."}},
+   {"@type":"Question","name":"What is breaker coordination and why does it matter?","acceptedAnswer":{"@type":"Answer","text":"Breaker coordination (also called selective coordination) means arranging protective devices so that during a fault, only the breaker or fuse closest to the fault trips — not an upstream device that would black out a much larger part of the system. It's verified by comparing each device's time-current trip curve against the ones upstream and downstream of it, and it's a common finding to fail when devices are added or resized without re-checking the whole coordination study."}}
  ]}
 ]}
 </script>
@@ -103,13 +103,13 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .artwrap li{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:6px}
 .artwrap a.inline{color:var(--signal-deep);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
 .callout{background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--signal);padding:16px 18px;margin:20px 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
-.cmptable{width:100%;border-collapse:collapse;margin:16px 0 22px;font-size:13.5px}
-.cmptable th{text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);padding:9px 12px;border-bottom:2px solid var(--ink)}
-.cmptable td{padding:11px 12px;border-bottom:1px solid var(--line);color:var(--ink-2);vertical-align:top}
-.cmptable td:first-child{font-weight:600;color:var(--ink);white-space:nowrap}
-details{background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px}
-details summary{font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer}
-details p{margin-top:10px}
+.warncallout{background:#FBF1EC;border:1px solid #D9B3A3;border-left:4px solid var(--og);padding:16px 18px;margin:20px 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.reftable{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0}
+.reftable th,.reftable td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.reftable th{background:var(--ink);color:#fff;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase}
+.reftable tr:nth-child(even) td{background:#fff}
+.reftable tr:nth-child(odd) td{background:var(--card)}
+.reftable td:first-child{font-weight:600;white-space:nowrap}
 .ctaband{background:linear-gradient(120deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;border-top:4px solid var(--signal)}
 .ctaband-in{max-width:1240px;margin:0 auto;padding:44px 20px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
 .ctaband h3{font-family:var(--disp);font-weight:700;font-size:28px;letter-spacing:.01em}
@@ -164,62 +164,60 @@ footer a:hover{color:#fff}
 </header>
 <section class="artban">
   <div class="artban-in">
-    <div style="font-family:var(--mono);font-size:11px;color:#8DA0B8;margin-bottom:12px"><a href="index.html" style="color:#8DA0B8;text-decoration:none">Home</a> / <a href="voltfield-insights.html" style="color:#8DA0B8;text-decoration:none">Insights</a> / <span style="color:#E8EDF3">Pad-Mount vs GSU</span></div>
-    <div class="eyebrow">Buying Guide</div>
-    <h1>Pad-Mount vs. GSU Transformers: Which Do You Need?</h1>
-    <p class="dek">Both are transformers. Both are on backorder. They solve completely different problems — and mixing them up on a spec sheet costs real time given current lead times.</p>
+    <div style="font-family:var(--mono);font-size:11px;color:#8DA0B8;margin-bottom:12px"><a href="index.html" style="color:#8DA0B8;text-decoration:none">Home</a> / <a href="voltfield-insights.html" style="color:#8DA0B8;text-decoration:none">Insights</a> / <span style="color:#E8EDF3">Short-Circuit Studies & Breaker Coordination</span></div>
+    <div class="eyebrow">Field Guide</div>
+    <h1>Short-Circuit Studies &amp; Breaker Coordination Basics</h1>
+    <p class="dek">A quick fault-current estimate tells you whether a breaker is roughly in the right range. A short-circuit study — and the coordination study that follows it — is what actually confirms every device on the system is rated correctly and trips in the right order.</p>
   </div>
 </section>
 <div class="artwrap">
-  <h2>The short answer: which direction is the voltage going?</h2>
-  <p>If you're stepping voltage <b>down</b> to serve a load — a building, a data center, a distribution feeder — you need a <b>pad-mount transformer</b>. If you're stepping voltage <b>up</b> from a generator or inverter to interconnect with the transmission grid, you need a <b>GSU (Generator Step-Up) transformer</b>. That single distinction resolves most of the confusion, but the practical differences go further.</p>
+  <h2>What a short-circuit study actually calculates</h2>
+  <p>A short-circuit study calculates the available fault current at every bus in an electrical system — starting from the utility's actual source impedance (not an assumed infinite source), then adding the impedance of every transformer, cable, and busway in the path in series, down to each panel and piece of equipment. The output is a fault-current number at each location, which gets compared against the interrupting rating (AIC) of every breaker, fuse, and switchgear assembly at that location. Any device rated below the calculated fault current at its location is a real safety and code problem, not a formality.</p>
 
-  <h2>What each one actually is</h2>
-  <p><b>Pad-mount transformers</b> are ground-mounted, tamper-resistant distribution transformers, typically stepping down from a primary distribution voltage (commonly 15kV–35kV class) to utilization voltage (480V, 208V, etc.). They're the standard way to bring underground power to a commercial site, and they're what most data center power drops from the local utility feeder use.</p>
-  <p><b>GSU transformers</b> sit at the generation side of the system — at a power plant, substation, or a utility-scale solar/wind/storage site — stepping voltage up from generator or inverter output (often in the low-kV range) to transmission-line levels (69kV and up, sometimes well over 300kV). They're substation-class equipment, frequently engineered to the specific project rather than pulled from a standard catalog configuration.</p>
+  <div class="warncallout"><b>This is reference material, not a substitute for a licensed study.</b> A real short-circuit and coordination study has to be performed and stamped by a qualified engineer using actual utility data, equipment impedances, and site-specific conditions. Nothing here should be used to make an equipment-rating or safety decision.</p></div>
 
-  <h2>Side-by-side</h2>
-  <table class="cmptable">
-    <thead><tr><th></th><th>Pad-mount</th><th>GSU</th></tr></thead>
-    <tbody>
-      <tr><td>Voltage direction</td><td>Steps down, toward a load</td><td>Steps up, toward the transmission grid</td></tr>
-      <tr><td>Typical location</td><td>Distribution feeder, building service entrance</td><td>Power plant, substation, utility-scale generation site</td></tr>
-      <tr><td>Typical rating</td><td>Tens to a few thousand kVA</td><td>Tens to hundreds of MVA</td></tr>
-      <tr><td>Current lead time</td><td>~85 wk</td><td>~144 wk</td></tr>
-      <tr><td>Typical buyer</td><td>Data center developer, utility distribution engineer, facility owner</td><td>Independent power producer, renewable developer, utility transmission engineer</td></tr>
-    </tbody>
+  <h2>Why an infinite-source estimate is only a first pass</h2>
+  <p>Tools like the <a class="inline" href="engineering-calculators.html#fault-current">fault current calculator</a> and the Practice Sandbox both use a simplified infinite-source method — they assume the utility source has zero impedance and ignore the impedance of the cable/feeder between the transformer and the point being checked. That's a deliberately conservative simplification for early sizing: real utility source impedance and real cable impedance both reduce available fault current somewhat versus the infinite-source number, and motor contribution during a fault can add to it at motor-heavy sites. An infinite-source estimate is useful for catching an obviously wrong breaker selection early; it is not what gets stamped for actual equipment ratings.</p>
+
+  <h2>Breaker coordination: who trips first</h2>
+  <p>Coordination (also called selective coordination) is a separate study layered on top of the fault-current numbers. It compares the time-current trip curve of every protective device against the devices immediately upstream and downstream of it, to confirm that during a fault, only the nearest upstream device trips — not a device further back that would black out a much larger part of the system. Properly coordinated devices "hand off" cleanly: a branch breaker clears a branch fault before the feeder breaker feeding it even notices; a feeder breaker clears a feeder fault before the main does.</p>
+
+  <table class="reftable">
+    <tr><th>Study</th><th>Question it answers</th></tr>
+    <tr><td>Short-circuit study</td><td>Is every device's interrupting rating (AIC) high enough for the fault current it could actually see?</td></tr>
+    <tr><td>Coordination study</td><td>When a fault happens, does only the closest upstream device trip — or does it take out more of the system than necessary?</td></tr>
+    <tr><td>Arc-flash study</td><td>Given the fault current and how fast the device actually clears it, what's the incident energy exposure at that location? (See the <a class="inline" href="guide-arc-flash-boundary-basics.html">arc-flash boundary basics guide</a>.)</td></tr>
   </table>
-  <p style="font-size:12.5px;color:var(--slate)">Lead times reflect current indicative market figures — see the <a class="inline" href="lead-time-index.html">Lead-Time Index</a> for the live reference table.</p>
 
-  <h2>The one case that trips people up</h2>
-  <p>A generation site still needs some step-down power for house loads — lighting, controls, HVAC in the switchgear building. That's a legitimate, smaller pad-mount (or dry-type) transformer application sitting right next to a GSU. The two aren't interchangeable, but they do coexist on the same site doing different jobs — don't assume "it's a generation site" automatically means every transformer on it is a GSU.</p>
+  <h2>Why this needs to be redone, not assumed current</h2>
+  <p>Both studies are only valid for the system configuration they were performed against. Adding a transformer, resizing a breaker, extending a feeder, or adding significant motor load can all change the fault current and trip-curve relationships enough to invalidate the existing study. A common finding in electrical audits is equipment installed or modified after the last study without a re-check — which is exactly the gap between "someone studied this once" and "this reflects what's actually installed today."</p>
 
-  <h2>Frequently asked questions</h2>
-  <details>
-    <summary>What's the main difference between a pad-mount and a GSU transformer?</summary>
-    <p>Direction and purpose: a pad-mount transformer steps voltage down to serve a load, while a GSU steps voltage up from a generator or inverter to interconnect with the transmission grid.</p>
-  </details>
-  <details>
-    <summary>Which one has the shorter lead time?</summary>
-    <p>Pad-mount transformers are currently quoting around 85 weeks industry-wide, versus around 144 weeks for GSU transformers — pad-mount units are smaller, more standardized, and manufactured in higher volume.</p>
-  </details>
-  <details>
-    <summary>Can a pad-mount transformer be used at a generation site?</summary>
-    <p>Only for step-down auxiliary/house loads at the site (lighting, controls, HVAC) — not for interconnecting the generator's output to the transmission grid, which is what a GSU is engineered for.</p>
-  </details>
-
-  <div class="callout"><b>Practice this:</b> an undersized transformer is one of the easiest mistakes to make on paper and the most expensive to fix in the field. Try the <a class="inline" href="voltfield-sandbox.html?scenario=xfmr-overload">Transformer Overloaded</a> scenario in the Practice Sandbox to catch it before it's built.</div>
+  <div class="callout"><b>Practice this:</b> try the <a class="inline" href="voltfield-sandbox.html?scenario=fault-current">Fault Current Exceeds Breaker Rating</a> scenario in the Practice Sandbox to work through the infinite-source method these tools use — then compare it against how a real study would refine that number.</div>
 
   <h2>Where Voltfield fits in</h2>
-  <p>Both transformer types are on the <a class="inline" href="data-centers.html">Data Centers</a> desk, each with an indicative lead time attached to the specific configuration. For deeper context on why both are quoting this far out, see <a class="inline" href="guide-transformer-lead-times.html">why transformer lead times stretch past 3 years</a>.</p>
+  <p>The <a class="inline" href="data-centers.html">Data Centers</a> and <a class="inline" href="industrial-supply.html">Industrial Supply</a> desks carry switchgear and breakers configured by interrupting rating, so the AIC number is visible before you commit to a spec — feed a real study's fault-current result straight into the configurator. Unfamiliar with a term above? Check the <a class="inline" href="glossary.html">glossary</a>, or see how %Z drives fault current in the <a class="inline" href="guide-transformer-nameplate.html">transformer nameplate guide</a>.</p>
+
+  <h2>Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What does a short-circuit study actually calculate?</summary>
+    <p style="margin-top:10px">A short-circuit study calculates the available fault current at every bus in a system, working from the utility's actual source impedance through every transformer, cable, and busway in series down to each panel and piece of equipment. It's what confirms every breaker, fuse, and piece of switchgear has an interrupting rating equal to or greater than the fault current it could actually see.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Is an infinite-source fault current estimate the same as a short-circuit study?</summary>
+    <p style="margin-top:10px">No. An infinite-source estimate (assuming the utility source has zero impedance, ignoring cable impedance) is a useful first-pass sanity check for early sizing decisions, but it's not a substitute for a full study. Real utility source impedance, series cable/busway impedance, and motor contribution during a fault all typically reduce the available fault current somewhat from the infinite-source number, and a full study is what a licensed engineer stamps for actual equipment ratings and code compliance.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is breaker coordination and why does it matter?</summary>
+    <p style="margin-top:10px">Breaker coordination (also called selective coordination) means arranging protective devices so that during a fault, only the breaker or fuse closest to the fault trips — not an upstream device that would black out a much larger part of the system. It's verified by comparing each device's time-current trip curve against the ones upstream and downstream of it, and it's a common finding to fail when devices are added or resized without re-checking the whole coordination study.</p>
+  </details>
 </div>
 <div class="ctaband">
   <div class="ctaband-in">
     <div>
-      <h3>Know which one you need?</h3>
-      <p>Configure the exact spec and get an indicative lead time and price in 24 hours.</p>
+      <h3>Specifying switchgear or breakers?</h3>
+      <p>Configure by interrupting rating and voltage class, with current lead time shown up front.</p>
     </div>
-    <a class="ctabtn" href="voltfield-supply-catalog.html?sector=dc&cat=Transformers">CONFIGURE A TRANSFORMER &rarr;</a>
+    <a class="ctabtn" href="voltfield-supply-catalog.html?sector=dc&cat=Switchgear%20%26%20Breakers">BROWSE SWITCHGEAR &amp; BREAKERS &rarr;</a>
   </div>
 </div>
 <footer>
