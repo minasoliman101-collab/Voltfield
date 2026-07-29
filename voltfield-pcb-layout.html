@@ -99,6 +99,15 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .artwrap a.inline{color:var(--signal-deep);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
 .callout{background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--signal);padding:16px 18px;margin:20px 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
 .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin:18px 0 16px}
+.howsteps{margin:10px 0 20px 0;padding-left:22px}
+.howsteps li{font-size:14px;color:var(--ink-2);line-height:1.65;margin-bottom:9px}
+.howsteps b{color:var(--ink);font-family:var(--disp);font-weight:700}
+.examplegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin:14px 0 24px}
+.examplecard{background:#fff;border:2px solid var(--line-dark);padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.examplecard h4{font-family:var(--disp);font-weight:700;font-size:15.5px;color:var(--ink)}
+.examplecard p{font-size:12.5px;color:var(--ink-2);line-height:1.55;margin:0;flex:1}
+.examplecard button{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:700;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;align-self:flex-start}
+.examplecard button:hover{background:transparent;color:var(--ink)}
 .toolbar .fld{display:flex;flex-direction:column;gap:4px}
 .toolbar label{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--slate)}
 .toolbar select{border:1px solid var(--line-dark);padding:8px 10px;font-family:var(--mono);font-size:13.5px;background:#fff}
@@ -214,6 +223,19 @@ footer a:hover{color:#fff}
 <div class="artwrap">
   <p>This is a layout and routing linter, not an electrical simulator — it doesn't model current, voltage, or whether your circuit performs its intended function. It's a place to practice component placement and two-layer trace routing.</p>
 
+  <h2>How to build a connection</h2>
+  <ol class="howsteps">
+    <li><b>Place a component.</b> Tap a tile in the legend below (it highlights, "armed"), then tap an empty highlighted cell on the board. The component snaps to the grid.</li>
+    <li><b>Route a trace.</b> Tap one pad (the small circle on a component) — it turns gold. Tap a second pad, and a copper trace draws itself between them on whichever layer is selected above the board.</li>
+    <li><b>Use both layers on purpose.</b> Switch the Top/Bottom toggle before drawing a trace that needs to cross another one without touching it — that's the whole reason two-layer boards exist. A pad with traces on both layers acts as an implicit via.</li>
+    <li><b>Check your pads.</b> A connected pad turns green; an unconnected one stays grey. "Run Design Check" flags any pad still grey, plus same-layer crossings, overlaps, and anything hanging off the board edge.</li>
+    <li><b>Remove something.</b> Tap a placed component or an existing trace again to take it back off the board.</li>
+  </ol>
+
+  <h2>Example connections &amp; boards</h2>
+  <p>Five small pre-wired boards, each demonstrating one pattern. Load one, then use "Run Design Check" to see it pass — or tap a trace and re-route it your own way.</p>
+  <div class="examplegrid" id="exampleGrid"></div>
+
   <div class="toolbar">
     <div class="fld"><label for="boardSizeSel">Board size</label><select id="boardSizeSel"><option value="small">Small · 50&times;40mm</option><option value="medium" selected>Medium · 64&times;51mm</option><option value="large">Large · 100&times;80mm</option></select></div>
     <div class="fld"><label>Routing layer</label>
@@ -227,7 +249,6 @@ footer a:hover{color:#fff}
   <div class="pcbwrap"><svg id="pcbSvg" xmlns="http://www.w3.org/2000/svg"></svg></div>
 
   <div class="est-row" style="margin:0 0 10px">
-    <div class="est-field"><button type="button" class="ghost" id="loadExampleBtn">Load example</button></div>
     <div class="est-field"><button type="button" class="ghost" id="clearBoardBtn">Clear board</button></div>
     <div class="est-field"><button type="button" class="ghost" id="copyLinkBtn">Copy link</button></div>
   </div>
@@ -576,15 +597,45 @@ footer a:hover{color:#fff}
     $('scoreBar').classList.remove('show');
   };
 
-  const EXAMPLE={size:'medium',placed:[{part:'hdr2',x:2,y:2},{part:'res',x:5,y:2},{part:'led',x:9,y:2}],
-    traces:[{a:{c:0,p:0},b:{c:1,p:0},layer:'top'},{a:{c:1,p:1},b:{c:2,p:0},layer:'top'},{a:{c:2,p:1},b:{c:0,p:1},layer:'bottom'}]};
-  $('loadExampleBtn').onclick=()=>{
-    boardKey=EXAMPLE.size; $('boardSizeSel').value=EXAMPLE.size;
-    placed=EXAMPLE.placed.map(c=>({...c})); traces=EXAMPLE.traces.map(t=>({a:{...t.a},b:{...t.b},layer:t.layer}));
-    armedPart=null; armedPad=null;
-    renderLegend(); drawBoard();
-    toast('Example loaded — an LED indicator circuit, fully routed');
-  };
+  const EXAMPLES=[
+    {id:'led', name:'LED Indicator', why:'A 2-pin header (power in) feeds a resistor, then an LED, then back to the header\'s ground pad. The resistor limits current so the LED doesn\'t burn out — never wire an LED straight across a supply.',
+      size:'medium', placed:[{part:'hdr2',x:2,y:2},{part:'res',x:5,y:2},{part:'led',x:9,y:2}],
+      traces:[{a:{c:0,p:0},b:{c:1,p:0},layer:'top'},{a:{c:1,p:1},b:{c:2,p:0},layer:'top'},{a:{c:2,p:1},b:{c:0,p:1},layer:'bottom'}]},
+    {id:'button', name:'Push-Button Switch', why:'The button sits in series between the header and the LED — one leg of the loop is broken until the button is pressed. This is the standard way to gate a signal or indicator with a switch.',
+      size:'medium', placed:[{part:'hdr2',x:2,y:2},{part:'btn',x:5,y:2},{part:'led',x:9,y:3}],
+      traces:[{a:{c:0,p:0},b:{c:1,p:0},layer:'top'},{a:{c:1,p:1},b:{c:2,p:0},layer:'top'},{a:{c:2,p:1},b:{c:0,p:1},layer:'bottom'}]},
+    {id:'pot', name:'Potentiometer Divider', why:'A potentiometer has three pads: the two outer ones go across a supply, and the middle "wiper" pad taps off a variable voltage between them. Here a 4-pin header supplies both ends and reads the wiper back — its 4th pin doubles up as a second ground tap, a common way to use a spare header pin.',
+      size:'medium', placed:[{part:'hdr4',x:2,y:2},{part:'pot',x:6,y:4}],
+      traces:[{a:{c:0,p:0},b:{c:1,p:0},layer:'top'},{a:{c:0,p:1},b:{c:1,p:2},layer:'bottom'},{a:{c:0,p:2},b:{c:1,p:1},layer:'top'},{a:{c:0,p:3},b:{c:1,p:2},layer:'bottom'}]},
+    {id:'crossover', name:'Two-Layer Crossover', why:'The outer two pins on these headers are wired crossed — pin 1 to pin 4, pin 4 to pin 1 — sharing the same routing channel on the right side. One is routed on top, the other on bottom, specifically so they don\'t short into each other. Try moving one to match the other\'s layer, then run the Design Check.',
+      size:'medium', placed:[{part:'hdr4',x:2,y:3},{part:'hdr4',x:13,y:3}],
+      traces:[{a:{c:0,p:0},b:{c:1,p:3},layer:'top'},{a:{c:0,p:3},b:{c:1,p:0},layer:'bottom'},{a:{c:0,p:1},b:{c:1,p:1},layer:'top'},{a:{c:0,p:2},b:{c:1,p:2},layer:'top'}]},
+    {id:'ic', name:'DIP-8 IC Breakout', why:'Breaking out every pin of a chip to its own header pad — one header per side — is the standard way to make all of an IC\'s pins accessible for probing or further wiring, without routing anything to the far side of the board.',
+      size:'medium', placed:[{part:'hdr4',x:2,y:3},{part:'dip8',x:6,y:3},{part:'hdr4',x:12,y:3}],
+      traces:[{a:{c:0,p:0},b:{c:1,p:0},layer:'top'},{a:{c:0,p:1},b:{c:1,p:1},layer:'top'},{a:{c:0,p:2},b:{c:1,p:2},layer:'top'},{a:{c:0,p:3},b:{c:1,p:3},layer:'top'},
+        {a:{c:1,p:4},b:{c:2,p:0},layer:'top'},{a:{c:1,p:5},b:{c:2,p:1},layer:'top'},{a:{c:1,p:6},b:{c:2,p:2},layer:'top'},{a:{c:1,p:7},b:{c:2,p:3},layer:'top'}]}
+  ];
+  function renderExampleGrid(){
+    $('exampleGrid').innerHTML=EXAMPLES.map(ex=>`
+      <div class="examplecard">
+        <h4>${ex.name}</h4>
+        <p>${ex.why}</p>
+        <button type="button" data-id="${ex.id}">Load this board</button>
+      </div>`).join('');
+    $('exampleGrid').querySelectorAll('button').forEach(btn=>{
+      btn.onclick=()=>{
+        const ex=EXAMPLES.find(e=>e.id===btn.dataset.id);
+        boardKey=ex.size; $('boardSizeSel').value=ex.size;
+        placed=ex.placed.map(c=>({...c})); traces=ex.traces.map(t=>({a:{...t.a},b:{...t.b},layer:t.layer}));
+        armedPart=null; armedPad=null;
+        renderLegend(); drawBoard();
+        $('pcbSvg').scrollIntoView({behavior:'smooth',block:'center'});
+        toast(ex.name+' loaded');
+        if(window.vfGtag)window.vfGtag('event','pcb_layout_example_loaded',{example:ex.id});
+      };
+    });
+  }
+  renderExampleGrid();
 
   /* ---------- share link ---------- */
   function toObj(){ return {size:boardKey, placed:placed.map(c=>({part:c.part,x:c.x,y:c.y})), traces:traces.map(t=>({a:t.a,b:t.b,layer:t.layer}))}; }
