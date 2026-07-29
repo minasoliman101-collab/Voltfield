@@ -115,11 +115,27 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .legend-title{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);margin:16px 0 8px}
 .legend-title:first-child{margin-top:0}
 .tilerow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
-.tile{background:#fff;border:2px solid var(--line-dark);padding:8px 12px;font-family:var(--mono);font-size:11.5px;text-align:left;cursor:pointer;min-width:96px}
+.tile{background:#fff;border:2px solid var(--line-dark);padding:8px 12px;font-family:var(--mono);font-size:11.5px;text-align:left;cursor:pointer;min-width:96px;display:flex;align-items:center;gap:9px;transition:transform .15s,border-color .15s}
+.tile .glyph{font-size:20px;line-height:1;flex-shrink:0;width:24px;text-align:center}
 .tile b{display:block;font-family:var(--disp);font-weight:700;font-size:14px;color:var(--ink)}
 .tile span{display:block;color:var(--slate);font-size:10px;margin-top:2px}
-.tile:hover{border-color:var(--ink)}
-.tile.armed{border-color:var(--signal-deep);background:#FFF7DE;box-shadow:0 0 0 2px var(--signal) inset}
+.tile:hover{border-color:var(--ink);transform:translateY(-2px)}
+.tile.armed{border-color:var(--signal-deep);background:#FFF7DE;animation:tilePulse 1.1s ease-in-out infinite}
+@keyframes tilePulse{0%,100%{box-shadow:0 0 0 2px var(--signal) inset}50%{box-shadow:0 0 0 4px var(--signal) inset}}
+@keyframes compPop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.12);opacity:1}100%{transform:scale(1)}}
+.comp-enter{animation:compPop .32s cubic-bezier(.34,1.56,.64,1) both;transform-box:fill-box;transform-origin:center}
+@keyframes compShrink{0%{transform:scale(1);opacity:1}100%{transform:scale(.3);opacity:0}}
+.comp-leaving{animation:compShrink .22s ease-in forwards;transform-box:fill-box;transform-origin:center;pointer-events:none}
+@keyframes tracePop{0%{opacity:0}100%{opacity:.92}}
+.trace-enter{animation:tracePop .5s ease-out both}
+@keyframes traceShrink{0%{opacity:.92}100%{opacity:0}}
+.trace-leaving{animation:traceShrink .18s ease-in forwards;pointer-events:none}
+@keyframes padPulse{0%{r:6}40%{r:9}100%{r:6}}
+.pad-connect{animation:padPulse .4s ease-out}
+@keyframes ledGlow{0%,100%{filter:drop-shadow(0 0 2px #FFC400) drop-shadow(0 0 1px #FFC400)}50%{filter:drop-shadow(0 0 7px #FFC400) drop-shadow(0 0 3px #FFEB99)}}
+.led-lit{animation:ledGlow 1.6s ease-in-out infinite}
+@keyframes rowIn{0%{opacity:0;transform:translateX(-8px)}100%{opacity:1;transform:translateX(0)}}
+.checkrow{animation:rowIn .3s ease-out both}
 .est-row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:10px}
 .est-field button{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase}
 .est-field button:hover{background:transparent;color:var(--ink)}
@@ -315,12 +331,52 @@ footer a:hover{color:#fff}
   ];
   function findPart(id){return PARTS.find(p=>p.id===id)||null;}
 
+  /* small pictorial glyph per part -- real emoji where a good match exists, hand-drawn
+     schematic-style SVG icons where it doesn't (resistor/caps/diode/IC have no good emoji) */
+  const TILE_EMOJI={led:'💡',btn:'🔘',hdr2:'🔌',hdr4:'🔌',pot:'🎚️'};
+  function tileGlyphHTML(id){
+    if(TILE_EMOJI[id])return TILE_EMOJI[id];
+    if(id==='res')return '⚡';
+    if(id==='ccap'||id==='ecap')return '🔵';
+    if(id==='diode')return '▶';
+    if(id==='dip8')return '🔲';
+    return '⚙️';
+  }
+  function glyphSVG(id,cx,cy){
+    switch(id){
+      case 'res':
+        return `<path d="M${cx-16},${cy} L${cx-11},${cy} L${cx-8},${cy-6} L${cx-2},${cy+6} L${cx+4},${cy-6} L${cx+10},${cy+6} L${cx+13},${cy} L${cx+16},${cy}" fill="none" stroke="#E8B84B" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" pointer-events="none"/>`;
+      case 'ccap':
+        return `<g pointer-events="none"><line x1="${cx-3}" y1="${cy-8}" x2="${cx-3}" y2="${cy+8}" stroke="#8FD3E8" stroke-width="2.5"/><line x1="${cx+3}" y1="${cy-8}" x2="${cx+3}" y2="${cy+8}" stroke="#8FD3E8" stroke-width="2.5"/></g>`;
+      case 'ecap':
+        return `<g pointer-events="none"><rect x="${cx-7}" y="${cy-9}" width="14" height="18" rx="3" fill="#2B3B4E" stroke="#8DA0B8" stroke-width="1.2"/><text x="${cx}" y="${cy+4}" text-anchor="middle" font-size="11" fill="#FFC400" font-weight="700">+</text></g>`;
+      case 'led':
+        return `<text x="${cx}" y="${cy+6}" text-anchor="middle" font-size="18" pointer-events="none">💡</text>`;
+      case 'diode':
+        return `<g pointer-events="none"><path d="M${cx-8},${cy-7} L${cx-8},${cy+7} L${cx+6},${cy} Z" fill="#C9D3DF"/><line x1="${cx+6}" y1="${cy-7}" x2="${cx+6}" y2="${cy+7}" stroke="#C9D3DF" stroke-width="2.5"/></g>`;
+      case 'btn':
+        return `<text x="${cx}" y="${cy+7}" text-anchor="middle" font-size="19" pointer-events="none">🔘</text>`;
+      case 'hdr2': case 'hdr4':
+        return `<text x="${cx}" y="${cy+6}" text-anchor="middle" font-size="16" pointer-events="none">🔌</text>`;
+      case 'dip8':
+        return `<g pointer-events="none">
+          <rect x="${cx-18}" y="${cy-26}" width="36" height="52" rx="3" fill="#181D22" stroke="#3A4552" stroke-width="1"/>
+          <circle cx="${cx-12}" cy="${cy-19}" r="2.8" fill="#3A4552"/>
+          ${[-19,-6.5,6.5,19].map(dy=>`<rect x="${cx-22}" y="${cy+dy-2.5}" width="5" height="5" fill="#C9A437"/><rect x="${cx+17}" y="${cy+dy-2.5}" width="5" height="5" fill="#C9A437"/>`).join('')}
+        </g>`;
+      case 'pot':
+        return `<text x="${cx}" y="${cy+6}" text-anchor="middle" font-size="18" pointer-events="none">🎚️</text>`;
+      default: return '';
+    }
+  }
+
   /* ---------- state ---------- */
   let placed=[];   /* {part:'res', x:2, y:3} -- x,y = anchor top-left cell */
   let traces=[];   /* {a:{c:idx,p:idx}, b:{c:idx,p:idx}, layer:'top'|'bottom'} */
   let armedPart=null;
   let armedPad=null; /* {c:idx,p:idx} */
   let curLayer='top';
+  let justPlacedIdx=null, justTraceIdx=null, justConnectedPads=null;
 
   function cols(){return SIZES[boardKey].cols;}
   function rows(){return SIZES[boardKey].rows;}
@@ -349,7 +405,7 @@ footer a:hover{color:#fff}
       <div class="legend-title">Components — tap a tile, then tap an empty cell on the board</div>
       <div class="tilerow">${PARTS.map(p=>{
         const isArmed=armedPart===p.id;
-        return `<button type="button" class="tile${isArmed?' armed':''}" data-id="${p.id}"><b>${p.label}</b><span>${p.pads.length} pad${p.pads.length>1?'s':''}${p.polarized?' · polarized':''}</span></button>`;
+        return `<button type="button" class="tile${isArmed?' armed':''}" data-id="${p.id}"><span class="glyph">${tileGlyphHTML(p.id)}</span><span><b>${p.label}</b><span>${p.pads.length} pad${p.pads.length>1?'s':''}${p.polarized?' · polarized':''}</span></span></button>`;
       }).join('')}</div>`;
     $('legendMount').querySelectorAll('.tile').forEach(el=>{
       el.addEventListener('click',()=>{
@@ -387,8 +443,14 @@ footer a:hover{color:#fff}
     placed.forEach((c,i)=>{
       const part=findPart(c.part);
       const x=c.x*CELL, y=c.y*CELL, w=part.w*CELL, h=part.h*CELL;
-      s+=`<rect class="comprect" data-i="${i}" x="${x+2}" y="${y+2}" width="${w-4}" height="${h-4}" fill="#1B2B3E" stroke="#8DA0B8" stroke-width="1.5" rx="3"/>`;
-      s+=`<text x="${x+w/2}" y="${y+h/2+4}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-weight="600" font-size="11" fill="#E8EDF3" pointer-events="none">${part.abbr}</text>`;
+      const cx=x+w/2, cy=y+h/2;
+      const enterCls=i===justPlacedIdx?' comp-enter':'';
+      const allConnected=part.pads.every((off,pi)=>traces.some(t=>(t.a.c===i&&t.a.p===pi)||(t.b.c===i&&t.b.p===pi)));
+      const litCls=(part.id==='led'&&allConnected)?' led-lit':'';
+      s+=`<g class="compgroup${enterCls}${litCls}" data-i="${i}">
+        <rect class="comprect" data-i="${i}" x="${x+2}" y="${y+2}" width="${w-4}" height="${h-4}" fill="#1B2B3E" stroke="#8DA0B8" stroke-width="1.5" rx="3"/>
+        ${glyphSVG(part.id,cx,cy)}
+      </g>`;
     });
 
     /* traces (drawn before pads so pads sit on top) */
@@ -397,7 +459,8 @@ footer a:hover{color:#fff}
       const ax=a.x*CELL+CELL/2, ay=a.y*CELL+CELL/2, bx=b.x*CELL+CELL/2, by=b.y*CELL+CELL/2;
       const col=t.layer==='top'?'#C43D2E':'#3B82C4';
       const pts= (ax===bx||ay===by) ? `${ax},${ay} ${bx},${by}` : `${ax},${ay} ${bx},${ay} ${bx},${by}`;
-      s+=`<polyline class="tracepoly" data-ti="${ti}" points="${pts}" fill="none" stroke="${col}" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.92"/>`;
+      const enterCls=ti===justTraceIdx?' trace-enter':'';
+      s+=`<polyline class="tracepoly${enterCls}" data-ti="${ti}" points="${pts}" fill="none" stroke="${col}" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.92"/>`;
       s+=`<polyline points="${pts}" fill="none" stroke="transparent" stroke-width="14" data-ti="${ti}" class="tracehit"/>`;
     });
 
@@ -409,10 +472,12 @@ footer a:hover{color:#fff}
         const connected=traces.some(t=>(t.a.c===ci&&t.a.p===pi)||(t.b.c===ci&&t.b.p===pi));
         const isArmed=armedPad&&armedPad.c===ci&&armedPad.p===pi;
         const fill=isArmed?'#FFC400':(connected?'#2E7D4F':'#8DA0B8');
-        s+=`<circle class="padcirc" data-c="${ci}" data-p="${pi}" cx="${px}" cy="${py}" r="6" fill="${fill}" stroke="#0A0F14" stroke-width="1.5"/>`;
+        const justConn=justConnectedPads&&justConnectedPads.some(j=>j.c===ci&&j.p===pi);
+        s+=`<circle class="padcirc${justConn?' pad-connect':''}" data-c="${ci}" data-p="${pi}" cx="${px}" cy="${py}" r="6" fill="${fill}" stroke="#0A0F14" stroke-width="1.5"/>`;
         if(part.polarized&&pi===0)s+=`<text x="${px}" y="${py-9}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="#FFC400" pointer-events="none">+</text>`;
       });
     });
+    justPlacedIdx=null; justTraceIdx=null; justConnectedPads=null;
 
     svg.innerHTML=s;
 
@@ -421,6 +486,7 @@ footer a:hover{color:#fff}
       el.addEventListener('click',()=>{
         const x=+el.dataset.x, y=+el.dataset.y;
         placed.push({part:armedPart,x,y});
+        justPlacedIdx=placed.length-1;
         armedPart=null;
         renderLegend();
         drawBoard();
@@ -436,6 +502,8 @@ footer a:hover{color:#fff}
         if(!armedPad){ armedPad={c,p}; drawBoard(); return; }
         if(armedPad.c===c&&armedPad.p===p){ armedPad=null; drawBoard(); return; }
         traces.push({a:{c:armedPad.c,p:armedPad.p}, b:{c,p}, layer:curLayer});
+        justTraceIdx=traces.length-1;
+        justConnectedPads=[{c:armedPad.c,p:armedPad.p},{c,p}];
         armedPad=null;
         drawBoard();
       });
@@ -444,24 +512,38 @@ footer a:hover{color:#fff}
       el.style.cursor='pointer';
       el.addEventListener('click',()=>{
         const i=+el.dataset.i;
-        traces=traces.filter(t=>t.a.c!==i&&t.b.c!==i);
-        placed.splice(i,1);
-        traces.forEach(t=>{
-          if(t.a.c>i)t.a.c--;
-          if(t.b.c>i)t.b.c--;
-        });
-        armedPad=null;
-        drawBoard();
-        toast('Component removed');
+        const group=svg.querySelector('.compgroup[data-i="'+i+'"]');
+        const relatedTraces=[...svg.querySelectorAll('.tracepoly')].filter(t=>traces[+t.dataset.ti]&&(traces[+t.dataset.ti].a.c===i||traces[+t.dataset.ti].b.c===i));
+        if(group)group.classList.add('comp-leaving');
+        relatedTraces.forEach(t=>t.classList.add('trace-leaving'));
+        [...svg.querySelectorAll('.padcirc[data-c="'+i+'"]')].forEach(p=>p.classList.add('comp-leaving'));
+        svg.querySelectorAll('.celltarget,.padcirc,.comprect,.tracehit').forEach(x=>x.style.pointerEvents='none');
+        setTimeout(()=>{
+          traces=traces.filter(t=>t.a.c!==i&&t.b.c!==i);
+          placed.splice(i,1);
+          traces.forEach(t=>{
+            if(t.a.c>i)t.a.c--;
+            if(t.b.c>i)t.b.c--;
+          });
+          armedPad=null;
+          drawBoard();
+          toast('Component removed');
+        },220);
       });
     });
     svg.querySelectorAll('.tracehit').forEach(el=>{
       el.style.cursor='pointer';
       el.addEventListener('click',e=>{
         e.stopPropagation();
-        traces.splice(+el.dataset.ti,1);
-        drawBoard();
-        toast('Trace removed');
+        const ti=+el.dataset.ti;
+        const poly=svg.querySelector('.tracepoly[data-ti="'+ti+'"]');
+        if(poly)poly.classList.add('trace-leaving');
+        svg.querySelectorAll('.celltarget,.padcirc,.comprect,.tracehit').forEach(x=>x.style.pointerEvents='none');
+        setTimeout(()=>{
+          traces.splice(ti,1);
+          drawBoard();
+          toast('Trace removed');
+        },180);
       });
     });
   }
@@ -584,8 +666,8 @@ footer a:hover{color:#fff}
     return checks;
   }
   function renderChecks(checks){
-    $('checkPanel').innerHTML=checks.map(c=>`
-      <div class="checkrow ${c.pass?'pass':'fail'}"><div class="mk">${c.pass?'&#10003;':'&#10007;'}</div><div class="tx"><b>${c.title}</b><span>${c.detail}</span></div></div>
+    $('checkPanel').innerHTML=checks.map((c,i)=>`
+      <div class="checkrow ${c.pass?'pass':'fail'}" style="animation-delay:${i*70}ms"><div class="mk">${c.pass?'&#10003;':'&#10007;'}</div><div class="tx"><b>${c.title}</b><span>${c.detail}</span></div></div>
     `).join('');
     const passCount=checks.filter(c=>c.pass).length;
     $('scoreBar').classList.add('show');
