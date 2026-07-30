@@ -242,6 +242,7 @@ footer a{color:#9FB0C3}
 
 <script src="voltfield-site-config.js"></script>
 <script src="voltfield-catalog-data.js"></script>
+<script src="voltfield-cat-icons.js"></script>
 <script src="voltfield-bom-engine.js"></script>
 <script>
 /* ===== Standalone part-detail / configurator (uses shared catalog data) ===== */
@@ -281,7 +282,7 @@ function renderRecentlyViewed(excludeFi){
     const price=priceFor(rf,rpicks);
     const col=SECTORS[rf.s].color;
     return `<a class="rv-card" href="voltfield-part.html?fi=${x.fi}&o=${x.o}&chk=${x.chk}">
-      <div class="rv-imgwrap">${rf.img?pImg(rf.img,'','',true):`<div class="rv-noimg" style="background:${col}"></div>`}</div>
+      <div class="rv-imgwrap">${rf.img?vfPartVisual(rf,'','',true):`<div class="rv-noimg" style="background:${col}"></div>`}</div>
       <div class="rv-body"><div class="rv-name">${name}</div><div class="rv-price">${money(price,rf.pu)}</div></div>
     </a>`;
   }).join('');
@@ -354,7 +355,7 @@ function renderPart(){
         <span class="p-cat" style="background:${col}">${f.c}</span>
         <span class="p-dist">${distLbl} · ${SECTORS[f.s].label}</span>
       </div>
-      ${f.img?`<div class="p-imgwrap">${pImg(f.img,'p-img',configuredName(f,picks))}</div>`:''}
+      ${f.img?`<div class="p-imgwrap">${vfPartVisual(f,'p-img',configuredName(f,picks))}</div>`:''}
       <div class="p-body">
         <div class="p-pn">${pn}</div>
         <h1 class="p-name">${configuredName(f,picks)}</h1>
