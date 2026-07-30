@@ -99,7 +99,6 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .rv-card:hover{box-shadow:0 4px 10px rgba(16,27,45,.12)}
 .rv-card .rv-imgwrap{height:90px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:6px;overflow:hidden}
 .rv-card .rv-imgwrap img{max-width:100%;max-height:100%;object-fit:contain;mix-blend-mode:multiply}
-.rv-card .rv-noimg{width:100%;height:100%}
 .rv-card .rv-body{padding:8px 9px}
 .rv-card .rv-name{font-size:11.5px;font-weight:600;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:29px}
 .rv-card .rv-price{font-family:var(--mono);font-size:11px;color:var(--slate);margin-top:4px}
@@ -607,7 +606,7 @@ function renderResults(){
     const inq=qset.has(sku.pn);
     html+=`<div class="skucard" data-fi="${f._i}" data-seed="${seed}">
       <div class="sk-band" style="background:${col}"></div>
-      ${f.img?`<div class="sk-imgwrap">${vfPartVisual(f,'sk-img',f.n,true)}</div>`:''}
+      <div class="sk-imgwrap">${vfPartVisual(f,'sk-img',f.n)}</div>
       <div class="sk-body">
         <div class="sk-cat"><span class="c" style="background:${col}">${f.c}</span><span class="d">${DL[f.d]}</span></div>
         <div class="sk-pn">${sku.pn}</div>
@@ -655,8 +654,6 @@ function scrollTop(){document.querySelector('.catlayout').scrollIntoView({behavi
 /* ---------- quote list (localStorage) ---------- */
 function loadQuote(){try{const q=JSON.parse(localStorage.getItem('vf_quote')||'[]');return Array.isArray(q)?q:[];}catch(e){return [];}}
 function saveQuote(q){localStorage.setItem('vf_quote',JSON.stringify(q));document.getElementById('quoteCount').textContent=q.length;}
-/* WebP-with-JPEG-fallback <picture> for family images (src is a .jpg path from FAM) */
-function pImg(src,cls,alt,lazy){if(!src)return'';const w=src.replace(/\.jpg$/,'.webp');return`<picture><source srcset="${w}" type="image/webp"><img class="${cls||''}" src="${src}" alt="${alt||''}"${lazy?' loading="lazy"':''}></picture>`;}
 /* ---------- saved / named quote lists (projects) ---------- */
 function escP(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function loadSaved(){try{const s=JSON.parse(localStorage.getItem('vf_saved')||'{}');return (s&&typeof s==='object'&&!Array.isArray(s))?s:{};}catch(e){return {};}}
@@ -736,7 +733,7 @@ function renderModal(){
       <div><span class="dm-cat" style="background:${col}">${f.c}</span> <span class="dm-dist">${distLbl} · ${SECTORS[f.s].label}</span></div>
       <button class="dm-x" id="dmClose" aria-label="Close">&times;</button>
     </div>
-    ${f.img?`<div class="dm-imgwrap">${vfPartVisual(f,'dm-img',configuredName(f,picks))}</div>`:''}
+    <div class="dm-imgwrap">${vfPartVisual(f,'dm-img',configuredName(f,picks))}</div>
     <div class="dm-body">
       <div class="dm-pn">${pn}</div>
       <h3 class="dm-name">${configuredName(f,picks)}</h3>
@@ -817,9 +814,8 @@ function renderRecentlyViewed(){
     const picks=paramToPicks(rf,x.o);
     const name=configuredName(rf,picks);
     const price=priceFor(rf,picks);
-    const col=SECTORS[rf.s].color;
     return `<a class="rv-card" href="voltfield-part.html?fi=${x.fi}&o=${x.o}&chk=${x.chk}">
-      <div class="rv-imgwrap">${rf.img?vfPartVisual(rf,'','',true):`<div class="rv-noimg" style="background:${col}"></div>`}</div>
+      <div class="rv-imgwrap">${vfPartVisual(rf,'',name)}</div>
       <div class="rv-body"><div class="rv-name">${name}</div><div class="rv-price">${money(price,rf.pu)}</div></div>
     </a>`;
   }).join('');
@@ -884,7 +880,7 @@ function openCompareModal(){
     ['Compliance',it=>it.f.cmp.join(', ')||'—'],
     ['SKUs in family',it=>fmt(it.f.ct)]
   ];
-  let html='<table class="cmp-table"><tr><th>Part</th>'+items.map(it=>`<td><strong>${it.sku.name}</strong>${it.f.img?`<div style="margin-top:6px;width:60px;height:60px">${vfPartVisual(it.f)}</div>`:''}</td>`).join('')+'</tr>';
+  let html='<table class="cmp-table"><tr><th>Part</th>'+items.map(it=>`<td><strong>${it.sku.name}</strong><div style="margin-top:6px;width:60px;height:60px">${vfPartVisual(it.f,'',it.sku.name)}</div></td>`).join('')+'</tr>';
   rows.forEach(([label,fn])=>{html+=`<tr><th>${label}</th>`+items.map(it=>`<td>${fn(it)}</td>`).join('')+'</tr>';});
   html+='<tr><th></th>'+items.map(it=>`<td><a href="voltfield-part.html?fi=${it.fi}&o=${picksToParam(it.f,it.sku.picks)}&chk=${it.sku.chk}" style="color:var(--signal-deep);font-weight:600;text-decoration:underline">View details &rsaquo;</a></td>`).join('')+'</tr>';
   html+='</table>';

@@ -1,11 +1,15 @@
-/* VOLTFIELD — category icon fallback for duplicate part photos.
-   94 of 236 part images were byte-identical duplicates reused across
-   unrelated families (traced via MD5 hashing of images/parts/*.jpg).
-   For each duplicate group we keep one family's real photo and render
-   a distinct hand-drawn category icon for the rest, so no two
-   unrelated families ever look identical. */
+/* VOLTFIELD — category icon rendering for every catalog part.
+   Originally added because 94 of 236 part photos turned out to be
+   byte-identical duplicates reused across unrelated families (traced via
+   MD5 hashing of images/parts/*.jpg). Rather than keep juggling which
+   photos were genuinely unique, every family now renders a hand-drawn
+   icon keyed off its family (VF_FILE_ICON_MAP) or, failing that, its
+   category (VF_CAT_ICON_MAP) — simple, consistent, and immune to any
+   future photo mix-ups. VF_ICON_REPLACE is kept only as a historical
+   record of which files were the duplicates. */
 
-/* filenames (basename only) that must NOT use their catalog photo */
+/* filenames (basename only) that were byte-identical duplicates of another
+   family's photo — no longer consulted at render time, kept for reference */
 const VF_ICON_REPLACE = new Set([
 "bess-battery-modules-rack-hardware.jpg","bess-battery-thermal-components.jpg","bess-dc-contactors-fuses-pre-charge.jpg",
 "bess-fire-detection-suppression-components.jpg","bess-grid-forming-pcs.jpg","bess-nmc-dc-blocks.jpg",
@@ -128,16 +132,19 @@ const VF_FILE_ICON_MAP = {
   're-plant-controllers.jpg':'plant-controller'
 };
 
-/* (sector|category) -> icon id, used only when a file isn't in the map above. */
+/* (sector|category) -> icon id. Every family now renders an icon (no more
+   real photos in the catalog), so this covers all 81 categories, not just
+   the ones that had duplicate photos. Used whenever a file isn't in the
+   more-specific VF_FILE_ICON_MAP above. */
 const VF_CAT_ICON_MAP = {
   'dc|Transformers':'transformer','dc|Transformer Components':'transformer','re|GSU & MV Transformers':'transformer',
   'dc|Switchgear & Breakers':'switchgear','dc|Switchgear Components':'switchgear',
-  'mro|Electrical':'electrical',
+  'mro|Electrical':'electrical','mro|Electrical Distribution Equipment':'enclosure',
   'dc|Genset Components':'genset',
   'dc|Cooling':'cooling','mro|HVAC & Refrigeration':'cooling',
-  'dc|Monitoring & Controls':'controls','re|Monitoring & SCADA':'controls','og|Instrumentation & Controls':'controls',
+  'dc|Monitoring & Controls':'controls','re|Monitoring & SCADA':'controls','og|Instrumentation & Controls':'controls','mro|Industrial Automation':'controls',
   'bess|Battery Components':'battery','bess|Storage Blocks':'battery',
-  'bess|Power Conversion':'power-conversion','re|Inverter & PE Components':'power-conversion',
+  'bess|Power Conversion':'power-conversion','re|Inverter & PE Components':'power-conversion','re|Inverters & PCS':'power-conversion',
   'bess|Fire Suppression & Safety':'fire-safety',
   're|Module & BOS Components':'module-bos',
   're|Combiners & Protection':'combiner',
@@ -149,16 +156,37 @@ const VF_CAT_ICON_MAP = {
   'og|Pumps & Rotating':'pump','mro|Pumps':'pump',
   'mro|Cutting Tools':'cutting-tool','mro|Machining':'cutting-tool',
   'mro|Hand Tools':'hand-tool',
-  'mro|Measuring & Inspection':'measuring',
-  'mro|Metalworking Abrasives':'abrasive',
-  'mro|Lubrication':'lubrication',
+  'mro|Measuring & Inspection':'measuring','mro|Test Instruments':'measuring',
+  'mro|Metalworking Abrasives':'abrasive','mro|Abrasives':'abrasive',
+  'mro|Lubrication':'lubrication','mro|Metalworking Fluids':'lubrication',
   'mro|Power Transmission':'power-transmission',
   'mro|Motors':'motor',
-  'mro|Lighting':'lighting',
-  'mro|Building Wire & Cable':'cable',
+  'mro|Lighting':'lighting','mro|Lighting & Controls':'lighting',
+  'mro|Building Wire & Cable':'cable','dc|Cabling & Busbar':'cable','re|Wire & Cable':'cable',
   'mro|Conduit, Raceway & Fittings':'conduit',
   'mro|Adhesives, Sealants & Tape':'tape','mro|Tape, Labels & Strapping':'tape','mro|Identification & Packaging':'tape',
-  'mro|Janitorial & Facility':'janitorial'
+  'mro|Janitorial & Facility':'janitorial','mro|Cleaning & Janitorial':'janitorial',
+  'bess|Controls (BMS/EMS)':'controls',
+  'bess|Enclosures & Integration':'enclosure',
+  'bess|Thermal Management':'thermal-component',
+  'dc|Backup Power':'backup-power',
+  'dc|Grounding & Bonding':'grounding',
+  'dc|Power Distribution':'power-distribution',
+  'mro|Bags & Poly':'packaging-crate','mro|Packaging Materials':'packaging-crate','mro|Retail & Warehouse':'packaging-crate','mro|Shipping Boxes':'packaging-crate',
+  'mro|Datacomm & Networking':'network',
+  'mro|Machine Accessories':'toolholding','mro|Toolholding & Workholding':'toolholding',
+  'mro|Material Handling':'material-handling','mro|Warehouse & Material Handling':'material-handling',
+  'mro|Plumbing':'plumbing',
+  'mro|Pneumatics & Hydraulics':'pneumatics',
+  'mro|Power Tools':'power-tool',
+  'mro|Raw Materials':'raw-material',
+  'mro|Safety & PPE':'ppe','mro|Safety Supplies':'ppe',
+  'mro|Security & Life Safety':'security',
+  'mro|Welding':'welding',
+  'og|Downhole & Artificial Lift':'downhole-lift',
+  're|Solar Modules':'pv-module',
+  're|Structural BOS':'structural-bos',
+  're|Wind Components':'wind-turbine'
 };
 
 /* Each entry returns inner SVG markup for a 0..100 viewBox, drawn with
@@ -282,7 +310,25 @@ const VF_ICON_PATHS = {
   'solar-cell':c=>`<rect x="22" y="22" width="56" height="56" rx="2" fill="none" stroke="${c}" stroke-width="4"/><path d="M22 22l56 56M50 22v56M22 50h56" stroke="${c}" stroke-width="2.5"/>`,
   'solar-glass':c=>`<rect x="16" y="30" width="68" height="40" rx="2" fill="none" stroke="${c}" stroke-width="4"/><path d="M16 30l68 40M84 30l-68 40" stroke="${c}" stroke-width="2" opacity=".5"/>`,
   'tracker-drive':c=>`<path d="M20 62h60" stroke="${c}" stroke-width="4" stroke-linecap="round"/><path d="M50 62V30" stroke="${c}" stroke-width="4"/><path d="M30 42l40-12M30 42a20 20 0 0140-12" stroke="${c}" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="50" cy="70" r="8" fill="none" stroke="${c}" stroke-width="4"/>`,
-  'plant-controller':c=>`<rect x="18" y="20" width="64" height="44" rx="4" fill="none" stroke="${c}" stroke-width="4"/><path d="M28 40h20v14H28zM56 34h16v20H56z" fill="none" stroke="${c}" stroke-width="3"/><path d="M40 72v10M60 72v10" stroke="${c}" stroke-width="4" stroke-linecap="round"/>`
+  'plant-controller':c=>`<rect x="18" y="20" width="64" height="44" rx="4" fill="none" stroke="${c}" stroke-width="4"/><path d="M28 40h20v14H28zM56 34h16v20H56z" fill="none" stroke="${c}" stroke-width="3"/><path d="M40 72v10M60 72v10" stroke="${c}" stroke-width="4" stroke-linecap="round"/>`,
+
+  /* --- full-catalog category coverage (beyond the original duplicate-photo set) --- */
+  grounding:c=>`<path d="M50 16v40" stroke="${c}" stroke-width="5" stroke-linecap="round"/><path d="M28 56h44M34 66h32M40 76h20" stroke="${c}" stroke-width="4" stroke-linecap="round"/>`,
+  'backup-power':c=>`<rect x="24" y="26" width="40" height="54" rx="4" fill="none" stroke="${c}" stroke-width="4"/><path d="M64 40h8v8" stroke="${c}" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M48 36l-10 20h10l-6 18 18-24H50z" fill="${c}"/>`,
+  'power-distribution':c=>`<rect x="20" y="20" width="60" height="60" rx="4" fill="none" stroke="${c}" stroke-width="4"/><circle cx="34" cy="36" r="4" fill="${c}"/><circle cx="50" cy="36" r="4" fill="${c}"/><circle cx="66" cy="36" r="4" fill="${c}"/><circle cx="34" cy="54" r="4" fill="${c}"/><circle cx="50" cy="54" r="4" fill="${c}"/><circle cx="66" cy="54" r="4" fill="${c}"/><path d="M30 70h40" stroke="${c}" stroke-width="3.5" stroke-linecap="round"/>`,
+  network:c=>`<rect x="18" y="34" width="64" height="26" rx="3" fill="none" stroke="${c}" stroke-width="4"/><path d="M28 60v8M40 60v8M52 60v8M64 60v8M76 60v8" stroke="${c}" stroke-width="3.5" stroke-linecap="round"/><path d="M28 34v-8h12v8M52 34v-8h12v8" stroke="${c}" stroke-width="3"/>`,
+  'material-handling':c=>`<rect x="16" y="60" width="68" height="10" rx="2" fill="none" stroke="${c}" stroke-width="4"/><path d="M16 70v8M84 70v8" stroke="${c}" stroke-width="4" stroke-linecap="round"/><rect x="28" y="30" width="24" height="30" rx="2" fill="none" stroke="${c}" stroke-width="4"/><rect x="54" y="40" width="18" height="20" rx="2" fill="none" stroke="${c}" stroke-width="3.5"/>`,
+  plumbing:c=>`<path d="M20 40h30v-8a8 8 0 018-8h0a8 8 0 018 8v8h14" fill="none" stroke="${c}" stroke-width="4"/><path d="M30 60l14-14 6 6-14 14z" fill="none" stroke="${c}" stroke-width="3.5" stroke-linejoin="round"/><circle cx="34" cy="70" r="8" fill="none" stroke="${c}" stroke-width="3.5"/>`,
+  pneumatics:c=>`<rect x="18" y="38" width="40" height="24" rx="3" fill="none" stroke="${c}" stroke-width="4"/><path d="M58 50h24" stroke="${c}" stroke-width="6" stroke-linecap="round"/><rect x="78" y="42" width="6" height="16" fill="${c}"/>`,
+  'power-tool':c=>`<path d="M20 44h30v18H30l-10 10z" fill="none" stroke="${c}" stroke-width="4" stroke-linejoin="round"/><rect x="50" y="48" width="10" height="10" fill="${c}"/><path d="M60 53h22" stroke="${c}" stroke-width="4" stroke-linecap="round"/>`,
+  'raw-material':c=>`<rect x="18" y="26" width="64" height="10" rx="2" fill="none" stroke="${c}" stroke-width="4"/><rect x="18" y="45" width="64" height="10" rx="2" fill="none" stroke="${c}" stroke-width="4"/><rect x="18" y="64" width="64" height="10" rx="2" fill="none" stroke="${c}" stroke-width="4"/>`,
+  ppe:c=>`<path d="M22 62a28 20 0 0156 0z" fill="none" stroke="${c}" stroke-width="4"/><path d="M16 62h68" stroke="${c}" stroke-width="4" stroke-linecap="round"/><path d="M50 34v10" stroke="${c}" stroke-width="3.5" stroke-linecap="round"/>`,
+  security:c=>`<path d="M50 16l26 10v18c0 20-12 32-26 38-14-6-26-18-26-38V26z" fill="none" stroke="${c}" stroke-width="4" stroke-linejoin="round"/><rect x="40" y="46" width="20" height="16" rx="2" fill="none" stroke="${c}" stroke-width="3.5"/><path d="M44 46v-6a6 6 0 0112 0v6" fill="none" stroke="${c}" stroke-width="3.5"/>`,
+  welding:c=>`<path d="M28 72l24-24" stroke="${c}" stroke-width="6" stroke-linecap="round"/><path d="M52 48l10-10 10 10-10 10z" fill="none" stroke="${c}" stroke-width="4" stroke-linejoin="round"/><path d="M66 30l6-6M74 38l8-4M60 24l4-8" stroke="${c}" stroke-width="3" stroke-linecap="round"/>`,
+  'downhole-lift':c=>`<path d="M20 70h60" stroke="${c}" stroke-width="4" stroke-linecap="round"/><path d="M35 70V50" stroke="${c}" stroke-width="4"/><path d="M20 40l50-6" stroke="${c}" stroke-width="4" stroke-linecap="round"/><path d="M50 34v16M64 36v10" stroke="${c}" stroke-width="3.5"/>`,
+  'pv-module':c=>`<rect x="16" y="24" width="68" height="52" rx="2" fill="none" stroke="${c}" stroke-width="5"/><path d="M33 24v52M50 24v52M67 24v52M16 40h68M16 60h68" stroke="${c}" stroke-width="2.5"/>`,
+  'structural-bos':c=>`<path d="M18 34h64M18 50h64" stroke="${c}" stroke-width="4" stroke-linecap="round"/><path d="M30 34v16M50 34v16M70 34v16" stroke="${c}" stroke-width="3.5"/><path d="M24 66l12-8M76 66l-12-8" stroke="${c}" stroke-width="3.5" stroke-linecap="round"/>`,
+  'wind-turbine':c=>`<circle cx="50" cy="50" r="6" fill="${c}"/><path d="M50 50c0-18 8-24 4-34M50 50c16 6 26 0 34-8M50 50c-4 18 4 26-2 34" stroke="${c}" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M50 60v20" stroke="${c}" stroke-width="4" stroke-linecap="round"/>`
 };
 
 function vfCatIconSVG(iconId,color){
@@ -292,11 +338,11 @@ function vfCatIconSVG(iconId,color){
 
 /* Drop-in replacement for a bare pImg(f.img,...) call: routes duplicate-photo
    families to a category icon instead, keeps everyone else on their real photo. */
-function vfPartVisual(f,cls,alt,lazy){
-  if(!f||!f.img) return '';
-  const base=f.img.split('/').pop();
-  if(!VF_ICON_REPLACE.has(base)) return pImg(f.img,cls,alt,lazy);
-  const iconId=VF_FILE_ICON_MAP[base]||VF_CAT_ICON_MAP[f.s+'|'+f.c]||'generic';
+function vfPartVisual(f,cls,alt){
+  if(!f) return '';
+  const base=f.img?f.img.split('/').pop():'';
+  const iconId=(base&&VF_FILE_ICON_MAP[base])||VF_CAT_ICON_MAP[f.s+'|'+f.c]||'generic';
   const color=(typeof SECTORS!=='undefined'&&SECTORS[f.s])?SECTORS[f.s].color:'#5B6B7E';
-  return `<div class="vf-cat-icon ${cls||''}" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:${color}14">${vfCatIconSVG(iconId,color)}</div>`;
+  const label=alt||f.n||f.c;
+  return `<div class="vf-cat-icon ${cls||''}" role="img" aria-label="${label.replace(/"/g,'&quot;')}" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:${color}14">${vfCatIconSVG(iconId,color)}</div>`;
 }
