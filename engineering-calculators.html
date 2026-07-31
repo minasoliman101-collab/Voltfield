@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Engineering Calculators: Voltage Drop, Transformer &amp; BESS Sizing, Fault Current | VOLTFIELD Supply Co.</title>
-<meta name="description" content="Free engineering calculators for power and energy procurement: voltage drop / cable sizing, transformer sizing, BESS sizing, solar string sizing, fault current estimate, power factor correction, transformer TCO, MACRS depreciation, landed cost, generator runtime, and a kVA/AWG/NEMA-IP unit converter.">
-<meta name="keywords" content="voltage drop calculator, transformer sizing calculator, BESS sizing calculator, solar string sizing calculator, fault current calculator, power factor correction calculator, transformer TCO calculator, MACRS depreciation calculator, landed cost calculator, generator runtime calculator, HS code lookup, UL vs ETL vs CSA, AWG to mm2 converter, NEMA to IP rating">
+<title>Engineering Calculators: Voltage Drop, Transformer Sizing, Arc-Flash Energy | VOLTFIELD Supply Co.</title>
+<meta name="description" content="Free engineering calculators for power and energy procurement: voltage drop / cable sizing, transformer sizing, BESS sizing, solar string sizing, fault current estimate, arc-flash incident energy, power factor correction, transformer TCO, MACRS depreciation, landed cost, generator runtime, and a kVA/AWG/NEMA-IP unit converter.">
+<meta name="keywords" content="voltage drop calculator, transformer sizing calculator, BESS sizing calculator, solar string sizing calculator, fault current calculator, arc flash incident energy calculator, arc flash boundary calculator, Lee equation arc flash, Doughty equation arc flash, power factor correction calculator, transformer TCO calculator, MACRS depreciation calculator, landed cost calculator, generator runtime calculator, HS code lookup, UL vs ETL vs CSA, AWG to mm2 converter, NEMA to IP rating">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VOLTFIELD Supply Co.">
 <meta property="og:title" content="Engineering Calculators for Power &amp; Energy Procurement">
-<meta property="og:description" content="Seven free calculators for cable sizing, transformer/BESS sizing, solar strings, fault current, power factor correction, and unit conversion.">
+<meta property="og:description" content="Free calculators for cable sizing, transformer/BESS sizing, solar strings, fault current, arc-flash incident energy, power factor correction, and unit conversion.">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="https://voltfield.org/social/social-engineering-calculators.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:image" content="https://voltfield.org/social/social-engineering-calculators.jpg">
 <meta name="twitter:title" content="Engineering Calculators for Power &amp; Energy Procurement">
-<meta name="twitter:description" content="Voltage drop, transformer/BESS sizing, solar strings, fault current, PF correction &amp; unit conversion — free, client-side, no signup.">
+<meta name="twitter:description" content="Voltage drop, transformer/BESS sizing, solar strings, fault current, arc-flash energy, PF correction &amp; unit conversion — free, client-side, no signup.">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
  {"@type":"BreadcrumbList","itemListElement":[
@@ -28,6 +28,7 @@
    {"@type":"Question","name":"What size transformer do I need for my load?","acceptedAnswer":{"@type":"Answer","text":"Divide your real load in kW by its power factor to get required kVA, then round up to the nearest standard transformer nameplate rating (common ANSI/IEEE sizes include 75, 112.5, 150, 225, 300, 500, 750, and 1000 kVA). Always leave margin for future load growth."}},
    {"@type":"Question","name":"How do I size a battery energy storage system (BESS)?","acceptedAnswer":{"@type":"Answer","text":"Multiply the critical load in kW by the required backup duration in hours to get usable energy in kWh, then divide by your assumed depth of discharge and round-trip efficiency (commonly around 90% each for LFP systems) to get the nameplate energy rating you need to procure."}},
    {"@type":"Question","name":"Are these calculators a substitute for a stamped engineering study?","acceptedAnswer":{"@type":"Answer","text":"No. These tools use standard simplified formulas for early-stage budgetary sizing and procurement planning. Final designs, especially fault current and arc-flash coordination, require a licensed engineer's study using actual system impedances."}},
+   {"@type":"Question","name":"How do you estimate arc-flash incident energy?","acceptedAnswer":{"@type":"Answer","text":"The theoretical Lee equation (NFPA 70E Annex D, for open-air arcs above 600V) and the empirical Doughty equations (for open-air or in-a-box arcs at 600V or below) estimate incident energy in cal/cm2 from the bolted fault current, system voltage, arc duration, and working distance. These are simplified, standard-referenced methods for early-stage estimates — a real arc-flash study for PPE selection and labeling should use the full IEEE 1584 arcing-current method performed by a qualified person."}},
    {"@type":"Question","name":"How do you calculate the total cost of ownership of a transformer?","acceptedAnswer":{"@type":"Answer","text":"Add the purchase price to the lifetime cost of its energy losses. No-load loss (core loss) runs continuously whenever the transformer is energized; load loss (winding loss) scales with the square of the load factor. Multiply each by 8760 hours/year and your electricity rate to get an annual loss cost, then extend it over the transformer's service life."}},
    {"@type":"Question","name":"What is MACRS depreciation and how is it calculated for energy equipment?","acceptedAnswer":{"@type":"Answer","text":"MACRS (Modified Accelerated Cost Recovery System) lets businesses depreciate equipment faster than its useful life using IRS-published percentage tables (5-year and 7-year property are common for energy equipment). This is a simplified estimate only — it doesn't account for bonus depreciation or Section 179 expensing, and isn't tax advice."}},
    {"@type":"Question","name":"How do you calculate the landed or delivered cost of imported equipment?","acceptedAnswer":{"@type":"Answer","text":"Add the equipment price, freight, duty (equipment price multiplied by the applicable duty rate), and cargo insurance together. The duty rate depends on the item's actual customs classification, which should come from a licensed customs broker, not an estimate."}},
@@ -185,7 +186,7 @@ footer a:hover{color:#fff}
     <div style="font-family:var(--mono);font-size:11px;color:#8DA0B8;margin-bottom:12px"><a href="index.html" style="color:#8DA0B8;text-decoration:none">Home</a> / <span style="color:#E8EDF3">Engineering Calculators</span></div>
     <div class="eyebrow">Free Tools · No Signup</div>
     <h1>Engineering Calculators for Power &amp; Energy Procurement</h1>
-    <p class="dek">Seven client-side calculators for early-stage sizing and budgetary planning — cable sizing, transformer &amp; BESS sizing, solar strings, fault current, power factor correction, and unit conversion. Standard formulas, your inputs, nothing sent to a server.</p>
+    <p class="dek">A full set of client-side calculators for early-stage sizing and budgetary planning — cable sizing, transformer &amp; BESS sizing, solar strings, fault current, arc-flash incident energy, power factor correction, and unit conversion. Standard formulas, your inputs, nothing sent to a server.</p>
   </div>
 </section>
 <div class="artwrap">
@@ -196,6 +197,7 @@ footer a:hover{color:#fff}
     <a href="#bess-sizing">BESS Sizing</a>
     <a href="#solar-string">Solar String Sizing</a>
     <a href="#fault-current">Fault Current Estimate</a>
+    <a href="#arc-flash">Arc-Flash Incident Energy</a>
     <a href="#power-factor">Power Factor Correction</a>
     <a href="#unit-converter">Unit &amp; Spec Converter</a>
     <a href="#transformer-tco">Transformer TCO Estimator</a>
@@ -298,6 +300,31 @@ footer a:hover{color:#fff}
     </div>
     <div class="est-result" id="faultResult"></div>
   </div>
+
+  <h2 id="arc-flash">Arc-Flash Incident Energy Calculator</h2>
+  <p>A first-pass estimate of arc-flash incident energy and the arc-flash protection boundary, using the theoretical <b>Lee equation</b> (open-air arcs above 600V) and the empirical <b>Doughty equations</b> (open-air or arc-in-a-box, 600V and below) — both documented in NFPA 70E Annex D. <b>These are not the IEEE 1584 arcing-current method</b> that a real arc-flash study or PPE label uses; they're simpler closed-form equations meant for early budgetary estimates, and they don't account for equipment-specific arcing current, electrode configuration, or enclosure size the way IEEE 1584 does. Always get a qualified arc-flash study for PPE selection and labeling.</p>
+  <div class="formula" id="afFormula">E = 793 &times; F &times; V &times; t / D&sup2; &nbsp;[Lee, open air, &gt;600V]</div>
+  <div class="estimator" id="afCalc">
+    <h3>Arc-Flash Incident Energy</h3>
+    <div class="sub" id="afSub">Doughty equations (&le;600V) are only validated for 16&ndash;50 kA bolted fault current and working distances of 18 in or more — the tool will flag it if you're outside that range.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="afScenario">Scenario</label><select id="afScenario">
+        <option value="lee">Open air, &gt;600V (Lee)</option>
+        <option value="doughtyAir" selected>Open air, &le;600V (Doughty)</option>
+        <option value="doughtyBox">Arc in enclosure/box, &le;600V (Doughty)</option>
+      </select></div>
+      <div class="est-field" id="afVWrap" style="display:none"><label for="afV">System voltage (kV)</label><input type="number" id="afV" min="0" step="0.01" placeholder="e.g. 13.8"></div>
+      <div class="est-field"><label for="afIbf">Bolted fault current (kA)</label><input type="number" id="afIbf" min="0" step="0.1" placeholder="e.g. 22.6"></div>
+      <div class="est-field"><label for="afTime">Arc duration (s)</label><input type="number" id="afTime" min="0.01" step="0.01" placeholder="e.g. 0.1"></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="afDist">Working distance (in)</label><input type="number" id="afDist" min="1" step="0.5" placeholder="e.g. 18"></div>
+      <div class="est-field"><label for="afThresh">Boundary threshold (cal/cm&sup2;)</label><input type="number" id="afThresh" min="0.1" step="0.1" value="1.2"></div>
+      <div class="est-field"><button type="button" id="afBtn">Calculate</button></div>
+    </div>
+    <div class="est-result" id="afResult"></div>
+  </div>
+  <div class="callout">Arc duration is your upstream protective device's actual clearing time (breaker + relay, from a coordination study) — there's no universal default, since it's the single biggest driver of incident energy. Bolted fault current can come from the <a class="inline" href="#fault-current">Fault Current Estimate</a> calculator above, or an actual short-circuit study. The 1.2 cal/cm&sup2; boundary threshold is the standard "just curable" second-degree-burn value from NFPA 70E Annex D — bump it to 1.5 cal/cm&sup2; if you're above 600V with a clearing time of 0.1s or less, per the same Annex D guidance.</div>
 
   <h2 id="power-factor">Power Factor Correction Calculator</h2>
   <p>Sizes the capacitor bank (kVAR) needed to raise real power at an existing power factor up to a target power factor.</p>
@@ -491,6 +518,10 @@ footer a:hover{color:#fff}
     <p style="margin-top:10px">No. These tools use standard simplified formulas for early-stage budgetary sizing and procurement planning. Final designs, especially fault current and arc-flash coordination, require a licensed engineer's study using actual system impedances.</p>
   </details>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How do you estimate arc-flash incident energy?</summary>
+    <p style="margin-top:10px">The theoretical Lee equation (NFPA 70E Annex D, for open-air arcs above 600V) and the empirical Doughty equations (for open-air or in-a-box arcs at 600V or below) estimate incident energy in cal/cm&sup2; from the bolted fault current, system voltage, arc duration, and working distance. These are simplified, standard-referenced methods for early-stage estimates — a real arc-flash study for PPE selection and labeling should use the full IEEE 1584 arcing-current method performed by a qualified person.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How do you calculate the total cost of ownership of a transformer?</summary>
     <p style="margin-top:10px">Add the purchase price to the lifetime cost of its energy losses. No-load loss (core loss) runs continuously whenever the transformer is energized; load loss (winding loss) scales with the square of the load factor. Multiply each by 8760 hours/year and your electricity rate to get an annual loss cost, then extend it over the transformer's service life.</p>
   </details>
@@ -628,6 +659,48 @@ footer a:hover{color:#fff}
     const isc=(100000*kva)/(1.732*V*z);
     r.innerHTML='Estimated available symmetrical fault current: <b>'+fmt(isc,0)+' A</b> ('+fmt(isc/1000)+' kA) at the transformer secondary, assuming an infinite source and ignoring cable impedance.';
     r.className='est-result show';
+  });
+
+  /* ---- Arc-flash incident energy: Lee equation (open air, >600V) + Doughty equations
+     (open air / arc-in-box, <=600V) -- both from NFPA 70E Annex D. Not the IEEE 1584
+     arcing-current method. Every constant/exponent below was checked against worked
+     numeric examples (V=0.48kV or 1kV, F=22.6kA, t=0.1s, D=18in) before shipping. */
+  const AF_FORMULAS={
+    lee:'E = 793 &times; F &times; V &times; t / D&sup2; &nbsp;&middot;&nbsp; Dc = &radic;(793 &times; F &times; V &times; t / E) &nbsp;[Lee, open air, &gt;600V]',
+    doughtyAir:'E = 5271 &times; D<sup>&minus;1.9593</sup> &times; t &times; (0.0016F&sup2; &minus; 0.0076F + 0.8938) &nbsp;[Doughty, open air, &le;600V]',
+    doughtyBox:'E = 1038.7 &times; D<sup>&minus;1.4738</sup> &times; t &times; (0.0093F&sup2; &minus; 0.3453F + 5.9675) &nbsp;[Doughty, arc in box, &le;600V]'
+  };
+  const afScenarioSel=document.getElementById('afScenario'), afVWrap=document.getElementById('afVWrap'), afFormulaEl=document.getElementById('afFormula');
+  function afSyncScenario(){
+    const sc=afScenarioSel.value;
+    afVWrap.style.display=sc==='lee'?'':'none';
+    afFormulaEl.innerHTML=AF_FORMULAS[sc];
+  }
+  if(afScenarioSel){afScenarioSel.addEventListener('change',afSyncScenario);afSyncScenario();}
+
+  const afBtn=document.getElementById('afBtn');
+  if(afBtn)afBtn.addEventListener('click',function(){
+    const r=document.getElementById('afResult');
+    const sc=afScenarioSel.value;
+    const F=parseFloat(document.getElementById('afIbf').value), t=parseFloat(document.getElementById('afTime').value);
+    const D=parseFloat(document.getElementById('afDist').value), thresh=parseFloat(document.getElementById('afThresh').value)||1.2;
+    const V=parseFloat(document.getElementById('afV').value);
+    if(!(F>0)||!(t>0)||!(D>0)){r.textContent='Enter bolted fault current, arc duration, and working distance.';r.className='est-result show';return;}
+    if(sc==='lee'&&!(V>0)){r.textContent='Enter system voltage (kV) for the open-air, >600V scenario.';r.className='est-result show';return;}
+    let E,Dc,warn=false,warnMsg='';
+    if(sc==='lee'){
+      E=793*F*V*t/(D*D);
+      Dc=Math.sqrt(793*F*V*t/thresh);
+    } else {
+      const bracket=sc==='doughtyAir' ? (0.0016*F*F-0.0076*F+0.8938) : (0.0093*F*F-0.3453*F+5.9675);
+      const k=sc==='doughtyAir'?5271:1038.7, exp=sc==='doughtyAir'?1.9593:1.4738;
+      E=k*Math.pow(D,-exp)*t*bracket;
+      Dc=Math.pow(k*t*bracket/thresh,1/exp);
+      if(F<16||F>50){warn=true;warnMsg+=' Bolted fault current is outside the 16-50 kA range the Doughty equations were fit to — treat this result as extrapolated, not validated.';}
+      if(D<18){warn=true;warnMsg+=' Working distance under 18 in is outside the Doughty equations\' validated range.';}
+    }
+    r.innerHTML='Estimated incident energy: <b>'+fmt(E)+' cal/cm&sup2;</b> at '+D+' in. Arc-flash boundary (at '+thresh+' cal/cm&sup2;): <b>'+fmt(Dc)+' in</b> ('+fmt(Dc/12)+' ft). Select PPE with an arc rating (ATPV/EBT) at or above the incident energy figure.'+warnMsg;
+    r.className='est-result show'+(warn?' warn':'');
   });
 
   const pfBtn=document.getElementById('pfBtn');
