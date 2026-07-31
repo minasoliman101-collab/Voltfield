@@ -196,7 +196,7 @@ footer a:hover{color:#fff}
     <a href="#transformer-sizing">Transformer Sizing</a>
     <a href="#bess-sizing">BESS Sizing</a>
     <a href="#solar-string">Solar String Sizing</a>
-    <a href="#fault-current">Fault Current Estimate</a>
+    <a href="#fault-current">Fault Current &amp; Withstand Check</a>
     <a href="#arc-flash">Arc-Flash Incident Energy</a>
     <a href="#power-factor">Power Factor Correction</a>
     <a href="#unit-converter">Unit &amp; Spec Converter</a>
@@ -286,16 +286,19 @@ footer a:hover{color:#fff}
     <div class="est-result" id="strResult"></div>
   </div>
 
-  <h2 id="fault-current">Fault Current Estimate</h2>
+  <h2 id="fault-current">Fault Current Estimate &amp; Withstand Check</h2>
   <p>A simplified, infinite-source estimate of available symmetrical fault current at a transformer's secondary terminals — useful for a first-pass equipment rating check, not a substitute for a full short-circuit/coordination study that accounts for source and cable impedance.</p>
   <div class="formula">Isc = (100,000 &times; kVA) / (1.732 &times; V &times; %Z)</div>
   <div class="estimator" id="faultCalc">
     <h3>Available Fault Current</h3>
-    <div class="sub">%Z comes from the transformer nameplate — typical distribution transformers run 5.75%&ndash;6.5%, but always use the actual nameplate value.</div>
+    <div class="sub">%Z comes from the transformer nameplate — typical distribution transformers run 5.75%&ndash;6.5%, but always use the actual nameplate value. Common standard equipment AIC/withstand ratings: 10, 14, 18, 22, 25, 35, 42, 50, 65, 100, 150, 200 kA.</div>
     <div class="est-row">
       <div class="est-field"><label for="faultKva">Transformer (kVA)</label><input type="number" id="faultKva" min="0" step="1" placeholder="e.g. 1500"></div>
       <div class="est-field"><label for="faultZ">Impedance %Z</label><input type="number" id="faultZ" min="0.1" step="0.01" placeholder="e.g. 5.75"></div>
       <div class="est-field"><label for="faultV">Secondary voltage, L-L (V)</label><input type="number" id="faultV" min="0" step="1" placeholder="e.g. 480"></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="faultAic">Equipment AIC/withstand rating (kA, optional)</label><input type="number" id="faultAic" min="0" step="1" placeholder="e.g. 42"></div>
       <div class="est-field"><button type="button" id="faultBtn">Calculate</button></div>
     </div>
     <div class="est-result" id="faultResult"></div>
@@ -655,10 +658,18 @@ footer a:hover{color:#fff}
   if(faultBtn)faultBtn.addEventListener('click',function(){
     const r=document.getElementById('faultResult');
     const kva=parseFloat(document.getElementById('faultKva').value), z=parseFloat(document.getElementById('faultZ').value), V=parseFloat(document.getElementById('faultV').value);
+    const aic=parseFloat(document.getElementById('faultAic').value);
     if(!(kva>0)||!(z>0)||!(V>0)){r.textContent='Enter transformer kVA, %Z, and secondary voltage.';r.className='est-result show';return;}
     const isc=(100000*kva)/(1.732*V*z);
-    r.innerHTML='Estimated available symmetrical fault current: <b>'+fmt(isc,0)+' A</b> ('+fmt(isc/1000)+' kA) at the transformer secondary, assuming an infinite source and ignoring cable impedance.';
-    r.className='est-result show';
+    let out='Estimated available symmetrical fault current: <b>'+fmt(isc,0)+' A</b> ('+fmt(isc/1000)+' kA) at the transformer secondary, assuming an infinite source and ignoring cable impedance.';
+    let warn=false;
+    if(aic>0){
+      const iscKa=isc/1000, under=iscKa>aic;
+      out+=' <br>Equipment rated '+fmt(aic,1)+' kA AIC: '+(under?'<b>under-rated</b> — available fault current exceeds the equipment\'s withstand rating.':'adequate — available fault current is within the equipment\'s withstand rating.')+' (Remember: this ignores upstream/cable impedance, which only ever reduces actual fault current from this infinite-source figure — so a marginal pass here deserves a real study, not just this estimate.)';
+      warn=under;
+    }
+    r.innerHTML=out;
+    r.className='est-result show'+(warn?' warn':'');
   });
 
   /* ---- Arc-flash incident energy: Lee equation (open air, >600V) + Doughty equations
