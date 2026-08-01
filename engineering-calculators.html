@@ -193,11 +193,15 @@ footer a:hover{color:#fff}
   <div class="toc" aria-label="Jump to a calculator">
     <b>Jump to a calculator</b>
     <a href="#voltage-drop">Voltage Drop / Cable Sizing</a>
+    <a href="#ampacity">Cable Ampacity &amp; Conduit Fill</a>
     <a href="#transformer-sizing">Transformer Sizing</a>
+    <a href="#inrush">Transformer Inrush Current</a>
     <a href="#bess-sizing">BESS Sizing</a>
     <a href="#solar-string">Solar String Sizing</a>
     <a href="#fault-current">Fault Current &amp; Withstand Check</a>
+    <a href="#motor-start">Motor Starting Voltage Dip</a>
     <a href="#arc-flash">Arc-Flash Incident Energy</a>
+    <a href="#grounding">Ground Rod Resistance</a>
     <a href="#power-factor">Power Factor Correction</a>
     <a href="#unit-converter">Unit &amp; Spec Converter</a>
     <a href="#transformer-tco">Transformer TCO Estimator</a>
@@ -232,6 +236,33 @@ footer a:hover{color:#fff}
     <div class="est-result" id="vdResult"></div>
   </div>
 
+  <h2 id="ampacity">Cable Ampacity &amp; Conduit Fill</h2>
+  <p>Looks up base conductor ampacity from NEC Table 310.16 (no more than 3 current-carrying conductors, 30&deg;C ambient — before any correction factors) and checks conduit fill against NEC Chapter 9's percentage caps. This covers a curated subset of common sizes for early-stage estimating, not the full code table.</p>
+  <div class="formula">Fill % = 100 &times; (n &times; A<sub>conductor</sub>) / A<sub>conduit</sub> &nbsp;&middot;&nbsp; cap: 53% (1 conductor) &middot; 31% (2) &middot; 40% (3+)</div>
+  <div class="estimator" id="ampCalc">
+    <h3>Ampacity Lookup</h3>
+    <div class="sub">Base ampacity only — apply NEC 310.15(B) ambient/altitude correction and 310.15(C) bundling adjustment factors for your actual install conditions, and respect the 60&deg;C/75&deg;C termination rating of the equipment per NEC 110.14(C).</div>
+    <div class="est-row">
+      <div class="est-field"><label for="ampSize">Conductor size</label><select id="ampSize"></select></div>
+      <div class="est-field"><label for="ampMat">Conductor</label><select id="ampMat"><option value="Cu">Copper</option><option value="Al">Aluminum</option></select></div>
+      <div class="est-field"><label for="ampTemp">Insulation rating</label><select id="ampTemp"><option value="60">60&deg;C</option><option value="75" selected>75&deg;C</option><option value="90">90&deg;C</option></select></div>
+      <div class="est-field"><button type="button" id="ampBtn">Look up</button></div>
+    </div>
+    <div class="est-result" id="ampResult"></div>
+  </div>
+  <div class="estimator" id="fillCalc">
+    <h3>Conduit Fill</h3>
+    <div class="sub">EMT conduit and THHN/THWN-2 conductor areas, a handful of common sizes only. Mixed conductor sizes in one raceway, or other conduit/conductor types, need NEC Annex C or a real fill calc.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="fillConduit">Conduit (EMT)</label><select id="fillConduit"></select></div>
+      <div class="est-field"><label for="fillWire">Conductor (THHN)</label><select id="fillWire"></select></div>
+      <div class="est-field"><label for="fillN">Number of conductors</label><input type="number" id="fillN" min="1" step="1" placeholder="e.g. 4"></div>
+      <div class="est-field"><button type="button" id="fillBtn">Check fill</button></div>
+    </div>
+    <div class="est-result" id="fillResult"></div>
+  </div>
+  <div class="callout">NEC Annex C publishes the code's own pre-computed conductors-per-conduit tables, which can differ by about &plusmn;1 conductor from the simple area-ratio math here due to NFPA's own rounding conventions — use Annex C (or a licensed designer) for anything past a rough early estimate, and always confirm against the NEC/NFPA 70 edition actually adopted by your jurisdiction.</div>
+
   <h2 id="transformer-sizing">Transformer Sizing Calculator</h2>
   <p>Converts a real load in kW to required kVA and rounds up to the nearest standard ANSI/IEEE C57.12.00 transformer nameplate rating, plus estimated full-load amps on the secondary.</p>
   <div class="formula">kVA = kW / PF &nbsp;&middot;&nbsp; FLA = kVA &times; 1000 / (1.732 &times; V) &nbsp;[3&phi;]&nbsp; or &nbsp;kVA &times; 1000 / V &nbsp;[1&phi;]</div>
@@ -247,6 +278,30 @@ footer a:hover{color:#fff}
     <div class="est-row"><div class="est-field"><button type="button" id="xfBtn">Calculate</button></div></div>
     <div class="est-result" id="xfResult"></div>
   </div>
+
+  <h2 id="inrush">Transformer Inrush Current Estimator</h2>
+  <p>Energizing a transformer briefly draws a magnetizing inrush current well above full-load amps — enough to matter for upstream breaker/fuse selection and protective coordination. The multiplier below is an industry rule of thumb (commonly cited around IEEE 141/242 and manufacturer application literature), not a precise physical constant — it varies by core design, steel grade, residual flux, and point-on-wave of energization.</p>
+  <div class="formula">FLA = kVA &times; 1000 / (1.732 &times; V) &nbsp;[3&phi;] &nbsp;&middot;&nbsp; Peak inrush &asymp; M &times; FLA</div>
+  <div class="estimator" id="inrushCalc">
+    <h3>Inrush Current</h3>
+    <div class="sub">Pick the size class closest to your unit to auto-fill a typical multiplier range, or override it if your manufacturer publishes an actual figure.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="inClass">Transformer size class</label><select id="inClass">
+        <option value="small">Small control/instrument (up to a few kVA)</option>
+        <option value="dist" selected>Small&ndash;medium distribution (up to ~2500 kVA)</option>
+        <option value="large">Large power (&gt;2500 kVA)</option>
+      </select></div>
+      <div class="est-field"><label for="inKva">Transformer (kVA)</label><input type="number" id="inKva" min="0" step="1" placeholder="e.g. 2000"></div>
+      <div class="est-field"><label for="inV">Secondary voltage (V)</label><input type="number" id="inV" min="0" step="1" placeholder="e.g. 480"></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="inMlo">Multiplier, low (&times;FLA)</label><input type="number" id="inMlo" min="1" step="0.5" value="8"></div>
+      <div class="est-field"><label for="inMhi">Multiplier, high (&times;FLA)</label><input type="number" id="inMhi" min="1" step="0.5" value="12"></div>
+      <div class="est-field"><button type="button" id="inBtn">Calculate</button></div>
+    </div>
+    <div class="est-result" id="inResult"></div>
+  </div>
+  <div class="callout">This is a budgetary planning heuristic, not manufacturer inrush data or a time-domain simulation — it's not a substitute for the transformer's actual published inrush curve when sizing protective devices or generator/UPS ride-through.</div>
 
   <h2 id="bess-sizing">BESS Sizing Calculator</h2>
   <p>Converts a critical load and backup duration into usable energy, then to the nameplate energy rating you'd need to procure once depth of discharge and round-trip efficiency losses are factored in. See <a class="inline" href="battery-storage.html">Battery Storage</a> for DC block configurations.</p>
@@ -304,6 +359,30 @@ footer a:hover{color:#fff}
     <div class="est-result" id="faultResult"></div>
   </div>
 
+  <h2 id="motor-start">Motor Starting Voltage Dip</h2>
+  <p>Estimates the voltage dip at a bus when a large motor starts across-the-line, using the standard "infinite bus minus source impedance" screening method behind IEEE Std 399 motor-starting studies — the motor's locked-rotor demand as a fraction of itself plus the source's short-circuit capacity. It's a snapshot of maximum dip only; it doesn't model acceleration time, other motors reaccelerating, or a limited-capacity generator source (which needs its transient reactance modeled separately, not this infinite-bus assumption).</p>
+  <div class="formula">%VoltageDip = LRkVA / (LRkVA + SCkVA) &times; 100</div>
+  <div class="estimator" id="motorCalc">
+    <h3>Voltage Dip on Motor Start</h3>
+    <div class="sub">Use actual nameplate LRA when you have it — the NEMA code letter only gives a band, not an exact value. Use the system's minimum expected fault capacity (weakest condition), the opposite convention from a protective-device duty study.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="motorMethod">Motor data</label><select id="motorMethod">
+        <option value="letter" selected>NEMA code letter + HP</option>
+        <option value="lra">Nameplate LRA (A)</option>
+      </select></div>
+      <div class="est-field" id="motorHpWrap"><label for="motorHp">Motor rating (HP)</label><input type="number" id="motorHp" min="0" step="1" placeholder="e.g. 500"></div>
+      <div class="est-field" id="motorLetterWrap"><label for="motorLetter">NEMA code letter</label><select id="motorLetter"></select></div>
+      <div class="est-field" id="motorLraWrap" style="display:none"><label for="motorLra">Locked-rotor amps, LRA</label><input type="number" id="motorLra" min="0" step="1" placeholder="e.g. 3950"></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="motorV">System voltage, L-L (V)</label><input type="number" id="motorV" min="0" step="1" placeholder="e.g. 460"></div>
+      <div class="est-field"><label for="motorSc">Available fault capacity (kVA)</label><input type="number" id="motorSc" min="0" step="100" placeholder="e.g. 40000"></div>
+      <div class="est-field"><button type="button" id="motorBtn">Calculate</button></div>
+    </div>
+    <div class="est-result" id="motorResult"></div>
+  </div>
+  <div class="callout">Minimum acceptable starting-bus voltage is application-specific — commonly cited screening thresholds include ~80% of rated voltage at the starting motor's own terminals (NEMA Design B, full-torque load), ~85% for AC contactor pickup, and ~71% at the terminals of other motors on the same bus that need to reaccelerate. There's no single universal cutoff.</div>
+
   <h2 id="arc-flash">Arc-Flash Incident Energy Calculator</h2>
   <p>A first-pass estimate of arc-flash incident energy and the arc-flash protection boundary, using the theoretical <b>Lee equation</b> (open-air arcs above 600V) and the empirical <b>Doughty equations</b> (open-air or arc-in-a-box, 600V and below) — both documented in NFPA 70E Annex D. <b>These are not the IEEE 1584 arcing-current method</b> that a real arc-flash study or PPE label uses; they're simpler closed-form equations meant for early budgetary estimates, and they don't account for equipment-specific arcing current, electrode configuration, or enclosure size the way IEEE 1584 does. Always get a qualified arc-flash study for PPE selection and labeling.</p>
   <div class="formula" id="afFormula">E = 793 &times; F &times; V &times; t / D&sup2; &nbsp;[Lee, open air, &gt;600V]</div>
@@ -328,6 +407,29 @@ footer a:hover{color:#fff}
     <div class="est-result" id="afResult"></div>
   </div>
   <div class="callout">Arc duration is your upstream protective device's actual clearing time (breaker + relay, from a coordination study) — there's no universal default, since it's the single biggest driver of incident energy. Bolted fault current can come from the <a class="inline" href="#fault-current">Fault Current Estimate</a> calculator above, or an actual short-circuit study. The 1.2 cal/cm&sup2; boundary threshold is the standard "just curable" second-degree-burn value from NFPA 70E Annex D — bump it to 1.5 cal/cm&sup2; if you're above 600V with a clearing time of 0.1s or less, per the same Annex D guidance.</div>
+
+  <h2 id="grounding">Ground Rod Resistance Estimator</h2>
+  <p>Estimates the resistance-to-earth of a single driven ground rod using Dwight's formula, the standard starting point for grounding-grid work referenced in IEEE Std 142. Real (layered, non-uniform) soil commonly deviates from this uniform-resistivity assumption by 10&ndash;20% or more — treat this as a first-pass design estimate, not a substitute for a field measurement (Wenner four-point method, IEEE Std 81) or a full grounding-grid study.</p>
+  <div class="formula">R = [&rho; / (2&pi;L)] &times; [ln(4L/d) &minus; 1]</div>
+  <div class="estimator" id="groundCalc">
+    <h3>Single Rod Resistance</h3>
+    <div class="sub">Soil resistivity presets are order-of-magnitude only (moisture, compaction, and mineral content routinely swing real resistivity by 10&times; within one "soil type") — a site resistivity test is the real number.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="gndPreset">Soil (typical &rho;, illustrative only)</label><select id="gndPreset">
+        <option value="">Custom &rho; (enter at right)</option>
+        <option value="10">Wet organic soil (~10 &Omega;&middot;m)</option>
+        <option value="100" selected>Moist soil (~100 &Omega;&middot;m)</option>
+        <option value="1000">Dry soil (~1,000 &Omega;&middot;m)</option>
+        <option value="10000">Bedrock (~10,000 &Omega;&middot;m)</option>
+      </select></div>
+      <div class="est-field"><label for="gndRho">Soil resistivity, &rho; (&Omega;&middot;m)</label><input type="number" id="gndRho" min="1" step="1" value="100"></div>
+      <div class="est-field"><label for="gndLen">Rod length (ft)</label><input type="number" id="gndLen" min="1" step="0.5" value="10"></div>
+      <div class="est-field"><label for="gndDia">Rod diameter (in)</label><select id="gndDia"><option value="0.5">1/2"</option><option value="0.625" selected>5/8"</option><option value="0.75">3/4"</option></select></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="gndBtn">Calculate</button></div></div>
+    <div class="est-result" id="gndResult"></div>
+  </div>
+  <div class="callout">The commonly cited 25-ohm figure (NEC 250.53(A)(2)) is a pass/fail test for whether a <b>single</b> rod/pipe/plate electrode needs a supplemental electrode — it's enforceable rule text (an Exception), not just an informational note, and it doesn't apply once you're already using multiple electrodes. It's also not a general "the grounding system must measure 25&Omega;" requirement. Always confirm against the NEC edition your jurisdiction has adopted.</div>
 
   <h2 id="power-factor">Power Factor Correction Calculator</h2>
   <p>Sizes the capacitor bank (kVAR) needed to raise real power at an existing power factor up to a target power factor.</p>
@@ -612,6 +714,66 @@ footer a:hover{color:#fff}
     r.className='est-result show'+(warn?' warn':'');
   });
 
+  /* ---- NEC Table 310.16 ampacity (curated subset, base conditions: <=3 CCC, 30C ambient)
+     and NEC Chapter 9 conduit fill (Table 1 caps, Table 4 EMT areas, Table 5 THHN areas) ---- */
+  const NEC_AMPACITY=[
+    {n:'14 AWG',Cu:{60:15,75:20,90:25},Al:{60:null,75:null,90:null}},
+    {n:'12 AWG',Cu:{60:20,75:25,90:30},Al:{60:15,75:20,90:25}},
+    {n:'10 AWG',Cu:{60:30,75:35,90:40},Al:{60:25,75:30,90:35}},
+    {n:'8 AWG', Cu:{60:40,75:50,90:55},Al:{60:35,75:40,90:45}},
+    {n:'6 AWG', Cu:{60:55,75:65,90:75},Al:{60:40,75:50,90:55}},
+    {n:'4 AWG', Cu:{60:70,75:85,90:95},Al:{60:55,75:65,90:75}},
+    {n:'3 AWG', Cu:{60:85,75:100,90:115},Al:{60:65,75:75,90:85}},
+    {n:'2 AWG', Cu:{60:95,75:115,90:130},Al:{60:75,75:90,90:100}},
+    {n:'1 AWG', Cu:{60:110,75:130,90:145},Al:{60:85,75:100,90:115}},
+    {n:'1/0 AWG',Cu:{60:125,75:150,90:170},Al:{60:100,75:120,90:135}},
+    {n:'2/0 AWG',Cu:{60:145,75:175,90:195},Al:{60:115,75:135,90:150}},
+    {n:'3/0 AWG',Cu:{60:165,75:200,90:225},Al:{60:130,75:155,90:175}},
+    {n:'4/0 AWG',Cu:{60:195,75:230,90:260},Al:{60:150,75:180,90:205}},
+    {n:'250 kcmil',Cu:{60:215,75:255,90:290},Al:{60:170,75:205,90:230}},
+    {n:'300 kcmil',Cu:{60:240,75:285,90:320},Al:{60:195,75:230,90:260}},
+    {n:'350 kcmil',Cu:{60:260,75:310,90:350},Al:{60:210,75:250,90:280}},
+    {n:'400 kcmil',Cu:{60:280,75:335,90:380},Al:{60:225,75:270,90:305}},
+    {n:'500 kcmil',Cu:{60:320,75:380,90:430},Al:{60:260,75:310,90:350}}
+  ];
+  const EMT_AREA={'1-2in':0.122,'3-4in':0.213,'1in':0.346,'2in':1.342}; /* in^2 at 40% fill */
+  const EMT_LABEL={'1-2in':'1/2"','3-4in':'3/4"','1in':'1"','2in':'2"'};
+  const THHN_AREA={'14 AWG':0.0097,'12 AWG':0.0133,'10 AWG':0.0211,'8 AWG':0.0366,'6 AWG':0.0507,'1/0 AWG':0.1855};
+  const FILL_CAP={1:0.53,2:0.31}; /* 3+ uses 0.40, handled separately */
+
+  const ampSizeSel=document.getElementById('ampSize'), fillConduitSel=document.getElementById('fillConduit'), fillWireSel=document.getElementById('fillWire');
+  if(ampSizeSel)ampSizeSel.innerHTML=NEC_AMPACITY.map((a,i)=>'<option value="'+i+'"'+(a.n==='4/0 AWG'?' selected':'')+'>'+a.n+'</option>').join('');
+  if(fillConduitSel)fillConduitSel.innerHTML=Object.keys(EMT_AREA).map(k=>'<option value="'+k+'"'+(k==='3-4in'?' selected':'')+'>'+EMT_LABEL[k]+' EMT</option>').join('');
+  if(fillWireSel)fillWireSel.innerHTML=Object.keys(THHN_AREA).map(k=>'<option value="'+k+'"'+(k==='12 AWG'?' selected':'')+'>'+k+' THHN</option>').join('');
+
+  const ampBtn=document.getElementById('ampBtn');
+  if(ampBtn)ampBtn.addEventListener('click',function(){
+    const r=document.getElementById('ampResult');
+    const row=NEC_AMPACITY[+ampSizeSel.value], mat=document.getElementById('ampMat').value, temp=document.getElementById('ampTemp').value;
+    const a=row[mat][temp];
+    if(a===null){r.textContent=row.n+' has no standard aluminum ampacity in this table (aluminum conductors typically start at 12 AWG).';r.className='est-result show warn';return;}
+    r.innerHTML=row.n+' '+(mat==='Cu'?'copper':'aluminum')+', '+temp+'&deg;C column: <b>'+a+' A</b> base ampacity (&le;3 current-carrying conductors, 30&deg;C ambient, before any correction factors).';
+    r.className='est-result show';
+  });
+
+  const fillBtn=document.getElementById('fillBtn');
+  if(fillBtn)fillBtn.addEventListener('click',function(){
+    const r=document.getElementById('fillResult');
+    const conduit=fillConduitSel.value, wire=fillWireSel.value, n=parseInt(document.getElementById('fillN').value,10);
+    if(!(n>0)){r.textContent='Enter the number of conductors.';r.className='est-result show';return;}
+    const conduitArea40=EMT_AREA[conduit]; /* already the 40%-fill area */
+    const conduitAreaTotal=conduitArea40/0.40;
+    const wireArea=THHN_AREA[wire];
+    const usedArea=n*wireArea;
+    const cap=n>=3?0.40:FILL_CAP[n];
+    const capArea=conduitAreaTotal*cap;
+    const pct=(usedArea/conduitAreaTotal)*100;
+    const fits=usedArea<=capArea;
+    const nMax=Math.floor(capArea/wireArea);
+    r.innerHTML=n+' &times; '+wire+' THHN in '+EMT_LABEL[conduit]+' EMT: <b>'+fmt(pct,1)+'% fill</b> (cap for '+n+' conductor'+(n===1?'':'s')+': '+(cap*100)+'%). '+(fits?'Fits within the cap.':'<b>Exceeds the fill cap</b> — over by '+fmt(usedArea-capArea,4)+' in&sup2;.')+' Max '+wire+' conductors in this conduit at the applicable cap: <b>'+nMax+'</b>.';
+    r.className='est-result show'+(fits?'':' warn');
+  });
+
   const xfBtn=document.getElementById('xfBtn');
   if(xfBtn)xfBtn.addEventListener('click',function(){
     const r=document.getElementById('xfResult');
@@ -622,6 +784,31 @@ footer a:hover{color:#fff}
     const std=STD_KVA.find(s=>s>=kvaReq)||STD_KVA[STD_KVA.length-1];
     const fla=phase==='3'?(std*1000)/(1.732*V):(std*1000)/V;
     r.innerHTML='Required: <b>'+fmt(kvaReq)+' kVA</b> &rarr; nearest standard size: <b>'+fmt(std,1)+' kVA</b>. Estimated secondary FLA at that rating: <b>'+fmt(fla)+' A</b>.';
+    r.className='est-result show';
+  });
+
+  /* ---- Transformer inrush: rule-of-thumb multiplier x FLA, ranges commonly cited around IEEE 141/242 ---- */
+  const INRUSH_CLASS={
+    small:{lo:15,hi:25,decay:'within a few cycles (roughly 50-100 ms)'},
+    dist:{lo:8,hi:12,decay:'over roughly 6-12 cycles (~0.1-0.2 s)'},
+    large:{lo:4,hi:10,decay:'over several cycles up to roughly 1 second, sometimes longer on a high-X/R source'}
+  };
+  const inClassSel=document.getElementById('inClass');
+  if(inClassSel)inClassSel.addEventListener('change',function(){
+    const c=INRUSH_CLASS[this.value];
+    document.getElementById('inMlo').value=c.lo;
+    document.getElementById('inMhi').value=c.hi;
+  });
+  const inBtn=document.getElementById('inBtn');
+  if(inBtn)inBtn.addEventListener('click',function(){
+    const r=document.getElementById('inResult');
+    const kva=parseFloat(document.getElementById('inKva').value), V=parseFloat(document.getElementById('inV').value);
+    const mlo=parseFloat(document.getElementById('inMlo').value), mhi=parseFloat(document.getElementById('inMhi').value);
+    if(!(kva>0)||!(V>0)||!(mlo>0)||!(mhi>0)){r.textContent='Enter transformer kVA, voltage, and both multipliers.';r.className='est-result show';return;}
+    const fla=(kva*1000)/(1.732*V);
+    const lo=mlo*fla, hi=mhi*fla;
+    const decay=INRUSH_CLASS[inClassSel.value].decay;
+    r.innerHTML='Full-load amps: <b>'+fmt(fla)+' A</b>. Estimated peak inrush: <b>'+fmt(lo,0)+'&ndash;'+fmt(hi,0)+' A</b> ('+fmt(mlo)+'&times;&ndash;'+fmt(mhi)+'&times; FLA), decaying '+decay+'. Treat this as an order-of-magnitude planning figure — actual peak and duration depend heavily on the specific unit\'s design.';
     r.className='est-result show';
   });
 
@@ -672,6 +859,50 @@ footer a:hover{color:#fff}
     r.className='est-result show'+(warn?' warn':'');
   });
 
+  /* ---- Motor starting voltage dip: infinite-bus-minus-source-impedance method (IEEE Std 399) ---- */
+  const NEMA_CODE=[
+    {l:'A',lo:0,hi:3.15},{l:'B',lo:3.15,hi:3.55},{l:'C',lo:3.55,hi:4.00},{l:'D',lo:4.00,hi:4.50},
+    {l:'E',lo:4.50,hi:5.00},{l:'F',lo:5.00,hi:5.60},{l:'G',lo:5.60,hi:6.30},{l:'H',lo:6.30,hi:7.10},
+    {l:'J',lo:7.10,hi:8.00},{l:'K',lo:8.00,hi:9.00},{l:'L',lo:9.00,hi:10.00},{l:'M',lo:10.00,hi:11.20},
+    {l:'N',lo:11.20,hi:12.50},{l:'P',lo:12.50,hi:14.00},{l:'R',lo:14.00,hi:16.00},{l:'S',lo:16.00,hi:18.00},
+    {l:'T',lo:18.00,hi:20.00},{l:'U',lo:20.00,hi:22.40},{l:'V',lo:22.40,hi:26.00}
+  ];
+  const motorLetterSel=document.getElementById('motorLetter'), motorMethodSel=document.getElementById('motorMethod');
+  if(motorLetterSel)motorLetterSel.innerHTML=NEMA_CODE.map(c=>'<option value="'+c.l+'"'+(c.l==='G'?' selected':'')+'>'+c.l+' ('+c.lo.toFixed(2)+'&ndash;'+c.hi.toFixed(2)+' kVA/HP)</option>').join('');
+  function motorSyncMethod(){
+    const isLetter=motorMethodSel.value==='letter';
+    document.getElementById('motorHpWrap').style.display=isLetter?'':'none';
+    document.getElementById('motorLetterWrap').style.display=isLetter?'':'none';
+    document.getElementById('motorLraWrap').style.display=isLetter?'none':'';
+  }
+  if(motorMethodSel){motorMethodSel.addEventListener('change',motorSyncMethod);motorSyncMethod();}
+
+  const motorBtn=document.getElementById('motorBtn');
+  if(motorBtn)motorBtn.addEventListener('click',function(){
+    const r=document.getElementById('motorResult');
+    const V=parseFloat(document.getElementById('motorV').value), sc=parseFloat(document.getElementById('motorSc').value);
+    if(!(V>0)||!(sc>0)){r.textContent='Enter system voltage and available fault capacity.';r.className='est-result show';return;}
+    let out,warn=false;
+    if(motorMethodSel.value==='letter'){
+      const hp=parseFloat(document.getElementById('motorHp').value);
+      if(!(hp>0)){r.textContent='Enter motor HP.';r.className='est-result show';return;}
+      const code=NEMA_CODE.find(c=>c.l===motorLetterSel.value);
+      const lrkvaLo=code.lo*hp, lrkvaHi=code.hi*hp;
+      const dipLo=lrkvaLo/(lrkvaLo+sc)*100, dipHi=lrkvaHi/(lrkvaHi+sc)*100;
+      warn=dipHi>20;
+      out='Locked-rotor kVA (Code '+code.l+' band): <b>'+fmt(lrkvaLo,0)+'&ndash;'+fmt(lrkvaHi,0)+' kVA</b>. Estimated voltage dip: <b>'+fmt(dipLo,1)+'%&ndash;'+fmt(dipHi,1)+'%</b> (terminal voltage sags to roughly '+fmt(100-dipHi,1)+'%&ndash;'+fmt(100-dipLo,1)+'% of nominal). Use actual nameplate LRA instead of the code-letter band for a precise figure.'+(warn?' This is a large enough dip to check against your minimum acceptable starting voltage.':'');
+    } else {
+      const lra=parseFloat(document.getElementById('motorLra').value);
+      if(!(lra>0)){r.textContent='Enter locked-rotor amps (LRA).';r.className='est-result show';return;}
+      const lrkva=1.732*V*lra/1000;
+      const dip=lrkva/(lrkva+sc)*100;
+      warn=dip>20;
+      out='Locked-rotor kVA: <b>'+fmt(lrkva,0)+' kVA</b>. Estimated voltage dip: <b>'+fmt(dip,1)+'%</b> (terminal voltage sags to roughly '+fmt(100-dip,1)+'% of nominal).'+(warn?' This is a large enough dip to check against your minimum acceptable starting voltage.':'');
+    }
+    r.innerHTML=out;
+    r.className='est-result show'+(warn?' warn':'');
+  });
+
   /* ---- Arc-flash incident energy: Lee equation (open air, >600V) + Doughty equations
      (open air / arc-in-box, <=600V) -- both from NFPA 70E Annex D. Not the IEEE 1584
      arcing-current method. Every constant/exponent below was checked against worked
@@ -711,6 +942,25 @@ footer a:hover{color:#fff}
       if(D<18){warn=true;warnMsg+=' Working distance under 18 in is outside the Doughty equations\' validated range.';}
     }
     r.innerHTML='Estimated incident energy: <b>'+fmt(E)+' cal/cm&sup2;</b> at '+D+' in. Arc-flash boundary (at '+thresh+' cal/cm&sup2;): <b>'+fmt(Dc)+' in</b> ('+fmt(Dc/12)+' ft). Select PPE with an arc rating (ATPV/EBT) at or above the incident energy figure.'+warnMsg;
+    r.className='est-result show'+(warn?' warn':'');
+  });
+
+  /* ---- Ground rod resistance: Dwight's formula (IEEE Std 142), R = [rho/(2*pi*L)] * [ln(4L/d) - 1] ---- */
+  const gndPresetSel=document.getElementById('gndPreset');
+  if(gndPresetSel)gndPresetSel.addEventListener('change',function(){
+    if(this.value)document.getElementById('gndRho').value=this.value;
+  });
+  const gndBtn=document.getElementById('gndBtn');
+  if(gndBtn)gndBtn.addEventListener('click',function(){
+    const r=document.getElementById('gndResult');
+    const rho=parseFloat(document.getElementById('gndRho').value);
+    const Lft=parseFloat(document.getElementById('gndLen').value);
+    const dIn=parseFloat(document.getElementById('gndDia').value);
+    if(!(rho>0)||!(Lft>0)||!(dIn>0)){r.textContent='Enter soil resistivity, rod length, and rod diameter.';r.className='est-result show';return;}
+    const L=Lft*0.3048, d=dIn*0.0254;
+    const R=(rho/(2*Math.PI*L))*(Math.log(4*L/d)-1);
+    const warn=R>25;
+    r.innerHTML='Estimated resistance to earth: <b>'+fmt(R,1)+' &Omega;</b> for a '+Lft+' ft, '+dIn+'in-diameter rod in '+fmt(rho,0)+' &Omega;&middot;m soil.'+(warn?' <br>Exceeds the commonly cited 25&Omega; single-electrode benchmark — a supplemental electrode, longer/multiple rods, or soil treatment is the typical next step.':' Within the commonly cited 25&Omega; single-electrode benchmark.');
     r.className='est-result show'+(warn?' warn':'');
   });
 
