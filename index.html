@@ -213,6 +213,9 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .ctaband p{color:#AFC0D3;font-size:14px;margin-top:6px;max-width:460px}
 .ctabtn{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:14px 26px;font-family:var(--disp);font-weight:700;font-size:17px;letter-spacing:.05em;text-decoration:none;flex-shrink:0}
 .ctabtn:hover{background:transparent;color:var(--signal)}
+/* ---------- scroll-reveal (JS adds .reveal on load, .in when scrolled into view) ---------- */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
 footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
 footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
 @media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
@@ -673,6 +676,49 @@ document.getElementById("newstabs").addEventListener("click",e=>{
     const el=document.getElementById("quoteCount");
     if(el)el.textContent=Array.isArray(q)?q.length:0;
   }catch(e){}
+})();
+/* ---------- scroll-reveal for card grids: fade+rise in on first view, staggered per grid.
+   Plain scroll-position check (rAF-throttled) rather than IntersectionObserver -- both are
+   valid approaches, this one just happens to be directly testable end-to-end. ---------- */
+(function(){
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const groups=document.querySelectorAll('.switchgrid,.secgrid,.newsgrid,.catquick,.toolstats-row');
+  const items=[];
+  groups.forEach(group=>{
+    [...group.children].forEach((el,i)=>{
+      el.classList.add('reveal');
+      el.style.transitionDelay=Math.min(i*60,360)+'ms';
+      items.push(el);
+    });
+  });
+  let pending=items.slice();
+  function check(){
+    const vh=window.innerHeight||document.documentElement.clientHeight;
+    pending=pending.filter(el=>{
+      const r=el.getBoundingClientRect();
+      if(r.top<vh*0.92 && r.bottom>0){el.classList.add('in');return false;}
+      return true;
+    });
+    if(!pending.length)cleanup();
+  }
+  let ticking=false;
+  function onScroll(){
+    if(ticking)return;
+    ticking=true;
+    (window.requestAnimationFrame||setTimeout)(()=>{check();ticking=false;});
+  }
+  function cleanup(){
+    window.removeEventListener('scroll',onScroll);
+    window.removeEventListener('resize',onScroll);
+    clearInterval(safetyNet);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll);
+  check();
+  /* belt-and-suspenders: never let anything stay invisible if scroll/rAF events are
+     somehow missed (a stalled tab, a browser quirk) -- worst case, content still reveals. */
+  const safetyNet=setInterval(check,600);
+  setTimeout(()=>{items.forEach(el=>el.classList.add('in'));cleanup();},4000);
 })();
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
