@@ -191,7 +191,7 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .catq .cq-n{font-family:var(--mono);font-size:11px;color:var(--slate)}
 /* ---------- news ---------- */
 .newstabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px}
-.newstab{border:1px solid var(--line-dark);background:var(--card);padding:7px 14px;font-family:var(--disp);font-weight:600;font-size:14.5px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-2)}
+.newstab{border:1px solid var(--line-dark);background:var(--card);padding:11px 16px;font-family:var(--disp);font-weight:600;font-size:14.5px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-2);min-height:44px}
 .newstab.on{background:var(--ink);color:var(--signal);border-color:var(--ink)}
 .newsgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
 .newscard{background:var(--card);border:1px solid var(--line-dark);text-decoration:none;color:var(--ink);display:flex;flex-direction:column;overflow:hidden}
@@ -223,6 +223,10 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .reveal.in{opacity:1;transform:translateY(0)}
 .skip-link{position:absolute;left:-9999px;top:0;background:var(--signal);color:var(--ink);padding:12px 20px;font-family:var(--disp);font-weight:700;z-index:200;text-decoration:none}
 .skip-link:focus{left:12px;top:12px}
+.totop{position:fixed;right:20px;bottom:20px;width:46px;height:46px;background:var(--ink);color:var(--signal);border:2px solid var(--signal);display:none;align-items:center;justify-content:center;font-size:20px;z-index:80;cursor:pointer;opacity:0;transform:translateY(10px);transition:opacity .2s,transform .2s}
+.totop.show{display:flex}
+.totop.in{opacity:1;transform:translateY(0)}
+.totop:hover{background:var(--ink-2)}
 footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
 footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
 @media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
@@ -646,6 +650,7 @@ footer a:hover{color:#fff}
     <a class="ctabtn" href="voltfield-bom.html">MATCH YOUR BOM &rarr;</a>
   </div>
 </div>
+<button class="totop" id="toTopBtn" aria-label="Back to top" title="Back to top">&uarr;</button>
 <div class="ad-unit" data-ad="footer"></div>
 <footer>
   <div class="in">
@@ -743,6 +748,28 @@ document.querySelectorAll('.sw-icon,.sc-icon,.cq-icon,.sw-toggle').forEach(el=>e
      somehow missed (a stalled tab, a browser quirk) -- worst case, content still reveals. */
   const safetyNet=setInterval(check,600);
   setTimeout(()=>{items.forEach(el=>el.classList.add('in'));cleanup();},4000);
+})();
+/* ---------- back-to-top button ---------- */
+(function(){
+  const btn=document.getElementById('toTopBtn');
+  if(!btn)return;
+  let visible=false, ticking=false;
+  function sync(){
+    const should=window.scrollY>600;
+    if(should===visible)return;
+    visible=should;
+    if(should){btn.classList.add('show');setTimeout(()=>btn.classList.add('in'),20);}
+    else{btn.classList.remove('in');setTimeout(()=>{if(!visible)btn.classList.remove('show');},200);}
+  }
+  function onScroll(){
+    if(ticking)return;
+    ticking=true;
+    (window.requestAnimationFrame||setTimeout)(()=>{sync();ticking=false;});
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  setInterval(sync,600); /* same belt-and-suspenders as the reveal script above */
+  btn.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'});});
+  sync();
 })();
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
