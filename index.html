@@ -216,6 +216,8 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 /* ---------- scroll-reveal (JS adds .reveal on load, .in when scrolled into view) ---------- */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
 .reveal.in{opacity:1;transform:translateY(0)}
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--signal);color:var(--ink);padding:12px 20px;font-family:var(--disp);font-weight:700;z-index:200;text-decoration:none}
+.skip-link:focus{left:12px;top:12px}
 footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
 footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
 @media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
@@ -227,6 +229,7 @@ footer a:hover{color:#fff}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
     <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
@@ -259,7 +262,7 @@ footer a:hover{color:#fff}
     <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View quote list on catalog page">QUOTE LIST <span class="ct" id="quoteCount">0</span></a>
   </div>
 </header>
-<section class="hero">
+<section class="hero" id="main">
   <div class="hero-in hero-grid">
     <div class="hero-left">
     <div class="hero-eyebrow">Configurable SKUs · 5 sectors · updated July 2026</div>
@@ -677,6 +680,9 @@ document.getElementById("newstabs").addEventListener("click",e=>{
     if(el)el.textContent=Array.isArray(q)?q.length:0;
   }catch(e){}
 })();
+/* ---------- decorative icons shouldn't be announced by screen readers -- the adjacent
+   heading text already carries the meaning ---------- */
+document.querySelectorAll('.sw-icon,.sc-icon,.cq-icon,.sw-toggle').forEach(el=>el.setAttribute('aria-hidden','true'));
 /* ---------- scroll-reveal for card grids: fade+rise in on first view, staggered per grid.
    Plain scroll-position check (rAF-throttled) rather than IntersectionObserver -- both are
    valid approaches, this one just happens to be directly testable end-to-end. ---------- */
