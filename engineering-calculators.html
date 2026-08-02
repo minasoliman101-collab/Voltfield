@@ -206,6 +206,7 @@ footer a:hover{color:#fff}
     <a href="#unit-converter">Unit &amp; Spec Converter</a>
     <a href="#transformer-tco">Transformer TCO Estimator</a>
     <a href="#macrs-depreciation">MACRS Depreciation Estimator</a>
+    <a href="#payback">Investment Payback &amp; NPV</a>
     <a href="#standards-crossref">Standards Cross-Reference</a>
     <a href="#external-data">External Data &amp; Price Trackers</a>
     <a href="#landed-cost">Landed/Delivered Cost Calculator</a>
@@ -520,6 +521,23 @@ footer a:hover{color:#fff}
     <div class="est-result" id="macrsResult"></div>
   </div>
   <div class="callout"><b>Not tax advice.</b> This is the standard MACRS percentage table only — it doesn't account for bonus depreciation (many new energy assets qualify for significant first-year expensing), Section 179 expensing, or your specific tax situation. Confirm your actual depreciation schedule and eligibility with a qualified CPA.</div>
+
+  <h2 id="payback">Investment Payback &amp; NPV Calculator</h2>
+  <p>Simple payback and net present value for a BESS, solar, or efficiency-upgrade investment — how many years until annual savings/revenue cover the upfront cost, and what that cash flow is worth today once a discount rate is applied. Same NPV-of-a-level-annuity method as the Transformer TCO estimator above.</p>
+  <div class="formula">Simple payback (yrs) = Upfront cost / Annual savings &nbsp;&middot;&nbsp; NPV = Annual savings &times; [1 &minus; (1+r)<sup>&minus;n</sup>] / r &minus; Upfront cost</div>
+  <div class="estimator" id="paybackCalc">
+    <h3>Payback &amp; NPV</h3>
+    <div class="sub">"Annual savings/revenue" is your own estimate — energy arbitrage, demand-charge reduction, incentive payments, avoided utility spend, whatever applies. This assumes a level (non-escalating) annual figure.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="pbCost">Upfront cost ($)</label><input type="number" id="pbCost" min="0" step="1000" placeholder="e.g. 850000"></div>
+      <div class="est-field"><label for="pbSavings">Annual savings/revenue ($/yr)</label><input type="number" id="pbSavings" min="0" step="100" placeholder="e.g. 120000"></div>
+      <div class="est-field"><label for="pbDiscount">Discount rate (%)</label><input type="number" id="pbDiscount" min="0" max="30" step="0.1" placeholder="e.g. 8"></div>
+      <div class="est-field"><label for="pbYears">Analysis period (years)</label><input type="number" id="pbYears" min="1" step="1" placeholder="e.g. 15"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="pbBtn">Calculate</button></div></div>
+    <div class="est-result" id="pbResult"></div>
+  </div>
+  <div class="callout">Simple payback ignores the time value of money and stops counting once the analysis period is over — a project that pays back in year 12 of a 15-year analysis still needs the discount rate/NPV figure to judge whether it was worth doing, not just the payback year alone. This also doesn't model financing costs, tax credits/depreciation (see the MACRS estimator above), or savings escalation over time.</div>
 
   <h2 id="standards-crossref">Standards Cross-Reference (US &harr; International)</h2>
   <p>A quick-reference pairing of common US standards (ANSI/IEEE/NEMA/UL) with their closest international (IEC) counterpart for the same equipment category. These are commonly paired equivalents for similar equipment classes, not certified legal equivalencies — a UL listing and an IEC/CE certification are separate compliance processes with their own testing requirements.</p>
@@ -1048,6 +1066,22 @@ footer a:hover{color:#fff}
     rows+='</table></div>';
     r.innerHTML='MACRS '+cls+'-year schedule for $'+fmt(cost,0)+' of equipment (half-year convention):'+rows+'<div style="margin-top:8px">Total depreciated: <b>$'+fmt(total,0)+'</b></div>';
     r.className='est-result show';
+  });
+
+  const pbBtn=document.getElementById('pbBtn');
+  if(pbBtn)pbBtn.addEventListener('click',function(){
+    const r=document.getElementById('pbResult');
+    const cost=parseFloat(document.getElementById('pbCost').value), savings=parseFloat(document.getElementById('pbSavings').value);
+    const disc=parseFloat(document.getElementById('pbDiscount').value), years=parseFloat(document.getElementById('pbYears').value);
+    if(!(cost>0)||!(savings>0)||!(years>0)){r.textContent='Enter upfront cost, annual savings, and analysis period.';r.className='est-result show';return;}
+    const payback=cost/savings;
+    const r_=disc>0?disc/100:0;
+    const pvOfSavings=r_>0 ? savings*(1-Math.pow(1+r_,-years))/r_ : savings*years;
+    const npv=pvOfSavings-cost;
+    const noPayback=payback>years;
+    const method=r_>0?'NPV at '+disc+'% discount rate':'undiscounted total (enter a discount rate for a true NPV)';
+    r.innerHTML='Simple payback: <b>'+fmt(payback,1)+' years</b>'+(noPayback?' — longer than the '+years+'-year analysis period.':'.')+' Present value of '+years+' years of savings: <b>$'+fmt(pvOfSavings,0)+'</b> ('+method+'). Net present value: <b>$'+fmt(npv,0)+'</b>'+(npv>=0?' (positive — savings exceed cost in present-value terms).':' (negative — cost exceeds the present value of savings over this period).');
+    r.className='est-result show'+(npv<0||noPayback?' warn':'');
   });
 
   const landedBtn=document.getElementById('landedBtn');
