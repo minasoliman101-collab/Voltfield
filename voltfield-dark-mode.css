@@ -1,0 +1,175 @@
+/* VOLTFIELD — dark mode override stylesheet.
+   Loaded on every page (same pattern as ordering-hidden.css). Activated by
+   voltfield-site-config.js setting <html data-theme="dark">, based on a
+   stored preference or prefers-color-scheme, with a toggle it injects into
+   the header. Nothing here deletes any rule -- it only overrides variable
+   values and a known set of "already-dark chrome" selectors that rely on
+   --ink/--ink-2 for their (correctly dark, unchanged) background rather
+   than text, so flipping those two variables for readability doesn't
+   accidentally invert the site's existing dark banners/buttons/footer. */
+
+html[data-theme="dark"]{
+  --paper:#0B1420;
+  --card:#141F2E;
+  --line:#25344A;
+  --line-dark:#374B66;
+  --ink:#E7EDF4;
+  --ink-2:#C9D3DF;
+  --slate:#93A4B8;
+  color-scheme: dark;
+}
+
+/* Chrome that was already dark (background:var(--ink) or var(--ink-2)) --
+   re-pin to the original dark hex so it doesn't flip along with the
+   variables above, which exist for body-copy text/light-card readability.
+   List built by grepping every "background:var(--ink)" / "var(--ink-2)"
+   rule sitewide (including compound/descendant selectors), not just the
+   obvious banner/button classes -- so this covers calculator "Calculate"
+   buttons, table header rows, search-box buttons, etc. too. */
+html[data-theme="dark"] .abtn.primary:hover,
+html[data-theme="dark"] .abtn:hover,
+html[data-theme="dark"] .accban,
+html[data-theme="dark"] .addbtn:hover,
+html[data-theme="dark"] .alertbox,
+html[data-theme="dark"] .artban,
+html[data-theme="dark"] .bomban,
+html[data-theme="dark"] .btn.dark,
+html[data-theme="dark"] .btn.primary:hover,
+html[data-theme="dark"] .buildcta,
+html[data-theme="dark"] .catban,
+html[data-theme="dark"] .clearbtn,
+html[data-theme="dark"] .cmp-modal .cmp-hd button,
+html[data-theme="dark"] .comparebar,
+html[data-theme="dark"] .dailyband,
+html[data-theme="dark"] .dirsearch button,
+html[data-theme="dark"] .dm-add:hover,
+html[data-theme="dark"] .dm-rfq,
+html[data-theme="dark"] .drawer-ft .rfqbtn:hover,
+html[data-theme="dark"] .drawer-hd,
+html[data-theme="dark"] .embedbox-code button,
+html[data-theme="dark"] .eolban,
+html[data-theme="dark"] .est-field button,
+html[data-theme="dark"] .est-field button.ghost:hover,
+html[data-theme="dark"] .examplecard button,
+html[data-theme="dark"] .fbtn.on,
+html[data-theme="dark"] .ghost:hover,
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .humancard,
+html[data-theme="dark"] .idban,
+html[data-theme="dark"] .insban,
+html[data-theme="dark"] .layerbar button.on,
+html[data-theme="dark"] .lb-submit button,
+html[data-theme="dark"] .ltstrip,
+html[data-theme="dark"] .modebar button.on,
+html[data-theme="dark"] .navtoggle,
+html[data-theme="dark"] .newstab.on,
+html[data-theme="dark"] .p-add:hover,
+html[data-theme="dark"] .p-alert-form button,
+html[data-theme="dark"] .p-rfq,
+html[data-theme="dark"] .pbtn.primary:hover,
+html[data-theme="dark"] .pbtn:hover,
+html[data-theme="dark"] .pcbban,
+html[data-theme="dark"] .pricebar,
+html[data-theme="dark"] .proj-row button,
+html[data-theme="dark"] .quiz-next button,
+html[data-theme="dark"] .quizcallout,
+html[data-theme="dark"] .quotebtn,
+html[data-theme="dark"] .reftable th,
+html[data-theme="dark"] .reqpart button:hover,
+html[data-theme="dark"] .reveal-card,
+html[data-theme="dark"] .rfqbtn:hover,
+html[data-theme="dark"] .scorebar,
+html[data-theme="dark"] .searchrow button,
+html[data-theme="dark"] .seg button.on,
+html[data-theme="dark"] .sumbar,
+html[data-theme="dark"] .supban,
+html[data-theme="dark"] .thumb .rm,
+html[data-theme="dark"] .tmplbox button,
+html[data-theme="dark"] .toast,
+html[data-theme="dark"] .totop,
+html[data-theme="dark"] .utilbar,
+html[data-theme="dark"] table.rfq th,
+html[data-theme="dark"] tr.total td,
+html[data-theme="dark"] .btn.dark:hover,
+html[data-theme="dark"] .cb-item,
+html[data-theme="dark"] .comparebar .cb-item,
+html[data-theme="dark"] .clearbtn:hover,
+html[data-theme="dark"] .dm-rfq:hover,
+html[data-theme="dark"] .p-rfq:hover,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .proj-row button:hover,
+html[data-theme="dark"] .toolstats,
+html[data-theme="dark"] .totop:hover,
+html[data-theme="dark"] tr.grp td,
+html[data-theme="dark"] footer{
+  background:#101B2D !important;
+}
+html[data-theme="dark"] .ctaband{
+  background:linear-gradient(120deg,#101B2D 0%,#22334C 100%) !important;
+}
+/* Table zebra striping: even rows were plain #fff, odd rows var(--card) --
+   keep the same subtle alternation using the two dark-mode card shades. */
+html[data-theme="dark"] .reftable tr:nth-child(even) td{
+  background:#141F2E !important;
+}
+html[data-theme="dark"] .reftable tr:nth-child(odd) td{
+  background:#182333 !important;
+}
+
+/* Form controls: the site consistently hardcodes background:#fff (or
+   transparent) on inputs/selects/textareas -- override at the tag level
+   so it applies everywhere without touching per-page class names. Higher-
+   specificity rules that are already dark (e.g. input[type=email] on the
+   Insights signup) are untouched since they out-specificity this. */
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea{
+  background:#182333;
+  color:#E7EDF4;
+  border-color:#374B66;
+}
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder{
+  color:#7C8CA0;
+}
+
+/* Components that hardcode background:#fff instead of var(--card) for the
+   same "light card" role -- full list confirmed via a sitewide grep. */
+html[data-theme="dark"] .callout,
+html[data-theme="dark"] .tile,
+html[data-theme="dark"] .examplecard,
+html[data-theme="dark"] .exportbtn,
+html[data-theme="dark"] .oneline,
+html[data-theme="dark"] .board,
+html[data-theme="dark"] .catsearch,
+html[data-theme="dark"] .cmp-modal,
+html[data-theme="dark"] .dirsearch,
+html[data-theme="dark"] .dm-imgwrap,
+html[data-theme="dark"] .est-result,
+html[data-theme="dark"] .formula,
+html[data-theme="dark"] .kbsearch-results,
+html[data-theme="dark"] .oemimg,
+html[data-theme="dark"] .p-imgwrap,
+html[data-theme="dark"] .p-print,
+html[data-theme="dark"] .quiz-opt,
+html[data-theme="dark"] .reqpart,
+html[data-theme="dark"] .rv-imgwrap,
+html[data-theme="dark"] .searchrow,
+html[data-theme="dark"] .sharebtn,
+html[data-theme="dark"] .sk-imgwrap,
+html[data-theme="dark"] .solvebox,
+html[data-theme="dark"] .opt.on,
+html[data-theme="dark"] .drawer-proj,
+html[data-theme="dark"] .herosearch form,
+html[data-theme="dark"] .jump a,
+html[data-theme="dark"] .ec-note code,
+html[data-theme="dark"] .layerbar button,
+html[data-theme="dark"] .modebar button,
+html[data-theme="dark"] .seg button{
+  background:#141F2E !important;
+}
+
+/* Sector/status accent colors (--dc/--re/--bess/--og/--mro, --crit/--warn/--ok,
+   --signal) are left unchanged -- they're used as accents on dark chrome and
+   as small bands/badges, not large text-on-background surfaces, and already
+   have enough contrast against both the light and dark card colors above. */

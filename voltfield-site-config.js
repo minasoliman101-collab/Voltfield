@@ -160,3 +160,35 @@ const SITE_CONFIG = {
   gtag('config', A.measurementId);
   window.vfGtag = gtag; /* available for future event tracking, e.g. vfGtag('event','add_to_quote') */
 })();
+
+/* ---------- dark mode toggle ----------
+   The theme itself is already applied before paint by a tiny inline script
+   in <head> (reads localStorage/prefers-color-scheme, sets <html data-theme>)
+   so there's no flash of the wrong theme. This just adds the visible toggle
+   button + click handling, once the header exists. */
+(function () {
+  function initToggle() {
+    const host = document.querySelector('.headright');
+    if (!host || document.getElementById('themeToggle')) return;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.id = 'themeToggle';
+    btn.setAttribute('aria-label', 'Toggle dark mode');
+    btn.style.cssText = 'background:#101B2D;color:#fff;border:2px solid #101B2D;width:42px;height:38px;font-size:17px;line-height:1;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;order:-1';
+    function paint() {
+      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      btn.textContent = dark ? '☀' : '☽'; /* sun when dark (tap to go light), moon when light */
+      btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+    }
+    btn.addEventListener('click', function () {
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('vf_theme', next); } catch (e) {}
+      paint();
+    });
+    paint();
+    host.insertBefore(btn, host.firstChild);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initToggle);
+  else initToggle();
+})();
