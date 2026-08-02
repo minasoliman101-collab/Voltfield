@@ -88,7 +88,16 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .catban-in{max-width:1240px;margin:0 auto}
 .catban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:8px}
 .catban h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.6vw,40px);letter-spacing:.01em;line-height:1}
-.catsearch{margin-top:16px;display:flex;max-width:680px;border:2px solid var(--signal);background:#fff}
+.catsearch{margin-top:16px;display:flex;max-width:680px;border:2px solid var(--signal);background:#fff;position:relative}
+.kbsearch-results{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:2px solid var(--ink);border-top:0;max-height:400px;overflow-y:auto;z-index:50}
+.kbsearch-results.show{display:block}
+.kbsearch-item{display:block;width:100%;text-align:left;padding:10px 16px;border:0;border-bottom:1px solid var(--line);background:none;text-decoration:none;color:inherit;font-family:inherit;cursor:pointer}
+.kbsearch-item:last-child{border-bottom:0}
+.kbsearch-item:hover,.kbsearch-item:focus-visible{background:var(--paper)}
+.kbsearch-item .kind{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--signal-deep);font-weight:600}
+.kbsearch-item .ttl{font-family:var(--disp);font-weight:600;font-size:15px;display:block;margin:2px 0}
+.kbsearch-item .snip{font-size:12.5px;color:var(--slate);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kbsearch-empty{padding:14px 16px;font-size:13px;color:var(--slate)}
 .catsearch input{flex:1;border:0;padding:13px 16px;font-family:var(--mono);font-size:14.5px;color:var(--ink);background:transparent}
 .catsearch input::placeholder{color:#8896A6}
 .catsearch button{background:var(--signal);border:0;border-left:2px solid var(--ink);padding:0 22px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.05em;color:var(--ink)}
@@ -344,8 +353,9 @@ footer a{color:#9FB0C3}
     <div class="eyebrow">All Parts · Configurable Catalog</div>
     <h1>Search configurable SKUs across five sectors</h1>
     <form class="catsearch" id="searchForm" role="search">
-      <input id="searchInput" type="search" placeholder="Search part name, spec, or number — e.g. &ldquo;hex cap screw SS316&rdquo;, &ldquo;15kV switchgear&rdquo;" aria-label="Search catalog">
+      <input id="searchInput" type="search" placeholder="Search part name, spec, or number — e.g. &ldquo;hex cap screw SS316&rdquo;, &ldquo;15kV switchgear&rdquo;" aria-label="Search catalog" autocomplete="off">
       <button type="submit">SEARCH</button>
+      <div class="kbsearch-results" id="searchSuggest" role="listbox"></div>
     </form>
     <div class="metaline">
       <span><b id="mTotal">0</b> configurable SKUs</span>
@@ -776,7 +786,34 @@ function renderModal(){
 function apply(){writeURL();renderFacets();renderChips();renderResults();}
 function openQuoteDrawer(){renderDrawer();renderProjects();document.getElementById('drawer').classList.add('open');document.getElementById('scrim').classList.add('open');}
 function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('scrim').classList.remove('open');}
-document.getElementById('searchForm').addEventListener('submit',e=>{e.preventDefault();state.q=document.getElementById('searchInput').value.trim();state.page=0;apply();});
+document.getElementById('searchForm').addEventListener('submit',e=>{e.preventDefault();state.q=document.getElementById('searchInput').value.trim();state.page=0;apply();suggestResults.classList.remove('show');});
+
+/* ---------- search autocomplete: live family-name suggestions as you type ---------- */
+const suggestInput=document.getElementById('searchInput'), suggestResults=document.getElementById('searchSuggest');
+function suggestEsc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function suggestSearch(q){
+  const needle=q.trim().toLowerCase();
+  if(!needle)return [];
+  return FAM.filter(f=>f.search.includes(needle)).slice(0,8);
+}
+function suggestRender(list,q){
+  if(!q.trim()){suggestResults.classList.remove('show');suggestResults.innerHTML='';return;}
+  if(!list.length){suggestResults.innerHTML='<div class="kbsearch-empty">No matches for &ldquo;'+suggestEsc(q)+'&rdquo; &mdash; press Enter to search anyway.</div>';suggestResults.classList.add('show');return;}
+  suggestResults.innerHTML=list.map(f=>`<button type="button" class="kbsearch-item" data-fi="${f._i}"><span class="kind">${SECTORS[f.s].label} &middot; ${suggestEsc(f.c)}</span><span class="ttl">${suggestEsc(f.n)}</span><span class="snip">${fmt(f.ct)} configurable SKUs &middot; ${money(f.lo,'')}&ndash;${money(f.hi,f.pu)}</span></button>`).join('');
+  suggestResults.classList.add('show');
+}
+suggestInput.addEventListener('input',()=>suggestRender(suggestSearch(suggestInput.value),suggestInput.value));
+suggestInput.addEventListener('focus',()=>{if(suggestInput.value.trim())suggestRender(suggestSearch(suggestInput.value),suggestInput.value);});
+suggestResults.addEventListener('click',e=>{
+  const btn=e.target.closest('.kbsearch-item[data-fi]');
+  if(!btn)return;
+  const f=FAM[+btn.dataset.fi];
+  suggestInput.value=f.n;
+  state.q=f.n;state.page=0;apply();
+  suggestResults.classList.remove('show');
+});
+document.addEventListener('click',e=>{if(!e.target.closest('.catsearch'))suggestResults.classList.remove('show');});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')suggestResults.classList.remove('show');});
 document.getElementById('clearBtn').onclick=()=>{state={sector:null,cat:null,q:'',lt:null,dist:null,page:0};document.getElementById('searchInput').value='';apply();};
 document.getElementById('openQuote').onclick=openQuoteDrawer;
 document.getElementById('closeQuote').onclick=closeDrawer;
