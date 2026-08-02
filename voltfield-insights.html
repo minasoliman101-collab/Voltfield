@@ -141,9 +141,31 @@ footer{background:var(--ink);color:#9FB0C3;padding:30px 20px;font-size:12px;marg
 footer .in{max-width:1240px;margin:0 auto}
 footer p{line-height:1.6;max-width:640px}
 footer a{color:#9FB0C3}
+.hidden-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.alertbox{background:var(--ink);color:#E8EDF3;padding:24px;margin:20px 0 0;border-left:4px solid var(--signal)}
+.alertbox h3{font-family:var(--disp);font-weight:700;font-size:20px;margin-bottom:6px}
+.alertbox p{color:#AFC0D3;font-size:13px;margin-bottom:14px;max-width:560px}
+.alertform{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start}
+.alertform input[type=email]{flex:1;min-width:220px;border:2px solid #354866;background:#0F1B2D;color:#fff;padding:11px 12px;font-family:var(--mono);font-size:13.5px}
+.alertform input[type=email]::placeholder{color:#7C8CA3}
+.alertform button{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:11px 20px;font-family:var(--disp);font-weight:700;font-size:14.5px;letter-spacing:.04em;text-transform:uppercase}
+.alertform button:hover{background:transparent;color:var(--signal)}
+.alertform button:disabled{opacity:.6;cursor:default}
+.alert-msg{font-family:var(--mono);font-size:12px;margin-top:10px;display:none}
+.alert-msg.show{display:block}
+.alert-msg.ok{color:#7FCB9E}
+.alert-msg.err{color:#E8A79A}
 </style>
 </head>
 <body>
+<!-- Static Netlify Forms detector -- never shown or submitted directly, exists only so
+     Netlify registers the "insights-updates" form and its fields at build time. The real
+     submission (see script below) is an AJAX POST to "/" with a matching form-name. -->
+<form name="insights-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="hidden-field" aria-hidden="true">
+  <input type="hidden" name="form-name" value="insights-updates">
+  <input name="bot-field">
+  <input type="email" name="email">
+</form>
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
     <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
@@ -229,6 +251,15 @@ footer a{color:#9FB0C3}
       <div style="font-family:var(--disp);font-weight:700;font-size:19px;line-height:1.2">RFQ Toolkit — Readiness Checklist &amp; Spec Templates</div>
     </a>
   </div>
+  <div class="alertbox">
+    <h3>Get new guides &amp; tools by email</h3>
+    <p>A short note whenever we publish a new guide, calculator, or reference tool — not a general newsletter, just new Insights content. Unsubscribe anytime.</p>
+    <form id="insightsForm" class="alertform">
+      <input type="email" id="insightsEmail" placeholder="you@company.com" required>
+      <button type="submit" id="insightsBtn">Subscribe</button>
+    </form>
+    <div class="alert-msg" id="insightsMsg"></div>
+  </div>
 </div>
 <div class="wrap" style="padding-top:24px">
   <div class="kpigrid" id="kpis"></div>
@@ -285,6 +316,32 @@ footer a{color:#9FB0C3}
 <script>
 /* ===== Catalog insights — computed from shared catalog data ===== */
 (function(){try{const q=JSON.parse(localStorage.getItem('vf_quote')||'[]');document.getElementById('quoteCount').textContent=Array.isArray(q)?q.length:0;}catch(e){}})();
+
+/* ---------- Insights email signup (Netlify Forms, same pattern as lead-time-index.html) ---------- */
+(function(){
+  const form=document.getElementById('insightsForm');
+  if(!form)return;
+  function encodeForm(data){return Object.keys(data).map(k=>encodeURIComponent(k)+'='+encodeURIComponent(data[k])).join('&');}
+  function validEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);}
+  function showMsg(text,cls){const m=document.getElementById('insightsMsg');m.textContent=text;m.className='alert-msg show '+cls;}
+  form.addEventListener('submit',async function(e){
+    e.preventDefault();
+    const email=document.getElementById('insightsEmail').value.trim();
+    if(!validEmail(email)){showMsg('Add a valid email address.','err');return;}
+    const btn=document.getElementById('insightsBtn'); const orig=btn.textContent; btn.textContent='Sending…'; btn.disabled=true;
+    try{
+      const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+        body:encodeForm({'form-name':'insights-updates',email})});
+      if(!r.ok)throw new Error('status '+r.status);
+      showMsg('You\'re on the list — we\'ll email you when new guides or tools publish.','ok');
+      form.reset();
+    }catch(err){
+      showMsg('Online signup isn\'t reachable here — email RFQ@voltfield.org to be added manually.','err');
+    }finally{
+      btn.textContent=orig; btn.disabled=false;
+    }
+  });
+})();
 
 const DCOL={grainger:'#5B6B7E',msc:'#9C4221',graybar:'#2E7D4F',uline:'#B7791F',voltfield:'#2B6CB0'};
 const el=id=>document.getElementById(id);
