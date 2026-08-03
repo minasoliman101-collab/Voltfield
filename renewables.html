@@ -91,7 +91,8 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 @media(max-width:899px){
 .navdrop-btn{width:100%;justify-content:space-between;padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}
 .navdrop-btn.on{border-left-color:var(--signal);border-bottom-color:var(--line)}
-.navdrop-menu{display:flex!important;position:static;border:0;min-width:0;background:var(--paper)}
+.navdrop-menu{display:none;position:static;border:0;min-width:0;background:var(--paper)}
+.navdrop.open .navdrop-menu{display:flex}
 .navdrop-menu a{padding-left:26px;border-bottom:1px solid var(--line)}
 .navdrop-btn .car{display:none}
 }
