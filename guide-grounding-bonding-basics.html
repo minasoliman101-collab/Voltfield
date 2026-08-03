@@ -193,12 +193,12 @@ footer a:hover{color:#fff}
   <h2>Why the ground rod doesn't clear a fault</h2>
   <p>Earth is a comparatively poor conductor — its impedance is high enough that a fault path relying on "through the enclosure, into the earth, back through the earth to the source" typically can't push enough current to trip a breaker or fuse in a useful time. That's the equipment grounding conductor's (EGC) job: a dedicated, low-impedance metallic path — conduit, a bonding wire, a busbar system — that runs alongside the circuit and ties every non-current-carrying metal part back to the source. The grounding electrode (rod, plate, ring, or concrete-encased/Ufer ground) mainly bleeds off lightning and surge energy and stabilizes system voltage; it is not what makes a breaker trip on a ground fault.</p>
 
-  <table class="reftable">
+  <div style="overflow-x:auto"><table class="reftable">
     <tr><th>Term</th><th>Job</th></tr>
     <tr><td>Grounding electrode conductor (GEC)</td><td>Connects the system to the grounding electrode (rod/plate/ring) — limits voltage, doesn't clear faults.</td></tr>
     <tr><td>Equipment grounding conductor (EGC)</td><td>Low-impedance metallic path bonding equipment enclosures back to the source — this is what clears a ground fault.</td></tr>
     <tr><td>Bonding jumper</td><td>Ensures continuity across a joint, fitting, or separately derived system where the normal path might otherwise be interrupted or high-impedance.</td></tr>
-  </table>
+  </table></div>
 
   <h2>Separately derived systems reset the rules</h2>
   <p>Any transformer creates a <b>separately derived system</b> on its secondary — a new source with no direct electrical connection to the primary side's grounded conductor. Per NEC 250.30, each separately derived system needs its own system bonding jumper and, in most cases, its own grounding electrode connection at or near the source. This is easy to miss on a retrofit: adding a step-down transformer to feed a new panel means that panel's system needs to be grounded and bonded as its own system, not assumed to inherit the upstream system's grounding.</p>

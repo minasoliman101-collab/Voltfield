@@ -90,8 +90,8 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .pcbban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:8px}
 .pcbban h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.6vw,40px);letter-spacing:.01em;line-height:1}
 .pcbban p{color:#AFC0D3;font-size:14.5px;max-width:680px;margin-top:10px;line-height:1.55}
-.wrap{max-width:1240px;margin:0 auto;padding:24px 20px 60px;display:grid;grid-template-columns:1fr;gap:20px}
-@media(min-width:1020px){.wrap{grid-template-columns:1fr 1fr;align-items:start}}
+.wrap{max-width:1240px;margin:0 auto;padding:24px 20px 60px;display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+@media(min-width:1020px){.wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}}
 /* form panel */
 .formpanel{background:var(--card);border:1px solid var(--line-dark);padding:18px}
 .formpanel h2{font-family:var(--disp);font-weight:700;font-size:22px;margin-bottom:12px}

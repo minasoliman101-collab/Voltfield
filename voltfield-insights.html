@@ -97,7 +97,7 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .kpi .k{font-family:var(--disp);font-weight:700;font-size:clamp(24px,3vw,30px);line-height:1;color:var(--ink)}
 .kpi .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);margin-top:5px;line-height:1.4}
 /* panels */
-.pgrid{display:grid;grid-template-columns:1fr;gap:16px}
+.pgrid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
 @media(min-width:900px){.pgrid{grid-template-columns:1fr 1fr}}
 .ipanel{background:var(--card);border:1px solid var(--line-dark);padding:18px 18px 20px;display:flex;flex-direction:column}
 .ipanel.wide{grid-column:1/-1}
