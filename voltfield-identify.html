@@ -58,7 +58,7 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .hnav{display:none;gap:4px}
 .navtoggle{display:none;background:var(--ink);color:#fff;border:2px solid var(--ink);width:42px;height:38px;font-size:20px;line-height:1;align-items:center;justify-content:center;flex-shrink:0}
 @media(max-width:899px){.navtoggle{display:inline-flex}.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:2px solid var(--ink);padding:6px 12px 10px;gap:0;box-shadow:0 10px 20px rgba(16,27,45,.14);z-index:59}.hnav.open a{padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}.hnav.open a:last-child{border-bottom:0}.hnav.open a.on{border-left-color:var(--signal);color:var(--ink)}}
-@media(min-width:900px){.hnav{display:flex}}
+@media(min-width:900px){.hnav{display:flex}.navdrop:hover .navdrop-menu,.navdrop:focus-within .navdrop-menu{display:flex}}
 .hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
 .hnav a:hover{color:var(--ink);background:var(--paper)}
 .hnav a.on{color:var(--ink);border-bottom-color:var(--signal)}
@@ -68,7 +68,7 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .navdrop-btn.on{color:var(--ink);border-bottom-color:var(--signal)}
 .navdrop-btn .car{width:8px;height:8px;flex-shrink:0}
 .navdrop-menu{display:none;position:absolute;top:100%;left:0;background:var(--card);border:2px solid var(--ink);min-width:190px;z-index:70;flex-direction:column}
-.navdrop.open .navdrop-menu,.navdrop:hover .navdrop-menu,.navdrop:focus-within .navdrop-menu{display:flex}
+.navdrop.open .navdrop-menu{display:flex}
 .navdrop-menu a{padding:10px 14px;font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line)}
 .navdrop-menu a:last-child{border-bottom:0}
 .navdrop-menu a:hover{background:var(--paper);color:var(--ink)}
