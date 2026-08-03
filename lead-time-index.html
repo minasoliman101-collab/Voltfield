@@ -122,8 +122,8 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .alertbox h3{font-family:var(--disp);font-weight:700;font-size:20px;margin-bottom:6px}
 .alertbox p{color:#AFC0D3;font-size:13px;margin-bottom:14px;max-width:560px}
 .alertform{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start}
-.alertform input[type=email]{flex:1;min-width:220px;border:2px solid #354866;background:#0F1B2D;color:#fff;padding:11px 12px;font-family:var(--mono);font-size:13.5px}
-.alertform input[type=email]::placeholder{color:#7C8CA3}
+.alertform input[type=email],.alertform input[type=text]{flex:1;min-width:220px;border:2px solid #354866;background:#0F1B2D;color:#fff;padding:11px 12px;font-family:var(--mono);font-size:13.5px}
+.alertform input[type=email]::placeholder,.alertform input[type=text]::placeholder{color:#7C8CA3}
 .alertform .sectors{display:flex;flex-wrap:wrap;gap:10px;font-family:var(--mono);font-size:11.5px;color:#C9D3DF;align-items:center;width:100%}
 .alertform .sectors label{display:flex;align-items:center;gap:5px;cursor:pointer}
 .alertform button{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:11px 20px;font-family:var(--disp);font-weight:700;font-size:14.5px;letter-spacing:.04em;text-transform:uppercase}
@@ -160,6 +160,13 @@ footer a:hover{color:#fff}
   <input type="hidden" name="form-name" value="lead-time-alerts">
   <input name="bot-field">
   <input type="email" name="email"><input type="text" name="sectors">
+</form>
+<!-- Static Netlify Forms detector for the crowdsourced submission form below. -->
+<form name="lead-time-submission" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="hidden-field" aria-hidden="true">
+  <input type="hidden" name="form-name" value="lead-time-submission">
+  <input name="bot-field">
+  <input type="text" name="equipment"><input type="text" name="observed_lead_time"><input type="text" name="region">
+  <input type="text" name="observed_date"><input type="email" name="email"><input type="text" name="company"><textarea name="notes"></textarea>
 </form>
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
@@ -287,6 +294,19 @@ footer a:hover{color:#fff}
     </tbody>
   </table>
 
+  <div class="alertbox" id="submitBox">
+    <h3>Seeing a different lead time on your own orders?</h3>
+    <p>This index reflects Voltfield's own distributor and mill network — if you're a buyer or distributor seeing a materially different lead time on a category above, tell us. Submissions are reviewed before anything is added to the public index; this isn't an automatic feed.</p>
+    <form id="submitForm" class="alertform">
+      <input type="text" id="submitEquipment" placeholder="Equipment (e.g. Pad-mount transformers)" required style="flex:1 1 220px">
+      <input type="text" id="submitLeadTime" placeholder="Observed lead time (e.g. 95 wk)" required style="flex:1 1 180px">
+      <input type="text" id="submitRegion" placeholder="Region (e.g. Texas, US)" style="flex:1 1 160px">
+      <input type="email" id="submitEmail" placeholder="you@company.com (for follow-up)" required style="flex:1 1 220px">
+      <button type="submit" id="submitBtn">Submit for review</button>
+    </form>
+    <div class="alert-msg" id="submitMsg"></div>
+  </div>
+
   <h2>Why lead times are the real constraint</h2>
   <p>Across every sector here, the equipment itself isn't the bottleneck — the wait is. Data center developers and utilities are bidding for the same transformer and switchgear capacity; see <a class="inline" href="guide-transformer-lead-times.html">why transformer lead times stretch past 3 years</a> for what's driving it and how to plan around it. Solar and storage buyers are layering FEOC and tariff compliance on top of already-long inverter and GSU lead times; see the <a class="inline" href="guide-feoc-compliance.html">FEOC compliance guide</a> for what to document. Configure any of the equipment above against your exact spec on the <a class="inline" href="data-centers.html">Data Centers</a>, <a class="inline" href="renewables.html">Renewables</a>, <a class="inline" href="battery-storage.html">Battery Storage</a>, or <a class="inline" href="oil-gas.html">Oil &amp; Gas</a> desks for a configuration-specific lead time.</p>
 </div>
@@ -368,6 +388,36 @@ footer a:hover{color:#fff}
       form.querySelectorAll('.sectors input').forEach(c=>c.checked=true);
     }catch(err){
       showMsg('Online signup isn\'t reachable here — email RFQ@voltfield.org to be added manually.','err');
+    }finally{
+      btn.textContent=orig; btn.disabled=false;
+    }
+  });
+})();
+</script>
+<script>
+(function(){
+  const form=document.getElementById('submitForm');
+  if(!form)return;
+  function encodeForm(data){return Object.keys(data).map(k=>encodeURIComponent(k)+'='+encodeURIComponent(data[k])).join('&');}
+  function validEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);}
+  function showMsg(text,cls){const m=document.getElementById('submitMsg');m.textContent=text;m.className='alert-msg show '+cls;}
+  form.addEventListener('submit',async function(e){
+    e.preventDefault();
+    const equipment=document.getElementById('submitEquipment').value.trim();
+    const leadTime=document.getElementById('submitLeadTime').value.trim();
+    const region=document.getElementById('submitRegion').value.trim();
+    const email=document.getElementById('submitEmail').value.trim();
+    if(!equipment||!leadTime){showMsg('Add the equipment and the lead time you observed.','err');return;}
+    if(!validEmail(email)){showMsg('Add a valid email address so we can follow up if needed.','err');return;}
+    const btn=document.getElementById('submitBtn'); const orig=btn.textContent; btn.textContent='Sending…'; btn.disabled=true;
+    try{
+      const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+        body:encodeForm({'form-name':'lead-time-submission',equipment,observed_lead_time:leadTime,region,email,observed_date:new Date().toISOString().slice(0,10)})});
+      if(!r.ok)throw new Error('status '+r.status);
+      showMsg('Thanks — this is queued for editorial review, not published automatically.','ok');
+      form.reset();
+    }catch(err){
+      showMsg('Online submission isn\'t reachable here — email RFQ@voltfield.org with the details instead.','err');
     }finally{
       btn.textContent=orig; btn.disabled=false;
     }
