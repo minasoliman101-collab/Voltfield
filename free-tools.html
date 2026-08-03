@@ -3,27 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Search Guides, Calculators &amp; Tools | VOLTFIELD Supply Co.</title>
-<meta name="description" content="Search across every guide, calculator, glossary term, and free tool on Voltfield — one box instead of hunting through the Tools menu.">
-<meta name="keywords" content="voltfield search, engineering guide search, calculator search, glossary search">
+<title>Free Engineering &amp; Procurement Tools — Calculators, Sandbox, RFQ Toolkit &amp; More | VOLTFIELD Supply Co.</title>
+<meta name="description" content="Every free tool on Voltfield in one place: 20 engineering calculators, an EE design practice sandbox, PCB builders, an RFQ toolkit, glossary quiz, and procurement reference tools.">
+<meta name="keywords" content="free engineering calculators, free procurement tools, electrical engineering practice tools, RFQ toolkit, PCB design tools, industrial reference tools">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VOLTFIELD Supply Co.">
-<meta property="og:title" content="Search Guides, Calculators & Tools">
-<meta property="og:description" content="One search box across every guide, calculator, glossary term, and free tool on Voltfield.">
+<meta property="og:title" content="Free Engineering & Procurement Tools">
+<meta property="og:description" content="Every free tool on Voltfield in one place: calculators, design practice, PCB tools, RFQ toolkit, and reference tools.">
 <meta name="twitter:card" content="summary_large_image">
-<meta property="og:image" content="https://voltfield.org/social/social-site-search.jpg">
+<meta property="og:image" content="https://voltfield.org/social/social-free-tools.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta name="twitter:image" content="https://voltfield.org/social/social-site-search.jpg">
-<meta name="twitter:title" content="Search Guides, Calculators & Tools">
-<meta name="twitter:description" content="One search box across every guide, calculator, glossary term, and free tool on Voltfield.">
-<meta name="robots" content="noindex,follow">
+<meta name="twitter:image" content="https://voltfield.org/social/social-free-tools.jpg">
+<meta name="twitter:title" content="Free Engineering & Procurement Tools">
+<meta name="twitter:description" content="20 calculators, an EE design sandbox, PCB tools, RFQ toolkit, and reference tools — all free, no signup.">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
  {"@type":"BreadcrumbList","itemListElement":[
    {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
-   {"@type":"ListItem","position":2,"name":"Search","item":"https://voltfield.org/site-search.html"}
- ]}
+   {"@type":"ListItem","position":2,"name":"Free Tools","item":"https://voltfield.org/free-tools.html"}
+ ]},
+ {"@type":"CollectionPage","name":"Free Engineering & Procurement Tools","description":"Every free tool on Voltfield in one place: engineering calculators, an EE design practice sandbox, PCB builders, an RFQ toolkit, glossary quiz, and procurement reference tools.","url":"https://voltfield.org/free-tools.html"}
 ]}
 </script>
 <link rel="manifest" href="manifest.json">
@@ -50,7 +50,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5}
-button,a,input{font-family:inherit;cursor:pointer}
+button,a{font-family:inherit;cursor:pointer}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--signal);outline-offset:2px}
 header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:60}
@@ -74,7 +74,6 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .navdrop-menu a{padding:10px 14px;font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line)}
 .navdrop-menu a:last-child{border-bottom:0}
 .navdrop-menu a:hover{background:var(--paper);color:var(--ink)}
-.navdrop-menu a.on{color:var(--ink);background:var(--paper);border-left:3px solid var(--signal)}
 @media(max-width:899px){
 .navdrop-btn{width:100%;justify-content:space-between;padding:12px 6px;border-bottom:1px solid var(--line)}
 .navdrop-menu{display:flex!important;position:static;border:0;min-width:0;background:var(--paper)}
@@ -85,25 +84,27 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
 .quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
 .artban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:32px 20px 34px}
-.artban-in{max-width:900px;margin:0 auto}
+.artban-in{max-width:1100px;margin:0 auto}
 .artban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:10px}
 .artban h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,44px);letter-spacing:.01em;line-height:1.06}
 .artban p.dek{color:#AFC0D3;font-size:15.5px;margin-top:14px;line-height:1.55;max-width:680px}
-.searchwrap{max-width:900px;margin:0 auto;padding:36px 20px 60px}
-.searchbox{position:relative;margin-bottom:22px}
-.searchbox input{width:100%;border:2px solid var(--ink);background:#fff;padding:16px 18px;font-family:var(--body);font-size:17px;color:var(--ink)}
-.searchbox input::placeholder{color:#8896A6}
-.searchmeta{font-family:var(--mono);font-size:11.5px;color:var(--slate);margin-bottom:18px}
-.reslist{display:flex;flex-direction:column;gap:10px}
-.rescard{background:var(--card);border:1px solid var(--line-dark);padding:14px 16px;text-decoration:none;color:var(--ink);display:block}
-.rescard:hover{border-color:var(--ink)}
-.rescard .rc-cat{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--signal-deep);font-weight:600;margin-bottom:4px}
-.rescard .rc-title{font-family:var(--disp);font-weight:700;font-size:17px;color:var(--ink)}
-.rescard .rc-desc{font-size:13px;color:var(--ink-2);margin-top:3px;line-height:1.5}
-.empty{text-align:center;padding:40px 20px;color:var(--slate);font-size:14px}
-.quicklinks{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
-.quicklinks button{border:1px solid var(--line-dark);background:#fff;color:var(--ink-2);font-family:var(--disp);font-weight:600;font-size:12.5px;padding:6px 12px}
-.quicklinks button:hover{border-color:var(--ink);color:var(--ink)}
+.wrap{max-width:1100px;margin:0 auto;padding:36px 20px 60px}
+.wrap h2{font-family:var(--disp);font-weight:700;font-size:22px;letter-spacing:.01em;color:var(--ink);margin:36px 0 6px}
+.wrap h2:first-child{margin-top:0}
+.sectiondek{font-size:13.5px;color:var(--slate);margin-bottom:14px;max-width:640px;line-height:1.6}
+.toolgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.toolcard{background:var(--card);border:1px solid var(--line-dark);padding:16px 18px;text-decoration:none;color:var(--ink);display:block;transition:border-color .15s}
+.toolcard:hover{border-color:var(--ink)}
+.toolcard .tc-t{font-family:var(--disp);font-weight:700;font-size:16.5px;color:var(--ink)}
+.toolcard .tc-d{font-size:12.5px;color:var(--ink-2);margin-top:4px;line-height:1.5}
+.calclist{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 8px}
+.calclist a{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);background:#fff;border:1px solid var(--line);padding:4px 9px;text-decoration:none}
+.calclist a:hover{border-color:var(--ink);color:var(--ink)}
+.viewall{font-family:var(--disp);font-weight:600;font-size:13px;color:var(--signal-deep);text-decoration:underline;text-decoration-color:var(--signal)}
+.searchcta{background:var(--card);border:1px solid var(--line-dark);padding:16px 18px;margin:18px 0 0;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.searchcta p{font-size:13px;color:var(--ink-2);margin:0}
+.searchcta a{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none}
+.searchcta a:hover{background:transparent;color:var(--ink)}
 footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
 footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
 @media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
@@ -128,7 +129,7 @@ footer a:hover{color:#fff}
     <div class="navdrop" id="toolsDrop">
       <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
       <div class="navdrop-menu">
-        <a href="free-tools.html">All Free Tools</a>
+        <a href="free-tools.html" class="on">All Free Tools</a>
         <a href="voltfield-bom-generator.html">BOM Generator</a>
         <a href="voltfield-pcb.html">PCB Builder</a>
         <a href="voltfield-pcb-layout.html">PCB Layout Tool</a>
@@ -138,7 +139,7 @@ footer a:hover{color:#fff}
         <a href="voltfield-sandbox.html">Practice Sandbox</a>
         <a href="voltfield-glossary-quiz.html">Glossary Quiz</a>
         <a href="rfq-toolkit.html">RFQ Toolkit</a>
-        <a href="site-search.html" class="on">Search</a>
+        <a href="site-search.html">Search</a>
       </div>
     </div>
     <a href="voltfield-insights.html">Insights</a>
@@ -151,24 +152,110 @@ footer a:hover{color:#fff}
 </header>
 <section class="artban">
   <div class="artban-in">
-    <div class="eyebrow">Search</div>
-    <h1>Search guides, calculators &amp; tools</h1>
-    <p class="dek">One box across every guide, calculator, glossary term, and free tool — not the parts catalog (that has its own search on the All Parts page).</p>
+    <div class="eyebrow">Free Tools · No Signup</div>
+    <h1>Every free tool, in one place</h1>
+    <p class="dek">Calculators, design practice, PCB tools, RFQ prep, and reference tools — everything below runs entirely in your browser, free, no account required.</p>
   </div>
 </section>
-<div class="searchwrap">
-  <div class="searchbox">
-    <input type="text" id="searchInput" placeholder="Try &ldquo;fault current&rdquo;, &ldquo;FEOC&rdquo;, &ldquo;NEMA&rdquo;, or &ldquo;sandbox&rdquo;&hellip;" autofocus>
+<div class="wrap">
+  <h2>Engineering Calculators</h2>
+  <p class="sectiondek">20 calculators covering cable sizing, transformer/BESS sizing, fault current, arc-flash, financial estimators, and procurement reference tables.</p>
+  <div class="calclist">
+    <a href="engineering-calculators.html#voltage-drop">Voltage Drop</a>
+    <a href="engineering-calculators.html#transformer-sizing">Transformer Sizing</a>
+    <a href="engineering-calculators.html#bess-sizing">BESS Sizing</a>
+    <a href="engineering-calculators.html#fault-current">Fault Current</a>
+    <a href="engineering-calculators.html#arc-flash">Arc-Flash Incident Energy</a>
+    <a href="engineering-calculators.html#grounding">Ground Rod Resistance</a>
+    <a href="engineering-calculators.html#power-factor">Power Factor Correction</a>
+    <a href="engineering-calculators.html#landed-cost">Landed Cost</a>
+    <a href="engineering-calculators.html#payback">Payback &amp; NPV</a>
+    <a href="engineering-calculators.html#macrs-depreciation">MACRS Depreciation</a>
   </div>
-  <div class="quicklinks" id="quickLinks"></div>
-  <div class="searchmeta" id="searchMeta"></div>
-  <div class="reslist" id="resList"></div>
+  <a class="viewall" href="engineering-calculators.html">View all 20 calculators &rarr;</a>
+
+  <h2>Design &amp; Practice</h2>
+  <p class="sectiondek">Hands-on tools for working through a real design, not just looking up a formula.</p>
+  <div class="toolgrid">
+    <a class="toolcard" href="voltfield-sandbox.html">
+      <div class="tc-t">EE Practice Sandbox</div>
+      <div class="tc-d">Design a one-line system — transformer, main breaker, feeder, panel loads — and run 5 engineering checks against a live SVG diagram.</div>
+    </a>
+    <a class="toolcard" href="voltfield-pcb.html">
+      <div class="tc-t">Custom PCB Builder</div>
+      <div class="tc-d">Instant spec, price, and lead time for a custom PCB fab configuration.</div>
+    </a>
+    <a class="toolcard" href="voltfield-pcb-layout.html">
+      <div class="tc-t">PCB Layout Tool</div>
+      <div class="tc-d">Place components and route two-layer traces, with a live design check.</div>
+    </a>
+    <a class="toolcard" href="voltfield-glossary-quiz.html">
+      <div class="tc-t">Glossary Quiz</div>
+      <div class="tc-d">Test yourself on energy and industrial equipment terms.</div>
+    </a>
+  </div>
+
+  <h2>Procurement Tools</h2>
+  <p class="sectiondek">For getting a spec or bill of materials ready to send to vendors.</p>
+  <div class="toolgrid">
+    <a class="toolcard" href="rfq-toolkit.html">
+      <div class="tc-t">RFQ Toolkit</div>
+      <div class="tc-d">A readiness checklist plus copy-paste spec templates for transformers, switchgear, and BESS.</div>
+    </a>
+    <a class="toolcard" href="voltfield-bom-generator.html">
+      <div class="tc-t">BOM Generator</div>
+      <div class="tc-d">Component-level bill of materials breakdown for any engineered part.</div>
+    </a>
+    <a class="toolcard" href="voltfield-bom.html">
+      <div class="tc-t">Quick Order</div>
+      <div class="tc-d">Paste or upload a bill of materials and match every line to the catalog.</div>
+    </a>
+  </div>
+
+  <h2>Part Identification &amp; Lifecycle</h2>
+  <p class="sectiondek">For figuring out what a part is, or what replaces it.</p>
+  <div class="toolgrid">
+    <a class="toolcard" href="voltfield-identify.html">
+      <div class="tc-t">Part ID</div>
+      <div class="tc-d">Photograph a nameplate to help identify a replacement part.</div>
+    </a>
+    <a class="toolcard" href="voltfield-eol.html">
+      <div class="tc-t">Obsolete / End-of-Life Parts</div>
+      <div class="tc-d">Discontinued equipment series with OEM-recommended replacement paths.</div>
+    </a>
+  </div>
+
+  <h2>Reference &amp; Data</h2>
+  <p class="sectiondek">Definitions, current market data, and cross-references.</p>
+  <div class="toolgrid">
+    <a class="toolcard" href="glossary.html">
+      <div class="tc-t">Glossary</div>
+      <div class="tc-d">Plain-language definitions for standards and terms across energy and industrial procurement.</div>
+    </a>
+    <a class="toolcard" href="lead-time-index.html">
+      <div class="tc-t">Lead-Time Index</div>
+      <div class="tc-d">Current indicative lead times and pricing across major equipment categories, plus an embeddable widget and JSON feed.</div>
+    </a>
+    <a class="toolcard" href="engineering-calculators.html#standards-crossref">
+      <div class="tc-t">Standards Cross-Reference</div>
+      <div class="tc-d">IEEE/ANSI/NEMA/UL standards paired with their closest IEC equivalent.</div>
+    </a>
+    <a class="toolcard" href="voltfield-insights.html">
+      <div class="tc-t">Insights &amp; Guides</div>
+      <div class="tc-d">All 11 technical guides — nameplates, switchgear, arc-flash, FEOC, Buy America, interconnection, and more.</div>
+    </a>
+  </div>
+
+  <div class="searchcta">
+    <p>Know roughly what you need but not which tool has it?</p>
+    <a href="site-search.html">Search everything &rarr;</a>
+  </div>
 </div>
 <footer>
   <div class="in">
     <div>
       <h5>Voltfield Supply Co.</h5>
-      <p>Free engineering calculators, guides, and reference tools for energy infrastructure and industrial procurement — sourced from real published standards and formulas.</p>
+      <p>Free engineering calculators, guides, and reference tools for energy infrastructure and industrial procurement — sourced from real published standards and formulas, run entirely in your browser.</p>
     </div>
     <div><h5>Desks</h5><ul>
       <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
@@ -192,59 +279,6 @@ footer a:hover{color:#fff}
     const el=document.getElementById("quoteCount");
     if(el)el.textContent=Array.isArray(q)?q.length:0;
   }catch(e){}
-})();
-</script>
-<script>
-(function(){
-  const input=document.getElementById('searchInput');
-  const resList=document.getElementById('resList');
-  const meta=document.getElementById('searchMeta');
-  const quickLinks=document.getElementById('quickLinks');
-  let ITEMS=[];
-
-  const QUICK=['fault current','FEOC','NEMA','arc-flash','BESS','sandbox','MACRS','grounding'];
-  quickLinks.innerHTML=QUICK.map(q=>`<button type="button" data-q="${q}">${q}</button>`).join('');
-  quickLinks.querySelectorAll('button').forEach(b=>b.onclick=()=>{input.value=b.dataset.q;runSearch();});
-
-  function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
-
-  function score(item,terms){
-    const hay=(item.title+' '+item.description+' '+item.category).toLowerCase();
-    let s=0;
-    terms.forEach(t=>{
-      if(!t)return;
-      if(item.title.toLowerCase().includes(t))s+=3;
-      if(hay.includes(t))s+=1;
-    });
-    return s;
-  }
-
-  function runSearch(){
-    const q=input.value.trim().toLowerCase();
-    if(!q){
-      resList.innerHTML='';
-      meta.textContent=ITEMS.length?`${ITEMS.length} guides, calculators, terms, and tools indexed — start typing to search.`:'Loading index…';
-      return;
-    }
-    const terms=q.split(/\s+/);
-    const scored=ITEMS.map(it=>({it,s:score(it,terms)})).filter(x=>x.s>0).sort((a,b)=>b.s-a.s).slice(0,30);
-    if(!scored.length){
-      resList.innerHTML='';
-      meta.innerHTML=`<div class="empty">No matches for &ldquo;${esc(input.value)}&rdquo;. Try a shorter or more general term.</div>`;
-      return;
-    }
-    meta.textContent=`${scored.length} result${scored.length===1?'':'s'}`;
-    resList.innerHTML=scored.map(({it})=>`<a class="rescard" href="${it.url}"><div class="rc-cat">${esc(it.category)}</div><div class="rc-title">${esc(it.title)}</div><div class="rc-desc">${esc(it.description)}</div></a>`).join('');
-  }
-
-  fetch('search-index.json').then(r=>r.json()).then(data=>{
-    ITEMS=data.items||[];
-    meta.textContent=`${ITEMS.length} guides, calculators, terms, and tools indexed — start typing to search.`;
-    const p=new URLSearchParams(location.search);
-    if(p.get('q')){input.value=p.get('q');runSearch();}
-  }).catch(()=>{meta.textContent='Search index unavailable right now.';});
-
-  input.addEventListener('input',runSearch);
 })();
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
