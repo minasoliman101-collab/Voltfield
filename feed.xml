@@ -83,5 +83,19 @@
     <description>What a short-circuit study actually calculates, why a quick infinite-source fault-current estimate isn't a substitute for one, and how breaker coordination decides which device trips first when something goes wrong.</description>
     <pubDate>Tue, 28 Jul 2026 00:00:00 GMT</pubDate>
   </item>
+  <item>
+    <title>The Grid Interconnection Process, Explained: Queue to Interconnection Agreement</title>
+    <link>https://voltfield.org/guide-grid-interconnection-process.html</link>
+    <guid>https://voltfield.org/guide-grid-interconnection-process.html</guid>
+    <description>What actually happens between filing an interconnection request and energizing a generation project — queue position, feasibility/system impact/facilities studies, cluster studies, and the interconnection agreement.</description>
+    <pubDate>Sun, 02 Aug 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>Buy America / Build America, Buy America (BABA) for Infrastructure Procurement</title>
+    <link>https://voltfield.org/guide-buy-america-iija.html</link>
+    <guid>https://voltfield.org/guide-buy-america-iija.html</guid>
+    <description>What the Build America, Buy America Act (BABA) actually requires for IIJA-funded infrastructure projects, how it differs from the IRA domestic content bonus, and what documentation to gather.</description>
+    <pubDate>Sun, 02 Aug 2026 00:00:00 GMT</pubDate>
+  </item>
 </channel>
 </rss>
