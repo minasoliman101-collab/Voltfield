@@ -228,7 +228,7 @@ table.rfq input.q{width:60px;border:1px solid var(--line-dark);padding:5px 6px;f
 <script src="voltfield-catalog-data.js"></script>
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
-/* ===== Purchase request built from the cart (vf_quote) ===== */
+/* ===== Sourcing request built from the sourcing list (vf_quote) ===== */
 function loadQuote(){try{const q=JSON.parse(localStorage.getItem('vf_quote')||'[]');return Array.isArray(q)?q:[];}catch(e){return [];}}
 function saveQuote(q){localStorage.setItem('vf_quote',JSON.stringify(q));const el=document.getElementById('quoteCount');if(el)el.textContent=q.length;}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._tm);t._tm=setTimeout(()=>t.classList.remove('show'),1900);}
@@ -256,7 +256,7 @@ function mount(){
     <div class="rfqhead">
       <div class="co">
         <div class="nm"><span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>VOLTFIELD SUPPLY CO.</div>
-        <div class="addr">Energy Infrastructure &amp; Industrial Supply<br>4043 Star Trek Ln, Garland, TX 75044<br>+1 (850) 686-1378 · RFQ@voltfield.org</div>
+        <div class="addr">Energy Infrastructure &amp; Industrial Supply<br>4043 Star Trek Ln, Garland, TX 75044<br>+1 (850) 686-1378 · Help@voltfield.org</div>
       </div>
       <div class="doc">
         <h1>SOURCING REQUEST</h1>
@@ -388,8 +388,8 @@ document.getElementById('emailBtn').onclick=()=>{
   body.push('','Total units: '+units,'Estimated total: $'+(total>=1000?Math.round(total).toLocaleString():total.toFixed(2)));
   if(notes)body.push('','Notes: '+notes);
   body.push('','(Indicative pricing — no payment collected; please follow up with a formal invoice/quote.)');
-  const subj='Purchase request '+orderNo+(company?(' — '+company):'');
-  location.href='mailto:RFQ@voltfield.org?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body.join('\n'));
+  const subj='Sourcing request '+orderNo+(company?(' — '+company):'');
+  location.href='mailto:Help@voltfield.org?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body.join('\n'));
 };
 
 /* ---------- primary path: submit to Netlify Forms (see the hidden "purchase-request" form) ---------- */
@@ -411,7 +411,7 @@ document.getElementById('sendBtn').onclick=async()=>{
     document.getElementById('rfqRefNo').textContent=orderNo;
     document.getElementById('rfqSuccess').classList.add('show');
     document.getElementById('rfqSuccess').scrollIntoView({behavior:'smooth',block:'start'});
-    toast('Purchase request sent');
+    toast('Sourcing request sent');
     QUOTE=[]; saveQuote(QUOTE); document.getElementById('actbar').style.display='none';
   }catch(err){
     toast('Online submission unavailable here — opening your email client instead');

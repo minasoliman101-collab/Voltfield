@@ -7,7 +7,7 @@
    rather than an exact href -- an exact match against the .html filename silently misses in production. */
 .hnav a[href$="voltfield-bom.html"], .hnav a[href$="voltfield-bom"],
 #checkoutBtn, #rfqBtn, #pAdd, #pRfq, #pAlertBox,
-#addBtn, #addAllBtn,
+#addBtn, #addAllBtn, .addbtn, #dmAdd, #dmRfq,
 .utilbar b,
 .sk-price, .rv-price, .p-facts, .pricebar, .dm-price
 { display:none !important; }

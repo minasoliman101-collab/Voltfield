@@ -339,10 +339,10 @@ try{var q=JSON.parse(localStorage.getItem('vf_quote')||'[]');document.getElement
   var pro=document.getElementById('proBtn'), ent=document.getElementById('entBtn');
   if(B.proMonthlyUrl){ pro.href=B.proMonthlyUrl; }
   else{
-    pro.href='mailto:'+(B.salesEmail||'RFQ@voltfield.org')+'?subject='+encodeURIComponent('VOLTFIELD Pro Procurement — early access')+'&body='+encodeURIComponent('We’re interested in the Pro plan. Team size and use case: ');
+    pro.href='mailto:'+(B.salesEmail||'Help@voltfield.org')+'?subject='+encodeURIComponent('VOLTFIELD Pro Procurement — early access')+'&body='+encodeURIComponent('We’re interested in the Pro plan. Team size and use case: ');
     pro.addEventListener('click',function(){toast('Checkout isn’t wired yet — this opens a sales email instead');});
   }
-  ent.href='mailto:'+(B.salesEmail||'RFQ@voltfield.org')+'?subject='+encodeURIComponent('VOLTFIELD Enterprise — pricing & integration')+'&body='+encodeURIComponent('Sites/locations: \nERP system: \nAnnual parts spend (rough): ');
+  ent.href='mailto:'+(B.salesEmail||'Help@voltfield.org')+'?subject='+encodeURIComponent('VOLTFIELD Enterprise — pricing & integration')+'&body='+encodeURIComponent('Sites/locations: \nERP system: \nAnnual parts spend (rough): ');
 })();
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>

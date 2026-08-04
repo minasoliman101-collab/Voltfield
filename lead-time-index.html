@@ -391,7 +391,7 @@ footer a:hover{color:#fff}
       form.reset();
       form.querySelectorAll('.sectors input').forEach(c=>c.checked=true);
     }catch(err){
-      showMsg('Online signup isn\'t reachable here — email RFQ@voltfield.org to be added manually.','err');
+      showMsg('Online signup isn\'t reachable here — email Help@voltfield.org to be added manually.','err');
     }finally{
       btn.textContent=orig; btn.disabled=false;
     }
@@ -421,7 +421,7 @@ footer a:hover{color:#fff}
       showMsg('Thanks — this is queued for editorial review, not published automatically.','ok');
       form.reset();
     }catch(err){
-      showMsg('Online submission isn\'t reachable here — email RFQ@voltfield.org with the details instead.','err');
+      showMsg('Online submission isn\'t reachable here — email Help@voltfield.org with the details instead.','err');
     }finally{
       btn.textContent=orig; btn.disabled=false;
     }
