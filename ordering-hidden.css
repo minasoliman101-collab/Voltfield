@@ -9,6 +9,5 @@
 #checkoutBtn, #rfqBtn, #pAdd, #pRfq, #pAlertBox,
 #addBtn, #addAllBtn,
 .utilbar b,
-.sk-price, .rv-price, .p-facts, .pricebar,
-.planhead, .plans, .plannote, .howgrid
+.sk-price, .rv-price, .p-facts, .pricebar, .dm-price
 { display:none !important; }

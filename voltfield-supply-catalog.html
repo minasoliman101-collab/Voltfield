@@ -340,9 +340,8 @@ footer a{color:#9FB0C3}
   </a>
   <nav class="hnav">
     <a href="index.html">Home</a>
-    <a href="voltfield-supply-catalog.html" class="on">All Parts</a>
-    <a href="voltfield-suppliers.html">All Suppliers</a>
-    <a href="voltfield-bom.html">BOM Match</a>
+    <a href="lead-time-index.html">Lead-Time Index</a>
+    <a href="voltfield-insights.html">Insights</a>
     <div class="navdrop" id="toolsDrop">
       <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
       <div class="navdrop-menu">
@@ -359,7 +358,9 @@ footer a{color:#9FB0C3}
         <a href="site-search.html">Search</a>
       </div>
     </div>
-    <a href="voltfield-insights.html">Insights</a>
+    <a href="voltfield-supply-catalog.html" class="on">All Parts</a>
+    <a href="voltfield-suppliers.html">All Suppliers</a>
+    <a href="voltfield-bom.html">BOM Match</a>
     <a href="whats-new.html">What's New</a>
     <a href="voltfield-account.html">Account</a>
   </nav>
@@ -758,7 +759,7 @@ function closeModal(){document.getElementById('detailModal').classList.remove('o
 function renderModal(){
   const {f,picks,chk,qty}=MS;
   const pn=configuredPN(f,picks,chk), price=priceFor(f,picks), lb=leadBadge(f), col=SECTORS[f.s].color;
-  const distLbl={grainger:'Grainger',uline:'Uline',graybar:'Graybar',msc:'MSC Industrial',voltfield:'Voltfield Direct'}[f.d];
+  const distLbl=DIST_NAME[f.d];
   const inq=loadQuote().some(x=>x.pn===pn);
   document.getElementById('detailContent').innerHTML=`
     <div class="dm-band" style="background:${col}"></div>
@@ -775,10 +776,10 @@ function renderModal(){
       <div class="dm-cfg">${f.ax.map((axis,ai)=>`<label class="cfg-row"><span>${axis[0]}</span><select data-ai="${ai}">${axis.slice(1).map(o=>`<option${o===picks[ai]?' selected':''}>${o}</option>`).join('')}</select></label>`).join('')}</div>
       <div class="dm-cmp">${f.cmp.map(x=>`<span>${x}</span>`).join('')}</div>
       <div class="dm-facts">
-        <div><span>Unit price</span><b>${money(price,f.pu)}</b></div>
+        <div class="dm-price"><span>Unit price</span><b>${money(price,f.pu)}</b></div>
         <div><span>Lead time</span><b class="lead ${lb.c}">${lb.t}</b></div>
         <div><span>Quantity</span><input type="number" id="dmQty" min="1" value="${qty}"></div>
-        <div><span>Est. line total</span><b>${money(price*qty,f.pu)}</b></div>
+        <div class="dm-price"><span>Est. line total</span><b>${money(price*qty,f.pu)}</b></div>
         <div><span>Voltfield sourcing ref</span><b>${sourcingRef(pn)}</b></div>
       </div>
       <div class="dm-note">Configured from ${f.ax.length} attribute axes across ${fmt(f.ct)} SKUs in this family. Indicative pricing; final price, availability &amp; lead time confirmed at quote. The sourcing ref is Voltfield's own internal tracking code for this configuration — not a manufacturer SKU or UPC.</div>
