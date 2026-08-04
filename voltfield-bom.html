@@ -9,7 +9,7 @@
 <meta name="keywords" content="BOM matching tool, parts list matching, CSV parts lookup, industrial parts cross reference, bulk part matching, spare parts identification">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VOLTFIELD Supply Co.">
-<meta property="og:title" content="Quick Order — match your whole BOM in seconds">
+<meta property="og:title" content="BOM Match — match your whole BOM in seconds">
 <meta property="og:description" content="Free-text or CSV parts lists matched and configured against an industrial parts catalog.">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
@@ -163,7 +163,7 @@ footer a{color:#9FB0C3}
     <a href="index.html">Home</a>
     <a href="voltfield-supply-catalog.html">All Parts</a>
     <a href="voltfield-suppliers.html">All Suppliers</a>
-    <a href="voltfield-bom.html" class="on">Quick Order</a>
+    <a href="voltfield-bom.html" class="on">BOM Match</a>
     <div class="navdrop" id="toolsDrop">
       <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
       <div class="navdrop-menu">
@@ -186,13 +186,13 @@ footer a{color:#9FB0C3}
   </nav>
   <div class="headright">
     <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
-    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View quote list on catalog page">QUOTE LIST <span class="ct" id="quoteCount">0</span></a>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View sourcing list on catalog page">SOURCING LIST <span class="ct" id="quoteCount">0</span></a>
   </div>
 </header>
 
 <section class="bomban">
   <div class="bomban-in">
-    <div class="eyebrow">Quick Order · BOM Match</div>
+    <div class="eyebrow">BOM Match</div>
     <h1>Paste a BOM — we match every line to the catalog</h1>
     <p>Drop in a parts list or upload a CSV. We match each line against the catalog across Grainger, Uline, Graybar, MSC Industrial, and Voltfield's energy lines, and configure the closest variant.</p>
   </div>
@@ -221,7 +221,7 @@ footer a{color:#9FB0C3}
       <div class="sumstat"><div class="k" id="sValue">$0</div><div class="l">Est. total value</div></div>
       <div class="sumstat"><div class="k" id="sLead">—</div><div class="l">Longest lead time</div></div>
       <div class="sumact">
-        <button class="btn primary" id="addAllBtn">Add matched to quote</button>
+        <button class="btn primary" id="addAllBtn">Add matched to sourcing list</button>
         <button class="btn dark" id="csvBtn">Download results (CSV)</button>
       </div>
     </div>
@@ -244,11 +244,11 @@ footer a{color:#9FB0C3}
   <div class="in">
     <div>
       <h5>Voltfield Supply Co.</h5>
-      <p>Quick Order matches free-text or CSV part lists against the configurable catalog using name, keyword, category, and attribute tokens. Matches are best-effort and clearly confidence-scored; part numbers, pricing, and lead times are indicative and confirmed at quote. Nothing is ordered automatically — matched lines are added to your quote list for review.</p>
+      <p>BOM Match matches free-text or CSV part lists against the reference catalog using name, keyword, category, and attribute tokens. Matches are best-effort and clearly confidence-scored; part numbers, pricing, and lead times are indicative market data. Nothing is ordered automatically — matched lines are added to your sourcing list for review.</p>
     </div>
     <div>
       <h5>Explore</h5>
-      <p><a href="index.html">Home</a> &nbsp;·&nbsp; <a href="voltfield-supply-catalog.html">All Parts catalog</a> &nbsp;·&nbsp; <a href="voltfield-suppliers.html">All Suppliers</a><br><br><a href="voltfield-supply-catalog.html?quote=1">View quote list &rarr;</a></p>
+      <p><a href="index.html">Home</a> &nbsp;·&nbsp; <a href="voltfield-supply-catalog.html">All Parts catalog</a> &nbsp;·&nbsp; <a href="voltfield-suppliers.html">All Suppliers</a><br><br><a href="voltfield-supply-catalog.html?quote=1">View sourcing list &rarr;</a></p>
     </div>
   </div>
 </footer>
@@ -389,7 +389,7 @@ document.getElementById('addAllBtn').onclick=()=>{
     if(ex){ex.qty=(ex.qty||1)+r.qty;} else {q.push({pn:m.pn,name:m.name,price:money(m.price,m.f.pu).replace(/<[^>]+>/g,''),lead:m.lb.t,sec:m.sec,qty:r.qty,up:m.price,pu:m.f.pu,d:m.f.d});added++;}
   });
   saveQuote(q);
-  document.getElementById('sumNote').innerHTML=`Added ${inc.length} line${inc.length>1?'s':''} to your quote list (${added} new). <a href="voltfield-supply-catalog.html?quote=1">View quote list &rarr;</a>`;
+  document.getElementById('sumNote').innerHTML=`Added ${inc.length} line${inc.length>1?'s':''} to your sourcing list (${added} new). <a href="voltfield-supply-catalog.html?quote=1">View sourcing list &rarr;</a>`;
   toast(`Added ${inc.length} line${inc.length>1?'s':''} to quote`);
   if(window.vfGtag)window.vfGtag('event','add_to_quote',{method:'quick_order',lines:inc.length,new_items:added});
 };

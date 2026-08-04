@@ -175,7 +175,7 @@ footer a{color:#9FB0C3}
     <a href="index.html">Home</a>
     <a href="voltfield-supply-catalog.html">All Parts</a>
     <a href="voltfield-suppliers.html">All Suppliers</a>
-    <a href="voltfield-bom.html">Quick Order</a>
+    <a href="voltfield-bom.html">BOM Match</a>
     <div class="navdrop" id="toolsDrop">
       <button class="navdrop-btn on" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
       <div class="navdrop-menu">
@@ -198,7 +198,7 @@ footer a{color:#9FB0C3}
   </nav>
   <div class="headright">
     <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
-    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View quote list on catalog page">QUOTE LIST <span class="ct" id="quoteCount">0</span></a>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View sourcing list on catalog page">SOURCING LIST <span class="ct" id="quoteCount">0</span></a>
   </div>
 </header>
 
@@ -368,7 +368,7 @@ function identify(){
   eolHits.forEach(({x})=>{
     html+=`<div class="alert"><h3>Possible obsolete platform: ${esc(x.oem)} ${esc(x.series.split('(')[0].trim())}</h3>
       <p>${esc(EOL_STATUS[x.status].label)} — recommended path: <b>${esc(x.succOem!=='—'?x.succOem+' '+x.succ:x.succ)}</b>.</p>
-      <p style="margin-top:8px"><a href="voltfield-eol.html?oem=${encodeURIComponent(x.oem.split(' ')[0])}">Open the EOL record &rsaquo;</a> &nbsp;·&nbsp; <a href="voltfield-supply-catalog.html?q=${encodeURIComponent(x.q)}">Shop the replacement class &rsaquo;</a></p></div>`;
+      <p style="margin-top:8px"><a href="voltfield-eol.html?oem=${encodeURIComponent(x.oem.split(' ')[0])}">Open the EOL record &rsaquo;</a> &nbsp;·&nbsp; <a href="voltfield-supply-catalog.html?q=${encodeURIComponent(x.q)}">See the replacement class &rsaquo;</a></p></div>`;
   });
   if(fams.length){
     html+=fams.map(({f,sc},i)=>{
@@ -382,7 +382,7 @@ function identify(){
           <span class="conf ${cc}">${cl}</span>
         </div>
         <div class="foot">
-          <a href="voltfield-part.html?fi=${f._i}">Configure &amp; quote &rsaquo;</a>
+          <a href="voltfield-part.html?fi=${f._i}">Configure &amp; get sourcing info &rsaquo;</a>
           ${bomOk?`<a href="voltfield-bom-generator.html?fi=${f._i}">Component BOM teardown &rsaquo;</a>`:''}
           <a href="voltfield-supply-catalog.html?q=${encodeURIComponent(f.n)}">Similar parts &rsaquo;</a>
         </div>

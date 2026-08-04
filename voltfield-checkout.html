@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Request to Purchase — VOLTFIELD Supply Co.</title>
+<title>Sourcing Request — VOLTFIELD Supply Co.</title>
 <link rel="canonical" href="https://voltfield.org/voltfield-checkout.html">
-<meta name="description" content="Submit a purchase request from your cart — shipping details, PO number, and line items sent directly to our order desk. No payment collected online.">
+<meta name="description" content="Submit a sourcing request from your list — contact details, reference PO number, and line items sent to our sourcing team for pricing and next steps.">
 <meta name="robots" content="noindex,follow">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#101B2D">
@@ -176,7 +176,7 @@ table.rfq input.q{width:60px;border:1px solid var(--line-dark);padding:5px 6px;f
     <a href="index.html">Home</a>
     <a href="voltfield-supply-catalog.html">All Parts</a>
     <a href="voltfield-suppliers.html">All Suppliers</a>
-    <a href="voltfield-bom.html">Quick Order</a>
+    <a href="voltfield-bom.html">BOM Match</a>
     <div class="navdrop" id="toolsDrop">
       <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
       <div class="navdrop-menu">
@@ -199,7 +199,7 @@ table.rfq input.q{width:60px;border:1px solid var(--line-dark);padding:5px 6px;f
   </nav>
   <div class="headright">
     <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
-    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View quote list on catalog page">QUOTE LIST <span class="ct" id="quoteCount">0</span></a>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View sourcing list on catalog page">SOURCING LIST <span class="ct" id="quoteCount">0</span></a>
   </div>
 </header>
 
@@ -208,16 +208,16 @@ table.rfq input.q{width:60px;border:1px solid var(--line-dark);padding:5px 6px;f
 </div>
 
 <div class="actbar noprint" id="actbar" style="display:none">
-  <button class="btn primary" id="sendBtn">Submit Purchase Request</button>
+  <button class="btn primary" id="sendBtn">Submit Sourcing Request</button>
   <button class="btn dark" id="printBtn">Print / Save as PDF</button>
   <button class="btn ghost" id="emailBtn">Email instead</button>
-  <a class="btn dark" href="voltfield-supply-catalog.html">Continue shopping</a>
-  <button class="btn ghost" id="clearBtn">Clear cart</button>
-  <span class="acthint">This submits an order request to our sourcing desk — we don't process payment here. Pricing is indicative until we send a formal invoice/quote to confirm.</span>
+  <a class="btn dark" href="voltfield-supply-catalog.html">Continue browsing</a>
+  <button class="btn ghost" id="clearBtn">Clear list</button>
+  <span class="acthint">This submits a sourcing request to our team — we don't process payment here. Pricing is indicative until confirmed by the distributor or mill fulfilling it.</span>
 </div>
 <div class="rfqsuccess noprint" id="rfqSuccess">
-  <h3>Purchase request sent — order <span id="rfqRefNo"></span></h3>
-  <p>We've received your request and a copy has been logged with our order desk. Expect a formal quote/invoice at the email you provided within 24 hours to confirm pricing, availability, and payment. You can keep browsing or print a copy for your records.</p>
+  <h3>Sourcing request sent — reference <span id="rfqRefNo"></span></h3>
+  <p>We've received your request and a copy has been logged with our sourcing team. Expect a reply at the email you provided within 24 hours with sourcing details and next steps. You can keep browsing or print a copy for your records.</p>
 </div>
 
 <div id="mount"></div>
@@ -245,7 +245,7 @@ const dateStr=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'n
 function mount(){
   if(!QUOTE.length){
     document.getElementById('actbar').style.display='none';
-    document.getElementById('mount').innerHTML=`<div class="empty"><h2>Your cart is empty</h2><p>Add parts from the catalog, configurator, or Quick Order matcher, then come back to submit a purchase request.</p><a href="voltfield-supply-catalog.html">Browse All Parts &rarr;</a></div>`;
+    document.getElementById('mount').innerHTML=`<div class="empty"><h2>Your sourcing list is empty</h2><p>Add parts from the catalog, configurator, or BOM Match, then come back to submit a sourcing request.</p><a href="voltfield-supply-catalog.html">Browse All Parts &rarr;</a></div>`;
     return;
   }
   document.getElementById('actbar').style.display='flex';
@@ -257,11 +257,11 @@ function mount(){
         <div class="addr">Energy Infrastructure &amp; Industrial Supply<br>4043 Star Trek Ln, Garland, TX 75044<br>+1 (850) 686-1378 · RFQ@voltfield.org</div>
       </div>
       <div class="doc">
-        <h1>PURCHASE REQUEST</h1>
+        <h1>SOURCING REQUEST</h1>
         <div class="meta">Order #: <b>${orderNo}</b><br>Date: <b>${dateStr}</b></div>
       </div>
     </div>
-    <div class="sectitle">Buyer</div>
+    <div class="sectitle">Requester</div>
     <div class="buyer">
       <div class="bf"><label>Company</label><input id="bCompany" placeholder="Your company"></div>
       <div class="bf"><label>PO number (optional)</label><input id="bPO" placeholder="Your internal PO #"></div>
@@ -270,7 +270,7 @@ function mount(){
       <div class="bf"><label>Phone</label><input id="bPhone" placeholder="(   )   -"></div>
       <div class="bf"><label>Requested delivery</label><input id="bNeeded" placeholder="Target date"></div>
     </div>
-    <div class="sectitle">Ship to</div>
+    <div class="sectitle">Delivery location</div>
     <div class="buyer">
       <div class="bf full"><label>Address line 1</label><input id="sAddr1" placeholder="Street address"></div>
       <div class="bf full"><label>Address line 2 (optional)</label><input id="sAddr2" placeholder="Suite, unit, building"></div>
@@ -291,8 +291,8 @@ function mount(){
       <div class="s"><div class="k" id="sLead">—</div><div class="l">Longest lead time</div></div>
       <div class="s"><div class="k" id="sTotal">$0</div><div class="l">Estimated total</div></div>
     </div>
-    <div class="notes"><label>Notes to order desk</label><textarea id="bNotes" placeholder="Freight terms, certifications required, tagging, dock hours, etc."></textarea></div>
-    <div class="terms">Pricing shown is indicative market range (North America, ${now.getFullYear()}) and is not a firm offer. No payment is collected on this page — submitting sends this order request to our sourcing desk, who will follow up with a formal, priced quote/invoice for confirmation before anything ships. Configured part numbers reference a family + attribute selection and may be substituted with an equivalent on confirmation.</div>
+    <div class="notes"><label>Notes to sourcing team</label><textarea id="bNotes" placeholder="Freight terms, certifications required, tagging, dock hours, etc."></textarea></div>
+    <div class="terms">Pricing shown is indicative market range (North America, ${now.getFullYear()}) and is not a firm offer. No payment is collected on this page — submitting sends this sourcing request to our team, who will follow up with sourcing details, pricing, and next steps for connecting with the right distributor or mill. Configured part numbers reference a family + attribute selection and may be substituted with an equivalent on confirmation.</div>
   </div>`;
   const an=localStorage.getItem('vf_active_name'); if(an){const bp=document.getElementById('bCompany'); if(bp&&!bp.value)bp.placeholder=an;}
   prefillFromIdentity();
@@ -331,7 +331,7 @@ function renderRows(){
 /* source label: prefer stored distributor, else sector label */
 function srcLabel(it){return (it.d&&DIST_NAME[it.d])?DIST_NAME[it.d]:(SECTORS[it.sec]?SECTORS[it.sec].label:'—');}
 
-/* ---------- Netlify Identity: optional sign-in prefill, guest checkout still allowed ---------- */
+/* ---------- Netlify Identity: optional sign-in prefill, guest sourcing requests still allowed ---------- */
 function prefillFromIdentity(){
   if(typeof netlifyIdentity==='undefined')return;
   const user=netlifyIdentity.currentUser();
@@ -372,7 +372,7 @@ document.getElementById('printBtn').onclick=()=>window.print();
 document.getElementById('emailBtn').onclick=()=>{
   if(!QUOTE.length){toast('Nothing to send');return;}
   const {company,po,contact,email,phone,needed,notes,addr1,addr2,city,state,zip,country,lines,total,units}=gatherOrder();
-  const CAP=25, body=['PURCHASE REQUEST','Order #: '+orderNo,'Date: '+dateStr,''];
+  const CAP=25, body=['SOURCING REQUEST','Reference #: '+orderNo,'Date: '+dateStr,''];
   if(company)body.push('Company: '+company);
   if(po)body.push('PO number: '+po);
   if(contact)body.push('Contact: '+contact);

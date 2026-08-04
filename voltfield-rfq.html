@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Request for Quotation — VOLTFIELD Supply Co.</title>
 <link rel="canonical" href="https://voltfield.org/voltfield-rfq.html">
-<meta name="description" content="Build and print a Request for Quotation from your quote list — configured part numbers, quantities, indicative pricing and lead times, ready to send.">
+<meta name="description" content="Build and print a Request for Quotation from your sourcing list — configured part numbers, quantities, indicative pricing and lead times, ready to send.">
 <meta name="robots" content="noindex,follow">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#101B2D">
@@ -167,7 +167,7 @@ table.rfq input.q{width:60px;border:1px solid var(--line-dark);padding:5px 6px;f
     <a href="index.html">Home</a>
     <a href="voltfield-supply-catalog.html">All Parts</a>
     <a href="voltfield-suppliers.html">All Suppliers</a>
-    <a href="voltfield-bom.html">Quick Order</a>
+    <a href="voltfield-bom.html">BOM Match</a>
     <div class="navdrop" id="toolsDrop">
       <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
       <div class="navdrop-menu">
@@ -190,17 +190,17 @@ table.rfq input.q{width:60px;border:1px solid var(--line-dark);padding:5px 6px;f
   </nav>
   <div class="headright">
     <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
-    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View quote list on catalog page">QUOTE LIST <span class="ct" id="quoteCount">0</span></a>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View sourcing list on catalog page">SOURCING LIST <span class="ct" id="quoteCount">0</span></a>
   </div>
 </header>
 
 <div class="actbar noprint" id="actbar" style="display:none">
   <button class="btn primary" id="sendBtn">Send RFQ</button>
-  <a class="btn dark" href="voltfield-checkout.html">Proceed to Purchase</a>
+  <a class="btn dark" href="voltfield-checkout.html">Proceed to Sourcing Request</a>
   <button class="btn dark" id="printBtn">Print / Save as PDF</button>
   <button class="btn ghost" id="emailBtn">Email instead</button>
-  <a class="btn dark" href="voltfield-supply-catalog.html">Continue shopping</a>
-  <button class="btn ghost" id="clearBtn">Clear quote</button>
+  <a class="btn dark" href="voltfield-supply-catalog.html">Continue browsing</a>
+  <button class="btn ghost" id="clearBtn">Clear list</button>
   <span class="acthint">“Send RFQ” submits directly to our sourcing desk (fill in your email first); “Email instead” opens a pre-filled message in your own mail app; “Print / Save as PDF” makes a clean copy to attach.</span>
 </div>
 <div class="rfqsuccess noprint" id="rfqSuccess">
@@ -213,7 +213,7 @@ table.rfq input.q{width:60px;border:1px solid var(--line-dark);padding:5px 6px;f
 
 <script src="voltfield-catalog-data.js"></script>
 <script>
-/* ===== Printable RFQ built from the quote list ===== */
+/* ===== Printable RFQ built from the sourcing list ===== */
 function loadQuote(){try{const q=JSON.parse(localStorage.getItem('vf_quote')||'[]');return Array.isArray(q)?q:[];}catch(e){return [];}}
 function saveQuote(q){localStorage.setItem('vf_quote',JSON.stringify(q));const el=document.getElementById('quoteCount');if(el)el.textContent=q.length;}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._tm);t._tm=setTimeout(()=>t.classList.remove('show'),1900);}
@@ -233,7 +233,7 @@ const validUntil=new Date(now.getTime()+30*864e5).toLocaleDateString('en-US',{ye
 function mount(){
   if(!QUOTE.length){
     document.getElementById('actbar').style.display='none';
-    document.getElementById('mount').innerHTML=`<div class="empty"><h2>Your quote list is empty</h2><p>Add parts from the catalog, configurator, or Quick Order matcher, then come back to generate a printable RFQ.</p><a href="voltfield-supply-catalog.html">Browse All Parts &rarr;</a></div>`;
+    document.getElementById('mount').innerHTML=`<div class="empty"><h2>Your sourcing list is empty</h2><p>Add parts from the catalog, configurator, or BOM Match, then come back to generate a printable RFQ.</p><a href="voltfield-supply-catalog.html">Browse All Parts &rarr;</a></div>`;
     return;
   }
   document.getElementById('actbar').style.display='flex';
@@ -368,7 +368,7 @@ document.getElementById('sendBtn').onclick=async()=>{
   }
 };
 
-document.getElementById('clearBtn').onclick=()=>{if(confirm('Clear all parts from your quote list?')){QUOTE=[];saveQuote(QUOTE);document.getElementById('rfqSuccess').classList.remove('show');mount();toast('Quote list cleared');}};
+document.getElementById('clearBtn').onclick=()=>{if(confirm('Clear all parts from your sourcing list?')){QUOTE=[];saveQuote(QUOTE);document.getElementById('rfqSuccess').classList.remove('show');mount();toast('Sourcing list cleared');}};
 mount();
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
