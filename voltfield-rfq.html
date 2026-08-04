@@ -85,6 +85,7 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .acthint{font-family:var(--mono);font-size:11px;color:var(--slate)}
 /* RFQ document */
 .rfqdoc{max-width:900px;margin:18px auto 40px;background:var(--card);border:1px solid var(--line-dark);padding:34px 38px}
+@media(max-width:640px){.rfqdoc{padding:20px 16px;overflow-x:auto}table.rfq{min-width:560px}}
 .rfqhead{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-bottom:3px solid var(--ink);padding-bottom:16px}
 .rfqhead .co .nm{font-family:var(--disp);font-weight:700;font-size:30px;letter-spacing:.02em;line-height:1;display:flex;align-items:center;gap:9px}
 .rfqhead .co .nm .bolt{width:30px;height:30px;background:var(--signal);display:grid;place-items:center;border:2px solid var(--ink)}
@@ -161,7 +162,7 @@ table.rfq input.q{width:60px;border:1px solid var(--line-dark);padding:5px 6px;f
 <header class="site noprint">
   <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
     <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
-    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — ENERGY INFRASTRUCTURE PARTS</small></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — SOURCING & ENGINEERING REFERENCE</small></span>
   </a>
   <nav class="hnav">
     <a href="index.html">Home</a>

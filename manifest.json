@@ -1,7 +1,7 @@
 {
-  "name": "VOLTFIELD Supply Co. — Energy & Industrial Parts",
+  "name": "VOLTFIELD Supply Co. — Sourcing Reference & Engineering Tools",
   "short_name": "VOLTFIELD",
-  "description": "Search configurable SKUs, generate component BOMs for OEM parts, and match parts lists — data centers, renewables, battery storage, oil & gas, and MRO.",
+  "description": "Sourcing reference data, engineering calculators, and procurement tools — data centers, renewables, battery storage, oil & gas, and MRO.",
   "id": "./",
   "start_url": "./index.html?source=pwa",
   "scope": "./",
@@ -25,16 +25,16 @@
       "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
     },
     {
-      "name": "Quick Order / BOM Match",
-      "short_name": "Quick Order",
-      "description": "Paste a parts list and match every line to the catalog",
+      "name": "BOM Match",
+      "short_name": "BOM Match",
+      "description": "Paste a parts list and match every line to the reference catalog",
       "url": "./voltfield-bom.html?source=pwa",
       "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
     },
     {
       "name": "All Parts",
       "short_name": "Catalog",
-      "description": "Browse the full parts catalog",
+      "description": "Browse the full parts reference catalog",
       "url": "./voltfield-supply-catalog.html?source=pwa",
       "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
     }
