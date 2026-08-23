@@ -13,6 +13,10 @@
     {"title": "PJM Interconnection Timeline, Explained", "url": "guide-interconnection-pjm.html", "category": "Guide", "description": "Transition Cycles, readiness requirements, and what the Northern Virginia data-center load boom means for queue timing."},
     {"title": "MISO Interconnection Timeline, Explained", "url": "guide-interconnection-miso.html", "category": "Guide", "description": "The Definitive Planning Phase (DPP), why cycles ran behind schedule, and why sub-region matters."},
     {"title": "ERCOT Interconnection Timeline, Explained", "url": "guide-interconnection-ercot.html", "category": "Guide", "description": "Why ERCOT sits outside FERC jurisdiction, and how rapid growth has reshaped a historically faster process."},
+    {"title": "PUE Explained", "url": "guide-pue-explained.html", "category": "Guide", "description": "The formula, typical ranges from 1.1 to 2.0, what actually drives PUE down, and where the metric falls short."},
+    {"title": "Liquid Cooling vs. Air Cooling for AI-Density Racks", "url": "guide-liquid-vs-air-cooling.html", "category": "Guide", "description": "Direct-to-chip, immersion, and rear-door heat exchangers explained, plus retrofit vs. new-build tradeoffs."},
+    {"title": "BESS Augmentation Explained", "url": "guide-bess-augmentation.html", "category": "Guide", "description": "Why battery storage capacity fades, and how augmentation plans for it with phased DC block additions."},
+    {"title": "Inverter Clipping Ratio Explained", "url": "guide-inverter-clipping-ratio.html", "category": "Guide", "description": "Why utility-scale solar sites oversize the DC array on purpose, and typical DC:AC ratios by site profile."},
     {"title": "Buy America / BABA for Infrastructure Procurement", "url": "guide-buy-america-iija.html", "category": "Guide", "description": "What BABA requires for IIJA-funded projects, and how it differs from the IRA domestic content bonus."},
 
     {"title": "Voltage Drop / Cable Sizing Calculator", "url": "engineering-calculators.html#voltage-drop", "category": "Calculator", "description": "K-factor method voltage drop estimate across a feeder, with AWG/kcmil wire sizing."},

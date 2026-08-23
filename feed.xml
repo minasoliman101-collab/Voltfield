@@ -132,5 +132,33 @@
     <description>A free rack elevation planner: stack servers, switches, storage, UPS, and PDUs into a 24/42/48U rack and check U-space, circuit power (NEC 80% continuous-load derate), and weight budgets instantly.</description>
     <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
   </item>
+  <item>
+    <title>PUE Explained</title>
+    <link>https://voltfield.org/guide-pue-explained.html</link>
+    <guid>https://voltfield.org/guide-pue-explained.html</guid>
+    <description>The formula, typical ranges from 1.1 to 2.0, what actually drives PUE down, and where the metric falls short.</description>
+    <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>Liquid Cooling vs. Air Cooling for AI-Density Racks</title>
+    <link>https://voltfield.org/guide-liquid-vs-air-cooling.html</link>
+    <guid>https://voltfield.org/guide-liquid-vs-air-cooling.html</guid>
+    <description>Direct-to-chip, immersion, and rear-door heat exchangers explained, plus retrofit vs. new-build tradeoffs.</description>
+    <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>BESS Augmentation Explained</title>
+    <link>https://voltfield.org/guide-bess-augmentation.html</link>
+    <guid>https://voltfield.org/guide-bess-augmentation.html</guid>
+    <description>Why battery storage capacity fades, and how augmentation plans for it with phased DC block additions.</description>
+    <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>Inverter Clipping Ratio Explained</title>
+    <link>https://voltfield.org/guide-inverter-clipping-ratio.html</link>
+    <guid>https://voltfield.org/guide-inverter-clipping-ratio.html</guid>
+    <description>Why utility-scale solar sites oversize the DC array on purpose, and typical DC:AC ratios by site profile.</description>
+    <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
+  </item>
 </channel>
 </rss>

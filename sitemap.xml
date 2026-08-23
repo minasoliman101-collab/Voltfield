@@ -41,6 +41,10 @@
   <url><loc>https://voltfield.org/guide-interconnection-pjm.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
   <url><loc>https://voltfield.org/guide-interconnection-miso.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
   <url><loc>https://voltfield.org/guide-interconnection-ercot.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://voltfield.org/guide-pue-explained.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://voltfield.org/guide-liquid-vs-air-cooling.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://voltfield.org/guide-bess-augmentation.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://voltfield.org/guide-inverter-clipping-ratio.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
   <url><loc>https://voltfield.org/free-tools.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://voltfield.org/whats-new.html</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://voltfield.org/about.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>

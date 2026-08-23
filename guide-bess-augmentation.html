@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BESS Augmentation Explained: Planning for Battery Capacity Fade | VOLTFIELD Supply Co.</title>
+<link rel="canonical" href="https://voltfield.org/guide-bess-augmentation.html">
+<meta name="description" content="Why lithium battery storage capacity fades over a project's life, how augmentation plans for it with phased DC block additions, and why offtake agreements make this a procurement decision, not just an engineering one.">
+<meta name="keywords" content="BESS augmentation, battery capacity fade, battery storage degradation, augmentation plan, DC block replacement schedule, capacity guarantee BESS, battery warranty degradation">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:title" content="BESS Augmentation Explained">
+<meta property="og:description" content="Why battery storage capacity fades, and how augmentation plans for it with phased DC block additions.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta name="twitter:title" content="BESS Augmentation Explained">
+<meta name="twitter:description" content="How augmentation plans for battery capacity fade with phased DC block additions.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"BreadcrumbList","itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
+   {"@type":"ListItem","position":2,"name":"Insights","item":"https://voltfield.org/voltfield-insights.html"},
+   {"@type":"ListItem","position":3,"name":"BESS Augmentation Explained","item":"https://voltfield.org/guide-bess-augmentation.html"}
+ ]},
+ {"@type":"Article","headline":"BESS Augmentation Explained: Planning for Battery Capacity Fade","description":"Why lithium battery storage capacity fades over a project's life, how augmentation plans for it with phased DC block additions, and why offtake agreements make this a procurement decision, not just an engineering one.","image":"https://voltfield.org/social/social-generic.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"VOLTFIELD Supply Co."},"datePublished":"2026-08-23T00:00:00-05:00","url":"https://voltfield.org/guide-bess-augmentation.html"},
+ {"@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"What is BESS augmentation?","acceptedAnswer":{"@type":"Answer","text":"Augmentation is adding DC blocks to a battery storage system partway through its life to offset capacity that has faded due to calendar and cycle aging, holding the system at its contracted capacity rather than letting delivered capacity decline year over year."}},
+   {"@type":"Question","name":"Why does battery capacity fade over time?","acceptedAnswer":{"@type":"Answer","text":"Two mechanisms: calendar aging (chemical degradation that happens whether or not the battery cycles, driven mainly by time and temperature) and cycle aging (wear from repeated charge/discharge cycles, worse at higher depth of discharge and higher C-rates). Both are factored into manufacturer degradation curves and warranty capacity floors."}},
+   {"@type":"Question","name":"Why does augmentation need to be planned before construction, not just added later?","acceptedAnswer":{"@type":"Answer","text":"Adding DC blocks later needs reserved physical space, spare PCS/interconnection capacity, and often a compatible product generation still in production. Projects that don't reserve for augmentation upfront can find the original DC block model discontinued by the time augmentation is due, forcing a more expensive mixed-generation retrofit."}}
+ ]}
+]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="ordering-hidden.css">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<style>
+
+.artban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:32px 20px 34px}
+.artban-in{max-width:780px;margin:0 auto}
+.artban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:10px}
+.artban h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,44px);letter-spacing:.01em;line-height:1.06}
+.artban p.dek{color:#AFC0D3;font-size:15.5px;margin-top:14px;line-height:1.55}
+.artwrap{max-width:780px;margin:0 auto;padding:40px 20px 8px}
+.artwrap h2{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:.01em;color:var(--ink);margin:34px 0 12px}
+.artwrap p{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:14px}
+.artwrap ul,.artwrap ol{margin:0 0 14px 20px}
+.artwrap li{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:6px}
+.artwrap a.inline{color:var(--signal-deep);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
+.callout{background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--signal);padding:16px 18px;margin:20px 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.ctaband{background:linear-gradient(120deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;border-top:4px solid var(--signal)}
+.ctaband-in{max-width:1240px;margin:0 auto;padding:44px 20px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.ctaband h3{font-family:var(--disp);font-weight:700;font-size:28px;letter-spacing:.01em}
+.ctaband p{color:#AFC0D3;font-size:14px;margin-top:6px;max-width:460px}
+.ctabtn{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:14px 26px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.05em;text-decoration:none;flex-shrink:0}
+.ctabtn:hover{background:transparent;color:var(--signal)}
+footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
+footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
+@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
+footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer p{line-height:1.6;max-width:460px}
+footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
+footer a{color:#9FB0C3;text-decoration:none}
+footer a:hover{color:#fff}
+.sharebar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 22px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.sharebar-lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);margin-right:2px}
+.sharebtn{border:1px solid var(--line-dark);background:#fff;color:var(--ink-2);font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:.02em;padding:6px 12px;text-decoration:none;cursor:pointer;transition:border-color .15s,color .15s}
+.sharebtn:hover{border-color:var(--ink);color:var(--ink)}
+</style>
+</head>
+<body>
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — SOURCING & ENGINEERING REFERENCE</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu">
+        <a href="free-tools.html">All Free Tools</a>
+        <a href="voltfield-sandbox.html">Practice Sandbox</a>
+        <a href="voltfield-pod-designer.html">POD &amp; Skid Designer</a>
+        <a href="voltfield-rack-builder.html">Rack Elevation Builder</a>
+        <a href="engineering-calculators.html">Calculators</a>
+        <a href="voltfield-bom-generator.html">BOM Generator</a>
+        <a href="voltfield-bom.html">BOM Match</a>
+        <a href="voltfield-pcb.html">PCB Builder</a>
+        <a href="voltfield-pcb-layout.html">PCB Layout Tool</a>
+        <a href="voltfield-identify.html">Part ID</a>
+        <a href="voltfield-eol.html">Obsolete/EOL</a>
+        <a href="voltfield-glossary-quiz.html">Glossary Quiz</a>
+        <a href="rfq-toolkit.html">RFQ Toolkit</a>
+        <a href="site-search.html">Search</a>
+      </div>
+    </div>
+    <a href="voltfield-insights.html">Guides &amp; Insights</a>
+    <a href="lead-time-index.html">Lead-Time Index</a>
+    <a href="voltfield-supply-catalog.html">Spec Library</a>
+    <a href="voltfield-suppliers.html">Suppliers</a>
+    <a href="whats-new.html">What's New</a>
+    <a href="voltfield-account.html">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View sourcing list on catalog page">SOURCING LIST <span class="ct" id="quoteCount">0</span></a>
+  </div>
+</header>
+<section class="artban">
+  <div class="artban-in">
+    <div style="font-family:var(--mono);font-size:11px;color:#8DA0B8;margin-bottom:12px"><a href="index.html" style="color:#8DA0B8;text-decoration:none">Home</a> / <a href="voltfield-insights.html" style="color:#8DA0B8;text-decoration:none">Insights</a> / <span style="color:#E8EDF3">BESS Augmentation Explained</span></div>
+    <div class="eyebrow">Battery Storage</div>
+    <h1>BESS Augmentation Explained</h1>
+    <p class="dek">A battery sized for its nameplate capacity on day one won't still meet it in year ten. Augmentation is the plan for that — and it has to start before the project is even built.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:#8DA0B8;margin-top:14px"><span>By <b style="color:#E8EDF3;font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published Aug 23, 2026</span><span>&middot;</span><a href="methodology.html" style="color:#8DA0B8;text-decoration:underline">How we source &amp; verify this</a></div>
+  </div>
+</section>
+<div class="artwrap">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <p>Every lithium battery loses capacity over time, whether or not it's used. A BESS project contracted to deliver a fixed capacity — to an offtaker, a capacity market, or a utility — has to plan for that decline from day one, not discover it in year eight. <b>Augmentation</b> is that plan: adding <a class="inline" href="battery-storage.html">DC blocks</a> partway through the project's life to offset fade and hold the contracted capacity.</p>
+
+  <h2>Why capacity fades</h2>
+  <p>Two mechanisms drive it, and both are present in every lithium installation:</p>
+  <ul>
+    <li><b>Calendar aging</b> — chemical degradation that happens whether or not the battery cycles at all, driven mainly by time and temperature. A battery sitting idle at a hot site still loses capacity.</li>
+    <li><b>Cycle aging</b> — wear from repeated charge/discharge cycles, worse at higher depth of discharge (DoD) and higher <a class="inline" href="battery-storage.html#dur">C-rates</a>. A system cycled hard for daily energy arbitrage fades faster than one held mostly in reserve for occasional dispatch.</li>
+  </ul>
+  <p>Manufacturers publish degradation curves combining both effects, and warranties are typically written against a guaranteed capacity floor at specific years — for example, a common structure guarantees something like 70% of nameplate capacity remains at year 10 or year 15, not a flat percentage-per-year line. The actual curve is steeper in the early years and flattens later, which is exactly why an augmentation plan needs real degradation data, not a straight-line estimate.</p>
+
+  <h2>How an augmentation plan actually works</h2>
+  <p>Rather than building a system oversized enough to cover its entire life of fade upfront — expensive, and wasteful in the early years when the extra capacity sits unused — an augmentation plan adds capacity in phases, timed to when fade has eaten into enough headroom to matter. A typical structure:</p>
+  <ol>
+    <li>Size the initial DC block capacity with a modest built-in buffer above the contracted capacity.</li>
+    <li>Model the manufacturer's degradation curve against the contract term to find the year(s) fade would drop delivered capacity below the guarantee.</li>
+    <li>Schedule one or more augmentation phases — adding DC blocks — timed just ahead of those crossing points.</li>
+    <li>Reserve the physical space, PCS capacity, and interconnection headroom for those future blocks in the <i>original</i> design, not as an afterthought.</li>
+  </ol>
+
+  <div class="callout"><b>The step most projects get wrong:</b> reserving space and interconnection capacity for augmentation is easy to defer during initial construction budgeting — and expensive to fix later. A site with no room for another row of DC blocks, or an interconnection agreement sized exactly to the original capacity with no margin, turns a planned augmentation into a much harder retrofit.</div>
+
+  <h2>The product-generation problem</h2>
+  <p>DC block products change generations every few years — a battery chemistry, form factor, or manufacturer's product line available at construction may be discontinued by the time an augmentation phase is due five or ten years later. Projects that don't account for this risk either over-provision the initial reserved capacity, negotiate a supply agreement that includes future-generation compatibility commitments, or accept that augmentation may require a mixed-generation system with the integration complexity that comes with it. None of these are free — the point is to decide deliberately rather than discover the constraint mid-project. See <a class="inline" href="voltfield-eol.html">Obsolete &amp; End-of-Life Parts</a> for how this plays out across other long-lived equipment categories.</p>
+
+  <h2>Why this is a procurement decision, not just an engineering one</h2>
+  <p>Capacity guarantees in offtake agreements, tolling agreements, or capacity-market commitments are what actually make augmentation a contractual requirement rather than an optional maintenance choice. The augmentation schedule, who bears the cost, and what happens if a degradation curve turns out worse than modeled are all commercial terms that need to be negotiated alongside the equipment spec — not left to be sorted out once the fade shows up on a performance report.</p>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2>Where Voltfield fits in</h2>
+  <p>Augmentation planning starts with the same equipment covered on the <a class="inline" href="battery-storage.html">Battery Storage</a> pillar page — DC block sizing, C-rate, and PCS selection all factor into how much headroom a project needs to reserve. The <a class="inline" href="voltfield-bom-generator.html">BOM Generator</a> breaks down a DC block's component-level bill of materials, useful when evaluating whether a future augmentation phase can integrate with the original hardware generation.</p>
+
+  <h2>Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is BESS augmentation?</summary>
+    <p style="margin-top:10px">Adding DC blocks to a battery storage system partway through its life to offset capacity that has faded due to calendar and cycle aging, holding the system at its contracted capacity rather than letting delivered capacity decline year over year.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why does battery capacity fade over time?</summary>
+    <p style="margin-top:10px">Two mechanisms: calendar aging (chemical degradation that happens whether or not the battery cycles, driven mainly by time and temperature) and cycle aging (wear from repeated charge/discharge cycles, worse at higher depth of discharge and higher C-rates). Both are factored into manufacturer degradation curves and warranty capacity floors.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why does augmentation need to be planned before construction, not just added later?</summary>
+    <p style="margin-top:10px">Adding DC blocks later needs reserved physical space, spare PCS/interconnection capacity, and often a compatible product generation still in production. Projects that don't reserve for augmentation upfront can find the original DC block model discontinued by the time augmentation is due, forcing a more expensive mixed-generation retrofit.</p>
+  </details>
+</div>
+<div class="ctaband">
+  <div class="ctaband-in">
+    <div>
+      <h3>Specifying a BESS project?</h3>
+      <p>Configure DC blocks, PCS, and fire suppression equipment, and get real sourcing info with lead time in 24 hours.</p>
+    </div>
+    <a class="ctabtn" href="voltfield-supply-catalog.html?sector=bess">BROWSE BATTERY STORAGE PARTS &rarr;</a>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+<footer>
+  <div class="in">
+    <div>
+      <h5>Voltfield Supply Co.</h5>
+      <p>Independent sourcing agent for long-lead electrical, storage, oilfield, and MRO/industrial supply equipment. Pricing shown across the catalog is indicative market range (North America, July 2026), for reference only — actual pricing, availability, and lead time are set by the distributor, mill, or OEM fulfilling the order.</p>
+    </div>
+    <div><h5>Desks</h5><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+      <li><a href="oil-gas.html">Drilling &amp; Completions</a></li>
+      <li><a href="industrial-supply.html">Industrial Supply (MRO)</a></li>
+    </ul></div>
+    <div><h5>Compliance</h5><ul><li>UL · IEEE · ANSI C57</li><li>API 5CT/6A/7K/16A/Q1</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script>
+(function(){
+  try{
+    const q=JSON.parse(localStorage.getItem("vf_quote")||"[]");
+    const el=document.getElementById("quoteCount");
+    if(el)el.textContent=Array.isArray(q)?q.length:0;
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>
