@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Battery Storage (BESS) Equipment — DC Blocks, PCS, BMS &amp; Thermal | VOLTFIELD Supply Co.</title>
 <link rel="canonical" href="https://voltfield.org/battery-storage.html">
-<meta name="description" content="DC blocks, PCS, BMS, fire suppression, and thermal management for utility-scale BESS — priced at today's $/kWh benchmarks. 330 SKUs with lead-time reference data.">
+<meta name="description" content="BESS engineering explained: duration and C-rate, grid-forming vs. grid-following PCS, augmentation, NFPA 855 fire safety — plus guides, free calculators, and 330 reference SKUs at today's $/kWh benchmarks.">
 <meta name="keywords" content="BESS equipment, battery storage DC block, PCS power conversion system, BMS, NFPA 855, UL 9540A, utility-scale battery storage">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VOLTFIELD Supply Co.">
@@ -27,6 +27,8 @@
  {"@type":"CollectionPage","name":"Utility-Scale Battery Storage Equipment","description":"DC blocks, PCS, BMS, fire suppression, and thermal management for utility-scale BESS.","url":"https://voltfield.org/battery-storage.html","isPartOf":{"@type":"WebSite","name":"VOLTFIELD Supply Co.","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What's the current price range for BESS DC blocks?","acceptedAnswer":{"@type":"Answer","text":"LFP DC blocks are running roughly $110-140/kWh in the current market, above the roughly $117/kWh global turnkey average, as FEOC-compliant sourcing carries a premium for US buyers chasing tax credits."}},
+   {"@type":"Question","name":"What does 4-hour BESS and C-rate mean?","acceptedAnswer":{"@type":"Answer","text":"It means the system can discharge its full rated power continuously for 4 hours -- C/4 in C-rate shorthand. Duration is set first and directly drives DC block count for a given power rating."}},
+   {"@type":"Question","name":"What's the difference between grid-forming and grid-following PCS?","acceptedAnswer":{"@type":"Answer","text":"Grid-following PCS synchronizes to voltage and frequency the grid already provides; grid-forming PCS can establish that voltage and frequency itself, similar to a spinning generator."}},
    {"@type":"Question","name":"What's included in the Storage desk?","acceptedAnswer":{"@type":"Answer","text":"DC blocks, PCS, BMS, EMS, fire suppression, and thermal management — 330 SKUs built to NFPA 855 and UL 9540A."}},
    {"@type":"Question","name":"Is battery storage bigger than pumped hydro now?","acceptedAnswer":{"@type":"Answer","text":"Yes — global BESS capacity topped 250 GW in 2025, overtaking pumped hydro, per Rystad Energy's 2026 outlook."}}
  ]}
@@ -202,10 +204,10 @@ footer a:hover{color:#fff}
     <h1>Utility-Scale Battery Storage Equipment</h1>
     <p class="lede">DC blocks, PCS, BMS, fire suppression, and thermal management for BESS projects — priced against today's $/kWh benchmarks, not last year's.</p>
     <div class="hero-stats">
-      <div class="hstat"><div class="k">330</div><div class="l">Storage SKUs</div></div>
       <div class="hstat"><div class="k">$110&ndash;140</div><div class="l">LFP DC block pricing, per kWh</div></div>
-      <div class="hstat"><div class="k">96</div><div class="l">Storage block SKUs</div></div>
-      <div class="hstat"><div class="k">24 hr</div><div class="l">Quote turnaround</div></div>
+      <div class="hstat"><div class="k">32 wk</div><div class="l">Grid-forming PCS lead time</div></div>
+      <div class="hstat"><div class="k">6</div><div class="l">Guides &amp; tools for this sector</div></div>
+      <div class="hstat"><div class="k">330</div><div class="l">Reference SKUs</div></div>
     </div>
   </div>
 </section>
@@ -216,14 +218,54 @@ footer a:hover{color:#fff}
     <p>Turnkey pricing keeps falling — BloombergNEF's latest survey put the global average around $117/kWh, down roughly 31% year over year — though FEOC-compliant sourcing for US buyers chasing tax credits still carries a premium over that global average. At the same time, operators say the business itself has gotten more complex, shifting from simple energy arbitrage toward active risk management as markets like ERCOT mature.</p>
     <p>The Storage desk covers DC block BESS units, PCS (power conversion system) and BMS, EMS, BESS fire suppression equipment, and thermal management — 330 SKUs built to NFPA 855 and UL 9540A, configured and quoted against current lead times.</p>
     <p>Sourcing storage components on a tax-credit-eligible project? See <a href="guide-feoc-compliance.html" style="color:var(--signal-deep);font-weight:600;text-decoration:underline">FEOC Compliance for Solar &amp; Storage Procurement</a>. Planning site layout around NFPA 855? See <a href="guide-bess-fire-safety-nfpa-855.html" style="color:var(--signal-deep);font-weight:600;text-decoration:underline">BESS Fire Safety Basics</a>.</p>
+
+    <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Duration and C-rate</h3>
+    <p>A "4-hour BESS" means the system can discharge its full rated power continuously for 4 hours — the industry shorthand for that is <b>C-rate</b>, where a 4-hour system is C/4 (a quarter of capacity per hour) and a 1-hour system is 1C. Duration is set first, then it drives how many DC blocks get specified for a given power (MW) rating — a 100 MW / 4-hour project needs roughly four times the DC block count of a 100 MW / 1-hour project at the same power electronics. Most new US utility-scale BESS is now specified at 4 hours or longer, largely to qualify for ITC stacking and to better match evening peak-demand windows as solar penetration grows.</p>
+
+    <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Grid-forming vs. grid-following PCS</h3>
+    <p>Most PCS (power conversion system) units installed to date are <b>grid-following</b> — they synchronize to a voltage and frequency the grid is already providing. <b>Grid-forming</b> PCS can establish that voltage and frequency itself, the way a spinning generator does, which matters increasingly on grids adding large amounts of inverter-based renewable and storage capacity that need to keep the grid stable without conventional generation doing all the work. Grid-forming PCS currently quotes around 32 weeks and is increasingly specified on new interconnection requests as utilities update their technical requirements.</p>
+
+    <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Augmentation: planning for capacity fade</h3>
+    <p>Lithium battery capacity fades over the life of a project — a system sized to meet its nameplate rating on day one won't still meet it in year 10 without adding capacity back. <b>Augmentation</b> is the practice of specifying and budgeting for additional DC blocks partway through the project's life to offset that fade and hold the contracted capacity, and it's now standard practice to plan for in the original procurement rather than treat as a surprise mid-life expense.</p>
+
+    <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Fire suppression, BMS, and EMS</h3>
+    <p>NFPA 855 and UL 9540A drive both equipment selection and site layout — clean-agent and aerosol suppression systems are common choices for containerized BESS, sized and spaced according to the same test data that sets separation distances between units; see <a href="guide-bess-fire-safety-nfpa-855.html" style="color:var(--signal-deep);font-weight:600;text-decoration:underline">BESS Fire Safety Basics</a> for how the two standards fit together. Inside the system, the <b>BMS</b> (battery management system) manages cell-level voltage, temperature, and balancing within each block, while the <b>EMS</b> (energy management system) operates at the plant level — dispatch, market participation, and coordinating multiple DC blocks and PCS units as one asset.</p>
   </div>
   <a class="ctabtn" style="display:inline-block;margin-top:22px" href="voltfield-supply-catalog.html?sector=bess">BROWSE ALL BATTERY STORAGE PARTS &rarr;</a>
+</div>
+<div class="section" style="padding-top:0">
+  <div class="section-head"><div><div class="section-eyebrow">Free tools</div><h2>Tools for storage engineers</h2></div></div>
+  <div class="catquick">
+    <a class="catq" href="voltfield-sandbox.html">
+      <span class="cq-sec" style="background:var(--bess)">PRACTICE</span>
+      <svg class="cq-icon" viewBox="0 0 40 40" fill="none" stroke="#22334C" stroke-width="2"><circle cx="7" cy="20" r="3"/><path d="M10 20h6"/><rect x="16" y="15" width="8" height="10" rx="1"/><path d="M24 20h6"/><circle cx="33" cy="20" r="3"/></svg>
+      <h4>Practice Sandbox</h4><span class="cq-n">Design a one-line, check sizing &amp; fault current</span>
+    </a>
+    <a class="catq" href="engineering-calculators.html#bess-sizing">
+      <span class="cq-sec" style="background:var(--bess)">CALCULATE</span>
+      <svg class="cq-icon" viewBox="0 0 40 40" fill="none" stroke="#22334C" stroke-width="2"><rect x="9" y="5" width="22" height="30" rx="2" fill="#E9EEF3"/><rect x="13" y="9" width="14" height="6" fill="#B9C4D0"/><circle cx="14" cy="21" r="1.6" fill="#FFC400" stroke="none"/><circle cx="20" cy="21" r="1.6" fill="#FFC400" stroke="none"/><circle cx="26" cy="21" r="1.6" fill="#FFC400" stroke="none"/></svg>
+      <h4>BESS Sizing Calculator</h4><span class="cq-n">Duration/C-rate sizing, plus 19 more calculators</span>
+    </a>
+    <a class="catq" href="voltfield-bom-generator.html">
+      <span class="cq-sec" style="background:var(--bess)">BOM</span>
+      <svg class="cq-icon" viewBox="0 0 40 40" fill="none" stroke="#22334C" stroke-width="2"><rect x="6" y="6" width="28" height="28" rx="2" fill="#E9EEF3"/><path d="M12 14h10M12 20h16M12 26h13"/><circle cx="27" cy="14" r="1.6" fill="#FFC400" stroke="none"/></svg>
+      <h4>BOM Generator</h4><span class="cq-n">Component teardown for any DC block or PCS</span>
+    </a>
+  </div>
 </div>
 <div class="section" style="padding-top:0">
   <div class="section-head"><div><div class="section-eyebrow">FAQ</div><h2>Common questions</h2></div></div>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What's the current price range for BESS DC blocks?</summary>
     <p style="margin-top:10px;font-size:13.5px;color:var(--ink-2)">LFP DC blocks are running roughly $110-140/kWh in the current market, above the roughly $117/kWh global turnkey average, as FEOC-compliant sourcing carries a premium for US buyers chasing tax credits.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What does "4-hour BESS" and C-rate mean?</summary>
+    <p style="margin-top:10px;font-size:13.5px;color:var(--ink-2)">It means the system can discharge its full rated power continuously for 4 hours -- C/4 in C-rate shorthand. Duration is set first and directly drives DC block count for a given power rating.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What's the difference between grid-forming and grid-following PCS?</summary>
+    <p style="margin-top:10px;font-size:13.5px;color:var(--ink-2)">Grid-following PCS synchronizes to voltage and frequency the grid already provides; grid-forming PCS can establish that voltage and frequency itself, similar to a spinning generator -- increasingly specified as grids add more inverter-based capacity.</p>
   </details>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What's included in the Storage desk?</summary>
