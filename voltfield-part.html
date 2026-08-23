@@ -41,6 +41,9 @@
 .p-band{height:7px}
 .p-imgwrap{height:230px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:16px}
 .p-img{max-width:100%;max-height:100%;object-fit:contain;mix-blend-mode:multiply}
+.p-refphoto{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);padding:10px 12px;margin-top:14px}
+.p-refphoto img{width:64px;height:64px;object-fit:contain;flex-shrink:0;background:var(--card)}
+.p-refphoto p{font-size:11.5px;color:var(--slate);line-height:1.5;margin:0}
 .p-hd{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 20px;border-bottom:1px solid var(--line)}
 .p-cat{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#fff;padding:3px 8px}
 .p-dist{font-family:var(--mono);font-size:11px;color:var(--slate)}
@@ -274,6 +277,23 @@ function updateProductSchema(pn,price,lb){
   if(!el){el=document.createElement('script');el.type='application/ld+json';el.id='productSchema';document.head.appendChild(el);}
   el.textContent=JSON.stringify(data);
 }
+/* The catalog listing/grid deliberately uses category icons, not photos, everywhere --
+   many SKUs in a family would otherwise share one duplicate stock photo (see
+   voltfield-cat-icons.js). A part detail page is different: it's exactly one
+   configuration, so a real crawlable <img> (with the same honest disclosure used
+   sitewide) is worth surfacing here even though the icon stays the primary visual. */
+function refPhotoHTML(f,name){
+  if(!f.img)return '';
+  const webp=f.img.replace(/\.jpg$/,'.webp');
+  const alt=(name+' — reference illustration').replace(/"/g,'&quot;');
+  return `<div class="p-refphoto">
+    <picture>
+      <source srcset="${webp}" type="image/webp">
+      <img src="${f.img}" alt="${alt}" width="340" height="340" loading="lazy" onerror="this.closest('.p-refphoto').remove()">
+    </picture>
+    <p>AI-generated reference illustration, not vendor photography — the exact item supplied may vary by manufacturer and configuration.</p>
+  </div>`;
+}
 function renderPart(){
   const {picks,qty}=PS;
   const pn=configuredPN(f,picks,PS.chk), price=priceFor(f,picks), lb=leadBadge(f), col=SECTORS[f.s].color;
@@ -306,6 +326,7 @@ function renderPart(){
         <div class="p-cfg-t">Configure this part</div>
         <div class="p-cfg">${f.ax.map((axis,ai)=>`<label class="cfg-row"><span>${axis[0]}</span><select data-ai="${ai}">${axis.slice(1).map(o=>`<option${o===picks[ai]?' selected':''}>${o}</option>`).join('')}</select><span class="cfg-print">${picks[ai]}</span></label>`).join('')}</div>
         <div class="p-cmp">${f.cmp.map(x=>`<span>${x}</span>`).join('')}</div>
+        ${refPhotoHTML(f,configuredName(f,picks))}
         <div class="p-facts">
           <div><span>Unit price</span><b>${money(price,f.pu)}</b></div>
           <div><span>Lead time</span><b class="lead ${lb.c}">${lb.t}</b></div>
