@@ -97,5 +97,33 @@
     <description>What the Build America, Buy America Act (BABA) actually requires for IIJA-funded infrastructure projects, how it differs from the IRA domestic content bonus, and what documentation to gather.</description>
     <pubDate>Sun, 02 Aug 2026 00:00:00 GMT</pubDate>
   </item>
+  <item>
+    <title>POD &amp; Skid Designer</title>
+    <link>https://voltfield.org/voltfield-pod-designer.html</link>
+    <guid>https://voltfield.org/voltfield-pod-designer.html</guid>
+    <description>A free power POD/skid sizing sandbox: set a target load and redundancy level (N/N+1/2N), pick a transformer, switchgear, distribution, backup power, and cooling, then check sizing instantly.</description>
+    <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>PJM Interconnection Timeline, Explained: Transition Cycles &amp; Data Center Load</title>
+    <link>https://voltfield.org/guide-interconnection-pjm.html</link>
+    <guid>https://voltfield.org/guide-interconnection-pjm.html</guid>
+    <description>How PJM's interconnection queue actually works: the Transition Cycle reform that replaced serial studies, readiness requirements, and what the Northern Virginia data-center load boom means for queue timing.</description>
+    <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>MISO Interconnection Timeline, Explained: The Definitive Planning Phase</title>
+    <link>https://voltfield.org/guide-interconnection-miso.html</link>
+    <guid>https://voltfield.org/guide-interconnection-miso.html</guid>
+    <description>How MISO's Definitive Planning Phase (DPP) cluster-study process works, why it ran into major delays, and why a single MISO timeline doesn't apply evenly across its North, Central, and South regions.</description>
+    <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>ERCOT Interconnection Timeline, Explained: Why Texas Runs Its Own Process</title>
+    <link>https://voltfield.org/guide-interconnection-ercot.html</link>
+    <guid>https://voltfield.org/guide-interconnection-ercot.html</guid>
+    <description>How ERCOT's generation interconnection process works, why it isn't FERC-jurisdictional, and how rapid wind, solar, and storage growth has reshaped what was once one of the faster queues in the US.</description>
+    <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
+  </item>
 </channel>
 </rss>

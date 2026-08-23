@@ -10,6 +10,9 @@
     {"title": "Grounding & Bonding Basics", "url": "guide-grounding-bonding-basics.html", "category": "Guide", "description": "Grounding and bonding do two different jobs — what each one actually does and why it matters."},
     {"title": "Short-Circuit Studies & Breaker Coordination Basics", "url": "guide-short-circuit-studies-breaker-coordination.html", "category": "Guide", "description": "What a short-circuit study calculates and how breaker coordination decides which device trips first."},
     {"title": "The Grid Interconnection Process, Explained", "url": "guide-grid-interconnection-process.html", "category": "Guide", "description": "Queue position, feasibility/system-impact/facilities studies, cluster studies, and the interconnection agreement."},
+    {"title": "PJM Interconnection Timeline, Explained", "url": "guide-interconnection-pjm.html", "category": "Guide", "description": "Transition Cycles, readiness requirements, and what the Northern Virginia data-center load boom means for queue timing."},
+    {"title": "MISO Interconnection Timeline, Explained", "url": "guide-interconnection-miso.html", "category": "Guide", "description": "The Definitive Planning Phase (DPP), why cycles ran behind schedule, and why sub-region matters."},
+    {"title": "ERCOT Interconnection Timeline, Explained", "url": "guide-interconnection-ercot.html", "category": "Guide", "description": "Why ERCOT sits outside FERC jurisdiction, and how rapid growth has reshaped a historically faster process."},
     {"title": "Buy America / BABA for Infrastructure Procurement", "url": "guide-buy-america-iija.html", "category": "Guide", "description": "What BABA requires for IIJA-funded projects, and how it differs from the IRA domestic content bonus."},
 
     {"title": "Voltage Drop / Cable Sizing Calculator", "url": "engineering-calculators.html#voltage-drop", "category": "Calculator", "description": "K-factor method voltage drop estimate across a feeder, with AWG/kcmil wire sizing."},
@@ -58,6 +61,7 @@
 
     {"title": "Engineering Calculators", "url": "engineering-calculators.html", "category": "Tool", "description": "20 free calculators for cable sizing, transformer/BESS sizing, fault current, arc-flash, and more."},
     {"title": "EE Practice Sandbox", "url": "voltfield-sandbox.html", "category": "Tool", "description": "Design a one-line system — transformer, main breaker, feeder, panel loads — and run 5 engineering checks live."},
+    {"title": "POD & Skid Designer", "url": "voltfield-pod-designer.html", "category": "Tool", "description": "Size a modular power block against a target load and redundancy level (N/N+1/2N) — enclosed POD or open-frame skid."},
     {"title": "Glossary Quiz", "url": "voltfield-glossary-quiz.html", "category": "Tool", "description": "Test yourself on energy and industrial equipment terms."},
     {"title": "RFQ Toolkit", "url": "rfq-toolkit.html", "category": "Tool", "description": "An RFQ readiness checklist and copy-paste spec templates for transformers, switchgear, and BESS."},
     {"title": "BOM Generator", "url": "voltfield-bom-generator.html", "category": "Tool", "description": "Component-level bill of materials breakdown for any engineered part."},
