@@ -3,25 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VOLTFIELD — Energy Infrastructure &amp; Industrial Parts Catalog | VOLTFIELD Supply Co.</title>
+<title>VOLTFIELD — Free Engineering Calculators, Guides &amp; Practice Tools | VOLTFIELD Supply Co.</title>
 <link rel="canonical" href="https://voltfield.org/">
-<meta name="description" content="Search configurable SKUs across data-center power, solar & wind, battery storage, oil & gas, and industrial MRO. Configure exact parts, see specs and lead-time reference data, and generate component BOMs.">
-<meta name="keywords" content="power transformers, MV switchgear, solar inverters, BESS, battery storage, oilfield equipment, MRO supplies, industrial parts, lead times, BOM generator">
+<meta name="description" content="Free engineering calculators, a one-line design practice sandbox, a BOM generator, and a live equipment lead-time index for data center, renewable, storage, and industrial power systems. No signup required.">
+<meta name="keywords" content="engineering calculators, one-line diagram practice, voltage drop calculator, transformer sizing, arc-flash calculator, BOM generator, power transformer lead times, FEOC compliance, data center power">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VOLTFIELD Supply Co.">
-<meta property="og:title" content="VOLTFIELD Supply Co. — Find the Exact Part, From Grid Gear to MRO">
-<meta property="og:description" content="Configurable SKUs across 5 sectors: transformers, switchgear, inverters, battery storage, oilfield and MRO — with lead-time reference data and a BOM generator.">
+<meta property="og:title" content="VOLTFIELD Supply Co. — Free Engineering Tools for Energy Infrastructure">
+<meta property="og:description" content="Free calculators, a one-line design sandbox, a BOM generator, and a live lead-time index — for data center, renewable, storage, and industrial power engineers.">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="https://voltfield.org/social/social-index.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:image" content="https://voltfield.org/social/social-index.jpg">
-<meta name="twitter:title" content="VOLTFIELD Supply Co. — Energy Infrastructure & Industrial Parts">
-<meta name="twitter:description" content="Search configurable SKUs, configure exact parts, and generate component BOMs.">
+<meta name="twitter:title" content="VOLTFIELD Supply Co. — Free Engineering Tools &amp; Practice Sandbox">
+<meta name="twitter:description" content="Free engineering calculators, a one-line design sandbox, and a live equipment lead-time index. No signup.">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
- {"@type":"Organization","name":"VOLTFIELD Supply Co.","description":"Independent sourcing agent for energy-infrastructure and industrial MRO parts across data centers, renewables, battery storage, and oil & gas.","telephone":"+1-850-686-1378","email":"Help@voltfield.org","address":{"@type":"PostalAddress","streetAddress":"4043 Star Trek Ln","addressLocality":"Garland","addressRegion":"TX","postalCode":"75044","addressCountry":"US"}},
- {"@type":"WebSite","name":"VOLTFIELD Supply Co.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"voltfield-supply-catalog.html?q={search_term_string}"},"query-input":"required name=search_term_string"}}
+ {"@type":"Organization","name":"VOLTFIELD Supply Co.","description":"Free engineering tools, technical guides, and sourcing-reference data for energy-infrastructure and industrial equipment across data centers, renewables, battery storage, and oil & gas.","telephone":"+1-850-686-1378","email":"Help@voltfield.org","address":{"@type":"PostalAddress","streetAddress":"4043 Star Trek Ln","addressLocality":"Garland","addressRegion":"TX","postalCode":"75044","addressCountry":"US"}},
+ {"@type":"WebSite","name":"VOLTFIELD Supply Co.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"site-search.html?q={search_term_string}"},"query-input":"required name=search_term_string"}}
 ]}
 </script>
 <link rel="manifest" href="manifest.json">
@@ -259,27 +259,27 @@ footer a:hover{color:#fff}
   </a>
   <nav class="hnav">
     <a href="index.html" class="on">Home</a>
-    <a href="lead-time-index.html">Lead-Time Index</a>
-    <a href="voltfield-insights.html">Insights</a>
     <div class="navdrop" id="toolsDrop">
       <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
       <div class="navdrop-menu">
         <a href="free-tools.html">All Free Tools</a>
+        <a href="voltfield-sandbox.html">Practice Sandbox</a>
+        <a href="engineering-calculators.html">Calculators</a>
         <a href="voltfield-bom-generator.html">BOM Generator</a>
+        <a href="voltfield-bom.html">BOM Match</a>
         <a href="voltfield-pcb.html">PCB Builder</a>
         <a href="voltfield-pcb-layout.html">PCB Layout Tool</a>
         <a href="voltfield-identify.html">Part ID</a>
         <a href="voltfield-eol.html">Obsolete/EOL</a>
-        <a href="engineering-calculators.html">Calculators</a>
-        <a href="voltfield-sandbox.html">Practice Sandbox</a>
         <a href="voltfield-glossary-quiz.html">Glossary Quiz</a>
         <a href="rfq-toolkit.html">RFQ Toolkit</a>
         <a href="site-search.html">Search</a>
       </div>
     </div>
-    <a href="voltfield-supply-catalog.html">All Parts</a>
-    <a href="voltfield-suppliers.html">All Suppliers</a>
-    <a href="voltfield-bom.html">BOM Match</a>
+    <a href="voltfield-insights.html">Guides &amp; Insights</a>
+    <a href="lead-time-index.html">Lead-Time Index</a>
+    <a href="voltfield-supply-catalog.html">Spec Library</a>
+    <a href="voltfield-suppliers.html">Suppliers</a>
     <a href="whats-new.html">What's New</a>
     <a href="voltfield-account.html">Account</a>
   </nav>
@@ -291,75 +291,47 @@ footer a:hover{color:#fff}
 <section class="hero" id="main">
   <div class="hero-in hero-grid">
     <div class="hero-left">
-    <div class="hero-eyebrow">Configurable SKUs · 5 sectors · updated July 2026</div>
-    <h1>Find the exact part.<br>Not just the <em>category.</em></h1>
-    <p class="lede">Search, filter, or tell us what you're building — we'll route you straight to the right family, configure the exact SKU, and show you real vendors and lead times. One industrial parts catalog for energy infrastructure and general MRO.</p>
+    <div class="hero-eyebrow">Free engineering tools · live market data · updated August 2026</div>
+    <h1>Practice the design.<br>Trust the <em>data.</em></h1>
+    <p class="lede">Free engineering calculators, a drag-and-drop one-line design sandbox, a BOM generator, and a live equipment lead-time index for data center, renewable, storage, and industrial power systems. No signup, nothing paywalled.</p>
     <div class="herosearch">
-      <form action="voltfield-supply-catalog.html" method="get" id="heroSearchForm">
-        <input name="q" id="heroSearchInput" type="search" autocomplete="off" placeholder="Try &ldquo;15kV switchgear&rdquo;, &ldquo;hex cap screw&rdquo;, or a part number&hellip;" aria-label="Search the catalog">
+      <form action="site-search.html" method="get" id="heroSearchForm">
+        <input name="q" id="heroSearchInput" type="search" autocomplete="off" placeholder="Try &ldquo;voltage drop&rdquo;, &ldquo;FEOC&rdquo;, or &ldquo;arc flash&rdquo;&hellip;" aria-label="Search guides, calculators &amp; tools">
         <button type="submit">SEARCH</button>
         <div class="kbsearch-results" id="heroSearchSuggest" role="listbox"></div>
       </form>
       <div class="hint">
         <span>Popular:</span>
-        <a href="voltfield-supply-catalog.html?q=transformer" style="color:#C9D3DF">transformers</a>
-        <a href="voltfield-supply-catalog.html?q=inverter" style="color:#C9D3DF">inverters</a>
-        <a href="voltfield-supply-catalog.html?q=fastener" style="color:#C9D3DF">fasteners</a>
-        <a href="voltfield-supply-catalog.html?q=bearing" style="color:#C9D3DF">bearings</a>
-        <a href="voltfield-supply-catalog.html?lt=short" style="color:#C9D3DF">in-stock / short lead-time</a>
+        <a href="voltfield-sandbox.html" style="color:#C9D3DF">practice sandbox</a>
+        <a href="engineering-calculators.html" style="color:#C9D3DF">calculators</a>
+        <a href="site-search.html?q=transformer+lead+time" style="color:#C9D3DF">transformer lead times</a>
+        <a href="site-search.html?q=FEOC" style="color:#C9D3DF">FEOC compliance</a>
+        <a href="site-search.html?q=voltage+drop" style="color:#C9D3DF">voltage drop</a>
       </div>
     </div>
     <div class="hero-stats">
       <div class="hstat"><div class="k">160 wk</div><div class="l">Longest transformer lead time</div></div>
-      <div class="hstat"><div class="k">243</div><div class="l">Product families</div></div>
-      <div class="hstat"><div class="k">5</div><div class="l">Sectors covered</div></div>
-      <div class="hstat"><div class="k">24 hr</div><div class="l">Quote turnaround</div></div>
+      <div class="hstat"><div class="k">20</div><div class="l">Free engineering calculators</div></div>
+      <div class="hstat"><div class="k">11</div><div class="l">In-depth technical guides</div></div>
+      <div class="hstat"><div class="k">Free</div><div class="l">No signup, ever</div></div>
     </div>
     </div>
     <aside class="panel" aria-label="Guided starting points">
-    <div class="panel-sub">Not sure where to start? Pick the path that matches your work — each option opens the catalog already filtered to the right parts.</div>
+    <div class="panel-sub">Not sure where to start? Jump into a tool, or open a sector's guides, calculators, and reference data.</div>
     <div class="switchgrid">
-      <a class="switch" href="voltfield-supply-catalog.html?sector=dc">
-        <div class="sw-top"><svg class="sw-icon" viewBox="0 0 40 40" fill="none" stroke="#8DA0B8" stroke-width="2"><rect x="9" y="6" width="22" height="28" rx="2"/><path d="M9 14h22M9 22h22M9 30h22"/><circle cx="26" cy="10" r="1.4" fill="#8DA0B8" stroke="none"/><circle cx="26" cy="18" r="1.4" fill="#8DA0B8" stroke="none"/><circle cx="26" cy="26" r="1.4" fill="#8DA0B8" stroke="none"/></svg>
+      <a class="switch" href="voltfield-sandbox.html">
+        <div class="sw-top"><svg class="sw-icon" viewBox="0 0 40 40" fill="none" stroke="#8DA0B8" stroke-width="2"><circle cx="7" cy="20" r="3"/><path d="M10 20h6"/><rect x="16" y="15" width="8" height="10" rx="1"/><path d="M24 20h6"/><circle cx="33" cy="20" r="3"/></svg>
         <div class="sw-toggle"><i></i></div></div>
-        <h3>Building a data center</h3>
-        <p>Power, switchgear, backup, cooling, and distribution — sized for hyperscale and colo builds.</p>
-        <div class="sw-foot"><span>26,630 SKUs</span><span>&rarr;</span></div>
+        <h3>Design a one-line system</h3>
+        <p>Drag transformer, breaker, feeder, and load tiles onto an open board and get instant checks on sizing, voltage drop, and fault current.</p>
+        <div class="sw-foot"><span>PRACTICE SANDBOX</span><span>&rarr;</span></div>
       </a>
-      <a class="switch" href="voltfield-supply-catalog.html?sector=re">
-        <div class="sw-top"><svg class="sw-icon" viewBox="0 0 40 40" fill="none" stroke="#8DA0B8" stroke-width="2"><path d="M20 6v6M20 28v6M6 20h6M28 20h6M10 10l4 4M26 26l4 4M30 10l-4 4M14 26l-4 4"/><circle cx="20" cy="20" r="7"/></svg>
+      <a class="switch" href="engineering-calculators.html">
+        <div class="sw-top"><svg class="sw-icon" viewBox="0 0 40 40" fill="none" stroke="#8DA0B8" stroke-width="2"><rect x="9" y="5" width="22" height="30" rx="2"/><rect x="13" y="9" width="14" height="6" fill="#8DA0B8" stroke="none"/><circle cx="14" cy="21" r="1.6" fill="#8DA0B8" stroke="none"/><circle cx="20" cy="21" r="1.6" fill="#8DA0B8" stroke="none"/><circle cx="26" cy="21" r="1.6" fill="#8DA0B8" stroke="none"/><circle cx="14" cy="27" r="1.6" fill="#8DA0B8" stroke="none"/><circle cx="20" cy="27" r="1.6" fill="#8DA0B8" stroke="none"/><circle cx="26" cy="27" r="1.6" fill="#8DA0B8" stroke="none"/></svg>
         <div class="sw-toggle"><i></i></div></div>
-        <h3>Engineering solar, wind, or hybrid sites</h3>
-        <p>Modules, inverters, trackers, MV cable, and GSUs — including FEOC-clean sourcing options.</p>
-        <div class="sw-foot"><span>26,826 SKUs</span><span>&rarr;</span></div>
-      </a>
-      <a class="switch" href="voltfield-supply-catalog.html?sector=bess">
-        <div class="sw-top"><svg class="sw-icon" viewBox="0 0 40 40" fill="none" stroke="#8DA0B8" stroke-width="2"><rect x="10" y="8" width="20" height="26" rx="2"/><rect x="16" y="4" width="8" height="4"/><path d="M15 16h10M15 22h10M15 28h6"/></svg>
-        <div class="sw-toggle"><i></i></div></div>
-        <h3>Specifying battery storage</h3>
-        <p>DC blocks, PCS, BMS, fire suppression, and thermal management — priced at today's $/kWh benchmarks.</p>
-        <div class="sw-foot"><span>1,310 SKUs</span><span>&rarr;</span></div>
-      </a>
-      <a class="switch" href="voltfield-supply-catalog.html?sector=og">
-        <div class="sw-top"><svg class="sw-icon" viewBox="0 0 40 40" fill="none" stroke="#8DA0B8" stroke-width="2"><path d="M20 4l9 30h-4.5l-1.5-7h-6l-1.5 7H11z"/><path d="M14.5 27h11M20 4v23M15 20l5-3 5 3M16 12l4 2.4 4-2.4" stroke-width="1.6"/><circle cx="20" cy="4" r="1.6" fill="#8DA0B8" stroke="none"/></svg>
-        <div class="sw-toggle"><i></i></div></div>
-        <h3>Running drilling, completions, or workover operations</h3>
-        <p>Wellheads, BOPs, tubulars, artificial lift, and fittings — new, rebuilt, or recertified.</p>
-        <div class="sw-foot"><span>89,084 SKUs</span><span>&rarr;</span></div>
-      </a>
-      <a class="switch" href="voltfield-supply-catalog.html?sector=mro">
-        <div class="sw-top"><svg class="sw-icon" viewBox="0 0 40 40" fill="none" stroke="#8DA0B8" stroke-width="2"><path d="M14 8l3-3 3 3-3 3z" fill="#8DA0B8" stroke-width="1.4"/><path d="M20 26h14M20 32h10" stroke-width="2.4"/><circle cx="14" cy="24" r="8"/><path d="M14 20v8M10 24h8" stroke-width="1.6"/></svg>
-        <div class="sw-toggle"><i></i></div></div>
-        <h3>Stocking MRO, tools, and shop supplies</h3>
-        <p>Fasteners, raw stock, safety, tools, plumbing, electrical, and more — everyday plant and facility supplies.</p>
-        <div class="sw-foot"><span>2,045,332 SKUs</span><span>&rarr;</span></div>
-      </a>
-      <a class="switch" href="voltfield-supply-catalog.html?lt=short">
-        <div class="sw-top"><svg class="sw-icon" viewBox="0 0 40 40" fill="none" stroke="#8DA0B8" stroke-width="2"><circle cx="20" cy="20" r="14"/><path d="M20 12v8l6 4"/></svg>
-        <div class="sw-toggle"><i></i></div></div>
-        <h3>Need it fast? Short lead times only</h3>
-        <p>Filter the entire catalog down to parts quoting 12 weeks or less, across every sector.</p>
-        <div class="sw-foot"><span>ALL SECTORS</span><span>&rarr;</span></div>
+        <h3>Run the numbers</h3>
+        <p>20 free calculators: voltage drop, transformer sizing, arc-flash incident energy, cable ampacity, fault current, and more.</p>
+        <div class="sw-foot"><span>CALCULATORS</span><span>&rarr;</span></div>
       </a>
       <a class="switch" href="voltfield-bom-generator.html">
         <div class="sw-top"><svg class="sw-icon" viewBox="0 0 40 40" fill="none" stroke="#8DA0B8" stroke-width="2"><rect x="6" y="6" width="28" height="28" rx="2"/><path d="M12 14h10M12 20h16M12 26h13"/><circle cx="27" cy="14" r="1.6" fill="#8DA0B8" stroke="none"/></svg>
@@ -382,12 +354,54 @@ footer a:hover{color:#fff}
         <p>Photograph the nameplate — on-device OCR reads it and matches replacement options, EOL alerts, and BOM teardowns.</p>
         <div class="sw-foot"><span>PART ID</span><span>&rarr;</span></div>
       </a>
+      <a class="switch" href="data-centers.html">
+        <div class="sw-top"><svg class="sw-icon" viewBox="0 0 40 40" fill="none" stroke="#8DA0B8" stroke-width="2"><rect x="9" y="6" width="22" height="28" rx="2"/><path d="M9 14h22M9 22h22M9 30h22"/><circle cx="26" cy="10" r="1.4" fill="#8DA0B8" stroke="none"/><circle cx="26" cy="18" r="1.4" fill="#8DA0B8" stroke="none"/><circle cx="26" cy="26" r="1.4" fill="#8DA0B8" stroke="none"/></svg>
+        <div class="sw-toggle"><i></i></div></div>
+        <h3>Building a data center</h3>
+        <p>Power, switchgear, backup, cooling, and distribution — guides, calculators, and reference specs for hyperscale and colo builds.</p>
+        <div class="sw-foot"><span>GUIDES &amp; SPECS</span><span>&rarr;</span></div>
+      </a>
+      <a class="switch" href="renewables.html">
+        <div class="sw-top"><svg class="sw-icon" viewBox="0 0 40 40" fill="none" stroke="#8DA0B8" stroke-width="2"><path d="M20 6v6M20 28v6M6 20h6M28 20h6M10 10l4 4M26 26l4 4M30 10l-4 4M14 26l-4 4"/><circle cx="20" cy="20" r="7"/></svg>
+        <div class="sw-toggle"><i></i></div></div>
+        <h3>Engineering solar, wind, or hybrid sites</h3>
+        <p>Modules, inverters, trackers, MV cable, and GSUs — including FEOC-clean sourcing guidance.</p>
+        <div class="sw-foot"><span>GUIDES &amp; SPECS</span><span>&rarr;</span></div>
+      </a>
+      <a class="switch" href="battery-storage.html">
+        <div class="sw-top"><svg class="sw-icon" viewBox="0 0 40 40" fill="none" stroke="#8DA0B8" stroke-width="2"><rect x="10" y="8" width="20" height="26" rx="2"/><rect x="16" y="4" width="8" height="4"/><path d="M15 16h10M15 22h10M15 28h6"/></svg>
+        <div class="sw-toggle"><i></i></div></div>
+        <h3>Specifying battery storage</h3>
+        <p>DC blocks, PCS, BMS, fire suppression, and thermal management — with today's $/kWh benchmarks.</p>
+        <div class="sw-foot"><span>GUIDES &amp; SPECS</span><span>&rarr;</span></div>
+      </a>
+      <a class="switch" href="oil-gas.html">
+        <div class="sw-top"><svg class="sw-icon" viewBox="0 0 40 40" fill="none" stroke="#8DA0B8" stroke-width="2"><path d="M20 4l9 30h-4.5l-1.5-7h-6l-1.5 7H11z"/><path d="M14.5 27h11M20 4v23M15 20l5-3 5 3M16 12l4 2.4 4-2.4" stroke-width="1.6"/><circle cx="20" cy="4" r="1.6" fill="#8DA0B8" stroke="none"/></svg>
+        <div class="sw-toggle"><i></i></div></div>
+        <h3>Running drilling, completions, or workover operations</h3>
+        <p>Wellheads, BOPs, tubulars, artificial lift, and fittings — reference specs, new, rebuilt, or recertified.</p>
+        <div class="sw-foot"><span>GUIDES &amp; SPECS</span><span>&rarr;</span></div>
+      </a>
+      <a class="switch" href="industrial-supply.html">
+        <div class="sw-top"><svg class="sw-icon" viewBox="0 0 40 40" fill="none" stroke="#8DA0B8" stroke-width="2"><path d="M14 8l3-3 3 3-3 3z" fill="#8DA0B8" stroke-width="1.4"/><path d="M20 26h14M20 32h10" stroke-width="2.4"/><circle cx="14" cy="24" r="8"/><path d="M14 20v8M10 24h8" stroke-width="1.6"/></svg>
+        <div class="sw-toggle"><i></i></div></div>
+        <h3>Stocking MRO, tools, and shop supplies</h3>
+        <p>Fasteners, raw stock, safety, tools, plumbing, electrical, and more — everyday plant and facility supplies.</p>
+        <div class="sw-foot"><span>GUIDES &amp; SPECS</span><span>&rarr;</span></div>
+      </a>
+      <a class="switch" href="voltfield-supply-catalog.html?lt=short">
+        <div class="sw-top"><svg class="sw-icon" viewBox="0 0 40 40" fill="none" stroke="#8DA0B8" stroke-width="2"><circle cx="20" cy="20" r="14"/><path d="M20 12v8l6 4"/></svg>
+        <div class="sw-toggle"><i></i></div></div>
+        <h3>Need it fast? Short lead times only</h3>
+        <p>Filter the reference catalog down to parts quoting 12 weeks or less, across every sector.</p>
+        <div class="sw-foot"><span>ALL SECTORS</span><span>&rarr;</span></div>
+      </a>
       <a class="switch" href="voltfield-supply-catalog.html">
         <div class="sw-top"><svg class="sw-icon" viewBox="0 0 40 40" fill="none" stroke="#8DA0B8" stroke-width="2"><rect x="7" y="7" width="11" height="11" rx="1"/><rect x="22" y="7" width="11" height="11" rx="1"/><rect x="7" y="22" width="11" height="11" rx="1"/><rect x="22" y="22" width="11" height="11" rx="1"/></svg>
         <div class="sw-toggle"><i></i></div></div>
         <h3>Know exactly what you need?</h3>
-        <p>Skip the guided paths and search the full 2M-SKU catalog with every filter open.</p>
-        <div class="sw-foot"><span>BROWSE ALL</span><span>&rarr;</span></div>
+        <p>Skip the guided paths and search the full 2M-part reference catalog with every filter open.</p>
+        <div class="sw-foot"><span>SPEC LIBRARY</span><span>&rarr;</span></div>
       </a>
     </div>
     </aside>
@@ -395,10 +409,10 @@ footer a:hover{color:#fff}
 </section>
 <div class="toolstats">
   <div class="toolstats-in">
-    <div class="toolstats-lbl">More than a parts catalog — free engineering resources, no signup:</div>
+    <div class="toolstats-lbl">Free engineering resources, no signup:</div>
     <div class="toolstats-row">
-      <a class="tstat" href="engineering-calculators.html"><div class="k">19</div><div class="l">Engineering Calculators</div></a>
-      <a class="tstat" href="voltfield-insights.html"><div class="k">9</div><div class="l">Technical Guides</div></a>
+      <a class="tstat" href="engineering-calculators.html"><div class="k">20</div><div class="l">Engineering Calculators</div></a>
+      <a class="tstat" href="voltfield-insights.html"><div class="k">11</div><div class="l">Technical Guides</div></a>
       <a class="tstat" href="voltfield-pcb.html"><div class="k">7</div><div class="l">Interactive Tools</div></a>
       <a class="tstat" href="voltfield-eol.html"><div class="k">21</div><div class="l">Obsolete/EOL Platforms Tracked</div></a>
     </div>
@@ -727,29 +741,32 @@ document.getElementById("newstabs").addEventListener("click",e=>{
     if(el)el.textContent=Array.isArray(q)?q.length:0;
   }catch(e){}
 })();
-/* ---------- hero search autocomplete: jump straight to a matching family ---------- */
+/* ---------- hero search autocomplete: jump straight to a matching guide, calculator, or tool ---------- */
 (function(){
   const input=document.getElementById('heroSearchInput'), results=document.getElementById('heroSearchSuggest');
-  if(!input||!results||typeof FAM==='undefined')return;
+  if(!input||!results)return;
+  let INDEX=null;
+  fetch('search-index.json').then(r=>r.json()).then(data=>{INDEX=data.items||[];if(input.value.trim())render(search(input.value),input.value);}).catch(()=>{INDEX=[];});
   function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+  function norm(s){return String(s).toLowerCase().replace(/[^a-z0-9]+/g,' ');}
   function search(q){
-    const needle=q.trim().toLowerCase();
-    if(!needle)return [];
-    return FAM.filter(f=>f.search.includes(needle)).slice(0,8);
+    if(!INDEX)return [];
+    const words=norm(q).trim().split(' ').filter(Boolean);
+    if(!words.length)return [];
+    return INDEX.filter(it=>{
+      const hay=norm(it.title+' '+it.description+' '+(it.category||''));
+      return words.every(w=>hay.includes(w));
+    }).slice(0,8);
   }
   function render(list,q){
     if(!q.trim()){results.classList.remove('show');results.innerHTML='';return;}
-    if(!list.length){results.innerHTML='<div class="kbsearch-empty">No matches for &ldquo;'+esc(q)+'&rdquo; &mdash; press Enter to search the full catalog.</div>';results.classList.add('show');return;}
-    results.innerHTML=list.map(f=>`<button type="button" class="kbsearch-item" data-fi="${f._i}"><span class="kind">${SECTORS[f.s].label} &middot; ${esc(f.c)}</span><span class="ttl">${esc(f.n)}</span><span class="snip">${f.ct.toLocaleString('en-US')} configurable SKUs</span></button>`).join('');
+    if(INDEX===null)return; /* still loading -- wait for the fetch to resolve */
+    if(!list.length){results.innerHTML='<div class="kbsearch-empty">No matches for &ldquo;'+esc(q)+'&rdquo; &mdash; press Enter to search guides, calculators &amp; tools.</div>';results.classList.add('show');return;}
+    results.innerHTML=list.map(it=>`<a class="kbsearch-item" href="${esc(it.url)}"><span class="kind">${esc(it.category)}</span><span class="ttl">${esc(it.title)}</span><span class="snip">${esc(it.description)}</span></a>`).join('');
     results.classList.add('show');
   }
   input.addEventListener('input',()=>render(search(input.value),input.value));
   input.addEventListener('focus',()=>{if(input.value.trim())render(search(input.value),input.value);});
-  results.addEventListener('click',e=>{
-    const btn=e.target.closest('.kbsearch-item[data-fi]');
-    if(!btn)return;
-    location.href='voltfield-part.html?fi='+btn.dataset.fi;
-  });
   document.addEventListener('click',e=>{if(!e.target.closest('.herosearch'))results.classList.remove('show');});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')results.classList.remove('show');});
 })();
