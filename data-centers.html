@@ -173,6 +173,7 @@ footer a:hover{color:#fff}
       <div class="navdrop-menu">
         <a href="free-tools.html">All Free Tools</a>
         <a href="voltfield-sandbox.html">Practice Sandbox</a>
+        <a href="voltfield-pod-designer.html">POD &amp; Skid Designer</a>
         <a href="engineering-calculators.html">Calculators</a>
         <a href="voltfield-bom-generator.html">BOM Generator</a>
         <a href="voltfield-bom.html">BOM Match</a>
@@ -220,7 +221,7 @@ footer a:hover{color:#fff}
     <p>Most campuses run two distinct transformer types with very different jobs. A <b>pad-mount transformer</b> steps utility service down to the low- or medium-voltage distribution used inside the building — it's the workhorse spec that shows up dozens of times across a large campus, currently quoting around 85 weeks. A <b>GSU (generator step-up) transformer</b> does the opposite job at the utility interconnection point, and on a campus with on-site generation or a dedicated substation it's typically the single highest-value, longest-lead item on the whole electrical BOM — current lead times run past 140 weeks. Confusing the two on an early spec sheet is a common, expensive mistake; see <a href="guide-pad-mount-vs-gsu-transformers.html" style="color:var(--signal-deep);font-weight:600;text-decoration:underline">Pad-Mount vs. GSU Transformers</a> for the full breakdown, or <a href="guide-transformer-nameplate.html" style="color:var(--signal-deep);font-weight:600;text-decoration:underline">How to Read a Transformer Nameplate</a> once you're comparing specific units.</p>
     <p>MV switchgear sits between the transformers and the distribution system, and it comes in two families that aren't interchangeable on a spec sheet: <b>metal-clad</b>, built around draw-out breakers for easier maintenance and higher arc-flash containment, and <b>metal-enclosed</b>, a lower-cost fixed-breaker design common on less critical distribution. Data center design almost always specifies metal-clad for anything upstream of critical IT load — see <a href="guide-switchgear-compartments.html" style="color:var(--signal-deep);font-weight:600;text-decoration:underline">Switchgear Compartment Types Explained</a> for what's actually inside each, and <a href="guide-short-circuit-studies-breaker-coordination.html" style="color:var(--signal-deep);font-weight:600;text-decoration:underline">Short-Circuit Studies &amp; Breaker Coordination</a> for how breakers get sized and coordinated once switchgear is on the one-line.</p>
 
-    <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Redundancy: N, N+1, and 2N</h3>
+    <h3 id="redundancy" style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Redundancy: N, N+1, and 2N</h3>
     <p>Every data center power design gets described by a redundancy notation before anything else. <b>N</b> is just enough capacity to run the load, with zero spare. <b>N+1</b> adds one extra unit of whatever's being sized — a UPS module, a generator, a cooling unit — so a single failure doesn't take the load down. <b>2N</b> duplicates the entire path: two independent UPS systems, two independent utility feeds, two of everything, so a full system can go offline for maintenance without ever touching the load. The redundancy level drives equipment count directly — a 2N electrical design roughly doubles the switchgear, UPS, and generator line items on the BOM compared to an N design of the same IT capacity — which is why redundancy level is usually the first number in a capacity conversation, not an afterthought.</p>
 
     <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Backup power and cooling</h3>
@@ -238,6 +239,11 @@ footer a:hover{color:#fff}
       <span class="cq-sec" style="background:var(--dc)">PRACTICE</span>
       <svg class="cq-icon" viewBox="0 0 40 40" fill="none" stroke="#22334C" stroke-width="2"><circle cx="7" cy="20" r="3"/><path d="M10 20h6"/><rect x="16" y="15" width="8" height="10" rx="1"/><path d="M24 20h6"/><circle cx="33" cy="20" r="3"/></svg>
       <h4>Practice Sandbox</h4><span class="cq-n">Design a one-line, check sizing &amp; fault current</span>
+    </a>
+    <a class="catq" href="voltfield-pod-designer.html">
+      <span class="cq-sec" style="background:var(--dc)">SIZE IT</span>
+      <svg class="cq-icon" viewBox="0 0 40 40" fill="none" stroke="#22334C" stroke-width="2"><rect x="5" y="14" width="30" height="18" rx="1" fill="#E9EEF3"/><path d="M12 14v-4M20 14v-4M28 14v-4" stroke-dasharray="3 2"/><path d="M11 20h8M11 26h5" stroke-width="1.6" stroke="#FFC400"/></svg>
+      <h4>POD &amp; Skid Designer</h4><span class="cq-n">Size a power block against a load &amp; redundancy target</span>
     </a>
     <a class="catq" href="engineering-calculators.html">
       <span class="cq-sec" style="background:var(--dc)">CALCULATE</span>

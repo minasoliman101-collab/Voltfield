@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POD &amp; Skid Designer — Size a Data Center Power Block | VOLTFIELD Supply Co.</title>
+<link rel="canonical" href="https://voltfield.org/voltfield-pod-designer.html">
+<meta name="description" content="Free, no-signup power POD and skid sizing tool. Pick a transformer, switchgear, distribution, backup power, and cooling for a target load and redundancy level (N/N+1/2N), then get instant sizing checks. Toggle between an enclosed POD and an open-frame skid.">
+<meta name="keywords" content="data center POD design, power skid sizing, modular power station design, N+1 2N redundancy tool, transformer sizing practice, skid mounted switchgear, containerized power block">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:title" content="POD &amp; Skid Designer — size a power block against a target load and redundancy">
+<meta property="og:description" content="A free power POD/skid sizing sandbox: pick a transformer, switchgear, distribution, backup, and cooling for a target load, then check sizing and redundancy instantly.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ordering-hidden.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"WebApplication","name":"VOLTFIELD POD & Skid Designer","applicationCategory":"EngineeringApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"A drag-free sizing sandbox for a modular power block: pick a transformer, switchgear, distribution, backup power, and cooling against a target load and redundancy level (N/N+1/2N), toggle between an enclosed POD and an open-frame skid, and get instant sizing checks."},
+ {"@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"What's the difference between a POD and a skid in this tool?","acceptedAnswer":{"@type":"Answer","text":"Same equipment slots and the same sizing checks either way. POD mode adds one extra check -- whether the equipment you picked fits inside the enclosure size class you selected (10/20/40 ft equivalent). Skid mode drops that check, since an open frame has no enclosure footprint budget, and instead flags that every component is weather-exposed and should carry its own NEMA/IP rating."}},
+   {"@type":"Question","name":"Are these checks a substitute for a real electrical design?","acceptedAnswer":{"@type":"Answer","text":"No. Sizing math here uses simplified, first-pass assumptions (0.85 power factor, 480V three-phase, rough heat-load and footprint heuristics) -- the same spirit as the Engineering Calculators and EE Practice Sandbox. Always use a licensed engineer's full load study, short-circuit study, and equipment-specific spec sheets for actual design or code compliance."}},
+   {"@type":"Question","name":"Is this free and does it require an account?","acceptedAnswer":{"@type":"Answer","text":"Yes -- free, runs entirely in your browser, no signup. Nothing you enter is sent anywhere."}}
+ ]}
+]}
+</script>
+<style>
+:root{
+  --ink:#101B2D;--ink-2:#22334C;--slate:#5B6B7E;--paper:#DDE5EC;--card:#F3F6FA;
+  --line:#C4CFDA;--line-dark:#A7B6C6;--signal:#FFC400;--signal-deep:#E5AC00;
+  --crit:#C43D2E;--warn:#D98E04;--ok:#2E7D4F;
+  --dc:#2B6CB0;--re:#2E7D4F;--bess:#B7791F;--og:#9C4221;--mro:#5B6B7E;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;--body:'IBM Plex Sans',system-ui,sans-serif;--disp:'Barlow Condensed',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5}
+button,a,input,select,textarea{font-family:inherit}
+button,a{cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:60}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo .bolt{width:34px;height:34px;background:var(--signal);display:grid;place-items:center;border:2px solid var(--ink)}
+.logo .bolt svg{width:18px;height:18px}
+.logo .wordmark{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.02em;line-height:1}
+.logo .wordmark small{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.18em;color:var(--slate)}
+.hnav{display:none;gap:4px}
+.navtoggle{display:none;background:var(--ink);color:#fff;border:2px solid var(--ink);width:42px;height:38px;font-size:20px;line-height:1;align-items:center;justify-content:center;flex-shrink:0}
+@media(max-width:899px){.navtoggle{display:inline-flex}.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:2px solid var(--ink);padding:6px 12px 10px;gap:0;box-shadow:0 10px 20px rgba(16,27,45,.14);z-index:59}.hnav.open a{padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}.hnav.open a:last-child{border-bottom:0}.hnav.open a.on{border-left-color:var(--signal);color:var(--ink)}}
+@media(min-width:900px){.hnav{display:flex}.navdrop:hover .navdrop-menu,.navdrop:focus-within .navdrop-menu{display:flex}}
+.hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
+.hnav a:hover{color:var(--ink);background:var(--paper)}
+.hnav a.on{color:var(--ink);border-bottom-color:var(--signal)}
+.navdrop{position:relative}
+.navdrop-btn{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-transform:uppercase;border:0;border-bottom:3px solid transparent;background:none;display:inline-flex;align-items:center;gap:4px}
+.navdrop-btn:hover{color:var(--ink);background:var(--paper)}
+.navdrop-btn.on{color:var(--ink);border-bottom-color:var(--signal)}
+.navdrop-btn .car{width:8px;height:8px;flex-shrink:0}
+.navdrop-menu{display:none;position:absolute;top:100%;left:0;background:var(--card);border:2px solid var(--ink);min-width:190px;z-index:70;flex-direction:column}
+.navdrop.open .navdrop-menu{display:flex}
+.navdrop-menu a{padding:10px 14px;font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line)}
+.navdrop-menu a:last-child{border-bottom:0}
+.navdrop-menu a:hover{background:var(--paper);color:var(--ink)}
+.navdrop-menu a.on{color:var(--ink);background:var(--paper);border-left:3px solid var(--signal)}
+@media(max-width:899px){
+.navdrop-btn{width:100%;justify-content:space-between;padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}
+.navdrop-btn.on{border-left-color:var(--signal);border-bottom-color:var(--line)}
+.navdrop-menu{display:none;position:static;border:0;min-width:0;background:var(--paper)}
+.navdrop.open .navdrop-menu{display:flex}
+.navdrop-menu a{padding-left:26px;border-bottom:1px solid var(--line)}
+.navdrop-btn .car{display:none}
+}
+.headright{margin-left:auto;display:flex;align-items:center;gap:10px}
+.quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
+.quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
+.artban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal)}
+.artban-in{max-width:900px;margin:0 auto;padding:32px 20px 30px}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:12px}
+.artban h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,44px);line-height:1.04}
+.artban .dek{margin-top:14px;font-size:15.5px;color:#C9D3DF;max-width:680px;line-height:1.6}
+.artwrap{max-width:900px;margin:0 auto;padding:30px 20px 60px}
+.artwrap>p.note{font-size:13px;color:var(--slate);background:var(--card);border:1px solid var(--line);padding:12px 16px;margin-bottom:22px}
+
+.modebar{display:flex;gap:0;border:2px solid var(--ink);margin-bottom:18px;width:fit-content}
+.modebar button{background:var(--card);border:0;padding:10px 18px;font-family:var(--disp);font-weight:600;font-size:14.5px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-2);border-right:2px solid var(--ink)}
+.modebar button:last-child{border-right:0}
+.modebar button.on{background:var(--ink);color:var(--signal)}
+
+.scenariobar{background:var(--card);border:1px solid var(--line-dark);padding:14px 16px;margin-bottom:20px;display:none}
+.scenariobar.show{display:block}
+.scenariobar select{width:100%;padding:8px 10px;border:2px solid var(--ink);background:#fff;font-family:var(--disp);font-weight:600;font-size:14.5px;margin-bottom:8px}
+.scenariobar .prompt{font-size:13.5px;color:var(--ink-2);line-height:1.55}
+.scenariobar .solved{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ok);text-transform:uppercase}
+
+.enclosurebar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:22px}
+.enctoggle{display:flex;border:2px solid var(--ink)}
+.enctoggle button{background:#fff;border:0;padding:9px 16px;font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.03em;text-transform:uppercase;border-right:2px solid var(--ink)}
+.enctoggle button:last-child{border-right:0}
+.enctoggle button.on{background:var(--signal);color:var(--ink)}
+.enclosurebar select{padding:8px 10px;border:2px solid var(--ink);background:#fff;font-family:var(--mono);font-size:13px}
+.enclosurebar .encnote{font-size:12.5px;color:var(--slate);flex-basis:100%}
+
+.diagram{background:var(--card);border:2px solid var(--ink);padding:20px;margin-bottom:22px;overflow-x:auto}
+.diagram-row{display:flex;align-items:stretch;gap:0;min-width:640px}
+.dblock{flex:1;border:2px solid var(--line-dark);background:#fff;padding:10px 12px;position:relative;min-height:74px;display:flex;flex-direction:column;justify-content:center}
+.dblock.filled{border-color:var(--ink)}
+.dblock .dl{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}
+.dblock .dv{font-family:var(--disp);font-weight:600;font-size:15.5px;margin-top:3px;color:var(--ink)}
+.dblock.empty .dv{color:var(--line-dark)}
+.darrow{width:22px;display:flex;align-items:center;justify-content:center;color:var(--line-dark);font-size:18px;flex-shrink:0}
+.dbranch{display:flex;gap:0;min-width:640px;margin-top:0}
+.dbranch .dblock{flex:1}
+
+.slotgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:22px}
+.slot{background:#fff;border:1px solid var(--line-dark);padding:14px 16px}
+.slot label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);margin-bottom:8px}
+.slot select,.slot input[type="number"]{width:100%;padding:9px 10px;border:2px solid var(--ink);background:#fff;font-family:var(--disp);font-weight:600;font-size:15.5px;color:var(--ink)}
+
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.btnrow button{padding:12px 22px;font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:.04em}
+#checkBtn{background:var(--signal);color:var(--ink);border:2px solid var(--signal)}
+#checkBtn:hover{background:transparent;border-color:var(--ink)}
+.ghost{background:none;border:2px solid var(--line-dark);color:var(--ink-2)}
+.ghost:hover{border-color:var(--ink);color:var(--ink)}
+
+.checklist{display:none;flex-direction:column;gap:8px;margin-bottom:20px}
+.checklist.show{display:flex}
+.checkcard{border:1px solid var(--line-dark);background:#fff;padding:12px 14px;display:flex;gap:12px;align-items:flex-start}
+.checkcard .cx{width:24px;height:24px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;font-family:var(--mono)}
+.checkcard.pass .cx{background:#DCEEE1;color:var(--ok)}
+.checkcard.fail .cx{background:#F8D9D5;color:var(--crit)}
+.checkcard .ct{font-family:var(--disp);font-weight:600;font-size:15px}
+.checkcard .cm{font-size:13px;color:var(--ink-2);margin-top:3px;line-height:1.5}
+
+.scorebar{display:none;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;letter-spacing:.04em;background:var(--card);border:1px solid var(--line-dark);padding:10px 16px;margin-bottom:20px}
+.scorebar.show{display:flex}
+.scorebar b{color:var(--signal-deep);font-size:16px}
+
+.section{max-width:900px;margin:0 auto;padding:0 20px 50px}
+.section h2{font-family:var(--disp);font-weight:700;font-size:26px;margin-bottom:10px}
+.section h3{font-family:var(--disp);font-weight:600;font-size:17px;margin:16px 0 6px}
+.section p{font-size:14.5px;color:var(--ink-2);line-height:1.65;max-width:70ch;margin-bottom:10px}
+.section a.inline{color:var(--signal-deep);font-weight:600;text-decoration:underline}
+.faqitem{background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px}
+.faqitem summary{font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer}
+.faqitem p{margin-top:10px;font-size:13.5px}
+
+footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
+footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
+@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
+footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer p{line-height:1.6;max-width:460px}
+footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
+footer a{color:#9FB0C3;text-decoration:none}
+footer a:hover{color:#fff}
+</style>
+</head>
+<body>
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — SOURCING & ENGINEERING REFERENCE</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu">
+        <a href="free-tools.html">All Free Tools</a>
+        <a href="voltfield-sandbox.html">Practice Sandbox</a>
+        <a href="voltfield-pod-designer.html" class="on">POD &amp; Skid Designer</a>
+        <a href="engineering-calculators.html">Calculators</a>
+        <a href="voltfield-bom-generator.html">BOM Generator</a>
+        <a href="voltfield-bom.html">BOM Match</a>
+        <a href="voltfield-pcb.html">PCB Builder</a>
+        <a href="voltfield-pcb-layout.html">PCB Layout Tool</a>
+        <a href="voltfield-identify.html">Part ID</a>
+        <a href="voltfield-eol.html">Obsolete/EOL</a>
+        <a href="voltfield-glossary-quiz.html">Glossary Quiz</a>
+        <a href="rfq-toolkit.html">RFQ Toolkit</a>
+        <a href="site-search.html">Search</a>
+      </div>
+    </div>
+    <a href="voltfield-insights.html">Guides &amp; Insights</a>
+    <a href="lead-time-index.html">Lead-Time Index</a>
+    <a href="voltfield-supply-catalog.html">Spec Library</a>
+    <a href="voltfield-suppliers.html">Suppliers</a>
+    <a href="whats-new.html">What's New</a>
+    <a href="voltfield-account.html">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View sourcing list on catalog page">SOURCING LIST <span class="ct" id="quoteCount">0</span></a>
+  </div>
+</header>
+
+<section class="artban">
+  <div class="artban-in">
+    <div style="font-family:var(--mono);font-size:11px;color:#8DA0B8;margin-bottom:12px"><a href="index.html" style="color:#8DA0B8;text-decoration:none">Home</a> / <span style="color:#E8EDF3">POD &amp; Skid Designer</span></div>
+    <div class="eyebrow">Free · No Signup · Runs In Your Browser</div>
+    <h1>Size a power POD — or the skid underneath it.</h1>
+    <p class="dek">Set a target load and redundancy level, pick a transformer, switchgear, distribution, backup power, and cooling, then check your sizing instantly. Same tool either way — toggle <b>POD</b> for a walk-in enclosure with a footprint budget, or <b>Skid</b> for the open-frame version without the shell.</p>
+  </div>
+</section>
+
+<div class="artwrap">
+  <p class="note">This is a first-pass sizing sandbox, not a substitute for a licensed engineer's load study or short-circuit/coordination study. It assumes 480V three-phase distribution and a flat 0.85 power factor throughout — the same kind of simplification used by the <a href="engineering-calculators.html" style="color:var(--signal-deep)">Engineering Calculators</a> and the <a href="voltfield-sandbox.html" style="color:var(--signal-deep)">EE Practice Sandbox</a>.</p>
+
+  <div class="modebar" role="tablist">
+    <button type="button" id="modeFreeBtn" class="on" role="tab" aria-selected="true">Free Design</button>
+    <button type="button" id="modeChalBtn" role="tab" aria-selected="false">Challenge Mode</button>
+  </div>
+
+  <div class="scenariobar" id="scenarioBar">
+    <select id="scenarioSel" aria-label="Choose a challenge scenario"></select>
+    <div class="prompt" id="scenarioPrompt"></div>
+    <span class="solved" id="solvedBadge" style="display:none">&#10003; Solved</span>
+  </div>
+
+  <div class="enclosurebar">
+    <div class="enctoggle" role="tablist" aria-label="Enclosure type">
+      <button type="button" id="encPodBtn" class="on" role="tab" aria-selected="true">POD (enclosed)</button>
+      <button type="button" id="encSkidBtn" role="tab" aria-selected="false">Skid (open frame)</button>
+    </div>
+    <select id="podSizeSel" aria-label="Enclosure size class">
+      <option value="10">10 ft equivalent</option>
+      <option value="20" selected>20 ft equivalent</option>
+      <option value="40">40 ft equivalent</option>
+    </select>
+    <div class="encnote" id="encNote"></div>
+  </div>
+
+  <div class="diagram" aria-hidden="true">
+    <div class="diagram-row">
+      <div class="dblock filled" id="dLoad"><span class="dl">Critical Load</span><span class="dv">—</span></div>
+      <div class="darrow">&larr;</div>
+      <div class="dblock empty" id="dDist"><span class="dl">Distribution</span><span class="dv">Not set</span></div>
+      <div class="darrow">&larr;</div>
+      <div class="dblock empty" id="dSwgr"><span class="dl">Switchgear</span><span class="dv">Not set</span></div>
+      <div class="darrow">&larr;</div>
+      <div class="dblock empty" id="dXfmr"><span class="dl">Transformer</span><span class="dv">Not set</span></div>
+    </div>
+    <div class="dbranch">
+      <div class="dblock empty" id="dBackup"><span class="dl">Backup Power</span><span class="dv">Not set</span></div>
+      <div class="dblock empty" id="dCooling"><span class="dl">Cooling</span><span class="dv">Not set</span></div>
+      <div class="dblock filled" id="dRedun"><span class="dl">Redundancy</span><span class="dv">N</span></div>
+    </div>
+  </div>
+
+  <div class="slotgrid">
+    <div class="slot">
+      <label for="loadInput">Critical load (kW)</label>
+      <input type="number" id="loadInput" min="10" max="10000" step="10" value="500">
+    </div>
+    <div class="slot">
+      <label for="redunSel">Redundancy target</label>
+      <select id="redunSel">
+        <option value="N">N — no standby path</option>
+        <option value="N+1">N+1 — one spare unit</option>
+        <option value="2N">2N — a full second path</option>
+      </select>
+    </div>
+    <div class="slot">
+      <label for="xfmrSel">Incoming transformer</label>
+      <select id="xfmrSel">
+        <option value="0">Not set</option>
+        <option value="150">150 kVA pad-mount</option>
+        <option value="300">300 kVA pad-mount</option>
+        <option value="500">500 kVA pad-mount</option>
+        <option value="750">750 kVA pad-mount</option>
+        <option value="1000">1,000 kVA pad-mount</option>
+        <option value="1500">1,500 kVA pad-mount</option>
+        <option value="2000">2,000 kVA pad-mount</option>
+        <option value="2500">2,500 kVA pad-mount</option>
+      </select>
+    </div>
+    <div class="slot">
+      <label for="swgrSel">Main switchgear (480V, 3&Oslash;)</label>
+      <select id="swgrSel">
+        <option value="0">Not set</option>
+        <option value="400">400 A</option>
+        <option value="800">800 A</option>
+        <option value="1200">1,200 A</option>
+        <option value="2000">2,000 A</option>
+        <option value="3000">3,000 A</option>
+        <option value="4000">4,000 A</option>
+      </select>
+    </div>
+    <div class="slot">
+      <label for="distSel">Distribution / busway (480V, 3&Oslash;)</label>
+      <select id="distSel">
+        <option value="0">Not set</option>
+        <option value="225">225 A</option>
+        <option value="400">400 A</option>
+        <option value="600">600 A</option>
+        <option value="800">800 A</option>
+        <option value="1200">1,200 A</option>
+        <option value="1600">1,600 A</option>
+        <option value="2000">2,000 A</option>
+        <option value="2500">2,500 A</option>
+        <option value="3200">3,200 A</option>
+        <option value="4000">4,000 A</option>
+      </select>
+    </div>
+    <div class="slot">
+      <label for="backupSel">Backup power</label>
+      <select id="backupSel">
+        <option value="none|0">None</option>
+        <option value="ups|250">UPS — 250 kW (bridge only)</option>
+        <option value="ups|500">UPS — 500 kW (bridge only)</option>
+        <option value="gen|500">Generator — 500 kW</option>
+        <option value="gen|1000">Generator — 1,000 kW</option>
+        <option value="gen|1500">Generator — 1,500 kW</option>
+        <option value="gen|2500">Generator — 2,500 kW</option>
+      </select>
+    </div>
+    <div class="slot">
+      <label for="coolSel">Cooling</label>
+      <select id="coolSel">
+        <option value="0">None</option>
+        <option value="5">5 tons</option>
+        <option value="10">10 tons</option>
+        <option value="20">20 tons</option>
+        <option value="40">40 tons</option>
+        <option value="75">75 tons</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="btnrow">
+    <button type="button" id="checkBtn">Check My Design</button>
+    <button type="button" class="ghost" id="clearBtn">Clear</button>
+    <button type="button" class="ghost" id="copyLinkBtn">Copy link</button>
+  </div>
+
+  <div class="scorebar" id="scoreBar"><span>SCORE</span><b id="scoreVal">0 / 6</b></div>
+  <div class="checklist" id="checklist"></div>
+
+  <div class="section" style="padding:0;margin:0 0 40px">
+    <h2>Why these checks</h2>
+    <h3>Transformer &amp; switchgear sizing</h3>
+    <p>The transformer has to cover the critical load at a realistic power factor (0.85 assumed here), and the main switchgear has to be rated for at least the transformer's full output — same logic as any one-line diagram, just applied to a modular block instead of a full facility. Run the exact numbers on the <a class="inline" href="engineering-calculators.html#transformer-sizing">Transformer Sizing Calculator</a>.</p>
+    <h3>Redundancy: N, N+1, 2N</h3>
+    <p><b>N</b> needs no standby path. <b>N+1</b> needs a spare unit — a generator or UPS present covers it. <b>2N</b> is stricter: it needs a <i>generator</i> (not just a UPS, since a UPS is a bridge, not a sustained source) sized to carry the <i>entire</i> load on its own, because a true 2N design duplicates the whole path rather than just adding a spare. See <a class="inline" href="data-centers.html#redundancy">Data Center Power Equipment</a> for the full explanation.</p>
+    <h3>POD footprint vs. skid</h3>
+    <p>POD mode adds a footprint budget — how many major equipment items reasonably fit inside a 10/20/40 ft-equivalent enclosure, a rough capacity heuristic rather than a scaled drawing. Skid mode drops that check entirely, since there's no shell to fit inside, and instead flags that every component sits exposed to weather.</p>
+  </div>
+
+  <div class="section" style="padding:0">
+    <h2>Common questions</h2>
+    <details class="faqitem">
+      <summary>What's the difference between a POD and a skid in this tool?</summary>
+      <p>Same equipment slots and the same sizing checks either way. POD mode adds one extra check — whether your picks fit inside the enclosure size class you selected. Skid mode drops that check and instead notes that every component is weather-exposed.</p>
+    </details>
+    <details class="faqitem">
+      <summary>Are these checks a substitute for a real electrical design?</summary>
+      <p>No. It's a simplified, first-pass sizing sandbox — 480V three-phase, flat 0.85 power factor, rough heat-load and footprint heuristics. Always use a licensed engineer's full study for actual design or code compliance.</p>
+    </details>
+    <details class="faqitem">
+      <summary>Is this free and does it require an account?</summary>
+      <p>Yes — free, runs entirely in your browser, no signup. Nothing you enter is sent anywhere.</p>
+    </details>
+  </div>
+</div>
+
+<footer>
+  <div class="in">
+    <div>
+      <h5>Voltfield Supply Co.</h5>
+      <p>Free engineering calculators, guides, and reference tools for energy infrastructure and industrial procurement.</p>
+    </div>
+    <div><h5>Desks</h5><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+      <li><a href="oil-gas.html">Drilling &amp; Completions</a></li>
+      <li><a href="industrial-supply.html">Industrial Supply (MRO)</a></li>
+    </ul></div>
+    <div><h5>Reference</h5><ul>
+      <li><a href="glossary.html">Glossary</a></li>
+      <li><a href="engineering-calculators.html">Engineering Calculators</a></li>
+      <li><a href="voltfield-sandbox.html">Practice Sandbox</a></li>
+      <li><a href="free-tools.html">All Free Tools</a></li>
+    </ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script>
+(function(){
+  try{
+    const q=JSON.parse(localStorage.getItem("vf_quote")||"[]");
+    const el=document.getElementById("quoteCount");
+    if(el)el.textContent=Array.isArray(q)?q.length:0;
+  }catch(e){}
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+<script>
+(function(){
+  'use strict';
+  const $=id=>document.getElementById(id);
+
+  /* ---------- scenarios ---------- */
+  const SCEN=[
+    {id:'colo-500-n1', name:'500 kW colo suite, N+1, 20ft POD', load:500, redun:'N+1', enc:'pod', size:'20',
+      prompt:'Spec a 500 kW colo suite with N+1 redundancy in a 20ft-equivalent POD. Pick a transformer, switchgear, distribution, and a standby path that all clear their checks.'},
+    {id:'hyperscale-1200-2n', name:'1,200 kW hyperscale block, 2N, 40ft POD', load:1200, redun:'2N', enc:'pod', size:'40',
+      prompt:'Spec a 1,200 kW block at 2N — remember 2N needs a generator (not a UPS alone) sized to carry the whole load by itself.'},
+    {id:'event-300-skid', name:'300 kW temporary event power, N, skid', load:300, redun:'N', enc:'skid', size:'20',
+      prompt:'Temporary power for a 300 kW load, N (no standby required), open-frame skid — no enclosure footprint check applies here.'},
+    {id:'campus-2000-n1', name:'2,000 kW campus substation, N+1, skid', load:2000, redun:'N+1', enc:'skid', size:'40',
+      prompt:'A 2,000 kW campus substation skid at N+1. Size the incoming transformer and switchgear, and make sure a standby path is present.'}
+  ];
+
+  let mode='free'; // 'free' | 'challenge'
+  let scenarioIdx=0;
+  let enc='pod'; // 'pod' | 'skid'
+
+  /* ---------- persistence: which challenge scenarios have been solved (local only, no account) ---------- */
+  function loadSolved(){ try{ return JSON.parse(localStorage.getItem('vf_pod_solved')||'{}'); }catch(e){ return {}; } }
+  function saveSolved(id){
+    try{
+      const s=loadSolved(); s[id]=true;
+      localStorage.setItem('vf_pod_solved', JSON.stringify(s));
+    }catch(e){}
+  }
+
+  /* ---------- mode / scenario UI ---------- */
+  function setMode(m){
+    mode=m;
+    $('modeFreeBtn').classList.toggle('on', m==='free');
+    $('modeFreeBtn').setAttribute('aria-selected', m==='free'?'true':'false');
+    $('modeChalBtn').classList.toggle('on', m==='challenge');
+    $('modeChalBtn').setAttribute('aria-selected', m==='challenge'?'true':'false');
+    $('scenarioBar').classList.toggle('show', m==='challenge');
+    if(m==='challenge') loadScenario(scenarioIdx);
+    $('checklist').classList.remove('show');
+    $('scoreBar').classList.remove('show');
+  }
+  $('modeFreeBtn').onclick=()=>setMode('free');
+  $('modeChalBtn').onclick=()=>setMode('challenge');
+
+  $('scenarioSel').innerHTML=SCEN.map((s,i)=>`<option value="${i}">${esc(s.name)}</option>`).join('');
+  $('scenarioSel').addEventListener('change',()=>loadScenario(+$('scenarioSel').value));
+
+  function loadScenario(i){
+    scenarioIdx=i;
+    const s=SCEN[i];
+    $('scenarioSel').value=i;
+    $('scenarioPrompt').textContent=s.prompt;
+    $('loadInput').value=s.load;
+    $('redunSel').value=s.redun;
+    setEnclosure(s.enc, /*fromScenario*/true);
+    $('podSizeSel').value=s.size;
+    ['xfmrSel','swgrSel','distSel','backupSel','coolSel'].forEach(id=>$(id).value=$(id).options[0].value);
+    const solved=loadSolved();
+    $('solvedBadge').style.display = solved[s.id] ? '' : 'none';
+    $('checklist').classList.remove('show');
+    $('scoreBar').classList.remove('show');
+    updateDiagram();
+  }
+
+  /* ---------- enclosure toggle ---------- */
+  function setEnclosure(e, fromScenario){
+    enc=e;
+    $('encPodBtn').classList.toggle('on', e==='pod');
+    $('encPodBtn').setAttribute('aria-selected', e==='pod'?'true':'false');
+    $('encSkidBtn').classList.toggle('on', e==='skid');
+    $('encSkidBtn').setAttribute('aria-selected', e==='skid'?'true':'false');
+    $('podSizeSel').style.display = e==='pod' ? '' : 'none';
+    $('encNote').textContent = e==='pod'
+      ? 'Weatherproof enclosure — verify the IP/NEMA rating meets site environmental exposure.'
+      : 'Open frame — every component is weather-exposed. Confirm NEMA 3R/4 ratings on each unit, or plan a weather canopy for sensitive electronics.';
+    if(!fromScenario && mode==='challenge'){ /* switching enclosure manually in challenge mode is fine, checks just re-run against current selection */ }
+  }
+  $('encPodBtn').onclick=()=>setEnclosure('pod');
+  $('encSkidBtn').onclick=()=>setEnclosure('skid');
+  setEnclosure('pod');
+
+  /* ---------- live diagram ---------- */
+  function fmtBlock(el, val){
+    const dv=el.querySelector('.dv');
+    if(val===null){ el.classList.add('empty'); el.classList.remove('filled'); dv.textContent='Not set'; }
+    else { el.classList.remove('empty'); el.classList.add('filled'); dv.textContent=val; }
+  }
+  function updateDiagram(){
+    const load=+$('loadInput').value||0;
+    fmtBlock($('dLoad'), load ? load.toLocaleString('en-US')+' kW' : '—');
+    const xf=+$('xfmrSel').value; fmtBlock($('dXfmr'), xf ? xf.toLocaleString('en-US')+' kVA' : null);
+    const sw=+$('swgrSel').value; fmtBlock($('dSwgr'), sw ? sw.toLocaleString('en-US')+' A' : null);
+    const ds=+$('distSel').value; fmtBlock($('dDist'), ds ? ds.toLocaleString('en-US')+' A' : null);
+    const [bType,bKwStr]=$('backupSel').value.split('|'); const bKw=+bKwStr;
+    fmtBlock($('dBackup'), bType==='none' ? null : (bType==='gen'?'Gen ':'UPS ')+bKw.toLocaleString('en-US')+' kW');
+    const cl=+$('coolSel').value; fmtBlock($('dCooling'), cl ? cl+' tons' : null);
+    fmtBlock($('dRedun'), $('redunSel').value);
+  }
+  ['loadInput','redunSel','xfmrSel','swgrSel','distSel','backupSel','coolSel'].forEach(id=>{
+    $(id).addEventListener('input', updateDiagram);
+    $(id).addEventListener('change', updateDiagram);
+  });
+  updateDiagram();
+
+  /* ---------- checks ---------- */
+  const PF=0.85;            // flat assumed power factor
+  const V=480, SQ3=1.732;   // 480V three-phase for amp<->kVA conversion
+  function ampsToKva(a){ return a*V*SQ3/1000; }
+
+  function runChecks(){
+    const load=+$('loadInput').value||0;
+    const redun=$('redunSel').value;
+    const xf=+$('xfmrSel').value;
+    const sw=+$('swgrSel').value;
+    const ds=+$('distSel').value;
+    const [bType,bKwStr]=$('backupSel').value.split('|'); const bKw=+bKwStr;
+    const cool=+$('coolSel').value;
+    const checks=[];
+
+    // 1. Transformer sized for load
+    const xfKw=xf*PF;
+    checks.push({
+      title:'Transformer sized for the critical load',
+      pass: xf>0 && xfKw >= load*1.05,
+      msg: xf===0 ? 'Pick a transformer.' :
+        `${xf.toLocaleString('en-US')} kVA × 0.85 PF ≈ ${Math.round(xfKw).toLocaleString('en-US')} kW capacity vs. ${load.toLocaleString('en-US')} kW load.`
+    });
+
+    // 2. Switchgear rated above transformer output
+    const swKva=sw?ampsToKva(sw):0;
+    checks.push({
+      title:'Main switchgear rated above transformer output',
+      pass: sw>0 && xf>0 && swKva >= xf,
+      msg: sw===0 ? 'Pick a main switchgear/breaker rating.' :
+        `${sw.toLocaleString('en-US')} A at 480V 3Ø ≈ ${Math.round(swKva).toLocaleString('en-US')} kVA vs. ${xf.toLocaleString('en-US')} kVA transformer.`
+    });
+
+    // 3. Distribution rated for the load
+    const dsKw=ds?ampsToKva(ds)*PF:0;
+    checks.push({
+      title:'Distribution / busway rated for the load',
+      pass: ds>0 && dsKw >= load,
+      msg: ds===0 ? 'Pick a distribution/busway rating.' :
+        `${ds.toLocaleString('en-US')} A ≈ ${Math.round(dsKw).toLocaleString('en-US')} kW deliverable vs. ${load.toLocaleString('en-US')} kW load.`
+    });
+
+    // 4. Redundancy
+    let redunPass, redunMsg;
+    if(redun==='N'){
+      redunPass=true; redunMsg='N — no standby path required.';
+    } else if(redun==='N+1'){
+      redunPass = bType!=='none';
+      redunMsg = redunPass ? `Standby path present (${bType==='gen'?'generator':'UPS'}, ${bKw.toLocaleString('en-US')} kW).` : 'N+1 needs a standby generator or UPS path — pick one.';
+    } else { // 2N
+      redunPass = bType==='gen' && bKw >= load;
+      redunMsg = redunPass ? `Full second path present: ${bKw.toLocaleString('en-US')} kW generator covers the whole load independently.`
+        : 'A true 2N path needs a generator (not just a UPS) sized to carry the entire load on its own.';
+    }
+    checks.push({title:`Redundancy requirement met (${redun})`, pass:redunPass, msg:redunMsg});
+
+    // 5. Cooling (rough presence heuristic above ~100kW, not a real thermal calc)
+    const coolNeeded = load>100;
+    const coolPass = !coolNeeded || cool>0;
+    checks.push({
+      title:'Cooling present for the equipment heat load',
+      pass: coolPass,
+      msg: !coolNeeded ? 'Under ~100 kW, active cooling isn’t assumed required for this first-pass check.'
+        : coolPass ? `${cool} tons selected. This is a presence check, not a thermal calc — see the Engineering Calculators for detailed heat-load math.`
+        : 'Loads above ~100 kW generate enough heat that active cooling is standard practice — pick a cooling capacity.'
+    });
+
+    // 6. POD-only: footprint budget
+    if(enc==='pod'){
+      const itemCount=[xf>0,sw>0,ds>0,bType!=='none',cool>0].filter(Boolean).length;
+      const size=$('podSizeSel').value;
+      const budget = size==='10' ? 3 : size==='20' ? 5 : 8;
+      checks.push({
+        title:`Fits a ${size}ft-equivalent POD`,
+        pass: itemCount>0 && itemCount<=budget,
+        msg: `${itemCount} major equipment item${itemCount===1?'':'s'} selected vs. a rough budget of ${budget} for a ${size}ft enclosure. This is a first-pass capacity heuristic, not a scaled layout.`
+      });
+    }
+
+    return checks;
+  }
+
+  function renderChecks(checks){
+    const list=$('checklist');
+    list.innerHTML=checks.map(c=>`
+      <div class="checkcard ${c.pass?'pass':'fail'}">
+        <div class="cx">${c.pass?'✓':'✗'}</div>
+        <div><div class="ct">${esc(c.title)}</div><div class="cm">${esc(c.msg)}</div></div>
+      </div>`).join('');
+    list.classList.add('show');
+    const passCount=checks.filter(c=>c.pass).length;
+    $('scoreVal').textContent=passCount+' / '+checks.length;
+    $('scoreBar').classList.add('show');
+    if(window.vfGtag)window.vfGtag('event','pod_check_design',{mode:mode,enclosure:enc,pass_count:passCount,total_checks:checks.length,scenario:mode==='challenge'?SCEN[scenarioIdx].id:null});
+    if(mode==='challenge' && passCount===checks.length){
+      saveSolved(SCEN[scenarioIdx].id);
+      $('solvedBadge').style.display='';
+      if(window.vfGtag)window.vfGtag('event','pod_challenge_complete',{scenario:SCEN[scenarioIdx].id,enclosure:enc});
+    }
+    return passCount;
+  }
+
+  $('checkBtn').onclick=()=>{
+    updateDiagram();
+    renderChecks(runChecks());
+    $('checklist').scrollIntoView({behavior:'smooth',block:'start'});
+  };
+
+  $('clearBtn').onclick=()=>{
+    ['xfmrSel','swgrSel','distSel','backupSel','coolSel'].forEach(id=>$(id).value=$(id).options[0].value);
+    if(mode==='free'){ $('loadInput').value=500; $('redunSel').value='N'; }
+    $('checklist').classList.remove('show');
+    $('scoreBar').classList.remove('show');
+    updateDiagram();
+  };
+
+  $('copyLinkBtn').onclick=()=>{
+    const params=new URLSearchParams();
+    params.set('load',$('loadInput').value);
+    params.set('redun',$('redunSel').value);
+    params.set('enc',enc);
+    params.set('xf',$('xfmrSel').value);
+    params.set('sw',$('swgrSel').value);
+    params.set('ds',$('distSel').value);
+    params.set('bk',$('backupSel').value);
+    params.set('cl',$('coolSel').value);
+    const url=location.origin+location.pathname+'?'+params.toString();
+    if(navigator.clipboard) navigator.clipboard.writeText(url).then(()=>toast('Link copied'),()=>toast('Copy failed'));
+  };
+
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+  function toast(msg){
+    let t=$('vfToast');
+    if(!t){ t=document.createElement('div'); t.id='vfToast';
+      t.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;font-family:var(--mono);font-size:12.5px;z-index:200;border:1px solid var(--signal)';
+      document.body.appendChild(t);
+    }
+    t.textContent=msg; t.style.opacity='1';
+    clearTimeout(t._h); t._h=setTimeout(()=>{t.style.opacity='0';},2200);
+  }
+
+  /* ---------- restore state from a shared link, if present ---------- */
+  (function(){
+    const p=new URLSearchParams(location.search);
+    if(!p.has('load'))return;
+    if(p.get('load')) $('loadInput').value=p.get('load');
+    if(p.get('redun')) $('redunSel').value=p.get('redun');
+    if(p.get('enc')) setEnclosure(p.get('enc'));
+    if(p.get('xf')) $('xfmrSel').value=p.get('xf');
+    if(p.get('sw')) $('swgrSel').value=p.get('sw');
+    if(p.get('ds')) $('distSel').value=p.get('ds');
+    if(p.get('bk')) $('backupSel').value=p.get('bk');
+    if(p.get('cl')) $('coolSel').value=p.get('cl');
+    updateDiagram();
+  })();
+})();
+</script>
+</body>
+</html>
