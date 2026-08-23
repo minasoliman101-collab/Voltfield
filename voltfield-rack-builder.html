@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rack Elevation Builder — Plan Power, Weight &amp; U-Space Budgets | VOLTFIELD Supply Co.</title>
+<link rel="canonical" href="https://voltfield.org/voltfield-rack-builder.html">
+<meta name="description" content="Free, no-signup rack elevation planner. Stack servers, switches, storage, UPS, and PDUs into a 24/42/48U rack and check U-space, circuit power (with NEC 80% continuous derate), and weight budgets instantly.">
+<meta name="keywords" content="rack elevation diagram, rack elevation builder, data center rack planning, 42U rack layout, rack power budget calculator, rack weight budget, NEC 80 percent continuous load">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:title" content="Rack Elevation Builder — plan a rack's power, weight, and U-space budget">
+<meta property="og:description" content="A free rack elevation planner: stack equipment into a 24/42/48U rack and check U-space, circuit power, and weight budgets instantly.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ordering-hidden.css">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"WebApplication","name":"VOLTFIELD Rack Elevation Builder","applicationCategory":"EngineeringApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"A free rack elevation planning sandbox: stack servers, switches, storage, UPS, and PDUs into a 24/42/48U rack and check U-space, circuit power (with NEC 80% continuous-load derate), and weight budgets instantly."},
+ {"@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"Why does the power check apply an 80% derate?","acceptedAnswer":{"@type":"Answer","text":"NEC 210.19 and 210.20 (and the equivalent CEC rule) require continuous loads -- running 3 hours or more, which describes nearly all rack IT load -- to not exceed 80% of a branch circuit's rating. A 20A/208V circuit is rated 4,160W but its continuous-load-safe budget is 3,328W. This tool applies that same derate automatically."}},
+   {"@type":"Question","name":"Is this a substitute for a real rack elevation drawing?","acceptedAnswer":{"@type":"Answer","text":"No. It's a first-pass budget check -- U-space, circuit power, and weight -- using simplified assumptions, the same spirit as the Engineering Calculators and POD & Skid Designer. It doesn't model airflow, cable routing, or physical rail/depth clearances. Always confirm against the rack manufacturer's spec sheet and a real elevation drawing before ordering."}},
+   {"@type":"Question","name":"Is this free and does it require an account?","acceptedAnswer":{"@type":"Answer","text":"Yes -- free, runs entirely in your browser, no signup. Nothing you enter is sent anywhere."}}
+ ]}
+]}
+</script>
+<style>
+
+.artban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:32px 20px 34px}
+.artban-in{max-width:900px;margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:12px}
+.artban h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,44px);line-height:1.04}
+.artban .dek{margin-top:14px;font-size:15.5px;color:#C9D3DF;max-width:680px;line-height:1.6}
+.artwrap{max-width:900px;margin:0 auto;padding:30px 20px 60px}
+.artwrap>p.note{font-size:13px;color:var(--slate);background:var(--card);border:1px solid var(--line);padding:12px 16px;margin-bottom:22px}
+.section{padding:0;margin:0 0 40px}
+.section h2{font-family:var(--disp);font-weight:700;font-size:26px;margin-bottom:10px}
+.section h3{font-family:var(--disp);font-weight:600;font-size:17px;margin:16px 0 6px}
+.section p{font-size:14.5px;color:var(--ink-2);line-height:1.65;max-width:70ch;margin-bottom:10px}
+.section a.inline{color:var(--signal-deep);font-weight:600;text-decoration:underline}
+
+.setrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:22px}
+.setfield{background:#fff;border:1px solid var(--line-dark);padding:12px 14px}
+.setfield label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);margin-bottom:7px}
+.setfield select,.setfield input{width:100%;padding:8px 9px;border:2px solid var(--ink);background:#fff;font-family:var(--disp);font-weight:600;font-size:14.5px;color:var(--ink)}
+
+.rackarea{display:grid;grid-template-columns:1fr 260px;gap:20px;margin-bottom:22px}
+@media(max-width:720px){.rackarea{grid-template-columns:1fr}}
+.rackshell{background:var(--card);border:2px solid var(--ink);padding:10px}
+.rackinner{display:flex;flex-direction:column;border:1px solid var(--line-dark);background:repeating-linear-gradient(180deg,#fff,#fff 15px,#F3F6FA 15px,#F3F6FA 16px)}
+.rackitem{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 10px;border-bottom:1px solid var(--ink);background:var(--card);font-family:var(--mono);font-size:11px;color:var(--ink)}
+.rackitem:last-child{border-bottom:0}
+.rackitem .ri-n{font-family:var(--disp);font-weight:600;font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rackitem .ri-u{color:var(--slate);flex-shrink:0}
+.rackitem button{background:none;border:0;color:var(--crit);font-size:15px;cursor:pointer;flex-shrink:0;line-height:1}
+.rackempty{flex:1;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--line-dark);letter-spacing:.05em;text-transform:uppercase;min-height:60px}
+
+.addpanel{background:#fff;border:1px solid var(--line-dark);padding:14px;align-self:start}
+.addpanel label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);margin-bottom:7px}
+.addpanel select{width:100%;padding:8px 9px;border:2px solid var(--ink);background:#fff;font-family:var(--disp);font-weight:600;font-size:14px;margin-bottom:10px}
+.addpanel .eqspecs{font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:10px;line-height:1.6}
+.addpanel button{width:100%;background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:10px;font-family:var(--disp);font-weight:700;font-size:14px;letter-spacing:.03em;cursor:pointer}
+.addpanel button:hover{background:transparent;border-color:var(--ink)}
+
+.budgetrow{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--line-dark);margin-bottom:22px;background:var(--card)}
+.budget{flex:1;min-width:150px;padding:12px 16px;border-right:1px solid var(--line)}
+.budget:last-child{border-right:0}
+.budget .bl{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--slate)}
+.budget .bv{font-family:var(--disp);font-weight:700;font-size:16px;color:var(--ink);margin-top:2px}
+.budget .bv.over{color:var(--crit)}
+.budget .bbar{height:4px;background:var(--line);margin-top:6px;position:relative;overflow:hidden}
+.budget .bbar i{position:absolute;left:0;top:0;bottom:0;background:var(--ok);display:block}
+.budget .bbar i.warn{background:var(--warn)}
+.budget .bbar i.over{background:var(--crit)}
+
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.btnrow button{padding:12px 22px;font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:.04em}
+#checkBtn{background:var(--signal);color:var(--ink);border:2px solid var(--signal)}
+#checkBtn:hover{background:transparent;border-color:var(--ink)}
+.ghost{background:none;border:2px solid var(--line-dark);color:var(--ink-2)}
+.ghost:hover{border-color:var(--ink);color:var(--ink)}
+
+.checklist{display:none;flex-direction:column;gap:8px;margin-bottom:20px}
+.checklist.show{display:flex}
+.checkcard{border:1px solid var(--line-dark);background:#fff;padding:12px 14px;display:flex;gap:12px;align-items:flex-start}
+.checkcard .cx{width:24px;height:24px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;font-family:var(--mono)}
+.checkcard.pass .cx{background:#DCEEE1;color:var(--ok)}
+.checkcard.fail .cx{background:#F8D9D5;color:var(--crit)}
+.checkcard .ct{font-family:var(--disp);font-weight:600;font-size:15px}
+.checkcard .cm{font-size:13px;color:var(--ink-2);margin-top:3px;line-height:1.5}
+
+.faqitem{background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px}
+.faqitem summary{font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer}
+.faqitem p{margin-top:10px;font-size:13.5px}
+
+footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
+footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
+@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
+footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer p{line-height:1.6;max-width:460px}
+footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
+footer a{color:#9FB0C3;text-decoration:none}
+footer a:hover{color:#fff}
+</style>
+</head>
+<body>
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — SOURCING & ENGINEERING REFERENCE</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu">
+        <a href="free-tools.html">All Free Tools</a>
+        <a href="voltfield-sandbox.html">Practice Sandbox</a>
+        <a href="voltfield-pod-designer.html">POD &amp; Skid Designer</a>
+        <a href="voltfield-rack-builder.html" class="on">Rack Elevation Builder</a>
+        <a href="engineering-calculators.html">Calculators</a>
+        <a href="voltfield-bom-generator.html">BOM Generator</a>
+        <a href="voltfield-bom.html">BOM Match</a>
+        <a href="voltfield-pcb.html">PCB Builder</a>
+        <a href="voltfield-pcb-layout.html">PCB Layout Tool</a>
+        <a href="voltfield-identify.html">Part ID</a>
+        <a href="voltfield-eol.html">Obsolete/EOL</a>
+        <a href="voltfield-glossary-quiz.html">Glossary Quiz</a>
+        <a href="rfq-toolkit.html">RFQ Toolkit</a>
+        <a href="site-search.html">Search</a>
+      </div>
+    </div>
+    <a href="voltfield-insights.html">Guides &amp; Insights</a>
+    <a href="lead-time-index.html">Lead-Time Index</a>
+    <a href="voltfield-supply-catalog.html">Spec Library</a>
+    <a href="voltfield-suppliers.html">Suppliers</a>
+    <a href="whats-new.html">What's New</a>
+    <a href="voltfield-account.html">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View sourcing list on catalog page">SOURCING LIST <span class="ct" id="quoteCount">0</span></a>
+  </div>
+</header>
+
+<section class="artban">
+  <div class="artban-in">
+    <div style="font-family:var(--mono);font-size:11px;color:#8DA0B8;margin-bottom:12px"><a href="index.html" style="color:#8DA0B8;text-decoration:none">Home</a> / <span style="color:#E8EDF3">Rack Elevation Builder</span></div>
+    <div class="eyebrow">Free · No Signup · Runs In Your Browser</div>
+    <h1>Plan a rack before you order the rail kit.</h1>
+    <p class="dek">Stack servers, switches, storage, and a UPS into a rack and check three budgets that actually stop a rack build: U-space, circuit power (with the NEC 80% continuous-load derate applied automatically), and weight.</p>
+  </div>
+</section>
+
+<div class="artwrap">
+  <p class="note">A first-pass budget check, not a substitute for a real rack elevation drawing — it doesn't model airflow, cable routing, or rail/depth clearances. The same spirit as the <a href="engineering-calculators.html" style="color:var(--signal-deep)">Engineering Calculators</a> and the <a href="voltfield-pod-designer.html" style="color:var(--signal-deep)">POD &amp; Skid Designer</a>.</p>
+
+  <div class="setrow">
+    <div class="setfield">
+      <label for="rackUSel">Rack height</label>
+      <select id="rackUSel">
+        <option value="24">24U</option>
+        <option value="42" selected>42U</option>
+        <option value="48">48U</option>
+      </select>
+    </div>
+    <div class="setfield">
+      <label for="ampsInput">Circuit rating (A)</label>
+      <input type="number" id="ampsInput" min="10" max="100" step="5" value="20">
+    </div>
+    <div class="setfield">
+      <label for="voltsSel">Circuit voltage</label>
+      <select id="voltsSel">
+        <option value="120">120V</option>
+        <option value="208" selected>208V</option>
+        <option value="240">240V</option>
+      </select>
+    </div>
+    <div class="setfield">
+      <label for="weightInput">Rack weight rating (lb)</label>
+      <input type="number" id="weightInput" min="200" max="5000" step="50" value="1500">
+    </div>
+  </div>
+
+  <div class="rackarea">
+    <div class="rackshell">
+      <div class="rackinner" id="rackInner"></div>
+    </div>
+    <div class="addpanel">
+      <label for="eqSel">Add equipment</label>
+      <select id="eqSel"></select>
+      <div class="eqspecs" id="eqSpecs"></div>
+      <button type="button" id="addBtn">Add to rack</button>
+    </div>
+  </div>
+
+  <div class="budgetrow" id="budgetRow"></div>
+
+  <div class="btnrow">
+    <button type="button" id="checkBtn">Check My Rack</button>
+    <button type="button" class="ghost" id="clearBtn">Clear rack</button>
+    <button type="button" class="ghost" id="copyLinkBtn">Copy link</button>
+  </div>
+
+  <div class="checklist" id="checklist"></div>
+
+  <div class="section">
+    <h2>Why these checks</h2>
+    <h3>U-space</h3>
+    <p>The most obvious budget and the easiest to blow: total rack units used can't exceed the rack's physical height. Blanking panels and cable managers count against U-space too — they're often left off a first-pass equipment list and then the rack comes up short.</p>
+    <h3>Circuit power, with the 80% continuous-load derate</h3>
+    <p>NEC 210.19 and 210.20 (and the equivalent CEC rule) require a continuous load — running 3 hours or more, which describes nearly all rack IT load — to stay at or under 80% of a branch circuit's rating. A 20A/208V circuit is rated 4,160W but its continuous-load-safe budget is 3,328W, not 4,160W. This tool applies that derate automatically rather than checking against the raw circuit rating, the same convention used on the <a class="inline" href="engineering-calculators.html">Engineering Calculators</a> page.</p>
+    <h3>Weight</h3>
+    <p>Rack weight ratings vary a lot by frame construction and floor loading — confirm the actual rating on the rack's own spec sheet and against the room's floor load capacity, especially for a raised-floor data hall. This tool's default (1,500 lb) is a reasonable placeholder for a standard 42U enclosure, not a universal number.</p>
+  </div>
+
+  <div class="section">
+    <h2>Common questions</h2>
+    <details class="faqitem">
+      <summary>Why does the power check apply an 80% derate?</summary>
+      <p>NEC 210.19 and 210.20 require continuous loads (3+ hours, which describes nearly all rack IT load) to stay at or under 80% of a branch circuit's rating. A 20A/208V circuit is rated 4,160W but its continuous-load-safe budget is 3,328W. This tool applies that derate automatically.</p>
+    </details>
+    <details class="faqitem">
+      <summary>Is this a substitute for a real rack elevation drawing?</summary>
+      <p>No. It's a first-pass budget check using simplified assumptions — it doesn't model airflow, cable routing, or physical rail/depth clearances. Always confirm against the rack manufacturer's spec sheet and a real elevation drawing before ordering.</p>
+    </details>
+    <details class="faqitem">
+      <summary>Is this free and does it require an account?</summary>
+      <p>Yes — free, runs entirely in your browser, no signup. Nothing you enter is sent anywhere.</p>
+    </details>
+  </div>
+</div>
+
+<footer>
+  <div class="in">
+    <div>
+      <h5>Voltfield Supply Co.</h5>
+      <p>Free engineering calculators, guides, and reference tools for energy infrastructure and industrial procurement.</p>
+    </div>
+    <div><h5>Desks</h5><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+      <li><a href="oil-gas.html">Drilling &amp; Completions</a></li>
+      <li><a href="industrial-supply.html">Industrial Supply (MRO)</a></li>
+    </ul></div>
+    <div><h5>Reference</h5><ul>
+      <li><a href="glossary.html">Glossary</a></li>
+      <li><a href="engineering-calculators.html">Engineering Calculators</a></li>
+      <li><a href="voltfield-pod-designer.html">POD &amp; Skid Designer</a></li>
+      <li><a href="free-tools.html">All Free Tools</a></li>
+    </ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script>
+(function(){
+  try{
+    const q=JSON.parse(localStorage.getItem("vf_quote")||"[]");
+    const el=document.getElementById("quoteCount");
+    if(el)el.textContent=Array.isArray(q)?q.length:0;
+  }catch(e){}
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+<script>
+(function(){
+  'use strict';
+  var $=function(id){return document.getElementById(id);};
+
+  var EQUIPMENT=[
+    {id:'srv1u',name:'1U Rack Server',u:1,w:450,lbs:45},
+    {id:'srv2u',name:'2U Rack Server',u:2,w:750,lbs:65},
+    {id:'sw1u',name:'1U Top-of-Rack Switch',u:1,w:150,lbs:15},
+    {id:'pdu1u',name:'1U Metered PDU',u:1,w:0,lbs:12},
+    {id:'san2u',name:'2U Storage Array',u:2,w:550,lbs:70},
+    {id:'ups4u',name:'4U Rack-Mount UPS',u:4,w:100,lbs:130},
+    {id:'kvm1u',name:'1U KVM Console',u:1,w:40,lbs:18},
+    {id:'blank1u',name:'1U Blanking Panel',u:1,w:0,lbs:2},
+    {id:'cable2u',name:'2U Cable Manager',u:2,w:0,lbs:5}
+  ];
+
+  var items=[]; /* {instId, eq} */
+  var nextInstId=1;
+
+  function eqById(id){ for(var i=0;i<EQUIPMENT.length;i++){ if(EQUIPMENT[i].id===id) return EQUIPMENT[i]; } return null; }
+
+  /* ---------- equipment picker ---------- */
+  $('eqSel').innerHTML=EQUIPMENT.map(function(e){return '<option value="'+e.id+'">'+e.name+'</option>';}).join('');
+  function renderEqSpecs(){
+    var e=eqById($('eqSel').value);
+    if(!e){ $('eqSpecs').textContent=''; return; }
+    $('eqSpecs').textContent=e.u+'U · '+e.w+'W · '+e.lbs+' lb';
+  }
+  $('eqSel').addEventListener('change',renderEqSpecs);
+  renderEqSpecs();
+
+  $('addBtn').addEventListener('click',function(){
+    var e=eqById($('eqSel').value);
+    if(!e)return;
+    items.push({instId:nextInstId++, eq:e});
+    renderRack();
+    renderBudgets();
+    $('checklist').classList.remove('show');
+  });
+
+  /* ---------- rack visual ---------- */
+  var PX_PER_U=17;
+  function renderRack(){
+    var rackU=parseInt($('rackUSel').value,10);
+    var used=items.reduce(function(s,it){return s+it.eq.u;},0);
+    var wrap=$('rackInner');
+    wrap.style.height=(rackU*PX_PER_U)+'px';
+    var html='';
+    items.forEach(function(it){
+      html+='<div class="rackitem" style="height:'+(it.eq.u*PX_PER_U)+'px" data-inst="'+it.instId+'">'+
+        '<span class="ri-n">'+it.eq.name+'</span>'+
+        '<span class="ri-u">'+it.eq.u+'U</span>'+
+        '<button type="button" data-remove="'+it.instId+'" aria-label="Remove">&times;</button>'+
+      '</div>';
+    });
+    var remaining=rackU-used;
+    if(remaining>0){
+      html+='<div class="rackempty" style="height:'+(remaining*PX_PER_U)+'px">'+remaining+'U open</div>';
+    }
+    wrap.innerHTML=html;
+    wrap.querySelectorAll('button[data-remove]').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var id=parseInt(btn.dataset.remove,10);
+        items=items.filter(function(it){return it.instId!==id;});
+        renderRack();
+        renderBudgets();
+        $('checklist').classList.remove('show');
+      });
+    });
+  }
+
+  /* ---------- budgets (live readout, not pass/fail -- that's the Check button) ---------- */
+  function totals(){
+    var rackU=parseInt($('rackUSel').value,10);
+    var amps=parseFloat($('ampsInput').value)||0;
+    var volts=parseFloat($('voltsSel').value)||0;
+    var weightLimit=parseFloat($('weightInput').value)||0;
+    var usedU=items.reduce(function(s,it){return s+it.eq.u;},0);
+    var usedW=items.reduce(function(s,it){return s+it.eq.w;},0);
+    var usedLbs=items.reduce(function(s,it){return s+it.eq.lbs;},0);
+    var wattBudget=amps*volts*0.8;
+    return {rackU:rackU,usedU:usedU,usedW:usedW,wattBudget:wattBudget,usedLbs:usedLbs,weightLimit:weightLimit};
+  }
+  function barClass(used,budget){
+    if(budget<=0)return 'over';
+    var pct=used/budget;
+    if(pct>1)return 'over';
+    if(pct>=0.85)return 'warn';
+    return '';
+  }
+  function renderBudgets(){
+    var t=totals();
+    var uPct=Math.min(100,(t.usedU/Math.max(1,t.rackU))*100);
+    var wPct=Math.min(100,(t.usedW/Math.max(1,t.wattBudget))*100);
+    var lPct=Math.min(100,(t.usedLbs/Math.max(1,t.weightLimit))*100);
+    $('budgetRow').innerHTML=
+      '<div class="budget"><div class="bl">U-space</div><div class="bv'+(t.usedU>t.rackU?' over':'')+'">'+t.usedU+' / '+t.rackU+'U</div><div class="bbar"><i class="'+barClass(t.usedU,t.rackU)+'" style="width:'+uPct+'%"></i></div></div>'+
+      '<div class="budget"><div class="bl">Circuit power (80% derated)</div><div class="bv'+(t.usedW>t.wattBudget?' over':'')+'">'+Math.round(t.usedW)+' / '+Math.round(t.wattBudget)+'W</div><div class="bbar"><i class="'+barClass(t.usedW,t.wattBudget)+'" style="width:'+wPct+'%"></i></div></div>'+
+      '<div class="budget"><div class="bl">Weight</div><div class="bv'+(t.usedLbs>t.weightLimit?' over':'')+'">'+t.usedLbs+' / '+t.weightLimit+' lb</div><div class="bbar"><i class="'+barClass(t.usedLbs,t.weightLimit)+'" style="width:'+lPct+'%"></i></div></div>';
+  }
+
+  ['rackUSel','ampsInput','voltsSel','weightInput'].forEach(function(id){
+    $(id).addEventListener('input',function(){ renderRack(); renderBudgets(); });
+    $(id).addEventListener('change',function(){ renderRack(); renderBudgets(); });
+  });
+
+  /* ---------- explicit check (pass/fail cards + GA4 event) ---------- */
+  function runChecks(){
+    var t=totals();
+    var checks=[];
+    checks.push({
+      title:'U-space fits the rack',
+      pass: t.usedU<=t.rackU,
+      msg: t.usedU+'U used of '+t.rackU+'U available.'+(t.usedU>t.rackU?' Remove '+(t.usedU-t.rackU)+'U of equipment or pick a taller rack.':'')
+    });
+    checks.push({
+      title:'Circuit power within the 80% continuous-load derate',
+      pass: t.usedW<=t.wattBudget,
+      msg: Math.round(t.usedW)+'W used of a '+Math.round(t.wattBudget)+'W budget (80% of the circuit\'s rated capacity).'+(t.usedW>t.wattBudget?' Split the load across a second circuit or a higher-rated one.':'')
+    });
+    checks.push({
+      title:'Weight within the rack rating',
+      pass: t.usedLbs<=t.weightLimit,
+      msg: t.usedLbs+' lb used of a '+t.weightLimit+' lb rating.'+(t.usedLbs>t.weightLimit?' Confirm the actual rack/floor rating before proceeding.':'')
+    });
+    return checks;
+  }
+  function renderChecks(checks){
+    var list=$('checklist');
+    list.innerHTML=checks.map(function(c){
+      return '<div class="checkcard '+(c.pass?'pass':'fail')+'"><div class="cx">'+(c.pass?'✓':'✗')+'</div><div><div class="ct">'+c.title+'</div><div class="cm">'+c.msg+'</div></div></div>';
+    }).join('');
+    list.classList.add('show');
+    var passCount=checks.filter(function(c){return c.pass;}).length;
+    if(window.vfGtag)window.vfGtag('event','rack_check_design',{pass_count:passCount,total_checks:checks.length,item_count:items.length});
+  }
+  $('checkBtn').addEventListener('click',function(){
+    renderChecks(runChecks());
+    $('checklist').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  $('clearBtn').addEventListener('click',function(){
+    items=[];
+    renderRack();
+    renderBudgets();
+    $('checklist').classList.remove('show');
+  });
+
+  $('copyLinkBtn').addEventListener('click',function(){
+    var params=new URLSearchParams();
+    params.set('u',$('rackUSel').value);
+    params.set('a',$('ampsInput').value);
+    params.set('v',$('voltsSel').value);
+    params.set('w',$('weightInput').value);
+    params.set('items',items.map(function(it){return it.eq.id;}).join(','));
+    var url=location.origin+location.pathname+'?'+params.toString();
+    if(navigator.clipboard){ navigator.clipboard.writeText(url).then(function(){toast('Link copied');},function(){toast('Copy failed');}); }
+  });
+
+  function toast(msg){
+    var t=$('vfToast');
+    if(!t){ t=document.createElement('div'); t.id='vfToast';
+      t.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;font-family:var(--mono);font-size:12.5px;z-index:200;border:1px solid var(--signal)';
+      document.body.appendChild(t);
+    }
+    t.textContent=msg; t.style.opacity='1';
+    clearTimeout(t._h); t._h=setTimeout(function(){t.style.opacity='0';},2200);
+  }
+
+  /* ---------- restore from a shared link ---------- */
+  (function(){
+    var p=new URLSearchParams(location.search);
+    if(!p.has('items'))return;
+    if(p.get('u')) $('rackUSel').value=p.get('u');
+    if(p.get('a')) $('ampsInput').value=p.get('a');
+    if(p.get('v')) $('voltsSel').value=p.get('v');
+    if(p.get('w')) $('weightInput').value=p.get('w');
+    var ids=(p.get('items')||'').split(',').filter(Boolean);
+    ids.forEach(function(id){
+      var e=eqById(id);
+      if(e) items.push({instId:nextInstId++, eq:e});
+    });
+  })();
+
+  renderRack();
+  renderBudgets();
+})();
+</script>
+</body>
+</html>

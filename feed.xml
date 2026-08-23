@@ -125,5 +125,12 @@
     <description>How ERCOT's generation interconnection process works, why it isn't FERC-jurisdictional, and how rapid wind, solar, and storage growth has reshaped what was once one of the faster queues in the US.</description>
     <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
   </item>
+  <item>
+    <title>Rack Elevation Builder</title>
+    <link>https://voltfield.org/voltfield-rack-builder.html</link>
+    <guid>https://voltfield.org/voltfield-rack-builder.html</guid>
+    <description>A free rack elevation planner: stack servers, switches, storage, UPS, and PDUs into a 24/42/48U rack and check U-space, circuit power (NEC 80% continuous-load derate), and weight budgets instantly.</description>
+    <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
+  </item>
 </channel>
 </rss>

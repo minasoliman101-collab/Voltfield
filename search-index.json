@@ -62,6 +62,7 @@
     {"title": "Engineering Calculators", "url": "engineering-calculators.html", "category": "Tool", "description": "20 free calculators for cable sizing, transformer/BESS sizing, fault current, arc-flash, and more."},
     {"title": "EE Practice Sandbox", "url": "voltfield-sandbox.html", "category": "Tool", "description": "Design a one-line system — transformer, main breaker, feeder, panel loads — and run 5 engineering checks live."},
     {"title": "POD & Skid Designer", "url": "voltfield-pod-designer.html", "category": "Tool", "description": "Size a modular power block against a target load and redundancy level (N/N+1/2N) — enclosed POD or open-frame skid."},
+    {"title": "Rack Elevation Builder", "url": "voltfield-rack-builder.html", "category": "Tool", "description": "Stack equipment into a 24/42/48U rack and check U-space, circuit power (NEC 80% derated), and weight budgets instantly."},
     {"title": "Glossary Quiz", "url": "voltfield-glossary-quiz.html", "category": "Tool", "description": "Test yourself on energy and industrial equipment terms."},
     {"title": "RFQ Toolkit", "url": "rfq-toolkit.html", "category": "Tool", "description": "An RFQ readiness checklist and copy-paste spec templates for transformers, switchgear, and BESS."},
     {"title": "BOM Generator", "url": "voltfield-bom-generator.html", "category": "Tool", "description": "Component-level bill of materials breakdown for any engineered part."},

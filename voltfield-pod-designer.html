@@ -140,6 +140,7 @@ footer a:hover{color:#fff}
         <a href="free-tools.html">All Free Tools</a>
         <a href="voltfield-sandbox.html">Practice Sandbox</a>
         <a href="voltfield-pod-designer.html" class="on">POD &amp; Skid Designer</a>
+        <a href="voltfield-rack-builder.html">Rack Elevation Builder</a>
         <a href="engineering-calculators.html">Calculators</a>
         <a href="voltfield-bom-generator.html">BOM Generator</a>
         <a href="voltfield-bom.html">BOM Match</a>
@@ -315,6 +316,7 @@ footer a:hover{color:#fff}
     <p><b>N</b> needs no standby path. <b>N+1</b> needs a spare unit — a generator or UPS present covers it. <b>2N</b> is stricter: it needs a <i>generator</i> (not just a UPS, since a UPS is a bridge, not a sustained source) sized to carry the <i>entire</i> load on its own, because a true 2N design duplicates the whole path rather than just adding a spare. See <a class="inline" href="data-centers.html#redundancy">Data Center Power Equipment</a> for the full explanation.</p>
     <h3>POD footprint vs. skid</h3>
     <p>POD mode adds a footprint budget — how many major equipment items reasonably fit inside a 10/20/40 ft-equivalent enclosure, a rough capacity heuristic rather than a scaled drawing. Skid mode drops that check entirely, since there's no shell to fit inside, and instead flags that every component sits exposed to weather.</p>
+    <p>Once the power block itself is sized, the <a class="inline" href="voltfield-rack-builder.html">Rack Elevation Builder</a> handles the next level down — stacking the actual servers, switches, and storage that load sits behind, with its own U-space, circuit, and weight budgets.</p>
   </div>
 
   <div class="section" style="padding:0">
