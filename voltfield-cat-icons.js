@@ -336,12 +336,20 @@ function vfCatIconSVG(iconId,color){
   return `<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">${draw(color)}</svg>`;
 }
 
+/* The category-icon lookup, pulled out on its own so other renderers (the
+   voltfield-3d.js procedural shape viewer) can resolve the same family ->
+   icon-id mapping without duplicating this logic. */
+function vfIconIdFor(f){
+  if(!f) return 'generic';
+  const base=f.img?f.img.split('/').pop():'';
+  return (base&&VF_FILE_ICON_MAP[base])||VF_CAT_ICON_MAP[f.s+'|'+f.c]||'generic';
+}
+
 /* Drop-in replacement for a bare pImg(f.img,...) call: routes duplicate-photo
    families to a category icon instead, keeps everyone else on their real photo. */
 function vfPartVisual(f,cls,alt){
   if(!f) return '';
-  const base=f.img?f.img.split('/').pop():'';
-  const iconId=(base&&VF_FILE_ICON_MAP[base])||VF_CAT_ICON_MAP[f.s+'|'+f.c]||'generic';
+  const iconId=vfIconIdFor(f);
   const color=(typeof SECTORS!=='undefined'&&SECTORS[f.s])?SECTORS[f.s].color:'#5B6B7E';
   const label=alt||f.n||f.c;
   return `<div class="vf-cat-icon ${cls||''}" role="img" aria-label="${label.replace(/"/g,'&quot;')}" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:${color}14">${vfCatIconSVG(iconId,color)}</div>`;

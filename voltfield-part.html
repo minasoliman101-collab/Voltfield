@@ -44,6 +44,10 @@
 .p-refphoto{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);padding:10px 12px;margin-top:14px}
 .p-refphoto img{width:64px;height:64px;object-fit:contain;flex-shrink:0;background:var(--card)}
 .p-refphoto p{font-size:11.5px;color:var(--slate);line-height:1.5;margin:0}
+.p-3dbar{display:flex;justify-content:center;padding:8px;border-bottom:1px solid var(--line);background:#fff}
+.p-3dbtn{background:none;border:1px solid var(--line-dark);color:var(--ink-2);font-family:var(--disp);font-weight:600;font-size:12.5px;letter-spacing:.03em;padding:6px 14px;cursor:pointer;transition:border-color .15s,color .15s}
+.p-3dbtn:hover{border-color:var(--ink);color:var(--ink)}
+.p-3dbtn.on{background:var(--ink);border-color:var(--ink);color:var(--signal)}
 .p-hd{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 20px;border-bottom:1px solid var(--line)}
 .p-cat{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#fff;padding:3px 8px}
 .p-dist{font-family:var(--mono);font-size:11px;color:var(--slate)}
@@ -204,6 +208,7 @@ footer a{color:#9FB0C3}
 <script src="voltfield-catalog-data.js"></script>
 <script src="voltfield-cat-icons.js"></script>
 <script src="voltfield-bom-engine.js"></script>
+<script src="voltfield-3d.js"></script>
 <script>
 /* ===== Standalone part-detail / configurator (uses shared catalog data) ===== */
 function loadQuote(){try{const q=JSON.parse(localStorage.getItem('vf_quote')||'[]');return Array.isArray(q)?q:[];}catch(e){return [];}}
@@ -215,6 +220,7 @@ const P=new URLSearchParams(location.search);
 const fi=parseInt(P.get('fi'),10);
 const f=(Number.isInteger(fi)&&fi>=0&&fi<FAM.length)?FAM[fi]:null;
 let PS=null;
+var vf3dDispose=null, vf3dOn=false; /* 3D-view toggle state -- read inside renderPart(), must exist before its first call below */
 
 function recordRecentlyViewed(fi,picks,chk){
   try{
@@ -294,6 +300,17 @@ function refPhotoHTML(f,name){
     <p>AI-generated reference illustration, not vendor photography — the exact item supplied may vary by manufacturer and configuration.</p>
   </div>`;
 }
+/* ---------- 3D view toggle (procedural shapes, no external model files -- see voltfield-3d.js) ---------- */
+function vf3dTeardown(){ if(vf3dDispose){ vf3dDispose(); vf3dDispose=null; } }
+function vf3dMount(){
+  if(typeof VF3D==='undefined')return;
+  const wrap=document.getElementById('pImgWrap');
+  if(!wrap)return;
+  vf3dTeardown();
+  const color=(typeof SECTORS!=='undefined'&&SECTORS[f.s])?SECTORS[f.s].color:'#2B6CB0';
+  vf3dDispose=VF3D.mount(wrap,vfIconIdFor(f),color);
+  if(window.vfGtag)window.vfGtag('event','part_3d_view',{sector:f.s,family:f.n});
+}
 function renderPart(){
   const {picks,qty}=PS;
   const pn=configuredPN(f,picks,PS.chk), price=priceFor(f,picks), lb=leadBadge(f), col=SECTORS[f.s].color;
@@ -319,7 +336,8 @@ function renderPart(){
         <span class="p-cat" style="background:${col}">${f.c}</span>
         <span class="p-dist">${distLbl} · ${SECTORS[f.s].label}</span>
       </div>
-      <div class="p-imgwrap">${vfPartVisual(f,'p-img',configuredName(f,picks))}</div>
+      <div class="p-imgwrap" id="pImgWrap">${vfPartVisual(f,'p-img',configuredName(f,picks))}</div>
+      <div class="p-3dbar"><button type="button" id="p3dBtn" class="p-3dbtn">View in 3D &#8635;</button></div>
       <div class="p-body">
         <div class="p-pn">${pn}</div>
         <h1 class="p-name">${configuredName(f,picks)}</h1>
@@ -357,6 +375,27 @@ function renderPart(){
       <div class="altsub">Same category, shorter lead time than ${lb.t}.</div>
       <div id="altList">${alternatives.map(a=>`<div class="alt-item"><a href="voltfield-part.html?fi=${a._i}">${a.n}</a><span class="lead ${leadBadge(a).c} alt-lead">${leadBadge(a).t}</span></div>`).join('')}</div>
     </div>`:''}`;
+  const p3dBtn=document.getElementById('p3dBtn');
+  const p3dLabelOff='View in 3D ↻', p3dLabelOn='Icon view';
+  if(p3dBtn){
+    p3dBtn.textContent=vf3dOn?p3dLabelOn:p3dLabelOff;
+    p3dBtn.classList.toggle('on',vf3dOn);
+    p3dBtn.onclick=()=>{
+      vf3dOn=!vf3dOn;
+      if(vf3dOn){
+        p3dBtn.textContent=p3dLabelOn;
+        p3dBtn.classList.add('on');
+        vf3dMount();
+      } else {
+        p3dBtn.textContent=p3dLabelOff;
+        p3dBtn.classList.remove('on');
+        vf3dTeardown();
+        const wrap=document.getElementById('pImgWrap');
+        if(wrap)wrap.innerHTML=vfPartVisual(f,'p-img',configuredName(f,picks));
+      }
+    };
+  }
+  if(vf3dOn)vf3dMount();
   document.querySelectorAll('select[data-ai]').forEach(sel=>sel.onchange=()=>{PS.picks[+sel.dataset.ai]=sel.value;syncURL();renderPart();});
   const qi=document.getElementById('pQty'); qi.onchange=()=>{PS.qty=Math.max(1,parseInt(qi.value,10)||1);syncURL();renderPart();};
   document.getElementById('pAdd').onclick=()=>{
