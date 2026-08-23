@@ -745,7 +745,9 @@ footer a:hover{color:#fff}
         if(scenarioIdx===dailyIdx)markDailyDone();
         if(!submittedThisLoad){
           submittedThisLoad=true;
-          showSubmitPrompt(SCEN[scenarioIdx].id, Date.now()-scenarioStartTime);
+          const solveMs=Date.now()-scenarioStartTime;
+          if(window.vfGtag)window.vfGtag('event','sandbox_challenge_complete',{scenario:SCEN[scenarioIdx].id,time_ms:solveMs,tier2:tier2On});
+          showSubmitPrompt(SCEN[scenarioIdx].id, solveMs);
         }
       }
       const shareBtn=$('shareResultBtn');
@@ -949,6 +951,7 @@ footer a:hover{color:#fff}
         const data=await r.json();
         card.dataset.submitHtml='';
         card.innerHTML=`<h4>Leaderboard</h4><div class="sub">You're on the board.</div><div id="lbList">${renderLeaderboardList(data.entries||[])}</div>`;
+        if(window.vfGtag)window.vfGtag('event','sandbox_leaderboard_submit',{scenario:scenarioId,time_ms:timeMs});
         toast('Time submitted');
       }catch(e){
         toast('Leaderboard unavailable here');

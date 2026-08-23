@@ -1122,5 +1122,18 @@ footer a:hover{color:#fff}
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
 <script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+<script>
+/* ---------- usage tracking: which of the 20 calculators actually get used.
+   Delegated so it covers every .estimator/*Btn pair, including any added later. ---------- */
+(function(){
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest('button[id$="Btn"]');
+    if(!btn)return;
+    var est=btn.closest('.estimator');
+    if(!est||!est.id)return;
+    if(window.vfGtag)window.vfGtag('event','calculator_run',{calc:est.id});
+  });
+})();
+</script>
 </body>
 </html>
