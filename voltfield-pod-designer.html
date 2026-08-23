@@ -35,6 +35,13 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
  {"@type":"WebApplication","name":"VOLTFIELD POD & Skid Designer","applicationCategory":"EngineeringApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"A drag-free sizing sandbox for a modular power block: pick a transformer, switchgear, distribution, backup power, and cooling against a target load and redundancy level (N/N+1/2N), toggle between an enclosed POD and an open-frame skid, and get instant sizing checks."},
+ {"@type":"HowTo","name":"How to size a power POD or skid","description":"Set a target load and redundancy, then pick equipment and check the sizing.","step":[
+   {"@type":"HowToStep","name":"Set the load and redundancy target","text":"Enter the critical load in kW and choose a redundancy level: N, N+1, or 2N."},
+   {"@type":"HowToStep","name":"Choose POD or Skid","text":"Toggle between an enclosed POD, which adds a footprint check, and an open-frame skid, which drops it."},
+   {"@type":"HowToStep","name":"Pick a transformer and switchgear","text":"Select an incoming transformer size and a main switchgear rating."},
+   {"@type":"HowToStep","name":"Pick distribution, backup, and cooling","text":"Select a distribution/busway rating, a backup power source if the redundancy target requires one, and a cooling capacity."},
+   {"@type":"HowToStep","name":"Check the design","text":"Click Check My Design to see pass/fail results against sizing, redundancy, and (for PODs) footprint checks."}
+ ]},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What's the difference between a POD and a skid in this tool?","acceptedAnswer":{"@type":"Answer","text":"Same equipment slots and the same sizing checks either way. POD mode adds one extra check -- whether the equipment you picked fits inside the enclosure size class you selected (10/20/40 ft equivalent). Skid mode drops that check, since an open frame has no enclosure footprint budget, and instead flags that every component is weather-exposed and should carry its own NEMA/IP rating."}},
    {"@type":"Question","name":"Are these checks a substitute for a real electrical design?","acceptedAnswer":{"@type":"Answer","text":"No. Sizing math here uses simplified, first-pass assumptions (0.85 power factor, 480V three-phase, rough heat-load and footprint heuristics) -- the same spirit as the Engineering Calculators and EE Practice Sandbox. Always use a licensed engineer's full load study, short-circuit study, and equipment-specific spec sheets for actual design or code compliance."}},

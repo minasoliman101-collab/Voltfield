@@ -36,6 +36,14 @@
 {"@context":"https://schema.org","@type":"WebApplication","name":"VOLTFIELD EE Practice Sandbox","applicationCategory":"EngineeringApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"A drag-and-drop one-line system design sandbox: assemble transformer, breaker, feeder, and load tiles from a legend onto an open board, with instant engineering checks on sizing, voltage drop, and fault current."}
 </script>
 <script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"How to build a one-line diagram","description":"Assemble a transformer, breaker, feeder, and loads, then check the design.","step":[
+{"@type":"HowToStep","name":"Pick a transformer","text":"Drag or tap a transformer tile from the legend onto the transformer slot on the board."},
+{"@type":"HowToStep","name":"Pick a main breaker and feeder","text":"Add a main overcurrent protective device and a feeder conductor."},
+{"@type":"HowToStep","name":"Add panel loads","text":"Add one or more loads to the panel."},
+{"@type":"HowToStep","name":"Check the design","text":"Click Check My Design to run the engineering checks on sizing, voltage drop, and fault current."}
+]}
+</script>
+<script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"Are these calculations a substitute for a real short-circuit or coordination study?","acceptedAnswer":{"@type":"Answer","text":"No. The sandbox uses simplified, infinite-source, single-voltage-level formulas — the same methods used in the Engineering Calculators page — for learning and first-pass checks only. Always use a licensed engineer's full study for actual design or code compliance sign-off."}},
 {"@type":"Question","name":"Where do these formulas come from?","acceptedAnswer":{"@type":"Answer","text":"Standard K-factor voltage drop, kVA/FLA sizing, and infinite-source fault current formulas, plus commonly published NEC Table 310.16 75°C copper/aluminum ampacities. The same formulas power VOLTFIELD's Engineering Calculators page."}},

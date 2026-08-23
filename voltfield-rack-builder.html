@@ -35,6 +35,12 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
  {"@type":"WebApplication","name":"VOLTFIELD Rack Elevation Builder","applicationCategory":"EngineeringApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"A free rack elevation planning sandbox: stack servers, switches, storage, UPS, and PDUs into a 24/42/48U rack and check U-space, circuit power (with NEC 80% continuous-load derate), and weight budgets instantly."},
+ {"@type":"HowTo","name":"How to plan a rack elevation","description":"Set rack and circuit parameters, add equipment, and check U-space, power, and weight budgets.","step":[
+   {"@type":"HowToStep","name":"Set rack and circuit parameters","text":"Choose a rack height (24/42/48U), circuit rating and voltage, and a weight budget."},
+   {"@type":"HowToStep","name":"Add equipment","text":"Select equipment from the list and add it to the rack; it stacks in a proportional elevation view."},
+   {"@type":"HowToStep","name":"Review the live budget bars","text":"U-space, circuit power (80% derated), and weight update live as equipment is added or removed."},
+   {"@type":"HowToStep","name":"Check the rack","text":"Click Check My Rack to see pass/fail results against all three budgets."}
+ ]},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"Why does the power check apply an 80% derate?","acceptedAnswer":{"@type":"Answer","text":"NEC 210.19 and 210.20 (and the equivalent CEC rule) require continuous loads -- running 3 hours or more, which describes nearly all rack IT load -- to not exceed 80% of a branch circuit's rating. A 20A/208V circuit is rated 4,160W but its continuous-load-safe budget is 3,328W. This tool applies that same derate automatically."}},
    {"@type":"Question","name":"Is this a substitute for a real rack elevation drawing?","acceptedAnswer":{"@type":"Answer","text":"No. It's a first-pass budget check -- U-space, circuit power, and weight -- using simplified assumptions, the same spirit as the Engineering Calculators and POD & Skid Designer. It doesn't model airflow, cable routing, or physical rail/depth clearances. Always confirm against the rack manufacturer's spec sheet and a real elevation drawing before ordering."}},
