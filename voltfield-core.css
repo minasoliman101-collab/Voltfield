@@ -55,3 +55,27 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .headright{margin-left:auto;display:flex;align-items:center;gap:10px}
 .quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
 .quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
+
+/* ---------- pseudo-3D icon tiles ----------
+   Every category/tool icon site-wide (catalog part icons via vfPartVisual(),
+   homepage switchgrid .sw-icon, sector "popular categories" .cq-icon) gets a
+   tilted-card look: a perspective transform plus a hard-edged offset shadow
+   that traces the icon's own silhouette, so it reads as a small dimensional
+   tile rather than a flat glyph. No new markup, no external assets -- pure
+   CSS on the existing icon elements. Settles flatter and lifts slightly on
+   hover/focus for a tactile response. */
+.vf-cat-icon,.sw-icon,.cq-icon{
+  transform:perspective(500px) rotateX(10deg) rotateY(-14deg);
+  filter:drop-shadow(4px 6px 0 rgba(16,27,45,.16)) drop-shadow(4px 7px 9px rgba(16,27,45,.12));
+  transition:transform .25s ease,filter .25s ease;
+  will-change:transform;
+}
+a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
+.switch:hover .sw-icon,.switch:focus-visible .sw-icon,
+.catq:hover .cq-icon,.catq:focus-visible .cq-icon{
+  transform:perspective(500px) rotateX(4deg) rotateY(-6deg) scale(1.06) translateY(-2px);
+  filter:drop-shadow(2px 4px 0 rgba(16,27,45,.2)) drop-shadow(5px 9px 13px rgba(16,27,45,.16));
+}
+@media (prefers-reduced-motion:reduce){
+  .vf-cat-icon,.sw-icon,.cq-icon{transition:none}
+}
