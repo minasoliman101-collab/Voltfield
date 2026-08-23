@@ -14,6 +14,9 @@
 /ordering-hidden.css
   Cache-Control: public, max-age=600
 
+/voltfield-core.css
+  Cache-Control: public, max-age=86400, stale-while-revalidate=86400
+
 /icons/*
   Cache-Control: public, max-age=2592000
 

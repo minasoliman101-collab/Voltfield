@@ -4,7 +4,7 @@
    of serving a stale file indefinitely. Still bump VERSION for an instant,
    forced cache-wide reset (e.g. an urgent fix) — activate() below wipes
    every cache bucket that doesn't match it. */
-const VERSION = 'voltfield-v25';
+const VERSION = 'voltfield-v26';
 
 const CORE = [
   './',
@@ -14,8 +14,10 @@ const CORE = [
   './voltfield-bom.html',
   './voltfield-bom-generator.html',
   './voltfield-sandbox.html',
+  './voltfield-pod-designer.html',
   './voltfield-pcb-layout.html',
   './ordering-hidden.css',
+  './voltfield-core.css',
   './voltfield-insights.html',
   './voltfield-part.html',
   './voltfield-rfq.html',
