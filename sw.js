@@ -4,7 +4,7 @@
    of serving a stale file indefinitely. Still bump VERSION for an instant,
    forced cache-wide reset (e.g. an urgent fix) — activate() below wipes
    every cache bucket that doesn't match it. */
-const VERSION = 'voltfield-v31';
+const VERSION = 'voltfield-v32';
 
 const CORE = [
   './',
@@ -20,6 +20,7 @@ const CORE = [
      still comes from a CDN on first use, so 3D needs a connection once even
      though this shim is precached. */
   './voltfield-3d.js',
+  './voltfield-progress.js',
   './voltfield-component-viz.js',
   './voltfield-component-viz.css',
   './voltfield-pcb-layout.html',

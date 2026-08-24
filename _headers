@@ -67,3 +67,8 @@
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
+
+# 3D-rendered tool thumbnails. Content-addressed by name only, so long cache
+# but not immutable -- regenerating one reuses its filename.
+/images/tools/*
+  Cache-Control: public, max-age=604800

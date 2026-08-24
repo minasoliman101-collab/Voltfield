@@ -63,6 +63,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .sectiondek{font-size:13.5px;color:var(--slate);margin-bottom:14px;max-width:640px;line-height:1.6}
 .toolgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
 .toolcard{background:var(--card);border:1px solid var(--line-dark);padding:16px 18px;text-decoration:none;color:var(--ink);display:block;transition:border-color .15s}
+/* 3D-rendered thumbnails. Negative margins pull the image to the card edges
+   while the text keeps its padding; width/height attributes give the browser
+   the aspect ratio up front so lazy-loading cannot shift the grid. */
+.toolcard .tc-img{display:block;width:calc(100% + 36px);height:auto;aspect-ratio:440/280;
+  margin:-16px -18px 12px;object-fit:cover;background:#0C1524;border-bottom:1px solid var(--line-dark)}
+.toolcard:hover .tc-img{opacity:.92}
 .toolcard:hover{border-color:var(--ink)}
 .toolcard .tc-t{font-family:var(--disp);font-weight:700;font-size:16.5px;color:var(--ink)}
 .toolcard .tc-d{font-size:12.5px;color:var(--ink-2);margin-top:4px;line-height:1.5}
@@ -155,22 +161,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p class="sectiondek">Hands-on tools for working through a real design, not just looking up a formula.</p>
   <div class="toolgrid">
     <a class="toolcard" href="voltfield-sandbox.html">
+      <img class="tc-img" src="images/tools/tool-sandbox.png" alt="A transformer, breaker, feeder and panel wired as a one-line" width="440" height="280" loading="lazy" decoding="async" onerror="this.remove()">
       <div class="tc-t">EE Practice Sandbox</div>
       <div class="tc-d">Design a one-line system — transformer, main breaker, feeder, panel loads — and run 5 engineering checks against a live SVG diagram.</div>
     </a>
     <a class="toolcard" href="voltfield-pod-designer.html">
+      <img class="tc-img" src="images/tools/tool-pod.png" alt="Power equipment laid out inside a containerised POD" width="440" height="280" loading="lazy" decoding="async" onerror="this.remove()">
       <div class="tc-t">POD &amp; Skid Designer</div>
       <div class="tc-d">Size a modular power block against a target load and redundancy level (N/N+1/2N) — toggle between an enclosed POD and an open-frame skid.</div>
     </a>
     <a class="toolcard" href="voltfield-rack-builder.html">
+      <img class="tc-img" src="images/tools/tool-rack.png" alt="A 24U rack loaded with switch, servers, storage and UPS" width="440" height="280" loading="lazy" decoding="async" onerror="this.remove()">
       <div class="tc-t">Rack Elevation Builder</div>
       <div class="tc-d">Stack equipment into a 24/42/48U rack and check U-space, circuit power (NEC 80% derated), and weight budgets instantly.</div>
     </a>
     <a class="toolcard" href="voltfield-pcb.html">
+      <img class="tc-img" src="images/tools/tool-pcb.png" alt="A DIP-8 integrated circuit on a board" width="440" height="280" loading="lazy" decoding="async" onerror="this.remove()">
       <div class="tc-t">Custom PCB Builder</div>
       <div class="tc-d">Instant spec, price, and lead time for a custom PCB fab configuration.</div>
     </a>
     <a class="toolcard" href="voltfield-pcb-layout.html">
+      <img class="tc-img" src="images/tools/tool-pcblayout.png" alt="An electrolytic capacitor with its polarity stripe" width="440" height="280" loading="lazy" decoding="async" onerror="this.remove()">
       <div class="tc-t">PCB Layout Tool</div>
       <div class="tc-d">Place components and route two-layer traces, with a live design check.</div>
     </a>
@@ -188,6 +199,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="tc-d">A readiness checklist plus copy-paste spec templates for transformers, switchgear, and BESS.</div>
     </a>
     <a class="toolcard" href="voltfield-bom-generator.html">
+      <img class="tc-img" src="images/tools/tool-bom.png" alt="A pad-mount transformer, the subject of a BOM teardown" width="440" height="280" loading="lazy" decoding="async" onerror="this.remove()">
       <div class="tc-t">BOM Generator</div>
       <div class="tc-d">Component-level bill of materials breakdown for any engineered part.</div>
     </a>
@@ -201,10 +213,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p class="sectiondek">For figuring out what a part is, or what replaces it.</p>
   <div class="toolgrid">
     <a class="toolcard" href="voltfield-identify.html">
+      <img class="tc-img" src="images/tools/tool-identify.png" alt="An AC induction motor" width="440" height="280" loading="lazy" decoding="async" onerror="this.remove()">
       <div class="tc-t">Part ID</div>
       <div class="tc-d">Photograph a nameplate to help identify a replacement part.</div>
     </a>
     <a class="toolcard" href="voltfield-eol.html">
+      <img class="tc-img" src="images/tools/tool-eol.png" alt="A moulded-case circuit breaker" width="440" height="280" loading="lazy" decoding="async" onerror="this.remove()">
       <div class="tc-t">Obsolete / End-of-Life Parts</div>
       <div class="tc-d">Discontinued equipment series with OEM-recommended replacement paths.</div>
     </a>

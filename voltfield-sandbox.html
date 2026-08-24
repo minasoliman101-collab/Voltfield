@@ -963,6 +963,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   function loadStreak(){ try{ const s=JSON.parse(localStorage.getItem('vf_sandbox_streak')||'null'); return s&&typeof s==='object'?s:{lastDate:null,current:0,longest:0}; }catch(e){ return {lastDate:null,current:0,longest:0}; } }
   function renderStreakBadge(){
+    /* Freshness matters: this used to print `current` unconditionally, so a run
+       abandoned weeks ago still announced itself as an active streak. VFProgress
+       treats a streak as alive only if it was fed today or yesterday. */
+    if(window.VFProgress){
+      const s=VFProgress.streak();
+      $('streakBadge').textContent = s.current>0
+        ? '🔥 '+s.current+'-day streak'+(s.atRisk?' — ends tonight':'')
+        : '';
+      return;
+    }
     const st=loadStreak();
     $('streakBadge').textContent = st.current>0 ? `🔥 ${st.current}-day streak` : '';
   }

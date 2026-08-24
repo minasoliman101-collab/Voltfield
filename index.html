@@ -58,6 +58,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .hero-in{max-width:1240px;margin:0 auto;padding:56px 20px 40px;position:relative}
 .hero-grid{display:grid;gap:38px}
 @media(min-width:1080px){.hero-grid{grid-template-columns:1.02fr .98fr;align-items:start}}
+/* ---------- hero 3D showcase ---------- */
+.showcase{border:1px solid #354866;background:#0C1524;margin-bottom:14px}
+/* fixed height, reserved up front: the canvas mounts after load and must not
+   push the panel around when it appears */
+.showcase-stage{height:190px;position:relative}
+.showcase-stage canvas{display:block}
+.showcase-fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#8DA0B8}
+.showcase-fallback svg{width:44px;height:44px}
+.showcase-fallback span{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase}
+.showcase-cap{border-top:1px solid #354866;padding:9px 12px;display:flex;flex-direction:column;gap:2px}
+.showcase-cap b{font-family:var(--disp);font-weight:700;font-size:14px;color:#E8EDF3;letter-spacing:.01em}
+.showcase-cap span{font-family:var(--mono);font-size:9.5px;color:#8DA0B8;letter-spacing:.04em}
 .hero .panel{border-color:#354866;margin-top:10px}
 .hero .switchgrid{grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:10px}
 .hero .switch h3{font-size:16px}
@@ -86,6 +98,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .herosearch button{background:var(--signal);border:0;border-left:2px solid var(--ink);padding:0 24px;font-family:var(--disp);font-weight:700;font-size:17px;letter-spacing:.06em;color:var(--ink)}
 .herosearch .hint{margin-top:8px;font-family:var(--mono);font-size:11px;color:#8DA0B8;display:flex;gap:14px;flex-wrap:wrap}
 .herosearch .hint button{background:none;border:0;color:#C9D3DF;font-family:var(--mono);font-size:11px;text-decoration:underline;text-underline-offset:2px;padding:0}
+/* ---------- returning-visitor resume band ---------- */
+/* display:flex would otherwise beat the UA's [hidden]{display:none}, painting an
+   empty bordered box on every first-time visitor's homepage. */
+.resume[hidden]{display:none}
+.resume{margin-top:30px;max-width:900px;background:rgba(255,196,0,.07);border:1px solid #3A4E6E;border-left:4px solid var(--signal);padding:15px 18px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.resume.urgent{background:rgba(255,196,0,.13);border-left-color:var(--signal)}
+.resume-l{min-width:0;flex:1}
+.resume-hd{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--signal);margin-bottom:5px;display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.resume-streak{background:var(--signal);color:var(--ink);padding:1px 7px;font-weight:600;letter-spacing:.05em}
+.resume-t{font-family:var(--disp);font-weight:700;font-size:19px;color:#fff;line-height:1.15}
+.resume-d{font-size:13px;color:#AFC0D3;margin-top:3px;line-height:1.5}
+.resume-cta{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:10px 18px;font-family:var(--disp);font-weight:700;font-size:14px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;white-space:nowrap;flex-shrink:0}
+.resume-cta:hover{background:transparent;color:var(--signal)}
+.resume-bars{display:flex;gap:16px;flex-wrap:wrap;margin-top:9px}
+.resume-bar{font-family:var(--mono);font-size:10px;color:#9FB0C3;letter-spacing:.04em}
+.resume-bar b{color:#E8EDF3;font-weight:600}
+.resume-bar i{display:inline-block;width:52px;height:4px;background:#2C3E58;margin-left:6px;vertical-align:middle;position:relative}
+.resume-bar i span{position:absolute;inset:0 auto 0 0;background:var(--signal)}
+@media(max-width:560px){.resume{flex-direction:column;align-items:stretch}.resume-cta{text-align:center}}
 .hero-stats{display:flex;gap:0;margin-top:40px;border-top:1px solid #2C3E58;max-width:900px;flex-wrap:wrap}
 .hstat{padding:16px 26px 4px 0;margin-right:26px}
 .hstat .k{font-family:var(--disp);font-weight:700;font-size:28px;color:var(--signal);line-height:1}
@@ -271,6 +302,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a href="site-search.html?q=voltage+drop" style="color:#C9D3DF">voltage drop</a>
       </div>
     </div>
+    <!-- Returning-visitor band. Stays empty (and invisible) for first-timers;
+         filled client-side from practice state by voltfield-progress.js. -->
+    <div class="resume" id="resumeBand" hidden></div>
+
     <div class="hero-stats">
       <div class="hstat"><div class="k">160 wk</div><div class="l">Longest transformer lead time</div></div>
       <div class="hstat"><div class="k">20</div><div class="l">Free engineering calculators</div></div>
@@ -279,6 +314,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     </div>
     <aside class="panel" aria-label="Guided starting points">
+    <!-- 3D showcase. Height is reserved in CSS so mounting the canvas later
+         cannot shift layout, and Three.js is only fetched after window.load so
+         it never competes with first paint on the site's most important page. -->
+    <div class="showcase" id="showcase">
+      <div class="showcase-stage" id="showcaseStage">
+        <div class="showcase-fallback" id="showcaseFallback">
+          <svg viewBox="0 0 40 40" fill="none" stroke="#8DA0B8" stroke-width="1.6" aria-hidden="true"><rect x="8" y="12" width="24" height="16" rx="1"/><path d="M12 12V8M20 12V8M28 12V8M8 28h24"/></svg>
+          <span>Equipment models</span>
+        </div>
+      </div>
+      <div class="showcase-cap">
+        <b id="showcaseName">Interactive equipment models</b>
+        <span id="showcaseHint">32 procedural 3D models across the practice tools</span>
+      </div>
+    </div>
     <div class="panel-sub">Not sure where to start? Jump into a tool, or open a sector's guides, calculators, and reference data.</div>
     <div class="switchgrid">
       <a class="switch" href="voltfield-sandbox.html">
@@ -683,6 +733,112 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 <script src="voltfield-catalog-data.js"></script>
 <script src="voltfield-site-config.js"></script>
+<script src="voltfield-progress.js"></script>
+<script>
+/* Hero 3D showcase.
+
+   Deliberately deferred: voltfield-3d.js is injected only after window.load,
+   and Three.js itself is then fetched from a CDN on first mount. The homepage
+   is the page most likely to be a search landing, so nothing here is allowed
+   to compete with first paint or shift layout -- the stage height is reserved
+   in CSS and the canvas replaces a static placeholder inside it.
+
+   Cycles a few pieces of equipment rather than showing one, because the point
+   being made is "there are models of the real kit in here", not "look, a
+   transformer". Honours prefers-reduced-motion by not cycling. */
+(function(){
+  var stage=document.getElementById('showcaseStage');
+  if(!stage) return;
+  var reduce=false;
+  try{ reduce=matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
+
+  var PICKS=[
+    {id:'transformer',color:'#2B6CB0',name:'Pad-mount transformer',hint:'Sized in the calculators, placed in the POD designer'},
+    {id:'switchgear', color:'#2B6CB0',name:'LV switchgear',        hint:'Fault-current and arc-flash checks run against it'},
+    {id:'genset',     color:'#9C4221',name:'Diesel genset',        hint:'Backup power in the POD & Skid designer'},
+    {id:'server2u',   color:'#2B6CB0',name:'2U rack server',       hint:'Stacked in the rack elevation builder'},
+    {id:'cooling',    color:'#2B6CB0',name:'CRAH unit',            hint:'Cooling load tracks the electrical load'},
+    {id:'motor',      color:'#5B6B7E',name:'AC induction motor',   hint:'The load at the end of a practice one-line'}
+  ];
+  var i=Math.floor(Math.random()*PICKS.length), dispose=null, timer=null;
+
+  function show(){
+    var p=PICKS[i%PICKS.length];
+    if(dispose){ try{dispose();}catch(e){} dispose=null; }
+    var fb=document.getElementById('showcaseFallback');
+    if(fb) fb.remove();
+    dispose=VF3D.mount(stage,p.id,p.color);
+    document.getElementById('showcaseName').textContent=p.name;
+    document.getElementById('showcaseHint').textContent=p.hint;
+    i++;
+    if(!reduce) timer=setTimeout(show,7000);
+  }
+
+  function start(){
+    if(!window.VF3D) return;
+    show();
+    /* stop burning a GL context and a rAF loop while the tab is hidden */
+    document.addEventListener('visibilitychange',function(){
+      if(document.hidden){ if(timer){clearTimeout(timer);timer=null;} }
+      else if(!timer&&!reduce){ timer=setTimeout(show,3000); }
+    });
+  }
+
+  function load(){
+    var s=document.createElement('script');
+    s.src='voltfield-3d.js';
+    s.onload=start;
+    s.onerror=function(){ /* placeholder simply stays put */ };
+    document.body.appendChild(s);
+  }
+
+  if(document.readyState==='complete') setTimeout(load,200);
+  else window.addEventListener('load',function(){ setTimeout(load,200); });
+})();
+</script>
+<script>
+/* Returning-visitor band. Renders only when there IS practice history --
+   a first-time visitor must not be shown an empty "welcome back" shell, and
+   must not be shown zeroed progress bars either, which read as nagging. */
+(function(){
+  var band=document.getElementById('resumeBand');
+  if(!band||!window.VFProgress) return;
+  var s=VFProgress.summary();
+  if(!s.active) return;                       // stays hidden for first-timers
+
+  var next=VFProgress.nextAction(), c=s.counts;
+  function bar(label,done,total){
+    if(!total) return '';
+    var pct=Math.round((done/total)*100);
+    return '<span class="resume-bar">'+label+' <b>'+done+'/'+total+'</b>'+
+           '<i><span style="width:'+pct+'%"></span></i></span>';
+  }
+  var bars=bar('Sandbox',c.sandboxDone,c.sandboxTotal)+
+           bar('POD &amp; Skid',c.podDone,c.podTotal)+
+           (c.quizBest>0?'<span class="resume-bar">Quiz best <b>'+c.quizBest+'</b></span>':'');
+
+  var streakChip='';
+  if(s.streak.current>0){
+    streakChip='<span class="resume-streak">🔥 '+s.streak.current+'-day streak</span>';
+  } else if(s.streak.expired){
+    /* Say what actually happened rather than silently resetting to zero --
+       and point at the longest run so it still reads as an achievement. */
+    streakChip='<span class="resume-streak" style="background:#3A4E6E;color:#E8EDF3">Streak ended · best '+s.streak.longest+'</span>';
+  }
+
+  band.className='resume'+(next.urgent?' urgent':'');
+  band.innerHTML=
+    '<div class="resume-l">'+
+      '<div class="resume-hd">Welcome back'+streakChip+'</div>'+
+      '<div class="resume-t">'+next.label+'</div>'+
+      '<div class="resume-d">'+next.detail+'</div>'+
+      (bars?'<div class="resume-bars">'+bars+'</div>':'')+
+    '</div>'+
+    '<a class="resume-cta" href="'+next.href+'">Continue &rsaquo;</a>';
+  band.hidden=false;
+  if(window.vfGtag) window.vfGtag('resume_band_shown',{action:next.label,streak:s.streak.current});
+})();
+</script>
 <script>
 /* ---------- lead-time ticker (mirrors catalog data) ---------- */
 const TK=[["Large power transformers","<b>160 wk</b> &#9650;"],["Pad-mount transformers","<b>85 wk</b> &#9650;"],["MV switchgear","<b>sold out '28</b> &#9632;"],["Gas turbines","<b>2029+ slots</b> &#9650;"],["Diesel gensets","<b>90 wk</b> &#9650;"],["Grid-forming PCS","<b>32 wk</b> &#9632;"],["LFP DC blocks","<b>$110&ndash;140/kWh</b> &#9660;"],["FEOC-clean inverters","<b>20 wk</b> &#9650;"],["PV modules (import)","<b>$0.09&ndash;0.13/W</b> &#9660;"],["GSU transformers","<b>144 wk</b> &#9650;"],["Drill pipe S-135","<b>34 wk</b> &#9632;"],["Frac valves","<b>24 wk</b> &#9660;"],["MCCBs 15&ndash;1200 A","<b>12 wk</b> &#9632;"],["Hydraulic hose asm","<b>same-wk crimp</b> &#9660;"]];
