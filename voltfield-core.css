@@ -79,3 +79,28 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
 @media (prefers-reduced-motion:reduce){
   .vf-cat-icon,.sw-icon,.cq-icon{transition:none}
 }
+
+/* ---------- guide provenance block (scripts/add-guide-provenance.ps1) ----------
+   Lives in core rather than per-page <style> because it appears on all 18
+   guides. Tokenised throughout, so the dark theme needs no override. */
+.provenance{
+  max-width:780px;margin:34px auto 8px;padding:18px 20px;
+  background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--slate);
+}
+.provenance h2{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--slate);margin:0 0 12px;font-weight:600;
+}
+.provenance dl{margin:0;display:grid;gap:10px}
+.provenance dt{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--slate);margin-bottom:2px;
+}
+.provenance dd{margin:0;font-size:13px;line-height:1.65;color:var(--ink-2)}
+.provenance ul{margin:0;padding-left:18px}
+.provenance li{font-size:13px;line-height:1.6;color:var(--ink-2);margin-bottom:3px}
+.provenance a{color:var(--signal-deep);font-weight:600;text-decoration:underline}
+@media(min-width:640px){
+  .provenance dl{grid-template-columns:auto 1fr;gap:10px 20px;align-items:baseline}
+  .provenance dt{margin-bottom:0;white-space:nowrap}
+}

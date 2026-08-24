@@ -1,0 +1,95 @@
+{
+  "_note": "Per-guide provenance. 'basedOn' lists what the guide's content actually rests on -- verified by extracting standards and regulatory references from each guide's own body text, not assumed. Where a guide is Voltfield's own analysis rather than a restatement of a published standard, that is stated plainly instead of padding the list with citations the content does not use. 'published' and 'updated' come from git history (first commit adding the file, and last commit touching it) so both are verifiable rather than asserted.",
+  "guides": {
+    "guide-arc-flash-boundary-basics": {
+      "covers": "How arc-flash boundaries are calculated, what the PPE categories mean, and why incident energy depends on clearing time as much as on fault current.",
+      "basedOn": ["IEEE 1584 — Guide for Performing Arc-Flash Hazard Calculations", "NFPA 70E — Standard for Electrical Safety in the Workplace"],
+      "notFor": "It is not an arc-flash study. A real study models your actual system with measured settings and produces the labels your site must carry."
+    },
+    "guide-bess-augmentation": {
+      "covers": "Why battery capacity fades, how augmentation is planned across a project's life, and what that does to the commercial model.",
+      "basedOn": ["NFPA 855 — Standard for the Installation of Stationary Energy Storage Systems", "UL 9540A — Test Method for Thermal Runaway Fire Propagation"],
+      "notFor": "Degradation behaviour is chemistry- and duty-specific. Treat the figures here as shape rather than as a warranty model for a particular product."
+    },
+    "guide-bess-fire-safety-nfpa-855": {
+      "covers": "What NFPA 855 requires of a storage installation, how UL 9540A test data feeds into it, and where the separation and suppression requirements come from.",
+      "basedOn": ["NFPA 855 — Standard for the Installation of Stationary Energy Storage Systems", "UL 9540A — Test Method for Thermal Runaway Fire Propagation"],
+      "notFor": "Local adoption and amendment of these codes varies. The authority having jurisdiction decides what applies to your site."
+    },
+    "guide-buy-america-iija": {
+      "covers": "How Buy America content rules under the IIJA and the Inflation Reduction Act affect equipment selection and documentation.",
+      "basedOn": ["Infrastructure Investment and Jobs Act (IIJA) Build America, Buy America provisions", "Inflation Reduction Act domestic content provisions"],
+      "notFor": "This is not legal or tax advice. Content determinations are project-specific and change with agency guidance."
+    },
+    "guide-feoc-compliance": {
+      "covers": "What Foreign Entity of Concern restrictions mean in practice for equipment sourcing, and how they interact with tariff exposure.",
+      "basedOn": ["US Treasury guidance on Foreign Entity of Concern restrictions", "Section 301 and Section 232 tariff actions"],
+      "notFor": "This is not legal advice. FEOC determinations depend on ownership structures and current guidance, both of which move."
+    },
+    "guide-grid-interconnection-process": {
+      "covers": "How a generation or large-load interconnection request moves through study, agreement and construction, and where the delays concentrate.",
+      "basedOn": ["FERC Order 2023 — Improvements to Generator Interconnection Procedures"],
+      "notFor": "Each ISO and RTO implements these rules differently. Confirm the current process with the interconnecting utility."
+    },
+    "guide-grounding-bonding-basics": {
+      "covers": "The difference between grounding and bonding, why separately derived systems are treated differently, and what the electrode system is actually for.",
+      "basedOn": ["NEC 250.30 — Grounding Separately Derived Alternating-Current Systems (NFPA 70)"],
+      "notFor": "Code adoption and amendment varies by jurisdiction. Confirm against the edition your authority having jurisdiction enforces."
+    },
+    "guide-interconnection-ercot": {
+      "covers": "How ERCOT's interconnection process differs from the FERC-jurisdictional model, and what that means for project timing.",
+      "basedOn": ["FERC Order 2023 (for contrast with the ERCOT model)", "ERCOT published interconnection procedures"],
+      "notFor": "Process details change. Verify current requirements directly with ERCOT before relying on any timeline here."
+    },
+    "guide-interconnection-miso": {
+      "covers": "MISO's interconnection queue structure, study phases, and where projects typically stall.",
+      "basedOn": ["FERC Order 2023 — Improvements to Generator Interconnection Procedures", "MISO published interconnection procedures"],
+      "notFor": "Queue conditions and study timelines change continually. Verify current status directly with MISO."
+    },
+    "guide-interconnection-pjm": {
+      "covers": "PJM's transition to a cycle-based interconnection process and what it changes for project developers.",
+      "basedOn": ["FERC Order 2023 — Improvements to Generator Interconnection Procedures", "PJM published interconnection procedures"],
+      "notFor": "PJM's process is in active transition. Verify current cycle status and requirements directly with PJM."
+    },
+    "guide-inverter-clipping-ratio": {
+      "covers": "Why DC/AC ratios above unity are normal, how clipping losses behave, and how to reason about the trade-off.",
+      "basedOn": ["Voltfield's own engineering analysis — this guide explains a design trade-off rather than restating a published standard."],
+      "notFor": "Optimal ratios depend on site irradiance, module orientation and offtake terms. The reasoning transfers; the numbers do not."
+    },
+    "guide-liquid-vs-air-cooling": {
+      "covers": "Where air cooling stops being practical, what a liquid loop adds, and how the crossover is usually reasoned about.",
+      "basedOn": ["ASHRAE thermal guidelines for data processing environments", "Voltfield's own engineering analysis of the density crossover"],
+      "notFor": "The crossover point depends on rack layout, climate and equipment. This is orientation, not a mechanical design."
+    },
+    "guide-pad-mount-vs-gsu-transformers": {
+      "covers": "What separates a pad-mount from a generator step-up transformer, and when each is the right answer.",
+      "basedOn": ["IEEE C57 series — standards for liquid-immersed distribution and power transformers"],
+      "notFor": "Not a specification. Confirm ratings, impedance and configuration against the manufacturer's data before ordering."
+    },
+    "guide-pue-explained": {
+      "covers": "What PUE measures, what a good figure looks like, and the ways the number can mislead.",
+      "basedOn": ["The Green Grid — PUE definition and measurement categories", "ASHRAE thermal guidelines for data processing environments"],
+      "notFor": "PUE is a comparison metric, not an objective function. Optimising it directly can produce worse overall outcomes."
+    },
+    "guide-short-circuit-studies-breaker-coordination": {
+      "covers": "Why short-circuit studies are run, how selective coordination works, and why coordination and arc-flash mitigation pull against each other.",
+      "basedOn": ["IEEE 1584 — Guide for Performing Arc-Flash Hazard Calculations", "ANSI C37 series — standards for switchgear and circuit breakers"],
+      "notFor": "Not a substitute for a study. Coordination must be verified against actual device curves and settings by a qualified engineer."
+    },
+    "guide-switchgear-compartments": {
+      "covers": "What sits inside each compartment of a switchgear lineup and why the construction is arranged that way.",
+      "basedOn": ["UL 1558 — Metal-Enclosed Low-Voltage Power Circuit Breaker Switchgear", "ANSI C37.20.1 — Metal-Enclosed Low-Voltage Power Circuit Breaker Switchgear"],
+      "notFor": "Construction varies by manufacturer and voltage class. Confirm against the specific lineup's drawings."
+    },
+    "guide-transformer-lead-times": {
+      "covers": "What is driving multi-year transformer lead times and how procurement teams can plan around them.",
+      "basedOn": ["Voltfield Equipment Lead-Time Index — indicative modelled positions, reviewed monthly", "Industry reporting aggregated in the Voltfield Insights feed"],
+      "notFor": "Lead-time figures are indicative modelled positions, not quotations. Actual lead time comes from the fulfilling supplier."
+    },
+    "guide-transformer-nameplate": {
+      "covers": "How to read a transformer nameplate field by field, and which entries actually constrain your design.",
+      "basedOn": ["IEEE C57.12.00 — General Requirements for Liquid-Immersed Distribution, Power, and Regulating Transformers"],
+      "notFor": "Nameplate layouts vary between manufacturers and vintages. This explains the common fields, not every variant."
+    }
+  }
+}

@@ -32,7 +32,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    {"@type":"ListItem","position":2,"name":"Insights","item":"https://voltfield.org/voltfield-insights.html"},
    {"@type":"ListItem","position":3,"name":"Short-Circuit Studies & Breaker Coordination","item":"https://voltfield.org/guide-short-circuit-studies-breaker-coordination.html"}
  ]},
- {"@type":"Article","headline":"Short-Circuit Studies & Breaker Coordination Basics","description":"What a short-circuit study actually calculates, why a quick infinite-source fault-current estimate isn't a substitute for one, and how breaker coordination decides which device trips first when something goes wrong.","image":"https://voltfield.org/social/social-data-centers.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"VOLTFIELD Supply Co."},"datePublished":"2026-07-28T00:00:00-05:00","url":"https://voltfield.org/guide-short-circuit-studies-breaker-coordination.html"},
+ {"@type":"Article","headline":"Short-Circuit Studies & Breaker Coordination Basics","description":"What a short-circuit study actually calculates, why a quick infinite-source fault-current estimate isn't a substitute for one, and how breaker coordination decides which device trips first when something goes wrong.","image":"https://voltfield.org/social/social-data-centers.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"VOLTFIELD Supply Co."},"datePublished":"2026-07-28T00:00:00-05:00","dateModified":"2026-08-23T00:00:00-05:00","url":"https://voltfield.org/guide-short-circuit-studies-breaker-coordination.html"},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What does a short-circuit study actually calculate?","acceptedAnswer":{"@type":"Answer","text":"A short-circuit study calculates the available fault current at every bus in a system, working from the utility's actual source impedance through every transformer, cable, and busway in series down to each panel and piece of equipment. It's what confirms every breaker, fuse, and piece of switchgear has an interrupting rating equal to or greater than the fault current it could actually see."}},
    {"@type":"Question","name":"Is an infinite-source fault current estimate the same as a short-circuit study?","acceptedAnswer":{"@type":"Answer","text":"No. An infinite-source estimate (assuming the utility source has zero impedance, ignoring cable impedance) is a useful first-pass sanity check for early sizing decisions, but it's not a substitute for a full study. Real utility source impedance, series cable/busway impedance, and motor contribution during a fault all typically reduce the available fault current somewhat from the infinite-source number, and a full study is what a licensed engineer stamps for actual equipment ratings and code compliance."}},
@@ -146,7 +146,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="eyebrow">Field Guide</div>
     <h1>Short-Circuit Studies &amp; Breaker Coordination Basics</h1>
     <p class="dek">A quick fault-current estimate tells you whether a breaker is roughly in the right range. A short-circuit study — and the coordination study that follows it — is what actually confirms every device on the system is rated correctly and trips in the right order.</p>
-    <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:#8DA0B8;margin-top:14px"><span>By <b style="color:#E8EDF3;font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published Jul 28, 2026</span><span>&middot;</span><a href="methodology.html" style="color:#8DA0B8;text-decoration:underline">How we source &amp; verify this</a></div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:#8DA0B8;margin-top:14px"><span>By <b style="color:#E8EDF3;font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published Jul 28, 2026</span><span>&middot;</span><span>Updated August 23, 2026</span><span>&middot;</span><a href="methodology.html" style="color:#8DA0B8;text-decoration:underline">How we source &amp; verify this</a></div>
   </div>
 </section>
 <div class="artwrap">
@@ -210,6 +210,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </div>
 <div class="ad-unit" data-ad="footer"></div>
+
+  <aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>Why short-circuit studies are run, how selective coordination works, and why coordination and arc-flash mitigation pull against each other.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>IEEE 1584 — Guide for Performing Arc-Flash Hazard Calculations</li><li>ANSI C37 series — standards for switchgear and circuit breakers</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>Not a substitute for a study. Coordination must be verified against actual device curves and settings by a qualified engineer.</dd>
+      <dt>Provenance</dt>
+      <dd>Published July 28, 2026 &middot; last updated August 23, 2026. Written and maintained by the Voltfield editorial team against the sources above. Figures that are Voltfield's own estimates rather than published standards are labelled as such where they appear &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
+    </dl>
+  </aside>
 <footer>
   <div class="in">
     <div>
