@@ -58,6 +58,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
 <link rel="stylesheet" href="ordering-hidden.css">
 <link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-component-viz.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <style>
@@ -197,6 +198,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2 id="voltage-drop">Voltage Drop / Cable Sizing Calculator</h2>
   <p>Estimates voltage drop across a feeder using the standard K-factor method, then flags runs that exceed the commonly used 3% branch-circuit / 5% total design guideline (NEC 210.19(A) informational note — a recommendation, not a hard limit).</p>
   <div class="formula">VD = (2 &times; K &times; I &times; D) / CM &nbsp;[single-phase]&nbsp; &middot; &nbsp;VD = (1.732 &times; K &times; I &times; D) / CM &nbsp;[three-phase]</div>
+  <div class="vfcv-mount" data-calc="voltage-drop" data-comp="conductor"></div>
   <div class="estimator" id="vdCalc">
     <h3>Voltage Drop</h3>
     <div class="sub">K = 12.9 (copper) or 21.2 (aluminum) ohm&middot;cmil/ft — approximate, ignores conductor reactance. Best for runs under ~250 ft.</div>
@@ -217,6 +219,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2 id="ampacity">Cable Ampacity &amp; Conduit Fill Calculators</h2>
   <p>Looks up base conductor ampacity from NEC Table 310.16 (no more than 3 current-carrying conductors, 30&deg;C ambient — before any correction factors) and checks conduit fill against NEC Chapter 9's percentage caps. This covers a curated subset of common sizes for early-stage estimating, not the full code table.</p>
   <div class="formula">Fill % = 100 &times; (n &times; A<sub>conductor</sub>) / A<sub>conduit</sub> &nbsp;&middot;&nbsp; cap: 53% (1 conductor) &middot; 31% (2) &middot; 40% (3+)</div>
+  <div class="vfcv-mount" data-calc="ampacity" data-comp="conductor"></div>
   <div class="estimator" id="ampCalc">
     <h3>Ampacity Lookup</h3>
     <div class="sub">Base ampacity only — apply NEC 310.15(B) ambient/altitude correction and 310.15(C) bundling adjustment factors for your actual install conditions, and respect the 60&deg;C/75&deg;C termination rating of the equipment per NEC 110.14(C).</div>
@@ -244,6 +247,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2 id="transformer-sizing">Transformer Sizing Calculator</h2>
   <p>Converts a real load in kW to required kVA and rounds up to the nearest standard ANSI/IEEE C57.12.00 transformer nameplate rating, plus estimated full-load amps on the secondary.</p>
   <div class="formula">kVA = kW / PF &nbsp;&middot;&nbsp; FLA = kVA &times; 1000 / (1.732 &times; V) &nbsp;[3&phi;]&nbsp; or &nbsp;kVA &times; 1000 / V &nbsp;[1&phi;]</div>
+  <div class="vfcv-mount" data-calc="transformer-sizing" data-comp="transformer"></div>
   <div class="estimator" id="xfCalc">
     <h3>Transformer Size</h3>
     <div class="sub">Rounds up to the nearest standard kVA nameplate rating. Add your own margin for future load growth — this doesn't assume any.</div>
@@ -260,6 +264,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2 id="inrush">Transformer Inrush Current Estimator</h2>
   <p>Energizing a transformer briefly draws a magnetizing inrush current well above full-load amps — enough to matter for upstream breaker/fuse selection and protective coordination. The multiplier below is an industry rule of thumb (commonly cited around IEEE 141/242 and manufacturer application literature), not a precise physical constant — it varies by core design, steel grade, residual flux, and point-on-wave of energization.</p>
   <div class="formula">FLA = kVA &times; 1000 / (1.732 &times; V) &nbsp;[3&phi;] &nbsp;&middot;&nbsp; Peak inrush &asymp; M &times; FLA</div>
+  <div class="vfcv-mount" data-calc="inrush" data-comp="transformer"></div>
   <div class="estimator" id="inrushCalc">
     <h3>Inrush Current</h3>
     <div class="sub">Pick the size class closest to your unit to auto-fill a typical multiplier range, or override it if your manufacturer publishes an actual figure.</div>
@@ -284,6 +289,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2 id="bess-sizing">BESS Sizing Calculator</h2>
   <p>Converts a critical load and backup duration into usable energy, then to the nameplate energy rating you'd need to procure once depth of discharge and round-trip efficiency losses are factored in. See <a class="inline" href="battery-storage.html">Battery Storage</a> for DC block configurations.</p>
   <div class="formula">Usable kWh = kW &times; hours &nbsp;&middot;&nbsp; Nameplate kWh = Usable kWh / (DoD &times; RTE)</div>
+  <div class="vfcv-mount" data-calc="bess-sizing" data-comp="battery"></div>
   <div class="estimator" id="bessCalc">
     <h3>BESS Size</h3>
     <div class="sub">Defaults (90% DoD, 90% RTE) are typical for utility-scale LFP systems — adjust to your spec sheet.</div>
@@ -300,6 +306,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2 id="solar-string">Solar String Sizing Calculator</h2>
   <p>Applies module temperature coefficients to your site's design temperatures to find the maximum string length (cold-weather Voc must stay under the inverter's max input voltage) and minimum string length (hot-weather Vmp must stay in the inverter's MPPT window).</p>
   <div class="formula">Voc(cold) = Voc &times; (1 + (Tc&middot;Voc/100) &times; (Tmin&minus;25)) &nbsp;&middot;&nbsp; Vmp(hot) = Vmp &times; (1 + (Tc&middot;Vmp/100) &times; (Tmax&minus;25))</div>
+  <div class="vfcv-mount" data-calc="solar-string" data-comp="pvmodule"></div>
   <div class="estimator" id="strCalc">
     <h3>String Size</h3>
     <div class="sub">All values from the module and inverter datasheets — this tool does no lookups of its own.</div>
@@ -322,6 +329,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2 id="fault-current">Fault Current Estimate &amp; Withstand Check</h2>
   <p>A simplified, infinite-source estimate of available symmetrical fault current at a transformer's secondary terminals — useful for a first-pass equipment rating check, not a substitute for a full short-circuit/coordination study that accounts for source and cable impedance.</p>
   <div class="formula">Isc = (100,000 &times; kVA) / (1.732 &times; V &times; %Z)</div>
+  <div class="vfcv-mount" data-calc="fault-current" data-comp="switchgear"></div>
   <div class="estimator" id="faultCalc">
     <h3>Available Fault Current</h3>
     <div class="sub">%Z comes from the transformer nameplate — typical distribution transformers run 5.75%&ndash;6.5%, but always use the actual nameplate value. Common standard equipment AIC/withstand ratings: 10, 14, 18, 22, 25, 35, 42, 50, 65, 100, 150, 200 kA.</div>
@@ -340,6 +348,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2 id="motor-start">Motor Starting Voltage Dip</h2>
   <p>Estimates the voltage dip at a bus when a large motor starts across-the-line, using the standard "infinite bus minus source impedance" screening method behind IEEE Std 399 motor-starting studies — the motor's locked-rotor demand as a fraction of itself plus the source's short-circuit capacity. It's a snapshot of maximum dip only; it doesn't model acceleration time, other motors reaccelerating, or a limited-capacity generator source (which needs its transient reactance modeled separately, not this infinite-bus assumption).</p>
   <div class="formula">%VoltageDip = LRkVA / (LRkVA + SCkVA) &times; 100</div>
+  <div class="vfcv-mount" data-calc="motor-start" data-comp="motor"></div>
   <div class="estimator" id="motorCalc">
     <h3>Voltage Dip on Motor Start</h3>
     <div class="sub">Use actual nameplate LRA when you have it — the NEMA code letter only gives a band, not an exact value. Use the system's minimum expected fault capacity (weakest condition), the opposite convention from a protective-device duty study.</div>
@@ -364,6 +373,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2 id="arc-flash">Arc-Flash Incident Energy Calculator</h2>
   <p>A first-pass estimate of arc-flash incident energy and the arc-flash protection boundary, using the theoretical <b>Lee equation</b> (open-air arcs above 600V) and the empirical <b>Doughty equations</b> (open-air or arc-in-a-box, 600V and below) — both documented in NFPA 70E Annex D. <b>These are not the IEEE 1584 arcing-current method</b> that a real arc-flash study or PPE label uses; they're simpler closed-form equations meant for early budgetary estimates, and they don't account for equipment-specific arcing current, electrode configuration, or enclosure size the way IEEE 1584 does. Always get a qualified arc-flash study for PPE selection and labeling.</p>
   <div class="formula" id="afFormula">E = 793 &times; F &times; V &times; t / D&sup2; &nbsp;[Lee, open air, &gt;600V]</div>
+  <div class="vfcv-mount" data-calc="arc-flash" data-comp="switchgear"></div>
   <div class="estimator" id="afCalc">
     <h3>Arc-Flash Incident Energy</h3>
     <div class="sub" id="afSub">Doughty equations (&le;600V) are only validated for 16&ndash;50 kA bolted fault current and working distances of 18 in or more — the tool will flag it if you're outside that range.</div>
@@ -389,6 +399,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2 id="grounding">Ground Rod Resistance Estimator</h2>
   <p>Estimates the resistance-to-earth of a single driven ground rod using Dwight's formula, the standard starting point for grounding-grid work referenced in IEEE Std 142. Real (layered, non-uniform) soil commonly deviates from this uniform-resistivity assumption by 10&ndash;20% or more — treat this as a first-pass design estimate, not a substitute for a field measurement (Wenner four-point method, IEEE Std 81) or a full grounding-grid study.</p>
   <div class="formula">R = [&rho; / (2&pi;L)] &times; [ln(4L/d) &minus; 1]</div>
+  <div class="vfcv-mount" data-calc="grounding" data-comp="groundrod"></div>
   <div class="estimator" id="groundCalc">
     <h3>Single Rod Resistance</h3>
     <div class="sub">Soil resistivity presets are order-of-magnitude only (moisture, compaction, and mineral content routinely swing real resistivity by 10&times; within one "soil type") — a site resistivity test is the real number.</div>
@@ -412,6 +423,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2 id="power-factor">Power Factor Correction Calculator</h2>
   <p>Sizes the capacitor bank (kVAR) needed to raise real power at an existing power factor up to a target power factor.</p>
   <div class="formula">kVAR = kW &times; (tan(cos&sup1;&sup2;PF1) &minus; tan(cos&sup1;&sup2;PF2))</div>
+  <div class="vfcv-mount" data-calc="power-factor" data-comp="pfcap"></div>
   <div class="estimator" id="pfCalc">
     <h3>PF Correction Size</h3>
     <div class="est-row">
@@ -469,6 +481,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2 id="transformer-tco">Transformer TCO Estimator</h2>
   <p>A transformer loses energy as heat continuously: a fixed <b>no-load loss</b> (core loss, present anytime it's energized, loaded or not) and a <b>load loss</b> (winding loss that scales with the square of the load factor). Over a 20&ndash;30 year service life, that loss can cost more than the transformer itself — so total cost of ownership, not sticker price, is often the better basis for comparing bids of the same kVA size. Enter both loss figures from the nameplate or factory test report.</p>
   <div class="formula">Annual loss cost = [(Pnl &times; 8760) + (Pll &times; LoadFactor&sup2; &times; 8760)] &times; $/kWh</div>
+  <div class="vfcv-mount" data-calc="transformer-tco" data-comp="transformer"></div>
   <div class="estimator" id="tcoCalc">
     <h3>Transformer TCO</h3>
     <div class="sub">Loss figures come from the transformer's nameplate or factory test report — this tool does no lookups of its own.</div>
@@ -586,6 +599,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2 id="generator-runtime">Generator Runtime Estimator</h2>
   <p>How long a generator will actually run on a full tank at a given load — use the fuel consumption rate from the genset's own spec sheet at your expected load point (most spec sheets publish gal/hr at 50%, 75%, and 100% load).</p>
   <div class="formula">Runtime (hrs) = Fuel tank capacity (gal) / Fuel consumption rate (gal/hr)</div>
+  <div class="vfcv-mount" data-calc="generator-runtime" data-comp="genset"></div>
   <div class="estimator" id="genCalc">
     <h3>Generator Runtime</h3>
     <div class="sub">Looking for battery/UPS backup runtime instead? See the <a class="inline" href="#bess-sizing">BESS sizing calculator</a> above.</div>
@@ -669,6 +683,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 <script src="voltfield-site-config.js"></script>
+<script src="voltfield-3d.js"></script>
+<script src="voltfield-component-viz.js"></script>
+<script>
+/* Fill each calculator's component mount. The markup is generated rather than
+   inlined thirteen times so the wording of "what a transformer is" lives in one
+   place (voltfield-component-viz.js) and cannot drift between sections. */
+(function(){
+  if(!window.VFCV) return;
+  document.querySelectorAll('.vfcv-mount[data-comp]').forEach(function(m){
+    var id=m.getAttribute('data-comp');
+    if(!VFCV.has(id)){ m.remove(); return; }   // never leave an empty box behind
+    m.innerHTML=VFCV.cardHTML(id);
+  });
+  VFCV.bindCards(document);
+})();
+</script>
 <script>
 (function(){
   try{

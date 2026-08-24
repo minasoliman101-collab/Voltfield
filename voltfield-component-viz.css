@@ -53,6 +53,33 @@ picture.vfcv-thumb img{
   border:1px solid var(--line-dark);background:var(--bg);
 }
 
+/* ---------- inline card (long reference pages) ---------- */
+.vfcv-card{
+  display:grid;
+  grid-template-columns:200px minmax(0,1fr);
+  gap:14px;
+  align-items:start;
+  border:1px solid var(--line-dark);
+  background:var(--card);
+  padding:12px;
+  margin:14px 0 18px;
+}
+@media(max-width:640px){ .vfcv-card{grid-template-columns:1fr} }
+.vfcv-card-media{min-width:0}
+.vfcv-card.is-3d{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.vfcv-card.is-3d .vfcv-stage{height:230px}
+.vfcv-card-body{display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0}
+.vfcv-nophoto{
+  font-family:var(--mono);font-size:11px;line-height:1.6;color:var(--slate);
+  border:1px dashed var(--line-dark);padding:14px;text-align:center;
+}
+.vfcv-3dbtn{
+  background:none;border:1px solid var(--ink);color:var(--ink);
+  padding:6px 12px;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
+}
+.vfcv-3dbtn:hover,.vfcv-3dbtn[aria-pressed="true"]{background:var(--signal);border-color:var(--signal);color:var(--ink)}
+
 /* Placeholder shown before anything is selected. */
 .vfcv-inspector:not(.has-item) .vfcv-stage{display:none}
 .vfcv-empty{

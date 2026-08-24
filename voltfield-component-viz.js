@@ -157,6 +157,26 @@
     dip8:  { name: 'DIP-8 IC', shape: 'dip8', color: '#5B6B7E', img: null,
       what: 'An eight-pin chip in a dual in-line package, four pins a side.',
       note: 'The notch (and the dot beside pin 1) is the only orientation cue. Pins count anticlockwise from pin 1 when viewed from above.' },
+    /* ---------- calculator subjects ---------- */
+    pvmodule: {
+      name: 'PV module', shape: 'pvmodule', color: '#2B6CB0',
+      img: 're-mono-perc-modules',
+      what: 'Converts sunlight to DC power; wired in series into strings.',
+      note: 'String length is set by temperature, not by the nameplate: module voltage RISES as it gets colder, so the record cold morning decides how many modules fit under the inverter\'s maximum input voltage.'
+    },
+    groundrod: {
+      name: 'Ground rod & electrode conductor', shape: 'groundrod', color: '#5B6B7E',
+      img: 'dc-ground-bars-kits',
+      what: 'Bonds the electrical system to earth.',
+      note: 'Resistance is dominated by the SOIL, not the rod: the same rod can measure a few ohms in wet clay and hundreds in dry sand or rock. Doubling rod length helps far more than thickening it.'
+    },
+    pfcap: {
+      name: 'PF correction capacitor bank', shape: 'pfcap', color: '#2B6CB0',
+      img: 're-dc-link-film-capacitors',
+      what: 'Supplies reactive power locally so the supply does not have to.',
+      note: 'Switched in stages rather than all at once, because a bank sized for full load and left connected at light load overshoots into leading power factor.'
+    },
+
     pot:   { name: 'Potentiometer', shape: 'pot', color: '#5B6B7E', img: null,
       what: 'A variable resistor you adjust with a shaft or screwdriver.',
       note: 'Three pins: the outer two are the whole resistive track, the middle one is the wiper that moves along it. Using only the wiper and one end makes it a variable resistor instead of a divider.' }
@@ -257,8 +277,70 @@
     };
   }
 
+  /* ---------- inline card ----------
+     For long reference pages (the calculators) where a component belongs beside
+     each section rather than in one panel. The photo and text are static and
+     free; 3D is opt-in per card via a button.
+
+     Only ONE card page-wide may hold a live viewer: opening a second closes the
+     first. On a page with a dozen cards that is the difference between one GL
+     context and a dozen, and browsers cap them. */
+  let openCard = null;   // {el, dispose}
+
+  function closeOpenCard(){
+    if (!openCard) return;
+    try { openCard.dispose(); } catch (e) {}
+    const media = openCard.el.querySelector('[data-vfcv-media]');
+    const btn = openCard.el.querySelector('[data-vfcv-3d]');
+    if (media) media.innerHTML = openCard.photo;
+    if (btn) { btn.textContent = 'View in 3D'; btn.removeAttribute('aria-pressed'); }
+    openCard.el.classList.remove('is-3d');
+    openCard = null;
+  }
+
+  function cardHTML(id, opts){
+    const c = get(id), o = opts || {};
+    if (!c) return '';
+    const media = photoHTML(id, {size: 240, lazy: true, caption: o.caption !== false});
+    return '<div class="vfcv-card" data-vfcv-card="' + esc(id) + '">' +
+      '<div class="vfcv-card-media" data-vfcv-media>' + (media || '<div class="vfcv-nophoto">No reference illustration for this one &mdash; view it in 3D instead.</div>') + '</div>' +
+      '<div class="vfcv-card-body">' +
+        explainHTML(id) +
+        '<button type="button" class="vfcv-3dbtn" data-vfcv-3d>View in 3D</button>' +
+      '</div>' +
+    '</div>';
+  }
+
+  /* Wires every card under `root`. Safe to call more than once. */
+  function bindCards(root){
+    const scope = root || document;
+    scope.querySelectorAll('[data-vfcv-card]').forEach(function(card){
+      const btn = card.querySelector('[data-vfcv-3d]');
+      const media = card.querySelector('[data-vfcv-media]');
+      if (!btn || !media || btn.dataset.vfcvBound) return;
+      btn.dataset.vfcvBound = '1';
+      btn.addEventListener('click', function(){
+        const id = card.getAttribute('data-vfcv-card');
+        if (openCard && openCard.el === card) { closeOpenCard(); return; }
+        const photo = media.innerHTML;      // stash so we can restore on close
+        closeOpenCard();
+        media.innerHTML = '<div class="vfcv-stage" data-vfcv-stage></div>';
+        const stage = media.querySelector('[data-vfcv-stage]');
+        const c = get(id);
+        const dispose = window.VF3D ? window.VF3D.mount(stage, c.shape, c.color) : function(){};
+        card.classList.add('is-3d');
+        btn.textContent = 'Show photo';
+        btn.setAttribute('aria-pressed', 'true');
+        openCard = { el: card, dispose: dispose, photo: photo };
+      });
+    });
+  }
+
   window.VFCV = {
     INFO: INFO,
+    cardHTML: cardHTML,
+    bindCards: bindCards,
+    closeCard: closeOpenCard,
     has: has,
     get: get,
     photoHTML: photoHTML,

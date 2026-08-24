@@ -473,6 +473,76 @@
     return g;
   }
 
+  /* ---------- calculator subjects ---------- */
+
+  function buildPVModule(THREE, color){
+    const M = mats(THREE, color); const g = new THREE.Group();
+    const glass = new THREE.MeshStandardMaterial({color:0x16305A, metalness:.55, roughness:.28});
+    const frame = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.75, roughness:.35});
+    const panel = new THREE.Group();
+    const PW = 3.6, PH = 2.2;
+    panel.add(box(THREE, frame, PW+0.14, 0.10, PH+0.14, 0, 0, 0));
+    panel.add(box(THREE, glass, PW, 0.05, PH, 0, 0.06, 0));
+    for (let r=0;r<4;r++) for (let c=0;c<6;c++){          // cell grid
+      panel.add(box(THREE, M.deep, PW/6*0.86, 0.012, PH/4*0.86, (c-2.5)*(PW/6), 0.09, (r-1.5)*(PH/4)));
+    }
+    panel.rotation.x = -0.52;                              // fixed tilt
+    panel.position.y = 1.35;
+    g.add(panel);
+    // racking
+    for (const sx of [-1,1]) for (const sz of [-1,1]) {
+      const post = box(THREE, frame, 0.12, sz>0?1.0:1.9, 0.12, sx*1.5, (sz>0?0.5:0.95), sz*0.9);
+      g.add(post);
+    }
+    g.add(box(THREE, M.dark, 3.6, 0.10, 2.4, 0, 0.03, 0));
+    return g;
+  }
+
+  function buildGroundRod(THREE, color){
+    const M = mats(THREE, color); const g = new THREE.Group();
+    /* The soil MUST be see-through: the buried length is the entire point of
+       this shape, and an opaque block hides it completely. */
+    const soil = new THREE.MeshStandardMaterial({
+      color:0x6B5540, metalness:.0, roughness:.95,
+      transparent:true, opacity:.34, side:THREE.DoubleSide, depthWrite:false });
+    const cu   = new THREE.MeshStandardMaterial({color:0xB87333, metalness:.85, roughness:.35});
+    const grade = new THREE.MeshStandardMaterial({color:0x7A6349, roughness:.9});
+    g.add(box(THREE, soil, 3.2, 1.9, 2.0, 0, -0.95, 0));
+    g.add(box(THREE, grade, 3.24, 0.05, 2.04, 0, 0.0, 0));       // grade line
+    g.add(cyl(THREE, cu, 0.10,0.10, 2.9, 14, 0, -0.55, 0));      // the rod, mostly below grade
+    g.add(cyl(THREE, cu, 0.13,0.13, 0.12, 14, 0, 0.92, 0));      // exposed top
+    // acorn clamp + grounding electrode conductor heading off to the service
+    g.add(box(THREE, M.dark, 0.30, 0.26, 0.30, 0, 0.74, 0));
+    const gec = cyl(THREE, cu, 0.07,0.07, 1.5, 12, 0.75, 0.86, 0);
+    gec.rotation.z = Math.PI/2; gec.rotation.y = 0.15; g.add(gec);
+    return g;
+  }
+
+  function buildPFCapacitor(THREE, color){
+    const M = mats(THREE, color); const g = new THREE.Group();
+    /* Cabinet built as a SHELL with an open front, not a solid box: the staged
+       cans inside are the thing worth showing, and a solid body hides them no
+       matter how transparent the door is. */
+    const W = 2.0, H = 2.6, D = 1.2, t = 0.07;
+    g.add(box(THREE, M.body, W, H, t, 0, 1.3, -D/2));             // back
+    for (const s of [-1,1]) g.add(box(THREE, M.body, t, H, D, s*W/2, 1.3, 0));  // sides
+    g.add(box(THREE, M.body, W, t, D, 0, 1.3 + H/2, 0));          // top
+    g.add(box(THREE, M.body, W, t, D, 0, 1.3 - H/2, 0));          // bottom
+    const glass = new THREE.MeshStandardMaterial({
+      color:0x9FB3CC, metalness:.4, roughness:.45,
+      transparent:true, opacity:.20, side:THREE.DoubleSide, depthWrite:false });
+    g.add(box(THREE, glass, W - 0.12, H - 0.18, 0.04, 0, 1.3, D/2));   // door
+    // capacitor cans behind the door, in stages -- PF correction is switched in steps
+    for (let r=0;r<3;r++) for (const x of [-0.42, 0.42]) {
+      g.add(cyl(THREE, M.deep, 0.26,0.26, 0.62, 16, x, 0.55 + r*0.78, 0.05));
+      g.add(cyl(THREE, M.dark, 0.28,0.28, 0.05, 16, x, 0.87 + r*0.78, 0.05));  // can top
+    }
+    // stage indicator per step -- PF correction switches in, not all at once
+    for (let r=0;r<3;r++) g.add(box(THREE, M.gold, 0.14, 0.06, 0.03, 0.86, 0.55 + r*0.78, D/2 + 0.03));
+    g.add(box(THREE, M.dark, 2.2, 0.14, 1.4, 0, 0.07, 0));
+    return g;
+  }
+
   const BUILDERS = {
     /* electrical / plant */
     transformer: buildTransformer,
@@ -505,9 +575,24 @@
     hdr2: (T) => buildHeader(T, 2),
     hdr4: (T) => buildHeader(T, 4),
     dip8: buildDIP8,
-    pot: buildPotentiometer
+    pot: buildPotentiometer,
+    /* calculator subjects */
+    pvmodule: buildPVModule,
+    groundrod: buildGroundRod,
+    pfcap: buildPFCapacitor
   };
   function resolveBuilder(shapeId){ return BUILDERS[shapeId] || buildGeneric; }
+
+  /* Per-shape opening camera angle. The default (phi 1.15) looks in from a bit
+     above the horizon, which suits upright equipment but reduces a broad flat
+     object to a line -- a tilted PV module was almost invisible until the
+     camera was raised over it. Smaller phi = higher viewpoint. */
+  const VIEW_HINT = {
+    pvmodule: { phi: 0.62 },
+    groundrod: { phi: 1.30 },   // lower, so the buried length reads against grade
+    blank:    { phi: 0.95 },
+    cablemgr: { phi: 0.95 }
+  };
 
   /* ---------- composite assemblies ----------
      These take a live layout from one of the tools and stack/lay out the single
@@ -609,7 +694,8 @@
     /* Radius and its clamps are caller-supplied because assemblies vary wildly in
        size -- a 1U PDU and a 48U rack elevation cannot share one framing distance. */
     const o = opts || {};
-    let theta = o.theta != null ? o.theta : 0.9, phi = 1.15;
+    let theta = o.theta != null ? o.theta : 0.9;
+    let phi = o.phi != null ? o.phi : 1.15;
     let radius = o.radius != null ? o.radius : 5.6;
     let autoRotate = o.autoRotate !== false, dragging = false, lastX = 0, lastY = 0;
     const minPhi = 0.35, maxPhi = Math.PI - 0.35;
@@ -698,9 +784,10 @@
      repeatedly will leak GPU contexts. */
   VF3D.mount = function(container, shapeId, colorHex){
     const color = normColor(colorHex);
+    const hint = VIEW_HINT[shapeId] || {};
     return VF3D.mountScene(container, function(THREE){
       return resolveBuilder(shapeId)(THREE, color);
-    });
+    }, hint);
   };
 
   function normColor(c){
@@ -768,6 +855,7 @@
         minR: radius * 0.35,
         maxR: radius * 2.4,
         theta: o.theta,
+        phi: o.phi,
         autoRotate: o.autoRotate
       });
 
