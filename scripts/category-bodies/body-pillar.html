@@ -1,0 +1,80 @@
+  <h2>Why this is a procurement problem before it is an engineering one</h2>
+  <p>On a conventional building, electrical equipment is ordered once the design is largely settled. On a data centre that sequence no longer works. The longest-lead items &mdash; transformers, medium-voltage switchgear, generation &mdash; now quote in years rather than months, which means the order has to be placed against a preliminary specification, well before the design that would normally justify it is finished.</p>
+  <p>That inversion is what makes data centre electrical procurement its own discipline. The engineering decisions have not become harder; the consequence of making them late has. A transformer specified six months later than it could have been does not delay the transformer by six months &mdash; it can delay energisation by considerably more, because everything downstream is waiting on it.</p>
+
+  <div class="callout"><b>What the lead times look like right now.</b> Large power transformers are quoting toward 160 weeks and pad-mount units around 85. Medium-voltage switchgear is sold out through 2028 and gas turbines are quoting 2029+ delivery slots &mdash; both allocation positions rather than queues, meaning ordering earlier does not necessarily move you up. Diesel gensets sit around 90 weeks. Every figure is an indicative modelled position for North America, reviewed monthly, published with its basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>. None of them are quotations or inventory commitments.</div>
+
+  <h2>The critical path, in order</h2>
+  <p>The dependency chain is unusually rigid, and it runs in one direction. Each decision constrains the next, which is why getting the sequence right matters more than optimising any single item.</p>
+  <ul>
+    <li><b>1. Utility interface and voltage class.</b> Whether you take power at transmission or distribution voltage decides whether large power transformers and MV switchgear are in scope at all. This is the single highest-leverage decision on the schedule.</li>
+    <li><b>2. Transformer rating and impedance.</b> kVA follows the load; impedance decides the available fault current downstream. Both have to be settled before switchgear can be specified.</li>
+    <li><b>3. Switchgear interrupting rating.</b> Determined by the fault current from step 2. Specify it before ordering and it is a number; discover it afterwards and it is a change order.</li>
+    <li><b>4. Backup generation and ride-through.</b> Sized against the critical load plus cooling, and split between generation and stored energy because they solve different problems.</li>
+    <li><b>5. Cooling capacity.</b> Follows IT load almost one for one, and has to survive the transfer to generator alongside the load producing the heat.</li>
+    <li><b>6. Distribution and cabling.</b> Shortest lead times, most frequently changed, and the layer where the continuous-load derate quietly decides how many racks actually fit.</li>
+  </ul>
+
+  <h2>The six equipment categories</h2>
+  <p>Each page below covers what separates the families in that category, the specifications that decide the selection, applicable standards, indicative lead times with their basis, and the calculators worth running before an RFQ goes out.</p>
+
+  <div class="rel">
+    <a href="/data-centers/transformers.html"><span class="k">Longest lead &middot; 85&ndash;160 wk</span><span class="t">Transformers &mdash; pad-mount, large power, dry-type and K-rated</span></a>
+    <a href="/data-centers/switchgear.html"><span class="k">Allocation-limited</span><span class="t">Switchgear &amp; breakers &mdash; MV, LV, ACB and MCCB</span></a>
+    <a href="/data-centers/backup-power.html"><span class="k">Long lead &middot; 78&ndash;90 wk</span><span class="t">Backup power &mdash; gensets, turbines, UPS and flywheels</span></a>
+    <a href="/data-centers/cooling.html"><span class="k">Medium lead &middot; 14&ndash;24 wk</span><span class="t">Cooling &mdash; CDUs, CRAH/CRAC, rear-door HX and chillers</span></a>
+    <a href="/data-centers/power-distribution.html"><span class="k">Short lead &middot; 8&ndash;22 wk</span><span class="t">Power distribution &mdash; busway, PDUs, RPPs and transfer</span></a>
+    <a href="/data-centers/cabling.html"><span class="k">Short lead &middot; 6&ndash;18 wk</span><span class="t">Cable &amp; busbar &mdash; MV, LV, copper bus and fibre</span></a>
+  </div>
+
+  <h2>Four mistakes that cost the most</h2>
+  <h3>Specifying a transformer on kVA alone</h3>
+  <p>Impedance decides the available fault current downstream, and therefore the interrupting rating every protective device needs. A lower %Z gives a stiffer source and a <b>higher</b> fault current &mdash; the opposite of most people's intuition. Ordering switchgear before this is settled is how lineups end up under-rated.</p>
+
+  <h3>Treating a generator as the whole backup answer</h3>
+  <p>A generator needs time to start, reach speed and accept load. Nothing carries the critical load during those seconds unless stored energy is specified for it. Conversely, sizing a UPS for hours of runtime buys expensive battery to do a job the generator already does.</p>
+
+  <h3>Planning rack capacity against the breaker nameplate</h3>
+  <p>A circuit supplying a continuous load must be sized at 125&nbsp;% of that load, so usable capacity is 80&nbsp;% of the breaker rating. Data centre load is continuous, which makes a 20&nbsp;A circuit a 16&nbsp;A circuit in practice. Ignoring this consistently over-counts how many racks a room supports.</p>
+
+  <h3>Reading an allocation position as a lead time</h3>
+  <p>&ldquo;Sold out through 2028&rdquo; is not a queue you join earlier by ordering sooner &mdash; it is committed manufacturing capacity. The productive conversation is about allocation, alternates and phased delivery, and it needs to happen far earlier than a normal procurement cycle would suggest.</p>
+
+  <h2>Tools worth running before the RFQ</h2>
+  <div class="rel">
+    <a href="/engineering-calculators.html#transformer-sizing"><span class="k">Calculator</span><span class="t">Transformer sizing</span></a>
+    <a href="/engineering-calculators.html#fault-current"><span class="k">Calculator</span><span class="t">Fault current and breaker withstand</span></a>
+    <a href="/engineering-calculators.html#voltage-drop"><span class="k">Calculator</span><span class="t">Voltage drop and cable sizing</span></a>
+    <a href="/engineering-calculators.html#arc-flash"><span class="k">Calculator</span><span class="t">Arc-flash incident energy</span></a>
+    <a href="/voltfield-sandbox.html"><span class="k">Practice</span><span class="t">Build a one-line and run the checks</span></a>
+    <a href="/voltfield-pod-designer.html"><span class="k">Practice</span><span class="t">Size a POD or skid to a redundancy target</span></a>
+    <a href="/voltfield-rack-builder.html"><span class="k">Practice</span><span class="t">Rack U-space, derated power and weight</span></a>
+    <a href="/voltfield-bom-generator.html"><span class="k">Teardown</span><span class="t">Component BOM for a configured part</span></a>
+    <a href="/rfq-toolkit.html"><span class="k">Template</span><span class="t">RFQ readiness checklist and spec templates</span></a>
+  </div>
+
+  <h2>Background reading</h2>
+  <div class="rel">
+    <a href="/guide-transformer-lead-times.html"><span class="k">Guide</span><span class="t">Why transformer lead times stretch past three years</span></a>
+    <a href="/guide-pad-mount-vs-gsu-transformers.html"><span class="k">Guide</span><span class="t">Pad-mount versus GSU transformers</span></a>
+    <a href="/guide-short-circuit-studies-breaker-coordination.html"><span class="k">Guide</span><span class="t">Short-circuit studies and breaker coordination</span></a>
+    <a href="/guide-switchgear-compartments.html"><span class="k">Guide</span><span class="t">Inside a switchgear compartment</span></a>
+    <a href="/guide-liquid-vs-air-cooling.html"><span class="k">Guide</span><span class="t">Liquid versus air cooling</span></a>
+    <a href="/guide-grid-interconnection-process.html"><span class="k">Guide</span><span class="t">The grid interconnection process</span></a>
+    <a href="/guide-arc-flash-boundary-basics.html"><span class="k">Guide</span><span class="t">Arc-flash boundary basics</span></a>
+    <a href="/guide-pue-explained.html"><span class="k">Guide</span><span class="t">PUE explained</span></a>
+    <a href="/methodology.html"><span class="k">Reference</span><span class="t">How our lead-time and pricing figures are derived</span></a>
+  </div>
+
+  <h2>Common questions</h2>
+  <h3>When should long-lead equipment actually be ordered?</h3>
+  <p>Against a preliminary specification, as early as the utility voltage class and approximate load are known &mdash; not after the design is finished. With transformers indicatively at 85 to 160 weeks, the difference between ordering at concept and ordering at issued-for-construction can exceed a year of schedule.</p>
+
+  <h3>What is the single highest-leverage decision?</h3>
+  <p>The utility interface voltage. It determines whether large power transformers and medium-voltage switchgear are in scope at all &mdash; and those are precisely the two categories that are allocation-limited rather than merely slow.</p>
+
+  <h3>Can rebuilt or recertified equipment shorten the schedule?</h3>
+  <p>Sometimes, particularly for interim or lower-capacity needs, usually at a premium over new. It is worth evaluating explicitly rather than treating new-build as the only path, especially where the alternative is holding up energisation.</p>
+
+  <h3>How should these lead-time figures be used?</h3>
+  <p>For sequencing, not for pricing or commitment. They are indicative modelled positions for North America, reviewed monthly, and published with the basis of each figure stated. Actual lead time comes from the distributor, mill or OEM that fulfils the order.</p>

@@ -1,0 +1,104 @@
+  <h2>The part of the estimate that moves with commodity prices</h2>
+  <p>Cable and busbar are the only line items in a data centre electrical package priced substantially by weight of metal. That makes them behave differently from everything else: lead times are comparatively short, but pricing tracks copper and aluminium markets rather than manufacturing capacity, and a quote can go stale in weeks for reasons that have nothing to do with the supplier.</p>
+  <p>Two constraints govern the sizing, and they compete. Ampacity asks whether the conductor will overheat. Voltage drop asks whether the load still sees usable voltage at the far end. On short runs ampacity decides; past a few hundred feet voltage drop usually takes over and forces a larger conductor than heating alone would require.</p>
+
+  <div class="tblwrap">
+  <table class="famtable">
+    <thead>
+      <tr><th>Family</th><th>Typical configuration</th><th>Indicative lead time</th><th>Standards</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>MV Power Cable</b>Medium-voltage feeders between the utility interface, transformers and switchgear.</td>
+        <td class="num">5 / 15 / 35 kV<br>#2 &ndash; 750 kcmil<br>EPR or XLPE insulation</td>
+        <td><span class="lt mid">~18 weeks</span></td>
+        <td class="num">ICEA, AEIC<br>UL MV-105</td>
+      </tr>
+      <tr>
+        <td><b>LV Power Cable</b>Everything downstream of the main switchgear. The highest-volume item on the site.</td>
+        <td class="num">#12 &ndash; 500 kcmil<br>THHN or XHHW-2<br>Copper or aluminium</td>
+        <td><span class="lt short">~6 weeks</span></td>
+        <td class="num">UL 83, UL 44</td>
+      </tr>
+      <tr>
+        <td><b>Copper Busbar</b>Rigid conductor inside switchgear, PDUs and ground systems.</td>
+        <td class="num">1/2in &ndash; 4in wide<br>1/8in &ndash; 3/8in thick<br>Bare or tinned</td>
+        <td><span class="lt short">~10 weeks</span></td>
+        <td class="num">ASTM B187</td>
+      </tr>
+      <tr>
+        <td><b>Fibre Trunks &amp; Patch Panels</b>Structured cabling between rows, halls and the meet-me room.</td>
+        <td class="num">OM3 / OM4 / OS2<br>12&ndash;144 fibre<br>LC / SC / MPO</td>
+        <td><span class="lt short">~8 weeks</span></td>
+        <td class="num">TIA-568<br>UL 444</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout"><b>Aluminium is not simply cheaper copper.</b> For the same ampacity it needs a larger conductor, which changes conduit fill, tray loading and termination hardware, and it requires terminations rated for it plus proper anti-oxidant treatment. On long feeder runs the material saving is real and routinely taken; on branch circuits and inside equipment it usually is not worth the handling. Lead times shown are indicative modelled positions for North America, reviewed monthly, published with their basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>.</div>
+
+  <h2>Specifications that decide the selection</h2>
+  <div class="specgrid">
+    <div class="speccard">
+      <h4>Ampacity, after derating</h4>
+      <p>Table ampacity assumes no more than three current-carrying conductors at 30&nbsp;&deg;C. Bundle more, or run hotter, and the usable figure drops &mdash; often sharply.</p>
+    </div>
+    <div class="speccard">
+      <h4>Voltage drop over the run</h4>
+      <p>The 3&nbsp;% branch and 5&nbsp;% total guidance is a recommendation, not a hard limit &mdash; but it is what decides the conductor on any long run.</p>
+    </div>
+    <div class="speccard">
+      <h4>Insulation type and rating</h4>
+      <p>XHHW-2 is rated 90&nbsp;&deg;C wet or dry; THHN is 90&nbsp;&deg;C dry, 75&nbsp;&deg;C wet. Underground and outdoors, that distinction is the whole decision.</p>
+    </div>
+    <div class="speccard">
+      <h4>Conduit fill</h4>
+      <p>Capped at 53&nbsp;% for one conductor, 31&nbsp;% for two, 40&nbsp;% for three or more. Fill is what usually forces a larger raceway, not the conductor itself.</p>
+    </div>
+  </div>
+
+  <h2>Selection criteria in practice</h2>
+  <ul>
+    <li><b>Check both limits, every time.</b> Size for ampacity, then verify voltage drop. Whichever demands the larger conductor wins; assuming it is always ampacity is how long runs end up undersized.</li>
+    <li><b>Count the current-carrying conductors before trusting a table figure.</b> Bundling derates ampacity, and shared neutrals on harmonic-heavy loads may themselves count.</li>
+    <li><b>Confirm terminations are rated for the conductor material and temperature.</b> A 90&nbsp;&deg;C cable landed on a 75&nbsp;&deg;C-rated lug is limited by the lug.</li>
+    <li><b>Lock pricing where the metal content is significant.</b> On large orders the commodity exposure is worth managing explicitly rather than absorbing.</li>
+    <li><b>Specify fibre for the refresh after next.</b> Pulling additional strands during construction is a fraction of the cost of adding a route to a live facility.</li>
+  </ul>
+
+  <h2>Typical applications</h2>
+  <p><b>MV cable</b> runs from the utility interface to pad-mount transformers and MV switchgear. <b>LV cable</b> carries everything downstream &mdash; feeders to panelboards, branch circuits, mechanical loads. <b>Copper busbar</b> forms the rigid conductor inside switchgear and PDUs, and the ground bars that bond the room. <b>Fibre trunks</b> link rows to distribution frames and out to the meet-me room, sized well beyond current need because retrofitting is disproportionately expensive.</p>
+
+  <h2>Work the numbers before you RFQ</h2>
+  <div class="rel">
+    <a href="/engineering-calculators.html#voltage-drop"><span class="k">Calculator</span><span class="t">Voltage drop and cable sizing</span></a>
+    <a href="/engineering-calculators.html#ampacity"><span class="k">Calculator</span><span class="t">Ampacity lookup and conduit fill</span></a>
+    <a href="/engineering-calculators.html#unit-converter"><span class="k">Calculator</span><span class="t">AWG to mm&sup2; conversion</span></a>
+    <a href="/voltfield-sandbox.html"><span class="k">Practice</span><span class="t">Size a feeder and see the checks run</span></a>
+    <a href="/engineering-calculators.html#grounding"><span class="k">Calculator</span><span class="t">Ground rod resistance estimate</span></a>
+    <a href="/rfq-toolkit.html"><span class="k">Template</span><span class="t">RFQ readiness checklist</span></a>
+  </div>
+
+  <h2>Related reading</h2>
+  <div class="rel">
+    <a href="/guide-grounding-bonding-basics.html"><span class="k">Guide</span><span class="t">Grounding and bonding basics</span></a>
+    <a href="/guide-buy-america-iija.html"><span class="k">Guide</span><span class="t">Buy America content rules</span></a>
+    <a href="/data-centers/power-distribution.html"><span class="k">Category</span><span class="t">Busway, PDUs and rack distribution</span></a>
+    <a href="/data-centers/transformers.html"><span class="k">Category</span><span class="t">Transformers at each end of the MV run</span></a>
+    <a href="/data-center-electrical-procurement.html"><span class="k">Hub</span><span class="t">Data center electrical procurement</span></a>
+    <a href="/data-centers.html"><span class="k">Sector</span><span class="t">All data center power equipment</span></a>
+  </div>
+
+  <h2>Common questions</h2>
+  <h3>Should I use copper or aluminium?</h3>
+  <p>On long feeders, aluminium is routinely chosen and the saving is real. It needs a larger conductor for the same ampacity, terminations rated for it, and anti-oxidant treatment at joints. On branch circuits and inside equipment the handling penalty usually outweighs the material saving.</p>
+
+  <h3>Which decides the conductor size, ampacity or voltage drop?</h3>
+  <p>Both, and you have to check both. Ampacity generally governs short runs; past roughly a few hundred feet voltage drop tends to take over and force a larger conductor than heating alone would require.</p>
+
+  <h3>Is the 3&nbsp;% voltage drop figure a code requirement?</h3>
+  <p>No. It appears as an informational note rather than a mandatory rule, so it is design guidance rather than something an inspector enforces. It remains the number most specifications are written against.</p>
+
+  <h3>Why is conduit fill capped at 40&nbsp;% for three or more conductors?</h3>
+  <p>The limits exist for heat dissipation and for the mechanical practicality of pulling without damaging insulation. The single-conductor limit is higher because there is nothing else in the raceway to bind against or heat.</p>

@@ -21,6 +21,7 @@
 
 /about                              /about.html                             301!
 /battery-storage                    /battery-storage.html                   301!
+/data-center-electrical-procurement /data-center-electrical-procurement.html 301!
 /data-centers                       /data-centers.html                      301!
 /engineering-calculators            /engineering-calculators.html           301!
 /free-tools                         /free-tools.html                        301!
@@ -71,5 +72,8 @@
 /voltfield-supply-catalog           /voltfield-supply-catalog.html          301!
 /whats-new                          /whats-new.html                         301!
 /data-centers/backup-power          /data-centers/backup-power.html         301!
+/data-centers/cabling               /data-centers/cabling.html              301!
+/data-centers/cooling               /data-centers/cooling.html              301!
+/data-centers/power-distribution    /data-centers/power-distribution.html   301!
 /data-centers/switchgear            /data-centers/switchgear.html           301!
 /data-centers/transformers          /data-centers/transformers.html         301!

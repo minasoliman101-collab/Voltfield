@@ -10,15 +10,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
 <!-- End Google Tag Manager -->
-<title>Data Center Transformers: Specs &amp; Lead Times | Voltfield</title>
-<link rel="canonical" href="https://voltfield.org/data-centers/transformers.html">
-<meta name="description" content="Compare pad-mount, large power, dry-type and K-rated transformers for data centers. Specifications, indicative lead times, and what to settle before you RFQ.">
-<meta name="keywords" content="data center transformers, pad-mount transformer specifications, large power transformer lead time, dry-type transformer data center, K-rated transformer, transformer procurement">
+<title>Data Center Cable &amp; Busbar: Sizing &amp; Lead Times | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/data-centers/cabling.html">
+<meta name="description" content="MV and LV power cable, copper busbar and fibre trunks for data centers. Ampacity versus voltage drop, conduit fill, and indicative lead times.">
+<meta name="keywords" content="data center cable sizing, MV power cable, LV power cable THHN XHHW, copper busbar, conduit fill, voltage drop cable sizing, fibre trunk assemblies">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VOLTFIELD Supply Co.">
-<meta property="og:title" content="Data Center Transformers — Specifications &amp; Lead Times">
-<meta property="og:description" content="Four transformer families used in data centers, what separates them, and the lead times that decide your sequencing.">
+<meta property="og:title" content="Cabling &amp; Busbar">
+<meta property="og:description" content="MV and LV power cable, copper busbar and fibre trunks for data centers. Ampacity versus voltage drop, conduit fill, and indicative lead times.">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="https://voltfield.org/social/social-data-centers.jpg">
 <meta property="og:image:width" content="1200">
@@ -29,14 +29,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
  {"@type":"BreadcrumbList","itemListElement":[
    {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
    {"@type":"ListItem","position":2,"name":"Data Centers","item":"https://voltfield.org/data-centers.html"},
-   {"@type":"ListItem","position":3,"name":"Transformers","item":"https://voltfield.org/data-centers/transformers.html"}
+   {"@type":"ListItem","position":3,"name":"Cabling & Busbar","item":"https://voltfield.org/data-centers/cabling.html"}
  ]},
- {"@type":"CollectionPage","name":"Data Center Transformers","description":"Transformer families used in data center electrical distribution, with specifications, configuration axes and indicative lead times.","url":"https://voltfield.org/data-centers/transformers.html","isPartOf":{"@type":"WebSite","name":"VOLTFIELD Supply Co.","url":"https://voltfield.org/"}},
+ {"@type":"CollectionPage","name":"Data Center Cabling & Busbar","description":"MV and LV power cable, copper busbar and fibre trunk assemblies, with ampacity and voltage-drop guidance and indicative lead times.","url":"https://voltfield.org/data-centers/cabling.html","isPartOf":{"@type":"WebSite","name":"VOLTFIELD Supply Co.","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
-   {"@type":"Question","name":"Which transformer type do data centers actually use?","acceptedAnswer":{"@type":"Answer","text":"Usually more than one. A pad-mount transformer steps utility medium voltage down to the 480V the building distributes. Dry-type or cast-resin units sit indoors closer to the load. Large power transformers appear only where the campus takes power at transmission voltage. K-rated isolation transformers handle harmonic-heavy loads."}},
-   {"@type":"Question","name":"Why does transformer impedance matter for data centers?","acceptedAnswer":{"@type":"Answer","text":"Impedance (%Z) sets how much fault current can reach everything downstream. A lower %Z means a stiffer source and a HIGHER available fault current, which drives the interrupting rating you need on the main breaker. Choosing a transformer on kVA alone and ignoring %Z is how switchgear ends up under-rated."}},
-   {"@type":"Question","name":"How far ahead should transformer orders be placed?","acceptedAnswer":{"@type":"Answer","text":"Against a preliminary specification rather than a finished design. With pad-mount units indicatively around 85 weeks and large power transformers toward 160 weeks, waiting for a locked design before ordering can add a year or more to the project."}},
-   {"@type":"Question","name":"Is a dry-type transformer a substitute for a pad-mount?","acceptedAnswer":{"@type":"Answer","text":"Not generally. They solve different problems: pad-mount units are outdoor, liquid-filled and handle the utility-voltage step-down, while dry-type units are indoor, air-cooled and sit closer to the load. Dry-type lead times are considerably shorter, which sometimes tempts a substitution that the voltage class and location will not support."}}
+   {"@type":"Question","name":"Should I use copper or aluminium cable?","acceptedAnswer":{"@type":"Answer","text":"On long feeders aluminium is routinely chosen and the saving is real. It needs a larger conductor for the same ampacity, terminations rated for it, and anti-oxidant treatment at joints. On branch circuits and inside equipment the handling penalty usually outweighs the material saving."}},
+   {"@type":"Question","name":"Does ampacity or voltage drop decide conductor size?","acceptedAnswer":{"@type":"Answer","text":"Both, and both must be checked. Ampacity generally governs short runs, while past roughly a few hundred feet voltage drop tends to take over and force a larger conductor than heating alone would require."}},
+   {"@type":"Question","name":"Is the 3 percent voltage drop figure a code requirement?","acceptedAnswer":{"@type":"Answer","text":"No. It appears as an informational note rather than a mandatory rule, so it is design guidance rather than something an inspector enforces. It remains the figure most specifications are written against."}},
+   {"@type":"Question","name":"Why is conduit fill capped at 40 percent for three or more conductors?","acceptedAnswer":{"@type":"Answer","text":"The limits exist for heat dissipation and for the mechanical practicality of pulling conductors without damaging insulation. The single-conductor limit is higher because there is nothing else in the raceway to bind against or heat."}}
  ]}
 ]}
 </script>
@@ -164,21 +164,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="artban">
   <div class="artban-in">
     <div class="eyebrow">Data Centers · Equipment Category</div>
-    <h1>Data center transformers</h1>
-    <p class="dek">Four transformer families show up in data center electrical distribution, and they are not interchangeable. This page covers what separates them, the specifications that decide the selection, and the lead times that decide your sequencing.</p>
+    <h1>Data center cable and busbar</h1>
+    <p class="dek">The only line items priced substantially by weight of metal. Short lead times, commodity-linked pricing, and two sizing constraints that compete with each other.</p>
   </div>
 </section>
 
 <nav class="crumb" aria-label="Breadcrumb">
   <a href="/index.html">Home</a><span class="sep">/</span>
   <a href="/data-centers.html">Data Centers</a><span class="sep">/</span>
-  <span>Transformers</span>
+  <span>Cabling &amp; Busbar</span>
 </nav>
 
 <div class="artwrap">
-
-  <h2>The four families, and what actually separates them</h2>
-  <p>Transformer selection for a data center is rarely one decision. Power arrives at utility medium voltage and has to reach IT equipment at utilisation voltage, and different parts of that path call for different machines. Picking on kVA alone — the most common shortcut — ignores the two things that usually cause trouble later: impedance, and where the unit is physically allowed to sit.</p>
+  <h2>The part of the estimate that moves with commodity prices</h2>
+  <p>Cable and busbar are the only line items in a data centre electrical package priced substantially by weight of metal. That makes them behave differently from everything else: lead times are comparatively short, but pricing tracks copper and aluminium markets rather than manufacturing capacity, and a quote can go stale in weeks for reasons that have nothing to do with the supplier.</p>
+  <p>Two constraints govern the sizing, and they compete. Ampacity asks whether the conductor will overheat. Voltage drop asks whether the load still sees usable voltage at the far end. On short runs ampacity decides; past a few hundred feet voltage drop usually takes over and forces a larger conductor than heating alone would require.</p>
 
   <div class="tblwrap">
   <table class="famtable">
@@ -187,112 +187,109 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </thead>
     <tbody>
       <tr>
-        <td><b>Pad-Mount Transformers</b>The workhorse: utility MV down to building distribution voltage, outdoors on a pad.</td>
-        <td class="num">75–2,500 kVA<br>12.47 / 24.94 / 34.5 kV<br>Loop or radial</td>
-        <td><span class="lt long">~85 weeks</span></td>
-        <td class="num">IEEE C57<br>DOE efficiency</td>
+        <td><b>MV Power Cable</b>Medium-voltage feeders between the utility interface, transformers and switchgear.</td>
+        <td class="num">5 / 15 / 35 kV<br>#2 &ndash; 750 kcmil<br>EPR or XLPE insulation</td>
+        <td><span class="lt mid">~18 weeks</span></td>
+        <td class="num">ICEA, AEIC<br>UL MV-105</td>
       </tr>
       <tr>
-        <td><b>Large Power Transformers</b>Only where a campus takes power at transmission voltage rather than distribution voltage.</td>
-        <td class="num">60–345 MVA<br>138 / 230 / 345 kV<br>ONAN / ONAF / OFAF</td>
-        <td><span class="lt long">~160 weeks</span></td>
-        <td class="num">IEEE C57<br>ANSI</td>
+        <td><b>LV Power Cable</b>Everything downstream of the main switchgear. The highest-volume item on the site.</td>
+        <td class="num">#12 &ndash; 500 kcmil<br>THHN or XHHW-2<br>Copper or aluminium</td>
+        <td><span class="lt short">~6 weeks</span></td>
+        <td class="num">UL 83, UL 44</td>
       </tr>
       <tr>
-        <td><b>Dry-Type / Cast-Resin</b>Indoor, air-cooled, closer to the load. No liquid, so no containment or fire-separation burden.</td>
-        <td class="num">15–1,500 kVA<br>AN / AF<br>80 / 115 / 150 °C rise</td>
-        <td><span class="lt mid">~30 weeks</span></td>
-        <td class="num">UL 1561<br>IEEE C57.12.01</td>
+        <td><b>Copper Busbar</b>Rigid conductor inside switchgear, PDUs and ground systems.</td>
+        <td class="num">1/2in &ndash; 4in wide<br>1/8in &ndash; 3/8in thick<br>Bare or tinned</td>
+        <td><span class="lt short">~10 weeks</span></td>
+        <td class="num">ASTM B187</td>
       </tr>
       <tr>
-        <td><b>Isolation / K-Rated</b>For harmonic-heavy loads. The K-factor states how much harmonic heating the unit is built to survive.</td>
-        <td class="num">15–150 kVA<br>K-4 / K-13 / K-20<br>Single or double shield</td>
-        <td><span class="lt short">~18 weeks</span></td>
-        <td class="num">UL 1561</td>
+        <td><b>Fibre Trunks &amp; Patch Panels</b>Structured cabling between rows, halls and the meet-me room.</td>
+        <td class="num">OM3 / OM4 / OS2<br>12&ndash;144 fibre<br>LC / SC / MPO</td>
+        <td><span class="lt short">~8 weeks</span></td>
+        <td class="num">TIA-568<br>UL 444</td>
       </tr>
     </tbody>
   </table>
   </div>
 
-  <div class="callout"><b>How to read these lead times.</b> They are indicative modelled ranges for North America, reviewed monthly, not quotations and not a commitment of available inventory. They exist to help you sequence a project, not to price one. Every figure and the basis behind it is published on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>, and the derivation is described on the <a class="inline" href="/methodology.html">methodology page</a>. Actual lead time is set by the distributor, mill or OEM that ultimately fulfils the order.</div>
+  <div class="callout"><b>Aluminium is not simply cheaper copper.</b> For the same ampacity it needs a larger conductor, which changes conduit fill, tray loading and termination hardware, and it requires terminations rated for it plus proper anti-oxidant treatment. On long feeder runs the material saving is real and routinely taken; on branch circuits and inside equipment it usually is not worth the handling. Lead times shown are indicative modelled positions for North America, reviewed monthly, published with their basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>.</div>
 
   <h2>Specifications that decide the selection</h2>
-  <p>Four numbers do most of the work. Getting any of them wrong tends to surface late, when the fix is expensive.</p>
-
   <div class="specgrid">
     <div class="speccard">
-      <h4>kVA and load profile</h4>
-      <p>Continuous load, not peak nameplate. Data centre load is unusually flat compared with commercial buildings, so the usual diversity assumptions understate it.</p>
+      <h4>Ampacity, after derating</h4>
+      <p>Table ampacity assumes no more than three current-carrying conductors at 30&nbsp;&deg;C. Bundle more, or run hotter, and the usable figure drops &mdash; often sharply.</p>
     </div>
     <div class="speccard">
-      <h4>Impedance (%Z)</h4>
-      <p>Sets how much fault current reaches everything downstream. Lower %Z means a stiffer source and a <b>higher</b> available fault current — which is what drives the interrupting rating on your main breaker.</p>
+      <h4>Voltage drop over the run</h4>
+      <p>The 3&nbsp;% branch and 5&nbsp;% total guidance is a recommendation, not a hard limit &mdash; but it is what decides the conductor on any long run.</p>
     </div>
     <div class="speccard">
-      <h4>Primary voltage &amp; configuration</h4>
-      <p>Dictated by the utility, not by you. Loop-feed versus radial changes the switching arrangement and often the physical footprint.</p>
+      <h4>Insulation type and rating</h4>
+      <p>XHHW-2 is rated 90&nbsp;&deg;C wet or dry; THHN is 90&nbsp;&deg;C dry, 75&nbsp;&deg;C wet. Underground and outdoors, that distinction is the whole decision.</p>
     </div>
     <div class="speccard">
-      <h4>Temperature rise &amp; cooling class</h4>
-      <p>A 115 °C-rise unit run at 80 °C has usable overload headroom. ONAN/ONAF ratings mean the same tank delivers different capacity with fans running.</p>
+      <h4>Conduit fill</h4>
+      <p>Capped at 53&nbsp;% for one conductor, 31&nbsp;% for two, 40&nbsp;% for three or more. Fill is what usually forces a larger raceway, not the conductor itself.</p>
     </div>
   </div>
 
   <h2>Selection criteria in practice</h2>
   <ul>
-    <li><b>Where can it physically sit?</b> Liquid-filled units outdoors need containment and clearances; indoors they bring fire-separation requirements that often make dry-type the only workable answer regardless of lead time.</li>
-    <li><b>What is the available fault current downstream?</b> Settle this before ordering switchgear, not after. It is set by the transformer's impedance and the utility's contribution, and it decides the interrupting rating you must buy.</li>
-    <li><b>Is the load harmonic-heavy?</b> Rectifier front-ends and older UPS topologies produce harmonic currents that heat a standard transformer beyond its rating. That is what K-rating exists to address.</li>
-    <li><b>Does efficiency regulation apply?</b> DOE efficiency rules constrain what can legally be sold for many distribution ratings, which narrows the field more than buyers expect.</li>
-    <li><b>What is the redundancy target?</b> N+1 at the transformer level changes both the count and, often, the individual unit rating.</li>
+    <li><b>Check both limits, every time.</b> Size for ampacity, then verify voltage drop. Whichever demands the larger conductor wins; assuming it is always ampacity is how long runs end up undersized.</li>
+    <li><b>Count the current-carrying conductors before trusting a table figure.</b> Bundling derates ampacity, and shared neutrals on harmonic-heavy loads may themselves count.</li>
+    <li><b>Confirm terminations are rated for the conductor material and temperature.</b> A 90&nbsp;&deg;C cable landed on a 75&nbsp;&deg;C-rated lug is limited by the lug.</li>
+    <li><b>Lock pricing where the metal content is significant.</b> On large orders the commodity exposure is worth managing explicitly rather than absorbing.</li>
+    <li><b>Specify fibre for the refresh after next.</b> Pulling additional strands during construction is a fraction of the cost of adding a route to a live facility.</li>
   </ul>
 
   <h2>Typical applications</h2>
-  <p>A conventional build uses a <b>pad-mount</b> transformer at the utility interface, feeding main switchgear at 480V. Inside the building, <b>dry-type</b> units step down again for mechanical and house loads. <b>K-rated isolation</b> units appear where harmonic-producing equipment is concentrated. <b>Large power transformers</b> only enter the picture on campuses large enough to interconnect at transmission voltage — at which point the lead time becomes the single longest pole in the project schedule.</p>
+  <p><b>MV cable</b> runs from the utility interface to pad-mount transformers and MV switchgear. <b>LV cable</b> carries everything downstream &mdash; feeders to panelboards, branch circuits, mechanical loads. <b>Copper busbar</b> forms the rigid conductor inside switchgear and PDUs, and the ground bars that bond the room. <b>Fibre trunks</b> link rows to distribution frames and out to the meet-me room, sized well beyond current need because retrofitting is disproportionately expensive.</p>
 
   <h2>Work the numbers before you RFQ</h2>
   <div class="rel">
-    <a href="/engineering-calculators.html#transformer-sizing"><span class="k">Calculator</span><span class="t">Size a transformer against your load</span></a>
-    <a href="/engineering-calculators.html#fault-current"><span class="k">Calculator</span><span class="t">Estimate available fault current and check breaker withstand</span></a>
-    <a href="/engineering-calculators.html#inrush"><span class="k">Calculator</span><span class="t">Estimate transformer inrush current</span></a>
-    <a href="/engineering-calculators.html#transformer-tco"><span class="k">Calculator</span><span class="t">Compare total cost of ownership including losses</span></a>
-    <a href="/voltfield-sandbox.html"><span class="k">Practice</span><span class="t">Build the one-line and run the sizing checks</span></a>
-    <a href="/voltfield-bom-generator.html"><span class="k">Teardown</span><span class="t">See the component BOM inside a transformer</span></a>
+    <a href="/engineering-calculators.html#voltage-drop"><span class="k">Calculator</span><span class="t">Voltage drop and cable sizing</span></a>
+    <a href="/engineering-calculators.html#ampacity"><span class="k">Calculator</span><span class="t">Ampacity lookup and conduit fill</span></a>
+    <a href="/engineering-calculators.html#unit-converter"><span class="k">Calculator</span><span class="t">AWG to mm&sup2; conversion</span></a>
+    <a href="/voltfield-sandbox.html"><span class="k">Practice</span><span class="t">Size a feeder and see the checks run</span></a>
+    <a href="/engineering-calculators.html#grounding"><span class="k">Calculator</span><span class="t">Ground rod resistance estimate</span></a>
+    <a href="/rfq-toolkit.html"><span class="k">Template</span><span class="t">RFQ readiness checklist</span></a>
   </div>
 
   <h2>Related reading</h2>
   <div class="rel">
-    <a href="/guide-pad-mount-vs-gsu-transformers.html"><span class="k">Guide</span><span class="t">Compare pad-mount and GSU transformer applications</span></a>
-    <a href="/guide-transformer-lead-times.html"><span class="k">Guide</span><span class="t">Why transformer lead times stretch past three years</span></a>
-    <a href="/guide-transformer-nameplate.html"><span class="k">Guide</span><span class="t">How to read a transformer nameplate</span></a>
-    <a href="/guide-short-circuit-studies-breaker-coordination.html"><span class="k">Guide</span><span class="t">Short-circuit studies and breaker coordination</span></a>
-    <a href="/data-centers/switchgear.html"><span class="k">Category</span><span class="t">Data center switchgear and breakers</span></a>
-    <a href="/data-centers/backup-power.html"><span class="k">Category</span><span class="t">Backup power &mdash; gensets and UPS</span></a>
+    <a href="/guide-grounding-bonding-basics.html"><span class="k">Guide</span><span class="t">Grounding and bonding basics</span></a>
+    <a href="/guide-buy-america-iija.html"><span class="k">Guide</span><span class="t">Buy America content rules</span></a>
+    <a href="/data-centers/power-distribution.html"><span class="k">Category</span><span class="t">Busway, PDUs and rack distribution</span></a>
+    <a href="/data-centers/transformers.html"><span class="k">Category</span><span class="t">Transformers at each end of the MV run</span></a>
+    <a href="/data-center-electrical-procurement.html"><span class="k">Hub</span><span class="t">Data center electrical procurement</span></a>
     <a href="/data-centers.html"><span class="k">Sector</span><span class="t">All data center power equipment</span></a>
   </div>
 
   <h2>Common questions</h2>
-  <h3>Which transformer type do data centers actually use?</h3>
-  <p>Usually more than one. A pad-mount steps utility medium voltage down to the voltage the building distributes; dry-type or cast-resin units sit indoors closer to the load; large power transformers appear only where the campus takes power at transmission voltage; K-rated isolation units handle harmonic-heavy loads.</p>
+  <h3>Should I use copper or aluminium?</h3>
+  <p>On long feeders, aluminium is routinely chosen and the saving is real. It needs a larger conductor for the same ampacity, terminations rated for it, and anti-oxidant treatment at joints. On branch circuits and inside equipment the handling penalty usually outweighs the material saving.</p>
 
-  <h3>Why does impedance matter so much?</h3>
-  <p>Because it sets the available fault current downstream, and that decides the interrupting rating on your protective devices. A lower %Z gives a stiffer source and a <b>higher</b> fault current. Selecting a transformer on kVA alone and discovering the impedance implication after the switchgear is ordered is a recurring and expensive sequence.</p>
+  <h3>Which decides the conductor size, ampacity or voltage drop?</h3>
+  <p>Both, and you have to check both. Ampacity generally governs short runs; past roughly a few hundred feet voltage drop tends to take over and force a larger conductor than heating alone would require.</p>
 
-  <h3>How far ahead should orders be placed?</h3>
-  <p>Against a preliminary specification rather than a finished design. With pad-mount units indicatively around 85 weeks and large power transformers toward 160 weeks, waiting for a locked design can add a year or more to the schedule.</p>
+  <h3>Is the 3&nbsp;% voltage drop figure a code requirement?</h3>
+  <p>No. It appears as an informational note rather than a mandatory rule, so it is design guidance rather than something an inspector enforces. It remains the number most specifications are written against.</p>
 
-  <h3>Can a dry-type unit substitute for a pad-mount to save time?</h3>
-  <p>Rarely. They solve different problems — indoor air-cooled versus outdoor liquid-filled, and different voltage classes. The much shorter dry-type lead time makes the substitution tempting, but the voltage class and installation location usually rule it out.</p>
+  <h3>Why is conduit fill capped at 40&nbsp;% for three or more conductors?</h3>
+  <p>The limits exist for heat dissipation and for the mechanical practicality of pulling without damaging insulation. The single-conductor limit is higher because there is nothing else in the raceway to bind against or heat.</p>
 
 </div>
 
 <section class="ctaband">
   <div class="ctaband-in">
     <div>
-      <h3>Sourcing a transformer?</h3>
-      <p>Configure the specification, save it to a sourcing list, and send it over. It is routed to a person who connects you with the distributor, mill or OEM that can actually fulfil it — Voltfield does not stock or ship equipment itself.</p>
+      <h3>Sourcing cable or busbar?</h3>
+      <p>Configure the specification, save it to a sourcing list, and send it over. It is routed to a person who connects you with the distributor, mill or OEM that can fulfil it &mdash; Voltfield does not stock or ship equipment itself.</p>
     </div>
-    <a class="ctabtn" href="/voltfield-supply-catalog.html?sector=dc&amp;cat=Transformers">Browse transformer specs &rsaquo;</a>
+    <a class="ctabtn" href="/voltfield-supply-catalog.html?sector=dc&amp;cat=Cabling%20%26%20Busbar">Browse cable specs &rsaquo;</a>
   </div>
 </section>
 

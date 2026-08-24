@@ -10,15 +10,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
 <!-- End Google Tag Manager -->
-<title>Data Center Transformers: Specs &amp; Lead Times | Voltfield</title>
-<link rel="canonical" href="https://voltfield.org/data-centers/transformers.html">
-<meta name="description" content="Compare pad-mount, large power, dry-type and K-rated transformers for data centers. Specifications, indicative lead times, and what to settle before you RFQ.">
-<meta name="keywords" content="data center transformers, pad-mount transformer specifications, large power transformer lead time, dry-type transformer data center, K-rated transformer, transformer procurement">
+<title>Data Center Power Distribution: Busway &amp; PDUs | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/data-centers/power-distribution.html">
+<meta name="description" content="Compare busway, floor PDUs, RPPs, static transfer switches and rack PDUs. Metering, the NEC 80 percent derate, and indicative lead times.">
+<meta name="keywords" content="data center power distribution, busway plug-in, rack PDU metered, floor PDU RPP, static transfer switch, NEC 80 percent continuous load">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VOLTFIELD Supply Co.">
-<meta property="og:title" content="Data Center Transformers — Specifications &amp; Lead Times">
-<meta property="og:description" content="Four transformer families used in data centers, what separates them, and the lead times that decide your sequencing.">
+<meta property="og:title" content="Power Distribution">
+<meta property="og:description" content="Compare busway, floor PDUs, RPPs, static transfer switches and rack PDUs. Metering, the NEC 80 percent derate, and indicative lead times.">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="https://voltfield.org/social/social-data-centers.jpg">
 <meta property="og:image:width" content="1200">
@@ -29,14 +29,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
  {"@type":"BreadcrumbList","itemListElement":[
    {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
    {"@type":"ListItem","position":2,"name":"Data Centers","item":"https://voltfield.org/data-centers.html"},
-   {"@type":"ListItem","position":3,"name":"Transformers","item":"https://voltfield.org/data-centers/transformers.html"}
+   {"@type":"ListItem","position":3,"name":"Power Distribution","item":"https://voltfield.org/data-centers/power-distribution.html"}
  ]},
- {"@type":"CollectionPage","name":"Data Center Transformers","description":"Transformer families used in data center electrical distribution, with specifications, configuration axes and indicative lead times.","url":"https://voltfield.org/data-centers/transformers.html","isPartOf":{"@type":"WebSite","name":"VOLTFIELD Supply Co.","url":"https://voltfield.org/"}},
+ {"@type":"CollectionPage","name":"Data Center Power Distribution","description":"Busway, floor PDU and RPP, static transfer switches, rack PDUs and enclosures, with configurations, the NEC continuous-load derate and indicative lead times.","url":"https://voltfield.org/data-centers/power-distribution.html","isPartOf":{"@type":"WebSite","name":"VOLTFIELD Supply Co.","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
-   {"@type":"Question","name":"Which transformer type do data centers actually use?","acceptedAnswer":{"@type":"Answer","text":"Usually more than one. A pad-mount transformer steps utility medium voltage down to the 480V the building distributes. Dry-type or cast-resin units sit indoors closer to the load. Large power transformers appear only where the campus takes power at transmission voltage. K-rated isolation transformers handle harmonic-heavy loads."}},
-   {"@type":"Question","name":"Why does transformer impedance matter for data centers?","acceptedAnswer":{"@type":"Answer","text":"Impedance (%Z) sets how much fault current can reach everything downstream. A lower %Z means a stiffer source and a HIGHER available fault current, which drives the interrupting rating you need on the main breaker. Choosing a transformer on kVA alone and ignoring %Z is how switchgear ends up under-rated."}},
-   {"@type":"Question","name":"How far ahead should transformer orders be placed?","acceptedAnswer":{"@type":"Answer","text":"Against a preliminary specification rather than a finished design. With pad-mount units indicatively around 85 weeks and large power transformers toward 160 weeks, waiting for a locked design before ordering can add a year or more to the project."}},
-   {"@type":"Question","name":"Is a dry-type transformer a substitute for a pad-mount?","acceptedAnswer":{"@type":"Answer","text":"Not generally. They solve different problems: pad-mount units are outdoor, liquid-filled and handle the utility-voltage step-down, while dry-type units are indoor, air-cooled and sit closer to the load. Dry-type lead times are considerably shorter, which sometimes tempts a substitution that the voltage class and location will not support."}}
+   {"@type":"Question","name":"Why is usable circuit capacity only 80 percent of the breaker rating?","acceptedAnswer":{"@type":"Answer","text":"A circuit supplying a continuous load must be sized at 125 percent of that load, which is the same constraint stated the other way round. Data center load is continuous, so a 20 A circuit yields 16 A usable. Planning against the nameplate rating is how racks trip under normal operation."}},
+   {"@type":"Question","name":"Is busway worth it over cable feeders?","acceptedAnswer":{"@type":"Answer","text":"If loads will move or grow, generally yes. The premium buys the ability to add a tap-off without pulling new cable or de-energising anything. On a genuinely fixed layout, feeders are cheaper and adequate."}},
+   {"@type":"Question","name":"What is the difference between a floor PDU and an RPP?","acceptedAnswer":{"@type":"Answer","text":"A floor PDU usually includes a transformer, stepping distribution voltage down and splitting it into branch circuits. A remote power panel distributes at the incoming voltage with no transformer, so where no step-down is needed it is smaller, cheaper and produces less heat."}},
+   {"@type":"Question","name":"Do I need switched rack PDUs?","acceptedAnswer":{"@type":"Answer","text":"Only if you need to power-cycle individual outlets remotely. Switched units cost meaningfully more and add a failure point. Monitored-but-not-switched is sufficient for most sites, which mainly want visibility rather than remote control."}}
  ]}
 ]}
 </script>
@@ -164,21 +164,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="artban">
   <div class="artban-in">
     <div class="eyebrow">Data Centers · Equipment Category</div>
-    <h1>Data center transformers</h1>
-    <p class="dek">Four transformer families show up in data center electrical distribution, and they are not interchangeable. This page covers what separates them, the specifications that decide the selection, and the lead times that decide your sequencing.</p>
+    <h1>Data center power distribution</h1>
+    <p class="dek">Everything between the switchgear and the server. The layer that absorbs every density change and refresh cycle, and where you find out what a rack actually draws.</p>
   </div>
 </section>
 
 <nav class="crumb" aria-label="Breadcrumb">
   <a href="/index.html">Home</a><span class="sep">/</span>
   <a href="/data-centers.html">Data Centers</a><span class="sep">/</span>
-  <span>Transformers</span>
+  <span>Power Distribution</span>
 </nav>
 
 <div class="artwrap">
-
-  <h2>The four families, and what actually separates them</h2>
-  <p>Transformer selection for a data center is rarely one decision. Power arrives at utility medium voltage and has to reach IT equipment at utilisation voltage, and different parts of that path call for different machines. Picking on kVA alone — the most common shortcut — ignores the two things that usually cause trouble later: impedance, and where the unit is physically allowed to sit.</p>
+  <h2>Everything between the switchgear and the server</h2>
+  <p>Power distribution is the layer that gets designed last and changed most. Switchgear and transformers are fixed for the life of the building; what sits between them and the IT equipment has to absorb every density change, every refresh cycle and every tenant that wants something slightly different. That is why the decisions here are less about capacity and more about how cheaply the design can be modified later.</p>
+  <p>It is also where measurement happens. A facility with no branch-level metering cannot answer basic questions &mdash; what a rack actually draws, whether a circuit is near its limit, where capacity is stranded. Those answers determine how much of the installed capacity can safely be sold or used.</p>
 
   <div class="tblwrap">
   <table class="famtable">
@@ -187,112 +187,115 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </thead>
     <tbody>
       <tr>
-        <td><b>Pad-Mount Transformers</b>The workhorse: utility MV down to building distribution voltage, outdoors on a pad.</td>
-        <td class="num">75–2,500 kVA<br>12.47 / 24.94 / 34.5 kV<br>Loop or radial</td>
-        <td><span class="lt long">~85 weeks</span></td>
-        <td class="num">IEEE C57<br>DOE efficiency</td>
+        <td><b>Busway (Feeder / Plug-In)</b>A rigid run you tap anywhere along its length. Replaces many parallel cable feeders where loads move.</td>
+        <td class="num">225&ndash;4,000 A<br>Feeder or plug-in<br>Copper or aluminium</td>
+        <td><span class="lt short">~16 weeks</span></td>
+        <td class="num">UL 857</td>
       </tr>
       <tr>
-        <td><b>Large Power Transformers</b>Only where a campus takes power at transmission voltage rather than distribution voltage.</td>
-        <td class="num">60–345 MVA<br>138 / 230 / 345 kV<br>ONAN / ONAF / OFAF</td>
-        <td><span class="lt long">~160 weeks</span></td>
-        <td class="num">IEEE C57<br>ANSI</td>
+        <td><b>Floor PDU / RPP</b>Steps down and splits the feed into branch circuits for a row or zone.</td>
+        <td class="num">75&ndash;300 kVA<br>PDU or RPP<br>Basic or branch-level metering</td>
+        <td><span class="lt mid">~20 weeks</span></td>
+        <td class="num">UL 891</td>
       </tr>
       <tr>
-        <td><b>Dry-Type / Cast-Resin</b>Indoor, air-cooled, closer to the load. No liquid, so no containment or fire-separation burden.</td>
-        <td class="num">15–1,500 kVA<br>AN / AF<br>80 / 115 / 150 °C rise</td>
-        <td><span class="lt mid">~30 weeks</span></td>
-        <td class="num">UL 1561<br>IEEE C57.12.01</td>
+        <td><b>Static Transfer Switches</b>Switches a load between two sources fast enough that equipment does not notice.</td>
+        <td class="num">100&ndash;1,200 A<br>2 / 3 / 4 pole<br>208V / 480V</td>
+        <td><span class="lt mid">~22 weeks</span></td>
+        <td class="num">UL 1008</td>
       </tr>
       <tr>
-        <td><b>Isolation / K-Rated</b>For harmonic-heavy loads. The K-factor states how much harmonic heating the unit is built to survive.</td>
-        <td class="num">15–150 kVA<br>K-4 / K-13 / K-20<br>Single or double shield</td>
-        <td><span class="lt short">~18 weeks</span></td>
-        <td class="num">UL 1561</td>
+        <td><b>Rack PDUs</b>The last metre. Metered versions are how you find out what a rack really draws.</td>
+        <td class="num">Metered / switched / monitored<br>208V / 240V / 415V<br>24&ndash;48 outlets</td>
+        <td><span class="lt short">~8 weeks</span></td>
+        <td class="num">UL 60950<br>UL 62368</td>
+      </tr>
+      <tr>
+        <td><b>Server Rack Enclosures</b>The frame everything else is budgeted against &mdash; U-space, weight and depth.</td>
+        <td class="num">42U / 45U / 48U<br>19in / 23in<br>1,000 / 1,200 mm deep</td>
+        <td><span class="lt short">~10 weeks</span></td>
+        <td class="num">EIA-310</td>
       </tr>
     </tbody>
   </table>
   </div>
 
-  <div class="callout"><b>How to read these lead times.</b> They are indicative modelled ranges for North America, reviewed monthly, not quotations and not a commitment of available inventory. They exist to help you sequence a project, not to price one. Every figure and the basis behind it is published on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>, and the derivation is described on the <a class="inline" href="/methodology.html">methodology page</a>. Actual lead time is set by the distributor, mill or OEM that ultimately fulfils the order.</div>
+  <div class="callout"><b>Circuit sizing here is governed by the continuous-load rule.</b> A circuit supplying a continuous load must be sized at 125&nbsp;% of that load &mdash; equivalently, usable capacity is 80&nbsp;% of the breaker rating (NEC 210.19 and 210.20). Data centre load is continuous by any reasonable reading, so a 20&nbsp;A circuit provides 16&nbsp;A of usable capacity. Budgeting racks against the nameplate rating rather than the derated figure is the single most common capacity error at this layer. The <a class="inline" href="/voltfield-rack-builder.html">Rack Elevation Builder</a> applies the derate for you.</div>
 
   <h2>Specifications that decide the selection</h2>
-  <p>Four numbers do most of the work. Getting any of them wrong tends to surface late, when the fix is expensive.</p>
-
   <div class="specgrid">
     <div class="speccard">
-      <h4>kVA and load profile</h4>
-      <p>Continuous load, not peak nameplate. Data centre load is unusually flat compared with commercial buildings, so the usual diversity assumptions understate it.</p>
+      <h4>Metering granularity</h4>
+      <p>Basic, per-inlet, or per-outlet. Per-outlet costs more and is the only way to attribute consumption to a specific device rather than a rack.</p>
     </div>
     <div class="speccard">
-      <h4>Impedance (%Z)</h4>
-      <p>Sets how much fault current reaches everything downstream. Lower %Z means a stiffer source and a <b>higher</b> available fault current — which is what drives the interrupting rating on your main breaker.</p>
+      <h4>Distribution voltage</h4>
+      <p>415V three-phase to the rack delivers 240V line-to-neutral to equipment and carries more power per conductor than 208V, which matters as density rises.</p>
     </div>
     <div class="speccard">
-      <h4>Primary voltage &amp; configuration</h4>
-      <p>Dictated by the utility, not by you. Loop-feed versus radial changes the switching arrangement and often the physical footprint.</p>
+      <h4>Tap-off flexibility</h4>
+      <p>Plug-in busway lets a new drop be added without pulling cable or shutting anything down. That is the whole reason to pay for it over feeders.</p>
     </div>
     <div class="speccard">
-      <h4>Temperature rise &amp; cooling class</h4>
-      <p>A 115 °C-rise unit run at 80 °C has usable overload headroom. ONAN/ONAF ratings mean the same tank delivers different capacity with fans running.</p>
+      <h4>Rack weight budget</h4>
+      <p>Fully populated storage racks routinely reach the enclosure's rated capacity. Weight, not U-space, is often what runs out first.</p>
     </div>
   </div>
 
   <h2>Selection criteria in practice</h2>
   <ul>
-    <li><b>Where can it physically sit?</b> Liquid-filled units outdoors need containment and clearances; indoors they bring fire-separation requirements that often make dry-type the only workable answer regardless of lead time.</li>
-    <li><b>What is the available fault current downstream?</b> Settle this before ordering switchgear, not after. It is set by the transformer's impedance and the utility's contribution, and it decides the interrupting rating you must buy.</li>
-    <li><b>Is the load harmonic-heavy?</b> Rectifier front-ends and older UPS topologies produce harmonic currents that heat a standard transformer beyond its rating. That is what K-rating exists to address.</li>
-    <li><b>Does efficiency regulation apply?</b> DOE efficiency rules constrain what can legally be sold for many distribution ratings, which narrows the field more than buyers expect.</li>
-    <li><b>What is the redundancy target?</b> N+1 at the transformer level changes both the count and, often, the individual unit rating.</li>
+    <li><b>Design for change, not just for load.</b> This layer will be modified repeatedly over the building's life. Busway and modular PDUs cost more up front and far less on every subsequent change.</li>
+    <li><b>Apply the 80&nbsp;% derate before counting racks.</b> It is the difference between a plan that works and one that trips under load.</li>
+    <li><b>Decide what you need to measure, before buying.</b> Retrofitting branch-level metering is expensive; specifying it at purchase is comparatively cheap.</li>
+    <li><b>Trace both paths on dual-corded equipment.</b> A/B redundancy only holds if the two feeds are genuinely independent all the way back to their sources.</li>
+    <li><b>Check enclosure depth against the deepest thing you will ever fit.</b> Depth constrains cable management and airflow, and it is fixed once the rows are set.</li>
   </ul>
 
   <h2>Typical applications</h2>
-  <p>A conventional build uses a <b>pad-mount</b> transformer at the utility interface, feeding main switchgear at 480V. Inside the building, <b>dry-type</b> units step down again for mechanical and house loads. <b>K-rated isolation</b> units appear where harmonic-producing equipment is concentrated. <b>Large power transformers</b> only enter the picture on campuses large enough to interconnect at transmission voltage — at which point the lead time becomes the single longest pole in the project schedule.</p>
+  <p>A modern hall runs <b>busway</b> overhead down each row, with plug-in tap boxes dropping to <b>rack PDUs</b> in each cabinet. <b>Floor PDUs or RPPs</b> serve zones where a transformer step-down or dense branch-circuit distribution is needed. <b>Static transfer switches</b> feed single-corded equipment from two sources. <b>Rack enclosures</b> set the physical envelope everything else is budgeted against.</p>
 
   <h2>Work the numbers before you RFQ</h2>
   <div class="rel">
-    <a href="/engineering-calculators.html#transformer-sizing"><span class="k">Calculator</span><span class="t">Size a transformer against your load</span></a>
-    <a href="/engineering-calculators.html#fault-current"><span class="k">Calculator</span><span class="t">Estimate available fault current and check breaker withstand</span></a>
-    <a href="/engineering-calculators.html#inrush"><span class="k">Calculator</span><span class="t">Estimate transformer inrush current</span></a>
-    <a href="/engineering-calculators.html#transformer-tco"><span class="k">Calculator</span><span class="t">Compare total cost of ownership including losses</span></a>
-    <a href="/voltfield-sandbox.html"><span class="k">Practice</span><span class="t">Build the one-line and run the sizing checks</span></a>
-    <a href="/voltfield-bom-generator.html"><span class="k">Teardown</span><span class="t">See the component BOM inside a transformer</span></a>
+    <a href="/voltfield-rack-builder.html"><span class="k">Practice</span><span class="t">Budget U-space, NEC-derated power and weight</span></a>
+    <a href="/engineering-calculators.html#voltage-drop"><span class="k">Calculator</span><span class="t">Check voltage drop on branch and feeder runs</span></a>
+    <a href="/engineering-calculators.html#ampacity"><span class="k">Calculator</span><span class="t">Conductor ampacity and conduit fill</span></a>
+    <a href="/voltfield-sandbox.html"><span class="k">Practice</span><span class="t">Build the one-line down to branch loads</span></a>
+    <a href="/voltfield-bom-generator.html"><span class="k">Teardown</span><span class="t">Component BOM for distribution equipment</span></a>
+    <a href="/rfq-toolkit.html"><span class="k">Template</span><span class="t">RFQ readiness checklist</span></a>
   </div>
 
   <h2>Related reading</h2>
   <div class="rel">
-    <a href="/guide-pad-mount-vs-gsu-transformers.html"><span class="k">Guide</span><span class="t">Compare pad-mount and GSU transformer applications</span></a>
-    <a href="/guide-transformer-lead-times.html"><span class="k">Guide</span><span class="t">Why transformer lead times stretch past three years</span></a>
-    <a href="/guide-transformer-nameplate.html"><span class="k">Guide</span><span class="t">How to read a transformer nameplate</span></a>
-    <a href="/guide-short-circuit-studies-breaker-coordination.html"><span class="k">Guide</span><span class="t">Short-circuit studies and breaker coordination</span></a>
-    <a href="/data-centers/switchgear.html"><span class="k">Category</span><span class="t">Data center switchgear and breakers</span></a>
-    <a href="/data-centers/backup-power.html"><span class="k">Category</span><span class="t">Backup power &mdash; gensets and UPS</span></a>
+    <a href="/guide-grounding-bonding-basics.html"><span class="k">Guide</span><span class="t">Grounding and bonding basics</span></a>
+    <a href="/guide-arc-flash-boundary-basics.html"><span class="k">Guide</span><span class="t">Arc-flash boundary basics</span></a>
+    <a href="/data-centers/switchgear.html"><span class="k">Category</span><span class="t">Switchgear and breakers upstream of this layer</span></a>
+    <a href="/data-centers/cabling.html"><span class="k">Category</span><span class="t">Cable, busbar and fibre</span></a>
+    <a href="/data-center-electrical-procurement.html"><span class="k">Hub</span><span class="t">Data center electrical procurement</span></a>
     <a href="/data-centers.html"><span class="k">Sector</span><span class="t">All data center power equipment</span></a>
   </div>
 
   <h2>Common questions</h2>
-  <h3>Which transformer type do data centers actually use?</h3>
-  <p>Usually more than one. A pad-mount steps utility medium voltage down to the voltage the building distributes; dry-type or cast-resin units sit indoors closer to the load; large power transformers appear only where the campus takes power at transmission voltage; K-rated isolation units handle harmonic-heavy loads.</p>
+  <h3>Why is usable circuit capacity only 80&nbsp;% of the breaker rating?</h3>
+  <p>Because a circuit supplying a continuous load must be sized at 125&nbsp;% of that load, which is the same constraint expressed the other way round. Data centre load is continuous, so a 20&nbsp;A circuit yields 16&nbsp;A usable. Planning against the nameplate figure instead is how racks end up tripping under normal operation.</p>
 
-  <h3>Why does impedance matter so much?</h3>
-  <p>Because it sets the available fault current downstream, and that decides the interrupting rating on your protective devices. A lower %Z gives a stiffer source and a <b>higher</b> fault current. Selecting a transformer on kVA alone and discovering the impedance implication after the switchgear is ordered is a recurring and expensive sequence.</p>
+  <h3>Is busway worth it over cable feeders?</h3>
+  <p>If loads will move or grow, generally yes. The premium buys the ability to add a tap-off without pulling new cable or de-energising anything. On a fixed layout that will never change, feeders are cheaper and perfectly adequate &mdash; but that layout is rarer than people expect.</p>
 
-  <h3>How far ahead should orders be placed?</h3>
-  <p>Against a preliminary specification rather than a finished design. With pad-mount units indicatively around 85 weeks and large power transformers toward 160 weeks, waiting for a locked design can add a year or more to the schedule.</p>
+  <h3>What is the practical difference between a PDU and an RPP?</h3>
+  <p>A floor PDU usually includes a transformer, stepping distribution voltage down and splitting it into branch circuits. A remote power panel distributes at the incoming voltage with no transformer. If no step-down is needed, the RPP is smaller, cheaper and produces less heat.</p>
 
-  <h3>Can a dry-type unit substitute for a pad-mount to save time?</h3>
-  <p>Rarely. They solve different problems — indoor air-cooled versus outdoor liquid-filled, and different voltage classes. The much shorter dry-type lead time makes the substitution tempting, but the voltage class and installation location usually rule it out.</p>
+  <h3>Do I need switched rack PDUs?</h3>
+  <p>Only if you need to power-cycle individual outlets remotely. Switched units cost meaningfully more and add a failure point; monitored-but-not-switched is sufficient for most sites, which mainly want visibility rather than remote control.</p>
 
 </div>
 
 <section class="ctaband">
   <div class="ctaband-in">
     <div>
-      <h3>Sourcing a transformer?</h3>
-      <p>Configure the specification, save it to a sourcing list, and send it over. It is routed to a person who connects you with the distributor, mill or OEM that can actually fulfil it — Voltfield does not stock or ship equipment itself.</p>
+      <h3>Sourcing distribution equipment?</h3>
+      <p>Configure the specification, save it to a sourcing list, and send it over. It is routed to a person who connects you with the distributor or OEM that can fulfil it &mdash; Voltfield does not stock or ship equipment itself.</p>
     </div>
-    <a class="ctabtn" href="/voltfield-supply-catalog.html?sector=dc&amp;cat=Transformers">Browse transformer specs &rsaquo;</a>
+    <a class="ctabtn" href="/voltfield-supply-catalog.html?sector=dc&amp;cat=Power%20Distribution">Browse distribution specs &rsaquo;</a>
   </div>
 </section>
 

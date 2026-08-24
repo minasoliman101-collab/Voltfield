@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>Data Center Electrical Procurement | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/data-center-electrical-procurement.html">
+<meta name="description" content="How to sequence data center electrical equipment around multi-year lead times: transformers, switchgear, backup power, cooling and distribution.">
+<meta name="keywords" content="data center electrical procurement, data center power infrastructure, data center equipment procurement, long lead electrical equipment, data center transformer sourcing">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:title" content="Data Center Electrical Procurement">
+<meta property="og:description" content="How to sequence data center electrical equipment around multi-year lead times: transformers, switchgear, backup power, cooling and distribution.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-data-centers.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-data-centers.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"BreadcrumbList","itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
+   {"@type":"ListItem","position":2,"name":"Data Center Electrical Procurement","item":"https://voltfield.org/data-center-electrical-procurement.html"}
+ ]},
+ {"@type":"CollectionPage","name":"Data Center Electrical Procurement","description":"How to sequence and specify data center electrical equipment around multi-year lead times, with six equipment category references, calculators and guides.","url":"https://voltfield.org/data-center-electrical-procurement.html","isPartOf":{"@type":"WebSite","name":"VOLTFIELD Supply Co.","url":"https://voltfield.org/"}},
+ {"@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"When should long-lead data center equipment be ordered?","acceptedAnswer":{"@type":"Answer","text":"Against a preliminary specification, as early as the utility voltage class and approximate load are known, rather than after the design is finished. With transformers indicatively at 85 to 160 weeks, ordering at concept versus issued-for-construction can differ by more than a year of schedule."}},
+   {"@type":"Question","name":"What is the highest-leverage decision in data center electrical procurement?","acceptedAnswer":{"@type":"Answer","text":"The utility interface voltage. It determines whether large power transformers and medium-voltage switchgear are in scope at all, and those are the two categories that are allocation-limited rather than merely slow."}},
+   {"@type":"Question","name":"Can rebuilt or recertified equipment shorten the schedule?","acceptedAnswer":{"@type":"Answer","text":"Sometimes, particularly for interim or lower-capacity needs, usually at a premium over new. It is worth evaluating explicitly rather than assuming new-build is the only path, especially where the alternative is holding up energisation."}},
+   {"@type":"Question","name":"How should indicative lead-time figures be used?","acceptedAnswer":{"@type":"Answer","text":"For sequencing, not for pricing or commitment. They are indicative modelled positions for North America, reviewed monthly, published with the basis of each figure stated. Actual lead time comes from the distributor, mill or OEM that fulfils the order."}}
+ ]}
+]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Root-relative asset paths throughout: this page lives one directory deep,
+     so the relative paths used by the flat pages at the site root would break. -->
+<link rel="stylesheet" href="/ordering-hidden.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-component-viz.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<style>
+.artban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:32px 20px 34px}
+.artban-in{max-width:900px;margin:0 auto}
+.artban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:10px}
+.artban h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,44px);letter-spacing:.01em;line-height:1.06}
+.artban p.dek{color:#AFC0D3;font-size:15.5px;margin-top:14px;line-height:1.55;max-width:700px}
+.crumb{max-width:900px;margin:0 auto;padding:12px 20px 0;font-family:var(--mono);font-size:11px;color:var(--slate)}
+.crumb a{color:var(--slate);text-decoration:underline;text-underline-offset:2px}
+.crumb .sep{margin:0 7px;opacity:.6}
+.artwrap{max-width:900px;margin:0 auto;padding:34px 20px 8px}
+.artwrap h2{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:.01em;color:var(--ink);margin:34px 0 12px}
+.artwrap h3{font-family:var(--disp);font-weight:700;font-size:18px;color:var(--ink);margin:22px 0 8px}
+.artwrap p{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:14px}
+.artwrap ul{margin:0 0 14px 20px}
+.artwrap li{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:6px}
+.artwrap a.inline{color:var(--signal-deep);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
+.callout{background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--signal);padding:16px 18px;margin:20px 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+/* family table */
+.famtable{width:100%;border-collapse:collapse;margin:16px 0 8px;font-size:13px}
+.famtable th{font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);text-align:left;padding:8px 10px;border-bottom:2px solid var(--ink)}
+.famtable td{padding:10px;border-bottom:1px solid var(--line);color:var(--ink-2);vertical-align:top}
+.famtable td b{font-family:var(--disp);font-size:15px;color:var(--ink);display:block;margin-bottom:2px}
+.famtable td.num{font-family:var(--mono);font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.famtable a{color:var(--signal-deep);font-weight:600;text-decoration:underline}
+.lt{font-family:var(--mono);font-size:11px;padding:2px 7px;white-space:nowrap;display:inline-block}
+.lt.long{background:#F7E4E1;color:var(--crit)}
+.lt.mid{background:#FBF0DA;color:var(--warn)}
+.lt.short{background:#E7F1EB;color:var(--ok)}
+html[data-theme="dark"] .lt.long{background:#3A1F1C;color:#E8A79B}
+html[data-theme="dark"] .lt.mid{background:#3A3016;color:#E4C77F}
+html[data-theme="dark"] .lt.short{background:#15301F;color:#7FCC9B}
+.tblwrap{overflow-x:auto}
+/* spec grid */
+.specgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:16px 0}
+.speccard{background:var(--card);border:1px solid var(--line-dark);padding:14px 16px}
+.speccard h4{font-family:var(--disp);font-weight:700;font-size:15px;color:var(--ink);margin-bottom:6px}
+.speccard p{font-size:12.5px;margin:0;line-height:1.6}
+/* related links */
+.rel{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:16px 0 8px}
+.rel a{display:block;background:var(--card);border:1px solid var(--line-dark);padding:12px 14px;text-decoration:none;transition:border-color .15s}
+.rel a:hover{border-color:var(--ink)}
+.rel .k{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}
+.rel .t{font-family:var(--disp);font-weight:600;font-size:14.5px;color:var(--ink);margin-top:3px;line-height:1.25}
+.ctaband{background:linear-gradient(120deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;border-top:4px solid var(--signal);margin-top:40px}
+.ctaband-in{max-width:1240px;margin:0 auto;padding:44px 20px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.ctaband h3{font-family:var(--disp);font-weight:700;font-size:28px;letter-spacing:.01em}
+.ctaband p{color:#AFC0D3;font-size:14px;margin-top:6px;max-width:520px;line-height:1.6}
+.ctabtn{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:14px 26px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.05em;text-decoration:none;flex-shrink:0}
+.ctabtn:hover{background:transparent;color:var(--signal)}
+footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
+footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
+@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
+footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer p{line-height:1.6;max-width:460px}
+footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
+footer a{color:#9FB0C3;text-decoration:none}
+footer a:hover{color:#fff}
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="/index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — SOURCING &amp; ENGINEERING REFERENCE</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="/index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu">
+        <a href="/free-tools.html">All Free Tools</a>
+        <a href="/voltfield-sandbox.html">Practice Sandbox</a>
+        <a href="/voltfield-pod-designer.html">POD &amp; Skid Designer</a>
+        <a href="/voltfield-rack-builder.html">Rack Elevation Builder</a>
+        <a href="/engineering-calculators.html">Calculators</a>
+        <a href="/voltfield-bom-generator.html">BOM Generator</a>
+        <a href="/voltfield-bom.html">BOM Match</a>
+        <a href="/voltfield-pcb.html">PCB Builder</a>
+        <a href="/voltfield-pcb-layout.html">PCB Layout Tool</a>
+        <a href="/voltfield-identify.html">Part ID</a>
+        <a href="/voltfield-eol.html">Obsolete/EOL</a>
+        <a href="/voltfield-glossary-quiz.html">Glossary Quiz</a>
+        <a href="/rfq-toolkit.html">RFQ Toolkit</a>
+        <a href="/site-search.html">Search</a>
+      </div>
+    </div>
+    <a href="/voltfield-insights.html">Guides &amp; Insights</a>
+    <a href="/lead-time-index.html">Lead-Time Index</a>
+    <a href="/voltfield-supply-catalog.html">Spec Library</a>
+    <a href="/voltfield-suppliers.html">Suppliers</a>
+    <a href="/whats-new.html">What's New</a>
+    <a href="/voltfield-account.html">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <a class="quotebtn" href="/voltfield-supply-catalog.html?quote=1" aria-label="View sourcing list on catalog page">SOURCING LIST <span class="ct" id="quoteCount">0</span></a>
+  </div>
+</header>
+
+<section class="artban">
+  <div class="artban-in">
+    <div class="eyebrow">Data Centers · Equipment Category</div>
+    <h1>Data center electrical procurement</h1>
+    <p class="dek">The longest-lead items now quote in years, which means orders have to be placed against a preliminary specification rather than a finished design. This is the sequence that follows from that, and the six equipment categories it runs through.</p>
+  </div>
+</section>
+
+<nav class="crumb" aria-label="Breadcrumb">
+  <a href="/index.html">Home</a><span class="sep">/</span>
+  <span>Data Center Electrical Procurement</span>
+</nav>
+
+<div class="artwrap">
+  <h2>Why this is a procurement problem before it is an engineering one</h2>
+  <p>On a conventional building, electrical equipment is ordered once the design is largely settled. On a data centre that sequence no longer works. The longest-lead items &mdash; transformers, medium-voltage switchgear, generation &mdash; now quote in years rather than months, which means the order has to be placed against a preliminary specification, well before the design that would normally justify it is finished.</p>
+  <p>That inversion is what makes data centre electrical procurement its own discipline. The engineering decisions have not become harder; the consequence of making them late has. A transformer specified six months later than it could have been does not delay the transformer by six months &mdash; it can delay energisation by considerably more, because everything downstream is waiting on it.</p>
+
+  <div class="callout"><b>What the lead times look like right now.</b> Large power transformers are quoting toward 160 weeks and pad-mount units around 85. Medium-voltage switchgear is sold out through 2028 and gas turbines are quoting 2029+ delivery slots &mdash; both allocation positions rather than queues, meaning ordering earlier does not necessarily move you up. Diesel gensets sit around 90 weeks. Every figure is an indicative modelled position for North America, reviewed monthly, published with its basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>. None of them are quotations or inventory commitments.</div>
+
+  <h2>The critical path, in order</h2>
+  <p>The dependency chain is unusually rigid, and it runs in one direction. Each decision constrains the next, which is why getting the sequence right matters more than optimising any single item.</p>
+  <ul>
+    <li><b>1. Utility interface and voltage class.</b> Whether you take power at transmission or distribution voltage decides whether large power transformers and MV switchgear are in scope at all. This is the single highest-leverage decision on the schedule.</li>
+    <li><b>2. Transformer rating and impedance.</b> kVA follows the load; impedance decides the available fault current downstream. Both have to be settled before switchgear can be specified.</li>
+    <li><b>3. Switchgear interrupting rating.</b> Determined by the fault current from step 2. Specify it before ordering and it is a number; discover it afterwards and it is a change order.</li>
+    <li><b>4. Backup generation and ride-through.</b> Sized against the critical load plus cooling, and split between generation and stored energy because they solve different problems.</li>
+    <li><b>5. Cooling capacity.</b> Follows IT load almost one for one, and has to survive the transfer to generator alongside the load producing the heat.</li>
+    <li><b>6. Distribution and cabling.</b> Shortest lead times, most frequently changed, and the layer where the continuous-load derate quietly decides how many racks actually fit.</li>
+  </ul>
+
+  <h2>The six equipment categories</h2>
+  <p>Each page below covers what separates the families in that category, the specifications that decide the selection, applicable standards, indicative lead times with their basis, and the calculators worth running before an RFQ goes out.</p>
+
+  <div class="rel">
+    <a href="/data-centers/transformers.html"><span class="k">Longest lead &middot; 85&ndash;160 wk</span><span class="t">Transformers &mdash; pad-mount, large power, dry-type and K-rated</span></a>
+    <a href="/data-centers/switchgear.html"><span class="k">Allocation-limited</span><span class="t">Switchgear &amp; breakers &mdash; MV, LV, ACB and MCCB</span></a>
+    <a href="/data-centers/backup-power.html"><span class="k">Long lead &middot; 78&ndash;90 wk</span><span class="t">Backup power &mdash; gensets, turbines, UPS and flywheels</span></a>
+    <a href="/data-centers/cooling.html"><span class="k">Medium lead &middot; 14&ndash;24 wk</span><span class="t">Cooling &mdash; CDUs, CRAH/CRAC, rear-door HX and chillers</span></a>
+    <a href="/data-centers/power-distribution.html"><span class="k">Short lead &middot; 8&ndash;22 wk</span><span class="t">Power distribution &mdash; busway, PDUs, RPPs and transfer</span></a>
+    <a href="/data-centers/cabling.html"><span class="k">Short lead &middot; 6&ndash;18 wk</span><span class="t">Cable &amp; busbar &mdash; MV, LV, copper bus and fibre</span></a>
+  </div>
+
+  <h2>Four mistakes that cost the most</h2>
+  <h3>Specifying a transformer on kVA alone</h3>
+  <p>Impedance decides the available fault current downstream, and therefore the interrupting rating every protective device needs. A lower %Z gives a stiffer source and a <b>higher</b> fault current &mdash; the opposite of most people's intuition. Ordering switchgear before this is settled is how lineups end up under-rated.</p>
+
+  <h3>Treating a generator as the whole backup answer</h3>
+  <p>A generator needs time to start, reach speed and accept load. Nothing carries the critical load during those seconds unless stored energy is specified for it. Conversely, sizing a UPS for hours of runtime buys expensive battery to do a job the generator already does.</p>
+
+  <h3>Planning rack capacity against the breaker nameplate</h3>
+  <p>A circuit supplying a continuous load must be sized at 125&nbsp;% of that load, so usable capacity is 80&nbsp;% of the breaker rating. Data centre load is continuous, which makes a 20&nbsp;A circuit a 16&nbsp;A circuit in practice. Ignoring this consistently over-counts how many racks a room supports.</p>
+
+  <h3>Reading an allocation position as a lead time</h3>
+  <p>&ldquo;Sold out through 2028&rdquo; is not a queue you join earlier by ordering sooner &mdash; it is committed manufacturing capacity. The productive conversation is about allocation, alternates and phased delivery, and it needs to happen far earlier than a normal procurement cycle would suggest.</p>
+
+  <h2>Tools worth running before the RFQ</h2>
+  <div class="rel">
+    <a href="/engineering-calculators.html#transformer-sizing"><span class="k">Calculator</span><span class="t">Transformer sizing</span></a>
+    <a href="/engineering-calculators.html#fault-current"><span class="k">Calculator</span><span class="t">Fault current and breaker withstand</span></a>
+    <a href="/engineering-calculators.html#voltage-drop"><span class="k">Calculator</span><span class="t">Voltage drop and cable sizing</span></a>
+    <a href="/engineering-calculators.html#arc-flash"><span class="k">Calculator</span><span class="t">Arc-flash incident energy</span></a>
+    <a href="/voltfield-sandbox.html"><span class="k">Practice</span><span class="t">Build a one-line and run the checks</span></a>
+    <a href="/voltfield-pod-designer.html"><span class="k">Practice</span><span class="t">Size a POD or skid to a redundancy target</span></a>
+    <a href="/voltfield-rack-builder.html"><span class="k">Practice</span><span class="t">Rack U-space, derated power and weight</span></a>
+    <a href="/voltfield-bom-generator.html"><span class="k">Teardown</span><span class="t">Component BOM for a configured part</span></a>
+    <a href="/rfq-toolkit.html"><span class="k">Template</span><span class="t">RFQ readiness checklist and spec templates</span></a>
+  </div>
+
+  <h2>Background reading</h2>
+  <div class="rel">
+    <a href="/guide-transformer-lead-times.html"><span class="k">Guide</span><span class="t">Why transformer lead times stretch past three years</span></a>
+    <a href="/guide-pad-mount-vs-gsu-transformers.html"><span class="k">Guide</span><span class="t">Pad-mount versus GSU transformers</span></a>
+    <a href="/guide-short-circuit-studies-breaker-coordination.html"><span class="k">Guide</span><span class="t">Short-circuit studies and breaker coordination</span></a>
+    <a href="/guide-switchgear-compartments.html"><span class="k">Guide</span><span class="t">Inside a switchgear compartment</span></a>
+    <a href="/guide-liquid-vs-air-cooling.html"><span class="k">Guide</span><span class="t">Liquid versus air cooling</span></a>
+    <a href="/guide-grid-interconnection-process.html"><span class="k">Guide</span><span class="t">The grid interconnection process</span></a>
+    <a href="/guide-arc-flash-boundary-basics.html"><span class="k">Guide</span><span class="t">Arc-flash boundary basics</span></a>
+    <a href="/guide-pue-explained.html"><span class="k">Guide</span><span class="t">PUE explained</span></a>
+    <a href="/methodology.html"><span class="k">Reference</span><span class="t">How our lead-time and pricing figures are derived</span></a>
+  </div>
+
+  <h2>Common questions</h2>
+  <h3>When should long-lead equipment actually be ordered?</h3>
+  <p>Against a preliminary specification, as early as the utility voltage class and approximate load are known &mdash; not after the design is finished. With transformers indicatively at 85 to 160 weeks, the difference between ordering at concept and ordering at issued-for-construction can exceed a year of schedule.</p>
+
+  <h3>What is the single highest-leverage decision?</h3>
+  <p>The utility interface voltage. It determines whether large power transformers and medium-voltage switchgear are in scope at all &mdash; and those are precisely the two categories that are allocation-limited rather than merely slow.</p>
+
+  <h3>Can rebuilt or recertified equipment shorten the schedule?</h3>
+  <p>Sometimes, particularly for interim or lower-capacity needs, usually at a premium over new. It is worth evaluating explicitly rather than treating new-build as the only path, especially where the alternative is holding up energisation.</p>
+
+  <h3>How should these lead-time figures be used?</h3>
+  <p>For sequencing, not for pricing or commitment. They are indicative modelled positions for North America, reviewed monthly, and published with the basis of each figure stated. Actual lead time comes from the distributor, mill or OEM that fulfils the order.</p>
+
+</div>
+
+<section class="ctaband">
+  <div class="ctaband-in">
+    <div>
+      <h3>Ready to source?</h3>
+      <p>Configure a specification, save it to a sourcing list, and send it over. It is routed to a person who connects you with the distributor, mill or OEM that can actually fulfil it &mdash; Voltfield does not stock or ship equipment itself.</p>
+    </div>
+    <a class="ctabtn" href="/voltfield-supply-catalog.html?sector=dc">Browse data center specs &rsaquo;</a>
+  </div>
+</section>
+
+<footer>
+  <div class="in">
+    <div>
+      <h5>Voltfield Supply Co.</h5>
+      <p>Independent sourcing reference for long-lead electrical, storage, oilfield and MRO equipment. Pricing and lead times shown across the site are indicative market ranges for North America, for planning reference only — actual pricing, availability and lead time are set by the distributor, mill or OEM fulfilling the order.</p>
+    </div>
+    <div><h5>Desks</h5><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+      <li><a href="/oil-gas.html">Drilling &amp; Completions</a></li>
+      <li><a href="/industrial-supply.html">Industrial Supply (MRO)</a></li>
+    </ul></div>
+    <div><h5>Compliance</h5><ul><li>UL · IEEE · ANSI C57</li><li>API 5CT/6A/7K/16A/Q1</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="/voltfield-site-config.js"></script>
+<script>
+(function(){
+  try{
+    const q=JSON.parse(localStorage.getItem("vf_quote")||"[]");
+    const el=document.getElementById("quoteCount");
+    if(el)el.textContent=Array.isArray(q)?q.length:0;
+  }catch(e){}
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

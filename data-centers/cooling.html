@@ -10,15 +10,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
 <!-- End Google Tag Manager -->
-<title>Data Center Transformers: Specs &amp; Lead Times | Voltfield</title>
-<link rel="canonical" href="https://voltfield.org/data-centers/transformers.html">
-<meta name="description" content="Compare pad-mount, large power, dry-type and K-rated transformers for data centers. Specifications, indicative lead times, and what to settle before you RFQ.">
-<meta name="keywords" content="data center transformers, pad-mount transformer specifications, large power transformer lead time, dry-type transformer data center, K-rated transformer, transformer procurement">
+<title>Data Center Cooling: CDU, CRAH &amp; Chillers | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/data-centers/cooling.html">
+<meta name="description" content="Compare CDUs, CRAH/CRAC units, rear-door heat exchangers and chillers for data centers. Where liquid cooling becomes necessary, and indicative lead times.">
+<meta name="keywords" content="data center cooling, coolant distribution unit, CDU liquid cooling, CRAH CRAC units, rear door heat exchanger, data center chiller lead time">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VOLTFIELD Supply Co.">
-<meta property="og:title" content="Data Center Transformers — Specifications &amp; Lead Times">
-<meta property="og:description" content="Four transformer families used in data centers, what separates them, and the lead times that decide your sequencing.">
+<meta property="og:title" content="Cooling">
+<meta property="og:description" content="Compare CDUs, CRAH/CRAC units, rear-door heat exchangers and chillers for data centers. Where liquid cooling becomes necessary, and indicative lead times.">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="https://voltfield.org/social/social-data-centers.jpg">
 <meta property="og:image:width" content="1200">
@@ -29,14 +29,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
  {"@type":"BreadcrumbList","itemListElement":[
    {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
    {"@type":"ListItem","position":2,"name":"Data Centers","item":"https://voltfield.org/data-centers.html"},
-   {"@type":"ListItem","position":3,"name":"Transformers","item":"https://voltfield.org/data-centers/transformers.html"}
+   {"@type":"ListItem","position":3,"name":"Cooling","item":"https://voltfield.org/data-centers/cooling.html"}
  ]},
- {"@type":"CollectionPage","name":"Data Center Transformers","description":"Transformer families used in data center electrical distribution, with specifications, configuration axes and indicative lead times.","url":"https://voltfield.org/data-centers/transformers.html","isPartOf":{"@type":"WebSite","name":"VOLTFIELD Supply Co.","url":"https://voltfield.org/"}},
+ {"@type":"CollectionPage","name":"Data Center Cooling","description":"CDU, CRAH/CRAC, rear-door heat exchanger and chiller families used in data center cooling, with configurations and indicative lead times.","url":"https://voltfield.org/data-centers/cooling.html","isPartOf":{"@type":"WebSite","name":"VOLTFIELD Supply Co.","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
-   {"@type":"Question","name":"Which transformer type do data centers actually use?","acceptedAnswer":{"@type":"Answer","text":"Usually more than one. A pad-mount transformer steps utility medium voltage down to the 480V the building distributes. Dry-type or cast-resin units sit indoors closer to the load. Large power transformers appear only where the campus takes power at transmission voltage. K-rated isolation transformers handle harmonic-heavy loads."}},
-   {"@type":"Question","name":"Why does transformer impedance matter for data centers?","acceptedAnswer":{"@type":"Answer","text":"Impedance (%Z) sets how much fault current can reach everything downstream. A lower %Z means a stiffer source and a HIGHER available fault current, which drives the interrupting rating you need on the main breaker. Choosing a transformer on kVA alone and ignoring %Z is how switchgear ends up under-rated."}},
-   {"@type":"Question","name":"How far ahead should transformer orders be placed?","acceptedAnswer":{"@type":"Answer","text":"Against a preliminary specification rather than a finished design. With pad-mount units indicatively around 85 weeks and large power transformers toward 160 weeks, waiting for a locked design before ordering can add a year or more to the project."}},
-   {"@type":"Question","name":"Is a dry-type transformer a substitute for a pad-mount?","acceptedAnswer":{"@type":"Answer","text":"Not generally. They solve different problems: pad-mount units are outdoor, liquid-filled and handle the utility-voltage step-down, while dry-type units are indoor, air-cooled and sit closer to the load. Dry-type lead times are considerably shorter, which sometimes tempts a substitution that the voltage class and location will not support."}}
+   {"@type":"Question","name":"At what rack density does air cooling stop working?","acceptedAnswer":{"@type":"Answer","text":"There is no hard line, but around 30 to 40 kW per rack moving sufficient air becomes impractical, both in airflow required and fan power to move it. Above that, heat is generally picked up in liquid closer to the source."}},
+   {"@type":"Question","name":"What does a coolant distribution unit actually do?","acceptedAnswer":{"@type":"Answer","text":"It separates two water loops. Facility water is comparatively dirty and variable, while the technology loop reaching server cold plates needs tightly controlled chemistry, temperature and pressure. The CDU is the controlled interface between them and is usually where liquid-path redundancy is implemented."}},
+   {"@type":"Question","name":"Does data center cooling need to survive a utility outage?","acceptedAnswer":{"@type":"Answer","text":"Yes, and it is frequently under-provisioned. IT load does not stop during transfer to generator, so heat production does not either. Chilled water thermal mass buys some time, but pumps and CDUs generally need backed-up power alongside the IT load."}},
+   {"@type":"Question","name":"Is a lower PUE always the right target?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. PUE is a ratio and can be improved by measures that raise total energy or trade water for electricity. It is a useful comparison metric rather than an objective function, and optimising it directly can produce decisions that are worse overall."}}
  ]}
 ]}
 </script>
@@ -164,21 +164,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="artban">
   <div class="artban-in">
     <div class="eyebrow">Data Centers · Equipment Category</div>
-    <h1>Data center transformers</h1>
-    <p class="dek">Four transformer families show up in data center electrical distribution, and they are not interchangeable. This page covers what separates them, the specifications that decide the selection, and the lead times that decide your sequencing.</p>
+    <h1>Data center cooling</h1>
+    <p class="dek">Almost every watt delivered to IT equipment comes back out as heat, which makes cooling capacity a direct function of electrical load. Where air stops being enough, and what the liquid loop adds.</p>
   </div>
 </section>
 
 <nav class="crumb" aria-label="Breadcrumb">
   <a href="/index.html">Home</a><span class="sep">/</span>
   <a href="/data-centers.html">Data Centers</a><span class="sep">/</span>
-  <span>Transformers</span>
+  <span>Cooling</span>
 </nav>
 
 <div class="artwrap">
-
-  <h2>The four families, and what actually separates them</h2>
-  <p>Transformer selection for a data center is rarely one decision. Power arrives at utility medium voltage and has to reach IT equipment at utilisation voltage, and different parts of that path call for different machines. Picking on kVA alone — the most common shortcut — ignores the two things that usually cause trouble later: impedance, and where the unit is physically allowed to sit.</p>
+  <h2>Cooling is an electrical problem wearing mechanical clothes</h2>
+  <p>Essentially every watt delivered to IT equipment comes back out as heat. That makes cooling capacity a direct function of electrical load, and it is why cooling and power sizing cannot be done independently &mdash; a rack density decision made on the electrical side lands immediately on the mechanical side.</p>
+  <p>The genuine shift over the last few years is that air alone has stopped being sufficient at the top end. Somewhere above roughly 30&ndash;40 kW per rack, moving enough air becomes impractical, and heat has to be picked up in liquid closer to the chip. That does not eliminate air &mdash; it adds a second loop, with its own equipment, its own failure modes and its own procurement lead time.</p>
 
   <div class="tblwrap">
   <table class="famtable">
@@ -187,112 +187,107 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </thead>
     <tbody>
       <tr>
-        <td><b>Pad-Mount Transformers</b>The workhorse: utility MV down to building distribution voltage, outdoors on a pad.</td>
-        <td class="num">75–2,500 kVA<br>12.47 / 24.94 / 34.5 kV<br>Loop or radial</td>
-        <td><span class="lt long">~85 weeks</span></td>
-        <td class="num">IEEE C57<br>DOE efficiency</td>
+        <td><b>Coolant Distribution Units (CDU)</b>The interface between a facility water loop and the technology loop that reaches the servers.</td>
+        <td class="num">300 kW &ndash; 1.4 MW<br>Liquid-liquid or liquid-air<br>N or N+1</td>
+        <td><span class="lt mid">~20 weeks</span></td>
+        <td class="num">ASHRAE<br>UL 60335</td>
       </tr>
       <tr>
-        <td><b>Large Power Transformers</b>Only where a campus takes power at transmission voltage rather than distribution voltage.</td>
-        <td class="num">60–345 MVA<br>138 / 230 / 345 kV<br>ONAN / ONAF / OFAF</td>
-        <td><span class="lt long">~160 weeks</span></td>
-        <td class="num">IEEE C57<br>ANSI</td>
+        <td><b>CRAH / CRAC Units</b>Room-level air cooling. CRAH uses chilled water; CRAC has its own refrigeration circuit.</td>
+        <td class="num">30&ndash;300 kW<br>Chilled water or DX<br>Upflow or downflow</td>
+        <td><span class="lt mid">~18 weeks</span></td>
+        <td class="num">ASHRAE 90.4<br>AHRI</td>
       </tr>
       <tr>
-        <td><b>Dry-Type / Cast-Resin</b>Indoor, air-cooled, closer to the load. No liquid, so no containment or fire-separation burden.</td>
-        <td class="num">15–1,500 kVA<br>AN / AF<br>80 / 115 / 150 °C rise</td>
-        <td><span class="lt mid">~30 weeks</span></td>
-        <td class="num">UL 1561<br>IEEE C57.12.01</td>
+        <td><b>Rear-Door Heat Exchangers</b>Captures heat at the rack before it reaches the room. Passive versions add no fan power.</td>
+        <td class="num">35&ndash;100 kW per rack<br>Passive or active<br>600 / 750 mm</td>
+        <td><span class="lt short">~14 weeks</span></td>
+        <td class="num">ASHRAE</td>
       </tr>
       <tr>
-        <td><b>Isolation / K-Rated</b>For harmonic-heavy loads. The K-factor states how much harmonic heating the unit is built to survive.</td>
-        <td class="num">15–150 kVA<br>K-4 / K-13 / K-20<br>Single or double shield</td>
-        <td><span class="lt short">~18 weeks</span></td>
-        <td class="num">UL 1561</td>
+        <td><b>Dry Coolers &amp; Chillers</b>Where the heat finally leaves the site. Adiabatic units trade water consumption for capacity on hot days.</td>
+        <td class="num">40&ndash;600 tons<br>Air-cooled chiller / dry cooler / adiabatic<br>R-134a / R-513A / R-1234ze</td>
+        <td><span class="lt mid">~24 weeks</span></td>
+        <td class="num">AHRI 550/590<br>ASHRAE</td>
       </tr>
     </tbody>
   </table>
   </div>
 
-  <div class="callout"><b>How to read these lead times.</b> They are indicative modelled ranges for North America, reviewed monthly, not quotations and not a commitment of available inventory. They exist to help you sequence a project, not to price one. Every figure and the basis behind it is published on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>, and the derivation is described on the <a class="inline" href="/methodology.html">methodology page</a>. Actual lead time is set by the distributor, mill or OEM that ultimately fulfils the order.</div>
+  <div class="callout"><b>Refrigerant selection is now a procurement constraint, not just an engineering one.</b> Phase-down schedules are progressively restricting higher-GWP refrigerants, which affects both what can be bought and what can be serviced over a fifteen-year life. Confirm the refrigerant against the regulatory position in your jurisdiction before standardising a platform. Lead times shown are indicative modelled positions for North America, reviewed monthly, published with their basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>.</div>
 
   <h2>Specifications that decide the selection</h2>
-  <p>Four numbers do most of the work. Getting any of them wrong tends to surface late, when the fix is expensive.</p>
-
   <div class="specgrid">
     <div class="speccard">
-      <h4>kVA and load profile</h4>
-      <p>Continuous load, not peak nameplate. Data centre load is unusually flat compared with commercial buildings, so the usual diversity assumptions understate it.</p>
+      <h4>Approach temperature</h4>
+      <p>How close the supply gets to the source temperature. A tighter approach means more heat exchanger surface, more cost, and usually better annual efficiency.</p>
     </div>
     <div class="speccard">
-      <h4>Impedance (%Z)</h4>
-      <p>Sets how much fault current reaches everything downstream. Lower %Z means a stiffer source and a <b>higher</b> available fault current — which is what drives the interrupting rating on your main breaker.</p>
+      <h4>Rack density, not room average</h4>
+      <p>Average density hides the problem. A room averaging 8 kW per rack with a 40 kW row still needs a solution for that row.</p>
     </div>
     <div class="speccard">
-      <h4>Primary voltage &amp; configuration</h4>
-      <p>Dictated by the utility, not by you. Loop-feed versus radial changes the switching arrangement and often the physical footprint.</p>
+      <h4>Water quality &amp; loop separation</h4>
+      <p>The technology loop reaching servers has far tighter chemistry requirements than facility water. That separation is precisely what a CDU exists to provide.</p>
     </div>
     <div class="speccard">
-      <h4>Temperature rise &amp; cooling class</h4>
-      <p>A 115 °C-rise unit run at 80 °C has usable overload headroom. ONAN/ONAF ratings mean the same tank delivers different capacity with fans running.</p>
+      <h4>Redundancy at the right layer</h4>
+      <p>N+1 CDUs feeding a single non-redundant chilled water loop is not N+1 cooling. Redundancy has to be traced end to end, like an electrical path.</p>
     </div>
   </div>
 
   <h2>Selection criteria in practice</h2>
   <ul>
-    <li><b>Where can it physically sit?</b> Liquid-filled units outdoors need containment and clearances; indoors they bring fire-separation requirements that often make dry-type the only workable answer regardless of lead time.</li>
-    <li><b>What is the available fault current downstream?</b> Settle this before ordering switchgear, not after. It is set by the transformer's impedance and the utility's contribution, and it decides the interrupting rating you must buy.</li>
-    <li><b>Is the load harmonic-heavy?</b> Rectifier front-ends and older UPS topologies produce harmonic currents that heat a standard transformer beyond its rating. That is what K-rating exists to address.</li>
-    <li><b>Does efficiency regulation apply?</b> DOE efficiency rules constrain what can legally be sold for many distribution ratings, which narrows the field more than buyers expect.</li>
-    <li><b>What is the redundancy target?</b> N+1 at the transformer level changes both the count and, often, the individual unit rating.</li>
+    <li><b>Start from the electrical load, not a target PUE.</b> Cooling capacity follows IT load almost one for one. Efficiency targets are an outcome of the design, not an input to sizing.</li>
+    <li><b>Establish whether liquid is required now or later.</b> Retrofitting a technology loop into a live room is materially harder than provisioning the pipework during construction, even if the CDUs come later.</li>
+    <li><b>Check the free-cooling hours for the actual site.</b> Economiser hours vary enormously by climate and drive the operating cost far more than nameplate efficiency does.</li>
+    <li><b>Confirm water availability and discharge rules.</b> Adiabatic and evaporative equipment buys capacity on design days by consuming water, which is increasingly constrained or reportable.</li>
+    <li><b>Do not neglect the blanking panels.</b> An open rack unit lets hot exhaust recirculate to the intake above it. It is the cheapest thermal fix available and the one most often skipped.</li>
   </ul>
 
   <h2>Typical applications</h2>
-  <p>A conventional build uses a <b>pad-mount</b> transformer at the utility interface, feeding main switchgear at 480V. Inside the building, <b>dry-type</b> units step down again for mechanical and house loads. <b>K-rated isolation</b> units appear where harmonic-producing equipment is concentrated. <b>Large power transformers</b> only enter the picture on campuses large enough to interconnect at transmission voltage — at which point the lead time becomes the single longest pole in the project schedule.</p>
+  <p>A conventional air-cooled hall uses <b>CRAH</b> units on a chilled water loop fed by <b>chillers</b> or <b>dry coolers</b>. As density rises, <b>rear-door heat exchangers</b> intercept heat at the rack without committing to full liquid cooling. High-density AI halls add a technology loop through <b>CDUs</b> feeding direct-to-chip cold plates, with air cooling retained for everything the liquid loop does not reach &mdash; power supplies, networking and storage still need it.</p>
 
   <h2>Work the numbers before you RFQ</h2>
   <div class="rel">
-    <a href="/engineering-calculators.html#transformer-sizing"><span class="k">Calculator</span><span class="t">Size a transformer against your load</span></a>
-    <a href="/engineering-calculators.html#fault-current"><span class="k">Calculator</span><span class="t">Estimate available fault current and check breaker withstand</span></a>
-    <a href="/engineering-calculators.html#inrush"><span class="k">Calculator</span><span class="t">Estimate transformer inrush current</span></a>
-    <a href="/engineering-calculators.html#transformer-tco"><span class="k">Calculator</span><span class="t">Compare total cost of ownership including losses</span></a>
-    <a href="/voltfield-sandbox.html"><span class="k">Practice</span><span class="t">Build the one-line and run the sizing checks</span></a>
-    <a href="/voltfield-bom-generator.html"><span class="k">Teardown</span><span class="t">See the component BOM inside a transformer</span></a>
+    <a href="/engineering-calculators.html"><span class="k">Calculators</span><span class="t">Load, current and sizing calculators</span></a>
+    <a href="/voltfield-rack-builder.html"><span class="k">Practice</span><span class="t">Budget rack power, weight and U-space</span></a>
+    <a href="/voltfield-pod-designer.html"><span class="k">Practice</span><span class="t">Size a POD including its cooling</span></a>
+    <a href="/rfq-toolkit.html"><span class="k">Template</span><span class="t">RFQ readiness checklist</span></a>
   </div>
 
   <h2>Related reading</h2>
   <div class="rel">
-    <a href="/guide-pad-mount-vs-gsu-transformers.html"><span class="k">Guide</span><span class="t">Compare pad-mount and GSU transformer applications</span></a>
-    <a href="/guide-transformer-lead-times.html"><span class="k">Guide</span><span class="t">Why transformer lead times stretch past three years</span></a>
-    <a href="/guide-transformer-nameplate.html"><span class="k">Guide</span><span class="t">How to read a transformer nameplate</span></a>
-    <a href="/guide-short-circuit-studies-breaker-coordination.html"><span class="k">Guide</span><span class="t">Short-circuit studies and breaker coordination</span></a>
-    <a href="/data-centers/switchgear.html"><span class="k">Category</span><span class="t">Data center switchgear and breakers</span></a>
-    <a href="/data-centers/backup-power.html"><span class="k">Category</span><span class="t">Backup power &mdash; gensets and UPS</span></a>
+    <a href="/guide-liquid-vs-air-cooling.html"><span class="k">Guide</span><span class="t">Liquid versus air cooling &mdash; where the crossover sits</span></a>
+    <a href="/guide-pue-explained.html"><span class="k">Guide</span><span class="t">PUE explained, and what it hides</span></a>
+    <a href="/data-centers/power-distribution.html"><span class="k">Category</span><span class="t">Power distribution &mdash; busway, PDUs and transfer</span></a>
+    <a href="/data-centers/backup-power.html"><span class="k">Category</span><span class="t">Backup power &mdash; cooling has to survive the transfer too</span></a>
+    <a href="/data-center-electrical-procurement.html"><span class="k">Hub</span><span class="t">Data center electrical procurement</span></a>
     <a href="/data-centers.html"><span class="k">Sector</span><span class="t">All data center power equipment</span></a>
   </div>
 
   <h2>Common questions</h2>
-  <h3>Which transformer type do data centers actually use?</h3>
-  <p>Usually more than one. A pad-mount steps utility medium voltage down to the voltage the building distributes; dry-type or cast-resin units sit indoors closer to the load; large power transformers appear only where the campus takes power at transmission voltage; K-rated isolation units handle harmonic-heavy loads.</p>
+  <h3>At what rack density does air cooling stop working?</h3>
+  <p>There is no hard line, but somewhere around 30&ndash;40 kW per rack moving sufficient air becomes impractical &mdash; the airflow required, and the fan power to move it, stop being reasonable. Above that, heat is generally picked up in liquid closer to the source.</p>
 
-  <h3>Why does impedance matter so much?</h3>
-  <p>Because it sets the available fault current downstream, and that decides the interrupting rating on your protective devices. A lower %Z gives a stiffer source and a <b>higher</b> fault current. Selecting a transformer on kVA alone and discovering the impedance implication after the switchgear is ordered is a recurring and expensive sequence.</p>
+  <h3>What does a CDU actually do?</h3>
+  <p>It separates two water loops. Facility water is comparatively dirty and variable; the technology loop that reaches server cold plates needs tightly controlled chemistry, temperature and pressure. The CDU is the controlled interface between them, and it is also where redundancy in the liquid path is usually implemented.</p>
 
-  <h3>How far ahead should orders be placed?</h3>
-  <p>Against a preliminary specification rather than a finished design. With pad-mount units indicatively around 85 weeks and large power transformers toward 160 weeks, waiting for a locked design can add a year or more to the schedule.</p>
+  <h3>Does cooling need to survive a utility outage?</h3>
+  <p>Yes, and this is frequently under-provisioned. IT load does not stop during transfer to generator, so heat production does not either. Chilled water thermal mass buys some time, but pumps and CDUs generally need to be on backed-up power alongside the IT load itself.</p>
 
-  <h3>Can a dry-type unit substitute for a pad-mount to save time?</h3>
-  <p>Rarely. They solve different problems — indoor air-cooled versus outdoor liquid-filled, and different voltage classes. The much shorter dry-type lead time makes the substitution tempting, but the voltage class and installation location usually rule it out.</p>
+  <h3>Is a lower PUE always the right target?</h3>
+  <p>Not necessarily. PUE is a ratio, and it can be improved by measures that raise total energy or that trade water for electricity. It is a useful comparison metric, not an objective function &mdash; optimising it directly can produce decisions that are worse overall.</p>
 
 </div>
 
 <section class="ctaband">
   <div class="ctaband-in">
     <div>
-      <h3>Sourcing a transformer?</h3>
-      <p>Configure the specification, save it to a sourcing list, and send it over. It is routed to a person who connects you with the distributor, mill or OEM that can actually fulfil it — Voltfield does not stock or ship equipment itself.</p>
+      <h3>Sourcing cooling equipment?</h3>
+      <p>Configure the specification, save it to a sourcing list, and send it over. It is routed to a person who connects you with the distributor or OEM that can fulfil it &mdash; Voltfield does not stock or ship equipment itself.</p>
     </div>
-    <a class="ctabtn" href="/voltfield-supply-catalog.html?sector=dc&amp;cat=Transformers">Browse transformer specs &rsaquo;</a>
+    <a class="ctabtn" href="/voltfield-supply-catalog.html?sector=dc&amp;cat=Cooling">Browse cooling specs &rsaquo;</a>
   </div>
 </section>
 

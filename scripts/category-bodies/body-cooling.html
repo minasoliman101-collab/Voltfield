@@ -1,0 +1,102 @@
+  <h2>Cooling is an electrical problem wearing mechanical clothes</h2>
+  <p>Essentially every watt delivered to IT equipment comes back out as heat. That makes cooling capacity a direct function of electrical load, and it is why cooling and power sizing cannot be done independently &mdash; a rack density decision made on the electrical side lands immediately on the mechanical side.</p>
+  <p>The genuine shift over the last few years is that air alone has stopped being sufficient at the top end. Somewhere above roughly 30&ndash;40 kW per rack, moving enough air becomes impractical, and heat has to be picked up in liquid closer to the chip. That does not eliminate air &mdash; it adds a second loop, with its own equipment, its own failure modes and its own procurement lead time.</p>
+
+  <div class="tblwrap">
+  <table class="famtable">
+    <thead>
+      <tr><th>Family</th><th>Typical configuration</th><th>Indicative lead time</th><th>Standards</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Coolant Distribution Units (CDU)</b>The interface between a facility water loop and the technology loop that reaches the servers.</td>
+        <td class="num">300 kW &ndash; 1.4 MW<br>Liquid-liquid or liquid-air<br>N or N+1</td>
+        <td><span class="lt mid">~20 weeks</span></td>
+        <td class="num">ASHRAE<br>UL 60335</td>
+      </tr>
+      <tr>
+        <td><b>CRAH / CRAC Units</b>Room-level air cooling. CRAH uses chilled water; CRAC has its own refrigeration circuit.</td>
+        <td class="num">30&ndash;300 kW<br>Chilled water or DX<br>Upflow or downflow</td>
+        <td><span class="lt mid">~18 weeks</span></td>
+        <td class="num">ASHRAE 90.4<br>AHRI</td>
+      </tr>
+      <tr>
+        <td><b>Rear-Door Heat Exchangers</b>Captures heat at the rack before it reaches the room. Passive versions add no fan power.</td>
+        <td class="num">35&ndash;100 kW per rack<br>Passive or active<br>600 / 750 mm</td>
+        <td><span class="lt short">~14 weeks</span></td>
+        <td class="num">ASHRAE</td>
+      </tr>
+      <tr>
+        <td><b>Dry Coolers &amp; Chillers</b>Where the heat finally leaves the site. Adiabatic units trade water consumption for capacity on hot days.</td>
+        <td class="num">40&ndash;600 tons<br>Air-cooled chiller / dry cooler / adiabatic<br>R-134a / R-513A / R-1234ze</td>
+        <td><span class="lt mid">~24 weeks</span></td>
+        <td class="num">AHRI 550/590<br>ASHRAE</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout"><b>Refrigerant selection is now a procurement constraint, not just an engineering one.</b> Phase-down schedules are progressively restricting higher-GWP refrigerants, which affects both what can be bought and what can be serviced over a fifteen-year life. Confirm the refrigerant against the regulatory position in your jurisdiction before standardising a platform. Lead times shown are indicative modelled positions for North America, reviewed monthly, published with their basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>.</div>
+
+  <h2>Specifications that decide the selection</h2>
+  <div class="specgrid">
+    <div class="speccard">
+      <h4>Approach temperature</h4>
+      <p>How close the supply gets to the source temperature. A tighter approach means more heat exchanger surface, more cost, and usually better annual efficiency.</p>
+    </div>
+    <div class="speccard">
+      <h4>Rack density, not room average</h4>
+      <p>Average density hides the problem. A room averaging 8 kW per rack with a 40 kW row still needs a solution for that row.</p>
+    </div>
+    <div class="speccard">
+      <h4>Water quality &amp; loop separation</h4>
+      <p>The technology loop reaching servers has far tighter chemistry requirements than facility water. That separation is precisely what a CDU exists to provide.</p>
+    </div>
+    <div class="speccard">
+      <h4>Redundancy at the right layer</h4>
+      <p>N+1 CDUs feeding a single non-redundant chilled water loop is not N+1 cooling. Redundancy has to be traced end to end, like an electrical path.</p>
+    </div>
+  </div>
+
+  <h2>Selection criteria in practice</h2>
+  <ul>
+    <li><b>Start from the electrical load, not a target PUE.</b> Cooling capacity follows IT load almost one for one. Efficiency targets are an outcome of the design, not an input to sizing.</li>
+    <li><b>Establish whether liquid is required now or later.</b> Retrofitting a technology loop into a live room is materially harder than provisioning the pipework during construction, even if the CDUs come later.</li>
+    <li><b>Check the free-cooling hours for the actual site.</b> Economiser hours vary enormously by climate and drive the operating cost far more than nameplate efficiency does.</li>
+    <li><b>Confirm water availability and discharge rules.</b> Adiabatic and evaporative equipment buys capacity on design days by consuming water, which is increasingly constrained or reportable.</li>
+    <li><b>Do not neglect the blanking panels.</b> An open rack unit lets hot exhaust recirculate to the intake above it. It is the cheapest thermal fix available and the one most often skipped.</li>
+  </ul>
+
+  <h2>Typical applications</h2>
+  <p>A conventional air-cooled hall uses <b>CRAH</b> units on a chilled water loop fed by <b>chillers</b> or <b>dry coolers</b>. As density rises, <b>rear-door heat exchangers</b> intercept heat at the rack without committing to full liquid cooling. High-density AI halls add a technology loop through <b>CDUs</b> feeding direct-to-chip cold plates, with air cooling retained for everything the liquid loop does not reach &mdash; power supplies, networking and storage still need it.</p>
+
+  <h2>Work the numbers before you RFQ</h2>
+  <div class="rel">
+    <a href="/engineering-calculators.html"><span class="k">Calculators</span><span class="t">Load, current and sizing calculators</span></a>
+    <a href="/voltfield-rack-builder.html"><span class="k">Practice</span><span class="t">Budget rack power, weight and U-space</span></a>
+    <a href="/voltfield-pod-designer.html"><span class="k">Practice</span><span class="t">Size a POD including its cooling</span></a>
+    <a href="/rfq-toolkit.html"><span class="k">Template</span><span class="t">RFQ readiness checklist</span></a>
+  </div>
+
+  <h2>Related reading</h2>
+  <div class="rel">
+    <a href="/guide-liquid-vs-air-cooling.html"><span class="k">Guide</span><span class="t">Liquid versus air cooling &mdash; where the crossover sits</span></a>
+    <a href="/guide-pue-explained.html"><span class="k">Guide</span><span class="t">PUE explained, and what it hides</span></a>
+    <a href="/data-centers/power-distribution.html"><span class="k">Category</span><span class="t">Power distribution &mdash; busway, PDUs and transfer</span></a>
+    <a href="/data-centers/backup-power.html"><span class="k">Category</span><span class="t">Backup power &mdash; cooling has to survive the transfer too</span></a>
+    <a href="/data-center-electrical-procurement.html"><span class="k">Hub</span><span class="t">Data center electrical procurement</span></a>
+    <a href="/data-centers.html"><span class="k">Sector</span><span class="t">All data center power equipment</span></a>
+  </div>
+
+  <h2>Common questions</h2>
+  <h3>At what rack density does air cooling stop working?</h3>
+  <p>There is no hard line, but somewhere around 30&ndash;40 kW per rack moving sufficient air becomes impractical &mdash; the airflow required, and the fan power to move it, stop being reasonable. Above that, heat is generally picked up in liquid closer to the source.</p>
+
+  <h3>What does a CDU actually do?</h3>
+  <p>It separates two water loops. Facility water is comparatively dirty and variable; the technology loop that reaches server cold plates needs tightly controlled chemistry, temperature and pressure. The CDU is the controlled interface between them, and it is also where redundancy in the liquid path is usually implemented.</p>
+
+  <h3>Does cooling need to survive a utility outage?</h3>
+  <p>Yes, and this is frequently under-provisioned. IT load does not stop during transfer to generator, so heat production does not either. Chilled water thermal mass buys some time, but pumps and CDUs generally need to be on backed-up power alongside the IT load itself.</p>
+
+  <h3>Is a lower PUE always the right target?</h3>
+  <p>Not necessarily. PUE is a ratio, and it can be improved by measures that raise total energy or that trade water for electricity. It is a useful comparison metric, not an objective function &mdash; optimising it directly can produce decisions that are worse overall.</p>

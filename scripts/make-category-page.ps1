@@ -19,7 +19,13 @@ param(
   [Parameter(Mandatory=$true)][string]$CtaH3,
   [Parameter(Mandatory=$true)][string]$CtaP,
   [Parameter(Mandatory=$true)][string]$CtaHref,
-  [Parameter(Mandatory=$true)][string]$CtaLabel
+  [Parameter(Mandatory=$true)][string]$CtaLabel,
+  # Relative output path from the repo root. Defaults to the category
+  # subdirectory; the pillar page uses this to sit at the site root instead.
+  [string]$OutRel = $null,
+  # Breadcrumb HTML between Home and the leaf. Categories sit under the sector
+  # page; the pillar has no intermediate level.
+  [string]$CrumbMid = $null
 )
 $ErrorActionPreference = 'Stop'
 $root = 'C:\Users\minas\AppData\Local\Temp\claude\C--Users-minas-Desktop\57cb7386-2fb4-45d2-b459-f0af4d0e9662\scratchpad\Voltfield'
@@ -31,7 +37,8 @@ $body = [System.IO.File]::ReadAllText($BodyFile, [System.Text.Encoding]::UTF8)
 
 # --- head ---
 $s = $s -replace '<title>[^<]*</title>', ('<title>' + $Title + '</title>')
-$s = $s -replace 'href="https://voltfield\.org/data-centers/transformers\.html"', ('href="https://voltfield.org/data-centers/' + $Slug + '.html"')
+$canonPath = if ($OutRel) { $OutRel } else { 'data-centers/' + $Slug + '.html' }
+$s = $s -replace 'href="https://voltfield\.org/data-centers/transformers\.html"', ('href="https://voltfield.org/' + $canonPath + '"')
 $s = [regex]::Replace($s, '<meta name="description" content="[^"]*">', '<meta name="description" content="' + $Desc + '">')
 $s = [regex]::Replace($s, '<meta name="keywords" content="[^"]*">', '<meta name="keywords" content="' + $Keywords + '">')
 $s = [regex]::Replace($s, '<meta property="og:title" content="[^"]*">', '<meta property="og:title" content="' + $CrumbName + '">')
@@ -46,8 +53,14 @@ $s = $s.Substring(0, $ldStart) + '{"@context":"https://schema.org","@graph":[' +
 $s = [regex]::Replace($s, '(?s)<h1>.*?</h1>', '<h1>' + $H1 + '</h1>')
 $s = [regex]::Replace($s, '(?s)<p class="dek">.*?</p>', '<p class="dek">' + $Dek + '</p>')
 
-# --- breadcrumb leaf ---
+# --- breadcrumb ---
 $s = [regex]::Replace($s, '(?s)(<span class="sep">/</span>\s*\n\s*<span>)[^<]*(</span>)', ('${1}' + $CrumbName + '${2}'))
+if ($PSBoundParameters.ContainsKey('CrumbMid')) {
+  # drop or replace the intermediate "Data Centers" crumb
+  $s = [regex]::Replace($s,
+    '(?s)<a href="/data-centers\.html">Data Centers</a><span class="sep">/</span>\s*\n\s*',
+    $CrumbMid)
+}
 
 # --- body ---
 $bStart = $s.IndexOf('<div class="artwrap">')
@@ -73,6 +86,6 @@ $s = $head + $cta
 $faqCount = ([regex]::Matches($s, '<h3>')).Count
 if ($faqCount -lt 2) { throw "only $faqCount <h3> left -- the CTA rewrite clobbered the body" }
 
-$out = Join-Path $root ('data-centers\' + $Slug + '.html')
+$out = if ($OutRel) { Join-Path $root ($OutRel -replace '/','\') } else { Join-Path $root ('data-centers\' + $Slug + '.html') }
 [System.IO.File]::WriteAllText($out, $s, $utf8)
-Write-Host "wrote data-centers/$Slug.html"
+Write-Host "wrote $canonPath"

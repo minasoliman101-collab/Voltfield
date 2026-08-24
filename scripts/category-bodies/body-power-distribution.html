@@ -1,0 +1,110 @@
+  <h2>Everything between the switchgear and the server</h2>
+  <p>Power distribution is the layer that gets designed last and changed most. Switchgear and transformers are fixed for the life of the building; what sits between them and the IT equipment has to absorb every density change, every refresh cycle and every tenant that wants something slightly different. That is why the decisions here are less about capacity and more about how cheaply the design can be modified later.</p>
+  <p>It is also where measurement happens. A facility with no branch-level metering cannot answer basic questions &mdash; what a rack actually draws, whether a circuit is near its limit, where capacity is stranded. Those answers determine how much of the installed capacity can safely be sold or used.</p>
+
+  <div class="tblwrap">
+  <table class="famtable">
+    <thead>
+      <tr><th>Family</th><th>Typical configuration</th><th>Indicative lead time</th><th>Standards</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Busway (Feeder / Plug-In)</b>A rigid run you tap anywhere along its length. Replaces many parallel cable feeders where loads move.</td>
+        <td class="num">225&ndash;4,000 A<br>Feeder or plug-in<br>Copper or aluminium</td>
+        <td><span class="lt short">~16 weeks</span></td>
+        <td class="num">UL 857</td>
+      </tr>
+      <tr>
+        <td><b>Floor PDU / RPP</b>Steps down and splits the feed into branch circuits for a row or zone.</td>
+        <td class="num">75&ndash;300 kVA<br>PDU or RPP<br>Basic or branch-level metering</td>
+        <td><span class="lt mid">~20 weeks</span></td>
+        <td class="num">UL 891</td>
+      </tr>
+      <tr>
+        <td><b>Static Transfer Switches</b>Switches a load between two sources fast enough that equipment does not notice.</td>
+        <td class="num">100&ndash;1,200 A<br>2 / 3 / 4 pole<br>208V / 480V</td>
+        <td><span class="lt mid">~22 weeks</span></td>
+        <td class="num">UL 1008</td>
+      </tr>
+      <tr>
+        <td><b>Rack PDUs</b>The last metre. Metered versions are how you find out what a rack really draws.</td>
+        <td class="num">Metered / switched / monitored<br>208V / 240V / 415V<br>24&ndash;48 outlets</td>
+        <td><span class="lt short">~8 weeks</span></td>
+        <td class="num">UL 60950<br>UL 62368</td>
+      </tr>
+      <tr>
+        <td><b>Server Rack Enclosures</b>The frame everything else is budgeted against &mdash; U-space, weight and depth.</td>
+        <td class="num">42U / 45U / 48U<br>19in / 23in<br>1,000 / 1,200 mm deep</td>
+        <td><span class="lt short">~10 weeks</span></td>
+        <td class="num">EIA-310</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout"><b>Circuit sizing here is governed by the continuous-load rule.</b> A circuit supplying a continuous load must be sized at 125&nbsp;% of that load &mdash; equivalently, usable capacity is 80&nbsp;% of the breaker rating (NEC 210.19 and 210.20). Data centre load is continuous by any reasonable reading, so a 20&nbsp;A circuit provides 16&nbsp;A of usable capacity. Budgeting racks against the nameplate rating rather than the derated figure is the single most common capacity error at this layer. The <a class="inline" href="/voltfield-rack-builder.html">Rack Elevation Builder</a> applies the derate for you.</div>
+
+  <h2>Specifications that decide the selection</h2>
+  <div class="specgrid">
+    <div class="speccard">
+      <h4>Metering granularity</h4>
+      <p>Basic, per-inlet, or per-outlet. Per-outlet costs more and is the only way to attribute consumption to a specific device rather than a rack.</p>
+    </div>
+    <div class="speccard">
+      <h4>Distribution voltage</h4>
+      <p>415V three-phase to the rack delivers 240V line-to-neutral to equipment and carries more power per conductor than 208V, which matters as density rises.</p>
+    </div>
+    <div class="speccard">
+      <h4>Tap-off flexibility</h4>
+      <p>Plug-in busway lets a new drop be added without pulling cable or shutting anything down. That is the whole reason to pay for it over feeders.</p>
+    </div>
+    <div class="speccard">
+      <h4>Rack weight budget</h4>
+      <p>Fully populated storage racks routinely reach the enclosure's rated capacity. Weight, not U-space, is often what runs out first.</p>
+    </div>
+  </div>
+
+  <h2>Selection criteria in practice</h2>
+  <ul>
+    <li><b>Design for change, not just for load.</b> This layer will be modified repeatedly over the building's life. Busway and modular PDUs cost more up front and far less on every subsequent change.</li>
+    <li><b>Apply the 80&nbsp;% derate before counting racks.</b> It is the difference between a plan that works and one that trips under load.</li>
+    <li><b>Decide what you need to measure, before buying.</b> Retrofitting branch-level metering is expensive; specifying it at purchase is comparatively cheap.</li>
+    <li><b>Trace both paths on dual-corded equipment.</b> A/B redundancy only holds if the two feeds are genuinely independent all the way back to their sources.</li>
+    <li><b>Check enclosure depth against the deepest thing you will ever fit.</b> Depth constrains cable management and airflow, and it is fixed once the rows are set.</li>
+  </ul>
+
+  <h2>Typical applications</h2>
+  <p>A modern hall runs <b>busway</b> overhead down each row, with plug-in tap boxes dropping to <b>rack PDUs</b> in each cabinet. <b>Floor PDUs or RPPs</b> serve zones where a transformer step-down or dense branch-circuit distribution is needed. <b>Static transfer switches</b> feed single-corded equipment from two sources. <b>Rack enclosures</b> set the physical envelope everything else is budgeted against.</p>
+
+  <h2>Work the numbers before you RFQ</h2>
+  <div class="rel">
+    <a href="/voltfield-rack-builder.html"><span class="k">Practice</span><span class="t">Budget U-space, NEC-derated power and weight</span></a>
+    <a href="/engineering-calculators.html#voltage-drop"><span class="k">Calculator</span><span class="t">Check voltage drop on branch and feeder runs</span></a>
+    <a href="/engineering-calculators.html#ampacity"><span class="k">Calculator</span><span class="t">Conductor ampacity and conduit fill</span></a>
+    <a href="/voltfield-sandbox.html"><span class="k">Practice</span><span class="t">Build the one-line down to branch loads</span></a>
+    <a href="/voltfield-bom-generator.html"><span class="k">Teardown</span><span class="t">Component BOM for distribution equipment</span></a>
+    <a href="/rfq-toolkit.html"><span class="k">Template</span><span class="t">RFQ readiness checklist</span></a>
+  </div>
+
+  <h2>Related reading</h2>
+  <div class="rel">
+    <a href="/guide-grounding-bonding-basics.html"><span class="k">Guide</span><span class="t">Grounding and bonding basics</span></a>
+    <a href="/guide-arc-flash-boundary-basics.html"><span class="k">Guide</span><span class="t">Arc-flash boundary basics</span></a>
+    <a href="/data-centers/switchgear.html"><span class="k">Category</span><span class="t">Switchgear and breakers upstream of this layer</span></a>
+    <a href="/data-centers/cabling.html"><span class="k">Category</span><span class="t">Cable, busbar and fibre</span></a>
+    <a href="/data-center-electrical-procurement.html"><span class="k">Hub</span><span class="t">Data center electrical procurement</span></a>
+    <a href="/data-centers.html"><span class="k">Sector</span><span class="t">All data center power equipment</span></a>
+  </div>
+
+  <h2>Common questions</h2>
+  <h3>Why is usable circuit capacity only 80&nbsp;% of the breaker rating?</h3>
+  <p>Because a circuit supplying a continuous load must be sized at 125&nbsp;% of that load, which is the same constraint expressed the other way round. Data centre load is continuous, so a 20&nbsp;A circuit yields 16&nbsp;A usable. Planning against the nameplate figure instead is how racks end up tripping under normal operation.</p>
+
+  <h3>Is busway worth it over cable feeders?</h3>
+  <p>If loads will move or grow, generally yes. The premium buys the ability to add a tap-off without pulling new cable or de-energising anything. On a fixed layout that will never change, feeders are cheaper and perfectly adequate &mdash; but that layout is rarer than people expect.</p>
+
+  <h3>What is the practical difference between a PDU and an RPP?</h3>
+  <p>A floor PDU usually includes a transformer, stepping distribution voltage down and splitting it into branch circuits. A remote power panel distributes at the incoming voltage with no transformer. If no step-down is needed, the RPP is smaller, cheaper and produces less heat.</p>
+
+  <h3>Do I need switched rack PDUs?</h3>
+  <p>Only if you need to power-cycle individual outlets remotely. Switched units cost meaningfully more and add a failure point; monitored-but-not-switched is sufficient for most sites, which mainly want visibility rather than remote control.</p>
