@@ -52,6 +52,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
 <link rel="stylesheet" href="ordering-hidden.css">
 <link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-component-viz.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <style>
@@ -100,6 +101,10 @@ footer p{line-height:1.6;max-width:460px}
 footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
 footer a{color:#9FB0C3;text-decoration:none}
 footer a:hover{color:#fff}
+.tpl-h{display:flex;align-items:center;gap:11px}
+.tpl-thumb{flex-shrink:0;line-height:0}
+.tpl-thumb:empty{display:none}
+.tpl-thumb picture.vfcv-thumb{width:46px;display:block}
 </style>
 </head>
 <body>
@@ -171,7 +176,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p>Plain-text technical specification templates for three common categories — copy, fill in the blanks, and send to any vendor (not just Voltfield). Sending the identical template to every bidder is what makes their quotes comparable.</p>
 
   <div class="tmplbox" id="tmplTransformer">
-    <h3>Transformer RFQ Spec Template</h3>
+    <h3 class="tpl-h"><span class="tpl-thumb" data-comp="transformer"></span>Transformer RFQ Spec Template</h3>
     <pre id="tmplTransformerText">TRANSFORMER -- TECHNICAL SPECIFICATION FOR RFQ
 ================================================
 Project: [name / number]
@@ -193,7 +198,7 @@ Notes: [ ]</pre>
   </div>
 
   <div class="tmplbox" id="tmplSwitchgear">
-    <h3>Switchgear RFQ Spec Template</h3>
+    <h3 class="tpl-h"><span class="tpl-thumb" data-comp="switchgear"></span>Switchgear RFQ Spec Template</h3>
     <pre id="tmplSwitchgearText">SWITCHGEAR -- TECHNICAL SPECIFICATION FOR RFQ
 ================================================
 Project: [name / number]
@@ -212,7 +217,11 @@ Notes: [ ]</pre>
   </div>
 
   <div class="tmplbox" id="tmplBess">
-    <h3>Battery Energy Storage (BESS) RFQ Spec Template</h3>
+    <!-- direct path, not the registry's `battery` component: that entry means
+     "battery / static UPS" (correct for the POD designer's backup slot) and
+     its illustration is a UPS cabinet, which is the wrong picture for a
+     utility-scale BESS specification -->
+    <h3 class="tpl-h"><span class="tpl-thumb" data-img="images/parts/bess-containerized-enclosures.jpg"></span>Battery Energy Storage (BESS) RFQ Spec Template</h3>
     <pre id="tmplBessText">BATTERY ENERGY STORAGE SYSTEM -- TECHNICAL SPECIFICATION FOR RFQ
 ================================================
 Project: [name / number]
@@ -282,6 +291,19 @@ Notes: [ ]</pre>
   </div>
 </footer>
 <script src="voltfield-site-config.js"></script>
+<script src="voltfield-component-viz.js"></script>
+<script>
+/* Put the equipment beside each spec template heading, so a template is
+   recognisable at a glance rather than by reading the title. */
+(function(){
+  if(!window.VFCV) return;
+  document.querySelectorAll('.tpl-thumb').forEach(function(s){
+    var id=s.getAttribute('data-comp'), path=s.getAttribute('data-img');
+    if(path) s.innerHTML=VFCV.pathThumbHTML(path,'',46);
+    else if(id&&VFCV.has(id)) s.innerHTML=VFCV.thumbHTML(id,46);
+  });
+})();
+</script>
 <script>
 (function(){
   try{

@@ -215,10 +215,28 @@
   function thumbHTML(id, px){
     const c = get(id);
     if (!c || !c.img) return '';
+    return pathThumbHTML(IMG + c.img + '.jpg', '', px);
+  }
+
+  /* Thumbnail straight from a catalog family's own `img` path.
+
+     The catalog-driven tools (Part ID, BOM Match, BOM Generator, EOL) resolve
+     to a FAM record that already carries `img`, so they don't need a registry
+     entry -- there are 236 families and the registry only describes the ~30
+     components the practice tools let you place. Takes the .jpg path the
+     catalog stores and derives the .webp sibling.
+
+     Decorative by default (empty alt, aria-hidden): in a results list the name
+     is right beside it, so announcing the picture too just doubles it up for a
+     screen reader. Pass alt text where the image carries meaning on its own. */
+  function pathThumbHTML(jpgPath, alt, px){
+    if (!jpgPath) return '';
     const n = px || 44;
+    const webp = String(jpgPath).replace(/\.jpg$/i, '.webp');
+    const a = alt ? ' alt="' + esc(alt) + '"' : ' alt="" aria-hidden="true"';
     return '<picture class="vfcv-thumb">' +
-      '<source srcset="' + IMG + c.img + '.webp" type="image/webp">' +
-      '<img src="' + IMG + c.img + '.jpg" alt="" aria-hidden="true" width="' + n + '" height="' + n +
+      '<source srcset="' + esc(webp) + '" type="image/webp">' +
+      '<img src="' + esc(jpgPath) + '"' + a + ' width="' + n + '" height="' + n +
         '" loading="lazy" decoding="async" onerror="this.closest(\'picture\').remove()">' +
     '</picture>';
   }
@@ -345,6 +363,7 @@
     get: get,
     photoHTML: photoHTML,
     thumbHTML: thumbHTML,
+    pathThumbHTML: pathThumbHTML,
     explainHTML: explainHTML,
     inspector: makeInspector,
     ids: function(){ return Object.keys(INFO); }

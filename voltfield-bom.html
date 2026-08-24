@@ -39,6 +39,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="ordering-hidden.css">
 <link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-component-viz.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <style>
@@ -83,6 +84,9 @@ table.bom th{background:var(--paper);font-family:var(--mono);font-size:9.5px;let
 table.bom td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;font-size:13px}
 table.bom tr.nomatch{background:#FBF2F0}
 .bom .yourline{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);max-width:180px}
+.bom .m-wrap{display:flex;gap:10px;align-items:flex-start}
+.bom .m-wrap picture.vfcv-thumb{width:40px;flex-shrink:0}
+.bom .m-txt{min-width:0}
 .bom .m-pn{font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--ink)}
 .bom .m-name{font-family:var(--disp);font-weight:600;font-size:15px;line-height:1.1;margin-top:1px}
 .bom .m-spec{font-family:var(--mono);font-size:10px;color:var(--slate);margin-top:3px;line-height:1.4;max-width:260px}
@@ -222,6 +226,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 <script src="voltfield-site-config.js"></script>
+<script src="voltfield-component-viz.js"></script>
 <script src="voltfield-catalog-data.js"></script>
 <script>
 /* ===== BOM / Quick-Order matcher — uses shared catalog data (FAM, SECTORS, genSKU, priceFor, ...) ===== */
@@ -305,10 +310,15 @@ function render(){
       <td><input class="inc" type="checkbox" data-i="${i}" ${r.include?'checked':''}></td>
       <td class="yourline">${escapeHtml(r.raw)}</td>
       <td>
-        <div class="m-pn">${m.pn}</div>
-        <div class="m-name">${escapeHtml(m.name)}</div>
-        <div class="m-spec">${escapeHtml(m.spec)}</div>
-        <span class="m-src" style="background:${col}">${DL[m.f.d]} · ${m.f.c}</span>
+        <div class="m-wrap">
+          ${(window.VFCV&&m.f.img)?VFCV.pathThumbHTML(m.f.img,'',40):''}
+          <div class="m-txt">
+            <div class="m-pn">${m.pn}</div>
+            <div class="m-name">${escapeHtml(m.name)}</div>
+            <div class="m-spec">${escapeHtml(m.spec)}</div>
+            <span class="m-src" style="background:${col}">${DL[m.f.d]} · ${m.f.c}</span>
+          </div>
+        </div>
       </td>
       <td class="price">${money(m.price,m.f.pu)}</td>
       <td><span class="lead ${m.lb.c}">${m.lb.t}</span></td>

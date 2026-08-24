@@ -37,6 +37,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="ordering-hidden.css">
 <link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-component-viz.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <style>
@@ -74,6 +75,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .cfg-dist{font-family:var(--mono);font-size:10.5px;color:var(--slate)}
 .cfg-hd .swap{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--slate);background:none;border:0;text-decoration:underline;text-underline-offset:2px}
 .cfg-body{padding:8px 18px 18px}
+.cfg-photo{float:right;margin:0 0 10px 14px}
+.cfg-photo picture.vfcv-thumb{display:block;width:120px}
+.cfg-photo:empty{display:none}
+@media(max-width:560px){.cfg-photo{float:none;margin:0 0 12px}}
 .cfg-pn{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ink-2)}
 .cfg-name{font-family:var(--disp);font-weight:700;font-size:26px;line-height:1.05;margin:2px 0 12px}
 .cfg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;max-width:900px}
@@ -215,6 +220,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <button class="swap" id="swapBtn">change part</button>
     </div>
     <div class="cfg-body">
+      <div class="cfg-photo" id="cfgPhoto"></div>
       <div class="cfg-pn" id="cfgPN"></div>
       <div class="cfg-name" id="cfgName"></div>
       <div style="font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);margin-bottom:8px">2 · Configure it — the BOM scales with the configuration</div>
@@ -275,6 +281,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 <script src="voltfield-site-config.js"></script>
+<script src="voltfield-component-viz.js"></script>
 <script src="voltfield-catalog-data.js"></script>
 <script src="voltfield-bom-engine.js"></script>
 <script>
@@ -344,6 +351,9 @@ function renderCfg(){
   $('cfgDist').textContent=DIST_NAME[f.d]+' · '+SECTORS[f.s].label;
   $('cfgPN').textContent=configuredPN(f,picks,String((f._i%90)+10));
   $('cfgName').textContent=configuredName(f,picks);
+  /* Show what the assembly being torn down actually is. Meaningful alt here --
+     unlike a results list, there is no adjacent thumbnail-plus-name pairing. */
+  $('cfgPhoto').innerHTML=(window.VFCV&&f.img)?VFCV.pathThumbHTML(f.img,f.n+' — reference illustration',120):'';
   $('cfgGrid').innerHTML=f.ax.map((axis,ai)=>`<label class="cfg-row"><span>${esc(axis[0])}</span><select data-ai="${ai}">${axis.slice(1).map(o=>`<option${o===picks[ai]?' selected':''}>${esc(o)}</option>`).join('')}</select></label>`).join('');
   $('cfgGrid').querySelectorAll('select').forEach(sel=>sel.onchange=()=>{CUR.picks[+sel.dataset.ai]=sel.value;renderCfg();syncURL();if(bomApplicability(f).ok)generate();});
   $('partLink').href=`voltfield-part.html?fi=${f._i}&o=${picksToParam(f,picks)}`;

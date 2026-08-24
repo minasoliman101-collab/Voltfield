@@ -39,6 +39,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="ordering-hidden.css">
 <link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-component-viz.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <style>
@@ -95,6 +96,7 @@ textarea#labelText{width:100%;min-height:120px;border:1px solid var(--line-dark)
 .match .band{height:5px}
 .match .in{padding:13px 16px;display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
 .match .nm{flex:1;min-width:200px}
+.match .in picture.vfcv-thumb{width:56px;flex-shrink:0}
 .match h3{font-family:var(--disp);font-weight:700;font-size:19px;line-height:1.1}
 .match .cat{font-family:var(--mono);font-size:10.5px;color:var(--slate);margin-top:2px}
 .match .conf{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;white-space:nowrap}
@@ -224,6 +226,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 <script src="voltfield-site-config.js"></script>
+<script src="voltfield-component-viz.js"></script>
 <script src="voltfield-catalog-data.js"></script>
 <script src="voltfield-bom-engine.js"></script>
 <script src="voltfield-eol-data.js"></script>
@@ -343,9 +346,13 @@ function identify(){
       const conf=sc/maxSc, cc=conf>=0.8&&sc>=5?'hi':conf>=0.45?'md':'lo', cl=cc==='hi'?'Strong match':cc==='md'?'Possible match':'Weak match';
       const col=SECTORS[f.s].color;
       const bomOk=bomApplicability(f).ok;
+      /* A picture is the whole point of an identify tool: the user is trying to
+         work out what they are holding, and the name alone rarely settles it. */
+      const thumb=(window.VFCV&&f.img)?VFCV.pathThumbHTML(f.img,'',56):'';
       return `<div class="match">
         <div class="band" style="background:${col}"></div>
         <div class="in">
+          ${thumb}
           <div class="nm"><h3>${esc(f.n)}</h3><div class="cat">${esc(f.c)} · ${SECTORS[f.s].label} · ${fmt(f.ct)} configurable SKUs</div></div>
           <span class="conf ${cc}">${cl}</span>
         </div>

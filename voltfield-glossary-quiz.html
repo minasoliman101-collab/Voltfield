@@ -37,6 +37,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="ordering-hidden.css">
 <link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-component-viz.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <script type="application/ld+json">
@@ -61,6 +62,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .quiz-opt.correct{border-color:var(--ok);background:#EAF5EE;color:var(--ink)}
 .quiz-opt.wrong{border-color:var(--crit);background:#FBEDEA;color:var(--ink)}
 .quiz-next{margin-top:6px}
+.quiz-pic{display:flex;gap:11px;align-items:center;margin-top:12px;padding:10px;border:1px solid var(--line-dark);background:var(--card)}
+.quiz-pic picture.vfcv-thumb{width:110px;flex-shrink:0}
+.quiz-pic span{font-family:var(--mono);font-size:10px;line-height:1.55;color:var(--slate)}
 .quiz-next button{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:10px 20px;font-family:var(--disp);font-weight:700;font-size:14px;letter-spacing:.04em;text-transform:uppercase}
 .quiz-next button:hover{background:transparent;color:var(--ink)}
 .quiz-done{text-align:center}
@@ -162,6 +166,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 <script src="voltfield-site-config.js"></script>
+<script src="voltfield-component-viz.js"></script>
 <script>
 (function(){
   try{
@@ -215,6 +220,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     renderQuestion();
   }
 
+  /* Only the terms that ARE a physical object. The other fourteen are
+     standards, tax mechanisms and concepts -- there is nothing honest to
+     photograph for "safe harbor" or "domestic content bonus", so they get
+     no picture rather than a decorative one. */
+  const TERM_IMG={
+    'BOP (Blowout Preventer)':'images/parts/og-bops-annular-ram.jpg',
+    'Christmas tree (wellhead)':'images/parts/og-wellheads-christmas-trees.jpg',
+    'OCTG':'images/parts/og-octg-casing.jpg',
+    'GSU transformer':'images/parts/re-gsu-transformers.jpg',
+    'MCCB':'images/parts/dc-molded-case-breakers-mccb-15-1200a.jpg',
+    'PCS (Power Conversion System)':'images/parts/re-medium-voltage-pcs-skids.jpg',
+    'DC block (BESS)':'images/parts/bess-modular-battery-racks.jpg'
+  };
+
   function renderQuestion(){
     if(qi>=deck.length){ renderDone(); return; }
     const q=deck[qi];
@@ -234,6 +253,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           if(b.dataset.correct==='true')b.classList.add('correct');
           else if(b===btn)b.classList.add('wrong');
         });
+        /* Picture goes in the REVEAL, never the question: showing a photo of a
+           blowout preventer above "what is a BOP?" answers it for you. Here it
+           reinforces the term you just committed to. */
+        const pic=TERM_IMG[q.t];
+        if(pic&&window.VFCV){
+          const fig=document.createElement('div');
+          fig.className='quiz-pic';
+          fig.innerHTML=VFCV.pathThumbHTML(pic,q.t+' — reference illustration',110)+
+            `<span>${q.t} &mdash; AI-generated reference illustration, not vendor photography.</span>`;
+          $('quizMount').appendChild(fig);
+        }
         const next=document.createElement('div');
         next.className='quiz-next';
         next.innerHTML=`<button type="button">${qi+1<deck.length?'Next question':'See results'} &rarr;</button>`;
