@@ -32,7 +32,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    {"@type":"ListItem","position":2,"name":"Insights","item":"https://voltfield.org/voltfield-insights.html"},
    {"@type":"ListItem","position":3,"name":"Lead-Time Index","item":"https://voltfield.org/lead-time-index.html"}
  ]},
- {"@type":"Dataset","name":"Voltfield Lead-Time Index","description":"Indicative market lead times and pricing across data center, renewable, battery storage, and oilfield equipment, compiled from the same catalog data and vendor/mill network Voltfield quotes against.","creator":{"@type":"Organization","name":"VOLTFIELD Supply Co.","url":"https://voltfield.org/"},"temporalCoverage":"2026-07","url":"https://voltfield.org/lead-time-index.html","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://voltfield.org/lead-time-index.json"}]}
+ {"@type":"Dataset","name":"Voltfield Lead-Time Index","description":"Indicative market lead times and pricing across data center, renewable, battery storage, and oilfield equipment. Every figure carries a basis label (modeled, operator-reported, or published) identifying its provenance; figures marked modeled are Voltfield's own derived estimates.","creator":{"@type":"Organization","name":"VOLTFIELD Supply Co.","url":"https://voltfield.org/"},"temporalCoverage":"2026-07","spatialCoverage":"North America","url":"https://voltfield.org/lead-time-index.html","isAccessibleForFree":true,"license":"https://voltfield.org/lead-time-index.html","creditText":"Voltfield Lead-Time Index","variableMeasured":[{"@type":"PropertyValue","name":"Equipment lead time","description":"Indicative order-to-delivery lead time, in weeks"},{"@type":"PropertyValue","name":"Indicative price range","description":"Indicative market price range where lead time is not the governing constraint"}],"distribution":[{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://voltfield.org/lead-time-index.json"}]}
 ]}
 </script>
 <link rel="manifest" href="manifest.json">
@@ -73,6 +73,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .idxtable .trend-up{color:var(--crit,#C43D2E)}
 .idxtable .trend-down{color:var(--ok,#2E7D4F)}
 .idxtable .trend-flat{color:var(--slate)}
+.idxwrap{overflow-x:auto}
+.idxtable{min-width:560px}
+.basis{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;white-space:nowrap;border:1px solid transparent}
+.basis-modeled{background:#EDEFF2;color:#5B6B7E;border-color:#C4CFDA}
+.basis-operator{background:#E7F1EB;color:#2E7D4F;border-color:#B7D6C4}
+.basis-published{background:#E4ECF7;color:#2B6CB0;border-color:#B9CDE8}
+/* Badge tints are fixed hex (they're semantic, not themed), so they need
+   explicit dark variants -- the site always stamps an explicit data-theme
+   via the inline <head> script, so this selector alone is sufficient. */
+html[data-theme="dark"] .basis-modeled{background:#1C2938;color:#93A4B8;border-color:#374B66}
+html[data-theme="dark"] .basis-operator{background:#15301F;color:#7FCC9B;border-color:#2C5238}
+html[data-theme="dark"] .basis-published{background:#152740;color:#8FB4E4;border-color:#2E4A70}
+.basiskey{display:flex;flex-wrap:wrap;gap:8px 18px;margin:14px 0 4px;padding:14px 16px;background:var(--card);border:1px solid var(--line-dark)}
+.basiskey .bk{display:flex;gap:8px;align-items:flex-start;flex:1;min-width:220px}
+.basiskey .bk p{font-size:12.5px;color:var(--ink-2);margin:0;line-height:1.5}
 .embedbox{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;margin:16px 0 20px;background:var(--card);border:1px solid var(--line-dark);padding:18px}
 @media(min-width:640px){.embedbox{grid-template-columns:auto 1fr;align-items:start}}
 .embedbox-demo{display:flex;justify-content:center}
@@ -187,7 +202,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="artwrap" style="padding-bottom:0">
   <h2>Methodology</h2>
   <p>Figures below are indicative market lead times and pricing ranges observed across Voltfield's distributor and mill network, compiled from the same data that drives lead-time flags across the catalog. They are directional reference points for planning, not a quote for any specific order — final lead time and price are confirmed when a specific configuration is quoted. "Trend" reflects the recent direction (lengthening, holding, or shortening) based on the same market conditions covered in <a class="inline" href="voltfield-insights.html">Insights</a>.</p>
-  <div class="callout"><b>Using this data elsewhere?</b> Feel free to cite or link to this page (<code>voltfield.org/lead-time-index.html</code>) as a reference for current equipment lead times — that's exactly what it's here for.</div>
+  <h3 style="font-family:var(--disp);font-weight:700;font-size:18px;color:var(--ink);margin:26px 0 8px">Where each number comes from</h3>
+  <p>Every row carries a <b>basis</b> label so anyone quoting this index can see exactly what kind of figure they're citing, rather than having to take the whole table on trust. We'd rather be specific about what's an estimate than let a modeled number get repeated as if it were a manufacturer survey.</p>
+  <div class="basiskey">
+    <div class="bk"><span class="basis basis-modeled">Modeled</span><p>Derived from Voltfield's catalog reference data and distributor/mill network. A Voltfield estimate — attribute it to Voltfield, not to a third party.</p></div>
+    <div class="bk"><span class="basis basis-operator">Operator</span><p>Reported by a buyer or distributor through the submission form below, reviewed by hand before publishing.</p></div>
+    <div class="bk"><span class="basis basis-published">Published</span><p>Traceable to a named public source, linked inline on the row.</p></div>
+  </div>
+  <p style="font-size:13px;color:var(--slate);margin-top:10px">Every figure currently published is <b>modeled</b>. As operator submissions are verified and published sources are matched to specific rows, those rows get relabeled — so the mix here is itself a signal of how well-corroborated the index is at any given time.</p>
+
+  <div class="callout"><b>Using this data elsewhere?</b> Feel free to cite or link to this page (<code>voltfield.org/lead-time-index.html</code>) as a reference for current equipment lead times — that's exactly what it's here for. Please carry the basis label across with the number: a figure marked <i>Modeled</i> should be described as a Voltfield estimate.</div>
 
   <h2>Embed this data on your site</h2>
   <p>Publishing about equipment lead times or grid buildout? Drop this snippet into your page to embed a live, self-updating lead-time widget for any sector below — it fetches the same data as this page and always reflects the current numbers. Free to use, attribution link included automatically.</p>
@@ -203,7 +227,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="ec-note">Sectors: <code>dc</code> (data centers), <code>re</code> (renewables), <code>bess</code> (battery storage), <code>og</code> (oil &amp; gas). Drop <code>data-limit</code> to show every item in the sector.</div>
     </div>
   </div>
-  <p style="font-size:13px;color:var(--slate)">Prefer raw data? The same figures are published as JSON at <a class="inline" href="lead-time-index.json">lead-time-index.json</a>.</p>
+  <p style="font-size:13px;color:var(--slate)">Prefer raw data? The same figures are published as JSON at <a class="inline" href="lead-time-index.json">lead-time-index.json</a> — including the <code>basis</code> field for every row.</p>
+
+  <h2>How to cite this index</h2>
+  <p>Writing about equipment lead times? Copy the line below. No permission needed, no attribution fee, no email required — a link back is all we ask.</p>
+  <div class="embedbox" style="grid-template-columns:minmax(0,1fr)">
+    <div class="embedbox-code">
+      <div class="ec-label">Suggested citation</div>
+      <pre id="citeSnippet">Voltfield Lead-Time Index, North America, July 2026.
+https://voltfield.org/lead-time-index.html</pre>
+      <button type="button" id="copyCiteBtn">Copy citation</button>
+      <div class="ec-note">Please carry the row's <b>basis</b> label across with the figure — e.g. &ldquo;an estimated 160 weeks, per Voltfield's modeled index&rdquo; rather than presenting a modeled number as a surveyed one.</div>
+    </div>
+  </div>
 
   <div class="alertbox">
     <h3>Get lead-time alerts</h3>
@@ -222,50 +258,50 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <h2>Data Centers</h2>
-  <table class="idxtable" style="--SECCOLOR:var(--dc)">
+  <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--dc)">
     <caption>Data Center Power &amp; Backup Equipment</caption>
-    <thead><tr><th>Equipment</th><th>Current lead time / price</th><th>Trend</th></tr></thead>
+    <thead><tr><th>Equipment</th><th>Current lead time / price</th><th>Trend</th><th>Basis</th></tr></thead>
     <tbody>
-      <tr><td>Large power transformers</td><td class="val">160 wk</td><td class="trend-up">&#9650; Lengthening</td></tr>
-      <tr><td>Pad-mount transformers</td><td class="val">85 wk</td><td class="trend-up">&#9650; Lengthening</td></tr>
-      <tr><td>MV switchgear</td><td class="val">Sold out through 2028</td><td class="trend-flat">&#9632; Holding</td></tr>
-      <tr><td>Gas turbines</td><td class="val">2029+ delivery slots</td><td class="trend-up">&#9650; Lengthening</td></tr>
-      <tr><td>Diesel gensets</td><td class="val">90 wk</td><td class="trend-up">&#9650; Lengthening</td></tr>
-      <tr><td>MCCBs (15–1200 A)</td><td class="val">12 wk</td><td class="trend-flat">&#9632; Holding</td></tr>
+      <tr><td>Large power transformers</td><td class="val">160 wk</td><td class="trend-up">&#9650; Lengthening</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
+      <tr><td>Pad-mount transformers</td><td class="val">85 wk</td><td class="trend-up">&#9650; Lengthening</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
+      <tr><td>MV switchgear</td><td class="val">Sold out through 2028</td><td class="trend-flat">&#9632; Holding</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
+      <tr><td>Gas turbines</td><td class="val">2029+ delivery slots</td><td class="trend-up">&#9650; Lengthening</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
+      <tr><td>Diesel gensets</td><td class="val">90 wk</td><td class="trend-up">&#9650; Lengthening</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
+      <tr><td>MCCBs (15–1200 A)</td><td class="val">12 wk</td><td class="trend-flat">&#9632; Holding</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
     </tbody>
-  </table>
+  </table></div>
 
   <h2>Renewables</h2>
-  <table class="idxtable" style="--SECCOLOR:var(--re)">
+  <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--re)">
     <caption>Solar, Wind &amp; Hybrid Equipment</caption>
-    <thead><tr><th>Equipment</th><th>Current lead time / price</th><th>Trend</th></tr></thead>
+    <thead><tr><th>Equipment</th><th>Current lead time / price</th><th>Trend</th><th>Basis</th></tr></thead>
     <tbody>
-      <tr><td>GSU transformers</td><td class="val">144 wk</td><td class="trend-up">&#9650; Lengthening</td></tr>
-      <tr><td>Grid-forming PCS</td><td class="val">32 wk</td><td class="trend-flat">&#9632; Holding</td></tr>
-      <tr><td>FEOC-clean inverters</td><td class="val">20 wk</td><td class="trend-up">&#9650; Lengthening</td></tr>
-      <tr><td>PV modules (import)</td><td class="val">$0.09–0.13/W</td><td class="trend-down">&#9660; Falling</td></tr>
+      <tr><td>GSU transformers</td><td class="val">144 wk</td><td class="trend-up">&#9650; Lengthening</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
+      <tr><td>Grid-forming PCS</td><td class="val">32 wk</td><td class="trend-flat">&#9632; Holding</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
+      <tr><td>FEOC-clean inverters</td><td class="val">20 wk</td><td class="trend-up">&#9650; Lengthening</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
+      <tr><td>PV modules (import)</td><td class="val">$0.09–0.13/W</td><td class="trend-down">&#9660; Falling</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
     </tbody>
-  </table>
+  </table></div>
 
   <h2>Battery Storage</h2>
-  <table class="idxtable" style="--SECCOLOR:var(--bess)">
+  <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--bess)">
     <caption>Utility-Scale BESS Equipment</caption>
-    <thead><tr><th>Equipment</th><th>Current lead time / price</th><th>Trend</th></tr></thead>
+    <thead><tr><th>Equipment</th><th>Current lead time / price</th><th>Trend</th><th>Basis</th></tr></thead>
     <tbody>
-      <tr><td>LFP DC blocks</td><td class="val">$110–140/kWh</td><td class="trend-down">&#9660; Falling</td></tr>
+      <tr><td>LFP DC blocks</td><td class="val">$110–140/kWh</td><td class="trend-down">&#9660; Falling</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
     </tbody>
-  </table>
+  </table></div>
 
   <h2>Oil &amp; Gas</h2>
-  <table class="idxtable" style="--SECCOLOR:var(--og)">
+  <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--og)">
     <caption>Drilling &amp; Completions Equipment</caption>
-    <thead><tr><th>Equipment</th><th>Current lead time / price</th><th>Trend</th></tr></thead>
+    <thead><tr><th>Equipment</th><th>Current lead time / price</th><th>Trend</th><th>Basis</th></tr></thead>
     <tbody>
-      <tr><td>Drill pipe (S-135)</td><td class="val">34 wk</td><td class="trend-flat">&#9632; Holding</td></tr>
-      <tr><td>Frac valves</td><td class="val">24 wk</td><td class="trend-down">&#9660; Falling</td></tr>
-      <tr><td>Hydraulic hose assemblies</td><td class="val">Same-week crimp</td><td class="trend-down">&#9660; Falling</td></tr>
+      <tr><td>Drill pipe (S-135)</td><td class="val">34 wk</td><td class="trend-flat">&#9632; Holding</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
+      <tr><td>Frac valves</td><td class="val">24 wk</td><td class="trend-down">&#9660; Falling</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
+      <tr><td>Hydraulic hose assemblies</td><td class="val">Same-week crimp</td><td class="trend-down">&#9660; Falling</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
     </tbody>
-  </table>
+  </table></div>
 
   <div class="alertbox" id="submitBox">
     <h3>Seeing a different lead time on your own orders?</h3>
@@ -334,6 +370,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }catch(e){
       btn.textContent='Select the text above to copy';
       setTimeout(()=>{btn.textContent='Copy snippet';},2200);
+    }
+  });
+})();
+</script>
+<script>
+(function(){
+  const btn=document.getElementById('copyCiteBtn');
+  if(!btn)return;
+  btn.addEventListener('click',async function(){
+    const text=document.getElementById('citeSnippet').textContent;
+    try{
+      await navigator.clipboard.writeText(text);
+      btn.textContent='Copied ✓'; btn.classList.add('copied');
+      if(window.vfGtag)window.vfGtag('event','lead_time_citation_copied',{});
+      setTimeout(()=>{btn.textContent='Copy citation'; btn.classList.remove('copied');},1800);
+    }catch(e){
+      btn.textContent='Select the text above to copy';
+      setTimeout(()=>{btn.textContent='Copy citation';},2200);
     }
   });
 })();

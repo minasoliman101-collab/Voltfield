@@ -3,19 +3,26 @@
   "url": "https://voltfield.org/lead-time-index.html",
   "region": "North America",
   "lastUpdated": "2026-07",
+  "reviewCadence": "monthly",
   "license": "Free to cite or embed with attribution and a link back to https://voltfield.org/lead-time-index.html",
+  "basisNote": "Every figure carries a 'basis' describing where it comes from, so anyone citing this index can see exactly what kind of number they are quoting. Figures marked 'modeled' are Voltfield's own derived estimates and should be attributed to Voltfield, not presented as survey or manufacturer data.",
+  "basisTypes": {
+    "modeled": "Derived from Voltfield's catalog reference data and distributor/mill network. A Voltfield estimate, not a third-party measurement.",
+    "operator": "Reported by buyers or distributors through the submission form and reviewed by hand before publishing.",
+    "published": "Traceable to a named public source, given in sourceName and sourceUrl on the item."
+  },
   "sectors": [
     {
       "key": "dc",
       "label": "Data Centers",
       "caption": "Data Center Power & Backup Equipment",
       "items": [
-        {"equipment": "Large power transformers", "value": "160 wk", "trend": "up"},
-        {"equipment": "Pad-mount transformers", "value": "85 wk", "trend": "up"},
-        {"equipment": "MV switchgear", "value": "Sold out through 2028", "trend": "flat"},
-        {"equipment": "Gas turbines", "value": "2029+ delivery slots", "trend": "up"},
-        {"equipment": "Diesel gensets", "value": "90 wk", "trend": "up"},
-        {"equipment": "MCCBs (15–1200 A)", "value": "12 wk", "trend": "flat"}
+        {"equipment": "Large power transformers", "value": "160 wk", "trend": "up", "basis": "modeled"},
+        {"equipment": "Pad-mount transformers", "value": "85 wk", "trend": "up", "basis": "modeled"},
+        {"equipment": "MV switchgear", "value": "Sold out through 2028", "trend": "flat", "basis": "modeled"},
+        {"equipment": "Gas turbines", "value": "2029+ delivery slots", "trend": "up", "basis": "modeled"},
+        {"equipment": "Diesel gensets", "value": "90 wk", "trend": "up", "basis": "modeled"},
+        {"equipment": "MCCBs (15–1200 A)", "value": "12 wk", "trend": "flat", "basis": "modeled"}
       ]
     },
     {
@@ -23,10 +30,10 @@
       "label": "Renewables",
       "caption": "Solar, Wind & Hybrid Equipment",
       "items": [
-        {"equipment": "GSU transformers", "value": "144 wk", "trend": "up"},
-        {"equipment": "Grid-forming PCS", "value": "32 wk", "trend": "flat"},
-        {"equipment": "FEOC-clean inverters", "value": "20 wk", "trend": "up"},
-        {"equipment": "PV modules (import)", "value": "$0.09–0.13/W", "trend": "down"}
+        {"equipment": "GSU transformers", "value": "144 wk", "trend": "up", "basis": "modeled"},
+        {"equipment": "Grid-forming PCS", "value": "32 wk", "trend": "flat", "basis": "modeled"},
+        {"equipment": "FEOC-clean inverters", "value": "20 wk", "trend": "up", "basis": "modeled"},
+        {"equipment": "PV modules (import)", "value": "$0.09–0.13/W", "trend": "down", "basis": "modeled"}
       ]
     },
     {
@@ -34,7 +41,7 @@
       "label": "Battery Storage",
       "caption": "Utility-Scale BESS Equipment",
       "items": [
-        {"equipment": "LFP DC blocks", "value": "$110–140/kWh", "trend": "down"}
+        {"equipment": "LFP DC blocks", "value": "$110–140/kWh", "trend": "down", "basis": "modeled"}
       ]
     },
     {
@@ -42,9 +49,9 @@
       "label": "Oil & Gas",
       "caption": "Drilling & Completions Equipment",
       "items": [
-        {"equipment": "Drill pipe (S-135)", "value": "34 wk", "trend": "flat"},
-        {"equipment": "Frac valves", "value": "24 wk", "trend": "down"},
-        {"equipment": "Hydraulic hose assemblies", "value": "Same-week crimp", "trend": "down"}
+        {"equipment": "Drill pipe (S-135)", "value": "34 wk", "trend": "flat", "basis": "modeled"},
+        {"equipment": "Frac valves", "value": "24 wk", "trend": "down", "basis": "modeled"},
+        {"equipment": "Hydraulic hose assemblies", "value": "Same-week crimp", "trend": "down", "basis": "modeled"}
       ]
     }
   ]
