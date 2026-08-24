@@ -60,6 +60,57 @@ const SITE_CONFIG = {
   },
 };
 
+/* ---------- --vf-header-h: real header height, for the mobile menu ----------
+   The open mobile nav is absolutely positioned inside a position:sticky header,
+   so it cannot scroll with the page -- it needs its own max-height, and that
+   height is "whatever is left below the header". The header's height varies
+   with viewport width (the wordmark wraps), so it has to be measured rather
+   than hard-coded. voltfield-core.css consumes this with a static fallback, so
+   the menu is still usable if this never runs. */
+(function () {
+  var header = null;
+  var t = null;
+
+  function measure() {
+    if (!header) header = document.querySelector('header.site');
+    if (!header) return;
+    var h = Math.round(header.getBoundingClientRect().height);
+    if (h > 0) document.documentElement.style.setProperty('--vf-header-h', h + 'px');
+  }
+
+  function debounced() { clearTimeout(t); t = setTimeout(measure, 100); }
+
+  function start() {
+    measure();
+    window.addEventListener('resize', debounced);
+    window.addEventListener('orientationchange', debounced);
+
+    /* Measured again in the capture phase of any click that opens a menu --
+       i.e. at the exact moment the value gets used. This is the load-bearing
+       one: it is correct even if a resize event was missed, because it runs
+       immediately before the menu is shown.
+
+       Deliberately NOT a ResizeObserver on the header. The property this sets
+       feeds a max-height on menus that live inside the header, so observing
+       the header creates a resize loop -- and once the browser detects one it
+       stops delivering notifications entirely. Measured directly: the observer
+       fired once and then never again, leaving the value stale at 157px across
+       three subsequent header height changes. Event-driven measurement has no
+       such failure mode. */
+    document.addEventListener('click', function (e) {
+      if (e.target && e.target.closest && e.target.closest('#navToggle, .navdrop-btn')) measure();
+    }, true);
+
+    /* Web fonts can change the header's height after first paint. */
+    if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
+      document.fonts.ready.then(measure).catch(function () {});
+    }
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+})();
+
 /* ---------- PWA: service-worker registration (https/localhost only) ---------- */
 (function () {
   if (!('serviceWorker' in navigator)) return;

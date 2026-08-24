@@ -28,8 +28,30 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .logo .wordmark small{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.18em;color:var(--slate)}
 .hnav{display:none;gap:4px}
 .navtoggle{display:none;background:var(--ink);color:#fff;border:2px solid var(--ink);width:42px;height:38px;font-size:20px;line-height:1;align-items:center;justify-content:center;flex-shrink:0}
-@media(max-width:899px){.navtoggle{display:inline-flex}.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:2px solid var(--ink);padding:6px 12px 10px;gap:0;box-shadow:0 10px 20px rgba(16,27,45,.14);z-index:59}.hnav.open a{padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}.hnav.open a:last-child{border-bottom:0}.hnav.open a.on{border-left-color:var(--signal);color:var(--ink)}}
-@media(min-width:900px){.hnav{display:flex}.navdrop:hover .navdrop-menu,.navdrop:focus-within .navdrop-menu{display:flex}}
+/* Boundary is 899.98px, not 899px: paired with @media(min-width:900px) below, an
+   integer boundary leaves a gap at fractional viewport widths (browser zoom, or
+   certain device pixel ratios put the layout viewport at e.g. 899.5px). In that
+   gap NEITHER query matched, so .hnav was display:none with the hamburger also
+   hidden -- the navigation disappeared entirely. Reproduced at innerWidth 899. */
+@media(max-width:899.98px){.navtoggle{display:inline-flex}.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:2px solid var(--ink);padding:6px 12px 10px;gap:0;box-shadow:0 10px 20px rgba(16,27,45,.14);z-index:59}.hnav.open a{padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}.hnav.open a:last-child{border-bottom:0}.hnav.open a.on{border-left-color:var(--signal);color:var(--ink)}
+/* The open mobile menu MUST scroll internally. It is absolutely positioned
+   inside a position:sticky header, so it stays pinned to the top of the
+   viewport no matter how far the page scrolls -- anything taller than the
+   space below the header was simply unreachable. With the Tools group
+   expanded the menu is ~986px against ~681px of available space, leaving
+   about 300px (ending at "Account") permanently off-screen.
+   --vf-header-h is measured and kept current by voltfield-site-config.js;
+   the fallback covers the moment before that script runs. dvh rather than vh
+   so mobile browser chrome collapsing does not clip the last item. */
+.hnav.open{max-height:calc(100vh - var(--vf-header-h, 132px));max-height:calc(100dvh - var(--vf-header-h, 132px));overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}}
+@media(min-width:900px){.hnav{display:flex}.navdrop:hover .navdrop-menu,.navdrop:focus-within .navdrop-menu{display:flex}
+/* Same problem as the mobile menu, on a short desktop window: the 14-item
+   Tools dropdown is ~549px and is absolutely positioned inside a sticky
+   header, so on a viewport under ~620px tall the last items are clipped and
+   cannot be scrolled to. Scoped to the desktop query on purpose -- below 900px
+   this menu is position:static inside the already-scrolling .hnav, and giving
+   it its own scroller there would nest two of them. */
+.navdrop-menu{max-height:calc(100vh - var(--vf-header-h, 60px) - 16px);max-height:calc(100dvh - var(--vf-header-h, 60px) - 16px);overflow-y:auto;overscroll-behavior:contain}}
 .hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
 .hnav a:hover{color:var(--ink);background:var(--paper)}
 .hnav a.on{color:var(--ink);border-bottom-color:var(--signal)}
@@ -44,7 +66,7 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
 .navdrop-menu a:last-child{border-bottom:0}
 .navdrop-menu a:hover{background:var(--paper);color:var(--ink)}
 .navdrop-menu a.on{color:var(--ink);background:var(--paper);border-left:3px solid var(--signal)}
-@media(max-width:899px){
+@media(max-width:899.98px){
 .navdrop-btn{width:100%;justify-content:space-between;padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}
 .navdrop-btn.on{border-left-color:var(--signal);border-bottom-color:var(--line)}
 .navdrop-menu{display:none;position:static;border:0;min-width:0;background:var(--paper)}
