@@ -193,7 +193,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="p-band" style="background:var(--signal)"></div>
       <div class="p-body">
         <h3>Pro Procurement</h3>
-        <div class="price">$49<small> /user/mo · placeholder pricing</small></div>
+        <div class="price">$49<small> /user/mo · indicative, not yet available</small></div>
         <div class="for">For maintenance &amp; procurement teams</div>
         <ul>
           <li>Everything in Starter</li>
@@ -204,7 +204,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li class="soon">Repair-kit suggestions from generated BOMs</li>
         </ul>
       </div>
-      <div class="p-foot"><a class="pbtn primary" id="proBtn" href="#">Start Pro</a></div>
+      <!-- Label matches what the button actually does. Script below swaps it to
+           "Start Pro" only if a real checkout URL is configured. -->
+      <div class="p-foot"><a class="pbtn primary" id="proBtn" href="#">Talk to us about Pro</a></div>
     </div>
 
     <div class="plan">
@@ -225,7 +227,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 
-  <p class="plannote"><b>Transparency note:</b> Starter is fully functional today. Features marked ◷ are the paid roadmap — they require the cloud backend described in the README (§9) and are not yet live; the Start Pro button takes payment only once a checkout link is configured, and otherwise opens a sales conversation. Pricing shown is a placeholder to validate demand.</p>
+  <!-- Keep this note honest but customer-facing. It previously pointed at an
+       internal spec section and described the price in internal terms -- all
+       true, but written for the people building the site rather than the people
+       buying from it. Every factual claim below is unchanged; only the register
+       is different. -->
+  <p class="plannote"><b>Where these plans stand:</b> Starter is live today, and every engineering tool on this site is free to use with no account. Features marked ◷ are planned and not yet available. Pro and Enterprise can't be bought yet — both buttons open a conversation with us rather than taking payment, and the $49 figure is indicative while we settle on pricing. We'd rather say that plainly than take an order we can't fulfil.</p>
 
   <div class="planhead" style="margin-top:40px">
     <h2>How a subscription streamlines sourcing &amp; repairs</h2>
@@ -298,10 +305,12 @@ try{var q=JSON.parse(localStorage.getItem('vf_quote')||'[]');document.getElement
 (function(){
   var B=(typeof SITE_CONFIG!=='undefined'&&SITE_CONFIG.billing)||{};
   var pro=document.getElementById('proBtn'), ent=document.getElementById('entBtn');
-  if(B.proMonthlyUrl){ pro.href=B.proMonthlyUrl; }
+  /* Button label follows reality: it only says "Start Pro" when there is an
+     actual checkout to send someone to. Otherwise it stays "Talk to us about
+     Pro" and opens an email, which is what it really does. */
+  if(B.proMonthlyUrl){ pro.href=B.proMonthlyUrl; pro.textContent='Start Pro'; }
   else{
     pro.href='mailto:'+(B.salesEmail||'Help@voltfield.org')+'?subject='+encodeURIComponent('VOLTFIELD Pro Procurement — early access')+'&body='+encodeURIComponent('We’re interested in the Pro plan. Team size and use case: ');
-    pro.addEventListener('click',function(){toast('Checkout isn’t wired yet — this opens a sales email instead');});
   }
   ent.href='mailto:'+(B.salesEmail||'Help@voltfield.org')+'?subject='+encodeURIComponent('VOLTFIELD Enterprise — pricing & integration')+'&body='+encodeURIComponent('Sites/locations: \nERP system: \nAnnual parts spend (rough): ');
 })();

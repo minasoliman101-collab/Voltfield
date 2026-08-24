@@ -340,10 +340,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <button type="submit">SEARCH</button>
       <div class="kbsearch-results" id="searchSuggest" role="listbox"></div>
     </form>
+    <!-- These are STATIC totals, derived from voltfield-catalog-data.js, so they
+         belong in the HTML rather than being written by script on load. They used
+         to ship as "0" and were filled in after the catalog data parsed, which
+         meant a crawler (and anyone on a slow connection) saw a page whose headline
+         stat read "0 configurable SKUs". The script below still overwrites them, so
+         there is exactly one source of truth if the catalog grows. -->
     <div class="metaline">
-      <span><b id="mTotal">0</b> configurable SKUs</span>
-      <span><b id="mFam">0</b> product families</span>
-      <span><b>5</b> sectors · <b id="mCat">0</b> categories</span>
+      <span><b id="mTotal">2,191,366</b> configurable SKUs</span>
+      <span><b id="mFam">243</b> product families</span>
+      <span><b>5</b> sectors · <b id="mCat">81</b> categories</span>
       <span>Grainger · Uline · Graybar · MSC catalogs live</span>
     </div>
   </div>
