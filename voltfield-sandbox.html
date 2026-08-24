@@ -37,6 +37,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="ordering-hidden.css">
 <link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-component-viz.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <script type="application/ld+json">
@@ -109,6 +110,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .legend{margin:20px 0 10px}
 .legend-title{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);margin:16px 0 8px}
 .legend-title:first-child{margin-top:0}
+/* group heading doubles as a "show me this component" control */
+button.legend-title.lt-btn{display:flex;align-items:center;gap:9px;width:100%;background:none;border:0;padding:0;text-align:left;cursor:pointer;font:inherit;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}
+button.legend-title.lt-btn picture.vfcv-thumb{width:34px}
+button.legend-title.lt-btn em{font-style:normal;font-size:9.5px;letter-spacing:.06em;color:var(--ink);border:1px solid var(--line-dark);padding:2px 6px}
+button.legend-title.lt-btn:hover em{background:var(--signal);border-color:var(--signal)}
+.compdetail{margin:18px 0 22px}
+.compdetail-hd{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);margin-bottom:8px}
 .tilerow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
 .tile{background:#fff;border:2px solid var(--line-dark);padding:8px 12px;font-family:var(--mono);font-size:11.5px;text-align:left;cursor:pointer;min-width:96px}
 .tile b{display:block;font-family:var(--disp);font-weight:700;font-size:14px;color:var(--ink)}
@@ -274,6 +282,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="legend" id="legendMount"></div>
 
+  <div class="compdetail">
+    <div class="compdetail-hd">Component detail</div>
+    <div id="sbInspector"><div class="vfcv-empty">Click <b>view</b> on any group above to see the equipment in 3D, with a reference photo and what it does.</div></div>
+  </div>
+
   <div class="est-row" style="margin:16px 0 26px">
     <div class="est-field"><button type="button" id="checkBtn">Check My Design</button></div>
     <div class="est-field"><button type="button" class="ghost" id="copyLinkBtn">Copy link</button></div>
@@ -342,6 +355,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script src="voltfield-site-config.js"></script>
 <script src="voltfield-3d.js"></script>
+<script src="voltfield-component-viz.js"></script>
 <script>
 (function(){
   try{
@@ -436,35 +450,55 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     return '';
   }
 
+  /* `comp` is the component-registry id for the group (voltfield-component-viz.js).
+     Groups with no honest match are left null rather than borrowing another
+     component's picture: feeder LENGTH is a distance, not a device, and a
+     "general load" is deliberately unspecified. */
   function renderLegend(){
     const groups=[
-      {cat:'xfmr',title:'Transformers',tiles:XFMR_TILES},
-      {cat:'ocpd',title:'Main OCPD (trip / interrupting rating)',tiles:OCPD_TILES},
-      {cat:'cond',title:'Feeder conductor',tiles:COND_TILES},
-      {cat:'len',title:'Feeder length',tiles:LEN_TILES},
-      {cat:'load',title:'Branch loads — motor (HP)',tiles:MOTOR_TILES},
-      {cat:'load',title:'Branch loads — general (kVA)',tiles:GEN_TILES}
+      {cat:'xfmr',title:'Transformers',tiles:XFMR_TILES,comp:'transformer'},
+      {cat:'ocpd',title:'Main OCPD (trip / interrupting rating)',tiles:OCPD_TILES,comp:'breaker'},
+      {cat:'cond',title:'Feeder conductor',tiles:COND_TILES,comp:'conductor'},
+      {cat:'len',title:'Feeder length',tiles:LEN_TILES,comp:null},
+      {cat:'load',title:'Branch loads — motor (HP)',tiles:MOTOR_TILES,comp:'motor'},
+      {cat:'load',title:'Branch loads — general (kVA)',tiles:GEN_TILES,comp:null}
     ];
     if(tier2On){
       groups.push(
-        {cat:'xfmr2',title:'Tier 2 — Transformer',tiles:XFMR_TILES},
-        {cat:'ocpd2',title:'Tier 2 — Main OCPD',tiles:OCPD_TILES},
-        {cat:'cond2',title:'Tier 2 — Feeder conductor',tiles:COND_TILES},
-        {cat:'len2',title:'Tier 2 — Feeder length',tiles:LEN_TILES}
+        {cat:'xfmr2',title:'Tier 2 — Transformer',tiles:XFMR_TILES,comp:'transformer'},
+        {cat:'ocpd2',title:'Tier 2 — Main OCPD',tiles:OCPD_TILES,comp:'breaker'},
+        {cat:'cond2',title:'Tier 2 — Feeder conductor',tiles:COND_TILES,comp:'conductor'},
+        {cat:'len2',title:'Tier 2 — Feeder length',tiles:LEN_TILES,comp:null}
       );
     }
-    $('legendMount').innerHTML=groups.map(g=>`
-      <div class="legend-title">${g.title}</div>
+    $('legendMount').innerHTML=groups.map(g=>{
+      const thumb=(g.comp&&window.VFCV)?VFCV.thumbHTML(g.comp,34):'';
+      const head=g.comp
+        ? `<button type="button" class="legend-title lt-btn" data-comp="${g.comp}" title="See what this is">${thumb}<span>${g.title}</span><em>view</em></button>`
+        : `<div class="legend-title">${g.title}</div>`;
+      return head+`
       <div class="tilerow">${g.tiles.map(t=>{
         const isArmed=armed&&armed.cat===g.cat&&armed.tile.id===t.id;
         return `<button type="button" class="tile${isArmed?' armed':''}" draggable="true" data-cat="${g.cat}" data-id="${t.id}"><b>${t.label}</b><span>${tileSub(g.cat,t)}</span></button>`;
-      }).join('')}</div>
-    `).join('');
+      }).join('')}</div>`;
+    }).join('');
     $('legendMount').querySelectorAll('.tile').forEach(el=>{
       const cat=el.dataset.cat, id=el.dataset.id;
       el.addEventListener('click',()=>armTile(cat,findTile(cat,id)));
       el.addEventListener('dragstart',e=>{ e.dataTransfer.setData('text/plain',JSON.stringify({cat,id})); });
     });
+    $('legendMount').querySelectorAll('.lt-btn').forEach(el=>{
+      el.addEventListener('click',()=>showComponent(el.dataset.comp));
+    });
+  }
+
+  /* ---------- component detail ---------- */
+  let sbInspector=null;
+  function showComponent(id){
+    if(!id||!window.VFCV||!window.VFCV.has(id))return;
+    if(!sbInspector) sbInspector=VFCV.inspector($('sbInspector'));
+    sbInspector.show(id);
+    $('sbInspector').scrollIntoView({block:'nearest',behavior:'smooth'});
   }
 
   function armTile(cat,tile){

@@ -37,6 +37,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="ordering-hidden.css">
 <link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-component-viz.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <script type="application/ld+json">
@@ -93,6 +94,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    values, so they need explicit dark equivalents rather than inheriting. */
 html[data-theme="dark"] .rackinner{background:repeating-linear-gradient(180deg,#16202E,#16202E 15px,#1B2637 15px,#1B2637 16px)}
 html[data-theme="dark"] .chips .chip{background:var(--card)}
+.compdetail{margin-bottom:22px}
+.compdetail-hd{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);margin-bottom:8px}
+.eqthumbrow{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.eqthumbrow picture.vfcv-thumb{width:44px}
 .rackinner{display:flex;flex-direction:column;border:1px solid var(--line-dark);background:repeating-linear-gradient(180deg,#fff,#fff 15px,#F3F6FA 15px,#F3F6FA 16px)}
 .rackitem{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 10px;border-bottom:1px solid var(--ink);background:var(--card);font-family:var(--mono);font-size:11px;color:var(--ink)}
 .rackitem:last-child{border-bottom:0}
@@ -256,6 +261,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 
+  <div class="compdetail">
+    <div class="compdetail-hd">Component detail</div>
+    <div id="eqInspector"></div>
+  </div>
+
   <div class="budgetrow" id="budgetRow"></div>
 
   <div class="btnrow">
@@ -316,6 +326,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 <script src="voltfield-site-config.js"></script>
 <script src="voltfield-3d.js"></script>
+<script src="voltfield-component-viz.js"></script>
 <script>
 (function(){
   try{
@@ -353,10 +364,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   /* ---------- equipment picker ---------- */
   $('eqSel').innerHTML=EQUIPMENT.map(function(e){return '<option value="'+e.id+'">'+e.name+'</option>';}).join('');
+  /* The equipment record's `shape` doubles as its component-registry id, so the
+     picker, the 3D elevation and the detail panel all describe the same item. */
+  var inspector=null;
   function renderEqSpecs(){
     var e=eqById($('eqSel').value);
     if(!e){ $('eqSpecs').textContent=''; return; }
     $('eqSpecs').textContent=e.u+'U · '+e.w+'W · '+e.lbs+' lb';
+    showDetail(e.shape);
+  }
+  function showDetail(id){
+    if(!window.VFCV||!window.VFCV.has(id)) return;
+    if(!inspector) inspector=VFCV.inspector($('eqInspector'));
+    inspector.show(id);
   }
   $('eqSel').addEventListener('change',renderEqSpecs);
   renderEqSpecs();
@@ -379,7 +399,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     wrap.style.height=(rackU*PX_PER_U)+'px';
     var html='';
     items.forEach(function(it){
-      html+='<div class="rackitem" style="height:'+(it.eq.u*PX_PER_U)+'px" data-inst="'+it.instId+'">'+
+      html+='<div class="rackitem" style="height:'+(it.eq.u*PX_PER_U)+'px" data-inst="'+it.instId+'" data-shape="'+it.eq.shape+'" title="Click to see what this is">'+
         '<span class="ri-n">'+it.eq.name+'</span>'+
         '<span class="ri-u">'+it.eq.u+'U</span>'+
         '<button type="button" data-remove="'+it.instId+'" aria-label="Remove">&times;</button>'+
@@ -391,7 +411,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
     wrap.innerHTML=html;
     wrap.querySelectorAll('button[data-remove]').forEach(function(btn){
-      btn.addEventListener('click',function(){ removeInst(parseInt(btn.dataset.remove,10)); });
+      btn.addEventListener('click',function(e){ e.stopPropagation(); removeInst(parseInt(btn.dataset.remove,10)); });
+    });
+    /* clicking a unit in the elevation explains it, so the diagram teaches
+       rather than just tallying U-space */
+    wrap.querySelectorAll('.rackitem[data-shape]').forEach(function(row){
+      row.addEventListener('click',function(){ showDetail(row.dataset.shape); });
     });
     if(view3d) render3D();
   }
@@ -423,11 +448,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     var box=$('rackChips');
     if(!items.length){ box.innerHTML='<span class="chipnone">Rack is empty &mdash; add equipment from the panel.</span>'; return; }
     box.innerHTML=items.map(function(it){
-      return '<span class="chip"><i style="background:'+it.eq.color+'"></i>'+it.eq.name+
+      var thumb=(window.VFCV?VFCV.thumbHTML(it.eq.shape,20):'');
+      return '<span class="chip" data-shape="'+it.eq.shape+'" title="Click to see what this is">'+
+             (thumb||'<i style="background:'+it.eq.color+'"></i>')+it.eq.name+
              '<button type="button" data-remove3d="'+it.instId+'" aria-label="Remove '+it.eq.name+'">&times;</button></span>';
     }).join('');
     box.querySelectorAll('button[data-remove3d]').forEach(function(btn){
-      btn.addEventListener('click',function(){ removeInst(parseInt(btn.dataset.remove3d,10)); });
+      btn.addEventListener('click',function(e){ e.stopPropagation(); removeInst(parseInt(btn.dataset.remove3d,10)); });
+    });
+    box.querySelectorAll('.chip[data-shape]').forEach(function(ch){
+      ch.addEventListener('click',function(){ showDetail(ch.dataset.shape); });
     });
   }
 

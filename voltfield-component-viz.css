@@ -1,0 +1,61 @@
+/* VOLTFIELD -- shared styling for component visuals (voltfield-component-viz.js).
+   Tokens come from voltfield-core.css; every colour here resolves through a
+   token so the dark theme needs no overrides of its own. */
+
+/* ---------- inspector: 3D stage beside the explanation + photo ---------- */
+.vfcv-inspector{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:16px;
+  align-items:start;          /* don't stretch the stage to the text column's height */
+  border:1px solid var(--line-dark);
+  background:var(--card);
+  padding:14px;
+}
+@media(max-width:720px){ .vfcv-inspector{grid-template-columns:1fr} }
+
+/* Fixed height, not min-height: letting the stage stretch to match a long
+   explanation leaves the model floating in a mostly-empty box. */
+.vfcv-stage{
+  height:300px;
+  background:var(--bg);
+  border:1px solid var(--line-dark);
+}
+.vfcv-side{display:flex;flex-direction:column;gap:12px;min-width:0}
+
+.vfcv-explain h4{
+  font-family:var(--disp);font-weight:700;font-size:16px;
+  margin:0 0 6px;color:var(--ink);letter-spacing:.01em;
+}
+.vfcv-explain .vfcv-what{
+  margin:0 0 8px;font-size:13.5px;line-height:1.55;color:var(--ink);
+}
+.vfcv-explain .vfcv-note{
+  margin:0;font-size:12.5px;line-height:1.6;color:var(--slate);
+  border-left:2px solid var(--signal);padding-left:10px;
+}
+
+/* ---------- reference illustration ---------- */
+.vfcv-photo{margin:0}
+.vfcv-photo img{
+  display:block;width:100%;height:auto;max-width:240px;
+  border:1px solid var(--line-dark);background:var(--bg);
+}
+.vfcv-photo figcaption{
+  margin-top:6px;font-family:var(--mono);font-size:9.5px;line-height:1.5;
+  color:var(--slate);
+}
+
+/* ---------- tile thumbnail ---------- */
+picture.vfcv-thumb{display:block;flex-shrink:0}
+picture.vfcv-thumb img{
+  display:block;width:100%;height:auto;
+  border:1px solid var(--line-dark);background:var(--bg);
+}
+
+/* Placeholder shown before anything is selected. */
+.vfcv-inspector:not(.has-item) .vfcv-stage{display:none}
+.vfcv-empty{
+  font-family:var(--mono);font-size:12px;line-height:1.7;
+  color:var(--slate);text-align:center;padding:26px 14px;
+}

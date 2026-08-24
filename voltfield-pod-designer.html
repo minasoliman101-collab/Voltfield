@@ -37,6 +37,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="ordering-hidden.css">
 <link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-component-viz.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <script type="application/ld+json">
@@ -85,6 +86,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .enclosurebar select{padding:8px 10px;border:2px solid var(--ink);background:#fff;font-family:var(--mono);font-size:13px}
 .enclosurebar .encnote{font-size:12.5px;color:var(--slate);flex-basis:100%}
 
+.compdetail{margin-bottom:22px}
+.compdetail-hd{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);margin-bottom:8px}
+.compdetail-hd .cd-hint{text-transform:none;letter-spacing:0}
 .vizhead{margin-bottom:10px}
 .viewtabs{display:inline-flex;border:1px solid var(--line-dark)}
 .viewtabs button{background:none;border:0;border-right:1px solid var(--line-dark);padding:7px 14px;font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);cursor:pointer}
@@ -260,6 +264,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 
+  <div class="compdetail">
+    <div class="compdetail-hd">Component detail <span class="cd-hint">— pick any equipment below to see it</span></div>
+    <div id="podInspector"></div>
+  </div>
+
   <div class="slotgrid">
     <div class="slot">
       <label for="loadInput">Critical load (kW)</label>
@@ -400,6 +409,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 <script src="voltfield-site-config.js"></script>
 <script src="voltfield-3d.js"></script>
+<script src="voltfield-component-viz.js"></script>
 <script>
 (function(){
   try{
@@ -517,6 +527,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     $(id).addEventListener('change', updateDiagram);
   });
   updateDiagram();
+
+  /* ---------- component detail ----------
+     Touching any equipment select shows what that piece of kit actually is:
+     a 3D model, a reference illustration, and what it does. One shared
+     inspector, so browsing the whole lineup costs a single WebGL context. */
+  const SEL_COMPONENT={xfmrSel:'transformer',swgrSel:'switchgear',distSel:'busway',coolSel:'cooling'};
+  let podInspector=null;
+  function componentForSelect(id){
+    if(id==='backupSel'){
+      const t=$('backupSel').value.split('|')[0];
+      return t==='gen' ? 'genset' : (t==='ups' ? 'battery' : null);
+    }
+    return SEL_COMPONENT[id]||null;
+  }
+  function showPodDetail(selId){
+    const cid=componentForSelect(selId);
+    if(!cid||!window.VFCV||!window.VFCV.has(cid)) return;
+    if(!podInspector) podInspector=VFCV.inspector($('podInspector'));
+    podInspector.show(cid);
+  }
+  Object.keys(SEL_COMPONENT).concat('backupSel').forEach(id=>{
+    $(id).addEventListener('change',()=>showPodDetail(id));
+    $(id).addEventListener('focus',()=>showPodDetail(id));
+  });
+  /* seed it so the panel is never an empty box on load */
+  showPodDetail('xfmrSel');
 
   /* ---------- 3D layout ----------
      Equipment is laid out in the same order as the single-line, upstream first,
