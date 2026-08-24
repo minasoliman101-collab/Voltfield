@@ -4,7 +4,7 @@
    of serving a stale file indefinitely. Still bump VERSION for an instant,
    forced cache-wide reset (e.g. an urgent fix) — activate() below wipes
    every cache bucket that doesn't match it. */
-const VERSION = 'voltfield-v26';
+const VERSION = 'voltfield-v27';
 
 const CORE = [
   './',
@@ -15,6 +15,11 @@ const CORE = [
   './voltfield-bom-generator.html',
   './voltfield-sandbox.html',
   './voltfield-pod-designer.html',
+  './voltfield-rack-builder.html',
+  /* Shape library for the 3D views in the three practice tools. Three.js itself
+     still comes from a CDN on first use, so 3D needs a connection once even
+     though this shim is precached. */
+  './voltfield-3d.js',
   './voltfield-pcb-layout.html',
   './ordering-hidden.css',
   './voltfield-core.css',

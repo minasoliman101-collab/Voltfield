@@ -87,6 +87,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .dailyband button:hover{background:transparent;color:var(--signal)}
 .sharebtn{margin-top:12px}
 .oneline{background:#fff;border:1px solid var(--line-dark);padding:14px;margin:16px 0 18px;overflow-x:auto}
+.viewtabs{display:inline-flex;border:1px solid var(--line-dark);margin-top:16px}
+.viewtabs button{background:none;border:0;border-right:1px solid var(--line-dark);padding:7px 14px;font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);cursor:pointer}
+.viewtabs button:last-child{border-right:0}
+.viewtabs button.on{background:var(--ink);color:var(--signal)}
+.sb3d{height:360px;background:var(--card);border:1px solid var(--line-dark);margin-top:16px}
+.sb3dhint{font-family:var(--mono);font-size:10px;color:var(--slate);margin:7px 0 18px;text-align:center;letter-spacing:.05em}
+.sb3d .sb3dempty{font-family:var(--mono);font-size:12px;color:var(--slate);padding:24px;text-align:center;line-height:1.7}
 .oneline svg{display:block;min-width:640px}
 .board{background:#fff;border:1px solid var(--line-dark);padding:16px;margin:0 0 10px}
 .tier2toggle{background:var(--card);border:1px dashed var(--line-dark);padding:12px 16px;margin:0 0 12px;font-size:13.5px;color:var(--ink-2)}
@@ -240,7 +247,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="prompt" id="scenarioPrompt"></div>
   </div>
 
+  <div class="viewtabs" role="tablist" aria-label="Circuit view">
+    <button type="button" id="tabLine" role="tab" aria-selected="true" class="on">One-line</button>
+    <button type="button" id="tabSb3d" role="tab" aria-selected="false">3D view</button>
+  </div>
+
   <div class="oneline" id="onelineWrap"><svg id="onelineSvg" viewBox="0 0 900 190" xmlns="http://www.w3.org/2000/svg"></svg></div>
+
+  <div id="sb3dPane" hidden>
+    <div class="sb3d" id="sb3d"></div>
+    <p class="sb3dhint">Drag to rotate &middot; scroll to zoom &middot; equipment appears as you place tiles</p>
+  </div>
 
   <div class="board" id="boardMount"></div>
 
@@ -324,6 +341,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 <script src="voltfield-site-config.js"></script>
+<script src="voltfield-3d.js"></script>
 <script>
 (function(){
   try{
@@ -624,7 +642,58 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       s_+=`<text x="${panelCx}" y="${panelBottom+16}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#5B6B7E">feeds Tier 2 diagram below</text>`;
     }
     svg.innerHTML=s_;
+    if(view3d) render3D();
   }
+
+  /* ---------- 3D circuit view ----------
+     Same devices as the one-line, in the same order, but as geometry: a tile you
+     place shows up here immediately. Tier 2 chains onto the end of tier 1 rather
+     than drawing a second scene, so it stays one WebGL context. */
+  var view3d=false, dispose3d=null;
+
+  function circuitItems(){
+    const list=[];
+    if(board.xfmr) list.push({shape:'transformer', color:'#2B6CB0'});
+    if(board.ocpd) list.push({shape:'breaker',     color:'#2B6CB0'});
+    if(board.cond) list.push({shape:'conductor',   color:'#2E7D4F'});
+    if(board.xfmr||board.ocpd||board.cond) list.push({shape:'panel', color:'#2B6CB0'});
+    if(tier2On){
+      if(board.xfmr2) list.push({shape:'transformer', color:'#2B6CB0'});
+      if(board.ocpd2) list.push({shape:'breaker',     color:'#2B6CB0'});
+      if(board.cond2) list.push({shape:'conductor',   color:'#2E7D4F'});
+      if(board.xfmr2||board.ocpd2||board.cond2) list.push({shape:'panel', color:'#2B6CB0'});
+    } else if(board.loads.some(l=>l&&l.type==='motor')){
+      list.push({shape:'motor', color:'#5B6B7E'});   // branch loads: one motor stands in for the motor loads
+    }
+    return list;
+  }
+
+  function render3D(){
+    if(!window.VF3D) return;
+    if(dispose3d){ dispose3d(); dispose3d=null; }
+    const list=circuitItems();
+    if(!list.length){
+      $('sb3d').innerHTML='<div class="sb3dempty">Board is empty.<br>Place a transformer, OCPD, or conductor tile and it will appear here.</div>';
+      return;
+    }
+    dispose3d=VF3D.mountCircuit($('sb3d'), list);
+  }
+
+  function setView3D(on){
+    view3d=on;
+    $('tabLine').classList.toggle('on',!on);
+    $('tabSb3d').classList.toggle('on',on);
+    $('tabLine').setAttribute('aria-selected',on?'false':'true');
+    $('tabSb3d').setAttribute('aria-selected',on?'true':'false');
+    $('onelineWrap').hidden=on;
+    $('oneline2Wrap').style.display=(on||!tier2On)?'none':'';
+    $('sb3dPane').hidden=!on;
+    if(on) render3D();
+    else if(dispose3d){ dispose3d(); dispose3d=null; }   // release the GL context when hidden
+    if(window.vfGtag) window.vfGtag('sandbox_view_toggle',{view:on?'3d':'one_line'});
+  }
+  $('tabLine').onclick=()=>setView3D(false);
+  $('tabSb3d').onclick=()=>setView3D(true);
 
   function drawOneline2(){
     if(!tier2On)return;
@@ -757,7 +826,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   /* ---------- tier 2 toggle (Free Design only) ---------- */
   $('tier2Chk').onchange=e=>{
     tier2On=e.target.checked;
-    $('oneline2Wrap').style.display=tier2On?'':'none';
+    /* the tier-2 one-line stays hidden while the 3D view is up -- 3D chains both
+       tiers into a single scene rather than showing a second diagram */
+    $('oneline2Wrap').style.display=(tier2On&&!view3d)?'':'none';
     $('board2Mount').style.display=tier2On?'':'none';
     renderLegend();
     renderBoard();

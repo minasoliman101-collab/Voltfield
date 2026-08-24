@@ -85,6 +85,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .enclosurebar select{padding:8px 10px;border:2px solid var(--ink);background:#fff;font-family:var(--mono);font-size:13px}
 .enclosurebar .encnote{font-size:12.5px;color:var(--slate);flex-basis:100%}
 
+.vizhead{margin-bottom:10px}
+.viewtabs{display:inline-flex;border:1px solid var(--line-dark)}
+.viewtabs button{background:none;border:0;border-right:1px solid var(--line-dark);padding:7px 14px;font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);cursor:pointer}
+.viewtabs button:last-child{border-right:0}
+.viewtabs button.on{background:var(--ink);color:var(--signal)}
+.pod3d{height:420px;background:var(--card);border:2px solid var(--ink)}
+.p3dhint{font-family:var(--mono);font-size:10px;color:var(--slate);margin:7px 0 22px;text-align:center;letter-spacing:.05em}
+.pod3d .p3dempty{font-family:var(--mono);font-size:12px;color:var(--slate);padding:24px;text-align:center;line-height:1.7}
 .diagram{background:var(--card);border:2px solid var(--ink);padding:20px;margin-bottom:22px;overflow-x:auto}
 .diagram-row{display:flex;align-items:stretch;gap:0;min-width:640px}
 .dblock{flex:1;border:2px solid var(--line-dark);background:#fff;padding:10px 12px;position:relative;min-height:74px;display:flex;flex-direction:column;justify-content:center}
@@ -223,7 +231,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="encnote" id="encNote"></div>
   </div>
 
-  <div class="diagram" aria-hidden="true">
+  <div class="vizhead">
+    <div class="viewtabs" role="tablist" aria-label="Layout view">
+      <button type="button" id="tabFlow" role="tab" aria-selected="true" class="on">Single-line</button>
+      <button type="button" id="tabPod3d" role="tab" aria-selected="false">3D layout</button>
+    </div>
+  </div>
+
+  <div id="pod3dPane" hidden>
+    <div class="pod3d" id="pod3d"></div>
+    <p class="p3dhint">Drag to rotate &middot; scroll to zoom &middot; only equipment you've selected appears</p>
+  </div>
+
+  <div class="diagram" id="flowPane" aria-hidden="true">
     <div class="diagram-row">
       <div class="dblock filled" id="dLoad"><span class="dl">Critical Load</span><span class="dv">—</span></div>
       <div class="darrow">&larr;</div>
@@ -379,6 +399,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 <script src="voltfield-site-config.js"></script>
+<script src="voltfield-3d.js"></script>
 <script>
 (function(){
   try{
@@ -467,6 +488,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       ? 'Weatherproof enclosure — verify the IP/NEMA rating meets site environmental exposure.'
       : 'Open frame — every component is weather-exposed. Confirm NEMA 3R/4 ratings on each unit, or plan a weather canopy for sensitive electronics.';
     if(!fromScenario && mode==='challenge'){ /* switching enclosure manually in challenge mode is fine, checks just re-run against current selection */ }
+    if(view3d) render3D();   // the shell is the POD/skid difference, so redraw
   }
   $('encPodBtn').onclick=()=>setEnclosure('pod');
   $('encSkidBtn').onclick=()=>setEnclosure('skid');
@@ -488,12 +510,58 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     fmtBlock($('dBackup'), bType==='none' ? null : (bType==='gen'?'Gen ':'UPS ')+bKw.toLocaleString('en-US')+' kW');
     const cl=+$('coolSel').value; fmtBlock($('dCooling'), cl ? cl+' tons' : null);
     fmtBlock($('dRedun'), $('redunSel').value);
+    if(view3d) render3D();
   }
   ['loadInput','redunSel','xfmrSel','swgrSel','distSel','backupSel','coolSel'].forEach(id=>{
     $(id).addEventListener('input', updateDiagram);
     $(id).addEventListener('change', updateDiagram);
   });
   updateDiagram();
+
+  /* ---------- 3D layout ----------
+     Equipment is laid out in the same order as the single-line, upstream first,
+     and only what's actually been selected is drawn -- so the 3D view is a
+     picture of the user's design, not a stock illustration. The POD/skid toggle
+     drives the container shell, which is the only real difference between them. */
+  var view3d=false, dispose3d=null;
+
+  function podItems(){
+    const list=[];
+    if(+$('xfmrSel').value) list.push({shape:'transformer', color:'#2B6CB0'});
+    if(+$('swgrSel').value) list.push({shape:'switchgear',  color:'#2B6CB0'});
+    if(+$('distSel').value) list.push({shape:'busway',      color:'#2B6CB0'});
+    const bType=$('backupSel').value.split('|')[0];
+    if(bType==='gen') list.push({shape:'genset', color:'#9C4221'});
+    else if(bType==='ups') list.push({shape:'battery', color:'#B7791F'});
+    if(+$('coolSel').value) list.push({shape:'cooling', color:'#2B6CB0'});
+    return list;
+  }
+
+  function render3D(){
+    if(!window.VF3D) return;
+    if(dispose3d){ dispose3d(); dispose3d=null; }
+    const list=podItems();
+    if(!list.length){
+      $('pod3d').innerHTML='<div class="p3dempty">Nothing selected yet.<br>Pick a transformer, switchgear, or cooling below and it will appear here.</div>';
+      return;
+    }
+    dispose3d=VF3D.mountPod($('pod3d'), list, {shell: enc==='pod'});
+  }
+
+  function setView3D(on){
+    view3d=on;
+    $('tabFlow').classList.toggle('on',!on);
+    $('tabPod3d').classList.toggle('on',on);
+    $('tabFlow').setAttribute('aria-selected',on?'false':'true');
+    $('tabPod3d').setAttribute('aria-selected',on?'true':'false');
+    $('flowPane').hidden=on;
+    $('pod3dPane').hidden=!on;
+    if(on) render3D();
+    else if(dispose3d){ dispose3d(); dispose3d=null; }   // release the GL context when hidden
+    if(window.vfGtag) window.vfGtag('pod_view_toggle',{view:on?'3d':'single_line'});
+  }
+  $('tabFlow').onclick=()=>setView3D(false);
+  $('tabPod3d').onclick=()=>setView3D(true);
 
   /* ---------- checks ---------- */
   const PF=0.85;            // flat assumed power factor

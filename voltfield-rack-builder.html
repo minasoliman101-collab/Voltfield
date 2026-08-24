@@ -78,6 +78,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .rackarea{display:grid;grid-template-columns:1fr 260px;gap:20px;margin-bottom:22px}
 @media(max-width:720px){.rackarea{grid-template-columns:1fr}}
 .rackshell{background:var(--card);border:2px solid var(--ink);padding:10px}
+.viewtabs{display:flex;gap:0;margin-bottom:10px;border:1px solid var(--line-dark)}
+.viewtabs button{flex:1;background:none;border:0;border-right:1px solid var(--line-dark);padding:7px 10px;font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);cursor:pointer}
+.viewtabs button:last-child{border-right:0}
+.viewtabs button.on{background:var(--ink);color:var(--signal)}
+.rack3d{height:440px;background:var(--card);border:1px solid var(--line-dark)}
+.r3dhint{font-family:var(--mono);font-size:10px;color:var(--slate);margin:7px 0 9px;text-align:center;letter-spacing:.05em}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips .chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line-dark);background:#fff;padding:4px 6px 4px 8px;font-family:var(--mono);font-size:10.5px;color:var(--ink)}
+.chips .chip i{width:9px;height:9px;flex-shrink:0;display:inline-block}
+.chips .chip button{background:none;border:0;color:var(--crit);font-size:14px;line-height:1;cursor:pointer;padding:0 2px}
+.chips .chipnone{font-family:var(--mono);font-size:11px;color:var(--slate)}
+/* The elevation's ruled-paper stripes and the chip fills are hardcoded light
+   values, so they need explicit dark equivalents rather than inheriting. */
+html[data-theme="dark"] .rackinner{background:repeating-linear-gradient(180deg,#16202E,#16202E 15px,#1B2637 15px,#1B2637 16px)}
+html[data-theme="dark"] .chips .chip{background:var(--card)}
 .rackinner{display:flex;flex-direction:column;border:1px solid var(--line-dark);background:repeating-linear-gradient(180deg,#fff,#fff 15px,#F3F6FA 15px,#F3F6FA 16px)}
 .rackitem{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 10px;border-bottom:1px solid var(--ink);background:var(--card);font-family:var(--mono);font-size:11px;color:var(--ink)}
 .rackitem:last-child{border-bottom:0}
@@ -222,7 +237,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="rackarea">
     <div class="rackshell">
-      <div class="rackinner" id="rackInner"></div>
+      <div class="viewtabs" role="tablist" aria-label="Rack view">
+        <button type="button" id="tab2d" role="tab" aria-selected="true" aria-controls="rackInner" class="on">Elevation</button>
+        <button type="button" id="tab3d" role="tab" aria-selected="false" aria-controls="rack3dPane">3D view</button>
+      </div>
+      <div class="rackinner" id="rackInner" role="tabpanel" aria-labelledby="tab2d"></div>
+      <div id="rack3dPane" role="tabpanel" aria-labelledby="tab3d" hidden>
+        <div class="rack3d" id="rack3d"></div>
+        <p class="r3dhint">Drag to rotate &middot; scroll to zoom</p>
+        <div class="chips" id="rackChips"></div>
+      </div>
     </div>
     <div class="addpanel">
       <label for="eqSel">Add equipment</label>
@@ -291,6 +315,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 <script src="voltfield-site-config.js"></script>
+<script src="voltfield-3d.js"></script>
 <script>
 (function(){
   try{
@@ -307,16 +332,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   'use strict';
   var $=function(id){return document.getElementById(id);};
 
+  /* shape/color drive the 3D elevation (voltfield-3d.js); they're carried on the
+     equipment record itself so the 2D and 3D views can never drift apart. */
   var EQUIPMENT=[
-    {id:'srv1u',name:'1U Rack Server',u:1,w:450,lbs:45},
-    {id:'srv2u',name:'2U Rack Server',u:2,w:750,lbs:65},
-    {id:'sw1u',name:'1U Top-of-Rack Switch',u:1,w:150,lbs:15},
-    {id:'pdu1u',name:'1U Metered PDU',u:1,w:0,lbs:12},
-    {id:'san2u',name:'2U Storage Array',u:2,w:550,lbs:70},
-    {id:'ups4u',name:'4U Rack-Mount UPS',u:4,w:100,lbs:130},
-    {id:'kvm1u',name:'1U KVM Console',u:1,w:40,lbs:18},
-    {id:'blank1u',name:'1U Blanking Panel',u:1,w:0,lbs:2},
-    {id:'cable2u',name:'2U Cable Manager',u:2,w:0,lbs:5}
+    {id:'srv1u',name:'1U Rack Server',u:1,w:450,lbs:45,shape:'server',color:'#2B6CB0'},
+    {id:'srv2u',name:'2U Rack Server',u:2,w:750,lbs:65,shape:'server2u',color:'#2B6CB0'},
+    {id:'sw1u',name:'1U Top-of-Rack Switch',u:1,w:150,lbs:15,shape:'netswitch',color:'#2E7D4F'},
+    {id:'pdu1u',name:'1U Metered PDU',u:1,w:0,lbs:12,shape:'pdu',color:'#5B6B7E'},
+    {id:'san2u',name:'2U Storage Array',u:2,w:550,lbs:70,shape:'storage',color:'#B7791F'},
+    {id:'ups4u',name:'4U Rack-Mount UPS',u:4,w:100,lbs:130,shape:'ups',color:'#9C4221'},
+    {id:'kvm1u',name:'1U KVM Console',u:1,w:40,lbs:18,shape:'kvm',color:'#5B6B7E'},
+    {id:'blank1u',name:'1U Blanking Panel',u:1,w:0,lbs:2,shape:'blank',color:'#5B6B7E'},
+    {id:'cable2u',name:'2U Cable Manager',u:2,w:0,lbs:5,shape:'cablemgr',color:'#5B6B7E'}
   ];
 
   var items=[]; /* {instId, eq} */
@@ -364,15 +391,60 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
     wrap.innerHTML=html;
     wrap.querySelectorAll('button[data-remove]').forEach(function(btn){
-      btn.addEventListener('click',function(){
-        var id=parseInt(btn.dataset.remove,10);
-        items=items.filter(function(it){return it.instId!==id;});
-        renderRack();
-        renderBudgets();
-        $('checklist').classList.remove('show');
-      });
+      btn.addEventListener('click',function(){ removeInst(parseInt(btn.dataset.remove,10)); });
+    });
+    if(view3d) render3D();
+  }
+
+  function removeInst(id){
+    items=items.filter(function(it){return it.instId!==id;});
+    renderRack();
+    renderBudgets();
+    $('checklist').classList.remove('show');
+  }
+
+  /* ---------- 3D elevation ----------
+     One mounted scene for the whole rack, not one per item: the browser caps
+     simultaneous WebGL contexts, and a per-item palette would blow straight
+     through it (see the live-instance note in voltfield-3d.js). */
+  var view3d=false, dispose3d=null;
+
+  function render3D(){
+    if(!window.VF3D) return;
+    if(dispose3d){ dispose3d(); dispose3d=null; }
+    var rackU=parseInt($('rackUSel').value,10);
+    dispose3d=VF3D.mountRack($('rack3d'), items.map(function(it){
+      return {shape:it.eq.shape, u:it.eq.u, color:it.eq.color};
+    }), rackU);
+    renderChips();
+  }
+
+  function renderChips(){
+    var box=$('rackChips');
+    if(!items.length){ box.innerHTML='<span class="chipnone">Rack is empty &mdash; add equipment from the panel.</span>'; return; }
+    box.innerHTML=items.map(function(it){
+      return '<span class="chip"><i style="background:'+it.eq.color+'"></i>'+it.eq.name+
+             '<button type="button" data-remove3d="'+it.instId+'" aria-label="Remove '+it.eq.name+'">&times;</button></span>';
+    }).join('');
+    box.querySelectorAll('button[data-remove3d]').forEach(function(btn){
+      btn.addEventListener('click',function(){ removeInst(parseInt(btn.dataset.remove3d,10)); });
     });
   }
+
+  function setView(is3d){
+    view3d=is3d;
+    $('tab2d').classList.toggle('on',!is3d);
+    $('tab3d').classList.toggle('on',is3d);
+    $('tab2d').setAttribute('aria-selected',is3d?'false':'true');
+    $('tab3d').setAttribute('aria-selected',is3d?'true':'false');
+    $('rackInner').hidden=is3d;
+    $('rack3dPane').hidden=!is3d;
+    if(is3d){ render3D(); }
+    else if(dispose3d){ dispose3d(); dispose3d=null; }   // free the GL context when hidden
+    if(window.vfGtag) window.vfGtag('rack_view_toggle',{view:is3d?'3d':'elevation'});
+  }
+  $('tab2d').addEventListener('click',function(){ setView(false); });
+  $('tab3d').addEventListener('click',function(){ setView(true); });
 
   /* ---------- budgets (live readout, not pass/fail -- that's the Check button) ---------- */
   function totals(){
