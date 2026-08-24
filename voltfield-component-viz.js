@@ -122,7 +122,44 @@
       note: 'Not cosmetic: an open U lets hot exhaust air recirculate to the front of the rack and be drawn back in, which raises intake temperature on everything above it.' },
     cablemgr:  { name: 'Cable manager', shape: 'cablemgr', color: '#5B6B7E', img: null,
       what: 'Routes and dresses the cabling between equipment.',
-      note: 'Costs rack units but keeps airflow paths clear and makes anything above it serviceable.' }
+      note: 'Costs rack units but keeps airflow paths clear and makes anything above it serviceable.' },
+
+    /* ---------- through-hole PCB parts (PCB Layout tool) ----------
+       All img:null on purpose. The illustration library covers industrial
+       electrical supply, not electronics: the nearest "LED" entry is light
+       FIXTURES and the nearest "capacitor" is a power film cap, and showing
+       either next to a through-hole part would actively mislead someone
+       learning what these look like. 3D and text only until real ones exist. */
+    res:   { name: 'Resistor', shape: 'res', color: '#2B6CB0', img: null,
+      what: 'Limits current, or sets a voltage by dividing it.',
+      note: 'Not polarised — it goes in either way round. The colour bands, read from the end with the bands crowded toward it, give the value.' },
+    ccap:  { name: 'Ceramic capacitor', shape: 'ccap', color: '#2B6CB0', img: null,
+      what: 'Small non-polarised capacitor, usually smoothing supply noise close to a chip.',
+      note: 'Either way round is fine. Placed as near the chip\'s power pins as the layout allows, because the point is to supply fast current locally.' },
+    ecap:  { name: 'Electrolytic capacitor', shape: 'ecap', color: '#2B6CB0', img: null,
+      what: 'Larger capacitor for bulk energy storage and supply smoothing.',
+      note: 'POLARISED — the stripe marks the negative leg. Fitting one backwards is the classic way to make a capacitor vent.' },
+    led:   { name: 'LED', shape: 'led', color: '#B7791F', img: null,
+      what: 'Emits light when current flows the right way through it.',
+      note: 'Polarised, and it does not limit its own current: without a series resistor it draws until something fails. The longer leg is the anode (+).' },
+    diode: { name: 'Diode', shape: 'diode', color: '#5B6B7E', img: null,
+      what: 'Lets current pass one way and blocks it the other.',
+      note: 'The painted band marks the cathode — the end current flows OUT of in normal conduction.' },
+    btn:   { name: 'Push button', shape: 'btn', color: '#5B6B7E', img: null,
+      what: 'Momentary switch: closes the circuit only while pressed.',
+      note: 'The four pins are two pairs already joined inside, so which pair you wire across decides whether it switches anything at all.' },
+    hdr2:  { name: '2-pin header', shape: 'hdr2', color: '#5B6B7E', img: null,
+      what: 'Two pins for a connection off the board — typically power in.',
+      note: 'Nothing enforces polarity on a plain header; the board silkscreen is the only thing stopping a reversed plug.' },
+    hdr4:  { name: '4-pin header', shape: 'hdr4', color: '#5B6B7E', img: null,
+      what: 'Four pins for a multi-wire connection off the board.',
+      note: 'Pin 1 is marked on the board, not the part — orientation is a layout decision.' },
+    dip8:  { name: 'DIP-8 IC', shape: 'dip8', color: '#5B6B7E', img: null,
+      what: 'An eight-pin chip in a dual in-line package, four pins a side.',
+      note: 'The notch (and the dot beside pin 1) is the only orientation cue. Pins count anticlockwise from pin 1 when viewed from above.' },
+    pot:   { name: 'Potentiometer', shape: 'pot', color: '#5B6B7E', img: null,
+      what: 'A variable resistor you adjust with a shaft or screwdriver.',
+      note: 'Three pins: the outer two are the whole resistive track, the middle one is the wiper that moves along it. Using only the wiper and one end makes it a variable resistor instead of a divider.' }
   };
 
   function has(id){ return Object.prototype.hasOwnProperty.call(INFO, id); }

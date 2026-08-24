@@ -313,6 +313,166 @@
     return g;
   }
 
+  /* ---------- through-hole PCB parts ----------
+     For the PCB Layout tool, whose palette is footprints on a grid: a learner
+     placing "DIP-8" or "electrolytic cap" benefits from seeing the physical
+     part the footprint belongs to. All are drawn standing on a small board
+     stub so the relative sizes read honestly against each other. */
+  const PCB_GREEN = 0x1E6B3A, LEAD = 0xC8CCD2, BLACK = 0x1A1A1E;
+
+  function pcbBase(THREE, w, d){
+    const g = new THREE.Group();
+    const m = new THREE.MeshStandardMaterial({color:PCB_GREEN, metalness:.15, roughness:.75});
+    g.add(box(THREE, m, w||3.0, 0.10, d||2.2, 0, -0.05, 0));
+    return g;
+  }
+  function leadMat(THREE){ return new THREE.MeshStandardMaterial({color:LEAD, metalness:.9, roughness:.28}); }
+  function goldMat(THREE){ return new THREE.MeshStandardMaterial({color:0xD4A72C, metalness:.85, roughness:.3}); }
+  /* A lead running from `top` straight down through the board.
+     Takes the TOP, not a length: an axial part's lead has to stop exactly at
+     the body it leaves, and sizing by length instead made the leads overshoot
+     above the resistor and diode bodies like antennae. */
+  const PCB_UNDER = -0.35;
+  function pin(THREE, m, x, z, top){
+    const t = (top == null ? 0.5 : top);
+    const h = t - PCB_UNDER;
+    return cyl(THREE, m, 0.045,0.045, h, 8, x, PCB_UNDER + h/2, z);
+  }
+
+  function buildResistor(THREE){
+    const g = pcbBase(THREE, 3.2, 1.6);
+    const body = new THREE.MeshStandardMaterial({color:0xC9AE86, metalness:.1, roughness:.7});
+    const L = leadMat(THREE);
+    const b = cyl(THREE, body, 0.26,0.26, 1.15, 18, 0, 0.72, 0); b.rotation.z = Math.PI/2; g.add(b);
+    for (const s of [-1,1]) {                                   // end caps
+      const c = cyl(THREE, body, 0.29,0.29, 0.12, 18, s*0.58, 0.72, 0); c.rotation.z = Math.PI/2; g.add(c);
+    }
+    // colour bands -- what you actually read the value off
+    const bands = [[-0.30,0x5A3A1E],[-0.12,0x1A1A1E],[0.06,0xB03030],[0.34,0xC8A42C]];
+    bands.forEach(function(bd){
+      const r = cyl(THREE, new THREE.MeshStandardMaterial({color:bd[1], roughness:.6}), 0.275,0.275, 0.11, 18, bd[0], 0.72, 0);
+      r.rotation.z = Math.PI/2; g.add(r);
+    });
+    for (const s of [-1,1]) {                                   // axial leads, bent down
+      const run = cyl(THREE, L, 0.045,0.045, 0.75, 8, s*1.02, 0.72, 0); run.rotation.z = Math.PI/2; g.add(run);
+      g.add(pin(THREE, L, s*1.38, 0, 0.72));
+    }
+    return g;
+  }
+
+  function buildCeramicCap(THREE){
+    const g = pcbBase(THREE, 2.2, 1.6);
+    const body = new THREE.MeshStandardMaterial({color:0xC98A2E, metalness:.1, roughness:.72});
+    const L = leadMat(THREE);
+    const disc = cyl(THREE, body, 0.52,0.52, 0.20, 22, 0, 0.86, 0);   // the classic disc
+    disc.rotation.x = Math.PI/2; g.add(disc);
+    for (const s of [-1,1]) g.add(pin(THREE, L, s*0.22, 0, 0.80));
+    return g;
+  }
+
+  function buildElectrolyticCap(THREE){
+    const g = pcbBase(THREE, 2.2, 2.0);
+    const can = new THREE.MeshStandardMaterial({color:0x243A5E, metalness:.5, roughness:.4});
+    const stripe = new THREE.MeshStandardMaterial({color:0xD8DEE6, metalness:.2, roughness:.6});
+    const L = leadMat(THREE);
+    g.add(cyl(THREE, can, 0.55,0.55, 1.6, 24, 0, 0.85, 0));           // upright can
+    g.add(cyl(THREE, can, 0.57,0.57, 0.06, 24, 0, 1.63, 0));          // crimped top
+    /* Polarity stripe. Drawn as a curved cylinder SEGMENT wrapping ~70deg of
+       the can rather than a flat plate on one face: a flat plate disappears
+       entirely once the model is rotated, and the stripe is the one feature
+       that makes this part different from a non-polarised one. */
+    const st = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.565, 0.565, 1.45, 24, 1, true, -0.62, 1.24), stripe);
+    st.position.y = 0.85; g.add(st);
+    for (const s of [-1,1]) g.add(pin(THREE, L, s*0.20, 0, 0.12));
+    return g;
+  }
+
+  function buildLED(THREE){
+    const g = pcbBase(THREE, 2.0, 1.6);
+    const lens = new THREE.MeshStandardMaterial({color:0xD03A3A, emissive:0xD03A3A, emissiveIntensity:.45, roughness:.25, transparent:true, opacity:.9});
+    const L = leadMat(THREE);
+    g.add(cyl(THREE, lens, 0.34,0.34, 0.75, 20, 0, 0.72, 0));          // body
+    const dome = new THREE.Mesh(new THREE.SphereGeometry(0.34, 20, 12, 0, Math.PI*2, 0, Math.PI/2), lens);
+    dome.position.y = 1.10; g.add(dome);
+    g.add(cyl(THREE, lens, 0.40,0.40, 0.08, 20, 0, 0.38, 0));          // the flange with the flat
+    for (const s of [-1,1]) g.add(pin(THREE, L, s*0.16, 0, 0.42));
+    return g;
+  }
+
+  function buildDiode(THREE){
+    const g = pcbBase(THREE, 2.8, 1.6);
+    const body = new THREE.MeshStandardMaterial({color:BLACK, metalness:.3, roughness:.55});
+    const band = new THREE.MeshStandardMaterial({color:0xE4E8ED, metalness:.2, roughness:.5});
+    const L = leadMat(THREE);
+    const b = cyl(THREE, body, 0.24,0.24, 0.95, 18, 0, 0.72, 0); b.rotation.z = Math.PI/2; g.add(b);
+    const bd = cyl(THREE, band, 0.25,0.25, 0.14, 18, -0.30, 0.72, 0);  // cathode band
+    bd.rotation.z = Math.PI/2; g.add(bd);
+    for (const s of [-1,1]) {
+      const run = cyl(THREE, L, 0.045,0.045, 0.6, 8, s*0.78, 0.72, 0); run.rotation.z = Math.PI/2; g.add(run);
+      g.add(pin(THREE, L, s*1.06, 0, 0.72));
+    }
+    return g;
+  }
+
+  function buildPushButton(THREE){
+    const g = pcbBase(THREE, 2.4, 2.4);
+    const body = new THREE.MeshStandardMaterial({color:BLACK, metalness:.25, roughness:.6});
+    const cap  = new THREE.MeshStandardMaterial({color:0xC23B3B, metalness:.2, roughness:.5});
+    const L = leadMat(THREE);
+    g.add(box(THREE, body, 1.25, 0.5, 1.25, 0, 0.25, 0));              // tactile switch body
+    g.add(cyl(THREE, cap, 0.24,0.24, 0.32, 18, 0, 0.62, 0));           // plunger
+    for (const sx of [-1,1]) for (const sz of [-1,1]) g.add(pin(THREE, L, sx*0.55, sz*0.55, 0.12));
+    return g;
+  }
+
+  function buildHeader(THREE, n, vertical){
+    const g = pcbBase(THREE, Math.max(2.0, n*0.55 + 0.9), 1.6);
+    const body = new THREE.MeshStandardMaterial({color:BLACK, metalness:.2, roughness:.65});
+    const G = goldMat(THREE);
+    const pitch = 0.55, span = (n-1)*pitch;
+    g.add(box(THREE, body, span + 0.5, 0.42, 0.5, 0, 0.21, 0));        // plastic strip
+    for (let i=0;i<n;i++){
+      const x = -span/2 + i*pitch;
+      g.add(box(THREE, G, 0.13, 1.35, 0.13, x, 0.62, 0));              // square pin above
+      g.add(box(THREE, G, 0.11, 0.55, 0.11, x, -0.20, 0));             // and below the board
+    }
+    return g;
+  }
+
+  function buildDIP8(THREE){
+    const g = pcbBase(THREE, 3.0, 2.6);
+    const body = new THREE.MeshStandardMaterial({color:0x26262C, metalness:.25, roughness:.6});
+    const L = leadMat(THREE);
+    const W = 1.5, D = 1.9, H = 0.42;
+    g.add(box(THREE, body, W, H, D, 0, 0.30 + H/2, 0));
+    // pin-1 notch at one end -- the only thing telling you which way round it goes
+    const notch = cyl(THREE, new THREE.MeshStandardMaterial({color:0x141418, roughness:.7}), 0.17,0.17, 0.06, 16, -W/2 + 0.08, 0.30 + H, 0);
+    notch.rotation.x = Math.PI/2; g.add(notch);
+    g.add(cyl(THREE, new THREE.MeshStandardMaterial({color:0x141418, roughness:.7}), 0.10,0.10, 0.05, 14, -W/2 + 0.30, 0.30 + H, -D/2 + 0.28).rotateX(Math.PI/2));
+    for (let i=0;i<4;i++){                                             // 4 pins a side
+      const z = -D/2 + 0.32 + i*0.42;
+      for (const sx of [-1,1]) {
+        g.add(box(THREE, L, 0.28, 0.06, 0.16, sx*(W/2 + 0.11), 0.42, z));   // shoulder
+        g.add(box(THREE, L, 0.09, 0.75, 0.16, sx*(W/2 + 0.22), 0.06, z));   // leg
+      }
+    }
+    return g;
+  }
+
+  function buildPotentiometer(THREE){
+    const g = pcbBase(THREE, 2.6, 2.2);
+    const can = new THREE.MeshStandardMaterial({color:0x2C3E56, metalness:.55, roughness:.42});
+    const shaft = new THREE.MeshStandardMaterial({color:0xD8DEE6, metalness:.7, roughness:.35});
+    const L = leadMat(THREE);
+    g.add(cyl(THREE, can, 0.70,0.70, 0.45, 24, 0, 0.28, 0));           // round body
+    g.add(cyl(THREE, shaft, 0.16,0.16, 0.85, 16, 0, 0.90, 0));         // adjustment shaft
+    const slot = box(THREE, new THREE.MeshStandardMaterial({color:0x3A3A42, roughness:.6}), 0.26, 0.05, 0.06, 0, 1.32, 0);
+    g.add(slot);                                                       // screwdriver slot
+    for (const x of [-0.5, 0, 0.5]) g.add(pin(THREE, L, x, 0.45, 0.16));  // wiper + two ends
+    return g;
+  }
+
   const BUILDERS = {
     /* electrical / plant */
     transformer: buildTransformer,
@@ -334,7 +494,18 @@
     pdu: buildPDU,
     kvm: buildKVM,
     blank: buildBlank,
-    cablemgr: buildCableMgr
+    cablemgr: buildCableMgr,
+    /* through-hole PCB parts (ids match the PCB Layout tool's palette) */
+    res: buildResistor,
+    ccap: buildCeramicCap,
+    ecap: buildElectrolyticCap,
+    led: buildLED,
+    diode: buildDiode,
+    btn: buildPushButton,
+    hdr2: (T) => buildHeader(T, 2),
+    hdr4: (T) => buildHeader(T, 4),
+    dip8: buildDIP8,
+    pot: buildPotentiometer
   };
   function resolveBuilder(shapeId){ return BUILDERS[shapeId] || buildGeneric; }
 

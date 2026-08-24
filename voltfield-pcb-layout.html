@@ -37,6 +37,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="ordering-hidden.css">
 <link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-component-viz.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <script type="application/ld+json">
@@ -87,6 +88,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .legend{margin:16px 0 10px}
 .legend-title{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);margin:16px 0 8px}
 .legend-title:first-child{margin-top:0}
+.compdetail{margin:18px 0 22px}
+.compdetail-hd{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);margin-bottom:8px}
 .tilerow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
 .tile{background:#fff;border:2px solid var(--line-dark);padding:11px 16px;font-family:var(--mono);font-size:11.5px;text-align:left;cursor:pointer;min-width:120px;display:flex;align-items:center;gap:12px;transition:transform .15s,border-color .15s}
 .tile .glyph{font-size:28px;line-height:1;flex-shrink:0;width:32px;text-align:center}
@@ -237,6 +240,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="legend" id="legendMount"></div>
 
+  <div class="compdetail">
+    <div class="compdetail-hd">Component detail</div>
+    <div id="pcbInspector"><div class="vfcv-empty">Tap any component above to see the real part in 3D &mdash; what it looks like, what it does, and which way round it goes.</div></div>
+  </div>
+
   <div class="est-row" style="margin:16px 0 26px">
     <div class="est-field"><button type="button" id="checkBtn">Run Design Check</button></div>
   </div>
@@ -297,6 +305,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 <script src="voltfield-site-config.js"></script>
+<script src="voltfield-3d.js"></script>
+<script src="voltfield-component-viz.js"></script>
 <script>
 (function(){
   try{
@@ -426,8 +436,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         armedPad=null;
         renderLegend();
         drawBoard();
+        /* show the real part regardless of arm/disarm -- tapping a tile is how
+           you ask "what IS this?", not only "I want to place one" */
+        showComponent(id);
       });
     });
+  }
+
+  /* ---------- component detail ----------
+     The palette shows footprints; this shows the physical part the footprint
+     belongs to, which is the bit a beginner cannot infer from a pad pattern.
+     PART IDS ARE THE COMPONENT-REGISTRY IDS -- keep them in step if either
+     list changes. One shared inspector, so browsing costs one WebGL context. */
+  let pcbInspector=null;
+  function showComponent(id){
+    if(!id||!window.VFCV||!window.VFCV.has(id))return;
+    if(!pcbInspector) pcbInspector=VFCV.inspector($('pcbInspector'));
+    pcbInspector.show(id);
   }
 
   /* ---------- board rendering ---------- */
