@@ -23,6 +23,12 @@
 /images/*
   Cache-Control: public, max-age=2592000, immutable
 
+# Social/OG cards. Long cache but NOT immutable -- if a card is regenerated,
+# the filename stays the same and scrapers need to be able to pick up the
+# new version on their next fetch.
+/social/*
+  Cache-Control: public, max-age=604800
+
 /voltfield-catalog-data.js
   Cache-Control: public, max-age=604800, stale-while-revalidate=86400
 
