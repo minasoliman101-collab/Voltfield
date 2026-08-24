@@ -1,0 +1,110 @@
+  <h2>Two problems that look like one</h2>
+  <p>&ldquo;Backup power&rdquo; covers two jobs that a single machine cannot do. When the utility drops, something has to carry the load in the milliseconds before anything else reacts &mdash; that is stored energy, a UPS or a flywheel. Separately, something has to carry the load for the hours or days that follow, and that is generation: a diesel or gas engine, or on the largest campuses a turbine.</p>
+  <p>Confusing the two is the most common sizing error. A generator takes time to start, come up to speed and accept load; it does nothing for the gap at the instant of transfer. A UPS covers that gap but has minutes of runtime, not hours. Every real design uses both, and the interesting decisions are about how they hand over.</p>
+
+  <div class="tblwrap">
+  <table class="famtable">
+    <thead>
+      <tr><th>Family</th><th>Typical configuration</th><th>Indicative lead time</th><th>Standards</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Diesel Gensets</b>The default for standby generation. Fast starting, fuel stored on site.</td>
+        <td class="num">60&ndash;3,250 kW<br>Standby or prime<br>Open / weatherproof / sound-attenuated</td>
+        <td><span class="lt long">~90 weeks</span></td>
+        <td class="num">UL 2200, NFPA 110<br>EPA Tier 4</td>
+      </tr>
+      <tr>
+        <td><b>Natural-Gas Gensets</b>No fuel storage, but dependent on the gas supply staying up during the event you are protecting against.</td>
+        <td class="num">100&ndash;2,000 kW<br>Natural gas or bi-fuel<br>Standby or continuous</td>
+        <td><span class="lt long">~78 weeks</span></td>
+        <td class="num">UL 2200, NFPA 37</td>
+      </tr>
+      <tr>
+        <td><b>Gas Turbine Generators</b>Campus scale only. Delivery slots, not lead times.</td>
+        <td class="num">5&ndash;50 MW<br>Aeroderivative or industrial<br>Simple or combined cycle</td>
+        <td><span class="lt long">2029+ slots</span></td>
+        <td class="num">ISO 3977, API 616</td>
+      </tr>
+      <tr>
+        <td><b>UPS Systems (Static)</b>Battery-backed, covers the transfer gap. Modular designs let capacity grow without replacing the frame.</td>
+        <td class="num">10&ndash;1,200 kVA<br>Online or modular<br>5 / 10 / 15 min runtime</td>
+        <td><span class="lt mid">~22 weeks</span></td>
+        <td class="num">UL 1778<br>Energy Star</td>
+      </tr>
+      <tr>
+        <td><b>Flywheel / DC UPS</b>Kinetic or DC storage. Shorter ride-through, but no battery replacement cycle.</td>
+        <td class="num">100&ndash;500 kW<br>Flywheel or DC-battery<br>480V / 600V bus</td>
+        <td><span class="lt short">~16 weeks</span></td>
+        <td class="num">UL 1778</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout"><b>Turbine slots behave differently from lead times.</b> A 2029+ position is an allocation of manufacturing and commissioning capacity, not a queue you can join earlier by ordering sooner. Treat it as a schedule constraint on the whole project rather than a procurement lead time. All figures are indicative modelled positions for North America, reviewed monthly and published with their basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a> &mdash; not quotations, not inventory commitments.</div>
+
+  <h2>Specifications that decide the selection</h2>
+  <div class="specgrid">
+    <div class="speccard">
+      <h4>Standby versus prime rating</h4>
+      <p>A standby rating assumes limited annual hours at varying load. Prime allows continuous operation. The same physical machine carries different published ratings depending on which duty you buy it for.</p>
+    </div>
+    <div class="speccard">
+      <h4>Step load acceptance</h4>
+      <p>How much load the set can take in one block without unacceptable voltage or frequency dip. This, not kW, is often what decides the size on a data centre.</p>
+    </div>
+    <div class="speccard">
+      <h4>Power and energy, separately</h4>
+      <p>A UPS is sized twice: can it carry the load (kW), and for how long (kWh). Those are independent choices, and quoting only one of them is a common RFQ gap.</p>
+    </div>
+    <div class="speccard">
+      <h4>Emissions tier and permitting</h4>
+      <p>EPA Tier 4 requirements and local air permits constrain what can be installed and how many hours it may run &mdash; including for testing.</p>
+    </div>
+  </div>
+
+  <h2>Selection criteria in practice</h2>
+  <ul>
+    <li><b>Size the UPS for the gap, not the outage.</b> Its job is to carry load until the generator accepts it. Runtime beyond that is expensive battery you will replace on a cycle.</li>
+    <li><b>Check step load acceptance against your actual block loads.</b> Cooling equipment restarting at once is usually the hardest step, and it is the one that gets missed.</li>
+    <li><b>Interrogate the fuel assumption.</b> Diesel means on-site storage, fuel polishing and a refuelling plan. Natural gas removes storage but adds dependence on a supply that may be affected by the same event.</li>
+    <li><b>Confirm the redundancy target applies to both layers.</b> N+1 generation with a single UPS path is not N+1 overall.</li>
+    <li><b>Plan for testing, not just for outages.</b> NFPA 110 exercise requirements and permit hour limits shape the installation as much as the emergency case does.</li>
+  </ul>
+
+  <h2>Typical applications</h2>
+  <p>A conventional facility pairs a <b>static UPS</b> covering seconds of ride-through with <b>diesel gensets</b> sized for the full critical load plus cooling, transferring on loss of utility. <b>Natural-gas sets</b> appear where fuel storage is impractical or emissions limits favour them. <b>Flywheel or DC UPS</b> suits sites that want ride-through without a battery replacement cycle and can accept shorter autonomy. <b>Turbines</b> only make sense at campus scale, where the machine is closer to a generating asset than to backup equipment.</p>
+
+  <h2>Work the numbers before you RFQ</h2>
+  <div class="rel">
+    <a href="/engineering-calculators.html#generator-runtime"><span class="k">Calculator</span><span class="t">Estimate generator runtime against fuel on site</span></a>
+    <a href="/engineering-calculators.html#motor-start"><span class="k">Calculator</span><span class="t">Check voltage dip on motor starting</span></a>
+    <a href="/engineering-calculators.html#bess-sizing"><span class="k">Calculator</span><span class="t">Size stored energy in power and duration</span></a>
+    <a href="/voltfield-pod-designer.html"><span class="k">Practice</span><span class="t">Size a POD or skid with N, N+1 or 2N backup</span></a>
+    <a href="/voltfield-rack-builder.html"><span class="k">Practice</span><span class="t">Budget rack-level UPS and PDU load</span></a>
+    <a href="/rfq-toolkit.html"><span class="k">Template</span><span class="t">RFQ readiness checklist</span></a>
+  </div>
+
+  <h2>Related reading</h2>
+  <div class="rel">
+    <a href="/guide-bess-fire-safety-nfpa-855.html"><span class="k">Guide</span><span class="t">Battery fire safety and NFPA 855</span></a>
+    <a href="/guide-bess-augmentation.html"><span class="k">Guide</span><span class="t">Battery augmentation and capacity fade</span></a>
+    <a href="/guide-pue-explained.html"><span class="k">Guide</span><span class="t">PUE explained</span></a>
+    <a href="/data-centers/transformers.html"><span class="k">Category</span><span class="t">Data center transformers</span></a>
+    <a href="/data-centers/switchgear.html"><span class="k">Category</span><span class="t">Switchgear, breakers and transfer</span></a>
+    <a href="/data-centers.html"><span class="k">Sector</span><span class="t">All data center power equipment</span></a>
+  </div>
+
+  <h2>Common questions</h2>
+  <h3>Why can't a generator alone provide backup power?</h3>
+  <p>Because it takes time to start, reach speed and accept load. During those seconds the critical load has no source. A UPS exists specifically to cover that window; the generator covers everything after it.</p>
+
+  <h3>How long should UPS runtime be?</h3>
+  <p>Long enough to cover generator start and load acceptance, with margin for a failed first start attempt. Sizing for a long outage is generally the wrong instinct &mdash; that is the generator's job, and the extra battery is capital you replace on a cycle.</p>
+
+  <h3>Is natural gas better than diesel for standby?</h3>
+  <p>It depends on what you are protecting against. Gas removes on-site fuel storage and its maintenance burden, but it makes you dependent on a supply that may be disrupted by the same regional event causing the outage. Diesel is self-contained but brings storage, polishing and refuelling logistics.</p>
+
+  <h3>What does &ldquo;step load acceptance&rdquo; mean and why does it matter more than kW?</h3>
+  <p>It is how much load the set can take in a single block without the voltage or frequency dipping unacceptably. Data centre loads restart in large blocks &mdash; particularly cooling &mdash; so a set with adequate kW but insufficient step capability will still fail the transfer.</p>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>Data Center Switchgear &amp; Breakers | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/data-centers/switchgear.html">
+<meta name="description" content="Compare MV switchgear, LV switchgear, air circuit breakers and MCCBs for data centers. Interrupting ratings, coordination, and indicative lead times.">
+<meta name="keywords" content="data center switchgear, medium voltage switchgear lead time, LV switchgear specifications, air circuit breaker, MCCB interrupting rating, selective coordination">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:title" content="Switchgear &amp; Breakers">
+<meta property="og:description" content="Compare MV switchgear, LV switchgear, air circuit breakers and MCCBs for data centers. Interrupting ratings, coordination, and indicative lead times.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-data-centers.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-data-centers.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"BreadcrumbList","itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
+   {"@type":"ListItem","position":2,"name":"Data Centers","item":"https://voltfield.org/data-centers.html"},
+   {"@type":"ListItem","position":3,"name":"Switchgear & Breakers","item":"https://voltfield.org/data-centers/switchgear.html"}
+ ]},
+ {"@type":"CollectionPage","name":"Data Center Switchgear & Breakers","description":"Switchgear and circuit breaker families used in data center electrical distribution, with specifications, interrupting ratings and indicative lead times.","url":"https://voltfield.org/data-centers/switchgear.html","isPartOf":{"@type":"WebSite","name":"VOLTFIELD Supply Co.","url":"https://voltfield.org/"}},
+ {"@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"What is the difference between trip rating and interrupting rating?","acceptedAnswer":{"@type":"Answer","text":"Trip rating (AT) is the current at which the breaker opens under overload and matches the load. Interrupting rating (kAIC) is the fault current it can safely break without failing. They are independent numbers, and a breaker sized correctly on trip rating can still be unsafe if available fault current exceeds its interrupting rating."}},
+   {"@type":"Question","name":"Why is medium-voltage switchgear on allocation rather than a long lead time?","acceptedAnswer":{"@type":"Answer","text":"The constraint is manufacturing capacity rather than queue position. Slots are committed well in advance, so ordering earlier does not necessarily help. The useful conversation is about allocation, alternates and phased delivery."}},
+   {"@type":"Question","name":"Do I need drawout circuit breakers?","acceptedAnswer":{"@type":"Answer","text":"If the facility cannot be de-energised for breaker maintenance, effectively yes. Drawout construction lets a breaker be racked out and serviced while the bus stays live. Fixed-mount gear is cheaper and appropriate where a planned shutdown is acceptable."}},
+   {"@type":"Question","name":"Can better selective coordination make arc-flash worse?","acceptedAnswer":{"@type":"Answer","text":"Yes. Slowing an upstream device to separate its time-current curve improves coordination, but incident energy scales with clearing time, so the same change can raise arc-flash energy at that bus. The two objectives conflict and must be balanced."}}
+ ]}
+]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Root-relative asset paths throughout: this page lives one directory deep,
+     so the relative paths used by the flat pages at the site root would break. -->
+<link rel="stylesheet" href="/ordering-hidden.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-component-viz.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<style>
+.artban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:32px 20px 34px}
+.artban-in{max-width:900px;margin:0 auto}
+.artban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:10px}
+.artban h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,44px);letter-spacing:.01em;line-height:1.06}
+.artban p.dek{color:#AFC0D3;font-size:15.5px;margin-top:14px;line-height:1.55;max-width:700px}
+.crumb{max-width:900px;margin:0 auto;padding:12px 20px 0;font-family:var(--mono);font-size:11px;color:var(--slate)}
+.crumb a{color:var(--slate);text-decoration:underline;text-underline-offset:2px}
+.crumb .sep{margin:0 7px;opacity:.6}
+.artwrap{max-width:900px;margin:0 auto;padding:34px 20px 8px}
+.artwrap h2{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:.01em;color:var(--ink);margin:34px 0 12px}
+.artwrap h3{font-family:var(--disp);font-weight:700;font-size:18px;color:var(--ink);margin:22px 0 8px}
+.artwrap p{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:14px}
+.artwrap ul{margin:0 0 14px 20px}
+.artwrap li{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:6px}
+.artwrap a.inline{color:var(--signal-deep);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
+.callout{background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--signal);padding:16px 18px;margin:20px 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+/* family table */
+.famtable{width:100%;border-collapse:collapse;margin:16px 0 8px;font-size:13px}
+.famtable th{font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);text-align:left;padding:8px 10px;border-bottom:2px solid var(--ink)}
+.famtable td{padding:10px;border-bottom:1px solid var(--line);color:var(--ink-2);vertical-align:top}
+.famtable td b{font-family:var(--disp);font-size:15px;color:var(--ink);display:block;margin-bottom:2px}
+.famtable td.num{font-family:var(--mono);font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.famtable a{color:var(--signal-deep);font-weight:600;text-decoration:underline}
+.lt{font-family:var(--mono);font-size:11px;padding:2px 7px;white-space:nowrap;display:inline-block}
+.lt.long{background:#F7E4E1;color:var(--crit)}
+.lt.mid{background:#FBF0DA;color:var(--warn)}
+.lt.short{background:#E7F1EB;color:var(--ok)}
+html[data-theme="dark"] .lt.long{background:#3A1F1C;color:#E8A79B}
+html[data-theme="dark"] .lt.mid{background:#3A3016;color:#E4C77F}
+html[data-theme="dark"] .lt.short{background:#15301F;color:#7FCC9B}
+.tblwrap{overflow-x:auto}
+/* spec grid */
+.specgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:16px 0}
+.speccard{background:var(--card);border:1px solid var(--line-dark);padding:14px 16px}
+.speccard h4{font-family:var(--disp);font-weight:700;font-size:15px;color:var(--ink);margin-bottom:6px}
+.speccard p{font-size:12.5px;margin:0;line-height:1.6}
+/* related links */
+.rel{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:16px 0 8px}
+.rel a{display:block;background:var(--card);border:1px solid var(--line-dark);padding:12px 14px;text-decoration:none;transition:border-color .15s}
+.rel a:hover{border-color:var(--ink)}
+.rel .k{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}
+.rel .t{font-family:var(--disp);font-weight:600;font-size:14.5px;color:var(--ink);margin-top:3px;line-height:1.25}
+.ctaband{background:linear-gradient(120deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;border-top:4px solid var(--signal);margin-top:40px}
+.ctaband-in{max-width:1240px;margin:0 auto;padding:44px 20px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.ctaband h3{font-family:var(--disp);font-weight:700;font-size:28px;letter-spacing:.01em}
+.ctaband p{color:#AFC0D3;font-size:14px;margin-top:6px;max-width:520px;line-height:1.6}
+.ctabtn{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:14px 26px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.05em;text-decoration:none;flex-shrink:0}
+.ctabtn:hover{background:transparent;color:var(--signal)}
+footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
+footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
+@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
+footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer p{line-height:1.6;max-width:460px}
+footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
+footer a{color:#9FB0C3;text-decoration:none}
+footer a:hover{color:#fff}
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="/index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — SOURCING &amp; ENGINEERING REFERENCE</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="/index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu">
+        <a href="/free-tools.html">All Free Tools</a>
+        <a href="/voltfield-sandbox.html">Practice Sandbox</a>
+        <a href="/voltfield-pod-designer.html">POD &amp; Skid Designer</a>
+        <a href="/voltfield-rack-builder.html">Rack Elevation Builder</a>
+        <a href="/engineering-calculators.html">Calculators</a>
+        <a href="/voltfield-bom-generator.html">BOM Generator</a>
+        <a href="/voltfield-bom.html">BOM Match</a>
+        <a href="/voltfield-pcb.html">PCB Builder</a>
+        <a href="/voltfield-pcb-layout.html">PCB Layout Tool</a>
+        <a href="/voltfield-identify.html">Part ID</a>
+        <a href="/voltfield-eol.html">Obsolete/EOL</a>
+        <a href="/voltfield-glossary-quiz.html">Glossary Quiz</a>
+        <a href="/rfq-toolkit.html">RFQ Toolkit</a>
+        <a href="/site-search.html">Search</a>
+      </div>
+    </div>
+    <a href="/voltfield-insights.html">Guides &amp; Insights</a>
+    <a href="/lead-time-index.html">Lead-Time Index</a>
+    <a href="/voltfield-supply-catalog.html">Spec Library</a>
+    <a href="/voltfield-suppliers.html">Suppliers</a>
+    <a href="/whats-new.html">What's New</a>
+    <a href="/voltfield-account.html">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <a class="quotebtn" href="/voltfield-supply-catalog.html?quote=1" aria-label="View sourcing list on catalog page">SOURCING LIST <span class="ct" id="quoteCount">0</span></a>
+  </div>
+</header>
+
+<section class="artban">
+  <div class="artban-in">
+    <div class="eyebrow">Data Centers · Equipment Category</div>
+    <h1>Data center switchgear and breakers</h1>
+    <p class="dek">From a 15 A moulded-case device to a metal-clad medium-voltage lineup. What separates them, why interrupting rating is the number that gets under-specified, and where the lead times actually bite.</p>
+  </div>
+</section>
+
+<nav class="crumb" aria-label="Breadcrumb">
+  <a href="/index.html">Home</a><span class="sep">/</span>
+  <a href="/data-centers.html">Data Centers</a><span class="sep">/</span>
+  <span>Switchgear &amp; Breakers</span>
+</nav>
+
+<div class="artwrap">
+  <h2>Four families, two very different jobs</h2>
+  <p>Switchgear and breakers cover everything from a 15 A moulded-case device to a metal-clad medium-voltage lineup costing most of a million dollars. What unites them is a single idea: interrupt fault current safely, and isolate the faulted section without taking down everything else. What separates them is the voltage class they work at and how much fault energy they have to survive.</p>
+  <p>The number that catches people out is not the continuous current rating — it is the interrupting rating. A device can be correctly sized for the load it carries and still be dangerously under-rated for the fault current available at its terminals. Those are two independent numbers, and the second one is set upstream, by the transformer's impedance and the utility's contribution.</p>
+
+  <div class="tblwrap">
+  <table class="famtable">
+    <thead>
+      <tr><th>Family</th><th>Typical configuration</th><th>Indicative lead time</th><th>Standards</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>MV Switchgear (5&ndash;38 kV)</b>Metal-clad, vacuum-interrupter lineups at the utility interface.</td>
+        <td class="num">5 / 15 / 27 / 38 kV<br>1,200&ndash;4,000 A bus<br>25 / 40 / 50 kA interrupting</td>
+        <td><span class="lt long">Sold out through 2028</span></td>
+        <td class="num">ANSI C37<br>IEEE</td>
+      </tr>
+      <tr>
+        <td><b>LV Switchgear</b>The main 480V distribution lineup. Drawout construction allows a breaker to be serviced without a shutdown.</td>
+        <td class="num">800&ndash;5,000 A bus<br>480V / 600V<br>Fixed or drawout</td>
+        <td><span class="lt mid">~24 weeks</span></td>
+        <td class="num">UL 1558<br>ANSI C37.20.1</td>
+      </tr>
+      <tr>
+        <td><b>Air Circuit Breakers</b>Large-frame breakers for main and tie positions, usually inside LV switchgear.</td>
+        <td class="num">800&ndash;6,000 A frame<br>3 or 4 pole<br>LSI / LSIG trip</td>
+        <td><span class="lt mid">~26 weeks</span></td>
+        <td class="num">UL 1066<br>ANSI</td>
+      </tr>
+      <tr>
+        <td><b>Moulded-Case Breakers</b>Feeder and branch protection. The commodity end &mdash; and by far the shortest lead time.</td>
+        <td class="num">15&ndash;1,200 A<br>1 / 2 / 3 pole<br>Thermal-mag or electronic LSIG</td>
+        <td><span class="lt short">~12 weeks</span></td>
+        <td class="num">UL 489</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout"><b>The MV switchgear position is worth reading carefully.</b> &ldquo;Sold out through 2028&rdquo; is not a long lead time, it is an allocation position &mdash; capacity is spoken for rather than queued. That changes the procurement approach: it is a conversation about allocation and alternates, not about placing an order earlier. All figures here are indicative modelled positions for North America, reviewed monthly, published with their basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>. They are not quotations or inventory commitments.</div>
+
+  <h2>Specifications that decide the selection</h2>
+  <div class="specgrid">
+    <div class="speccard">
+      <h4>Interrupting rating (kAIC)</h4>
+      <p>The fault current the device can safely break. Set by what is available at its terminals, not by the load. This is the rating that gets under-specified.</p>
+    </div>
+    <div class="speccard">
+      <h4>Continuous bus rating</h4>
+      <p>What the bus carries indefinitely. Independent of interrupting rating &mdash; a 3,000 A bus and a 65 kA interrupting rating are unrelated decisions.</p>
+    </div>
+    <div class="speccard">
+      <h4>Trip unit type</h4>
+      <p>Thermal-magnetic is fixed. Electronic LSIG adds long-time, short-time, instantaneous and ground-fault adjustment, which is what makes selective coordination achievable.</p>
+    </div>
+    <div class="speccard">
+      <h4>Fixed versus drawout</h4>
+      <p>Drawout lets a breaker be racked out and serviced without de-energising the bus. On a facility that cannot take a shutdown, this is not a convenience feature.</p>
+    </div>
+  </div>
+
+  <h2>Selective coordination, and why it drives the spec</h2>
+  <p>Under a fault, the ideal outcome is that the nearest upstream device opens and nothing above it does. Achieving that means the time-current characteristics of devices in series must not overlap &mdash; each upstream device has to be slower, at every current, than the one below it.</p>
+  <p>That is why trip unit selection matters more than it appears. Fixed thermal-magnetic devices leave nothing to adjust; electronic trip units with adjustable short-time and ground-fault bands give the room needed to separate the curves. On critical facilities, coordination is frequently a code requirement rather than a design preference, and discovering it after the gear is ordered is expensive.</p>
+
+  <h2>Selection criteria in practice</h2>
+  <ul>
+    <li><b>Settle available fault current first.</b> It comes from the transformer impedance and the utility contribution. Everything about the interrupting rating follows from it.</li>
+    <li><b>Decide whether the facility can ever be shut down.</b> If not, drawout construction and adequate isolation are requirements, not upgrades.</li>
+    <li><b>Check arc-flash implications early.</b> Incident energy depends on available fault current and clearing time; a slower upstream device improves coordination but worsens arc-flash energy. The two goals pull against each other.</li>
+    <li><b>Confirm the voltage class against the utility interface.</b> MV gear is an allocation conversation today; discovering you need it late is materially worse than discovering you need more LV gear.</li>
+    <li><b>Plan spare positions.</b> Adding a section to an existing lineup is far harder than buying it with spare cubicles.</li>
+  </ul>
+
+  <h2>Typical applications</h2>
+  <p><b>MV switchgear</b> sits at the utility interface where the campus takes power at medium voltage. <b>LV switchgear</b> is the main 480V distribution lineup downstream of the transformer, holding <b>air circuit breakers</b> in the main and tie positions. <b>Moulded-case breakers</b> handle feeders and branch circuits from panelboards throughout the facility. The lead-time spread across those four &mdash; from allocation-limited down to about twelve weeks &mdash; is why the upstream decisions have to be made first.</p>
+
+  <h2>Work the numbers before you RFQ</h2>
+  <div class="rel">
+    <a href="/engineering-calculators.html#fault-current"><span class="k">Calculator</span><span class="t">Estimate available fault current and check breaker withstand</span></a>
+    <a href="/engineering-calculators.html#arc-flash"><span class="k">Calculator</span><span class="t">Estimate arc-flash incident energy</span></a>
+    <a href="/engineering-calculators.html#voltage-drop"><span class="k">Calculator</span><span class="t">Size feeders and check voltage drop</span></a>
+    <a href="/voltfield-sandbox.html"><span class="k">Practice</span><span class="t">Build a one-line and run the protection checks</span></a>
+    <a href="/voltfield-pod-designer.html"><span class="k">Practice</span><span class="t">Size a POD or skid around a switchgear lineup</span></a>
+    <a href="/rfq-toolkit.html"><span class="k">Template</span><span class="t">Switchgear RFQ specification template</span></a>
+  </div>
+
+  <h2>Related reading</h2>
+  <div class="rel">
+    <a href="/guide-switchgear-compartments.html"><span class="k">Guide</span><span class="t">What is inside a switchgear compartment</span></a>
+    <a href="/guide-short-circuit-studies-breaker-coordination.html"><span class="k">Guide</span><span class="t">Short-circuit studies and breaker coordination</span></a>
+    <a href="/guide-arc-flash-boundary-basics.html"><span class="k">Guide</span><span class="t">Arc-flash boundary basics</span></a>
+    <a href="/data-centers/transformers.html"><span class="k">Category</span><span class="t">Data center transformers &mdash; where fault current originates</span></a>
+    <a href="/voltfield-eol.html"><span class="k">Reference</span><span class="t">Obsolete breaker platforms and their successors</span></a>
+    <a href="/data-centers.html"><span class="k">Sector</span><span class="t">All data center power equipment</span></a>
+  </div>
+
+  <h2>Common questions</h2>
+  <h3>What is the difference between trip rating and interrupting rating?</h3>
+  <p>Trip rating (AT) is the current at which the breaker opens under overload &mdash; it matches the load. Interrupting rating (kAIC) is the fault current it can safely break without failing. They are independent. A breaker can be correctly sized on trip rating and still be unsafe if the available fault current exceeds its interrupting rating.</p>
+
+  <h3>Why is medium-voltage switchgear on allocation rather than just a long lead time?</h3>
+  <p>Because the constraint is manufacturing capacity rather than queue position. Slots are committed well in advance, so ordering earlier does not necessarily help &mdash; the useful conversation is about allocation, alternates and phased delivery.</p>
+
+  <h3>Do I need drawout breakers?</h3>
+  <p>If the facility cannot be de-energised for breaker maintenance, effectively yes. Drawout construction lets a breaker be racked out and worked on while the bus stays live. Fixed-mount gear is cheaper and perfectly appropriate where a planned shutdown is acceptable.</p>
+
+  <h3>Can better coordination make arc-flash worse?</h3>
+  <p>Yes, and this trips people up. Slowing an upstream device to separate its curve from the one below improves coordination, but incident energy scales with clearing time &mdash; so the same change can raise arc-flash energy at that bus. The two objectives genuinely conflict and have to be balanced rather than optimised separately.</p>
+
+</div>
+
+<section class="ctaband">
+  <div class="ctaband-in">
+    <div>
+      <h3>Sourcing switchgear?</h3>
+      <p>Configure the lineup, save it to a sourcing list, and send it over. It is routed to a person who connects you with the distributor or OEM that can fulfil it &mdash; Voltfield does not stock or ship equipment itself.</p>
+    </div>
+    <a class="ctabtn" href="/voltfield-supply-catalog.html?sector=dc&amp;cat=Switchgear%20%26%20Breakers">Browse switchgear specs &rsaquo;</a>
+  </div>
+</section>
+
+<footer>
+  <div class="in">
+    <div>
+      <h5>Voltfield Supply Co.</h5>
+      <p>Independent sourcing reference for long-lead electrical, storage, oilfield and MRO equipment. Pricing and lead times shown across the site are indicative market ranges for North America, for planning reference only — actual pricing, availability and lead time are set by the distributor, mill or OEM fulfilling the order.</p>
+    </div>
+    <div><h5>Desks</h5><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+      <li><a href="/oil-gas.html">Drilling &amp; Completions</a></li>
+      <li><a href="/industrial-supply.html">Industrial Supply (MRO)</a></li>
+    </ul></div>
+    <div><h5>Compliance</h5><ul><li>UL · IEEE · ANSI C57</li><li>API 5CT/6A/7K/16A/Q1</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="/voltfield-site-config.js"></script>
+<script>
+(function(){
+  try{
+    const q=JSON.parse(localStorage.getItem("vf_quote")||"[]");
+    const el=document.getElementById("quoteCount");
+    if(el)el.textContent=Array.isArray(q)?q.length:0;
+  }catch(e){}
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

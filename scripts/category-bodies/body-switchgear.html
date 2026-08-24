@@ -1,0 +1,108 @@
+  <h2>Four families, two very different jobs</h2>
+  <p>Switchgear and breakers cover everything from a 15 A moulded-case device to a metal-clad medium-voltage lineup costing most of a million dollars. What unites them is a single idea: interrupt fault current safely, and isolate the faulted section without taking down everything else. What separates them is the voltage class they work at and how much fault energy they have to survive.</p>
+  <p>The number that catches people out is not the continuous current rating — it is the interrupting rating. A device can be correctly sized for the load it carries and still be dangerously under-rated for the fault current available at its terminals. Those are two independent numbers, and the second one is set upstream, by the transformer's impedance and the utility's contribution.</p>
+
+  <div class="tblwrap">
+  <table class="famtable">
+    <thead>
+      <tr><th>Family</th><th>Typical configuration</th><th>Indicative lead time</th><th>Standards</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>MV Switchgear (5&ndash;38 kV)</b>Metal-clad, vacuum-interrupter lineups at the utility interface.</td>
+        <td class="num">5 / 15 / 27 / 38 kV<br>1,200&ndash;4,000 A bus<br>25 / 40 / 50 kA interrupting</td>
+        <td><span class="lt long">Sold out through 2028</span></td>
+        <td class="num">ANSI C37<br>IEEE</td>
+      </tr>
+      <tr>
+        <td><b>LV Switchgear</b>The main 480V distribution lineup. Drawout construction allows a breaker to be serviced without a shutdown.</td>
+        <td class="num">800&ndash;5,000 A bus<br>480V / 600V<br>Fixed or drawout</td>
+        <td><span class="lt mid">~24 weeks</span></td>
+        <td class="num">UL 1558<br>ANSI C37.20.1</td>
+      </tr>
+      <tr>
+        <td><b>Air Circuit Breakers</b>Large-frame breakers for main and tie positions, usually inside LV switchgear.</td>
+        <td class="num">800&ndash;6,000 A frame<br>3 or 4 pole<br>LSI / LSIG trip</td>
+        <td><span class="lt mid">~26 weeks</span></td>
+        <td class="num">UL 1066<br>ANSI</td>
+      </tr>
+      <tr>
+        <td><b>Moulded-Case Breakers</b>Feeder and branch protection. The commodity end &mdash; and by far the shortest lead time.</td>
+        <td class="num">15&ndash;1,200 A<br>1 / 2 / 3 pole<br>Thermal-mag or electronic LSIG</td>
+        <td><span class="lt short">~12 weeks</span></td>
+        <td class="num">UL 489</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout"><b>The MV switchgear position is worth reading carefully.</b> &ldquo;Sold out through 2028&rdquo; is not a long lead time, it is an allocation position &mdash; capacity is spoken for rather than queued. That changes the procurement approach: it is a conversation about allocation and alternates, not about placing an order earlier. All figures here are indicative modelled positions for North America, reviewed monthly, published with their basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>. They are not quotations or inventory commitments.</div>
+
+  <h2>Specifications that decide the selection</h2>
+  <div class="specgrid">
+    <div class="speccard">
+      <h4>Interrupting rating (kAIC)</h4>
+      <p>The fault current the device can safely break. Set by what is available at its terminals, not by the load. This is the rating that gets under-specified.</p>
+    </div>
+    <div class="speccard">
+      <h4>Continuous bus rating</h4>
+      <p>What the bus carries indefinitely. Independent of interrupting rating &mdash; a 3,000 A bus and a 65 kA interrupting rating are unrelated decisions.</p>
+    </div>
+    <div class="speccard">
+      <h4>Trip unit type</h4>
+      <p>Thermal-magnetic is fixed. Electronic LSIG adds long-time, short-time, instantaneous and ground-fault adjustment, which is what makes selective coordination achievable.</p>
+    </div>
+    <div class="speccard">
+      <h4>Fixed versus drawout</h4>
+      <p>Drawout lets a breaker be racked out and serviced without de-energising the bus. On a facility that cannot take a shutdown, this is not a convenience feature.</p>
+    </div>
+  </div>
+
+  <h2>Selective coordination, and why it drives the spec</h2>
+  <p>Under a fault, the ideal outcome is that the nearest upstream device opens and nothing above it does. Achieving that means the time-current characteristics of devices in series must not overlap &mdash; each upstream device has to be slower, at every current, than the one below it.</p>
+  <p>That is why trip unit selection matters more than it appears. Fixed thermal-magnetic devices leave nothing to adjust; electronic trip units with adjustable short-time and ground-fault bands give the room needed to separate the curves. On critical facilities, coordination is frequently a code requirement rather than a design preference, and discovering it after the gear is ordered is expensive.</p>
+
+  <h2>Selection criteria in practice</h2>
+  <ul>
+    <li><b>Settle available fault current first.</b> It comes from the transformer impedance and the utility contribution. Everything about the interrupting rating follows from it.</li>
+    <li><b>Decide whether the facility can ever be shut down.</b> If not, drawout construction and adequate isolation are requirements, not upgrades.</li>
+    <li><b>Check arc-flash implications early.</b> Incident energy depends on available fault current and clearing time; a slower upstream device improves coordination but worsens arc-flash energy. The two goals pull against each other.</li>
+    <li><b>Confirm the voltage class against the utility interface.</b> MV gear is an allocation conversation today; discovering you need it late is materially worse than discovering you need more LV gear.</li>
+    <li><b>Plan spare positions.</b> Adding a section to an existing lineup is far harder than buying it with spare cubicles.</li>
+  </ul>
+
+  <h2>Typical applications</h2>
+  <p><b>MV switchgear</b> sits at the utility interface where the campus takes power at medium voltage. <b>LV switchgear</b> is the main 480V distribution lineup downstream of the transformer, holding <b>air circuit breakers</b> in the main and tie positions. <b>Moulded-case breakers</b> handle feeders and branch circuits from panelboards throughout the facility. The lead-time spread across those four &mdash; from allocation-limited down to about twelve weeks &mdash; is why the upstream decisions have to be made first.</p>
+
+  <h2>Work the numbers before you RFQ</h2>
+  <div class="rel">
+    <a href="/engineering-calculators.html#fault-current"><span class="k">Calculator</span><span class="t">Estimate available fault current and check breaker withstand</span></a>
+    <a href="/engineering-calculators.html#arc-flash"><span class="k">Calculator</span><span class="t">Estimate arc-flash incident energy</span></a>
+    <a href="/engineering-calculators.html#voltage-drop"><span class="k">Calculator</span><span class="t">Size feeders and check voltage drop</span></a>
+    <a href="/voltfield-sandbox.html"><span class="k">Practice</span><span class="t">Build a one-line and run the protection checks</span></a>
+    <a href="/voltfield-pod-designer.html"><span class="k">Practice</span><span class="t">Size a POD or skid around a switchgear lineup</span></a>
+    <a href="/rfq-toolkit.html"><span class="k">Template</span><span class="t">Switchgear RFQ specification template</span></a>
+  </div>
+
+  <h2>Related reading</h2>
+  <div class="rel">
+    <a href="/guide-switchgear-compartments.html"><span class="k">Guide</span><span class="t">What is inside a switchgear compartment</span></a>
+    <a href="/guide-short-circuit-studies-breaker-coordination.html"><span class="k">Guide</span><span class="t">Short-circuit studies and breaker coordination</span></a>
+    <a href="/guide-arc-flash-boundary-basics.html"><span class="k">Guide</span><span class="t">Arc-flash boundary basics</span></a>
+    <a href="/data-centers/transformers.html"><span class="k">Category</span><span class="t">Data center transformers &mdash; where fault current originates</span></a>
+    <a href="/voltfield-eol.html"><span class="k">Reference</span><span class="t">Obsolete breaker platforms and their successors</span></a>
+    <a href="/data-centers.html"><span class="k">Sector</span><span class="t">All data center power equipment</span></a>
+  </div>
+
+  <h2>Common questions</h2>
+  <h3>What is the difference between trip rating and interrupting rating?</h3>
+  <p>Trip rating (AT) is the current at which the breaker opens under overload &mdash; it matches the load. Interrupting rating (kAIC) is the fault current it can safely break without failing. They are independent. A breaker can be correctly sized on trip rating and still be unsafe if the available fault current exceeds its interrupting rating.</p>
+
+  <h3>Why is medium-voltage switchgear on allocation rather than just a long lead time?</h3>
+  <p>Because the constraint is manufacturing capacity rather than queue position. Slots are committed well in advance, so ordering earlier does not necessarily help &mdash; the useful conversation is about allocation, alternates and phased delivery.</p>
+
+  <h3>Do I need drawout breakers?</h3>
+  <p>If the facility cannot be de-energised for breaker maintenance, effectively yes. Drawout construction lets a breaker be racked out and worked on while the bus stays live. Fixed-mount gear is cheaper and perfectly appropriate where a planned shutdown is acceptable.</p>
+
+  <h3>Can better coordination make arc-flash worse?</h3>
+  <p>Yes, and this trips people up. Slowing an upstream device to separate its curve from the one below improves coordination, but incident energy scales with clearing time &mdash; so the same change can raise arc-flash energy at that bus. The two objectives genuinely conflict and have to be balanced rather than optimised separately.</p>

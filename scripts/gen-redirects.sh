@@ -34,8 +34,11 @@ cat <<'HDR'
 
 HDR
 
-for f in *.html; do
+# root pages, then one level of category subdirectories
+for f in *.html data-centers/*.html; do
   base="${f%.html}"
+  # skip if the directory glob did not match anything
+  [ -e "$f" ] || continue
   # index is the root; 404 is served by Netlify's own not-found handling
   [ "$base" = "index" ] && continue
   [ "$base" = "404" ] && continue

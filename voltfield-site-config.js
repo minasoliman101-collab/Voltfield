@@ -65,7 +65,12 @@ const SITE_CONFIG = {
   if (!('serviceWorker' in navigator)) return;
   if (location.protocol !== 'https:' && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) return;
   window.addEventListener('load', function () {
-    navigator.serviceWorker.register('sw.js').catch(function () { /* non-fatal */ });
+    /* Root-absolute, not 'sw.js'. A relative path resolves against the current
+       directory, so any page outside the site root (e.g. /data-centers/transformers)
+       would ask for /data-centers/sw.js -- a 404 that fails silently, and if such a
+       file ever existed it would register with a scope limited to that directory.
+       An explicit '/' scope keeps one worker for the whole origin at any depth. */
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function () { /* non-fatal */ });
   });
 })();
 
