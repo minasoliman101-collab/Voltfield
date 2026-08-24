@@ -201,7 +201,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   repeating-linear-gradient(90deg,#FAFBFC,#FAFBFC 17px,#F0F3F6 17px,#F0F3F6 18px);
   background-blend-mode:multiply;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center}
 .newscard .nc-img svg{height:78px;width:auto;filter:drop-shadow(0 2px 3px rgba(16,27,45,.15))}
-.newscard .nc-img img{width:100%;height:100%;object-fit:cover;display:block}
+/* Own equipment illustrations, not publisher photography. Contained rather than
+   full-bleed, and explicitly labelled, so it cannot read as a news photo of the
+   event the headline describes. The images are square; sizing by height and
+   letting width follow the aspect ratio keeps them centred in the band. */
+.newscard .nc-img{position:relative;overflow:hidden}
+.newscard .nc-img picture{display:contents}
+.newscard .nc-img img{height:96px;width:96px;object-fit:contain;
+  filter:drop-shadow(0 2px 4px rgba(16,27,45,.18));mix-blend-mode:multiply}
+.newscard .nc-illus{position:absolute;right:6px;bottom:5px;font-family:var(--mono);font-size:8px;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--slate);background:rgba(255,255,255,.82);padding:1px 5px}
+html[data-theme="dark"] .newscard .nc-img img{mix-blend-mode:normal}
+html[data-theme="dark"] .newscard .nc-illus{background:rgba(16,27,45,.8);color:#9FB0C3}
 .newscard .nc-tag{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line)}
 .newscard .nc-sec{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.1em;color:#fff;padding:2px 7px;text-transform:uppercase}
 .newscard .nc-date{font-family:var(--mono);font-size:10.5px;color:var(--slate)}
@@ -459,7 +470,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <div class="newsgrid" id="newsgrid">
     <a class="newscard" data-sec="dc" target="_blank" rel="noopener" href="https://www.techradar.com/pro/darkness-looms-across-europe-and-america-as-power-hungry-ai-data-centers-and-electric-cars-drain-the-grid-decimate-factory-capacity-and-engineer-a-four-year-wait-for-transformers-threatening-to-leave-entire-regions-in-the-dark">
-      <div class="nc-img"><img src="https://cdn.mos.cms.futurecdn.net/3Vu4FwPCzHo6pxU4MsqSPU-1920-80.png" alt="Grid transformer waits stretch toward four years" loading="lazy" onerror="this.remove()"></div>
+      <div class="nc-img"><picture><source srcset="images/parts/dc-large-power-transformers.webp" type="image/webp"><img src="images/parts/dc-large-power-transformers.jpg" alt="Large power transformer &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div>
       <div class="nc-tag"><span class="nc-sec" style="background:var(--dc)">DATA CENTERS</span><span class="nc-date">Jul 14, 2026</span></div>
       <div class="nc-body">
         <h4>Grid transformer waits stretch toward four years</h4>
@@ -468,7 +479,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </a>
     <a class="newscard" data-sec="dc" target="_blank" rel="noopener" href="https://mediaselangor.com/en/2026/07/383621">
-      <div class="nc-img"><img src="https://mssb-media.xcms.io/publisher-c1a3f893382d2b2f8a9aa22a654d9c97/2026/07/60fb0d72aee7547e3442141104b66897.jpg=s800" alt="Utilities and data centers now bid for the same equipment" loading="lazy" onerror="this.remove()"></div>
+      <div class="nc-img"><picture><source srcset="images/parts/dc-pad-mount-transformers.webp" type="image/webp"><img src="images/parts/dc-pad-mount-transformers.jpg" alt="Pad-mount transformer &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div>
       <div class="nc-tag"><span class="nc-sec" style="background:var(--dc)">DATA CENTERS</span><span class="nc-date">Jul 9, 2026</span></div>
       <div class="nc-body">
         <h4>Utilities and data centers now bid for the same equipment</h4>
@@ -477,7 +488,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </a>
     <a class="newscard" data-sec="dc" target="_blank" rel="noopener" href="https://www.grandviewresearch.com/industry-analysis/data-center-liquid-cooling-market-report">
-      <div class="nc-img"><svg viewBox="0 0 160 100" fill="none" stroke="#22334C" stroke-width="2.2"><rect x="30" y="18" width="44" height="64" rx="3" fill="#E9EEF3"/><path d="M36 28h32M36 38h32M36 48h32M36 58h32M36 68h32" stroke-width="1.6" stroke="#B9C4D0"/><rect x="102" y="46" width="34" height="32" rx="3" fill="#D3DBE4"/><path d="M74 34h45v12M74 70h28" stroke-width="2.4" stroke="#2B6CB0"/><path d="M119 20c-5 8-8 11-8 15a8 8 0 0016 0c0-4-3-7-8-15z" fill="#FFC400" stroke-width="1.8"/><path d="M108 54h22M108 62h16" stroke-width="1.4" stroke="#5B6B7E"/></svg></div>
+      <div class="nc-img"><picture><source srcset="images/parts/dc-coolant-distribution-units-cdu.webp" type="image/webp"><img src="images/parts/dc-coolant-distribution-units-cdu.jpg" alt="Coolant distribution unit &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div>
       <div class="nc-tag"><span class="nc-sec" style="background:var(--dc)">DATA CENTERS</span><span class="nc-date">Market report</span></div>
       <div class="nc-body">
         <h4>Liquid cooling market on pace for $29B by 2033</h4>
@@ -486,7 +497,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </a>
     <a class="newscard" data-sec="re" target="_blank" rel="noopener" href="https://www.pv-tech.org/us-treasurys-first-interim-feoc-guidance-met-with-some-relief/">
-      <div class="nc-img"><img src="https://www.pv-tech.org/wp-content/uploads/2022/08/US_Congress_02-credit-wikimedia-user-Bjoertvedt-768x576-1.jpg" alt="Treasury's first FEOC guidance gives developers a workable path" loading="lazy" onerror="this.remove()"></div>
+      <div class="nc-img"><picture><source srcset="images/parts/re-string-inverters-feoc-clean.webp" type="image/webp"><img src="images/parts/re-string-inverters-feoc-clean.jpg" alt="String inverter &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div>
       <div class="nc-tag"><span class="nc-sec" style="background:var(--re)">RENEWABLES</span><span class="nc-date">Feb 18, 2026</span></div>
       <div class="nc-body">
         <h4>Treasury's first FEOC guidance gives developers a workable path</h4>
@@ -495,7 +506,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </a>
     <a class="newscard" data-sec="re" target="_blank" rel="noopener" href="https://www.pv-tech.org/the-impact-of-evolving-global-policies-on-the-pv-inverter-industry/">
-      <div class="nc-img"><img src="https://www.pv-tech.org/wp-content/uploads/2024/07/sungrow-in-germany.jpg" alt="Tariffs and FEOC rules are reshaping the inverter industry" loading="lazy" onerror="this.remove()"></div>
+      <div class="nc-img"><picture><source srcset="images/parts/re-central-inverters-utility.webp" type="image/webp"><img src="images/parts/re-central-inverters-utility.jpg" alt="Utility central inverter &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div>
       <div class="nc-tag"><span class="nc-sec" style="background:var(--re)">RENEWABLES</span><span class="nc-date">May 5, 2026</span></div>
       <div class="nc-body">
         <h4>Tariffs and FEOC rules are reshaping the inverter industry</h4>
@@ -504,7 +515,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </a>
     <a class="newscard" data-sec="re" target="_blank" rel="noopener" href="https://pv-magazine-usa.com/2026/07/30/u-s-solar-module-assembly-prices-stabilize-as-trade-cases-and-ownership-shifts-shake-supply-chains/">
-      <div class="nc-img"><img src="https://pv-magazine-usa.com/wp-content/uploads/2026/06/michael-pointner-9XNbOxsSIrw-unsplash1-2048x1365-1-1536x1024-2-1024x683-1-1.jpg" alt="US module assembly prices hold steady amid FEOC-driven asset sales" loading="lazy" onerror="this.remove()"></div>
+      <div class="nc-img"><picture><source srcset="images/parts/re-mono-perc-modules.webp" type="image/webp"><img src="images/parts/re-mono-perc-modules.jpg" alt="Mono PERC PV module &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div>
       <div class="nc-tag"><span class="nc-sec" style="background:var(--re)">RENEWABLES</span><span class="nc-date">Jul 30, 2026</span></div>
       <div class="nc-body">
         <h4>US module assembly prices hold steady amid FEOC-driven asset sales</h4>
@@ -513,7 +524,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </a>
     <a class="newscard" data-sec="bess" target="_blank" rel="noopener" href="https://www.energy-storage.news/global-bess-deployments-soar-27-in-h1-2026-saudi-arabia-drives-figures-in-june/">
-      <div class="nc-img"><img src="https://www.energy-storage.news/wp-content/uploads/2026/06/grenergy-elena-planta-2-800x533-1.jpg" alt="Saudi Arabia leads monthly BESS deployments for the first time" loading="lazy" onerror="this.remove()"></div>
+      <div class="nc-img"><picture><source srcset="images/parts/bess-containerized-enclosures.webp" type="image/webp"><img src="images/parts/bess-containerized-enclosures.jpg" alt="Containerised battery enclosure &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div>
       <div class="nc-tag"><span class="nc-sec" style="background:var(--bess)">STORAGE</span><span class="nc-date">Jul 15, 2026</span></div>
       <div class="nc-body">
         <h4>Saudi Arabia leads monthly BESS deployments for the first time</h4>
@@ -522,7 +533,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </a>
     <a class="newscard" data-sec="bess" target="_blank" rel="noopener" href="https://www.rystadenergy.com/insights/energy-storage-outlook-the-expanding-role-of-bess-in-global-energy-systems">
-      <div class="nc-img"><img src="https://www.datocms-assets.com/75979/1769612617-newsletter-images-under-monthly-315-x-150-px.png?auto=format&fit=max&w=1200" alt="Global battery storage capacity overtakes pumped hydro" loading="lazy" onerror="this.remove()"></div>
+      <div class="nc-img"><picture><source srcset="images/parts/bess-modular-battery-racks.webp" type="image/webp"><img src="images/parts/bess-modular-battery-racks.jpg" alt="Modular battery rack &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div>
       <div class="nc-tag"><span class="nc-sec" style="background:var(--bess)">STORAGE</span><span class="nc-date">May 20, 2026</span></div>
       <div class="nc-body">
         <h4>Global battery storage capacity overtakes pumped hydro</h4>
@@ -531,7 +542,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </a>
     <a class="newscard" data-sec="bess" target="_blank" rel="noopener" href="https://www.utilitydive.com/news/us-sees-record-q1-2026-energy-storage-installations-amid-rosy-outlook/823547/">
-      <div class="nc-img"><img src="https://imgproxy.divecdn.com/75TX9-v9Vd40OOUshFMlpOF913BhDn6DtUFZTAgmG7o/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xOTI2MjI3OTQ4LmpwZw==.webp" alt="US sees record Q1 2026 energy storage installations amid rosy outlook" loading="lazy" onerror="this.remove()"></div>
+      <div class="nc-img"><picture><source srcset="images/parts/bess-battery-modules-rack-hardware.webp" type="image/webp"><img src="images/parts/bess-battery-modules-rack-hardware.jpg" alt="Battery modules and rack hardware &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div>
       <div class="nc-tag"><span class="nc-sec" style="background:var(--bess)">STORAGE</span><span class="nc-date">Jun 23, 2026</span></div>
       <div class="nc-body">
         <h4>US posts record Q1 energy storage installations</h4>
@@ -540,7 +551,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </a>
     <a class="newscard" data-sec="og" target="_blank" rel="noopener" href="https://worldoil.com/news/2026/6/24/u-s-steel-invests-475-million-to-expand-octg-production-capacity/">
-      <div class="nc-img"><img src="https://www.worldoil.com/media/v3ydh3pp/us-steel-octg-operations-virginia.jpg" alt="US Steel commits $475M to expand OCTG capacity in Alabama" loading="lazy" onerror="this.remove()"></div>
+      <div class="nc-img"><picture><source srcset="images/parts/og-octg-casing.webp" type="image/webp"><img src="images/parts/og-octg-casing.jpg" alt="OCTG casing &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div>
       <div class="nc-tag"><span class="nc-sec" style="background:var(--og)">OIL &amp; GAS</span><span class="nc-date">Jun 24, 2026</span></div>
       <div class="nc-body">
         <h4>US Steel commits $475M to expand OCTG capacity in Alabama</h4>
@@ -549,7 +560,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </a>
     <a class="newscard" data-sec="og" target="_blank" rel="noopener" href="https://worldoil.com/news/2026/7/21/halliburton-posts-stronger-q2-on-north-america-recovery/">
-      <div class="nc-img"><img src="https://www.worldoil.com/media/15151/newsletter-top-jeff-miller-halliburton.jpg" alt="Halliburton posts stronger Q2 on North America recovery" loading="lazy" onerror="this.remove()"></div>
+      <div class="nc-img"><picture><source srcset="images/parts/og-frac-valves.webp" type="image/webp"><img src="images/parts/og-frac-valves.jpg" alt="Frac valves &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div>
       <div class="nc-tag"><span class="nc-sec" style="background:var(--og)">OIL &amp; GAS</span><span class="nc-date">Jul 21, 2026</span></div>
       <div class="nc-body">
         <h4>Halliburton posts stronger Q2 on North America recovery</h4>
@@ -558,7 +569,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </a>
     <a class="newscard" data-sec="og" target="_blank" rel="noopener" href="https://rigcount.bakerhughes.com/">
-      <div class="nc-img"><svg viewBox="0 0 160 100" fill="none" stroke="#22334C" stroke-width="2.2"><path d="M28 88 38 24h6l10 64" fill="#E9EEF3"/><path d="M28 88 38 24h6l10 64z"/><path d="M31 72h20M34 52h14" stroke-width="1.4"/><rect x="35" y="18" width="12" height="6" fill="#D3DBE4"/><rect x="76" y="22" width="64" height="60" rx="2" fill="#fff"/><path d="M76 36h64" stroke-width="1.6"/><g stroke="#B9C4D0" stroke-width="1.4"><path d="M84 44v30M92 44v30M100 44v30M108 44v30"/></g><path d="M80 78l32-32" stroke="#FFC400" stroke-width="2.4"/><text x="82" y="33" font-family="monospace" font-size="8" fill="#5B6B7E" stroke="none">WEEKLY COUNT</text><path d="M18 88h124" stroke-width="2.6"/></svg></div>
+      <div class="nc-img"><picture><source srcset="images/parts/og-drill-pipe-s-135.webp" type="image/webp"><img src="images/parts/og-drill-pipe-s-135.jpg" alt="S-135 drill pipe &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div>
       <div class="nc-tag"><span class="nc-sec" style="background:var(--og)">OIL &amp; GAS</span><span class="nc-date">Updated weekly</span></div>
       <div class="nc-body">
         <h4>The rig count: oilfield equipment demand's leading indicator</h4>
