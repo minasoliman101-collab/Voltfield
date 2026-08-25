@@ -67,7 +67,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .kbsearch-item{display:block;width:100%;text-align:left;padding:10px 16px;border:0;border-bottom:1px solid var(--line);background:none;text-decoration:none;color:inherit;font-family:inherit;cursor:pointer}
 .kbsearch-item:last-child{border-bottom:0}
 .kbsearch-item:hover,.kbsearch-item:focus-visible{background:var(--paper)}
-.kbsearch-item .kind{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--signal-deep);font-weight:600}
+.kbsearch-item .kind{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--link);font-weight:600}
 .kbsearch-item .ttl{font-family:var(--disp);font-weight:600;font-size:15px;display:block;margin:2px 0}
 .kbsearch-item .snip{font-size:12.5px;color:var(--slate);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .kbsearch-empty{padding:14px 16px;font-size:13px;color:var(--slate)}
@@ -210,7 +210,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 /* ---------- detail / configurator modal ---------- */
 .sk-body{cursor:pointer}
-.sk-more{font-family:var(--mono);font-size:10px;color:var(--signal-deep);margin-top:9px;font-weight:600;letter-spacing:.03em}
+.sk-more{font-family:var(--mono);font-size:10px;color:var(--link);margin-top:9px;font-weight:600;letter-spacing:.03em}
 .skucard:hover .sk-more{text-decoration:underline;text-underline-offset:2px}
 .modal-scrim{position:fixed;inset:0;background:rgba(16,27,45,.55);z-index:110;display:none}
 .modal-scrim.open{display:block}
@@ -246,7 +246,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .dm-body{padding:14px 16px}
 .dm-pn{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--ink)}
 .dm-name{font-family:var(--disp);font-weight:700;font-size:24px;line-height:1.05;margin-top:3px}
-.dm-share{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--signal-deep);text-decoration:none;margin-top:6px}
+.dm-share{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--link);text-decoration:none;margin-top:6px}
 .dm-share:hover{text-decoration:underline;text-underline-offset:2px}
 .dm-cfg-t{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin:16px 0 8px}
 .dm-cfg{display:grid;grid-template-columns:1fr 1fr;gap:9px}
@@ -278,6 +278,7 @@ footer a{color:#9FB0C3}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -382,7 +383,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <button class="clearbtn" id="clearBtn">Clear all filters</button>
   </aside>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="resbar">
       <div class="count">
         <b id="resCount">0</b>
@@ -910,7 +911,7 @@ function openCompareModal(){
   ];
   let html='<table class="cmp-table"><tr><th>Part</th>'+items.map(it=>`<td><strong>${it.sku.name}</strong><div style="margin-top:6px;width:60px;height:60px">${vfPartVisual(it.f,'',it.sku.name)}</div></td>`).join('')+'</tr>';
   rows.forEach(([label,fn])=>{html+=`<tr><th>${label}</th>`+items.map(it=>`<td>${fn(it)}</td>`).join('')+'</tr>';});
-  html+='<tr><th></th>'+items.map(it=>`<td><a href="voltfield-part.html?fi=${it.fi}&o=${picksToParam(it.f,it.sku.picks)}&chk=${it.sku.chk}" style="color:var(--signal-deep);font-weight:600;text-decoration:underline">View details &rsaquo;</a></td>`).join('')+'</tr>';
+  html+='<tr><th></th>'+items.map(it=>`<td><a href="voltfield-part.html?fi=${it.fi}&o=${picksToParam(it.f,it.sku.picks)}&chk=${it.sku.chk}" style="color:var(--link);font-weight:600;text-decoration:underline">View details &rsaquo;</a></td>`).join('')+'</tr>';
   html+='</table>';
   document.getElementById('cmpTableWrap').innerHTML=html;
   document.getElementById('cmpScrim').classList.add('open');

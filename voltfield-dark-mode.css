@@ -16,6 +16,11 @@ html[data-theme="dark"]{
   --ink:#E7EDF4;
   --ink-2:#C9D3DF;
   --slate:#93A4B8;
+  /* --link is deliberately darkened in the light theme so amber text clears
+     4.5:1 on a light ground. On this dark ground that same colour would be
+     unreadable, and the original brand amber already has ~10:1 here, so the
+     dark theme takes it straight back. */
+  --link:#F0B81F;
   color-scheme: dark;
 }
 

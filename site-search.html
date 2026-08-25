@@ -65,7 +65,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .reslist{display:flex;flex-direction:column;gap:10px}
 .rescard{background:var(--card);border:1px solid var(--line-dark);padding:14px 16px;text-decoration:none;color:var(--ink);display:block}
 .rescard:hover{border-color:var(--ink)}
-.rescard .rc-cat{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--signal-deep);font-weight:600;margin-bottom:4px}
+.rescard .rc-cat{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--link);font-weight:600;margin-bottom:4px}
 .rescard .rc-title{font-family:var(--disp);font-weight:700;font-size:17px;color:var(--ink)}
 .rescard .rc-desc{font-size:13px;color:var(--ink-2);margin-top:3px;line-height:1.5}
 .empty{text-align:center;padding:40px 20px;color:var(--slate);font-size:14px}
@@ -83,6 +83,7 @@ footer a:hover{color:#fff}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -125,6 +126,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View sourcing list on catalog page">SOURCING LIST <span class="ct" id="quoteCount">0</span></a>
   </div>
 </header>
+<main id="main" tabindex="-1">
 <section class="artban">
   <div class="artban-in">
     <div class="eyebrow">Search</div>
@@ -140,6 +142,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="searchmeta" id="searchMeta"></div>
   <div class="reslist" id="resList"></div>
 </div>
+</main>
 <footer>
   <div class="in">
     <div>

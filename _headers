@@ -64,9 +64,35 @@
 /ads.txt
   Cache-Control: public, max-age=86400
 
+# Shared front-end modules. These had no rule at all, so they fell through to
+# Netlify's default (max-age=0, must-revalidate) and were revalidated on every
+# page load -- voltfield-3d.js alone is ~100KB uncompressed and is pulled by
+# every tool page. Same treatment as the other shared data files above.
+/voltfield-3d.js
+  Cache-Control: public, max-age=86400, stale-while-revalidate=86400
+
+/voltfield-component-viz.js
+  Cache-Control: public, max-age=86400, stale-while-revalidate=86400
+
+/voltfield-component-viz.css
+  Cache-Control: public, max-age=86400, stale-while-revalidate=86400
+
+/voltfield-progress.js
+  Cache-Control: public, max-age=86400, stale-while-revalidate=86400
+
+/voltfield-dark-mode.css
+  Cache-Control: public, max-age=86400, stale-while-revalidate=86400
+
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
+  # Clickjacking: nothing here is meant to be framed by another site. The
+  # lead-time widget is served as a script for embedding, not as an iframe,
+  # so denying frames costs nothing.
+  X-Frame-Options: DENY
+  # Turn off device APIs the site never uses, so a future injected script
+  # cannot quietly reach for them.
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=()
 
 # 3D-rendered tool thumbnails. Content-addressed by name only, so long cache
 # but not immutable -- regenerating one reuses its filename.

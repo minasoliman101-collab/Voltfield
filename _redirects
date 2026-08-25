@@ -88,3 +88,25 @@
 /renewables/solar-inverters          /renewables/solar-inverters.html        301!
 /renewables/dc-collection            /renewables/dc-collection.html          301!
 /renewables/ac-collection            /renewables/ac-collection.html          301!
+
+# ---- repo files that are not part of the site ----
+# Netlify publishes the repo root, so build inputs shipped with it. Two problems:
+# the 16 fragments under scripts/category-bodies and scripts/tool-seo are headless
+# copies of real page bodies (duplicate content Google can index against the
+# originals), and the .ps1 files disclose local filesystem paths and the name of
+# the Icecat credentials file. No secrets are in them -- .gitignore keeps the
+# .env files out and they 404 -- but none of this belongs on the public site.
+#
+# Forced (!) because these files EXIST: an unforced rule is shadowed by a real
+# static file, which is exactly the case here.
+#
+# /netlify/* is the SOURCE path only. The live function endpoint is
+# /.netlify/functions/* (dot-prefixed) and is unaffected -- verified before
+# adding this.
+/scripts/*        /404.html   404!
+/netlify/*        /404.html   404!
+/app-wrapper/*    /404.html   404!
+/README.md        /404.html   404!
+/APP-STORES.md    /404.html   404!
+/package.json     /404.html   404!
+/package-lock.json /404.html  404!

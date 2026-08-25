@@ -73,7 +73,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .artwrap p{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:14px}
 .artwrap ul{margin:0 0 14px 20px}
 .artwrap li{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:6px}
-.artwrap a.inline{color:var(--signal-deep);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
+.artwrap a.inline{color:var(--link);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
 .callout{background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--signal);padding:16px 18px;margin:20px 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
 /* family table */
 .famtable{width:100%;border-collapse:collapse;margin:16px 0 8px;font-size:13px}
@@ -81,11 +81,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .famtable td{padding:10px;border-bottom:1px solid var(--line);color:var(--ink-2);vertical-align:top}
 .famtable td b{font-family:var(--disp);font-size:15px;color:var(--ink);display:block;margin-bottom:2px}
 .famtable td.num{font-family:var(--mono);font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
-.famtable a{color:var(--signal-deep);font-weight:600;text-decoration:underline}
+.famtable a{color:var(--link);font-weight:600;text-decoration:underline}
 .lt{font-family:var(--mono);font-size:11px;padding:2px 7px;white-space:nowrap;display:inline-block}
-.lt.long{background:#F7E4E1;color:var(--crit)}
-.lt.mid{background:#FBF0DA;color:var(--warn)}
-.lt.short{background:#E7F1EB;color:var(--ok)}
+.lt.long{background:#F7E4E1;color:var(--crit-ink)}
+.lt.mid{background:#FBF0DA;color:var(--warn-ink)}
+.lt.short{background:#E7F1EB;color:var(--ok-ink)}
 html[data-theme="dark"] .lt.long{background:#3A1F1C;color:#E8A79B}
 html[data-theme="dark"] .lt.mid{background:#3A3016;color:#E4C77F}
 html[data-theme="dark"] .lt.short{background:#15301F;color:#7FCC9B}
@@ -118,6 +118,7 @@ footer a:hover{color:#fff}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -160,6 +161,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a class="quotebtn" href="/voltfield-supply-catalog.html?quote=1" aria-label="View sourcing list on catalog page">SOURCING LIST <span class="ct" id="quoteCount">0</span></a>
   </div>
 </header>
+<main id="main" tabindex="-1">
 
 <section class="artban">
   <div class="artban-in">
@@ -293,6 +295,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
+</main>
 <footer>
   <div class="in">
     <div>

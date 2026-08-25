@@ -131,13 +131,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 .scorebar{display:none;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;letter-spacing:.04em;background:var(--card);border:1px solid var(--line-dark);padding:10px 16px;margin-bottom:20px}
 .scorebar.show{display:flex}
-.scorebar b{color:var(--signal-deep);font-size:16px}
+.scorebar b{color:var(--link);font-size:16px}
 
 .section{max-width:900px;margin:0 auto;padding:0 20px 50px}
 .section h2{font-family:var(--disp);font-weight:700;font-size:26px;margin-bottom:10px}
 .section h3{font-family:var(--disp);font-weight:600;font-size:17px;margin:16px 0 6px}
 .section p{font-size:14.5px;color:var(--ink-2);line-height:1.65;max-width:70ch;margin-bottom:10px}
-.section a.inline{color:var(--signal-deep);font-weight:600;text-decoration:underline}
+.section a.inline{color:var(--link);font-weight:600;text-decoration:underline}
 .faqitem{background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px}
 .faqitem summary{font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer}
 .faqitem p{margin-top:10px;font-size:13.5px}
@@ -156,6 +156,7 @@ footer a:hover{color:#fff}
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -198,6 +199,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View sourcing list on catalog page">SOURCING LIST <span class="ct" id="quoteCount">0</span></a>
   </div>
 </header>
+<main id="main" tabindex="-1">
 
 <section class="artban">
   <div class="artban-in">
@@ -209,7 +211,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <div class="artwrap">
-  <p class="note">This is a first-pass sizing sandbox, not a substitute for a licensed engineer's load study or short-circuit/coordination study. It assumes 480V three-phase distribution and a flat 0.85 power factor throughout — the same kind of simplification used by the <a href="engineering-calculators.html" style="color:var(--signal-deep)">Engineering Calculators</a> and the <a href="voltfield-sandbox.html" style="color:var(--signal-deep)">EE Practice Sandbox</a>.</p>
+  <p class="note">This is a first-pass sizing sandbox, not a substitute for a licensed engineer's load study or short-circuit/coordination study. It assumes 480V three-phase distribution and a flat 0.85 power factor throughout — the same kind of simplification used by the <a href="engineering-calculators.html" style="color:var(--link)">Engineering Calculators</a> and the <a href="voltfield-sandbox.html" style="color:var(--link)">EE Practice Sandbox</a>.</p>
 
   <div class="modebar" role="tablist">
     <button type="button" id="modeFreeBtn" class="on" role="tab" aria-selected="true">Free Design</button>
@@ -386,6 +388,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </div>
 
+</main>
 <footer>
   <div class="in">
     <div>

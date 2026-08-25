@@ -68,7 +68,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .artwrap{max-width:900px;margin:0 auto;padding:36px 20px 8px}
 .artwrap h2{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:.01em;color:var(--ink);margin:34px 0 8px}
 .artwrap p{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:14px}
-.artwrap a.inline{color:var(--signal-deep);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
+.artwrap a.inline{color:var(--link);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
 .callout{background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--signal);padding:16px 18px;margin:20px 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
 .modebar{display:flex;gap:0;margin:18px 0 22px;border:2px solid var(--ink);width:fit-content}
 .modebar button{background:#fff;color:var(--ink);border:0;padding:10px 20px;font-family:var(--disp);font-weight:700;font-size:14.5px;letter-spacing:.04em;text-transform:uppercase;border-right:2px solid var(--ink)}
@@ -106,7 +106,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .board-slot .fl{font-family:var(--disp);font-weight:700;font-size:14px;color:var(--ink)}
 .board-slot .fs{font-size:10px;color:var(--slate);margin-top:2px}
 .board-slot.filled{border-style:solid;border-color:var(--ink);background:var(--card);color:var(--ink)}
-.board-slot.target{border-color:var(--signal-deep);background:#FFF7DE;color:var(--ink-2)}
+.board-slot.target{border-color:var(--link);background:#FFF7DE;color:var(--ink-2)}
 .legend{margin:20px 0 10px}
 .legend-title{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);margin:16px 0 8px}
 .legend-title:first-child{margin-top:0}
@@ -122,7 +122,7 @@ button.legend-title.lt-btn:hover em{background:var(--signal);border-color:var(--
 .tile b{display:block;font-family:var(--disp);font-weight:700;font-size:14px;color:var(--ink)}
 .tile span{display:block;color:var(--slate);font-size:10px;margin-top:2px}
 .tile:hover{border-color:var(--ink)}
-.tile.armed{border-color:var(--signal-deep);background:#FFF7DE;box-shadow:0 0 0 2px var(--signal) inset}
+.tile.armed{border-color:var(--link);background:#FFF7DE;box-shadow:0 0 0 2px var(--signal) inset}
 .est-row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:10px}
 .est-field button{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase}
 .est-field button:hover{background:transparent;color:var(--ink)}
@@ -182,6 +182,7 @@ footer a:hover{color:#fff}
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -224,6 +225,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View sourcing list on catalog page">SOURCING LIST <span class="ct" id="quoteCount">0</span></a>
   </div>
 </header>
+<main id="main" tabindex="-1">
 <section class="artban">
   <div class="artban-in">
     <div style="font-family:var(--mono);font-size:11px;color:#8DA0B8;margin-bottom:12px"><a href="index.html" style="color:#8DA0B8;text-decoration:none">Home</a> / <span style="color:#E8EDF3">Practice Sandbox</span></div>
@@ -330,6 +332,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="toast" id="toast"></div>
 
 <div class="ad-unit" data-ad="footer"></div>
+</main>
 <footer>
   <div class="in">
     <div>
