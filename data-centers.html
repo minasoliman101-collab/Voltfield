@@ -92,7 +92,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   repeating-linear-gradient(0deg,#FAFBFC,#FAFBFC 17px,#F0F3F6 17px,#F0F3F6 18px),
   repeating-linear-gradient(90deg,#FAFBFC,#FAFBFC 17px,#F0F3F6 17px,#F0F3F6 18px);
   background-blend-mode:multiply;border-bottom:1px solid var(--line)}
-.newscard .nc-img img{width:100%;height:100%;object-fit:cover;display:block}
+.newscard .nc-img{position:relative;overflow:hidden;height:108px;
+  display:flex;align-items:center;justify-content:center}
+.nc-img picture{display:contents}
+.nc-img img{height:96px;width:96px;object-fit:contain;display:block;
+  filter:drop-shadow(0 2px 4px rgba(16,27,45,.18));mix-blend-mode:multiply}
+html[data-theme="dark"] .nc-img img{mix-blend-mode:normal}
+.nc-illus{position:absolute;right:6px;bottom:5px;font-family:var(--mono);font-size:8px;
+  letter-spacing:.08em;text-transform:uppercase;color:#7C8A9A;background:rgba(255,255,255,.82);
+  padding:1px 4px;border-radius:2px}
+html[data-theme="dark"] .nc-illus{background:rgba(16,27,45,.8);color:#9FB0C3}
 .newscard .nc-tag{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line)}
 .newscard .nc-sec{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.1em;color:#fff;padding:2px 7px;text-transform:uppercase}
 .newscard .nc-date{font-family:var(--mono);font-size:10.5px;color:var(--slate)}
@@ -314,8 +323,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="section-head"><div><div class="section-eyebrow">Industry news &amp; insights</div><h2>What's moving in data centers</h2></div></div>
   <div class="newsgrid">
     <a class="newscard" target="_blank" rel="noopener" href="https://www.techradar.com/pro/darkness-looms-across-europe-and-america-as-power-hungry-ai-data-centers-and-electric-cars-drain-the-grid-decimate-factory-capacity-and-engineer-a-four-year-wait-for-transformers-threatening-to-leave-entire-regions-in-the-dark">
-      <div class="nc-img"><img src="https://cdn.mos.cms.futurecdn.net/3Vu4FwPCzHo6pxU4MsqSPU-1920-80.png" alt="Grid transformer waits stretch toward four years" loading="lazy" onerror="this.remove()"></div>
-      <div class="nc-tag"><span class="nc-sec" style="background:var(--dc)">DATA CENTERS</span><span class="nc-date">Jul 14, 2026</span></div>
+      <div class="nc-img"><picture><source srcset="images/parts/dc-large-power-transformers.webp" type="image/webp"><img src="images/parts/dc-large-power-transformers.jpg" alt="Large power transformer &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div><div class="nc-tag"><span class="nc-sec" style="background:var(--dc)">DATA CENTERS</span><span class="nc-date">Jul 14, 2026</span></div>
       <div class="nc-body">
         <h4>Grid transformer waits stretch toward four years</h4>
         <p>Analysts describe a worsening North American and European shortage of large power transformers, with electrical-steel and skilled-labor bottlenecks compounding demand from AI data centers and EV charging buildouts.</p>
@@ -323,8 +331,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </a>
     <a class="newscard" target="_blank" rel="noopener" href="https://mediaselangor.com/en/2026/07/383621">
-      <div class="nc-img"><img src="https://mssb-media.xcms.io/publisher-c1a3f893382d2b2f8a9aa22a654d9c97/2026/07/60fb0d72aee7547e3442141104b66897.jpg=s800" alt="Utilities and data centers now bid for the same equipment" loading="lazy" onerror="this.remove()"></div>
-      <div class="nc-tag"><span class="nc-sec" style="background:var(--dc)">DATA CENTERS</span><span class="nc-date">Jul 9, 2026</span></div>
+      <div class="nc-img"><picture><source srcset="images/parts/dc-pad-mount-transformers.webp" type="image/webp"><img src="images/parts/dc-pad-mount-transformers.jpg" alt="Pad-mount transformer &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div><div class="nc-tag"><span class="nc-sec" style="background:var(--dc)">DATA CENTERS</span><span class="nc-date">Jul 9, 2026</span></div>
       <div class="nc-body">
         <h4>Utilities and data centers now bid for the same equipment</h4>
         <p>A Reuters report finds utilities competing directly with hyperscale developers for the same limited pool of transformers and switchgear, pushing some orders three to five years out and lifting prices industry-wide.</p>
@@ -332,8 +339,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </a>
     <a class="newscard" target="_blank" rel="noopener" href="https://www.grandviewresearch.com/industry-analysis/data-center-liquid-cooling-market-report">
-      <div class="nc-img"></div>
-      <div class="nc-tag"><span class="nc-sec" style="background:var(--dc)">DATA CENTERS</span><span class="nc-date">Market report</span></div>
+      <div class="nc-img"><picture><source srcset="images/parts/dc-coolant-distribution-units-cdu.webp" type="image/webp"><img src="images/parts/dc-coolant-distribution-units-cdu.jpg" alt="Coolant distribution unit &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div><div class="nc-tag"><span class="nc-sec" style="background:var(--dc)">DATA CENTERS</span><span class="nc-date">Market report</span></div>
       <div class="nc-body">
         <h4>Liquid cooling market on pace for $29B by 2033</h4>
         <p>Rising GPU rack densities are pushing operators from air to liquid cooling; direct-to-chip CDU deployments are forecast to keep growing at roughly 20% a year as the technology becomes standard in new builds.</p>

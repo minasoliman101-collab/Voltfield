@@ -90,7 +90,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   repeating-linear-gradient(0deg,#FAFBFC,#FAFBFC 17px,#F0F3F6 17px,#F0F3F6 18px),
   repeating-linear-gradient(90deg,#FAFBFC,#FAFBFC 17px,#F0F3F6 17px,#F0F3F6 18px);
   background-blend-mode:multiply;border-bottom:1px solid var(--line)}
-.newscard .nc-img img{width:100%;height:100%;object-fit:cover;display:block}
+.newscard .nc-img{position:relative;overflow:hidden;height:108px;
+  display:flex;align-items:center;justify-content:center}
+.nc-img picture{display:contents}
+.nc-img img{height:96px;width:96px;object-fit:contain;display:block;
+  filter:drop-shadow(0 2px 4px rgba(16,27,45,.18));mix-blend-mode:multiply}
+html[data-theme="dark"] .nc-img img{mix-blend-mode:normal}
+.nc-illus{position:absolute;right:6px;bottom:5px;font-family:var(--mono);font-size:8px;
+  letter-spacing:.08em;text-transform:uppercase;color:#7C8A9A;background:rgba(255,255,255,.82);
+  padding:1px 4px;border-radius:2px}
+html[data-theme="dark"] .nc-illus{background:rgba(16,27,45,.8);color:#9FB0C3}
 .newscard .nc-tag{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line)}
 .newscard .nc-sec{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.1em;color:#fff;padding:2px 7px;text-transform:uppercase}
 .newscard .nc-date{font-family:var(--mono);font-size:10.5px;color:var(--slate)}
@@ -239,8 +248,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="section-head"><div><div class="section-eyebrow">Industry news &amp; insights</div><h2>What's moving in oil &amp; gas</h2></div></div>
   <div class="newsgrid">
     <a class="newscard" target="_blank" rel="noopener" href="https://worldoil.com/news/2026/6/24/u-s-steel-invests-475-million-to-expand-octg-production-capacity/">
-      <div class="nc-img"><img src="https://www.worldoil.com/media/v3ydh3pp/us-steel-octg-operations-virginia.jpg" alt="US Steel commits $475M to expand OCTG capacity in Alabama" loading="lazy" onerror="this.remove()"></div>
-      <div class="nc-tag"><span class="nc-sec" style="background:var(--og)">OIL &amp; GAS</span><span class="nc-date">Jun 24, 2026</span></div>
+      <div class="nc-img"><picture><source srcset="images/parts/og-octg-casing.webp" type="image/webp"><img src="images/parts/og-octg-casing.jpg" alt="OCTG casing &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div><div class="nc-tag"><span class="nc-sec" style="background:var(--og)">OIL &amp; GAS</span><span class="nc-date">Jun 24, 2026</span></div>
       <div class="nc-body">
         <h4>US Steel commits $475M to expand OCTG capacity in Alabama</h4>
         <p>A new quench-and-temper line at the Fairfield Tubular plant aims to relieve a domestic OCTG bottleneck for Permian, Eagle Ford, Haynesville, and Appalachia operators, reaching full output by 2029.</p>
@@ -248,8 +256,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </a>
     <a class="newscard" target="_blank" rel="noopener" href="https://worldoil.com/news/2026/7/21/halliburton-posts-stronger-q2-on-north-america-recovery/">
-      <div class="nc-img"><img src="https://www.worldoil.com/media/15151/newsletter-top-jeff-miller-halliburton.jpg" alt="Halliburton posts stronger Q2 on North America recovery" loading="lazy" onerror="this.remove()"></div>
-      <div class="nc-tag"><span class="nc-sec" style="background:var(--og)">OIL &amp; GAS</span><span class="nc-date">Jul 21, 2026</span></div>
+      <div class="nc-img"><picture><source srcset="images/parts/og-frac-valves.webp" type="image/webp"><img src="images/parts/og-frac-valves.jpg" alt="Frac valve &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div><div class="nc-tag"><span class="nc-sec" style="background:var(--og)">OIL &amp; GAS</span><span class="nc-date">Jul 21, 2026</span></div>
       <div class="nc-body">
         <h4>Halliburton posts stronger Q2 on North America recovery</h4>
         <p>Halliburton reported Q2 2026 revenue of $5.7 billion, beating estimates as North American stimulation and well-construction activity drove sequential growth, with North America revenue up 7% quarter over quarter.</p>
@@ -257,8 +264,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </a>
     <a class="newscard" target="_blank" rel="noopener" href="https://rigcount.bakerhughes.com/">
-      <div class="nc-img"></div>
-      <div class="nc-tag"><span class="nc-sec" style="background:var(--og)">OIL &amp; GAS</span><span class="nc-date">Updated weekly</span></div>
+      <div class="nc-img"><picture><source srcset="images/parts/og-drill-pipe-s-135.webp" type="image/webp"><img src="images/parts/og-drill-pipe-s-135.jpg" alt="S-135 drill pipe &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div><div class="nc-tag"><span class="nc-sec" style="background:var(--og)">OIL &amp; GAS</span><span class="nc-date">Updated weekly</span></div>
       <div class="nc-body">
         <h4>The rig count: oilfield equipment demand's leading indicator</h4>
         <p>Published continuously since 1944, the Baker Hughes weekly rig count remains the standard reference point for near-term demand across drilling, completions, and production equipment.</p>

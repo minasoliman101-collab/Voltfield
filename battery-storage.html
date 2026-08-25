@@ -92,7 +92,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   repeating-linear-gradient(0deg,#FAFBFC,#FAFBFC 17px,#F0F3F6 17px,#F0F3F6 18px),
   repeating-linear-gradient(90deg,#FAFBFC,#FAFBFC 17px,#F0F3F6 17px,#F0F3F6 18px);
   background-blend-mode:multiply;border-bottom:1px solid var(--line)}
-.newscard .nc-img img{width:100%;height:100%;object-fit:cover;display:block}
+.newscard .nc-img{position:relative;overflow:hidden;height:108px;
+  display:flex;align-items:center;justify-content:center}
+.nc-img picture{display:contents}
+.nc-img img{height:96px;width:96px;object-fit:contain;display:block;
+  filter:drop-shadow(0 2px 4px rgba(16,27,45,.18));mix-blend-mode:multiply}
+html[data-theme="dark"] .nc-img img{mix-blend-mode:normal}
+.nc-illus{position:absolute;right:6px;bottom:5px;font-family:var(--mono);font-size:8px;
+  letter-spacing:.08em;text-transform:uppercase;color:#7C8A9A;background:rgba(255,255,255,.82);
+  padding:1px 4px;border-radius:2px}
+html[data-theme="dark"] .nc-illus{background:rgba(16,27,45,.8);color:#9FB0C3}
 .newscard .nc-tag{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line)}
 .newscard .nc-sec{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.1em;color:#fff;padding:2px 7px;text-transform:uppercase}
 .newscard .nc-date{font-family:var(--mono);font-size:10.5px;color:var(--slate)}
@@ -282,8 +291,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="section-head"><div><div class="section-eyebrow">Industry news &amp; insights</div><h2>What's moving in battery storage</h2></div></div>
   <div class="newsgrid">
     <a class="newscard" target="_blank" rel="noopener" href="https://www.energy-storage.news/global-bess-deployments-soar-27-in-h1-2026-saudi-arabia-drives-figures-in-june/">
-      <div class="nc-img"><img src="https://www.energy-storage.news/wp-content/uploads/2026/06/grenergy-elena-planta-2-800x533-1.jpg" alt="Saudi Arabia leads monthly BESS deployments for the first time" loading="lazy" onerror="this.remove()"></div>
-      <div class="nc-tag"><span class="nc-sec" style="background:var(--bess)">STORAGE</span><span class="nc-date">Jul 15, 2026</span></div>
+      <div class="nc-img"><picture><source srcset="images/parts/bess-containerized-enclosures.webp" type="image/webp"><img src="images/parts/bess-containerized-enclosures.jpg" alt="Containerised BESS enclosure &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div><div class="nc-tag"><span class="nc-sec" style="background:var(--bess)">STORAGE</span><span class="nc-date">Jul 15, 2026</span></div>
       <div class="nc-body">
         <h4>Saudi Arabia leads monthly BESS deployments for the first time</h4>
         <p>Some 9.1 GW/33.5 GWh of utility-scale battery storage came online globally in June 2026, with Saudi Arabia's 2.5 GW/12.5 GWh — built from five Saudi Electricity Company projects using BYD batteries — outpacing China for the first time in 18 months of tracking, per Benchmark Mineral Intelligence data.</p>
@@ -291,8 +299,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </a>
     <a class="newscard" target="_blank" rel="noopener" href="https://www.rystadenergy.com/insights/energy-storage-outlook-the-expanding-role-of-bess-in-global-energy-systems">
-      <div class="nc-img"><img src="https://www.datocms-assets.com/75979/1769612617-newsletter-images-under-monthly-315-x-150-px.png?auto=format&fit=max&w=1200" alt="Global battery storage capacity overtakes pumped hydro" loading="lazy" onerror="this.remove()"></div>
-      <div class="nc-tag"><span class="nc-sec" style="background:var(--bess)">STORAGE</span><span class="nc-date">May 20, 2026</span></div>
+      <div class="nc-img"><picture><source srcset="images/parts/bess-lfp-dc-blocks-5mwh.webp" type="image/webp"><img src="images/parts/bess-lfp-dc-blocks-5mwh.jpg" alt="LFP DC block &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div><div class="nc-tag"><span class="nc-sec" style="background:var(--bess)">STORAGE</span><span class="nc-date">May 20, 2026</span></div>
       <div class="nc-body">
         <h4>Global battery storage capacity overtakes pumped hydro</h4>
         <p>Rystad's 2026 outlook finds global BESS capacity topped 250 GW in 2025, with more than 130 GW of further additions expected this year, led by the US, China, and Australia.</p>
@@ -300,8 +307,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </a>
     <a class="newscard" target="_blank" rel="noopener" href="https://www.utilitydive.com/news/us-sees-record-q1-2026-energy-storage-installations-amid-rosy-outlook/823547/">
-      <div class="nc-img"><img src="https://imgproxy.divecdn.com/75TX9-v9Vd40OOUshFMlpOF913BhDn6DtUFZTAgmG7o/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xOTI2MjI3OTQ4LmpwZw==.webp" alt="US sees record Q1 2026 energy storage installations amid rosy outlook" loading="lazy" onerror="this.remove()"></div>
-      <div class="nc-tag"><span class="nc-sec" style="background:var(--bess)">STORAGE</span><span class="nc-date">Jun 23, 2026</span></div>
+      <div class="nc-img"><picture><source srcset="images/parts/bess-modular-battery-racks.webp" type="image/webp"><img src="images/parts/bess-modular-battery-racks.jpg" alt="Modular battery rack &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div><div class="nc-tag"><span class="nc-sec" style="background:var(--bess)">STORAGE</span><span class="nc-date">Jun 23, 2026</span></div>
       <div class="nc-body">
         <h4>US posts record Q1 energy storage installations</h4>
         <p>The US installed a record 3.3 GW/8.4 GWh of battery storage in Q1 2026, up 54% over the prior Q1 record, with utility, commercial, and residential segments all hitting new highs, per ACP and Wood Mackenzie's latest storage monitor.</p>
