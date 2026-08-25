@@ -41,7 +41,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
 <link rel="stylesheet" href="ordering-hidden.css">
 <link rel="stylesheet" href="voltfield-core.css">
@@ -742,7 +742,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </ul></div>
   </div>
 </footer>
-<script src="voltfield-catalog-data.js"></script>
+<!-- voltfield-catalog-data.js is deliberately NOT loaded here. It is 94 KB --
+     29% of this page's total payload -- and nothing on the homepage uses it:
+     every one of the 21 globals it defines was checked against this file, and
+     the only match was the literal string "ALL SECTORS" in a button label. The
+     hero search autocomplete reads search-index.json instead. If a homepage
+     feature ever needs the catalog taxonomy, load it lazily on interaction
+     rather than restoring it to the critical path of the site's most important
+     page. -->
 <script src="voltfield-site-config.js"></script>
 <script src="voltfield-progress.js"></script>
 <script>

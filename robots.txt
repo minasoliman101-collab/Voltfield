@@ -1,9 +1,16 @@
 # VOLTFIELD Supply Co. — robots.txt
 User-agent: *
 Allow: /
-# Utility pages with no search value
-Disallow: /voltfield-rfq.html
-Disallow: /404.html
-Disallow: /voltfield-home.html
+
+# NOTE ON UTILITY PAGES
+# voltfield-rfq.html, 404.html and site-search.html are kept OUT of this file on
+# purpose, even though they have no search value. They each carry
+# <meta name="robots" content="noindex">, and a Disallow rule here would defeat
+# that: a crawler told not to fetch a page never sees its noindex, so a URL that
+# is linked from anywhere can still surface as a bare result. Allowing the crawl
+# is what lets the noindex actually do its job.
+#
+# voltfield-home.html is likewise not listed — it is now a server-side 301 to /
+# (see _redirects), so there is nothing to crawl.
 
 Sitemap: https://voltfield.org/sitemap.xml
