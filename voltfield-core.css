@@ -2,7 +2,12 @@
    Loaded on every page; keep in sync with any header/nav markup changes.
    Page-specific styles stay inline in each page's own <style> block. */
 :root{
-  --ink:#101B2D;--ink-2:#22334C;--slate:#5B6B7E;--paper:#DDE5EC;--card:#F3F6FA;
+  /* --slate was #5B6B7E, which measured 4.28:1 on --paper -- just under the
+     4.5 AA needs, and it carries breadcrumbs, table headers and meta text at
+     10-11px, so it accounted for every remaining contrast failure on a page.
+     Nudged down to 4.76:1 on --paper and 5.59:1 on --card. The dark theme
+     overrides --slate separately and is unaffected. */
+  --ink:#101B2D;--ink-2:#22334C;--slate:#556475;--paper:#DDE5EC;--card:#F3F6FA;
   --line:#C4CFDA;--line-dark:#A7B6C6;--signal:#FFC400;--signal-deep:#E5AC00;
   --crit:#C43D2E;--warn:#D98E04;--ok:#2E7D4F;
   /* Text-on-light colours, kept separate from the signal/status colours above.
