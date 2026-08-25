@@ -29,7 +29,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
    {"@type":"ListItem","position":2,"name":"All Parts","item":"https://voltfield.org/voltfield-supply-catalog.html"}
  ]},
- {"@type":"CollectionPage","name":"Industrial & Energy Parts Catalog","description":"Searchable, filterable catalog of configurable SKUs across data-center power, renewables, battery storage, oil & gas, and industrial MRO.","url":"https://voltfield.org/voltfield-supply-catalog.html"},
+ {"@type":"CollectionPage","name":"Industrial & Energy Parts Catalog","description":"Searchable, filterable reference of 11,429 equipment configurations across data-center power, renewables, battery storage, oil & gas, and industrial MRO.","url":"https://voltfield.org/voltfield-supply-catalog.html"},
  {"@type":"ItemList","name":"Catalog sectors","itemListElement":[
    {"@type":"ListItem","position":1,"name":"Data Centers","url":"https://voltfield.org/data-centers.html"},
    {"@type":"ListItem","position":2,"name":"Renewables","url":"https://voltfield.org/renewables.html"},
@@ -333,7 +333,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="catban">
   <div class="catban-in">
     <div class="eyebrow">All Parts · Configurable Catalog</div>
-    <h1>Search configurable SKUs across five sectors</h1>
+    <h1>Search 11,429 equipment configurations across five sectors</h1>
     <form class="catsearch" id="searchForm" role="search">
       <input id="searchInput" type="search" placeholder="Search part name, spec, or number — e.g. &ldquo;hex cap screw SS316&rdquo;, &ldquo;15kV switchgear&rdquo;" aria-label="Search catalog" autocomplete="off">
       <button type="submit">SEARCH</button>
@@ -343,10 +343,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
          belong in the HTML rather than being written by script on load. They used
          to ship as "0" and were filled in after the catalog data parsed, which
          meant a crawler (and anyone on a slow connection) saw a page whose headline
-         stat read "0 configurable SKUs". The script below still overwrites them, so
+         stat read "0 configurations". The script below still overwrites them, so
          there is exactly one source of truth if the catalog grows. -->
     <div class="metaline">
-      <span><b id="mTotal">2,191,366</b> configurable SKUs</span>
+      <span><b id="mTotal">11,429</b> configurations</span>
       <span><b id="mFam">243</b> product families</span>
       <span><b>5</b> sectors · <b id="mCat">81</b> categories</span>
       <span>Grainger · Uline · Graybar · MSC catalogs live</span>
@@ -385,7 +385,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="resbar">
       <div class="count">
         <b id="resCount">0</b>
-        <span class="sub" id="resSub">configurable SKUs</span>
+        <span class="sub" id="resSub">configurations</span>
       </div>
       <div class="chips" id="activeChips"></div>
       <button class="exportbtn" id="exportCsvBtn" type="button">Export CSV</button>
@@ -583,7 +583,7 @@ function renderResults(){
   const N=matched.reduce((a,f)=>a+f.ct,0);
   const grid=document.getElementById('skugrid'), empty=document.getElementById('emptyState');
   document.getElementById('resCount').textContent=fmt(N);
-  document.getElementById('resSub').textContent=state.q?`configurable SKUs match “${state.q}” · ${matched.length} families`:`configurable SKUs · ${matched.length} families`;
+  document.getElementById('resSub').textContent=state.q?`configurations match “${state.q}” · ${matched.length} families`:`configurations · ${matched.length} families`;
   if(N===0){grid.innerHTML='';empty.style.display='';document.getElementById('pager').innerHTML='';
     const rd=document.getElementById('reqDesc'); if(rd&&!rd.value&&state.q)rd.value=state.q;
     return;}
@@ -904,7 +904,7 @@ function openCompareModal(){
     ['Indicative range',it=>band(it.f)],
     ['Lead time',it=>{const lb=leadBadge(it.f);return `<span class="lead ${lb.c}">${lb.t}</span>`;}],
     ['Compliance',it=>it.f.cmp.join(', ')||'—'],
-    ['SKUs in family',it=>fmt(it.f.ct)]
+    ['Configurations in family',it=>fmt(it.f.ct)]
   ];
   let html='<table class="cmp-table"><tr><th>Part</th>'+items.map(it=>`<td><strong>${it.sku.name}</strong><div style="margin-top:6px;width:60px;height:60px">${vfPartVisual(it.f,'',it.sku.name)}</div></td>`).join('')+'</tr>';
   rows.forEach(([label,fn])=>{html+=`<tr><th>${label}</th>`+items.map(it=>`<td>${fn(it)}</td>`).join('')+'</tr>';});

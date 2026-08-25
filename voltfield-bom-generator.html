@@ -392,7 +392,7 @@ inp.addEventListener('input',()=>{
     <button data-fi="${x.f._i}" role="option">
       <span class="tag" style="background:${SECTORS[x.f.s].color}">${SECTORS[x.f.s].code}</span>
       <span><span class="nm">${esc(x.f.n)}</span><br><span style="font-family:var(--mono);font-size:10px;color:var(--slate)">${esc(x.f.c)}</span></span>
-      ${x.app.ok?`<span class="ct2">${fmt(x.f.ct)} SKUs</span>`:'<span class="na">BOM N/A</span>'}
+      ${x.app.ok?`<span class="ct2">${fmt(x.f.ct)} configurations</span>`:'<span class="na">BOM N/A</span>'}
     </button>`).join(''):'<button disabled style="color:var(--slate);font-family:var(--mono);font-size:12px">No families match.</button>';
   res.classList.add('show');
   res.querySelectorAll('button[data-fi]').forEach(b=>b.onclick=()=>{selectFam(+b.dataset.fi);res.classList.remove('show');inp.value='';});

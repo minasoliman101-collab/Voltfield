@@ -16,8 +16,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="keywords" content="transformer lead time trends, switchgear market data, industrial equipment lead times, energy infrastructure procurement data, catalog analytics">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Voltfield">
-<meta property="og:title" content="Catalog Insights — lead times and SKU mix at a glance">
-<meta property="og:description" content="SKUs by source and sector, top categories, and lead-time distribution across the catalog.">
+<meta property="og:title" content="Catalog Insights — lead times and configuration mix at a glance">
+<meta property="og:description" content="Configurations by channel and sector, top categories, and lead-time distribution across the catalog.">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="https://voltfield.org/social/social-insights.jpg">
 <meta property="og:image:width" content="1200">
@@ -29,7 +29,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
    {"@type":"ListItem","position":2,"name":"Catalog Insights","item":"https://voltfield.org/voltfield-insights.html"}
  ]},
- {"@type":"Dataset","name":"VOLTFIELD Catalog Insights","description":"SKU counts by source and sector, top categories, and lead-time mix across transformers, switchgear, BESS, oilfield and MRO lines.","creator":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"},"url":"https://voltfield.org/voltfield-insights.html","isAccessibleForFree":true}
+ {"@type":"Dataset","name":"VOLTFIELD Catalog Insights","description":"Configuration counts by channel and sector, top categories, and lead-time mix across transformers, switchgear, BESS, oilfield and MRO lines.","creator":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"},"url":"https://voltfield.org/voltfield-insights.html","isAccessibleForFree":true}
 ]}
 </script>
 <link rel="manifest" href="manifest.json">
@@ -184,7 +184,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="insban-in">
     <div class="eyebrow">Catalog Insights · Live from the taxonomy</div>
     <h1>What's in the catalog, at a glance</h1>
-    <p>Every number below is computed in your browser from the same data that powers the catalog — SKU counts by source and sector, the biggest categories, the lead-time mix, and where the long-pole items sit.</p>
+    <p>Every number below is computed in your browser from the same data that powers the catalog — Configuration counts by channel and sector, the biggest categories, the lead-time mix, and where the long-pole items sit.</p>
   </div>
 </section>
 
@@ -284,12 +284,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="pgrid">
     <div class="ipanel">
       <h2>Catalog by sourcing channel</h2>
-      <div class="sub">Every SKU is sourced through a distributor/mill network — share shown by which network we source it through</div>
+      <div class="sub">Channel indicates where this class of part is typically distributed — Voltfield does not supply any of it</div>
       <div class="donut-wrap"><div id="srcDonut"></div><div class="legend" id="srcLegend"></div></div>
     </div>
     <div class="ipanel">
       <h2>Industrial Supply by distributor</h2>
-      <div class="sub">MRO SKUs mirrored from each distributor catalog</div>
+      <div class="sub">MRO configurations by typical distribution channel</div>
       <div id="mroBars"></div>
     </div>
     <div class="ipanel">
@@ -327,7 +327,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="in">
     <!-- Static totals in the markup, not "0" filled in by script after load --
          see the note on the same stats in voltfield-supply-catalog.html. -->
-    <p>All figures are derived live from the catalog taxonomy (<b id="fTotal">2,191,366</b> configurable SKUs across <b id="fFam">243</b> product families). The dataset is modeled for demonstration; distributor assortments are modeled on public catalogs and pricing/lead times are indicative — see the <a href="methodology.html">methodology page</a> for how that works. <a href="voltfield-supply-catalog.html">Back to All Parts &rarr;</a></p>
+    <p>All figures are derived live from the catalog taxonomy (<b id="fTotal">11,429</b> configurations across <b id="fFam">243</b> equipment families). The dataset is modeled for demonstration; distributor assortments are modeled on public catalogs and pricing/lead times are indicative — see the <a href="methodology.html">methodology page</a> for how that works. <a href="voltfield-supply-catalog.html">Back to All Parts &rarr;</a></p>
   </div>
 </footer>
 
@@ -389,7 +389,7 @@ const secColor=k=>SECTORS[k].color;
 // KPIs
 const longestLw=FAM.reduce((m,f)=>Math.max(m,f.lw||0),0);
 const kpis=[
-  {k:fmt(GRAND_TOTAL),l:'Configurable SKUs'},
+  {k:fmt(GRAND_TOTAL),l:'Configurations'},
   {k:fmt(FAM.length),l:'Product families'},
   {k:'5',l:'Sectors'},
   {k:String(Object.values(SECTOR_CATS).reduce((a,c)=>a+c.length,0)),l:'Categories'},
@@ -423,7 +423,7 @@ Object.keys(CAT_TOTALS).forEach(s=>Object.keys(CAT_TOTALS[s]).forEach(c=>cats.pu
 cats.sort((a,b)=>b.v-a.v);
 el('catBars').innerHTML=barsHTML(cats.slice(0,12).map(x=>({label:x.c,value:x.v,color:secColor(x.s),note:SECTORS[x.s].code,href:'voltfield-supply-catalog.html?sector='+x.s+'&cat='+encodeURIComponent(x.c)})));
 
-// Lead-time mix (by SKUs)
+// Lead-time mix (by configurations)
 const buckets={ok:0,warn:0,crit:0}, bucketFams={ok:0,warn:0,crit:0};
 FAM.forEach(f=>{const b=f.lw<=12?'ok':(f.lw<=52?'warn':'crit');buckets[b]+=f.ct;bucketFams[b]++;});
 const leadItems=[
