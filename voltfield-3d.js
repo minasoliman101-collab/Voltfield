@@ -1462,6 +1462,58 @@
     };
   }
 
+  /* ---------- studio environment ----------
+     Every material here is metalness .4-.9. Metal in a physically-based renderer
+     is lit almost entirely by what it REFLECTS, so with no environment map a
+     bushing, a busbar or a radiator fin has nothing to reflect and resolves to
+     flat grey -- which is why the models read as plastic no matter how much
+     geometry they carry.
+
+     Built from a canvas gradient rather than three's RoomEnvironment addon: that
+     addon lives in examples/jsm and would be a SECOND module fetched from the
+     CDN. This site is an offline-first PWA and three is already the one external
+     dependency, so a procedural equirect out of core three keeps it that way.
+
+     PMREM output is bound to the renderer that produced it, so this cannot be
+     shared between viewers -- each context builds its own. Kept at 128x64 source
+     so that per-context cost stays trivial. */
+  function studioEnv(THREE, renderer){
+    const W = 128, H = 64;
+    const cv = document.createElement('canvas');
+    cv.width = W; cv.height = H;
+    const x = cv.getContext('2d');
+
+    /* Sky over horizon over floor. The bright band across the horizon is what
+       produces the long specular highlight along a cylindrical bushing or a
+       length of busway. */
+    const g = x.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0.00, '#F2F6FA');   // overhead
+    g.addColorStop(0.42, '#D8E2EC');
+    g.addColorStop(0.50, '#FFFFFF');   // horizon band
+    g.addColorStop(0.58, '#8FA0B4');
+    g.addColorStop(1.00, '#333F4E');   // floor
+    x.fillStyle = g; x.fillRect(0, 0, W, H);
+
+    /* Two soft key sources, so rotating the model sweeps a highlight across it
+       instead of presenting one uniform sheen from every angle. */
+    for (const k of [{cx:0.26, i:0.95}, {cx:0.72, i:0.55}]) {
+      const r = x.createRadialGradient(k.cx*W, H*0.30, 0, k.cx*W, H*0.30, W*0.20);
+      r.addColorStop(0, 'rgba(255,255,255,' + k.i + ')');
+      r.addColorStop(1, 'rgba(255,255,255,0)');
+      x.fillStyle = r; x.fillRect(0, 0, W, H);
+    }
+
+    const tex = new THREE.CanvasTexture(cv);
+    tex.mapping = THREE.EquirectangularReflectionMapping;
+    tex.colorSpace = THREE.SRGBColorSpace;
+
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    const rt = pmrem.fromEquirectangular(tex);
+    pmrem.dispose();
+    tex.dispose();
+    return rt;                                  // caller disposes rt
+  }
+
   /* ---------- live-instance registry ----------
      Browsers cap simultaneous WebGL contexts (16 in Chrome at time of writing)
      and silently kill the OLDEST context once you exceed it -- the canvas stays
@@ -1515,7 +1567,7 @@
      assembly turned out (a 1U PDU and a 48U rack both come back framed). */
   VF3D.mountScene = function(container, build, opts){
     const o = opts || {};
-    let disposed = false, renderer, camera, orbit, animId, ro;
+    let disposed = false, renderer, camera, orbit, animId, ro, envRT;
 
     loadThree().then(THREE => {
       if (disposed) return;
@@ -1532,17 +1584,59 @@
       renderer.setSize(w,h);
       renderer.setClearColor(0x000000, 0);
       renderer.domElement.style.cssText = 'width:100%;height:100%;display:block;touch-action:none;cursor:grab';
+
+      /* Filmic response instead of the default clip. Without it the specular
+         highlights the environment map introduces blow straight out to white. */
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.15;
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
       container.innerHTML = '';
       container.appendChild(renderer.domElement);
 
-      scene.add(new THREE.HemisphereLight(0xffffff, 0x22334C, 0.95));
-      const dir = new THREE.DirectionalLight(0xffffff, 1.15);
+      envRT = studioEnv(THREE, renderer);
+      scene.environment = envRT.texture;
+
+      /* Direct light is dialled well back from what it was before the
+         environment map existed: the env now supplies most of the ambient and
+         all of the specular, so the previous intensities double-count and wash
+         the models out. */
+      scene.add(new THREE.HemisphereLight(0xffffff, 0x22334C, 0.30));
+      const dir = new THREE.DirectionalLight(0xffffff, 0.85);
       dir.position.set(4,6,5); scene.add(dir);
-      const fill = new THREE.DirectionalLight(0xAFC0D3, 0.35);
+      dir.castShadow = true;
+      dir.shadow.mapSize.set(1024, 1024);
+      /* Shadow acne on this geometry comes from the many thin coplanar plates
+         (louvre slats, faceplate details, PCB pads). normalBias handles those
+         far better than depth bias alone, which would detach contact shadows. */
+      dir.shadow.bias = -0.0004;
+      dir.shadow.normalBias = 0.02;
+      const fill = new THREE.DirectionalLight(0xAFC0D3, 0.22);
       fill.position.set(-4,2,-3); scene.add(fill);
 
       const model = build(THREE);
       scene.add(model);
+
+      /* Self-shadowing only -- no ground plane. These shapes are framed on their
+         own bounds and several (conductor, busway, the PCB parts) have no ground
+         to stand on, so a catcher plane would either float or cut through them.
+         Radiator fins, louvres, fan blades and cable trays shadowing themselves
+         is where the depth cue actually comes from. */
+      model.traverse(function(n){
+        if (!n.isMesh) return;
+        /* A transparent mesh must NOT cast: the shadow map has no notion of
+           opacity, so a see-through surface casts a fully solid shadow. Every
+           translucent surface in this library exists specifically so you can
+           see what is behind it -- the soil around a ground rod, the glass door
+           on a capacitor cabinet, the POD shell -- and casting would black out
+           exactly the interior they were made transparent to reveal. */
+        const m = n.material;
+        const clear = Array.isArray(m) ? m.some(function(x){ return x && x.transparent; })
+                                       : !!(m && m.transparent);
+        n.castShadow = !clear;
+        n.receiveShadow = true;
+      });
 
       /* Frame the model from its own bounds. Fit the LARGER of the horizontal
          and vertical requirement against the matching half-FOV: a 48U rack is
@@ -1563,6 +1657,20 @@
       const distH = radXZ / Math.tan(hFov/2) + radXZ;
       const fit = Math.max(distV, distH);
       const radius = fit * (o.zoom || 1.25);
+
+      /* Fit the shadow camera to this model. The shapes span a wide range of
+         scales -- a DIP-8 on a board stub against a 48U rack -- and a single
+         fixed frustum either misses the small ones entirely or spreads 1024px
+         across so much world space that the large ones get blocky shadows. */
+      const shadowR = Math.max(size.x, size.y, size.z) * 0.85 + 0.5;
+      dir.position.set(ctr.x + shadowR*0.8, ctr.y + shadowR*1.2, ctr.z + shadowR*1.0);
+      dir.target.position.copy(ctr);
+      scene.add(dir.target);
+      const sc = dir.shadow.camera;
+      sc.left = -shadowR; sc.right = shadowR;
+      sc.top  =  shadowR; sc.bottom = -shadowR;
+      sc.near = 0.1;      sc.far = shadowR * 5;
+      sc.updateProjectionMatrix();
 
       const target = new THREE.Vector3(ctr.x, ctr.y, ctr.z);
       orbit = attachOrbit(camera, renderer.domElement, target, {
@@ -1601,6 +1709,10 @@
       if (animId) cancelAnimationFrame(animId);
       if (ro) ro.disconnect();
       if (orbit) orbit.dispose();
+      /* The PMREM render target is GPU memory owned by this context. It has to
+         go before the context is lost, or it is leaked for as long as the page
+         lives -- and with LRU eviction cycling viewers, that accumulates. */
+      if (envRT) { try { envRT.dispose(); } catch (e) {} envRT = null; }
       if (renderer) {
         renderer.dispose();
         // free the GL context immediately rather than waiting for GC, otherwise
