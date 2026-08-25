@@ -337,6 +337,28 @@ function money(v,pu){
   else { s='$'+Math.round(v).toLocaleString('en-US'); }
   return s+(pu?` <small>${pu}</small>`:'');
 }
+/* Indicative price BAND for an equipment family.
+   Replaces the per-configuration figure that used to be published. That figure
+   came from priceFor(), which interpolates between the family's low and high on
+   the average POSITION of each chosen option in its list -- it carries no
+   engineering relationship to the configuration. The visible consequence was
+   configurations that cannot cost the same being priced identically: measured
+   on the live site, a 150 MVA and a 345 MVA transformer both landed on
+   $5,308,333. Quoting that to the dollar implied a precision that never existed.
+
+   The family's own low-high range IS meaningful -- it is set per family -- so
+   that is what gets published, rounded to the nearest sensible unit so it reads
+   as the estimate it is. */
+function band(f){
+  if(!f || typeof f.lo!=='number' || typeof f.hi!=='number') return '';
+  const compact=v=>{
+    if(f.pu==='/W'||f.pu==='/kWh') return '$'+v.toFixed(v<1?3:2);
+    if(v>=1e6) return '$'+(v/1e6>=10?Math.round(v/1e6):(v/1e6).toFixed(1).replace(/\.0$/,''))+'M';
+    if(v>=1e3) return '$'+Math.round(v/1e3)+'K';
+    return '$'+v.toFixed(v<10?2:0);
+  };
+  return compact(f.lo)+'&ndash;'+compact(f.hi)+(f.pu?` <small>${f.pu}</small>`:'');
+}
 function leadBadge(f){
   if(f.lw===0) return {t:f.sp||'In stock',c:'ok'};
   if(f.lw<=12) return {t:f.sp||(f.lw+' wk'),c:'ok'};

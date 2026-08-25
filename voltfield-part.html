@@ -267,7 +267,7 @@ function renderRecentlyViewed(excludeFi){
     const price=priceFor(rf,rpicks);
     return `<a class="rv-card" href="voltfield-part.html?fi=${x.fi}&o=${x.o}&chk=${x.chk}">
       <div class="rv-imgwrap">${vfPartVisual(rf,'',name)}</div>
-      <div class="rv-body"><div class="rv-name">${name}</div><div class="rv-price">${money(price,rf.pu)}</div></div>
+      <div class="rv-body"><div class="rv-name">${name}</div><div class="rv-price">${band(rf)}</div></div>
     </a>`;
   }).join('');
   if(!html){wrap.style.display='none';return;}
@@ -369,10 +369,9 @@ function renderPart(){
         <div class="p-cmp">${f.cmp.map(x=>`<span>${x}</span>`).join('')}</div>
         ${refPhotoHTML(f,configuredName(f,picks))}
         <div class="p-facts">
-          <div><span>Unit price</span><b>${money(price,f.pu)}</b></div>
+          <div><span>Indicative range</span><b>${band(f)}</b></div>
           <div><span>Lead time</span><b class="lead ${lb.c}">${lb.t}</b></div>
           <div><span>Quantity</span><input type="number" id="pQty" min="1" value="${qty}"></div>
-          <div><span>Est. line total</span><b>${money(price*qty,f.pu)}</b></div>
           <div><span>Voltfield sourcing ref</span><b>${sourcingRef(pn)}</b></div>
         </div>
         <div class="p-note">This is one configuration within the <b>${f.n}</b> family (${fmt(f.ct)} SKUs). Change any option above and the shareable link updates automatically. The sourcing ref is Voltfield's own internal tracking code for this configuration — not a manufacturer SKU or UPC.</div>
