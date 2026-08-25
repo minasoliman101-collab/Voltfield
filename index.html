@@ -788,7 +788,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if(dispose){ try{dispose();}catch(e){} dispose=null; }
     var fb=document.getElementById('showcaseFallback');
     if(fb) fb.remove();
-    dispose=VF3D.mount(stage,p.id,p.color);
+    /* Ambient occlusion on: this is one large hero view, not a grid, so it can
+       afford the post-process pass. If the extra modules do not load the
+       viewer just renders without AO. */
+    dispose=VF3D.mount(stage,p.id,p.color,{ao:true});
     document.getElementById('showcaseName').textContent=p.name;
     document.getElementById('showcaseHint').textContent=p.hint;
     i++;

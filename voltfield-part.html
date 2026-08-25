@@ -323,7 +323,9 @@ function vf3dMount(){
   if(!wrap)return;
   vf3dTeardown();
   const color=(typeof SECTORS!=='undefined'&&SECTORS[f.s])?SECTORS[f.s].color:'#2B6CB0';
-  vf3dDispose=VF3D.mount(wrap,vfIconIdFor(f),color);
+  /* One large viewer, opened deliberately by the visitor on a single part --
+     worth the AO pass. Degrades to plain rendering if it cannot load. */
+  vf3dDispose=VF3D.mount(wrap,vfIconIdFor(f),color,{ao:true});
   if(window.vfGtag)window.vfGtag('event','part_3d_view',{sector:f.s,family:f.n});
 }
 function renderPart(){

@@ -282,7 +282,11 @@
       current = id;
       container.classList.add('has-item');
       stage.innerHTML = '';
-      if (window.VF3D) dispose = window.VF3D.mount(stage, c.shape, c.color);
+      /* The inspector is the one shared, deliberately large viewer on a page --
+         see the WebGL budget note at the top of this file -- so it is the right
+         place to spend a post-process pass on ambient occlusion. Falls back to
+         plain rendering if the extra modules are unavailable. */
+      if (window.VF3D) dispose = window.VF3D.mount(stage, c.shape, c.color, {ao: true});
       side.innerHTML = explainHTML(id) + photoHTML(id, {size: 220});
       if (o.onShow) o.onShow(id, c);
     }

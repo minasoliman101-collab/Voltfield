@@ -20,6 +20,39 @@
     return threeModPromise;
   }
 
+  /* ---------- optional ambient occlusion ----------
+     AO is what makes a crevice read as a crevice: without it, the inside of a
+     radiator bank, the gap behind a louvre and the seat of a bolt are all lit
+     exactly like the open faces around them, which is the flat look that
+     survives everything done so far.
+
+     This is the ONE place the library reaches past three.module.js, and it does
+     so on three conditions:
+       - lazily, only when a caller actually asks for AO
+       - opt-in per mount, so a grid of thumbnails never pays a full-screen
+         post-process pass per viewer
+       - degrading silently: if the modules do not load, the viewer keeps
+         rendering exactly as before. Offline still works, just without AO.
+
+     Pinned to the same three version as the core build -- examples/jsm is
+     compiled against a specific release and will throw on a mismatch. */
+  const PP_URL = 'https://unpkg.com/three@0.160.0/examples/jsm/postprocessing/';
+  let ppPromise = null;
+  function loadPostFX(){
+    if (!ppPromise) {
+      ppPromise = Promise.all([
+        import(PP_URL + 'EffectComposer.js'),
+        import(PP_URL + 'RenderPass.js'),
+        import(PP_URL + 'SSAOPass.js'),
+        import(PP_URL + 'OutputPass.js')
+      ]).then(function(m){
+        return { EffectComposer: m[0].EffectComposer, RenderPass: m[1].RenderPass,
+                 SSAOPass: m[2].SSAOPass, OutputPass: m[3].OutputPass };
+      });
+    }
+    return ppPromise;
+  }
+
   /* ---------- shape builders: each returns a THREE.Group centered near the origin ---------- */
   function buildTransformer(THREE, color){
     const g = new THREE.Group();
@@ -1886,12 +1919,18 @@
      removing/replacing the container to stop the render loop and free the
      WebGL context; skipping this on a page that toggles the view on and off
      repeatedly will leak GPU contexts. */
-  VF3D.mount = function(container, shapeId, colorHex){
+  /* `opts` is merged over the shape's own VIEW_HINT, so a caller can ask for
+     ambient occlusion ({ao:true}) on a hero-sized view without losing the
+     per-shape camera angle. Grids of thumbnails should leave it off. */
+  VF3D.mount = function(container, shapeId, colorHex, opts){
     const color = normColor(colorHex);
     const hint = VIEW_HINT[shapeId] || {};
+    const merged = {};
+    for (const k in hint) merged[k] = hint[k];
+    if (opts) for (const k in opts) merged[k] = opts[k];
     return VF3D.mountScene(container, function(THREE){
       return resolveBuilder(shapeId)(THREE, color);
-    }, hint);
+    }, merged);
   };
 
   function normColor(c){
@@ -1904,7 +1943,7 @@
      assembly turned out (a 1U PDU and a 48U rack both come back framed). */
   VF3D.mountScene = function(container, build, opts){
     const o = opts || {};
-    let disposed = false, renderer, camera, orbit, animId, ro, envRT;
+    let disposed = false, renderer, camera, orbit, animId, ro, envRT, composer;
 
     loadThree().then(THREE => {
       if (disposed) return;
@@ -2031,10 +2070,36 @@
         autoRotate: o.autoRotate
       });
 
+      /* Ambient occlusion, opt-in per mount. Until (and unless) the modules
+         land, `composer` stays null and the loop renders exactly as before, so
+         a slow CDN delays AO rather than the model. */
+      if (o.ao === true) {
+        loadPostFX().then(function(PP){
+          if (disposed) return;
+          const cw = container.clientWidth || w, ch = container.clientHeight || h;
+          const c = new PP.EffectComposer(renderer);
+          c.addPass(new PP.RenderPass(scene, camera));
+          const ssao = new PP.SSAOPass(scene, camera, cw, ch);
+          /* Tuned for these models' scale -- they are framed a couple of world
+             units across, so the default 8-unit kernel would sample right past
+             the geometry and shade nothing. */
+          ssao.kernelRadius = 0.14;
+          ssao.minDistance  = 0.0012;
+          ssao.maxDistance  = 0.09;
+          c.addPass(ssao);
+          /* Required last: the composer renders through linear render targets,
+             so tone mapping and the output colour space have to be applied at
+             the end instead of by the renderer. Without this the picture comes
+             out washed out and in the wrong space. */
+          c.addPass(new PP.OutputPass());
+          composer = c;
+        }).catch(function(){ /* no AO; direct rendering continues */ });
+      }
+
       function animate(){
         if (disposed) return;
         orbit.tick();
-        renderer.render(scene, camera);
+        if (composer) composer.render(); else renderer.render(scene, camera);
         animId = requestAnimationFrame(animate);
       }
       animate();
@@ -2045,6 +2110,9 @@
           if (!nw||!nh) return;
           camera.aspect = nw/nh; camera.updateProjectionMatrix();
           renderer.setSize(nw,nh);
+          /* The composer owns its own render targets, so it needs resizing too
+             or AO keeps sampling at the old dimensions and smears. */
+          if (composer) composer.setSize(nw,nh);
         });
         ro.observe(container);
       }
@@ -2062,6 +2130,9 @@
          go before the context is lost, or it is leaked for as long as the page
          lives -- and with LRU eviction cycling viewers, that accumulates. */
       if (envRT) { try { envRT.dispose(); } catch (e) {} envRT = null; }
+      /* The composer holds several full-size render targets of its own -- more
+         GPU memory than the env map -- so it has to go the same way. */
+      if (composer) { try { composer.dispose(); } catch (e) {} composer = null; }
       if (renderer) {
         renderer.dispose();
         // free the GL context immediately rather than waiting for GC, otherwise
