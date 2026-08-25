@@ -1,13 +1,29 @@
-/* VOLTFIELD — ordering/sales UI paused sitewide (site is pivoting to knowledge/sourcing/engineering-practice).
-   Nothing here deletes any page, script, or data — every hidden element's underlying HTML/JS stays intact
-   and reachable by direct URL. To restore ordering, delete the rule block below (leave the <link> tags in
-   every page alone — an empty stylesheet is a no-op). */
+/* VOLTFIELD — commerce controls removed.
+   Voltfield is an engineering reference. Nothing on the site is for sale, there
+   is no cart, no checkout and no payment path, and the copy no longer offers
+   any of them.
+
+   This file remains the single place the remaining transactional CONTROLS are
+   switched off. It is deliberately not a rewrite of every tool's markup: the
+   catalog and part pages were built around a configure-then-request flow, and
+   suppressing the controls here is far safer than surgery on nine interactive
+   pages. Their underlying HTML and JS stay intact and inert.
+
+   What changed in this pass: price displays are no longer hidden. Indicative
+   market ranges are reference DATA — the same standing the Lead-Time Index
+   already has — and hiding them was a leftover from the era when they were a
+   step toward a quote. What stays hidden is anything that asks the visitor to
+   transact: request buttons, add-to-list controls and quantity inputs. */
+
+/* ---- request / quote / cart controls ---- */
 .quotebtn,
-/* Netlify serves "pretty URLs" (voltfield-bom.html -> /voltfield-bom), so match both forms by suffix
-   rather than an exact href -- an exact match against the .html filename silently misses in production. */
-.hnav a[href$="voltfield-bom.html"], .hnav a[href$="voltfield-bom"],
 #checkoutBtn, #rfqBtn, #pAdd, #pRfq, #pAlertBox,
 #addBtn, #addAllBtn, .addbtn, #dmAdd, #dmRfq,
-.utilbar b,
-.sk-price, .rv-price, .p-facts, .pricebar, .dm-price
+/* Quantity pickers only make sense if something can be ordered. The price and
+   lead-time facts around them stay visible. */
+.p-facts input,
+.utilbar b
 { display:none !important; }
+
+/* The BOM Match nav entry and the Account link were removed from the markup
+   itself rather than hidden, so no rule for them is needed here any more. */

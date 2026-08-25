@@ -1,4 +1,4 @@
-# VOLTFIELD Supply Co. — robots.txt
+# Voltfield — robots.txt
 User-agent: *
 Allow: /
 

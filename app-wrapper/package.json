@@ -1,7 +1,7 @@
 {
   "name": "voltfield-app",
   "version": "1.0.0",
-  "description": "VOLTFIELD Supply Co. — Capacitor app wrapper for the static site",
+  "description": "Voltfield — Capacitor app wrapper for the static site",
   "private": true,
   "scripts": {
     "sync": "cap sync",

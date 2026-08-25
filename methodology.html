@@ -15,7 +15,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="description" content="How Voltfield's reference data is compiled, what is modeled versus operator-reported, and why nothing here is a binding quote. Written plainly.">
 <meta name="keywords" content="voltfield methodology, how lead time index works, indicative pricing data, sourcing reference data">
 <meta property="og:type" content="article">
-<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:site_name" content="Voltfield">
 <meta property="og:title" content="How Voltfield's Reference Data Works">
 <meta property="og:description" content="What's modeled for demonstration, what's crowdsourced, and why nothing on the site is a binding quote.">
 <meta name="twitter:card" content="summary_large_image">
@@ -29,7 +29,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
    {"@type":"ListItem","position":2,"name":"Methodology","item":"https://voltfield.org/methodology.html"}
  ]},
- {"@type":"Article","headline":"How Voltfield's Reference Data Works","description":"How Voltfield compiles its lead-time and pricing reference data: what's modeled for demonstration, what's crowdsourced, and why nothing on the site is a binding quote.","image":"https://voltfield.org/social/social-methodology.jpg","author":{"@type":"Organization","name":"VOLTFIELD Supply Co.","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"VOLTFIELD Supply Co."},"datePublished":"2026-08-04T00:00:00-05:00","url":"https://voltfield.org/methodology.html"}
+ {"@type":"Article","headline":"How Voltfield's Reference Data Works","description":"How Voltfield compiles its lead-time and pricing reference data: what's modeled for demonstration, what's crowdsourced, and why nothing on the site is a binding quote.","image":"https://voltfield.org/social/social-methodology.jpg","author":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-08-04T00:00:00-05:00","url":"https://voltfield.org/methodology.html"}
 ]}
 </script>
 <link rel="manifest" href="manifest.json">
@@ -89,9 +89,9 @@ footer a:hover{color:#fff}
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <header class="site">
-  <a class="logo" href="index.html" aria-label="Voltfield Supply Co. home">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
     <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
-    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — SOURCING & ENGINEERING REFERENCE</small></span>
+    <span class="wordmark">VOLTFIELD<small>ENGINEERING REFERENCE & EQUIPMENT DATA</small></span>
   </a>
   <nav class="hnav">
     <a href="index.html">Home</a>
@@ -104,7 +104,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a href="voltfield-rack-builder.html">Rack Elevation Builder</a>
         <a href="engineering-calculators.html">Calculators</a>
         <a href="voltfield-bom-generator.html">BOM Generator</a>
-        <a href="voltfield-bom.html">BOM Match</a>
         <a href="voltfield-pcb.html">PCB Builder</a>
         <a href="voltfield-pcb-layout.html">PCB Layout Tool</a>
         <a href="voltfield-identify.html">Part ID</a>
@@ -119,8 +118,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="voltfield-supply-catalog.html">Spec Library</a>
     <a href="voltfield-suppliers.html">Suppliers</a>
     <a href="whats-new.html">What's New</a>
-    <a href="voltfield-account.html">Account</a>
-  </nav>
+    </nav>
   <div class="headright">
     <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
     <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View sourcing list on catalog page">SOURCING LIST <span class="ct" id="quoteCount">0</span></a>
@@ -159,10 +157,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p><b>Every figure is labeled with its basis.</b> Each row on the Index carries one of three labels — <i>Modeled</i> (a Voltfield estimate derived from catalog and vendor-network data), <i>Operator</i> (reported by a buyer or distributor and hand-reviewed), or <i>Published</i> (traceable to a named public source, linked on the row). The same labels are in the <a class="inline" href="lead-time-index.json">JSON feed</a> under a <code>basis</code> field. This exists so nobody has to guess which numbers are measurements and which are estimates: as of this writing every published figure is <b>modeled</b>, and we'd rather say that plainly than let a derived number get requoted elsewhere as manufacturer or survey data.</p>
 
   <h2>The distributor and mill network</h2>
-  <p>The <a class="inline" href="voltfield-suppliers.html">All Suppliers</a> directory lists both real, named distributors (Grainger, Uline, Graybar, MSC Industrial) whose publicly published product ranges inform catalog scope and indicative pricing, and a set of regional manufacturer/mill profiles that are a <b>modeled sourcing network built for demonstration</b> — not live accounts with real-time inventory feeds. OEM brand listings (transformer, inverter, and switchgear manufacturers among them) identify product lines Voltfield tracks and cross-references as an independent sourcing agent; Voltfield is not affiliated with, sponsored by, or endorsed by any manufacturer it references.</p>
+  <p>The <a class="inline" href="voltfield-suppliers.html">All Suppliers</a> directory lists both real, named distributors (Grainger, Uline, Graybar, MSC Industrial) whose publicly published product ranges inform catalog scope and indicative pricing, and a set of regional manufacturer/mill profiles that are a <b>modeled sourcing network built for demonstration</b> — not live accounts with real-time inventory feeds. OEM brand listings (transformer, inverter, and switchgear manufacturers among them) identify product lines Voltfield tracks and cross-references as an independent reference; Voltfield is not affiliated with, sponsored by, or endorsed by any manufacturer it references.</p>
 
   <h2>What happens when you actually request sourcing help</h2>
-  <p>Configuring a part, adding it to a sourcing list, and sending a <a class="inline" href="voltfield-rfq.html">request for quotation</a> or <a class="inline" href="voltfield-checkout.html">sourcing request</a> doesn't complete a purchase on Voltfield — there's no checkout, and no payment is ever collected on the site. It sends your request to Voltfield's sourcing team, who follow up with real pricing, lead time, and next steps for connecting with the distributor, mill, or OEM that would actually fulfill it.</p>
+  <p>Nothing on Voltfield is for sale, and nothing here completes a purchase. There is no cart, no checkout, and no payment is ever collected. The spec library, the lead-time index and the calculators exist so you can arrive at a defensible specification — you then take that to the distributor, mill or OEM who actually supplies it. The <a class="inline" href="rfq-toolkit.html">RFQ toolkit</a> has copy-paste templates for exactly that conversation.</p>
 
   <h2>Why be this explicit about it</h2>
   <p>A sourcing-reference site's whole value is that the numbers are useful for planning even though they're not final. That only works if the gap between "indicative" and "confirmed" is stated plainly instead of buried in fine print — so this page exists to say it once, clearly, in one place, rather than leaving it scattered across disclaimers.</p>
@@ -181,8 +179,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <footer>
   <div class="in">
     <div>
-      <h5>Voltfield Supply Co.</h5>
-      <p>Independent sourcing agent for long-lead electrical, storage, oilfield, and MRO/industrial supply equipment. Pricing shown across the catalog is indicative market range, for reference only — actual pricing, availability, and lead time are set by the distributor, mill, or OEM fulfilling the order.</p>
+      <h5>Voltfield</h5>
+      <p>An independent engineering reference for energy-infrastructure and industrial power equipment. Nothing on this site is for sale. Price ranges in the spec library are indicative market benchmarks, published for budgeting and comparison — real pricing, availability and lead time come from the distributor, mill or OEM you buy from.</p>
     </div>
     <div><h5>Desks</h5><ul>
       <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>

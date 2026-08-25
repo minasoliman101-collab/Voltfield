@@ -58,10 +58,10 @@
 /renewables                         /renewables.html                        301!
 /rfq-toolkit                        /rfq-toolkit.html                       301!
 /site-search                        /site-search.html                       301!
-/voltfield-account                  /voltfield-account.html                 301!
+/voltfield-account                  /free-tools.html                        301!
 /voltfield-bom-generator            /voltfield-bom-generator.html           301!
-/voltfield-bom                      /voltfield-bom.html                     301!
-/voltfield-checkout                 /voltfield-checkout.html                301!
+/voltfield-bom                      /voltfield-bom-generator.html           301!
+/voltfield-checkout                 /rfq-toolkit.html                       301!
 /voltfield-eol                      /voltfield-eol.html                     301!
 /voltfield-glossary-quiz            /voltfield-glossary-quiz.html           301!
 /voltfield-identify                 /voltfield-identify.html                301!
@@ -71,7 +71,7 @@
 /voltfield-pcb                      /voltfield-pcb.html                     301!
 /voltfield-pod-designer             /voltfield-pod-designer.html            301!
 /voltfield-rack-builder             /voltfield-rack-builder.html            301!
-/voltfield-rfq                      /voltfield-rfq.html                     301!
+/voltfield-rfq                      /rfq-toolkit.html                       301!
 /voltfield-sandbox                  /voltfield-sandbox.html                 301!
 /voltfield-suppliers                /voltfield-suppliers.html               301!
 /voltfield-supply-catalog           /voltfield-supply-catalog.html          301!
@@ -117,3 +117,14 @@
 /APP-STORES.md     /   301!
 /package.json      /   301!
 /package-lock.json /   301!
+
+# ---- retired commerce pages ----
+# The site does not sell anything, so the storefront flow (cart, sourcing
+# request, account, BOM match) has no home here. Each goes to its closest
+# reference equivalent rather than 404ing, so any inbound link or indexed URL
+# still lands somewhere useful. The extensionless rules above point at the same
+# targets directly, so nothing redirects twice.
+/voltfield-checkout.html   /rfq-toolkit.html              301!
+/voltfield-rfq.html        /rfq-toolkit.html              301!
+/voltfield-account.html    /free-tools.html               301!
+/voltfield-bom.html        /voltfield-bom-generator.html  301!
