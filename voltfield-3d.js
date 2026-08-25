@@ -78,7 +78,18 @@
     g.add(box(THREE, metal, 0.05, 0.20, 0.04, -0.85, 1.26, TD/2 + 0.07));
 
     /* Nameplate, pressure-relief device, and ground pads. */
-    plate(THREE, g, metal, {x: 0.72, y: 1.12, z: TD/2 + 0.02, w: 0.40, h: 0.26});
+    /* The rating plate carries the numbers the equipment is actually selected
+       on. %Z is on it deliberately: it sets the available fault current
+       downstream, which is the point the transformer guides keep making. */
+    decal(THREE, g, {key:'np-xfmr', w:0.74, h:0.48, x:0.72, y:1.14, z:TD/2 + 0.03,
+      cw:280, ch:180, metal:0.35, rough:0.42,
+      draw: npDraw('LIQUID-FILLED TRANSFORMER', [
+        ['kVA',   '2500'],
+        ['HV',    '13.8 kV'],
+        ['LV',    '480Y/277'],
+        ['%Z',    '5.75'],
+        ['PH/HZ', '3 / 60']
+      ])});
     g.add(cyl(THREE, dark, 0.09, 0.09, 0.08, 10, 0.30, 1.64, 0));         // PRD on the cover
     for (const s of [-1, 1]) g.add(box(THREE, cu, 0.13, 0.09, 0.03, s*0.95, 0.22, TD/2 + 0.015));
 
@@ -109,6 +120,27 @@
       g.add(box(THREE, dark, w*0.72, 0.46, 0.03, x, h*0.80, fz + 0.01));
       g.add(box(THREE, glass, w*0.40, 0.24, 0.015, x - 0.06, h*0.83, fz + 0.03));
       g.add(box(THREE, metal, 0.13, 0.13, 0.02, x + 0.22, h*0.83, fz + 0.03));
+      /* Live metering readout behind the instrument window, and the cubicle
+         designation below it -- a switchgear lineup is identified by these. */
+      decal(THREE, g, {key:'sg-meter-'+i, w:w*0.38, h:0.22, x:x - 0.06, y:h*0.83, z:fz + 0.042,
+        cw:200, ch:120, rough:0.3, metal:0.0,
+        draw: (function(idx){ return function(xc,W,H){
+          xc.fillStyle='#07120C'; xc.fillRect(0,0,W,H);
+          xc.fillStyle='#4BE08A'; xc.textBaseline='middle';
+          xc.font='bold '+Math.round(H*0.30)+'px "IBM Plex Mono",monospace';
+          xc.fillText(['480','477','479'][idx]+' V', W*0.08, H*0.30);
+          xc.font='bold '+Math.round(H*0.24)+'px "IBM Plex Mono",monospace';
+          xc.fillText(['612','588','604'][idx]+' A', W*0.08, H*0.68);
+          xc.fillStyle='#1E6B3A'; xc.fillRect(W*0.70,H*0.18,W*0.22,H*0.16);
+        };})(i)});
+      decal(THREE, g, {key:'sg-id-'+i, w:w*0.46, h:0.10, x:x, y:h*0.60, z:fz + 0.02,
+        cw:220, ch:56, rough:0.6, metal:0.1,
+        draw: (function(idx){ return function(xc,W,H){
+          xc.fillStyle='#12161B'; xc.fillRect(0,0,W,H);
+          xc.fillStyle='#E8ECEF'; xc.textBaseline='middle'; xc.textAlign='center';
+          xc.font='bold '+Math.round(H*0.52)+'px "Helvetica Neue",Arial,sans-serif';
+          xc.fillText(['MAIN','TIE','FEEDER 1'][idx], W/2, H*0.54);
+        };})(i)});
       for (let k = 0; k < 3; k++) {
         const lamp = cyl(THREE, k === 0 ? M.lit : (k === 1 ? signal : dark), 0.028, 0.028, 0.02, 8,
           x - 0.20 + k * 0.09, h*0.68, fz + 0.02);
@@ -125,6 +157,13 @@
 
       /* Arc-vent flap on the roof of each cubicle. */
       g.add(box(THREE, metal, w*0.62, 0.05, 0.34, x, h + 0.03, -0.18));
+
+      /* Arc-flash label on the middle cubicle door. Required in practice, and
+         it is the single most recognisable thing on real switchgear. */
+      if (i === 1) {
+        decal(THREE, g, {key:'arcflash', w:w*0.68, h:0.34, x:x, y:h*0.34, z:fz + 0.055,
+          cw:340, ch:200, rough:0.6, metal:0.05, draw: arcFlashDraw});
+      }
     }
 
     /* Continuous top bus enclosure spanning the lineup, with joint covers. */
@@ -310,6 +349,32 @@
     c.position.set(x,y,z); return c;
   }
 
+  /* One draw call for a repeated part.
+     The heavy repeats here are genuinely repetitive -- 24 RJ45 jacks, 24 drive
+     carriers, 56 keycaps, and a punched vent field on every rack chassis. As
+     separate meshes each one is its own draw call, and a loaded rack was
+     spending hundreds of them on identical little boxes. Same geometry, same
+     material, different transforms is exactly what InstancedMesh is for.
+
+     `at` is an array of [x,y,z] or [x,y,z,rx,ry,rz]. Shadows are enabled by the
+     caller-side traverse in mountScene, which handles InstancedMesh fine. */
+  function inst(THREE, g, geo, mat, at){
+    const im = new THREE.InstancedMesh(geo, mat, at.length);
+    const m4 = new THREE.Matrix4(), eu = new THREE.Euler(), q = new THREE.Quaternion();
+    const v = new THREE.Vector3(), one = new THREE.Vector3(1,1,1);
+    for (let i = 0; i < at.length; i++) {
+      const a = at[i];
+      v.set(a[0], a[1], a[2]);
+      eu.set(a[3] || 0, a[4] || 0, a[5] || 0);
+      q.setFromEuler(eu);
+      m4.compose(v, q, one);
+      im.setMatrixAt(i, m4);
+    }
+    im.instanceMatrix.needsUpdate = true;
+    g.add(im);
+    return im;
+  }
+
   /* ---------- detail helpers ----------
      Small repeated features -- louvers, bolt circles, fan grilles, handles,
      nameplates -- extracted so every builder can add the same vocabulary of
@@ -387,6 +452,112 @@
     g.add(box(THREE, m, o.w || 0.34, o.h || 0.22, 0.015, o.x, o.y, o.z));
   }
 
+  /* ---------- decals: canvas-drawn labels ----------
+     A blank rectangle standing in for a nameplate teaches nothing. The actual
+     numbers on a transformer plate -- kVA, the two voltages, impedance -- are
+     what a learner is supposed to take away, and the whole point of showing the
+     equipment is to attach those numbers to the object they live on.
+
+     Canvases are cached by key at module scope because the 2D drawing is the
+     expensive part and it is identical for every viewer. The CanvasTexture is
+     built per call: textures are uploaded per WebGL context, and viewers here
+     each own their own context. */
+  const _labelCanvas = {};
+  function labelCanvas(key, w, h, draw){
+    if (_labelCanvas[key]) return _labelCanvas[key];
+    const cv = document.createElement('canvas');
+    cv.width = w; cv.height = h;
+    draw(cv.getContext('2d'), w, h);
+    _labelCanvas[key] = cv;
+    return cv;
+  }
+
+  /* A flat label plane. Kept as a PlaneGeometry rather than mapping a box:
+     BoxGeometry repeats the same UV square on all six faces, so a plate would
+     show the text on its back and edges too. */
+  function decal(THREE, g, o){
+    const cv  = labelCanvas(o.key, o.cw || 256, o.ch || 160, o.draw);
+    const tex = new THREE.CanvasTexture(cv);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.anisotropy = 4;
+    const mat = new THREE.MeshStandardMaterial({
+      map: tex, roughness: o.rough == null ? 0.5 : o.rough,
+      metalness: o.metal == null ? 0.15 : o.metal,
+      transparent: !!o.transparent, side: THREE.DoubleSide });
+    const p = new THREE.Mesh(new THREE.PlaneGeometry(o.w, o.h), mat);
+    p.position.set(o.x, o.y, o.z);
+    if (o.rx) p.rotation.x = o.rx;
+    if (o.ry) p.rotation.y = o.ry;
+    if (o.rz) p.rotation.z = o.rz;
+    g.add(p);
+    return p;
+  }
+
+  /* Etched-metal nameplate: a title bar over rows of label/value pairs, which
+     is how essentially every rating plate in this equipment class is laid out. */
+  function npDraw(title, rows){
+    return function(x, W, H){
+      x.fillStyle = '#C9CDD2'; x.fillRect(0,0,W,H);
+      x.fillStyle = '#9AA1A9'; x.fillRect(0,0,W,Math.round(H*0.20));
+      x.fillStyle = '#14181D';
+      x.font = 'bold ' + Math.round(H*0.135) + 'px "Helvetica Neue",Arial,sans-serif';
+      x.textBaseline = 'middle';
+      x.fillText(title, W*0.045, H*0.105);
+      const top = H*0.30, step = (H*0.64) / rows.length;
+      x.font = Math.round(H*0.105) + 'px "Helvetica Neue",Arial,sans-serif';
+      rows.forEach(function(r, i){
+        const y = top + step*i + step/2;
+        x.fillStyle = '#3A4149'; x.fillText(r[0], W*0.05, y);
+        x.fillStyle = '#101418';
+        x.font = 'bold ' + Math.round(H*0.105) + 'px "Helvetica Neue",Arial,sans-serif';
+        x.fillText(r[1], W*0.52, y);
+        x.font = Math.round(H*0.105) + 'px "Helvetica Neue",Arial,sans-serif';
+      });
+      x.strokeStyle = '#7F868E'; x.lineWidth = 2; x.strokeRect(1,1,W-2,H-2);
+    };
+  }
+
+  /* The orange ANSI Z535 arc-flash label that appears on switchgear and
+     panelboards. Instantly recognisable and genuinely informative. */
+  function arcFlashDraw(x, W, H){
+    x.fillStyle = '#F0F0EE'; x.fillRect(0,0,W,H);
+    x.fillStyle = '#E8791A'; x.fillRect(0,0,W,Math.round(H*0.30));
+    x.fillStyle = '#101010';
+    x.font = 'bold ' + Math.round(H*0.20) + 'px "Helvetica Neue",Arial,sans-serif';
+    x.textBaseline = 'middle';
+    x.fillText('WARNING', W*0.30, H*0.155);
+    /* triangle-and-bang */
+    x.beginPath(); x.moveTo(W*0.14,H*0.055); x.lineTo(W*0.24,H*0.255); x.lineTo(W*0.04,H*0.255);
+    x.closePath(); x.fillStyle='#F0F0EE'; x.fill(); x.strokeStyle='#101010'; x.lineWidth=3; x.stroke();
+    x.fillStyle='#101010'; x.font='bold '+Math.round(H*0.13)+'px Arial'; x.fillText('!', W*0.125, H*0.19);
+    x.fillStyle = '#151515';
+    x.font = 'bold ' + Math.round(H*0.115) + 'px "Helvetica Neue",Arial,sans-serif';
+    x.fillText('Arc Flash and Shock Hazard', W*0.06, H*0.44);
+    x.font = Math.round(H*0.10) + 'px "Helvetica Neue",Arial,sans-serif';
+    x.fillText('Appropriate PPE Required', W*0.06, H*0.60);
+    x.fillText('Do not operate controls or open', W*0.06, H*0.745);
+    x.fillText('covers without protective equipment', W*0.06, H*0.875);
+  }
+
+  /* Panel directory card -- the circuit schedule inside a panelboard door. */
+  function directoryDraw(x, W, H){
+    x.fillStyle = '#FBFBF7'; x.fillRect(0,0,W,H);
+    x.fillStyle = '#2B3138';
+    x.font = 'bold ' + Math.round(H*0.075) + 'px "Helvetica Neue",Arial,sans-serif';
+    x.textBaseline = 'middle';
+    x.fillText('CIRCUIT DIRECTORY', W*0.06, H*0.075);
+    const names = ['LTG  A','LTG  B','RECEPT','RECEPT','AHU-1','AHU-2','PUMP','SPARE','SPARE'];
+    x.font = Math.round(H*0.055) + 'px "Helvetica Neue",Arial,sans-serif';
+    for (let i=0;i<9;i++){
+      const y = H*0.17 + i*(H*0.088);
+      x.strokeStyle = '#C2C7CC'; x.lineWidth = 1;
+      x.beginPath(); x.moveTo(W*0.05,y+H*0.042); x.lineTo(W*0.95,y+H*0.042); x.stroke();
+      x.fillStyle = '#5A6068'; x.fillText(String(i*2+1), W*0.07, y);
+      x.fillStyle = '#22262B'; x.fillText(names[i], W*0.17, y);
+      x.fillStyle = '#5A6068'; x.fillText('20A', W*0.72, y);
+    }
+  }
+
   /* Lifting lug. */
   function lug(THREE, g, m, x, y, z){
     const l = box(THREE, m, 0.09, 0.16, 0.05, x, y, z);
@@ -420,10 +591,14 @@
                   s*((RW/2)+0.09), y, RD/2 - 0.005).rotateX(Math.PI/2));
       }
     }
-    /* Punched vent field along the top skin and a folded seam down each side. */
+    /* Punched vent field along the top skin and a folded seam down each side.
+       27 holes per chassis, and a loaded rack holds several chassis -- one
+       instanced draw instead of 27 each. */
+    const ventAt = [];
     for (let c = 0; c < 9; c++) for (let r = 0; r < 3; r++) {
-      g.add(box(THREE, M.dark, 0.17, 0.012, 0.14, -1.7 + c*0.42, h + 0.006, -0.35 + r*0.35));
+      ventAt.push([-1.7 + c*0.42, h + 0.006, -0.35 + r*0.35]);
     }
+    inst(THREE, g, new THREE.BoxGeometry(0.17, 0.012, 0.14), M.dark, ventAt);
     for (const s of [-1, 1]) g.add(box(THREE, M.dark, 0.02, h, RD + 0.01, s*RW/2, h/2, 0));
     g.userData.h = h;
     return g;
@@ -468,13 +643,20 @@
     /* 24 RJ45 jacks in the usual two staggered banks of 12. Each is a shielded
        housing with the latch cut-out above it and a link LED beside it, which is
        what distinguishes a switch faceplate from a grid of dark rectangles. */
+    /* 24 jacks x 3 parts each was 72 draw calls for the same three little boxes.
+       Collected per part type and drawn instanced. */
+    const shieldAt = [], boreAt = [], latchAt = [], ledAt = [];
     for (let r=0;r<2;r++) for (let i=0;i<12;i++){
       const x = -1.7 + i*0.29, y = h*(r?0.66:0.34);
-      g.add(box(THREE, metal, 0.13, 0.085, 0.02, x, y, faceZ()));         // shield
-      g.add(box(THREE, M.deep, 0.10, 0.055, 0.03, x, y - 0.008, faceZ()+0.008));
-      g.add(box(THREE, M.deep, 0.035, 0.03, 0.03, x, y + 0.036, faceZ()+0.008));  // latch slot
-      if (i % 2 === 0) g.add(box(THREE, M.lit, 0.03, 0.022, 0.02, x, y + 0.075, faceZ()));
+      shieldAt.push([x, y, faceZ()]);
+      boreAt.push([x, y - 0.008, faceZ()+0.008]);
+      latchAt.push([x, y + 0.036, faceZ()+0.008]);
+      if (i % 2 === 0) ledAt.push([x, y + 0.075, faceZ()]);
     }
+    inst(THREE, g, new THREE.BoxGeometry(0.13, 0.085, 0.02),  metal,  shieldAt);
+    inst(THREE, g, new THREE.BoxGeometry(0.10, 0.055, 0.03),  M.deep, boreAt);
+    inst(THREE, g, new THREE.BoxGeometry(0.035, 0.03, 0.03),  M.deep, latchAt);
+    inst(THREE, g, new THREE.BoxGeometry(0.03, 0.022, 0.02),  M.lit,  ledAt);
     /* Two SFP+ uplink cages and the console port at the right-hand end. */
     for (let i=0;i<2;i++) {
       g.add(box(THREE, metal, 0.26, 0.11, 0.02, 1.55, h*(i?0.66:0.34), faceZ()));
@@ -489,14 +671,23 @@
     const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.32});
     /* 24 vertical carriers. Each gets the cam latch and the two status LEDs a
        hot-swap carrier carries, so a failed drive is a thing you could point at. */
+    /* 24 carriers x 4 parts. The one faulted drive stays a separate mesh --
+       it is the only instance with a different material, and it is the detail
+       worth being able to point at. */
+    const bh = h*0.38;
+    const bayAt = [], latchAt2 = [], actAt = [], okAt = [];
     for (let r=0;r<2;r++) for (let c=0;c<12;c++){
-      const x = -1.72 + c*0.31, y = h*(r?0.72:0.28), bh = h*0.38;
-      g.add(box(THREE, M.deep, 0.24, bh, 0.02, x, y, faceZ()));
-      g.add(box(THREE, metal, 0.055, bh*0.72, 0.03, x - 0.08, y, faceZ()+0.014));  // cam latch
-      g.add(box(THREE, M.lit,  0.05, 0.035, 0.02, x + 0.05, y + bh*0.26, faceZ()+0.012));
-      g.add(box(THREE, (c === 5 && r === 1) ? M.gold : M.dark,
-                0.05, 0.035, 0.02, x + 0.05, y - bh*0.26, faceZ()+0.012));         // fault LED
+      const x = -1.72 + c*0.31, y = h*(r?0.72:0.28);
+      bayAt.push([x, y, faceZ()]);
+      latchAt2.push([x - 0.08, y, faceZ()+0.014]);
+      actAt.push([x + 0.05, y + bh*0.26, faceZ()+0.012]);
+      if (!(c === 5 && r === 1)) okAt.push([x + 0.05, y - bh*0.26, faceZ()+0.012]);
+      else g.add(box(THREE, M.gold, 0.05, 0.035, 0.02, x + 0.05, y - bh*0.26, faceZ()+0.012));
     }
+    inst(THREE, g, new THREE.BoxGeometry(0.24, bh, 0.02),          M.deep, bayAt);
+    inst(THREE, g, new THREE.BoxGeometry(0.055, bh*0.72, 0.03),    metal,  latchAt2);
+    inst(THREE, g, new THREE.BoxGeometry(0.05, 0.035, 0.02),       M.lit,  actAt);
+    inst(THREE, g, new THREE.BoxGeometry(0.05, 0.035, 0.02),       M.dark, okAt);
     /* Enclosure ID display at the right-hand end. */
     g.add(box(THREE, M.dark, 0.20, h*0.20, 0.03, 1.82, h*0.5, faceZ()));
     return g;
@@ -508,7 +699,22 @@
     /* Bezel-mounted LCD with a lit panel inset, the way a rack UPS presents
        load and runtime. */
     g.add(box(THREE, M.dark, 1.62, h*0.46, 0.03, -0.95, h*0.58, faceZ()));
-    g.add(box(THREE, M.deep, 1.44, h*0.36, 0.02, -0.95, h*0.58, faceZ()+0.014));
+    /* Load and runtime on the LCD -- the two numbers anyone walking a data hall
+       actually reads off a UPS. */
+    decal(THREE, g, {key:'ups-lcd', w:1.44, h:h*0.36, x:-0.95, y:h*0.58, z:faceZ()+0.016,
+      cw:320, ch:120, rough:0.25, metal:0.0,
+      draw: function(x,W,H){
+        x.fillStyle='#08120B'; x.fillRect(0,0,W,H);
+        x.fillStyle='#4BE08A'; x.textBaseline='middle';
+        x.font='bold '+Math.round(H*0.30)+'px "IBM Plex Mono",monospace';
+        x.fillText('LOAD  62%', W*0.05, H*0.30);
+        x.font='bold '+Math.round(H*0.24)+'px "IBM Plex Mono",monospace';
+        x.fillText('RUNTIME 11 MIN', W*0.05, H*0.68);
+        x.fillStyle='#1E6B3A';
+        for(var i=0;i<10;i++){ x.fillRect(W*0.62+i*(W*0.035), H*0.16, W*0.022, H*0.22); }
+        x.fillStyle='#4BE08A';
+        for(var j=0;j<6;j++){ x.fillRect(W*0.62+j*(W*0.035), H*0.16, W*0.022, H*0.22); }
+      }});
     for (let i=0;i<5;i++) {                                                    // bar-graph segments
       g.add(box(THREE, i < 3 ? M.lit : M.dark, 0.20, h*0.07, 0.02,
                 -1.42 + i*0.24, h*0.46, faceZ()+0.026));
@@ -555,9 +761,11 @@
     const tray = new THREE.Group();
     tray.add(box(THREE, M.body, RW - 0.12, h*0.9, 1.5, 0, h*0.5, RD/2 + 0.75));
     tray.add(box(THREE, M.dark, RW - 0.30, 0.02, 1.1, 0, h*0.95, RD/2 + 0.72));  // keyboard well
-    for (let r=0;r<4;r++) for (let c=0;c<14;c++) {                               // key caps
-      tray.add(box(THREE, M.deep, 0.16, 0.04, 0.13, -1.55 + c*0.24, h*0.97, RD/2 + 0.30 + r*0.20));
+    const keyAt = [];                                                            // 56 key caps
+    for (let r=0;r<4;r++) for (let c=0;c<14;c++) {
+      keyAt.push([-1.55 + c*0.24, h*0.97, RD/2 + 0.30 + r*0.20]);
     }
+    inst(THREE, tray, new THREE.BoxGeometry(0.16, 0.04, 0.13), M.deep, keyAt);
     tray.add(box(THREE, M.deep, 0.55, 0.03, 0.34, 1.35, h*0.97, RD/2 + 1.20));   // touchpad
     for (const s of [-1,1]) tray.add(box(THREE, metal, 0.20, h*0.4, 0.06, s*1.86, h*0.5, RD/2 + 1.50));
     g.add(tray);
@@ -634,8 +842,27 @@
     /* Push-to-trip button. */
     const ptt = cyl(THREE, M.dark, 0.07, 0.07, 0.05, 10, 0.44, 1.62, fz + 0.03);
     ptt.rotation.x = Math.PI/2; g.add(ptt);
-    /* Rating plug window. */
+    /* Rating plug window, showing the actual plug rating. */
     g.add(box(THREE, M.dark, 0.30, 0.18, 0.02, 0.40, 1.06, fz + 0.03));
+    decal(THREE, g, {key:'brk-plug', w:0.26, h:0.15, x:0.40, y:1.06, z:fz + 0.045,
+      cw:160, ch:96, rough:0.4, metal:0.1,
+      draw: function(x,W,H){
+        x.fillStyle='#15181C'; x.fillRect(0,0,W,H);
+        x.fillStyle='#F2C230'; x.textBaseline='middle'; x.textAlign='center';
+        x.font='bold '+Math.round(H*0.52)+'px "Helvetica Neue",Arial,sans-serif';
+        x.fillText('400', W/2, H*0.44);
+        x.font='bold '+Math.round(H*0.24)+'px "Helvetica Neue",Arial,sans-serif';
+        x.fillText('AMP', W/2, H*0.80);
+      }});
+    /* Interrupting-rating label on the case. AIC is the number that has to be
+       checked against available fault current, and it is the one people skip. */
+    decal(THREE, g, {key:'brk-aic', w:0.62, h:0.30, x:0, y:0.68, z:fz + 0.02,
+      cw:260, ch:130, rough:0.55, metal:0.1,
+      draw: npDraw('MOLDED CASE BREAKER', [
+        ['FRAME', '600A'],
+        ['AIC',   '65kA @480V'],
+        ['UL',    '489']
+      ])});
 
     /* Lug shrouds with removable covers, top and bottom. */
     for (const s of [1, -1]) {
@@ -725,7 +952,17 @@
     g.add(cyl(THREE, metal, 0.11, 0.11, 0.16, 10, -0.05, 1.86, 0.44));         // cable gland
 
     /* Nameplate, eyebolt and feet with slotted holes. */
-    plate(THREE, g, metal, {x: 0.30, y: 1.42, z: 0.74, w: 0.44, h: 0.26});
+    /* Motor nameplate. FLA and service factor are the two values people come
+       looking for when sizing overloads and conductors. */
+    decal(THREE, g, {key:'np-motor', w:0.66, h:0.42, x:0.30, y:1.44, z:0.75,
+      cw:280, ch:180, metal:0.35, rough:0.42,
+      draw: npDraw('INDUCTION MOTOR', [
+        ['HP',    '75'],
+        ['RPM',   '1780'],
+        ['VOLTS', '460'],
+        ['FLA',   '88'],
+        ['SF',    '1.15']
+      ])});
     g.add(cyl(THREE, metal, 0.09, 0.09, 0.06, 10, -0.05, 2.34, 0).rotateX(Math.PI/2));
     for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
       g.add(box(THREE, M.dark, 0.42, 0.16, 0.30, sx*0.86, 0.14, sz*0.60));
@@ -753,6 +990,13 @@
     /* latch and handle on the free edge */
     doorPivot.add(box(THREE, metal, 0.06, 0.30, 0.06, W - 0.18, 0, 0.05));
     doorPivot.add(cyl(THREE, M.gold, 0.06, 0.06, 0.10, 10, W - 0.18, -0.25, 0.05));
+    /* Circuit directory on the inside of the door, where it actually lives, and
+       the arc-flash warning on the outside where an operator would read it. */
+    decal(THREE, doorPivot, {key:'dir-card', w:W-0.34, h:1.35, cw:300, ch:340,
+      x:(W-0.06)/2, y:0.42, z:-0.04, ry:Math.PI, rough:0.75, metal:0.05,
+      draw: directoryDraw});
+    decal(THREE, doorPivot, {key:'arcflash', w:W-0.38, h:0.62, cw:340, ch:200,
+      x:(W-0.06)/2, y:-0.72, z:0.031, rough:0.6, metal:0.05, draw: arcFlashDraw});
     doorPivot.rotation.y = -1.15;                                              // ~66 degrees open
     g.add(doorPivot);
     for (const sy of [0.55, 1.45, 2.35]) {                                     // hinge barrels
