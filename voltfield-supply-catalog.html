@@ -17,7 +17,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Voltfield">
 <meta property="og:title" content="All Parts — the full parts catalog">
-<meta property="og:description" content="Filter by sector, category, lead time and attributes; configure exact SKUs and see full specs.">
+<meta property="og:description" content="Filter by sector, category, lead time and attributes; configure exact variants and see full specs.">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="https://voltfield.org/social/social-supply-catalog.jpg">
 <meta property="og:image:width" content="1200">
@@ -456,7 +456,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="in">
     <div>
       <h5>Voltfield</h5>
-      <p>Configurable catalog spanning grid &amp; data-center power, renewables BOS, battery storage, oilfield equipment, and industrial-scale MRO supply — a sourcing reference, not a storefront. SKUs are configured on demand from a taxonomy of product families and attribute options; pricing is indicative market data, sourced through distributor and mill partners for reference only.</p>
+      <p>Configurable reference spanning grid &amp; data-center power, renewables BOS, battery storage, oilfield equipment, and industrial-scale MRO supply — an engineering reference, not a storefront. Configurations are generated on demand from a taxonomy of 243 equipment families and their attribute options; prices are indicative market bands published for budgeting, not offers.</p>
     </div>
     <div>
       <h5>Jump to sector</h5>
@@ -747,7 +747,7 @@ function renderModal(){
         <div><span>Quantity</span><input type="number" id="dmQty" min="1" value="${qty}"></div>
         <div><span>Voltfield sourcing ref</span><b>${sourcingRef(pn)}</b></div>
       </div>
-      <div class="dm-note">Configured from ${f.ax.length} attribute axes across ${fmt(f.ct)} SKUs in this family. Indicative pricing; final price, availability &amp; lead time confirmed at quote. The sourcing ref is Voltfield's own internal tracking code for this configuration — not a manufacturer SKU or UPC.</div>
+      <div class="dm-note">Configured from ${f.ax.length} attribute axes across ${fmt(f.ct)} configurations in this family. Indicative pricing; final price, availability &amp; lead time confirmed at quote. The sourcing ref is Voltfield's own internal tracking code for this configuration — not a manufacturer SKU or UPC.</div>
     </div>
     <div class="dm-foot">
       <button class="dm-add${inq?' in':''}" id="dmAdd">${inq?'In sourcing list ✓':'Add to sourcing list'}</button>
@@ -786,7 +786,7 @@ function suggestSearch(q){
 function suggestRender(list,q){
   if(!q.trim()){suggestResults.classList.remove('show');suggestResults.innerHTML='';return;}
   if(!list.length){suggestResults.innerHTML='<div class="kbsearch-empty">No matches for &ldquo;'+suggestEsc(q)+'&rdquo; &mdash; press Enter to search anyway.</div>';suggestResults.classList.add('show');return;}
-  suggestResults.innerHTML=list.map(f=>`<button type="button" class="kbsearch-item" data-fi="${f._i}"><span class="kind">${SECTORS[f.s].label} &middot; ${suggestEsc(f.c)}</span><span class="ttl">${suggestEsc(f.n)}</span><span class="snip">${fmt(f.ct)} configurable SKUs &middot; ${money(f.lo,'')}&ndash;${money(f.hi,f.pu)}</span></button>`).join('');
+  suggestResults.innerHTML=list.map(f=>`<button type="button" class="kbsearch-item" data-fi="${f._i}"><span class="kind">${SECTORS[f.s].label} &middot; ${suggestEsc(f.c)}</span><span class="ttl">${suggestEsc(f.n)}</span><span class="snip">${fmt(f.ct)} configurations &middot; ${money(f.lo,'')}&ndash;${money(f.hi,f.pu)}</span></button>`).join('');
   suggestResults.classList.add('show');
 }
 suggestInput.addEventListener('input',()=>suggestRender(suggestSearch(suggestInput.value),suggestInput.value));
@@ -925,7 +925,7 @@ document.getElementById('cmpScrim').onclick=closeCompareModal;
   btn.addEventListener('click',function(){
     const matched=matchedFamilies();
     if(!matched.length){toast('Nothing to export — no families match the current filters.');return;}
-    const header=['Family','Category','Sector','Distributor','Price Low','Price High','Price Unit','Lead Time (wk)','SKU Count'];
+    const header=['Family','Category','Sector','Distributor','Price Low','Price High','Price Unit','Lead Time (wk)','Configurations'];
     const rows=matched.map(f=>[f.n,f.c,SECTORS[f.s].label,DIST_LABEL[f.d]||f.d,f.lo,f.hi,f.pu||'',f.lw,f.ct]);
     const csv=[header,...rows].map(r=>r.map(csvCell).join(',')).join('\r\n');
     const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});

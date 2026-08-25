@@ -220,7 +220,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </main>
 <footer>
   <div class="in">
-    <p>Configured part detail. This part is one configuration of a family spanning many SKUs; change any option to reconfigure it, and the link above updates so you can share this exact configuration. Pricing is indicative and confirmed at quote. <a href="voltfield-supply-catalog.html">Back to All Parts &rarr;</a></p>
+    <p>Configured part detail. This part is one configuration of a family spanning many; change any option to reconfigure it, and the link above updates so you can share this exact configuration. Pricing is indicative and confirmed at quote. <a href="voltfield-supply-catalog.html">Back to All Parts &rarr;</a></p>
   </div>
 </footer>
 <div class="toast" id="toast"></div>
@@ -305,7 +305,7 @@ function updateProductSchema(pn,price,lb){
   el.textContent=JSON.stringify(data);
 }
 /* The catalog listing/grid deliberately uses category icons, not photos, everywhere --
-   many SKUs in a family would otherwise share one duplicate stock photo (see
+   many configurations in a family would otherwise share one duplicate stock photo (see
    voltfield-cat-icons.js). A part detail page is different: it's exactly one
    configuration, so a real crawlable <img> (with the same honest disclosure used
    sitewide) is worth surfacing here even though the icon stays the primary visual. */

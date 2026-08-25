@@ -294,18 +294,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="ipanel">
       <h2>Energy infrastructure by sector</h2>
-      <div class="sub">SKUs across the four energy-infrastructure sectors</div>
+      <div class="sub">configurations across the four energy-infrastructure sectors</div>
       <div id="energyBars"></div>
     </div>
     <div class="ipanel">
       <h2>Lead-time mix</h2>
-      <div class="sub">Share of SKUs by quoted lead time</div>
+      <div class="sub">Share of configurations by indicative lead time</div>
       <div class="donut-wrap"><div id="leadDonut"></div><div class="legend" id="leadLegend"></div></div>
       <div class="note" id="leadNote"></div>
     </div>
     <div class="ipanel wide">
       <h2>Largest categories</h2>
-      <div class="sub">Top 12 categories by SKU count, across all sectors</div>
+      <div class="sub">Top 12 categories by configuration count, across all sectors</div>
       <div id="catBars"></div>
     </div>
     <div class="ipanel">
@@ -315,8 +315,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="ipanel">
       <h2>Coverage by sector</h2>
-      <div class="sub">Families, categories and SKUs per sector</div>
-      <table class="ins"><thead><tr><th>Sector</th><th class="r">Families</th><th class="r">Categories</th><th class="r">SKUs</th></tr></thead><tbody id="covTable"></tbody></table>
+      <div class="sub">Families, categories and configurations per sector</div>
+      <table class="ins"><thead><tr><th>Sector</th><th class="r">Families</th><th class="r">Categories</th><th class="r">Configurations</th></tr></thead><tbody id="covTable"></tbody></table>
     </div>
   </div>
 </div>
@@ -377,7 +377,7 @@ function donutSVG(items){
   items.forEach(it=>{const seg=it.value/total*C; if(seg<=0)return;
     segs+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${it.color}" stroke-width="${sw}" stroke-dasharray="${seg.toFixed(2)} ${(C-seg).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}" transform="rotate(-90 ${cx} ${cy})"></circle>`;
     off+=seg;});
-  return `<svg viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="donut chart"><circle cx="64" cy="64" r="52" fill="none" stroke="#EEF1F4" stroke-width="22"></circle>${segs}<text x="64" y="60" class="donut-c" text-anchor="middle">${fmt(total)}</text><text x="64" y="76" class="donut-l" text-anchor="middle">SKUs</text></svg>`;
+  return `<svg viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="donut chart"><circle cx="64" cy="64" r="52" fill="none" stroke="#EEF1F4" stroke-width="22"></circle>${segs}<text x="64" y="60" class="donut-c" text-anchor="middle">${fmt(total)}</text><text x="64" y="76" class="donut-l" text-anchor="middle">Configurations</text></svg>`;
 }
 function legendHTML(items){
   const total=items.reduce((a,x)=>a+x.value,0)||1;
@@ -433,7 +433,7 @@ const leadItems=[
 ];
 el('leadDonut').innerHTML=donutSVG(leadItems);
 el('leadLegend').innerHTML=legendHTML(leadItems);
-el('leadNote').textContent=`By product family: ${bucketFams.ok} short-lead, ${bucketFams.warn} standard, ${bucketFams.crit} long-lead families. Short-lead SKUs are dominated by industrial-supply (MRO) lines.`;
+el('leadNote').textContent=`By product family: ${bucketFams.ok} short-lead, ${bucketFams.warn} standard, ${bucketFams.crit} long-lead families. Short-lead configurations are dominated by industrial-supply (MRO) lines.`;
 
 // Longest lead families (table)
 const lf=FAM.slice().sort((a,b)=>(b.lw||0)-(a.lw||0)).slice(0,8);
