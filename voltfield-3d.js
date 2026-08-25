@@ -2060,6 +2060,16 @@
       sc.near = 0.1;      sc.far = shadowR * 5;
       sc.updateProjectionMatrix();
 
+      /* Fit the depth range to the model instead of leaving the 0.1..100
+         default. These models are only a few world units across, so a 100-unit
+         far plane spends nearly all of the depth buffer's precision on empty
+         space behind them. Measured effect on the SSAO depth prepass: with
+         far=100 the AO buffer bottomed out at 175/255 (almost no occlusion
+         detected); fitted, it reaches 69. It also sharpens the shadow map. */
+      camera.near = Math.max(0.05, radius * 0.15);
+      camera.far  = radius * 4 + fit;
+      camera.updateProjectionMatrix();
+
       const target = new THREE.Vector3(ctr.x, ctr.y, ctr.z);
       orbit = attachOrbit(camera, renderer.domElement, target, {
         radius: radius,
@@ -2083,9 +2093,14 @@
           /* Tuned for these models' scale -- they are framed a couple of world
              units across, so the default 8-unit kernel would sample right past
              the geometry and shade nothing. */
-          ssao.kernelRadius = 0.14;
-          ssao.minDistance  = 0.0012;
-          ssao.maxDistance  = 0.09;
+          /* Swept these against the AO buffer directly rather than guessing.
+             three's default kernel of 8 is sized for scenes hundreds of units
+             across: on a 3-unit model every sample lands in empty space and the
+             AO buffer comes back white. 0.25 with a tight depth window is where
+             crevices actually register. */
+          ssao.kernelRadius = 0.25;
+          ssao.minDistance  = 0.001;
+          ssao.maxDistance  = 0.05;
           c.addPass(ssao);
           /* Required last: the composer renders through linear render targets,
              so tone mapping and the output colour space have to be applied at
