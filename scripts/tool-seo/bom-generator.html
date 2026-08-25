@@ -1,0 +1,51 @@
+<div class="toolseo">
+  <h2>What a bill of materials for electrical equipment has to contain</h2>
+  <p>A bill of materials is the list a quote is built from. When it is incomplete, the quotes that come back are not comparable &mdash; each supplier fills the gaps differently, and the cheapest number usually belongs to whoever assumed the least. Most of the difficulty in electrical procurement traces back to a BOM that described the main equipment properly and left everything around it implied.</p>
+  <p>This tool breaks a piece of equipment into the components it is actually assembled from, so the parts that are easy to forget appear on the list before the RFQ goes out rather than during commissioning.</p>
+
+  <h3>What gets missed, reliably</h3>
+  <ul>
+    <li><b>Accessories on protective devices.</b> Shunt trips, auxiliary contacts, undervoltage releases and communication modules are ordered separately from the breaker on most platforms, and they have their own lead times.</li>
+    <li><b>Terminations and lugs.</b> Whether lugs are included, and whether they suit the conductor size and material actually being landed, is a routine source of site rework.</li>
+    <li><b>Enclosure rating for the real environment.</b> An indoor-rated enclosure specified for an outdoor location is a change order, and it is usually discovered late.</li>
+    <li><b>Spares and test equipment.</b> Anything with a long replacement lead time deserves a spares decision at purchase, when it is a line item rather than an emergency.</li>
+    <li><b>The interface hardware between packages.</b> Transition sections, bus connections and cable entry provisions belong to whichever package the specification says &mdash; and if it says nothing, to neither.</li>
+  </ul>
+
+  <div class="note"><b>Component teardowns here are illustrative, not manufacturer bills of materials.</b> They show the parts a given class of equipment is typically assembled from, at the level of detail useful for scoping and comparison. Actual OEM designs vary, and the manufacturer&rsquo;s own documentation governs for any specific catalogue number.</div>
+
+  <h3>Why the BOM decides schedule as much as cost</h3>
+  <p>Electrical equipment lead times are not uniform. Inside a single package, the enclosure might be six weeks and the breaker forty. A BOM that resolves to component level makes the long-lead items visible early enough to release them separately, which is often the difference between a project that energises on time and one that waits on a single line item.</p>
+
+  <h2>Building a BOM that produces comparable quotes</h2>
+  <ul>
+    <li><b>Specify the electrical duty, not just the product.</b> Voltage, available fault current, continuous load and ambient conditions let a supplier confirm the selection rather than merely price what you asked for.</li>
+    <li><b>State what is excluded as explicitly as what is included.</b> Ambiguity is priced by the supplier, and always in their favour.</li>
+    <li><b>Separate long-lead items into their own release.</b> Holding a forty-week item inside a package that is otherwise ready adds its lead time to everything.</li>
+    <li><b>Give quantities and spares together.</b> Adding spares to an existing production run costs far less than ordering them afterwards.</li>
+    <li><b>Fix the standards and listings up front.</b> A device listed to a different standard than the assembly it goes into is a compliance problem, not a substitution.</li>
+  </ul>
+
+  <h2>Related tools and reading</h2>
+  <div class="rel">
+    <a href="rfq-toolkit.html"><span class="k">Template</span><span class="t">RFQ readiness checklist</span></a>
+    <a href="lead-time-index.html"><span class="k">Data</span><span class="t">Current lead times by equipment class</span></a>
+    <a href="engineering-calculators.html"><span class="k">Calculators</span><span class="t">Load, current and sizing calculators</span></a>
+    <a href="voltfield-identify.html"><span class="k">Tool</span><span class="t">Identify a part from its markings</span></a>
+    <a href="data-center-electrical-procurement.html"><span class="k">Hub</span><span class="t">How an electrical procurement sequence fits together</span></a>
+    <a href="free-tools.html"><span class="k">Tools</span><span class="t">All free engineering tools</span></a>
+  </div>
+
+  <h2>Common questions</h2>
+  <h3>How detailed should a BOM be before requesting quotes?</h3>
+  <p>Detailed enough that two suppliers pricing it would include the same scope. That is the practical test, and it is a lower bar than a full manufacturing bill of materials but a much higher one than a list of headline equipment. If a line could reasonably be read two ways, it will be.</p>
+
+  <h3>Should the BOM name a specific manufacturer?</h3>
+  <p>It depends on what you are optimising. Naming a manufacturer gets a precise comparison and constrains competition; specifying performance gets alternatives and a wider price range but requires more work to evaluate. A common middle path is to name a basis of design and allow equivalents, with the evaluation criteria stated.</p>
+
+  <h3>Why do quotes for the same BOM differ so much?</h3>
+  <p>Most of the spread is scope, not price. Differences in what is assumed included &mdash; accessories, terminations, freight, commissioning, spares &mdash; typically account for more variance than the underlying equipment cost. Normalising quotes against the BOM line by line usually collapses a wide-looking spread considerably.</p>
+
+  <h3>Can this replace a manufacturer&rsquo;s bill of materials?</h3>
+  <p>No, and it is not intended to. The teardowns show what a class of equipment is typically built from, which is what you need for scoping, comparison and finding the gaps in a specification. For a specific catalogue number, the manufacturer&rsquo;s own documentation is the authority, and it is what should be used for ordering.</p>
+</div>

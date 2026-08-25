@@ -1,0 +1,43 @@
+<div class="toolseo">
+  <h2>What the components on a board actually do</h2>
+  <p>A populated circuit board is a small number of component families repeated in different values and arrangements. Learning to recognise them by sight &mdash; and knowing what each one is there for &mdash; is most of what separates reading a board from staring at one.</p>
+  <p>This builder places real through-hole parts so the physical form and the function stay attached to each other. A resistor looks like a resistor, its colour bands encode its value, and its leads bend down through the board to pads on the other side, because that is how the part is actually mounted.</p>
+
+  <h3>The families worth knowing on sight</h3>
+  <ul>
+    <li><b>Resistors</b> limit current and set voltages. The colour bands are the value; the body is otherwise featureless, which is exactly why the bands exist.</li>
+    <li><b>Capacitors</b> store charge. Ceramic discs are small, non-polarised and used for decoupling. Electrolytic cans are larger, polarised, and marked with a stripe &mdash; installing one backwards is a classic and destructive mistake.</li>
+    <li><b>Diodes</b> conduct one way. The band marks the cathode, and it is the only thing on the part telling you which way round it goes.</li>
+    <li><b>LEDs</b> are diodes that emit light. The flat on the flange marks the cathode; the leads are the other cue before the part is trimmed.</li>
+    <li><b>Integrated circuits</b> in DIP packages carry a notch or dot at pin&nbsp;1. Every pin number on the datasheet is counted from it.</li>
+    <li><b>Trimmer potentiometers</b> are adjustable resistors, set once during calibration rather than during operation.</li>
+  </ul>
+
+  <div class="note"><b>Polarity is where most first boards fail.</b> Resistors and ceramic capacitors can go in either way round. Electrolytic capacitors, diodes, LEDs and integrated circuits cannot. Three of those four fail destructively when reversed, and an IC installed backwards frequently takes something else with it. Checking polarity before soldering costs seconds; finding it afterwards costs the board.</div>
+
+  <h3>Why through-hole rather than surface mount</h3>
+  <p>Almost all commercial production is surface mount now, and the parts are far smaller. Through-hole remains the better place to learn: the parts are large enough to see, the leads make the electrical connection visible, and the relationship between the schematic symbol and the physical object is obvious rather than abstract. The concepts transfer directly.</p>
+
+  <h2>Related tools and reading</h2>
+  <div class="rel">
+    <a href="voltfield-pcb-layout.html"><span class="k">Tool</span><span class="t">Place footprints on a board grid</span></a>
+    <a href="voltfield-sandbox.html"><span class="k">Practice</span><span class="t">Build a circuit from source to load</span></a>
+    <a href="glossary.html"><span class="k">Reference</span><span class="t">Electrical equipment glossary</span></a>
+    <a href="voltfield-glossary-quiz.html"><span class="k">Practice</span><span class="t">Test what you have learned</span></a>
+    <a href="engineering-calculators.html"><span class="k">Calculators</span><span class="t">Load, current and sizing calculators</span></a>
+    <a href="free-tools.html"><span class="k">Tools</span><span class="t">All free engineering tools</span></a>
+  </div>
+
+  <h2>Common questions</h2>
+  <h3>How do I read a resistor&rsquo;s colour bands?</h3>
+  <p>The first two bands are digits, the third is a multiplier, and a fourth band gives tolerance. Five-band resistors add a third digit for precision parts. Read from the end where the bands are grouped closest together &mdash; the tolerance band sits alone at the other end, which is what tells you which way to read it.</p>
+
+  <h3>Which components are polarised?</h3>
+  <p>Electrolytic capacitors, diodes, LEDs, transistors and integrated circuits all have a defined orientation. Resistors and ceramic capacitors do not. Each polarised part carries a physical marking &mdash; a stripe, a band, a flat, or a notch &mdash; and that marking exists precisely because getting it wrong usually destroys the part.</p>
+
+  <h3>What is the notch on an integrated circuit for?</h3>
+  <p>It identifies pin&nbsp;1. Pins are numbered counter-clockwise from the notch when viewed from above, and every pin assignment in the datasheet is relative to it. A DIP package is otherwise symmetrical, so without the notch there would be no way to orient it.</p>
+
+  <h3>Does the size of a capacitor tell you its value?</h3>
+  <p>Only loosely, and only within one technology. A physically larger electrolytic generally holds more charge or withstands a higher voltage, but a ceramic and an electrolytic of similar size can differ by orders of magnitude in capacitance. The printed marking is the value; the size mostly tells you the voltage rating and the family.</p>
+</div>
