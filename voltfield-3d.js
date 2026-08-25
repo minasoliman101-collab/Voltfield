@@ -344,8 +344,19 @@
     const b = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), m);
     b.position.set(x,y,z); return b;
   }
+  /* Radial resolution multiplier. The builders were authored with segment counts
+     tuned by eye at thumbnail size -- half of them sit at 10 or fewer, which is
+     visibly faceted once a bushing, pipe, fan hub or shaft is shown at any real
+     size. Scaling centrally lifts all 100-odd call sites at once instead of
+     re-tuning each by hand, and keeps the numbers at the call site meaningful as
+     *relative* detail (a bolt head still gets less than a transformer tank).
+     Clamped at both ends: never coarser than 10, never finer than 48, since past
+     that the extra triangles buy nothing at these screen sizes. */
+  const DETAIL = 2.0;
+  function segs(n){ return Math.max(10, Math.min(48, Math.round((n || 14) * DETAIL))); }
+
   function cyl(THREE, m, rt,rb,h, seg, x,y,z){
-    const c = new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,seg||14), m);
+    const c = new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,segs(seg)), m);
     c.position.set(x,y,z); return c;
   }
 
@@ -1899,8 +1910,15 @@
       const radXZ = Math.sqrt(size.x*size.x + size.z*size.z) / 2;
       const distV = (size.y/2) / Math.tan(vFov/2) + radXZ;
       const distH = radXZ / Math.tan(hFov/2) + radXZ;
+      /* distV and distH already add radXZ, which is the object's own half-
+         diagonal -- that is the rotation-safety margin, and it is generous on
+         its own. Multiplying it again by 1.25 double-padded the shot: measured
+         on the homepage showcase, models were occupying only 21-30% of the
+         frame width and about 12% of its area, which reads as a small, plain
+         object rather than a detailed one. 1.06 keeps a visible margin without
+         stacking two of them. */
       const fit = Math.max(distV, distH);
-      const radius = fit * (o.zoom || 1.25);
+      const radius = fit * (o.zoom || 1.06);
 
       /* Fit the shadow camera to this model. The shapes span a wide range of
          scales -- a DIP-8 on a board stub against a 48U rack -- and a single
