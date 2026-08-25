@@ -19,6 +19,7 @@
 #
 # Pure ASCII on purpose (PowerShell 5.1 reads .ps1 as ANSI).
 $ErrorActionPreference = 'Stop'
+Add-Type -AssemblyName System.Drawing
 . (Join-Path $PSScriptRoot 'parse-families.ps1')
 
 $root  = Split-Path -Parent $PSScriptRoot
@@ -167,9 +168,20 @@ foreach ($f in $fams) {
     }
   }
 
+  # Intrinsic dimensions are read from the file, not assumed. The first pass
+  # hardcoded 640x420, which stretched every one of these square images and
+  # reserved a box of the wrong shape.
   $imgTag = ''
   if ($f.img) {
-    $imgTag = "    <img class=`"famimg`" src=`"/$($f.img)`" alt=`"$(EscAttr $f.n)`" width=`"640`" height=`"420`" loading=`"lazy`" decoding=`"async`">`r`n"
+    $imgPath = Join-Path $root ($f.img -replace '/','\')
+    if (Test-Path $imgPath) {
+      try {
+        $bmp = [System.Drawing.Image]::FromFile($imgPath)
+        $iw = $bmp.Width; $ih = $bmp.Height
+        $bmp.Dispose()
+      } catch { $iw = 340; $ih = 340 }
+      $imgTag = "    <img class=`"famimg`" src=`"/$($f.img)`" alt=`"$(EscAttr $f.n)`" width=`"$iw`" height=`"$ih`" loading=`"lazy`" decoding=`"async`">`r`n"
+    }
   }
 
   $desc = "$($f.n): configuration options, standards, indicative lead time and market price band. Reference data, nothing for sale."
