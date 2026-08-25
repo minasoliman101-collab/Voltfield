@@ -1,0 +1,84 @@
+# Written introductions for the /parts/ family reference pages.
+#
+# Format:  sector|Family Name :: introduction
+#
+# A family with no entry here gets no page. That gate is deliberate: 243 pages
+# differing only in table data would be a doorway-page pattern. Each intro says
+# what the thing is and what actually decides the specification, because that is
+# the part a spec table cannot carry.
+#
+# Nothing here states a figure that is not already in the catalog data. Where a
+# number appears it is a physical constant, a standard, or a widely published
+# industry range -- never an invented measurement.
+
+# ---------------- DATA CENTERS: Transformers ----------------
+dc|Large Power Transformers :: The units that appear only where a campus takes power at transmission voltage rather than distribution voltage. Ratings, cooling class and HV class are chosen together, and grain-oriented electrical steel supply is what puts these at the far end of every lead-time chart.
+dc|Pad-Mount Transformers :: The workhorse of campus distribution: utility medium voltage stepped down to building utilisation voltage, outdoors on a pad, dead-front for safety. Loop-feed or radial is the decision that follows your redundancy scheme, not the other way round.
+dc|Dry-Type / Cast-Resin Transformers :: Air-cooled units that sit indoors close to the load, with no liquid to contain. Cast-resin windings tolerate humidity and thermal cycling that ventilated units do not, which is why they turn up in mechanical rooms and on upper floors.
+dc|Isolation / K-Rated Transformers :: Shielded transformers sized for harmonic-heavy loads. The K-factor rating states how much additional eddy-current heating the unit can absorb, which matters wherever six-pulse drives and switch-mode supplies dominate the connected load.
+
+# ---------------- DATA CENTERS: Switchgear & Breakers ----------------
+dc|MV Switchgear (5–38kV) :: Metal-clad lineups with drawout vacuum breakers, sitting between the utility service and the building transformers. Compartmentalisation is what separates metal-clad from metal-enclosed, and it decides what can be safely worked on while the lineup is energised.
+dc|LV Switchgear :: 480V drawout power breaker lineups feeding the distribution system. Interrupting rating has to be selected against the available fault current the upstream transformer impedance allows, which is why switchgear cannot be specified from load alone.
+dc|Molded-Case Breakers (MCCB 15–1200A) :: The general-purpose overcurrent device across panelboards and distribution boards. Thermal-magnetic units cover most branch circuits; electronic LSIG trip units earn their place where selective coordination with an upstream device has to be demonstrated.
+dc|Air Circuit Breakers :: Drawout power breakers for main and tie positions at higher frame sizes. Their adjustable trip characteristics are what make selective coordination achievable at the top of a distribution system, where an unnecessary main trip takes out everything below it.
+
+# ---------------- DATA CENTERS: Backup Power ----------------
+dc|Diesel Gensets :: The default standby source for critical facilities. Standby, prime and continuous ratings describe different duty cycles from the same hardware, and picking the wrong one is how a set ends up de-rated or prematurely worn.
+dc|Natural-Gas Gensets :: Gaseous-fuelled sets used where fuel storage is impractical or emissions rules bite. Lean-burn units accept longer run hours than diesel, but block load acceptance is weaker, which shapes how the transfer scheme has to be designed.
+dc|Gas Turbine Generators :: Aeroderivative and industrial turbines for prime power and peaking duty at scale. Their power density and fast-start capability come with a heat rate and maintenance interval profile quite different from reciprocating sets.
+dc|UPS Systems (Static) :: Double-conversion systems that hold the critical bus through a source transfer. Modular architectures let capacity track the IT load rather than the design-day load, which is where most of the efficiency at partial load is won or lost.
+dc|Flywheel / DC UPS :: Kinetic storage for ride-through, covering the seconds between a utility event and the generator taking load. It trades stored runtime for a service life and thermal profile that batteries cannot match in the same footprint.
+
+# ---------------- DATA CENTERS: Cooling ----------------
+dc|Coolant Distribution Units (CDU) :: The interface between a facility water loop and a direct-to-chip cooling loop, keeping the technology-side fluid clean, cool and at controlled pressure. Approach temperature and pumping head are what size them, not raw kW alone.
+dc|CRAH / CRAC Units :: Precision room-level cooling: CRAH units on chilled water, CRAC units with integral refrigeration. Sensible heat ratio matters more than nominal tonnage, because a data hall load carries almost no latent component.
+dc|Rear-Door Heat Exchangers :: Coils mounted on the rack itself, capturing heat before it enters the room. Passive doors rely on server fans alone; active doors add their own, which raises capture at the cost of another set of fans to power and maintain.
+dc|Dry Coolers & Chillers :: Heat rejection for the facility loop, either air-cooled chillers producing chilled water or dry coolers rejecting sensible heat directly. Ambient design temperature and glycol concentration drive both capacity and freeze protection.
+
+# ---------------- DATA CENTERS: Power Distribution ----------------
+dc|Busway (Feeder / Plug-In) :: Overhead bus duct replacing large conduit runs. Plug-in sections allow taps to be added or moved without a shutdown, which is why it suits halls that get reconfigured, while feeder sections simply move current between points.
+dc|Rack PDUs :: The last metre of distribution, at the rack. Metered units report per-circuit load; switched units add outlet control for remote reboot and stranded-capacity recovery. Outlet mix and phase balance decide usable capacity more than the nameplate does.
+dc|Floor PDU / RPP :: Floor-standing distribution with an integral transformer, or a remote power panel fed from one. They break a large feeder into branch circuits close to the load and are where per-branch metering is usually captured.
+dc|Static Transfer Switches :: Solid-state transfer between two independent sources, fast enough that downstream single-corded equipment never sees the break. Source synchronisation and upstream coordination are the parts that need care.
+dc|Server Rack Enclosures :: The cabinet itself: height in rack units, depth for equipment and cable management, and perforation ratio that determines how freely air moves through it. Weight rating matters more than it used to now that dense compute fills a frame.
+
+# ---------------- DATA CENTERS: Cabling & Busbar ----------------
+dc|MV Power Cable :: Shielded medium-voltage cable between the service entrance and building transformers. Insulation system, shielding and ampacity in the installed configuration matter far more than conductor size read off a table.
+dc|LV Power Cable :: 600V building wire and feeders. Insulation type sets the temperature rating and where the cable may be run; ampacity derating for bundling and ambient is what turns a calculated size into an installed one.
+dc|Copper Busbar :: Bare and tinned bar for switchgear connections, ground buses and equipment bonding. Current-carrying capacity depends on surface area and orientation, so a bar rated flat is not rated the same on edge.
+dc|Fiber Optic Trunk Assemblies & Patch Panels :: Pre-terminated trunks and the panels that land them. The multimode or singlemode choice sets the reach and optics cost for every link that will ever run over that fibre, so it long outlives the switches at each end.
+
+# ---------------- DATA CENTERS: Grounding & Bonding ----------------
+dc|Ground Bars & Kits :: Busbars, lugs and exothermic connections that give the facility a defined earthing reference. Grounding and bonding do two different jobs, and the equipment grounding conductor is not the neutral.
+dc|Surge Protective Devices :: Devices that clamp transient overvoltage before it reaches connected equipment. Type 1 units sit ahead of the main overcurrent device, Type 2 behind it, and the surge current rating is only meaningful alongside the let-through voltage.
+
+# ---------------- DATA CENTERS: Monitoring & Controls ----------------
+dc|Power Meters / BMS :: Revenue and power-quality metering feeding building management and DCIM systems. Accuracy class governs what the reading may be used for, and the protocol decides what can actually consume it.
+dc|Protective Relays :: The devices that decide when a breaker opens. Feeder, differential and overcurrent functions are configured as a coordinated scheme, so a relay setting is never a device-level decision in isolation.
+
+# ---------------- DATA CENTERS: Transformer Components ----------------
+dc|Transformer Bushings :: The insulated path taking a conductor through the tank wall. Porcelain and polymer housings, and condenser or solid designs, trade differently on seismic performance, failure mode and the risk they pose when they let go.
+dc|De-Energized Tap Changers :: Off-load tap switches that trim the turns ratio to match actual service voltage. They must only be moved with the unit de-energised, which is exactly the operational constraint that separates them from on-load changers.
+dc|Transformer Radiators & Cooling Fans :: Detachable radiator panels, fan banks and oil pumps that set which cooling class a unit achieves. The step from ONAN to ONAF is added airflow, and it buys a meaningful capacity increase from the same core and coils.
+dc|Insulating Oils & Dielectric Fluids :: The fluid doing both insulation and heat transfer. Natural ester fluids carry a much higher fire point than mineral oil, which is what allows some indoor and close-clearance installations to be built at all.
+dc|Transformer Gauges & Protective Devices :: Level, temperature and pressure instrumentation, plus the pressure relief and sudden-pressure devices that act when something goes wrong inside the tank. These are the signals a condition-monitoring programme is built on.
+dc|Electrical Steel & Core Laminations :: Grain-oriented silicon steel, slit and stacked into a core. Its supply is the single most-cited constraint behind multi-year transformer lead times, and grade selection trades core loss directly against material cost.
+dc|Magnet Wire & Winding Conductor :: Enamelled and paper-wrapped conductor, including continuously transposed strip for large windings. The insulation class sets the winding temperature rise the design may be rated for.
+dc|Transformer Insulation & Pressboard :: Kraft paper, pressboard, angle rings and spacers forming the solid insulation structure. Thermally upgraded paper is what allows a higher rated rise, and its ageing largely defines the transformer's service life.
+dc|Tanks, Skids & Fabricated Steel :: The welded tank, cover, conservator and supporting steel. Beyond containment, the fabrication sets seismic qualification and defines how the unit can be lifted, shipped and set.
+
+# ---------------- DATA CENTERS: Switchgear Components ----------------
+dc|Instrument Transformers (CT / VT) :: Current and voltage transformers scaling primary quantities down for metering and protection. Metering and relaying accuracy classes are not interchangeable, and a CT saturating during a fault defeats the protection depending on it.
+dc|Bus Insulators & Standoffs :: The supports holding bus at a defined clearance. Their real job is mechanical: withstanding the electromagnetic forces a through-fault imposes, which is what bus bracing rating describes.
+dc|Breaker Repair Kits — Contacts, Arc Chutes & Mechanisms :: Wear parts for breakers already in service: contact sets, arc chutes, springs and operating mechanisms. For an obsolete frame these often decide whether a lineup can be maintained or has to be replaced entirely.
+dc|Breaker Trip Units & Accessories :: Trip units, rating plugs and auxiliaries that determine breaker behaviour. Changing a rating plug changes the coordination study, so it is a protection decision rather than a parts swap.
+dc|Panel Heaters, Terminal Blocks & Control Wiring :: Anti-condensation heaters, thermostats, terminal blocks and control wiring. Unglamorous, but condensation inside medium-voltage equipment is a genuine and recurring cause of failure.
+dc|Electrical Enclosures & Cabinets :: Boxes and cabinets rated by NEMA type for the environment they sit in. The rating describes ingress and corrosion protection, and a stainless or polycarbonate body is chosen for the environment rather than the electrical duty.
+
+# ---------------- DATA CENTERS: Genset Components ----------------
+dc|Industrial Engines (Diesel & Gas) :: The prime mover itself, as a long block or complete engine. Emissions tier governs where it may be installed and how many hours it may run, which is often a stricter constraint than the power rating.
+dc|Alternators & Generator Ends :: The synchronous machine converting shaft power to electricity. Its subtransient reactance sets the fault current available to downstream protection, and excitation type decides behaviour under non-linear load.
+dc|Genset Controls, AVRs & Governors :: Controllers, voltage regulators and governors managing voltage, speed, synchronising and load sharing. On a paralleled installation these determine whether sets share load cleanly or fight each other.
+dc|Engine Cooling & Exhaust :: Radiators, charge-air coolers, silencers and flexible connections. Silencer grade is chosen against a site noise limit, and exhaust back-pressure is a real constraint on engine output.
+dc|Fuel & Starting Systems :: Day tanks, filtration, polishing, transfer pumps, gas trains and starting systems. Fuel degradation in long-idle standby installations causes more failed starts than the engine itself does.
