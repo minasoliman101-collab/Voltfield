@@ -82,10 +82,15 @@
   function buildTransformer(THREE, color){
     const g = new THREE.Group();
     const M = mats(THREE, color);
+    /* Materials chosen per part rather than per palette slot: the tank and its
+       corrugations are the same painted steel, but the bushings are glazed
+       porcelain (a dielectric -- giving ceramic any metalness is what made it
+       look like painted plastic), the fan guards and hardware are galvanised,
+       and the terminals are copper. */
     const mat = M.body, dark = M.dark;
-    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.75, roughness:.35});
-    const porc  = new THREE.MeshStandardMaterial({color:0xD8DEE6, metalness:.15, roughness:.45});
-    const cu    = new THREE.MeshStandardMaterial({color:0xB87333, metalness:.85, roughness:.35});
+    const metal = M.galv;
+    const porc  = M.porcelain;
+    const cu    = M.copper;
 
     const TW = 2.4, TH = 1.6, TD = 1.4;
     g.add(box(THREE, mat, TW, TH, TD, 0, 0.8, 0));                       // tank
@@ -166,7 +171,7 @@
     const g = new THREE.Group();
     const M = mats(THREE, color);
     const mat = M.body, dark = M.dark, signal = M.gold;
-    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.75, roughness:.35});
+    const metal = new THREE.MeshStandardMaterial({color:0xAAB2B8, metalness:.68, roughness:.50});
     const glass = new THREE.MeshStandardMaterial({color:0x0E1826, metalness:.5, roughness:.25});
 
     const n = 3, w = 0.86, h = 1.9, d = 1.0, fz = d/2;
@@ -243,7 +248,7 @@
     const g = new THREE.Group();
     const M = mats(THREE, color);
     const mat = M.body, mod = M.deep, dark = M.dark;
-    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.75, roughness:.35});
+    const metal = new THREE.MeshStandardMaterial({color:0xAAB2B8, metalness:.68, roughness:.50});
     const cu    = new THREE.MeshStandardMaterial({color:0xB87333, metalness:.85, roughness:.35});
 
     const W = 1.9, H = 2.2, D = 1.1;
@@ -295,8 +300,8 @@
     const g = new THREE.Group();
     const M = mats(THREE, color);
     const mat = M.body, dark = M.dark;
-    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.75, roughness:.35});
-    const blk   = new THREE.MeshStandardMaterial({color:0x2A3240, metalness:.5, roughness:.5});
+    const metal = new THREE.MeshStandardMaterial({color:0xAAB2B8, metalness:.68, roughness:.50});
+    const blk   = new THREE.MeshStandardMaterial({color:0x24272C, metalness:.05, roughness:.55});
 
     /* Fuel-tank base skid -- on a packaged set the tank IS the base. */
     g.add(box(THREE, dark, 3.2, 0.34, 1.25, 0, 0.17, 0));
@@ -467,13 +472,50 @@
     });
   }
 
+  /* ---------- material library ----------
+     `body` stays the sector hue: that colour is functional, it is how a viewer
+     tells a data-centre part from a storage or oilfield one, and it is not a
+     realism decision to make.
+
+     Everything else is. `dark` was a fixed navy (#22334C) used 57 times and
+     `deep` 18 more, which meant galvanised frames, rubber gaskets, cast-iron
+     housings, concrete pads and black plastic all rendered as the same blue.
+     They are now neutral greys, and the named materials below give builders a
+     physically sensible choice per part instead of a tint of the brand colour.
+
+     Values are plausible PBR rather than measured: non-metals sit at metalness
+     0 (a painted or ceramic surface is a dielectric -- giving it metalness is
+     the classic way to make everything look like toys), and roughness carries
+     the difference between a glazed bushing and a sand-cast housing. */
   function mats(THREE, color){
+    const M = function(c, metalness, roughness, extra){
+      const o = {color:c, metalness:metalness, roughness:roughness};
+      if (extra) for (const k in extra) o[k] = extra[k];
+      return new THREE.MeshStandardMaterial(o);
+    };
     return {
-      body: new THREE.MeshStandardMaterial({color, metalness:.3, roughness:.6}),
-      dark: new THREE.MeshStandardMaterial({color:0x22334C, metalness:.4, roughness:.5}),
-      deep: new THREE.MeshStandardMaterial({color:0x101B2D, metalness:.3, roughness:.55}),
-      gold: new THREE.MeshStandardMaterial({color:0xFFC400, emissive:0xFFC400, emissiveIntensity:.22, roughness:.4}),
-      lit:  new THREE.MeshStandardMaterial({color:0x7FCC9B, emissive:0x7FCC9B, emissiveIntensity:.3, roughness:.4})
+      /* sector identity -- do not repurpose */
+      body: M(color, 0.30, 0.60),
+
+      /* neutral structural greys, replacing the old navy */
+      dark: M(0x3A4046, 0.55, 0.52),
+      deep: M(0x24272B, 0.35, 0.58),
+
+      /* indicators stay emissive */
+      gold: M(0xFFC400, 0.00, 0.40, {emissive:0xFFC400, emissiveIntensity:.22}),
+      lit:  M(0x7FCC9B, 0.00, 0.40, {emissive:0x7FCC9B, emissiveIntensity:.30}),
+
+      /* ---- real materials ---- */
+      steel:     M(0x9AA3AD, 0.85, 0.34),   // bare / mill-finish steel
+      galv:      M(0xAAB2B8, 0.68, 0.50),   // galvanised: duller, slight spangle
+      stainless: M(0xC6CCD2, 0.92, 0.20),   // silencers, cladding, fasteners
+      castIron:  M(0x55595E, 0.45, 0.70),   // engine blocks, motor housings
+      copper:    M(0xB87333, 0.88, 0.32),   // busbar, windings, terminals
+      brass:     M(0xC0982E, 0.86, 0.30),   // glands, valve trim
+      porcelain: M(0xE9E5DB, 0.00, 0.22),   // glazed bushing sheds -- dielectric
+      rubber:    M(0x1A1C1F, 0.00, 0.94),   // gaskets, boots, vibration mounts
+      plastic:   M(0x24272C, 0.05, 0.52),   // mouldings, breaker cases
+      concrete:  M(0x8E8B84, 0.00, 0.95)    // pads and plinths
     };
   }
   function box(THREE, m, w,h,d, x,y,z){
@@ -735,7 +777,7 @@
   function rackChassis(THREE, M, u){
     const g = new THREE.Group();
     const h = u * RU;
-    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.32});
+    const metal = new THREE.MeshStandardMaterial({color:0xC6CCD2, metalness:.90, roughness:.22});
     g.add(box(THREE, M.body, RW, h, RD, 0, h/2, 0));
 
     /* The faceplate is a separate panel bolted to the chassis, so it sits very
@@ -774,7 +816,7 @@
     const M = mats(THREE, color); u = u || 1;
     const g = rackChassis(THREE, M, u); const h = g.userData.h;
     // drive bays down the left of the faceplate
-    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.32});
+    const metal = new THREE.MeshStandardMaterial({color:0xC6CCD2, metalness:.90, roughness:.22});
     const cols = 4, rows = u === 1 ? 1 : 2;
     for (let r=0;r<rows;r++) for (let c=0;c<cols;c++){
       const bx = -1.45 + c*0.5, by = (h/rows)*(r+0.5), bh = (h/rows)*0.5;
@@ -801,7 +843,7 @@
   function buildSwitchNet(THREE, color){
     const M = mats(THREE, color);
     const g = rackChassis(THREE, M, 1); const h = g.userData.h;
-    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.32});
+    const metal = new THREE.MeshStandardMaterial({color:0xC6CCD2, metalness:.90, roughness:.22});
     /* 24 RJ45 jacks in the usual two staggered banks of 12. Each is a shielded
        housing with the latch cut-out above it and a link LED beside it, which is
        what distinguishes a switch faceplate from a grid of dark rectangles. */
@@ -830,7 +872,7 @@
   function buildStorage(THREE, color){
     const M = mats(THREE, color);
     const g = rackChassis(THREE, M, 2); const h = g.userData.h;
-    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.32});
+    const metal = new THREE.MeshStandardMaterial({color:0xC6CCD2, metalness:.90, roughness:.22});
     /* 24 vertical carriers. Each gets the cam latch and the two status LEDs a
        hot-swap carrier carries, so a failed drive is a thing you could point at. */
     /* 24 carriers x 4 parts. The one faulted drive stays a separate mesh --
@@ -857,7 +899,7 @@
   function buildUPSRack(THREE, color, u){
     const M = mats(THREE, color); u = u || 4;
     const g = rackChassis(THREE, M, u); const h = g.userData.h;
-    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.32});
+    const metal = new THREE.MeshStandardMaterial({color:0xC6CCD2, metalness:.90, roughness:.22});
     /* Bezel-mounted LCD with a lit panel inset, the way a rack UPS presents
        load and runtime. */
     g.add(box(THREE, M.dark, 1.62, h*0.46, 0.03, -0.95, h*0.58, faceZ()));
@@ -916,7 +958,7 @@
   function buildKVM(THREE, color){
     const M = mats(THREE, color);
     const g = rackChassis(THREE, M, 1); const h = g.userData.h;
-    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.32});
+    const metal = new THREE.MeshStandardMaterial({color:0xC6CCD2, metalness:.90, roughness:.22});
     /* A rack console is a slide-out drawer: the tray pulls forward, the lid
        hinges up into a screen. Drawn part-way out so both halves are visible --
        fully closed it is indistinguishable from a blanking panel. */
@@ -945,7 +987,7 @@
   function buildBlank(THREE, color){
     const M = mats(THREE, color);
     const g = rackChassis(THREE, M, 1); const h = g.userData.h;
-    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.32});
+    const metal = new THREE.MeshStandardMaterial({color:0xC6CCD2, metalness:.90, roughness:.22});
     /* A blanking panel is plain by definition, so the detail that matters is the
        tool-less mounting: the sprung clips at each end and the stiffening swage
        across the middle are the whole of what one looks like. */
@@ -961,7 +1003,7 @@
   function buildCableMgr(THREE, color){
     const M = mats(THREE, color);
     const g = rackChassis(THREE, M, 2); const h = g.userData.h;
-    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.32});
+    const metal = new THREE.MeshStandardMaterial({color:0xC6CCD2, metalness:.90, roughness:.22});
     /* Fingers are C-shaped, not solid blocks: the open throat is the entire
        point of a finger duct, and patch cords have to be visible sitting in it. */
     for (let i=0;i<6;i++){
@@ -987,7 +1029,7 @@
   /* ---------- electrical gear ---------- */
   function buildBreaker(THREE, color){
     const M = mats(THREE, color); const g = new THREE.Group();
-    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.75, roughness:.35});
+    const metal = new THREE.MeshStandardMaterial({color:0xAAB2B8, metalness:.68, roughness:.50});
     const cu    = new THREE.MeshStandardMaterial({color:0xB87333, metalness:.85, roughness:.35});
     const W = 1.5, H = 2.1, D = 1.15, fz = D/2;
 
@@ -1074,8 +1116,8 @@
   }
   function buildMotor(THREE, color){
     const M = mats(THREE, color); const g = new THREE.Group();
-    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.3});
-    const blk   = new THREE.MeshStandardMaterial({color:0x2A3240, metalness:.5, roughness:.5});
+    const metal = new THREE.MeshStandardMaterial({color:0xC6CCD2, metalness:.90, roughness:.22});
+    const blk   = new THREE.MeshStandardMaterial({color:0x24272C, metalness:.05, roughness:.55});
 
     /* Stator frame with radial cooling fins running its length. */
     const body = cyl(THREE, M.body, 0.85, 0.85, 2.0, 24, 0, 1.0, 0);
@@ -1135,7 +1177,7 @@
   }
   function buildPanel(THREE, color){
     const M = mats(THREE, color); const g = new THREE.Group();
-    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.75, roughness:.35});
+    const metal = new THREE.MeshStandardMaterial({color:0xAAB2B8, metalness:.68, roughness:.50});
     const cu    = new THREE.MeshStandardMaterial({color:0xB87333, metalness:.85, roughness:.35});
     const W = 1.7, H = 2.9, D = 0.75, fz = D/2;
 
@@ -1191,7 +1233,7 @@
   }
   function buildBusway(THREE, color){
     const M = mats(THREE, color); const g = new THREE.Group();
-    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.75, roughness:.35});
+    const metal = new THREE.MeshStandardMaterial({color:0xAAB2B8, metalness:.68, roughness:.50});
     const cu    = new THREE.MeshStandardMaterial({color:0xB87333, metalness:.85, roughness:.35});
     const Y = 1.4, S = 0.85;
 
@@ -1235,8 +1277,8 @@
   }
   function buildCooling(THREE, color){
     const M = mats(THREE, color); const g = new THREE.Group();
-    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.75, roughness:.35});
-    const blk   = new THREE.MeshStandardMaterial({color:0x2A3240, metalness:.4, roughness:.55});
+    const metal = new THREE.MeshStandardMaterial({color:0xAAB2B8, metalness:.68, roughness:.50});
+    const blk   = new THREE.MeshStandardMaterial({color:0x24272C, metalness:.05, roughness:.60});
     const cu    = new THREE.MeshStandardMaterial({color:0xB87333, metalness:.85, roughness:.35});
     const W = 2.0, H = 2.8, D = 1.5, fz = D/2;
 
@@ -1479,7 +1521,7 @@
     const body = new THREE.MeshStandardMaterial({color:BLACK, metalness:.25, roughness:.6});
     const cap  = new THREE.MeshStandardMaterial({color:0xC23B3B, metalness:.2, roughness:.5});
     const L = leadMat(THREE);
-    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.32});
+    const metal = new THREE.MeshStandardMaterial({color:0xC6CCD2, metalness:.90, roughness:.22});
     g.add(box(THREE, body, 1.25, 0.5, 1.25, 0, 0.25, 0));              // tactile switch body
     /* Stainless top plate with the dimple the dome snaps against, and the
        moulded ring the plunger rides in. */
@@ -1589,7 +1631,7 @@
   function buildPVModule(THREE, color){
     const M = mats(THREE, color); const g = new THREE.Group();
     const glass = new THREE.MeshStandardMaterial({color:0x16305A, metalness:.55, roughness:.28});
-    const frame = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.75, roughness:.35});
+    const frame = new THREE.MeshStandardMaterial({color:0xAAB2B8, metalness:.68, roughness:.50});
     const panel = new THREE.Group();
     const PW = 3.6, PH = 2.2;
     panel.add(box(THREE, frame, PW+0.14, 0.10, PH+0.14, 0, 0, 0));
