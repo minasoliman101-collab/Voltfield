@@ -6,3 +6,24 @@
 # Netlify dashboard for this site.
 [functions]
   directory = "netlify/functions"
+
+# Pretty URLs OFF -- it was fighting the canonicalisation in _redirects.
+#
+# The site is 100% consistent on .html: every canonical tag, every sitemap
+# entry and every authored link. _redirects therefore forces the extensionless
+# form to 301 to .html, so there is one indexable URL per page.
+#
+# Netlify's pretty_urls does the opposite: it rewrites the links in the served
+# HTML to strip .html. Measured on the live site before this change -- 72
+# rewritten links on the homepage, 59 on free-tools, 42 on a category page --
+# every one of which then hit the forced 301 and cost a redirect hop before
+# the page loaded. Two features each doing their job, in opposite directions.
+#
+# Turning it off keeps the served links as authored, so internal navigation is
+# one request again. The _redirects rules stay as the safety net for anyone
+# who types or has linked the extensionless form.
+#
+# Only [build.processing] is set here -- no command, no publish -- so this
+# still cannot conflict with the publish directory configured in the dashboard.
+[build.processing.html]
+  pretty_urls = false
