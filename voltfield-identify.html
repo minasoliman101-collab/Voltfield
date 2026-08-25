@@ -324,7 +324,7 @@ function addFiles(files){
   });
 }
 function renderThumbs(){
-  $('thumbs').innerHTML=IMGS.map((im,i)=>`<div class="thumb${i===SEL?' sel':''}" data-i="${i}"><img src="${im.url}" alt="${esc(im.name)}"><button class="rm" data-rm="${i}" aria-label="Remove">×</button></div>`).join('');
+  $('thumbs').innerHTML=IMGS.map((im,i)=>`<div class="thumb${i===SEL?' sel':''}" data-i="${i}"><img src="${im.url}" alt="${esc(im.name)}" width="110" height="82" decoding="async"><button class="rm" data-rm="${i}" aria-label="Remove">×</button></div>`).join('');
   $('thumbs').querySelectorAll('.thumb').forEach(t=>t.onclick=e=>{if(e.target.dataset.rm!==undefined){IMGS.splice(+e.target.dataset.rm,1);SEL=Math.max(0,SEL-1);renderThumbs();return;}SEL=+t.dataset.i;renderThumbs();});
   $('ocrBtn').disabled=!IMGS.length;
 }

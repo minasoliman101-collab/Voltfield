@@ -397,7 +397,13 @@ render();
   const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   grid.innerHTML=OEM_REF.map(r=>`<div class="oemcard">
     <div class="oemtag">${r.test?'Test data — Icecat':'Verified OEM'}</div>
-    ${r.img?`<div class="oemimg"><img src="${esc(r.img)}" alt="${esc(r.title)}" loading="lazy"></div>`:''}
+    ${/* No width/height here on purpose. These are remote Icecat gallery images
+          of wildly varying aspect ratio, dropped into a fixed 110px-tall box
+          with object-fit:contain, so the container already reserves the space --
+          measured CLS on this section is 0. Declaring dimensions would mean
+          inventing an aspect ratio that is wrong for most of the 23 records,
+          which is worse than omitting them. */''}
+    ${r.img?`<div class="oemimg"><img src="${esc(r.img)}" alt="${esc(r.title)}" loading="lazy" decoding="async"></div>`:''}
     <div class="oembrand">${esc(r.brand)}</div>
     <div class="oemtitle">${esc(r.title)}</div>
     <div class="oemfacts">
