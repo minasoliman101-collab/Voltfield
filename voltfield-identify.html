@@ -404,6 +404,13 @@ function identify(){
   const fams=FAM.map(f=>({f,sc:famScore(f,tok)})).filter(h=>h.sc>0).sort((a,b)=>b.sc-a.sc).slice(0,5);
   const maxSc=fams.length?fams[0].sc:1;
   const isPCB=hints.includes('pcb');
+  /* Identification is a high-intent action -- someone doing it usually needs to
+     buy or replace the thing. Track whether we could actually answer: a run of
+     identifications returning no family match says the reference data has a
+     gap, which is the one thing page views cannot tell us. */
+  if(window.gtag)gtag('event','part_identify',{
+    matches:fams.length, eol_hits:eolHits.length,
+    confidence:fams.length?((fams[0].sc/maxSc>=0.8&&fams[0].sc>=5)?'high':(fams[0].sc/maxSc>=0.45?'medium':'low')):'none'});
   let html='';
   eolHits.forEach(({x})=>{
     html+=`<div class="alert"><h3>Possible obsolete platform: ${esc(x.oem)} ${esc(x.series.split('(')[0].trim())}</h3>

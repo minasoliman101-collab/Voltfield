@@ -306,7 +306,13 @@ function render(){
     </div>`;
   }).join('');
 }
-document.getElementById('eolForm').addEventListener('submit',e=>{e.preventDefault();fQ=document.getElementById('eolInput').value.trim();render();});
+document.getElementById('eolForm').addEventListener('submit',e=>{e.preventDefault();fQ=document.getElementById('eolInput').value.trim();render();
+  /* Someone searching for a replacement is further down the buying path than
+     someone browsing the catalog, so this search is worth measuring on its own.
+     Report whether the search FOUND anything: a run of zero-result searches is
+     the signal that the EOL data set is missing a platform people want. */
+  if(window.gtag&&fQ)gtag('event','eol_search',{search_term:fQ.slice(0,80),results:matched().length});
+});
 (function(){const P=new URLSearchParams(location.search);
   if(P.get('oem'))fOem=P.get('oem');
   if(P.get('sector'))fSector=P.get('sector');
