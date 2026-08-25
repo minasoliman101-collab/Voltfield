@@ -62,6 +62,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .wrap h2:first-child{margin-top:0}
 .sectiondek{font-size:13.5px;color:var(--slate);margin-bottom:14px;max-width:640px;line-height:1.6}
 .toolgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+/* A grid holding a single card. auto-FIT collapses empty tracks, so one child
+   would stretch to the full row and upscale a 440px-wide thumbnail to roughly
+   1100px. auto-FILL keeps the empty tracks, so the card stays the same size as
+   the cards in every other section. */
+.toolgrid.solo{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
 .toolcard{background:var(--card);border:1px solid var(--line-dark);padding:16px 18px;text-decoration:none;color:var(--ink);display:block;transition:border-color .15s}
 /* 3D-rendered thumbnails. Negative margins pull the image to the card edges
    while the text keeps its padding; width/height attributes give the browser
@@ -146,6 +151,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="wrap">
   <h2>Engineering Calculators</h2>
   <p class="sectiondek">20 calculators covering cable sizing, transformer/BESS sizing, fault current, arc-flash, financial estimators, and procurement reference tables.</p>
+  <div class="toolgrid solo">
+    <a class="toolcard" href="engineering-calculators.html">
+      <picture class="tc-pic"><source srcset="images/tools/tool-calculators.webp" type="image/webp"><img class="tc-img" src="images/tools/tool-calculators.png" alt="Insulated copper conductors with stripped ends, the subject of the voltage-drop and ampacity calculators" width="440" height="280" loading="lazy" decoding="async" onerror="this.closest(&quot;.tc-pic&quot;).remove()"></picture>
+      <div class="tc-t">All 20 Calculators</div>
+      <div class="tc-d">Voltage drop, ampacity, transformer and BESS sizing, fault current and arc-flash, plus financial estimators and reference tables — citing the NEC and IEEE clauses they follow.</div>
+    </a>
+  </div>
   <div class="calclist">
     <a href="engineering-calculators.html#voltage-drop">Voltage Drop</a>
     <a href="engineering-calculators.html#transformer-sizing">Transformer Sizing</a>
