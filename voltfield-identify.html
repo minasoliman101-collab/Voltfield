@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google Tag Manager -->
+<!-- three.js import map. Required by the examples/jsm postprocessing modules
+     that voltfield-3d.js loads for ambient occlusion: those are published with
+     a bare `from 'three'` specifier, which a browser cannot resolve on its own.
+     The url must match the one voltfield-3d.js imports, so the two resolve to a
+     single module instance rather than two copies of three. -->
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}
+</script>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=

@@ -19,6 +19,11 @@ $ErrorActionPreference = 'Stop'
 $root = 'C:\Users\minas\AppData\Local\Temp\claude\C--Users-minas-Desktop\57cb7386-2fb4-45d2-b459-f0af4d0e9662\scratchpad\Voltfield'
 $utf8 = New-Object System.Text.UTF8Encoding($false)
 
+# Every page that loads voltfield-3d.js, directly or through
+# voltfield-component-viz.js. The map is needed by any examples/jsm module the
+# library pulls -- postprocessing for AO, and RoundedBoxGeometry for bevelled
+# edges -- and a page without it silently renders sharp-edged boxes while its
+# neighbours render bevelled ones.
 $PAGES = @(
   'index.html',                    # hero showcase
   'voltfield-part.html',           # part viewer
@@ -26,7 +31,13 @@ $PAGES = @(
   'voltfield-pcb-layout.html',
   'voltfield-pod-designer.html',
   'voltfield-rack-builder.html',
-  'voltfield-sandbox.html'
+  'voltfield-sandbox.html',
+  'rfq-toolkit.html',
+  'voltfield-bom-generator.html',
+  'voltfield-bom.html',
+  'voltfield-eol.html',
+  'voltfield-glossary-quiz.html',
+  'voltfield-identify.html'
 )
 
 $MAP = @'

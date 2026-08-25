@@ -36,6 +36,31 @@
 
      Pinned to the same three version as the core build -- examples/jsm is
      compiled against a specific release and will throw on a mismatch. */
+  /* ---------- bevelled edges ----------
+     Every box in this library met its neighbours at a perfect 90 degrees. Real
+     sheet metal, castings and enclosures are all chamfered or radiused, and a
+     perfectly sharp edge is the most reliable CG tell there is: it cannot catch
+     the thin highlight that runs along every real edge, so the form reads as
+     printed rather than fabricated.
+
+     RoundedBoxGeometry is a 4.6KB module, and swapping it in inside box()
+     bevels all 200-odd boxes from one place. Optional exactly like AO: if it
+     does not load, box() falls back to BoxGeometry and everything still
+     renders, just with sharp edges. */
+  const GEO_URL = 'https://unpkg.com/three@0.160.0/examples/jsm/geometries/';
+  let RoundedBox = null, roundedPromise = null;
+  function loadRoundedBox(){
+    if (!roundedPromise) {
+      roundedPromise = Promise.race([
+        import(GEO_URL + 'RoundedBoxGeometry.js').then(function(m){ RoundedBox = m.RoundedBoxGeometry; }),
+        /* Never let a slow or blocked CDN hold up the first frame. Losing the
+           race just means sharp edges on this mount. */
+        new Promise(function(r){ setTimeout(r, 2500); })
+      ]).catch(function(){ RoundedBox = null; });
+    }
+    return roundedPromise;
+  }
+
   const PP_URL = 'https://unpkg.com/three@0.160.0/examples/jsm/postprocessing/';
   let ppPromise = null;
   function loadPostFX(){
@@ -452,7 +477,22 @@
     };
   }
   function box(THREE, m, w,h,d, x,y,z){
-    const b = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), m);
+    const smallest = Math.min(w, h, d);
+    let geo;
+    /* Skip the thin detail plates -- vent slots, printed markings, faceplate
+       inlays are 0.012-0.03 thick, so a bevel would consume the whole slab and
+       round it into a lozenge. They also sit flat against a parent face where
+       no edge is visible, so it would be vertices spent on nothing. */
+    if (RoundedBox && smallest > 0.05) {
+      /* Proportional, but capped: a chamfer is a fixed small size on real
+         equipment, not a fraction of the panel. Without the cap a large tank
+         face turns into a pillow. */
+      const r = Math.min(smallest * 0.12, 0.022);
+      geo = new RoundedBox(w, h, d, 1, r);
+    } else {
+      geo = new THREE.BoxGeometry(w, h, d);
+    }
+    const b = new THREE.Mesh(geo, m);
     b.position.set(x,y,z); return b;
   }
   /* Radial resolution multiplier. The builders were authored with segment counts
@@ -1945,7 +1985,12 @@
     const o = opts || {};
     let disposed = false, renderer, camera, orbit, animId, ro, envRT, composer;
 
-    loadThree().then(THREE => {
+    /* RoundedBoxGeometry has to be resolved before build() runs, because box()
+       reaches for it synchronously. Fetched in parallel with three and capped
+       by its own timeout, so the worst case is sharp edges rather than a
+       viewer that never appears. */
+    Promise.all([loadThree(), loadRoundedBox()]).then(res => {
+      const THREE = res[0];
       if (disposed) return;
       const w = container.clientWidth || 300, h = container.clientHeight || 260;
 
