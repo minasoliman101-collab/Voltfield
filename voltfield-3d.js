@@ -331,6 +331,84 @@
   }
 
   /* ---------- shared material helpers ---------- */
+  /* ---------- surface micro-detail ----------
+     Every material here was a flat colour with one constant roughness value.
+     That is the single biggest thing making the models read as CG rather than
+     as equipment: a real painted or machined surface is never optically
+     uniform, so its specular highlight breaks up across the face instead of
+     sitting there as one clean sheet.
+
+     A single tiling noise canvas drives both a roughnessMap and a very shallow
+     bumpMap. It is deliberately near-WHITE: roughnessMap MULTIPLIES the
+     material's roughness, so a mid-grey map would halve it and turn painted
+     steel into a mirror. This only ever roughens slightly, never polishes.
+
+     The canvas is built once at module scope; the CanvasTexture wrapping it is
+     per-viewer, because textures upload per WebGL context. */
+  let _noiseCanvas = null;
+  function noiseCanvas(){
+    if (_noiseCanvas) return _noiseCanvas;
+    const N = 256;
+    const cv = document.createElement('canvas');
+    cv.width = N; cv.height = N;
+    const x = cv.getContext('2d');
+    const img = x.createImageData(N, N);
+    /* Value noise at two frequencies, biased high. Seeded from a plain LCG so
+       every viewer and every build gets the identical surface. */
+    let seed = 0x2F6E2B1;
+    const rnd = () => ((seed = (seed * 1103515245 + 12345) & 0x7FFFFFFF) / 0x7FFFFFFF);
+    const coarse = new Float32Array(64 * 64);
+    for (let i = 0; i < coarse.length; i++) coarse[i] = rnd();
+    for (let p = 0, y = 0; y < N; y++) {
+      for (let xx = 0; xx < N; xx++, p += 4) {
+        const c = coarse[((y >> 2) * 64 + (xx >> 2)) % coarse.length];
+        const v = 214 + c * 26 + rnd() * 15;      // ~214..255, never dark
+        img.data[p] = img.data[p+1] = img.data[p+2] = v;
+        img.data[p+3] = 255;
+      }
+    }
+    x.putImageData(img, 0, 0);
+    _noiseCanvas = cv;
+    return cv;
+  }
+  function surfaceTex(THREE, repeat){
+    const t = new THREE.CanvasTexture(noiseCanvas());
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    t.repeat.set(repeat, repeat);
+    return t;
+  }
+
+  /* Applied to every material in a built model, not just the five from mats():
+     the builders create roughly 90 of their own -- bare steel, copper, porcelain,
+     engine block -- and those are exactly the surfaces where a uniform highlight
+     looks most synthetic. Doing it in one pass at mount time covers all of them
+     without touching 90 call sites.
+
+     Left alone deliberately:
+       - emissive materials (lamps, meter faces) -- roughening them reads as dirt
+       - anything with a `map` already (the canvas nameplates and placards)
+       - transparent surfaces (glass doors, soil, the POD shell) */
+  function addSurfaceDetail(THREE, root){
+    const seen = new Set();
+    root.traverse(function(n){
+      if (!n.isMesh) return;
+      const list = Array.isArray(n.material) ? n.material : [n.material];
+      for (const m of list) {
+        if (!m || seen.has(m)) continue;
+        seen.add(m);
+        if (m.map || m.transparent) continue;
+        if (m.emissive && (m.emissive.r || m.emissive.g || m.emissive.b)) continue;
+        if (m.roughnessMap) continue;
+        m.roughnessMap = surfaceTex(THREE, 3);
+        m.bumpMap = surfaceTex(THREE, 3);
+        /* Scaled by how polished the surface is: a mirror shows every
+           irregularity, matt paint hides most of them. */
+        m.bumpScale = 0.003 + (m.metalness || 0) * 0.006;
+        m.needsUpdate = true;
+      }
+    });
+  }
+
   function mats(THREE, color){
     return {
       body: new THREE.MeshStandardMaterial({color, metalness:.3, roughness:.6}),
@@ -1733,7 +1811,11 @@
      shared between viewers -- each context builds its own. Kept at 128x64 source
      so that per-context cost stays trivial. */
   function studioEnv(THREE, renderer){
-    const W = 128, H = 64;
+    /* 256x128 rather than 128x64. The source is what PMREM prefilters into the
+       reflection mips, so at the old size the horizon band and the two key
+       sources blurred into a soft wash on anything approaching a mirror finish
+       -- polished shafts, bushing glaze, copper. Still trivial to build. */
+    const W = 256, H = 128;
     const cv = document.createElement('canvas');
     cv.width = W; cv.height = H;
     const x = cv.getContext('2d');
@@ -1861,7 +1943,11 @@
       const dir = new THREE.DirectionalLight(0xffffff, 0.85);
       dir.position.set(4,6,5); scene.add(dir);
       dir.castShadow = true;
-      dir.shadow.mapSize.set(1024, 1024);
+      /* 2048 rather than 1024. The shadow camera is fitted tightly to each
+         model, so the map is spread over a small world volume and the extra
+         resolution goes straight into the self-shadowing that gives radiator
+         fins, louvres and fan blades their depth. */
+      dir.shadow.mapSize.set(2048, 2048);
       /* Shadow acne on this geometry comes from the many thin coplanar plates
          (louvre slats, faceplate details, PCB pads). normalBias handles those
          far better than depth bias alone, which would detach contact shadows. */
@@ -1872,6 +1958,7 @@
 
       const model = build(THREE);
       scene.add(model);
+      addSurfaceDetail(THREE, model);
 
       /* Self-shadowing only -- no ground plane. These shapes are framed on their
          own bounds and several (conductor, busway, the PCB parts) have no ground
