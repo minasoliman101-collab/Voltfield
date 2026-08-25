@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>BESS Balance of Plant &amp; MV Equipment | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/battery-storage/balance-of-plant.html">
+<meta name="description" content="MV step-up transformers, collector switchgear, protection relays and station service for battery storage, with indicative lead times and scope-split guidance.">
+<meta name="keywords" content="BESS balance of plant, MV step-up transformer, collector switchgear, plant controller, station service, storage interconnection">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VOLTFIELD Supply Co.">
+<meta property="og:title" content="Balance of Plant">
+<meta property="og:description" content="MV step-up transformers, collector switchgear, protection relays and station service for battery storage, with indicative lead times and scope-split guidance.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-battery-storage.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-battery-storage.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"BreadcrumbList","itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
+   {"@type":"ListItem","position":2,"name":"Battery Storage","item":"https://voltfield.org/battery-storage.html"},
+   {"@type":"ListItem","position":3,"name":"Balance of Plant","item":"https://voltfield.org/battery-storage/balance-of-plant.html"}
+ ]},
+ {"@type":"CollectionPage","name":"Battery Storage Balance of Plant","description":"Medium-voltage transformers, collector switchgear, protection relays and station service equipment for battery energy storage projects.","url":"https://voltfield.org/battery-storage/balance-of-plant.html","isPartOf":{"@type":"WebSite","name":"VOLTFIELD Supply Co.","url":"https://voltfield.org/"}},
+ {"@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"Why is the transformer usually the critical path?","acceptedAnswer":{"@type":"Answer","text":"Medium-voltage transformer capacity has been constrained for several years, and storage projects compete for it against data centres, renewables and utility replacement programmes simultaneously. The design information needed to release the order is available early, so there is rarely a good reason to wait — and waiting is what causes the slip."}},
+   {"@type":"Question","name":"Is 13.8 kV or 34.5 kV the right collector voltage?","acceptedAnswer":{"@type":"Answer","text":"It follows from plant size and distance. Higher collector voltage reduces current, and therefore conductor cost and losses, which matters as the site grows. Below roughly 20 MW that advantage often does not repay the higher equipment cost, and 13.8 kV equipment is generally easier to source."}},
+   {"@type":"Question","name":"Who owns the plant controller configuration?","acceptedAnswer":{"@type":"Answer","text":"This should be settled in writing before award. The configuration implements the interconnection agreement, so it touches the utility’s requirements, the converter vendor’s capabilities and the owner’s dispatch strategy. Leaving ownership ambiguous reliably produces a dispute during witness testing, at the worst possible point in the schedule."}},
+   {"@type":"Question","name":"Does a storage plant need station service if it has a battery?","acceptedAnswer":{"@type":"Answer","text":"Yes. The battery cannot power its own thermal management and controls under all the conditions in which those systems must run — including a fault that has isolated the plant, or a state of charge at the bottom of the range. Independent station service with UPS-backed controls is standard practice, and skipping it converts a minor event into an extended outage."}}
+ ]}
+]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Root-relative asset paths throughout: this page lives one directory deep,
+     so the relative paths used by the flat pages at the site root would break. -->
+<link rel="stylesheet" href="/ordering-hidden.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-component-viz.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<style>
+.artban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:32px 20px 34px}
+.artban-in{max-width:900px;margin:0 auto}
+.artban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:10px}
+.artban h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,44px);letter-spacing:.01em;line-height:1.06}
+.artban p.dek{color:#AFC0D3;font-size:15.5px;margin-top:14px;line-height:1.55;max-width:700px}
+.crumb{max-width:900px;margin:0 auto;padding:12px 20px 0;font-family:var(--mono);font-size:11px;color:var(--slate)}
+.crumb a{color:var(--slate);text-decoration:underline;text-underline-offset:2px}
+.crumb .sep{margin:0 7px;opacity:.6}
+.artwrap{max-width:900px;margin:0 auto;padding:34px 20px 8px}
+.artwrap h2{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:.01em;color:var(--ink);margin:34px 0 12px}
+.artwrap h3{font-family:var(--disp);font-weight:700;font-size:18px;color:var(--ink);margin:22px 0 8px}
+.artwrap p{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:14px}
+.artwrap ul{margin:0 0 14px 20px}
+.artwrap li{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:6px}
+.artwrap a.inline{color:var(--signal-deep);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
+.callout{background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--signal);padding:16px 18px;margin:20px 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+/* family table */
+.famtable{width:100%;border-collapse:collapse;margin:16px 0 8px;font-size:13px}
+.famtable th{font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);text-align:left;padding:8px 10px;border-bottom:2px solid var(--ink)}
+.famtable td{padding:10px;border-bottom:1px solid var(--line);color:var(--ink-2);vertical-align:top}
+.famtable td b{font-family:var(--disp);font-size:15px;color:var(--ink);display:block;margin-bottom:2px}
+.famtable td.num{font-family:var(--mono);font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.famtable a{color:var(--signal-deep);font-weight:600;text-decoration:underline}
+.lt{font-family:var(--mono);font-size:11px;padding:2px 7px;white-space:nowrap;display:inline-block}
+.lt.long{background:#F7E4E1;color:var(--crit)}
+.lt.mid{background:#FBF0DA;color:var(--warn)}
+.lt.short{background:#E7F1EB;color:var(--ok)}
+html[data-theme="dark"] .lt.long{background:#3A1F1C;color:#E8A79B}
+html[data-theme="dark"] .lt.mid{background:#3A3016;color:#E4C77F}
+html[data-theme="dark"] .lt.short{background:#15301F;color:#7FCC9B}
+.tblwrap{overflow-x:auto}
+/* spec grid */
+.specgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:16px 0}
+.speccard{background:var(--card);border:1px solid var(--line-dark);padding:14px 16px}
+.speccard h4{font-family:var(--disp);font-weight:700;font-size:15px;color:var(--ink);margin-bottom:6px}
+.speccard p{font-size:12.5px;margin:0;line-height:1.6}
+/* related links */
+.rel{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:16px 0 8px}
+.rel a{display:block;background:var(--card);border:1px solid var(--line-dark);padding:12px 14px;text-decoration:none;transition:border-color .15s}
+.rel a:hover{border-color:var(--ink)}
+.rel .k{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}
+.rel .t{font-family:var(--disp);font-weight:600;font-size:14.5px;color:var(--ink);margin-top:3px;line-height:1.25}
+.ctaband{background:linear-gradient(120deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;border-top:4px solid var(--signal);margin-top:40px}
+.ctaband-in{max-width:1240px;margin:0 auto;padding:44px 20px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.ctaband h3{font-family:var(--disp);font-weight:700;font-size:28px;letter-spacing:.01em}
+.ctaband p{color:#AFC0D3;font-size:14px;margin-top:6px;max-width:520px;line-height:1.6}
+.ctabtn{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:14px 26px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.05em;text-decoration:none;flex-shrink:0}
+.ctabtn:hover{background:transparent;color:var(--signal)}
+footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
+footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
+@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
+footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer p{line-height:1.6;max-width:460px}
+footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
+footer a{color:#9FB0C3;text-decoration:none}
+footer a:hover{color:#fff}
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="/index.html" aria-label="Voltfield Supply Co. home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>SUPPLY CO. — SOURCING &amp; ENGINEERING REFERENCE</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="/index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu">
+        <a href="/free-tools.html">All Free Tools</a>
+        <a href="/voltfield-sandbox.html">Practice Sandbox</a>
+        <a href="/voltfield-pod-designer.html">POD &amp; Skid Designer</a>
+        <a href="/voltfield-rack-builder.html">Rack Elevation Builder</a>
+        <a href="/engineering-calculators.html">Calculators</a>
+        <a href="/voltfield-bom-generator.html">BOM Generator</a>
+        <a href="/voltfield-bom.html">BOM Match</a>
+        <a href="/voltfield-pcb.html">PCB Builder</a>
+        <a href="/voltfield-pcb-layout.html">PCB Layout Tool</a>
+        <a href="/voltfield-identify.html">Part ID</a>
+        <a href="/voltfield-eol.html">Obsolete/EOL</a>
+        <a href="/voltfield-glossary-quiz.html">Glossary Quiz</a>
+        <a href="/rfq-toolkit.html">RFQ Toolkit</a>
+        <a href="/site-search.html">Search</a>
+      </div>
+    </div>
+    <a href="/voltfield-insights.html">Guides &amp; Insights</a>
+    <a href="/lead-time-index.html">Lead-Time Index</a>
+    <a href="/voltfield-supply-catalog.html">Spec Library</a>
+    <a href="/voltfield-suppliers.html">Suppliers</a>
+    <a href="/whats-new.html">What's New</a>
+    <a href="/voltfield-account.html">Account</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <a class="quotebtn" href="/voltfield-supply-catalog.html?quote=1" aria-label="View sourcing list on catalog page">SOURCING LIST <span class="ct" id="quoteCount">0</span></a>
+  </div>
+</header>
+
+<section class="artban">
+  <div class="artban-in">
+    <div class="eyebrow">Battery Storage · Equipment Category</div>
+    <h1>Balance of Plant &amp; MV Equipment</h1>
+    <p class="dek">Transformers, collector switchgear, protection and auxiliary power &mdash; the items that usually set the energisation date.</p>
+  </div>
+</section>
+
+<nav class="crumb" aria-label="Breadcrumb">
+  <a href="/index.html">Home</a><span class="sep">/</span>
+  <a href="/battery-storage.html">Battery Storage</a><span class="sep">/</span>
+          <span>Balance of Plant</span>
+</nav>
+
+<div class="artwrap">
+  <h2>Balance of plant is where storage schedules actually slip</h2>
+  <p>The battery and the converter get the attention, but they are rarely what delays energisation. The medium-voltage transformer, the collector switchgear, the auxiliary supply and the protection relays sit between a finished block and a plant that can export &mdash; and several of them carry the longest lead times on the project.</p>
+  <p>Balance of plant also carries most of the interfaces. It is where the storage vendor&rsquo;s scope ends and the EPC&rsquo;s begins, where the utility&rsquo;s requirements land, and where the protection scheme has to reconcile converter-based sources with conventional overcurrent practice. Scope gaps here are the single most common cause of avoidable rework on a storage project.</p>
+
+  <div class="tblwrap">
+  <table class="famtable">
+    <thead>
+      <tr><th>Family</th><th>Typical configuration</th><th>Indicative lead time</th><th>Standards</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>MV Step-Up Transformers</b>Takes converter output to collector voltage. Often supplied on the PCS skid, but not always &mdash; confirm the scope split.</td>
+        <td class="num">1&ndash;5 MVA<br>630 V to 13.8 / 34.5 kV<br>Pad-mount or substation type</td>
+        <td><span class="lt long">~60 weeks</span></td>
+        <td class="num">IEEE C57.12<br>DOE 2016 efficiency</td>
+      </tr>
+      <tr>
+        <td><b>Collector Switchgear</b>Combines block feeders onto the collector bus and provides the protection interface to the utility.</td>
+        <td class="num">15&ndash;38 kV<br>Vacuum interrupters<br>Metal-clad or metal-enclosed</td>
+        <td><span class="lt long">~50 weeks</span></td>
+        <td class="num">IEEE C37.20.2<br>IEEE C37.04</td>
+      </tr>
+      <tr>
+        <td><b>Protection Relays &amp; Plant Controller</b>Executes the interconnection requirements &mdash; trip settings, ride-through, and the dispatch interface to the ISO.</td>
+        <td class="num">Multifunction digital relays<br>DNP3 / IEC 61850<br>Redundant controllers</td>
+        <td><span class="lt mid">~24 weeks</span></td>
+        <td class="num">IEEE 1547<br>IEEE C37.2<br>NERC CIP</td>
+      </tr>
+      <tr>
+        <td><b>Auxiliary Power &amp; Station Service</b>Feeds thermal management, controls and lighting. Must remain available when the battery is not.</td>
+        <td class="num">50&ndash;500 kVA<br>Utility or on-site backup<br>UPS-backed controls</td>
+        <td><span class="lt mid">~22 weeks</span></td>
+        <td class="num">NEC Article 706<br>IEEE 446</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout"><b>Auxiliary power is the quiet single point of failure.</b> A storage plant whose thermal management, controls and communications all depend on the plant being able to export has an availability problem that will not appear in any datasheet. Station service needs to survive the conditions the battery exists to ride through, which usually means a genuinely independent supply and UPS-backed controls. Lead times shown are indicative modelled positions for North America, reviewed monthly, published with their basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>.</div>
+
+  <h2>Specifications that decide the selection</h2>
+  <div class="specgrid">
+    <div class="speccard">
+      <h4>Transformer duty is not standard</h4>
+      <p>A storage step-up transformer is bidirectional, loaded near rating for hours at a time, and fed by a converter with real harmonic content. Specifying it like a distribution transformer understates the thermal duty.</p>
+    </div>
+    <div class="speccard">
+      <h4>Fault contribution from converters</h4>
+      <p>Converters current-limit at roughly their rating rather than delivering several times it. Protection schemes assuming a large fault contribution may simply not pick up. This has to be settled by study.</p>
+    </div>
+    <div class="speccard">
+      <h4>Collector voltage choice</h4>
+      <p>34.5 kV reduces collector losses and conductor cost on large sites; 13.8 kV suits smaller ones and often has better equipment availability. The decision propagates to every transformer and cable on the site.</p>
+    </div>
+    <div class="speccard">
+      <h4>Communications architecture</h4>
+      <p>The plant controller has to reach every PCS and BMS, and the ISO has to reach the plant controller. Latency, redundancy and cybersecurity scope belong in the specification, not in commissioning.</p>
+    </div>
+  </div>
+
+  <h2>Selection criteria in practice</h2>
+  <ul>
+    <li><b>Order the transformer first.</b> On most storage projects the MV step-up transformer is the critical path item by a wide margin. It should be released against the interconnection study, ahead of items with far more design freedom.</li>
+    <li><b>Write the scope split down explicitly.</b> Whether the step-up transformer, the MV breaker and the auxiliary supply are inside the storage vendor&rsquo;s scope varies by supplier. Every one of these has been missed on real projects because both parties assumed the other had it.</li>
+    <li><b>Coordinate protection against converter behaviour, not textbook sources.</b> Settings derived from a conventional generator model can leave a converter-fed fault undetected. The study must use the actual converter characteristic.</li>
+    <li><b>Treat the plant controller as long-lead engineering, not a commodity.</b> Its configuration encodes the interconnection agreement. Utility witness testing depends on it being right, and that testing is often the last gate before commercial operation.</li>
+    <li><b>Confirm spare parts for the relays and controllers.</b> A digital relay with a six-month replacement lead time is an availability risk on a plant expected to run for two decades.</li>
+  </ul>
+
+  <h2>Typical applications</h2>
+  <p>A utility-scale storage plant repeats a standard block &mdash; enclosures, PCS, <b>MV step-up transformer</b> &mdash; and collects those blocks onto a 34.5 kV bus through <b>collector switchgear</b>, with <b>protection relays</b> and a <b>plant controller</b> providing the interface the ISO contracts with. Smaller commercial installations compress this considerably, often to a single pad-mount transformer and a service-entrance-rated disconnect, but the auxiliary power and controls questions do not get smaller with the plant.</p>
+
+  <h2>Work the numbers before you RFQ</h2>
+  <div class="rel">
+    <a href="/engineering-calculators.html"><span class="k">Calculators</span><span class="t">Load, current and sizing calculators</span></a>
+    <a href="/voltfield-sandbox.html"><span class="k">Practice</span><span class="t">Build a circuit from source to load</span></a>
+    <a href="/voltfield-bom-generator.html"><span class="k">Tool</span><span class="t">Build a bill of materials</span></a>
+    <a href="/rfq-toolkit.html"><span class="k">Template</span><span class="t">RFQ readiness checklist</span></a>
+  </div>
+
+  <h2>Related reading</h2>
+  <div class="rel">
+    <a href="/guide-pad-mount-vs-gsu-transformers.html"><span class="k">Guide</span><span class="t">Pad-mount versus GSU transformers</span></a>
+    <a href="/guide-transformer-lead-times.html"><span class="k">Guide</span><span class="t">Why transformer lead times are what they are</span></a>
+    <a href="/guide-short-circuit-studies-breaker-coordination.html"><span class="k">Guide</span><span class="t">Short-circuit studies and coordination</span></a>
+    <a href="/battery-storage/pcs-inverters.html"><span class="k">Category</span><span class="t">Power conversion systems</span></a>
+    <a href="/battery-storage/bess-enclosures.html"><span class="k">Category</span><span class="t">Enclosures, modules and fire protection</span></a>
+    <a href="/battery-storage.html"><span class="k">Sector</span><span class="t">All battery storage equipment</span></a>
+  </div>
+
+  <h2>Common questions</h2>
+  <h3>Why is the transformer usually the critical path?</h3>
+  <p>Medium-voltage transformer capacity has been constrained for several years, and storage projects compete for it against data centres, renewables and utility replacement programmes simultaneously. The design information needed to release the order is available early, so there is rarely a good reason to wait &mdash; and waiting is what causes the slip.</p>
+
+  <h3>Is 13.8 kV or 34.5 kV the right collector voltage?</h3>
+  <p>It follows from plant size and distance. Higher collector voltage reduces current, and therefore conductor cost and losses, which matters as the site grows. Below roughly 20 MW that advantage often does not repay the higher equipment cost, and 13.8 kV equipment is generally easier to source.</p>
+
+  <h3>Who owns the plant controller configuration?</h3>
+  <p>This should be settled in writing before award. The configuration implements the interconnection agreement, so it touches the utility&rsquo;s requirements, the converter vendor&rsquo;s capabilities and the owner&rsquo;s dispatch strategy. Leaving ownership ambiguous reliably produces a dispute during witness testing, at the worst possible point in the schedule.</p>
+
+  <h3>Does a storage plant need station service if it has a battery?</h3>
+  <p>Yes. The battery cannot power its own thermal management and controls under all the conditions in which those systems must run &mdash; including a fault that has isolated the plant, or a state of charge at the bottom of the range. Independent station service with UPS-backed controls is standard practice, and skipping it converts a minor event into an extended outage.</p>
+
+</div>
+
+<section class="ctaband">
+  <div class="ctaband-in">
+    <div>
+      <h3>Mapping the scope split?</h3>
+      <p>Work through what belongs in each package before the RFQ goes out, using the readiness checklist.</p>
+    </div>
+    <a class="ctabtn" href="/rfq-toolkit.html">Open the RFQ toolkit</a>
+  </div>
+</section>
+
+<footer>
+  <div class="in">
+    <div>
+      <h5>Voltfield Supply Co.</h5>
+      <p>Independent sourcing reference for long-lead electrical, storage, oilfield and MRO equipment. Pricing and lead times shown across the site are indicative market ranges for North America, for planning reference only — actual pricing, availability and lead time are set by the distributor, mill or OEM fulfilling the order.</p>
+    </div>
+    <div><h5>Desks</h5><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+      <li><a href="/oil-gas.html">Drilling &amp; Completions</a></li>
+      <li><a href="/industrial-supply.html">Industrial Supply (MRO)</a></li>
+    </ul></div>
+    <div><h5>Compliance</h5><ul><li>UL · IEEE · ANSI C57</li><li>API 5CT/6A/7K/16A/Q1</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="/voltfield-site-config.js"></script>
+<script>
+(function(){
+  try{
+    const q=JSON.parse(localStorage.getItem("vf_quote")||"[]");
+    const el=document.getElementById("quoteCount");
+    if(el)el.textContent=Array.isArray(q)?q.length:0;
+  }catch(e){}
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+  <h2>Everything the plant produces has to leave through this equipment</h2>
+  <p>The AC collection system takes inverter output, steps it to medium voltage, gathers it across the site and delivers it to the point of interconnection. It is the part of a renewable plant that most resembles conventional utility work &mdash; and it carries the longest lead times, the heaviest regulatory scrutiny and the least design freedom once the interconnection study is complete.</p>
+  <p>It is also the part least amenable to schedule recovery. A module delivery can be accelerated; a 34.5&nbsp;kV collector breaker or a step-up transformer generally cannot. On most projects the AC collection equipment defines the energisation date, which is why it should be released against the study rather than held for later design refinement.</p>
+
+  <div class="tblwrap">
+  <table class="famtable">
+    <thead>
+      <tr><th>Family</th><th>Typical configuration</th><th>Indicative lead time</th><th>Standards</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Pad-Mount Step-Up Transformers</b>One per inverter block. Takes inverter output to collector voltage.</td>
+        <td class="num">1&ndash;5 MVA<br>600 V to 34.5 kV<br>Loop or radial feed</td>
+        <td><span class="lt long">~60 weeks</span></td>
+        <td class="num">IEEE C57.12.34<br>DOE 2016 efficiency</td>
+      </tr>
+      <tr>
+        <td><b>Collector Feeders</b>MV cable, direct buried or in duct, tying blocks back to the collector substation.</td>
+        <td class="num">15&ndash;35 kV class<br>Aluminium or copper<br>133% or 100% insulation</td>
+        <td><span class="lt mid">~22 weeks</span></td>
+        <td class="num">ICEA S-94-649<br>AEIC CS8<br>NEC 310</td>
+      </tr>
+      <tr>
+        <td><b>Collector Switchgear</b>Sectionalises feeders and provides the protection interface at the substation.</td>
+        <td class="num">15&ndash;38 kV<br>Vacuum interrupters<br>Metal-clad or pad-mount</td>
+        <td><span class="lt long">~50 weeks</span></td>
+        <td class="num">IEEE C37.20.2<br>IEEE C37.04</td>
+      </tr>
+      <tr>
+        <td><b>Main Power Transformer</b>The substation step-up to transmission voltage. Frequently the single longest-lead item on the project.</td>
+        <td class="num">20&ndash;200 MVA<br>34.5 kV to 69&ndash;345 kV<br>LTC where required</td>
+        <td><span class="lt long">~100 weeks</span></td>
+        <td class="num">IEEE C57.12.00<br>IEEE C57.12.90</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout"><b>Release the main power transformer against the interconnection study, not the final design.</b> At current lead times this item alone can determine the commercial operation date, and the information needed to specify it &mdash; rating, voltages, impedance, tap requirements &mdash; is settled by the system impact study well before the balance of the plant is designed. Waiting for design completion adds the delay directly to the schedule. Lead times shown are indicative modelled positions for North America, reviewed monthly, published with their basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>.</div>
+
+  <h2>Specifications that decide the selection</h2>
+  <div class="specgrid">
+    <div class="speccard">
+      <h4>Impedance is fixed by the study</h4>
+      <p>Transformer impedance sets fault levels and voltage regulation across the plant. It is an output of the interconnection study, and changing it later invalidates the protection coordination built on it.</p>
+    </div>
+    <div class="speccard">
+      <h4>Loop versus radial collection</h4>
+      <p>Looped feeders let a faulted section be isolated without losing the blocks beyond it. Radial is cheaper and simpler. The choice is an availability decision priced against feeder cost.</p>
+    </div>
+    <div class="speccard">
+      <h4>Cable ampacity in real soil</h4>
+      <p>Direct-buried MV cable ratings depend on soil thermal resistivity, burial depth and circuit spacing. Standard tables assume conditions the site may not have, and the correction is not small.</p>
+    </div>
+    <div class="speccard">
+      <h4>Reactive capability at the POI</h4>
+      <p>The interconnection agreement specifies power factor at the point of interconnection, not at the inverter. Collector system charging current and transformer losses sit in between and must be accounted for.</p>
+    </div>
+  </div>
+
+  <h2>Selection criteria in practice</h2>
+  <ul>
+    <li><b>Sequence procurement by lead time, not by design order.</b> The main power transformer and collector switchgear should be released first even though they are conceptually downstream. Everything else has slack; these do not.</li>
+    <li><b>Verify cable ampacity against a site-specific thermal model.</b> Soil thermal resistivity varies widely and dries out under load, which reduces capacity further. Published ampacity tables are a starting point, not a design.</li>
+    <li><b>Coordinate protection for converter-based sources explicitly.</b> Inverters current-limit rather than delivering several times rated current into a fault. Collector protection designed on conventional assumptions may under-reach, and this must be resolved by study before relay settings are issued.</li>
+    <li><b>Confirm the utility&rsquo;s metering and telemetry requirements in writing.</b> Revenue metering, ISO telemetry and the communications path are utility-specified and frequently discovered late. They are also a common cause of delay between mechanical completion and commercial operation.</li>
+    <li><b>Check domestic content requirements against the transformer and switchgear.</b> Where incentives depend on domestic content, these large items carry disproportionate weight, and qualifying supply has its own constrained lead time.</li>
+  </ul>
+
+  <h2>Typical applications</h2>
+  <p>A utility-scale PV or storage plant repeats an inverter block with its <b>pad-mount step-up transformer</b>, ties blocks together with <b>collector feeders</b> at 34.5&nbsp;kV, and brings those feeders into a collector substation through <b>collector switchgear</b> and a <b>main power transformer</b> to the transmission system. Distributed generation connecting at distribution voltage compresses this to a single step-up transformer and a utility-specified interconnection cabinet &mdash; but the metering, protection and telemetry requirements remain, and they remain utility-specified.</p>
+
+  <h2>Work the numbers before you RFQ</h2>
+  <div class="rel">
+    <a href="/engineering-calculators.html"><span class="k">Calculators</span><span class="t">Voltage drop, ampacity and sizing</span></a>
+    <a href="/voltfield-sandbox.html"><span class="k">Practice</span><span class="t">Build a circuit from source to load</span></a>
+    <a href="/voltfield-bom-generator.html"><span class="k">Tool</span><span class="t">Build a bill of materials</span></a>
+    <a href="/rfq-toolkit.html"><span class="k">Template</span><span class="t">RFQ readiness checklist</span></a>
+  </div>
+
+  <h2>Related reading</h2>
+  <div class="rel">
+    <a href="/guide-pad-mount-vs-gsu-transformers.html"><span class="k">Guide</span><span class="t">Pad-mount versus GSU transformers</span></a>
+    <a href="/guide-transformer-lead-times.html"><span class="k">Guide</span><span class="t">Why transformer lead times are what they are</span></a>
+    <a href="/guide-grid-interconnection-process.html"><span class="k">Guide</span><span class="t">The grid interconnection process</span></a>
+    <a href="/renewables/solar-inverters.html"><span class="k">Category</span><span class="t">String, central and hybrid inverters</span></a>
+    <a href="/renewables/dc-collection.html"><span class="k">Category</span><span class="t">Combiners, recombiners and DC cable</span></a>
+    <a href="/renewables.html"><span class="k">Sector</span><span class="t">All renewable energy equipment</span></a>
+  </div>
+
+  <h2>Common questions</h2>
+  <h3>Why are main power transformer lead times so long?</h3>
+  <p>Large power transformers are engineered to order, built in a small number of factories, and depend on constrained inputs &mdash; grain-oriented electrical steel, bushings, and skilled winding labour. Demand from grid replacement, data centres and renewables has risen simultaneously against capacity that expands slowly, because a new transformer factory takes years to build and staff.</p>
+
+  <h3>Is 34.5 kV always the right collector voltage?</h3>
+  <p>It is the common choice for utility-scale plants because it keeps collector currents and losses manageable across a large site. Smaller plants, and those interconnecting at distribution voltage, are often better served at 13.8&nbsp;kV, where equipment is cheaper and more readily available. Plant size and cable run length decide it.</p>
+
+  <h3>When should the transformer order be placed?</h3>
+  <p>As soon as the system impact study fixes the rating, voltages and impedance &mdash; which is typically well before the rest of the plant is designed. Holding the order until design completion adds the full lead time to the schedule for no engineering benefit, and this is one of the most common avoidable delays on renewable projects.</p>
+
+  <h3>Does the collector system affect the power factor obligation?</h3>
+  <p>Yes, and it is regularly overlooked. The obligation is measured at the point of interconnection, but MV cable contributes charging current and the transformers consume reactive power. The inverters have to make up the difference, which consumes some of their reactive capability before any grid support is delivered.</p>

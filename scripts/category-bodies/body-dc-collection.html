@@ -1,0 +1,102 @@
+  <h2>The DC side is where a solar plant quietly loses money</h2>
+  <p>Between the modules and the inverter sits the DC collection system: source-circuit fusing, combiners, recombiners, and the cable that ties them together. None of it generates anything. All of it can lose energy, start fires, and fail in ways that are difficult to find on a site covering several hundred acres.</p>
+  <p>The move to 1500&nbsp;V systems reshaped this layer. Longer strings mean fewer parallel circuits, fewer combiners and less copper for the same plant &mdash; a genuine cost reduction. It also means higher voltages present at more places on the site, tighter insulation and clearance requirements, and DC arc-fault behaviour that is unforgiving of poor terminations.</p>
+
+  <div class="tblwrap">
+  <table class="famtable">
+    <thead>
+      <tr><th>Family</th><th>Typical configuration</th><th>Indicative lead time</th><th>Standards</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>String Combiner Boxes</b>Parallels source circuits and provides overcurrent protection and a disconnect point.</td>
+        <td class="num">8&ndash;32 inputs<br>1500 V DC<br>NEMA 4X, fused or fuseless</td>
+        <td><span class="lt mid">~16 weeks</span></td>
+        <td class="num">UL 1741<br>NEC 690.8<br>UL 508A</td>
+      </tr>
+      <tr>
+        <td><b>Recombiner Boxes</b>Combines combiner outputs onto the feeders reaching a central inverter.</td>
+        <td class="num">4&ndash;16 inputs<br>1500 V DC<br>Load-break disconnect</td>
+        <td><span class="lt mid">~18 weeks</span></td>
+        <td class="num">UL 1741<br>NEC 690<br>IEC 61439</td>
+      </tr>
+      <tr>
+        <td><b>PV Wire &amp; Connectors</b>The single largest count of connections on the site, and the most common source of DC faults.</td>
+        <td class="num">10&ndash;4 AWG typical<br>2000 V rated insulation<br>MC4-compatible</td>
+        <td><span class="lt short">~10 weeks</span></td>
+        <td class="num">UL 4703<br>UL 6703<br>NEC 690.31</td>
+      </tr>
+      <tr>
+        <td><b>Rapid Shutdown &amp; MLPE</b>Module-level shutdown required on buildings. Also provides per-module monitoring.</td>
+        <td class="num">Per-module or per-string<br>Rooftop mandatory<br>PLC or wireless signalling</td>
+        <td><span class="lt short">~12 weeks</span></td>
+        <td class="num">NEC 690.12<br>UL 1741<br>SunSpec</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout"><b>Connectors from different manufacturers should not be mated, even when they fit.</b> &ldquo;MC4-compatible&rdquo; describes the geometry, not the contact metallurgy or the sealing tolerance. Cross-mated pairs are a recognised cause of high-resistance joints, and a high-resistance DC joint in an array is a fire risk, not just a loss. Standardise on one connector family per site and record it. Lead times shown are indicative modelled positions for North America, reviewed monthly, published with their basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>.</div>
+
+  <h2>Specifications that decide the selection</h2>
+  <div class="specgrid">
+    <div class="speccard">
+      <h4>Maximum system voltage at record low</h4>
+      <p>String open-circuit voltage rises as temperature falls. The design check is the coldest expected temperature at the site, not the average &mdash; that is the condition that can push a string past the equipment rating.</p>
+    </div>
+    <div class="speccard">
+      <h4>Fused or fuseless combiners</h4>
+      <p>Fewer parallel strings at 1500&nbsp;V can remove the need for source-circuit fusing entirely. Whether it does depends on the module&rsquo;s reverse current rating and the string count, and it must be verified rather than assumed.</p>
+    </div>
+    <div class="speccard">
+      <h4>Enclosure rating and thermal load</h4>
+      <p>Combiners sit outdoors in full sun for decades. Internal temperature rise derates the fuses and ages the terminations, so NEMA rating alone is not the whole specification.</p>
+    </div>
+    <div class="speccard">
+      <h4>String-level monitoring</h4>
+      <p>Without it, a failed string on a large site is found by walking the array. Monitoring at the combiner is cheap relative to the energy lost to a fault nobody noticed for a month.</p>
+    </div>
+  </div>
+
+  <h2>Selection criteria in practice</h2>
+  <ul>
+    <li><b>Size the string on the record low temperature.</b> Open-circuit voltage at the coldest expected condition sets the maximum string length. Designing on annual average temperature is a straightforward route to exceeding the 1500&nbsp;V rating on a winter morning.</li>
+    <li><b>Standardise the connector family site-wide and enforce it.</b> This is a specification and quality-control matter, not a preference. Mixed connectors on a site are difficult to police later and produce faults years after commissioning.</li>
+    <li><b>Specify monitoring granularity deliberately.</b> String-level data changes how the plant is operated; array-level data only tells you something is wrong. The incremental cost is small against the energy recovered by finding faults quickly.</li>
+    <li><b>Confirm rapid shutdown scope from the code edition in force.</b> NEC 690.12 requirements have changed between editions and are enforced locally. What the AHJ requires governs, and it affects whether module-level electronics are needed at all.</li>
+    <li><b>Torque and inspect terminations, then document it.</b> The overwhelming majority of DC faults originate at terminations. A torque record is cheap insurance and is frequently the only evidence available when a fault is investigated years later.</li>
+  </ul>
+
+  <h2>Typical applications</h2>
+  <p>Central-inverter plants use a full DC collection hierarchy: <b>string combiners</b> in the array feeding <b>recombiners</b>, which feed the inverter over large-conductor DC feeders. String-inverter plants delete most of that layer &mdash; strings land directly on the inverter, and <b>PV wire and connectors</b> become the whole of the DC system. Rooftop and building-mounted arrays add <b>rapid shutdown</b> equipment because NEC 690.12 requires it, and that equipment is generally also the monitoring layer.</p>
+
+  <h2>Work the numbers before you RFQ</h2>
+  <div class="rel">
+    <a href="/engineering-calculators.html"><span class="k">Calculators</span><span class="t">Voltage drop, ampacity and sizing</span></a>
+    <a href="/voltfield-sandbox.html"><span class="k">Practice</span><span class="t">Build a circuit from source to load</span></a>
+    <a href="/voltfield-bom-generator.html"><span class="k">Tool</span><span class="t">Build a bill of materials</span></a>
+    <a href="/rfq-toolkit.html"><span class="k">Template</span><span class="t">RFQ readiness checklist</span></a>
+  </div>
+
+  <h2>Related reading</h2>
+  <div class="rel">
+    <a href="/renewables/solar-inverters.html"><span class="k">Category</span><span class="t">String, central and hybrid inverters</span></a>
+    <a href="/renewables/ac-collection.html"><span class="k">Category</span><span class="t">Transformers, feeders and the substation interface</span></a>
+    <a href="/guide-inverter-clipping-ratio.html"><span class="k">Guide</span><span class="t">Inverter clipping and DC/AC ratio</span></a>
+    <a href="/guide-grounding-bonding-basics.html"><span class="k">Guide</span><span class="t">Grounding and bonding basics</span></a>
+    <a href="/guide-arc-flash-boundary-basics.html"><span class="k">Guide</span><span class="t">Arc flash boundary basics</span></a>
+    <a href="/renewables.html"><span class="k">Sector</span><span class="t">All renewable energy equipment</span></a>
+  </div>
+
+  <h2>Common questions</h2>
+  <h3>Do 1500 V systems still need string fuses?</h3>
+  <p>Often not, but it has to be checked rather than assumed. Fusing protects a string against reverse current from the other parallel strings. With few enough strings in parallel, the worst-case reverse current stays below the module&rsquo;s reverse current rating and no fuse is required. The threshold depends on the specific module, so it is a calculation per design.</p>
+
+  <h3>Why is DC arcing more dangerous than AC arcing?</h3>
+  <p>Alternating current crosses zero twice per cycle, which gives an arc a natural opportunity to extinguish. Direct current does not, so an established DC arc tends to sustain itself. That is why DC-rated disconnects and correct terminations matter more on the array side than the equivalent components do downstream of the inverter.</p>
+
+  <h3>How much energy does a bad connector actually cost?</h3>
+  <p>Individually very little &mdash; and that is the problem. A slightly resistive joint loses a fraction of a percent and produces heat, neither of which trips anything. Across thousands of connections it becomes a measurable yield loss, and the failure mode at the end of that slow degradation is a hot joint in a dry field.</p>
+
+  <h3>Is string-level monitoring worth the cost?</h3>
+  <p>On any site large enough that walking the array is a real expense, generally yes. The value is not the data but the reduction in fault-detection time: a string that fails silently in March and is found during an autumn inspection has lost most of a season&rsquo;s production from that circuit.</p>

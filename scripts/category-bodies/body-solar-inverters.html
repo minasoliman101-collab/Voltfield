@@ -1,0 +1,102 @@
+  <h2>String or central is a site decision, not a preference</h2>
+  <p>The inverter converts DC from the array into AC the grid will accept, and in doing so it sets the plant&rsquo;s availability profile, its maintenance model and much of its interconnection behaviour. The long-running string-versus-central argument is not really about efficiency &mdash; the two are close &mdash; it is about how failure, service access and terrain interact on a specific site.</p>
+  <p>What has genuinely changed is the grid interface. IEEE 1547-2018 and UL 1741 SB moved inverters from passive exporters to grid-supporting devices with mandated voltage and frequency response. In several markets an inverter without current certification simply cannot be interconnected, regardless of how well it converts power.</p>
+
+  <div class="tblwrap">
+  <table class="famtable">
+    <thead>
+      <tr><th>Family</th><th>Typical configuration</th><th>Indicative lead time</th><th>Standards</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Central Inverters</b>One large converter per block, fed by recombiners. Lowest cost per watt at scale.</td>
+        <td class="num">1&ndash;5 MW<br>1500 V DC input<br>Skid or container mounted</td>
+        <td><span class="lt long">~36 weeks</span></td>
+        <td class="num">UL 1741 SB<br>IEEE 1547<br>IEEE 2800</td>
+      </tr>
+      <tr>
+        <td><b>String Inverters</b>Many smaller converters distributed across the array. A failure costs a fraction of output, not a block.</td>
+        <td class="num">100&ndash;350 kW<br>1500 V DC input<br>Pole or rack mounted</td>
+        <td><span class="lt mid">~20 weeks</span></td>
+        <td class="num">UL 1741 SB<br>IEEE 1547</td>
+      </tr>
+      <tr>
+        <td><b>Commercial Three-Phase</b>Rooftop and carport scale, frequently with integrated monitoring and rapid shutdown.</td>
+        <td class="num">30&ndash;125 kW<br>480 V AC output<br>Transformerless</td>
+        <td><span class="lt short">~12 weeks</span></td>
+        <td class="num">UL 1741 SA/SB<br>NEC 690.12</td>
+      </tr>
+      <tr>
+        <td><b>Hybrid PV + Storage Inverters</b>Shares a DC bus between array and battery, so one conversion stage serves both.</td>
+        <td class="num">50&ndash;250 kW<br>Bidirectional DC port<br>DC-coupled storage</td>
+        <td><span class="lt mid">~18 weeks</span></td>
+        <td class="num">UL 1741 SB<br>UL 9540 (system)</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout"><b>DC/AC ratio is an economic choice with a technical ceiling.</b> Oversizing the array relative to the inverter raises annual yield and flattens the output profile, at the cost of clipping the peak. The optimum depends on the local irradiance profile and on whether the offtake rewards peak or energy &mdash; there is no universally correct ratio, and vendors quoting one are describing their own product, not your site. Lead times shown are indicative modelled positions for North America, reviewed monthly, published with their basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>.</div>
+
+  <h2>Specifications that decide the selection</h2>
+  <div class="specgrid">
+    <div class="speccard">
+      <h4>MPPT count and granularity</h4>
+      <p>Each maximum power point tracker optimises the strings behind it. On broken terrain or mixed azimuths, more trackers recover real energy; on a flat uniform array they mostly add cost.</p>
+    </div>
+    <div class="speccard">
+      <h4>Certified grid support functions</h4>
+      <p>Volt-VAR, volt-watt, frequency-watt and ride-through are certified per product and firmware. Utilities check the certification, not the datasheet claim.</p>
+    </div>
+    <div class="speccard">
+      <h4>Derating at site temperature</h4>
+      <p>Inverters shed output when hot. A unit rated at 25&nbsp;&deg;C ambient behaves differently on a 45&nbsp;&deg;C afternoon &mdash; which is precisely when irradiance is highest.</p>
+    </div>
+    <div class="speccard">
+      <h4>Serviceability and spares</h4>
+      <p>Central inverters concentrate risk and usually need a technician and sometimes a crane. String inverters are swapped by two people. The service model should match the site&rsquo;s access and staffing reality.</p>
+    </div>
+  </div>
+
+  <h2>Selection criteria in practice</h2>
+  <ul>
+    <li><b>Let terrain and shading choose the architecture.</b> Uniform flat sites favour central inverters on cost. Rolling terrain, mixed orientations or partial shading favour string inverters, because the energy recovered from finer MPPT granularity is real and recurring.</li>
+    <li><b>Confirm UL 1741 SB certification for the exact configuration.</b> Certification is tied to hardware and firmware together. An uncertified firmware revision installed at commissioning is an interconnection problem discovered at the worst time.</li>
+    <li><b>Model clipping against your offtake, not against a rule of thumb.</b> A power purchase agreement that pays flat energy prices values a different DC/AC ratio than one with time-of-day pricing. Run the production model both ways before fixing the ratio.</li>
+    <li><b>Check domestic content implications early if incentives apply.</b> Inverter origin can affect eligibility for domestic content adders, and the qualifying criteria are specific about what counts. This constrains the vendor list before technical selection begins.</li>
+    <li><b>Plan for a mid-life inverter replacement.</b> Inverters do not last as long as modules or racking. Whether the platform will still be supported in year twelve is a legitimate selection criterion, not a hypothetical.</li>
+  </ul>
+
+  <h2>Typical applications</h2>
+  <p>Large flat utility-scale sites still favour <b>central inverters</b> feeding an MV transformer per block, because the cost per watt and the simpler AC collection win at scale. Distributed generation, community solar and difficult terrain increasingly use <b>string inverters</b>, where the availability advantage and the absence of a DC recombination layer offset the higher unit cost. Rooftop commercial installations use <b>three-phase commercial inverters</b> with module-level rapid shutdown, and sites adding storage after the fact are the natural home for <b>hybrid inverters</b> sharing the existing DC infrastructure.</p>
+
+  <h2>Work the numbers before you RFQ</h2>
+  <div class="rel">
+    <a href="/engineering-calculators.html"><span class="k">Calculators</span><span class="t">Load, current and sizing calculators</span></a>
+    <a href="/voltfield-sandbox.html"><span class="k">Practice</span><span class="t">Build a circuit from source to load</span></a>
+    <a href="/voltfield-bom-generator.html"><span class="k">Tool</span><span class="t">Build a bill of materials</span></a>
+    <a href="/rfq-toolkit.html"><span class="k">Template</span><span class="t">RFQ readiness checklist</span></a>
+  </div>
+
+  <h2>Related reading</h2>
+  <div class="rel">
+    <a href="/guide-inverter-clipping-ratio.html"><span class="k">Guide</span><span class="t">Inverter clipping and DC/AC ratio</span></a>
+    <a href="/guide-grid-interconnection-process.html"><span class="k">Guide</span><span class="t">The grid interconnection process</span></a>
+    <a href="/renewables/dc-collection.html"><span class="k">Category</span><span class="t">Combiners, recombiners and DC cable</span></a>
+    <a href="/renewables/ac-collection.html"><span class="k">Category</span><span class="t">Transformers, feeders and the substation interface</span></a>
+    <a href="/guide-buy-america-iija.html"><span class="k">Guide</span><span class="t">Buy America and domestic content</span></a>
+    <a href="/renewables.html"><span class="k">Sector</span><span class="t">All renewable energy equipment</span></a>
+  </div>
+
+  <h2>Common questions</h2>
+  <h3>Is string or central cheaper overall?</h3>
+  <p>Central inverters are cheaper on equipment cost per watt at utility scale, and that gap is real. String inverters recover some of it through higher availability, finer MPPT on non-uniform sites, and the elimination of DC recombiners and the long DC runs feeding them. The comparison only resolves at the level of a specific site layout, which is why generic answers are unhelpful.</p>
+
+  <h3>What DC/AC ratio should I use?</h3>
+  <p>Most utility-scale projects land somewhere between roughly 1.2 and 1.4, but that range is an observation rather than a recommendation. The correct value depends on the irradiance profile, the temperature regime and how the offtake values peak power against total energy. It should come out of a production model for the actual site.</p>
+
+  <h3>Why does UL 1741 SB matter so much now?</h3>
+  <p>It certifies the grid support behaviours required by IEEE 1547-2018 &mdash; ride-through, volt-VAR, frequency response. As those requirements moved from optional to mandatory, the certification became the evidence utilities rely on. Without it, many interconnection applications will not be processed at all.</p>
+
+  <h3>How long do inverters actually last?</h3>
+  <p>Considerably less than the modules they serve. Ten to fifteen years is a reasonable planning assumption, against a twenty-five to thirty-year module life, which means at least one replacement across the plant&rsquo;s life. Financial models that assume otherwise are understating operating cost, and platform longevity is worth weighting during selection.</p>

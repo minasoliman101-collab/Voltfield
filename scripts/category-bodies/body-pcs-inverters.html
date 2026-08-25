@@ -1,0 +1,102 @@
+  <h2>The PCS is where a battery becomes a grid asset</h2>
+  <p>Cells store energy. The power conversion system is what turns that into something a grid operator will accept &mdash; it sets the power rating, the response time, the fault behaviour and, increasingly, the grid services the plant can be paid for. Two projects with identical batteries and different PCS platforms are not the same asset.</p>
+  <p>The significant change is that the PCS is no longer a commodity converter. Grid codes now require behaviours &mdash; ride-through, frequency response, reactive power at zero real power, and in some markets grid-forming operation &mdash; that live in the converter and its controls, not in the battery. Buying on cost per kilowatt alone selects against exactly the capabilities that determine whether the plant can be interconnected and what it can earn.</p>
+
+  <div class="tblwrap">
+  <table class="famtable">
+    <thead>
+      <tr><th>Family</th><th>Typical configuration</th><th>Indicative lead time</th><th>Standards</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Central PCS Skids</b>Utility-scale conversion, usually skid mounted with the MV transformer as one deliverable.</td>
+        <td class="num">1&ndash;5 MW per unit<br>630&ndash;800 V AC output<br>Outdoor rated</td>
+        <td><span class="lt long">~38 weeks</span></td>
+        <td class="num">UL 1741 SB<br>IEEE 1547<br>IEEE 2800</td>
+      </tr>
+      <tr>
+        <td><b>String / Modular PCS</b>Multiple smaller converters in parallel. Partial failure degrades output rather than losing a block.</td>
+        <td class="num">100&ndash;400 kW per unit<br>Paralleled to block rating<br>Hot-swappable</td>
+        <td><span class="lt mid">~26 weeks</span></td>
+        <td class="num">UL 1741 SB<br>IEEE 1547</td>
+      </tr>
+      <tr>
+        <td><b>Grid-Forming PCS</b>Establishes voltage and frequency rather than following them. Required for black start and for weak-grid interconnection.</td>
+        <td class="num">1&ndash;5 MW per unit<br>Virtual synchronous control<br>Black start capable</td>
+        <td><span class="lt long">~44 weeks</span></td>
+        <td class="num">IEEE 2800<br>UL 1741 SB<br>ISO-specific</td>
+      </tr>
+      <tr>
+        <td><b>C&amp;I Bidirectional Inverters</b>Behind-the-meter conversion, frequently combined with solar input on a shared DC bus.</td>
+        <td class="num">30&ndash;250 kW<br>480 V AC<br>Hybrid PV + storage</td>
+        <td><span class="lt mid">~16 weeks</span></td>
+        <td class="num">UL 1741 SA/SB<br>IEEE 1547<br>Rule 21</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout"><b>UL 1741 SB certification is interconnection-critical and product-specific.</b> It certifies conformance to IEEE 1547-2018 grid support functions, and utilities increasingly will not process an application without it. Certification applies to a specific firmware and hardware combination &mdash; a field firmware update can invalidate it. Confirm the certified configuration matches what will actually be installed and operated. Lead times shown are indicative modelled positions for North America, reviewed monthly, published with their basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>.</div>
+
+  <h2>Specifications that decide the selection</h2>
+  <div class="specgrid">
+    <div class="speccard">
+      <h4>Continuous rating at site conditions</h4>
+      <p>Nameplate power is quoted at a reference ambient. Real derating at design-day temperature and site elevation can remove a meaningful fraction of it, and that is the number the plant actually dispatches.</p>
+    </div>
+    <div class="speccard">
+      <h4>Reactive capability at zero real power</h4>
+      <p>Many interconnection agreements require reactive support when the battery is neither charging nor discharging. Not every converter can do it, and the ones that can may derate elsewhere to achieve it.</p>
+    </div>
+    <div class="speccard">
+      <h4>Grid-following or grid-forming</h4>
+      <p>Grid-following converters need a stiff grid to synchronise to. On weak interconnections, or where black start is required, grid-forming control is not an upgrade &mdash; it is the entry requirement.</p>
+    </div>
+    <div class="speccard">
+      <h4>DC window versus battery voltage</h4>
+      <p>The converter&rsquo;s usable DC voltage range must cover the battery&rsquo;s full state-of-charge range at the design C-rate. A mismatch quietly strands capacity at the ends of the range.</p>
+    </div>
+  </div>
+
+  <h2>Selection criteria in practice</h2>
+  <ul>
+    <li><b>Start from the interconnection agreement, not the datasheet.</b> The required grid support functions, fault ride-through profile and reactive range are specified by the utility or ISO. Those requirements select the converter; the battery selection follows.</li>
+    <li><b>Match the PCS platform to the study assumptions.</b> Interconnection studies are run on a specific converter model. Substituting a different platform after the study can require rework, and rework means re-queuing in some markets.</li>
+    <li><b>Weigh central versus modular against your service model.</b> Central skids are cheaper per kilowatt and simpler to interface. Modular converters degrade gracefully and can be repaired without a crane. The right answer depends on site access and who does the maintenance.</li>
+    <li><b>Confirm the harmonic and short-circuit contribution.</b> Converter-based sources behave nothing like synchronous machines under fault. Protection coordination on the collector system depends on the converter&rsquo;s actual current contribution and duration.</li>
+    <li><b>Establish the firmware governance early.</b> If certification is tied to firmware, then patching, cybersecurity requirements and certification maintenance are the same conversation. Agree who authorises updates before commissioning.</li>
+  </ul>
+
+  <h2>Typical applications</h2>
+  <p>Utility-scale storage blocks pair a <b>central PCS skid</b> with an MV transformer, repeated across the site. Weak-grid and islanded projects, and any plant expected to black start, need <b>grid-forming</b> converters and the study work that goes with them. <b>String PCS</b> suits sites where availability matters more than capital cost, or where crane access is poor. Behind-the-meter commercial installations use <b>bidirectional inverters</b>, very often sharing a DC bus with rooftop or carport PV so a single conversion stage serves both.</p>
+
+  <h2>Work the numbers before you RFQ</h2>
+  <div class="rel">
+    <a href="/engineering-calculators.html"><span class="k">Calculators</span><span class="t">Load, current and sizing calculators</span></a>
+    <a href="/voltfield-sandbox.html"><span class="k">Practice</span><span class="t">Build a circuit from source to load</span></a>
+    <a href="/voltfield-bom-generator.html"><span class="k">Tool</span><span class="t">Build a bill of materials</span></a>
+    <a href="/rfq-toolkit.html"><span class="k">Template</span><span class="t">RFQ readiness checklist</span></a>
+  </div>
+
+  <h2>Related reading</h2>
+  <div class="rel">
+    <a href="/guide-grid-interconnection-process.html"><span class="k">Guide</span><span class="t">The grid interconnection process</span></a>
+    <a href="/guide-inverter-clipping-ratio.html"><span class="k">Guide</span><span class="t">Inverter clipping and DC/AC ratio</span></a>
+    <a href="/battery-storage/bess-enclosures.html"><span class="k">Category</span><span class="t">Enclosures, modules and fire protection</span></a>
+    <a href="/battery-storage/balance-of-plant.html"><span class="k">Category</span><span class="t">MV skid, transformers and auxiliary power</span></a>
+    <a href="/guide-short-circuit-studies-breaker-coordination.html"><span class="k">Guide</span><span class="t">Short-circuit studies and coordination</span></a>
+    <a href="/battery-storage.html"><span class="k">Sector</span><span class="t">All battery storage equipment</span></a>
+  </div>
+
+  <h2>Common questions</h2>
+  <h3>What is the practical difference between grid-following and grid-forming?</h3>
+  <p>A grid-following converter measures the grid&rsquo;s voltage and frequency and injects current in step with it &mdash; it cannot operate without a reference. A grid-forming converter creates that reference itself, behaving more like a synchronous generator. On a strong grid the difference is largely invisible; on a weak one, or during a black start, it is the difference between a plant that works and one that cannot energise.</p>
+
+  <h3>Should the PCS and the battery come from the same vendor?</h3>
+  <p>Integrated supply removes an interface and usually shortens commissioning, which is a real benefit. The cost is a longer commercial dependency: augmentation, spares and warranty all route through one party. Split supply preserves options but puts the controls integration risk on you, and that risk is not small.</p>
+
+  <h3>How much oversizing is sensible?</h3>
+  <p>Very little on the converter itself, but the derating at site conditions must be understood first &mdash; what looks like oversizing is often just the honest rating. Where genuine headroom is worth buying is in reactive capability, because interconnection requirements have tightened repeatedly and retrofitting that capability is expensive.</p>
+
+  <h3>Does a PCS need its own protection, or does the MV switchgear cover it?</h3>
+  <p>Both, and they must be coordinated. Converters current-limit rather than delivering a large fault contribution, so protection schemes designed around synchronous sources may not see a fault at all. This is a study question, and it needs to be settled before the switchgear relay settings are finalised.</p>

@@ -1,0 +1,102 @@
+  <h2>Balance of plant is where storage schedules actually slip</h2>
+  <p>The battery and the converter get the attention, but they are rarely what delays energisation. The medium-voltage transformer, the collector switchgear, the auxiliary supply and the protection relays sit between a finished block and a plant that can export &mdash; and several of them carry the longest lead times on the project.</p>
+  <p>Balance of plant also carries most of the interfaces. It is where the storage vendor&rsquo;s scope ends and the EPC&rsquo;s begins, where the utility&rsquo;s requirements land, and where the protection scheme has to reconcile converter-based sources with conventional overcurrent practice. Scope gaps here are the single most common cause of avoidable rework on a storage project.</p>
+
+  <div class="tblwrap">
+  <table class="famtable">
+    <thead>
+      <tr><th>Family</th><th>Typical configuration</th><th>Indicative lead time</th><th>Standards</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>MV Step-Up Transformers</b>Takes converter output to collector voltage. Often supplied on the PCS skid, but not always &mdash; confirm the scope split.</td>
+        <td class="num">1&ndash;5 MVA<br>630 V to 13.8 / 34.5 kV<br>Pad-mount or substation type</td>
+        <td><span class="lt long">~60 weeks</span></td>
+        <td class="num">IEEE C57.12<br>DOE 2016 efficiency</td>
+      </tr>
+      <tr>
+        <td><b>Collector Switchgear</b>Combines block feeders onto the collector bus and provides the protection interface to the utility.</td>
+        <td class="num">15&ndash;38 kV<br>Vacuum interrupters<br>Metal-clad or metal-enclosed</td>
+        <td><span class="lt long">~50 weeks</span></td>
+        <td class="num">IEEE C37.20.2<br>IEEE C37.04</td>
+      </tr>
+      <tr>
+        <td><b>Protection Relays &amp; Plant Controller</b>Executes the interconnection requirements &mdash; trip settings, ride-through, and the dispatch interface to the ISO.</td>
+        <td class="num">Multifunction digital relays<br>DNP3 / IEC 61850<br>Redundant controllers</td>
+        <td><span class="lt mid">~24 weeks</span></td>
+        <td class="num">IEEE 1547<br>IEEE C37.2<br>NERC CIP</td>
+      </tr>
+      <tr>
+        <td><b>Auxiliary Power &amp; Station Service</b>Feeds thermal management, controls and lighting. Must remain available when the battery is not.</td>
+        <td class="num">50&ndash;500 kVA<br>Utility or on-site backup<br>UPS-backed controls</td>
+        <td><span class="lt mid">~22 weeks</span></td>
+        <td class="num">NEC Article 706<br>IEEE 446</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout"><b>Auxiliary power is the quiet single point of failure.</b> A storage plant whose thermal management, controls and communications all depend on the plant being able to export has an availability problem that will not appear in any datasheet. Station service needs to survive the conditions the battery exists to ride through, which usually means a genuinely independent supply and UPS-backed controls. Lead times shown are indicative modelled positions for North America, reviewed monthly, published with their basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>.</div>
+
+  <h2>Specifications that decide the selection</h2>
+  <div class="specgrid">
+    <div class="speccard">
+      <h4>Transformer duty is not standard</h4>
+      <p>A storage step-up transformer is bidirectional, loaded near rating for hours at a time, and fed by a converter with real harmonic content. Specifying it like a distribution transformer understates the thermal duty.</p>
+    </div>
+    <div class="speccard">
+      <h4>Fault contribution from converters</h4>
+      <p>Converters current-limit at roughly their rating rather than delivering several times it. Protection schemes assuming a large fault contribution may simply not pick up. This has to be settled by study.</p>
+    </div>
+    <div class="speccard">
+      <h4>Collector voltage choice</h4>
+      <p>34.5 kV reduces collector losses and conductor cost on large sites; 13.8 kV suits smaller ones and often has better equipment availability. The decision propagates to every transformer and cable on the site.</p>
+    </div>
+    <div class="speccard">
+      <h4>Communications architecture</h4>
+      <p>The plant controller has to reach every PCS and BMS, and the ISO has to reach the plant controller. Latency, redundancy and cybersecurity scope belong in the specification, not in commissioning.</p>
+    </div>
+  </div>
+
+  <h2>Selection criteria in practice</h2>
+  <ul>
+    <li><b>Order the transformer first.</b> On most storage projects the MV step-up transformer is the critical path item by a wide margin. It should be released against the interconnection study, ahead of items with far more design freedom.</li>
+    <li><b>Write the scope split down explicitly.</b> Whether the step-up transformer, the MV breaker and the auxiliary supply are inside the storage vendor&rsquo;s scope varies by supplier. Every one of these has been missed on real projects because both parties assumed the other had it.</li>
+    <li><b>Coordinate protection against converter behaviour, not textbook sources.</b> Settings derived from a conventional generator model can leave a converter-fed fault undetected. The study must use the actual converter characteristic.</li>
+    <li><b>Treat the plant controller as long-lead engineering, not a commodity.</b> Its configuration encodes the interconnection agreement. Utility witness testing depends on it being right, and that testing is often the last gate before commercial operation.</li>
+    <li><b>Confirm spare parts for the relays and controllers.</b> A digital relay with a six-month replacement lead time is an availability risk on a plant expected to run for two decades.</li>
+  </ul>
+
+  <h2>Typical applications</h2>
+  <p>A utility-scale storage plant repeats a standard block &mdash; enclosures, PCS, <b>MV step-up transformer</b> &mdash; and collects those blocks onto a 34.5 kV bus through <b>collector switchgear</b>, with <b>protection relays</b> and a <b>plant controller</b> providing the interface the ISO contracts with. Smaller commercial installations compress this considerably, often to a single pad-mount transformer and a service-entrance-rated disconnect, but the auxiliary power and controls questions do not get smaller with the plant.</p>
+
+  <h2>Work the numbers before you RFQ</h2>
+  <div class="rel">
+    <a href="/engineering-calculators.html"><span class="k">Calculators</span><span class="t">Load, current and sizing calculators</span></a>
+    <a href="/voltfield-sandbox.html"><span class="k">Practice</span><span class="t">Build a circuit from source to load</span></a>
+    <a href="/voltfield-bom-generator.html"><span class="k">Tool</span><span class="t">Build a bill of materials</span></a>
+    <a href="/rfq-toolkit.html"><span class="k">Template</span><span class="t">RFQ readiness checklist</span></a>
+  </div>
+
+  <h2>Related reading</h2>
+  <div class="rel">
+    <a href="/guide-pad-mount-vs-gsu-transformers.html"><span class="k">Guide</span><span class="t">Pad-mount versus GSU transformers</span></a>
+    <a href="/guide-transformer-lead-times.html"><span class="k">Guide</span><span class="t">Why transformer lead times are what they are</span></a>
+    <a href="/guide-short-circuit-studies-breaker-coordination.html"><span class="k">Guide</span><span class="t">Short-circuit studies and coordination</span></a>
+    <a href="/battery-storage/pcs-inverters.html"><span class="k">Category</span><span class="t">Power conversion systems</span></a>
+    <a href="/battery-storage/bess-enclosures.html"><span class="k">Category</span><span class="t">Enclosures, modules and fire protection</span></a>
+    <a href="/battery-storage.html"><span class="k">Sector</span><span class="t">All battery storage equipment</span></a>
+  </div>
+
+  <h2>Common questions</h2>
+  <h3>Why is the transformer usually the critical path?</h3>
+  <p>Medium-voltage transformer capacity has been constrained for several years, and storage projects compete for it against data centres, renewables and utility replacement programmes simultaneously. The design information needed to release the order is available early, so there is rarely a good reason to wait &mdash; and waiting is what causes the slip.</p>
+
+  <h3>Is 13.8 kV or 34.5 kV the right collector voltage?</h3>
+  <p>It follows from plant size and distance. Higher collector voltage reduces current, and therefore conductor cost and losses, which matters as the site grows. Below roughly 20 MW that advantage often does not repay the higher equipment cost, and 13.8 kV equipment is generally easier to source.</p>
+
+  <h3>Who owns the plant controller configuration?</h3>
+  <p>This should be settled in writing before award. The configuration implements the interconnection agreement, so it touches the utility&rsquo;s requirements, the converter vendor&rsquo;s capabilities and the owner&rsquo;s dispatch strategy. Leaving ownership ambiguous reliably produces a dispute during witness testing, at the worst possible point in the schedule.</p>
+
+  <h3>Does a storage plant need station service if it has a battery?</h3>
+  <p>Yes. The battery cannot power its own thermal management and controls under all the conditions in which those systems must run &mdash; including a fault that has isolated the plant, or a state of charge at the bottom of the range. Independent station service with UPS-backed controls is standard practice, and skipping it converts a minor event into an extended outage.</p>

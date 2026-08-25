@@ -1,0 +1,102 @@
+  <h2>The enclosure is the product, not the packaging</h2>
+  <p>A containerised battery energy storage system is bought as one unit, but it is really a building containing an electrical room, a fire protection system and a thermal management system, all of which have to be accepted together. Treating the enclosure as a box that cells arrive in leads to the two most common late-stage surprises on a storage project: the fire authority having jurisdiction rejects the deployment, and the foundation or transport route cannot take what was actually ordered.</p>
+  <p>The market has consolidated hard around 20-foot outdoor enclosures using LFP cells, liquid thermal management, and DC capacities in the 3&ndash;6 MWh range. That convergence is genuinely useful &mdash; it makes competing offers comparable in a way they were not five years ago &mdash; but it also means the differentiators have moved to the things that are harder to read off a datasheet: the fire test evidence, the augmentation path, and what the warranty actually guarantees.</p>
+
+  <div class="tblwrap">
+  <table class="famtable">
+    <thead>
+      <tr><th>Family</th><th>Typical configuration</th><th>Indicative lead time</th><th>Standards</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>20 ft Outdoor Enclosures</b>The current default for utility-scale and large C&amp;I. Self-contained, delivered with cells installed and commissioned on site.</td>
+        <td class="num">3&ndash;6 MWh DC<br>LFP, liquid cooled<br>1000 / 1500 V DC</td>
+        <td><span class="lt long">~40 weeks</span></td>
+        <td class="num">UL 9540<br>UL 9540A<br>NFPA 855</td>
+      </tr>
+      <tr>
+        <td><b>Modular Cabinets</b>Free-standing outdoor cabinets. Used where a container will not fit, or where capacity is added in smaller steps.</td>
+        <td class="num">100 kWh &ndash; 400 kWh<br>LFP, air or liquid<br>Wall or pad mounted</td>
+        <td><span class="lt mid">~24 weeks</span></td>
+        <td class="num">UL 9540<br>NFPA 855<br>IEC 62619</td>
+      </tr>
+      <tr>
+        <td><b>Battery Modules &amp; Racks</b>The replaceable unit inside an enclosure. Also bought separately for augmentation and warranty replacement.</td>
+        <td class="num">5&ndash;10 kWh per module<br>Series strings to 1500 V<br>Rack-level BMS</td>
+        <td><span class="lt mid">~20 weeks</span></td>
+        <td class="num">UL 1973<br>IEC 62619<br>UN 38.3</td>
+      </tr>
+      <tr>
+        <td><b>Fire Suppression &amp; Detection</b>Off-gas detection, deflagration venting and suppression. Frequently the item that sets the permitting schedule.</td>
+        <td class="num">Aerosol / clean agent / water<br>Off-gas or VESDA detection<br>Deflagration panels</td>
+        <td><span class="lt mid">~18 weeks</span></td>
+        <td class="num">NFPA 855<br>NFPA 68 / 69<br>UL 9540A data</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout"><b>UL 9540A is a test method, not a rating.</b> A vendor saying they are &ldquo;9540A tested&rdquo; tells you a test was run, not that it passed anything &mdash; there is no pass or fail. What matters is the report itself, and specifically whether propagation between modules and between units was observed at the spacings you intend to build. Ask for the report, not the certificate. Lead times shown are indicative modelled positions for North America, reviewed monthly, published with their basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>.</div>
+
+  <h2>Specifications that decide the selection</h2>
+  <div class="specgrid">
+    <div class="speccard">
+      <h4>Nameplate vs usable energy</h4>
+      <p>Quoted DC capacity is not what the site can dispatch. Depth of discharge limits, round-trip efficiency and auxiliary load all sit between nameplate and delivered energy. Compare on usable AC energy at the point of interconnection.</p>
+    </div>
+    <div class="speccard">
+      <h4>C-rate and duration</h4>
+      <p>A 4-hour system and a 2-hour system can share a cell and still be different products. The power conversion, thermal management and warranty terms all change with duration, so specify duration before comparing prices.</p>
+    </div>
+    <div class="speccard">
+      <h4>Augmentation path</h4>
+      <p>Capacity fades. Whether you can add modules to existing racks, must add whole enclosures, or are locked out entirely by a discontinued module is a fifteen-year commercial decision made at purchase.</p>
+    </div>
+    <div class="speccard">
+      <h4>Transport and foundation</h4>
+      <p>A loaded 20 ft enclosure is heavy enough to constrain both the delivery route and the pad design. Confirm shipped weight, whether cells travel installed, and the crane access before the pad is poured.</p>
+    </div>
+  </div>
+
+  <h2>Selection criteria in practice</h2>
+  <ul>
+    <li><b>Engage the fire authority early, with the actual 9540A report.</b> Separation distances, whether the deployment can be indoors, and what suppression is required are decided by the AHJ against that evidence. This is routinely the longest-lead item on a storage project and it is not a procurement task.</li>
+    <li><b>Specify the warranty in energy throughput, not years.</b> A ten-year warranty with a cycle cap that your dispatch profile exhausts in six years is a six-year warranty. Model your own duty cycle against the guarantee terms.</li>
+    <li><b>Check who owns the controls boundary.</b> The enclosure BMS, the PCS controller and the plant controller are often three vendors. Establish which one curtails, which one trips, and who is responsible when they disagree.</li>
+    <li><b>Confirm auxiliary power provision.</b> Thermal management and controls draw real power, and they need to run when the battery is unavailable. An enclosure that cannot cool itself during an outage is not a resilient asset.</li>
+    <li><b>Read the degradation curve, not the headline retention figure.</b> End-of-life capacity is set by temperature, C-rate and depth of discharge together. A single retention percentage without those conditions attached is not a comparable number.</li>
+  </ul>
+
+  <h2>Typical applications</h2>
+  <p>Utility-scale storage and standalone merchant projects are built almost entirely from <b>20 ft outdoor enclosures</b> in blocks, paired with a <b>PCS</b> and an MV transformer per block. Commercial and industrial sites &mdash; demand charge management, backup, solar self-consumption &mdash; more often use <b>modular cabinets</b>, where the smaller step size matters more than the cost per kilowatt-hour. <b>Battery modules</b> are bought separately throughout the asset&rsquo;s life for warranty replacement and augmentation, which is why module availability over time is worth confirming at the outset.</p>
+
+  <h2>Work the numbers before you RFQ</h2>
+  <div class="rel">
+    <a href="/engineering-calculators.html"><span class="k">Calculators</span><span class="t">Load, current and sizing calculators</span></a>
+    <a href="/voltfield-pod-designer.html"><span class="k">Practice</span><span class="t">Lay out a block and its electrical room</span></a>
+    <a href="/voltfield-bom-generator.html"><span class="k">Tool</span><span class="t">Build a bill of materials</span></a>
+    <a href="/rfq-toolkit.html"><span class="k">Template</span><span class="t">RFQ readiness checklist</span></a>
+  </div>
+
+  <h2>Related reading</h2>
+  <div class="rel">
+    <a href="/guide-bess-fire-safety-nfpa-855.html"><span class="k">Guide</span><span class="t">BESS fire safety and NFPA 855</span></a>
+    <a href="/guide-bess-augmentation.html"><span class="k">Guide</span><span class="t">Augmentation &mdash; planning for capacity fade</span></a>
+    <a href="/battery-storage/pcs-inverters.html"><span class="k">Category</span><span class="t">Power conversion systems</span></a>
+    <a href="/battery-storage/balance-of-plant.html"><span class="k">Category</span><span class="t">MV skid, transformers and auxiliary power</span></a>
+    <a href="/guide-feoc-compliance.html"><span class="k">Guide</span><span class="t">FEOC compliance and cell sourcing</span></a>
+    <a href="/battery-storage.html"><span class="k">Sector</span><span class="t">All battery storage equipment</span></a>
+  </div>
+
+  <h2>Common questions</h2>
+  <h3>How much site area does a containerised BESS need?</h3>
+  <p>Far more than the footprint of the enclosures. NFPA 855 separation distances between units, and between units and exposures, frequently drive the layout more than the equipment itself does. Those distances depend on the UL 9540A test evidence for the specific product, so the area requirement is not knowable until the product is chosen.</p>
+
+  <h3>Why is LFP now the default rather than NMC?</h3>
+  <p>Thermal runaway behaviour and cost. LFP has a higher onset temperature and releases less energy in a runaway event, which makes permitting materially easier, and it has become cheaper per kilowatt-hour for stationary use. NMC retains an energy density advantage that matters when space is severely constrained &mdash; which is rarely the binding constraint on a utility-scale site.</p>
+
+  <h3>Can the same enclosure serve a 2-hour and a 4-hour application?</h3>
+  <p>Sometimes physically, but usually not commercially. Duration changes the C-rate the cells see, which changes degradation, which changes the warranty terms the vendor will offer. A vendor quoting one price for both durations is quoting one of them badly.</p>
+
+  <h3>What actually fails first on these systems?</h3>
+  <p>In field experience the cells are rarely the first problem. Thermal management components, contactors, communications between the BMS and the plant controller, and enclosure sealing account for a disproportionate share of downtime. Spares and service coverage for those items are worth more attention than they usually get during procurement.</p>
