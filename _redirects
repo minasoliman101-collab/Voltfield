@@ -103,10 +103,17 @@
 # /netlify/* is the SOURCE path only. The live function endpoint is
 # /.netlify/functions/* (dot-prefixed) and is unaffected -- verified before
 # adding this.
-/scripts/*        /404.html   404!
-/netlify/*        /404.html   404!
-/app-wrapper/*    /404.html   404!
-/README.md        /404.html   404!
-/APP-STORES.md    /404.html   404!
-/package.json     /404.html   404!
-/package-lock.json /404.html  404!
+# 301 rather than 404 on purpose. Netlify's force flag does NOT let a 404 rule
+# shadow a file that actually exists -- tested against the live site: the same
+# rules written as `404!` left every one of these paths returning 200, while a
+# 404! on a path with no file behind it worked (which proves the file was being
+# read, not the rule ignored). A forced 301 does take precedence, so these paths
+# now bounce to the homepage: the fragment content stops being served, which is
+# what both the duplicate-content and the disclosure problem needed.
+/scripts/*         /   301!
+/netlify/*         /   301!
+/app-wrapper/*     /   301!
+/README.md         /   301!
+/APP-STORES.md     /   301!
+/package.json      /   301!
+/package-lock.json /   301!
