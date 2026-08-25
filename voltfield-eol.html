@@ -264,7 +264,10 @@ function matched(){
   return EOL.filter(x=>{
     if(fOem&&!x.oem.toLowerCase().includes(fOem.toLowerCase()))return false;
     if(fSector&&x.sector!==fSector)return false;
-    if(toks.length){const hay=(x.oem+' '+x.series+' '+x.cat+' '+x.succ+' '+x.succOem+' '+x.note).toLowerCase();if(!toks.every(t=>hay.includes(t)))return false;}
+    /* x.alias carries brand names that appear nowhere else in the record --
+       people search the brand on the label, which is not always the OEM name
+       we file the record under. See the header of voltfield-eol-data.js. */
+    if(toks.length){const hay=(x.oem+' '+x.series+' '+x.cat+' '+x.succ+' '+x.succOem+' '+x.note+' '+(x.alias||'')).toLowerCase();if(!toks.every(t=>hay.includes(t)))return false;}
     return true;
   });
 }

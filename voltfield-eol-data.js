@@ -10,6 +10,14 @@
      transferred — product line moved to another OEM (acquisition/divestiture)
      retrofit    — successor OEM offers retrofit kits into existing gear
      exited      — manufacturer left the market; cross-vendor replacement class
+
+   Optional `alias` field: brand names people actually search for that appear
+   nowhere else in the record. Search matches on oem/series/cat/succ/note, so a
+   brand that is not in any of those is unfindable — "Square D" returned zero
+   results for Masterpact, which is sold under exactly that name in North
+   America. Aliases are PER RECORD, not per OEM: the same manufacturer's other
+   lines here (Modicon PLCs, APC UPS) are not Square D products, so an
+   OEM-level alias map would file them under a brand they never carried.
    ============================================================ */
 'use strict';
 
@@ -51,6 +59,7 @@ const EOL = [
   {oem:'Schneider Electric', series:'Masterpact NT / NW air circuit breakers', sector:'dc', cat:'LV breakers',
    status:'successor', year:'active migration', succOem:'Schneider Electric', succ:'MasterPact MTZ (with Micrologic X)',
    note:'MTZ is Schneider’s recommended replacement platform for NT/NW; cradle-compatible retrofit options exist for many frames.',
+   alias:'Square D SquareD',
    q:'air circuit breakers',rimg:'images/parts/dc-air-circuit-breakers.jpg'},
   {oem:'Schneider Electric', series:'Modicon Quantum PLC', sector:'dc', cat:'PLC / controls',
    status:'successor', year:'announced EOL', succOem:'Schneider Electric', succ:'Modicon M580 ePAC',
@@ -59,6 +68,7 @@ const EOL = [
   {oem:'Schneider Electric (APC)', series:'Symmetra PX UPS', sector:'dc', cat:'UPS',
    status:'successor', year:'2020s', succOem:'Schneider Electric', succ:'Galaxy VS / VL series',
    note:'Galaxy VS/VL is the OEM-recommended replacement for Symmetra PX deployments as they reach end of service life.',
+   alias:'American Power Conversion',
    q:'ups systems',rimg:'images/parts/dc-ups-systems-static.jpg'},
   {oem:'Siemens', series:'SIMATIC S5 PLC family', sector:'dc', cat:'PLC / controls',
    status:'successor', year:'2003 (spares ended 2013)', succOem:'Siemens', succ:'SIMATIC S7-1500',
@@ -71,6 +81,7 @@ const EOL = [
   {oem:'Westinghouse', series:'DS / DSII low-voltage power breakers', sector:'dc', cat:'LV breakers',
    status:'retrofit', year:'legacy (pre-Eaton)', succOem:'Eaton', succ:'Magnum-based direct-replacement / retrofit breakers',
    note:'Eaton (successor to Westinghouse distribution) offers UL-listed replacement breakers and retrofit kits for DS-class switchgear.',
+   alias:'Cutler-Hammer Cutler Hammer',
    q:'air circuit breakers',rimg:'images/parts/dc-air-circuit-breakers.jpg'},
   {oem:'GE', series:'AKR / AK low-voltage power breakers', sector:'dc', cat:'LV breakers',
    status:'retrofit', year:'legacy', succOem:'ABB', succ:'Emax 2-based retrofit kits (ABB acquired GE Industrial Solutions)',

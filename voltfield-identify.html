@@ -395,7 +395,12 @@ function identify(){
   /* EOL matches: brand + series word overlap */
   const eolHits=EOL.map(x=>{
     let sc=0;
-    if(tok.brands.some(b=>x.oem.toLowerCase().includes(b.toLowerCase())))sc+=3;
+    /* Match the brand against x.alias as well as x.oem. A nameplate carries the
+       brand it was sold under, which is often not the OEM name the record is
+       filed under -- "Square D" is already a recognised brand token here, but
+       tested against oem alone it never reached the Masterpact record. */
+    const brandHay=(x.oem+' '+(x.alias||'')).toLowerCase();
+    if(tok.brands.some(b=>brandHay.includes(b.toLowerCase())))sc+=3;
     for(const m of tok.models){if(x.series.toUpperCase().includes(m))sc+=4;}
     for(const w of tok.words){if(w.length>=4&&x.series.toLowerCase().includes(w))sc+=1.2;}
     return {x,sc};
