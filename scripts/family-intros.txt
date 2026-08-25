@@ -82,3 +82,93 @@ dc|Alternators & Generator Ends :: The synchronous machine converting shaft powe
 dc|Genset Controls, AVRs & Governors :: Controllers, voltage regulators and governors managing voltage, speed, synchronising and load sharing. On a paralleled installation these determine whether sets share load cleanly or fight each other.
 dc|Engine Cooling & Exhaust :: Radiators, charge-air coolers, silencers and flexible connections. Silencer grade is chosen against a site noise limit, and exhaust back-pressure is a real constraint on engine output.
 dc|Fuel & Starting Systems :: Day tanks, filtration, polishing, transfer pumps, gas trains and starting systems. Fuel degradation in long-idle standby installations causes more failed starts than the engine itself does.
+
+# ---------------- RENEWABLES: Solar Modules ----------------
+re|Mono PERC Modules :: The workhorse crystalline module for a decade, with a rear passivation layer that lifts efficiency over plain aluminium-BSF cells. Increasingly the budget option as TOPCon takes the high end, and the format where import origin and FEOC documentation matter most.
+re|TOPCon Modules :: N-type cells with a tunnel-oxide passivated contact, giving higher efficiency and a gentler temperature coefficient than PERC. The efficiency gain shows up as fewer piles, less racking and less land for the same plant capacity, which is where the economics actually turn.
+re|Bifacial Modules :: Dual-glass modules that also generate from the rear face. The gain depends entirely on what is underneath: ground albedo, mounting height and row spacing decide whether the rear contribution is a few percent or closer to fifteen.
+re|Thin-Film (CdTe) Modules :: Cadmium telluride panels made by a fundamentally different process from crystalline silicon. Lower efficiency per square metre, but a better temperature coefficient and a supply chain outside the usual polysilicon route, which is why they appear where trade exposure is a design constraint.
+
+# ---------------- RENEWABLES: Inverters & PCS ----------------
+re|Central Inverters (Utility) :: Large skid-mounted inverters aggregating many combiner inputs into a single MW-scale AC output. Fewer units to maintain than a string architecture, but one failure takes a much larger block of production offline.
+re|String Inverters (FEOC-Clean) :: Distributed inverters at the string or sub-array level. Failures are contained, and MPPT granularity is far finer, which matters on uneven terrain or shaded sites. Domestic-content documentation is often the reason a specific unit is selected.
+re|Medium-Voltage PCS Skids :: Inverter and step-up transformer integrated on one skid, delivering collection voltage directly. Removing the separate LV run and its losses is the point, and it compresses the electrical balance of plant considerably.
+re|IGBT & SiC Power Modules :: The switching devices at the heart of every inverter. Silicon carbide switches faster with lower losses than silicon IGBTs, allowing higher frequencies and smaller magnetics, at a device cost that has to be earned back in efficiency.
+re|Gate Driver Boards :: The isolated stage between control logic and the power switch. Desaturation detection and Miller clamping are what stop a shoot-through from destroying a module, so the driver decides how gracefully the converter fails.
+re|DC-Link Film Capacitors :: Metallised polypropylene capacitors stabilising the DC bus and absorbing ripple current. Low inductance matters as much as capacitance, because bus inductance is what turns switching transients into device overvoltage.
+re|Filter Inductors & Magnetics :: LCL output filters, line reactors and chokes shaping inverter output into something the grid will accept. Core material sets loss and saturation behaviour, and these components dominate the converter's weight.
+re|EMI Filters & Surge Components :: Filters, snubbers, ferrites and MOVs keeping conducted emissions within limits and clamping transients. Compliance is proven at the installed configuration, so cable routing affects the result as much as component choice.
+re|Heat Sinks, Cold Plates & Fan Trays :: Extruded sinks, liquid cold plates and fan trays removing switching losses. Junction temperature governs semiconductor life, so thermal design sets the inverter's service life more directly than its electrical rating does.
+re|Sensors & Transducers :: Current, voltage, temperature, flow and environmental sensing feeding protection and monitoring. Accuracy and response time decide whether a protective function acts on a real event or a measurement artefact.
+re|Controller Boards, HMIs & Industrial Power Supplies :: The DSP and FPGA control boards, I/O, interfaces and DIN-rail supplies running the converter. Control firmware determines grid-support behaviour, which is increasingly what interconnection approval turns on.
+re|Wiring Harnesses & Cable Assemblies :: Pre-terminated looms and connectorised assemblies for power and signal. Factory termination removes a large source of field error, and keying prevents the mis-mating that field-built harnesses invite.
+re|PV Power Optimizers :: Module-level electronics performing per-module MPPT and rapid shutdown. They recover mismatch losses from shading and soiling, at the cost of active electronics distributed across the array where replacement is least convenient.
+
+# ---------------- RENEWABLES: Structural BOS ----------------
+re|Single-Axis Trackers :: Rows rotating about a horizontal torque tube to follow the sun. The energy gain over fixed-tilt is substantial, bought with moving parts, drives, controllers and a stow strategy for wind and snow.
+re|Fixed-Tilt Racking :: Ground-mount steel holding modules at a fixed angle. No moving parts and the lowest maintenance burden available, which is why it persists on smaller sites and wherever terrain or wind makes tracking impractical.
+re|Foundation Piles :: Driven W-sections, helical piles and ground screws transferring array loads into soil. The geotechnical report governs selection, and refusal or unexpectedly soft ground is among the most common causes of construction delay.
+re|Module Clamps & Hardware :: Mid clamps, end clamps, grounding hardware and wire management. Small parts in enormous quantity, and the clamp is often the electrical bonding path as well as the mechanical one.
+re|Solar Glass, Encapsulants & Backsheets :: Low-iron tempered front glass, EVA or POE encapsulant and the rear backsheet. Encapsulant chemistry governs long-term degradation, and POE resists potential-induced degradation better than standard EVA.
+re|Solar Cells & Interconnect Ribbon :: The cells themselves and the coated ribbon joining them. Wafer format sets module dimensions and therefore what racking will accept, so a cell-format change ripples through the entire mechanical design.
+re|PV Junction Boxes, Diodes & Potting :: The module's rear box, its bypass diodes and the potting sealing it. Bypass diodes limit hot-spot damage under partial shading, and diode failure is a recurring cause of module underperformance.
+re|Module Frames & Aluminum Extrusions :: Anodized aluminium frames carrying mechanical load and providing the bonding path. Frame stiffness sets the load rating, which in turn determines allowable span and wind zone.
+re|Tracker Drives & Row Controllers :: Slew drives, motors and row controllers rotating and stowing tracker rows. The controller decides backtracking and stow response, so it governs both yield and survival in high wind.
+re|PV & DC Fuses, Holders & Disconnects :: String protection and load-break disconnects at 1500V DC. DC arcs do not self-extinguish at a zero crossing the way AC does, which is why DC-rated devices are not interchangeable with AC ones.
+
+# ---------------- RENEWABLES: Wire & Cable ----------------
+re|PV Wire / DC String Cable :: Double-insulated single conductor rated for the DC array, exposed to UV, moisture and wide temperature swings for decades. The insulation system, not the copper, is what determines whether it survives the term.
+re|MV Collection Cable :: Medium-voltage aluminium cable gathering inverter outputs to the collector substation. Circuit length and conductor size trade directly against collection losses, and this is usually a significant share of the electrical BOS budget.
+re|MC4 Connectors & Jumpers :: The connectors joining strings. Cross-mating different manufacturers' connectors is a known and documented fire risk, and remains one of the most common defects found in commissioning.
+
+# ---------------- RENEWABLES: GSU & MV Transformers ----------------
+re|GSU Transformers :: Step-up units taking collection voltage to transmission voltage at the point of interconnection. Same long-lead constraints as any large power transformer, and typically the single longest-lead item on a solar project.
+re|Collector Substation Transformers :: Transformers at the collector substation aggregating feeders before the GSU. Impedance selection shapes fault current for the whole collection system, so it is a protection decision as much as a sizing one.
+re|Pad-Mount (Collection) :: Three-phase pad-mount units stepping inverter output up to collection voltage, distributed across the site. Ordered in quantity, so a small unit cost or lead-time difference multiplies across the plant.
+
+# ---------------- RENEWABLES: Combiners & Protection ----------------
+re|DC Combiner Boxes :: Enclosures paralleling strings onto one feeder, with fusing and often string-level monitoring. String monitoring is what makes underperformance findable without walking the array.
+re|Recombiners :: A second aggregation stage combining combiner feeders before the inverter, with disconnect capability. They reduce the conductor count into the inverter and give a defined isolation point for maintenance.
+re|Rapid Shutdown Devices :: Module-level devices de-energising conductors on command, to satisfy NEC 690.12. A code-driven requirement rather than a performance one, and the compliance approach shapes the whole array architecture.
+
+# ---------------- RENEWABLES: Wind Components ----------------
+re|Pitch / Yaw Drives :: Planetary gearboxes and slew drives rotating blades about their axis and the nacelle into wind. Pitch is the primary power-regulation and safety system, so its reliability is a load-limiting concern, not a comfort one.
+re|Slip Rings & Converters :: Slip rings passing power and signal across the rotating interface, and the converters conditioning generator output. In a doubly-fed machine the converter handles a fraction of rated power while controlling the whole output.
+re|Blade Bolts & Foundation Hardware :: High-tension bolts and studs at blade roots, tower flanges and foundations. Preload is the design parameter, and retensioning is a scheduled maintenance activity rather than a one-time install step.
+
+# ---------------- RENEWABLES: Monitoring & SCADA ----------------
+re|Met Stations & Sensors :: Pyranometers, anemometers and met masts measuring the resource. Performance ratio is calculated against these readings, so sensor calibration effectively determines whether a plant is judged to be underperforming.
+re|Plant Controllers :: The power plant controller managing real and reactive power, voltage and ramp rate at the point of interconnection. It is where the interconnection agreement is actually enforced in hardware.
+re|Revenue Meters & SCADA Gateways :: Metering to ANSI C12.20 accuracy plus the gateways carrying data to utility and owner systems. This is the meter the energy payment is settled on, so its accuracy class is a commercial term.
+
+# ---------------- BATTERY STORAGE: Storage Blocks ----------------
+bess|LFP DC Blocks (5MWh) :: Pre-integrated lithium iron phosphate blocks, now the default for grid storage. LFP trades energy density for thermal stability and cycle life, which is the right trade when the asset sits still on a pad for twenty years.
+bess|NMC DC Blocks :: Nickel manganese cobalt blocks offering higher energy density than LFP in the same footprint. The higher density comes with a lower thermal runaway threshold, which drives more demanding fire protection and spacing requirements.
+bess|Modular Battery Racks :: Rack-level assemblies integrating modules onto a 1500V string with its protection and monitoring. The rack is the practical unit of replacement, so its design governs how augmentation and repair actually work in the field.
+bess|Battery Cells (Prismatic LFP / NMC) :: The cells themselves, matched by capacity and impedance before assembly. Binning quality determines how evenly a pack ages, because a string is limited by its weakest cell for its entire life.
+bess|Battery Modules & Rack Hardware :: Module housings, laser-welded busbars, cell interconnects and service disconnects. The interconnect carries full current and must survive thermal cycling, making it a common origin of resistance growth over time.
+bess|DC Contactors, Fuses & Pre-Charge :: Contactors, semiconductor fuses and pre-charge circuits managing the DC bus. Pre-charge limits inrush into the DC link at closing, without which contactors weld on their first connection.
+bess|Battery Thermal Components :: Cold plates, manifolds, couplings and glycol loop hardware moving heat out of the modules. Cell temperature uniformity drives calendar life, so distribution matters as much as total cooling capacity.
+
+# ---------------- BATTERY STORAGE: Power Conversion ----------------
+bess|Grid-Forming PCS :: Converters that establish their own voltage and frequency reference rather than following the grid. This is what enables black start and islanded operation, and increasingly what interconnection studies require on weak grids.
+bess|Grid-Following PCS :: Bidirectional converters synchronising to an existing grid reference. Simpler, well proven and lower cost, but they need a stable external reference and cannot support a system without one.
+bess|Bi-Directional DC-DC :: Converters coupling storage to a shared DC bus, typically alongside PV. DC coupling captures energy that would otherwise be clipped at the inverter and avoids a conversion stage.
+
+# ---------------- BATTERY STORAGE: Controls ----------------
+bess|Battery Management Systems :: Cell balancing, state of charge and state of health estimation, and protection. The BMS decides the operating envelope, so its accuracy directly determines usable capacity and warranty compliance.
+bess|Energy Management Systems :: Site controllers dispatching the asset against market signals and operating constraints. On a merchant project the EMS strategy, not the hardware, is what determines the revenue the asset earns.
+
+# ---------------- BATTERY STORAGE: Fire Suppression & Safety ----------------
+bess|Aerosol / Clean-Agent Suppression :: Suppression systems for battery enclosures. Clean agents knock down flame but do not remove the stored energy driving thermal runaway, which is why suppression is one layer of a strategy rather than the strategy.
+bess|Gas Detection & Deflagration Panels :: Off-gas detection and deflagration venting. Cells vent flammable gas before visible fire, so detecting that off-gas is the earliest reliable warning available and the basis for the NFPA 855 approach.
+bess|Fire Detection & Suppression Components :: Detectors, releasing panels, nozzles, notification devices and vents making up the installed system. UL 9540A test data for the specific product is what sets separation distances and enclosure requirements.
+
+# ---------------- BATTERY STORAGE: Thermal Management ----------------
+bess|Liquid Cooling Skids :: Glycol loop skids and chillers holding cells within their temperature band. Liquid cooling has largely displaced air in new builds because it keeps cell-to-cell temperature spread far tighter.
+bess|HVAC / Chiller Units :: Direct-expansion and chilled-water units conditioning enclosure air. Simpler than liquid loops and still common on smaller or air-cooled systems, with a wider temperature gradient across the enclosure.
+
+# ---------------- BATTERY STORAGE: Enclosures & Integration ----------------
+bess|Containerized Enclosures :: Walk-in and non-walk-in enclosures housing the DC blocks and their auxiliaries. The enclosure sets ingress protection, fire rating and the separation distance the site layout must respect.
+bess|Switchboard / AC Panels :: AC switchboards and collection panels tying PCS output to the medium-voltage coupling point. Protection coordination across the storage block terminates here.
+bess|Battery Racking & Structural Steel :: Frames and structural steel carrying the modules. Seismic qualification governs the design, because a battery rack is a heavy mass mounted high in a lightly built enclosure.
