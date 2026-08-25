@@ -23,85 +23,261 @@
   /* ---------- shape builders: each returns a THREE.Group centered near the origin ---------- */
   function buildTransformer(THREE, color){
     const g = new THREE.Group();
-    const mat = new THREE.MeshStandardMaterial({color, metalness:.35, roughness:.55});
-    const dark = new THREE.MeshStandardMaterial({color:0x22334C, metalness:.4, roughness:.5});
+    const M = mats(THREE, color);
+    const mat = M.body, dark = M.dark;
+    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.75, roughness:.35});
+    const porc  = new THREE.MeshStandardMaterial({color:0xD8DEE6, metalness:.15, roughness:.45});
+    const cu    = new THREE.MeshStandardMaterial({color:0xB87333, metalness:.85, roughness:.35});
 
-    const tank = new THREE.Mesh(new THREE.BoxGeometry(2.4,1.6,1.4), mat);
-    tank.position.y = 0.8; g.add(tank);
+    const TW = 2.4, TH = 1.6, TD = 1.4;
+    g.add(box(THREE, mat, TW, TH, TD, 0, 0.8, 0));                       // tank
 
-    for (const side of [-1,1]) {
-      const fin = new THREE.Mesh(new THREE.BoxGeometry(0.45,1.3,0.22), dark);
-      fin.position.set(side*1.5, 0.75, 0); g.add(fin);
+    /* Corrugated tank wall -- distribution transformers get their cooling
+       surface from the pressed corrugations, not bolt-on radiators. */
+    for (let i = 0; i < 11; i++) {
+      const x = -TW/2 + 0.16 + i * ((TW - 0.32) / 10);
+      g.add(box(THREE, dark, 0.05, TH - 0.22, 0.03, x, 0.8, TD/2 + 0.005));
+      g.add(box(THREE, dark, 0.05, TH - 0.22, 0.03, x, 0.8, -TD/2 - 0.005));
     }
 
-    const cons = new THREE.Mesh(new THREE.CylinderGeometry(0.26,0.26,1.4,16), mat);
-    cons.rotation.z = Math.PI/2;
-    cons.position.set(0, 1.72, 0.55); g.add(cons);
-
-    for (const x of [-0.7,0,0.7]) {
-      const bush = new THREE.Mesh(new THREE.CylinderGeometry(0.065,0.1,0.7,10), dark);
-      bush.position.set(x, 1.95, -0.3); g.add(bush);
+    /* Bolt-on radiator banks on the short sides, with headers. */
+    for (const s of [-1, 1]) {
+      radiator(THREE, g, dark, {x: s * (TW/2 + 0.22), y: 0.85, z: 0, h: 1.15, w: 0.40, d: 0.07, n: 6, pitch: 0.13, axis:'z'});
     }
 
-    const base = new THREE.Mesh(new THREE.BoxGeometry(2.6,0.15,1.6), dark);
-    base.position.y = -0.075; g.add(base);
+    /* Cooling fans under the radiators (the ONAF stage). */
+    for (const s of [-1, 1]) fan(THREE, g, metal, dark, {x: s * (TW/2 + 0.22), y: 0.16, z: 0, r: 0.24, blades: 5});
+
+    /* Conservator on saddles, with the oil-level gauge on its end. */
+    const cons = cyl(THREE, mat, 0.26, 0.26, 1.5, 18, 0, 1.86, 0.5);
+    cons.rotation.z = Math.PI/2; g.add(cons);
+    for (const s of [-1, 1]) g.add(box(THREE, dark, 0.09, 0.22, 0.20, s*0.55, 1.68, 0.5));
+    const gauge = cyl(THREE, M.gold, 0.10, 0.10, 0.04, 12, 0.76, 1.86, 0.5);
+    gauge.rotation.z = Math.PI/2; g.add(gauge);
+
+    /* HV bushings: porcelain sheds stepping down in diameter, on a turret. */
+    for (const x of [-0.72, 0, 0.72]) {
+      g.add(cyl(THREE, dark, 0.16, 0.18, 0.16, 12, x, 1.66, -0.34));      // turret
+      for (let i = 0; i < 4; i++) {
+        const r = 0.145 - i * 0.018;
+        g.add(cyl(THREE, porc, r, r + 0.012, 0.10, 12, x, 1.80 + i * 0.16, -0.34));
+      }
+      g.add(cyl(THREE, cu, 0.035, 0.035, 0.14, 8, x, 2.44, -0.34));       // stud
+    }
+
+    /* LV bushings -- fewer sheds, larger conductor. */
+    for (const x of [-0.42, 0, 0.42]) {
+      for (let i = 0; i < 2; i++) {
+        g.add(cyl(THREE, porc, 0.10, 0.115, 0.09, 10, x, 1.74 + i * 0.13, 0.34));
+      }
+      g.add(cyl(THREE, cu, 0.05, 0.05, 0.10, 8, x, 1.96, 0.34));
+    }
+
+    /* De-energised tap changer handle on the tank face. */
+    g.add(cyl(THREE, dark, 0.13, 0.13, 0.07, 12, -0.85, 1.18, TD/2 + 0.03));
+    g.add(box(THREE, metal, 0.05, 0.20, 0.04, -0.85, 1.26, TD/2 + 0.07));
+
+    /* Nameplate, pressure-relief device, and ground pads. */
+    plate(THREE, g, metal, {x: 0.72, y: 1.12, z: TD/2 + 0.02, w: 0.40, h: 0.26});
+    g.add(cyl(THREE, dark, 0.09, 0.09, 0.08, 10, 0.30, 1.64, 0));         // PRD on the cover
+    for (const s of [-1, 1]) g.add(box(THREE, cu, 0.13, 0.09, 0.03, s*0.95, 0.22, TD/2 + 0.015));
+
+    /* Lifting lugs at the cover corners. */
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+      lug(THREE, g, metal, sx * (TW/2 - 0.16), TH + 0.06, sz * (TD/2 - 0.14));
+    }
+
+    /* Skid base with channel ends. */
+    g.add(box(THREE, dark, TW + 0.24, 0.16, TD + 0.24, 0, -0.08, 0));
+    for (const s of [-1, 1]) g.add(box(THREE, metal, 0.10, 0.20, TD + 0.24, s*(TW/2 + 0.06), -0.06, 0));
     return g;
   }
 
   function buildSwitchgear(THREE, color){
     const g = new THREE.Group();
-    const mat = new THREE.MeshStandardMaterial({color, metalness:.3, roughness:.6});
-    const dark = new THREE.MeshStandardMaterial({color:0x22334C, metalness:.4, roughness:.5});
-    const signal = new THREE.MeshStandardMaterial({color:0xFFC400, emissive:0xFFC400, emissiveIntensity:.2, roughness:.4});
+    const M = mats(THREE, color);
+    const mat = M.body, dark = M.dark, signal = M.gold;
+    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.75, roughness:.35});
+    const glass = new THREE.MeshStandardMaterial({color:0x0E1826, metalness:.5, roughness:.25});
 
-    const n = 3, w = 0.85, h = 1.9;
-    for (let i=0;i<n;i++){
-      const cab = new THREE.Mesh(new THREE.BoxGeometry(w*0.9,h,1.0), mat);
-      cab.position.set((i-(n-1)/2)*w, h/2, 0); g.add(cab);
-      const dot = new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.05,0.03,12), signal);
-      dot.rotation.x = Math.PI/2;
-      dot.position.set((i-(n-1)/2)*w, h*0.78, 0.51); g.add(dot);
+    const n = 3, w = 0.86, h = 1.9, d = 1.0, fz = d/2;
+    for (let i = 0; i < n; i++) {
+      const x = (i - (n-1)/2) * w;
+      g.add(box(THREE, mat, w * 0.92, h, d, x, h/2, 0));                  // cubicle
+
+      /* Upper: instrument compartment -- meter window, relay, indicator lamps. */
+      g.add(box(THREE, dark, w*0.72, 0.46, 0.03, x, h*0.80, fz + 0.01));
+      g.add(box(THREE, glass, w*0.40, 0.24, 0.015, x - 0.06, h*0.83, fz + 0.03));
+      g.add(box(THREE, metal, 0.13, 0.13, 0.02, x + 0.22, h*0.83, fz + 0.03));
+      for (let k = 0; k < 3; k++) {
+        const lamp = cyl(THREE, k === 0 ? M.lit : (k === 1 ? signal : dark), 0.028, 0.028, 0.02, 8,
+          x - 0.20 + k * 0.09, h*0.68, fz + 0.02);
+        lamp.rotation.x = Math.PI/2; g.add(lamp);
+      }
+
+      /* Middle: breaker compartment door with racking port and handle. */
+      door(THREE, g, mat, dark, metal, {x: x, y: h*0.45, z: fz + 0.015, w: w*0.80, h: 0.72});
+      const port = cyl(THREE, dark, 0.06, 0.06, 0.03, 10, x, h*0.45, fz + 0.05);
+      port.rotation.x = Math.PI/2; g.add(port);
+
+      /* Lower: cable compartment, louvred for ventilation. */
+      louvers(THREE, g, dark, {n: 5, x: x, y0: h*0.10, y1: h*0.24, z: fz + 0.015, w: w*0.62, h: 0.035});
+
+      /* Arc-vent flap on the roof of each cubicle. */
+      g.add(box(THREE, metal, w*0.62, 0.05, 0.34, x, h + 0.03, -0.18));
     }
-    const bus = new THREE.Mesh(new THREE.BoxGeometry(w*n+0.05, 0.12, 1.05), dark);
-    bus.position.y = h + 0.06; g.add(bus);
+
+    /* Continuous top bus enclosure spanning the lineup, with joint covers. */
+    g.add(box(THREE, dark, w*n + 0.06, 0.16, d + 0.06, 0, h + 0.12, 0));
+    for (let i = 0; i < n - 1; i++) {
+      g.add(box(THREE, metal, 0.07, 0.20, d + 0.10, (i - (n-2)/2) * w, h + 0.12, 0));
+    }
+
+    /* End panels, base channel and floor bolts. */
+    for (const s of [-1, 1]) g.add(box(THREE, dark, 0.05, h, d, s * (w*n/2), h/2, 0));
+    g.add(box(THREE, dark, w*n + 0.10, 0.14, d + 0.10, 0, 0.07, 0));
+    for (const s of [-1, 1]) for (const sz of [-1, 1]) {
+      g.add(cyl(THREE, metal, 0.04, 0.04, 0.05, 6, s * (w*n/2 - 0.16), 0.16, sz * (d/2 - 0.12)));
+    }
     return g;
   }
 
   function buildBatteryRack(THREE, color){
     const g = new THREE.Group();
-    const mat = new THREE.MeshStandardMaterial({color, metalness:.25, roughness:.65});
-    const mod = new THREE.MeshStandardMaterial({color:0x101B2D, metalness:.3, roughness:.5});
+    const M = mats(THREE, color);
+    const mat = M.body, mod = M.deep, dark = M.dark;
+    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.75, roughness:.35});
+    const cu    = new THREE.MeshStandardMaterial({color:0xB87333, metalness:.85, roughness:.35});
 
-    const cab = new THREE.Mesh(new THREE.BoxGeometry(1.8,2.2,1.1), mat);
-    cab.position.y = 1.1; g.add(cab);
-
-    const cols=3, rows=4, mw=1.5/cols, mh=1.8/rows;
-    for (let r=0;r<rows;r++) for (let c=0;c<cols;c++){
-      const m = new THREE.Mesh(new THREE.BoxGeometry(mw*0.8,mh*0.76,0.05), mod);
-      m.position.set((c-(cols-1)/2)*mw, 0.35+r*mh, 0.58); g.add(m);
+    const W = 1.9, H = 2.2, D = 1.1;
+    /* Open frame rather than a solid cabinet: uprights, top and bottom rails. */
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+      g.add(box(THREE, mat, 0.10, H, 0.10, sx*(W/2 - 0.05), H/2, sz*(D/2 - 0.05)));
     }
-    const base = new THREE.Mesh(new THREE.BoxGeometry(2.0,0.12,1.3), mod);
-    base.position.y = -0.06; g.add(base);
+    for (const y of [0.06, H - 0.06]) for (const sz of [-1, 1]) {
+      g.add(box(THREE, mat, W, 0.09, 0.10, 0, y, sz*(D/2 - 0.05)));
+    }
+    g.add(box(THREE, dark, W, H - 0.2, 0.05, 0, H/2, -D/2 + 0.04));       // back panel
+
+    /* Battery modules on shelves, each with a vent slot and terminal pair. */
+    const rows = 5, mh = (H - 0.42) / rows;
+    for (let r = 0; r < rows; r++) {
+      const y = 0.26 + r * mh + mh/2;
+      g.add(box(THREE, metal, W - 0.22, 0.035, D - 0.20, 0, y - mh/2 + 0.02, 0));  // shelf
+      g.add(box(THREE, mod, W - 0.30, mh * 0.72, D - 0.26, 0, y, 0.01));           // module
+      g.add(box(THREE, dark, W - 0.42, mh * 0.16, 0.02, 0, y + mh*0.20, D/2 - 0.12));
+      for (const sx of [-1, 1]) {                                                  // terminals
+        g.add(cyl(THREE, cu, 0.045, 0.045, 0.06, 8, sx * (W/2 - 0.30), y, D/2 - 0.14));
+      }
+      const led = cyl(THREE, r === rows-1 ? M.gold : M.lit, 0.022, 0.022, 0.02, 8, W/2 - 0.20, y, D/2 - 0.14);
+      led.rotation.x = Math.PI/2; g.add(led);
+    }
+
+    /* Inter-module cabling down one side. */
+    for (let r = 0; r < rows - 1; r++) {
+      const y0 = 0.26 + r * mh + mh/2, y1 = y0 + mh;
+      const c = cyl(THREE, cu, 0.03, 0.03, mh, 6, -(W/2 - 0.30), (y0 + y1)/2, D/2 - 0.14);
+      g.add(c);
+    }
+
+    /* BMS / controller box at the top, and a disconnect handle. */
+    g.add(box(THREE, dark, W - 0.30, 0.22, D - 0.30, 0, H - 0.20, 0));
+    g.add(box(THREE, M.lit, 0.26, 0.08, 0.02, -0.30, H - 0.20, D/2 - 0.16));
+    g.add(cyl(THREE, metal, 0.09, 0.09, 0.05, 10, 0.42, H - 0.20, D/2 - 0.15));
+    g.add(box(THREE, M.gold, 0.05, 0.16, 0.04, 0.42, H - 0.14, D/2 - 0.12));
+
+    /* Base plinth with anchor feet. */
+    g.add(box(THREE, mod, W + 0.14, 0.13, D + 0.14, 0, 0.065, 0));
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+      g.add(cyl(THREE, metal, 0.04, 0.04, 0.05, 6, sx*(W/2 - 0.10), 0.15, sz*(D/2 - 0.10)));
+    }
     return g;
   }
 
   function buildGenset(THREE, color){
     const g = new THREE.Group();
-    const mat = new THREE.MeshStandardMaterial({color, metalness:.3, roughness:.6});
-    const dark = new THREE.MeshStandardMaterial({color:0x22334C, metalness:.4, roughness:.5});
+    const M = mats(THREE, color);
+    const mat = M.body, dark = M.dark;
+    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.75, roughness:.35});
+    const blk   = new THREE.MeshStandardMaterial({color:0x2A3240, metalness:.5, roughness:.5});
 
-    const skid = new THREE.Mesh(new THREE.BoxGeometry(3.0,0.2,1.2), dark);
-    skid.position.y = 0.1; g.add(skid);
+    /* Fuel-tank base skid -- on a packaged set the tank IS the base. */
+    g.add(box(THREE, dark, 3.2, 0.34, 1.25, 0, 0.17, 0));
+    for (const s of [-1, 1]) g.add(box(THREE, metal, 0.10, 0.40, 1.30, s*1.55, 0.20, 0));
+    g.add(cyl(THREE, metal, 0.10, 0.10, 0.10, 10, 1.16, 0.38, 0.42));      // fill point
 
-    const engine = new THREE.Mesh(new THREE.CylinderGeometry(0.5,0.5,1.6,20), mat);
-    engine.rotation.z = Math.PI/2;
-    engine.position.set(-0.4,0.75,0); g.add(engine);
+    /* Engine block with cylinder head and rocker cover. Block stays dark; the
+       rocker cover takes the body colour so the two read as separate parts. */
+    g.add(box(THREE, blk, 1.35, 0.62, 0.78, -0.55, 0.70, 0));
+    for (let i = 0; i < 4; i++) {                                          // block ribs
+      g.add(box(THREE, dark, 0.04, 0.54, 0.82, -1.05 + i*0.33, 0.70, 0));
+    }
+    g.add(box(THREE, dark, 1.20, 0.24, 0.62, -0.55, 1.10, 0));             // head
+    g.add(box(THREE, mat, 1.05, 0.16, 0.46, -0.55, 1.30, 0));              // rocker cover
+    for (let i = 0; i < 5; i++) {                                          // cover bolts
+      g.add(cyl(THREE, metal, 0.028, 0.028, 0.04, 6, -0.95 + i*0.20, 1.39, 0));
+    }
+    /* Exhaust manifold: a run of short stubs into a collector. */
+    for (let i = 0; i < 4; i++) {
+      g.add(cyl(THREE, blk, 0.075, 0.075, 0.22, 8, -1.02 + i*0.31, 1.00, -0.44));
+    }
+    const coll = cyl(THREE, blk, 0.10, 0.10, 1.30, 10, -0.55, 1.00, -0.56);
+    coll.rotation.z = Math.PI/2; g.add(coll);
 
-    const radiator = new THREE.Mesh(new THREE.BoxGeometry(0.5,1.1,1.1), dark);
-    radiator.position.set(1.15,0.75,0); g.add(radiator);
+    /* Turbo and air filter housing. */
+    g.add(cyl(THREE, metal, 0.17, 0.17, 0.22, 12, 0.18, 1.00, -0.44));
+    const filt = cyl(THREE, mat, 0.20, 0.20, 0.42, 14, 0.18, 1.06, 0.34);
+    filt.rotation.z = Math.PI/2; g.add(filt);
 
-    const canopy = new THREE.Mesh(new THREE.BoxGeometry(3.0,0.08,1.2), dark);
-    canopy.position.y = 1.55; g.add(canopy);
+    /* Alternator: cylindrical housing with cooling slots and terminal box. */
+    const alt = cyl(THREE, mat, 0.44, 0.44, 0.86, 20, 0.62, 0.74, 0);
+    alt.rotation.z = Math.PI/2; g.add(alt);
+    for (let i = 0; i < 8; i++) {
+      const a = (i/8)*Math.PI*2;
+      g.add(box(THREE, dark, 0.60, 0.055, 0.05, 0.62, 0.74 + Math.sin(a)*0.40, Math.cos(a)*0.40));
+    }
+    g.add(box(THREE, dark, 0.40, 0.30, 0.34, 0.62, 1.24, 0));
+
+    /* Radiator: body-coloured frame around a visibly finned core, so it reads
+       as a heat exchanger rather than a flat slab. */
+    g.add(box(THREE, mat, 0.14, 1.20, 1.16, 1.36, 0.88, 0));               // frame
+    g.add(box(THREE, blk, 0.06, 1.00, 0.98, 1.30, 0.88, 0));               // core recess
+    for (let i = 0; i < 13; i++) {
+      g.add(box(THREE, metal, 0.02, 0.94, 0.035, 1.28, 0.88, -0.46 + i*0.077));
+    }
+    fan(THREE, g, metal, blk, {x: 1.12, y: 0.88, z: 0, r: 0.40, blades: 6});
+    /* Fan guard bars across the face. */
+    for (let i = 0; i < 5; i++) {
+      g.add(box(THREE, metal, 0.02, 0.03, 0.92, 1.06, 0.88 - 0.32 + i*0.16, 0));
+    }
+
+    /* Critical-grade silencer, carried on stanchions off the skid rather than
+       floating above the engine -- the first version had it unsupported in
+       mid-air, which read as a modelling error rather than a machine. */
+    const SILY = 1.68;
+    for (const sx of [-1.05, -0.05]) {
+      g.add(box(THREE, metal, 0.07, SILY - 1.20, 0.07, sx, (SILY + 1.20)/2 - 0.10, -0.30));
+      g.add(box(THREE, metal, 0.22, 0.06, 0.22, sx, SILY - 0.20, -0.30));   // saddle
+    }
+    const sil = cyl(THREE, metal, 0.19, 0.19, 1.05, 14, -0.55, SILY, -0.30);
+    sil.rotation.z = Math.PI/2; g.add(sil);
+    for (const sx of [-1.05, -0.05]) {                                      // clamp bands
+      const bandm = cyl(THREE, dark, 0.205, 0.205, 0.06, 14, sx, SILY, -0.30);
+      bandm.rotation.z = Math.PI/2; g.add(bandm);
+    }
+    /* Flex connector from the manifold collector up into the silencer. */
+    const flex = cyl(THREE, dark, 0.10, 0.10, 0.52, 10, -0.05, 1.34, -0.44);
+    flex.rotation.x = -0.5; g.add(flex);
+    g.add(cyl(THREE, metal, 0.12, 0.12, 0.50, 10, -1.08, 1.94, -0.30));     // stack
+    g.add(cyl(THREE, dark, 0.155, 0.12, 0.07, 10, -1.08, 2.22, -0.30));     // rain cap
+
+    /* Control panel on the skid, and battery box. */
+    g.add(box(THREE, dark, 0.34, 0.52, 0.22, 1.02, 0.66, 0.56));
+    g.add(box(THREE, M.lit, 0.22, 0.16, 0.02, 1.02, 0.80, 0.68));
+    g.add(box(THREE, blk, 0.42, 0.24, 0.30, -1.20, 0.48, 0.42));
+
+    /* Lifting lugs on the skid corners. */
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) lug(THREE, g, metal, sx*1.42, 0.36, sz*0.50);
     return g;
   }
 
@@ -134,6 +310,91 @@
     c.position.set(x,y,z); return c;
   }
 
+  /* ---------- detail helpers ----------
+     Small repeated features -- louvers, bolt circles, fan grilles, handles,
+     nameplates -- extracted so every builder can add the same vocabulary of
+     detail instead of each inventing its own. Segment counts are kept low on
+     purpose: these mount on phones, and a bolt head does not need 24 sides. */
+
+  /* A run of ventilation louvers across a face. */
+  function louvers(THREE, g, m, opts){
+    const o = opts, n = o.n || 6;
+    for (let i = 0; i < n; i++) {
+      const t = n === 1 ? 0.5 : i / (n - 1);
+      const y = o.y0 + (o.y1 - o.y0) * t;
+      const l = box(THREE, m, o.w, o.h || 0.045, 0.02, o.x || 0, y, o.z);
+      if (o.tilt) l.rotation.x = o.tilt;
+      g.add(l);
+    }
+  }
+
+  /* Bolt heads round a flange or along an edge. */
+  function bolts(THREE, g, m, opts){
+    const o = opts, n = o.n || 8, r = o.r || 0.3;
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * Math.PI * 2 + (o.phase || 0);
+      const b = cyl(THREE, m, o.size || 0.035, o.size || 0.035, 0.05, 6,
+        (o.x || 0) + Math.cos(a) * r, (o.y || 0) + Math.sin(a) * r, o.z || 0);
+      b.rotation.x = Math.PI / 2;
+      g.add(b);
+    }
+  }
+
+  /* A fan: outer ring, hub and swept blades. Used on radiators, CRAHs, motors. */
+  function fan(THREE, g, ring, blade, opts){
+    const o = opts, r = o.r || 0.4;
+    const rg = cyl(THREE, ring, r, r, 0.05, 20, o.x, o.y, o.z);
+    rg.rotation.x = Math.PI / 2; g.add(rg);
+    const hub = cyl(THREE, blade, r * 0.22, r * 0.22, 0.07, 10, o.x, o.y, o.z + 0.01);
+    hub.rotation.x = Math.PI / 2; g.add(hub);
+    const n = o.blades || 5;
+    for (let i = 0; i < n; i++) {
+      const bl = box(THREE, blade, r * 1.5, r * 0.24, 0.02, o.x, o.y, o.z + 0.005);
+      bl.rotation.z = (i / n) * Math.PI;
+      g.add(bl);
+    }
+  }
+
+  /* Radiator: a stack of fins with an end plate, as seen on transformer tanks. */
+  function radiator(THREE, g, m, opts){
+    const o = opts, n = o.n || 7;
+    for (let i = 0; i < n; i++) {
+      const off = (i - (n - 1) / 2) * (o.pitch || 0.11);
+      g.add(box(THREE, m, o.w || 0.06, o.h, o.d || 0.5, o.x + (o.axis === 'z' ? 0 : off), o.y, o.z + (o.axis === 'z' ? off : 0)));
+    }
+    /* top and bottom headers tying the fins together */
+    for (const s of [-1, 1]) {
+      g.add(box(THREE, m, o.axis === 'z' ? 0.12 : n * (o.pitch || 0.11), 0.09, o.axis === 'z' ? n * (o.pitch || 0.11) : 0.12,
+        o.x, o.y + s * (o.h / 2 - 0.03), o.z));
+    }
+  }
+
+  /* A door: recessed panel, hinge barrels and a latch handle. */
+  function door(THREE, g, face, dark, metal, opts){
+    const o = opts;
+    g.add(box(THREE, face, o.w, o.h, 0.03, o.x, o.y, o.z));
+    g.add(box(THREE, dark, o.w - 0.12, o.h - 0.12, 0.012, o.x, o.y, o.z + 0.02));
+    for (const s of [-1, 1]) {
+      g.add(cyl(THREE, metal, 0.045, 0.045, 0.14, 8, o.x - o.w / 2 + 0.03, o.y + s * (o.h / 2 - 0.18), o.z + 0.02));
+    }
+    const handle = box(THREE, metal, 0.06, 0.26, 0.05, o.x + o.w / 2 - 0.10, o.y, o.z + 0.04);
+    g.add(handle);
+  }
+
+  /* Nameplate / rating label. */
+  function plate(THREE, g, m, opts){
+    const o = opts;
+    g.add(box(THREE, m, o.w || 0.34, o.h || 0.22, 0.015, o.x, o.y, o.z));
+  }
+
+  /* Lifting lug. */
+  function lug(THREE, g, m, x, y, z){
+    const l = box(THREE, m, 0.09, 0.16, 0.05, x, y, z);
+    g.add(l);
+    const eye = cyl(THREE, m, 0.055, 0.055, 0.045, 10, x, y + 0.09, z);
+    eye.rotation.x = Math.PI / 2; g.add(eye);
+  }
+
   /* ---------- 19" rack gear: one chassis helper, different faceplates ----------
      Real proportions: a 19" rack unit is 19in wide and 1.75in per U, so the
      chassis is deliberately wide and thin rather than a generic cube. */
@@ -141,97 +402,256 @@
   function rackChassis(THREE, M, u){
     const g = new THREE.Group();
     const h = u * RU;
+    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.32});
     g.add(box(THREE, M.body, RW, h, RD, 0, h/2, 0));
-    // rack ears
-    g.add(box(THREE, M.dark, 0.18, h, 0.09, -(RW/2)-0.09, h/2, RD/2 - 0.05));
-    g.add(box(THREE, M.dark, 0.18, h, 0.09,  (RW/2)+0.09, h/2, RD/2 - 0.05));
+
+    /* The faceplate is a separate panel bolted to the chassis, so it sits very
+       slightly proud with a shadow gap around it. Without this the whole unit
+       reads as one extruded block no matter what is drawn on the front. */
+    g.add(box(THREE, M.dark, RW - 0.02, h - 0.03, 0.04, 0, h/2, RD/2 - 0.01));
+    g.add(box(THREE, M.body, RW - 0.10, h - 0.09, 0.03, 0, h/2, RD/2 + 0.012));
+
+    /* Rack ears with the two mounting slots each that actually carry the unit. */
+    for (const s of [-1, 1]) {
+      g.add(box(THREE, M.dark, 0.18, h, 0.09, s*((RW/2)+0.09), h/2, RD/2 - 0.05));
+      const ys = u === 1 ? [h*0.5] : [h*0.22, h*0.78];
+      for (const y of ys) {
+        g.add(cyl(THREE, metal, 0.045, 0.045, 0.05, 10,
+                  s*((RW/2)+0.09), y, RD/2 - 0.005).rotateX(Math.PI/2));
+      }
+    }
+    /* Punched vent field along the top skin and a folded seam down each side. */
+    for (let c = 0; c < 9; c++) for (let r = 0; r < 3; r++) {
+      g.add(box(THREE, M.dark, 0.17, 0.012, 0.14, -1.7 + c*0.42, h + 0.006, -0.35 + r*0.35));
+    }
+    for (const s of [-1, 1]) g.add(box(THREE, M.dark, 0.02, h, RD + 0.01, s*RW/2, h/2, 0));
     g.userData.h = h;
     return g;
   }
-  function faceZ(){ return RD/2 + 0.012; }
+  /* Front surface to draw faceplate features on. This must clear the raised
+     faceplate panel added in rackChassis -- at the old RD/2 + 0.012 every port,
+     bay and LED ended up buried inside that panel instead of on it. */
+  function faceZ(){ return RD/2 + 0.035; }
 
   function buildServer(THREE, color, u){
     const M = mats(THREE, color); u = u || 1;
     const g = rackChassis(THREE, M, u); const h = g.userData.h;
     // drive bays down the left of the faceplate
-    const bays = u === 1 ? 4 : 8, cols = u === 1 ? 4 : 4, rows = u === 1 ? 1 : 2;
+    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.32});
+    const cols = 4, rows = u === 1 ? 1 : 2;
     for (let r=0;r<rows;r++) for (let c=0;c<cols;c++){
-      g.add(box(THREE, M.deep, 0.42, (h/rows)*0.5, 0.02, -1.45 + c*0.5, (h/rows)*(r+0.5), faceZ()));
+      const bx = -1.45 + c*0.5, by = (h/rows)*(r+0.5), bh = (h/rows)*0.5;
+      g.add(box(THREE, M.deep, 0.42, bh, 0.02, bx, by, faceZ()));      // recessed bay
+      /* Each carrier has a latch handle and an activity LED -- that pairing is
+         what makes a drive bay read as a drive bay and not a printed rectangle. */
+      g.add(box(THREE, metal, 0.07, bh*0.8, 0.03, bx - 0.15, by, faceZ()+0.015));
+      g.add(box(THREE, M.lit, 0.05, 0.035, 0.02, bx + 0.14, by - bh*0.28, faceZ()+0.015));
     }
-    // vent block on the right
-    for (let i=0;i<6;i++) g.add(box(THREE, M.deep, 0.05, h*0.55, 0.02, 0.9 + i*0.12, h/2, faceZ()));
-    g.add(cyl(THREE, M.lit, 0.035,0.035,0.02, 10, 1.78, h*0.5, faceZ()).rotateX(Math.PI/2));
+    // vent block on the right, punched rather than printed
+    for (let i=0;i<6;i++) for (let r=0;r<(u===1?2:4);r++){
+      g.add(box(THREE, M.deep, 0.05, h*0.16, 0.02, 0.9 + i*0.12, h*0.22 + r*h*0.2, faceZ()));
+    }
+    /* Power button, reset pinhole, status LEDs and a front USB -- the cluster
+       of controls at the right-hand end of essentially every rack server. */
+    g.add(cyl(THREE, metal, 0.075,0.075,0.035, 12, 1.62, h*0.5, faceZ()+0.01).rotateX(Math.PI/2));
+    g.add(cyl(THREE, M.lit, 0.035,0.035,0.02, 10, 1.78, h*0.72, faceZ()).rotateX(Math.PI/2));
+    g.add(cyl(THREE, M.gold, 0.028,0.028,0.02, 10, 1.78, h*0.5, faceZ()).rotateX(Math.PI/2));
+    g.add(box(THREE, M.dark, 0.16, 0.07, 0.03, 1.76, h*0.26, faceZ()));   // USB
+    /* Pull-out asset tag between the bays and the vents. */
+    g.add(box(THREE, M.dark, 0.10, h*0.34, 0.03, 0.72, h*0.5, faceZ()));
     return g;
   }
   function buildSwitchNet(THREE, color){
     const M = mats(THREE, color);
     const g = rackChassis(THREE, M, 1); const h = g.userData.h;
-    // two rows of RJ45 ports
+    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.32});
+    /* 24 RJ45 jacks in the usual two staggered banks of 12. Each is a shielded
+       housing with the latch cut-out above it and a link LED beside it, which is
+       what distinguishes a switch faceplate from a grid of dark rectangles. */
     for (let r=0;r<2;r++) for (let i=0;i<12;i++){
-      g.add(box(THREE, M.deep, 0.11, 0.06, 0.02, -1.7 + i*0.29, h*(r?0.66:0.34), faceZ()));
+      const x = -1.7 + i*0.29, y = h*(r?0.66:0.34);
+      g.add(box(THREE, metal, 0.13, 0.085, 0.02, x, y, faceZ()));         // shield
+      g.add(box(THREE, M.deep, 0.10, 0.055, 0.03, x, y - 0.008, faceZ()+0.008));
+      g.add(box(THREE, M.deep, 0.035, 0.03, 0.03, x, y + 0.036, faceZ()+0.008));  // latch slot
+      if (i % 2 === 0) g.add(box(THREE, M.lit, 0.03, 0.022, 0.02, x, y + 0.075, faceZ()));
     }
-    g.add(box(THREE, M.gold, 0.28, 0.07, 0.02, 1.72, h*0.5, faceZ()));
+    /* Two SFP+ uplink cages and the console port at the right-hand end. */
+    for (let i=0;i<2;i++) {
+      g.add(box(THREE, metal, 0.26, 0.11, 0.02, 1.55, h*(i?0.66:0.34), faceZ()));
+      g.add(box(THREE, M.dark, 0.22, 0.075, 0.03, 1.55, h*(i?0.66:0.34), faceZ()+0.008));
+    }
+    g.add(box(THREE, M.gold, 0.20, 0.07, 0.02, 1.86, h*0.5, faceZ()));
     return g;
   }
   function buildStorage(THREE, color){
     const M = mats(THREE, color);
     const g = rackChassis(THREE, M, 2); const h = g.userData.h;
-    // dense drive carriers
+    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.32});
+    /* 24 vertical carriers. Each gets the cam latch and the two status LEDs a
+       hot-swap carrier carries, so a failed drive is a thing you could point at. */
     for (let r=0;r<2;r++) for (let c=0;c<12;c++){
-      g.add(box(THREE, M.deep, 0.24, h*0.38, 0.02, -1.72 + c*0.31, h*(r?0.72:0.28), faceZ()));
+      const x = -1.72 + c*0.31, y = h*(r?0.72:0.28), bh = h*0.38;
+      g.add(box(THREE, M.deep, 0.24, bh, 0.02, x, y, faceZ()));
+      g.add(box(THREE, metal, 0.055, bh*0.72, 0.03, x - 0.08, y, faceZ()+0.014));  // cam latch
+      g.add(box(THREE, M.lit,  0.05, 0.035, 0.02, x + 0.05, y + bh*0.26, faceZ()+0.012));
+      g.add(box(THREE, (c === 5 && r === 1) ? M.gold : M.dark,
+                0.05, 0.035, 0.02, x + 0.05, y - bh*0.26, faceZ()+0.012));         // fault LED
     }
+    /* Enclosure ID display at the right-hand end. */
+    g.add(box(THREE, M.dark, 0.20, h*0.20, 0.03, 1.82, h*0.5, faceZ()));
     return g;
   }
   function buildUPSRack(THREE, color, u){
     const M = mats(THREE, color); u = u || 4;
     const g = rackChassis(THREE, M, u); const h = g.userData.h;
-    g.add(box(THREE, M.deep, 1.5, h*0.42, 0.02, -0.95, h*0.55, faceZ()));      // display
-    g.add(box(THREE, M.lit,  0.5,  0.07,  0.02, -1.42, h*0.55, faceZ()));       // status strip
-    for (let i=0;i<7;i++) g.add(box(THREE, M.deep, 0.06, h*0.6, 0.02, 0.5 + i*0.19, h*0.5, faceZ()));
+    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.32});
+    /* Bezel-mounted LCD with a lit panel inset, the way a rack UPS presents
+       load and runtime. */
+    g.add(box(THREE, M.dark, 1.62, h*0.46, 0.03, -0.95, h*0.58, faceZ()));
+    g.add(box(THREE, M.deep, 1.44, h*0.36, 0.02, -0.95, h*0.58, faceZ()+0.014));
+    for (let i=0;i<5;i++) {                                                    // bar-graph segments
+      g.add(box(THREE, i < 3 ? M.lit : M.dark, 0.20, h*0.07, 0.02,
+                -1.42 + i*0.24, h*0.46, faceZ()+0.026));
+    }
+    /* Navigation keypad beside the display. */
+    for (let r=0;r<2;r++) for (let c=0;c<2;c++) {
+      g.add(box(THREE, metal, 0.16, h*0.09, 0.03, 0.06 + c*0.22, h*0.66 - r*h*0.14, faceZ()+0.01));
+    }
+    /* The battery module is a separate drawer with its own handle -- on a rack
+       UPS this is the part that gets pulled and replaced, so it reads as one. */
+    g.add(box(THREE, M.dark, 3.5, h*0.30, 0.03, 0, h*0.17, faceZ()));
+    for (const s of [-1,1]) g.add(box(THREE, metal, 0.34, h*0.16, 0.05, s*1.30, h*0.17, faceZ()+0.02));
+    for (let i=0;i<7;i++) g.add(box(THREE, M.deep, 0.06, h*0.5, 0.02, 0.62 + i*0.19, h*0.58, faceZ()));
     return g;
   }
   function buildPDU(THREE, color){
     const M = mats(THREE, color);
     const g = rackChassis(THREE, M, 1); const h = g.userData.h;
+    /* C13 outlets: a rectangular moulded body with the D-shaped aperture and a
+       per-outlet LED. A bare circle reads as a hole, not a socket. */
     for (let i=0;i<10;i++){
-      g.add(cyl(THREE, M.deep, 0.055,0.055,0.02, 10, -1.7 + i*0.38, h*0.5, faceZ()).rotateX(Math.PI/2));
+      const x = -1.72 + i*0.34;
+      g.add(box(THREE, M.dark, 0.24, h*0.52, 0.03, x, h*0.46, faceZ()));
+      g.add(box(THREE, M.deep, 0.17, h*0.34, 0.03, x, h*0.46, faceZ()+0.016));
+      for (let p=0;p<3;p++) {                                          // the three pin slots
+        g.add(box(THREE, M.body, 0.028, h*0.10, 0.02,
+                  x - 0.05 + p*0.05, h*0.46 + (p===1 ? h*0.06 : -h*0.03), faceZ()+0.03));
+      }
+      g.add(box(THREE, M.lit, 0.06, 0.035, 0.02, x, h*0.80, faceZ()+0.006));
     }
-    g.add(box(THREE, M.gold, 0.22, 0.08, 0.02, 1.75, h*0.5, faceZ()));
+    /* Metered PDU display and its circuit-breaker button. */
+    g.add(box(THREE, M.dark, 0.30, h*0.34, 0.03, 1.72, h*0.62, faceZ()));
+    g.add(box(THREE, M.gold, 0.22, h*0.22, 0.02, 1.72, h*0.62, faceZ()+0.016));
+    g.add(cyl(THREE, M.deep, 0.05,0.05,0.04, 10, 1.72, h*0.24, faceZ()).rotateX(Math.PI/2));
     return g;
   }
   function buildKVM(THREE, color){
     const M = mats(THREE, color);
     const g = rackChassis(THREE, M, 1); const h = g.userData.h;
-    g.add(box(THREE, M.deep, 3.0, h*0.55, 0.02, 0, h*0.5, faceZ()));            // screen bezel
-    g.add(box(THREE, M.dark, 2.7, h*0.34, 0.015, 0, h*0.5, faceZ()+0.008));     // screen
+    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.32});
+    /* A rack console is a slide-out drawer: the tray pulls forward, the lid
+       hinges up into a screen. Drawn part-way out so both halves are visible --
+       fully closed it is indistinguishable from a blanking panel. */
+    const tray = new THREE.Group();
+    tray.add(box(THREE, M.body, RW - 0.12, h*0.9, 1.5, 0, h*0.5, RD/2 + 0.75));
+    tray.add(box(THREE, M.dark, RW - 0.30, 0.02, 1.1, 0, h*0.95, RD/2 + 0.72));  // keyboard well
+    for (let r=0;r<4;r++) for (let c=0;c<14;c++) {                               // key caps
+      tray.add(box(THREE, M.deep, 0.16, 0.04, 0.13, -1.55 + c*0.24, h*0.97, RD/2 + 0.30 + r*0.20));
+    }
+    tray.add(box(THREE, M.deep, 0.55, 0.03, 0.34, 1.35, h*0.97, RD/2 + 1.20));   // touchpad
+    for (const s of [-1,1]) tray.add(box(THREE, metal, 0.20, h*0.4, 0.06, s*1.86, h*0.5, RD/2 + 1.50));
+    g.add(tray);
+
+    /* Lid hinged up behind the tray, carrying the screen. */
+    const lid = new THREE.Group();
+    lid.add(box(THREE, M.body, RW - 0.12, 1.55, 0.09, 0, 0.78, 0));
+    lid.add(box(THREE, M.dark, RW - 0.42, 1.20, 0.03, 0, 0.80, 0.06));
+    lid.add(box(THREE, M.lit,  RW - 0.60, 1.02, 0.02, 0, 0.80, 0.08));           // panel
+    lid.position.set(0, h*0.9, RD/2 + 0.06);
+    lid.rotation.x = -0.16;                                                      // tipped back
+    g.add(lid);
     return g;
   }
   function buildBlank(THREE, color){
     const M = mats(THREE, color);
     const g = rackChassis(THREE, M, 1); const h = g.userData.h;
-    g.add(box(THREE, M.dark, 3.4, h*0.3, 0.015, 0, h*0.5, faceZ()));            // simple stamped rib
+    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.32});
+    /* A blanking panel is plain by definition, so the detail that matters is the
+       tool-less mounting: the sprung clips at each end and the stiffening swage
+       across the middle are the whole of what one looks like. */
+    g.add(box(THREE, M.dark, 3.4, h*0.30, 0.02, 0, h*0.5, faceZ()));             // stamped swage
+    g.add(box(THREE, M.dark, 3.4, 0.02, 0.03, 0, h*0.5 + h*0.15, faceZ()+0.008));
+    g.add(box(THREE, M.dark, 3.4, 0.02, 0.03, 0, h*0.5 - h*0.15, faceZ()+0.008));
+    for (const s of [-1,1]) {
+      g.add(box(THREE, metal, 0.12, h*0.55, 0.05, s*1.82, h*0.5, faceZ()+0.01)); // sprung clip
+      g.add(box(THREE, metal, 0.07, h*0.18, 0.10, s*1.90, h*0.5, faceZ()-0.03));
+    }
     return g;
   }
   function buildCableMgr(THREE, color){
     const M = mats(THREE, color);
     const g = rackChassis(THREE, M, 2); const h = g.userData.h;
-    for (let i=0;i<6;i++){                                                     // D-ring fingers
-      g.add(box(THREE, M.dark, 0.14, h*0.8, 0.30, -1.6 + i*0.64, h*0.5, faceZ()+0.15));
+    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.32});
+    /* Fingers are C-shaped, not solid blocks: the open throat is the entire
+       point of a finger duct, and patch cords have to be visible sitting in it. */
+    for (let i=0;i<6;i++){
+      const x = -1.6 + i*0.64, fz = RD/2 + 0.18;
+      g.add(box(THREE, M.dark, 0.14, h*0.86, 0.34, x, h*0.5, fz));               // upright
+      for (const s of [-1,1]) {                                                  // top and bottom returns
+        g.add(box(THREE, M.dark, 0.34, h*0.12, 0.34, x + 0.24, h*0.5 + s*h*0.37, fz));
+      }
     }
+    /* Cords lying in the channel, in the sector colours used elsewhere. */
+    const cords = [0x2E7D4F, 0x2B6CB0, 0xB7791F, 0x9C4221];
+    cords.forEach(function(c, i){
+      const m = new THREE.MeshStandardMaterial({color:c, roughness:.6});
+      const r = cyl(THREE, m, 0.05, 0.05, 3.3, 8, 0.1, h*0.30 + i*0.11, RD/2 + 0.20);
+      r.rotation.z = Math.PI/2; r.rotation.y = 0.04*i; g.add(r);
+    });
+    /* Hinged cover lying open below the fingers. */
+    const cover = box(THREE, M.body, RW - 0.20, 0.06, 0.62, 0, h*0.06, RD/2 + 0.42);
+    cover.rotation.x = -0.55; g.add(cover);
     return g;
   }
 
   /* ---------- electrical gear ---------- */
   function buildBreaker(THREE, color){
     const M = mats(THREE, color); const g = new THREE.Group();
-    g.add(box(THREE, M.body, 1.5, 2.1, 1.15, 0, 1.05, 0));                     // molded case
-    g.add(box(THREE, M.deep, 0.72, 0.62, 0.10, 0, 1.32, 0.60));                // window
-    g.add(box(THREE, M.gold, 0.30, 0.42, 0.22, 0, 1.32, 0.66));                // toggle handle
-    g.add(box(THREE, M.dark, 1.1, 0.20, 0.72, 0, 2.02, 0));                    // line-side lug shroud
-    g.add(box(THREE, M.dark, 1.1, 0.20, 0.72, 0, 0.10, 0));                    // load-side lug shroud
-    for (let i=-1;i<=1;i++) {
-      g.add(cyl(THREE, M.dark, 0.10,0.10,0.34, 10, i*0.42, 2.24, 0));
-      g.add(cyl(THREE, M.dark, 0.10,0.10,0.34, 10, i*0.42, -0.14, 0));
+    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.75, roughness:.35});
+    const cu    = new THREE.MeshStandardMaterial({color:0xB87333, metalness:.85, roughness:.35});
+    const W = 1.5, H = 2.1, D = 1.15, fz = D/2;
+
+    g.add(box(THREE, M.body, W, H, D, 0, 1.05, 0));                            // moulded case
+    /* Case split line and the moulding ribs that run round it. */
+    g.add(box(THREE, M.dark, W + 0.02, 0.035, D + 0.02, 0, 1.05, 0));
+    for (const sy of [0.42, 1.68]) g.add(box(THREE, M.dark, W + 0.01, 0.03, D + 0.01, 0, sy, 0));
+
+    /* Escutcheon, ON/OFF markings and toggle. */
+    g.add(box(THREE, M.deep, 0.80, 0.70, 0.05, 0, 1.32, fz + 0.01));
+    g.add(box(THREE, M.gold, 0.30, 0.42, 0.22, 0, 1.32, fz + 0.09));           // toggle
+    g.add(box(THREE, metal, 0.16, 0.05, 0.02, -0.28, 1.56, fz + 0.03));        // "I"
+    g.add(box(THREE, metal, 0.16, 0.05, 0.02, -0.28, 1.08, fz + 0.03));        // "O"
+    /* Push-to-trip button. */
+    const ptt = cyl(THREE, M.dark, 0.07, 0.07, 0.05, 10, 0.44, 1.62, fz + 0.03);
+    ptt.rotation.x = Math.PI/2; g.add(ptt);
+    /* Rating plug window. */
+    g.add(box(THREE, M.dark, 0.30, 0.18, 0.02, 0.40, 1.06, fz + 0.03));
+
+    /* Lug shrouds with removable covers, top and bottom. */
+    for (const s of [1, -1]) {
+      const y = s > 0 ? 2.02 : 0.10;
+      g.add(box(THREE, M.dark, W - 0.30, 0.22, D - 0.34, 0, y, 0));
+      for (let i = -1; i <= 1; i++) {
+        g.add(cyl(THREE, M.deep, 0.11, 0.11, 0.36, 10, i*0.42, y + s*0.24, 0));
+        g.add(cyl(THREE, cu, 0.06, 0.06, 0.20, 8, i*0.42, y + s*0.40, 0));     // conductor stub
+        /* lug clamping screw */
+        g.add(cyl(THREE, metal, 0.045, 0.045, 0.05, 6, i*0.42, y + s*0.24, D/2 - 0.20));
+      }
+    }
+
+    /* Mounting bosses on the back. */
+    for (const sx of [-1, 1]) for (const sy of [0.45, 1.65]) {
+      g.add(cyl(THREE, M.dark, 0.06, 0.06, 0.06, 8, sx*(W/2 - 0.16), sy, -D/2 - 0.02));
     }
     return g;
   }
@@ -265,51 +685,198 @@
   }
   function buildMotor(THREE, color){
     const M = mats(THREE, color); const g = new THREE.Group();
-    const body = cyl(THREE, M.body, 0.85,0.85,2.2, 24, 0, 1.0, 0); body.rotation.z = Math.PI/2; g.add(body);
-    for (let i=0;i<9;i++){                                                     // cooling fins
-      const f = cyl(THREE, M.dark, 0.92,0.92,0.06, 24, -0.95 + i*0.24, 1.0, 0);
-      f.rotation.z = Math.PI/2; g.add(f);
+    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.3});
+    const blk   = new THREE.MeshStandardMaterial({color:0x2A3240, metalness:.5, roughness:.5});
+
+    /* Stator frame with radial cooling fins running its length. */
+    const body = cyl(THREE, M.body, 0.85, 0.85, 2.0, 24, 0, 1.0, 0);
+    body.rotation.z = Math.PI/2; g.add(body);
+    for (let i = 0; i < 14; i++) {
+      const a = (i/14) * Math.PI * 2;
+      g.add(box(THREE, M.body, 1.9, 0.10, 0.09, 0, 1.0 + Math.sin(a)*0.90, Math.cos(a)*0.90));
     }
-    const shaft = cyl(THREE, M.dark, 0.17,0.17,0.9, 14, 1.55, 1.0, 0); shaft.rotation.z = Math.PI/2; g.add(shaft);
-    g.add(box(THREE, M.dark, 0.75, 0.55, 0.75, -0.1, 1.95, 0));                // terminal box
-    g.add(box(THREE, M.dark, 2.3, 0.16, 1.5, 0, 0.08, 0));                     // base/feet
+    /* End bells, bolted, slightly larger diameter than the frame. */
+    for (const s of [-1, 1]) {
+      const eb = cyl(THREE, M.dark, 0.88, 0.80, 0.22, 22, s*1.08, 1.0, 0);
+      eb.rotation.z = Math.PI/2; g.add(eb);
+      bolts(THREE, g, metal, {n: 6, r: 0.70, x: 0, y: 1.0, z: 0, size: 0.05});
+    }
+
+    /* Drive end: shaft with keyway and a bearing boss. */
+    g.add(cyl(THREE, M.dark, 0.26, 0.26, 0.18, 16, 1.24, 1.0, 0).rotateZ(Math.PI/2));
+    const shaft = cyl(THREE, metal, 0.16, 0.16, 0.86, 14, 1.68, 1.0, 0);
+    shaft.rotation.z = Math.PI/2; g.add(shaft);
+    g.add(box(THREE, blk, 0.34, 0.05, 0.09, 1.80, 1.14, 0));                   // key
+
+    /* Non-drive end: fan cowl with guard slots. */
+    const cowl = cyl(THREE, M.dark, 0.80, 0.72, 0.42, 20, -1.42, 1.0, 0);
+    cowl.rotation.z = Math.PI/2; g.add(cowl);
+    for (let i = 0; i < 10; i++) {
+      const a = (i/10) * Math.PI * 2;
+      g.add(box(THREE, blk, 0.03, 0.42, 0.10, -1.63, 1.0 + Math.sin(a)*0.46, Math.cos(a)*0.46));
+    }
+
+    /* Terminal box with gland plate and lid screws. */
+    g.add(box(THREE, M.dark, 0.80, 0.58, 0.78, -0.05, 1.98, 0));
+    g.add(box(THREE, blk, 0.66, 0.05, 0.64, -0.05, 2.28, 0));
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+      g.add(cyl(THREE, metal, 0.035, 0.035, 0.04, 6, -0.05 + sx*0.26, 2.31, sz*0.24));
+    }
+    g.add(cyl(THREE, metal, 0.11, 0.11, 0.16, 10, -0.05, 1.86, 0.44));         // cable gland
+
+    /* Nameplate, eyebolt and feet with slotted holes. */
+    plate(THREE, g, metal, {x: 0.30, y: 1.42, z: 0.74, w: 0.44, h: 0.26});
+    g.add(cyl(THREE, metal, 0.09, 0.09, 0.06, 10, -0.05, 2.34, 0).rotateX(Math.PI/2));
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+      g.add(box(THREE, M.dark, 0.42, 0.16, 0.30, sx*0.86, 0.14, sz*0.60));
+      g.add(cyl(THREE, blk, 0.06, 0.06, 0.18, 8, sx*0.86, 0.16, sz*0.60));
+    }
+    g.add(box(THREE, M.dark, 2.30, 0.10, 1.44, 0, 0.05, 0));                   // base rails
     return g;
   }
   function buildPanel(THREE, color){
     const M = mats(THREE, color); const g = new THREE.Group();
-    g.add(box(THREE, M.body, 1.7, 2.9, 0.75, 0, 1.45, 0));                     // enclosure
-    g.add(box(THREE, M.dark, 1.5, 2.6, 0.05, 0, 1.45, 0.40));                  // dead front
-    for (let r=0;r<8;r++) for (const s of [-1,1]) {                            // breaker handles
-      g.add(box(THREE, M.deep, 0.5, 0.19, 0.06, s*0.36, 2.42 - r*0.29, 0.44));
+    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.75, roughness:.35});
+    const cu    = new THREE.MeshStandardMaterial({color:0xB87333, metalness:.85, roughness:.35});
+    const W = 1.7, H = 2.9, D = 0.75, fz = D/2;
+
+    g.add(box(THREE, M.body, W, H, D, 0, 1.45, 0));                            // enclosure
+
+    /* Door swung OPEN on its hinges. Closed, it hid every interior feature --
+       the breaker handles, the gutter and the bus bars below were all modelled
+       and none of it was visible, which defeats the point of the detail. */
+    const doorPivot = new THREE.Group();
+    doorPivot.position.set(-W/2 + 0.04, 1.45, fz + 0.02);
+    const leaf = box(THREE, M.body, W - 0.06, H - 0.10, 0.04, (W - 0.06)/2, 0, 0);
+    doorPivot.add(leaf);
+    doorPivot.add(box(THREE, M.dark, W - 0.22, H - 0.26, 0.015, (W - 0.06)/2, 0, -0.03));
+    /* latch and handle on the free edge */
+    doorPivot.add(box(THREE, metal, 0.06, 0.30, 0.06, W - 0.18, 0, 0.05));
+    doorPivot.add(cyl(THREE, M.gold, 0.06, 0.06, 0.10, 10, W - 0.18, -0.25, 0.05));
+    doorPivot.rotation.y = -1.15;                                              // ~66 degrees open
+    g.add(doorPivot);
+    for (const sy of [0.55, 1.45, 2.35]) {                                     // hinge barrels
+      g.add(cyl(THREE, metal, 0.05, 0.05, 0.18, 8, -W/2 + 0.04, sy, fz + 0.02));
     }
-    g.add(cyl(THREE, M.gold, 0.06,0.06,0.10, 10, 0.72, 0.34, 0.44));           // latch
+
+    /* Dead front with the breaker cutout, main breaker at the top. */
+    g.add(box(THREE, M.dark, W - 0.20, H - 0.26, 0.04, 0, 1.45, fz - 0.04));
+    g.add(box(THREE, M.deep, 1.10, 0.34, 0.06, 0, 2.52, fz - 0.02));           // main
+    g.add(box(THREE, M.gold, 0.24, 0.22, 0.08, 0, 2.52, fz + 0.01));
+
+    /* Branch breaker handles in two columns, alternating trip positions. */
+    for (let r = 0; r < 9; r++) for (const s of [-1, 1]) {
+      const y = 2.20 - r * 0.22;
+      g.add(box(THREE, M.deep, 0.46, 0.155, 0.06, s*0.34, y, fz - 0.02));
+      g.add(box(THREE, r % 3 === 2 ? M.dark : metal, 0.12, 0.10, 0.05, s*0.34 + s*0.10, y, fz + 0.01));
+    }
+    /* Centre gutter between the columns, with the neutral/ground bars visible. */
+    g.add(box(THREE, M.dark, 0.14, H - 0.60, 0.05, 0, 1.55, fz - 0.03));
+    for (const sx of [-1, 1]) {
+      g.add(box(THREE, cu, 0.05, H - 0.90, 0.03, sx*(W/2 - 0.14), 1.50, fz - 0.06));
+    }
+
+    /* Directory pocket, and a conduit knockout pattern on the top. */
+    plate(THREE, g, metal, {x: 0, y: 0.34, z: fz + 0.03, w: 0.70, h: 0.26});
+    for (const sx of [-0.45, 0, 0.45]) {
+      g.add(cyl(THREE, M.dark, 0.13, 0.13, 0.04, 12, sx, H + 0.01, 0));
+    }
     return g;
   }
   function buildBusway(THREE, color){
     const M = mats(THREE, color); const g = new THREE.Group();
-    g.add(box(THREE, M.body, 4.4, 0.85, 0.85, 0, 1.4, 0));                     // duct run
-    for (const x of [-1.5, 0, 1.5]) g.add(box(THREE, M.dark, 0.16, 1.0, 1.0, x, 1.4, 0));   // joints
-    for (const x of [-2.2, 2.2]) g.add(box(THREE, M.dark, 0.12, 1.05, 1.05, x, 1.4, 0));    // end flanges
-    g.add(box(THREE, M.dark, 0.8, 0.55, 0.55, 0.75, 0.85, 0));                 // tap-off box
-    g.add(box(THREE, M.gold, 0.22, 0.10, 0.06, 0.75, 0.85, 0.30));
-    for (const x of [-1.6, 1.6]) {                                            // hangers
-      g.add(box(THREE, M.dark, 0.08, 1.0, 0.08, x, 2.32, 0));
+    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.75, roughness:.35});
+    const cu    = new THREE.MeshStandardMaterial({color:0xB87333, metalness:.85, roughness:.35});
+    const Y = 1.4, S = 0.85;
+
+    g.add(box(THREE, M.body, 4.4, S, S, 0, Y, 0));                             // duct run
+    /* Housing seams along the top and bottom edges, as on a real extrusion. */
+    for (const sy of [-1, 1]) g.add(box(THREE, M.dark, 4.4, 0.03, S + 0.02, 0, Y + sy*(S/2 - 0.06), 0));
+
+    /* Bolted joint packs, with visible bolt heads. */
+    for (const x of [-1.5, 0, 1.5]) {
+      g.add(box(THREE, M.dark, 0.18, S + 0.14, S + 0.14, x, Y, 0));
+      for (const sy of [-1, 1]) for (const sz of [-1, 1]) {
+        const b = cyl(THREE, metal, 0.045, 0.045, 0.06, 6, x, Y + sy*0.34, sz*0.34);
+        b.rotation.z = Math.PI/2; g.add(b);
+      }
+    }
+
+    /* End flanges with the bus stack visible on the cut end. */
+    for (const s of [-1, 1]) g.add(box(THREE, M.dark, 0.14, S + 0.18, S + 0.18, s*2.2, Y, 0));
+    for (let i = 0; i < 4; i++) {
+      g.add(box(THREE, i === 3 ? M.lit : cu, 0.03, 0.15, S - 0.24, 2.28, Y + 0.28 - i*0.19, 0));
+    }
+
+    /* Plug-in tap-off units: one fitted with a handle and cable outlet, one
+       empty opening showing the stab contacts behind it. */
+    g.add(box(THREE, M.body, 0.80, 0.60, 0.34, 0.75, Y - 0.62, 0.30));
+    g.add(box(THREE, M.dark, 0.66, 0.46, 0.04, 0.75, Y - 0.62, 0.48));
+    g.add(box(THREE, M.gold, 0.22, 0.12, 0.08, 0.75, Y - 0.62, 0.52));         // operating handle
+    g.add(cyl(THREE, M.dark, 0.10, 0.10, 0.24, 10, 0.75, Y - 0.94, 0.30));     // cable outlet
+    g.add(box(THREE, M.deep, 0.46, 0.34, 0.05, -0.70, Y, S/2 + 0.005));        // empty opening
+    for (const sz of [-1, 1]) g.add(box(THREE, cu, 0.06, 0.22, 0.04, -0.70 + sz*0.12, Y, S/2 - 0.02));
+
+    /* Trapeze hangers: threaded rod, channel and nuts. */
+    for (const x of [-1.6, 1.6]) {
+      for (const sz of [-1, 1]) {
+        g.add(cyl(THREE, metal, 0.035, 0.035, 1.05, 8, x, Y + S/2 + 0.52, sz*0.42));
+        g.add(cyl(THREE, M.dark, 0.06, 0.06, 0.05, 6, x, Y + S/2 + 0.04, sz*0.42));
+      }
+      g.add(box(THREE, metal, 0.10, 0.07, 1.05, x, Y + S/2 + 0.04, 0));        // channel
     }
     return g;
   }
   function buildCooling(THREE, color){
     const M = mats(THREE, color); const g = new THREE.Group();
-    g.add(box(THREE, M.body, 2.0, 2.8, 1.5, 0, 1.4, 0));                       // CRAH cabinet
-    for (let i=0;i<2;i++){                                                     // fan grilles
-      const ring = cyl(THREE, M.dark, 0.42,0.42,0.08, 22, 0, 0.85 + i*1.05, 0.78);
-      ring.rotation.x = Math.PI/2; g.add(ring);
-      for (let b=0;b<4;b++){
-        const bl = box(THREE, M.deep, 0.72, 0.06, 0.05, 0, 0.85 + i*1.05, 0.82);
-        bl.rotation.z = b * Math.PI/4; g.add(bl);
+    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.75, roughness:.35});
+    const blk   = new THREE.MeshStandardMaterial({color:0x2A3240, metalness:.4, roughness:.55});
+    const cu    = new THREE.MeshStandardMaterial({color:0xB87333, metalness:.85, roughness:.35});
+    const W = 2.0, H = 2.8, D = 1.5, fz = D/2;
+
+    g.add(box(THREE, M.body, W, H, D, 0, 1.4, 0));                             // CRAH cabinet
+    /* Panel seams so the cabinet reads as sheet metal rather than one block. */
+    for (const sy of [0.70, 1.90]) g.add(box(THREE, M.dark, W + 0.01, 0.03, D + 0.01, 0, sy, 0));
+
+    /* Filter section behind a louvred access door, lower front. */
+    door(THREE, g, M.body, M.dark, metal, {x: 0, y: 0.52, z: fz + 0.02, w: W - 0.24, h: 0.80});
+    louvers(THREE, g, blk, {n: 7, x: 0, y0: 0.24, y1: 0.80, z: fz + 0.05, w: W - 0.50, h: 0.045});
+
+    /* Two EC fans behind a wire guard. */
+    for (let i = 0; i < 2; i++) {
+      const y = 1.45 + i * 0.86;
+      fan(THREE, g, metal, blk, {x: 0, y: y, z: fz + 0.03, r: 0.38, blades: 7});
+      for (let k = 0; k < 4; k++) {                                            // guard rings
+        const r = 0.10 + k * 0.09;
+        const ring = cyl(THREE, metal, r, r, 0.012, 18, 0, y, fz + 0.07);
+        ring.rotation.x = Math.PI/2; g.add(ring);
       }
     }
-    for (const s of [-1,1]) g.add(cyl(THREE, M.dark, 0.16,0.16,0.9, 12, s*0.7, 2.9, -0.4)); // supply/return pipes
-    g.add(box(THREE, M.dark, 2.2, 0.14, 1.7, 0, 0.07, 0));
+
+    /* Chilled-water supply and return with insulation, valves and a coil. */
+    for (const s of [-1, 1]) {
+      g.add(cyl(THREE, M.dark, 0.17, 0.17, 1.0, 12, s*0.68, H + 0.22, -0.42));
+      g.add(cyl(THREE, s > 0 ? cu : metal, 0.10, 0.10, 1.06, 10, s*0.68, H + 0.22, -0.42));
+      /* isolation valve with handwheel */
+      g.add(box(THREE, blk, 0.20, 0.18, 0.20, s*0.68, H + 0.52, -0.42));
+      const hw = cyl(THREE, M.gold, 0.13, 0.13, 0.035, 12, s*0.68, H + 0.68, -0.42);
+      hw.rotation.x = Math.PI/2; g.add(hw);
+    }
+    /* Coil face visible through the top-rear grille. */
+    for (let i = 0; i < 8; i++) {
+      g.add(box(THREE, metal, W - 0.34, 0.02, 0.05, 0, 2.30, -fz + 0.10 + i*0.06));
+    }
+
+    /* Controls panel with display, and a condensate drain stub. */
+    g.add(box(THREE, M.dark, 0.46, 0.36, 0.05, W/2 - 0.36, 2.42, fz + 0.02));
+    g.add(box(THREE, M.lit, 0.30, 0.16, 0.02, W/2 - 0.36, 2.46, fz + 0.05));
+    g.add(cyl(THREE, metal, 0.06, 0.06, 0.22, 8, -W/2 + 0.24, 0.16, fz - 0.20).rotateX(Math.PI/2));
+
+    /* Plinth with levelling feet. */
+    g.add(box(THREE, M.dark, W + 0.20, 0.14, D + 0.20, 0, 0.07, 0));
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+      g.add(cyl(THREE, metal, 0.05, 0.05, 0.06, 8, sx*(W/2 - 0.12), 0.17, sz*(D/2 - 0.12)));
+    }
     return g;
   }
 
@@ -322,12 +889,41 @@
 
   function pcbBase(THREE, w, d){
     const g = new THREE.Group();
+    const W = w || 3.0, D = d || 2.2;
     const m = new THREE.MeshStandardMaterial({color:PCB_GREEN, metalness:.15, roughness:.75});
-    g.add(box(THREE, m, w||3.0, 0.10, d||2.2, 0, -0.05, 0));
+    const dk = new THREE.MeshStandardMaterial({color:0x14512B, metalness:.15, roughness:.8});
+    g.add(box(THREE, m, W, 0.10, D, 0, -0.05, 0));
+    /* Copper traces running off toward the board edge, so the stub reads as a
+       fragment of a real board rather than a green coaster the part sits on. */
+    const cu = new THREE.MeshStandardMaterial({color:0xB87333, metalness:.8, roughness:.4});
+    for (let i = 0; i < 3; i++) {
+      const z = (i - 1) * (D * 0.28);
+      g.add(box(THREE, cu, W * 0.42, 0.012, 0.07, -W * 0.28, 0.005, z));
+      g.add(box(THREE, cu, W * 0.42, 0.012, 0.07,  W * 0.28, 0.005, z + 0.11));
+    }
+    g.add(box(THREE, dk, W - 0.16, 0.012, 0.03, 0, 0.006,  D/2 - 0.10));  // silkscreen edge
+    g.add(box(THREE, dk, W - 0.16, 0.012, 0.03, 0, 0.006, -D/2 + 0.10));
     return g;
   }
   function leadMat(THREE){ return new THREE.MeshStandardMaterial({color:LEAD, metalness:.9, roughness:.28}); }
   function goldMat(THREE){ return new THREE.MeshStandardMaterial({color:0xD4A72C, metalness:.85, roughness:.3}); }
+  /* An annular solder pad where a lead enters the board. Drawn as a shallow
+     ring rather than a disc so the plated hole reads at the centre. */
+  function pad(THREE, g, x, z, r){
+    const cu = new THREE.MeshStandardMaterial({color:0xC08A4A, metalness:.85, roughness:.35});
+    const ring = new THREE.Mesh(new THREE.RingGeometry((r||0.075), (r||0.075)+0.075, 16), cu);
+    ring.rotation.x = -Math.PI/2; ring.position.set(x, 0.008, z);
+    ring.material.side = THREE.DoubleSide; g.add(ring);
+  }
+  /* White silkscreen outline of the part footprint. */
+  function silk(THREE, g, x, z, w, d){
+    const m = new THREE.MeshStandardMaterial({color:0xE8ECEF, roughness:.85});
+    const t = 0.035;
+    g.add(box(THREE, m, w, 0.012, t, x, 0.007, z - d/2));
+    g.add(box(THREE, m, w, 0.012, t, x, 0.007, z + d/2));
+    g.add(box(THREE, m, t, 0.012, d, x - w/2, 0.007, z));
+    g.add(box(THREE, m, t, 0.012, d, x + w/2, 0.007, z));
+  }
   /* A lead running from `top` straight down through the board.
      Takes the TOP, not a length: an axial part's lead has to stop exactly at
      the body it leaves, and sizing by length instead made the leads overshoot
@@ -338,6 +934,8 @@
     const h = t - PCB_UNDER;
     return cyl(THREE, m, 0.045,0.045, h, 8, x, PCB_UNDER + h/2, z);
   }
+  /* pin + its solder pad, which is what you actually see on a populated board. */
+  function pinAt(THREE, g, m, x, z, top){ g.add(pin(THREE, m, x, z, top)); pad(THREE, g, x, z); }
 
   function buildResistor(THREE){
     const g = pcbBase(THREE, 3.2, 1.6);
@@ -355,8 +953,13 @@
     });
     for (const s of [-1,1]) {                                   // axial leads, bent down
       const run = cyl(THREE, L, 0.045,0.045, 0.75, 8, s*1.02, 0.72, 0); run.rotation.z = Math.PI/2; g.add(run);
-      g.add(pin(THREE, L, s*1.38, 0, 0.72));
+      /* the radius of the bend, so the lead turns rather than meeting at a corner */
+      const knee = new THREE.Mesh(new THREE.TorusGeometry(0.10, 0.045, 6, 10, Math.PI/2), L);
+      knee.position.set(s*1.28, 0.62, 0); knee.rotation.x = Math.PI/2;
+      knee.rotation.z = s > 0 ? 0 : Math.PI/2; g.add(knee);
+      pinAt(THREE, g, L, s*1.38, 0, 0.62);
     }
+    silk(THREE, g, 0, 0, 2.9, 0.75);
     return g;
   }
 
@@ -366,7 +969,22 @@
     const L = leadMat(THREE);
     const disc = cyl(THREE, body, 0.52,0.52, 0.20, 22, 0, 0.86, 0);   // the classic disc
     disc.rotation.x = Math.PI/2; g.add(disc);
-    for (const s of [-1,1]) g.add(pin(THREE, L, s*0.22, 0, 0.80));
+    /* Rounded rim on the dipped body. A disc cap is epoxy dipped, not machined,
+       so the edge is domed rather than square. Built from a torus around the
+       disc's own axis -- the shoulder must share the disc's orientation, or it
+       reads as an unrelated lump stuck to the front. */
+    const rim = new THREE.Mesh(new THREE.TorusGeometry(0.50, 0.10, 8, 24), body);
+    rim.position.set(0, 0.86, 0); g.add(rim);
+    /* The narrow neck the two leads leave through, at the bottom of the dip. */
+    const neck = cyl(THREE, body, 0.30, 0.22, 0.30, 16, 0, 0.46, 0); g.add(neck);
+    /* Printed value code -- "104" is the marking a learner reads off the part. */
+    const ink = new THREE.MeshStandardMaterial({color:0x22160A, roughness:.8});
+    for (let i=0;i<3;i++) g.add(box(THREE, ink, 0.09, 0.20, 0.03, -0.15 + i*0.15, 0.92, 0.11));
+    for (const s of [-1,1]) {
+      g.add(cyl(THREE, L, 0.045,0.045, 0.24, 8, s*0.22, 0.62, 0));    // lead inside the shoulder
+      pinAt(THREE, g, L, s*0.22, 0, 0.62);
+    }
+    silk(THREE, g, 0, 0, 1.25, 0.55);
     return g;
   }
 
@@ -384,7 +1002,24 @@
     const st = new THREE.Mesh(
       new THREE.CylinderGeometry(0.565, 0.565, 1.45, 24, 1, true, -0.62, 1.24), stripe);
     st.position.y = 0.85; g.add(st);
-    for (const s of [-1,1]) g.add(pin(THREE, L, s*0.20, 0, 0.12));
+    /* Minus signs down the stripe -- the actual polarity marking, not just a band. */
+    const ink = new THREE.MeshStandardMaterial({color:0x1A2233, roughness:.8});
+    for (let i=0;i<4;i++) g.add(box(THREE, ink, 0.20, 0.05, 0.03, 0, 0.34 + i*0.34, 0.568));
+
+    /* Pressure-relief vent scored into the crimped top as a K. Every aluminium
+       electrolytic has one; it is the feature that identifies the top face. */
+    const score = new THREE.MeshStandardMaterial({color:0x101821, roughness:.7});
+    g.add(box(THREE, score, 0.52, 0.03, 0.055, 0, 1.67, 0));
+    for (const s of [-1,1]) {
+      const arm = box(THREE, score, 0.34, 0.03, 0.055, 0.13, 1.67, s*0.13);
+      arm.rotation.y = s * 0.9; g.add(arm);
+    }
+    /* Sleeve seam, and the moulded insulating base disc the can sits on. */
+    g.add(box(THREE, new THREE.MeshStandardMaterial({color:0x18293F, roughness:.7}),
+              0.04, 1.45, 0.03, 0, 0.85, -0.56));
+    g.add(cyl(THREE, new THREE.MeshStandardMaterial({color:0x1C1C22, roughness:.75}),
+              0.57, 0.57, 0.10, 24, 0, 0.10, 0));
+    for (const s of [-1,1]) pinAt(THREE, g, L, s*0.20, 0, 0.06);
     return g;
   }
 
@@ -396,7 +1031,16 @@
     const dome = new THREE.Mesh(new THREE.SphereGeometry(0.34, 20, 12, 0, Math.PI*2, 0, Math.PI/2), lens);
     dome.position.y = 1.10; g.add(dome);
     g.add(cyl(THREE, lens, 0.40,0.40, 0.08, 20, 0, 0.38, 0));          // the flange with the flat
-    for (const s of [-1,1]) g.add(pin(THREE, L, s*0.16, 0, 0.42));
+    /* The flat on the flange marks the cathode. Getting an LED backwards is the
+       classic beginner mistake, so the flat is modelled rather than implied. */
+    g.add(box(THREE, lens, 0.10, 0.08, 0.44, -0.36, 0.38, 0));
+    /* Lead frame inside the epoxy: the big anvil is the cathode. */
+    const frame = new THREE.MeshStandardMaterial({color:0x8A9099, metalness:.85, roughness:.35});
+    g.add(box(THREE, frame, 0.20, 0.16, 0.20, -0.16, 0.62, 0));        // reflector cup
+    g.add(box(THREE, frame, 0.07, 0.34, 0.07,  0.16, 0.54, 0));        // anode post
+    pinAt(THREE, g, L, -0.16, 0, 0.42);                                // cathode (short)
+    pinAt(THREE, g, L,  0.16, 0, 0.54);                                // anode  (long)
+    silk(THREE, g, 0, 0, 0.9, 0.5);
     return g;
   }
 
@@ -408,10 +1052,19 @@
     const b = cyl(THREE, body, 0.24,0.24, 0.95, 18, 0, 0.72, 0); b.rotation.z = Math.PI/2; g.add(b);
     const bd = cyl(THREE, band, 0.25,0.25, 0.14, 18, -0.30, 0.72, 0);  // cathode band
     bd.rotation.z = Math.PI/2; g.add(bd);
+    /* Rounded glass-body ends, so it reads as a DO-41 rather than a cut rod. */
+    for (const s of [-1,1]) {
+      const cap = new THREE.Mesh(new THREE.SphereGeometry(0.24, 14, 8, 0, Math.PI*2, 0, Math.PI/2), body);
+      cap.position.set(s*0.475, 0.72, 0); cap.rotation.z = s*Math.PI/2; g.add(cap);
+    }
     for (const s of [-1,1]) {
       const run = cyl(THREE, L, 0.045,0.045, 0.6, 8, s*0.78, 0.72, 0); run.rotation.z = Math.PI/2; g.add(run);
-      g.add(pin(THREE, L, s*1.06, 0, 0.72));
+      const knee = new THREE.Mesh(new THREE.TorusGeometry(0.10, 0.045, 6, 10, Math.PI/2), L);
+      knee.position.set(s*0.96, 0.62, 0); knee.rotation.x = Math.PI/2;
+      knee.rotation.z = s > 0 ? 0 : Math.PI/2; g.add(knee);
+      pinAt(THREE, g, L, s*1.06, 0, 0.62);
     }
+    silk(THREE, g, 0, 0, 2.3, 0.7);
     return g;
   }
 
@@ -420,9 +1073,23 @@
     const body = new THREE.MeshStandardMaterial({color:BLACK, metalness:.25, roughness:.6});
     const cap  = new THREE.MeshStandardMaterial({color:0xC23B3B, metalness:.2, roughness:.5});
     const L = leadMat(THREE);
+    const metal = new THREE.MeshStandardMaterial({color:0xB9C2CC, metalness:.8, roughness:.32});
     g.add(box(THREE, body, 1.25, 0.5, 1.25, 0, 0.25, 0));              // tactile switch body
-    g.add(cyl(THREE, cap, 0.24,0.24, 0.32, 18, 0, 0.62, 0));           // plunger
-    for (const sx of [-1,1]) for (const sz of [-1,1]) g.add(pin(THREE, L, sx*0.55, sz*0.55, 0.12));
+    /* Stainless top plate with the dimple the dome snaps against, and the
+       moulded ring the plunger rides in. */
+    g.add(box(THREE, metal, 1.18, 0.05, 1.18, 0, 0.52, 0));
+    g.add(cyl(THREE, body, 0.34,0.34, 0.10, 18, 0, 0.58, 0));
+    g.add(cyl(THREE, cap, 0.24,0.24, 0.32, 18, 0, 0.72, 0));           // plunger
+    g.add(cyl(THREE, cap, 0.26,0.22, 0.05, 18, 0, 0.90, 0));           // domed cap face
+    /* Corner chamfers and the moulding seam around the body sides. */
+    g.add(box(THREE, new THREE.MeshStandardMaterial({color:0x0E0E12, roughness:.7}),
+              1.27, 0.03, 1.27, 0, 0.30, 0));
+    for (const sx of [-1,1]) for (const sz of [-1,1]) {
+      /* Gull-wing shoulder out of the body before the lead turns down. */
+      g.add(box(THREE, L, 0.20, 0.05, 0.14, sx*0.66, 0.16, sz*0.45));
+      pinAt(THREE, g, L, sx*0.72, sz*0.45, 0.16);
+    }
+    silk(THREE, g, 0, 0, 1.45, 1.45);
     return g;
   }
 
@@ -432,11 +1099,20 @@
     const G = goldMat(THREE);
     const pitch = 0.55, span = (n-1)*pitch;
     g.add(box(THREE, body, span + 0.5, 0.42, 0.5, 0, 0.21, 0));        // plastic strip
+    const dk = new THREE.MeshStandardMaterial({color:0x0D0D11, roughness:.75});
     for (let i=0;i<n;i++){
       const x = -span/2 + i*pitch;
       g.add(box(THREE, G, 0.13, 1.35, 0.13, x, 0.62, 0));              // square pin above
       g.add(box(THREE, G, 0.11, 0.55, 0.11, x, -0.20, 0));             // and below the board
+      /* Chamfered pin tip, the moulded well each pin sits in, and a pad. */
+      g.add(box(THREE, G, 0.09, 0.09, 0.09, x, 1.32, 0));
+      g.add(box(THREE, dk, 0.26, 0.05, 0.26, x, 0.44, 0));
+      pad(THREE, g, x, 0, 0.065);
     }
+    /* Pin-1 square silkscreen marker: on a header this is the only orientation cue. */
+    const wht = new THREE.MeshStandardMaterial({color:0xE8ECEF, roughness:.85});
+    g.add(box(THREE, wht, 0.24, 0.012, 0.24, -span/2, 0.008, 0.44));
+    silk(THREE, g, 0, 0, span + 0.62, 0.62);
     return g;
   }
 
@@ -450,13 +1126,29 @@
     const notch = cyl(THREE, new THREE.MeshStandardMaterial({color:0x141418, roughness:.7}), 0.17,0.17, 0.06, 16, -W/2 + 0.08, 0.30 + H, 0);
     notch.rotation.x = Math.PI/2; g.add(notch);
     g.add(cyl(THREE, new THREE.MeshStandardMaterial({color:0x141418, roughness:.7}), 0.10,0.10, 0.05, 14, -W/2 + 0.30, 0.30 + H, -D/2 + 0.28).rotateX(Math.PI/2));
+    /* Moulding parting line round the package sides, and the two ejector-pin
+       dimples on top -- small, but they are why a real DIP never looks like a
+       plain extruded block. */
+    const seam = new THREE.MeshStandardMaterial({color:0x141418, roughness:.75});
+    g.add(box(THREE, seam, W + 0.015, 0.025, D + 0.015, 0, 0.30 + H/2, 0));
+    for (const sz of [-1,1]) {
+      g.add(cyl(THREE, seam, 0.07,0.07, 0.04, 12, W/2 - 0.34, 0.30 + H, sz*(D/2 - 0.34)).rotateX(Math.PI/2));
+    }
+    /* Printed part marking on the top face. */
+    const ink = new THREE.MeshStandardMaterial({color:0xB9BEC6, roughness:.8});
+    for (let r=0;r<2;r++) for (let c=0;c<4;c++) {
+      g.add(box(THREE, ink, 0.11, 0.02, 0.16, -0.36 + c*0.24, 0.30 + H + 0.015, -0.28 + r*0.34));
+    }
     for (let i=0;i<4;i++){                                             // 4 pins a side
       const z = -D/2 + 0.32 + i*0.42;
       for (const sx of [-1,1]) {
         g.add(box(THREE, L, 0.28, 0.06, 0.16, sx*(W/2 + 0.11), 0.42, z));   // shoulder
         g.add(box(THREE, L, 0.09, 0.75, 0.16, sx*(W/2 + 0.22), 0.06, z));   // leg
+        g.add(box(THREE, L, 0.07, 0.10, 0.11, sx*(W/2 + 0.22), -0.32, z));  // tapered tip
+        pad(THREE, g, sx*(W/2 + 0.22), z, 0.06);
       }
     }
+    silk(THREE, g, 0, 0, W + 0.20, D + 0.20);
     return g;
   }
 
@@ -465,11 +1157,24 @@
     const can = new THREE.MeshStandardMaterial({color:0x2C3E56, metalness:.55, roughness:.42});
     const shaft = new THREE.MeshStandardMaterial({color:0xD8DEE6, metalness:.7, roughness:.35});
     const L = leadMat(THREE);
+    const dk = new THREE.MeshStandardMaterial({color:0x1A2432, roughness:.7});
     g.add(cyl(THREE, can, 0.70,0.70, 0.45, 24, 0, 0.28, 0));           // round body
+    /* Crimped rim round the can, and the moulded base the pins come through. */
+    g.add(cyl(THREE, shaft, 0.72,0.72, 0.06, 24, 0, 0.48, 0));
+    g.add(cyl(THREE, dk, 0.74,0.74, 0.10, 24, 0, 0.06, 0));
+    /* Rotation-limit stops and the printed resistance code on the can face. */
+    for (const s of [-1,1]) g.add(box(THREE, dk, 0.10, 0.06, 0.10, s*0.46, 0.53, -0.46));
+    const ink = new THREE.MeshStandardMaterial({color:0xD4D9DF, roughness:.8});
+    for (let i=0;i<4;i++) g.add(box(THREE, ink, 0.09, 0.03, 0.16, -0.24 + i*0.16, 0.30, 0.705));
+
     g.add(cyl(THREE, shaft, 0.16,0.16, 0.85, 16, 0, 0.90, 0));         // adjustment shaft
-    const slot = box(THREE, new THREE.MeshStandardMaterial({color:0x3A3A42, roughness:.6}), 0.26, 0.05, 0.06, 0, 1.32, 0);
+    g.add(cyl(THREE, shaft, 0.24,0.24, 0.08, 16, 0, 1.28, 0));         // slotted head
+    const slot = box(THREE, new THREE.MeshStandardMaterial({color:0x3A3A42, roughness:.6}), 0.42, 0.06, 0.07, 0, 1.33, 0);
     g.add(slot);                                                       // screwdriver slot
-    for (const x of [-0.5, 0, 0.5]) g.add(pin(THREE, L, x, 0.45, 0.16));  // wiper + two ends
+    /* An index mark on the head, so which way it has been turned is readable. */
+    g.add(box(THREE, ink, 0.06, 0.03, 0.10, 0.15, 1.33, 0.12));
+    for (const x of [-0.5, 0, 0.5]) pinAt(THREE, g, L, x, 0.45, 0.10);  // wiper + two ends
+    silk(THREE, g, 0, 0.22, 1.6, 1.3);
     return g;
   }
 
@@ -590,8 +1295,18 @@
   const VIEW_HINT = {
     pvmodule: { phi: 0.62 },
     groundrod: { phi: 1.30 },   // lower, so the buried length reads against grade
-    blank:    { phi: 0.95 },
-    cablemgr: { phi: 0.95 }
+    /* Rack gear is wide, shallow and carries all of its detail on the faceplate.
+       At the default phi the camera looks down onto the lid and the ports, bays
+       and displays are edge-on and unreadable, so these open near eye level. */
+    server:    { phi: 1.44 },
+    server2u:  { phi: 1.44 },
+    netswitch: { phi: 1.44 },
+    storage:   { phi: 1.44 },
+    ups:       { phi: 1.40 },
+    pdu:       { phi: 1.44 },
+    kvm:       { phi: 1.20 },   // higher: the open keyboard tray is the subject
+    blank:     { phi: 1.44 },
+    cablemgr:  { phi: 1.32 }
   };
 
   /* ---------- composite assemblies ----------
