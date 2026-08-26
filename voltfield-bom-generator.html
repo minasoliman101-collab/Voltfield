@@ -281,7 +281,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <tbody id="bomBody"></tbody>
       </table>
     </div>
-    <p class="bomnote"><b>How to read this BOM:</b> component structure and quantities are engineering-typical for this class of equipment and scale with your configuration; costs are an indicative allocation of the catalog unit price (materials ≈ 70%, with labor, test, logistics and margin shown as roll-up lines), not supplier cost data. Actual OEM designs vary by manufacturer. Linked components (&ldquo;shop this part&rdquo;) jump to the matching buyable family in the catalog.</p>
+    <p class="bomnote"><b>How to read this BOM:</b> component structure and quantities are engineering-typical for this class of equipment and scale with your configuration; costs are an indicative allocation of the catalog unit price (materials ≈ 70%, with labor, test, logistics and margin shown as roll-up lines), not supplier cost data. Actual OEM designs vary by manufacturer. Linked components jump to the matching family in the spec library.</p>
     <div class="ad-unit" data-ad="incontent"></div>
   </div>
 </div>
@@ -350,7 +350,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div>
       <h4>Explore</h4>
-      <p><a href="index.html">Home</a> &nbsp;·&nbsp; <a href="voltfield-supply-catalog.html">All Parts catalog</a> &nbsp;·&nbsp; <a href="voltfield-suppliers.html">All Suppliers</a> &nbsp;·&nbsp; <a href="voltfield-insights.html">Insights</a> &nbsp;·&nbsp; <a href="whats-new.html">What's New</a> &nbsp;·&nbsp; <br><br><a href="voltfield-supply-catalog.html?quote=1">View sourcing list &rarr;</a></p>
+      <p><a href="index.html">Home</a> &nbsp;·&nbsp; <a href="voltfield-supply-catalog.html">All Parts catalog</a> &nbsp;·&nbsp; <a href="voltfield-suppliers.html">All Suppliers</a> &nbsp;·&nbsp; <a href="voltfield-insights.html">Insights</a> &nbsp;·&nbsp; <a href="whats-new.html">What's New</a> &nbsp;·&nbsp; <br><br><a href="voltfield-supply-catalog.html?quote=1">View saved list &rarr;</a></p>
     </div>
   </div>
 </footer>
@@ -460,7 +460,7 @@ function generate(){
     g.items.forEach(x=>{
       html+=`<tr>
         <td class="c-no">${String(x.no).padStart(3,'0')}</td>
-        <td class="c-name">${esc(x.name)}${x.link?` &nbsp;<a href="${x.link}">shop this part &rsaquo;</a>`:''}</td>
+        <td class="c-name">${esc(x.name)}${x.link?` &nbsp;<a href="${x.link}">see this family &rsaquo;</a>`:''}</td>
         <td class="c-mat">${esc(x.mat)}</td>
         <td class="c-spec">${esc(x.spec)}</td>
         <td class="c-qty r">${x.qty.toLocaleString()} ${esc(x.unit)}</td>

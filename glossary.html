@@ -33,28 +33,63 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    {"@type":"ListItem","position":3,"name":"Glossary","item":"https://voltfield.org/glossary.html"}
  ]},
  {"@type":"DefinedTermSet","name":"Voltfield Energy & Industrial Equipment Glossary","description":"Definitions for standards and terms used across data center, renewable, storage, oilfield, and industrial MRO procurement.","url":"https://voltfield.org/glossary.html","hasDefinedTerm":[
-   {"@type":"DefinedTerm","name":"ANSI C57","description":"The IEEE/ANSI C57 standard series governing power transformer design, testing, and performance requirements in North America."},
-   {"@type":"DefinedTerm","name":"API 5CT","description":"American Petroleum Institute specification covering casing and tubing (OCTG) used in oil and gas wells."},
+   {"@type":"DefinedTerm","name":"Ampacity","description":"The current a conductor can carry continuously without exceeding its temperature rating. The table value is a starting point, not an answer: it derates for ambient temperature and for how many conductors are bundled together, which is what turns a calculated size into an installed one. See LV power cable."},
+   {"@type":"DefinedTerm","name":"ANSI C57","description":"The IEEE/ANSI C57 standard series governs power transformer design, testing, and performance requirements in North America. It's the reference behind most of the specs on the Data Centers desk's transformer listings."},
+   {"@type":"DefinedTerm","name":"API 16A","description":"API specification covering drill-through equipment, including blowout preventers (BOPs)."},
+   {"@type":"DefinedTerm","name":"API 5CT","description":"An American Petroleum Institute specification covering casing and tubing — collectively OCTG — used in oil and gas wells."},
    {"@type":"DefinedTerm","name":"API 6A","description":"API specification covering wellhead and christmas tree equipment."},
    {"@type":"DefinedTerm","name":"API 7K","description":"API specification covering drilling and well-servicing structural equipment, including derricks and masts."},
-   {"@type":"DefinedTerm","name":"API 16A","description":"API specification covering drill-through equipment, including blowout preventers (BOPs)."},
-   {"@type":"DefinedTerm","name":"NFPA 855","description":"National Fire Protection Association standard for the installation of stationary energy storage systems."},
-   {"@type":"DefinedTerm","name":"UL 9540A","description":"UL test method evaluating thermal runaway fire propagation in battery energy storage systems."},
-   {"@type":"DefinedTerm","name":"FEOC","description":"Foreign Entity of Concern — restrictions on component sourcing that affect ITC eligibility and domestic-content bonus credits for solar and storage projects."},
-   {"@type":"DefinedTerm","name":"BOP","description":"Blowout Preventer — a large valve/stack assembly used to seal and control an oil or gas well to prevent an uncontrolled release."},
-   {"@type":"DefinedTerm","name":"BOS","description":"Balance of System — every component of a solar or storage installation other than the modules themselves, including racking, wiring, trackers, and inverters."},
-   {"@type":"DefinedTerm","name":"Christmas tree (wellhead)","description":"The assembly of valves, spools, and fittings mounted on top of a wellhead used to control production flow."},
-   {"@type":"DefinedTerm","name":"DC block (BESS)","description":"A modular, pre-integrated battery rack/module unit that serves as a building block of a larger battery energy storage system."},
-   {"@type":"DefinedTerm","name":"Domestic content bonus","description":"An additional US tax credit percentage available to projects that meet domestic-manufacturing thresholds for steel, iron, and manufactured components."},
-   {"@type":"DefinedTerm","name":"Grid-forming vs. grid-following","description":"Grid-forming inverters/PCS can establish their own voltage and frequency reference and operate independent of the grid; grid-following equipment synchronizes to an existing grid signal."},
-   {"@type":"DefinedTerm","name":"GSU transformer","description":"Generator Step-Up transformer — steps up voltage from a generator to transmission-line levels."},
-   {"@type":"DefinedTerm","name":"ITC","description":"Investment Tax Credit — the federal tax credit for renewable energy and storage projects under IRC Section 48/48E."},
-   {"@type":"DefinedTerm","name":"kVA vs. kW","description":"kVA (kilovolt-amperes) measures apparent power; kW (kilowatts) measures real, usable power. The ratio between the two is the power factor."},
-   {"@type":"DefinedTerm","name":"MCCB","description":"Molded-Case Circuit Breaker — an overcurrent protection device typically rated up to about 2,500 A."},
-   {"@type":"DefinedTerm","name":"OCTG","description":"Oil Country Tubular Goods — the collective term for tubulars used in oil and gas wells: casing, tubing, and drill pipe."},
-   {"@type":"DefinedTerm","name":"PCS","description":"Power Conversion System — equipment that converts DC battery power to AC (and back) for grid interconnection in a BESS."},
-   {"@type":"DefinedTerm","name":"Safe harbor (construction)","description":"IRS provisions that let a project lock in tax-credit eligibility by beginning construction or incurring qualifying costs before a deadline."}
- ]}
+   {"@type":"DefinedTerm","name":"Arc-flash boundary","description":"The distance from equipment at which incident energy falls to 1.2 cal/cm² — the threshold for a second-degree burn on bare skin. It follows from an incident-energy calculation, not from voltage alone, and NFPA 70E requires it on the equipment label. Covered in the arc-flash boundary guide."},
+   {"@type":"DefinedTerm","name":"ATS vs. STS","description":"Both transfer load between two sources. An automatic transfer switch is mechanical and takes long enough that downstream equipment sees an interruption; a static transfer switch is solid-state and fast enough that single-corded equipment never notices. The choice follows what the load can ride through."},
+   {"@type":"DefinedTerm","name":"Augmentation (BESS)","description":"Adding battery capacity partway through a storage project's life to offset degradation, so the system still meets its contracted energy at year 10 or 15. Planned up front as phased DC block additions rather than improvised later. See the augmentation guide."},
+   {"@type":"DefinedTerm","name":"Backtracking","description":"A tracker control strategy that rotates rows away from the optimal sun angle in early morning and late afternoon, so rows do not shade each other. It sacrifices some direct irradiance to avoid a much larger row-to-row shading loss. Handled by the row controller."},
+   {"@type":"DefinedTerm","name":"Bifacial gain","description":"The extra output a bifacial module produces from light striking its rear face. It depends entirely on what is underneath and around it — ground albedo, mounting height and row spacing — so the same module can gain a few percent on one site and closer to fifteen on another."},
+   {"@type":"DefinedTerm","name":"BIL (Basic Insulation Level)","description":"The peak impulse voltage a transformer or switchgear insulation system can withstand without flashover, expressed in kV. It is what protects equipment against lightning and switching surges, and it is chosen against the system voltage class rather than the operating voltage. One of the fields on a transformer nameplate."},
+   {"@type":"DefinedTerm","name":"Black start","description":"Bringing a generator or storage system online without an existing grid to synchronise to. It requires a grid-forming converter that can establish its own voltage and frequency reference; a grid-following unit cannot do it because it has nothing to follow."},
+   {"@type":"DefinedTerm","name":"BOP (Blowout Preventer)","description":"A large valve/stack assembly used to seal, control, and monitor an oil or gas well, preventing an uncontrolled release of fluids. Covered under API 16A on the Oil & Gas desk."},
+   {"@type":"DefinedTerm","name":"BOS (Balance of System)","description":"Every component of a solar or storage installation other than the modules themselves — racking, wiring, trackers, and inverters. See Renewables for BOS families in the catalog."},
+   {"@type":"DefinedTerm","name":"Busway (bus duct)","description":"Enclosed overhead conductors replacing large conduit runs. Plug-in sections let taps be added or moved without a shutdown, which suits halls that get reconfigured; feeder sections simply move current between two points. See busway."},
+   {"@type":"DefinedTerm","name":"CDU (Coolant Distribution Unit)","description":"The interface between a facility water loop and a direct-to-chip cooling loop, keeping the technology-side fluid clean, cool and at controlled pressure. Sized on approach temperature and pumping head rather than raw kW. See CDUs and the liquid vs air cooling guide."},
+   {"@type":"DefinedTerm","name":"Christmas tree (wellhead)","description":"The assembly of valves, spools, and fittings mounted on top of a wellhead used to control production flow, typically covered under API 6A."},
+   {"@type":"DefinedTerm","name":"Clipping (inverter)","description":"What happens when a solar array's DC output exceeds the inverter's AC rating and the surplus is simply not converted. It sounds wasteful and is usually deliberate: oversizing the array raises output through the shoulders of the day by more than the midday clipping costs. See the clipping and DC:AC ratio guide."},
+   {"@type":"DefinedTerm","name":"CRAH vs. CRAC","description":"Both are precision room-level cooling units. A CRAH uses chilled water supplied from a plant; a CRAC has its own refrigeration circuit. Sizing turns on sensible heat ratio rather than nominal tonnage, because a data hall load carries almost no latent component. See CRAH / CRAC units."},
+   {"@type":"DefinedTerm","name":"C-rate","description":"The rate a battery charges or discharges relative to its capacity. A 1C rate empties the system in one hour, 0.5C in two, 0.25C in four. It is the link between a project's power rating in MW and its energy rating in MWh, and it drives cell selection and thermal design."},
+   {"@type":"DefinedTerm","name":"DC block (BESS)","description":"A modular, pre-integrated battery rack/module unit that serves as a building block of a larger battery energy storage system — see the Battery Storage desk's Storage Blocks category."},
+   {"@type":"DefinedTerm","name":"DC:AC ratio","description":"The ratio of a solar array's installed DC capacity to its inverter AC capacity. Utility projects commonly run above 1.2, accepting some clipping at midday to raise total annual yield. Explained in the clipping guide."},
+   {"@type":"DefinedTerm","name":"Derating","description":"Reducing a component's allowable rating for the conditions it actually operates in — ambient temperature, altitude, conductor bundling, duty cycle. Nameplate ratings assume reference conditions that a real installation rarely matches, so derating is the normal case rather than the exception."},
+   {"@type":"DefinedTerm","name":"Domestic content bonus","description":"An additional US tax credit percentage available to projects meeting domestic-manufacturing thresholds for steel, iron, and manufactured components — evaluated separately from FEOC status. See the FEOC compliance guide for how the two interact."},
+   {"@type":"DefinedTerm","name":"Dry-type vs. liquid-filled","description":"Two ways of insulating and cooling a transformer. Liquid-filled units carry more load in less volume and generally last longer; dry-type units have no fluid to contain and so avoid the fire and spill provisions that push liquid units outdoors or into vaults. See dry-type transformers."},
+   {"@type":"DefinedTerm","name":"ESP (Electric Submersible Pump)","description":"An artificial-lift system whose motor, seal and multi-stage pump all sit downhole. It moves far more fluid than rod lift, but every component is at the bottom of the well, so a failure means a workover rig and a pulled string. See ESP systems."},
+   {"@type":"DefinedTerm","name":"FEOC (Foreign Entity of Concern)","description":"Restrictions on component sourcing that determine whether a solar or storage project's components disqualify it from ITC eligibility and the domestic-content bonus. Full detail in the FEOC compliance guide."},
+   {"@type":"DefinedTerm","name":"GOES (Grain-Oriented Electrical Steel)","description":"Silicon steel processed so its grain structure aligns with the magnetic flux path, which sharply reduces core loss. It is the material every transformer core is built from, and its constrained supply is the most-cited reason transformer lead times run into years. See electrical steel."},
+   {"@type":"DefinedTerm","name":"Grid-forming vs. grid-following","description":"Grid-forming inverters/PCS can establish their own voltage and frequency reference and operate independent of the grid. Grid-following equipment instead synchronizes to an existing grid signal. Both appear on the Battery Storage desk's Power Conversion category."},
+   {"@type":"DefinedTerm","name":"GSU transformer (Generator Step-Up)","description":"Steps up voltage from a generator to transmission-line levels — used at power plants, substations, and utility-scale renewable sites."},
+   {"@type":"DefinedTerm","name":"Impedance (%Z)","description":"A transformer's internal impedance, expressed as the percentage of rated voltage needed to drive rated current into a short circuit. It sets how much fault current reaches everything downstream: a lower %Z is a stiffer source and a higher available fault current. Specifying a transformer on kVA alone and ignoring %Z is how switchgear ends up under-rated."},
+   {"@type":"DefinedTerm","name":"Incident energy","description":"The thermal energy an arc flash would deliver to a surface at a given distance, in cal/cm². It is what determines the required PPE category and the arc-flash boundary, and it depends on available fault current and how long the upstream device takes to clear — so faster protection means lower incident energy."},
+   {"@type":"DefinedTerm","name":"Interrupting rating (AIC)","description":"The maximum fault current a breaker or fuse can safely interrupt. It must exceed the fault current available at its point of installation, which is set by the upstream transformer's impedance. A device correctly sized for load but under-rated for fault current can fail catastrophically instead of clearing."},
+   {"@type":"DefinedTerm","name":"ITC (Investment Tax Credit)","description":"The federal tax credit for renewable energy and storage projects under IRC Section 48/48E, subject to FEOC and content-sourcing rules."},
+   {"@type":"DefinedTerm","name":"K-factor","description":"A rating stating how much additional eddy-current heating from harmonic load a transformer can absorb. K-4 through K-20 units appear wherever switch-mode power supplies and variable-frequency drives dominate the connected load. See K-rated transformers."},
+   {"@type":"DefinedTerm","name":"kVA vs. kW","description":"kVA (kilovolt-amperes) measures apparent power; kW (kilowatts) measures real, usable power. The ratio between the two is the power factor — relevant when sizing transformers and generators."},
+   {"@type":"DefinedTerm","name":"LFP vs. NMC","description":"The two dominant lithium chemistries in grid storage. Lithium iron phosphate trades energy density for thermal stability and cycle life; nickel manganese cobalt packs more energy into the same footprint but has a lower thermal-runaway threshold, which drives more demanding fire protection. For a system that sits on a pad for twenty years, LFP has become the default."},
+   {"@type":"DefinedTerm","name":"MCCB (Molded-Case Circuit Breaker)","description":"An overcurrent protection device typically rated up to about 2,500 A, sitting between miniature breakers and large power breakers."},
+   {"@type":"DefinedTerm","name":"Metal-clad vs. metal-enclosed","description":"Both describe switchgear in a grounded metal enclosure, but metal-clad adds specific requirements: drawout breakers, insulated bus, and grounded metal barriers between compartments. Those barriers decide what can be worked on safely while the lineup stays energised. See the switchgear compartments guide."},
+   {"@type":"DefinedTerm","name":"MPPT (Maximum Power Point Tracking)","description":"The inverter function that continuously adjusts operating voltage to extract the most power from a string as irradiance and temperature change. How finely an inverter divides its inputs into separate MPPT zones determines how much a shaded or soiled section drags down the rest."},
+   {"@type":"DefinedTerm","name":"N+1, N+2 and 2N","description":"Redundancy notations. N is exactly the capacity the load needs; N+1 adds one spare unit; N+2 adds two; 2N duplicates the entire system on independent paths. 2N tolerates a whole-path failure, including maintenance on one side, which N+1 does not."},
+   {"@type":"DefinedTerm","name":"NACE / sour service","description":"Material requirements for equipment exposed to hydrogen sulphide, now published as ANSI/NACE MR0175 / ISO 15156. Sour service constrains alloy choice and hardness to resist sulphide stress cracking, and it disqualifies materials that would otherwise suit the pressure and temperature."},
+   {"@type":"DefinedTerm","name":"NFPA 70E","description":"The US standard for electrical safety in the workplace. It defines the risk-assessment process, approach boundaries and PPE requirements for work on or near energised equipment, and it is the reason incident energy appears on equipment labels at all."},
+   {"@type":"DefinedTerm","name":"NFPA 855","description":"The National Fire Protection Association standard for the installation of stationary energy storage systems — a core compliance reference for the Battery Storage desk. See the BESS fire safety basics guide for what it actually requires."},
+   {"@type":"DefinedTerm","name":"OCTG (Oil Country Tubular Goods)","description":"The collective term for tubulars used in oil and gas wells: casing, tubing, and drill pipe, typically specified under API 5CT."},
+   {"@type":"DefinedTerm","name":"PCS (Power Conversion System)","description":"Equipment that converts DC battery power to AC (and back) for grid interconnection in a BESS — see grid-forming vs. grid-following for the two operating modes."},
+   {"@type":"DefinedTerm","name":"Preload (bolted joints)","description":"The clamping tension a bolt holds after tightening. It is what makes a flanged joint seal and what stops a bolt loosening under vibration — not the bolt's grade on its own. Achieved through a defined tightening sequence and torque or tension value, and it is why a joint is retensioned rather than simply retightened."},
+   {"@type":"DefinedTerm","name":"PUE (Power Usage Effectiveness)","description":"Total facility power divided by IT equipment power. A PUE of 1.0 would mean every watt reaches IT equipment; real facilities sit between roughly 1.1 and 2.0. It measures overhead, not efficiency of the computing itself, and it moves with climate and load factor. See the PUE guide."},
+   {"@type":"DefinedTerm","name":"RTJ gasket (ring-joint)","description":"A metal ring that seals a flanged joint by deforming plastically into machined grooves under bolt preload. Because it seals by permanent deformation it is single-use, and reusing one is a recurring cause of joint leaks in high-pressure service."},
+   {"@type":"DefinedTerm","name":"Safe harbor (construction)","description":"IRS provisions that let a project lock in tax-credit eligibility by beginning construction or incurring qualifying costs before a deadline — referenced directly in the FEOC compliance guide."},
+   {"@type":"DefinedTerm","name":"SCCR (Short-Circuit Current Rating)","description":"The fault current an entire assembly — not just one device — can withstand. It is set by the weakest component in the assembly, so a panel full of well-rated parts can still carry a low SCCR because of one item. Distinct from a single device's interrupting rating."},
+   {"@type":"DefinedTerm","name":"Selective coordination","description":"Arranging protective devices so that only the one nearest a fault opens, leaving everything upstream energised. It is demonstrated by comparing time-current curves across the whole path, which is why it is a system property rather than a device setting. See the short-circuit and coordination guide."},
+   {"@type":"DefinedTerm","name":"SoC and SoH","description":"State of charge is how full a battery is right now; state of health is how much of its original capacity remains after ageing. The battery management system estimates both, and the accuracy of those estimates determines usable capacity and whether warranty terms are met."},
+   {"@type":"DefinedTerm","name":"UL 9540A","description":"A UL test method evaluating thermal runaway fire propagation in battery energy storage systems, alongside NFPA 855 installation requirements. See the BESS fire safety basics guide for how the two standards fit together."},
+   {"@type":"DefinedTerm","name":"Vector group","description":"A transformer's winding configuration and the phase displacement between its primary and secondary, written as codes like Dyn11. It determines whether two transformers can be paralleled and how the system is earthed, and it is one of the fields on every nameplate."}
+  ]}
 ]}
 </script>
 <link rel="manifest" href="manifest.json">
@@ -188,92 +223,230 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="#pcs">PCS</a><a href="#safe-harbor">Safe harbor</a><a href="#ul-9540a">UL 9540A</a>
   </div>
 
-  <div class="term" id="ansi-c57">
-    <h3>ANSI C57</h3>
-    <p>The IEEE/ANSI C57 standard series governs power transformer design, testing, and performance requirements in North America. It's the reference behind most of the specs on the <a class="inline" href="data-centers.html">Data Centers</a> desk's transformer listings.</p>
-  </div>
-  <div class="term" id="api-5ct">
-    <h3>API 5CT</h3>
-    <p>An American Petroleum Institute specification covering casing and tubing — collectively <a class="inline" href="#octg">OCTG</a> — used in oil and gas wells.</p>
-  </div>
-  <div class="term" id="api-6a">
-    <h3>API 6A</h3>
-    <p>API specification covering wellhead and <a class="inline" href="#christmas-tree">christmas tree</a> equipment.</p>
-  </div>
-  <div class="term" id="api-7k">
-    <h3>API 7K</h3>
-    <p>API specification covering drilling and well-servicing structural equipment, including derricks and masts.</p>
-  </div>
-  <div class="term" id="api-16a">
-    <h3>API 16A</h3>
-    <p>API specification covering drill-through equipment, including <a class="inline" href="#bop">blowout preventers (BOPs)</a>.</p>
-  </div>
-  <div class="term" id="bop">
-    <h3>BOP (Blowout Preventer)</h3>
-    <p>A large valve/stack assembly used to seal, control, and monitor an oil or gas well, preventing an uncontrolled release of fluids. Covered under API 16A on the <a class="inline" href="oil-gas.html">Oil &amp; Gas</a> desk.</p>
-  </div>
-  <div class="term" id="bos">
-    <h3>BOS (Balance of System)</h3>
-    <p>Every component of a solar or storage installation other than the modules themselves — racking, wiring, trackers, and inverters. See <a class="inline" href="renewables.html">Renewables</a> for BOS families in the catalog.</p>
-  </div>
-  <div class="term" id="christmas-tree">
-    <h3>Christmas tree (wellhead)</h3>
-    <p>The assembly of valves, spools, and fittings mounted on top of a wellhead used to control production flow, typically covered under API 6A.</p>
-  </div>
-  <div class="term" id="dc-block">
-    <h3>DC block (BESS)</h3>
-    <p>A modular, pre-integrated battery rack/module unit that serves as a building block of a larger battery energy storage system — see the <a class="inline" href="battery-storage.html">Battery Storage</a> desk's Storage Blocks category.</p>
-  </div>
-  <div class="term" id="domestic-content-bonus">
-    <h3>Domestic content bonus</h3>
-    <p>An additional US tax credit percentage available to projects meeting domestic-manufacturing thresholds for steel, iron, and manufactured components — evaluated separately from <a class="inline" href="#feoc">FEOC</a> status. See the <a class="inline" href="guide-feoc-compliance.html">FEOC compliance guide</a> for how the two interact.</p>
-  </div>
-  <div class="ad-unit" data-ad="incontent"></div>
-
-  <div class="term" id="feoc">
-    <h3>FEOC (Foreign Entity of Concern)</h3>
-    <p>Restrictions on component sourcing that determine whether a solar or storage project's components disqualify it from <a class="inline" href="#itc">ITC</a> eligibility and the domestic-content bonus. Full detail in the <a class="inline" href="guide-feoc-compliance.html">FEOC compliance guide</a>.</p>
-  </div>
-  <div class="term" id="grid-forming">
-    <h3>Grid-forming vs. grid-following</h3>
-    <p>Grid-forming inverters/<a class="inline" href="#pcs">PCS</a> can establish their own voltage and frequency reference and operate independent of the grid. Grid-following equipment instead synchronizes to an existing grid signal. Both appear on the <a class="inline" href="battery-storage.html">Battery Storage</a> desk's Power Conversion category.</p>
-  </div>
-  <div class="term" id="gsu">
-    <h3>GSU transformer (Generator Step-Up)</h3>
-    <p>Steps up voltage from a generator to transmission-line levels — used at power plants, substations, and utility-scale renewable sites.</p>
-  </div>
-  <div class="term" id="itc">
-    <h3>ITC (Investment Tax Credit)</h3>
-    <p>The federal tax credit for renewable energy and storage projects under IRC Section 48/48E, subject to <a class="inline" href="#feoc">FEOC</a> and content-sourcing rules.</p>
-  </div>
-  <div class="term" id="kva-vs-kw">
-    <h3>kVA vs. kW</h3>
-    <p>kVA (kilovolt-amperes) measures apparent power; kW (kilowatts) measures real, usable power. The ratio between the two is the power factor — relevant when sizing transformers and generators.</p>
-  </div>
-  <div class="term" id="mccb">
-    <h3>MCCB (Molded-Case Circuit Breaker)</h3>
-    <p>An overcurrent protection device typically rated up to about 2,500 A, sitting between miniature breakers and large power breakers.</p>
-  </div>
-  <div class="term" id="nfpa-855">
-    <h3>NFPA 855</h3>
-    <p>The National Fire Protection Association standard for the installation of stationary energy storage systems — a core compliance reference for the <a class="inline" href="battery-storage.html">Battery Storage</a> desk. See the <a class="inline" href="guide-bess-fire-safety-nfpa-855.html">BESS fire safety basics guide</a> for what it actually requires.</p>
-  </div>
-  <div class="term" id="octg">
-    <h3>OCTG (Oil Country Tubular Goods)</h3>
-    <p>The collective term for tubulars used in oil and gas wells: casing, tubing, and drill pipe, typically specified under API 5CT.</p>
-  </div>
-  <div class="term" id="pcs">
-    <h3>PCS (Power Conversion System)</h3>
-    <p>Equipment that converts DC battery power to AC (and back) for grid interconnection in a BESS — see <a class="inline" href="#grid-forming">grid-forming vs. grid-following</a> for the two operating modes.</p>
-  </div>
-  <div class="term" id="safe-harbor">
-    <h3>Safe harbor (construction)</h3>
-    <p>IRS provisions that let a project lock in tax-credit eligibility by beginning construction or incurring qualifying costs before a deadline — referenced directly in the <a class="inline" href="guide-feoc-compliance.html">FEOC compliance guide</a>.</p>
-  </div>
-  <div class="term" id="ul-9540a">
-    <h3>UL 9540A</h3>
-    <p>A UL test method evaluating thermal runaway fire propagation in battery energy storage systems, alongside <a class="inline" href="#nfpa-855">NFPA 855</a> installation requirements. See the <a class="inline" href="guide-bess-fire-safety-nfpa-855.html">BESS fire safety basics guide</a> for how the two standards fit together.</p>
-  </div>
+    <div class="term" id="ampacity">
+      <h3>Ampacity</h3>
+      <p>The current a conductor can carry continuously without exceeding its temperature rating. The table value is a starting point, not an answer: it derates for ambient temperature and for how many conductors are bundled together, which is what turns a calculated size into an installed one. See <a class="inline" href="parts/lv-power-cable.html">LV power cable</a>.</p>
+    </div>
+    <div class="term" id="ansi-c57">
+      <h3>ANSI C57</h3>
+      <p>The IEEE/ANSI C57 standard series governs power transformer design, testing, and performance requirements in North America. It's the reference behind most of the specs on the <a class="inline" href="data-centers.html">Data Centers</a> desk's transformer listings.</p>
+    </div>
+    <div class="term" id="api-16a">
+      <h3>API 16A</h3>
+      <p>API specification covering drill-through equipment, including <a class="inline" href="#bop">blowout preventers (BOPs)</a>.</p>
+    </div>
+    <div class="term" id="api-5ct">
+      <h3>API 5CT</h3>
+      <p>An American Petroleum Institute specification covering casing and tubing — collectively <a class="inline" href="#octg">OCTG</a> — used in oil and gas wells.</p>
+    </div>
+    <div class="term" id="api-6a">
+      <h3>API 6A</h3>
+      <p>API specification covering wellhead and <a class="inline" href="#christmas-tree">christmas tree</a> equipment.</p>
+    </div>
+    <div class="term" id="api-7k">
+      <h3>API 7K</h3>
+      <p>API specification covering drilling and well-servicing structural equipment, including derricks and masts.</p>
+    </div>
+    <div class="term" id="arc-flash-boundary">
+      <h3>Arc-flash boundary</h3>
+      <p>The distance from equipment at which incident energy falls to 1.2 cal/cm&sup2; &mdash; the threshold for a second-degree burn on bare skin. It follows from an incident-energy calculation, not from voltage alone, and <a class="inline" href="#nfpa-70e">NFPA 70E</a> requires it on the equipment label. Covered in the <a class="inline" href="guide-arc-flash-boundary-basics.html">arc-flash boundary guide</a>.</p>
+    </div>
+    <div class="term" id="ats-sts">
+      <h3>ATS vs. STS</h3>
+      <p>Both transfer load between two sources. An automatic transfer switch is mechanical and takes long enough that downstream equipment sees an interruption; a <a class="inline" href="parts/static-transfer-switches.html">static transfer switch</a> is solid-state and fast enough that single-corded equipment never notices. The choice follows what the load can ride through.</p>
+    </div>
+    <div class="term" id="augmentation">
+      <h3>Augmentation (BESS)</h3>
+      <p>Adding battery capacity partway through a storage project's life to offset degradation, so the system still meets its contracted energy at year 10 or 15. Planned up front as phased <a class="inline" href="#dc-block">DC block</a> additions rather than improvised later. See the <a class="inline" href="guide-bess-augmentation.html">augmentation guide</a>.</p>
+    </div>
+    <div class="term" id="backtracking">
+      <h3>Backtracking</h3>
+      <p>A tracker control strategy that rotates rows away from the optimal sun angle in early morning and late afternoon, so rows do not shade each other. It sacrifices some direct irradiance to avoid a much larger row-to-row shading loss. Handled by the <a class="inline" href="parts/tracker-drives-and-row-controllers.html">row controller</a>.</p>
+    </div>
+    <div class="term" id="bifacial-gain">
+      <h3>Bifacial gain</h3>
+      <p>The extra output a <a class="inline" href="parts/bifacial-modules.html">bifacial module</a> produces from light striking its rear face. It depends entirely on what is underneath and around it &mdash; ground albedo, mounting height and row spacing &mdash; so the same module can gain a few percent on one site and closer to fifteen on another.</p>
+    </div>
+    <div class="term" id="bil">
+      <h3>BIL (Basic Insulation Level)</h3>
+      <p>The peak impulse voltage a transformer or switchgear insulation system can withstand without flashover, expressed in kV. It is what protects equipment against lightning and switching surges, and it is chosen against the system voltage class rather than the operating voltage. One of the fields on a <a class="inline" href="guide-transformer-nameplate.html">transformer nameplate</a>.</p>
+    </div>
+    <div class="term" id="black-start">
+      <h3>Black start</h3>
+      <p>Bringing a generator or storage system online without an existing grid to synchronise to. It requires a <a class="inline" href="parts/grid-forming-pcs.html">grid-forming</a> converter that can establish its own voltage and frequency reference; a grid-following unit cannot do it because it has nothing to follow.</p>
+    </div>
+    <div class="term" id="bop">
+      <h3>BOP (Blowout Preventer)</h3>
+      <p>A large valve/stack assembly used to seal, control, and monitor an oil or gas well, preventing an uncontrolled release of fluids. Covered under API 16A on the <a class="inline" href="oil-gas.html">Oil &amp; Gas</a> desk.</p>
+    </div>
+    <div class="term" id="bos">
+      <h3>BOS (Balance of System)</h3>
+      <p>Every component of a solar or storage installation other than the modules themselves — racking, wiring, trackers, and inverters. See <a class="inline" href="renewables.html">Renewables</a> for BOS families in the catalog.</p>
+    </div>
+    <div class="term" id="busway">
+      <h3>Busway (bus duct)</h3>
+      <p>Enclosed overhead conductors replacing large conduit runs. Plug-in sections let taps be added or moved without a shutdown, which suits halls that get reconfigured; feeder sections simply move current between two points. See <a class="inline" href="parts/busway-feeder-plug-in.html">busway</a>.</p>
+    </div>
+    <div class="term" id="cdu">
+      <h3>CDU (Coolant Distribution Unit)</h3>
+      <p>The interface between a facility water loop and a direct-to-chip cooling loop, keeping the technology-side fluid clean, cool and at controlled pressure. Sized on approach temperature and pumping head rather than raw kW. See <a class="inline" href="parts/coolant-distribution-units-cdu.html">CDUs</a> and the <a class="inline" href="guide-liquid-vs-air-cooling.html">liquid vs air cooling guide</a>.</p>
+    </div>
+    <div class="term" id="christmas-tree">
+      <h3>Christmas tree (wellhead)</h3>
+      <p>The assembly of valves, spools, and fittings mounted on top of a wellhead used to control production flow, typically covered under API 6A.</p>
+    </div>
+    <div class="term" id="clipping">
+      <h3>Clipping (inverter)</h3>
+      <p>What happens when a solar array's DC output exceeds the inverter's AC rating and the surplus is simply not converted. It sounds wasteful and is usually deliberate: oversizing the array raises output through the shoulders of the day by more than the midday clipping costs. See the <a class="inline" href="guide-inverter-clipping-ratio.html">clipping and DC:AC ratio guide</a>.</p>
+    </div>
+    <div class="term" id="crah-crac">
+      <h3>CRAH vs. CRAC</h3>
+      <p>Both are precision room-level cooling units. A CRAH uses chilled water supplied from a plant; a CRAC has its own refrigeration circuit. Sizing turns on sensible heat ratio rather than nominal tonnage, because a data hall load carries almost no latent component. See <a class="inline" href="parts/crah-crac-units.html">CRAH / CRAC units</a>.</p>
+    </div>
+    <div class="term" id="c-rate">
+      <h3>C-rate</h3>
+      <p>The rate a battery charges or discharges relative to its capacity. A 1C rate empties the system in one hour, 0.5C in two, 0.25C in four. It is the link between a project's power rating in MW and its energy rating in MWh, and it drives cell selection and thermal design.</p>
+    </div>
+    <div class="term" id="dc-block">
+      <h3>DC block (BESS)</h3>
+      <p>A modular, pre-integrated battery rack/module unit that serves as a building block of a larger battery energy storage system — see the <a class="inline" href="battery-storage.html">Battery Storage</a> desk's Storage Blocks category.</p>
+    </div>
+    <div class="term" id="dc-ac-ratio">
+      <h3>DC:AC ratio</h3>
+      <p>The ratio of a solar array's installed DC capacity to its inverter AC capacity. Utility projects commonly run above 1.2, accepting some <a class="inline" href="#clipping">clipping</a> at midday to raise total annual yield. Explained in the <a class="inline" href="guide-inverter-clipping-ratio.html">clipping guide</a>.</p>
+    </div>
+    <div class="term" id="derating">
+      <h3>Derating</h3>
+      <p>Reducing a component's allowable rating for the conditions it actually operates in &mdash; ambient temperature, altitude, conductor bundling, duty cycle. Nameplate ratings assume reference conditions that a real installation rarely matches, so derating is the normal case rather than the exception.</p>
+    </div>
+    <div class="term" id="domestic-content-bonus">
+      <h3>Domestic content bonus</h3>
+      <p>An additional US tax credit percentage available to projects meeting domestic-manufacturing thresholds for steel, iron, and manufactured components — evaluated separately from <a class="inline" href="#feoc">FEOC</a> status. See the <a class="inline" href="guide-feoc-compliance.html">FEOC compliance guide</a> for how the two interact.</p>
+    </div>
+    <div class="term" id="dry-type">
+      <h3>Dry-type vs. liquid-filled</h3>
+      <p>Two ways of insulating and cooling a transformer. Liquid-filled units carry more load in less volume and generally last longer; dry-type units have no fluid to contain and so avoid the fire and spill provisions that push liquid units outdoors or into vaults. See <a class="inline" href="parts/dry-type-cast-resin-transformers.html">dry-type transformers</a>.</p>
+    </div>
+    <div class="term" id="esp">
+      <h3>ESP (Electric Submersible Pump)</h3>
+      <p>An artificial-lift system whose motor, seal and multi-stage pump all sit downhole. It moves far more fluid than rod lift, but every component is at the bottom of the well, so a failure means a workover rig and a pulled string. See <a class="inline" href="parts/esp-systems.html">ESP systems</a>.</p>
+    </div>
+    <div class="term" id="feoc">
+      <h3>FEOC (Foreign Entity of Concern)</h3>
+      <p>Restrictions on component sourcing that determine whether a solar or storage project's components disqualify it from <a class="inline" href="#itc">ITC</a> eligibility and the domestic-content bonus. Full detail in the <a class="inline" href="guide-feoc-compliance.html">FEOC compliance guide</a>.</p>
+    </div>
+    <div class="term" id="goes">
+      <h3>GOES (Grain-Oriented Electrical Steel)</h3>
+      <p>Silicon steel processed so its grain structure aligns with the magnetic flux path, which sharply reduces core loss. It is the material every transformer core is built from, and its constrained supply is the most-cited reason <a class="inline" href="guide-transformer-lead-times.html">transformer lead times</a> run into years. See <a class="inline" href="parts/electrical-steel-and-core-laminations.html">electrical steel</a>.</p>
+    </div>
+    <div class="term" id="grid-forming">
+      <h3>Grid-forming vs. grid-following</h3>
+      <p>Grid-forming inverters/<a class="inline" href="#pcs">PCS</a> can establish their own voltage and frequency reference and operate independent of the grid. Grid-following equipment instead synchronizes to an existing grid signal. Both appear on the <a class="inline" href="battery-storage.html">Battery Storage</a> desk's Power Conversion category.</p>
+    </div>
+    <div class="term" id="gsu">
+      <h3>GSU transformer (Generator Step-Up)</h3>
+      <p>Steps up voltage from a generator to transmission-line levels — used at power plants, substations, and utility-scale renewable sites.</p>
+    </div>
+    <div class="term" id="impedance">
+      <h3>Impedance (%Z)</h3>
+      <p>A transformer's internal impedance, expressed as the percentage of rated voltage needed to drive rated current into a short circuit. It sets how much fault current reaches everything downstream: a lower %Z is a stiffer source and a <em>higher</em> available fault current. Specifying a transformer on kVA alone and ignoring %Z is how switchgear ends up under-rated.</p>
+    </div>
+    <div class="term" id="incident-energy">
+      <h3>Incident energy</h3>
+      <p>The thermal energy an arc flash would deliver to a surface at a given distance, in cal/cm&sup2;. It is what determines the required PPE category and the <a class="inline" href="#arc-flash-boundary">arc-flash boundary</a>, and it depends on available fault current and how long the upstream device takes to clear &mdash; so faster protection means lower incident energy.</p>
+    </div>
+    <div class="term" id="interrupting-rating">
+      <h3>Interrupting rating (AIC)</h3>
+      <p>The maximum fault current a breaker or fuse can safely interrupt. It must exceed the fault current available at its point of installation, which is set by the upstream transformer's <a class="inline" href="#impedance">impedance</a>. A device correctly sized for load but under-rated for fault current can fail catastrophically instead of clearing.</p>
+    </div>
+    <div class="term" id="itc">
+      <h3>ITC (Investment Tax Credit)</h3>
+      <p>The federal tax credit for renewable energy and storage projects under IRC Section 48/48E, subject to <a class="inline" href="#feoc">FEOC</a> and content-sourcing rules.</p>
+    </div>
+    <div class="term" id="k-factor">
+      <h3>K-factor</h3>
+      <p>A rating stating how much additional eddy-current heating from harmonic load a transformer can absorb. K-4 through K-20 units appear wherever switch-mode power supplies and variable-frequency drives dominate the connected load. See <a class="inline" href="parts/isolation-k-rated-transformers.html">K-rated transformers</a>.</p>
+    </div>
+    <div class="term" id="kva-vs-kw">
+      <h3>kVA vs. kW</h3>
+      <p>kVA (kilovolt-amperes) measures apparent power; kW (kilowatts) measures real, usable power. The ratio between the two is the power factor — relevant when sizing transformers and generators.</p>
+    </div>
+    <div class="term" id="lfp-nmc">
+      <h3>LFP vs. NMC</h3>
+      <p>The two dominant lithium chemistries in grid storage. Lithium iron phosphate trades energy density for thermal stability and cycle life; nickel manganese cobalt packs more energy into the same footprint but has a lower thermal-runaway threshold, which drives more demanding fire protection. For a system that sits on a pad for twenty years, LFP has become the default.</p>
+    </div>
+    <div class="term" id="mccb">
+      <h3>MCCB (Molded-Case Circuit Breaker)</h3>
+      <p>An overcurrent protection device typically rated up to about 2,500 A, sitting between miniature breakers and large power breakers.</p>
+    </div>
+    <div class="term" id="metal-clad">
+      <h3>Metal-clad vs. metal-enclosed</h3>
+      <p>Both describe switchgear in a grounded metal enclosure, but metal-clad adds specific requirements: drawout breakers, insulated bus, and grounded metal barriers between compartments. Those barriers decide what can be worked on safely while the lineup stays energised. See the <a class="inline" href="guide-switchgear-compartments.html">switchgear compartments guide</a>.</p>
+    </div>
+    <div class="term" id="mppt">
+      <h3>MPPT (Maximum Power Point Tracking)</h3>
+      <p>The inverter function that continuously adjusts operating voltage to extract the most power from a string as irradiance and temperature change. How finely an inverter divides its inputs into separate MPPT zones determines how much a shaded or soiled section drags down the rest.</p>
+    </div>
+    <div class="term" id="n-plus-1">
+      <h3>N+1, N+2 and 2N</h3>
+      <p>Redundancy notations. N is exactly the capacity the load needs; N+1 adds one spare unit; N+2 adds two; 2N duplicates the entire system on independent paths. 2N tolerates a whole-path failure, including maintenance on one side, which N+1 does not.</p>
+    </div>
+    <div class="term" id="nace">
+      <h3>NACE / sour service</h3>
+      <p>Material requirements for equipment exposed to hydrogen sulphide, now published as ANSI/NACE MR0175 / ISO 15156. Sour service constrains alloy choice and hardness to resist sulphide stress cracking, and it disqualifies materials that would otherwise suit the pressure and temperature.</p>
+    </div>
+    <div class="term" id="nfpa-70e">
+      <h3>NFPA 70E</h3>
+      <p>The US standard for electrical safety in the workplace. It defines the risk-assessment process, approach boundaries and PPE requirements for work on or near energised equipment, and it is the reason <a class="inline" href="#incident-energy">incident energy</a> appears on equipment labels at all.</p>
+    </div>
+    <div class="term" id="nfpa-855">
+      <h3>NFPA 855</h3>
+      <p>The National Fire Protection Association standard for the installation of stationary energy storage systems — a core compliance reference for the <a class="inline" href="battery-storage.html">Battery Storage</a> desk. See the <a class="inline" href="guide-bess-fire-safety-nfpa-855.html">BESS fire safety basics guide</a> for what it actually requires.</p>
+    </div>
+    <div class="term" id="octg">
+      <h3>OCTG (Oil Country Tubular Goods)</h3>
+      <p>The collective term for tubulars used in oil and gas wells: casing, tubing, and drill pipe, typically specified under API 5CT.</p>
+    </div>
+    <div class="term" id="pcs">
+      <h3>PCS (Power Conversion System)</h3>
+      <p>Equipment that converts DC battery power to AC (and back) for grid interconnection in a BESS — see <a class="inline" href="#grid-forming">grid-forming vs. grid-following</a> for the two operating modes.</p>
+    </div>
+    <div class="term" id="preload">
+      <h3>Preload (bolted joints)</h3>
+      <p>The clamping tension a bolt holds after tightening. It is what makes a flanged joint seal and what stops a bolt loosening under vibration &mdash; not the bolt's grade on its own. Achieved through a defined tightening sequence and torque or tension value, and it is why a joint is retensioned rather than simply retightened.</p>
+    </div>
+    <div class="term" id="pue">
+      <h3>PUE (Power Usage Effectiveness)</h3>
+      <p>Total facility power divided by IT equipment power. A PUE of 1.0 would mean every watt reaches IT equipment; real facilities sit between roughly 1.1 and 2.0. It measures overhead, not efficiency of the computing itself, and it moves with climate and load factor. See the <a class="inline" href="guide-pue-explained.html">PUE guide</a>.</p>
+    </div>
+    <div class="term" id="rtj">
+      <h3>RTJ gasket (ring-joint)</h3>
+      <p>A metal ring that seals a flanged joint by deforming plastically into machined grooves under bolt <a class="inline" href="#preload">preload</a>. Because it seals by permanent deformation it is single-use, and reusing one is a recurring cause of joint leaks in high-pressure service.</p>
+    </div>
+    <div class="term" id="safe-harbor">
+      <h3>Safe harbor (construction)</h3>
+      <p>IRS provisions that let a project lock in tax-credit eligibility by beginning construction or incurring qualifying costs before a deadline — referenced directly in the <a class="inline" href="guide-feoc-compliance.html">FEOC compliance guide</a>.</p>
+    </div>
+    <div class="term" id="sccr">
+      <h3>SCCR (Short-Circuit Current Rating)</h3>
+      <p>The fault current an entire assembly &mdash; not just one device &mdash; can withstand. It is set by the weakest component in the assembly, so a panel full of well-rated parts can still carry a low SCCR because of one item. Distinct from a single device's <a class="inline" href="#interrupting-rating">interrupting rating</a>.</p>
+    </div>
+    <div class="term" id="selective-coordination">
+      <h3>Selective coordination</h3>
+      <p>Arranging protective devices so that only the one nearest a fault opens, leaving everything upstream energised. It is demonstrated by comparing time-current curves across the whole path, which is why it is a system property rather than a device setting. See the <a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">short-circuit and coordination guide</a>.</p>
+    </div>
+    <div class="term" id="soc-soh">
+      <h3>SoC and SoH</h3>
+      <p>State of charge is how full a battery is right now; state of health is how much of its original capacity remains after ageing. The <a class="inline" href="parts/battery-management-systems.html">battery management system</a> estimates both, and the accuracy of those estimates determines usable capacity and whether warranty terms are met.</p>
+    </div>
+    <div class="term" id="ul-9540a">
+      <h3>UL 9540A</h3>
+      <p>A UL test method evaluating thermal runaway fire propagation in battery energy storage systems, alongside <a class="inline" href="#nfpa-855">NFPA 855</a> installation requirements. See the <a class="inline" href="guide-bess-fire-safety-nfpa-855.html">BESS fire safety basics guide</a> for how the two standards fit together.</p>
+    </div>
+    <div class="term" id="vector-group">
+      <h3>Vector group</h3>
+      <p>A transformer's winding configuration and the phase displacement between its primary and secondary, written as codes like Dyn11. It determines whether two transformers can be paralleled and how the system is earthed, and it is one of the fields on every <a class="inline" href="guide-transformer-nameplate.html">nameplate</a>.</p>
+    </div>
 </div>
 <div class="ctaband">
   <div class="ctaband-in">

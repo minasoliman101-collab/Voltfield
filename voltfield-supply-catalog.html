@@ -326,7 +326,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </nav>
   <div class="headright">
     <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
-    <button class="quotebtn" id="openQuote" aria-label="Open sourcing list">SOURCING LIST <span class="ct" id="quoteCount">0</span></button>
+    <button class="quotebtn" id="openQuote" aria-label="Open saved list">SAVED LIST <span class="ct" id="quoteCount">0</span></button>
   </div>
 </header>
 
@@ -437,7 +437,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <div class="drawer-body" id="drawerBody"></div>
   <div class="drawer-ft">
-    <button class="rfqbtn" id="rfqBtn">Request sourcing info &mdash; 24 hr turnaround</button>
+    <button class="rfqbtn" id="rfqBtn">View configuration details</button>
     <button class="rfqbtn" id="checkoutBtn" style="background:var(--ink);color:#fff;margin-top:8px">Request sourcing help</button>
     <div class="note">Indicative price bands only, published for budgeting — nothing here is for sale. Real price, availability and lead time come from whoever supplies the part.</div>
   </div>
@@ -651,10 +651,10 @@ function renderPager(N,maxPage){
 }
 function scrollTop(){document.querySelector('.catlayout').scrollIntoView({behavior:'smooth',block:'start'});}
 
-/* ---------- sourcing list (localStorage) ---------- */
+/* ---------- saved list (localStorage) ---------- */
 function loadQuote(){try{const q=JSON.parse(localStorage.getItem('vf_quote')||'[]');return Array.isArray(q)?q:[];}catch(e){return [];}}
 function saveQuote(q){localStorage.setItem('vf_quote',JSON.stringify(q));document.getElementById('quoteCount').textContent=q.length;}
-/* ---------- saved / named sourcing lists (projects) ---------- */
+/* ---------- saved / named saved lists (projects) ---------- */
 function escP(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function loadSaved(){try{const s=JSON.parse(localStorage.getItem('vf_saved')||'{}');return (s&&typeof s==='object'&&!Array.isArray(s))?s:{};}catch(e){return {};}}
 function saveSaved(s){localStorage.setItem('vf_saved',JSON.stringify(s));}
@@ -668,14 +668,14 @@ function exportProjects(){
   const url=URL.createObjectURL(blob), a=document.createElement('a');
   const d=new Date(), stamp=d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');
   a.href=url;a.download='voltfield-quotes-'+stamp+'.json';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
-  toast('Exported your sourcing lists');
+  toast('Exported your saved lists');
 }
 function uniqueName(s,base){if(!s[base])return base;let k=2;while(s[base+' ('+k+')'])k++;return base+' ('+k+')';}
 function importProjects(file){
   const rd=new FileReader();
   rd.onload=()=>{
     let data; try{data=JSON.parse(rd.result);}catch(e){toast('That file isn’t a valid quotes file');return;}
-    if(!data||typeof data!=='object'||(!data.saved&&!data.working)){toast('No sourcing lists found in that file');return;}
+    if(!data||typeof data!=='object'||(!data.saved&&!data.working)){toast('No saved lists found in that file');return;}
     const s=loadSaved(); let added=0;
     const incoming=(data.saved&&typeof data.saved==='object'&&!Array.isArray(data.saved))?data.saved:{};
     Object.keys(incoming).forEach(nm=>{ if(!Array.isArray(incoming[nm]))return; s[uniqueName(s,nm)]=incoming[nm]; added++; });
@@ -702,14 +702,14 @@ function addToQuote(btn){
     saveQuote(q.filter(x=>x.pn!==pn)); btn.classList.remove('in'); btn.textContent='Add';
   } else {
     q.push({pn,name:decodeURIComponent(btn.dataset.name),price:btn.dataset.price,lead:btn.dataset.lead,sec:btn.dataset.sec,qty:1,up:parseFloat(btn.dataset.up)||0,pu:btn.dataset.pu||'',d:btn.dataset.d});
-    saveQuote(q); btn.classList.add('in'); btn.textContent='Added ✓'; toast('Added to sourcing list');
+    saveQuote(q); btn.classList.add('in'); btn.textContent='Added ✓'; toast('Added to saved list');
     if(window.vfGtag)window.vfGtag('event','add_to_quote',{pn,sector:btn.dataset.sec,value:parseFloat(btn.dataset.up)||0});
   }
   renderDrawer();
 }
 function renderDrawer(){
   const q=loadQuote(); const body=document.getElementById('drawerBody');
-  if(!q.length){body.innerHTML='<div class="qempty">Your sourcing list is empty.<br>Add parts and request sourcing info — we turn RFQs around in 24 hours.</div>';return;}
+  if(!q.length){body.innerHTML='<div class="qempty">Nothing saved yet.</div>';return;}
   body.innerHTML=q.map(x=>`<div class="qitem">
     <div class="qtop"><div><div class="qpn">${x.pn}</div><div class="qname">${x.name}</div></div><button class="qx" data-pn="${x.pn}" aria-label="Remove">&times;</button></div>
     <div class="qmeta"><span>${x.price}${x.qty>1?` &times; ${x.qty}`:''}</span><span style="color:var(--${x.sec==='bess'?'bess':x.sec});text-transform:uppercase">${SECTORS[x.sec].code}</span><span>${x.lead}</span></div>
@@ -750,8 +750,8 @@ function renderModal(){
       <div class="dm-note">Configured from ${f.ax.length} attribute axes across ${fmt(f.ct)} configurations in this family. Indicative pricing; final price, availability &amp; lead time confirmed at quote. The sourcing ref is Voltfield's own internal tracking code for this configuration — not a manufacturer SKU or UPC.</div>
     </div>
     <div class="dm-foot">
-      <button class="dm-add${inq?' in':''}" id="dmAdd">${inq?'In sourcing list ✓':'Add to sourcing list'}</button>
-      <button class="dm-rfq" id="dmRfq">Request sourcing info &rsaquo;</button>
+      <button class="dm-add${inq?' in':''}" id="dmAdd">${inq?'In saved list ✓':'Add to saved list'}</button>
+      <button class="dm-rfq" id="dmRfq">View details &rsaquo;</button>
     </div>`;
   document.getElementById('dmClose').onclick=closeModal;
   document.getElementById('detailContent').querySelectorAll('select[data-ai]').forEach(sel=>sel.onchange=()=>{MS.picks[+sel.dataset.ai]=sel.value;renderModal();});
@@ -759,7 +759,7 @@ function renderModal(){
   document.getElementById('dmAdd').onclick=()=>{
     const cur=loadQuote();
     if(cur.some(x=>x.pn===pn)){saveQuote(cur.filter(x=>x.pn!==pn));toast('Removed from quote');}
-    else{cur.push({pn,name:configuredName(f,picks),price:money(price,f.pu).replace(/<[^>]+>/g,''),lead:lb.t,sec:f.s,qty:MS.qty,up:price,pu:f.pu,d:f.d});saveQuote(cur);toast('Added to sourcing list');}
+    else{cur.push({pn,name:configuredName(f,picks),price:money(price,f.pu).replace(/<[^>]+>/g,''),lead:lb.t,sec:f.s,qty:MS.qty,up:price,pu:f.pu,d:f.d});saveQuote(cur);toast('Added to saved list');}
     renderModal();renderDrawer();renderResults();
   };
   document.getElementById('dmRfq').onclick=()=>{

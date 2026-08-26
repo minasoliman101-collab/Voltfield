@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # NOTE ON UTILITY PAGES
-# voltfield-rfq.html, 404.html and site-search.html are kept OUT of this file on
+# 404.html and site-search.html are kept OUT of this file on
 # purpose, even though they have no search value. They each carry
 # <meta name="robots" content="noindex">, and a Disallow rule here would defeat
 # that: a crawler told not to fetch a page never sees its noindex, so a URL that

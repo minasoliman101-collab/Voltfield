@@ -20,6 +20,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
 <title>Part Detail | Voltfield</title>
 <link rel="canonical" href="https://voltfield.org/voltfield-part.html">
+<!-- noindex on purpose: this page renders ONE configuration from query params and
+     carries ~214 words of static content. The 243 /parts/ family pages are the
+     indexable layer; this one exists so a specific configuration can be shared
+     by link. It self-canonicalises, so it was never a crawl trap, but an indexed
+     URL this thin is a poor signal. -->
+<meta name="robots" content="noindex,follow">
 <meta name="description" content="Configurable part detail with indicative pricing, lead time, compliance data, and a shareable link for this exact configuration.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Voltfield">
@@ -384,8 +390,8 @@ function renderPart(){
         </div>
       </div>
       <div class="p-foot">
-        <button class="p-add${inq?' in':''}" id="pAdd">${inq?'In sourcing list ✓':'Add to sourcing list'}</button>
-        <button class="p-rfq" id="pRfq">Request sourcing info &rsaquo;</button>
+        <button class="p-add${inq?' in':''}" id="pAdd">${inq?'In saved list ✓':'Add to saved list'}</button>
+        <button class="p-rfq" id="pRfq">View details &rsaquo;</button>
         ${(typeof bomApplicability==='function'&&bomApplicability(f).ok)?`<a class="p-bom" href="voltfield-bom-generator.html?fi=${f._i}&o=${picksToParam(f,picks)}">Component BOM &rsaquo;</a>`:''}
         <button class="p-copy" id="pCopy">Copy link</button>
         <button class="p-print" id="pPrint">Print spec sheet</button>
@@ -422,7 +428,7 @@ function renderPart(){
   document.getElementById('pAdd').onclick=()=>{
     const cur=loadQuote();
     if(cur.some(x=>x.pn===pn)){saveQuote(cur.filter(x=>x.pn!==pn));toast('Removed from quote');}
-    else{cur.push({pn,name:configuredName(f,picks),price:money(price,f.pu).replace(/<[^>]+>/g,''),lead:lb.t,sec:f.s,qty:PS.qty,up:price,pu:f.pu,d:f.d});saveQuote(cur);toast('Added to sourcing list');if(window.vfGtag)window.vfGtag('event','add_to_quote',{pn,sector:f.s,value:price});}
+    else{cur.push({pn,name:configuredName(f,picks),price:money(price,f.pu).replace(/<[^>]+>/g,''),lead:lb.t,sec:f.s,qty:PS.qty,up:price,pu:f.pu,d:f.d});saveQuote(cur);toast('Added to saved list');if(window.vfGtag)window.vfGtag('event','add_to_quote',{pn,sector:f.s,value:price});}
     renderPart();
   };
   document.getElementById('pRfq').onclick=()=>{
