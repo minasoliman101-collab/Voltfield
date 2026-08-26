@@ -128,6 +128,16 @@ footer p{line-height:1.6;max-width:460px}
 footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
 footer a{color:#9FB0C3;text-decoration:none}
 footer a:hover{color:#fff}
+/* Lead-time badges for the full index table. The .lt classes live in
+   voltfield-parts.css, which this page does not load, so they are defined
+   here against the same tokens the family and category pages use. */
+.idxtable .lt{font-family:var(--mono);font-size:11px;padding:2px 7px;white-space:nowrap;display:inline-block;font-variant-numeric:tabular-nums}
+.idxtable .lt.long{background:#F7E4E1;color:var(--crit-ink)}
+.idxtable .lt.mid{background:#FBF0DA;color:var(--warn-ink)}
+.idxtable .lt.short{background:#E7F1EB;color:var(--ok-ink)}
+html[data-theme="dark"] .idxtable .lt.long{background:#3A1F1C;color:#E8A79B}
+html[data-theme="dark"] .idxtable .lt.mid{background:#3A3016;color:#EBC77A}
+html[data-theme="dark"] .idxtable .lt.short{background:#16301F;color:#8FCBA6}
 .ltsub{font-family:var(--mono);font-size:11px;color:var(--slate);margin:2px 0 8px}
 .ltnote{font-family:var(--mono);font-size:11.5px;color:var(--slate);margin:0 0 18px}
 
