@@ -20,7 +20,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
 <title>BOM Generator: Part Teardowns | Voltfield</title>
 <link rel="canonical" href="https://voltfield.org/voltfield-bom-generator.html">
-<meta name="description" content="Pick any engineered part, from a transformer to a battery block, and generate its component-level bill of materials with an indicative cost roll-up.">
+<meta name="description" content="Pick any engineered part, from a transformer to a battery block, and generate its component-level bill of materials and each item's share of the assembly.">
 <meta name="keywords" content="BOM generator, bill of materials generator, transformer component breakdown, free BOM tool, spare parts BOM, component teardown, engineering BOM software">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
@@ -219,7 +219,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="bomban-in">
     <div class="eyebrow">BOM Generator · Component Teardown</div>
     <h1>Every component inside the part — generated as a Bill of Materials</h1>
-    <p>Pick any engineered part in the catalog — a transformer, inverter, valve, motor, battery block, breaker — and configure it. We generate the full component-level BOM: what's inside, in what quantity, of what material, with an indicative cost roll-up that reconciles to the catalog unit price. Commodity single-piece items (a bolt, a gasket, raw stock) are flagged as not applicable.</p>
+    <p>Pick any engineered part in the catalog — a transformer, inverter, valve, motor, battery block, breaker — and configure it. We generate the full component-level BOM: what is inside, in what quantity, of what material, and each item's share of the assembly by weight. Commodity single-piece items (a bolt, a gasket, raw stock) are flagged as not applicable.</p>
   </div>
 </section>
 
@@ -422,7 +422,7 @@ function renderCfg(){
   $('cfgCard').classList.add('show');
   $('cfgBand').style.background=col;
   $('cfgCat').style.background=col;$('cfgCat').textContent=f.c;
-  $('cfgDist').textContent=DIST_NAME[f.d]+' · '+SECTORS[f.s].label;
+  $('cfgDist').textContent=(channelLabel(f.d)?channelLabel(f.d)+' · ':'')+SECTORS[f.s].label;
   $('cfgPN').textContent=configuredPN(f,picks,String((f._i%90)+10));
   $('cfgName').textContent=configuredName(f,picks);
   /* Show what the assembly being torn down actually is. Meaningful alt here --

@@ -725,12 +725,12 @@ function closeModal(){document.getElementById('detailModal').classList.remove('o
 function renderModal(){
   const {f,picks,chk,qty}=MS;
   const pn=configuredPN(f,picks,chk), price=priceFor(f,picks), lb=leadBadge(f), col=SECTORS[f.s].color;
-  const distLbl=DIST_NAME[f.d];
+  const distLbl=channelLabel(f.d);
   const inq=loadQuote().some(x=>x.pn===pn);
   document.getElementById('detailContent').innerHTML=`
     <div class="dm-band" style="background:${col}"></div>
     <div class="dm-hd">
-      <div><span class="dm-cat" style="background:${col}">${f.c}</span> <span class="dm-dist">${distLbl} · ${SECTORS[f.s].label}</span></div>
+      <div><span class="dm-cat" style="background:${col}">${f.c}</span> <span class="dm-dist">${distLbl?distLbl+" · ":""}${SECTORS[f.s].label}</span></div>
       <button class="dm-x" id="dmClose" aria-label="Close">&times;</button>
     </div>
     <div class="dm-imgwrap">${vfPartVisual(f,'dm-img',configuredName(f,picks))}</div>

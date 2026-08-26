@@ -344,7 +344,7 @@ function renderPart(){
   const pn=configuredPN(f,picks,PS.chk), price=priceFor(f,picks), lb=leadBadge(f), col=SECTORS[f.s].color;
   document.title=configuredName(f,picks)+' | '+f.c+' — Voltfield';
   updateProductSchema(pn,price,lb);
-  const distLbl=DIST_NAME[f.d];
+  const distLbl=channelLabel(f.d);
   const inq=loadQuote().some(x=>x.pn===pn);
   const alternatives=FAM.filter(x=>x.s===f.s&&x.c===f.c&&x._i!==f._i&&x.lw<f.lw).sort((a,b)=>a.lw-b.lw).slice(0,3);
   document.getElementById('wrap').innerHTML=`
@@ -362,7 +362,7 @@ function renderPart(){
       <div class="p-band" style="background:${col}"></div>
       <div class="p-hd">
         <span class="p-cat" style="background:${col}">${f.c}</span>
-        <span class="p-dist">${distLbl} · ${SECTORS[f.s].label}</span>
+        <span class="p-dist">${distLbl?distLbl+" · ":""}${SECTORS[f.s].label}</span>
       </div>
       <div class="p-imgwrap" id="pImgWrap">${vfPartVisual(f,'p-img',configuredName(f,picks))}</div>
       <div class="p-3dbar"><button type="button" id="p3dBtn" class="p-3dbtn">View in 3D &#8635;</button></div>
