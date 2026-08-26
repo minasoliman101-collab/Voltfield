@@ -113,6 +113,17 @@ if (Test-Path $introPath) {
   }
 }
 
+# The date shown on every page is the real last-commit date of the data these
+# pages are generated from, resolved once. A hand-typed "updated" date is a
+# decoration; this one cannot be wrong without the data actually changing.
+Push-Location $root
+$dataDateRaw = (git log -1 --format=%cs -- voltfield-catalog-data.js scripts/family-intros.txt 2>$null)
+Pop-Location
+if (-not $dataDateRaw) { $dataDateRaw = (Get-Date).ToString('yyyy-MM-dd') }
+$dataDate  = ([datetime]::ParseExact($dataDateRaw.Trim(), 'yyyy-MM-dd', $null)).ToString('MMMM d, yyyy')
+$dataDateISO = $dataDateRaw.Trim()
+Write-Host ("reference data date: {0}" -f $dataDate)
+
 $fams = Get-Families (Join-Path $root 'voltfield-catalog-data.js')
 $top  = [System.IO.File]::ReadAllText((Join-Path $PSScriptRoot 'tpl\chrome-top.html'), [System.Text.Encoding]::UTF8)
 $hTail= [System.IO.File]::ReadAllText((Join-Path $PSScriptRoot 'tpl\head-tail.html'), [System.Text.Encoding]::UTF8)
@@ -240,7 +251,7 @@ foreach ($f in $fams) {
   [void]$sb.AppendLine("   {`"@type`":`"ListItem`",`"position`":2,`"name`":`"$(EscJson $sec.label)`",`"item`":`"https://voltfield.org/$($sec.page)`"},")
   [void]$sb.AppendLine("   {`"@type`":`"ListItem`",`"position`":3,`"name`":`"$(EscJson $f.n)`",`"item`":`"$url`"}")
   [void]$sb.AppendLine(' ]},')
-  [void]$sb.AppendLine(" {`"@type`":`"WebPage`",`"name`":`"$(EscJson $f.n)`",`"description`":`"$(EscJson $desc)`",`"url`":`"$url`",`"isPartOf`":{`"@type`":`"WebSite`",`"name`":`"Voltfield`",`"url`":`"https://voltfield.org/`"}}")
+  [void]$sb.AppendLine(" {`"@type`":`"WebPage`",`"name`":`"$(EscJson $f.n)`",`"description`":`"$(EscJson $desc)`",`"url`":`"$url`",`"dateModified`":`"$dataDateISO`",`"isPartOf`":{`"@type`":`"WebSite`",`"name`":`"Voltfield`",`"url`":`"https://voltfield.org/`"},`"publisher`":{`"@type`":`"Organization`",`"name`":`"Voltfield`",`"url`":`"https://voltfield.org/`"}}")
   [void]$sb.AppendLine(']}')
   [void]$sb.AppendLine('</script>')
   [void]$sb.Append($hTail)
@@ -285,6 +296,24 @@ foreach ($f in $fams) {
   [void]$sb.AppendLine('    <div class="rel">')
   [void]$sb.Append($rel)
   [void]$sb.AppendLine('    </div>')
+  [void]$sb.AppendLine('')
+  # Provenance block, matching the pattern the guides already use. Says what the
+  # page covers, what it is built from, what it explicitly is NOT, and when the
+  # underlying data last changed. The date is the source file's real last commit
+  # date, so it cannot drift into being decorative.
+  [void]$sb.AppendLine('  <aside class="provenance" aria-labelledby="prov-h">')
+  [void]$sb.AppendLine('    <h2 id="prov-h">Scope &amp; sources</h2>')
+  [void]$sb.AppendLine('    <dl>')
+  [void]$sb.AppendLine("      <dt>What this covers</dt>")
+  [void]$sb.AppendLine("      <dd>How $name is specified, the standards it is built to, its indicative lead time and its market price band.</dd>")
+  [void]$sb.AppendLine("      <dt>Based on</dt>")
+  [void]$sb.AppendLine("      <dd><ul><li>Voltfield's own equipment reference data &mdash; $($f.ax.Count) attribute $(if($f.ax.Count -eq 1){'axis'}else{'axes'}) giving $($f.combos.ToString('N0')) documented configuration$(if($f.combos -ne 1){'s'})</li><li>$((@($f.cmp | ForEach-Object { Esc $_ })) -join '; ') &mdash; the standards this family is built and tested to</li><li>Published market ranges for the price band and lead time</li></ul></dd>")
+  [void]$sb.AppendLine("      <dt>What it is not</dt>")
+  [void]$sb.AppendLine("      <dd>Not a quote, an offer, or a live inventory feed. The price band is a market range for the family as a whole and the lead time is directional. Voltfield sells nothing and is not a route to anyone who does.</dd>")
+  [void]$sb.AppendLine("      <dt>Provenance</dt>")
+  [void]$sb.AppendLine("      <dd>Reference data last updated $dataDate. Compiled and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why figures are attributed to Voltfield and labelled as estimates where they are estimates. See the <a href=""/methodology.html"">methodology page</a> for how each number is derived.</dd>")
+  [void]$sb.AppendLine('    </dl>')
+  [void]$sb.AppendLine('  </aside>')
   [void]$sb.AppendLine('')
   [void]$sb.AppendLine('  <div class="ctaband"><div class="ctaband-in">')
   [void]$sb.AppendLine("    <h3>Every configuration in this family</h3>")

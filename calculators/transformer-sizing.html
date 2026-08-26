@@ -19,7 +19,7 @@
    {"@type":"ListItem","position":2,"name":"Calculators","item":"https://voltfield.org/engineering-calculators.html"},
    {"@type":"ListItem","position":3,"name":"Transformer Sizing Calculator","item":"https://voltfield.org/calculators/transformer-sizing.html"}
  ]},
- {"@type":"WebPage","name":"Transformer Sizing Calculator","description":"Convert a kW load to the kVA rating you need, round to the nearest standard ANSI/IEEE C57.12.00 nameplate, and get full-load amps. Free, no signup.","url":"https://voltfield.org/calculators/transformer-sizing.html","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebPage","name":"Transformer Sizing Calculator","description":"Convert a kW load to the kVA rating you need, round to the nearest standard ANSI/IEEE C57.12.00 nameplate, and get full-load amps. Free, no signup.","url":"https://voltfield.org/calculators/transformer-sizing.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What does the Transformer Sizing calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Transformers are rated in kVA — apparent power — while loads are usually described in kW, real power. The difference is power factor, and ignoring it is how a transformer ends up undersized on day one. Once you have the kVA figure you cannot simply order it: transformers are built to a standard series of nameplate ratings, so the practical answer is always the next size up."}},
    {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"This sizes for steady-state load only. It does not account for future growth, harmonic heating, non-linear load, or motor starting, all of which argue for headroom. It also says nothing about impedance, which is the other half of a transformer specification and the one that sets downstream fault current."}}
@@ -139,6 +139,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/guide-transformer-nameplate.html">How to Read a Transformer Nameplate</a>
       <a href="/engineering-calculators.html">All 21 calculators</a>
     </div>
+
+  <aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>Convert a kW load to the kVA rating you need, round to the nearest standard ANSI/IEEE C57.12.00 nameplate, and get full-load amps. Free, no signup.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>Standard nameplate ratings come from ANSI/IEEE C57.12.00. Loading practice beyond nameplate is covered by IEEE C57.91, which governs how far and how long a unit may be run over rating before insulation life is affected.</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>This sizes for steady-state load only. It does not account for future growth, harmonic heating, non-linear load, or motor starting, all of which argue for headroom. It also says nothing about impedance, which is the other half of a transformer specification and the one that sets downstream fault current. This is a screening estimate, not a stamped calculation.</dd>
+      <dt>Provenance</dt>
+      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labelled as estimates. Worked examples are arithmetic you can reproduce against the <a href="/engineering-calculators.html#transformer-sizing">live calculator</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+    </dl>
+  </aside>
 
 </div>
 </main>

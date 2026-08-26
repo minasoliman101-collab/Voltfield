@@ -55,6 +55,14 @@ function Compact([double]$v, [string]$pu) {
   return '$' + [math]::Round($v).ToString('N0')
 }
 
+# Real last-commit date of the sources these pages are built from.
+Push-Location $root
+$dataDateRaw = (git log -1 --format=%cs -- voltfield-catalog-data.js scripts/category-intros.txt 2>$null)
+Pop-Location
+if (-not $dataDateRaw) { $dataDateRaw = (Get-Date).ToString('yyyy-MM-dd') }
+$dataDateISO = $dataDateRaw.Trim()
+$dataDate    = ([datetime]::ParseExact($dataDateISO, 'yyyy-MM-dd', $null)).ToString('MMMM d, yyyy')
+
 $fams = Get-Families (Join-Path $root 'voltfield-catalog-data.js')
 $top   = [System.IO.File]::ReadAllText((Join-Path $PSScriptRoot 'tpl\chrome-top.html'), [System.Text.Encoding]::UTF8)
 $hTail = [System.IO.File]::ReadAllText((Join-Path $PSScriptRoot 'tpl\head-tail.html'), [System.Text.Encoding]::UTF8)
@@ -120,7 +128,7 @@ foreach ($line in [System.IO.File]::ReadAllLines((Join-Path $PSScriptRoot 'categ
   [void]$sb.AppendLine("   {""@type"":""ListItem"",""position"":2,""name"":""$(EscJson $sec.label)"",""item"":""https://voltfield.org/$($sec.page)""},")
   [void]$sb.AppendLine("   {""@type"":""ListItem"",""position"":3,""name"":""$(EscJson $cat)"",""item"":""$url""}")
   [void]$sb.AppendLine(' ]},')
-  [void]$sb.AppendLine(" {""@type"":""CollectionPage"",""name"":""$(EscJson $h1)"",""description"":""$(EscJson $desc)"",""url"":""$url"",""isPartOf"":{""@type"":""WebSite"",""name"":""Voltfield"",""url"":""https://voltfield.org/""}},")
+  [void]$sb.AppendLine(" {""@type"":""CollectionPage"",""name"":""$(EscJson $h1)"",""description"":""$(EscJson $desc)"",""url"":""$url"",""dateModified"":""$dataDateISO"",""isPartOf"":{""@type"":""WebSite"",""name"":""Voltfield"",""url"":""https://voltfield.org/""},""publisher"":{""@type"":""Organization"",""name"":""Voltfield"",""url"":""https://voltfield.org/""}},")
   [void]$sb.AppendLine(' {"@type":"FAQPage","mainEntity":[')
   [void]$sb.AppendLine("   {""@type"":""Question"",""name"":""$(EscJson $q)"",""acceptedAnswer"":{""@type"":""Answer"",""text"":""$(EscJson $intro)""}}")
   [void]$sb.AppendLine(' ]}')
@@ -167,6 +175,21 @@ foreach ($line in [System.IO.File]::ReadAllLines((Join-Path $PSScriptRoot 'categ
   [void]$sb.AppendLine('    <div class="rel">')
   [void]$sb.Append($rel)
   [void]$sb.AppendLine('    </div>')
+  [void]$sb.AppendLine('')
+  $allStd = @($inCat | ForEach-Object { $_.cmp } | Sort-Object -Unique | ForEach-Object { Esc $_ })
+  [void]$sb.AppendLine('  <aside class="provenance" aria-labelledby="prov-h">')
+  [void]$sb.AppendLine('    <h2 id="prov-h">Scope &amp; sources</h2>')
+  [void]$sb.AppendLine('    <dl>')
+  [void]$sb.AppendLine("      <dt>What this covers</dt>")
+  [void]$sb.AppendLine("      <dd>The $($inCat.Count) equipment families in $cat, how each is specified, and the standards, lead times and price bands that apply to them.</dd>")
+  [void]$sb.AppendLine("      <dt>Based on</dt>")
+  [void]$sb.AppendLine("      <dd><ul><li>Voltfield's own equipment reference data &mdash; $($cfgTotal.ToString('N0')) documented configurations across $($inCat.Count) families</li><li>$($allStd -join '; ')</li><li>Published market ranges for the price bands and lead times</li></ul></dd>")
+  [void]$sb.AppendLine("      <dt>What it is not</dt>")
+  [void]$sb.AppendLine("      <dd>Not quotes, offers, or a live inventory feed. Price bands are market ranges per family and lead times are directional. Voltfield sells nothing and is not a route to anyone who does.</dd>")
+  [void]$sb.AppendLine("      <dt>Provenance</dt>")
+  [void]$sb.AppendLine("      <dd>Reference data last updated $dataDate. Compiled and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why figures are attributed to Voltfield and labelled as estimates where they are estimates. See the <a href=""/methodology.html"">methodology page</a>.</dd>")
+  [void]$sb.AppendLine('    </dl>')
+  [void]$sb.AppendLine('  </aside>')
   [void]$sb.AppendLine('')
   [void]$sb.AppendLine('</div>')
   [void]$sb.AppendLine('</main>')

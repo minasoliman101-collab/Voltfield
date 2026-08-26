@@ -19,7 +19,7 @@
    {"@type":"ListItem","position":2,"name":"Calculators","item":"https://voltfield.org/engineering-calculators.html"},
    {"@type":"ListItem","position":3,"name":"Solar String Sizing Calculator","item":"https://voltfield.org/calculators/solar-string.html"}
  ]},
- {"@type":"WebPage","name":"Solar String Sizing Calculator","description":"Apply module temperature coefficients to site design temperatures to find maximum and minimum string length against inverter voltage limits. Free, no signup.","url":"https://voltfield.org/calculators/solar-string.html","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebPage","name":"Solar String Sizing Calculator","description":"Apply module temperature coefficients to site design temperatures to find maximum and minimum string length against inverter voltage limits. Free, no signup.","url":"https://voltfield.org/calculators/solar-string.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What does the Solar String Sizing calculation account for?","acceptedAnswer":{"@type":"Answer","text":"String length is set by temperature, not by the module's rated voltage. Open-circuit voltage rises as it gets colder, so the binding constraint is the coldest morning of the year: if cold-weather Voc exceeds the inverter's maximum DC input, the string damages the inverter. At the other end, maximum-power voltage falls as it gets hotter, so a string that is too short drops below the inverter's MPPT window on the hottest afternoon and stops tracking. The usable range sits between those two."}},
    {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"The result is only as good as the design temperatures. Record low is not average winter low, and cell temperature in full sun runs 20-30°C above ambient. Uses module datasheet values, which carry their own tolerance."}}
@@ -140,6 +140,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/guide-inverter-clipping-ratio.html">Inverter Clipping &amp; DC:AC Ratio</a>
       <a href="/engineering-calculators.html">All 21 calculators</a>
     </div>
+
+  <aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>Apply module temperature coefficients to site design temperatures to find maximum and minimum string length against inverter voltage limits. Free, no signup.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>NEC 690.7 governs maximum PV system voltage and permits the temperature-coefficient method. Module coefficients come from the manufacturer's datasheet at STC per IEC 61215.</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>The result is only as good as the design temperatures. Record low is not average winter low, and cell temperature in full sun runs 20-30&deg;C above ambient. Uses module datasheet values, which carry their own tolerance. This is a screening estimate, not a stamped calculation.</dd>
+      <dt>Provenance</dt>
+      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labelled as estimates. Worked examples are arithmetic you can reproduce against the <a href="/engineering-calculators.html#solar-string">live calculator</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+    </dl>
+  </aside>
 
 </div>
 </main>

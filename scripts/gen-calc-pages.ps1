@@ -19,6 +19,17 @@ $root = Split-Path -Parent $PSScriptRoot
 $utf8 = New-Object System.Text.UTF8Encoding($false)
 $em   = [char]0x2014
 
+# The date shown on every page is the real last-commit date of the content these
+# pages are generated from. A hand-typed "updated" date is decoration; this one
+# cannot be wrong without the content actually changing.
+Push-Location $root
+$dataDateRaw = (git log -1 --format=%cs -- scripts/calc-content.txt 2>$null)
+Pop-Location
+if (-not $dataDateRaw) { $dataDateRaw = (Get-Date).ToString('yyyy-MM-dd') }
+$dataDateISO = $dataDateRaw.Trim()
+$dataDate    = ([datetime]::ParseExact($dataDateISO, 'yyyy-MM-dd', $null)).ToString('MMMM d, yyyy')
+Write-Host ("content date: {0}" -f $dataDate)
+
 $top   = [System.IO.File]::ReadAllText((Join-Path $PSScriptRoot 'tpl\chrome-top.html'), [System.Text.Encoding]::UTF8)
 $hTail = [System.IO.File]::ReadAllText((Join-Path $PSScriptRoot 'tpl\head-tail.html'), [System.Text.Encoding]::UTF8)
 $bot   = [System.IO.File]::ReadAllText((Join-Path $PSScriptRoot 'tpl\chrome-bot.html'), [System.Text.Encoding]::UTF8)
@@ -85,7 +96,7 @@ foreach ($r in $recs) {
   [void]$sb.AppendLine('   {"@type":"ListItem","position":2,"name":"Calculators","item":"https://voltfield.org/engineering-calculators.html"},')
   [void]$sb.AppendLine("   {""@type"":""ListItem"",""position"":3,""name"":""$(EscJson $r.h1)"",""item"":""$url""}")
   [void]$sb.AppendLine(' ]},')
-  [void]$sb.AppendLine(" {""@type"":""WebPage"",""name"":""$(EscJson $r.h1)"",""description"":""$(EscJson $r.desc)"",""url"":""$url"",""isPartOf"":{""@type"":""WebSite"",""name"":""Voltfield"",""url"":""https://voltfield.org/""}},")
+  [void]$sb.AppendLine(" {""@type"":""WebPage"",""name"":""$(EscJson $r.h1)"",""description"":""$(EscJson $r.desc)"",""url"":""$url"",""dateModified"":""$dataDateISO"",""isPartOf"":{""@type"":""WebSite"",""name"":""Voltfield"",""url"":""https://voltfield.org/""},""publisher"":{""@type"":""Organization"",""name"":""Voltfield"",""url"":""https://voltfield.org/""}},")
   [void]$sb.AppendLine(' {"@type":"FAQPage","mainEntity":[')
   [void]$sb.AppendLine("   {""@type"":""Question"",""name"":""What does the $(EscJson $r.h1.Replace(' Calculator','')) calculation account for?"",""acceptedAnswer"":{""@type"":""Answer"",""text"":""$(EscJson ($r.intro -join ' '))""}},")
   [void]$sb.AppendLine("   {""@type"":""Question"",""name"":""What does it not account for?"",""acceptedAnswer"":{""@type"":""Answer"",""text"":""$(EscJson ($r.limits -join ' '))""}}")
@@ -150,6 +161,23 @@ foreach ($r in $recs) {
   }
   [void]$sb.AppendLine("      <a href=""/engineering-calculators.html"">All 21 calculators</a>")
   [void]$sb.AppendLine('    </div>')
+  [void]$sb.AppendLine('')
+  # Provenance block, matching the pattern the guides use. The "what it is not"
+  # line matters most here: a calculator page that does not state where its
+  # method stops being valid invites a screening number into a real design.
+  [void]$sb.AppendLine('  <aside class="provenance" aria-labelledby="prov-h">')
+  [void]$sb.AppendLine('    <h2 id="prov-h">Scope &amp; sources</h2>')
+  [void]$sb.AppendLine('    <dl>')
+  [void]$sb.AppendLine("      <dt>What this covers</dt>")
+  [void]$sb.AppendLine("      <dd>$($r.desc)</dd>")
+  [void]$sb.AppendLine("      <dt>Based on</dt>")
+  [void]$sb.AppendLine("      <dd><ul>$(($r.standard | ForEach-Object { "<li>$_</li>" }) -join '')</ul></dd>")
+  [void]$sb.AppendLine("      <dt>What it is not</dt>")
+  [void]$sb.AppendLine("      <dd>$($r.limits -join ' ') This is a screening estimate, not a stamped calculation.</dd>")
+  [void]$sb.AppendLine("      <dt>Provenance</dt>")
+  [void]$sb.AppendLine("      <dd>Last reviewed $dataDate. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labelled as estimates. Worked examples are arithmetic you can reproduce against the <a href=""$toolUrl"">live calculator</a>. See the <a href=""/methodology.html"">methodology page</a>.</dd>")
+  [void]$sb.AppendLine('    </dl>')
+  [void]$sb.AppendLine('  </aside>')
   [void]$sb.AppendLine('')
   [void]$sb.AppendLine('</div>')
   [void]$sb.AppendLine('</main>')

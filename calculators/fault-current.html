@@ -19,7 +19,7 @@
    {"@type":"ListItem","position":2,"name":"Calculators","item":"https://voltfield.org/engineering-calculators.html"},
    {"@type":"ListItem","position":3,"name":"Available Fault Current Calculator","item":"https://voltfield.org/calculators/fault-current.html"}
  ]},
- {"@type":"WebPage","name":"Available Fault Current Calculator","description":"Estimate available symmetrical fault current at a transformer secondary from kVA, voltage and %Z, and check equipment withstand ratings. Free, no signup.","url":"https://voltfield.org/calculators/fault-current.html","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebPage","name":"Available Fault Current Calculator","description":"Estimate available symmetrical fault current at a transformer secondary from kVA, voltage and %Z, and check equipment withstand ratings. Free, no signup.","url":"https://voltfield.org/calculators/fault-current.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What does the Available Fault Current calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Available fault current is how much current the system can deliver into a bolted short circuit at a given point. It sets the interrupting rating every protective device downstream must meet, and the withstand rating of the gear that has to survive the event. The counter-intuitive part: a lower transformer impedance means a stiffer source and therefore a higher fault current, so specifying a low-%Z transformer makes the downstream equipment problem worse, not better."}},
    {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"This is an infinite-source estimate: it assumes the utility can supply unlimited current into the transformer primary, which over-states the real figure — conservative, and therefore safe for a first pass. It ignores cable impedance between the transformer and the point of interest, which reduces fault current with distance, and it ignores motor contribution, which increases it for the first few cycles."}}
@@ -138,6 +138,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/glossary.html#impedance">Impedance (%Z), defined</a>
       <a href="/engineering-calculators.html">All 21 calculators</a>
     </div>
+
+  <aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>Estimate available symmetrical fault current at a transformer secondary from kVA, voltage and %Z, and check equipment withstand ratings. Free, no signup.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>IEEE Std 141 covers the full method. For arc-flash and coordination work the governing analysis is IEEE 1584. Equipment interrupting ratings are marked per UL 489 for moulded-case breakers and ANSI C37 for power breakers.</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>This is an infinite-source estimate: it assumes the utility can supply unlimited current into the transformer primary, which over-states the real figure — conservative, and therefore safe for a first pass. It ignores cable impedance between the transformer and the point of interest, which reduces fault current with distance, and it ignores motor contribution, which increases it for the first few cycles. This is a screening estimate, not a stamped calculation.</dd>
+      <dt>Provenance</dt>
+      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labelled as estimates. Worked examples are arithmetic you can reproduce against the <a href="/engineering-calculators.html#fault-current">live calculator</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+    </dl>
+  </aside>
 
 </div>
 </main>

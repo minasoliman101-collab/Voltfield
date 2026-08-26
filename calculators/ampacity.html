@@ -19,7 +19,7 @@
    {"@type":"ListItem","position":2,"name":"Calculators","item":"https://voltfield.org/engineering-calculators.html"},
    {"@type":"ListItem","position":3,"name":"Cable Ampacity & Conduit Fill Calculator","item":"https://voltfield.org/calculators/ampacity.html"}
  ]},
- {"@type":"WebPage","name":"Cable Ampacity & Conduit Fill Calculator","description":"Look up NEC Table 310.16 conductor ampacity and check conduit fill against the 40% limit for three or more conductors. Free, no signup.","url":"https://voltfield.org/calculators/ampacity.html","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebPage","name":"Cable Ampacity & Conduit Fill Calculator","description":"Look up NEC Table 310.16 conductor ampacity and check conduit fill against the 40% limit for three or more conductors. Free, no signup.","url":"https://voltfield.org/calculators/ampacity.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What does the Cable Ampacity & Conduit Fill calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Ampacity is the current a conductor can carry continuously without exceeding its insulation temperature rating. The table value is where the calculation starts, not where it ends: the published figure assumes no more than three current-carrying conductors in a raceway at 30°C ambient, and both of those assumptions fail routinely in real installations. Conduit fill is the companion check — too many conductors in a raceway makes them impossible to pull without damage and traps the heat that ampacity derating exists to manage."}},
    {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"The lookup gives the base table value before any correction. Real ampacity is the table value multiplied by both the ambient correction factor and the conductor-count adjustment factor, and either can be substantial. Terminal temperature ratings under 110.14(C) may limit the answer further regardless of the conductor's own rating."}}
@@ -137,6 +137,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/glossary.html#derating">Derating, defined</a>
       <a href="/engineering-calculators.html">All 21 calculators</a>
     </div>
+
+  <aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>Look up NEC Table 310.16 conductor ampacity and check conduit fill against the 40% limit for three or more conductors. Free, no signup.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>Ampacity from NEC Table 310.16. Adjustment for more than three current-carrying conductors from 310.15(C)(1), ambient correction from 310.15(B). Conduit fill limits from NEC Chapter 9, Table 1, with conductor and raceway dimensions in Tables 4 and 5.</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>The lookup gives the base table value before any correction. Real ampacity is the table value multiplied by both the ambient correction factor and the conductor-count adjustment factor, and either can be substantial. Terminal temperature ratings under 110.14(C) may limit the answer further regardless of the conductor's own rating. This is a screening estimate, not a stamped calculation.</dd>
+      <dt>Provenance</dt>
+      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labelled as estimates. Worked examples are arithmetic you can reproduce against the <a href="/engineering-calculators.html#ampacity">live calculator</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+    </dl>
+  </aside>
 
 </div>
 </main>
