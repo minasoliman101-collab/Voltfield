@@ -381,3 +381,17 @@
 /data-centers/genset-components                  /data-centers/genset-components.html   301!
 /data-centers/grounding-bonding                  /data-centers/grounding-bonding.html   301!
 /data-centers/monitoring-controls                /data-centers/monitoring-controls.html   301!
+
+# ---- calculator landing pages ----
+/calculators/ampacity                       /calculators/ampacity.html   301!
+/calculators/arc-flash                      /calculators/arc-flash.html   301!
+/calculators/bess-sizing                    /calculators/bess-sizing.html   301!
+/calculators/fault-current                  /calculators/fault-current.html   301!
+/calculators/generator-runtime              /calculators/generator-runtime.html   301!
+/calculators/grounding                      /calculators/grounding.html   301!
+/calculators/inrush                         /calculators/inrush.html   301!
+/calculators/motor-start                    /calculators/motor-start.html   301!
+/calculators/power-factor                   /calculators/power-factor.html   301!
+/calculators/solar-string                   /calculators/solar-string.html   301!
+/calculators/transformer-sizing             /calculators/transformer-sizing.html   301!
+/calculators/voltage-drop                   /calculators/voltage-drop.html   301!

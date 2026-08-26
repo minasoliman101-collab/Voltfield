@@ -1,0 +1,327 @@
+# Landing-page content for the calculators with real search demand.
+#
+# Each record: ===slug|anchor-on-engineering-calculators|H1|<title>|meta description
+# Then --intro --formula --vars --example --standard --limits --mistakes --related
+#
+# Nothing here states a figure that is not either a physical constant, a value
+# published in the named standard, or arithmetic the reader can check against
+# the live calculator. Worked examples are computed from the same formula the
+# tool uses, so a reader can verify the page against the tool.
+
+===voltage-drop|voltage-drop|Voltage Drop Calculator|Voltage Drop Calculator (Cable Sizing)|Calculate voltage drop on a feeder using the K-factor method, check it against the 3% and 5% design limits, and size the conductor. Free, no signup.
+--intro
+Voltage drop is the loss along a conductor between the source and the load. It is not a code violation in itself — the NEC states its 3% branch-circuit and 5% total figures as recommendations in informational notes, not requirements — but equipment is rated to operate within a voltage band, and a long run that drops too far will leave a motor starting hard, a contactor chattering, or a drive faulting on undervoltage. On a long feeder it is usually voltage drop, not ampacity, that forces the conductor up a size.
+--formula
+VD = (2 &times; K &times; I &times; D) / CM  [single-phase]
+VD = (1.732 &times; K &times; I &times; D) / CM  [three-phase]
+--vars
+K :: Resistivity constant: 12.9 for copper, 21.2 for aluminium, in ohm-cmil/ft
+I :: Load current in amperes
+D :: One-way circuit length in feet
+CM :: Conductor cross-section in circular mils
+2 or 1.732 :: Accounts for the return path: two conductors single-phase, the square root of three for three-phase
+--example
+A 100 A three-phase load at 480 V, 150 ft away, on 2 AWG copper (66,360 cmil):
+VD = (1.732 &times; 12.9 &times; 100 &times; 150) / 66,360 = 5.05 V
+As a percentage: 5.05 / 480 = 1.05%. Comfortably inside 3%.
+Move the same load to 400 ft and it becomes 13.5 V, or 2.8% — still inside the limit, but with nothing left for the branch circuit beyond it.
+--standard
+The K-factor method is the standard hand calculation. NEC 210.19(A) and 215.2(A) informational notes give the 3% branch and 5% total figures. For exact work, IEEE Std 141 (the Red Book) covers the full method with reactance included.
+--limits
+This is a resistance-only calculation. It ignores conductor reactance, which matters on larger conductors and longer runs — above roughly 250 ft, or above about 4/0, the reactive component starts to dominate and this method under-reads. It also assumes a 75&deg;C conductor temperature and a balanced load.
+--mistakes
+Using one-way distance where the formula wants it and then doubling it again — the 2 and the 1.732 already account for the return path. Sizing to ampacity first and never checking drop on a long run. Applying the single-phase formula to a three-phase circuit, which over-states drop by about 15%.
+--related
+/parts/lv-power-cable.html :: LV Power Cable
+/parts/mv-power-cable.html :: MV Power Cable
+/data-centers/cabling.html :: Cable &amp; Busbar Sizing
+/glossary.html#ampacity :: Ampacity, defined
+
+===transformer-sizing|transformer-sizing|Transformer Sizing Calculator|Transformer Sizing Calculator (kW to kVA)|Convert a kW load to the kVA rating you need, round to the nearest standard ANSI/IEEE C57.12.00 nameplate, and get full-load amps. Free, no signup.
+--intro
+Transformers are rated in kVA — apparent power — while loads are usually described in kW, real power. The difference is power factor, and ignoring it is how a transformer ends up undersized on day one. Once you have the kVA figure you cannot simply order it: transformers are built to a standard series of nameplate ratings, so the practical answer is always the next size up.
+--formula
+kVA = kW / PF
+FLA = kVA &times; 1000 / (1.732 &times; V)  [three-phase]
+FLA = kVA &times; 1000 / V  [single-phase]
+--vars
+kW :: Real power drawn by the load
+PF :: Power factor, between 0 and 1
+V :: Line-to-line secondary voltage
+FLA :: Full-load amperes at the nameplate rating
+--example
+A 400 kW load at 0.85 power factor:
+kVA = 400 / 0.85 = 470.6 kVA
+The standard series runs 300, 500, 750, 1000 — so the unit specified is 500 kVA.
+At 480 V three-phase: FLA = 500 &times; 1000 / (1.732 &times; 480) = 601 A.
+--standard
+Standard nameplate ratings come from ANSI/IEEE C57.12.00. Loading practice beyond nameplate is covered by IEEE C57.91, which governs how far and how long a unit may be run over rating before insulation life is affected.
+--limits
+This sizes for steady-state load only. It does not account for future growth, harmonic heating, non-linear load, or motor starting, all of which argue for headroom. It also says nothing about impedance, which is the other half of a transformer specification and the one that sets downstream fault current.
+--mistakes
+Sizing on kW and never dividing by power factor, which under-sizes by however far PF sits below unity. Sizing exactly to calculated load with no growth allowance. Choosing on kVA alone and leaving %Z to the supplier, which is how switchgear ends up under-rated for the fault current the transformer can deliver.
+--related
+/parts/pad-mount-transformers.html :: Pad-Mount Transformers
+/parts/dry-type-cast-resin-transformers.html :: Dry-Type Transformers
+/data-centers/transformers.html :: Data Center Transformers
+/guide-transformer-nameplate.html :: How to Read a Transformer Nameplate
+
+===fault-current|fault-current|Available Fault Current Calculator|Available Fault Current Calculator (Short Circuit)|Estimate available symmetrical fault current at a transformer secondary from kVA, voltage and %Z, and check equipment withstand ratings. Free, no signup.
+--intro
+Available fault current is how much current the system can deliver into a bolted short circuit at a given point. It sets the interrupting rating every protective device downstream must meet, and the withstand rating of the gear that has to survive the event. The counter-intuitive part: a lower transformer impedance means a stiffer source and therefore a higher fault current, so specifying a low-%Z transformer makes the downstream equipment problem worse, not better.
+--formula
+Isc = (100,000 &times; kVA) / (1.732 &times; V &times; %Z)
+--vars
+kVA :: Transformer nameplate rating
+V :: Line-to-line secondary voltage
+%Z :: Transformer impedance as a percentage of rated voltage
+Isc :: Symmetrical RMS fault current in amperes
+--example
+A 1000 kVA transformer at 480 V with 5.75% impedance:
+Isc = (100,000 &times; 1000) / (1.732 &times; 480 &times; 5.75) = 20,934 A
+So roughly 21 kA at the secondary terminals, and the main breaker needs an interrupting rating above that. Drop the impedance to 4% and the same transformer delivers about 30 kA.
+--standard
+IEEE Std 141 covers the full method. For arc-flash and coordination work the governing analysis is IEEE 1584. Equipment interrupting ratings are marked per UL 489 for moulded-case breakers and ANSI C37 for power breakers.
+--limits
+This is an infinite-source estimate: it assumes the utility can supply unlimited current into the transformer primary, which over-states the real figure — conservative, and therefore safe for a first pass. It ignores cable impedance between the transformer and the point of interest, which reduces fault current with distance, and it ignores motor contribution, which increases it for the first few cycles.
+--mistakes
+Using the calculated value as a final number instead of commissioning a study. Forgetting motor contribution on a motor-heavy bus. Assuming a lower impedance is always better. Applying the secondary-terminal figure to equipment far downstream, where the real value is lower.
+--related
+/parts/lv-switchgear.html :: LV Switchgear
+/parts/molded-case-breakers-mccb-15-1200a.html :: Molded-Case Breakers
+/guide-short-circuit-studies-breaker-coordination.html :: Short-Circuit Studies &amp; Coordination
+/glossary.html#impedance :: Impedance (%Z), defined
+
+===arc-flash|arc-flash|Arc-Flash Incident Energy Calculator|Arc-Flash Incident Energy Calculator|Estimate arc-flash incident energy and the arc-flash boundary using the Lee method, for a first-pass check before a full IEEE 1584 study. Free, no signup.
+--intro
+Incident energy is the thermal energy an arc would deliver to a surface at a working distance, in calories per square centimetre. It determines the PPE category and the arc-flash boundary that must appear on the equipment label. Two inputs dominate it, and only one is obvious: available fault current, and how long the upstream device takes to clear. Halving clearing time roughly halves incident energy, which is why protection settings matter more to arc-flash exposure than almost anything else.
+--formula
+The Lee method models an open-air arc. Incident energy rises with available fault current, with the square of arcing time, and falls with the square of working distance.
+--vars
+Bolted fault current :: From the fault-current calculation at that point
+Clearing time :: How long the upstream protective device takes to interrupt, in seconds
+Working distance :: Distance from the arc to the worker's face and chest, commonly 18 inches for LV gear
+System voltage :: The Lee method applies above 600 V; below that, IEEE 1584 empirical models apply
+--example
+Doubling the clearing time from 0.1 s to 0.2 s does not double incident energy — it roughly quadruples it, because energy scales with the square of time. A breaker setting change that shaves 100 ms off clearing can move a task from one PPE category to a lower one without touching the hardware.
+--standard
+The theoretical Lee equation is documented in IEEE 1584, which is the governing standard for arc-flash calculation. NFPA 70E sets the workplace requirements: risk assessment, approach boundaries, PPE, and equipment labelling.
+--limits
+Lee is a theoretical open-air model and is conservative below 600 V, where IEEE 1584's empirical equations fit measured data far better. It does not model arc-in-a-box enclosure effects, electrode configuration or arc gap. This is a screening estimate only. Labelling and PPE selection require a full study by a qualified engineer.
+--mistakes
+Treating a screening number as a labelling result. Using a clearing time from the device curve without accounting for the arcing current being lower than bolted fault current, which can put the device on a slower part of its curve. Assuming higher fault current always means higher incident energy — sometimes it clears the device faster and lowers it.
+--related
+/data-centers/grounding-bonding.html :: Grounding, Bonding &amp; Surge Protection
+/guide-arc-flash-boundary-basics.html :: Arc-Flash Boundary Basics
+/glossary.html#incident-energy :: Incident energy, defined
+/glossary.html#nfpa-70e :: NFPA 70E, defined
+
+===ampacity|ampacity|Cable Ampacity &amp; Conduit Fill Calculator|Cable Ampacity &amp; Conduit Fill Calculator|Look up NEC Table 310.16 conductor ampacity and check conduit fill against the 40% limit for three or more conductors. Free, no signup.
+--intro
+Ampacity is the current a conductor can carry continuously without exceeding its insulation temperature rating. The table value is where the calculation starts, not where it ends: the published figure assumes no more than three current-carrying conductors in a raceway at 30&deg;C ambient, and both of those assumptions fail routinely in real installations. Conduit fill is the companion check — too many conductors in a raceway makes them impossible to pull without damage and traps the heat that ampacity derating exists to manage.
+--formula
+Fill % = 100 &times; (n &times; A conductor) / A conduit
+Limits: 53% for one conductor, 31% for two, 40% for three or more
+--vars
+n :: Number of conductors in the raceway
+A conductor :: Cross-sectional area of one conductor including insulation
+A conduit :: Internal cross-sectional area of the raceway
+--example
+Nine 12 AWG THHN conductors, each 0.0133 in&sup2;, in 3/4 inch EMT with 0.533 in&sup2; internal area:
+Fill = 100 &times; (9 &times; 0.0133) / 0.533 = 22.5%
+Inside the 40% limit. But nine current-carrying conductors trigger a 70% ampacity adjustment factor, so each one now carries far less than its table value.
+--standard
+Ampacity from NEC Table 310.16. Adjustment for more than three current-carrying conductors from 310.15(C)(1), ambient correction from 310.15(B). Conduit fill limits from NEC Chapter 9, Table 1, with conductor and raceway dimensions in Tables 4 and 5.
+--limits
+The lookup gives the base table value before any correction. Real ampacity is the table value multiplied by both the ambient correction factor and the conductor-count adjustment factor, and either can be substantial. Terminal temperature ratings under 110.14(C) may limit the answer further regardless of the conductor's own rating.
+--mistakes
+Using the 90&deg;C column when the terminations are only rated 75&deg;C — the termination governs. Counting the neutral as non-current-carrying on a circuit feeding non-linear load, where it carries harmonic current. Checking fill and forgetting the derating that the same conductor count triggers.
+--related
+/parts/lv-power-cable.html :: LV Power Cable
+/parts/conduit-raceway-and-fittings.html :: Conduit, Raceway &amp; Fittings
+/data-centers/cabling.html :: Cable &amp; Busbar Sizing
+/glossary.html#derating :: Derating, defined
+
+===bess-sizing|bess-sizing|BESS Sizing Calculator|BESS Sizing Calculator (kW and kWh)|Convert a critical load and backup duration into usable energy, then into the nameplate kWh you need once depth of discharge and round-trip efficiency are applied.
+--intro
+Battery storage is specified in two numbers that are easy to conflate: power in kW, which is how fast it can deliver, and energy in kWh, which is how long it can sustain that. The ratio between them is the C-rate, and it drives cell selection and thermal design. The other trap is that the energy you can use is not the energy on the nameplate — depth of discharge and round-trip efficiency both take a cut, and sizing to usable energy without grossing up for them under-sizes the system.
+--formula
+Usable kWh = kW &times; hours
+Nameplate kWh = Usable kWh / (DoD &times; RTE)
+--vars
+kW :: Critical load the system must carry
+hours :: Required backup duration
+DoD :: Depth of discharge, the fraction of nameplate energy the BMS will allow you to use
+RTE :: Round-trip efficiency, the fraction of energy in that comes back out
+--example
+A 500 kW load for 4 hours, at 90% depth of discharge and 88% round-trip efficiency:
+Usable = 500 &times; 4 = 2,000 kWh
+Nameplate = 2,000 / (0.90 &times; 0.88) = 2,525 kWh
+So a 2,000 kWh requirement needs roughly 2,525 kWh of installed capacity on day one — and more than that at end of life, which is what augmentation plans for.
+--standard
+Installation requirements come from NFPA 855, with UL 9540 for the system and UL 9540A for the thermal-runaway fire test data that sets separation distances. Grid-interconnected inverters follow IEEE 1547 and UL 1741.
+--limits
+This is a day-one calculation. Capacity fades with cycling and calendar age, so a system sized exactly to requirement will miss it within a few years unless augmentation is planned. It also ignores auxiliary load — the thermal management system draws power from the same asset.
+--mistakes
+Sizing to usable energy and ordering that as nameplate. Ignoring degradation, then discovering the shortfall in year three. Treating power and energy as one specification, which produces a system that meets the kWh and cannot deliver the kW.
+--related
+/parts/lfp-dc-blocks-5mwh.html :: LFP DC Blocks
+/parts/grid-forming-pcs.html :: Grid-Forming PCS
+/battery-storage/bess-enclosures.html :: BESS Enclosures &amp; Modules
+/guide-bess-augmentation.html :: BESS Augmentation Explained
+
+===solar-string|solar-string|Solar String Sizing Calculator|Solar String Sizing Calculator (Voc / Vmp)|Apply module temperature coefficients to site design temperatures to find maximum and minimum string length against inverter voltage limits. Free, no signup.
+--intro
+String length is set by temperature, not by the module's rated voltage. Open-circuit voltage rises as it gets colder, so the binding constraint is the coldest morning of the year: if cold-weather Voc exceeds the inverter's maximum DC input, the string damages the inverter. At the other end, maximum-power voltage falls as it gets hotter, so a string that is too short drops below the inverter's MPPT window on the hottest afternoon and stops tracking. The usable range sits between those two.
+--formula
+Voc(cold) = Voc &times; (1 + (Tc&middot;Voc / 100) &times; (Tmin &minus; 25))
+Vmp(hot) = Vmp &times; (1 + (Tc&middot;Vmp / 100) &times; (Tmax &minus; 25))
+--vars
+Voc :: Module open-circuit voltage at standard test conditions
+Vmp :: Module maximum-power voltage at STC
+Tc&middot;Voc :: Temperature coefficient of Voc, percent per &deg;C, always negative
+Tmin :: Record low ambient at the site
+Tmax :: Design cell temperature, which runs well above ambient in full sun
+--example
+A module with Voc 49.5 V and a coefficient of &minus;0.27%/&deg;C, at a record low of &minus;15&deg;C:
+Voc(cold) = 49.5 &times; (1 + (&minus;0.27/100) &times; (&minus;15 &minus; 25)) = 49.5 &times; 1.108 = 54.8 V
+Against a 1500 V inverter limit: 1500 / 54.8 = 27.3, so 27 modules maximum.
+Sizing on the 49.5 V nameplate instead would have suggested 30 — and exceeded the inverter limit on the first cold morning.
+--standard
+NEC 690.7 governs maximum PV system voltage and permits the temperature-coefficient method. Module coefficients come from the manufacturer's datasheet at STC per IEC 61215.
+--limits
+The result is only as good as the design temperatures. Record low is not average winter low, and cell temperature in full sun runs 20-30&deg;C above ambient. Uses module datasheet values, which carry their own tolerance.
+--mistakes
+Using average rather than record low temperature, which produces a string that is legal on paper and over-voltage in practice. Ignoring the hot-weather minimum entirely and building strings that fall out of the MPPT window in summer. Applying one site's temperatures to another project.
+--related
+/parts/mono-perc-modules.html :: Mono PERC Modules
+/parts/topcon-modules.html :: TOPCon Modules
+/parts/central-inverters-utility.html :: Central Inverters
+/guide-inverter-clipping-ratio.html :: Inverter Clipping &amp; DC:AC Ratio
+
+===power-factor|power-factor|Power Factor Correction Calculator|Power Factor Correction Calculator (kVAR)|Size the capacitor bank in kVAR needed to raise an existing power factor to a target, and see the effect on apparent power. Free, no signup.
+--intro
+Power factor is the ratio of real power to apparent power. A facility drawing 500 kW at 0.75 power factor is pulling 667 kVA through its transformer, cables and switchgear — a third more current than the real work requires, and every component in the path has to be sized for it. Correction adds capacitive reactive power locally so the reactive component stops being drawn through the whole system. Where the utility bills a power-factor penalty, the correction usually pays for itself on that alone.
+--formula
+kVAR = kW &times; (tan(arccos PF1) &minus; tan(arccos PF2))
+--vars
+kW :: Real power drawn by the load
+PF1 :: Existing, uncorrected power factor
+PF2 :: Target power factor after correction
+kVAR :: Capacitor bank size required
+--example
+500 kW at 0.75 power factor, corrected to 0.95:
+tan(arccos 0.75) = 0.882, tan(arccos 0.95) = 0.329
+kVAR = 500 &times; (0.882 &minus; 0.329) = 277 kVAR
+Apparent power falls from 667 kVA to 526 kVA — about 140 kVA of transformer and cable capacity released without adding a single kW of load.
+--standard
+IEEE Std 18 covers shunt power capacitors. NEC Article 460 governs capacitor installation, including the disconnect and overcurrent requirements.
+--limits
+This sizes a fixed bank for one operating point. Loads vary, and a fixed bank on a lightly loaded system can over-correct into a leading power factor, which causes its own voltage problems. It also assumes linear load: on a harmonic-rich system, capacitors can resonate with source inductance and amplify the harmonic instead of correcting anything.
+--mistakes
+Correcting to unity rather than to a target just below it, which risks over-correction as load varies. Installing capacitors on a harmonic-heavy bus without a detuning reactor. Sizing from a peak-demand reading and leaving the bank connected through the night.
+--related
+/parts/power-meters-bms.html :: Power Meters &amp; BMS
+/data-centers/monitoring-controls.html :: Monitoring &amp; Controls
+/glossary.html#kva-vs-kw :: kVA vs. kW, defined
+
+===motor-start|motor-start|Motor Starting Voltage Dip Calculator|Motor Starting Voltage Dip Calculator|Estimate bus voltage dip when a large motor starts across the line, using locked-rotor kVA against source short-circuit kVA. Free, no signup.
+--intro
+A motor starting across the line draws locked-rotor current — commonly six times full load — and that inrush pulls the bus voltage down for as long as it takes to accelerate. If the dip is deep enough, contactors drop out, drives fault on undervoltage, and lighting visibly flickers. The screening question is simple: how stiff is the source relative to the motor's starting demand?
+--formula
+%Voltage dip = LRkVA / (LRkVA + SCkVA) &times; 100
+--vars
+LRkVA :: Locked-rotor kVA of the motor being started
+SCkVA :: Short-circuit kVA available at the bus, a measure of source stiffness
+--example
+A motor with 1,200 kVA locked-rotor demand on a bus with 20,000 kVA short-circuit capacity:
+Dip = 1200 / (1200 + 20000) &times; 100 = 5.7%
+Acceptable for most equipment. Halve the source stiffness to 10,000 kVA and the dip becomes 10.7%, which is where contactor dropout and drive undervoltage trips start to appear.
+--standard
+The screening method is documented in IEEE Std 399 (the Brown Book). Motor locked-rotor codes are defined by NEMA MG 1, and the code letter on the nameplate is what gives you locked-rotor kVA per horsepower.
+--limits
+A steady-state screening estimate. It does not model the acceleration curve, the load torque the motor is starting against, or how long the dip persists — and duration matters as much as depth for whether a contactor actually drops out. Reduced-voltage starting and soft starters change the picture entirely.
+--mistakes
+Using full-load kVA instead of locked-rotor kVA, which understates the dip by a factor of about six. Ignoring dip duration. Assuming a generator-backed bus behaves like a utility source, when a generator is far softer and dips much further.
+--related
+/parts/ac-motors.html :: AC Motors
+/parts/motor-controls-and-drives.html :: Motor Controls &amp; Drives
+/glossary.html#impedance :: Impedance (%Z), defined
+
+===inrush|inrush|Transformer Inrush Current Calculator|Transformer Inrush Current Calculator|Estimate magnetizing inrush current on transformer energisation as a multiple of full-load amps, for upstream breaker and fuse selection. Free, no signup.
+--intro
+Energising a transformer draws a magnetizing inrush that is far above full-load current — commonly 8 to 12 times, decaying over several cycles. It is not a fault, but an upstream protective device cannot tell the difference unless it has been selected to ride through it. Getting this wrong produces a transformer that trips its own feeder breaker every time it is energised.
+--formula
+FLA = kVA &times; 1000 / (1.732 &times; V)  [three-phase]
+Peak inrush &asymp; M &times; FLA
+--vars
+kVA :: Transformer nameplate rating
+V :: Line-to-line voltage on the side being energised
+M :: Inrush multiplier, typically 8 to 12 for modern units
+--example
+A 1000 kVA transformer energised from a 480 V bus:
+FLA = 1000 &times; 1000 / (1.732 &times; 480) = 1,203 A
+At a multiplier of 10, peak inrush is roughly 12,000 A for the first cycle.
+The upstream device must not see that as a fault, which usually means an instantaneous setting above it or a deliberately delayed curve.
+--standard
+IEEE C57.12.00 covers transformer requirements. Overcurrent protection limits for transformers are set by NEC Article 450, which permits higher primary protection specifically to allow for inrush.
+--limits
+The multiplier is an estimate, not a measurement. Actual inrush depends on residual core flux and the exact point on the voltage wave at which the switch closes, and worst-case energisation can exceed the typical figure. Magnitude also decays over several cycles, so a single peak number does not describe the whole event.
+--mistakes
+Setting instantaneous protection from full-load current alone. Assuming inrush is the same on every energisation when it depends on residual flux from the last de-energisation. Applying a low multiplier to a modern low-loss core, which tends to have higher inrush than older designs.
+--related
+/parts/pad-mount-transformers.html :: Pad-Mount Transformers
+/parts/large-power-transformers.html :: Large Power Transformers
+/data-centers/transformers.html :: Data Center Transformers
+/guide-transformer-nameplate.html :: How to Read a Transformer Nameplate
+
+===grounding|grounding|Ground Rod Resistance Calculator|Ground Rod Resistance Calculator (Dwight's Formula)|Estimate resistance-to-earth of a driven ground rod from soil resistivity, rod length and diameter, using Dwight's formula. Free, no signup.
+--intro
+The resistance of a driven rod to earth is dominated by soil resistivity and by rod length — and much less than people expect by rod diameter. Doubling length roughly halves resistance; doubling diameter changes it by only a few percent. That is why grounding designs add rods and depth rather than thicker rods, and why the NEC's 25-ohm threshold is met with a second electrode rather than a bigger one.
+--formula
+R = [&rho; / (2&pi;L)] &times; [ln(4L/d) &minus; 1]
+--vars
+&rho; :: Soil resistivity in ohm-metres, which varies enormously: wet clay is tens, dry sand or rock is thousands
+L :: Rod length in metres
+d :: Rod diameter in metres
+R :: Resistance to earth in ohms
+--example
+A 3 m rod, 16 mm diameter, in 100 ohm-metre soil:
+R = [100 / (2&pi; &times; 3)] &times; [ln(4 &times; 3 / 0.016) &minus; 1]
+R = 5.31 &times; (6.62 &minus; 1) = 29.8 ohms
+Above the 25-ohm figure, so a second electrode is required. Doubling the rod to 6 m brings it to roughly 17 ohms; doubling the diameter instead would barely move it.
+--standard
+NEC 250.53(A)(2) requires a supplemental electrode where a single rod exceeds 25 ohms. IEEE Std 81 covers measurement of earth resistivity and ground resistance; IEEE Std 80 covers substation grounding design.
+--limits
+Dwight's formula assumes uniform soil, which real ground is not — resistivity varies with depth, moisture and season, and a summer measurement can be far better than the same rod in a dry autumn. It models one rod: multiple rods interact, and their combined resistance is higher than simple parallel arithmetic suggests unless they are spaced at least one rod length apart.
+--mistakes
+Treating a calculation as a substitute for measurement, when the code requirement is about measured resistance. Specifying a larger diameter to hit a resistance target. Spacing multiple rods too closely, so their shells of influence overlap and the array performs worse than expected.
+--related
+/parts/ground-bars-and-kits.html :: Ground Bars &amp; Kits
+/parts/surge-protective-devices.html :: Surge Protective Devices
+/data-centers/grounding-bonding.html :: Grounding, Bonding &amp; Surge Protection
+/guide-grounding-bonding-basics.html :: Grounding &amp; Bonding Basics
+
+===generator-runtime|generator-runtime|Generator Runtime Calculator|Generator Runtime Calculator (Fuel)|Estimate how long a generator runs on a full tank at a given load, using the fuel consumption rate from its own spec sheet. Free, no signup.
+--intro
+Runtime is tank capacity divided by consumption rate, but consumption is not a single number — it varies strongly with load. A set at 25% load burns far less per hour than at 75%, and using the full-load figure for a lightly loaded standby set will badly understate how long it runs. The number that matters for a standby installation is usually how long it lasts at the actual connected load, not at nameplate.
+--formula
+Runtime (hrs) = Fuel tank capacity (gal) / Fuel consumption rate (gal/hr)
+--vars
+Tank capacity :: Usable fuel volume, which is less than nominal capacity once the unusable heel is excluded
+Consumption rate :: Gallons per hour at the expected load, from the genset spec sheet
+--example
+A 500 kW diesel set with a 1,000 gallon tank, consuming 26 gal/hr at 75% load:
+Runtime = 1000 / 26 = 38.5 hours
+At 25% load the same set might burn 11 gal/hr, giving about 90 hours — more than twice as long from the same tank.
+--standard
+Emergency and standby system requirements come from NFPA 110, which classifies systems by how long they must run without refuelling. On-site fuel storage is governed by NFPA 30 and local fire code.
+--limits
+Depends entirely on the consumption figure used, which should come from the manufacturer's data at the actual load, not a rule of thumb. Ignores the unusable heel at the bottom of the tank, ambient temperature effects, and fuel-quality degradation in long-idle standby installations — which is a more common cause of failure than running out.
+--mistakes
+Using nameplate consumption for a lightly loaded set. Treating nominal tank capacity as usable. Sizing storage for runtime without checking what the local fire code allows to be stored on site. Ignoring fuel polishing on a tank that sits full for years.
+--related
+/parts/diesel-gensets.html :: Diesel Gensets
+/parts/fuel-and-starting-systems.html :: Fuel &amp; Starting Systems
+/data-centers/genset-components.html :: Genset Components
+/data-centers/backup-power.html :: Backup Power
