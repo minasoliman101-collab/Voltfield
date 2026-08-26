@@ -408,6 +408,16 @@
 
      The canvas is built once at module scope; the CanvasTexture wrapping it is
      per-viewer, because textures upload per WebGL context. */
+  /* Set from renderer.capabilities once a context exists; 4 until then, which is
+     the value every texture used before. Module-level so the geometry helpers
+     can reach it without a renderer reference. */
+  let MAX_ANISO = 4;
+  /* Supersampling factor for label/nameplate canvases. The draw callbacks size
+     everything from the width and height they are handed, so raising this
+     sharpens text without touching any of them. Kept at 2: these canvases are
+     cached per key and shared across every live context, so the memory cost is
+     paid once, but going higher stops being visible before it stops costing. */
+  const LABEL_SCALE = 2;
   let _noiseCanvas = null;
   function noiseCanvas(){
     if (_noiseCanvas) return _noiseCanvas;
@@ -438,6 +448,11 @@
     const t = new THREE.CanvasTexture(noiseCanvas());
     t.wrapS = t.wrapT = THREE.RepeatWrapping;
     t.repeat.set(repeat, repeat);
+    /* This is the tiling roughness/bump map, so it is seen at grazing angles on
+       every large panel. Without anisotropic filtering it smears into mush
+       toward the horizon of a surface, which is exactly where a real machined
+       or painted finish still shows texture. */
+    t.anisotropy = MAX_ANISO;
     return t;
   }
 
@@ -680,10 +695,16 @@
      BoxGeometry repeats the same UV square on all six faces, so a plate would
      show the text on its back and edges too. */
   function decal(THREE, g, o){
-    const cv  = labelCanvas(o.key, o.cw || 256, o.ch || 160, o.draw);
+    /* Label canvases are authored at the sizes below and rendered at 2x. These
+       are the only surfaces on the model carrying TEXT -- nameplates, rating
+       plates, warning labels -- so they are the first thing to look soft when a
+       viewer zooms, and the draw callbacks are resolution-independent 2D canvas
+       calls that scale for free. The 2x happens here rather than in each of the
+       eleven call sites so their authored proportions stay readable. */
+    const cv  = labelCanvas(o.key, (o.cw || 256) * LABEL_SCALE, (o.ch || 160) * LABEL_SCALE, o.draw);
     const tex = new THREE.CanvasTexture(cv);
     tex.colorSpace = THREE.SRGBColorSpace;
-    tex.anisotropy = 4;
+    tex.anisotropy = MAX_ANISO;
     const mat = new THREE.MeshStandardMaterial({
       map: tex, roughness: o.rough == null ? 0.5 : o.rough,
       metalness: o.metal == null ? 0.15 : o.metal,
@@ -2044,6 +2065,12 @@
       // testable by reading frames back). Negligible cost at these sizes.
       renderer = new THREE.WebGLRenderer({antialias:true, alpha:true, preserveDrawingBuffer:true});
       renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 2));
+      /* Record the GPU's real anisotropic-filtering limit once. Textures were
+         pinned at 4; hardware typically allows 16, and the difference shows on
+         any surface viewed at a shallow angle -- which here means every
+         nameplate, side panel and floor. It costs nothing beyond samples the
+         GPU could already take. */
+      try { MAX_ANISO = renderer.capabilities.getMaxAnisotropy() || 4; } catch(e) { MAX_ANISO = 4; }
       renderer.setSize(w,h);
       renderer.setClearColor(0x000000, 0);
       renderer.domElement.style.cssText = 'width:100%;height:100%;display:block;touch-action:none;cursor:grab';
