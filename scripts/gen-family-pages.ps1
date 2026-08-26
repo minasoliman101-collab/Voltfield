@@ -121,13 +121,25 @@ if (-not (Test-Path $outDir)) { New-Item -ItemType Directory $outDir | Out-Null 
 
 $written = 0; $skipped = 0; $urls = New-Object System.Collections.ArrayList
 foreach ($f in $fams) {
-  $key = "$($f.s)|$($f.n)"
-  if (-not $intros.ContainsKey($key)) { $skipped++; continue }
-  $intro = $intros[$key]
+  # Two MRO families share the name "Toolholding & Workholding" under different
+  # categories, so sector|name is not unique. A category-qualified key wins where
+  # one is supplied; otherwise fall back to the short form.
+  $keyQ = "$($f.s)|$($f.c)|$($f.n)"
+  $key  = "$($f.s)|$($f.n)"
+  if     ($intros.ContainsKey($keyQ)) { $intro = $intros[$keyQ] }
+  elseif ($intros.ContainsKey($key))  { $intro = $intros[$key] }
+  else   { $skipped++; continue }
 
   $sec   = $SECTOR[$f.s]
   $name  = Esc $f.n
   $cat   = Esc $f.c
+
+  # Two families share the name "Toolholding & Workholding". The parser already
+  # prefixed the category onto the colliding slugs, so reuse that signal here:
+  # a collided page qualifies its title, H1 and description with the category so
+  # no two pages ship identical ones.
+  $collided = $f.slug -ne (($f.n.ToLower() -replace '&amp;','and' -replace '&','and' -replace '[^a-z0-9]+','-').Trim('-'))
+  $dispName = if ($collided) { "$name ($cat)" } else { $name }
   $url   = "https://voltfield.org/parts/$($f.slug).html"
   $band  = if ($null -ne $f.lo -and $null -ne $f.hi) { (Compact $f.lo $f.pu) + " $nd " + (Compact $f.hi $f.pu) } else { '' }
 
@@ -184,7 +196,8 @@ foreach ($f in $fams) {
     }
   }
 
-  $desc = "$($f.n): configuration options, standards, indicative lead time and market price band. Reference data, nothing for sale."
+  $descName = if ($collided) { "$($f.n) ($($f.c))" } else { $f.n }
+  $desc = "${descName}: configuration options, standards, indicative lead time and market price band. Reference data, nothing for sale."
 
   # ---- assemble ----
   $sb = New-Object System.Text.StringBuilder
@@ -193,7 +206,7 @@ foreach ($f in $fams) {
   [void]$sb.AppendLine('<head>')
   [void]$sb.AppendLine('<meta charset="UTF-8">')
   [void]$sb.AppendLine('<meta name="viewport" content="width=device-width, initial-scale=1.0">')
-  [void]$sb.AppendLine("<title>$name$($em)Specs, Standards &amp; Lead Time | Voltfield</title>")
+  [void]$sb.AppendLine("<title>$dispName$($em)Specs, Standards &amp; Lead Time | Voltfield</title>")
   [void]$sb.AppendLine("<link rel=`"canonical`" href=`"$url`">")
   [void]$sb.AppendLine("<meta name=`"description`" content=`"$(EscAttr $desc)`">")
   [void]$sb.AppendLine('<meta name="robots" content="index,follow">')
@@ -219,7 +232,7 @@ foreach ($f in $fams) {
   [void]$sb.AppendLine('<section class="artban">')
   [void]$sb.AppendLine('  <div class="artban-in">')
   [void]$sb.AppendLine("    <div class=`"eyebrow`">$(Esc $sec.label) &middot; Equipment Family</div>")
-  [void]$sb.AppendLine("    <h1>$name</h1>")
+  [void]$sb.AppendLine("    <h1>$dispName</h1>")
   [void]$sb.AppendLine("    <p class=`"dek`">$(Esc $intro)</p>")
   [void]$sb.AppendLine('  </div>')
   [void]$sb.AppendLine('</section>')

@@ -172,3 +172,180 @@ bess|HVAC / Chiller Units :: Direct-expansion and chilled-water units conditioni
 bess|Containerized Enclosures :: Walk-in and non-walk-in enclosures housing the DC blocks and their auxiliaries. The enclosure sets ingress protection, fire rating and the separation distance the site layout must respect.
 bess|Switchboard / AC Panels :: AC switchboards and collection panels tying PCS output to the medium-voltage coupling point. Protection coordination across the storage block terminates here.
 bess|Battery Racking & Structural Steel :: Frames and structural steel carrying the modules. Seismic qualification governs the design, because a battery rack is a heavy mass mounted high in a lightly built enclosure.
+
+# ---------------- OIL & GAS: Tubulars ----------------
+og|OCTG Casing :: The structural string cemented into the hole to isolate formations and support everything run after it. Grade and connection are chosen against collapse, burst and tension loads at depth, and the connection is usually what limits the string rather than the pipe body.
+og|OCTG Tubing :: The production string carrying fluids to surface inside the casing. Connection type governs gas-tight integrity, and the choice between external and non-upset upsets trades clearance against joint strength.
+og|Drill Pipe (S-135) :: The rotating string transmitting torque and circulating fluid to the bit. S-135 is the high-strength grade for deeper and more deviated wells; tool joints are the wear item and are recut over the pipe's working life.
+og|Line Pipe :: Transmission pipe carrying product away from the wellsite. Grade sets the allowable operating pressure for a given wall thickness, and the seamless or welded decision follows service severity and diameter.
+og|Thread Protectors, Dope & Pipe Care :: Protectors, storage and running compounds, hardbanding and drifting equipment. Unglamorous, but connection damage in transit and storage is a routine cause of rejected joints on the rack.
+
+# ---------------- OIL & GAS: Fittings & Flanges ----------------
+og|Weld Fittings (Elbows / Tees) :: Buttweld elbows, tees, reducers and caps matched to the pipe schedule. Wall thickness must match the pipe it joins, because the weld transition is where stress concentrates in service.
+og|Flanges (WN / SO / Blind) :: Weld-neck, slip-on and blind flanges by pressure class and facing. Pressure class is temperature-dependent, so a 300# rating at ambient is not a 300# rating at operating temperature.
+og|Threaded / Forged Fittings :: Forged couplings and socket-weld fittings in 3000 and 6000 class. Used on small-bore lines where buttwelding is impractical, and small-bore connections are a disproportionate share of leak points.
+
+# ---------------- OIL & GAS: Valves ----------------
+og|Gate / Globe / Check Valves :: The general-purpose valve set: gate for isolation, globe for throttling, check for backflow. Using a gate valve to throttle is a common misapplication that erodes the seat and destroys its isolation duty.
+og|Ball Valves :: Quarter-turn valves in trunnion and floating designs. Full-port versions pass pigs and maintain flow area; trunnion mounting is what makes larger sizes and higher pressures operable by hand.
+og|Frac Valves :: Heavy-duty gate valves for stimulation service at 10K and 15K working pressure. They see proppant-laden flow at high rate, so they are treated as a wear item with a defined service interval rather than a fit-and-forget component.
+og|Choke & Kill Valves :: Valves on the choke and kill lines controlling annular pressure during well control. Adjustable chokes meter flow precisely under high differential, which is exactly the condition that erodes trim fastest.
+
+# ---------------- OIL & GAS: Pressure Control ----------------
+og|Wellheads & Christmas Trees :: The surface assembly sealing the casing strings and controlling flow from the completed well. API 6A material and temperature classes are selected against the produced fluid, and sour service changes the metallurgy entirely.
+og|BOPs (Annular / Ram) :: The blowout preventer stack: annular units sealing on any pipe size, ram units sealing on a specific size or shearing the string. Recertification intervals and traceable test records are a regulatory obligation, not a maintenance preference.
+og|Adapters & Spools :: Crossovers, drilling spool adapters and flange transitions joining equipment of different sizes and pressure ratings. The lowest-rated component in the stack governs the whole assembly's rating.
+
+# ---------------- OIL & GAS: Downhole & Artificial Lift ----------------
+og|ESP Systems :: Electric submersible pumps with their motor, seal and multi-stage pump section. High rate capability, but the whole assembly is downhole, so a failure means a workover rig and a pulled string.
+og|Rod Pumps & Sucker Rods :: Beam-lift systems with a downhole pump driven by a rod string. Mature, repairable at surface and economic on low-rate wells, which is why they still dominate stripper-well production.
+og|Packers & Completion Tools :: Packers and bridge plugs isolating zones in the wellbore. The retrievable or permanent choice sets the intervention plan for the rest of the well's life, so it is a long-horizon decision.
+og|Coiled Tubing Units & Injector Heads :: Continuous tubing and the injector head running it. It allows intervention under pressure without killing the well, and fatigue life is tracked cumulatively because the tubing plastically deforms on every trip.
+
+# ---------------- OIL & GAS: Instrumentation & Controls ----------------
+og|Pressure / Temp Transmitters :: Field transmitters feeding control and safety systems. Hazardous-area certification governs installation method, and the wetted materials must suit the produced fluid rather than just the pressure.
+og|Flow Meters :: Coriolis, magnetic, turbine and ultrasonic meters. Custody-transfer duty imposes a far stricter accuracy and proving regime than allocation measurement, and it is a contractual obligation.
+og|Wellsite Controllers / RTUs :: Flow computers, plunger-lift controllers and RTUs running unattended sites. Often solar powered with intermittent communications, so local autonomy matters more than bandwidth.
+
+# ---------------- OIL & GAS: Pumps & Rotating ----------------
+og|Centrifugal Pumps :: API 610 pumps for water injection and transfer. NPSH available at the installed suction condition, not the catalogue curve, is what determines whether a pump cavitates in service.
+og|Positive-Displacement Pumps :: Triplex and quintuplex plunger pumps for mud and high-pressure duty. Flow is near-constant regardless of discharge pressure, which is why relief protection is mandatory rather than optional.
+og|Compressors :: Reciprocating and screw compressors for gas gathering and wellhead service. Reciprocating units handle higher ratios; screws tolerate wet gas better and run with far less vibration.
+
+# ---------------- OIL & GAS: Gaskets, Seals & Fasteners ----------------
+og|Ring-Joint & Spiral-Wound Gaskets :: RTJ and spiral-wound gaskets sealing flanged joints. RTJ gaskets seal by controlled plastic deformation and are single-use, which is why reusing one is a recurring cause of joint leaks.
+og|Stud Bolts & Nuts (B7 / 2H) :: The bolting holding flanged joints together. Preload achieved through a defined tightening sequence, not bolt grade alone, is what makes a joint seal.
+og|O-Rings & Seal Kits :: Elastomeric seals for wellhead and BOP service. Explosive decompression resistance matters in high-pressure gas, where a rapid pressure drop can destroy an otherwise correctly specified elastomer.
+
+# ---------------- OIL & GAS: Valve & Wellhead Components ----------------
+og|Valve Trim, Seats & Repair Kits :: Wedges, discs, balls, seats, stems and hardfacing for valve rebuilds. Trim material governs erosion and corrosion life, and rebuilding to original trim spec is what preserves the pressure rating.
+og|Valve Operators & Actuators :: Handwheels, gear operators and pneumatic, electric or hydraulic actuators. Actuator sizing must cover the worst-case differential the valve will ever see, not the normal operating case.
+og|Forged Bodies, Bonnets & Spools :: Forgings and castings machined into pressure-containing bodies. NACE compliance for sour service is a material and hardness requirement, and it disqualifies otherwise suitable alloys.
+og|Downhole Cable & Wellsite Electrical :: ESP power cable, motor lead extensions, potheads and penetrators. The cable must survive downhole temperature, pressure and produced fluid, and it is a frequent point of ESP system failure.
+og|Wellhead Hangers, Packoffs & Seals :: Casing and tubing hangers, slips, packoffs and secondary seals. They transfer string weight and seal the annulus, and the secondary seal is what allows annulus pressure to be tested and monitored.
+
+# ---------------- MRO: Fasteners & Hardware ----------------
+mro|Hex Cap Screws & Bolts :: The default structural fastener. Grade sets tensile strength and finish sets corrosion resistance, and the two are chosen independently: a Grade 8 bolt in the wrong finish fails in a marine plant just as surely as a weak one.
+mro|Nuts :: Hex, nylon-lock, jam, flange and coupling nuts. The nut must match or exceed the bolt grade, and a locking feature is a substitute for neither correct preload nor a positive retention method under vibration.
+mro|Washers :: Flat, split-lock, fender and Belleville washers. Flat washers spread bearing load, Belleville washers maintain preload through thermal cycling, and split-lock washers do far less than most installers assume.
+mro|Machine Screws :: Smaller-diameter screws with machine threads, for tapped holes and nut assemblies. Head style is usually driven by tool clearance and how flush the head has to sit.
+mro|Socket Screws :: Internal-drive screws for high torque in tight clearance. The higher strength grades make them the choice for tooling and machine assembly where a hex head simply will not fit.
+mro|Anchors :: Mechanical and adhesive anchors fixing into concrete and masonry. Embedment depth, edge distance and base material govern the rated load far more than the anchor diameter does.
+mro|Threaded Rod & Studs :: Continuously threaded stock cut to length, for hangers and flanged joints. Common in seismic bracing and trapeze supports, where the rod grade and the connection at each end both need checking.
+mro|Rivets :: Blind and solid rivets for permanent joints where only one side is accessible. Grip range is the parameter that decides whether the joint clamps properly or stays loose.
+mro|Pins, Rings & Clips :: Cotter pins, dowel pins, retaining rings and clips locating and retaining components. Small, cheap and load-bearing, and a retaining ring installed in an out-of-tolerance groove will not hold its rated thrust.
+mro|Wood / Sheet-Metal / Self-Drilling Screws :: Thread-forming screws for wood, sheet metal and light steel. Self-drilling points remove a pilot-hole step, and the drill point must be matched to the material thickness or it strips before it bites.
+mro|Industrial Fasteners & Anchors :: Broader industrial fastening and anchoring stock across grades and finishes. Ordered by the box for maintenance work, where the failure mode is usually not having the right size at the right moment.
+
+# ---------------- MRO: Raw Materials ----------------
+mro|Metal Bar, Sheet & Plate :: Stock steel, stainless and aluminium in bar, sheet and plate. Alloy and temper determine machinability and weldability, and substituting a nearer-to-hand grade is a frequent source of fabrication trouble.
+mro|Metal Tubing & Pipe Stock :: Round, square and rectangular tube plus pipe stock. Tube is specified by outside diameter and wall, pipe by nominal size and schedule, and the two systems are not interchangeable.
+mro|Structural Shapes :: Angle, channel, beam and tee sections for frames and supports. Section properties govern deflection and buckling, so depth usually matters more than raw weight.
+mro|Plastic Sheet, Rod & Tube :: Engineering plastics in stock form. Each has a distinct temperature limit, chemical resistance and machining behaviour, and the wrong choice in a chemical environment fails quickly and unhelpfully.
+mro|Rubber & Gasket Stock :: Sheet rubber and gasket material cut to shape on site. Elastomer chemistry decides compatibility with the fluid and the temperature, which is the whole basis of selection.
+mro|Foam, Felt & Insulation Stock :: Foam, felt and insulation for sealing, damping and thermal duty. Temperature rating and flame characteristics decide where a material may be installed.
+mro|Wire, Coil & Fine Stock :: Wire and fine-gauge stock in coil form for forming, tying and fabrication. Temper governs whether it holds shape or springs back.
+
+# ---------------- MRO: Electrical ----------------
+mro|Wire, Cable & Cord :: Building wire, control cable and portable cord. Insulation type sets the temperature rating and permitted installation method, and portable cord is not a substitute for fixed wiring.
+mro|Building Wire & Cable :: Branch and feeder conductors for fixed installations. Ampacity derates for ambient temperature and conductor bundling, which is what turns a calculated size into the size actually installed.
+mro|Conduit, Boxes & Fittings :: Raceway, boxes and fittings forming the wiring system. Box fill and bend radius are code limits rather than guidance, and both are routinely exceeded in the field.
+mro|Conduit, Raceway & Fittings :: Rigid, EMT and flexible raceway with matching fittings. The fitting must match both the raceway type and the environmental rating, or the enclosure rating is void at that point.
+mro|Devices, Switches & Controls :: Receptacles, switches, pilot devices and control-station hardware. Duty rating and environmental type decide service life far more than appearance.
+mro|Fuses & Circuit Protection :: Fuses and supplementary protective devices. Interrupting rating must exceed the available fault current at the point of installation, and a fuse of the right amperage but wrong class is still the wrong fuse.
+mro|Industrial Batteries & Chargers :: Stationary and motive batteries with their chargers. Charging profile has to match the chemistry; the wrong profile shortens life quietly and expensively.
+mro|Electrical Distribution Equipment :: Panelboards, disconnects, transformers and distribution hardware for facility power. Selected against the fault current available at the point of installation, not just the connected load.
+mro|Datacomm & Networking :: Structured cabling, patch panels, jacks and network hardware. The installed category rating is proven by test results, not by the cable printed on the jacket.
+mro|Industrial Automation & Controls :: PLCs, I/O, HMIs, sensors and networking for machine control. Long-term availability of the platform matters as much as its capability, because a machine outlives its controller generation.
+mro|Security & Life Safety :: Access control, detection, notification and life-safety hardware. Listing and code compliance drive selection, and life-safety functions carry testing and documentation obligations.
+
+# ---------------- MRO: Lighting ----------------
+mro|LED Fixtures & Lamps :: Complete fixtures and retrofit lamps. Delivered lumens, distribution and colour quality determine the result; wattage is only a proxy and a poor one across product lines.
+mro|LED Modules, Drivers & Optics :: The components inside a fixture. Driver compatibility with the dimming system is a routine source of flicker complaints, and it is rarely discovered until installation.
+mro|Portable & Task Lighting :: Temporary, task and inspection lighting. Ruggedness and hazardous-area rating matter where these are actually used, which is rarely a clean environment.
+mro|Commercial Lighting & Controls :: Fixtures with occupancy, daylight and scheduling controls. Energy code compliance usually depends on the control strategy rather than the fixture efficacy.
+
+# ---------------- MRO: Motors & Power Transmission ----------------
+mro|AC Motors :: Induction motors across frame sizes and enclosure types. Frame, enclosure and efficiency class must all be matched when replacing, because a same-horsepower motor in a different frame will not fit the base.
+mro|DC & Gearmotors :: DC motors and integrated gearmotors for controlled speed and torque. The gearbox ratio and mounting orientation are as much a part of the selection as the motor rating.
+mro|Motor Controls & Drives :: Starters, contactors and variable frequency drives. A VFD changes motor cooling at low speed, so a motor not rated for inverter duty may overheat at exactly the speeds the drive was installed to provide.
+mro|Motor Repair Parts :: Bearings, brushes, fans and terminal hardware for motor rebuilds. Rebuilding is often faster than replacement for larger frames, particularly where the original is no longer manufactured.
+mro|Bearings & Bushings :: Rolling-element bearings and plain bushings. Fit, lubrication and contamination control determine life; the majority of premature bearing failures trace to one of those three rather than to load.
+mro|Shaft Couplings, Gearboxes & Drive Parts :: Couplings, gearboxes, sheaves and chain drives. Coupling type sets how much misalignment is tolerated, and misalignment is what destroys the bearings on both sides.
+mro|Mechanical Seals & Packing :: Seals and packing retaining fluid at rotating shafts. Mechanical seals leak less than packing but are far less tolerant of dry running and shaft deflection.
+
+# ---------------- MRO: Pumps, Plumbing & Fluid Power ----------------
+mro|Centrifugal & Utility Pumps :: General-service pumps for water and light fluids. The operating point is set by the system curve, so a pump running far from its best efficiency point wears quickly regardless of its rating.
+mro|Diaphragm & Drum Pumps :: Air-operated diaphragm and drum pumps for transfer and chemical duty. They self-prime, run dry safely and are rebuilt with wetted-path kits chosen for the fluid.
+mro|Pump Repair Parts & Impellers :: Impellers, wear rings, shafts and seal kits. Restoring wear-ring clearance recovers efficiency that has been lost gradually and usually unnoticed.
+mro|Pipe, Tube & Hose :: Piping, tubing and hose across materials and pressure ratings. Hose assemblies have a service life independent of visible condition, and pressure rating falls with temperature.
+mro|Valves & Fittings :: Isolation and control valves with their fittings for facility piping. Valve type follows duty: isolation, throttling or check, and using one for another shortens its life.
+mro|Fixtures, Pumps & Drains :: Plumbing fixtures, sump and utility pumps, drains and traps. Code and accessibility requirements often decide the fixture rather than performance.
+mro|Cylinders & Valves :: Pneumatic and hydraulic cylinders with their directional and control valves. Bore and stroke set force and travel; mounting style determines what side loads the rod will tolerate.
+mro|Hydraulic Hose & Fittings :: Hose, fittings and crimped assemblies for hydraulic service. The fitting series must match the hose, and an assembly crimped with mismatched components is a high-pressure failure waiting to happen.
+mro|Pneumatic Fittings & FRLs :: Push-to-connect fittings and filter-regulator-lubricator units. Air quality at the tool is what actually determines tool life, which is what the FRL exists to control.
+
+# ---------------- MRO: HVAC & Refrigeration ----------------
+mro|Motors, Blowers & Fans :: Air-moving equipment for HVAC service. The fan curve must be matched to system static pressure; an oversized fan in a restrictive duct system delivers less air, not more.
+mro|Filters & Belts :: Air filters and drive belts, the two highest-frequency consumables in HVAC maintenance. Filter MERV rating trades filtration against pressure drop and therefore fan energy.
+mro|Coils & Heat Exchangers :: Heating, cooling and heat-recovery coils. Fin spacing trades heat transfer against fouling tendency and cleanability in dirty air streams.
+mro|Controls & Refrigeration Parts :: Thermostats, valves, contactors and refrigeration components. Refrigerant-specific parts are not interchangeable across refrigerants, even where they physically fit.
+mro|Refrigerants & Heat-Transfer Fluids :: Refrigerants and glycol heat-transfer fluids. Refrigerant availability is now driven by phase-down regulation as much as by equipment compatibility.
+
+# ---------------- MRO: Cutting Tools & Machining ----------------
+mro|Metalworking Cutting Tools :: Drills, end mills, taps and reamers. Substrate and coating are matched to the workpiece material, and running a coated tool at uncoated speeds wastes most of what was paid for.
+mro|Cutting Tools & Inserts :: Indexable tooling and carbide inserts. Insert grade and chipbreaker geometry are selected for the material and the cut, and the correct grade at the wrong feed still fails.
+mro|Toolholding & Workholding :: Collets, chucks, vises and fixtures holding tool and part. Runout in the holder transfers directly to the finished part, so holder quality limits achievable tolerance regardless of the machine.
+mro|Toolholding & Workholding|Toolholding & Workholding :: Toolholders, collets and workholding sold as a distributor line rather than as machining consumables. The same components, stocked for maintenance and repair rather than production tooling.
+mro|Machine Tool Accessories :: Vises, rotary tables, arbors and machine attachments. They extend what an existing machine can do, usually more economically than acquiring another machine.
+mro|Metalworking Abrasives :: Wheels, belts and discs for metal removal and finishing. Abrasive grain and bond are matched to the workpiece; the wrong pairing glazes or wears out immediately.
+mro|Grinding & Cut-Off Wheels :: Bonded wheels for grinding and cutting. Maximum rated speed is a safety limit, and exceeding it is one of the more dangerous shortcuts available in a workshop.
+mro|Sanding & Surface Finishing :: Coated abrasives and finishing media. Grit progression matters: skipping steps leaves scratches that the next grit cannot remove.
+mro|Coolants, Lubricants & Fluids :: Cutting fluids and metalworking lubricants. Concentration and microbial control determine both tool life and whether the shop develops a fluid-hygiene problem.
+mro|Precision Measuring & Inspection :: Micrometers, calipers, gauges and indicators. Calibration traceability is what makes a measurement defensible; an uncalibrated instrument produces numbers, not measurements.
+mro|Dimensional & Environmental :: Dimensional gauges and environmental instruments for field and shop use. Resolution is not accuracy, and the distinction matters when a reading is used to accept work.
+mro|Electrical Testers & Meters :: Multimeters, clamp meters, insulation testers and power-quality instruments. The CAT rating must suit the circuit under test, and this is a personal-safety rating rather than an accuracy one.
+
+# ---------------- MRO: Hand & Power Tools ----------------
+mro|Wrenches & Sockets :: Wrenches, sockets and drive tools. Where preload matters, a calibrated torque tool is the difference between a joint that holds and one that is merely tight.
+mro|Pliers, Screwdrivers & Striking :: General hand tools. Insulated tools for live work carry a specific rating that is void once the insulation is damaged.
+mro|Cutting & Layout Tools :: Saws, knives, files and layout instruments. Accuracy of layout limits the accuracy of everything cut from it.
+mro|Corded & Cordless Drills / Drivers :: Drilling and driving power tools. Battery platform commitment usually outlasts any individual tool, which makes it the more consequential decision.
+mro|Saws & Grinders :: Portable saws and angle grinders. Guard integrity and correct wheel selection are what keep them from being the most dangerous tools in the building.
+
+# ---------------- MRO: Safety & PPE ----------------
+mro|Gloves & Protective Clothing :: Hand and body protection by hazard type. Cut, chemical, thermal and arc-flash ratings are separate scales, and a glove excellent on one may be useless on another.
+mro|Head, Eye & Face Protection :: Hard hats, safety glasses, goggles and face shields. Impact rating and optical clarity both matter, because uncomfortable eyewear is eyewear that gets removed.
+mro|Respiratory & Hearing :: Respirators and hearing protection. Respirator selection depends on the contaminant and its concentration, and fit testing is what makes the rating meaningful.
+mro|Safety & First Aid Supplies :: First aid, emergency response and general safety stock. Kit contents and restocking are usually governed by regulation rather than preference.
+
+# ---------------- MRO: Welding ----------------
+mro|Filler Metal & Electrodes :: Filler metals matched to base material and process. The filler is selected against the welding procedure specification, not against what happens to be on the shelf.
+mro|Torches, Guns & Accessories :: Welding torches, guns, tips and consumables. Contact tip and liner wear degrade arc stability long before they fail outright, which is why they are scheduled consumables.
+mro|Welding Machines & Power Sources :: Welding power sources by process and duty cycle. Duty cycle at the working current, not peak output, is what determines whether a machine keeps up with the work.
+
+# ---------------- MRO: Material Handling ----------------
+mro|Hoists, Slings & Rigging :: Lifting equipment and rigging hardware. Working load limit assumes a specific configuration, and sling angle reduces capacity sharply as it moves away from vertical.
+mro|Carts, Trucks & Shelving :: Carts, hand trucks, racking and shelving. Rated capacity assumes even distribution, and damaged racking uprights lose capacity in ways that are not visually obvious.
+mro|Casters & Wheels :: Casters and wheels for mobile equipment. Wheel material is selected for floor surface and load, and the wrong tread damages either the floor or itself.
+mro|Warehouse & Material Handling :: General warehouse handling equipment and storage. Aisle width and equipment reach constrain each other, so layout and equipment are one decision.
+mro|Retail & Warehouse Supplies :: Display, storage and general operating supplies for retail and warehouse space. High-turn consumables where availability matters more than specification.
+
+# ---------------- MRO: Packaging & Identification ----------------
+mro|Corrugated Shipping Boxes :: Corrugated cartons by size and board grade. Edge crush rating determines stacking strength, which is what governs whether a pallet survives distribution.
+mro|Protective Packaging :: Void fill, cushioning and protective materials. Selected against drop height and product fragility rather than by volume.
+mro|Bags & Poly Sheeting :: Poly bags, sheeting and film. Gauge and material set puncture resistance and moisture barrier performance.
+mro|Tape, Labels & Strapping :: Carton tape, labels and strapping. Adhesive performance is temperature dependent, and cold-warehouse failures are common with standard-grade tape.
+mro|Labels, Nameplates & Signage :: Identification labels, engraved nameplates and safety signage. Arc-flash labelling is a regulatory requirement with defined content, not a general-purpose label.
+mro|Reels, Crates & Protective Packaging :: Cable reels, export crates and heavy protective packaging. Export crating carries ISPM-15 treatment obligations for international shipment.
+
+# ---------------- MRO: Adhesives, Chemicals & Cleaning ----------------
+mro|Adhesives & Epoxies :: Structural adhesives, epoxies and threadlockers. Surface preparation determines bond strength more than the adhesive grade does, and cure schedule is not optional.
+mro|Sealants & Caulks :: Sealants and caulks for joints and penetrations. Joint movement capability and substrate compatibility govern selection; firestop penetrations carry a tested-assembly requirement.
+mro|Industrial Tape :: Industrial tapes across backings and adhesives. Electrical tape is rated for voltage and temperature, and general-purpose tape is not a substitute in either respect.
+mro|Paints & Protective Coatings :: Primers, topcoats and coating systems. The system is specified against a corrosivity category, and surface preparation grade is as much a part of it as the coating itself.
+mro|Chemicals & Degreasers :: Cleaning chemicals, solvents and degreasers. Material compatibility and ventilation requirements govern use; a solvent that attacks the substrate cleans it only once.
+mro|Wipers, Rags & Sorbents :: Wipers, rags and spill sorbents. Sorbent type is matched to the spilled fluid, and used sorbent is regulated waste rather than rubbish.
+mro|Waste, Trash & Restroom :: Waste handling and restroom supplies. High-turn consumables where the practical constraint is reorder cadence rather than specification.
+mro|Janitorial & Facility Supplies :: General janitorial and facility maintenance supplies. Broad, high-frequency stock supporting day-to-day building operation.
+mro|Oils, Greases & Fluids :: Lubricating oils, greases and industrial fluids. Viscosity grade and additive package are specified by the equipment manufacturer, and mixing incompatible greases can destroy both.

@@ -181,3 +181,13 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
   text-transform:uppercase;color:var(--slate);margin-bottom:5px}
 .toolseo .rel .t{display:block;font-size:14px;line-height:1.45;color:var(--ink);font-weight:500}
 @media(max-width:560px){.toolseo h2{font-size:23px}}
+/* Equipment-family reference index, used on the five sector pages.
+   One card per family linking to its /parts/ page. */
+.fr-cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);margin:18px 0 8px}
+.fr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:9px;margin-bottom:4px}
+.fr-card{display:flex;flex-direction:column;gap:3px;background:var(--card);border:1px solid var(--line-dark);border-left:3px solid var(--signal);padding:10px 12px;text-decoration:none;color:inherit}
+.fr-card:hover{border-color:var(--ink);border-left-color:var(--ink);background:#fff}
+.fr-card:focus-visible{outline:3px solid var(--signal-deep);outline-offset:2px}
+.fr-card b{font-family:var(--disp);font-weight:700;font-size:14px;color:var(--ink);line-height:1.25}
+.fr-card span{font-family:var(--mono);font-size:10px;color:var(--slate);font-variant-numeric:tabular-nums}
+@media (max-width:640px){ .fr-grid{grid-template-columns:1fr} }

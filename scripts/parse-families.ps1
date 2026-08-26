@@ -82,11 +82,16 @@ function Get-Families {
   # under the Machining category, one under a category of its own. Same name,
   # different records, so the name alone cannot address a page. Any slug that
   # collides gets its category prefixed; unique slugs are left short.
+  # Only the records whose category actually adds information get prefixed. One
+  # of the two sits in a category of the same name, so prefixing it would give
+  # "toolholding-and-workholding-toolholding-and-workholding" and a heading that
+  # repeats itself; that one keeps the plain slug and the other is qualified,
+  # which is enough to make the pair unique.
   $bySlug = $out | Group-Object slug | Where-Object Count -gt 1
   foreach ($g in $bySlug) {
     foreach ($rec in $g.Group) {
       $catSlug = ($rec.c.ToLower() -replace '&amp;','and' -replace '&','and' -replace '[^a-z0-9]+','-').Trim('-')
-      $rec.slug = "$catSlug-$($rec.slug)"
+      if ($catSlug -ne $rec.slug) { $rec.slug = "$catSlug-$($rec.slug)" }
     }
   }
   return $out
