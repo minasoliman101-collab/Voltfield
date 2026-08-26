@@ -297,7 +297,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </main>
 <footer>
   <div class="in">
-    <h4>Voltfield — Part identification desk</h4>
+    <h4>Voltfield — Part identification reference</h4>
     <p>Automated matches are suggestions ranked by label-text similarity — always confirm ratings, frame sizes and form/fit/function before ordering, and use the human-review path for anything safety-critical. For unreadable labels, burned boards, or parts with no markings at all, email photos to <a href="mailto:Help@voltfield.org?subject=Part%20identification%20request">Help@voltfield.org</a> — a sourcing engineer responds within one business day.</p>
   </div>
 </footer>
@@ -455,7 +455,7 @@ function identify(){
   }
   if(isPCB){
     html+=`<div class="pcbcard"><h3>Looks like a circuit board</h3>
-      <p>Measure the board, count layers at the edge, and note the finish — the PCB Builder prices a re-fabrication instantly, and the assembly tier quotes re-population from your BOM. For reverse-engineering from photos alone (layout recreation), use the engineering desk.</p>
+      <p>Measure the board, count layers at the edge, and note the finish — the PCB Builder prices a re-fabrication instantly, and the assembly tier quotes re-population from your BOM. For reverse-engineering from photos alone (layout recreation), use the PCB layout tool.</p>
       <p style="margin-top:8px"><a href="voltfield-pcb.html">Open the PCB Builder &rsaquo;</a> &nbsp;·&nbsp; <a href="mailto:Help@voltfield.org?subject=${encodeURIComponent('PCB re-fab from photos')}&body=${encodeURIComponent('Label text read from board:\n'+text+'\n\n(Attach your board photos to this email.)')}">Board rebuild review &rsaquo;</a></p></div>`;
   }
   if(!html){
@@ -463,7 +463,7 @@ function identify(){
   }
   html+=`<div class="humancard"><h3>Not sure? A sourcing engineer will ID it.</h3>
     <p>Email the photos with the extracted text below — we cross-reference against OEM catalogs and lifecycle notices and come back with exact options within one business day.</p>
-    <p style="margin-top:8px"><a href="mailto:Help@voltfield.org?subject=${encodeURIComponent('Part identification request')}&body=${encodeURIComponent('Label text (auto-extracted):\n'+text+'\n\nDetected: '+(tok.brands.join(', ')||'no brand')+(tok.models.length?' · models: '+tok.models.join(', '):'')+(tok.ratings.length?' · ratings: '+tok.ratings.join(', '):'')+'\n\n(Attach your part photos to this email.)')}">Send to the identification desk &rsaquo;</a></p></div>`;
+    <p style="margin-top:8px"><a href="mailto:Help@voltfield.org?subject=${encodeURIComponent('Part identification request')}&body=${encodeURIComponent('Label text (auto-extracted):\n'+text+'\n\nDetected: '+(tok.brands.join(', ')||'no brand')+(tok.models.length?' · models: '+tok.models.join(', '):'')+(tok.ratings.length?' · ratings: '+tok.ratings.join(', '):'')+'\n\n(Attach your part photos to this email.)')}">Look it up in the spec library &rsaquo;</a></p></div>`;
   $('resEmpty').style.display='none';
   $('results').innerHTML=html;
   /* optional vision backend (README §11) */
