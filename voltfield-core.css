@@ -191,3 +191,14 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
 .fr-card b{font-family:var(--disp);font-weight:700;font-size:14px;color:var(--ink);line-height:1.25}
 .fr-card span{font-family:var(--mono);font-size:10px;color:var(--slate);font-variant-numeric:tabular-nums}
 @media (max-width:640px){ .fr-grid{grid-template-columns:1fr} }
+
+/* Grouped Tools dropdown. Thirteen flat links was a list rather than a menu:
+   nothing signalled that "Identify a part" and "Obsolete & end-of-life" answer
+   the same kind of question. The group labels are not interactive and are
+   hidden from the accessibility tree's link list by being spans, so keyboard
+   users tab through twelve links exactly as before. */
+.navdrop-grp{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--slate);padding:10px 14px 4px;pointer-events:none;user-select:none}
+.navdrop-grp:first-child{padding-top:6px}
+.navdrop-all{font-weight:700}
+.navdrop-menu > .navdrop-all{border-bottom:1px solid var(--line);margin-bottom:2px;padding-bottom:9px}
