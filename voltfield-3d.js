@@ -506,15 +506,33 @@
     const M = function(c, metalness, roughness, extra){
       const o = {color:c, metalness:metalness, roughness:roughness};
       if (extra) for (const k in extra) o[k] = extra[k];
-      return new THREE.MeshStandardMaterial(o);
+      /* Bare MeshStandardMaterial leaves envMapIntensity at 1. The PMREM
+         environment is the only thing giving metal a sense of sitting in a room
+         rather than being lit by two lamps in a void, so metals are pushed above
+         1 and dielectrics left at it. Scaled by metalness so one line covers the
+         whole library. */
+      if (o.envMapIntensity == null) o.envMapIntensity = 1 + (metalness || 0) * 0.35;
+      /* clearcoat requires MeshPhysicalMaterial, which extends Standard, so
+         addSurfaceDetail's roughness/bump pass still applies unchanged. */
+      return (o.clearcoat != null)
+        ? new THREE.MeshPhysicalMaterial(o)
+        : new THREE.MeshStandardMaterial(o);
     };
+    /* Painted industrial enamel is two layers: pigment under a thin gloss coat.
+       A single-lobe Standard material has to average them, which is what makes
+       painted equipment read as plastic. Clearcoat models the second lobe -- a
+       sharp specular over the diffuse base -- and is the single biggest step
+       toward these reading as coated steel rather than toys. Glaze is the same
+       idea taken to a fired ceramic finish. */
+    const PAINT = {clearcoat:0.42, clearcoatRoughness:0.30};
+    const GLAZE = {clearcoat:1.00, clearcoatRoughness:0.06};
     return {
       /* sector identity -- do not repurpose */
-      body: M(color, 0.30, 0.60),
+      body: M(color, 0.30, 0.60, PAINT),
 
       /* neutral structural greys, replacing the old navy */
-      dark: M(0x3A4046, 0.55, 0.52),
-      deep: M(0x24272B, 0.35, 0.58),
+      dark: M(0x3A4046, 0.55, 0.52, PAINT),
+      deep: M(0x24272B, 0.35, 0.58, PAINT),
 
       /* indicators stay emissive */
       gold: M(0xFFC400, 0.00, 0.40, {emissive:0xFFC400, emissiveIntensity:.22}),
@@ -527,9 +545,9 @@
       castIron:  M(0x55595E, 0.45, 0.70),   // engine blocks, motor housings
       copper:    M(0xB87333, 0.88, 0.32),   // busbar, windings, terminals
       brass:     M(0xC0982E, 0.86, 0.30),   // glands, valve trim
-      porcelain: M(0xE9E5DB, 0.00, 0.22),   // glazed bushing sheds -- dielectric
+      porcelain: M(0xE9E5DB, 0.00, 0.22, GLAZE),   // glazed bushing sheds -- dielectric
       rubber:    M(0x1A1C1F, 0.00, 0.94),   // gaskets, boots, vibration mounts
-      plastic:   M(0x24272C, 0.05, 0.52),   // mouldings, breaker cases
+      plastic:   M(0x24272C, 0.05, 0.52, {clearcoat:0.25, clearcoatRoughness:0.42}),   // mouldings, breaker cases
       concrete:  M(0x8E8B84, 0.00, 0.95)    // pads and plinths
     };
   }
