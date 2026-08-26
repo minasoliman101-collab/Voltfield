@@ -50,7 +50,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="ordering-hidden.css">
 <link rel="stylesheet" href="voltfield-core.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
@@ -143,9 +142,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .lead.ok{background:#E7F1EB;color:var(--ok)}
 .lead.warn{background:#FBF0DA;color:var(--warn)}
 .lead.crit{background:#F7E4E1;color:var(--crit)}
-.addbtn{background:var(--signal);color:var(--ink);border:1.5px solid var(--ink);padding:5px 10px;font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:.03em;text-transform:uppercase}
-.addbtn:hover{background:var(--ink);color:var(--signal)}
-.addbtn.in{background:var(--ok);color:#fff;border-color:var(--ok)}
 .sk-actions{display:flex;gap:8px;align-items:center}
 /* ---------- pagination ---------- */
 .pager{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:26px;flex-wrap:wrap}
@@ -171,29 +167,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .reqpart .req-msg.err{color:var(--crit)}
 .hidden-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 /* ---------- quote drawer ---------- */
-.scrim{position:fixed;inset:0;background:rgba(16,27,45,.5);z-index:90;display:none}
-.scrim.open{display:block}
-.drawer{position:fixed;top:0;right:0;height:100%;width:min(420px,100%);background:var(--paper);z-index:100;transform:translateX(100%);transition:transform .2s;display:flex;flex-direction:column;border-left:2px solid var(--ink)}
-.drawer.open{transform:translateX(0)}
-.drawer-hd{background:var(--ink);color:#fff;padding:16px 18px;display:flex;justify-content:space-between;align-items:center}
-.drawer-hd h3{font-family:var(--disp);font-weight:700;font-size:20px;letter-spacing:.03em}
-.drawer-hd button{background:none;border:0;color:#9FB0C3;font-size:24px;line-height:1}
-.drawer-hd button:hover{color:#fff}
-.drawer-body{flex:1;overflow:auto;padding:14px}
-.drawer-proj{padding:12px 16px;border-bottom:1px solid var(--line-dark);background:#F7F9FB}
-.proj-active{font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:8px}
-.proj-active b{color:var(--ink)}
-.proj-row{display:flex;gap:6px;margin-bottom:6px}
-.proj-row:last-child{margin-bottom:0}
-.proj-row input,.proj-row select{flex:1;min-width:0;border:1px solid var(--line-dark);padding:7px 8px;font-family:var(--body);font-size:13px;background:#fff}
-.proj-row button{background:var(--ink);color:#fff;border:0;padding:7px 12px;font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap}
-.proj-row button:hover{background:var(--ink-2)}
 #delProj{background:var(--card);color:var(--slate);border:1px solid var(--line-dark)}
 #delProj:hover{border-color:var(--crit);color:var(--crit)}
-.proj-row .proj-sec{flex:1;background:var(--card);color:var(--ink-2);border:1px solid var(--line-dark)}
-.proj-row .proj-sec:hover{border-color:var(--ink);color:var(--ink)}
-.implbl{display:flex;align-items:center;justify-content:center;cursor:pointer;text-align:center}
-.implbl input{display:none}
 .qitem{background:var(--card);border:1px solid var(--line-dark);padding:11px 12px;margin-bottom:10px}
 .qitem .qtop{display:flex;justify-content:space-between;gap:8px}
 .qitem .qpn{font-family:var(--mono);font-size:11.5px;font-weight:600}
@@ -201,11 +176,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .qitem .qmeta{font-family:var(--mono);font-size:10.5px;color:var(--slate);margin-top:5px;display:flex;justify-content:space-between;gap:8px}
 .qitem .qx{background:none;border:0;color:var(--slate);font-size:16px;line-height:1}
 .qitem .qx:hover{color:var(--crit)}
-.drawer-ft{border-top:1px solid var(--line-dark);padding:14px 16px;background:var(--card)}
-.drawer-ft .rfqbtn{width:100%;background:var(--signal);color:var(--ink);border:2px solid var(--ink);padding:13px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.05em;text-transform:uppercase}
-.drawer-ft .rfqbtn:hover{background:var(--ink);color:var(--signal)}
-.drawer-ft .note{font-family:var(--mono);font-size:10px;color:var(--slate);margin-top:9px;line-height:1.5;text-align:center}
-.qempty{text-align:center;color:var(--slate);padding:40px 16px;font-size:13.5px}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;font-family:var(--mono);font-size:12.5px;padding:11px 18px;border-left:4px solid var(--signal);z-index:120;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 /* ---------- detail / configurator modal ---------- */
@@ -264,11 +234,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .dm-facts input{width:80px;border:1px solid var(--line-dark);padding:5px 8px;font-family:var(--mono);font-size:13px}
 .dm-note{font-family:var(--mono);font-size:10px;color:var(--slate);line-height:1.5;margin-top:14px}
 .dm-foot{display:flex;gap:10px;padding:14px 16px;border-top:1px solid var(--line);background:var(--paper)}
-.dm-add{flex:1;background:var(--signal);color:var(--ink);border:2px solid var(--ink);padding:11px;font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase}
-.dm-add:hover{background:var(--ink);color:var(--signal)}
-.dm-add.in{background:var(--ok);color:#fff;border-color:var(--ok)}
-.dm-rfq{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:11px 16px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;text-transform:uppercase}
-.dm-rfq:hover{background:var(--ink-2)}
 footer{background:var(--ink);color:#9FB0C3;padding:30px 20px;font-size:12px}
 footer .in{max-width:1240px;margin:0 auto;display:grid;gap:16px}
 @media(min-width:760px){footer .in{grid-template-columns:2fr 1fr}}
@@ -326,7 +291,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </nav>
   <div class="headright">
     <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
-    <button class="quotebtn" id="openQuote" aria-label="Open saved list">SAVED LIST <span class="ct" id="quoteCount">0</span></button>
   </div>
 </header>
 
@@ -412,36 +376,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="pager" id="pager"></div>
   </main>
 </div>
-
-<div class="scrim" id="scrim"></div>
-<aside class="drawer" id="drawer" aria-label="Quote list">
-  <div class="drawer-hd">
-    <h3>Quote List</h3>
-    <button id="closeQuote" aria-label="Close">&times;</button>
-  </div>
-  <div class="drawer-proj">
-    <div class="proj-active">Project: <b id="projActive">Working list</b></div>
-    <div class="proj-row">
-      <input id="projName" placeholder="Name this list&hellip;" aria-label="Project name">
-      <button id="saveProj">Save</button>
-      <button id="newProj">New</button>
-    </div>
-    <div class="proj-row" id="loadRow" style="display:none">
-      <select id="loadProj" aria-label="Load a saved list"></select>
-      <button id="delProj" title="Delete selected saved list">Delete</button>
-    </div>
-    <div class="proj-row">
-      <button id="exportProj" class="proj-sec" title="Download all your lists as a file">Export</button>
-      <label class="proj-sec implbl" title="Import lists from a file"><span>Import</span><input type="file" id="importProj" accept=".json,application/json"></label>
-    </div>
-  </div>
-  <div class="drawer-body" id="drawerBody"></div>
-  <div class="drawer-ft">
-    <button class="rfqbtn" id="rfqBtn">View configuration details</button>
-    <button class="rfqbtn" id="checkoutBtn" style="background:var(--ink);color:#fff;margin-top:8px">Request sourcing help</button>
-    <div class="note">Indicative price bands only, published for budgeting — nothing here is for sale. Real price, availability and lead time come from whoever supplies the part.</div>
-  </div>
-</aside>
 <div class="toast" id="toast"></div>
 <div class="modal-scrim" id="modalScrim"></div>
 <div class="detail-modal" id="detailModal" role="dialog" aria-modal="true" aria-label="Part detail"><div id="detailContent"></div></div>
@@ -595,7 +529,6 @@ function renderResults(){
   // cumulative offsets
   const offs=[]; let acc=0; matched.forEach(f=>{offs.push(acc);acc+=f.ct;});
   function locate(gi){let lo=0,hi=matched.length-1;while(lo<hi){const mid=(lo+hi+1)>>1;if(offs[mid]<=gi)lo=mid;else hi=mid-1;}return {f:matched[lo],local:gi-offs[lo]};}
-  const q=loadQuote(); const qset=new Set(q.map(x=>x.pn));
   const DL=CHANNEL_LABEL;
   let html='';
   for(let gi=start;gi<end;gi++){
@@ -620,14 +553,11 @@ function renderResults(){
         <div class="sk-actions">
           <label class="cmp-check"><input type="checkbox" class="cmp-cb" data-fi="${f._i}" data-seed="${seed}"${COMPARE.some(c=>c.fi===f._i&&c.seed===seed)?' checked':''}> Compare</label>
           <span class="lead ${lb.c}">${lb.t}</span>
-          <button class="addbtn${inq?' in':''}" data-pn="${sku.pn}" data-name="${encodeURIComponent(sku.name)}" data-price="${money(sku.price,f.pu).replace(/<[^>]+>/g,'')}" data-lead="${lb.t}" data-sec="${f.s}" data-up="${sku.price}" data-pu="${f.pu}" data-d="${f.d}">${inq?'Added ✓':'Add'}</button>
         </div>
       </div>
     </div>`;
   }
-  grid.innerHTML=html;
-  grid.querySelectorAll('.addbtn').forEach(b=>b.onclick=e=>{e.stopPropagation();addToQuote(b);});
-  grid.querySelectorAll('.cmp-cb').forEach(cb=>{
+  grid.innerHTML=html;  grid.querySelectorAll('.cmp-cb').forEach(cb=>{
     cb.onclick=e=>e.stopPropagation();
     cb.onchange=()=>toggleCompare(+cb.dataset.fi,+cb.dataset.seed,cb.checked,cb);
   });
@@ -651,71 +581,6 @@ function renderPager(N,maxPage){
 }
 function scrollTop(){document.querySelector('.catlayout').scrollIntoView({behavior:'smooth',block:'start'});}
 
-/* ---------- saved list (localStorage) ---------- */
-function loadQuote(){try{const q=JSON.parse(localStorage.getItem('vf_quote')||'[]');return Array.isArray(q)?q:[];}catch(e){return [];}}
-function saveQuote(q){localStorage.setItem('vf_quote',JSON.stringify(q));document.getElementById('quoteCount').textContent=q.length;}
-/* ---------- saved / named saved lists (projects) ---------- */
-function escP(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
-function loadSaved(){try{const s=JSON.parse(localStorage.getItem('vf_saved')||'{}');return (s&&typeof s==='object'&&!Array.isArray(s))?s:{};}catch(e){return {};}}
-function saveSaved(s){localStorage.setItem('vf_saved',JSON.stringify(s));}
-function activeName(){return localStorage.getItem('vf_active_name')||'';}
-function setActiveName(n){localStorage.setItem('vf_active_name',n||'');}
-function exportProjects(){
-  const saved=loadSaved(), working=loadQuote();
-  if(!working.length && !Object.keys(saved).length){toast('No lists to export');return;}
-  const data={voltfield_quotes:1,exported:new Date().toISOString(),working,saved};
-  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-  const url=URL.createObjectURL(blob), a=document.createElement('a');
-  const d=new Date(), stamp=d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');
-  a.href=url;a.download='voltfield-quotes-'+stamp+'.json';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
-  toast('Exported your saved lists');
-}
-function uniqueName(s,base){if(!s[base])return base;let k=2;while(s[base+' ('+k+')'])k++;return base+' ('+k+')';}
-function importProjects(file){
-  const rd=new FileReader();
-  rd.onload=()=>{
-    let data; try{data=JSON.parse(rd.result);}catch(e){toast('That file isn’t a valid quotes file');return;}
-    if(!data||typeof data!=='object'||(!data.saved&&!data.working)){toast('No saved lists found in that file');return;}
-    const s=loadSaved(); let added=0;
-    const incoming=(data.saved&&typeof data.saved==='object'&&!Array.isArray(data.saved))?data.saved:{};
-    Object.keys(incoming).forEach(nm=>{ if(!Array.isArray(incoming[nm]))return; s[uniqueName(s,nm)]=incoming[nm]; added++; });
-    if(Array.isArray(data.working)&&data.working.length){ s[uniqueName(s,'Imported list')]=data.working; added++; }
-    if(!added){toast('No lists found in that file');return;}
-    saveSaved(s); renderProjects(); toast('Imported '+added+' list'+(added===1?'':'s'));
-  };
-  rd.readAsText(file);
-}
-function renderProjects(){
-  const pa=document.getElementById('projActive'); if(!pa)return;
-  const active=activeName();
-  pa.textContent=active||'Working list';
-  const pn=document.getElementById('projName'); if(document.activeElement!==pn)pn.value=active||'';
-  const saved=loadSaved(), names=Object.keys(saved).sort((a,b)=>a.localeCompare(b));
-  const row=document.getElementById('loadRow'), sel=document.getElementById('loadProj');
-  if(!names.length){row.style.display='none';sel.innerHTML='';return;}
-  row.style.display='flex';
-  sel.innerHTML='<option value="">Load a saved list&hellip;</option>'+names.map(n=>`<option value="${escP(n)}"${n===active?' selected':''}>${escP(n)} (${saved[n].length})</option>`).join('');
-}
-function addToQuote(btn){
-  const q=loadQuote(); const pn=btn.dataset.pn;
-  if(q.some(x=>x.pn===pn)){ // toggle off
-    saveQuote(q.filter(x=>x.pn!==pn)); btn.classList.remove('in'); btn.textContent='Add';
-  } else {
-    q.push({pn,name:decodeURIComponent(btn.dataset.name),price:btn.dataset.price,lead:btn.dataset.lead,sec:btn.dataset.sec,qty:1,up:parseFloat(btn.dataset.up)||0,pu:btn.dataset.pu||'',d:btn.dataset.d});
-    saveQuote(q); btn.classList.add('in'); btn.textContent='Added ✓'; toast('Added to saved list');
-    if(window.vfGtag)window.vfGtag('event','add_to_quote',{pn,sector:btn.dataset.sec,value:parseFloat(btn.dataset.up)||0});
-  }
-  renderDrawer();
-}
-function renderDrawer(){
-  const q=loadQuote(); const body=document.getElementById('drawerBody');
-  if(!q.length){body.innerHTML='<div class="qempty">Nothing saved yet.</div>';return;}
-  body.innerHTML=q.map(x=>`<div class="qitem">
-    <div class="qtop"><div><div class="qpn">${x.pn}</div><div class="qname">${x.name}</div></div><button class="qx" data-pn="${x.pn}" aria-label="Remove">&times;</button></div>
-    <div class="qmeta"><span>${x.price}${x.qty>1?` &times; ${x.qty}`:''}</span><span style="color:var(--${x.sec==='bess'?'bess':x.sec});text-transform:uppercase">${SECTORS[x.sec].code}</span><span>${x.lead}</span></div>
-  </div>`).join('');
-  body.querySelectorAll('.qx').forEach(b=>b.onclick=()=>{saveQuote(loadQuote().filter(x=>x.pn!==b.dataset.pn));renderDrawer();renderResults();});
-}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._tm);t._tm=setTimeout(()=>t.classList.remove('show'),1800);}
 
 /* ---------- detail + configurator modal ---------- */
@@ -726,7 +591,6 @@ function renderModal(){
   const {f,picks,chk,qty}=MS;
   const pn=configuredPN(f,picks,chk), price=priceFor(f,picks), lb=leadBadge(f), col=SECTORS[f.s].color;
   const distLbl=channelLabel(f.d);
-  const inq=loadQuote().some(x=>x.pn===pn);
   document.getElementById('detailContent').innerHTML=`
     <div class="dm-band" style="background:${col}"></div>
     <div class="dm-hd">
@@ -745,34 +609,18 @@ function renderModal(){
         <div class="dm-price"><span>Indicative range</span><b>${band(f)}</b></div>
         <div><span>Lead time</span><b class="lead ${lb.c}">${lb.t}</b></div>
         <div><span>Quantity</span><input type="number" id="dmQty" min="1" value="${qty}"></div>
-        <div><span>Voltfield sourcing ref</span><b>${sourcingRef(pn)}</b></div>
       </div>
-      <div class="dm-note">Configured from ${f.ax.length} attribute axes across ${fmt(f.ct)} configurations in this family. Indicative pricing; final price, availability &amp; lead time confirmed at quote. The sourcing ref is Voltfield's own internal tracking code for this configuration — not a manufacturer SKU or UPC.</div>
+      <div class="dm-note">Indicative reference figures only. </div>
     </div>
     <div class="dm-foot">
-      <button class="dm-add${inq?' in':''}" id="dmAdd">${inq?'In saved list ✓':'Add to saved list'}</button>
-      <button class="dm-rfq" id="dmRfq">View details &rsaquo;</button>
     </div>`;
   document.getElementById('dmClose').onclick=closeModal;
   document.getElementById('detailContent').querySelectorAll('select[data-ai]').forEach(sel=>sel.onchange=()=>{MS.picks[+sel.dataset.ai]=sel.value;renderModal();});
   const qi=document.getElementById('dmQty'); qi.onchange=()=>{MS.qty=Math.max(1,parseInt(qi.value,10)||1);renderModal();};
-  document.getElementById('dmAdd').onclick=()=>{
-    const cur=loadQuote();
-    if(cur.some(x=>x.pn===pn)){saveQuote(cur.filter(x=>x.pn!==pn));toast('Removed from quote');}
-    else{cur.push({pn,name:configuredName(f,picks),price:money(price,f.pu).replace(/<[^>]+>/g,''),lead:lb.t,sec:f.s,qty:MS.qty,up:price,pu:f.pu,d:f.d});saveQuote(cur);toast('Added to saved list');}
-    renderModal();renderDrawer();renderResults();
-  };
-  document.getElementById('dmRfq').onclick=()=>{
-    const cur=loadQuote();
-    if(!cur.some(x=>x.pn===pn)){cur.push({pn,name:configuredName(f,picks),price:money(price,f.pu).replace(/<[^>]+>/g,''),lead:lb.t,sec:f.s,qty:MS.qty,up:price,pu:f.pu,d:f.d});saveQuote(cur);renderResults();}
-    closeModal();openQuoteDrawer();
-  };
 }
 
 /* ---------- apply / wire ---------- */
 function apply(){writeURL();renderFacets();renderChips();renderResults();}
-function openQuoteDrawer(){renderDrawer();renderProjects();document.getElementById('drawer').classList.add('open');document.getElementById('scrim').classList.add('open');}
-function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('scrim').classList.remove('open');}
 document.getElementById('searchForm').addEventListener('submit',e=>{e.preventDefault();state.q=document.getElementById('searchInput').value.trim();state.page=0;apply();suggestResults.classList.remove('show');});
 
 /* ---------- search autocomplete: live family-name suggestions as you type ---------- */
@@ -802,33 +650,8 @@ suggestResults.addEventListener('click',e=>{
 document.addEventListener('click',e=>{if(!e.target.closest('.catsearch'))suggestResults.classList.remove('show');});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')suggestResults.classList.remove('show');});
 document.getElementById('clearBtn').onclick=()=>{state={sector:null,cat:null,q:'',lt:null,dist:null,page:0};document.getElementById('searchInput').value='';apply();};
-document.getElementById('openQuote').onclick=openQuoteDrawer;
-document.getElementById('closeQuote').onclick=closeDrawer;
-document.getElementById('scrim').onclick=closeDrawer;
 document.getElementById('modalScrim').onclick=closeModal;
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeDrawer();}});
-document.getElementById('rfqBtn').onclick=()=>{const q=loadQuote();if(!q.length){toast('Add parts first');return;}location.href='voltfield-rfq.html';};
-document.getElementById('checkoutBtn').onclick=()=>{const q=loadQuote();if(!q.length){toast('Add parts first');return;}location.href='voltfield-checkout.html';};
-document.getElementById('saveProj').onclick=()=>{
-  const q=loadQuote(); if(!q.length){toast('Add parts before saving');return;}
-  const nm=(document.getElementById('projName').value.trim())||activeName()||'Untitled list';
-  const s=loadSaved(); s[nm]=q; saveSaved(s); setActiveName(nm); renderProjects(); toast('Saved “'+nm+'”');
-};
-document.getElementById('newProj').onclick=()=>{
-  if(loadQuote().length && !confirm('Start a new list? The current working list will be cleared. Saved projects are kept.'))return;
-  saveQuote([]); setActiveName(''); renderDrawer(); renderProjects(); renderResults();
-};
-document.getElementById('loadProj').onchange=function(){
-  const nm=this.value; if(!nm)return; const s=loadSaved(); if(!s[nm])return;
-  saveQuote(s[nm].slice()); setActiveName(nm); renderDrawer(); renderProjects(); renderResults(); toast('Loaded “'+nm+'”');
-};
-document.getElementById('delProj').onclick=()=>{
-  const nm=document.getElementById('loadProj').value; if(!nm){toast('Pick a saved list first');return;}
-  if(!confirm('Delete saved list “'+nm+'”? Your current working list is untouched.'))return;
-  const s=loadSaved(); delete s[nm]; saveSaved(s); if(activeName()===nm)setActiveName(''); renderProjects(); toast('Deleted “'+nm+'”');
-};
-document.getElementById('exportProj').onclick=exportProjects;
-document.getElementById('importProj').onchange=e=>{const f=e.target.files[0];if(f)importProjects(f);e.target.value='';};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();}});
 
 function renderRecentlyViewed(){
   const wrap=document.getElementById('recentlyViewed');
@@ -854,13 +677,11 @@ function renderRecentlyViewed(){
 document.getElementById('mTotal').textContent=fmt(GRAND_TOTAL);
 document.getElementById('mFam').textContent=fmt(FAM.length);
 document.getElementById('mCat').textContent=Object.values(SECTOR_CATS).reduce((a,c)=>a+c.length,0);
-saveQuote(loadQuote()); // sync header counter
 renderRecentlyViewed();
 const wantQuote=new URLSearchParams(location.search).get('quote');
 readURL();
 document.getElementById('searchInput').value=state.q;
 apply();
-if(wantQuote)openQuoteDrawer();
 
 function toggleCompare(fi,seed,checked,cbEl){
   if(checked){

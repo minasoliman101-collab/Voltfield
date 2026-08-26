@@ -43,7 +43,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="ordering-hidden.css">
 <link rel="stylesheet" href="voltfield-core.css">
 <link rel="stylesheet" href="voltfield-component-viz.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
@@ -349,7 +348,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div>
       <h4>Explore</h4>
-      <p><a href="index.html">Home</a> &nbsp;·&nbsp; <a href="voltfield-supply-catalog.html">All Parts catalog</a> &nbsp;·&nbsp; <a href="voltfield-suppliers.html">All Suppliers</a> &nbsp;·&nbsp; <a href="voltfield-insights.html">Insights</a> &nbsp;·&nbsp; <a href="whats-new.html">What's New</a> &nbsp;·&nbsp; <br><br><a href="voltfield-supply-catalog.html?quote=1">View saved list &rarr;</a></p>
+      <p><a href="index.html">Home</a> &nbsp;·&nbsp; <a href="voltfield-supply-catalog.html">All Parts catalog</a> &nbsp;·&nbsp; <a href="voltfield-suppliers.html">All Suppliers</a> &nbsp;·&nbsp; <a href="voltfield-insights.html">Insights</a> &nbsp;·&nbsp; <a href="whats-new.html">What's New</a> &nbsp;·&nbsp; <br><br></p>
     </div>
   </div>
 </footer>
@@ -360,8 +359,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="voltfield-bom-engine.js"></script>
 <script>
 /* ===== BOM Generator page logic ===== */
-function loadQuote(){try{const q=JSON.parse(localStorage.getItem('vf_quote')||'[]');return Array.isArray(q)?q:[];}catch(e){return [];}}
-{const _qc=document.getElementById('quoteCount'); if(_qc)_qc.textContent=loadQuote().length;}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._tm);t._tm=setTimeout(()=>t.classList.remove('show'),1900);}
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function $(id){return document.getElementById(id);}

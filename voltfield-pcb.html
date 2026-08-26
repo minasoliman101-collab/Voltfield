@@ -37,7 +37,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="ordering-hidden.css">
 <link rel="stylesheet" href="voltfield-core.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
@@ -181,7 +180,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="pcbban-in">
     <div class="eyebrow">Custom PCB Builder · Fab Configurator</div>
     <h1>Spec your board. Watch it build. Price it instantly.</h1>
-    <p>Free custom PCB builder — instant spec, price, and lead time. Set dimensions, stack-up, material, copper, finish and tolerances — the board preview and budgetary pricing update live, with quantity breaks and lead times. Need it populated? Switch on the assembly tier, upload your BOM (we read the line and placement counts automatically), and the PCBA price flows into the same saved list as everything else.</p>
+    <p>Free custom PCB builder — instant spec, price, and lead time. Set dimensions, stack-up, material, copper, finish and tolerances — the board preview and budgetary pricing update live, with quantity breaks and lead times. Need it populated? Switch on the assembly tier, upload your BOM (we read the line and placement counts automatically), and the estimate updates as you change the build.</p>
   </div>
 </section>
 
@@ -246,7 +245,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <table class="breaks"><thead><tr><th>Qty</th><th>Per board</th><th>Total w/ NRE</th></tr></thead><tbody id="breaksBody"></tbody></table>
     </div>
     <div class="actions">
-      <button class="btn primary" id="addBtn">Add to saved list</button>
       <button class="btn dark" id="printBtn">Print spec sheet</button>
       <button class="btn ghost" id="copyBtn">Copy link</button>
       <a class="btn ghost" id="dfmBtn" href="#">Engineering / DFM review &rsaquo;</a>
@@ -318,9 +316,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 /* ===== Custom PCB configurator ===== */
 function $(id){return document.getElementById(id);}
 function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._tm);t._tm=setTimeout(()=>t.classList.remove('show'),2000);}
-function loadQuote(){try{const q=JSON.parse(localStorage.getItem('vf_quote')||'[]');return Array.isArray(q)?q:[];}catch(e){return [];}}
-function saveQuote(q){localStorage.setItem('vf_quote',JSON.stringify(q));const _qc=$('quoteCount'); if(_qc)_qc.textContent=q.length;}
-saveQuote(loadQuote());
 
 const MASKS=[['green','#0E6B37'],['red','#B32821'],['blue','#1F4FA3'],['black','#20242A'],['white','#E9ECEF'],['purple','#5B2E8C'],['yellow','#D8B400']];
 /* ---------- pricing calibration notes ----------
@@ -566,21 +561,6 @@ function loadURL(){
   document.querySelectorAll('.seg').forEach(seg=>{const k=seg.dataset.k;seg.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===S[k]));});
   document.querySelectorAll('#maskSw .sw').forEach(x=>x.classList.toggle('on',x.title===S.mask));
 }
-
-$('addBtn').onclick=()=>{
-  const qty=Math.max(5,parseInt($('pQty').value,10)||100);
-  const r=calc(qty), pn=pcbPN();
-  const q=loadQuote();
-  const A=asmCounts();
-  const name=r.asm
-    ? `Custom PCBA — ${S.layers}L ${clampDims().w}×${clampDims().h}mm ${FIN[$('pFin').value].l}, ${A.smt} SMT/${A.th} TH placements, ${S.src} (${$('pName').value||'unnamed'})`
-    : `Custom PCB — ${S.layers}L ${clampDims().w}×${clampDims().h}mm ${FIN[$('pFin').value].l}, ${S.mask} (${$('pName').value||'unnamed'})`;
-  const ex=q.find(x=>x.pn===pn);
-  if(ex){ex.qty=qty;}else{q.push({pn,name,price:'$'+r.allUnit.toFixed(2),lead:r.leadDays+' bd',sec:'dc',qty,up:r.allUnit,pu:'/ea',d:''});}
-  saveQuote(q);
-  toast((r.asm?'PCBA build':'PCB build')+' added to quote ('+qty.toLocaleString()+' pcs)');
-  if(window.vfGtag)window.vfGtag('event','add_to_quote',{method:'pcb_builder',pn,qty,value:r.allUnit*qty});
-};
 $('printBtn').onclick=()=>window.print();
 $('copyBtn').onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(location.href).then(()=>toast('Config link copied'),()=>toast('Copy failed'));};
 document.addEventListener('click',e=>{if(e.target.id==='dfmBtn'){e.preventDefault();
