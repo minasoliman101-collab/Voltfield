@@ -3,23 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Breaker Repair Kits — Contacts, Arc Chutes &amp; Mechanisms Specs | Voltfield</title>
-<link rel="canonical" href="https://voltfield.org/parts/breaker-repair-kits-contacts-arc-chutes-and-mechanisms.html">
-<meta name="description" content="Breaker Repair Kits — Contacts, Arc Chutes &amp; Mechanisms: configuration options, standards, indicative lead time and market price band. Reference data, nothing for sale.">
+<title>Power monitoring and protective relays | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/data-centers/monitoring-controls.html">
+<meta name="description" content="Monitoring &amp; Controls: the families, how each is specified, the standards they are built to, indicative lead times and market price bands. Reference data, nothing for sale.">
 <meta name="robots" content="index,follow">
-<meta property="og:type" content="article">
+<meta property="og:type" content="website">
 <meta property="og:site_name" content="Voltfield">
-<meta property="og:title" content="Breaker Repair Kits — Contacts, Arc Chutes &amp; Mechanisms">
-<meta property="og:description" content="Breaker Repair Kits — Contacts, Arc Chutes &amp; Mechanisms: configuration options, standards, indicative lead time and market price band. Reference data, nothing for sale.">
+<meta property="og:title" content="Power monitoring and protective relays">
+<meta property="og:description" content="Monitoring &amp; Controls: the families, how each is specified, the standards they are built to, indicative lead times and market price bands. Reference data, nothing for sale.">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
  {"@type":"BreadcrumbList","itemListElement":[
    {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
    {"@type":"ListItem","position":2,"name":"Data Centers","item":"https://voltfield.org/data-centers.html"},
-   {"@type":"ListItem","position":3,"name":"Breaker Repair Kits — Contacts, Arc Chutes & Mechanisms","item":"https://voltfield.org/parts/breaker-repair-kits-contacts-arc-chutes-and-mechanisms.html"}
+   {"@type":"ListItem","position":3,"name":"Monitoring & Controls","item":"https://voltfield.org/data-centers/monitoring-controls.html"}
  ]},
- {"@type":"WebPage","name":"Breaker Repair Kits — Contacts, Arc Chutes & Mechanisms","description":"Breaker Repair Kits — Contacts, Arc Chutes & Mechanisms: configuration options, standards, indicative lead time and market price band. Reference data, nothing for sale.","url":"https://voltfield.org/parts/breaker-repair-kits-contacts-arc-chutes-and-mechanisms.html","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"}}
+ {"@type":"CollectionPage","name":"Power monitoring and protective relays","description":"Monitoring & Controls: the families, how each is specified, the standards they are built to, indicative lead times and market price bands. Reference data, nothing for sale.","url":"https://voltfield.org/data-centers/monitoring-controls.html","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"What accuracy does metering need, and why is a relay setting never a local decision?","acceptedAnswer":{"@type":"Answer","text":"These two categories look similar and answer to very different requirements. Metering accuracy class governs what a reading may be used for -- revenue settlement demands far more than trend monitoring, and it is a commercial obligation rather than an engineering preference. Protective relays are not device-level settings at all: a relay is configured as part of a coordinated scheme, so changing one setting changes what happens everywhere downstream of it."}}
+ ]}
 ]}
 </script>
 <link rel="manifest" href="/manifest.json">
@@ -83,60 +86,56 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section class="artban">
   <div class="artban-in">
-    <div class="eyebrow">Data Centers &middot; Equipment Family</div>
-    <h1>Breaker Repair Kits — Contacts, Arc Chutes &amp; Mechanisms</h1>
-    <p class="dek">Wear parts for breakers already in service: contact sets, arc chutes, springs and operating mechanisms. For an obsolete frame these often decide whether a lineup can be maintained or has to be replaced entirely.</p>
+    <div class="eyebrow">Data Centers &middot; Equipment Category</div>
+    <h1>Power monitoring and protective relays</h1>
+    <p class="dek">Revenue and power-quality meters feeding building management and DCIM systems, and the protective relays that decide when a breaker opens.</p>
   </div>
 </section>
 
 <nav class="crumb" aria-label="Breadcrumb">
   <a href="/index.html">Home</a><span class="sep">/</span>
   <a href="/data-centers.html">Data Centers</a><span class="sep">/</span>
-  <span>Breaker Repair Kits — Contacts, Arc Chutes &amp; Mechanisms</span>
+  <span>Monitoring &amp; Controls</span>
 </nav>
 
 <div class="artwrap">
-    <picture>
-      <source srcset="/images/parts/dc-breaker-repair-kits-contacts-arc-chutes-mechanisms.webp" type="image/webp">
-      <img class="famimg" src="/images/parts/dc-breaker-repair-kits-contacts-arc-chutes-mechanisms.jpg" alt="Breaker Repair Kits — Contacts, Arc Chutes &amp; Mechanisms" width="340" height="340" loading="lazy" decoding="async">
-    </picture>
+  <h2>What accuracy does metering need, and why is a relay setting never a local decision?</h2>
+  <p>These two categories look similar and answer to very different requirements. Metering accuracy class governs what a reading may be used for -- revenue settlement demands far more than trend monitoring, and it is a commercial obligation rather than an engineering preference. Protective relays are not device-level settings at all: a relay is configured as part of a coordinated scheme, so changing one setting changes what happens everywhere downstream of it.</p>
 
-  <h2>How this family is specified</h2>
-  <p>3 attribute axes describe this family — Frame (5), Kit (5), Grade (2) — which together give 50 documented configurations.</p>
-    <div class="specgrid">
-      <div class="speccard"><h3>Frame</h3><p>MCCB 400A &middot; MCCB 1200A &middot; ACB 2000A &middot; ACB 4000A &middot; VCB 1200A</p></div>
-      <div class="speccard"><h3>Kit</h3><p>Contact set &middot; Arc chutes &middot; Mechanism / springs &middot; Cluster / fingers &middot; Case halves</p></div>
-      <div class="speccard"><h3>Grade</h3><p>OEM &middot; Aftermarket</p></div>
-    </div>
-
-  <h2>Reference data</h2>
+  <h2>The 2 families in this category</h2>
+  <p>24 documented configurations in total, with indicative lead times from 8 to 20 weeks. Each family links to its own reference page.</p>
     <div class="tblwrap">
     <table class="famtable">
+      <thead>
+        <tr><th>Family</th><th>How it is specified</th><th>Lead time</th><th>Indicative band</th><th>Standards</th></tr>
+      </thead>
       <tbody>
-          <tr><td><b>Indicative price band</b></td><td class="num">$85 – $5K <small>/ea</small></td></tr>
-          <tr><td><b>Indicative lead time</b></td><td class="num"><span class="lt short">~8 weeks</span></td></tr>
-          <tr><td><b>Standards referenced</b></td><td class="num">UL 489</td></tr>
-          <tr><td><b>Documented configurations</b></td><td class="num">50</td></tr>
-          <tr><td><b>Category</b></td><td class="num">Switchgear Components</td></tr>
+        <tr>
+          <td><b><a href="/parts/power-meters-bms.html">Power Meters / BMS</a></b>12 documented configurations</td>
+          <td class="num">Class: Revenue / Power Quality<br>Protocol: Modbus / BACnet / SNMP<br>Mount: Panel / DIN</td>
+          <td><span class="lt short">~8 wk</span></td>
+          <td class="num">$280 – $5K <small>/ea</small></td>
+          <td class="num">ANSI C12.20<br>IEC 61557-12</td>
+        </tr>
+        <tr>
+          <td><b><a href="/parts/protective-relays.html">Protective Relays</a></b>12 documented configurations</td>
+          <td class="num">Function: Feeder / Transformer Diff / Motor<br>Comms: IEC 61850 / DNP3<br>Mount: Panel / Rack</td>
+          <td><span class="lt mid">~20 wk</span></td>
+          <td class="num">$1K – $14K <small>/ea</small></td>
+          <td class="num">IEEE C37.90<br>IEC 60255</td>
+        </tr>
       </tbody>
     </table>
     </div>
 
-    <div class="callout"><b>On these figures.</b> The price band is the market range for this family as a whole, published for budgeting — it is not a quote, and Voltfield sells nothing. Lead time is indicative and moves with the market; check the <a href="/lead-time-index.html">Lead-Time Index</a> for what is driving it.</div>
+    <div class="callout"><b>On these figures.</b> Price bands are market ranges for each family as a whole, published for budgeting — they are not quotes, and Voltfield sells nothing. Lead times are indicative and move with the market; the <a href="/lead-time-index.html">Lead-Time Index</a> covers what is driving them.</div>
 
   <h2>Related</h2>
     <div class="rel">
       <a href="/data-centers.html">Data Centers</a>
-      <a href="/data-centers/switchgear-components.html">Switchgear Components</a>
       <a href="/guide-switchgear-compartments.html">Metal-Clad vs Metal-Enclosed Switchgear</a>
       <a href="/guide-short-circuit-studies-breaker-coordination.html">Short-Circuit Studies &amp; Breaker Coordination</a>
     </div>
-
-  <div class="ctaband"><div class="ctaband-in">
-    <h3>Every configuration in this family</h3>
-    <p>Filter the spec library to Breaker Repair Kits — Contacts, Arc Chutes &amp; Mechanisms and step through all 50 of them.</p>
-    <a class="ctabtn" href="/voltfield-supply-catalog.html?q=Breaker%20Repair%20Kits%20%E2%80%94%20Contacts%2C%20Arc%20Chutes%20%26%20Mechanisms">OPEN THE SPEC LIBRARY &rarr;</a>
-  </div></div>
 
 </div>
 </main>

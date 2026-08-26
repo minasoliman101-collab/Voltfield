@@ -374,3 +374,10 @@
 /parts/wiring-harnesses-and-cable-assemblies                      /parts/wiring-harnesses-and-cable-assemblies.html   301!
 /parts/wood-sheet-metal-self-drilling-screws                      /parts/wood-sheet-metal-self-drilling-screws.html   301!
 /parts/wrenches-and-sockets                                       /parts/wrenches-and-sockets.html   301!
+
+# ---- data-center category pages ----
+/data-centers/transformer-components             /data-centers/transformer-components.html   301!
+/data-centers/switchgear-components              /data-centers/switchgear-components.html   301!
+/data-centers/genset-components                  /data-centers/genset-components.html   301!
+/data-centers/grounding-bonding                  /data-centers/grounding-bonding.html   301!
+/data-centers/monitoring-controls                /data-centers/monitoring-controls.html   301!
