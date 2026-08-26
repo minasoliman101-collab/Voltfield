@@ -536,7 +536,6 @@ function renderResults(){
     const seed=local*2654435761%f.ct + local;
     const sku=genSKU(f,seed);
     const col=SECTORS[f.s].color; const lb=leadBadge(f);
-    const inq=qset.has(sku.pn);
     html+=`<div class="skucard" data-fi="${f._i}" data-seed="${seed}">
       <div class="sk-band" style="background:${col}"></div>
       <div class="sk-imgwrap">${vfPartVisual(f,'sk-img',f.n)}</div>
