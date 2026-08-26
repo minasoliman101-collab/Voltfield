@@ -115,7 +115,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
 footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
 @media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
-footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer h4{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
 footer p{line-height:1.6;max-width:460px}
 footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
 footer a{color:#9FB0C3;text-decoration:none}
@@ -161,7 +161,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </nav>
   <div class="headright">
     <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
-    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View sourcing list on catalog page">SOURCING LIST <span class="ct" id="quoteCount">0</span></a>
   </div>
 </header>
 <main id="main" tabindex="-1">
@@ -290,28 +289,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <footer>
   <div class="in">
     <div>
-      <h5>Voltfield</h5>
+      <h4>Voltfield</h4>
       <p>An independent engineering reference for energy-infrastructure and industrial power equipment. Nothing on this site is for sale. Price ranges in the spec library are indicative market benchmarks (North America, July 2026), published for budgeting and comparison — real pricing, availability and lead time come from the distributor, mill or OEM you buy from.</p>
     </div>
-    <div><h5>Desks</h5><ul>
+    <div><h4>Desks</h4><ul>
       <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
       <li><a href="renewables.html">Solar / Wind BOS</a></li>
       <li><a href="battery-storage.html">Storage Systems</a></li>
       <li><a href="oil-gas.html">Drilling &amp; Completions</a></li>
       <li><a href="industrial-supply.html">Industrial Supply (MRO)</a></li>
     </ul></div>
-    <div><h5>Compliance</h5><ul><li>UL · IEEE · ANSI C57</li><li>API 5CT/6A/7K/16A/Q1</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+    <div><h4>Compliance</h4><ul><li>UL · IEEE · ANSI C57</li><li>API 5CT/6A/7K/16A/Q1</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
   </div>
 </footer>
 <script src="voltfield-site-config.js"></script>
 <script>
-(function(){
-  try{
-    const q=JSON.parse(localStorage.getItem("vf_quote")||"[]");
-    const el=document.getElementById("quoteCount");
-    if(el)el.textContent=Array.isArray(q)?q.length:0;
-  }catch(e){}
-})();
 </script>
 <script>
 (function(){

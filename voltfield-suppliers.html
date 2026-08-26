@@ -137,7 +137,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 footer{background:var(--ink);color:#9FB0C3;padding:30px 20px;font-size:12px}
 footer .in{max-width:1240px;margin:0 auto;display:grid;gap:16px}
 @media(min-width:760px){footer .in{grid-template-columns:2fr 1fr}}
-footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer h4{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
 footer p{line-height:1.6;max-width:560px}
 footer a{color:#9FB0C3}
 </style>
@@ -181,7 +181,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </nav>
   <div class="headright">
     <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
-    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View sourcing list on catalog page">SOURCING LIST <span class="ct" id="quoteCount">0</span></a>
   </div>
 </header>
 <main id="main" tabindex="-1">
@@ -221,11 +220,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <footer>
   <div class="in">
     <div>
-      <h5>Voltfield</h5>
+      <h4>Voltfield</h4>
       <p>An independent engineering reference for energy-infrastructure and industrial power equipment. Nothing on this site is for sale. Two kinds of entry appear below. Named companies are real firms, listed because they build or distribute this equipment. Entries badged <b>Archetype</b> are not companies at all: they describe a class of supplier &mdash; a regional transformer manufacturer, an OCTG mill, a recert shop &mdash; so the lead-time posture and supply constraints typical of that class can be documented without attaching them to a firm. Earlier versions of this page gave those archetypes invented company names and addresses, which was wrong; they now say what they are. Only the named companies appear in this page&rsquo;s structured data. Lead-time posture and compliance scopes are indicative reference data, not a live feed from any distributor. OEM brand listings (SMA, Schneider Electric, Siemens, ABB, Eaton, and others) identify product lines Voltfield tracks and cross-references as an <b>independent</b> reference — Voltfield is not affiliated with, sponsored by, or endorsed by these manufacturers, and all trademarks belong to their owners. Voltfield does not stock, sell or fulfil anything. Where a catalog entry names a distribution channel, that records where this class of part is typically bought &mdash; it is not a supply relationship, and Voltfield earns nothing from it. Catalog scope is modelled on each distributor&rsquo;s publicly published product range, not a live data feed.</p>
     </div>
     <div>
-      <h5>Explore</h5>
+      <h4>Explore</h4>
       <p><a href="index.html">Home</a> &nbsp;·&nbsp; <a href="voltfield-supply-catalog.html">All Parts catalog</a><br><br>
       <a href="voltfield-supply-catalog.html?sector=dc">Data Centers</a> · <a href="voltfield-supply-catalog.html?sector=re">Renewables</a> · <a href="voltfield-supply-catalog.html?sector=bess">Storage</a> · <a href="voltfield-supply-catalog.html?sector=og">Oil &amp; Gas</a> · <a href="voltfield-supply-catalog.html?sector=mro">MRO</a></p>
     </div>
@@ -355,7 +354,7 @@ document.getElementById('resetLink').addEventListener('click',e=>{e.preventDefau
 /* read sector from URL if arriving from a sector link */
 (function(){const p=new URLSearchParams(location.search);const s=p.get('sector');if(s&&SECTORS[s])fSector=s;})();
 /* quote counter shared across pages */
-(function(){try{const q=JSON.parse(localStorage.getItem('vf_quote')||'[]');document.getElementById('quoteCount').textContent=Array.isArray(q)?q.length:0;}catch(e){}})();
+
 render();
 </script>
 <script src="voltfield-oem-data.js"></script>

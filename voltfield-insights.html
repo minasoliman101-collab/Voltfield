@@ -175,7 +175,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </nav>
   <div class="headright">
     <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
-    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View sourcing list on catalog page">SOURCING LIST <span class="ct" id="quoteCount">0</span></a>
   </div>
 </header>
 <main id="main" tabindex="-1">
@@ -283,8 +282,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="clickhint">Tip: click any bar, legend item, or table row to open it pre‑filtered in the All Parts catalog.</div>
   <div class="pgrid">
     <div class="ipanel">
-      <h2>Catalog by sourcing channel</h2>
-      <div class="sub">Channel indicates where this class of part is typically distributed — Voltfield does not supply any of it</div>
+      <h2>Where this class of part is typically bought</h2>
+      <div class="sub">Only industrial-supply families carry a channel; it records where that class of part is normally distributed — Voltfield supplies none of it</div>
       <div class="donut-wrap"><div id="srcDonut"></div><div class="legend" id="srcLegend"></div></div>
     </div>
     <div class="ipanel">
@@ -335,7 +334,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="voltfield-catalog-data.js"></script>
 <script>
 /* ===== Catalog insights — computed from shared catalog data ===== */
-(function(){try{const q=JSON.parse(localStorage.getItem('vf_quote')||'[]');document.getElementById('quoteCount').textContent=Array.isArray(q)?q.length:0;}catch(e){}})();
+
 
 /* ---------- Insights email signup (Netlify Forms, same pattern as lead-time-index.html) ---------- */
 (function(){
@@ -363,7 +362,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   });
 })();
 
-const DCOL={grainger:'#5B6B7E',msc:'#9C4221',graybar:'#2E7D4F',uline:'#B7791F',voltfield:'#2B6CB0'};
+const DCOL={'mro-general':'#5B6B7E',msc:'#9C4221',graybar:'#2E7D4F',uline:'#B7791F'};
 const el=id=>document.getElementById(id);
 
 /* ---- chart builders ---- */
@@ -393,7 +392,7 @@ const kpis=[
   {k:fmt(FAM.length),l:'Product families'},
   {k:'5',l:'Sectors'},
   {k:String(Object.values(SECTOR_CATS).reduce((a,c)=>a+c.length,0)),l:'Categories'},
-  {k:String(Object.keys(DIST_TOTALS).length),l:'Catalog sources'},
+  {k:String(Object.keys(DIST_TOTALS).length),l:'Distribution channels'},
   {k:longestLw+' wk',l:'Longest lead time'}
 ];
 el('kpis').innerHTML=kpis.map(x=>`<div class="kpi"><div class="k">${x.k}</div><div class="l">${x.l}</div></div>`).join('');
@@ -401,14 +400,14 @@ el('fTotal').textContent=fmt(GRAND_TOTAL);
 el('fFam').textContent=fmt(FAM.length);
 
 // By source (donut)
-const srcOrder=['grainger','msc','graybar','uline','voltfield'];
-const SRC_LABEL={grainger:'Grainger',uline:'Uline',graybar:'Graybar',msc:'MSC Industrial',voltfield:'Voltfield Direct'};
+const srcOrder=['mro-general','msc','graybar','uline'];
+const SRC_LABEL=CHANNEL_SHORT;
 const srcItems=srcOrder.filter(d=>DIST_TOTALS[d]).map(d=>({label:SRC_LABEL[d],value:DIST_TOTALS[d],color:DCOL[d],href:'voltfield-supply-catalog.html?dist='+d}));
 el('srcDonut').innerHTML=donutSVG(srcItems);
 el('srcLegend').innerHTML=legendHTML(srcItems);
 
 // MRO by distributor (bars)
-const mroBars=[['grainger','Grainger'],['msc','MSC Industrial'],['graybar','Graybar'],['uline','Uline']]
+const mroBars=[['mro-general','General MRO'],['msc','MSC Industrial'],['graybar','Graybar'],['uline','Uline']]
   .map(([d,lbl])=>({label:lbl,value:DIST_TOTALS[d]||0,color:DCOL[d],href:'voltfield-supply-catalog.html?sector=mro&dist='+d}))
   .sort((a,b)=>b.value-a.value);
 el('mroBars').innerHTML=barsHTML(mroBars);

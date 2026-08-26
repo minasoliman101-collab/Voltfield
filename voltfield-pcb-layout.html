@@ -152,7 +152,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
 footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
 @media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
-footer h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer h4{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
 footer p{line-height:1.6;max-width:460px}
 footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
 footer a{color:#9FB0C3;text-decoration:none}
@@ -201,7 +201,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </nav>
   <div class="headright">
     <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
-    <a class="quotebtn" href="voltfield-supply-catalog.html?quote=1" aria-label="View sourcing list on catalog page">SOURCING LIST <span class="ct" id="quoteCount">0</span></a>
   </div>
 </header>
 <main id="main" tabindex="-1">
@@ -295,17 +294,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <footer>
   <div class="in">
     <div>
-      <h5>Voltfield — PCB Layout Tool</h5>
+      <h4>Voltfield — PCB Layout Tool</h4>
       <p>A free visual PCB layout sandbox for practicing component placement and two-layer trace routing, with a design-check pass for unconnected pins and same-layer shorts. Part of Voltfield's engineering knowledge tools, alongside the Practice Sandbox, BOM Generator, and Engineering Calculators.</p>
     </div>
-    <div><h5>Explore</h5><ul>
+    <div><h4>Explore</h4><ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="voltfield-pcb.html">PCB Builder (fab pricing)</a></li>
       <li><a href="voltfield-sandbox.html">Practice Sandbox</a></li>
       <li><a href="engineering-calculators.html">Engineering Calculators</a></li>
       <li><a href="voltfield-glossary-quiz.html">Glossary Quiz</a></li>
     </ul></div>
-    <div><h5>Reference Guides</h5><ul>
+    <div><h4>Reference Guides</h4><ul>
       <li><a href="guide-transformer-nameplate.html">Transformer Nameplate</a></li>
       <li><a href="guide-switchgear-compartments.html">Switchgear Compartments</a></li>
       <li><a href="guide-short-circuit-studies-breaker-coordination.html">Short-Circuit Studies</a></li>
@@ -317,13 +316,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="voltfield-3d.js"></script>
 <script src="voltfield-component-viz.js"></script>
 <script>
-(function(){
-  try{
-    const q=JSON.parse(localStorage.getItem("vf_quote")||"[]");
-    const el=document.getElementById("quoteCount");
-    if(el)el.textContent=Array.isArray(q)?q.length:0;
-  }catch(e){}
-})();
 </script>
 <script>
 (function(){

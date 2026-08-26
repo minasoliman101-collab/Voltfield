@@ -328,7 +328,42 @@ function abbr(n){return (n.replace(/[^A-Za-z0-9 ]/g,' ').trim().split(/\s+/).map
    (pagination, facet counts, insights, CSV export) now reads a real number. */
 FAM.forEach(f=>{ f.ct = f.ax.reduce((n,axis)=>n*(axis.length-1), 1); });
 
-FAM.forEach((f,i)=>{ f._i=i; f.abbr=abbr(f.n); f.d = f.d0 || (f.s==='mro' ? 'grainger' : 'voltfield'); f.search=(f.n+' '+f.kw+' '+f.c+' '+SECTORS[f.s].label).toLowerCase(); });
+/* Distribution channel.
+   This used to default to 'voltfield', rendered everywhere as "Voltfield
+   Direct" -- a supply channel that does not exist. 145 of the 243 families
+   carried that label on their catalog card. Voltfield stocks nothing, sells
+   nothing and is not a route to any of this, so the label was asserting a
+   commercial relationship on the majority of the catalog.
+
+   Only 22 families state a channel explicitly via d0, and those are real
+   category knowledge: packaging through Uline, electrical through Graybar,
+   metalworking through MSC. Those are kept and worded as what they are --
+   where this CLASS of part is typically bought, not where Voltfield gets it.
+
+   Everything else now has no channel. MRO families without an explicit d0 fall
+   back to a generic full-line description rather than naming a distributor
+   that was only ever a default; no family was ever actually assigned to
+   Grainger. Non-MRO families get an empty channel, and the UI omits the label
+   entirely rather than inventing one. */
+FAM.forEach((f,i)=>{ f._i=i; f.abbr=abbr(f.n); f.d = f.d0 || (f.s==='mro' ? 'mro-general' : ''); f.search=(f.n+' '+f.kw+' '+f.c+' '+SECTORS[f.s].label).toLowerCase(); });
+
+/* Single source of truth for how a channel is worded. Every consumer -- the
+   catalog cards and facet, the part page, insights, the BOM tools and the CSV
+   export -- reads this, so the wording cannot drift back out of sync. */
+const CHANNEL_LABEL = {
+  uline:         'Typically via Uline',
+  graybar:       'Typically via Graybar',
+  msc:           'Typically via MSC Industrial',
+  'mro-general': 'General MRO distribution'
+};
+const CHANNEL_SHORT = {
+  uline:         'Uline',
+  graybar:       'Graybar',
+  msc:           'MSC Industrial',
+  'mro-general': 'General MRO'
+};
+function channelLabel(d){ return (d && CHANNEL_LABEL[d]) || ''; }
+function channelShort(d){ return (d && CHANNEL_SHORT[d]) || ''; }
 
 const SECTOR_TOTALS={}, CAT_TOTALS={}, SECTOR_CATS={};
 FAM.forEach(f=>{
@@ -337,8 +372,10 @@ FAM.forEach(f=>{
   SECTOR_CATS[f.s]=SECTOR_CATS[f.s]||[]; if(!SECTOR_CATS[f.s].includes(f.c))SECTOR_CATS[f.s].push(f.c);
 });
 const GRAND_TOTAL=Object.values(SECTOR_TOTALS).reduce((a,b)=>a+b,0);
+/* Only families that actually carry a channel are counted. Families with no
+   channel are not silently bucketed under an empty key. */
 const DIST_TOTALS={};
-FAM.forEach(f=>{DIST_TOTALS[f.d]=(DIST_TOTALS[f.d]||0)+f.ct;});
+FAM.forEach(f=>{ if(f.d) DIST_TOTALS[f.d]=(DIST_TOTALS[f.d]||0)+f.ct; });
 
 /* ---------- helpers ---------- */
 const fmt=n=>n.toLocaleString('en-US');
@@ -409,4 +446,4 @@ function genSKU(f,i){
 /* config <-> URL helpers (used by the shareable part page) */
 function picksToParam(f,picks){return f.ax.map((axis,ai)=>Math.max(0,axis.slice(1).indexOf(picks[ai]))).join('.');}
 function paramToPicks(f,param){const arr=(param||'').split('.');return f.ax.map((axis,ai)=>{const o=axis.slice(1);const idx=Math.max(0,Math.min(o.length-1,parseInt(arr[ai],10)||0));return o[idx];});}
-const DIST_NAME={grainger:'Sourced via Grainger',uline:'Sourced via Uline',graybar:'Sourced via Graybar',msc:'Sourced via MSC Industrial',voltfield:'Sourced via Voltfield'};
+const DIST_NAME=CHANNEL_LABEL;
