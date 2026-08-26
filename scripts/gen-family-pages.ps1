@@ -218,7 +218,11 @@ foreach ($f in $fams) {
   [void]$sb.AppendLine('<head>')
   [void]$sb.AppendLine('<meta charset="UTF-8">')
   [void]$sb.AppendLine('<meta name="viewport" content="width=device-width, initial-scale=1.0">')
-  [void]$sb.AppendLine("<title>$dispName$($em)Specs, Standards &amp; Lead Time | Voltfield</title>")
+  # Title: family name first, minimal boilerplate. The previous form appended
+  # "-Specs, Standards & Lead Time | Voltfield" -- 40 characters of suffix that
+  # pushed 224 of 243 titles past the ~60 Google renders, truncating the part
+  # that actually distinguishes the page. This form leaves only 4 over.
+  [void]$sb.AppendLine("<title>$dispName Specs | Voltfield</title>")
   [void]$sb.AppendLine("<link rel=`"canonical`" href=`"$url`">")
   [void]$sb.AppendLine("<meta name=`"description`" content=`"$(EscAttr $desc)`">")
   [void]$sb.AppendLine('<meta name="robots" content="index,follow">')
