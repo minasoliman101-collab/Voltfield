@@ -79,6 +79,25 @@ $GUIDES = @(
   @{ re='module|panel|tracker|feoc';           href='guide-feoc-compliance.html';          t='FEOC Compliance for Solar & Storage' }
 )
 
+# keyword -> calculator landing page. A family page and the calculator that sizes
+# that family are the same search intent one step apart, and until now nothing
+# connected them: the calculator pages had two inbound links each and the family
+# pages sent nobody to a tool. Matched against name+kw+category.
+$CALCS = @(
+  @{ re='transformer|gsu|pad-mount|padmount|step-up'; href='calculators/transformer-sizing.html'; t='Transformer Sizing Calculator' }
+  @{ re='transformer|gsu|pad-mount|padmount';         href='calculators/inrush.html';             t='Transformer Inrush Calculator' }
+  @{ re='switchgear|breaker|mccb|relay|fault|protect';href='calculators/fault-current.html';      t='Available Fault Current Calculator' }
+  @{ re='switchgear|breaker|arc|ppe';                 href='calculators/arc-flash.html';          t='Arc-Flash Incident Energy Calculator' }
+  @{ re='cable|wire|conductor|busbar|conduit|raceway';href='calculators/voltage-drop.html';       t='Voltage Drop Calculator' }
+  @{ re='cable|wire|conductor|conduit|raceway';       href='calculators/ampacity.html';           t='Ampacity &amp; Conduit Fill Calculator' }
+  @{ re='battery|bess|dc block|lfp|nmc|storage';      href='calculators/bess-sizing.html';        t='BESS Sizing Calculator' }
+  @{ re='module|pv|solar|inverter|string|combiner';   href='calculators/solar-string.html';       t='Solar String Sizing Calculator' }
+  @{ re='genset|generator|engine|fuel|alternator';    href='calculators/generator-runtime.html';  t='Generator Runtime Calculator' }
+  @{ re='motor|drive|starter';                        href='calculators/motor-start.html';        t='Motor Starting Voltage Dip Calculator' }
+  @{ re='ground|bond|earth|surge';                    href='calculators/grounding.html';          t='Ground Rod Resistance Calculator' }
+  @{ re='capacitor|power factor|meter|kvar';          href='calculators/power-factor.html';       t='Power Factor Correction Calculator' }
+)
+
 function Esc([string]$s) {
   if ($null -eq $s) { return '' }
   # the source data already contains &amp; in some names; normalise then re-escape
@@ -183,13 +202,23 @@ foreach ($f in $fams) {
   $rel = "      <a href=`"/$($sec.page)`">$(Esc $sec.label)</a>`r`n"
   $ck = "$($f.s)|$($f.c)"
   if ($CLUSTER.ContainsKey($ck)) { $rel += "      <a href=`"/$($CLUSTER[$ck])`">$cat</a>`r`n" }
-  $hay = ($f.n + ' ' + $f.kw).ToLower()
+  $hay = ($f.n + ' ' + $f.kw + ' ' + $f.c).ToLower()
   $seen = @{}
   foreach ($g in $GUIDES) {
     if ($hay -match $g.re -and -not $seen.ContainsKey($g.href)) {
       $seen[$g.href] = $true
       $rel += "      <a href=`"/$($g.href)`">$(Esc $g.t)</a>`r`n"
       if ($seen.Count -ge 3) { break }
+    }
+  }
+  # Calculators that size this family, capped at two so the block stays a set of
+  # next steps rather than a link dump.
+  $seenC = @{}
+  foreach ($cc in $CALCS) {
+    if ($hay -match $cc.re -and -not $seenC.ContainsKey($cc.href)) {
+      $seenC[$cc.href] = $true
+      $rel += "      <a href=`"/$($cc.href)`">$($cc.t)</a>`r`n"
+      if ($seenC.Count -ge 2) { break }
     }
   }
 
