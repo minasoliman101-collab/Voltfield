@@ -28,6 +28,12 @@
 .famtable th{font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);text-align:left;padding:8px 10px;border-bottom:2px solid var(--ink)}
 .famtable td{padding:10px;border-bottom:1px solid var(--line);color:var(--ink-2);vertical-align:top}
 .famtable td b{font-family:var(--disp);font-size:15px;color:var(--ink);display:block;margin-bottom:2px}
+/* The key/value rows in a family table carry <th scope="row"> so a screen
+   reader announces the label with its value ("Indicative lead time: ~2 weeks")
+   instead of reading two unrelated cells. The .famtable th rule above is for
+   <thead> column headers and would render these at 9.5px uppercase, so the
+   scoped selector restores the display face the <b> they replaced carried. */
+.famtable th[scope="row"]{font-family:var(--disp);font-size:15px;font-weight:700;color:var(--ink);text-transform:none;letter-spacing:normal;text-align:left;padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
 .famtable td.num{font-family:var(--mono);font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .famtable a{color:var(--link);font-weight:600;text-decoration:underline}
 .lt{font-family:var(--mono);font-size:11px;padding:2px 7px;white-space:nowrap;display:inline-block}

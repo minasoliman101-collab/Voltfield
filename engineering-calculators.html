@@ -484,7 +484,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h3>NEMA &harr; IP Enclosure Rating (approximate)</h3>
     <div class="sub">NEMA (UL 50/50E) and IP (IEC 60529) use different test methods, so this is a commonly cited approximate cross-reference, not an exact regulatory equivalence — always verify against the enclosure's actual dual listing.</div>
     <div style="overflow-x:auto"><table class="reftable">
-      <tr><th>NEMA type</th><th>Approx. IP equivalent</th><th>Typical use</th></tr>
+      <tr><th scope="col">NEMA type</th><th scope="col">Approx. IP equivalent</th><th scope="col">Typical use</th></tr>
       <tr><td>1</td><td>IP20</td><td>Indoor, general purpose</td></tr>
       <tr><td>2</td><td>IP21</td><td>Indoor, light dripping water</td></tr>
       <tr><td>3</td><td>IP54</td><td>Outdoor, windblown dust/rain</td></tr>
@@ -553,7 +553,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2 id="standards-crossref">Standards Cross-Reference (US &harr; International)</h2>
   <p>A quick-reference pairing of common US standards (ANSI/IEEE/NEMA/UL) with their closest international (IEC) counterpart for the same equipment category. These are commonly paired equivalents for similar equipment classes, not certified legal equivalencies — a UL listing and an IEC/CE certification are separate compliance processes with their own testing requirements.</p>
   <div style="overflow-x:auto"><table class="reftable">
-    <tr><th>Equipment category</th><th>US standard</th><th>International (IEC) standard</th></tr>
+    <tr><th scope="col">Equipment category</th><th scope="col">US standard</th><th scope="col">International (IEC) standard</th></tr>
     <tr><td>Power transformers</td><td>IEEE/ANSI C57.12.00</td><td>IEC 60076</td></tr>
     <tr><td>Medium-voltage switchgear</td><td>IEEE C37 series</td><td>IEC 62271 series</td></tr>
     <tr><td>Low-voltage circuit breakers</td><td>UL 489</td><td>IEC 60947-2</td></tr>
@@ -592,7 +592,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2 id="hs-codes">HS Code Reference (Common Equipment Categories)</h2>
   <p>The Harmonized System (HS) is the WCO's internationally standardized product classification, used as the basis for every country's customs tariff schedule. The 4-digit headings below are stable across countries; the more specific 6&ndash;10-digit subheading that actually sets your duty rate depends on technical details (voltage class, power rating, technology) and the importing country's own tariff schedule — always confirm final classification with a licensed customs broker.</p>
   <div style="overflow-x:auto"><table class="reftable">
-    <tr><th>Equipment category</th><th>HS heading</th><th>Description</th></tr>
+    <tr><th scope="col">Equipment category</th><th scope="col">HS heading</th><th scope="col">Description</th></tr>
     <tr><td>Transformers</td><td>8504</td><td>Electrical transformers, static converters, and inductors</td></tr>
     <tr><td>Switchgear &gt;1000V</td><td>8535</td><td>Electrical apparatus for switching/protecting circuits, voltage &gt;1000V</td></tr>
     <tr><td>Switchgear/breakers &le;1000V</td><td>8536</td><td>Electrical apparatus for switching/protecting circuits, voltage &le;1000V</td></tr>
@@ -607,7 +607,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2 id="compliance-marks">Compliance Mark Quick-Reference</h2>
   <p>Buyers often treat these marks as interchangeable — they aren't. Some are independent third-party certifications; one is a manufacturer's own self-declaration.</p>
   <div style="overflow-x:auto"><table class="reftable">
-    <tr><th>Mark</th><th>Issued by</th><th>What it actually means</th></tr>
+    <tr><th scope="col">Mark</th><th scope="col">Issued by</th><th scope="col">What it actually means</th></tr>
     <tr><td>UL Listed</td><td>UL (Underwriters Laboratories)</td><td>Third-party safety testing and certification to a US standard — the most common NRTL mark in North America.</td></tr>
     <tr><td>ETL Listed</td><td>Intertek</td><td>An equivalent third-party NRTL certification to UL, testing against the same underlying US safety standards.</td></tr>
     <tr><td>cULus</td><td>UL</td><td>Certifies compliance with both US and Canadian safety standards in a single mark.</td></tr>
@@ -1079,7 +1079,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const cls=document.getElementById('macrsClass').value;
     if(!(cost>0)){r.textContent='Enter equipment cost.';r.className='est-result show';return;}
     const pcts=MACRS_PCT[cls];
-    let rows='<div style="overflow-x:auto"><table class="reftable" style="margin-top:8px"><tr><th>Year</th><th>%</th><th>Deduction</th></tr>';
+    let rows='<div style="overflow-x:auto"><table class="reftable" style="margin-top:8px"><tr><th scope="col">Year</th><th scope="col">%</th><th scope="col">Deduction</th></tr>';
     let total=0;
     pcts.forEach((p,i)=>{
       const amt=cost*p/100;

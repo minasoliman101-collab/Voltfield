@@ -1953,6 +1953,10 @@
     let phi = o.phi != null ? o.phi : 1.15;
     let radius = o.radius != null ? o.radius : 5.6;
     let autoRotate = o.autoRotate !== false, dragging = false, lastX = 0, lastY = 0;
+    /* Content that moves on its own is a barrier for some viewers, and the
+       platform already carries the answer as a user preference. Honoured here
+       rather than per caller so no mount can forget it. */
+    try { if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) autoRotate = false; } catch (e) {}
     const minPhi = 0.35, maxPhi = Math.PI - 0.35;
     const minR = o.minR != null ? o.minR : 2.6, maxR = o.maxR != null ? o.maxR : 9;
     const zoomStep = (maxR - minR) / 1800;
@@ -2025,6 +2029,33 @@
       else if (pts.size === 0) dragging = false;
     }
 
+    /* Keyboard equivalents for every mouse/touch gesture above. Without these
+       the model is reachable but inert for anyone not using a pointer, and the
+       auto-rotation has no way to be stopped -- moving content that cannot be
+       paused is its own barrier. Space/Enter is that pause. */
+    const KEY_ROT = 0.12, KEY_ZOOM = 0.12;
+    function key(e){
+      if (e.altKey || e.ctrlKey || e.metaKey) return;
+      let used = true;
+      switch (e.key) {
+        case 'ArrowLeft':  autoRotate = false; theta += KEY_ROT; break;
+        case 'ArrowRight': autoRotate = false; theta -= KEY_ROT; break;
+        case 'ArrowUp':    autoRotate = false; phi = Math.max(minPhi, phi - KEY_ROT); break;
+        case 'ArrowDown':  autoRotate = false; phi = Math.min(maxPhi, phi + KEY_ROT); break;
+        case '+': case '=': e.preventDefault(); setR(radius - (maxR - minR) * KEY_ZOOM); return;
+        case '-': case '_': e.preventDefault(); setR(radius + (maxR - minR) * KEY_ZOOM); return;
+        case 'Home': e.preventDefault(); autoRotate = false; theta = o.theta != null ? o.theta : 0.9;
+                        phi = o.phi != null ? o.phi : 1.15;
+                        setR(o.radius != null ? o.radius : 5.6); return;
+        case ' ': case 'Spacebar': case 'Enter': autoRotate = !autoRotate; break;
+        default: used = false;
+      }
+      if (!used) return;
+      e.preventDefault();
+      apply();
+    }
+
+    dom.addEventListener('keydown', key);
     dom.addEventListener('pointerdown', pdown);
     dom.addEventListener('pointermove', pmove);
     dom.addEventListener('pointerup', pup);
@@ -2040,6 +2071,7 @@
         dom.removeEventListener('pointerup', pup);
         dom.removeEventListener('pointercancel', pup);
         dom.removeEventListener('wheel', wheel);
+        dom.removeEventListener('keydown', key);
         pts.clear();
       }
     };
@@ -2145,6 +2177,10 @@
     const merged = {};
     for (const k in hint) merged[k] = hint[k];
     if (opts) for (const k in opts) merged[k] = opts[k];
+    /* The shape id is the only description of the subject this entry point
+       receives, so it becomes the accessible name unless a caller supplies a
+       better one: "pad-mount-transformer" reads as "pad mount transformer". */
+    if (merged.label == null) merged.label = String(shapeId || '').replace(/[-_]+/g, ' ').trim() || 'power equipment';
     return VF3D.mountScene(container, function(THREE){
       return resolveBuilder(shapeId)(THREE, color);
     }, merged);
@@ -2188,6 +2224,33 @@
       renderer.setSize(w,h);
       renderer.setClearColor(0x000000, 0);
       renderer.domElement.style.cssText = 'width:100%;height:100%;display:block;touch-action:none;cursor:grab';
+
+      /* A bare <canvas> is a blank element to a screen reader: no name, no role,
+         nothing to announce, and until now nothing to operate without a pointer.
+         role="img" plus a name makes it an image with a text alternative, which
+         is what it is for anyone not dragging it; the description names the keys
+         attachOrbit binds, so the interaction is discoverable rather than
+         something you have to guess at. The spec table on the page carries the
+         actual figures -- this view is a supplement to it, not the only copy. */
+      (function(){
+        const cvs = renderer.domElement;
+        const name = o.label || container.getAttribute('data-label') || 'power equipment';
+        cvs.setAttribute('role', 'img');
+        cvs.setAttribute('aria-label', '3D model of ' + name);
+        cvs.tabIndex = 0;
+        let help = document.getElementById('vf3d-help');
+        if (!help) {
+          help = document.createElement('p');
+          help.id = 'vf3d-help';
+          help.className = 'vf-sr-only';
+          help.textContent = 'Interactive 3D view. Arrow keys rotate the model, ' +
+            'plus and minus zoom, Home resets the view, and Space starts or stops ' +
+            'the automatic rotation. The specifications shown elsewhere on this ' +
+            'page do not depend on this view.';
+          document.body.appendChild(help);
+        }
+        cvs.setAttribute('aria-describedby', 'vf3d-help');
+      })();
 
       /* Filmic response instead of the default clip. Without it the specular
          highlights the environment map introduces blow straight out to white. */

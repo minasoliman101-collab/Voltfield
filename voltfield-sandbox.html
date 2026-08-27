@@ -252,27 +252,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <button type="button" id="dailyBtn">Start today's challenge</button>
   </div>
 
-  <div class="modebar" role="tablist">
-    <button type="button" id="modeFreeBtn" class="on" role="tab" aria-selected="true">Free Design</button>
-    <button type="button" id="modeChalBtn" role="tab" aria-selected="false">Challenge Mode</button>
+  <div class="modebar" role="group" aria-label="Design mode">
+    <button type="button" id="modeFreeBtn" class="on" aria-pressed="true">Free Design</button>
+    <button type="button" id="modeChalBtn" aria-pressed="false">Challenge Mode</button>
   </div>
 
   <div class="scenariobar" id="scenarioBar">
     <div class="progressbadge" id="progressBadge"></div>
-    <select id="scenarioSel"></select>
+    <select id="scenarioSel" aria-label="Choose a scenario"></select>
     <div class="prompt" id="scenarioPrompt"></div>
   </div>
 
   <div class="viewtabs" role="tablist" aria-label="Circuit view">
-    <button type="button" id="tabLine" role="tab" aria-selected="true" class="on">One-line</button>
-    <button type="button" id="tabSb3d" role="tab" aria-selected="false">3D view</button>
+    <button type="button" id="tabLine" role="tab" aria-selected="true" aria-controls="onelineWrap" class="on">One-line</button>
+    <button type="button" id="tabSb3d" role="tab" aria-selected="false" aria-controls="sb3dPane">3D view</button>
   </div>
 
-  <div class="oneline" id="onelineWrap"><svg id="onelineSvg" viewBox="0 0 900 190" xmlns="http://www.w3.org/2000/svg"></svg></div>
+  <div class="oneline" id="onelineWrap" role="tabpanel" aria-labelledby="tabLine"><svg id="onelineSvg" viewBox="0 0 900 190" xmlns="http://www.w3.org/2000/svg"></svg></div>
 
-  <div id="sb3dPane" hidden>
+  <div id="sb3dPane" role="tabpanel" aria-labelledby="tabSb3d" hidden>
     <div class="sb3d" id="sb3d"></div>
-    <p class="sb3dhint">Drag to rotate &middot; scroll to zoom &middot; equipment appears as you place tiles</p>
+    <p class="sb3dhint">Drag or arrow keys to rotate &middot; pinch, scroll or +/&minus; to zoom &middot; equipment appears as you place tiles</p>
   </div>
 
   <div class="board" id="boardMount"></div>
@@ -1026,7 +1026,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
   function showSubmitPrompt(scenarioId,timeMs){
     const card=$('leaderboardCard');
-    const submitHtml=`<div class="lb-submit"><input type="text" id="lbNameInput" placeholder="Your name (optional)" maxlength="24"><button type="button" id="lbSubmitBtn">Submit my time (${fmtTime(timeMs)})</button></div>`;
+    const submitHtml=`<div class="lb-submit"><input type="text" id="lbNameInput" aria-label="Your name for the leaderboard, optional" placeholder="Your name (optional)" maxlength="24"><button type="button" id="lbSubmitBtn">Submit my time (${fmtTime(timeMs)})</button></div>`;
     card.dataset.submitHtml=submitHtml;
     card.style.display='';
     if(!card.innerHTML.includes('lb-submit')) card.innerHTML=submitHtml+card.innerHTML;
@@ -1081,8 +1081,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     mode=m;
     $('modeFreeBtn').classList.toggle('on',m==='free');
     $('modeChalBtn').classList.toggle('on',m==='challenge');
-    $('modeFreeBtn').setAttribute('aria-selected',m==='free');
-    $('modeChalBtn').setAttribute('aria-selected',m==='challenge');
+    $('modeFreeBtn').setAttribute('aria-pressed',m==='free'?'true':'false');
+    $('modeChalBtn').setAttribute('aria-pressed',m==='challenge'?'true':'false');
     $('scenarioBar').classList.toggle('show',m==='challenge');
     $('exampleWrap').style.display=m==='challenge'?'none':'';
     $('revealWrap').style.display=(m==='challenge'&&SCEN[scenarioIdx].fix)?'':'none';

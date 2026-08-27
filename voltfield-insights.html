@@ -138,8 +138,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      submission (see script below) is an AJAX POST to "/" with a matching form-name. -->
 <form name="insights-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="hidden-field" aria-hidden="true">
   <input type="hidden" name="form-name" value="insights-updates">
-  <input name="bot-field">
-  <input type="email" name="email">
+  <input tabindex="-1" name="bot-field">
+  <input tabindex="-1" type="email" name="email">
 </form>
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield home">
@@ -272,7 +272,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h3>Get new guides &amp; tools by email</h3>
     <p>A short note whenever we publish a new guide, calculator, or reference tool — not a general newsletter, just new Insights content. Unsubscribe anytime.</p>
     <form id="insightsForm" class="alertform">
-      <input type="email" id="insightsEmail" placeholder="you@company.com" required>
+      <input type="email" id="insightsEmail" placeholder="you@company.com" required aria-label="Your email address">
       <button type="submit" id="insightsBtn">Subscribe</button>
     </form>
     <div class="alert-msg" id="insightsMsg"></div>
@@ -311,12 +311,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="ipanel">
       <h2>Longest lead-time families</h2>
       <div class="sub">Where the schedule risk sits</div>
-      <table class="ins"><thead><tr><th>Family</th><th>Sector</th><th class="r">Lead</th></tr></thead><tbody id="leadTable"></tbody></table>
+      <table class="ins"><thead><tr><th scope="col">Family</th><th scope="col">Sector</th><th scope="col" class="r">Lead</th></tr></thead><tbody id="leadTable"></tbody></table>
     </div>
     <div class="ipanel">
       <h2>Coverage by sector</h2>
       <div class="sub">Families, categories and configurations per sector</div>
-      <table class="ins"><thead><tr><th>Sector</th><th class="r">Families</th><th class="r">Categories</th><th class="r">Configurations</th></tr></thead><tbody id="covTable"></tbody></table>
+      <table class="ins"><thead><tr><th scope="col">Sector</th><th scope="col" class="r">Families</th><th scope="col" class="r">Categories</th><th scope="col" class="r">Configurations</th></tr></thead><tbody id="covTable"></tbody></table>
     </div>
   </div>
 </div>

@@ -191,38 +191,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h2>1 · Board specification</h2>
     <div class="fgrid" id="form">
       <div class="secthead">Geometry</div>
-      <div class="frow"><label>Board name / silkscreen label</label><input type="text" id="pName" maxlength="24" value="VF-BOARD-01"></div>
-      <div class="frow"><label>Shape</label><div class="seg" data-k="shape"><button data-v="rect">Rect</button><button data-v="rounded">Rounded</button><button data-v="circle">Circle</button></div></div>
-      <div class="frow"><label>Width × height (mm)</label><div class="dims"><input type="number" id="pW" min="10" max="500" value="100"><span>×</span><input type="number" id="pH" min="10" max="500" value="80"></div></div>
-      <div class="frow"><label>Board thickness</label><select id="pThk"><option>0.8 mm</option><option>1.0 mm</option><option selected>1.6 mm</option><option>2.0 mm</option><option>2.4 mm</option></select></div>
+      <div class="frow"><label for="pName">Board name / silkscreen label</label><input type="text" id="pName" maxlength="24" value="VF-BOARD-01"></div>
+      <div class="frow"><label id="seglbl-shape">Shape</label><div class="seg" role="group" aria-labelledby="seglbl-shape" data-k="shape"><button data-v="rect">Rect</button><button data-v="rounded">Rounded</button><button data-v="circle">Circle</button></div></div>
+      <div class="frow"><label>Width × height (mm)</label><div class="dims"><input type="number" id="pW" min="10" max="500" value="100" aria-label="Board width in millimetres"><span>×</span><input type="number" id="pH" min="10" max="500" value="80" aria-label="Board height in millimetres"></div></div>
+      <div class="frow"><label for="pThk">Board thickness</label><select id="pThk"><option>0.8 mm</option><option>1.0 mm</option><option selected>1.6 mm</option><option>2.0 mm</option><option>2.4 mm</option></select></div>
       <div class="secthead">Stack-up &amp; material</div>
-      <div class="frow"><label>Layers</label><div class="seg" data-k="layers"><button data-v="1">1</button><button data-v="2">2</button><button data-v="4">4</button><button data-v="6">6</button><button data-v="8">8</button></div></div>
-      <div class="frow"><label>Material</label><select id="pMat"><option value="fr4">FR-4 (Tg 140)</option><option value="fr4h">High-Tg FR-4 (Tg 170)</option><option value="alu">Aluminum MCPCB</option><option value="rog">Rogers 4350B-class</option><option value="flex">Flex polyimide</option></select></div>
-      <div class="frow"><label>Outer copper weight</label><select id="pCu"><option value="1">1 oz</option><option value="2">2 oz</option><option value="3">3 oz</option></select></div>
-      <div class="frow"><label>Surface finish</label><select id="pFin"><option value="hasl">HASL (Sn-Pb)</option><option value="lfh" selected>Lead-free HASL</option><option value="enig">ENIG</option><option value="iag">Immersion silver</option><option value="enepig">ENEPIG</option></select></div>
+      <div class="frow"><label id="seglbl-layers">Layers</label><div class="seg" role="group" aria-labelledby="seglbl-layers" data-k="layers"><button data-v="1">1</button><button data-v="2">2</button><button data-v="4">4</button><button data-v="6">6</button><button data-v="8">8</button></div></div>
+      <div class="frow"><label for="pMat">Material</label><select id="pMat"><option value="fr4">FR-4 (Tg 140)</option><option value="fr4h">High-Tg FR-4 (Tg 170)</option><option value="alu">Aluminum MCPCB</option><option value="rog">Rogers 4350B-class</option><option value="flex">Flex polyimide</option></select></div>
+      <div class="frow"><label for="pCu">Outer copper weight</label><select id="pCu"><option value="1">1 oz</option><option value="2">2 oz</option><option value="3">3 oz</option></select></div>
+      <div class="frow"><label for="pFin">Surface finish</label><select id="pFin"><option value="hasl">HASL (Sn-Pb)</option><option value="lfh" selected>Lead-free HASL</option><option value="enig">ENIG</option><option value="iag">Immersion silver</option><option value="enepig">ENEPIG</option></select></div>
       <div class="secthead">Appearance</div>
       <div class="frow"><label>Solder mask</label><div class="swatches" id="maskSw"></div></div>
-      <div class="frow"><label>Silkscreen</label><div class="seg" data-k="silk"><button data-v="white">White</button><button data-v="black">Black</button><button data-v="none">None</button></div></div>
+      <div class="frow"><label id="seglbl-silk">Silkscreen</label><div class="seg" role="group" aria-labelledby="seglbl-silk" data-k="silk"><button data-v="white">White</button><button data-v="black">Black</button><button data-v="none">None</button></div></div>
       <div class="secthead">Tolerances &amp; drilling</div>
-      <div class="frow"><label>Min trace / space</label><select id="pTr"><option value="6">6 / 6 mil</option><option value="5">5 / 5 mil</option><option value="4">4 / 4 mil</option><option value="35">3.5 / 3.5 mil</option></select></div>
-      <div class="frow"><label>Min hole size</label><select id="pHole"><option value="30">0.30 mm</option><option value="25">0.25 mm</option><option value="20">0.20 mm</option><option value="15">0.15 mm</option></select></div>
-      <div class="frow"><label>Via structure</label><select id="pVia"><option value="th">Through-hole only</option><option value="blind">+ Blind vias</option><option value="bb">+ Blind &amp; buried</option></select></div>
-      <div class="frow"><label>Controlled impedance</label><div class="seg" data-k="imp"><button data-v="no">No</button><button data-v="yes">Yes (+12%)</button></div></div>
+      <div class="frow"><label for="pTr">Min trace / space</label><select id="pTr"><option value="6">6 / 6 mil</option><option value="5">5 / 5 mil</option><option value="4">4 / 4 mil</option><option value="35">3.5 / 3.5 mil</option></select></div>
+      <div class="frow"><label for="pHole">Min hole size</label><select id="pHole"><option value="30">0.30 mm</option><option value="25">0.25 mm</option><option value="20">0.20 mm</option><option value="15">0.15 mm</option></select></div>
+      <div class="frow"><label for="pVia">Via structure</label><select id="pVia"><option value="th">Through-hole only</option><option value="blind">+ Blind vias</option><option value="bb">+ Blind &amp; buried</option></select></div>
+      <div class="frow"><label id="seglbl-imp">Controlled impedance</label><div class="seg" role="group" aria-labelledby="seglbl-imp" data-k="imp"><button data-v="no">No</button><button data-v="yes">Yes (+12%)</button></div></div>
       <div class="secthead">Assembly (PCBA)</div>
-      <div class="frow"><label>Assembly service</label><div class="seg" data-k="asm"><button data-v="no">Bare board</button><button data-v="yes">Fab + assembly</button></div></div>
-      <div class="frow asmf"><label>Sides</label><div class="seg" data-k="sides"><button data-v="1">Top only</button><button data-v="2">Double-sided</button></div></div>
-      <div class="frow asmf"><label>Unique parts (BOM lines)</label><input type="number" id="aLines" min="1" max="500" value="25"></div>
-      <div class="frow asmf"><label>SMT placements / board</label><input type="number" id="aSmt" min="0" max="5000" value="120"></div>
-      <div class="frow asmf"><label>Through-hole joints / board</label><input type="number" id="aTh" min="0" max="1000" value="12"></div>
-      <div class="frow asmf"><label>BGA / fine-pitch parts / board</label><input type="number" id="aBga" min="0" max="100" value="0"></div>
-      <div class="frow asmf"><label>Component sourcing</label><div class="seg" data-k="src"><button data-v="turnkey">Turnkey (we buy)</button><button data-v="consigned">Consigned (you supply)</button></div></div>
+      <div class="frow"><label id="seglbl-asm">Assembly service</label><div class="seg" role="group" aria-labelledby="seglbl-asm" data-k="asm"><button data-v="no">Bare board</button><button data-v="yes">Fab + assembly</button></div></div>
+      <div class="frow asmf"><label id="seglbl-sides">Sides</label><div class="seg" role="group" aria-labelledby="seglbl-sides" data-k="sides"><button data-v="1">Top only</button><button data-v="2">Double-sided</button></div></div>
+      <div class="frow asmf"><label for="aLines">Unique parts (BOM lines)</label><input type="number" id="aLines" min="1" max="500" value="25"></div>
+      <div class="frow asmf"><label for="aSmt">SMT placements / board</label><input type="number" id="aSmt" min="0" max="5000" value="120"></div>
+      <div class="frow asmf"><label for="aTh">Through-hole joints / board</label><input type="number" id="aTh" min="0" max="1000" value="12"></div>
+      <div class="frow asmf"><label for="aBga">BGA / fine-pitch parts / board</label><input type="number" id="aBga" min="0" max="100" value="0"></div>
+      <div class="frow asmf"><label id="seglbl-src">Component sourcing</label><div class="seg" role="group" aria-labelledby="seglbl-src" data-k="src"><button data-v="turnkey">Turnkey (we buy)</button><button data-v="consigned">Consigned (you supply)</button></div></div>
       <div class="frow asmf full"><label>BOM file (CSV/XLSX — CSVs are auto-read to fill line &amp; placement counts)</label>
         <div class="filelbl"><label class="filepick" for="aBom">Attach BOM</label><input type="file" id="aBom" accept=".csv,.txt,.xlsx,.xls"><span class="filename" id="bomName">No BOM attached — counts can be entered manually above.</span></div>
       </div>
       <div class="secthead">Order</div>
-      <div class="frow"><label>Quantity (boards)</label><input type="number" id="pQty" min="5" max="100000" value="100"></div>
-      <div class="frow"><label>Lead time</label><div class="seg" data-k="lead"><button data-v="std">Standard</button><button data-v="exp">Expedited (+60%)</button></div></div>
-      <div class="frow"><label>SMT stencil</label><div class="seg" data-k="sten"><button data-v="no">No</button><button data-v="yes">Yes (+$45)</button></div></div>
+      <div class="frow"><label for="pQty">Quantity (boards)</label><input type="number" id="pQty" min="5" max="100000" value="100"></div>
+      <div class="frow"><label id="seglbl-lead">Lead time</label><div class="seg" role="group" aria-labelledby="seglbl-lead" data-k="lead"><button data-v="std">Standard</button><button data-v="exp">Expedited (+60%)</button></div></div>
+      <div class="frow"><label id="seglbl-sten">SMT stencil</label><div class="seg" role="group" aria-labelledby="seglbl-sten" data-k="sten"><button data-v="no">No</button><button data-v="yes">Yes (+$45)</button></div></div>
       <div class="frow full"><label>Gerber / ODB++ package (goes with your RFQ for DFM review)</label>
         <div class="filelbl"><label class="filepick" for="pGerber">Attach file</label><input type="file" id="pGerber" accept=".zip,.rar,.7z,.gbr,.tgz"><span class="filename" id="gerberName">No file attached — you can also send it with the RFQ email.</span></div>
       </div>
@@ -244,7 +244,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="prevpanel">
       <h2 style="font-size:18px">3 · Quantity price breaks</h2>
-      <table class="breaks"><thead><tr><th>Qty</th><th>Per board</th><th>Total w/ NRE</th></tr></thead><tbody id="breaksBody"></tbody></table>
+      <table class="breaks"><thead><tr><th scope="col">Qty</th><th scope="col">Per board</th><th scope="col">Total w/ NRE</th></tr></thead><tbody id="breaksBody"></tbody></table>
     </div>
     <div class="actions">
       <button class="btn dark" id="printBtn">Print spec sheet</button>
@@ -349,17 +349,21 @@ const BREAKS=[10,25,50,100,250,500,1000];
 const S={shape:'rounded',layers:'2',silk:'white',imp:'no',lead:'std',sten:'no',mask:'green',asm:'no',sides:'1',src:'turnkey'};
 
 /* segmented controls */
+/* .on is a purely visual state. aria-pressed is that same fact in the form a
+   screen reader can report, so the two are always written together rather than
+   left to drift apart at the four call sites that toggle them. */
+function segPress(el,on){el.classList.toggle("on",!!on);el.setAttribute("aria-pressed",on?"true":"false");}
 document.querySelectorAll('.seg').forEach(seg=>{
   const k=seg.dataset.k;
   seg.querySelectorAll('button').forEach(b=>{
-    if(b.dataset.v===S[k])b.classList.add('on');
-    b.onclick=()=>{S[k]=b.dataset.v;seg.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));update();};
+    segPress(b, b.dataset.v===S[k]);
+    b.onclick=()=>{S[k]=b.dataset.v;seg.querySelectorAll('button').forEach(x=>segPress(x,x===b));update();};
   });
 });
 /* mask swatches */
 MASKS.forEach(([name,hex])=>{
-  const d=document.createElement('button');d.className='sw'+(S.mask===name?' on':'');d.style.background=hex;d.title=name;d.setAttribute('aria-label','Mask '+name);
-  d.onclick=()=>{S.mask=name;document.querySelectorAll('#maskSw .sw').forEach(x=>x.classList.toggle('on',x===d));update();};
+  const d=document.createElement('button');d.className='sw'+(S.mask===name?' on':'');d.style.background=hex;d.title=name;d.setAttribute('aria-label','Mask '+name);d.setAttribute('aria-pressed',S.mask===name?'true':'false');
+  d.onclick=()=>{S.mask=name;document.querySelectorAll('#maskSw .sw').forEach(x=>segPress(x,x===d));update();};
   $('maskSw').appendChild(d);
 });
 ['pName','pW','pH','pThk','pMat','pCu','pFin','pTr','pHole','pVia','pQty','aLines','aSmt','aTh','aBga'].forEach(id=>{$(id).addEventListener('input',update);$(id).addEventListener('change',update);});
@@ -560,8 +564,8 @@ function loadURL(){
   if(P.get('via'))$('pVia').value=P.get('via');
   if(P.get('q'))$('pQty').value=P.get('q');
   if(P.get('nm'))$('pName').value=P.get('nm');
-  document.querySelectorAll('.seg').forEach(seg=>{const k=seg.dataset.k;seg.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===S[k]));});
-  document.querySelectorAll('#maskSw .sw').forEach(x=>x.classList.toggle('on',x.title===S.mask));
+  document.querySelectorAll('.seg').forEach(seg=>{const k=seg.dataset.k;seg.querySelectorAll('button').forEach(b=>segPress(b,b.dataset.v===S[k]));});
+  document.querySelectorAll('#maskSw .sw').forEach(x=>segPress(x,x.title===S.mask));
 }
 $('printBtn').onclick=()=>window.print();
 $('copyBtn').onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(location.href).then(()=>toast('Config link copied'),()=>toast('Copy failed'));};

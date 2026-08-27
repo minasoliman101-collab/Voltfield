@@ -155,15 +155,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      these same field names. -->
 <form name="lead-time-alerts" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="hidden-field" aria-hidden="true">
   <input type="hidden" name="form-name" value="lead-time-alerts">
-  <input name="bot-field">
-  <input type="email" name="email"><input type="text" name="sectors">
+  <input tabindex="-1" name="bot-field">
+  <input tabindex="-1" type="email" name="email"><input tabindex="-1" type="text" name="sectors">
 </form>
 <!-- Static Netlify Forms detector for the crowdsourced submission form below. -->
 <form name="lead-time-submission" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="hidden-field" aria-hidden="true">
   <input type="hidden" name="form-name" value="lead-time-submission">
-  <input name="bot-field">
-  <input type="text" name="equipment"><input type="text" name="observed_lead_time"><input type="text" name="region">
-  <input type="text" name="observed_date"><input type="email" name="email"><input type="text" name="company"><textarea name="notes"></textarea>
+  <input tabindex="-1" name="bot-field">
+  <input tabindex="-1" type="text" name="equipment"><input tabindex="-1" type="text" name="observed_lead_time"><input tabindex="-1" type="text" name="region">
+  <input tabindex="-1" type="text" name="observed_date"><input tabindex="-1" type="email" name="email"><input tabindex="-1" type="text" name="company"><textarea tabindex="-1" name="notes"></textarea>
 </form>
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield home">
@@ -258,7 +258,7 @@ https://voltfield.org/lead-time-index.html</pre>
     <h3>Get lead-time alerts</h3>
     <p>We'll email you when a lead time or price range you're tracking actually moves — not a general newsletter, just changes to this index.</p>
     <form id="alertForm" class="alertform">
-      <input type="email" id="alertEmail" placeholder="you@company.com" required>
+      <input type="email" id="alertEmail" placeholder="you@company.com" required aria-label="Your email address for lead-time alerts">
       <div class="sectors">
         <label><input type="checkbox" value="dc" checked> Data Centers</label>
         <label><input type="checkbox" value="re" checked> Renewables</label>
@@ -273,7 +273,7 @@ https://voltfield.org/lead-time-index.html</pre>
   <h2>Data Centers</h2>
   <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--dc)">
     <caption>Data Center Power &amp; Backup Equipment</caption>
-    <thead><tr><th>Equipment</th><th>Current lead time / price</th><th>Trend</th><th>Basis</th></tr></thead>
+    <thead><tr><th scope="col">Equipment</th><th scope="col">Current lead time / price</th><th scope="col">Trend</th><th scope="col">Basis</th></tr></thead>
     <tbody>
       <tr><td>Large power transformers</td><td class="val">160 wk</td><td class="trend-up">&#9650; Lengthening</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
       <tr><td>Pad-mount transformers</td><td class="val">85 wk</td><td class="trend-up">&#9650; Lengthening</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
@@ -287,7 +287,7 @@ https://voltfield.org/lead-time-index.html</pre>
   <h2>Renewables</h2>
   <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--re)">
     <caption>Solar, Wind &amp; Hybrid Equipment</caption>
-    <thead><tr><th>Equipment</th><th>Current lead time / price</th><th>Trend</th><th>Basis</th></tr></thead>
+    <thead><tr><th scope="col">Equipment</th><th scope="col">Current lead time / price</th><th scope="col">Trend</th><th scope="col">Basis</th></tr></thead>
     <tbody>
       <tr><td>GSU transformers</td><td class="val">144 wk</td><td class="trend-up">&#9650; Lengthening</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
       <tr><td>Grid-forming PCS</td><td class="val">32 wk</td><td class="trend-flat">&#9632; Holding</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
@@ -299,7 +299,7 @@ https://voltfield.org/lead-time-index.html</pre>
   <h2>Battery Storage</h2>
   <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--bess)">
     <caption>Utility-Scale BESS Equipment</caption>
-    <thead><tr><th>Equipment</th><th>Current lead time / price</th><th>Trend</th><th>Basis</th></tr></thead>
+    <thead><tr><th scope="col">Equipment</th><th scope="col">Current lead time / price</th><th scope="col">Trend</th><th scope="col">Basis</th></tr></thead>
     <tbody>
       <tr><td>LFP DC blocks</td><td class="val">$110–140/kWh</td><td class="trend-down">&#9660; Falling</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
     </tbody>
@@ -308,7 +308,7 @@ https://voltfield.org/lead-time-index.html</pre>
   <h2>Oil &amp; Gas</h2>
   <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--og)">
     <caption>Drilling &amp; Completions Equipment</caption>
-    <thead><tr><th>Equipment</th><th>Current lead time / price</th><th>Trend</th><th>Basis</th></tr></thead>
+    <thead><tr><th scope="col">Equipment</th><th scope="col">Current lead time / price</th><th scope="col">Trend</th><th scope="col">Basis</th></tr></thead>
     <tbody>
       <tr><td>Drill pipe (S-135)</td><td class="val">34 wk</td><td class="trend-flat">&#9632; Holding</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
       <tr><td>Frac valves</td><td class="val">24 wk</td><td class="trend-down">&#9660; Falling</td><td><span class="basis basis-modeled">Modeled</span></td></tr>
@@ -320,10 +320,10 @@ https://voltfield.org/lead-time-index.html</pre>
     <h3>Seeing a different lead time on your own orders?</h3>
     <p>This index is compiled from published market data — if you are a buyer or distributor seeing a materially different lead time on a category above, tell us. Submissions are reviewed before anything is added to the public index; this isn't an automatic feed.</p>
     <form id="submitForm" class="alertform">
-      <input type="text" id="submitEquipment" placeholder="Equipment (e.g. Pad-mount transformers)" required style="flex:1 1 220px">
-      <input type="text" id="submitLeadTime" placeholder="Observed lead time (e.g. 95 wk)" required style="flex:1 1 180px">
-      <input type="text" id="submitRegion" placeholder="Region (e.g. Texas, US)" style="flex:1 1 160px">
-      <input type="email" id="submitEmail" placeholder="you@company.com (for follow-up)" required style="flex:1 1 220px">
+      <input type="text" id="submitEquipment" aria-label="Equipment category" placeholder="Equipment (e.g. Pad-mount transformers)" required style="flex:1 1 220px">
+      <input type="text" id="submitLeadTime" aria-label="Lead time you observed" placeholder="Observed lead time (e.g. 95 wk)" required style="flex:1 1 180px">
+      <input type="text" id="submitRegion" aria-label="Region" placeholder="Region (e.g. Texas, US)" style="flex:1 1 160px">
+      <input type="email" id="submitEmail" aria-label="Your email address, for follow-up" placeholder="you@company.com (for follow-up)" required style="flex:1 1 220px">
       <button type="submit" id="submitBtn">Submit for review</button>
     </form>
     <div class="alert-msg" id="submitMsg"></div>
@@ -336,7 +336,7 @@ https://voltfield.org/lead-time-index.html</pre>
   <h3>Data Centers</h3>
   <p class="ltsub">50 families &middot; 4 to 180 weeks</p>
   <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--dc)">
-    <thead><tr><th>Equipment family</th><th>Category</th><th>Indicative lead time</th></tr></thead>
+    <thead><tr><th scope="col">Equipment family</th><th scope="col">Category</th><th scope="col">Indicative lead time</th></tr></thead>
     <tbody>
       <tr><td><a href="/parts/gas-turbine-generators.html">Gas Turbine Generators</a></td><td>Backup Power</td><td><span class="lt long">180 wk</span></td></tr>
       <tr><td><a href="/parts/large-power-transformers.html">Large Power Transformers</a></td><td>Transformers</td><td><span class="lt long">160 wk</span></td></tr>
@@ -393,7 +393,7 @@ https://voltfield.org/lead-time-index.html</pre>
   <h3>Renewables</h3>
   <p class="ltsub">42 families &middot; 2 to 144 weeks</p>
   <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--re)">
-    <thead><tr><th>Equipment family</th><th>Category</th><th>Indicative lead time</th></tr></thead>
+    <thead><tr><th scope="col">Equipment family</th><th scope="col">Category</th><th scope="col">Indicative lead time</th></tr></thead>
     <tbody>
       <tr><td><a href="/parts/gsu-transformers.html">GSU Transformers</a></td><td>GSU &amp; MV Transformers</td><td><span class="lt long">144 wk</span></td></tr>
       <tr><td><a href="/parts/collector-substation-transformers.html">Collector Substation Transformers</a></td><td>GSU &amp; MV Transformers</td><td><span class="lt long">120 wk</span></td></tr>
@@ -442,7 +442,7 @@ https://voltfield.org/lead-time-index.html</pre>
   <h3>Battery Storage</h3>
   <p class="ltsub">20 families &middot; 8 to 32 weeks</p>
   <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--bess)">
-    <thead><tr><th>Equipment family</th><th>Category</th><th>Indicative lead time</th></tr></thead>
+    <thead><tr><th scope="col">Equipment family</th><th scope="col">Category</th><th scope="col">Indicative lead time</th></tr></thead>
     <tbody>
       <tr><td><a href="/parts/grid-forming-pcs.html">Grid-Forming PCS</a></td><td>Power Conversion</td><td><span class="lt mid">32 wk</span></td></tr>
       <tr><td><a href="/parts/lfp-dc-blocks-5mwh.html">LFP DC Blocks (5MWh)</a></td><td>Storage Blocks</td><td><span class="lt mid">30 wk</span></td></tr>
@@ -469,7 +469,7 @@ https://voltfield.org/lead-time-index.html</pre>
   <h3>Oil &amp; Gas</h3>
   <p class="ltsub">33 families &middot; 2 to 36 weeks</p>
   <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--og)">
-    <thead><tr><th>Equipment family</th><th>Category</th><th>Indicative lead time</th></tr></thead>
+    <thead><tr><th scope="col">Equipment family</th><th scope="col">Category</th><th scope="col">Indicative lead time</th></tr></thead>
     <tbody>
       <tr><td><a href="/parts/bops-annular-ram.html">BOPs (Annular / Ram)</a></td><td>Pressure Control</td><td><span class="lt mid">36 wk</span></td></tr>
       <tr><td><a href="/parts/drill-pipe-s-135.html">Drill Pipe (S-135)</a></td><td>Tubulars</td><td><span class="lt mid">34 wk</span></td></tr>
@@ -509,7 +509,7 @@ https://voltfield.org/lead-time-index.html</pre>
   <h3>Industrial Supply (MRO)</h3>
   <p class="ltsub">90 families &middot; 1 to 8 weeks</p>
   <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--mro)">
-    <thead><tr><th>Equipment family</th><th>Category</th><th>Indicative lead time</th></tr></thead>
+    <thead><tr><th scope="col">Equipment family</th><th scope="col">Category</th><th scope="col">Indicative lead time</th></tr></thead>
     <tbody>
       <tr><td><a href="/parts/coils-and-heat-exchangers.html">Coils &amp; Heat Exchangers</a></td><td>HVAC &amp; Refrigeration</td><td><span class="lt short">8 wk</span></td></tr>
       <tr><td><a href="/parts/motor-repair-parts.html">Motor Repair Parts</a></td><td>Motors</td><td><span class="lt short">6 wk</span></td></tr>

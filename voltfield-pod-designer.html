@@ -219,9 +219,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="artwrap">
   <p class="note">This is a first-pass sizing sandbox, not a substitute for a licensed engineer's load study or short-circuit/coordination study. It assumes 480V three-phase distribution and a flat 0.85 power factor throughout — the same kind of simplification used by the <a href="engineering-calculators.html" style="color:var(--link)">Engineering Calculators</a> and the <a href="voltfield-sandbox.html" style="color:var(--link)">EE Practice Sandbox</a>.</p>
 
-  <div class="modebar" role="tablist">
-    <button type="button" id="modeFreeBtn" class="on" role="tab" aria-selected="true">Free Design</button>
-    <button type="button" id="modeChalBtn" role="tab" aria-selected="false">Challenge Mode</button>
+  <div class="modebar" role="group" aria-label="Design mode">
+    <button type="button" id="modeFreeBtn" class="on" aria-pressed="true">Free Design</button>
+    <button type="button" id="modeChalBtn" aria-pressed="false">Challenge Mode</button>
   </div>
 
   <div class="scenariobar" id="scenarioBar">
@@ -231,9 +231,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <div class="enclosurebar">
-    <div class="enctoggle" role="tablist" aria-label="Enclosure type">
-      <button type="button" id="encPodBtn" class="on" role="tab" aria-selected="true">POD (enclosed)</button>
-      <button type="button" id="encSkidBtn" role="tab" aria-selected="false">Skid (open frame)</button>
+    <div class="enctoggle" role="group" aria-label="Enclosure type">
+      <button type="button" id="encPodBtn" class="on" aria-pressed="true">POD (enclosed)</button>
+      <button type="button" id="encSkidBtn" aria-pressed="false">Skid (open frame)</button>
     </div>
     <select id="podSizeSel" aria-label="Enclosure size class">
       <option value="10">10 ft equivalent</option>
@@ -245,17 +245,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="vizhead">
     <div class="viewtabs" role="tablist" aria-label="Layout view">
-      <button type="button" id="tabFlow" role="tab" aria-selected="true" class="on">Single-line</button>
-      <button type="button" id="tabPod3d" role="tab" aria-selected="false">3D layout</button>
+      <button type="button" id="tabFlow" role="tab" aria-selected="true" aria-controls="flowPane" class="on">Single-line</button>
+      <button type="button" id="tabPod3d" role="tab" aria-selected="false" aria-controls="pod3dPane">3D layout</button>
     </div>
   </div>
 
-  <div id="pod3dPane" hidden>
+  <div id="pod3dPane" role="tabpanel" aria-labelledby="tabPod3d" hidden>
     <div class="pod3d" id="pod3d"></div>
-    <p class="p3dhint">Drag to rotate &middot; scroll to zoom &middot; only equipment you've selected appears</p>
+    <p class="p3dhint">Drag or arrow keys to rotate &middot; pinch, scroll or +/&minus; to zoom &middot; only equipment you've selected appears</p>
   </div>
 
-  <div class="diagram" id="flowPane" aria-hidden="true">
+  <div class="diagram" id="flowPane" role="tabpanel" aria-labelledby="tabFlow">
     <div class="diagram-row">
       <div class="dblock filled" id="dLoad"><span class="dl">Critical Load</span><span class="dv">—</span></div>
       <div class="darrow">&larr;</div>
@@ -457,9 +457,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   function setMode(m){
     mode=m;
     $('modeFreeBtn').classList.toggle('on', m==='free');
-    $('modeFreeBtn').setAttribute('aria-selected', m==='free'?'true':'false');
+    $('modeFreeBtn').setAttribute('aria-pressed', m==='free'?'true':'false');
     $('modeChalBtn').classList.toggle('on', m==='challenge');
-    $('modeChalBtn').setAttribute('aria-selected', m==='challenge'?'true':'false');
+    $('modeChalBtn').setAttribute('aria-pressed', m==='challenge'?'true':'false');
     $('scenarioBar').classList.toggle('show', m==='challenge');
     if(m==='challenge') loadScenario(scenarioIdx);
     $('checklist').classList.remove('show');
@@ -492,9 +492,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   function setEnclosure(e, fromScenario){
     enc=e;
     $('encPodBtn').classList.toggle('on', e==='pod');
-    $('encPodBtn').setAttribute('aria-selected', e==='pod'?'true':'false');
+    $('encPodBtn').setAttribute('aria-pressed', e==='pod'?'true':'false');
     $('encSkidBtn').classList.toggle('on', e==='skid');
-    $('encSkidBtn').setAttribute('aria-selected', e==='skid'?'true':'false');
+    $('encSkidBtn').setAttribute('aria-pressed', e==='skid'?'true':'false');
     $('podSizeSel').style.display = e==='pod' ? '' : 'none';
     $('encNote').textContent = e==='pod'
       ? 'Weatherproof enclosure — verify the IP/NEMA rating meets site environmental exposure.'

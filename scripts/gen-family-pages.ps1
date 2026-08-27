@@ -187,16 +187,16 @@ foreach ($f in $fams) {
 
   # ---- reference rows: only what exists ----
   $rows = ''
-  if ($band) { $rows += "          <tr><td><b>Indicative price band</b></td><td class=`"num`">$band$(if($f.pu){" <small>$(Esc $f.pu)</small>"})</td></tr>`r`n" }
+  if ($band) { $rows += "          <tr><th scope=`"row`">Indicative price band</th><td class=`"num`">$band$(if($f.pu){" <small>$(Esc $f.pu)</small>"})</td></tr>`r`n" }
   if ($f.lw -and $f.lw -gt 0) {
     # class names must match the shared stylesheet, which defines .lt.short /
     # .lt.mid / .lt.long (and their dark-mode variants) -- not ok/warn
     $ltClass = if ($f.lw -le 12) { 'short' } elseif ($f.lw -le 52) { 'mid' } else { 'long' }
-    $rows += "          <tr><td><b>Indicative lead time</b></td><td class=`"num`"><span class=`"lt $ltClass`">~$([int]$f.lw) weeks</span></td></tr>`r`n"
+    $rows += "          <tr><th scope=`"row`">Indicative lead time</th><td class=`"num`"><span class=`"lt $ltClass`">~$([int]$f.lw) weeks</span></td></tr>`r`n"
   }
-  $rows += "          <tr><td><b>Standards referenced</b></td><td class=`"num`">$((@($f.cmp | ForEach-Object { Esc $_ })) -join '<br>')</td></tr>`r`n"
-  $rows += "          <tr><td><b>Documented configurations</b></td><td class=`"num`">$($f.combos.ToString('N0'))</td></tr>`r`n"
-  $rows += "          <tr><td><b>Category</b></td><td class=`"num`">$cat</td></tr>`r`n"
+  $rows += "          <tr><th scope=`"row`">Standards referenced</th><td class=`"num`">$((@($f.cmp | ForEach-Object { Esc $_ })) -join '<br>')</td></tr>`r`n"
+  $rows += "          <tr><th scope=`"row`">Documented configurations</th><td class=`"num`">$($f.combos.ToString('N0'))</td></tr>`r`n"
+  $rows += "          <tr><th scope=`"row`">Category</th><td class=`"num`">$cat</td></tr>`r`n"
 
   # ---- related links ----
   $rel = "      <a href=`"/$($sec.page)`">$(Esc $sec.label)</a>`r`n"

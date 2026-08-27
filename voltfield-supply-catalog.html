@@ -255,8 +255,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      these same field names. -->
 <form name="request-a-part" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="hidden-field" aria-hidden="true">
   <input type="hidden" name="form-name" value="request-a-part">
-  <input name="bot-field">
-  <input type="email" name="email"><input type="text" name="company"><textarea name="part_description"></textarea>
+  <input tabindex="-1" name="bot-field">
+  <input tabindex="-1" type="email" name="email"><input tabindex="-1" type="text" name="company"><textarea tabindex="-1" name="part_description"></textarea>
 </form>
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield home">
@@ -365,11 +365,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p>Not in the catalog yet doesn't mean we can't get it. Tell us what you're looking for and we'll follow up with sourcing options.</p>
         <form id="reqPartForm">
           <label for="reqDesc">What are you looking for?</label>
-          <textarea id="reqDesc" required placeholder="e.g. 500kVA pad-mount transformer, 15kV class"></textarea>
+          <textarea id="reqDesc" required aria-label="What you are looking for" placeholder="e.g. 500kVA pad-mount transformer, 15kV class"></textarea>
           <label for="reqEmail">Email</label>
-          <input type="email" id="reqEmail" required placeholder="you@company.com">
+          <input type="email" id="reqEmail" required aria-label="Your email address" placeholder="you@company.com">
           <label for="reqCompany">Company (optional)</label>
-          <input type="text" id="reqCompany" placeholder="Company name">
+          <input type="text" id="reqCompany" aria-label="Company name" placeholder="Company name">
           <button type="submit" id="reqBtn">Send Request</button>
         </form>
         <div class="req-msg" id="reqMsg"></div>
@@ -380,10 +380,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 <div class="toast" id="toast"></div>
 <div class="modal-scrim" id="modalScrim"></div>
-<div class="detail-modal" id="detailModal" role="dialog" aria-modal="true" aria-label="Part detail"><div id="detailContent"></div></div>
+<div class="detail-modal" id="detailModal" role="dialog" aria-modal="true" aria-label="Part detail" tabindex="-1"><div id="detailContent"></div></div>
 <div class="comparebar" id="compareBar"></div>
 <div class="cmp-scrim" id="cmpScrim"></div>
-<div class="cmp-modal" id="cmpModal" role="dialog" aria-modal="true" aria-label="Compare parts">
+<div class="cmp-modal" id="cmpModal" role="dialog" aria-modal="true" aria-label="Compare parts" tabindex="-1">
   <div class="cmp-hd"><h3>Compare parts</h3><button id="cmpClose" aria-label="Close">&times;</button></div>
   <div id="cmpTableWrap" style="overflow-x:auto"></div>
 </div>
@@ -586,8 +586,40 @@ function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t
 
 /* ---------- detail + configurator modal ---------- */
 let MS=null;
-function openDetail(fi,seed){const f=FAM[fi];if(!f)return;const base=genSKU(f,seed);MS={f,picks:base.picks.slice(),chk:base.chk,qty:1};renderModal();document.getElementById('detailModal').classList.add('open');document.getElementById('modalScrim').classList.add('open');}
-function closeModal(){document.getElementById('detailModal').classList.remove('open');document.getElementById('modalScrim').classList.remove('open');}
+/* Dialog focus handling. A dialog that opens without moving focus leaves a
+   keyboard user behind the scrim, tabbing a page they can no longer see; one
+   that closes without restoring focus drops them back at the top of the
+   document having lost their place. Both dialogs on this page route through
+   here so they cannot drift apart. */
+var MODAL_RETURN=null;
+function modalFocusables(el){
+  return Array.prototype.filter.call(el.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])'),
+    function(n){return n.offsetWidth||n.offsetHeight||n.getClientRects().length;});
+}
+function modalOpen(el){
+  MODAL_RETURN=document.activeElement;
+  el.classList.add('open');
+  var f=modalFocusables(el);
+  (f[0]||el).focus();
+}
+function modalClose(el){
+  el.classList.remove('open');
+  if(MODAL_RETURN&&document.contains(MODAL_RETURN))MODAL_RETURN.focus();
+  MODAL_RETURN=null;
+}
+/* aria-modal tells assistive tech the rest of the page is inert; it does not
+   stop the Tab key, so the cycle is closed by hand. */
+document.addEventListener('keydown',function(e){
+  if(e.key!=='Tab')return;
+  var open=document.querySelector('.detail-modal.open,.cmp-modal.open');
+  if(!open)return;
+  var f=modalFocusables(open); if(!f.length)return;
+  var first=f[0],last=f[f.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+});
+function openDetail(fi,seed){const f=FAM[fi];if(!f)return;const base=genSKU(f,seed);MS={f,picks:base.picks.slice(),chk:base.chk,qty:1};renderModal();document.getElementById('modalScrim').classList.add('open');modalOpen(document.getElementById('detailModal'));}
+function closeModal(){document.getElementById('modalScrim').classList.remove('open');modalClose(document.getElementById('detailModal'));}
 function renderModal(){
   const {f,picks,chk,qty}=MS;
   const pn=configuredPN(f,picks,chk), price=priceFor(f,picks), lb=leadBadge(f), col=SECTORS[f.s].color;
@@ -609,7 +641,7 @@ function renderModal(){
       <div class="dm-facts">
         <div class="dm-price"><span>Indicative range</span><b>${band(f)}</b></div>
         <div><span>Lead time</span><b class="lead ${lb.c}">${lb.t}</b></div>
-        <div><span>Quantity</span><input type="number" id="dmQty" min="1" value="${qty}"></div>
+        <div><span>Quantity</span><input type="number" id="dmQty" min="1" value="${qty}" aria-label="Quantity"></div>
       </div>
       <div class="dm-note">Indicative reference figures only. </div>
     </div>
@@ -652,7 +684,8 @@ document.addEventListener('click',e=>{if(!e.target.closest('.catsearch'))suggest
 document.addEventListener('keydown',e=>{if(e.key==='Escape')suggestResults.classList.remove('show');});
 document.getElementById('clearBtn').onclick=()=>{state={sector:null,cat:null,q:'',lt:null,dist:null,page:0};document.getElementById('searchInput').value='';apply();};
 document.getElementById('modalScrim').onclick=closeModal;
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();}});
+document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;
+  if(document.getElementById('cmpModal').classList.contains('open'))closeCompareModal();else closeModal();});
 
 function renderRecentlyViewed(){
   const wrap=document.getElementById('recentlyViewed');
@@ -728,15 +761,15 @@ function openCompareModal(){
     ['Compliance',it=>it.f.cmp.join(', ')||'—'],
     ['Configurations in family',it=>fmt(it.f.ct)]
   ];
-  let html='<table class="cmp-table"><tr><th>Part</th>'+items.map(it=>`<td><strong>${it.sku.name}</strong><div style="margin-top:6px;width:60px;height:60px">${vfPartVisual(it.f,'',it.sku.name)}</div></td>`).join('')+'</tr>';
-  rows.forEach(([label,fn])=>{html+=`<tr><th>${label}</th>`+items.map(it=>`<td>${fn(it)}</td>`).join('')+'</tr>';});
-  html+='<tr><th></th>'+items.map(it=>`<td><a href="voltfield-part.html?fi=${it.fi}&o=${picksToParam(it.f,it.sku.picks)}&chk=${it.sku.chk}" style="color:var(--link);font-weight:600;text-decoration:underline">View details &rsaquo;</a></td>`).join('')+'</tr>';
+  let html='<table class="cmp-table"><tr><th scope="row">Part</th>'+items.map(it=>`<td><strong>${it.sku.name}</strong><div style="margin-top:6px;width:60px;height:60px">${vfPartVisual(it.f,'',it.sku.name)}</div></td>`).join('')+'</tr>';
+  rows.forEach(([label,fn])=>{html+=`<tr><th scope="row">${label}</th>`+items.map(it=>`<td>${fn(it)}</td>`).join('')+'</tr>';});
+  html+='<tr><th scope="row"></th>'+items.map(it=>`<td><a href="voltfield-part.html?fi=${it.fi}&o=${picksToParam(it.f,it.sku.picks)}&chk=${it.sku.chk}" style="color:var(--link);font-weight:600;text-decoration:underline">View details &rsaquo;</a></td>`).join('')+'</tr>';
   html+='</table>';
   document.getElementById('cmpTableWrap').innerHTML=html;
   document.getElementById('cmpScrim').classList.add('open');
-  document.getElementById('cmpModal').classList.add('open');
+  modalOpen(document.getElementById('cmpModal'));
 }
-function closeCompareModal(){document.getElementById('cmpScrim').classList.remove('open');document.getElementById('cmpModal').classList.remove('open');}
+function closeCompareModal(){document.getElementById('cmpScrim').classList.remove('open');modalClose(document.getElementById('cmpModal'));}
 document.getElementById('cmpClose').onclick=closeCompareModal;
 document.getElementById('cmpScrim').onclick=closeCompareModal;
 
