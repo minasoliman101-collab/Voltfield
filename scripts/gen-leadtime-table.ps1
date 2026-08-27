@@ -52,7 +52,7 @@ foreach ($k in $SEC.Keys) {
   foreach ($f in $rows) {
     $w = [int]$f.lw
     $cls = if ($w -le 12) { 'short' } elseif ($w -le 52) { 'mid' } else { 'long' }
-    [void]$sb.AppendLine("      <tr><td><a href=""/parts/$($f.slug).html"">$(Esc $f.n)</a></td><td>$(Esc $f.c)</td><td><span class=""lt $cls"">$w wk</span></td></tr>")
+    [void]$sb.AppendLine("      <tr><td>$(Esc $f.n)</td><td>$(Esc $f.c)</td><td><span class=""lt $cls"">$w wk</span></td></tr>")
   }
   [void]$sb.AppendLine('    </tbody>')
   [void]$sb.AppendLine('  </table></div>')

@@ -26,8 +26,8 @@ while IFS= read -r line; do
   [ -n "$c" ] && FREQ["$k"]="$c"
 done < <(tr '\n' ' ' < sitemap.xml | sed 's|</url>|</url>\n|g')
 
-classify_pri()  { case "$1" in "") echo 1.0;; parts/*) echo 0.7;; guide-*) echo 0.8;; */*) echo 0.8;; guides.html) echo 0.9;; *) echo 0.7;; esac; }
-classify_freq() { case "$1" in "") echo weekly;; parts/*) echo monthly;; *) echo monthly;; esac; }
+classify_pri()  { case "$1" in "") echo 1.0;; guide-*) echo 0.8;; */*) echo 0.8;; guides.html) echo 0.9;; *) echo 0.7;; esac; }
+classify_freq() { case "$1" in "") echo weekly;; *) echo monthly;; esac; }
 
 {
   echo '<?xml version="1.0" encoding="UTF-8"?>'

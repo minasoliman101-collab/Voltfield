@@ -88,7 +88,7 @@ foreach ($line in [System.IO.File]::ReadAllLines((Join-Path $PSScriptRoot 'categ
     $band  = if ($null -ne $f.lo) { (Compact $f.lo $f.pu) + " $nd " + (Compact $f.hi $f.pu) + $(if($f.pu){" <small>$(Esc $f.pu)</small>"}) } else { '' }
     $lt    = if ($f.lw -gt 0) { $c = if ($f.lw -le 12){'short'} elseif ($f.lw -le 52){'mid'} else {'long'}; "<span class=""lt $c"">~$([int]$f.lw) wk</span>" } else { '<span class="muted">n/a</span>' }
     $rows += "        <tr>`r`n"
-    $rows += "          <td><b><a href=""/parts/$($f.slug).html"">$(Esc $f.n)</a></b>$($f.combos) documented configurations</td>`r`n"
+    $rows += "          <td><b><a href=""/voltfield-supply-catalog.html?q=$([uri]::EscapeDataString($f.n))"">$(Esc $f.n)</a></b>$($f.combos) documented configurations</td>`r`n"
     $rows += "          <td class=""num"">$axSum</td>`r`n"
     $rows += "          <td>$lt</td>`r`n"
     $rows += "          <td class=""num"">$band</td>`r`n"
