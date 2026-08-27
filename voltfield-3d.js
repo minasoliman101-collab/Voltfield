@@ -444,7 +444,20 @@
     _noiseCanvas = cv;
     return cv;
   }
-  function surfaceTex(THREE, repeat){
+  /* Cached per repeat bucket. Every material used to get two freshly allocated
+     CanvasTextures -- one for roughness, one for bump -- which for the ~90
+     materials a model builds meant ~180 GPU uploads of one 256x256 image. The
+     same texture object can drive both slots (identical UVs, identical repeat),
+     so this hands back one shared instance per bucket.
+
+     The cache is handed in rather than held at module scope on purpose: a
+     texture belongs to the WebGL context that uploaded it, and a page can mount
+     several viewers. One cache per addSurfaceDetail call is one cache per
+     context, which is the only sharing that is safe. */
+  function surfaceTex(THREE, repeat, cache){
+    const key = String(repeat);
+    const hit = cache.get(key);
+    if (hit) return hit;
     const t = new THREE.CanvasTexture(noiseCanvas());
     t.wrapS = t.wrapT = THREE.RepeatWrapping;
     t.repeat.set(repeat, repeat);
@@ -453,6 +466,7 @@
        toward the horizon of a surface, which is exactly where a real machined
        or painted finish still shows texture. */
     t.anisotropy = MAX_ANISO;
+    cache.set(key, t);
     return t;
   }
 
@@ -466,8 +480,27 @@
        - emissive materials (lamps, meter faces) -- roughening them reads as dirt
        - anything with a `map` already (the canvas nameplates and placards)
        - transparent surfaces (glass doors, soil, the POD shell) */
+  /* Repeat buckets, in tiles per world unit of the surface they land on.
+     Bucketed rather than continuous so the texture cache stays small -- a
+     handful of shared textures instead of one per material. */
+  const TILE_BUCKETS = [0.25, 0.5, 1, 2, 3, 4, 6, 8, 12, 16];
+  const TILES_PER_UNIT = 3;
+  function tileRepeat(size){
+    const want = size * TILES_PER_UNIT;
+    let best = TILE_BUCKETS[0];
+    for (const b of TILE_BUCKETS) if (Math.abs(b - want) < Math.abs(best - want)) best = b;
+    return best;
+  }
+
   function addSurfaceDetail(THREE, root){
+    /* World matrices drive the size measurement below, and a freshly built
+       model has not been through a render yet, so its children still carry
+       identity matrices. */
+    root.updateWorldMatrix(true, true);
     const seen = new Set();
+    const cache = new Map();
+    const v = new THREE.Vector3();
+    const _ws = new THREE.Vector3();
     root.traverse(function(n){
       if (!n.isMesh) return;
       const list = Array.isArray(n.material) ? n.material : [n.material];
@@ -477,8 +510,28 @@
         if (m.map || m.transparent) continue;
         if (m.emissive && (m.emissive.r || m.emissive.g || m.emissive.b)) continue;
         if (m.roughnessMap) continue;
-        m.roughnessMap = surfaceTex(THREE, 3);
-        m.bumpMap = surfaceTex(THREE, 3);
+        /* Every material used to get repeat 3 regardless of what it was on, so
+           a transformer tank and a bolt head carried noise of the same on-screen
+           size. Texture that does not hold a constant world scale is one of the
+           plainer tells that a surface is synthetic. Size the tiling from the
+           mesh instead, so a grain of finish stays a grain of finish whatever
+           it is applied to. */
+        let size = 1;
+        try {
+          const g = n.geometry;
+          if (g) {
+            if (!g.boundingBox) g.computeBoundingBox();
+            if (g.boundingBox) {
+              g.boundingBox.getSize(v);
+              n.getWorldScale(_ws);
+              size = Math.max(v.x * Math.abs(_ws.x), v.y * Math.abs(_ws.y), v.z * Math.abs(_ws.z));
+            }
+          }
+        } catch (e) { size = 1; }
+        if (!(size > 0) || !isFinite(size)) size = 1;
+        const tex = surfaceTex(THREE, tileRepeat(size), cache);
+        m.roughnessMap = tex;
+        m.bumpMap = tex;
         /* Scaled by how polished the surface is: a mirror shows every
            irregularity, matt paint hides most of them. */
         m.bumpScale = 0.003 + (m.metalness || 0) * 0.006;
@@ -1922,18 +1975,60 @@
       apply();
     }
     function up(){ dragging = false; }
+    function setR(r){ radius = Math.min(maxR, Math.max(minR, r)); apply(); }
     function wheel(e){
       e.preventDefault();
-      radius = Math.min(maxR, Math.max(minR, radius + e.deltaY*zoomStep));
-      apply();
+      setR(radius + e.deltaY*zoomStep);
     }
-    function pdown(e){ try{dom.setPointerCapture(e.pointerId);}catch(err){} down(e.clientX,e.clientY); }
-    function pmove(e){ move(e.clientX,e.clientY); }
+
+    /* Pinch-to-zoom.
+       Zoom used to be wheel-only, which meant it did not exist on a phone:
+       there is no wheel event, and the single-pointer handler treated a second
+       finger as more rotation. Every model was locked at its framing distance
+       on the device where you most want to lean in on a nameplate.
+
+       Pointer events already cover touch, so this tracks the live pointers in a
+       map: one moves the camera, two scale the radius by the ratio of their
+       separation. The canvas already carries touch-action:none, which is what
+       stops the browser claiming the gesture as a page zoom. */
+    const pts = new Map();
+    let pinchPrev = 0;
+    function spread(){
+      const p = [...pts.values()];
+      return Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y);
+    }
+    function pdown(e){
+      try{ dom.setPointerCapture(e.pointerId); }catch(err){}
+      pts.set(e.pointerId, {x:e.clientX, y:e.clientY});
+      if (pts.size === 2) { pinchPrev = spread(); dragging = false; autoRotate = false; }
+      else if (pts.size === 1) down(e.clientX, e.clientY);
+    }
+    function pmove(e){
+      if (!pts.has(e.pointerId)) return;
+      pts.set(e.pointerId, {x:e.clientX, y:e.clientY});
+      if (pts.size >= 2) {
+        const d = spread();
+        /* Fingers apart -> smaller radius -> closer. Guard the first frame and
+           any degenerate zero so one stray sample cannot divide by nothing. */
+        if (pinchPrev > 0 && d > 0) setR(radius * (pinchPrev / d));
+        pinchPrev = d;
+        return;
+      }
+      move(e.clientX, e.clientY);
+    }
+    function pup(e){
+      pts.delete(e.pointerId);
+      if (pts.size < 2) pinchPrev = 0;
+      /* Lifting one of two fingers hands control back to the other rather than
+         jumping the model: re-seat the drag origin on whichever remains. */
+      if (pts.size === 1) { const p = pts.values().next().value; lastX = p.x; lastY = p.y; dragging = true; }
+      else if (pts.size === 0) dragging = false;
+    }
 
     dom.addEventListener('pointerdown', pdown);
     dom.addEventListener('pointermove', pmove);
-    dom.addEventListener('pointerup', up);
-    dom.addEventListener('pointercancel', up);
+    dom.addEventListener('pointerup', pup);
+    dom.addEventListener('pointercancel', pup);
     dom.addEventListener('wheel', wheel, {passive:false});
     apply();
 
@@ -1942,9 +2037,10 @@
       dispose(){
         dom.removeEventListener('pointerdown', pdown);
         dom.removeEventListener('pointermove', pmove);
-        dom.removeEventListener('pointerup', up);
-        dom.removeEventListener('pointercancel', up);
+        dom.removeEventListener('pointerup', pup);
+        dom.removeEventListener('pointercancel', pup);
         dom.removeEventListener('wheel', wheel);
+        pts.clear();
       }
     };
   }
