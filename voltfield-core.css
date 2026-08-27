@@ -87,12 +87,14 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
    so mobile browser chrome collapsing does not clip the last item. */
 .hnav.open{max-height:calc(100vh - var(--vf-header-h, 132px));max-height:calc(100dvh - var(--vf-header-h, 132px));overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}}
 @media(min-width:900px){.hnav{display:flex}.navdrop:hover .navdrop-menu,.navdrop:focus-within .navdrop-menu{display:flex}
-/* Same problem as the mobile menu, on a short desktop window: the 14-item
-   Tools dropdown is ~549px and is absolutely positioned inside a sticky
-   header, so on a viewport under ~620px tall the last items are clipped and
-   cannot be scrolled to. Scoped to the desktop query on purpose -- below 900px
-   this menu is position:static inside the already-scrolling .hnav, and giving
-   it its own scroller there would nest two of them. */
+/* Same problem as the mobile menu, on a short desktop window: the menu is
+   absolutely positioned inside a sticky header, so on a short viewport the
+   last items would be clipped with no way to scroll to them. The Tools menu
+   is now a three-column pane rather than the 14-item column that made this
+   acute (~549px tall), but the guard stays -- it costs nothing and the pane
+   still has to fit. Scoped to the desktop query on purpose: below 900px this
+   menu is position:static inside the already-scrolling .hnav, and giving it
+   its own scroller there would nest two of them. */
 .navdrop-menu{max-height:calc(100vh - var(--vf-header-h, 60px) - 16px);max-height:calc(100dvh - var(--vf-header-h, 60px) - 16px);overflow-y:auto;overscroll-behavior:contain}}
 .hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
 .hnav a:hover{color:var(--ink);background:var(--paper)}
@@ -215,3 +217,40 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
 .navdrop-grp:first-child{padding-top:6px}
 .navdrop-all{font-weight:700}
 .navdrop-menu > .navdrop-all{border-bottom:1px solid var(--line);margin-bottom:2px;padding-bottom:9px}
+
+/* ---------- Tools pane ----------
+   This was a 13-item single column: uppercase link text, no descriptions, tall
+   enough to need its own scrollbar and long enough that the items near the
+   bottom were effectively invisible. Same destinations, arranged as three
+   short labelled columns with a line of plain-language description each, so
+   the whole set is legible at a glance instead of being read top to bottom.
+   The three tools that did not earn nav space -- the two PCB tools and the
+   glossary quiz -- are one click away on the hub, named in the footer link so
+   nothing silently disappears. */
+.toolpane{min-width:min(700px,92vw);padding:14px 16px 12px}
+.tp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px 20px}
+.tp-col{display:flex;flex-direction:column;min-width:0}
+/* The base .navdrop-menu a rule is built for the old uppercase list; the pane
+   items are a heading plus a description, so its casing, tracking and rules
+   are unset here rather than fought with per-property overrides. */
+.navdrop-menu.toolpane a{display:block;padding:7px 8px;border-bottom:0;
+  text-transform:none;letter-spacing:0;font-size:inherit}
+.navdrop-menu.toolpane a b{display:block;font-family:var(--disp);font-weight:700;
+  font-size:14px;letter-spacing:.01em;color:var(--ink-2)}
+.navdrop-menu.toolpane a em{display:block;font-style:normal;font-family:var(--mono);
+  font-size:10.5px;line-height:1.45;letter-spacing:.01em;color:var(--slate);margin-top:2px}
+.navdrop-menu.toolpane a:hover{background:var(--paper)}
+.navdrop-menu.toolpane a:hover b{color:var(--ink)}
+.navdrop-menu.toolpane a.tp-all{border-top:1px solid var(--line);margin-top:10px;
+  padding-top:11px;font-family:var(--mono);font-size:10.5px;text-transform:uppercase;
+  letter-spacing:.09em;color:var(--signal-deep);font-weight:600}
+.navdrop-menu.toolpane a.tp-all:hover{background:var(--paper);color:var(--ink)}
+@media(max-width:899.98px){
+  /* Inside the mobile nav the pane is just the stacked list again: one column,
+     descriptions dropped so a tap target stays one line. */
+  .toolpane{min-width:0;padding:0}
+  .tp-grid{grid-template-columns:1fr;gap:0}
+  .navdrop-menu.toolpane a{padding:12px 6px 12px 26px;border-bottom:1px solid var(--line)}
+  .navdrop-menu.toolpane a em{display:none}
+  .navdrop-menu.toolpane a.tp-all{margin-top:0;padding-top:12px;border-top:0}
+}

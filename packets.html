@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>Reference Packets | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/packets.html">
+<meta name="description" content="Planned reference packets drawn from Voltfield’s published material: equipment lead times, grid interconnection, data center electrical, battery storage, calculation method and domestic content. In development.">
+<meta name="keywords" content="free engineering calculators, free procurement tools, electrical engineering practice tools, RFQ toolkit, PCB design tools, industrial reference tools">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Voltfield Reference Packets">
+<meta property="og:description" content="The Voltfield reference, gathered into packets you can keep in a project folder. In development — nothing for sale yet.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Voltfield Reference Packets">
+<meta name="twitter:description" content="Equipment lead times, interconnection, data center electrical and more — packaged. In development.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"BreadcrumbList","itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
+   {"@type":"ListItem","position":2,"name":"Reference Packets","item":"https://voltfield.org/packets.html"}
+ ]},
+ {"@type":"CollectionPage","name":"Voltfield Reference Packets","description":"Planned reference packets drawn from Voltfield published material: equipment lead times, grid interconnection, data center electrical procurement, battery storage compliance, calculation method, and domestic content. In development; none are available for purchase.","url":"https://voltfield.org/packets.html"}
+]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<style>
+
+.artban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:32px 20px 34px}
+.artban-in{max-width:1100px;margin:0 auto}
+.artban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:10px}
+.artban h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,44px);letter-spacing:.01em;line-height:1.06}
+.artban p.dek{color:#AFC0D3;font-size:15.5px;margin-top:14px;line-height:1.55;max-width:680px}
+.wrap{max-width:1100px;margin:0 auto;padding:36px 20px 60px}
+.wrap h2{font-family:var(--disp);font-weight:700;font-size:22px;letter-spacing:.01em;color:var(--ink);margin:36px 0 6px}
+.wrap h2:first-child{margin-top:0}
+.sectiondek{font-size:13.5px;color:var(--slate);margin-bottom:14px;max-width:640px;line-height:1.6}
+.toolgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+/* A grid holding a single card. auto-FIT collapses empty tracks, so one child
+   would stretch to the full row and upscale a 440px-wide thumbnail to roughly
+   1100px. auto-FILL keeps the empty tracks, so the card stays the same size as
+   the cards in every other section. */
+.toolgrid.solo{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.toolcard{background:var(--card);border:1px solid var(--line-dark);padding:16px 18px;text-decoration:none;color:var(--ink);display:block;transition:border-color .15s}
+/* 3D-rendered thumbnails. Negative margins pull the image to the card edges
+   while the text keeps its padding; width/height attributes give the browser
+   the aspect ratio up front so lazy-loading cannot shift the grid. */
+.toolcard .tc-img{display:block;width:calc(100% + 36px);height:auto;aspect-ratio:440/280;
+  margin:-16px -18px 12px;object-fit:cover;background:#0C1524;border-bottom:1px solid var(--line-dark)}
+.toolcard:hover .tc-pic{display:contents}
+.tc-img{opacity:.92}
+.toolcard:hover{border-color:var(--ink)}
+.toolcard .tc-t{font-family:var(--disp);font-weight:700;font-size:16.5px;color:var(--ink)}
+.toolcard .tc-d{font-size:12.5px;color:var(--ink-2);margin-top:4px;line-height:1.5}
+.calclist{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 8px}
+.calclist a{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);background:#fff;border:1px solid var(--line);padding:4px 9px;text-decoration:none}
+.calclist a:hover{border-color:var(--ink);color:var(--ink)}
+.viewall{font-family:var(--disp);font-weight:600;font-size:13px;color:var(--link);text-decoration:underline;text-decoration-color:var(--signal)}
+.searchcta{background:var(--card);border:1px solid var(--line-dark);padding:16px 18px;margin:18px 0 0;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.searchcta p{font-size:13px;color:var(--ink-2);margin:0}
+.searchcta a{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none}
+.searchcta a:hover{background:transparent;color:var(--ink)}
+footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
+footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
+@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
+footer h4{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+footer p{line-height:1.6;max-width:460px}
+footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
+footer a{color:#9FB0C3;text-decoration:none}
+footer a:hover{color:#fff}
+
+/* ---------- reference packets ---------- */
+.pk-wrap{max-width:1100px;margin:0 auto;padding:34px 20px 60px}
+.pk-status{border:2px solid var(--ink);border-left:6px solid var(--signal);background:var(--card);
+  padding:14px 18px;font-size:14.5px;line-height:1.6;color:var(--ink-2);margin-bottom:38px}
+.pk-status b{color:var(--ink)}
+.pk-h2{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:.01em;color:var(--ink);
+  margin:0 0 8px;padding-bottom:9px;border-bottom:2px solid var(--ink)}
+.pk-note{font-size:14.5px;line-height:1.65;color:var(--ink-2);max-width:720px;margin:0 0 26px}
+.pk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-bottom:52px}
+.pk-card{border:1px solid var(--line-dark);background:var(--card);padding:20px 20px 18px;display:flex;flex-direction:column}
+.pk-tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--signal-deep);margin-bottom:9px}
+.pk-card h3{font-family:var(--disp);font-weight:700;font-size:19px;letter-spacing:.01em;color:var(--ink);margin:0 0 9px}
+.pk-card p{font-size:14px;line-height:1.62;color:var(--ink-2);margin:0 0 14px;flex:1}
+/* The sources are the point, not a footnote: the packet is only worth anything
+   if the material behind it can be read first. */
+.pk-src{list-style:none;margin:0;padding:12px 0 0;border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:5px 14px}
+.pk-src li{font-family:var(--mono);font-size:10.5px;letter-spacing:.02em}
+.pk-src a{color:var(--link);text-decoration:underline}
+.pk-form{display:grid;grid-template-columns:auto 1fr;gap:10px 14px;align-items:center;
+  max-width:560px;border:1px solid var(--line-dark);background:var(--card);padding:20px}
+.pk-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--slate)}
+.pk-form select,.pk-form input{font-family:var(--sans);font-size:14px;padding:9px 10px;
+  border:1px solid var(--line-dark);background:var(--paper);color:var(--ink);width:100%}
+.pk-form button{grid-column:1/-1;background:var(--ink);color:#fff;border:2px solid var(--ink);
+  padding:11px 16px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em}
+.pk-form button:hover{background:var(--signal-deep);border-color:var(--signal-deep)}
+.pk-msg{grid-column:1/-1;margin:0;font-family:var(--mono);font-size:11.5px;line-height:1.5;color:var(--signal-deep);min-height:1em}
+.pk-foot{margin-top:44px;border-top:1px solid var(--line);padding-top:20px}
+.pk-foot p{font-size:13.5px;line-height:1.65;color:var(--slate);max-width:760px;margin:0}
+.pk-foot b{color:var(--ink-2)}
+@media(max-width:560px){
+  .pk-form{grid-template-columns:1fr}
+}
+.hidden-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">VOLTFIELD<small>ENGINEERING REFERENCE & EQUIPMENT DATA</small></span>
+  </a>
+  <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="voltfield-bom-generator.html"><b>BOM generator</b><em>A spec turned into a bill of materials</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="voltfield-eol.html"><b>Obsolete &amp; end-of-life</b><em>What replaced a discontinued part</em></a>
+            <a href="rfq-toolkit.html"><b>RFQ readiness</b><em>What a quotable RFQ has to carry</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools, including the PCB builder and glossary quiz &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="lead-time-index.html">Lead-Time Index</a>
+    <a href="packets.html" class="on">Packets</a>
+    <a href="voltfield-supply-catalog.html">Spec Library</a>
+    <a href="voltfield-suppliers.html">Suppliers</a>
+    <a href="whats-new.html">What's New</a>
+    </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<!-- Netlify needs the form present in the served HTML to register it at deploy
+     time; the visible form below submits by AJAX to "/" with a matching
+     form-name. Controls carry tabindex="-1": this wrapper is aria-hidden and
+     only moved off-screen, so without it they stay in the tab order and focus
+     vanishes into a field nothing announces. -->
+<form name="packet-interest" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="hidden-field" aria-hidden="true">
+  <input type="hidden" name="form-name" value="packet-interest">
+  <input tabindex="-1" name="bot-field">
+  <input tabindex="-1" type="email" name="email">
+  <input tabindex="-1" type="text" name="packet">
+</form>
+<main id="main" tabindex="-1">
+
+<div class="artban">
+  <div class="artban-in">
+    <div class="eyebrow">Reference packets &middot; in development</div>
+    <h1>The reference, packaged to work offline</h1>
+    <p class="dek">Everything on this site stays free and stays here. These packets are the same material gathered into something you can put in a project folder, hand to a colleague, or attach to a submittal &mdash; sourced, dated, and readable without a browser tab open.</p>
+  </div>
+</div>
+
+<div class="pk-wrap">
+
+  <div class="pk-status">
+    <b>None of these are finished yet.</b> This page exists so the plan is visible and so you can tell us which one to build first &mdash; there is nothing to buy on it, no price has been set, and nothing here is a preorder.
+  </div>
+
+  <h2 class="pk-h2">Planned packets</h2>
+  <p class="pk-note">Each is drawn from work already published on this site. The pages the material comes from are linked under every entry, so you can read the whole basis before deciding whether the packaged form is worth anything to you.</p>
+
+  <div class="pk-grid">
+
+    <article class="pk-card">
+      <div class="pk-tag">Market data</div>
+      <h3>Equipment Lead Times</h3>
+      <p>The full lead-time index &mdash; 249 rows across nine equipment groups &mdash; with what is actually driving each number, which are firm and which are modelled, and how to read them into a schedule that survives contact with a supplier.</p>
+      <ul class="pk-src">
+        <li><a href="lead-time-index.html">Lead-Time Index</a></li>
+        <li><a href="guide-transformer-lead-times.html">Transformer lead times</a></li>
+      </ul>
+    </article>
+
+    <article class="pk-card">
+      <div class="pk-tag">Process</div>
+      <h3>Grid Interconnection</h3>
+      <p>How an interconnection request actually moves through ERCOT, MISO and PJM: the study sequence, where the queue stalls, what each operator asks for and when, and the timing assumptions that most often turn out to be wrong.</p>
+      <ul class="pk-src">
+        <li><a href="guide-grid-interconnection-process.html">Interconnection process</a></li>
+        <li><a href="guide-interconnection-ercot.html">ERCOT</a></li>
+        <li><a href="guide-interconnection-miso.html">MISO</a></li>
+        <li><a href="guide-interconnection-pjm.html">PJM</a></li>
+      </ul>
+    </article>
+
+    <article class="pk-card">
+      <div class="pk-tag">Procurement</div>
+      <h3>Data Center Electrical</h3>
+      <p>The electrical scope of a data center build from utility service to rack: transformers, switchgear, distribution, backup generation and cooling &mdash; what each is specified by, the standards it is built to, and the lead time to plan around.</p>
+      <ul class="pk-src">
+        <li><a href="data-center-electrical-procurement.html">Data center electrical procurement</a></li>
+        <li><a href="data-centers/transformers.html">Transformers</a></li>
+        <li><a href="data-centers/switchgear.html">Switchgear</a></li>
+        <li><a href="data-centers/backup-power.html">Backup power</a></li>
+      </ul>
+    </article>
+
+    <article class="pk-card">
+      <div class="pk-tag">Compliance</div>
+      <h3>Battery Storage</h3>
+      <p>What NFPA 855 asks of a battery installation and how that shapes siting, spacing and enclosure choice &mdash; plus how augmentation is planned across a project's life rather than bolted on once capacity has already faded.</p>
+      <ul class="pk-src">
+        <li><a href="guide-bess-fire-safety-nfpa-855.html">NFPA 855 fire safety</a></li>
+        <li><a href="guide-bess-augmentation.html">BESS augmentation</a></li>
+        <li><a href="calculators/bess-sizing.html">BESS sizing</a></li>
+      </ul>
+    </article>
+
+    <article class="pk-card">
+      <div class="pk-tag">Method</div>
+      <h3>Electrical Calculations</h3>
+      <p>The method behind each of the calculators: the formula, where it comes from, a worked example you can check by hand, the code or standard that governs it, and the conditions under which the shortcut stops being safe to use.</p>
+      <ul class="pk-src">
+        <li><a href="engineering-calculators.html">Engineering calculators</a></li>
+        <li><a href="calculators/voltage-drop.html">Voltage drop</a></li>
+        <li><a href="calculators/fault-current.html">Fault current</a></li>
+        <li><a href="calculators/arc-flash.html">Arc flash</a></li>
+      </ul>
+    </article>
+
+    <article class="pk-card">
+      <div class="pk-tag">Compliance</div>
+      <h3>Domestic Content</h3>
+      <p>Buy America and IIJA domestic-content rules alongside FEOC restrictions: what has to be sourced where, what documentation is expected to prove it, and where the two regimes pull a bill of materials in different directions.</p>
+      <ul class="pk-src">
+        <li><a href="guide-buy-america-iija.html">Buy America &amp; IIJA</a></li>
+        <li><a href="guide-feoc-compliance.html">FEOC compliance</a></li>
+      </ul>
+    </article>
+
+  </div>
+
+  <h2 class="pk-h2">Which one first?</h2>
+  <p class="pk-note">There is no point building all six before finding out whether any of them is wanted. Tell us which is closest to a problem you actually have, and we will build that one and email you when it exists. One message about that packet &mdash; not a newsletter, and not a signup for anything else.</p>
+
+  <form id="pkForm" class="pk-form">
+    <label class="pk-lbl" for="pkWhich">Packet</label>
+    <select id="pkWhich" name="packet">
+      <option value="lead-times">Equipment Lead Times</option>
+      <option value="interconnection">Grid Interconnection</option>
+      <option value="data-center">Data Center Electrical</option>
+      <option value="bess">Battery Storage</option>
+      <option value="calculations">Electrical Calculations</option>
+      <option value="domestic-content">Domestic Content</option>
+    </select>
+    <label class="pk-lbl" for="pkEmail">Email</label>
+    <input type="email" id="pkEmail" name="email" required placeholder="you@company.com">
+    <button type="submit" id="pkBtn">Tell me when it&rsquo;s ready</button>
+    <p class="pk-msg" id="pkMsg" role="status" aria-live="polite"></p>
+  </form>
+
+  <div class="pk-foot">
+    <p><b>What this is not.</b> Voltfield does not sell equipment and is not a route to anyone who does. These packets would be documents &mdash; the reference material on this site, gathered and formatted. The site itself stays free, complete and without a signup, whether or not any of this ever ships.</p>
+  </div>
+
+</div>
+
+</main>
+
+<footer>
+  <div class="in">
+    <div>
+      <h4>Voltfield</h4>
+      <p>Free engineering calculators, guides, and reference tools for energy infrastructure and industrial procurement — sourced from real published standards and formulas, run entirely in your browser.</p>
+    </div>
+    <div><h4>Sectors</h4><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+      <li><a href="oil-gas.html">Drilling &amp; Completions</a></li>
+      <li><a href="industrial-supply.html">Industrial Supply (MRO)</a></li>
+    </ul></div>
+    <div><h4>Reference</h4><ul>
+      <li><a href="glossary.html">Glossary</a></li>
+      <li><a href="engineering-calculators.html">Engineering Calculators</a></li>
+      <li><a href="guides.html">Guides</a></li>
+    </ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+<script>
+(function(){
+  const form=document.getElementById("pkForm");
+  if(!form)return;
+  const msg=document.getElementById("pkMsg");
+  const btn=document.getElementById("pkBtn");
+  function enc(d){return Object.keys(d).map(k=>encodeURIComponent(k)+"="+encodeURIComponent(d[k])).join("&");}
+  function valid(v){return /^[^s@]+@[^s@]+.[^s@]+$/.test(v);}
+  form.addEventListener("submit",async function(e){
+    e.preventDefault();
+    const email=document.getElementById("pkEmail").value.trim();
+    const packet=document.getElementById("pkWhich").value;
+    if(!valid(email)){msg.textContent="That does not look like an email address.";return;}
+    const orig=btn.textContent; btn.textContent="Sending…"; btn.disabled=true;
+    try{
+      const r=await fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},
+        body:enc({"form-name":"packet-interest",email:email,packet:packet})});
+      if(!r.ok)throw new Error("status "+r.status);
+      msg.textContent="Noted — one email when that packet exists, and nothing else.";
+      form.reset();
+    }catch(err){
+      msg.textContent="That did not send. Try again, or email hello@voltfield.org.";
+    }finally{ btn.textContent=orig; btn.disabled=false; }
+  });
+})();
+</script>
+</body>
+</html>
