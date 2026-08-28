@@ -165,7 +165,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="navdrop-grp">Look it up</span>
             <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
             <a href="voltfield-eol.html"><b>Obsolete &amp; end-of-life</b><em>What replaced a discontinued part</em></a>
-            <a href="rfq-toolkit.html"><b>RFQ readiness</b><em>What a quotable RFQ has to carry</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
           </div>
         </div>
         <a class="tp-all" href="free-tools.html">All free tools, including the PCB builder and glossary quiz &rarr;</a>
@@ -175,7 +175,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="lead-time-index.html">Lead-Time Index</a>
     <a href="packets.html">Packets</a>
     <a href="voltfield-supply-catalog.html">Spec Library</a>
-    <a href="voltfield-suppliers.html">Suppliers</a>
+    <a href="voltfield-suppliers.html">Manufacturers</a>
     <a href="whats-new.html">What's New</a>
     </nav>
   <div class="headright">
@@ -229,8 +229,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="frow"><label for="pQty">Quantity (boards)</label><input type="number" id="pQty" min="5" max="100000" value="100"></div>
       <div class="frow"><label id="seglbl-lead">Lead time</label><div class="seg" role="group" aria-labelledby="seglbl-lead" data-k="lead"><button data-v="std">Standard</button><button data-v="exp">Expedited (+60%)</button></div></div>
       <div class="frow"><label id="seglbl-sten">SMT stencil</label><div class="seg" role="group" aria-labelledby="seglbl-sten" data-k="sten"><button data-v="no">No</button><button data-v="yes">Yes (+$45)</button></div></div>
-      <div class="frow full"><label>Gerber / ODB++ package (goes with your RFQ for DFM review)</label>
-        <div class="filelbl"><label class="filepick" for="pGerber">Attach file</label><input type="file" id="pGerber" accept=".zip,.rar,.7z,.gbr,.tgz"><span class="filename" id="gerberName">No file attached — you can also send it with the RFQ email.</span></div>
+      <div class="frow full"><label>Gerber / ODB++ package (for DFM review)</label>
+        <div class="filelbl"><label class="filepick" for="pGerber">Attach file</label><input type="file" id="pGerber" accept=".zip,.rar,.7z,.gbr,.tgz"><span class="filename" id="gerberName">No file attached.</span></div>
       </div>
     </div>
   </div>
@@ -373,7 +373,7 @@ MASKS.forEach(([name,hex])=>{
   $('maskSw').appendChild(d);
 });
 ['pName','pW','pH','pThk','pMat','pCu','pFin','pTr','pHole','pVia','pQty','aLines','aSmt','aTh','aBga'].forEach(id=>{$(id).addEventListener('input',update);$(id).addEventListener('change',update);});
-$('pGerber').addEventListener('change',e=>{const f=e.target.files[0];$('gerberName').textContent=f?f.name+' ('+Math.round(f.size/1024)+' KB) — attached to spec; include it with your RFQ email.':'No file attached.';update();});
+$('pGerber').addEventListener('change',e=>{const f=e.target.files[0];$('gerberName').textContent=f?f.name+' ('+Math.round(f.size/1024)+' KB) — attached to spec.':'No file attached.';update();});
 
 /* BOM upload: CSVs are parsed client-side to auto-fill line & placement counts */
 $('aBom').addEventListener('change',e=>{

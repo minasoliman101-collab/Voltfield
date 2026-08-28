@@ -113,7 +113,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="navdrop-grp">Look it up</span>
             <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
             <a href="voltfield-eol.html"><b>Obsolete &amp; end-of-life</b><em>What replaced a discontinued part</em></a>
-            <a href="rfq-toolkit.html"><b>RFQ readiness</b><em>What a quotable RFQ has to carry</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
           </div>
         </div>
         <a class="tp-all" href="free-tools.html">All free tools, including the PCB builder and glossary quiz &rarr;</a>
@@ -123,7 +123,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="lead-time-index.html">Lead-Time Index</a>
     <a href="packets.html">Packets</a>
     <a href="voltfield-supply-catalog.html">Spec Library</a>
-    <a href="voltfield-suppliers.html">Suppliers</a>
+    <a href="voltfield-suppliers.html">Manufacturers</a>
     <a href="whats-new.html">What's New</a>
     </nav>
   <div class="headright">
@@ -155,18 +155,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="callout"><b>The short version:</b> nothing on Voltfield is a price you can transact against. It's a reference point for planning, and the Lead-Time Index and catalog both say so directly wherever a number appears.</div>
 
   <h2>How the technical guides are written</h2>
-  <p>The guides, glossary, and calculators are written and maintained by <b>Voltfield's editorial team</b>, working from publicly published standards (IEEE/ANSI C57, NFPA 70E/855, NEC, API 5CT/6A/7K/16A) and OEM technical documentation, and kept consistent with the sourcing and lead-time data described below. They're written for a procurement or facilities audience deciding what to spec, compare, or ask a vendor about — not as a substitute for a licensed engineer's stamped calculation, and every guide and calculator says so wherever it applies. Found something wrong or out of date? <a class="inline" href="mailto:Help@voltfield.org">Tell us</a> and we'll fix it.</p>
+  <p>The guides, glossary, and calculators are written and maintained by <b>Voltfield's editorial team</b>, working from publicly published standards (IEEE/ANSI C57, NFPA 70E/855, NEC, API 5CT/6A/7K/16A) and OEM technical documentation, and kept consistent with the sourcing and lead-time data described below. They're written for an engineering or facilities audience deciding what to spec, compare, or ask a manufacturer about — not as a substitute for a licensed engineer's stamped calculation, and every guide and calculator says so wherever it applies. Found something wrong or out of date? <a class="inline" href="mailto:Help@voltfield.org">Tell us</a> and we'll fix it.</p>
 
   <h2>How the Lead-Time Index is compiled</h2>
   <p>The <a class="inline" href="lead-time-index.html">Lead-Time Index</a> combines the same catalog reference data used across the site with the published market ranges Voltfield tracks pricing and lead-time patterns against. It's compiled periodically, not streamed in real time — figures are labeled with the region and month they reflect (for example, "North America, July 2026"), and they get stale the same way any market snapshot does.</p>
   <p>Starting this quarter, the Index also incorporates <a class="inline" href="lead-time-index.html#submitBox">crowdsourced submissions</a> from other buyers and distributors. Every submission is reviewed by hand before it's published — nothing is added automatically — specifically to keep the data trustworthy rather than just fast.</p>
-  <p><b>Every figure is labeled with its basis.</b> Each row on the Index carries one of three labels — <i>Modeled</i> (a Voltfield estimate derived from catalog and vendor-network data), <i>Operator</i> (reported by a buyer or distributor and hand-reviewed), or <i>Published</i> (traceable to a named public source, linked on the row). The same labels are in the <a class="inline" href="lead-time-index.json">JSON feed</a> under a <code>basis</code> field. This exists so nobody has to guess which numbers are measurements and which are estimates: as of this writing every published figure is <b>modeled</b>, and we'd rather say that plainly than let a derived number get requoted elsewhere as manufacturer or survey data.</p>
+  <p><b>Every figure is labeled with its basis.</b> Each row on the Index carries one of three labels — <i>Modeled</i> (a Voltfield estimate derived from catalog and manufacturer data), <i>Operator</i> (reported from the field and hand-reviewed), or <i>Published</i> (traceable to a named public source, linked on the row). The same labels are in the <a class="inline" href="lead-time-index.json">JSON feed</a> under a <code>basis</code> field. This exists so nobody has to guess which numbers are measurements and which are estimates: as of this writing every published figure is <b>modeled</b>, and we'd rather say that plainly than let a derived number get requoted elsewhere as manufacturer or survey data.</p>
 
   <h2>Distribution channels</h2>
   <p>The <a class="inline" href="voltfield-suppliers.html">All Suppliers</a> directory lists both real, named distributors (Grainger, Uline, Graybar, MSC Industrial) whose publicly published product ranges inform catalog scope and indicative pricing, and a set of <b>supplier archetypes</b> — a regional transformer manufacturer, an OCTG mill, a recert shop — which describe a class of supplier rather than a named firm, so the lead-time posture and supply constraints typical of that class can be documented without inventing a company to attach them to. Earlier versions gave these archetypes invented names and addresses; they now say what they are, and only the named companies appear in the page&rsquo;s structured data. OEM brand listings (transformer, inverter, and switchgear manufacturers among them) identify product lines Voltfield tracks and cross-references as an independent reference; Voltfield is not affiliated with, sponsored by, or endorsed by any manufacturer it references.</p>
 
   <h2>What Voltfield does, and what it does not do</h2>
-  <p>Nothing on Voltfield is for sale, and nothing here completes a purchase. There is no cart, no checkout, and no payment is ever collected. The spec library, the lead-time index and the calculators exist so you can arrive at a defensible specification — you then take that to the distributor, mill or OEM who actually supplies it. The <a class="inline" href="rfq-toolkit.html">RFQ toolkit</a> has copy-paste templates for exactly that conversation.</p>
+  <p>Nothing on Voltfield is for sale, and nothing here completes a purchase. There is no cart, no checkout, and no payment is ever collected. The spec library, the lead-time index and the calculators exist so you can arrive at a defensible specification — you then take that to the distributor, mill or OEM who actually supplies it. The <a class="inline" href="specification-checklist.html">specification checklist</a> has copy-paste templates for exactly that conversation.</p>
 
   <h2>Why be this explicit about it</h2>
   <p>This reference's whole value is that the numbers are useful for planning even though they are not final. That only works if the gap between "indicative" and "confirmed" is stated plainly instead of buried in fine print — so this page exists to say it once, clearly, in one place, rather than leaving it scattered across disclaimers.</p>
@@ -186,7 +186,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="in">
     <div>
       <h4>Voltfield</h4>
-      <p>An independent engineering reference for energy-infrastructure and industrial power equipment. Nothing on this site is for sale. Price ranges in the spec library are indicative market benchmarks, published for budgeting and comparison — real pricing, availability and lead time come from the distributor, mill or OEM you buy from.</p>
+      <p>An independent engineering reference for energy-infrastructure and industrial power equipment. Nothing on this site is for sale. Price ranges in the spec library are indicative market benchmarks, published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
     </div>
     <div><h4>Sectors</h4><ul>
       <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>

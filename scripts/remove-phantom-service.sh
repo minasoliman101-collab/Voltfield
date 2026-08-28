@@ -31,7 +31,7 @@ sub about.html \
  'You can still configure a part, save it to a sourcing list, and send a request &mdash; it just gets routed to a person who connects you with the actual fulfilling distributor, mill, or OEM, rather than treated as a completed sale.' \
  'What replaced it is a reference: you can look up a family, see how it is specified, what standards apply, roughly what it costs and roughly how long it takes. There is no request to send and no one to send it to.'
 
-sub data-center-electrical-procurement.html \
+sub data-center-electrical-equipment.html \
  'Configure a specification, save it to a sourcing list, and send it over. It is routed to a person who connects you with the distributor, mill or OEM that can actually fulfil it &mdash; Voltfield does not stock or ship equipment itself.' "$REF"
 
 sub data-centers/backup-power.html \

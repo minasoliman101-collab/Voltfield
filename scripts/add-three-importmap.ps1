@@ -32,7 +32,7 @@ $PAGES = @(
   'voltfield-pod-designer.html',
   'voltfield-rack-builder.html',
   'voltfield-sandbox.html',
-  'rfq-toolkit.html',
+  'specification-checklist.html',
   'voltfield-bom-generator.html',
   'voltfield-bom.html',
   'voltfield-eol.html',

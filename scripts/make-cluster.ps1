@@ -93,7 +93,7 @@ $PAGES = @(
      collDesc='Medium-voltage transformers, collector switchgear, protection relays and station service equipment for battery energy storage projects.'
      ctaH3='Mapping the scope split?'
      ctaP='Work through what belongs in each package before the RFQ goes out, using the readiness checklist.'
-     ctaHref='/rfq-toolkit.html'; ctaLabel='Open the RFQ toolkit' },
+     ctaHref='/specification-checklist.html'; ctaLabel='Open the RFQ toolkit' },
 
   @{ dir='renewables'; slug='solar-inverters'; sector='Renewables'; sectorUrl='renewables.html'
      leaf='Solar Inverters'

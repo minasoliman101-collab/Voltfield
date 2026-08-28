@@ -27,7 +27,9 @@
 
 /about                              /about.html                             301!
 /battery-storage                    /battery-storage.html                   301!
-/data-center-electrical-procurement /data-center-electrical-procurement.html 301!
+/data-center-electrical-equipment /data-center-electrical-equipment.html 301!
+/data-center-electrical-procurement      /data-center-electrical-equipment.html   301!
+/data-center-electrical-procurement.html /data-center-electrical-equipment.html   301!
 /data-centers                       /data-centers.html                      301!
 /engineering-calculators            /engineering-calculators.html           301!
 /free-tools                         /free-tools.html                        301!
@@ -58,12 +60,14 @@
 /oil-gas                            /oil-gas.html                           301!
 /privacy-policy                     /privacy-policy.html                    301!
 /renewables                         /renewables.html                        301!
-/rfq-toolkit                        /rfq-toolkit.html                       301!
+/rfq-toolkit                        /specification-checklist.html                       301!
+/rfq-toolkit.html                   /specification-checklist.html                       301!
+/specification-checklist            /specification-checklist.html                       301!
 /site-search                        /site-search.html                       301!
 /voltfield-account                  /free-tools.html                        301!
 /voltfield-bom-generator            /voltfield-bom-generator.html           301!
 /voltfield-bom                      /voltfield-bom-generator.html           301!
-/voltfield-checkout                 /rfq-toolkit.html                       301!
+/voltfield-checkout                 /specification-checklist.html                       301!
 /voltfield-eol                      /voltfield-eol.html                     301!
 /voltfield-glossary-quiz            /voltfield-glossary-quiz.html           301!
 /voltfield-identify                 /voltfield-identify.html                301!
@@ -73,7 +77,7 @@
 /voltfield-pcb                      /voltfield-pcb.html                     301!
 /voltfield-pod-designer             /voltfield-pod-designer.html            301!
 /voltfield-rack-builder             /voltfield-rack-builder.html            301!
-/voltfield-rfq                      /rfq-toolkit.html                       301!
+/voltfield-rfq                      /specification-checklist.html                       301!
 /voltfield-sandbox                  /voltfield-sandbox.html                 301!
 /voltfield-suppliers                /voltfield-suppliers.html               301!
 /voltfield-supply-catalog           /voltfield-supply-catalog.html          301!
@@ -126,8 +130,8 @@
 # reference equivalent rather than 404ing, so any inbound link or indexed URL
 # still lands somewhere useful. The extensionless rules above point at the same
 # targets directly, so nothing redirects twice.
-/voltfield-checkout.html   /rfq-toolkit.html              301!
-/voltfield-rfq.html        /rfq-toolkit.html              301!
+/voltfield-checkout.html   /specification-checklist.html              301!
+/voltfield-rfq.html        /specification-checklist.html              301!
 /voltfield-account.html    /free-tools.html               301!
 /voltfield-bom.html        /voltfield-bom-generator.html  301!
 # ---- retired family reference pages ----

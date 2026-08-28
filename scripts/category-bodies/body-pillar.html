@@ -1,6 +1,6 @@
   <h2>Why this is a procurement problem before it is an engineering one</h2>
   <p>On a conventional building, electrical equipment is ordered once the design is largely settled. On a data centre that sequence no longer works. The longest-lead items &mdash; transformers, medium-voltage switchgear, generation &mdash; now quote in years rather than months, which means the order has to be placed against a preliminary specification, well before the design that would normally justify it is finished.</p>
-  <p>That inversion is what makes data centre electrical procurement its own discipline. The engineering decisions have not become harder; the consequence of making them late has. A transformer specified six months later than it could have been does not delay the transformer by six months &mdash; it can delay energisation by considerably more, because everything downstream is waiting on it.</p>
+  <p>That inversion is what makes data centre electrical equipment its own discipline. The engineering decisions have not become harder; the consequence of making them late has. A transformer specified six months later than it could have been does not delay the transformer by six months &mdash; it can delay energisation by considerably more, because everything downstream is waiting on it.</p>
 
   <div class="callout"><b>What the lead times look like right now.</b> Large power transformers are quoting toward 160 weeks and pad-mount units around 85. Medium-voltage switchgear is sold out through 2028 and gas turbines are quoting 2029+ delivery slots &mdash; both allocation positions rather than queues, meaning ordering earlier does not necessarily move you up. Diesel gensets sit around 90 weeks. Every figure is an indicative modelled position for North America, reviewed monthly, published with its basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>. None of them are quotations or inventory commitments.</div>
 
@@ -38,7 +38,7 @@
   <p>A circuit supplying a continuous load must be sized at 125&nbsp;% of that load, so usable capacity is 80&nbsp;% of the breaker rating. Data centre load is continuous, which makes a 20&nbsp;A circuit a 16&nbsp;A circuit in practice. Ignoring this consistently over-counts how many racks a room supports.</p>
 
   <h3>Reading an allocation position as a lead time</h3>
-  <p>&ldquo;Sold out through 2028&rdquo; is not a queue you join earlier by ordering sooner &mdash; it is committed manufacturing capacity. The productive conversation is about allocation, alternates and phased delivery, and it needs to happen far earlier than a normal procurement cycle would suggest.</p>
+  <p>&ldquo;Sold out through 2028&rdquo; is not a queue you join earlier by ordering sooner &mdash; it is committed manufacturing capacity. The productive conversation is about allocation, alternates and phased delivery, and it needs to happen far earlier than a normal design cycle would suggest.</p>
 
   <h2>Tools worth running before the RFQ</h2>
   <div class="rel">
@@ -50,7 +50,7 @@
     <a href="/voltfield-pod-designer.html"><span class="k">Practice</span><span class="t">Size a POD or skid to a redundancy target</span></a>
     <a href="/voltfield-rack-builder.html"><span class="k">Practice</span><span class="t">Rack U-space, derated power and weight</span></a>
     <a href="/voltfield-bom-generator.html"><span class="k">Teardown</span><span class="t">Component BOM for a configured part</span></a>
-    <a href="/rfq-toolkit.html"><span class="k">Template</span><span class="t">RFQ readiness checklist and spec templates</span></a>
+    <a href="/specification-checklist.html"><span class="k">Template</span><span class="t">RFQ readiness checklist and spec templates</span></a>
   </div>
 
   <h2>Background reading</h2>
@@ -77,4 +77,4 @@
   <p>Sometimes, particularly for interim or lower-capacity needs, usually at a premium over new. It is worth evaluating explicitly rather than treating new-build as the only path, especially where the alternative is holding up energisation.</p>
 
   <h3>How should these lead-time figures be used?</h3>
-  <p>For sequencing, not for pricing or commitment. They are indicative modelled positions for North America, reviewed monthly, and published with the basis of each figure stated. Actual lead time comes from the distributor, mill or OEM that fulfils the order.</p>
+  <p>For sequencing, not for pricing or commitment. They are indicative modelled positions for North America, reviewed monthly, and published with the basis of each figure stated. Actual lead time depends on the manufacturer, the configuration and the moment you ask.</p>

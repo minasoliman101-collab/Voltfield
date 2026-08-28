@@ -22,7 +22,7 @@ OLD='          <a href="free-tools.html">All Free Tools</a>
           <a href="voltfield-identify.html">Part ID</a>
           <a href="voltfield-eol.html">Obsolete/EOL</a>
           <a href="voltfield-glossary-quiz.html">Glossary Quiz</a>
-          <a href="rfq-toolkit.html">RFQ Toolkit</a>
+          <a href="specification-checklist.html">RFQ Toolkit</a>
           <a href="site-search.html">Search</a>'
 NEW='          <a href="free-tools.html" class="navdrop-all">All free tools</a>
           <span class="navdrop-grp">Calculate</span>
@@ -37,7 +37,7 @@ NEW='          <a href="free-tools.html" class="navdrop-all">All free tools</a>
           <span class="navdrop-grp">Look it up</span>
           <a href="voltfield-identify.html">Identify a part</a>
           <a href="voltfield-eol.html">Obsolete &amp; end-of-life</a>
-          <a href="rfq-toolkit.html">RFQ readiness checklist</a>
+          <a href="specification-checklist.html">RFQ readiness checklist</a>
           <a href="voltfield-glossary-quiz.html">Glossary quiz</a>'
 n=0
 for f in $(find . -name '*.html' -not -path './.git/*' -not -path './scripts/*'); do
