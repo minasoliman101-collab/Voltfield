@@ -62,65 +62,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
 <link rel="stylesheet" href="voltfield-core.css">
 <link rel="stylesheet" href="voltfield-component-viz.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <style>
-
-.artban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:32px 20px 34px}
-.artban-in{max-width:900px;margin:0 auto}
-.artban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:10px}
-.artban h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,44px);letter-spacing:.01em;line-height:1.06}
-.artban p.dek{color:#AFC0D3;font-size:15.5px;margin-top:14px;line-height:1.55;max-width:680px}
-.artwrap{max-width:900px;margin:0 auto;padding:36px 20px 8px}
-.artwrap h2{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:.01em;color:var(--ink);margin:34px 0 8px}
-.artwrap p{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:14px}
-.artwrap ul{margin:0 0 14px 20px}
-.artwrap li{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:6px}
-.artwrap a.inline{color:var(--link);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
 .toc{background:var(--card);border:1px solid var(--line-dark);padding:16px 20px;margin:22px 0;display:grid;gap:6px}
 @media(min-width:600px){.toc{grid-template-columns:1fr 1fr}}
 .toc b{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);grid-column:1/-1;margin-bottom:2px}
 .toc a{font-family:var(--disp);font-weight:600;font-size:14.5px;color:var(--ink-2);text-decoration:none;padding:4px 0}
 .toc a:hover{color:var(--link)}
 .toc a::before{content:"→ ";color:var(--link)}
-.callout{background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--signal);padding:16px 18px;margin:20px 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
 .estimator{background:var(--card);border:1px solid var(--line-dark);padding:20px;margin:16px 0 26px;scroll-margin-top:80px}
 .estimator h3{font-family:var(--disp);font-weight:700;font-size:19px;color:var(--ink);margin-bottom:4px}
 .estimator .sub{font-size:12.5px;color:var(--slate);margin-bottom:14px}
 .est-row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:10px}
 .est-field{display:flex;flex-direction:column;gap:4px}
 .est-field label{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--slate)}
-.est-field input,.est-field select{width:140px;border:1px solid var(--line-dark);padding:8px 10px;font-family:var(--mono);font-size:14px;background:#fff}
-.est-field button{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase}
+.est-field input,.est-field select{width:140px;border:1px solid var(--line-dark);padding:8px 10px;font-family:var(--mono);font-size:14px;background:var(--card)}
+.est-field button{background:var(--solid-bg);color:var(--solid-fg);border:0;padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase}
 .est-field button:hover{background:transparent;color:var(--ink)}
-.est-result{font-family:var(--mono);font-size:13.5px;color:var(--ink);background:#fff;border:1px solid var(--line);padding:12px 14px;margin-top:4px;display:none;line-height:1.6}
+.est-result{font-family:var(--mono);font-size:13.5px;color:var(--ink);background:var(--card);border:1px solid var(--line);padding:12px 14px;margin-top:4px;display:none;line-height:1.6}
 .est-result.show{display:block}
 .est-result b{color:var(--link)}
 .est-result.warn{border-color:var(--og);background:#FBF1EC}
-.formula{font-family:var(--mono);font-size:11.5px;color:var(--slate);background:#fff;border:1px dashed var(--line-dark);padding:8px 10px;margin-bottom:12px;display:inline-block}
-.reftable{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
-.reftable th,.reftable td{border:1px solid var(--line);padding:6px 8px;text-align:left;font-family:var(--mono)}
-.reftable th{background:var(--ink);color:#fff;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase}
-.reftable tr:nth-child(even) td{background:#fff}
-.reftable tr:nth-child(odd) td{background:var(--card)}
-.ctaband{background:linear-gradient(120deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;border-top:4px solid var(--signal)}
-.ctaband-in{max-width:1240px;margin:0 auto;padding:44px 20px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
-.ctaband h3{font-family:var(--disp);font-weight:700;font-size:28px;letter-spacing:.01em}
-.ctaband p{color:#AFC0D3;font-size:14px;margin-top:6px;max-width:460px}
-.ctabtn{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:14px 26px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.05em;text-decoration:none;flex-shrink:0}
-.ctabtn:hover{background:transparent;color:var(--signal)}
-footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
-footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
-@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
-footer h4{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
-footer p{line-height:1.6;max-width:460px}
-footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
-footer a{color:#9FB0C3;text-decoration:none}
-footer a:hover{color:#fff}
 .calclink{margin:-6px 0 14px}
 .calclink a{font-family:var(--mono);font-size:11.5px;color:var(--link);text-decoration:underline;text-decoration-color:var(--signal)}
 </style>
@@ -134,7 +101,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield home">
     <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
-    <span class="wordmark">VOLTFIELD<small>ENGINEERING REFERENCE & EQUIPMENT DATA</small></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
   </a>
   <nav class="hnav">
     <a href="index.html">Home</a>
@@ -177,7 +144,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main id="main" tabindex="-1">
 <section class="artban">
   <div class="artban-in">
-    <div style="font-family:var(--mono);font-size:11px;color:#8DA0B8;margin-bottom:12px"><a href="index.html" style="color:#8DA0B8;text-decoration:none">Home</a> / <span style="color:#E8EDF3">Engineering Calculators</span></div>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <span style="color:var(--ink)">Engineering Calculators</span></div>
     <div class="eyebrow">Free Tools · No Signup</div>
     <h1>Engineering Calculators for Power &amp; Energy Systems</h1>
     <p class="dek">A full set of client-side calculators for early-stage sizing and budgetary planning — cable sizing, transformer &amp; BESS sizing, solar strings, fault current, arc-flash incident energy, power factor correction, and unit conversion. Standard formulas, your inputs, nothing sent to a server.</p>

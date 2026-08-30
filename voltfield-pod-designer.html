@@ -42,7 +42,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="voltfield-core.css">
 <link rel="stylesheet" href="voltfield-component-viz.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
@@ -65,32 +65,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 ]}
 </script>
 <style>
-
-.artban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal)}
-.artban-in{max-width:900px;margin:0 auto;padding:32px 20px 30px}
 .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:12px}
-.artban h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,44px);line-height:1.04}
-.artban .dek{margin-top:14px;font-size:15.5px;color:#C9D3DF;max-width:680px;line-height:1.6}
-.artwrap{max-width:900px;margin:0 auto;padding:30px 20px 60px}
-.artwrap>p.note{font-size:13px;color:var(--slate);background:var(--card);border:1px solid var(--line);padding:12px 16px;margin-bottom:22px}
 
-.modebar{display:flex;gap:0;border:2px solid var(--ink);margin-bottom:18px;width:fit-content}
+.modebar{display:flex;gap:0;border:1px solid var(--line-dark);margin-bottom:18px;width:fit-content}
 .modebar button{background:var(--card);border:0;padding:10px 18px;font-family:var(--disp);font-weight:600;font-size:14.5px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-2);border-right:2px solid var(--ink)}
 .modebar button:last-child{border-right:0}
-.modebar button.on{background:var(--ink);color:var(--signal)}
+.modebar button.on{background:var(--solid-bg);color:var(--solid-fg)}
 
 .scenariobar{background:var(--card);border:1px solid var(--line-dark);padding:14px 16px;margin-bottom:20px;display:none}
 .scenariobar.show{display:block}
-.scenariobar select{width:100%;padding:8px 10px;border:2px solid var(--ink);background:#fff;font-family:var(--disp);font-weight:600;font-size:14.5px;margin-bottom:8px}
+.scenariobar select{width:100%;padding:8px 10px;border:1px solid var(--line-dark);background:var(--card);font-family:var(--disp);font-weight:600;font-size:14.5px;margin-bottom:8px}
 .scenariobar .prompt{font-size:13.5px;color:var(--ink-2);line-height:1.55}
 .scenariobar .solved{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ok);text-transform:uppercase}
 
 .enclosurebar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:22px}
-.enctoggle{display:flex;border:2px solid var(--ink)}
-.enctoggle button{background:#fff;border:0;padding:9px 16px;font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.03em;text-transform:uppercase;border-right:2px solid var(--ink)}
+.enctoggle{display:flex;border:1px solid var(--line-dark)}
+.enctoggle button{background:var(--card);border:0;padding:9px 16px;font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.03em;text-transform:uppercase;border-right:2px solid var(--ink)}
 .enctoggle button:last-child{border-right:0}
-.enctoggle button.on{background:var(--signal);color:var(--ink)}
-.enclosurebar select{padding:8px 10px;border:2px solid var(--ink);background:#fff;font-family:var(--mono);font-size:13px}
+.enctoggle button.on{background:var(--signal);color:var(--on-signal)}
+.enclosurebar select{padding:8px 10px;border:1px solid var(--line-dark);background:var(--card);font-family:var(--mono);font-size:13px}
 .enclosurebar .encnote{font-size:12.5px;color:var(--slate);flex-basis:100%}
 
 .compdetail{margin-bottom:22px}
@@ -100,36 +93,36 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .viewtabs{display:inline-flex;border:1px solid var(--line-dark)}
 .viewtabs button{background:none;border:0;border-right:1px solid var(--line-dark);padding:7px 14px;font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);cursor:pointer}
 .viewtabs button:last-child{border-right:0}
-.viewtabs button.on{background:var(--ink);color:var(--signal)}
-.pod3d{height:420px;background:var(--card);border:2px solid var(--ink)}
+.viewtabs button.on{background:var(--solid-bg);color:var(--solid-fg)}
+.pod3d{height:420px;background:var(--card);border:1px solid var(--line-dark)}
 .p3dhint{font-family:var(--mono);font-size:10px;color:var(--slate);margin:7px 0 22px;text-align:center;letter-spacing:.05em}
 .pod3d .p3dempty{font-family:var(--mono);font-size:12px;color:var(--slate);padding:24px;text-align:center;line-height:1.7}
-.diagram{background:var(--card);border:2px solid var(--ink);padding:20px;margin-bottom:22px;overflow-x:auto}
+.diagram{background:var(--card);border:1px solid var(--line-dark);padding:20px;margin-bottom:22px;overflow-x:auto}
 .diagram-row{display:flex;align-items:stretch;gap:0;min-width:640px}
-.dblock{flex:1;border:2px solid var(--line-dark);background:#fff;padding:10px 12px;position:relative;min-height:74px;display:flex;flex-direction:column;justify-content:center}
+.dblock{flex:1;border:2px solid var(--line-dark);background:var(--card);padding:10px 12px;position:relative;min-height:74px;display:flex;flex-direction:column;justify-content:center}
 .dblock.filled{border-color:var(--ink)}
 .dblock .dl{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}
 .dblock .dv{font-family:var(--disp);font-weight:600;font-size:15.5px;margin-top:3px;color:var(--ink)}
-.dblock.empty .dv{color:var(--line-dark)}
+.dblock.empty .dv{color:var(--slate)}
 .darrow{width:22px;display:flex;align-items:center;justify-content:center;color:var(--line-dark);font-size:18px;flex-shrink:0}
 .dbranch{display:flex;gap:0;min-width:640px;margin-top:0}
 .dbranch .dblock{flex:1}
 
 .slotgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:22px}
-.slot{background:#fff;border:1px solid var(--line-dark);padding:14px 16px}
+.slot{background:var(--card);border:1px solid var(--line-dark);padding:14px 16px}
 .slot label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);margin-bottom:8px}
-.slot select,.slot input[type="number"]{width:100%;padding:9px 10px;border:2px solid var(--ink);background:#fff;font-family:var(--disp);font-weight:600;font-size:15.5px;color:var(--ink)}
+.slot select,.slot input[type="number"]{width:100%;padding:9px 10px;border:1px solid var(--line-dark);background:var(--card);font-family:var(--disp);font-weight:600;font-size:15.5px;color:var(--ink)}
 
 .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
 .btnrow button{padding:12px 22px;font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:.04em}
-#checkBtn{background:var(--signal);color:var(--ink);border:2px solid var(--signal)}
+#checkBtn{background:var(--signal);color:var(--on-signal);border:2px solid var(--signal)}
 #checkBtn:hover{background:transparent;border-color:var(--ink)}
 .ghost{background:none;border:2px solid var(--line-dark);color:var(--ink-2)}
 .ghost:hover{border-color:var(--ink);color:var(--ink)}
 
 .checklist{display:none;flex-direction:column;gap:8px;margin-bottom:20px}
 .checklist.show{display:flex}
-.checkcard{border:1px solid var(--line-dark);background:#fff;padding:12px 14px;display:flex;gap:12px;align-items:flex-start}
+.checkcard{border:1px solid var(--line-dark);background:var(--card);padding:12px 14px;display:flex;gap:12px;align-items:flex-start}
 .checkcard .cx{width:24px;height:24px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;font-family:var(--mono)}
 .checkcard.pass .cx{background:#DCEEE1;color:var(--ok)}
 .checkcard.fail .cx{background:#F8D9D5;color:var(--crit)}
@@ -139,24 +132,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .scorebar{display:none;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;letter-spacing:.04em;background:var(--card);border:1px solid var(--line-dark);padding:10px 16px;margin-bottom:20px}
 .scorebar.show{display:flex}
 .scorebar b{color:var(--link);font-size:16px}
-
-.section{max-width:900px;margin:0 auto;padding:0 20px 50px}
-.section h2{font-family:var(--disp);font-weight:700;font-size:26px;margin-bottom:10px}
-.section h3{font-family:var(--disp);font-weight:600;font-size:17px;margin:16px 0 6px}
-.section p{font-size:14.5px;color:var(--ink-2);line-height:1.65;max-width:70ch;margin-bottom:10px}
-.section a.inline{color:var(--link);font-weight:600;text-decoration:underline}
 .faqitem{background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px}
 .faqitem summary{font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer}
 .faqitem p{margin-top:10px;font-size:13.5px}
-
-footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
-footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
-@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
-footer h4{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
-footer p{line-height:1.6;max-width:460px}
-footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
-footer a{color:#9FB0C3;text-decoration:none}
-footer a:hover{color:#fff}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Free Tools","item":"https://voltfield.org/free-tools.html"},{"@type":"ListItem","position":3,"name":"POD & Skid Designer","item":"https://voltfield.org/voltfield-pod-designer.html"}]}
@@ -171,7 +149,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield home">
     <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
-    <span class="wordmark">VOLTFIELD<small>ENGINEERING REFERENCE & EQUIPMENT DATA</small></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
   </a>
   <nav class="hnav">
     <a href="index.html">Home</a>
@@ -215,7 +193,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section class="artban">
   <div class="artban-in">
-    <div style="font-family:var(--mono);font-size:11px;color:#8DA0B8;margin-bottom:12px"><a href="index.html" style="color:#8DA0B8;text-decoration:none">Home</a> / <span style="color:#E8EDF3">POD &amp; Skid Designer</span></div>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <span style="color:var(--ink)">POD &amp; Skid Designer</span></div>
     <div class="eyebrow">Free · No Signup · Runs In Your Browser</div>
     <h1>Size a power POD — or the skid underneath it.</h1>
     <p class="dek">Set a target load and redundancy level, pick a transformer, switchgear, distribution, backup power, and cooling, then check your sizing instantly. Same tool either way — toggle <b>POD</b> for a walk-in enclosure with a footprint budget, or <b>Skid</b> for the open-frame version without the shell.</p>
@@ -576,7 +554,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if(+$('distSel').value) list.push({shape:'busway',      color:'#2B6CB0'});
     const bType=$('backupSel').value.split('|')[0];
     if(bType==='gen') list.push({shape:'genset', color:'#9C4221'});
-    else if(bType==='ups') list.push({shape:'battery', color:'#B7791F'});
+    else if(bType==='ups') list.push({shape:'battery', color:'var(--bess)'});
     if(+$('coolSel').value) list.push({shape:'cooling', color:'#2B6CB0'});
     return list;
   }
@@ -741,7 +719,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   function toast(msg){
     let t=$('vfToast');
     if(!t){ t=document.createElement('div'); t.id='vfToast';
-      t.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;font-family:var(--mono);font-size:12.5px;z-index:200;border:1px solid var(--signal)';
+      t.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--solid-bg);color:var(--solid-fg);padding:10px 18px;font-family:var(--mono);font-size:12.5px;z-index:200;border:1px solid var(--signal)';
       document.body.appendChild(t);
     }
     t.textContent=msg; t.style.opacity='1';

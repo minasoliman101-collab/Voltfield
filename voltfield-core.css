@@ -1,14 +1,34 @@
 /* VOLTFIELD -- shared design-system CSS: tokens, base reset, header/nav chrome.
    Loaded on every page; keep in sync with any header/nav markup changes.
-   Page-specific styles stay inline in each page's own <style> block. */
+   Page-specific styles stay inline in each page's own <style> block.
+
+   2026 redesign. The previous look was hard-edged and industrial: 2px near-black
+   borders on everything, condensed uppercase headings, mono micro-labels at
+   9.5px, and a mid-grey page ground that made every card fight for attention.
+   This pass keeps the structure and every class name -- so all 50 pages inherit
+   it -- and changes three things:
+     surfaces  light, near-white ground with white cards, separated by hairlines
+               and soft shadows rather than heavy strokes;
+     type      one family (IBM Plex Sans) doing display and body, sentence case,
+               negative tracking on headings. Mono is reserved for numbers and
+               data, where it earns its place on an engineering reference;
+     motion    a single easing curve and short durations, applied consistently.
+   Text colours are deliberately untouched -- they were tuned against measured
+   contrast ratios (see below) and only gain margin on a lighter ground. */
 :root{
   /* --slate was #5B6B7E, which measured 4.28:1 on --paper -- just under the
      4.5 AA needs, and it carries breadcrumbs, table headers and meta text at
      10-11px, so it accounted for every remaining contrast failure on a page.
      Nudged down to 4.76:1 on --paper and 5.59:1 on --card. The dark theme
      overrides --slate separately and is unaffected. */
-  --ink:#101B2D;--ink-2:#22334C;--slate:#556475;--paper:#DDE5EC;--card:#F3F6FA;
-  --line:#C4CFDA;--line-dark:#A7B6C6;--signal:#FFC400;--signal-deep:#E5AC00;
+  --ink:#101B2D;--ink-2:#2C3E57;--slate:#556475;
+  /* Surfaces. --paper was #DDE5EC and --card #F3F6FA: only 4% apart in
+     lightness, so cards were told apart by their borders alone, which is why
+     the borders had to be so heavy. Widening the gap and putting cards on pure
+     white lets a 1px hairline do the same job quietly. */
+  --paper:#F5F7FA;--card:#FFFFFF;--sunk:#EDF1F6;
+  --line:#E3E9F0;--line-dark:#CBD5E1;--line-strong:#94A3B4;
+  --signal:#FFC400;--signal-deep:#E5AC00;
   --crit:#C43D2E;--warn:#D98E04;--ok:#2E7D4F;
   /* Text-on-light colours, kept separate from the signal/status colours above.
      Those are tuned to read as brand amber / status hues when used for fills,
@@ -21,8 +41,49 @@
        --crit-ink   5.9:1 on the red badge ground   (was 4.23)
        --ok-ink     5.7:1 on the green badge ground (was 4.37) */
   --link:#7E5800;--warn-ink:#8A5A02;--crit-ink:#A32A1C;--ok-ink:#236A41;
-  --dc:#2B6CB0;--re:#2E7D4F;--bess:#B7791F;--og:#9C4221;--mro:#5B6B7E;
-  --mono:'IBM Plex Mono',ui-monospace,monospace;--body:'IBM Plex Sans',system-ui,sans-serif;--disp:'Barlow Condensed',sans-serif;
+  /* --bess was #B7791F. Every sector colour is used as a badge fill with white
+     text on it (.nc-sec, .cq-sec, the sector dots); measured against white the
+     other four clear AA at 5.0-6.5:1, but #B7791F came out at 3.64 where 10px
+     badge text needs 4.5. Darkened to 5.11:1. It still reads as the storage
+     amber-brown, and as a dot or band nothing else changes. */
+  --dc:#2B6CB0;--re:#2E7D4F;--bess:#976314;--og:#9C4221;--mro:#5B6B7E;
+
+  /* One family for display and body. --disp stays as a token so the 50 pages
+     that reference it need no edit; it simply resolves to Plex Sans now.
+     Barlow Condensed is no longer requested by any page. */
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',monospace;
+  --body:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --disp:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+
+  /* Radii, elevation and motion. Three shadow steps rather than one hard
+     offset: resting cards, hovered cards, and floating layers (menus, popovers). */
+  --r-sm:6px;--r:10px;--r-lg:14px;--r-xl:20px;--r-pill:999px;
+  --sh-1:0 1px 2px rgba(16,27,45,.05),0 1px 3px rgba(16,27,45,.05);
+  --sh-2:0 2px 4px rgba(16,27,45,.04),0 8px 20px rgba(16,27,45,.07);
+  --sh-3:0 4px 8px rgba(16,27,45,.05),0 16px 40px rgba(16,27,45,.12);
+  /* Solid-button pair. A button painted background:var(--ink) with literal #fff
+     text is correct in the light theme and invisible in the dark one, where
+     --ink resolves to a near-white. Rather than keep extending the override
+     list in voltfield-dark-mode.css one selector at a time, the pair is a
+     token: the dark theme swaps it to amber-on-ink once, and every solid
+     button on the site follows. */
+  --solid-bg:var(--ink);--solid-fg:#fff;
+  /* Text drawn on the brand amber. Amber is amber in both themes, so the ink
+     on top of it must NOT be var(--ink) -- that token flips to a near-white in
+     the dark theme and the label disappears. Same value in both themes. */
+  --on-signal:#101B2D;
+  /* Surfaces that are dark in BOTH themes -- the practice feature band, the
+     compare bar, toasts, the daily-challenge strip. They must not use --ink
+     (which flips) nor the solid-button pair (whose foreground flips): the
+     ground never changes, so neither should the text on it. */
+  --surface-dark:#101B2D;--on-surface-dark:#E8EDF3;
+  /* Status tints. These grounds were hardcoded light hexes on every page, so
+     in the dark theme they stayed pale while the ink on them flipped light.
+     Tokenised so ground and ink move together. */
+  --tint-ok:#E7F1EB;--tint-warn:#FBF0DA;--tint-crit:#F7E4E1;--tint-signal:#FFF6DA;
+  --ease:cubic-bezier(.4,0,.2,1);
+  --dur:.22s;
+  --shell:1200px;
 }
 
 /* Skip link. The header carries a full nav plus a Tools dropdown, so without
@@ -30,10 +91,10 @@
    every page before reaching the content. Off-screen until focused, then it
    pins to the top-left as a normal-looking control. */
 .skip-link{position:absolute;left:-9999px;top:0;z-index:9999;
-  background:var(--signal);color:var(--ink);font-family:var(--disp);font-weight:700;
-  font-size:15px;letter-spacing:.04em;padding:12px 20px;text-decoration:none;
-  border:2px solid var(--ink)}
-.skip-link:focus{left:8px;top:8px}
+  background:var(--solid-bg);color:var(--solid-fg);font-family:var(--disp);font-weight:600;
+  font-size:14px;letter-spacing:0;padding:12px 20px;text-decoration:none;
+  border-radius:var(--r-sm);box-shadow:var(--sh-3)}
+.skip-link:focus{left:12px;top:12px}
 
 /* Available to assistive technology, absent from the visual layout. Used for
    text that explains a control whose meaning is obvious on screen but not to a
@@ -50,32 +111,84 @@ canvas[role="img"]:focus-visible{outline:3px solid var(--signal);outline-offset:
 /* The skip target takes focus programmatically, so it must not draw a focus
    ring around the whole page. */
 #main:focus{outline:none}
+
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility}
 button,a,input,select,textarea{font-family:inherit}
 button,a{cursor:pointer}
 a{color:inherit}
-:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+img,svg,video{max-width:100%}
+h1,h2,h3,h4,h5{font-family:var(--disp);font-weight:600;letter-spacing:-.021em;
+  line-height:1.15;text-wrap:balance;color:var(--ink)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-.utilbar{background:var(--ink);color:#C9D3DF;font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:6px 20px;display:flex;justify-content:space-between;gap:12px}
-.utilbar b{color:var(--signal);font-weight:600}
+
+/* Numbers set in mono should line up in columns. */
+.mono,.hstat .k,.tstat .k{font-variant-numeric:tabular-nums}
+
+/* Form controls. The pages each style their own inputs, so rather than edit
+   fifty copies this rounds every control at the tag level -- square-cornered
+   inputs next to pill buttons was the last thing still reading as the old
+   look. Anything that sets its own border-radius still wins. */
+input:not([type=checkbox]):not([type=radio]),select,textarea{border-radius:var(--r-sm)}
+input:not([type=checkbox]):not([type=radio]):focus-visible,
+select:focus-visible,textarea:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
+
+/* ---------- utility bar ---------- */
+.utilbar{background:var(--ink);color:#B6C4D4;font-family:var(--mono);font-size:11px;
+  letter-spacing:.02em;padding:7px 24px;display:flex;justify-content:space-between;gap:12px}
+.utilbar b{color:var(--signal);font-weight:500}
 .utilbar .right{display:none}
 @media(min-width:720px){.utilbar .right{display:block}}
-header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:60}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
-.logo .bolt{width:34px;height:34px;background:var(--signal);display:grid;place-items:center;border:2px solid var(--ink)}
-.logo .bolt svg{width:18px;height:18px}
-.logo .wordmark{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.02em;line-height:1}
-.logo .wordmark small{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.18em;color:var(--slate)}
-.hnav{display:none;gap:4px}
-.navtoggle{display:none;background:var(--ink);color:#fff;border:2px solid var(--ink);width:42px;height:38px;font-size:20px;line-height:1;align-items:center;justify-content:center;flex-shrink:0}
+
+/* ---------- header ----------
+   Was a 2px black rule under an off-white bar. Now a translucent, blurred bar
+   over a hairline: it stays legible as content scrolls beneath it without
+   drawing a hard line across the page. */
+header.site{background:rgba(255,255,255,.82);backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid var(--line);padding:10px 24px;display:flex;align-items:center;
+  gap:14px;flex-wrap:wrap;position:sticky;top:0;z-index:60}
+@supports not (backdrop-filter:blur(1px)){header.site{background:var(--card)}}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);
+  border-radius:var(--r-sm)}
+.logo .bolt{width:32px;height:32px;background:var(--ink);display:grid;place-items:center;
+  border-radius:8px;flex-shrink:0;transition:transform var(--dur) var(--ease)}
+.logo:hover .bolt{transform:rotate(-6deg) scale(1.05)}
+.logo .bolt svg{width:17px;height:17px}
+.logo .bolt svg path{fill:var(--signal)}
+.logo .wordmark{font-family:var(--disp);font-weight:600;font-size:20px;
+  letter-spacing:-.025em;line-height:1.1}
+.logo .wordmark small{display:block;font-family:var(--body);font-weight:400;font-size:10.5px;
+  letter-spacing:.005em;color:var(--slate);text-transform:none;margin-top:1px}
+
+/* ---------- primary nav ----------
+   Sentence case, no tracking, no uppercase. The active item is a soft pill
+   rather than an amber underline -- quieter, and it reads as a state instead
+   of a decoration. */
+.hnav{display:none;gap:2px;align-items:center}
+.navtoggle{display:none;background:transparent;color:var(--ink);
+  border:1px solid var(--line-dark);border-radius:var(--r-sm);width:40px;height:40px;
+  font-size:18px;line-height:1;align-items:center;justify-content:center;flex-shrink:0;
+  transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease)}
+.navtoggle:hover{background:var(--sunk);border-color:var(--line-strong)}
+
 /* Boundary is 899.98px, not 899px: paired with @media(min-width:900px) below, an
    integer boundary leaves a gap at fractional viewport widths (browser zoom, or
    certain device pixel ratios put the layout viewport at e.g. 899.5px). In that
    gap NEITHER query matched, so .hnav was display:none with the hamburger also
    hidden -- the navigation disappeared entirely. Reproduced at innerWidth 899. */
-@media(max-width:899.98px){.navtoggle{display:inline-flex}.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:2px solid var(--ink);padding:6px 12px 10px;gap:0;box-shadow:0 10px 20px rgba(16,27,45,.14);z-index:59}.hnav.open a{padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}.hnav.open a:last-child{border-bottom:0}.hnav.open a.on{border-left-color:var(--signal);color:var(--ink)}
+@media(max-width:899.98px){
+.navtoggle{display:inline-flex}
+.hnav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;
+  background:var(--card);border-bottom:1px solid var(--line);padding:8px 14px 14px;gap:0;
+  box-shadow:var(--sh-3);z-index:59}
+.hnav.open a{padding:12px 10px;border-bottom:1px solid var(--line);border-radius:var(--r-sm)}
+.hnav.open a:last-child{border-bottom:0}
+.hnav.open a.on{background:var(--sunk);color:var(--ink)}
 /* The open mobile menu MUST scroll internally. It is absolutely positioned
    inside a position:sticky header, so it stays pinned to the top of the
    viewport no matter how far the page scrolls -- anything taller than the
@@ -86,6 +199,7 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
    the fallback covers the moment before that script runs. dvh rather than vh
    so mobile browser chrome collapsing does not clip the last item. */
 .hnav.open{max-height:calc(100vh - var(--vf-header-h, 132px));max-height:calc(100dvh - var(--vf-header-h, 132px));overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}}
+
 @media(min-width:900px){.hnav{display:flex}.navdrop:hover .navdrop-menu,.navdrop:focus-within .navdrop-menu{display:flex}
 /* Same problem as the mobile menu, on a short desktop window: the menu is
    absolutely positioned inside a sticky header, so on a short viewport the
@@ -96,51 +210,97 @@ header.site{background:var(--card);border-bottom:2px solid var(--ink);padding:14
    menu is position:static inside the already-scrolling .hnav, and giving it
    its own scroller there would nest two of them. */
 .navdrop-menu{max-height:calc(100vh - var(--vf-header-h, 60px) - 16px);max-height:calc(100dvh - var(--vf-header-h, 60px) - 16px);overflow-y:auto;overscroll-behavior:contain}}
-.hnav a{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:uppercase;border-bottom:3px solid transparent}
-.hnav a:hover{color:var(--ink);background:var(--paper)}
-.hnav a.on{color:var(--ink);border-bottom-color:var(--signal)}
+
+.hnav a{font-family:var(--disp);font-weight:500;font-size:14.5px;letter-spacing:-.008em;
+  padding:8px 12px;color:var(--ink-2);text-decoration:none;text-transform:none;
+  border-radius:var(--r-sm);transition:background var(--dur) var(--ease),color var(--dur) var(--ease)}
+.hnav a:hover{color:var(--ink);background:var(--sunk)}
+.hnav a.on{color:var(--ink);background:var(--sunk);font-weight:600}
 .navdrop{position:relative}
-.navdrop-btn{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.04em;padding:8px 12px;color:var(--ink-2);text-transform:uppercase;border:0;border-bottom:3px solid transparent;background:none;display:inline-flex;align-items:center;gap:4px}
-.navdrop-btn:hover{color:var(--ink);background:var(--paper)}
-.navdrop-btn.on{color:var(--ink);border-bottom-color:var(--signal)}
-.navdrop-btn .car{width:8px;height:8px;flex-shrink:0}
-.navdrop-menu{display:none;position:absolute;top:100%;left:0;background:var(--card);border:2px solid var(--ink);min-width:190px;z-index:70;flex-direction:column}
+.navdrop-btn{font-family:var(--disp);font-weight:500;font-size:14.5px;letter-spacing:-.008em;
+  padding:8px 12px;color:var(--ink-2);text-transform:none;border:0;background:none;
+  border-radius:var(--r-sm);display:inline-flex;align-items:center;gap:5px;
+  transition:background var(--dur) var(--ease),color var(--dur) var(--ease)}
+.navdrop-btn:hover{color:var(--ink);background:var(--sunk)}
+.navdrop-btn.on{color:var(--ink);background:var(--sunk);font-weight:600}
+.navdrop-btn .car{width:9px;height:9px;flex-shrink:0;opacity:.6;
+  transition:transform var(--dur) var(--ease)}
+.navdrop:hover .navdrop-btn .car,.navdrop.open .navdrop-btn .car{transform:rotate(180deg)}
+
+/* ---------- dropdown ---------- */
+.navdrop-menu{display:none;position:absolute;top:calc(100% + 8px);left:0;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
+  box-shadow:var(--sh-3);min-width:210px;z-index:70;flex-direction:column;padding:6px}
 .navdrop.open .navdrop-menu{display:flex}
-.navdrop-menu a{padding:10px 14px;font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line)}
-.navdrop-menu a:last-child{border-bottom:0}
-.navdrop-menu a:hover{background:var(--paper);color:var(--ink)}
-.navdrop-menu a.on{color:var(--ink);background:var(--paper);border-left:3px solid var(--signal)}
+.navdrop-menu a{padding:9px 12px;font-family:var(--disp);font-weight:500;font-size:14px;
+  letter-spacing:-.008em;text-transform:none;color:var(--ink-2);text-decoration:none;
+  border-bottom:0;border-radius:var(--r-sm);transition:background var(--dur) var(--ease)}
+.navdrop-menu a:hover{background:var(--sunk);color:var(--ink)}
+.navdrop-menu a.on{color:var(--ink);background:var(--sunk);font-weight:600}
+
 @media(max-width:899.98px){
-.navdrop-btn{width:100%;justify-content:space-between;padding:12px 6px;border-bottom:1px solid var(--line);border-left:3px solid transparent}
-.navdrop-btn.on{border-left-color:var(--signal);border-bottom-color:var(--line)}
-.navdrop-menu{display:none;position:static;border:0;min-width:0;background:var(--paper)}
+.navdrop-btn{width:100%;justify-content:space-between;padding:12px 10px;
+  border-bottom:1px solid var(--line);border-radius:var(--r-sm)}
+.navdrop-btn.on{background:var(--sunk)}
+.navdrop-menu{display:none;position:static;border:0;min-width:0;background:transparent;
+  box-shadow:none;padding:0;border-radius:0}
 .navdrop.open .navdrop-menu{display:flex}
-.navdrop-menu a{padding-left:26px;border-bottom:1px solid var(--line)}
+.navdrop-menu a{padding-left:22px;border-bottom:1px solid var(--line);border-radius:0}
 .navdrop-btn .car{display:none}
 }
-.headright{margin-left:auto;display:flex;align-items:center;gap:10px}
-.quotebtn{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:8px;text-decoration:none}
-.quotebtn .ct{background:var(--signal);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;min-width:22px;height:22px;display:grid;place-items:center}
+.headright{margin-left:auto;display:flex;align-items:center;gap:8px}
+
+/* Dark-mode toggle. Injected into .headright by voltfield-site-config.js,
+   which used to carry these as inline styles; they live here so the control
+   matches the rest of the header chrome and follows the theme tokens. */
+#themeToggle,.themetoggle{background:transparent;color:var(--ink-2);
+  border:1px solid var(--line-dark);border-radius:var(--r-sm);width:40px;height:40px;
+  font-size:16px;line-height:1;display:inline-flex;align-items:center;justify-content:center;
+  flex-shrink:0;order:-1;
+  transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease)}
+#themeToggle:hover,.themetoggle:hover{background:var(--sunk);color:var(--ink);
+  border-color:var(--line-strong)}
+.quotebtn{background:var(--solid-bg);color:var(--solid-fg);border:0;padding:9px 16px;
+  font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:-.008em;
+  display:flex;align-items:center;gap:8px;text-decoration:none;border-radius:var(--r-pill);
+  transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+.quotebtn:hover{transform:translateY(-1px);box-shadow:var(--sh-2)}
+.quotebtn .ct{background:var(--signal);color:var(--on-signal);font-family:var(--mono);
+  font-size:11.5px;font-weight:600;min-width:20px;height:20px;border-radius:var(--r-pill);
+  display:grid;place-items:center;padding:0 6px}
+
+/* ---------- shared button vocabulary ----------
+   New in this pass. The old pages each rolled their own square amber button;
+   these give the page-by-page rollout something consistent to convert them to. */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:-.01em;
+  padding:12px 22px;border-radius:var(--r-pill);border:1px solid transparent;
+  text-decoration:none;white-space:nowrap;
+  transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),
+    background var(--dur) var(--ease),border-color var(--dur) var(--ease)}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--solid-bg);color:var(--solid-fg)}
+.btn-primary:hover{box-shadow:var(--sh-2)}
+.btn-signal{background:var(--signal);color:var(--on-signal)}
+.btn-signal:hover{box-shadow:0 6px 18px rgba(255,196,0,.34)}
+.btn-ghost{background:var(--card);color:var(--ink);border-color:var(--line-dark)}
+.btn-ghost:hover{border-color:var(--line-strong);box-shadow:var(--sh-1)}
+.btn-sm{padding:8px 16px;font-size:14px}
 
 /* ---------- pseudo-3D icon tiles ----------
-   Every category/tool icon site-wide (catalog part icons via vfPartVisual(),
-   homepage switchgrid .sw-icon, sector "popular categories" .cq-icon) gets a
-   tilted-card look: a perspective transform plus a hard-edged offset shadow
-   that traces the icon's own silhouette, so it reads as a small dimensional
-   tile rather than a flat glyph. No new markup, no external assets -- pure
-   CSS on the existing icon elements. Settles flatter and lifts slightly on
-   hover/focus for a tactile response. */
+   The previous version tilted every category and tool icon in perspective and
+   traced it with a hard offset shadow. At a dozen icons per screen that read as
+   noise, and it was the single biggest contributor to the "industrial clutter"
+   the redesign is answering. The tilt is gone; icons now sit flat and simply
+   lift a little on hover, which is enough feedback for a link target. */
 .vf-cat-icon,.sw-icon,.cq-icon{
-  transform:perspective(500px) rotateX(10deg) rotateY(-14deg);
-  filter:drop-shadow(4px 6px 0 rgba(16,27,45,.16)) drop-shadow(4px 7px 9px rgba(16,27,45,.12));
-  transition:transform .25s ease,filter .25s ease;
-  will-change:transform;
+  transition:transform var(--dur) var(--ease),opacity var(--dur) var(--ease);
 }
 a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
 .switch:hover .sw-icon,.switch:focus-visible .sw-icon,
 .catq:hover .cq-icon,.catq:focus-visible .cq-icon{
-  transform:perspective(500px) rotateX(4deg) rotateY(-6deg) scale(1.06) translateY(-2px);
-  filter:drop-shadow(2px 4px 0 rgba(16,27,45,.2)) drop-shadow(5px 9px 13px rgba(16,27,45,.16));
+  transform:translateY(-2px) scale(1.04);
 }
 @media (prefers-reduced-motion:reduce){
   .vf-cat-icon,.sw-icon,.cq-icon{transition:none}
@@ -150,22 +310,24 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
    Lives in core rather than per-page <style> because it appears on all 18
    guides. Tokenised throughout, so the dark theme needs no override. */
 .provenance{
-  max-width:780px;margin:34px auto 8px;padding:18px 20px;
-  background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--slate);
+  max-width:780px;margin:40px auto 8px;padding:22px 24px;
+  background:var(--card);border:1px solid var(--line);border-left:3px solid var(--line-strong);
+  border-radius:var(--r);box-shadow:var(--sh-1);
 }
 .provenance h2{
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--slate);margin:0 0 12px;font-weight:600;
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--slate);margin:0 0 14px;font-weight:500;
 }
 .provenance dl{margin:0;display:grid;gap:10px}
 .provenance dt{
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;
+  font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;
   color:var(--slate);margin-bottom:2px;
 }
-.provenance dd{margin:0;font-size:13px;line-height:1.65;color:var(--ink-2)}
+.provenance dd{margin:0;font-size:14px;line-height:1.65;color:var(--ink-2)}
 .provenance ul{margin:0;padding-left:18px}
-.provenance li{font-size:13px;line-height:1.6;color:var(--ink-2);margin-bottom:3px}
-.provenance a{color:var(--link);font-weight:600;text-decoration:underline}
+.provenance li{font-size:14px;line-height:1.6;color:var(--ink-2);margin-bottom:3px}
+.provenance a{color:var(--link);font-weight:500;text-decoration:underline;
+  text-underline-offset:2px}
 @media(min-width:640px){
   .provenance dl{grid-template-columns:auto 1fr;gap:10px 20px;align-items:baseline}
   .provenance dt{margin-bottom:0;white-space:nowrap}
@@ -176,35 +338,42 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
    chrome. This block carries the text that explains what the tool does and
    answers the questions people actually arrive with. Tokenised so it inherits
    dark mode with everything else. */
-.toolseo{max-width:820px;margin:34px auto 0;padding:0 18px 8px}
-.toolseo h2{font-family:var(--disp);font-weight:700;font-size:27px;line-height:1.15;
-  color:var(--ink);margin:30px 0 10px;text-wrap:balance}
-.toolseo h3{font-family:var(--disp);font-weight:600;font-size:19px;line-height:1.25;
-  color:var(--ink);margin:22px 0 6px}
-.toolseo p{font-size:15px;line-height:1.65;color:var(--ink-2);margin:0 0 12px}
-.toolseo ul{margin:0 0 14px;padding-left:20px}
-.toolseo li{font-size:15px;line-height:1.65;color:var(--ink-2);margin-bottom:7px}
-.toolseo a{color:var(--link);font-weight:600;text-decoration:underline}
-.toolseo .note{background:var(--card);border-left:3px solid var(--signal);
-  padding:12px 16px;margin:0 0 16px;font-size:14.5px;line-height:1.6;color:var(--ink-2)}
+.toolseo{max-width:760px;margin:40px auto 0;padding:0 24px 8px}
+.toolseo h2{font-size:28px;line-height:1.18;color:var(--ink);margin:34px 0 12px}
+.toolseo h3{font-size:19px;line-height:1.3;color:var(--ink);margin:24px 0 6px}
+.toolseo p{font-size:16px;line-height:1.7;color:var(--ink-2);margin:0 0 14px}
+.toolseo ul{margin:0 0 16px;padding-left:20px}
+.toolseo li{font-size:16px;line-height:1.7;color:var(--ink-2);margin-bottom:7px}
+.toolseo a{color:var(--link);font-weight:500;text-decoration:underline;text-underline-offset:2px}
+.toolseo .note{background:var(--sunk);border-left:3px solid var(--signal);
+  border-radius:0 var(--r) var(--r) 0;
+  padding:14px 18px;margin:0 0 18px;font-size:15px;line-height:1.65;color:var(--ink-2)}
 .toolseo .rel{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
-  gap:10px;margin:4px 0 18px}
-.toolseo .rel a{display:block;background:var(--card);border:1px solid var(--line-dark);
-  padding:11px 13px;text-decoration:none}
-.toolseo .rel a:hover{border-color:var(--link)}
-.toolseo .rel .k{display:block;font:600 10.5px/1 var(--mono);letter-spacing:.09em;
-  text-transform:uppercase;color:var(--slate);margin-bottom:5px}
-.toolseo .rel .t{display:block;font-size:14px;line-height:1.45;color:var(--ink);font-weight:500}
-@media(max-width:560px){.toolseo h2{font-size:23px}}
+  gap:10px;margin:4px 0 20px}
+.toolseo .rel a{display:block;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);padding:13px 15px;text-decoration:none;
+  transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease),
+    transform var(--dur) var(--ease)}
+.toolseo .rel a:hover{border-color:var(--line-dark);box-shadow:var(--sh-2);transform:translateY(-2px)}
+.toolseo .rel .k{display:block;font:500 10.5px/1 var(--mono);letter-spacing:.07em;
+  text-transform:uppercase;color:var(--slate);margin-bottom:6px}
+.toolseo .rel .t{display:block;font-size:14.5px;line-height:1.45;color:var(--ink);font-weight:500}
+@media(max-width:560px){.toolseo h2{font-size:24px}}
+
 /* Equipment-family reference index, used on the five sector pages.
    One card per family linking to its /parts/ page. */
-.fr-cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);margin:18px 0 8px}
-.fr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:9px;margin-bottom:4px}
-.fr-card{display:flex;flex-direction:column;gap:3px;background:var(--card);border:1px solid var(--line-dark);border-left:3px solid var(--signal);padding:10px 12px;text-decoration:none;color:inherit}
-.fr-card:hover{border-color:var(--ink);border-left-color:var(--ink);background:#fff}
-.fr-card:focus-visible{outline:3px solid var(--signal-deep);outline-offset:2px}
-.fr-card b{font-family:var(--disp);font-weight:700;font-size:14px;color:var(--ink);line-height:1.25}
-.fr-card span{font-family:var(--mono);font-size:10px;color:var(--slate);font-variant-numeric:tabular-nums}
+.fr-cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);margin:22px 0 10px}
+.fr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:10px;margin-bottom:4px}
+.fr-card{display:flex;flex-direction:column;gap:3px;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--r);padding:13px 15px;
+  text-decoration:none;color:inherit;
+  transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease),
+    transform var(--dur) var(--ease)}
+.fr-card:hover{border-color:var(--line-dark);box-shadow:var(--sh-2);transform:translateY(-2px)}
+.fr-card:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.fr-card b{font-family:var(--disp);font-weight:600;font-size:14.5px;color:var(--ink);
+  line-height:1.3;letter-spacing:-.012em}
+.fr-card span{font-family:var(--mono);font-size:10.5px;color:var(--slate);font-variant-numeric:tabular-nums}
 @media (max-width:640px){ .fr-grid{grid-template-columns:1fr} }
 
 /* Grouped Tools dropdown. Thirteen flat links was a list rather than a menu:
@@ -212,11 +381,12 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
    the same kind of question. The group labels are not interactive and are
    hidden from the accessibility tree's link list by being spans, so keyboard
    users tab through twelve links exactly as before. */
-.navdrop-grp{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--slate);padding:10px 14px 4px;pointer-events:none;user-select:none}
-.navdrop-grp:first-child{padding-top:6px}
-.navdrop-all{font-weight:700}
-.navdrop-menu > .navdrop-all{border-bottom:1px solid var(--line);margin-bottom:2px;padding-bottom:9px}
+.navdrop-grp{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--slate);padding:10px 10px 5px;
+  pointer-events:none;user-select:none}
+.navdrop-grp:first-child{padding-top:4px}
+.navdrop-all{font-weight:600}
+.navdrop-menu > .navdrop-all{border-bottom:1px solid var(--line);margin-bottom:4px;padding-bottom:10px;border-radius:0}
 
 /* ---------- Tools pane ----------
    This was a 13-item single column: uppercase link text, no descriptions, tall
@@ -227,30 +397,365 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
    The three tools that did not earn nav space -- the two PCB tools and the
    glossary quiz -- are one click away on the hub, named in the footer link so
    nothing silently disappears. */
-.toolpane{min-width:min(700px,92vw);padding:14px 16px 12px}
-.tp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px 20px}
+.toolpane{min-width:min(720px,92vw);padding:12px}
+.tp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px 14px}
 .tp-col{display:flex;flex-direction:column;min-width:0}
 /* The base .navdrop-menu a rule is built for the old uppercase list; the pane
    items are a heading plus a description, so its casing, tracking and rules
    are unset here rather than fought with per-property overrides. */
-.navdrop-menu.toolpane a{display:block;padding:7px 8px;border-bottom:0;
-  text-transform:none;letter-spacing:0;font-size:inherit}
-.navdrop-menu.toolpane a b{display:block;font-family:var(--disp);font-weight:700;
-  font-size:14px;letter-spacing:.01em;color:var(--ink-2)}
-.navdrop-menu.toolpane a em{display:block;font-style:normal;font-family:var(--mono);
-  font-size:10.5px;line-height:1.45;letter-spacing:.01em;color:var(--slate);margin-top:2px}
-.navdrop-menu.toolpane a:hover{background:var(--paper)}
+.navdrop-menu.toolpane a{display:block;padding:9px 10px;border-bottom:0;
+  text-transform:none;letter-spacing:0;font-size:inherit;border-radius:var(--r-sm)}
+.navdrop-menu.toolpane a b{display:block;font-family:var(--disp);font-weight:600;
+  font-size:14px;letter-spacing:-.012em;color:var(--ink)}
+.navdrop-menu.toolpane a em{display:block;font-style:normal;font-family:var(--body);
+  font-size:12.5px;line-height:1.45;letter-spacing:0;color:var(--slate);margin-top:2px}
+.navdrop-menu.toolpane a:hover{background:var(--sunk)}
 .navdrop-menu.toolpane a:hover b{color:var(--ink)}
-.navdrop-menu.toolpane a.tp-all{border-top:1px solid var(--line);margin-top:10px;
-  padding-top:11px;font-family:var(--mono);font-size:10.5px;text-transform:uppercase;
-  letter-spacing:.09em;color:var(--signal-deep);font-weight:600}
-.navdrop-menu.toolpane a.tp-all:hover{background:var(--paper);color:var(--ink)}
+.navdrop-menu.toolpane a.tp-all{border-top:1px solid var(--line);margin-top:8px;
+  padding-top:12px;font-family:var(--disp);font-size:13.5px;text-transform:none;
+  letter-spacing:-.008em;color:var(--link);font-weight:600;border-radius:0}
+.navdrop-menu.toolpane a.tp-all:hover{background:transparent;color:var(--ink)}
 @media(max-width:899.98px){
   /* Inside the mobile nav the pane is just the stacked list again: one column,
      descriptions dropped so a tap target stays one line. */
   .toolpane{min-width:0;padding:0}
   .tp-grid{grid-template-columns:1fr;gap:0}
-  .navdrop-menu.toolpane a{padding:12px 6px 12px 26px;border-bottom:1px solid var(--line)}
+  .navdrop-menu.toolpane a{padding:12px 10px 12px 22px;border-bottom:1px solid var(--line);border-radius:0}
   .navdrop-menu.toolpane a em{display:none}
   .navdrop-menu.toolpane a.tp-all{margin-top:0;padding-top:12px;border-top:0}
+}
+
+/* ==========================================================================
+   SHARED PAGE COMPONENTS  (2026 redesign, phase 2)
+
+   Everything below used to live in the per-page <style> block of all 50
+   pages -- the same banner, article, table, callout, CTA and card rules
+   pasted into each one, each copy free to drift. The file header says page
+   styles stay inline, and that was right when they were genuinely per-page;
+   these are not. `.artwrap` appeared 157 times across the site, `.artban`
+   136, `.ctaband` 96. They are hoisted here, redesigned once, and deleted
+   from the pages that carried them.
+
+   The old versions shared a look this pass is undoing: a dark navy banner
+   capped with a 4px amber rule, cards with 1-2px hard borders and square
+   corners, tables ruled on every cell edge, and uppercase condensed
+   headings. The replacements are light, hairlined, rounded and tokenised,
+   so they match the homepage and follow the dark theme.
+   ========================================================================== */
+
+/* ---------- page banner ----------
+   .artban is the guide/article header, .supban the hub header; they were
+   near-identical and are now the same component. Light, with the homepage's
+   two-tone wash instead of the flat navy slab and its amber underline. */
+.artban,.supban,
+.bomban,.eolban,.idban,.insban,.pcbban,.catban{
+  background:
+    radial-gradient(760px 340px at 10% -20%,rgba(255,196,0,.10),transparent 62%),
+    radial-gradient(640px 320px at 88% 0%,rgba(43,108,176,.08),transparent 60%),
+    var(--paper);
+  color:var(--ink);border-bottom:1px solid var(--line);padding:52px 24px 46px}
+/* The six tool-page banners head an interactive application rather than an
+   article, so they take the same treatment on tighter padding -- the tool
+   itself should be the first thing on screen. */
+.bomban,.eolban,.idban,.insban,.pcbban,.catban{padding:32px 24px 28px}
+/* 672px, not a round 820: .artwrap is max-width:720 with 24px of its own
+   horizontal padding, so its text column is 672 wide. The banner puts its
+   padding on the outer element instead, so giving the inner box 672 makes the
+   headline start on exactly the same vertical as the body copy beneath it.
+   Any other value leaves the two visibly out of register on desktop. */
+.artban-in,.supban-in,
+.bomban-in,.eolban-in,.idban-in,.insban-in,.pcbban-in,.catban-in{
+  max-width:672px;margin:0 auto}
+.supban-in,.bomban-in,.eolban-in,.idban-in,.insban-in,.pcbban-in,.catban-in{
+  max-width:var(--shell)}
+.artban .eyebrow,.supban .eyebrow,
+.bomban .eyebrow,.eolban .eyebrow,.idban .eyebrow,
+.insban .eyebrow,.pcbban .eyebrow,.catban .eyebrow{font-family:var(--mono);font-size:11px;
+  letter-spacing:.09em;color:var(--slate);text-transform:uppercase;margin-bottom:12px}
+.artban h1,.supban h1,
+.bomban h1,.eolban h1,.idban h1,.insban h1,.pcbban h1,.catban h1{
+  font-size:clamp(28px,3.8vw,42px);letter-spacing:-.032em;line-height:1.12;font-weight:600}
+.artban h1,.supban h1{font-size:clamp(30px,4.4vw,46px);line-height:1.1}
+.artban p.dek,.supban p.dek,.supban > .supban-in > p,
+.bomban > .bomban-in > p,.eolban > .eolban-in > p,.idban > .idban-in > p,
+.insban > .insban-in > p,.pcbban > .pcbban-in > p{color:var(--ink-2);font-size:17px;
+  margin-top:14px;line-height:1.6;max-width:680px}
+.artban p.dek,.supban p.dek{font-size:17.5px;margin-top:16px}
+.catban .metaline{font-family:var(--mono);font-size:12px;color:var(--slate);margin-top:14px;
+  display:flex;gap:20px;flex-wrap:wrap}
+.catban .metaline b{color:var(--ink);font-weight:500}
+
+/* ---------- sector-page hero ----------
+   Same wash as the homepage hero. The blueprint grid overlay is gone: it was
+   drawn on every dark band site-wide and read as texture noise at any size. */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);
+  background:
+    radial-gradient(880px 400px at 12% -10%,rgba(255,196,0,.10),transparent 62%),
+    radial-gradient(740px 380px at 88% 2%,rgba(43,108,176,.09),transparent 60%),
+    var(--paper);
+  color:var(--ink)}
+.hero::before{content:none}
+.hero-in{max-width:var(--shell);margin:0 auto;padding:44px 24px 52px;position:relative}
+.hero-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.09em;
+  color:var(--slate);text-transform:uppercase;margin-bottom:14px;display:block}
+.hero-eyebrow::before{content:none}
+.hero h1{font-size:clamp(31px,4.4vw,50px);letter-spacing:-.033em;line-height:1.08;
+  max-width:860px;font-weight:600}
+.hero p.lede{margin-top:18px;font-size:18px;color:var(--ink-2);max-width:640px;
+  line-height:1.6}
+.hero-stats{display:flex;gap:0;margin-top:34px;padding-top:26px;
+  border-top:1px solid var(--line);max-width:940px;flex-wrap:wrap}
+.hstat{padding:0 30px 0 0;margin-right:30px}
+.hstat .k{font-size:27px;font-weight:600;color:var(--ink);line-height:1.1;
+  letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.hstat .l{font-size:13.5px;letter-spacing:0;color:var(--slate);text-transform:none;
+  margin-top:5px;font-family:var(--body)}
+
+/* ---------- section shell ---------- */
+.section{max-width:var(--shell);margin:0 auto;padding:64px 24px}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+  margin-bottom:30px;flex-wrap:wrap}
+.section-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.09em;
+  color:var(--slate);text-transform:uppercase;margin-bottom:9px}
+.section-head h2{font-size:clamp(25px,3vw,34px);letter-spacing:-.028em;color:var(--ink)}
+.section-head p{font-size:16px;color:var(--slate);max-width:540px;margin-top:10px;
+  line-height:1.6}
+.sectiondek{font-size:16px;color:var(--slate);margin-bottom:18px;max-width:660px;
+  line-height:1.6}
+
+/* ---------- article body ----------
+   Body copy was 14.5px at 1.7. On a reference site people actually read,
+   that is small; 17px at 1.75 on a 720px measure is a comfortable column. */
+.wrap,.dirwrap{max-width:var(--shell);margin:0 auto;padding:44px 24px 68px}
+.artwrap{max-width:720px;margin:0 auto;padding:48px 24px 8px}
+.artwrap h2,.wrap h2{font-size:27px;letter-spacing:-.028em;color:var(--ink);
+  margin:44px 0 14px;line-height:1.2}
+.wrap h2:first-child{margin-top:0}
+.artwrap h3{font-size:20px;letter-spacing:-.022em;color:var(--ink);margin:30px 0 8px}
+.artwrap p{font-size:17px;color:var(--ink-2);line-height:1.75;margin-bottom:17px}
+.artwrap ul,.artwrap ol{margin:0 0 17px 22px}
+.artwrap li{font-size:17px;color:var(--ink-2);line-height:1.75;margin-bottom:8px}
+.artwrap a.inline,.viewall{color:var(--link);font-weight:500;text-decoration:underline;
+  text-decoration-color:var(--line-dark);text-underline-offset:2px;
+  transition:text-decoration-color var(--dur) var(--ease)}
+.artwrap a.inline:hover,.viewall:hover{text-decoration-color:var(--signal)}
+.lead{font-size:19px;line-height:1.65;color:var(--ink-2)}
+
+/* ---------- callout & formula ---------- */
+.callout{background:var(--sunk);border:0;border-left:3px solid var(--signal);
+  border-radius:0 var(--r) var(--r) 0;padding:18px 20px;margin:26px 0;font-size:15.5px;
+  color:var(--ink-2);line-height:1.65}
+.formula{background:var(--sunk);color:var(--ink);font-family:var(--mono);font-size:16px;
+  padding:20px 22px;margin:22px 0;text-align:center;border-radius:var(--r);
+  border:1px solid var(--line);overflow-x:auto}
+
+/* ---------- reference tables ----------
+   Were ruled on all four edges of every cell, which turns a small table into
+   a grid of boxes. Horizontal rules only, and the whole table gets a rounded
+   hairline frame. Wide tables scroll inside their own container rather than
+   pushing the page sideways. */
+.reftable{width:100%;border-collapse:collapse;margin:22px 0;font-size:15px;
+  background:var(--card);border-radius:var(--r);overflow:hidden;
+  box-shadow:0 0 0 1px var(--line)}
+.reftable th,.reftable td{border:0;border-bottom:1px solid var(--line);
+  padding:12px 15px;text-align:left;vertical-align:top}
+.reftable tr:last-child td{border-bottom:0}
+.reftable th{background:var(--sunk);font-family:var(--mono);font-size:11px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--slate);font-weight:500;
+  white-space:nowrap}
+.reftable td{color:var(--ink-2)}
+.reftable tbody tr{transition:background var(--dur) var(--ease)}
+.reftable tbody tr:hover{background:var(--sunk)}
+
+/* ---------- share bar ---------- */
+.sharebar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 26px;
+  padding-bottom:20px;border-bottom:1px solid var(--line)}
+.sharebar-lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--slate);margin-right:4px}
+.sharebtn{border:1px solid var(--line);background:var(--card);color:var(--ink-2);
+  font-family:var(--disp);font-weight:500;font-size:13.5px;letter-spacing:-.008em;
+  padding:7px 15px;border-radius:var(--r-pill);text-decoration:none;cursor:pointer;
+  transition:border-color var(--dur) var(--ease),color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease)}
+.sharebtn:hover{border-color:var(--line-dark);color:var(--ink);box-shadow:var(--sh-1)}
+
+/* ---------- closing CTA band ----------
+   Was a full-bleed navy-to-slate gradient under a 4px amber rule, with a
+   square amber button. Now a rounded panel inside the page measure. */
+.ctaband{background:transparent;color:var(--ink);border-top:0;padding:0 24px 64px}
+.ctaband-in{max-width:var(--shell);margin:0 auto;padding:34px 34px;display:flex;
+  justify-content:space-between;align-items:center;gap:26px;flex-wrap:wrap;
+  background:var(--sunk);border:1px solid var(--line);border-radius:var(--r-xl)}
+.ctaband h3{font-size:23px;letter-spacing:-.025em;color:var(--ink)}
+.ctaband p{color:var(--slate);font-size:15.5px;margin-top:9px;max-width:520px;
+  line-height:1.6}
+.ctabtn{background:var(--solid-bg);color:var(--solid-fg);border:0;padding:13px 26px;
+  font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:-.01em;
+  text-decoration:none;flex-shrink:0;border-radius:var(--r-pill);
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+.ctabtn:hover{background:var(--solid-bg);color:var(--solid-fg);transform:translateY(-1px);
+  box-shadow:var(--sh-2)}
+/* ---------- inline search rows ----------
+   Four near-identical input+button pairs across the site (.catsearch on the
+   spec library, .dirsearch and .searchrow on the directories). Each drew a
+   hard square frame -- .catsearch a 2px amber one -- with a square button
+   welded to its right edge. Same shape as the homepage hero search now: one
+   rounded control that lifts on focus, with the button inset inside it. */
+.catsearch,.dirsearch,.searchrow:has(button){
+  display:flex;align-items:center;gap:6px;background:var(--card);
+  border:1px solid var(--line-dark);border-radius:var(--r-pill);
+  padding:5px 5px 5px 8px;box-shadow:var(--sh-1);
+  transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+.catsearch:focus-within,.dirsearch:focus-within,.searchrow:has(button):focus-within{
+  border-color:var(--ink);box-shadow:var(--sh-2)}
+.catsearch input,.dirsearch input,.searchrow:has(button) input{
+  flex:1;min-width:0;border:0;background:transparent;border-radius:var(--r-pill);
+  padding:11px 12px;color:var(--ink)}
+.catsearch input:focus,.dirsearch input:focus,.searchrow:has(button) input:focus{outline:none}
+.catsearch button,.dirsearch button,.searchrow:has(button) button{
+  background:var(--solid-bg);color:var(--solid-fg);border:0;border-radius:var(--r-pill);
+  padding:11px 22px;font-family:var(--disp);font-weight:600;font-size:14.5px;
+  letter-spacing:-.01em;text-transform:none;flex-shrink:0;
+  transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+.catsearch button:hover,.dirsearch button:hover,.searchrow:has(button) button:hover{
+  transform:translateY(-1px);box-shadow:var(--sh-2)}
+
+.searchcta{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:20px 22px;margin:22px 0 0;display:flex;align-items:center;
+  justify-content:space-between;gap:16px;flex-wrap:wrap}
+.searchcta p{font-size:15px;color:var(--ink-2);margin:0}
+.searchcta a{background:var(--solid-bg);color:var(--solid-fg);border:0;padding:11px 20px;
+  font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:-.01em;
+  text-transform:none;text-decoration:none;border-radius:var(--r-pill);
+  transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+.searchcta a:hover{background:var(--solid-bg);color:var(--solid-fg);transform:translateY(-1px);
+  box-shadow:var(--sh-2)}
+
+/* ---------- generic card grids ----------
+   One resting style shared by every card vocabulary on the site: white,
+   hairline, rounded, lifting on hover. Each grid keeps its own track sizing. */
+.newsgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:18px}
+.catquick{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.secgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:18px}
+.toolgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:16px}
+.toolgrid.solo{grid-template-columns:repeat(auto-fill,minmax(255px,1fr))}
+.gdgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;
+  margin-top:18px}
+
+.newscard,.catq,.seccard,.toolcard,.gdcard{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
+  text-decoration:none;color:var(--ink);display:flex;flex-direction:column;
+  transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),
+    border-color var(--dur) var(--ease)}
+.newscard:hover,.catq:hover,.seccard:hover,.toolcard:hover,.gdcard:hover{
+  transform:translateY(-3px);box-shadow:var(--sh-2);border-color:var(--line-dark);
+  background:var(--card)}
+.newscard:focus-visible,.catq:focus-visible,.seccard:focus-visible,
+.toolcard:focus-visible,.gdcard:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+.newscard{overflow:hidden}
+/* position:relative matters: the sector pages absolutely position an
+   "Illustration" badge inside this box. It used to come from the per-page copy
+   of this rule; without it here the badge escapes to the nearest positioned
+   ancestor and lands in the page corner. */
+.newscard .nc-img{position:relative;background:var(--sunk);
+  border-bottom:1px solid var(--line);min-height:132px;
+  display:flex;align-items:center;justify-content:center;overflow:hidden}
+.newscard .nc-body{padding:16px 18px 18px;flex:1;display:flex;flex-direction:column}
+.newscard .nc-tag{display:flex;align-items:center;gap:9px;margin-bottom:10px;
+  border-bottom:0;padding:0}
+.newscard .nc-sec{font-family:var(--mono);font-size:10px;font-weight:500;
+  letter-spacing:.07em;color:#fff;padding:3px 9px;border-radius:var(--r-pill);
+  text-transform:uppercase}
+.newscard .nc-date{font-family:var(--mono);font-size:11px;color:var(--slate)}
+.newscard h4{font-size:16.5px;line-height:1.3;letter-spacing:-.02em}
+.newscard p{font-size:14px;color:var(--slate);margin-top:8px;line-height:1.6;flex:1}
+.newscard .nc-src{font-size:12.5px;color:var(--slate);margin-top:14px;display:flex;
+  justify-content:space-between;align-items:center;gap:10px;border-top:0;padding-top:0}
+.newscard .nc-src .go{color:var(--ink);font-weight:600}
+
+.catq{padding:18px;gap:9px}
+.catq .cq-icon{width:30px;height:30px}
+.catq .cq-sec{font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;
+  text-transform:uppercase;color:#fff;padding:3px 9px;border-radius:var(--r-pill);
+  align-self:flex-start}
+.catq h4{font-size:16px;letter-spacing:-.02em}
+.catq .cq-n{font-family:var(--mono);font-size:11px;color:var(--slate);
+  font-variant-numeric:tabular-nums}
+
+.toolcard{padding:18px 20px;overflow:hidden}
+.toolcard .tc-img{display:block;width:calc(100% + 40px);height:auto;aspect-ratio:440/280;
+  margin:-18px -20px 14px;object-fit:cover;background:#0C1524;
+  border-bottom:1px solid var(--line);opacity:1}
+.toolcard .tc-t{font-size:16.5px;letter-spacing:-.02em;color:var(--ink);font-weight:600}
+.toolcard .tc-d{font-size:14px;color:var(--slate);margin-top:5px;line-height:1.55}
+
+/* Guides hub cards. The amber left rule is kept -- on a page that is nothing
+   but a long list of cards it is the only thing giving the rows rhythm. */
+.gdcard{gap:8px;border-left:3px solid var(--signal);padding:16px 18px 17px;
+  color:inherit}
+.gdcard h3{font-size:16.5px;line-height:1.25;color:var(--ink);text-wrap:balance;
+  letter-spacing:-.02em}
+.gdcard p{font-size:14.5px;line-height:1.55;color:var(--slate);margin:0}
+.gdcard .gsub{font-family:var(--mono);font-size:10.5px;letter-spacing:.02em;
+  color:var(--slate);margin-top:auto;padding-top:8px;border-top:1px solid var(--line)}
+.gsec{font-size:23px;letter-spacing:-.026em;color:var(--ink);margin:44px 0 4px;
+  padding-bottom:10px;border-bottom:1px solid var(--line);font-weight:600}
+.gsec:first-of-type{margin-top:8px}
+.gnote{font-size:14px;color:var(--slate);margin:10px 0 0;font-family:var(--body)}
+.gct{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--slate);
+  letter-spacing:.02em;margin-left:8px}
+.gcat{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--slate);margin:20px 0 0}
+.gsub3{font-size:16px;color:var(--ink-2);margin:22px 0 0;font-weight:600;
+  letter-spacing:-.018em}
+.gdtight{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-top:10px}
+.gdmini{padding:13px 15px;gap:5px}
+.gdmini h3{font-size:15px}
+.gdmini .gsub{margin-top:3px;padding-top:0;border-top:0;font-size:10px}
+@media (max-width:640px){.gdgrid{grid-template-columns:1fr}}
+
+.calclist{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 10px}
+.calclist a{font-size:13.5px;color:var(--ink-2);background:var(--card);
+  border:1px solid var(--line);border-radius:var(--r-pill);padding:6px 13px;
+  text-decoration:none;
+  transition:border-color var(--dur) var(--ease),color var(--dur) var(--ease)}
+.calclist a:hover{border-color:var(--line-dark);color:var(--ink)}
+
+/* ---------- shared footer ----------
+   Identical on every page and pasted into each one. Hoisted verbatim in
+   structure, restyled: the amber mono column headings become plain white
+   labels, and body copy comes up off 12px. */
+footer{background:var(--ink);color:#93A7BD;padding:60px 24px 44px;font-size:14px}
+footer .in{max-width:var(--shell);margin:0 auto;display:grid;gap:34px}
+@media(min-width:780px){footer .in{grid-template-columns:2.1fr 1fr 1fr 1fr}}
+footer h4,footer h5{font-family:var(--disp);font-size:13px;letter-spacing:.01em;
+  text-transform:none;color:#fff;margin-bottom:14px;font-weight:600}
+footer p{line-height:1.7;max-width:480px;font-size:13px;color:#7F94AC}
+footer li{list-style:none;padding:5px 0;font-family:var(--body);font-size:13.5px}
+footer a{color:#93A7BD;text-decoration:none;transition:color var(--dur) var(--ease)}
+footer a:hover{color:#fff}
+
+/* ---------- back to top / scroll reveal ---------- */
+.totop{position:fixed;right:22px;bottom:22px;width:44px;height:44px;
+  background:var(--card);color:var(--ink);border:1px solid var(--line-dark);
+  border-radius:50%;display:none;align-items:center;justify-content:center;
+  font-size:17px;z-index:80;box-shadow:var(--sh-2);opacity:0;transform:translateY(8px);
+  transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease)}
+.totop.show{display:flex}
+.totop.in{opacity:1;transform:none}
+.totop:hover{background:var(--card);border-color:var(--line-strong)}
+.reveal{opacity:0;transform:translateY(14px);
+  transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:640px){
+  .section{padding:48px 20px}
+  .hero-in{padding:34px 20px 40px}
+  .artban,.supban{padding:38px 20px 34px}
+  .artwrap{padding:36px 20px 8px}
+  .wrap,.dirwrap{padding:34px 20px 52px}
+  .ctaband{padding:0 20px 48px}
+  .ctaband-in{padding:26px 22px}
 }

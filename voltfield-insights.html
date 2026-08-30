@@ -42,20 +42,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
 <link rel="stylesheet" href="voltfield-core.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <style>
-
-/* banner */
-.insban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:22px 20px 24px}
-.insban-in{max-width:1240px;margin:0 auto}
-.insban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:8px}
-.insban h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.6vw,40px);letter-spacing:.01em;line-height:1}
-.insban p{color:#AFC0D3;font-size:14px;max-width:640px;margin-top:9px;line-height:1.55}
-.wrap{max-width:1240px;margin:0 auto;padding:24px 20px 60px}
 /* KPI */
 .kpigrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:22px}
 @media(min-width:640px){.kpigrid{grid-template-columns:repeat(3,1fr)}}
@@ -96,10 +88,6 @@ table.ins td{padding:8px 10px;border-bottom:1px solid var(--line);font-size:13px
 table.ins .nm{font-family:var(--disp);font-weight:600;font-size:14.5px}
 table.ins .sec{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;color:#fff;padding:1px 6px}
 table.ins .num{font-family:var(--mono);font-size:12.5px}
-.lead{font-family:var(--mono);font-size:10px;font-weight:500;padding:2px 6px;white-space:nowrap}
-.lead.ok{background:#E7F1EB;color:var(--ok)}
-.lead.warn{background:#FBF0DA;color:var(--warn)}
-.lead.crit{background:#F7E4E1;color:var(--crit)}
 .note{font-family:var(--mono);font-size:10px;color:var(--slate);line-height:1.6;margin-top:12px}
 .clickhint{font-family:var(--mono);font-size:11px;color:var(--slate);background:var(--card);border:1px solid var(--line-dark);border-left:3px solid var(--signal);padding:9px 12px;margin-bottom:20px}
 .clickable{cursor:pointer}
@@ -107,19 +95,15 @@ table.ins .num{font-family:var(--mono);font-size:12.5px}
 .barrow.clickable:hover .bartrack{outline:2px solid var(--signal);outline-offset:1px}
 .legrow.clickable:hover{background:var(--paper)}
 table.ins tr.clickable:hover td{background:var(--paper)}
-footer{background:var(--ink);color:#9FB0C3;padding:30px 20px;font-size:12px;margin-top:30px}
-footer .in{max-width:1240px;margin:0 auto}
-footer p{line-height:1.6;max-width:640px}
-footer a{color:#9FB0C3}
 .hidden-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.alertbox{background:var(--ink);color:#E8EDF3;padding:24px;margin:20px 0 0;border-left:4px solid var(--signal)}
+.alertbox{background:var(--sunk);color:var(--ink);padding:24px;margin:20px 0 0;border-left:3px solid var(--signal);border-radius:0 var(--r) var(--r) 0}
 .alertbox h3{font-family:var(--disp);font-weight:700;font-size:20px;margin-bottom:6px}
-.alertbox p{color:#AFC0D3;font-size:13px;margin-bottom:14px;max-width:560px}
+.alertbox p{color:var(--slate);font-size:13px;margin-bottom:14px;max-width:560px}
 .alertform{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start}
-.alertform input[type=email]{flex:1;min-width:220px;border:2px solid #354866;background:#0F1B2D;color:#fff;padding:11px 12px;font-family:var(--mono);font-size:13.5px}
-.alertform input[type=email]::placeholder{color:#7C8CA3}
-.alertform button{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:11px 20px;font-family:var(--disp);font-weight:700;font-size:14.5px;letter-spacing:.04em;text-transform:uppercase}
-.alertform button:hover{background:transparent;color:var(--signal)}
+.alertform input[type=email]{flex:1;min-width:220px;border:1px solid var(--line-dark);border-radius:var(--r-sm);background:var(--card);color:var(--ink);padding:11px 13px;font-family:var(--mono);font-size:13.5px}
+.alertform input[type=email]::placeholder{color:var(--slate)}
+.alertform button{background:var(--solid-bg);color:var(--solid-fg);border:0;border-radius:var(--r-pill);padding:12px 22px;font-family:var(--disp);font-weight:600;font-size:14.5px;letter-spacing:-.01em;text-transform:none}
+.alertform button:hover{background:var(--solid-bg);color:var(--solid-fg);box-shadow:var(--sh-2)}
 .alertform button:disabled{opacity:.6;cursor:default}
 .alert-msg{font-family:var(--mono);font-size:12px;margin-top:10px;display:none}
 .alert-msg.show{display:block}
@@ -144,7 +128,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield home">
     <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
-    <span class="wordmark">VOLTFIELD<small>ENGINEERING REFERENCE & EQUIPMENT DATA</small></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
   </a>
   <nav class="hnav">
     <a href="index.html">Home</a>
@@ -369,7 +353,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   });
 })();
 
-const DCOL={'mro-general':'#5B6B7E',msc:'#9C4221',graybar:'#2E7D4F',uline:'#B7791F'};
+const DCOL={'mro-general':'#5B6B7E',msc:'#9C4221',graybar:'#2E7D4F',uline:'var(--bess)'};
 const el=id=>document.getElementById(id);
 
 /* ---- chart builders ---- */

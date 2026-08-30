@@ -49,7 +49,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <!-- Root-relative asset paths throughout: this page lives one directory deep,
      so the relative paths used by the flat pages at the site root would break. -->
 <link rel="stylesheet" href="/voltfield-core.css">
@@ -57,22 +57,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="stylesheet" href="/voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <style>
-.artban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:32px 20px 34px}
-.artban-in{max-width:900px;margin:0 auto}
-.artban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:10px}
-.artban h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,44px);letter-spacing:.01em;line-height:1.06}
-.artban p.dek{color:#AFC0D3;font-size:15.5px;margin-top:14px;line-height:1.55;max-width:700px}
 .crumb{max-width:900px;margin:0 auto;padding:12px 20px 0;font-family:var(--mono);font-size:11px;color:var(--slate)}
 .crumb a{color:var(--slate);text-decoration:underline;text-underline-offset:2px}
 .crumb .sep{margin:0 7px;opacity:.6}
-.artwrap{max-width:900px;margin:0 auto;padding:34px 20px 8px}
-.artwrap h2{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:.01em;color:var(--ink);margin:34px 0 12px}
-.artwrap h3{font-family:var(--disp);font-weight:700;font-size:18px;color:var(--ink);margin:22px 0 8px}
-.artwrap p{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:14px}
-.artwrap ul{margin:0 0 14px 20px}
-.artwrap li{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:6px}
-.artwrap a.inline{color:var(--link);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
-.callout{background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--signal);padding:16px 18px;margin:20px 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
 /* family table */
 .famtable{width:100%;border-collapse:collapse;margin:16px 0 8px;font-size:13px}
 .famtable th{font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);text-align:left;padding:8px 10px;border-bottom:2px solid var(--ink)}
@@ -81,9 +68,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .famtable td.num{font-family:var(--mono);font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .famtable a{color:var(--link);font-weight:600;text-decoration:underline}
 .lt{font-family:var(--mono);font-size:11px;padding:2px 7px;white-space:nowrap;display:inline-block}
-.lt.long{background:#F7E4E1;color:var(--crit-ink)}
-.lt.mid{background:#FBF0DA;color:var(--warn-ink)}
-.lt.short{background:#E7F1EB;color:var(--ok-ink)}
+.lt.long{background:var(--tint-crit);color:var(--crit-ink)}
+.lt.mid{background:var(--tint-warn);color:var(--warn-ink)}
+.lt.short{background:var(--tint-ok);color:var(--ok-ink)}
 html[data-theme="dark"] .lt.long{background:#3A1F1C;color:#E8A79B}
 html[data-theme="dark"] .lt.mid{background:#3A3016;color:#E4C77F}
 html[data-theme="dark"] .lt.short{background:#15301F;color:#7FCC9B}
@@ -99,20 +86,6 @@ html[data-theme="dark"] .lt.short{background:#15301F;color:#7FCC9B}
 .rel a:hover{border-color:var(--ink)}
 .rel .k{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}
 .rel .t{font-family:var(--disp);font-weight:600;font-size:14.5px;color:var(--ink);margin-top:3px;line-height:1.25}
-.ctaband{background:linear-gradient(120deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;border-top:4px solid var(--signal);margin-top:40px}
-.ctaband-in{max-width:1240px;margin:0 auto;padding:44px 20px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
-.ctaband h3{font-family:var(--disp);font-weight:700;font-size:28px;letter-spacing:.01em}
-.ctaband p{color:#AFC0D3;font-size:14px;margin-top:6px;max-width:520px;line-height:1.6}
-.ctabtn{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:14px 26px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.05em;text-decoration:none;flex-shrink:0}
-.ctabtn:hover{background:transparent;color:var(--signal)}
-footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
-footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
-@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
-footer h4{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
-footer p{line-height:1.6;max-width:460px}
-footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
-footer a{color:#9FB0C3;text-decoration:none}
-footer a:hover{color:#fff}
 </style>
 </head>
 <body>
@@ -124,7 +97,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="site">
   <a class="logo" href="/index.html" aria-label="Voltfield home">
     <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
-    <span class="wordmark">VOLTFIELD<small>ENGINEERING REFERENCE &amp; EQUIPMENT DATA</small></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
   </a>
   <nav class="hnav">
     <a href="/index.html">Home</a>

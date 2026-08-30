@@ -17,7 +17,7 @@
 const SECTORS={
   dc:{label:'Data Centers',code:'DC',color:'#2B6CB0'},
   re:{label:'Renewables',code:'RE',color:'#2E7D4F'},
-  bess:{label:'Battery Storage',code:'BES',color:'#B7791F'},
+  bess:{label:'Battery Storage',code:'BES',color:'#976314'},
   og:{label:'Oil & Gas',code:'OG',color:'#9C4221'},
   mro:{label:'Industrial Supply (MRO)',code:'MRO',color:'#5B6B7E'}
 };

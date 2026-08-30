@@ -45,88 +45,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
 <link rel="stylesheet" href="voltfield-core.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<style>
 
-.artban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:32px 20px 34px}
-.artban-in{max-width:1100px;margin:0 auto}
-.artban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:10px}
-.artban h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,44px);letter-spacing:.01em;line-height:1.06}
-.artban p.dek{color:#AFC0D3;font-size:15.5px;margin-top:14px;line-height:1.55;max-width:680px}
-.wrap{max-width:1100px;margin:0 auto;padding:36px 20px 60px}
-.wrap h2{font-family:var(--disp);font-weight:700;font-size:22px;letter-spacing:.01em;color:var(--ink);margin:36px 0 6px}
-.wrap h2:first-child{margin-top:0}
-.sectiondek{font-size:13.5px;color:var(--slate);margin-bottom:14px;max-width:640px;line-height:1.6}
-.toolgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
-/* A grid holding a single card. auto-FIT collapses empty tracks, so one child
-   would stretch to the full row and upscale a 440px-wide thumbnail to roughly
-   1100px. auto-FILL keeps the empty tracks, so the card stays the same size as
-   the cards in every other section. */
-.toolgrid.solo{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
-.toolcard{background:var(--card);border:1px solid var(--line-dark);padding:16px 18px;text-decoration:none;color:var(--ink);display:block;transition:border-color .15s}
-/* 3D-rendered thumbnails. Negative margins pull the image to the card edges
-   while the text keeps its padding; width/height attributes give the browser
-   the aspect ratio up front so lazy-loading cannot shift the grid. */
-.toolcard .tc-img{display:block;width:calc(100% + 36px);height:auto;aspect-ratio:440/280;
-  margin:-16px -18px 12px;object-fit:cover;background:#0C1524;border-bottom:1px solid var(--line-dark)}
-.toolcard:hover .tc-pic{display:contents}
-.tc-img{opacity:.92}
-.toolcard:hover{border-color:var(--ink)}
-.toolcard .tc-t{font-family:var(--disp);font-weight:700;font-size:16.5px;color:var(--ink)}
-.toolcard .tc-d{font-size:12.5px;color:var(--ink-2);margin-top:4px;line-height:1.5}
-.calclist{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 8px}
-.calclist a{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);background:#fff;border:1px solid var(--line);padding:4px 9px;text-decoration:none}
-.calclist a:hover{border-color:var(--ink);color:var(--ink)}
-.viewall{font-family:var(--disp);font-weight:600;font-size:13px;color:var(--link);text-decoration:underline;text-decoration-color:var(--signal)}
-.searchcta{background:var(--card);border:1px solid var(--line-dark);padding:16px 18px;margin:18px 0 0;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
-.searchcta p{font-size:13px;color:var(--ink-2);margin:0}
-.searchcta a{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none}
-.searchcta a:hover{background:transparent;color:var(--ink)}
-footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
-footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
-@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
-footer h4{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
-footer p{line-height:1.6;max-width:460px}
-footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
-footer a{color:#9FB0C3;text-decoration:none}
-footer a:hover{color:#fff}
-</style>
-<style>
-/* Guides hub. The banner and grid classes are local to this page; the site's
-   other hubs each carry their own, and voltfield-core.css holds only the
-   shared chrome and colour tokens. */
-.supban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:24px 20px 26px}
-.supban-in{max-width:1240px;margin:0 auto}
-.supban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:8px}
-.supban h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.6vw,40px);letter-spacing:.01em;line-height:1}
-.supban p{color:#AFC0D3;font-size:14.5px;max-width:660px;margin-top:10px;line-height:1.55}
-.dirwrap{max-width:1240px;margin:0 auto;padding:30px 20px 60px}
-.gsec{font-family:var(--disp);font-weight:700;font-size:22px;letter-spacing:.01em;color:var(--ink);
-      margin:34px 0 4px;padding-bottom:8px;border-bottom:2px solid var(--ink)}
-.gsec:first-of-type{margin-top:6px}
-.gnote{font-family:var(--mono);font-size:11.5px;color:var(--slate);margin:10px 0 0}
-.gdgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;margin-top:16px}
-.gdcard{display:flex;flex-direction:column;gap:7px;background:var(--card);border:1px solid var(--line-dark);
-        border-left:3px solid var(--signal);padding:15px 16px 16px;text-decoration:none;color:inherit}
-.gdcard:hover{border-color:var(--ink);border-left-color:var(--ink);background:#fff}
-.gdcard:focus-visible{outline:3px solid var(--signal-deep);outline-offset:2px}
-.gdcard h3{font-family:var(--disp);font-weight:700;font-size:16.5px;line-height:1.2;color:var(--ink);text-wrap:balance}
-.gdcard p{font-size:13.5px;line-height:1.5;color:var(--ink-2);margin:0}
-.gdcard .gsub{font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;color:var(--slate);
-              margin-top:auto;padding-top:6px;border-top:1px dotted var(--line-dark)}
-.gct{font-family:var(--mono);font-size:10px;font-weight:400;color:var(--slate);letter-spacing:.04em;margin-left:6px}
-.gcat{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);margin:16px 0 0}
-.gsub3{font-family:var(--disp);font-weight:700;font-size:15px;color:var(--ink-2);margin:20px 0 0;letter-spacing:.01em}
-.gdtight{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-top:10px}
-.gdmini{padding:11px 13px;gap:4px}
-.gdmini h3{font-size:14.5px}
-.gdmini .gsub{margin-top:2px;padding-top:0;border-top:0;font-size:10px}
-@media (max-width:640px){ .gdgrid{grid-template-columns:1fr} }
-</style>
+
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -137,7 +62,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield home">
     <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
-    <span class="wordmark">VOLTFIELD<small>ENGINEERING REFERENCE & EQUIPMENT DATA</small></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
   </a>
   <nav class="hnav">
     <a href="index.html">Home</a>

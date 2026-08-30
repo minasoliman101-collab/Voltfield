@@ -69,33 +69,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="voltfield-core.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <style>
-
-/* banner */
-.supban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:24px 20px 26px}
-.supban-in{max-width:1240px;margin:0 auto}
-.supban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:8px}
-.supban h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.6vw,40px);letter-spacing:.01em;line-height:1}
-.supban p{color:#AFC0D3;font-size:14.5px;max-width:620px;margin-top:10px;line-height:1.55}
-.status.live{background:#E7F1EB;color:var(--ok)}
-.status.road{background:#FBF0DA;color:var(--warn)}
-/* directory */
-.dirwrap{max-width:1240px;margin:0 auto;padding:30px 20px 60px}
+.status.live{background:var(--tint-ok);color:var(--ok)}
+.status.road{background:var(--tint-warn);color:var(--warn)}
 .dirhead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:16px}
 .dirhead h2{font-family:var(--disp);font-weight:700;font-size:26px}
-.dirsearch{display:flex;border:2px solid var(--ink);background:#fff;max-width:340px;width:100%}
-.dirsearch input{flex:1;border:0;padding:10px 12px;font-family:var(--mono);font-size:13px;background:transparent}
-.dirsearch button{background:var(--ink);color:#fff;border:0;padding:0 16px;font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.04em}
+
+
+
 .filters{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
 .filterrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .filterrow .flabel{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);min-width:64px}
 .fbtn{border:1px solid var(--line-dark);background:var(--card);padding:6px 12px;font-family:var(--disp);font-weight:600;font-size:13.5px;letter-spacing:.02em;color:var(--ink-2);text-transform:uppercase;display:inline-flex;align-items:center;gap:6px}
 .fbtn:hover{border-color:var(--ink)}
-.fbtn.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.fbtn.on{background:var(--solid-bg);color:var(--solid-fg);border-color:var(--ink)}
 .fbtn .sw{width:9px;height:9px}
 .dircount{font-family:var(--mono);font-size:12px;color:var(--slate);margin-bottom:14px}
 .supgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
@@ -105,7 +96,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .supcard .sc-in{padding:15px 16px 14px;flex:1;display:flex;flex-direction:column}
 .supcard .sc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .supcard h3{font-family:var(--disp);font-weight:700;font-size:21px;line-height:1.05;letter-spacing:.01em}
-.supcard .sarch{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;background:#FBF0DA;border:1px solid #D9C08A;color:#8A6D1F;padding:2px 6px;border-radius:3px;margin-left:6px;white-space:nowrap}
+.supcard .sarch{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;background:var(--tint-warn);border:1px solid #D9C08A;color:var(--warn-ink);padding:2px 6px;border-radius:3px;margin-left:6px;white-space:nowrap}
 .supcard .stype{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;background:var(--paper);border:1px solid var(--line-dark);color:var(--ink-2);padding:3px 7px;white-space:nowrap;flex-shrink:0}
 .supcard .sfocus{font-size:12.5px;color:var(--slate);margin-top:9px;line-height:1.5;flex:1}
 .supcard .stags{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px}
@@ -113,17 +104,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .supcard .sc-foot{border-top:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;color:var(--slate)}
 .supcard .sc-foot .region{color:var(--ink-2)}
 .supcard .lead{font-family:var(--mono);font-size:9.5px;font-weight:500;padding:2px 6px}
-.lead.ok{background:#E7F1EB;color:var(--ok)}
-.lead.warn{background:#FBF0DA;color:var(--warn)}
-.lead.crit{background:#F7E4E1;color:var(--crit)}
 .supcard .cmpline{font-family:var(--mono);font-size:9.5px;color:var(--slate);padding:0 16px 12px;line-height:1.5}
 .empty{background:var(--card);border:1px dashed var(--line-dark);padding:40px;text-align:center;color:var(--slate)}
-footer{background:var(--ink);color:#9FB0C3;padding:30px 20px;font-size:12px}
-footer .in{max-width:1240px;margin:0 auto;display:grid;gap:16px}
-@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr}}
-footer h4{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
-footer p{line-height:1.6;max-width:560px}
-footer a{color:#9FB0C3}
 </style>
 </head>
 <body>
@@ -135,7 +117,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield home">
     <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
-    <span class="wordmark">VOLTFIELD<small>ENGINEERING REFERENCE & EQUIPMENT DATA</small></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
   </a>
   <nav class="hnav">
     <a href="index.html">Home</a>
@@ -222,7 +204,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 const SECTORS={
   dc:{label:'Data Centers',code:'DC',color:'#2B6CB0'},
   re:{label:'Renewables',code:'RE',color:'#2E7D4F'},
-  bess:{label:'Battery Storage',code:'BESS',color:'#B7791F'},
+  bess:{label:'Battery Storage',code:'BESS',color:'var(--bess)'},
   og:{label:'Oil & Gas',code:'O&G',color:'#9C4221'},
   mro:{label:'Industrial Supply (MRO)',code:'MRO',color:'#5B6B7E'}
 };
@@ -328,7 +310,7 @@ function render(){
         <div class="sc-top"><h3>${x.n}</h3>${x.arch?`<span class="sarch" title="A manufacturer archetype, not a named company">Archetype</span>`:``}<span class="stype">${x.t}</span></div>
         <div class="sfocus">${x.f}</div>
         <div class="stags">${tags}</div>
-        ${x.eol?`<div style="margin-top:9px"><a href="voltfield-eol.html?oem=${encodeURIComponent(x.eol)}" style="font-family:var(--mono);font-size:11px;color:var(--dc);text-decoration:underline;text-underline-offset:2px">Obsolete/EOL records &rsaquo;</a></div>`:''}
+        ${x.eol?`<div style="margin-top:9px"><a href="voltfield-eol.html?oem=${encodeURIComponent(x.eol)}" style="font-family:var(--mono);font-size:11px;color:var(--link);text-decoration:underline;text-underline-offset:2px">Obsolete/EOL records &rsaquo;</a></div>`:''}
       </div>
       <div class="cmpline">${x.cmp.join(' · ')}</div>
       <div class="sc-foot"><span class="region">${x.r}</span>${statusChip}</div>

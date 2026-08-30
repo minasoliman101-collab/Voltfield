@@ -230,7 +230,12 @@ const SITE_CONFIG = {
     btn.type = 'button';
     btn.id = 'themeToggle';
     btn.setAttribute('aria-label', 'Toggle dark mode');
-    btn.style.cssText = 'background:#101B2D;color:#fff;border:2px solid #101B2D;width:42px;height:38px;font-size:17px;line-height:1;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;order:-1';
+    /* Styled by #themeToggle in voltfield-core.css rather than inline here.
+       The inline version hardcoded #101B2D on a 2px border, which was the old
+       header vocabulary and survived the redesign as a hard navy square next
+       to the rounded controls beside it -- and, being literal hex, it could
+       not follow the dark theme's token swap either. */
+    btn.className = 'themetoggle';
     function paint() {
       const dark = document.documentElement.getAttribute('data-theme') === 'dark';
       btn.textContent = dark ? '☀' : '☽'; /* sun when dark (tap to go light), moon when light */

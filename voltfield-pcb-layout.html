@@ -42,7 +42,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="voltfield-core.css">
 <link rel="stylesheet" href="voltfield-component-viz.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
@@ -59,37 +59,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </script>
 <style>
 :root{--top:#C43D2E;--bot:#2B6CB0;}
-
-.artban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal)}
-.artban-in{max-width:900px;margin:0 auto;padding:40px 20px 34px}
 .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--signal);margin-bottom:10px}
-.artban h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,44px);letter-spacing:.01em;line-height:1.06}
-.artban p.dek{color:#AFC0D3;font-size:15.5px;margin-top:14px;line-height:1.55;max-width:680px}
-.artwrap{max-width:900px;margin:0 auto;padding:36px 20px 8px}
-.artwrap h2{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:.01em;color:var(--ink);margin:34px 0 8px}
-.artwrap p{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:14px}
-.artwrap a.inline{color:var(--link);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
-.callout{background:var(--card);border:1px solid var(--line-dark);border-left:4px solid var(--signal);padding:16px 18px;margin:20px 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
 .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin:18px 0 16px}
 .howsteps{margin:10px 0 20px 0;padding-left:22px}
 .howsteps li{font-size:14px;color:var(--ink-2);line-height:1.65;margin-bottom:9px}
 .howsteps b{color:var(--ink);font-family:var(--disp);font-weight:700}
 .examplegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin:14px 0 24px}
-.examplecard{background:#fff;border:2px solid var(--line-dark);padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.examplecard{background:var(--card);border:2px solid var(--line-dark);padding:14px 16px;display:flex;flex-direction:column;gap:8px}
 .examplecard h4{font-family:var(--disp);font-weight:700;font-size:15.5px;color:var(--ink)}
 .examplecard p{font-size:12.5px;color:var(--ink-2);line-height:1.55;margin:0;flex:1}
-.examplecard button{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:8px 14px;font-family:var(--disp);font-weight:700;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;align-self:flex-start}
+.examplecard button{background:var(--solid-bg);color:var(--solid-fg);border:0;padding:8px 14px;font-family:var(--disp);font-weight:700;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;align-self:flex-start}
 .examplecard button:hover{background:transparent;color:var(--ink)}
 .toolbar .fld{display:flex;flex-direction:column;gap:4px}
 .toolbar label,.toolbar .fld-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--slate)}
-.toolbar select{border:1px solid var(--line-dark);padding:8px 10px;font-family:var(--mono);font-size:13.5px;background:#fff}
-.layerbar{display:flex;gap:0;border:2px solid var(--ink);width:fit-content}
-.layerbar button{background:#fff;color:var(--ink);border:0;padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase;border-right:2px solid var(--ink);display:flex;align-items:center;gap:6px}
+.toolbar select{border:1px solid var(--line-dark);padding:8px 10px;font-family:var(--mono);font-size:13.5px;background:var(--card)}
+.layerbar{display:flex;gap:0;border:1px solid var(--line-dark);width:fit-content}
+.layerbar button{background:var(--card);color:var(--ink);border:0;padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase;border-right:2px solid var(--ink);display:flex;align-items:center;gap:6px}
 .layerbar button:last-child{border-right:0}
 .layerbar button .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
 .layerbar button[data-layer="top"] .dot{background:var(--top)}
 .layerbar button[data-layer="bottom"] .dot{background:var(--bot)}
-.layerbar button.on{background:var(--ink);color:#fff}
+.layerbar button.on{background:var(--solid-bg);color:var(--solid-fg)}
 .pcbwrap{background:#0F1B2D;border:1px solid var(--line-dark);padding:16px;margin:0 0 14px;overflow-x:auto}
 .pcbwrap svg{display:block}
 .legend{margin:16px 0 10px}
@@ -98,7 +88,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .compdetail{margin:18px 0 22px}
 .compdetail-hd{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--slate);margin-bottom:8px}
 .tilerow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
-.tile{background:#fff;border:2px solid var(--line-dark);padding:11px 16px;font-family:var(--mono);font-size:11.5px;text-align:left;cursor:pointer;min-width:120px;display:flex;align-items:center;gap:12px;transition:transform .15s,border-color .15s}
+.tile{background:var(--card);border:2px solid var(--line-dark);padding:11px 16px;font-family:var(--mono);font-size:11.5px;text-align:left;cursor:pointer;min-width:120px;display:flex;align-items:center;gap:12px;transition:transform .15s,border-color .15s}
 .tile .glyph{font-size:28px;line-height:1;flex-shrink:0;width:32px;text-align:center}
 .tile b{display:block;font-family:var(--disp);font-weight:700;font-size:15.5px;color:var(--ink)}
 .tile span{display:block;color:var(--slate);font-size:10.5px;margin-top:2px}
@@ -120,10 +110,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 @keyframes rowIn{0%{opacity:0;transform:translateX(-8px)}100%{opacity:1;transform:translateX(0)}}
 .checkrow{animation:rowIn .3s ease-out both}
 .est-row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:10px}
-.est-field button{background:var(--ink);color:#fff;border:2px solid var(--ink);padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase}
+.est-field button{background:var(--solid-bg);color:var(--solid-fg);border:0;padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase}
 .est-field button:hover{background:transparent;color:var(--ink)}
 .est-field button.ghost{background:transparent;color:var(--ink)}
-.est-field button.ghost:hover{background:var(--ink);color:#fff}
+.est-field button.ghost:hover{background:var(--solid-bg);color:var(--solid-fg)}
 .checkpanel{background:var(--card);border:1px solid var(--line-dark);padding:20px;margin:16px 0 20px}
 .checkrow{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)}
 .checkrow:last-child{border-bottom:0}
@@ -132,30 +122,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .checkrow.fail .mk{background:var(--crit)}
 .checkrow .tx b{display:block;font-family:var(--disp);font-weight:700;font-size:15px;margin-bottom:2px}
 .checkrow .tx span{font-size:13px;color:var(--ink-2);font-family:var(--mono)}
-.buildcta{margin-top:14px;background:var(--ink);color:#fff;border-left:4px solid var(--signal);padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.buildcta{margin-top:14px;background:var(--surface-dark);color:var(--on-surface-dark);border-left:4px solid var(--signal);padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
 .buildcta b{display:block;font-family:var(--disp);font-weight:700;font-size:17px}
 .buildcta span{display:block;color:#AFC0D3;font-size:13px;margin-top:4px;max-width:420px;line-height:1.5}
-.buildcta .btn{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:11px 20px;font-family:var(--disp);font-weight:700;font-size:14.5px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;flex-shrink:0}
+.buildcta .btn{background:var(--signal);color:var(--on-signal);border:2px solid var(--signal);padding:11px 20px;font-family:var(--disp);font-weight:700;font-size:14.5px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;flex-shrink:0}
 .buildcta .btn:hover{background:transparent;color:var(--signal)}
-.scorebar{display:none;background:var(--ink);color:#fff;padding:14px 18px;margin-bottom:16px;font-family:var(--disp);font-weight:700;font-size:20px;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.scorebar{display:none;background:var(--surface-dark);color:var(--on-surface-dark);padding:14px 18px;margin-bottom:16px;font-family:var(--disp);font-weight:700;font-size:20px;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .scorebar.show{display:flex}
 .scorebar span{font-family:var(--mono);font-size:12px;color:#AFC0D3;font-weight:400;text-transform:uppercase;letter-spacing:.06em}
-.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 22px;font-family:var(--disp);font-weight:600;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:100}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--surface-dark);color:var(--on-surface-dark);padding:12px 22px;font-family:var(--disp);font-weight:600;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:100}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.ctaband{background:linear-gradient(120deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;border-top:4px solid var(--signal)}
-.ctaband-in{max-width:1240px;margin:0 auto;padding:44px 20px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
-.ctaband h3{font-family:var(--disp);font-weight:700;font-size:28px;letter-spacing:.01em}
-.ctaband p{color:#AFC0D3;font-size:14px;margin-top:6px;max-width:460px}
-.ctabtn{background:var(--signal);color:var(--ink);border:2px solid var(--signal);padding:14px 26px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.05em;text-decoration:none;flex-shrink:0}
-.ctabtn:hover{background:transparent;color:var(--signal)}
-footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
-footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
-@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
-footer h4{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
-footer p{line-height:1.6;max-width:460px}
-footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
-footer a{color:#9FB0C3;text-decoration:none}
-footer a:hover{color:#fff}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Free Tools","item":"https://voltfield.org/free-tools.html"},{"@type":"ListItem","position":3,"name":"PCB Layout Tool","item":"https://voltfield.org/voltfield-pcb-layout.html"}]}
@@ -170,7 +146,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield home">
     <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
-    <span class="wordmark">VOLTFIELD<small>ENGINEERING REFERENCE & EQUIPMENT DATA</small></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
   </a>
   <nav class="hnav">
     <a href="index.html">Home</a>
@@ -213,7 +189,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main id="main" tabindex="-1">
 <section class="artban">
   <div class="artban-in">
-    <div style="font-family:var(--mono);font-size:11px;color:#8DA0B8;margin-bottom:12px"><a href="index.html" style="color:#8DA0B8;text-decoration:none">Home</a> / <span style="color:#E8EDF3">PCB Layout Tool</span></div>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <span style="color:var(--ink)">PCB Layout Tool</span></div>
     <div class="eyebrow">Free · No Signup · Runs In Your Browser</div>
     <h1>Place components. Route copper. Check your work.</h1>
     <p class="dek">A free PCB layout tool, right in your browser. Tap a component tile, tap an empty grid cell to place it. Tap a pad, then tap another pad to route a trace on the current layer. Switch between Top and Bottom copper, then run a design check for unconnected pins and same-layer shorts — the same kind of check a real PCB tool runs before fabrication.</p>
@@ -374,7 +350,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       case 'ccap':
         return `<g><line x1="-3" y1="-8" x2="-3" y2="8" stroke="#8FD3E8" stroke-width="2.5"/><line x1="3" y1="-8" x2="3" y2="8" stroke="#8FD3E8" stroke-width="2.5"/></g>`;
       case 'ecap':
-        return `<g><rect x="-7" y="-9" width="14" height="18" rx="3" fill="#2B3B4E" stroke="#8DA0B8" stroke-width="1.2"/><text x="0" y="4" text-anchor="middle" font-size="11" fill="#FFC400" font-weight="700">+</text></g>`;
+        return `<g><rect x="-7" y="-9" width="14" height="18" rx="3" fill="#2B3B4E" stroke="var(--slate)" stroke-width="1.2"/><text x="0" y="4" text-anchor="middle" font-size="11" fill="#FFC400" font-weight="700">+</text></g>`;
       case 'led':
         return `<text x="0" y="6" text-anchor="middle" font-size="18">💡</text>`;
       case 'diode':
@@ -493,7 +469,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const allConnected=part.pads.every((off,pi)=>traces.some(t=>(t.a.c===i&&t.a.p===pi)||(t.b.c===i&&t.b.p===pi)));
       const litCls=(part.id==='led'&&allConnected)?' led-lit':'';
       s+=`<g class="compgroup${enterCls}${litCls}" data-i="${i}">
-        <rect class="comprect" data-i="${i}" x="${x+2}" y="${y+2}" width="${w-4}" height="${h-4}" fill="#1B2B3E" stroke="#8DA0B8" stroke-width="${(1.5*GS).toFixed(2)}" rx="${(3*GS).toFixed(2)}"/>
+        <rect class="comprect" data-i="${i}" x="${x+2}" y="${y+2}" width="${w-4}" height="${h-4}" fill="#1B2B3E" stroke="var(--slate)" stroke-width="${(1.5*GS).toFixed(2)}" rx="${(3*GS).toFixed(2)}"/>
         ${glyphSVG(part.id,cx,cy)}
       </g>`;
     });
@@ -516,7 +492,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         const px=(c.x+off[0])*CELL+CELL/2, py=(c.y+off[1])*CELL+CELL/2;
         const connected=traces.some(t=>(t.a.c===ci&&t.a.p===pi)||(t.b.c===ci&&t.b.p===pi));
         const isArmed=armedPad&&armedPad.c===ci&&armedPad.p===pi;
-        const fill=isArmed?'#FFC400':(connected?'#2E7D4F':'#8DA0B8');
+        const fill=isArmed?'#FFC400':(connected?'#2E7D4F':'var(--slate)');
         const justConn=justConnectedPads&&justConnectedPads.some(j=>j.c===ci&&j.p===pi);
         s+=`<circle class="padhit" data-c="${ci}" data-p="${pi}" cx="${px}" cy="${py}" r="${(6*GS+8).toFixed(2)}" fill="transparent"/>`;
         s+=`<circle class="padcirc${justConn?' pad-connect':''}" data-c="${ci}" data-p="${pi}" cx="${px}" cy="${py}" r="${(6*GS).toFixed(2)}" fill="${fill}" stroke="#0A0F14" stroke-width="${(1.5*GS).toFixed(2)}"/>`;

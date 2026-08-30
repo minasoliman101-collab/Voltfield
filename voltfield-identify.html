@@ -44,21 +44,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="voltfield-core.css">
 <link rel="stylesheet" href="voltfield-component-viz.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <style>
-
-/* banner */
-.idban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:24px 20px 26px}
-.idban-in{max-width:1240px;margin:0 auto}
-.idban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:8px}
-.idban h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.6vw,40px);letter-spacing:.01em;line-height:1}
-.idban p{color:#AFC0D3;font-size:14.5px;max-width:700px;margin-top:10px;line-height:1.55}
-.wrap{max-width:1240px;margin:0 auto;padding:24px 20px 60px;display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
-@media(min-width:1020px){.wrap{grid-template-columns:5fr 7fr;align-items:start}}
 /* panels */
 .panelb{background:var(--card);border:1px solid var(--line-dark);padding:18px}
 .panelb h2{font-family:var(--disp);font-weight:700;font-size:22px;margin-bottom:10px}
@@ -72,22 +63,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .thumbs{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
 .thumb{position:relative;width:110px;height:82px;border:2px solid var(--line-dark);overflow:hidden;background:#20262B}
 .thumb img{width:100%;height:100%;object-fit:cover}
-.thumb .rm{position:absolute;top:2px;right:2px;background:var(--ink);color:#fff;border:0;width:20px;height:20px;font-size:12px;line-height:1}
+.thumb .rm{position:absolute;top:2px;right:2px;background:var(--solid-bg);color:var(--solid-fg);border:0;width:20px;height:20px;font-size:12px;line-height:1}
 .thumb.sel{border-color:var(--signal)}
 /* ocr */
 .ocrrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
-.btn{border:2px solid var(--ink);padding:11px 18px;font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;display:inline-block}
-.btn.primary{background:var(--signal);color:var(--ink)}
-.btn.primary:hover{background:var(--ink);color:var(--signal)}
+.btn{border:1px solid var(--line-dark);padding:11px 18px;font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;display:inline-block}
+.btn.primary{background:var(--signal);color:var(--on-signal)}
+.btn.primary:hover{background:var(--solid-bg);color:var(--solid-fg)}
 .btn.primary:disabled{opacity:.45;cursor:not-allowed}
 .btn.ghost{background:var(--card);color:var(--ink-2);font-weight:600}
 .btn.ghost:hover{border-color:var(--ink);color:var(--ink)}
-.btn.dark{background:var(--ink);color:#fff}
+.btn.dark{background:var(--solid-bg);color:var(--solid-fg)}
 .btn.dark:hover{background:var(--ink-2)}
 .prog{display:none;height:10px;background:var(--paper);border:1px solid var(--line-dark);margin-top:10px;position:relative}
 .prog i{position:absolute;inset:0;width:0%;background:var(--signal);transition:width .2s}
 .prog span{position:absolute;inset:0;font-family:var(--mono);font-size:8.5px;display:flex;align-items:center;justify-content:center;color:var(--ink-2);letter-spacing:.06em}
-textarea#labelText{width:100%;min-height:120px;border:1px solid var(--line-dark);padding:11px;font-family:var(--mono);font-size:12.5px;line-height:1.7;resize:vertical;color:var(--ink);margin-top:12px;background:#fff}
+textarea#labelText{width:100%;min-height:120px;border:1px solid var(--line-dark);padding:11px;font-family:var(--mono);font-size:12.5px;line-height:1.7;resize:vertical;color:var(--ink);margin-top:12px;background:var(--card)}
 .tokens{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .tok{font-family:var(--mono);font-size:10.5px;padding:3px 8px;border:1px solid var(--line-dark);background:var(--paper)}
 .tok.brand{border-color:var(--dc);color:var(--dc);font-weight:600}
@@ -107,29 +98,24 @@ textarea#labelText{width:100%;min-height:120px;border:1px solid var(--line-dark)
 .match h3{font-family:var(--disp);font-weight:700;font-size:19px;line-height:1.1}
 .match .cat{font-family:var(--mono);font-size:10.5px;color:var(--slate);margin-top:2px}
 .match .conf{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;white-space:nowrap}
-.conf.hi{background:#E7F1EB;color:var(--ok)}
-.conf.md{background:#FBF0DA;color:var(--warn)}
+.conf.hi{background:var(--tint-ok);color:var(--ok)}
+.conf.md{background:var(--tint-warn);color:var(--warn)}
 .conf.lo{background:var(--paper);color:var(--slate);border:1px solid var(--line-dark)}
 .match .foot{border-top:1px solid var(--line);padding:9px 16px;display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:11.5px}
-.match .foot a{color:var(--dc);text-decoration:underline;text-underline-offset:2px}
+.match .foot a{color:var(--link);text-decoration:underline;text-underline-offset:2px}
 .pcbcard{border-left:5px solid var(--bess);background:#FBF6E9;border:1px solid var(--line-dark);padding:14px 16px}
 .pcbcard h3{font-family:var(--disp);font-weight:700;font-size:19px}
 .pcbcard p{font-size:13px;color:var(--ink-2);margin-top:5px;line-height:1.5}
 .pcbcard a{color:var(--dc);font-family:var(--mono);font-size:11.5px;text-decoration:underline;text-underline-offset:2px}
-.humancard{background:var(--ink);color:#E8EDF3;padding:16px 18px;border-left:4px solid var(--signal)}
+.humancard{background:var(--sunk);color:var(--ink);padding:16px 18px;border-left:3px solid var(--signal);border-radius:0 var(--r) var(--r) 0}
 .humancard h3{font-family:var(--disp);font-weight:700;font-size:19px;color:#fff}
 .humancard p{font-size:12.5px;color:#AFC0D3;margin-top:5px;line-height:1.55}
 .humancard a{color:var(--signal);font-family:var(--mono);font-size:12px}
 .emptyres{font-family:var(--mono);font-size:12px;color:var(--slate);padding:22px;text-align:center;border:1px dashed var(--line-dark)}
 .roadmap{font-family:var(--mono);font-size:11px;color:var(--slate);line-height:1.7;border:1px solid var(--line);background:var(--card);padding:12px 14px}
 .roadmap b{color:var(--ink-2)}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;font-family:var(--mono);font-size:12.5px;padding:11px 18px;border-left:4px solid var(--signal);z-index:120;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--surface-dark);color:var(--on-surface-dark);font-family:var(--mono);font-size:12.5px;padding:11px 18px;border-left:4px solid var(--signal);z-index:120;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-footer{background:var(--ink);color:#9FB0C3;padding:30px 20px;font-size:12px}
-footer .in{max-width:1240px;margin:0 auto}
-footer h4{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
-footer p{line-height:1.6;max-width:820px}
-footer a{color:#9FB0C3}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Free Tools","item":"https://voltfield.org/free-tools.html"},{"@type":"ListItem","position":3,"name":"Part ID","item":"https://voltfield.org/voltfield-identify.html"}]}
@@ -159,7 +145,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield home">
     <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
-    <span class="wordmark">VOLTFIELD<small>ENGINEERING REFERENCE & EQUIPMENT DATA</small></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
   </a>
   <nav class="hnav">
     <a href="index.html">Home</a>

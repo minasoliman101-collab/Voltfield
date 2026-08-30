@@ -44,21 +44,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
 <link rel="stylesheet" href="voltfield-core.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <style>
-
-.artban{background:var(--ink);color:#E8EDF3;border-bottom:4px solid var(--signal);padding:32px 20px 34px}
-.artban-in{max-width:900px;margin:0 auto}
-.artban .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);text-transform:uppercase;margin-bottom:10px}
-.artban h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.4vw,44px);letter-spacing:.01em;line-height:1.06}
-.artban p.dek{color:#AFC0D3;font-size:15.5px;margin-top:14px;line-height:1.55;max-width:680px}
 .searchwrap{max-width:900px;margin:0 auto;padding:36px 20px 60px}
 .searchbox{position:relative;margin-bottom:22px}
-.searchbox input{width:100%;border:2px solid var(--ink);background:#fff;padding:16px 18px;font-family:var(--body);font-size:17px;color:var(--ink)}
+.searchbox input{width:100%;border:1px solid var(--line-dark);background:var(--card);padding:16px 18px;font-family:var(--body);font-size:17px;color:var(--ink)}
 .searchbox input::placeholder{color:#8896A6}
 .searchmeta{font-family:var(--mono);font-size:11.5px;color:var(--slate);margin-bottom:18px}
 .reslist{display:flex;flex-direction:column;gap:10px}
@@ -69,16 +63,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .rescard .rc-desc{font-size:13px;color:var(--ink-2);margin-top:3px;line-height:1.5}
 .empty{text-align:center;padding:40px 20px;color:var(--slate);font-size:14px}
 .quicklinks{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
-.quicklinks button{border:1px solid var(--line-dark);background:#fff;color:var(--ink-2);font-family:var(--disp);font-weight:600;font-size:12.5px;padding:6px 12px}
+.quicklinks button{border:1px solid var(--line-dark);background:var(--card);color:var(--ink-2);font-family:var(--disp);font-weight:600;font-size:12.5px;padding:6px 12px}
 .quicklinks button:hover{border-color:var(--ink);color:var(--ink)}
-footer{background:var(--ink);color:#9FB0C3;padding:34px 20px;font-size:12px}
-footer .in{max-width:1240px;margin:0 auto;display:grid;gap:20px}
-@media(min-width:760px){footer .in{grid-template-columns:2fr 1fr 1fr}}
-footer h4{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
-footer p{line-height:1.6;max-width:460px}
-footer li{list-style:none;padding:3px 0;font-family:var(--mono);font-size:11.5px}
-footer a{color:#9FB0C3;text-decoration:none}
-footer a:hover{color:#fff}
 </style>
 </head>
 <body>
@@ -90,7 +76,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield home">
     <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
-    <span class="wordmark">VOLTFIELD<small>ENGINEERING REFERENCE & EQUIPMENT DATA</small></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
   </a>
   <nav class="hnav">
     <a href="index.html">Home</a>

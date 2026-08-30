@@ -21,8 +21,52 @@ html[data-theme="dark"]{
      unreadable, and the original brand amber already has ~10:1 here, so the
      dark theme takes it straight back. */
   --link:#F0B81F;
+  /* Added with the 2026 redesign, which introduced two surface roles the dark
+     theme has to answer for: --sunk (the recessed ground behind nav pills and
+     inset panels, one step BELOW --card here rather than above it as in the
+     light theme) and --line-strong (the emphasised hairline). Without these the
+     dark theme would inherit the light values and paint near-white blocks
+     behind every hovered nav item. */
+  --sunk:#1D2A3C;
+  --line-strong:#4A6183;
+  /* Shadows on a dark ground read as smudges at light-theme opacity; deepened
+     so elevation still separates a floating menu from the page behind it. */
+  --sh-1:0 1px 2px rgba(0,0,0,.4);
+  --sh-2:0 2px 4px rgba(0,0,0,.3),0 8px 20px rgba(0,0,0,.45);
+  --sh-3:0 4px 8px rgba(0,0,0,.35),0 16px 40px rgba(0,0,0,.55);
+  --solid-bg:var(--signal);--solid-fg:#101B2D;
+  /* Status colours used as TEXT. The light theme darkens them (--crit-ink etc)
+     so they clear AA on a light ground; on this dark ground those same darkened
+     values sit at 3.5:1 against the page. Lightened here instead -- measured
+     7.0:1, 7.4:1 and 9.6:1 on --paper. */
+  --crit-ink:#F2867A;--ok-ink:#6FCB95;--warn-ink:#F0B81F;
+  --tint-ok:#14301F;--tint-warn:#33280C;--tint-crit:#3A1A16;--tint-signal:#332A0E;
   color-scheme: dark;
 }
+
+/* The redesigned header is a translucent white bar with a blur behind it. That
+   literal rgba() cannot be tokenised away by the variable swap above, so the
+   dark theme restates it against the dark ground. */
+html[data-theme="dark"] header.site{background:rgba(11,20,32,.82)}
+@supports not (backdrop-filter:blur(1px)){
+  html[data-theme="dark"] header.site{background:var(--card)}
+}
+/* Focus rings are drawn in --ink, which is now a near-white on this theme and
+   would vanish against the light cards it outlines in the light theme -- but
+   here it is correct and high-contrast. The signal amber stays for the canvas. */
+/* Solid dark buttons: these are painted background:var(--ink) with #fff text,
+   which is correct in the light theme and inverts to white-on-white here,
+   because --ink is a near-white on this theme. They take the brand amber with
+   dark text instead -- the same substitution the pre-existing override list
+   above makes for the rest of the site's already-dark chrome. Every rule in
+   the redesign that pairs background:var(--ink) with a literal #fff is
+   listed here. */
+html[data-theme="dark"] .btn-primary,
+html[data-theme="dark"] .resume-cta,
+html[data-theme="dark"] .herosearch button[type=submit]{background:var(--signal);color:#101B2D}
+html[data-theme="dark"] .newstab.on{border-color:var(--signal)}
+html[data-theme="dark"] .logo .bolt{background:var(--signal)}
+html[data-theme="dark"] .logo .bolt svg path{fill:#101B2D}
 
 /* Chrome that was already dark (background:var(--ink) or var(--ink-2)) --
    re-pin to the original dark hex so it doesn't flip along with the
@@ -31,86 +75,21 @@ html[data-theme="dark"]{
    rule sitewide (including compound/descendant selectors), not just the
    obvious banner/button classes -- so this covers calculator "Calculate"
    buttons, table header rows, search-box buttons, etc. too. */
-html[data-theme="dark"] .abtn.primary:hover,
-html[data-theme="dark"] .abtn:hover,
 html[data-theme="dark"] .accban,
-html[data-theme="dark"] .addbtn:hover,
-html[data-theme="dark"] .alertbox,
-html[data-theme="dark"] .artban,
-html[data-theme="dark"] .bomban,
-html[data-theme="dark"] .btn.dark,
-html[data-theme="dark"] .btn.primary:hover,
 html[data-theme="dark"] .buildcta,
-html[data-theme="dark"] .catban,
-html[data-theme="dark"] .clearbtn,
-html[data-theme="dark"] .cmp-modal .cmp-hd button,
 html[data-theme="dark"] .comparebar,
 html[data-theme="dark"] .dailyband,
-html[data-theme="dark"] .dirsearch button,
-html[data-theme="dark"] .dm-add:hover,
-html[data-theme="dark"] .dm-rfq,
-html[data-theme="dark"] .drawer-ft .rfqbtn:hover,
 html[data-theme="dark"] .drawer-hd,
-html[data-theme="dark"] .embedbox-code button,
-html[data-theme="dark"] .eolban,
-html[data-theme="dark"] .est-field button,
-html[data-theme="dark"] .est-field button.ghost:hover,
-html[data-theme="dark"] .examplecard button,
-html[data-theme="dark"] .fbtn.on,
-html[data-theme="dark"] .ghost:hover,
-html[data-theme="dark"] .hero,
-html[data-theme="dark"] .humancard,
-html[data-theme="dark"] .idban,
-html[data-theme="dark"] .insban,
-html[data-theme="dark"] .layerbar button.on,
-html[data-theme="dark"] .lb-submit button,
-html[data-theme="dark"] .ltstrip,
-html[data-theme="dark"] .modebar button.on,
-html[data-theme="dark"] .navtoggle,
-html[data-theme="dark"] .newstab.on,
-html[data-theme="dark"] .p-add:hover,
-html[data-theme="dark"] .p-alert-form button,
-html[data-theme="dark"] .p-rfq,
-html[data-theme="dark"] .pbtn.primary:hover,
-html[data-theme="dark"] .pbtn:hover,
-html[data-theme="dark"] .pcbban,
-html[data-theme="dark"] .pricebar,
-html[data-theme="dark"] .proj-row button,
-html[data-theme="dark"] .quiz-next button,
-html[data-theme="dark"] .quizcallout,
-html[data-theme="dark"] .quotebtn,
-html[data-theme="dark"] .reftable th,
-html[data-theme="dark"] .reqpart button:hover,
-html[data-theme="dark"] .reveal-card,
-html[data-theme="dark"] .rfqbtn:hover,
 html[data-theme="dark"] .scorebar,
-html[data-theme="dark"] .searchrow button,
-html[data-theme="dark"] .seg button.on,
-html[data-theme="dark"] .sumbar,
-html[data-theme="dark"] .supban,
-html[data-theme="dark"] .thumb .rm,
-html[data-theme="dark"] .tmplbox button,
 html[data-theme="dark"] .toast,
-html[data-theme="dark"] .totop,
 html[data-theme="dark"] .utilbar,
 html[data-theme="dark"] table.rfq th,
 html[data-theme="dark"] tr.total td,
-html[data-theme="dark"] .btn.dark:hover,
 html[data-theme="dark"] .cb-item,
 html[data-theme="dark"] .comparebar .cb-item,
-html[data-theme="dark"] .clearbtn:hover,
-html[data-theme="dark"] .dm-rfq:hover,
-html[data-theme="dark"] .p-rfq:hover,
-html[data-theme="dark"] .panel,
-html[data-theme="dark"] .proj-row button:hover,
-html[data-theme="dark"] .toolstats,
-html[data-theme="dark"] .totop:hover,
-html[data-theme="dark"] tr.grp td,
+html[data-theme="dark"] .feature,
 html[data-theme="dark"] footer{
   background:#101B2D !important;
-}
-html[data-theme="dark"] .ctaband{
-  background:linear-gradient(120deg,#101B2D 0%,#22334C 100%) !important;
 }
 /* Table zebra striping: even rows were plain #fff, odd rows var(--card) --
    keep the same subtle alternation using the two dark-mode card shades. */
@@ -167,10 +146,7 @@ html[data-theme="dark"] .opt.on,
 html[data-theme="dark"] .drawer-proj,
 html[data-theme="dark"] .herosearch form,
 html[data-theme="dark"] .jump a,
-html[data-theme="dark"] .ec-note code,
-html[data-theme="dark"] .layerbar button,
-html[data-theme="dark"] .modebar button,
-html[data-theme="dark"] .seg button{
+html[data-theme="dark"] .ec-note code{
   background:#141F2E !important;
 }
 
