@@ -2325,17 +2325,87 @@
       const vFov = camera.fov * Math.PI/180;
       const hFov = 2 * Math.atan(Math.tan(vFov/2) * camera.aspect);
       const radXZ = Math.sqrt(size.x*size.x + size.z*size.z) / 2;
-      const distV = (size.y/2) / Math.tan(vFov/2) + radXZ;
-      const distH = radXZ / Math.tan(hFov/2) + radXZ;
-      /* distV and distH already add radXZ, which is the object's own half-
-         diagonal -- that is the rotation-safety margin, and it is generous on
-         its own. Multiplying it again by 1.25 double-padded the shot: measured
-         on the homepage showcase, models were occupying only 21-30% of the
-         frame width and about 12% of its area, which reads as a small, plain
-         object rather than a detailed one. 1.06 keeps a visible margin without
-         stacking two of them. */
-      const fit = Math.max(distV, distH);
-      const radius = fit * (o.zoom || 1.06);
+
+      /* Framing is solved by projection, not by a closed-form estimate.
+
+         The previous version fitted (size.y/2) against the vertical half-FOV
+         and added radXZ as a rotation margin. That treats the model as
+         symmetric about its bounding-box centre, and under perspective from an
+         elevated camera it is not: the near-bottom of the object is closer to
+         the lens than the far-top, so it projects further from centre and
+         leaves the frame first. On a wide, low model the error is large --
+         measured on the diesel genset at the homepage showcase's 563x340, the
+         skid ran off the bottom edge while roughly a fifth of the frame sat
+         empty above the exhaust.
+
+         So: place the camera, project the eight bounding-box corners, and read
+         the real screen-space bounds. Sample right around the orbit, because
+         theta auto-rotates and a long object presents its length at one angle
+         and its depth at another -- framing that holds only at the opening
+         angle clips halfway through the first rotation. Then centre on what
+         was actually measured and scale to fit. Converges in a few passes. */
+      const phi0 = o.phi != null ? o.phi : 1.15;
+      const corners = [];
+      for (let xi = 0; xi < 2; xi++)
+        for (let yi = 0; yi < 2; yi++)
+          for (let zi = 0; zi < 2; zi++)
+            corners.push(new THREE.Vector3(
+              xi ? bb.max.x : bb.min.x,
+              yi ? bb.max.y : bb.min.y,
+              zi ? bb.max.z : bb.min.z));
+
+      const target = ctr.clone();
+      /* Opening estimate, then refined below. */
+      let radius = Math.max(
+        (size.y/2) / Math.tan(vFov/2) + radXZ,
+        radXZ / Math.tan(hFov/2) + radXZ
+      );
+      /* Fraction of the half-frame the model is allowed to occupy. 0.92 leaves
+         a visible margin on the tightest axis; the old 1.06 distance multiplier
+         is kept as o.zoom for callers that set it. */
+      const FILL = 0.92;
+      /* Sit the model slightly above the middle of the frame rather than dead
+         centre. Equipment reads better with a little more room under it than
+         over it -- dead-centre leaves the subject looking like it is sinking --
+         and it keeps the silhouette clear of the caption bar directly beneath
+         the canvas. In NDC, where 1.0 is half the frame height. */
+      const Y_BIAS = o.yBias != null ? o.yBias : 0.07;
+      const THETA_SAMPLES = 24;
+      const probe = new THREE.Vector3();
+
+      for (let pass = 0; pass < 5; pass++) {
+        let minY = Infinity, maxY = -Infinity, maxAbsX = 0;
+        for (let t = 0; t < THETA_SAMPLES; t++) {
+          const th = (t / THETA_SAMPLES) * Math.PI * 2;
+          const s = Math.sin(phi0);
+          camera.position.set(
+            target.x + radius * s * Math.sin(th),
+            target.y + radius * Math.cos(phi0),
+            target.z + radius * s * Math.cos(th)
+          );
+          camera.lookAt(target);
+          camera.updateMatrixWorld(true);
+          for (let i = 0; i < corners.length; i++) {
+            probe.copy(corners[i]).project(camera);
+            if (probe.y < minY) minY = probe.y;
+            if (probe.y > maxY) maxY = probe.y;
+            const ax = Math.abs(probe.x);
+            if (ax > maxAbsX) maxAbsX = ax;
+          }
+        }
+        /* Vertical placement: move the look-at point so the measured box
+           centre lands on Y_BIAS rather than wherever perspective put it. One
+           NDC unit is half the frustum height at the target's depth. */
+        const dy = (minY + maxY) / 2 - Y_BIAS;
+        target.y += dy * radius * Math.tan(vFov/2);
+        /* Then scale distance to fit. Measured against the biased centre and
+           taking the larger side, so the offset cannot push the top out of
+           frame -- which a symmetric half-span test would miss. */
+        const halfV = Math.max(Math.abs(maxY - dy), Math.abs(minY - dy));
+        const need = Math.max(halfV, maxAbsX) / FILL;
+        if (isFinite(need) && need > 0) radius *= need;
+      }
+      radius *= (o.zoom || 1);
 
       /* Fit the shadow camera to this model. The shapes span a wide range of
          scales -- a DIP-8 on a board stub against a 48U rack -- and a single
@@ -2358,10 +2428,15 @@
          far=100 the AO buffer bottomed out at 175/255 (almost no occlusion
          detected); fitted, it reaches 69. It also sharpens the shadow map. */
       camera.near = Math.max(0.05, radius * 0.15);
-      camera.far  = radius * 4 + fit;
+      /* `radius` is now the solved orbit distance, so the far plane is that
+         plus the object's own half-diagonal and the room the orbit's maxR
+         allows the viewer to pull back to. */
+      camera.far  = radius * 4 + radXZ;
       camera.updateProjectionMatrix();
 
-      const target = new THREE.Vector3(ctr.x, ctr.y, ctr.z);
+      /* `target` is the solved look-at from the framing pass above -- it is the
+         box centre nudged vertically so the model sits centred on screen, not
+         the raw bounding-box centre. */
       orbit = attachOrbit(camera, renderer.domElement, target, {
         radius: radius,
         minR: radius * 0.35,
@@ -2422,7 +2497,13 @@
         });
         ro.observe(container);
       }
-    }).catch(() => {
+    }).catch((err) => {
+      /* This catch covers the whole mount chain, not just the CDN import, so a
+         genuine bug in scene construction used to surface to the user as
+         "needs an internet connection" and to the developer as nothing at all.
+         The message stays (it is the common case and the actionable one), but
+         the underlying error is logged so the other case is debuggable. */
+      try { console.error('[VF3D] mount failed:', err); } catch (e) {}
       if (!disposed) container.innerHTML = '<div style="font:12px/1.4 monospace;color:#8896A6;padding:12px;text-align:center">3D view needs an internet connection the first time it loads.</div>';
     });
 
