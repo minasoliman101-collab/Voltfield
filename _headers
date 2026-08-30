@@ -14,8 +14,21 @@
 /ordering-hidden.css
   Cache-Control: public, max-age=600
 
+# The shared stylesheets get a SHORT max-age, unlike the data files below.
+# They were on 24 hours, which was reasonable when they held only tokens and
+# header chrome. They now carry the whole visual system, so they change on
+# every design deploy -- and because the HTML is network-first while these were
+# a day stale, a returning visitor could get new markup painted with the old
+# stylesheet. That is not a stale page, it is a broken one. Ten minutes, with
+# background revalidation, keeps them cheap without that failure mode.
 /voltfield-core.css
-  Cache-Control: public, max-age=86400, stale-while-revalidate=86400
+  Cache-Control: public, max-age=600, stale-while-revalidate=86400
+
+/voltfield-dark-mode.css
+  Cache-Control: public, max-age=600, stale-while-revalidate=86400
+
+/voltfield-site-config.js
+  Cache-Control: public, max-age=600, stale-while-revalidate=86400
 
 /icons/*
   Cache-Control: public, max-age=2592000
