@@ -4,7 +4,13 @@
    of serving a stale file indefinitely. Still bump VERSION for an instant,
    forced cache-wide reset (e.g. an urgent fix) — activate() below wipes
    every cache bucket that doesn't match it. */
-const VERSION = 'voltfield-v91';
+/* v92: the 2026 redesign. This is the case the note above calls "an urgent
+   fix". Stale-while-revalidate normally degrades gracefully -- one load of old
+   JS against fresh HTML -- but the redesign moved the whole visual system into
+   voltfield-core.css, so a returning visitor would get the new pages painted
+   with the old stylesheet: new hero, old header, for one full page load.
+   Bumping wipes every non-matching bucket in activate(), so nobody sees it. */
+const VERSION = 'voltfield-v92';
 
 const CORE = [
   './',
