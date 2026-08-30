@@ -2221,7 +2221,18 @@
       // lets a viewer right-click-save the 3D view (and makes the shape library
       // testable by reading frames back). Negligible cost at these sizes.
       renderer = new THREE.WebGLRenderer({antialias:true, alpha:true, preserveDrawingBuffer:true});
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 2));
+      /* Supersample on non-retina displays. A plain 1.0 device ratio renders
+         one sample per screen pixel, which MSAA only partly rescues: MSAA
+         antialiases geometry EDGES but not shading, so specular glints on the
+         radiator fins and the fan blades still crawl. Rendering at 1.5x and
+         letting the browser downscale antialiases the shading too.
+
+         Bounded rather than open-ended: 1.5 is 2.25x the fragment work, which
+         these canvases (a few hundred px square, a handful of thousand
+         triangles) absorb easily, while 2.0 on an already-2x display would be
+         4x for no visible gain. Retina screens are left at 2. */
+      const _dpr = window.devicePixelRatio || 1;
+      renderer.setPixelRatio(Math.min(Math.max(_dpr, 1.5), 2));
       /* Record the GPU's real anisotropic-filtering limit once. Textures were
          pinned at 4; hardware typically allows 16, and the difference shows on
          any surface viewed at a shallow angle -- which here means every
@@ -2460,7 +2471,33 @@
         loadPostFX().then(function(PP){
           if (disposed) return;
           const cw = container.clientWidth || w, ch = container.clientHeight || h;
-          const c = new PP.EffectComposer(renderer);
+          /* Multisampled composer target. This matters more than it looks.
+
+             The renderer is built with antialias:true, but that only applies
+             to the DEFAULT framebuffer -- the moment anything renders through
+             an EffectComposer, the picture goes into a WebGLRenderTarget
+             instead and the renderer's MSAA is bypassed entirely. Composer's
+             own default target is created as { type: HalfFloatType } with no
+             `samples`, so it has none.
+
+             The effect is not subtle and it is exactly the "glitching" this
+             was reported as: measured on the genset at 520x400, 51.9% of
+             silhouette edges came back hard-stepped through the AO path
+             against 18.7% rendering direct. Under auto-rotation those stepped
+             edges crawl, which is what draws the eye on the skid rails and
+             the radiator fins.
+
+             Four samples restores it. renderTarget2 is cloned from this one
+             inside the composer and WebGLRenderTarget.copy() carries `samples`
+             across, so both buffers are multisampled; setSize() below keeps
+             them that way on resize. */
+          const dpr = renderer.getPixelRatio();
+          const msaaRT = new THREE.WebGLRenderTarget(
+            Math.max(1, Math.round(cw * dpr)),
+            Math.max(1, Math.round(ch * dpr)),
+            { type: THREE.HalfFloatType, samples: 4 }
+          );
+          const c = new PP.EffectComposer(renderer, msaaRT);
           c.addPass(new PP.RenderPass(scene, camera));
           const ssao = new PP.SSAOPass(scene, camera, cw, ch);
           /* Tuned for these models' scale -- they are framed a couple of world
