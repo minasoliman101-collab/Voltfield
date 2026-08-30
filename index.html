@@ -18,24 +18,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
 <!-- End Google Tag Manager -->
-<title>Equipment Lead Times &amp; Engineering Reference | Voltfield</title>
+<title>Engineering Calculators, Guides &amp; Practice Tools | Voltfield</title>
 <link rel="canonical" href="https://voltfield.org/">
-<meta name="description" content="How long transformers, switchgear, gensets and battery systems actually take to get: indicative lead times for 235 equipment families, what is driving each number, and the specs and standards behind them. Free, no signup.">
-<meta name="keywords" content="engineering calculators, one-line diagram practice, voltage drop calculator, transformer sizing, arc-flash calculator, BOM generator, power transformer lead times, FEOC compliance, data center power">
+<meta name="description" content="Twenty power-engineering calculators that show their method, eighteen in-depth guides, and open boards for practising one-lines, power PODs and rack elevations. Free, no signup.">
+<meta name="keywords" content="engineering calculators, one-line diagram practice, voltage drop calculator, transformer sizing, arc-flash calculator, cable ampacity, fault current, electrical engineering glossary, data center power">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Voltfield">
-<meta property="og:title" content="Equipment Lead Times &amp; Engineering Reference">
-<meta property="og:description" content="How long power equipment actually takes to get: indicative lead times for 235 equipment families across data center, renewable, storage and industrial power, with what is driving each number.">
+<meta property="og:title" content="Engineering Calculators, Guides &amp; Practice Tools">
+<meta property="og:description" content="Twenty calculators that show their method, eighteen guides that answer one question each, and open boards for practising one-lines, power PODs and rack elevations.">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="https://voltfield.org/social/social-index.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:image" content="https://voltfield.org/social/social-index.jpg">
-<meta name="twitter:title" content="Equipment Lead Times &amp; Engineering Reference">
-<meta name="twitter:description" content="Indicative lead times for 235 equipment families, and what is driving each number. Free, no signup.">
+<meta name="twitter:title" content="Engineering Calculators, Guides &amp; Practice Tools">
+<meta name="twitter:description" content="Calculators, guides and practice boards for power engineering. Free, no signup.">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
- {"@type":"Organization","name":"Voltfield","description":"An independent engineering reference for power equipment: indicative lead times for 235 equipment families, the specifications and standards behind them, and free engineering calculators and guides. Voltfield sells nothing.","telephone":"+1-850-686-1378","email":"Help@voltfield.org"},
+ {"@type":"Organization","name":"Voltfield","description":"An independent engineering reference for power equipment: free calculators that show their method, in-depth technical guides, a plain-language glossary, and interactive boards for practising electrical design. Voltfield sells nothing.","telephone":"+1-850-686-1378","email":"Help@voltfield.org"},
  {"@type":"WebSite","name":"Voltfield","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"site-search.html?q={search_term_string}"},"query-input":"required name=search_term_string"}}
 ]}
 </script>
@@ -81,10 +81,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 /* ---------- shared layout shell ---------- */
 .section{max-width:var(--shell);margin:0 auto;padding:76px 24px}
-.section-head{max-width:660px;margin-bottom:36px}
+/* display:block matters. voltfield-core.css gives .section-head a
+   flex row (its inner pages put the heading and a trailing link side by
+   side); this page nests the eyebrow, heading and lede as siblings inside it,
+   so inheriting that flex laid all three out in a row. */
+.section-head{display:block;max-width:680px;margin-bottom:38px}
 .section-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.09em;
   color:var(--slate);text-transform:uppercase;margin-bottom:10px}
-.section-head h2{font-size:clamp(27px,3.2vw,38px);line-height:1.12}
+.section-head h2{font-size:clamp(30px,3.6vw,44px);line-height:1.06}
 .section-head p{font-size:16.5px;color:var(--slate);margin-top:12px;line-height:1.6}
 .section-more{display:inline-flex;align-items:center;gap:7px;margin-top:26px;
   font-size:15px;font-weight:600;color:var(--ink);text-decoration:none;
@@ -111,8 +115,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   border-radius:var(--r-pill);padding:7px 15px;margin-bottom:26px;box-shadow:var(--sh-1)}
 .hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--signal);
   flex-shrink:0}
-.hero h1{font-size:clamp(38px,6.2vw,68px);line-height:1.08;letter-spacing:-.035em;
-  font-weight:600}
+.hero h1{font-size:clamp(42px,6.8vw,76px);line-height:1.02;letter-spacing:-.042em;
+  font-weight:700}
 /* Amber emphasis on the headline. A background gradient was tried first and
    is wrong here: the phrase wraps across two lines, and a gradient paints a
    separate box per line box, each positioned against a 1.08 line-height rather
@@ -184,9 +188,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    feel restless, and it presented the site's best material -- the actual
    numbers -- in the one format where you cannot scan or compare them. Same
    figures, laid out still. */
-.ltband{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  background:var(--card)}
-.ltband-in{max-width:var(--shell);margin:0 auto;padding:34px 24px}
+/* The counts band. Sits on the teal ground (.band-accent) so the page has a
+   second colour doing structural work rather than amber carrying all of it;
+   the figures are links, since each one names something you can go and use. */
+.ltband{border-top:1px solid var(--accent-line);border-bottom:1px solid var(--accent-line)}
+.ltband-in{max-width:var(--shell);margin:0 auto;padding:46px 24px}
 .ltband-hd{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
   flex-wrap:wrap;margin-bottom:22px}
 .ltband-hd .t{font-family:var(--mono);font-size:11px;letter-spacing:.09em;
@@ -195,13 +201,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   letter-spacing:-.01em;display:inline-flex;align-items:center;gap:6px;
   transition:gap var(--dur) var(--ease)}
 .ltband-hd a:hover{gap:10px}
-.ltgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:14px 28px}
-.ltfig{display:flex;flex-direction:column;gap:4px;padding-left:15px;
-  border-left:2px solid var(--line)}
-.ltfig .k{font-size:27px;font-weight:600;letter-spacing:-.03em;color:var(--ink);
-  font-variant-numeric:tabular-nums;line-height:1.1}
-.ltfig .l{font-size:13.5px;color:var(--slate);line-height:1.4}
+.ltgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:26px 30px}
+.ltfig{display:flex;flex-direction:column;gap:6px;padding:4px 0 4px 18px;
+  border-left:2px solid var(--accent-line);text-decoration:none;color:inherit;
+  transition:border-color var(--dur) var(--ease),transform var(--dur) var(--ease)}
+.ltfig:hover{border-left-color:var(--accent);transform:translateX(2px)}
+.ltfig .k{font-size:42px;font-weight:700;letter-spacing:-.045em;color:var(--accent-ink);
+  font-variant-numeric:tabular-nums;line-height:1}
+.ltfig .l{font-size:14px;color:var(--ink-2);line-height:1.45;max-width:210px}
 /* Direction of travel. A coloured arrow glyph rather than the old ▲/▼/■ set,
    which rendered at different weights across platforms and read as noise. */
 .ltfig .k .tr{font-size:15px;margin-left:5px;vertical-align:2px;font-weight:500}
@@ -247,10 +255,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),
     border-color var(--dur) var(--ease)}
 .path:hover{transform:translateY(-3px);box-shadow:var(--sh-2);border-color:var(--line-dark)}
-.path .pi{width:42px;height:42px;border-radius:var(--r);display:grid;place-items:center;
-  background:var(--sunk);margin-bottom:20px}
-.path .pi svg{width:22px;height:22px}
-.path h3{font-size:21px;letter-spacing:-.022em}
+/* Each of the three gets its own colour, carried by the icon chip and a rule
+   across the top of the card. Three identical grey chips on three identical
+   white cards was the flattest thing on the page. */
+.path{--pc:var(--accent);--pc-soft:var(--accent-soft)}
+.path-b{--pc:var(--dc);--pc-soft:#E7EFF8}
+.path-c{--pc:var(--signal-deep);--pc-soft:#FDF3D8}
+.path::before{content:"";display:block;height:4px;margin:-30px -28px 26px;
+  border-radius:var(--r-xl) var(--r-xl) 0 0;background:var(--pc)}
+.path .pi{width:52px;height:52px;border-radius:var(--r-lg);display:grid;place-items:center;
+  background:var(--pc-soft);color:var(--pc);margin-bottom:22px}
+.path .pi svg{width:26px;height:26px}
+.path h3{font-size:22px;letter-spacing:-.028em;font-weight:700}
 .path > p{font-size:15px;color:var(--slate);margin-top:9px;line-height:1.6;flex:1}
 .path .plinks{display:flex;flex-direction:column;gap:1px;margin-top:20px;
   border-top:1px solid var(--line);padding-top:8px}
@@ -342,37 +358,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   transition:transform var(--dur) var(--ease)}
 .seccard:hover .sc-foot .go{transform:translateX(3px)}
 
-/* ---------- news ---------- */
-.newstabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:26px}
-.newstab{border:1px solid var(--line);background:var(--card);padding:9px 17px;
-  font-family:var(--disp);font-weight:500;font-size:14px;letter-spacing:-.008em;
-  text-transform:none;color:var(--ink-2);border-radius:var(--r-pill);min-height:40px;
-  transition:background var(--dur) var(--ease),color var(--dur) var(--ease),
-    border-color var(--dur) var(--ease)}
-.newstab:hover{border-color:var(--line-dark);color:var(--ink)}
-.newstab.on{background:var(--solid-bg);color:var(--solid-fg);border-color:var(--ink);font-weight:600}
-.newsgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:20px}
-.newscard{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
-  text-decoration:none;color:var(--ink);display:flex;flex-direction:column;overflow:hidden;
-  transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),
-    border-color var(--dur) var(--ease)}
-.newscard:hover{transform:translateY(-3px);box-shadow:var(--sh-2);border-color:var(--line-dark)}
-.newscard .nc-img{height:150px;background:var(--sunk);display:flex;align-items:center;
-  justify-content:center;overflow:hidden}
-.newscard .nc-img img{width:100%;height:100%;object-fit:cover;display:block;
-  transition:transform .4s var(--ease)}
-.newscard:hover .nc-img img{transform:scale(1.035)}
-.newscard .nc-img svg{height:88px;width:auto}
-.newscard .nc-body{padding:18px 20px 20px;flex:1;display:flex;flex-direction:column}
-.newscard .nc-tag{display:flex;align-items:center;gap:9px;margin-bottom:11px}
-.newscard .nc-sec{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.07em;
-  color:#fff;padding:3px 9px;border-radius:var(--r-pill);text-transform:uppercase}
-.newscard .nc-date{font-family:var(--mono);font-size:11px;color:var(--slate)}
-.newscard h4{font-size:17px;line-height:1.3;letter-spacing:-.02em}
-.newscard p{font-size:14px;color:var(--slate);margin-top:9px;line-height:1.6;flex:1}
-.newscard .nc-src{font-size:12.5px;color:var(--slate);margin-top:16px;display:flex;
-  justify-content:space-between;align-items:center;gap:10px}
-.newscard .nc-src .go{color:var(--ink);font-weight:600}
 
 /* ---------- closing calls to action ----------
    Two cards replacing the old full-bleed gradient CTA band plus the separate
@@ -440,7 +425,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="bolt"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
     <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
   </a>
-  <nav class="hnav">
+    <nav class="hnav">
     <a href="index.html" class="on">Home</a>
     <div class="navdrop" id="toolsDrop">
       <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
@@ -449,7 +434,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="tp-col">
             <span class="navdrop-grp">Calculate</span>
             <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
-            <a href="voltfield-bom-generator.html"><b>BOM generator</b><em>A spec turned into a bill of materials</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
           </div>
           <div class="tp-col">
             <span class="navdrop-grp">Design &amp; practice</span>
@@ -459,19 +444,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="tp-col">
             <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
             <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
-            <a href="voltfield-eol.html"><b>Obsolete &amp; end-of-life</b><em>What replaced a discontinued part</em></a>
-            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+            <a href="voltfield-eol.html"><b>Obsolete &amp; end-of-life</b><em>What replaced a discontinued platform</em></a>
           </div>
         </div>
-        <a class="tp-all" href="free-tools.html">All free tools, including the PCB builder and glossary quiz &rarr;</a>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
       </div>
     </div>
     <a href="guides.html">Guides</a>
-    <a href="lead-time-index.html">Lead times</a>
-    <a href="packets.html">Packets</a>
-    <a href="voltfield-supply-catalog.html">Spec library</a>
-    <a href="voltfield-suppliers.html">Manufacturers</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
     <a href="whats-new.html">What's new</a>
   </nav>
   <div class="headright">
@@ -487,45 +470,41 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="hero">
   <div class="hero-in">
     <div class="hero-copy">
-      <div class="hero-eyebrow"><span class="dot"></span> Independent reference &middot; nothing for sale &middot; updated August 2026</div>
-      <h1>How long power equipment <em>actually takes to get</em></h1>
-      <p class="lede">Indicative lead times for 235 equipment families &mdash; what each number is, where it came from, and what is moving it. Plus the specs, standards and calculators behind them.</p>
+      <div class="hero-eyebrow"><span class="dot"></span> Free &middot; no signup &middot; runs in your browser</div>
+      <h1>Size it, spec it, <em>check your work</em></h1>
+      <p class="lede">Twenty calculators that show their method, eighteen guides that answer one question each, and open boards for practising one-lines, power PODs and rack elevations.</p>
       <div class="herosearch">
         <form action="site-search.html" method="get" id="heroSearchForm" role="search">
           <svg class="mag" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M12.5 12.5 17 17" stroke-linecap="round"/></svg>
-          <input name="q" id="heroSearchInput" type="search" autocomplete="off" placeholder="Search lead times, guides and calculators&hellip;" aria-label="Search guides, calculators &amp; tools">
+          <input name="q" id="heroSearchInput" type="search" autocomplete="off" placeholder="Search guides, calculators and tools&hellip;" aria-label="Search guides, calculators &amp; tools">
           <button type="submit">Search</button>
           <div class="kbsearch-results" id="heroSearchSuggest" role="listbox"></div>
         </form>
         <div class="hint">
           <span>Popular:</span>
-          <a href="lead-time-index.html">Lead-time index</a>
-          <a href="site-search.html?q=transformer+lead+time">Transformer lead times</a>
-          <a href="site-search.html?q=FEOC">FEOC compliance</a>
           <a href="site-search.html?q=voltage+drop">Voltage drop</a>
+          <a href="site-search.html?q=arc+flash">Arc flash</a>
+          <a href="site-search.html?q=transformer+sizing">Transformer sizing</a>
+          <a href="site-search.html?q=grounding">Grounding &amp; bonding</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== LEAD-TIME BAND ====================
-     Absorbs the old hero statistics, the "free resources" counter strip and
-     the scrolling ticker. Same figures the ticker carried, held still so they
-     can be read and compared. -->
-<div class="ltband">
+<!-- ==================== WHAT'S HERE ====================
+     Was the lead-time watch. The site is no longer led by lead-time, sourcing
+     or purchasing material -- those pages remain published, they are just not
+     what the homepage is about. This counts the reference itself instead, and
+     it sits on the teal ground so the page has a second colour doing
+     structural work rather than amber carrying everything. -->
+<div class="ltband band-accent">
   <div class="ltband-in">
-    <div class="ltband-hd">
-      <div class="t">Lead-time watch &middot; indicative, North America, August 2026</div>
-      <a href="lead-time-index.html">All 235 families <span aria-hidden="true">&rarr;</span></a>
-    </div>
     <div class="ltgrid">
-      <div class="ltfig"><div class="k">160 wk<span class="tr up" aria-hidden="true">&uarr;</span></div><div class="l">Large power transformers</div></div>
-      <div class="ltfig"><div class="k">2028<span class="tr up" aria-hidden="true">&uarr;</span></div><div class="l">MV switchgear, sold out through</div></div>
-      <div class="ltfig"><div class="k">90 wk<span class="tr up" aria-hidden="true">&uarr;</span></div><div class="l">Diesel gensets</div></div>
-      <div class="ltfig"><div class="k">32 wk<span class="tr fl" aria-hidden="true">&rarr;</span></div><div class="l">Grid-forming PCS</div></div>
-      <div class="ltfig"><div class="k">20 wk<span class="tr up" aria-hidden="true">&uarr;</span></div><div class="l">FEOC-clean inverters</div></div>
-      <div class="ltfig"><div class="k">$110&ndash;140<span class="tr dn" aria-hidden="true">&darr;</span></div><div class="l">LFP DC blocks, per kWh</div></div>
+      <a class="ltfig" href="engineering-calculators.html"><div class="k">20</div><div class="l">Engineering calculators, each showing its method</div></a>
+      <a class="ltfig" href="guides.html"><div class="k">18</div><div class="l">In-depth technical guides</div></a>
+      <a class="ltfig" href="free-tools.html"><div class="k">9</div><div class="l">Interactive design and practice tools</div></a>
+      <a class="ltfig" href="glossary.html"><div class="k">56</div><div class="l">Glossary terms, defined plainly</div></a>
     </div>
   </div>
 </div>
@@ -543,34 +522,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p>Most people arrive with one of three questions. Each of these opens onto the rest.</p>
   </div>
   <div class="pathgrid">
-    <div class="path">
-      <div class="pi"><svg viewBox="0 0 40 40" fill="none" stroke="#2C3E57" stroke-width="2.2" aria-hidden="true"><path d="M5 33h30"/><path d="M9 33V22M17 33V14M25 33V25M33 33V8"/><circle cx="33" cy="8" r="2.4" fill="#FFC400" stroke="none"/></svg></div>
-      <h3>How long will it take?</h3>
-      <p>Indicative order-to-delivery times for 235 equipment families, each labelled with where the figure came from and what is moving it.</p>
-      <div class="plinks">
-        <a href="lead-time-index.html">Lead-time index <span class="ar" aria-hidden="true">&rarr;</span></a>
-        <a href="guide-transformer-lead-times.html">Why transformers take four years <span class="ar" aria-hidden="true">&rarr;</span></a>
-        <a href="methodology.html">How these numbers are built <span class="ar" aria-hidden="true">&rarr;</span></a>
-      </div>
-    </div>
-    <div class="path">
-      <div class="pi"><svg viewBox="0 0 40 40" fill="none" stroke="#2C3E57" stroke-width="2.2" aria-hidden="true"><rect x="9" y="5" width="22" height="30" rx="3"/><rect x="13" y="9" width="14" height="6" rx="1" fill="#FFC400" stroke="none"/><circle cx="15" cy="22" r="1.7" fill="#2C3E57" stroke="none"/><circle cx="20" cy="22" r="1.7" fill="#2C3E57" stroke="none"/><circle cx="25" cy="22" r="1.7" fill="#2C3E57" stroke="none"/><circle cx="15" cy="28" r="1.7" fill="#2C3E57" stroke="none"/><circle cx="20" cy="28" r="1.7" fill="#2C3E57" stroke="none"/><circle cx="25" cy="28" r="1.7" fill="#2C3E57" stroke="none"/></svg></div>
-      <h3>Run the numbers</h3>
+    <div class="path path-a">
+      <div class="pi"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="9" y="5" width="22" height="30" rx="3"/><rect x="13" y="9" width="14" height="6" rx="1" fill="currentColor" stroke="none" opacity=".35"/><circle cx="15" cy="22" r="1.7" fill="currentColor" stroke="none"/><circle cx="20" cy="22" r="1.7" fill="currentColor" stroke="none"/><circle cx="25" cy="22" r="1.7" fill="currentColor" stroke="none"/><circle cx="15" cy="28" r="1.7" fill="currentColor" stroke="none"/><circle cx="20" cy="28" r="1.7" fill="currentColor" stroke="none"/><circle cx="25" cy="28" r="1.7" fill="currentColor" stroke="none"/></svg></div>
+      <h3>Work it out</h3>
       <p>Twenty calculators &mdash; voltage drop, transformer sizing, arc-flash incident energy, cable ampacity, fault current &mdash; each showing the method, not just the answer.</p>
       <div class="plinks">
         <a href="engineering-calculators.html">All 20 calculators <span class="ar" aria-hidden="true">&rarr;</span></a>
-        <a href="voltfield-bom-generator.html">BOM generator <span class="ar" aria-hidden="true">&rarr;</span></a>
         <a href="specification-checklist.html">Specification checklist <span class="ar" aria-hidden="true">&rarr;</span></a>
+        <a href="voltfield-glossary-quiz.html">Test yourself <span class="ar" aria-hidden="true">&rarr;</span></a>
       </div>
     </div>
-    <div class="path">
-      <div class="pi"><svg viewBox="0 0 40 40" fill="none" stroke="#2C3E57" stroke-width="2.2" aria-hidden="true"><circle cx="7" cy="20" r="3"/><path d="M10 20h6"/><rect x="16" y="15" width="8" height="10" rx="1.5" fill="#FFC400" stroke="none"/><rect x="16" y="15" width="8" height="10" rx="1.5"/><path d="M24 20h6"/><circle cx="33" cy="20" r="3"/></svg></div>
-      <h3>Look something up</h3>
-      <p>Reference specifications, standards and manufacturer data for the equipment itself &mdash; plus eighteen guides written to answer one question each.</p>
+    <div class="path path-b">
+      <div class="pi"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M8 7h17l7 7v19a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2z"/><path d="M25 7v7h7" stroke-width="1.8"/><path d="M12 21h16M12 27h11" stroke-width="1.8"/></svg></div>
+      <h3>Understand it</h3>
+      <p>Eighteen guides, each written to answer a single question &mdash; how a nameplate reads, what an arc-flash boundary is, why PUE lies to you &mdash; plus a plain-language glossary.</p>
       <div class="plinks">
-        <a href="voltfield-supply-catalog.html">Spec library <span class="ar" aria-hidden="true">&rarr;</span></a>
         <a href="guides.html">18 technical guides <span class="ar" aria-hidden="true">&rarr;</span></a>
-        <a href="voltfield-identify.html">Identify a part from its nameplate <span class="ar" aria-hidden="true">&rarr;</span></a>
+        <a href="glossary.html">Glossary, 56 terms <span class="ar" aria-hidden="true">&rarr;</span></a>
+        <a href="methodology.html">How this material is built <span class="ar" aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+    <div class="path path-c">
+      <div class="pi"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="7" cy="20" r="3"/><path d="M10 20h6"/><rect x="16" y="15" width="8" height="10" rx="1.5" fill="currentColor" stroke="none" opacity=".35"/><rect x="16" y="15" width="8" height="10" rx="1.5"/><path d="M24 20h6"/><circle cx="33" cy="20" r="3"/></svg></div>
+      <h3>Practise it</h3>
+      <p>Open boards for laying out real equipment &mdash; a one-line, a packaged power module, a rack elevation &mdash; with the result checked against sizing, load and code rules as you build.</p>
+      <div class="plinks">
+        <a href="voltfield-sandbox.html">One-line sandbox <span class="ar" aria-hidden="true">&rarr;</span></a>
+        <a href="voltfield-pod-designer.html">POD &amp; skid designer <span class="ar" aria-hidden="true">&rarr;</span></a>
+        <a href="voltfield-rack-builder.html">Rack elevation builder <span class="ar" aria-hidden="true">&rarr;</span></a>
       </div>
     </div>
   </div>
@@ -582,7 +561,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="feature-in">
     <div>
       <div class="section-eyebrow">Practice tools</div>
-      <h2>Build it before you buy it</h2>
+      <h2>Get it wrong here, not on site</h2>
       <p>Three open boards for laying out real equipment and having the result checked against sizing, load and code rules &mdash; with 32 procedural 3D models of the actual kit behind them.</p>
       <div class="flinks">
         <a href="voltfield-sandbox.html"><b>One-line sandbox</b><span>Drag transformer, breaker, feeder and load tiles onto a board; get instant checks on sizing, voltage drop and fault current.</span></a>
@@ -610,7 +589,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="section-head">
     <div class="section-eyebrow">Reference by sector</div>
     <h2>Five sectors of power equipment</h2>
-    <p>Each opens onto the guides, specifications and lead times for that sector.</p>
+    <p>Each opens onto the guides, reference specifications and standards for that sector.</p>
   </div>
   <div class="secgrid">
     <a class="seccard" href="data-centers.html">
@@ -618,35 +597,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="sc-hd"><span class="sc-dot" style="background:var(--dc)"></span><h3>Data centers</h3></div>
       <p>Transformers, switchgear, generators, UPS, CDUs and busway for hyperscale and colo builds.</p>
       <div class="sc-cats"><span>Transformers</span><span>Switchgear</span><span>Cooling</span></div>
-      <div class="sc-foot"><span class="n">1,326 configurations</span><span class="go">Browse &rarr;</span></div>
+      <div class="sc-foot"><span class="go">Guides &amp; reference &rarr;</span></div>
     </a>
     <a class="seccard" href="renewables.html">
       <svg class="sc-icon" viewBox="0 0 40 40" fill="none" stroke="#2C3E57" stroke-width="2" aria-hidden="true"><path d="M20 6v6M20 28v6M6 20h6M28 20h6M10 10l4 4M26 26l4 4M30 10l-4 4M14 26l-4 4"/><circle cx="20" cy="20" r="7" fill="#EDF1F6"/></svg>
       <div class="sc-hd"><span class="sc-dot" style="background:var(--re)"></span><h3>Renewables</h3></div>
       <p>Modules, inverters, trackers, GSUs and balance of system for solar, wind and hybrid sites.</p>
       <div class="sc-cats"><span>Inverters</span><span>Trackers</span><span>Wire &amp; cable</span></div>
-      <div class="sc-foot"><span class="n">673 configurations</span><span class="go">Browse &rarr;</span></div>
+      <div class="sc-foot"><span class="go">Guides &amp; reference &rarr;</span></div>
     </a>
     <a class="seccard" href="battery-storage.html">
       <svg class="sc-icon" viewBox="0 0 40 40" fill="none" stroke="#2C3E57" stroke-width="2" aria-hidden="true"><rect x="10" y="8" width="20" height="26" rx="2.5" fill="#EDF1F6"/><rect x="16" y="4" width="8" height="4" rx="1" fill="#FFC400" stroke="none"/><path d="M15 16h10M15 22h10M15 28h6"/></svg>
       <div class="sc-hd"><span class="sc-dot" style="background:var(--bess)"></span><h3>Battery storage</h3></div>
       <p>DC blocks, PCS, BMS, EMS, fire suppression and thermal management for utility-scale BESS.</p>
       <div class="sc-cats"><span>Storage blocks</span><span>PCS</span><span>Safety</span></div>
-      <div class="sc-foot"><span class="n">212 configurations</span><span class="go">Browse &rarr;</span></div>
+      <div class="sc-foot"><span class="go">Guides &amp; reference &rarr;</span></div>
     </a>
     <a class="seccard" href="oil-gas.html">
       <svg class="sc-icon" viewBox="0 0 40 40" fill="none" stroke="#2C3E57" stroke-width="2" aria-hidden="true"><path d="M20 4l9 30h-4.5l-1.5-7h-6l-1.5 7H11z" fill="#EDF1F6"/><path d="M14.5 27h11M20 4v23M15 20l5-3 5 3" stroke-width="1.6"/><circle cx="20" cy="4" r="1.8" fill="#FFC400" stroke="none"/></svg>
       <div class="sc-hd"><span class="sc-dot" style="background:var(--og)"></span><h3>Oil &amp; gas</h3></div>
       <p>Wellheads, BOPs, tubulars, artificial lift and fittings &mdash; new, rebuilt or recertified.</p>
       <div class="sc-cats"><span>Tubulars</span><span>Pressure control</span><span>Downhole</span></div>
-      <div class="sc-foot"><span class="n">1,112 configurations</span><span class="go">Browse &rarr;</span></div>
+      <div class="sc-foot"><span class="go">Guides &amp; reference &rarr;</span></div>
     </a>
     <a class="seccard" href="industrial-supply.html">
       <svg class="sc-icon" viewBox="0 0 40 40" fill="none" stroke="#2C3E57" stroke-width="2" aria-hidden="true"><path d="M10 30l6-6 3 3-6 6z" fill="#EDF1F6"/><path d="M16 24l10-10 4 4-10 10z" fill="#EDF1F6"/><circle cx="29" cy="11" r="3" fill="#FFC400" stroke="none"/></svg>
       <div class="sc-hd"><span class="sc-dot" style="background:var(--mro)"></span><h3>Industrial supply</h3></div>
-      <p>Fasteners, raw stock, tools, safety gear, motors and plumbing, with indicative market pricing published for budgeting.</p>
+      <p>Fasteners, raw stock, tools, safety gear, motors and plumbing &mdash; materials, grades and standards reference.</p>
       <div class="sc-cats"><span>Fasteners</span><span>Raw materials</span><span>+ 42 more</span></div>
-      <div class="sc-foot"><span class="n">8,106 configurations</span><span class="go">Browse &rarr;</span></div>
+      <div class="sc-foot"><span class="go">Guides &amp; reference &rarr;</span></div>
     </a>
   </div>
 </div>
@@ -654,94 +633,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="ad-unit" data-ad="leaderboard"></div>
 
 <!--NEWS-START-->
+<div class="band band-card">
 <div class="section">
   <div class="section-head">
-    <div class="section-eyebrow">Industry news &middot; updated August 2026</div>
-    <h2>What's moving in your sector</h2>
-    <p>Curated from primary trade and market-research sources, not press releases. Each opens the original article in a new tab.</p>
+    <div class="section-eyebrow">Written here</div>
+    <h2>Guides that answer one question each</h2>
+    <p>No overviews, no listicles. Each one takes a single thing engineers actually get asked and works through it properly.</p>
   </div>
-  <div class="newstabs" id="newstabs">
-    <button class="newstab on" data-f="all">All</button>
-    <button class="newstab" data-f="dc">Data centers</button>
-    <button class="newstab" data-f="re">Renewables</button>
-    <button class="newstab" data-f="bess">Storage</button>
-    <button class="newstab" data-f="og">Oil &amp; gas</button>
-  </div>
-  <div class="newsgrid" id="newsgrid">
-    <a class="newscard" data-sec="dc" target="_blank" rel="noopener" href="https://www.techradar.com/pro/darkness-looms-across-europe-and-america-as-power-hungry-ai-data-centers-and-electric-cars-drain-the-grid-decimate-factory-capacity-and-engineer-a-four-year-wait-for-transformers-threatening-to-leave-entire-regions-in-the-dark">
-      <div class="nc-img"><img src="https://cdn.mos.cms.futurecdn.net/3Vu4FwPCzHo6pxU4MsqSPU-1920-80.png" alt="" loading="lazy" onerror="this.remove()"></div>
-      <div class="nc-body">
-        <div class="nc-tag"><span class="nc-sec" style="background:var(--dc)">Data centers</span><span class="nc-date">Jul 14, 2026</span></div>
-        <h4>Grid transformer waits stretch toward four years</h4>
-        <p>Analysts describe a worsening North American and European shortage of large power transformers, with electrical-steel and skilled-labor bottlenecks compounding demand from AI data centers and EV charging buildouts.</p>
-        <div class="nc-src"><span>TechRadar Pro</span><span class="go">Read &#8599;</span></div>
-      </div>
+  <div class="gdgrid">
+    <a class="gdcard" href="guide-transformer-nameplate.html">
+      <h3>How to Read a Transformer Nameplate</h3>
+      <p>kVA ratings, cooling class codes, impedance, BIL and vector group: what every field means, and which ones decide the rest of your design.</p>
+      <span class="gsub">Transformers &amp; substation</span>
     </a>
-    <a class="newscard" data-sec="dc" target="_blank" rel="noopener" href="https://mediaselangor.com/en/2026/07/383621">
-      <div class="nc-img"><img src="https://mssb-media.xcms.io/publisher-c1a3f893382d2b2f8a9aa22a654d9c97/2026/07/60fb0d72aee7547e3442141104b66897.jpg=s800" alt="" loading="lazy" onerror="this.remove()"></div>
-      <div class="nc-body">
-        <div class="nc-tag"><span class="nc-sec" style="background:var(--dc)">Data centers</span><span class="nc-date">Jul 9, 2026</span></div>
-        <h4>Utilities and data centers now bid for the same equipment</h4>
-        <p>A Reuters report finds utilities competing directly with hyperscale developers for the same limited pool of transformers and switchgear, pushing some orders three to five years out and lifting prices industry-wide.</p>
-        <div class="nc-src"><span>Reuters</span><span class="go">Read &#8599;</span></div>
-      </div>
+    <a class="gdcard" href="guide-arc-flash-boundary-basics.html">
+      <h3>Arc-Flash Boundary Basics</h3>
+      <p>What an arc-flash boundary is, how it relates to incident energy, and what NFPA 70E requires on equipment labels.</p>
+      <span class="gsub">Switchgear &amp; protection</span>
     </a>
-    <a class="newscard" data-sec="re" target="_blank" rel="noopener" href="https://www.pv-tech.org/us-treasurys-first-interim-feoc-guidance-met-with-some-relief/">
-      <div class="nc-img"><img src="https://www.pv-tech.org/wp-content/uploads/2022/08/US_Congress_02-credit-wikimedia-user-Bjoertvedt-768x576-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
-      <div class="nc-body">
-        <div class="nc-tag"><span class="nc-sec" style="background:var(--re)">Renewables</span><span class="nc-date">Feb 18, 2026</span></div>
-        <h4>Treasury's first FEOC guidance gives developers a workable path</h4>
-        <p>Initial "material assistance" safe-harbor guidance clarifies how solar and storage projects can document component sourcing to keep ITC eligibility, easing months of procurement uncertainty.</p>
-        <div class="nc-src"><span>PV Tech</span><span class="go">Read &#8599;</span></div>
-      </div>
+    <a class="gdcard" href="guide-grounding-bonding-basics.html">
+      <h3>Grounding &amp; Bonding Basics</h3>
+      <p>They do two different jobs. What each actually does, and why the equipment grounding conductor is not the neutral.</p>
+      <span class="gsub">Switchgear &amp; protection</span>
     </a>
-    <a class="newscard" data-sec="re" target="_blank" rel="noopener" href="https://pv-magazine-usa.com/2026/07/30/u-s-solar-module-assembly-prices-stabilize-as-trade-cases-and-ownership-shifts-shake-supply-chains/">
-      <div class="nc-img"><img src="https://pv-magazine-usa.com/wp-content/uploads/2026/06/michael-pointner-9XNbOxsSIrw-unsplash1-2048x1365-1-1536x1024-2-1024x683-1-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
-      <div class="nc-body">
-        <div class="nc-tag"><span class="nc-sec" style="background:var(--re)">Renewables</span><span class="nc-date">Jul 30, 2026</span></div>
-        <h4>US module assembly prices hold steady amid FEOC-driven asset sales</h4>
-        <p>Median US-assembled module pricing held at $0.30/W through early July as Trina, JA Solar, JinkoSolar and LONGi restructured or divested US manufacturing stakes to preserve FEOC compliance.</p>
-        <div class="nc-src"><span>pv magazine USA</span><span class="go">Read &#8599;</span></div>
-      </div>
+    <a class="gdcard" href="guide-short-circuit-studies-breaker-coordination.html">
+      <h3>Short-Circuit Studies &amp; Breaker Coordination</h3>
+      <p>What a short-circuit study calculates, why a quick fault-current estimate is not a substitute, and how coordination follows from it.</p>
+      <span class="gsub">Switchgear &amp; protection</span>
     </a>
-    <a class="newscard" data-sec="bess" target="_blank" rel="noopener" href="https://www.energy-storage.news/global-bess-deployments-soar-27-in-h1-2026-saudi-arabia-drives-figures-in-june/">
-      <div class="nc-img"><img src="https://www.energy-storage.news/wp-content/uploads/2026/06/grenergy-elena-planta-2-800x533-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
-      <div class="nc-body">
-        <div class="nc-tag"><span class="nc-sec" style="background:var(--bess)">Storage</span><span class="nc-date">Jul 15, 2026</span></div>
-        <h4>Saudi Arabia leads monthly BESS deployments for the first time</h4>
-        <p>Some 9.1 GW/33.5 GWh of utility-scale battery storage came online globally in June 2026, with Saudi Arabia's 2.5 GW/12.5 GWh outpacing China for the first time in 18 months of tracking.</p>
-        <div class="nc-src"><span>Energy-Storage.News</span><span class="go">Read &#8599;</span></div>
-      </div>
+    <a class="gdcard" href="guide-pue-explained.html">
+      <h3>PUE Explained</h3>
+      <p>The formula, what counts as facility power, typical ranges from 1.1 to 2.0, and what actually drives the number.</p>
+      <span class="gsub">Data center power &amp; cooling</span>
     </a>
-    <a class="newscard" data-sec="bess" target="_blank" rel="noopener" href="https://www.utilitydive.com/news/us-sees-record-q1-2026-energy-storage-installations-amid-rosy-outlook/823547/">
-      <div class="nc-img"><img src="https://imgproxy.divecdn.com/75TX9-v9Vd40OOUshFMlpOF913BhDn6DtUFZTAgmG7o/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xOTI2MjI3OTQ4LmpwZw==.webp" alt="" loading="lazy" onerror="this.remove()"></div>
-      <div class="nc-body">
-        <div class="nc-tag"><span class="nc-sec" style="background:var(--bess)">Storage</span><span class="nc-date">Jun 23, 2026</span></div>
-        <h4>US posts record Q1 energy storage installations</h4>
-        <p>The US installed a record 3.3 GW/8.4 GWh of battery storage in Q1 2026, up 54% over the prior Q1 record, with utility, commercial and residential segments all hitting new highs.</p>
-        <div class="nc-src"><span>Utility Dive</span><span class="go">Read &#8599;</span></div>
-      </div>
-    </a>
-    <a class="newscard" data-sec="og" target="_blank" rel="noopener" href="https://worldoil.com/news/2026/6/24/u-s-steel-invests-475-million-to-expand-octg-production-capacity/">
-      <div class="nc-img"><img src="https://www.worldoil.com/media/v3ydh3pp/us-steel-octg-operations-virginia.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
-      <div class="nc-body">
-        <div class="nc-tag"><span class="nc-sec" style="background:var(--og)">Oil &amp; gas</span><span class="nc-date">Jun 24, 2026</span></div>
-        <h4>US Steel commits $475M to expand OCTG capacity in Alabama</h4>
-        <p>A new quench-and-temper line at the Fairfield Tubular plant aims to relieve a domestic OCTG bottleneck for Permian, Eagle Ford, Haynesville and Appalachia operators, reaching full output by 2029.</p>
-        <div class="nc-src"><span>World Oil</span><span class="go">Read &#8599;</span></div>
-      </div>
-    </a>
-    <a class="newscard" data-sec="og" target="_blank" rel="noopener" href="https://rigcount.bakerhughes.com/">
-      <div class="nc-img"><svg viewBox="0 0 160 100" fill="none" stroke="#2C3E57" stroke-width="2.2" aria-hidden="true"><path d="M28 88 38 24h6l10 64" fill="#FFFFFF"/><path d="M28 88 38 24h6l10 64z"/><path d="M31 72h20M34 52h14" stroke-width="1.4"/><rect x="35" y="18" width="12" height="6" rx="1" fill="#CBD5E1" stroke="none"/><rect x="76" y="22" width="64" height="60" rx="4" fill="#fff"/><path d="M76 36h64" stroke-width="1.6"/><g stroke="#CBD5E1" stroke-width="1.4"><path d="M84 44v30M92 44v30M100 44v30M108 44v30"/></g><path d="M80 78l32-32" stroke="#FFC400" stroke-width="2.6" stroke-linecap="round"/><path d="M18 88h124" stroke-width="2.6" stroke-linecap="round"/></svg></div>
-      <div class="nc-body">
-        <div class="nc-tag"><span class="nc-sec" style="background:var(--og)">Oil &amp; gas</span><span class="nc-date">Updated weekly</span></div>
-        <h4>The rig count: oilfield equipment demand's leading indicator</h4>
-        <p>Published continuously since 1944, the Baker Hughes weekly rig count remains the standard reference point for near-term demand across drilling, completions and production equipment.</p>
-        <div class="nc-src"><span>Baker Hughes</span><span class="go">Read &#8599;</span></div>
-      </div>
+    <a class="gdcard" href="guide-liquid-vs-air-cooling.html">
+      <h3>Liquid vs Air Cooling for AI Racks</h3>
+      <p>Why GPU rack density is pushing data centers to liquid: direct-to-chip, immersion and rear-door heat exchangers compared.</p>
+      <span class="gsub">Data center power &amp; cooling</span>
     </a>
   </div>
-  <a class="section-more" href="voltfield-insights.html">All insights and guides <span class="ar" aria-hidden="true">&rarr;</span></a>
+  <a class="section-more" href="guides.html">All 18 guides and 17 equipment references <span class="ar" aria-hidden="true">&rarr;</span></a>
+</div>
 </div>
 <!--NEWS-END-->
 
@@ -750,18 +682,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="section" style="padding-top:0">
   <div class="endgrid">
     <div class="endcard">
-      <div class="ek">Already have a spec</div>
-      <h3>Turn a spec into a bill of materials</h3>
-      <p>Pick an engineered part &mdash; a transformer, inverter, valve or battery block &mdash; and generate its component-level BOM, with the reference data behind every line.</p>
-      <a class="btn btn-primary" href="voltfield-bom-generator.html">Open the BOM generator</a>
+      <div class="ek">Start somewhere</div>
+      <h3>Not sure what you need yet?</h3>
+      <p>The tools hub lists everything on the site in one place &mdash; every calculator, every practice board, the glossary quiz and the PCB builder. Nothing needs an account.</p>
+      <a class="btn btn-primary" href="free-tools.html">Browse all free tools</a>
     </div>
     <div class="endcard">
-      <div class="ek">Reference packets &middot; in development</div>
-      <h3>The same material, packaged</h3>
-      <p>Six packets drawn from what is already published here, gathered into something that fits in a project folder. None are finished and none are for sale; the page lists what each would contain and links every page it would be built from.</p>
-      <a class="btn btn-ghost" href="packets.html">See the six packets</a>
+      <div class="ek">How this is made</div>
+      <h3>Where the numbers come from</h3>
+      <p>Every figure on the site carries a basis, and the methodology page sets out how each is derived, what it is good for, and where it should not be relied on.</p>
+      <a class="btn btn-ghost" href="methodology.html">Read the methodology</a>
     </div>
-  </div>
 </div>
 
 <div class="ad-unit" data-ad="footer"></div>
@@ -775,7 +706,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="bolt"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
         <b>Voltfield</b>
       </div>
-      <p>An independent engineering reference for energy-infrastructure and industrial power equipment. Nothing on this site is for sale. Price ranges in the spec library are indicative market benchmarks (North America, July 2026), published as reference data &mdash; actual figures vary with configuration, quantity and manufacturer. Product images are original, AI-generated representations of each part type, for illustration only; they are not photographs of specific equipment. News links point to third-party publishers; Voltfield does not control or endorse their content.</p>
+      <p>An independent engineering reference for energy-infrastructure and industrial power equipment. Nothing on this site is for sale and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer&rsquo;s study. Product images are original, AI-generated representations of each part type, for illustration only; they are not photographs of specific equipment. News links point to third-party publishers; Voltfield does not control or endorse their content.</p>
     </div>
     <div><h4>Sectors</h4><ul>
       <li><a href="data-centers.html">Grid &amp; data center power</a></li>
@@ -793,6 +724,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div><h4>About</h4><ul>
       <li><a href="about.html">About Voltfield</a></li>
       <li><a href="methodology.html">Methodology</a></li>
+      <li><a href="packets.html">Reference packets</a></li>
       <li><a href="privacy-policy.html">Privacy policy</a></li>
     </ul></div>
   </div>
@@ -916,16 +848,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 })();
 </script>
 <script>
-/* ---------- news filter ---------- */
-document.getElementById("newstabs").addEventListener("click",e=>{
-  const btn=e.target.closest(".newstab");
-  if(!btn)return;
-  document.querySelectorAll(".newstab").forEach(b=>b.classList.toggle("on",b===btn));
-  const f=btn.dataset.f;
-  document.querySelectorAll("#newsgrid .newscard").forEach(c=>{
-    c.style.display=(f==="all"||c.dataset.sec===f)?"":"none";
-  });
-});
 /* ---------- hero search autocomplete: jump straight to a matching guide, calculator, or tool ---------- */
 (function(){
   const input=document.getElementById('heroSearchInput'), results=document.getElementById('heroSearchSuggest');
@@ -970,7 +892,7 @@ document.querySelectorAll('.sc-icon,.path .pi svg').forEach(el=>el.setAttribute(
    first scroll -- which reads as a rendering fault, not an animation. ---------- */
 (function(){
   if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  const groups=document.querySelectorAll('.pathgrid,.secgrid,.newsgrid,.endgrid');
+  const groups=document.querySelectorAll('.pathgrid,.secgrid,.gdgrid,.endgrid');
   const items=[];
   groups.forEach(group=>{
     [...group.children].forEach((el,i)=>{

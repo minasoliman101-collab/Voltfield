@@ -29,6 +29,21 @@
   --paper:#F5F7FA;--card:#FFFFFF;--sunk:#EDF1F6;
   --line:#E3E9F0;--line-dark:#CBD5E1;--line-strong:#94A3B4;
   --signal:#FFC400;--signal-deep:#E5AC00;
+
+  /* Second accent. Amber alone had to be both the brand mark and every piece
+     of emphasis on the page, which is why the first light pass read as plain:
+     one hue doing two jobs, on flat white, with nothing to structure the page
+     by. Teal sits opposite amber, reads analytical rather than decorative next
+     to the navy, and gives section grounds and links something to be.
+       --accent      4.83:1 under white, so it works as a badge/button fill
+       --accent-ink  6.1:1 on --card, for when the colour carries words
+       --accent-soft the tinted section ground */
+  --accent:#0E7C86;--accent-ink:#0A5F67;--accent-soft:#E8F4F5;--accent-line:#BFDFE2;
+
+  /* Section grounds. Alternating these is what gives the page rhythm; the
+     first pass ran every section on the same near-white and relied on
+     whitespace alone to separate them. */
+  --band-1:var(--paper);--band-2:#EFF3F8;--band-3:var(--accent-soft);
   --crit:#C43D2E;--warn:#D98E04;--ok:#2E7D4F;
   /* Text-on-light colours, kept separate from the signal/status colours above.
      Those are tuned to read as brand amber / status hues when used for fills,
@@ -121,8 +136,14 @@ button,a,input,select,textarea{font-family:inherit}
 button,a{cursor:pointer}
 a{color:inherit}
 img,svg,video{max-width:100%}
+/* Headings carry the personality now. The first light pass set everything at
+   600 with mild tracking, which on a white ground read as a default template.
+   Display sizes go to 700 with tighter negative tracking; body-level headings
+   stay at 600 so the jump between a page title and a card title is real. */
 h1,h2,h3,h4,h5{font-family:var(--disp);font-weight:600;letter-spacing:-.021em;
   line-height:1.15;text-wrap:balance;color:var(--ink)}
+h1{font-weight:700;letter-spacing:-.038em;line-height:1.04}
+h2{font-weight:700;letter-spacing:-.03em;line-height:1.1}
 :focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
@@ -511,7 +532,15 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
 .hstat .l{font-size:13.5px;letter-spacing:0;color:var(--slate);text-transform:none;
   margin-top:5px;font-family:var(--body)}
 
-/* ---------- section shell ---------- */
+/* ---------- section shell ----------
+   .band-* are full-bleed grounds; the .section inside keeps the measure. The
+   page alternates them so sections are separated by a change of ground rather
+   than by whitespace alone. */
+.band{width:100%}
+.band-tint{background:var(--band-2);border-block:1px solid var(--line)}
+.band-accent{background:var(--band-3);border-block:1px solid var(--accent-line)}
+.band-card{background:var(--card);border-block:1px solid var(--line)}
+
 .section{max-width:var(--shell);margin:0 auto;padding:64px 24px}
 .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
   margin-bottom:30px;flex-wrap:wrap}
@@ -660,7 +689,7 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
    of this rule; without it here the badge escapes to the nearest positioned
    ancestor and lands in the page corner. */
 .newscard .nc-img{position:relative;background:var(--sunk);
-  border-bottom:1px solid var(--line);min-height:132px;
+  border-bottom:1px solid var(--line);min-height:180px;
   display:flex;align-items:center;justify-content:center;overflow:hidden}
 .newscard .nc-body{padding:16px 18px 18px;flex:1;display:flex;flex-direction:column}
 .newscard .nc-tag{display:flex;align-items:center;gap:9px;margin-bottom:10px;

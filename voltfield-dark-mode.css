@@ -41,6 +41,13 @@ html[data-theme="dark"]{
      7.0:1, 7.4:1 and 9.6:1 on --paper. */
   --crit-ink:#F2867A;--ok-ink:#6FCB95;--warn-ink:#F0B81F;
   --tint-ok:#14301F;--tint-warn:#33280C;--tint-crit:#3A1A16;--tint-signal:#332A0E;
+  /* The second accent and the section grounds, added with the personality
+     pass. --accent itself is a mid teal that works on both themes; what has to
+     flip is the tinted ground it sits on and the ink used when the colour
+     carries words -- the light theme darkens that for contrast on white, which
+     is unreadable here. */
+  --accent:#2AA5B0;--accent-ink:#5FD3DC;--accent-soft:#10333A;--accent-line:#1E4E56;
+  --band-2:#101A28;--band-3:var(--accent-soft);
   color-scheme: dark;
 }
 
