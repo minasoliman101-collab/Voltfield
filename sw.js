@@ -32,7 +32,6 @@ const CORE = [
   './voltfield-component-viz.js',
   './voltfield-component-viz.css',
   './voltfield-pcb-layout.html',
-  './ordering-hidden.css',
   './voltfield-core.css',
   './voltfield-parts.css',
   './voltfield-insights.html',

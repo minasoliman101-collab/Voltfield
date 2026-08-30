@@ -11,8 +11,6 @@
 /manifest.json
   Cache-Control: public, max-age=86400
 
-/ordering-hidden.css
-  Cache-Control: public, max-age=600
 
 # The shared stylesheets get a SHORT max-age, unlike the data files below.
 # They were on 24 hours, which was reasonable when they held only tokens and
@@ -59,11 +57,10 @@
 /voltfield-eol-data.js
   Cache-Control: public, max-age=86400, stale-while-revalidate=86400
 
-/voltfield-oem-data.js
-  Cache-Control: public, max-age=3600, stale-while-revalidate=3600
-
-/voltfield-site-config.js
-  Cache-Control: public, max-age=3600
+# /voltfield-oem-data.js had a rule here for a file that was deleted from the
+# repo, and /voltfield-site-config.js had a second rule that shadowed the
+# ten-minute one set for it above. Both removed: one rule per file, and no
+# rules for files that do not exist.
 
 /*.html
   Cache-Control: public, max-age=600, stale-while-revalidate=3600
@@ -85,24 +82,31 @@
 /ads.txt
   Cache-Control: public, max-age=86400
 
-# Shared front-end modules. These had no rule at all, so they fell through to
-# Netlify's default (max-age=0, must-revalidate) and were revalidated on every
-# page load -- voltfield-3d.js alone is ~100KB uncompressed and is pulled by
-# every tool page. Same treatment as the other shared data files above.
+# Shared front-end modules. These originally had no rule and fell through to
+# Netlify's default (max-age=0, must-revalidate), which revalidated them on
+# every page load; they were then put on 24 hours to stop that.
+#
+# Ten minutes, not a day. These are CODE, and code here changes on every
+# deploy: a 24-hour cache meant a returning visitor ran the previous build's
+# JavaScript against the current build's HTML for up to a day. That is the same
+# failure the stylesheets were moved off 86400 for, and it bit again -- an
+# antialiasing fix shipped to voltfield-3d.js was invisible on the live site
+# because the browser still held yesterday's copy. stale-while-revalidate keeps
+# the request cheap; max-age just stops it going stale for a day.
+#
+# voltfield-dark-mode.css also had a duplicate entry down here that silently
+# overrode the short cache set for it next to core.css. One rule per file now.
 /voltfield-3d.js
-  Cache-Control: public, max-age=86400, stale-while-revalidate=86400
+  Cache-Control: public, max-age=600, stale-while-revalidate=86400
 
 /voltfield-component-viz.js
-  Cache-Control: public, max-age=86400, stale-while-revalidate=86400
+  Cache-Control: public, max-age=600, stale-while-revalidate=86400
 
 /voltfield-component-viz.css
-  Cache-Control: public, max-age=86400, stale-while-revalidate=86400
+  Cache-Control: public, max-age=600, stale-while-revalidate=86400
 
 /voltfield-progress.js
-  Cache-Control: public, max-age=86400, stale-while-revalidate=86400
-
-/voltfield-dark-mode.css
-  Cache-Control: public, max-age=86400, stale-while-revalidate=86400
+  Cache-Control: public, max-age=600, stale-while-revalidate=86400
 
 /*
   X-Content-Type-Options: nosniff
