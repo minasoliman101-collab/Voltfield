@@ -30,6 +30,14 @@
 /voltfield-site-config.js
   Cache-Control: public, max-age=600, stale-while-revalidate=86400
 
+# Self-hosted three.js. The version is pinned in the path (vendor/three/ is a
+# copy of three@0.160.0), so these bytes can never change for a given URL --
+# upgrading means writing a new directory. That makes immutable correct here,
+# unlike everything else on this site, and it means the 1.2 MB core is fetched
+# once per visitor rather than on every 3D page.
+/vendor/*
+  Cache-Control: public, max-age=31536000, immutable
+
 /icons/*
   Cache-Control: public, max-age=2592000
 

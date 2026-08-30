@@ -10,7 +10,7 @@
      The url must match the one voltfield-3d.js imports, so the two resolve to a
      single module instance rather than two copies of three. -->
 <script type="importmap">
-{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}
+{"imports":{"three":"/vendor/three/build/three.module.js"}}
 </script>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -107,15 +107,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     radial-gradient(900px 420px at 12% -8%,rgba(255,196,0,.10),transparent 62%),
     radial-gradient(760px 400px at 88% 4%,rgba(43,108,176,.09),transparent 60%),
     var(--paper)}
-.hero-in{max-width:var(--shell);margin:0 auto;padding:84px 24px 68px;position:relative}
-.hero-copy{max-width:720px}
+.hero-in{max-width:var(--shell);margin:0 auto;padding:76px 24px 64px;position:relative;
+  display:grid;gap:44px;align-items:center}
+/* Two columns from 1040px: the copy needs ~560px to keep the headline on two
+   lines, and the viewer needs ~440px before the models start reading small.
+   Below that they stack, copy first. */
+@media(min-width:1040px){.hero-in{grid-template-columns:1.05fr .95fr;gap:56px}}
+.hero-copy{max-width:720px;min-width:0}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:9px;
   font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-2);
   text-transform:uppercase;background:var(--card);border:1px solid var(--line);
   border-radius:var(--r-pill);padding:7px 15px;margin-bottom:26px;box-shadow:var(--sh-1)}
 .hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--signal);
   flex-shrink:0}
-.hero h1{font-size:clamp(42px,6.8vw,76px);line-height:1.02;letter-spacing:-.042em;
+/* The floor was 42px, which is what a 375px phone actually got -- 6.8vw is
+   only 25px there, so the clamp never scaled and the headline ran to four
+   lines. A lower floor with a steeper slope reaches the same 76px on desktop
+   while fitting a phone in two. */
+.hero h1{font-size:clamp(33px,7.6vw,76px);line-height:1.04;letter-spacing:-.042em;
   font-weight:700}
 /* Amber emphasis on the headline. A background gradient was tried first and
    is wrong here: the phrase wraps across two lines, and a gradient paints a
@@ -288,17 +297,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   background:radial-gradient(680px 340px at 78% 12%,rgba(255,196,0,.09),transparent 65%)}
 .feature-in{max-width:var(--shell);margin:0 auto;padding:72px 24px;position:relative;
   z-index:1;display:grid;gap:44px;align-items:center}
-@media(min-width:940px){.feature-in{grid-template-columns:1fr 1.05fr}}
+.feature-in{max-width:960px}
 .feature h2{color:#fff;font-size:clamp(26px,3vw,36px);letter-spacing:-.028em}
 .feature .section-eyebrow{color:#8DA0B8}
 .feature > .feature-in > div > p{color:#A9BACD;font-size:16.5px;line-height:1.65;margin-top:12px}
-.feature .flinks{display:flex;flex-direction:column;gap:2px;margin-top:26px}
-.feature .flinks a{display:flex;align-items:baseline;gap:14px;padding:14px 16px;
-  margin:0 -16px;border-radius:var(--r);text-decoration:none;
-  transition:background var(--dur) var(--ease)}
+.feature .flinks{display:flex;flex-direction:column;gap:10px;margin-top:26px}
+/* Three across once there is room. This has to come AFTER the flex base rule
+   above, not before it -- same specificity, so source order decides. */
+@media(min-width:820px){.feature .flinks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}}
+.feature .flinks a{display:flex;flex-direction:column;align-items:flex-start;gap:6px;
+  padding:18px;margin:0;border-radius:var(--r-lg);text-decoration:none;
+  background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);
+  transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease),
+    transform var(--dur) var(--ease)}
+.feature .flinks a:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.2)}
 .feature .flinks a:hover{background:rgba(255,255,255,.055)}
 .feature .flinks b{font-weight:600;font-size:16px;color:#fff;letter-spacing:-.015em;
-  flex-shrink:0;min-width:172px}
+  flex-shrink:0}
 .feature .flinks span{font-size:14px;color:#93A7BD;line-height:1.5}
 @media(max-width:620px){.feature .flinks a{flex-direction:column;gap:3px}
   .feature .flinks b{min-width:0}}
@@ -306,8 +321,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 /* 3D stage. Height reserved so mounting the canvas cannot shift layout. */
 .showcase{background:#16233A;border:1px solid #2A3B56;border-radius:var(--r-xl);
   overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.34)}
-.showcase-stage{height:340px;position:relative;display:grid;place-items:center}
-@media(max-width:620px){.showcase-stage{height:250px}}
+.showcase-stage{height:380px;position:relative;display:grid;place-items:center}
+@media(max-width:1039px){.showcase-stage{height:300px}}
+@media(max-width:620px){.showcase-stage{height:240px}}
 .showcase-stage canvas{display:block;width:100%;height:100%}
 .showcase-fallback{display:flex;flex-direction:column;align-items:center;gap:12px;
   color:#8CA1BC;font-family:var(--mono);font-size:11px;letter-spacing:.08em;
@@ -405,6 +421,10 @@ footer .foot-brand b{font-size:18px;color:#fff;font-weight:600;letter-spacing:-.
 .totop:hover{border-color:var(--line-strong)}
 
 @media(max-width:640px){
+  .hero h1{line-height:1.06}
+  .hero .lede{font-size:17px;margin-top:18px}
+  .hero-eyebrow{font-size:10.5px;letter-spacing:.04em;padding:6px 12px}
+  .ltfig .k{font-size:34px}
   .section{padding:56px 20px}
   .hero-in{padding:56px 20px 48px}
   .feature-in{padding:56px 20px}
@@ -425,7 +445,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="bolt"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
     <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
   </a>
-    <nav class="hnav">
+      <nav class="hnav">
     <a href="index.html" class="on">Home</a>
     <div class="navdrop" id="toolsDrop">
       <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
@@ -456,6 +476,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="engineering-calculators.html">Calculators</a>
     <a href="glossary.html">Glossary</a>
     <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
   </nav>
   <div class="headright">
     <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
@@ -487,6 +508,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <a href="site-search.html?q=transformer+sizing">Transformer sizing</a>
           <a href="site-search.html?q=grounding">Grounding &amp; bonding</a>
         </div>
+      </div>
+    </div>
+    <div class="showcase" id="showcase">
+      <div class="showcase-stage" id="showcaseStage">
+        <div class="showcase-fallback" id="showcaseFallback">
+          <svg viewBox="0 0 40 40" fill="none" stroke="#6F86A3" stroke-width="1.6" aria-hidden="true"><rect x="8" y="12" width="24" height="16" rx="1"/><path d="M12 12V8M20 12V8M28 12V8M8 28h24"/></svg>
+          <span>Equipment models</span>
+        </div>
+      </div>
+      <div class="showcase-cap">
+        <b id="showcaseName">Interactive equipment models</b>
+        <span id="showcaseHint">32 procedural 3D models across the practice tools</span>
       </div>
     </div>
   </div>
@@ -567,18 +600,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a href="voltfield-sandbox.html"><b>One-line sandbox</b><span>Drag transformer, breaker, feeder and load tiles onto a board; get instant checks on sizing, voltage drop and fault current.</span></a>
         <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><span>Set a load and redundancy target, pick equipment, and check the sizing &mdash; enclosed POD or open-frame skid.</span></a>
         <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><span>Stack servers, switches and a UPS into a 24/42/48U rack against U-space, NEC-derated circuit power and weight.</span></a>
-      </div>
-    </div>
-    <div class="showcase" id="showcase">
-      <div class="showcase-stage" id="showcaseStage">
-        <div class="showcase-fallback" id="showcaseFallback">
-          <svg viewBox="0 0 40 40" fill="none" stroke="#6F86A3" stroke-width="1.6" aria-hidden="true"><rect x="8" y="12" width="24" height="16" rx="1"/><path d="M12 12V8M20 12V8M28 12V8M8 28h24"/></svg>
-          <span>Equipment models</span>
-        </div>
-      </div>
-      <div class="showcase-cap">
-        <b id="showcaseName">Interactive equipment models</b>
-        <span id="showcaseHint">32 procedural 3D models across the practice tools</span>
       </div>
     </div>
   </div>

@@ -11,7 +11,7 @@
    old stylesheet for one full load, which reads as a broken page rather than
    a stale one. Bump VERSION on any change to core.css or the shared nav:
    activate() wipes every non-matching bucket, so nobody sees the half-state. */
-const VERSION = 'voltfield-v94';
+const VERSION = 'voltfield-v95';
 
 const CORE = [
   './',
@@ -23,9 +23,10 @@ const CORE = [
   './voltfield-sandbox.html',
   './voltfield-pod-designer.html',
   './voltfield-rack-builder.html',
-  /* Shape library for the 3D views in the three practice tools. Three.js itself
-     still comes from a CDN on first use, so 3D needs a connection once even
-     though this shim is precached. */
+  /* Shape library for the 3D views in the three practice tools. Three.js is
+     now served from this origin too (vendor/three/), but it is 1.2 MB and only
+     the 3D pages need it, so it is left to the runtime cache rather than
+     precached -- same reasoning as the data files below. */
   './voltfield-3d.js',
   './voltfield-progress.js',
   './voltfield-component-viz.js',
@@ -42,10 +43,24 @@ const CORE = [
   './voltfield-eol-data.js',
   './privacy-policy.html',
   './404.html',
-  './voltfield-catalog-data.js',
-  './voltfield-cat-icons.js',
-  './voltfield-oem-data.js',
-  './voltfield-bom-engine.js',
+  /* The big data files are deliberately NOT precached.
+
+     voltfield-catalog-data.js (96 KB), voltfield-bom-engine.js (73 KB) and
+     voltfield-cat-icons.js (45 KB) are 214 KB that every first-time visitor
+     was downloading in the background regardless of where they landed -- and
+     only five pages load any of them (the catalog, part, BOM generator,
+     identify and insights pages). Nobody arriving on a guide or a calculator
+     needs a byte of it.
+
+     They are not uncached, just not PREcached: the stale-while-revalidate
+     handler below stores each one the first time a page actually asks for it,
+     so the second visit to those pages is still instant. The trade is that
+     they are unavailable offline until visited once, which is the right way
+     round for files most visitors never touch.
+
+     voltfield-oem-data.js was also listed here and does not exist -- it was
+     deleted from the repo. allSettled kept that from bricking the install, so
+     it failed silently on every single one. */
   './voltfield-site-config.js',
   './manifest.json',
   './icons/icon-192.png',

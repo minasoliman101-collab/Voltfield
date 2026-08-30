@@ -13,7 +13,14 @@
 (function(){
   'use strict';
 
-  const THREE_URL = 'https://unpkg.com/three@0.160.0/build/three.module.js';
+  /* Self-hosted. These were loaded from unpkg, which put the site's most
+     distinctive feature behind a third-party CDN on the critical path -- it
+     failed twice during one afternoon of testing, and every failure surfaces
+     to the reader as "3D view needs an internet connection". The exact same
+     module graph (13 files, three plus the four postprocessing passes and
+     their shaders) now ships from this origin under vendor/three/, so the 3D
+     views have no external dependency at all. */
+  const THREE_URL = '/vendor/three/build/three.module.js';
   let threeModPromise = null;
   function loadThree(){
     if (!threeModPromise) threeModPromise = import(THREE_URL);
@@ -47,7 +54,7 @@
      bevels all 200-odd boxes from one place. Optional exactly like AO: if it
      does not load, box() falls back to BoxGeometry and everything still
      renders, just with sharp edges. */
-  const GEO_URL = 'https://unpkg.com/three@0.160.0/examples/jsm/geometries/';
+  const GEO_URL = '/vendor/three/examples/jsm/geometries/';
   let RoundedBox = null, roundedPromise = null;
   function loadRoundedBox(){
     if (!roundedPromise) {
@@ -61,7 +68,7 @@
     return roundedPromise;
   }
 
-  const PP_URL = 'https://unpkg.com/three@0.160.0/examples/jsm/postprocessing/';
+  const PP_URL = '/vendor/three/examples/jsm/postprocessing/';
   let ppPromise = null;
   function loadPostFX(){
     if (!ppPromise) {
