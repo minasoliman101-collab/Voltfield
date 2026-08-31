@@ -112,7 +112,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .p-bom{background:var(--card);color:var(--ink-2);border:2px solid var(--line-dark);padding:12px 16px;font-family:var(--disp);font-weight:600;font-size:16px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;display:inline-block}
 .p-bom:hover{border-color:var(--ink);color:var(--ink)}
 .notfound{background:var(--card);border:1px dashed var(--line-dark);padding:44px 20px;text-align:center}
-.notfound h2{font-family:var(--disp);font-weight:700;font-size:24px;margin-bottom:6px}
+.notfound h1,.notfound h2{font-family:var(--disp);font-weight:700;font-size:24px;margin-bottom:6px}
 .notfound p{color:var(--slate);margin-bottom:14px}
 .notfound a{display:inline-block;background:var(--signal);color:var(--on-signal);border:0;padding:11px 20px;font-family:var(--disp);font-weight:700;letter-spacing:.04em;text-transform:uppercase;text-decoration:none}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--surface-dark);color:var(--on-surface-dark);font-family:var(--mono);font-size:12.5px;padding:11px 18px;border-left:4px solid var(--signal);z-index:120;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none}
@@ -152,7 +152,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </form>
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield home">
-    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
     <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
   </a>
       <nav class="hnav">
@@ -258,7 +258,7 @@ function renderRecentlyViewed(excludeFi){
 }
 
 if(!f){
-  document.getElementById('wrap').innerHTML=`<div class="notfound"><h2>Part not found</h2><p>That part link isn't valid. Browse the full catalog to find and configure a part.</p><a href="voltfield-supply-catalog.html">Go to All Parts &rarr;</a></div>`;
+  document.getElementById('wrap').innerHTML=`<div class="notfound"><h1>Part not found</h1><p>That part link isn't valid. Browse the full catalog to find and configure a part.</p><a href="voltfield-supply-catalog.html">Go to All Parts &rarr;</a></div>`;
 } else {
   const picks=P.get('o')?paramToPicks(f,P.get('o')):genSKU(f,fi).picks.slice();
   const chk=P.get('chk')||genSKU(f,fi).chk;

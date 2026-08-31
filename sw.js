@@ -11,7 +11,7 @@
    old stylesheet for one full load, which reads as a broken page rather than
    a stale one. Bump VERSION on any change to core.css or the shared nav:
    activate() wipes every non-matching bucket, so nobody sees the half-state. */
-const VERSION = 'voltfield-v97';
+const VERSION = 'voltfield-v98';
 
 const CORE = [
   './',

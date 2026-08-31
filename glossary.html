@@ -129,7 +129,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .jump a:hover{border-color:var(--ink);color:var(--ink)}
 .term{border-top:1px solid var(--line);padding:20px 0;scroll-margin-top:80px}
 .term:first-of-type{border-top:2px solid var(--ink)}
-.term h3{font-family:var(--disp);font-weight:700;font-size:20px;letter-spacing:.005em;color:var(--ink);margin-bottom:6px}
+.term h2,.term h3{font-family:var(--disp);font-weight:700;font-size:20px;letter-spacing:.005em;color:var(--ink);margin-bottom:6px}
 .term p{font-size:14px;color:var(--ink-2);line-height:1.65;max-width:700px}
 .term a.inline{color:var(--link);font-weight:600;text-decoration:underline;text-decoration-color:var(--signal)}
 </style>
@@ -142,7 +142,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield home">
-    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
     <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
   </a>
       <nav class="hnav">
@@ -185,7 +185,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main id="main" tabindex="-1">
 <section class="artban">
   <div class="artban-in">
-    <div style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="voltfield-insights.html" style="color:var(--slate);text-decoration:none">Insights</a> / <span style="color:var(--ink)">Glossary</span></div>
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="voltfield-insights.html" style="color:var(--slate);text-decoration:none">Insights</a> / <span style="color:var(--ink)">Glossary</span></nav>
     <div class="eyebrow">Reference</div>
     <h1>Glossary — Energy &amp; Industrial Equipment Terms</h1>
     <p class="dek">Plain-language definitions for the standards, acronyms, and terms that show up across data center, renewable, storage, oilfield, and industrial MRO procurement.</p>
@@ -214,227 +214,227 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
     <div class="term" id="ampacity">
-      <h3>Ampacity</h3>
+      <h2>Ampacity</h2>
       <p>The current a conductor can carry continuously without exceeding its temperature rating. The table value is a starting point, not an answer: it derates for ambient temperature and for how many conductors are bundled together, which is what turns a calculated size into an installed one. See <a class="inline" href="/voltfield-supply-catalog.html?q=LV%20Power%20Cable">LV power cable</a>.</p>
     </div>
     <div class="term" id="ansi-c57">
-      <h3>ANSI C57</h3>
+      <h2>ANSI C57</h2>
       <p>The IEEE/ANSI C57 standard series governs power transformer design, testing, and performance requirements in North America. It's the reference behind most of the specs on the <a class="inline" href="data-centers.html">Data Centers</a> sector's transformer listings.</p>
     </div>
     <div class="term" id="api-16a">
-      <h3>API 16A</h3>
+      <h2>API 16A</h2>
       <p>API specification covering drill-through equipment, including <a class="inline" href="#bop">blowout preventers (BOPs)</a>.</p>
     </div>
     <div class="term" id="api-5ct">
-      <h3>API 5CT</h3>
+      <h2>API 5CT</h2>
       <p>An American Petroleum Institute specification covering casing and tubing — collectively <a class="inline" href="#octg">OCTG</a> — used in oil and gas wells.</p>
     </div>
     <div class="term" id="api-6a">
-      <h3>API 6A</h3>
+      <h2>API 6A</h2>
       <p>API specification covering wellhead and <a class="inline" href="#christmas-tree">christmas tree</a> equipment.</p>
     </div>
     <div class="term" id="api-7k">
-      <h3>API 7K</h3>
+      <h2>API 7K</h2>
       <p>API specification covering drilling and well-servicing structural equipment, including derricks and masts.</p>
     </div>
     <div class="term" id="arc-flash-boundary">
-      <h3>Arc-flash boundary</h3>
+      <h2>Arc-flash boundary</h2>
       <p>The distance from equipment at which incident energy falls to 1.2 cal/cm&sup2; &mdash; the threshold for a second-degree burn on bare skin. It follows from an incident-energy calculation, not from voltage alone, and <a class="inline" href="#nfpa-70e">NFPA 70E</a> requires it on the equipment label. Covered in the <a class="inline" href="guide-arc-flash-boundary-basics.html">arc-flash boundary guide</a>.</p>
     </div>
     <div class="term" id="ats-sts">
-      <h3>ATS vs. STS</h3>
+      <h2>ATS vs. STS</h2>
       <p>Both transfer load between two sources. An automatic transfer switch is mechanical and takes long enough that downstream equipment sees an interruption; a <a class="inline" href="/voltfield-supply-catalog.html?q=Static%20Transfer%20Switches">static transfer switch</a> is solid-state and fast enough that single-corded equipment never notices. The choice follows what the load can ride through.</p>
     </div>
     <div class="term" id="augmentation">
-      <h3>Augmentation (BESS)</h3>
+      <h2>Augmentation (BESS)</h2>
       <p>Adding battery capacity partway through a storage project's life to offset degradation, so the system still meets its contracted energy at year 10 or 15. Planned up front as phased <a class="inline" href="#dc-block">DC block</a> additions rather than improvised later. See the <a class="inline" href="guide-bess-augmentation.html">augmentation guide</a>.</p>
     </div>
     <div class="term" id="backtracking">
-      <h3>Backtracking</h3>
+      <h2>Backtracking</h2>
       <p>A tracker control strategy that rotates rows away from the optimal sun angle in early morning and late afternoon, so rows do not shade each other. It sacrifices some direct irradiance to avoid a much larger row-to-row shading loss. Handled by the <a class="inline" href="/voltfield-supply-catalog.html?q=Tracker%20Drives%20%26%20Row%20Controllers">row controller</a>.</p>
     </div>
     <div class="term" id="bifacial-gain">
-      <h3>Bifacial gain</h3>
+      <h2>Bifacial gain</h2>
       <p>The extra output a <a class="inline" href="/voltfield-supply-catalog.html?q=Bifacial%20Modules">bifacial module</a> produces from light striking its rear face. It depends entirely on what is underneath and around it &mdash; ground albedo, mounting height and row spacing &mdash; so the same module can gain a few percent on one site and closer to fifteen on another.</p>
     </div>
     <div class="term" id="bil">
-      <h3>BIL (Basic Insulation Level)</h3>
+      <h2>BIL (Basic Insulation Level)</h2>
       <p>The peak impulse voltage a transformer or switchgear insulation system can withstand without flashover, expressed in kV. It is what protects equipment against lightning and switching surges, and it is chosen against the system voltage class rather than the operating voltage. One of the fields on a <a class="inline" href="guide-transformer-nameplate.html">transformer nameplate</a>.</p>
     </div>
     <div class="term" id="black-start">
-      <h3>Black start</h3>
+      <h2>Black start</h2>
       <p>Bringing a generator or storage system online without an existing grid to synchronise to. It requires a <a class="inline" href="/voltfield-supply-catalog.html?q=Grid-Forming%20PCS">grid-forming</a> converter that can establish its own voltage and frequency reference; a grid-following unit cannot do it because it has nothing to follow.</p>
     </div>
     <div class="term" id="bop">
-      <h3>BOP (Blowout Preventer)</h3>
+      <h2>BOP (Blowout Preventer)</h2>
       <p>A large valve/stack assembly used to seal, control, and monitor an oil or gas well, preventing an uncontrolled release of fluids. Covered under API 16A on the <a class="inline" href="oil-gas.html">Oil &amp; Gas</a> sector.</p>
     </div>
     <div class="term" id="bos">
-      <h3>BOS (Balance of System)</h3>
+      <h2>BOS (Balance of System)</h2>
       <p>Every component of a solar or storage installation other than the modules themselves — racking, wiring, trackers, and inverters. See <a class="inline" href="renewables.html">Renewables</a> for BOS families in the catalog.</p>
     </div>
     <div class="term" id="busway">
-      <h3>Busway (bus duct)</h3>
+      <h2>Busway (bus duct)</h2>
       <p>Enclosed overhead conductors replacing large conduit runs. Plug-in sections let taps be added or moved without a shutdown, which suits halls that get reconfigured; feeder sections simply move current between two points. See <a class="inline" href="/voltfield-supply-catalog.html?q=Busway%20(Feeder%20%2F%20Plug-In)">busway</a>.</p>
     </div>
     <div class="term" id="cdu">
-      <h3>CDU (Coolant Distribution Unit)</h3>
+      <h2>CDU (Coolant Distribution Unit)</h2>
       <p>The interface between a facility water loop and a direct-to-chip cooling loop, keeping the technology-side fluid clean, cool and at controlled pressure. Sized on approach temperature and pumping head rather than raw kW. See <a class="inline" href="/voltfield-supply-catalog.html?q=Coolant%20Distribution%20Units%20(CDU)">CDUs</a> and the <a class="inline" href="guide-liquid-vs-air-cooling.html">liquid vs air cooling guide</a>.</p>
     </div>
     <div class="term" id="christmas-tree">
-      <h3>Christmas tree (wellhead)</h3>
+      <h2>Christmas tree (wellhead)</h2>
       <p>The assembly of valves, spools, and fittings mounted on top of a wellhead used to control production flow, typically covered under API 6A.</p>
     </div>
     <div class="term" id="clipping">
-      <h3>Clipping (inverter)</h3>
+      <h2>Clipping (inverter)</h2>
       <p>What happens when a solar array's DC output exceeds the inverter's AC rating and the surplus is simply not converted. It sounds wasteful and is usually deliberate: oversizing the array raises output through the shoulders of the day by more than the midday clipping costs. See the <a class="inline" href="guide-inverter-clipping-ratio.html">clipping and DC:AC ratio guide</a>.</p>
     </div>
     <div class="term" id="crah-crac">
-      <h3>CRAH vs. CRAC</h3>
+      <h2>CRAH vs. CRAC</h2>
       <p>Both are precision room-level cooling units. A CRAH uses chilled water supplied from a plant; a CRAC has its own refrigeration circuit. Sizing turns on sensible heat ratio rather than nominal tonnage, because a data hall load carries almost no latent component. See <a class="inline" href="/voltfield-supply-catalog.html?q=CRAH%20%2F%20CRAC%20Units">CRAH / CRAC units</a>.</p>
     </div>
     <div class="term" id="c-rate">
-      <h3>C-rate</h3>
+      <h2>C-rate</h2>
       <p>The rate a battery charges or discharges relative to its capacity. A 1C rate empties the system in one hour, 0.5C in two, 0.25C in four. It is the link between a project's power rating in MW and its energy rating in MWh, and it drives cell selection and thermal design.</p>
     </div>
     <div class="term" id="dc-block">
-      <h3>DC block (BESS)</h3>
+      <h2>DC block (BESS)</h2>
       <p>A modular, pre-integrated battery rack/module unit that serves as a building block of a larger battery energy storage system — see the <a class="inline" href="battery-storage.html">Battery Storage</a> sector's Storage Blocks category.</p>
     </div>
     <div class="term" id="dc-ac-ratio">
-      <h3>DC:AC ratio</h3>
+      <h2>DC:AC ratio</h2>
       <p>The ratio of a solar array's installed DC capacity to its inverter AC capacity. Utility projects commonly run above 1.2, accepting some <a class="inline" href="#clipping">clipping</a> at midday to raise total annual yield. Explained in the <a class="inline" href="guide-inverter-clipping-ratio.html">clipping guide</a>.</p>
     </div>
     <div class="term" id="derating">
-      <h3>Derating</h3>
+      <h2>Derating</h2>
       <p>Reducing a component's allowable rating for the conditions it actually operates in &mdash; ambient temperature, altitude, conductor bundling, duty cycle. Nameplate ratings assume reference conditions that a real installation rarely matches, so derating is the normal case rather than the exception.</p>
     </div>
     <div class="term" id="domestic-content-bonus">
-      <h3>Domestic content bonus</h3>
+      <h2>Domestic content bonus</h2>
       <p>An additional US tax credit percentage available to projects meeting domestic-manufacturing thresholds for steel, iron, and manufactured components — evaluated separately from <a class="inline" href="#feoc">FEOC</a> status. See the <a class="inline" href="guide-feoc-compliance.html">FEOC compliance guide</a> for how the two interact.</p>
     </div>
     <div class="term" id="dry-type">
-      <h3>Dry-type vs. liquid-filled</h3>
+      <h2>Dry-type vs. liquid-filled</h2>
       <p>Two ways of insulating and cooling a transformer. Liquid-filled units carry more load in less volume and generally last longer; dry-type units have no fluid to contain and so avoid the fire and spill provisions that push liquid units outdoors or into vaults. See <a class="inline" href="/voltfield-supply-catalog.html?q=Dry-Type%20%2F%20Cast-Resin%20Transformers">dry-type transformers</a>.</p>
     </div>
     <div class="term" id="esp">
-      <h3>ESP (Electric Submersible Pump)</h3>
+      <h2>ESP (Electric Submersible Pump)</h2>
       <p>An artificial-lift system whose motor, seal and multi-stage pump all sit downhole. It moves far more fluid than rod lift, but every component is at the bottom of the well, so a failure means a workover rig and a pulled string. See <a class="inline" href="/voltfield-supply-catalog.html?q=ESP%20Systems">ESP systems</a>.</p>
     </div>
     <div class="term" id="feoc">
-      <h3>FEOC (Foreign Entity of Concern)</h3>
+      <h2>FEOC (Foreign Entity of Concern)</h2>
       <p>Restrictions on component sourcing that determine whether a solar or storage project's components disqualify it from <a class="inline" href="#itc">ITC</a> eligibility and the domestic-content bonus. Full detail in the <a class="inline" href="guide-feoc-compliance.html">FEOC compliance guide</a>.</p>
     </div>
     <div class="term" id="goes">
-      <h3>GOES (Grain-Oriented Electrical Steel)</h3>
+      <h2>GOES (Grain-Oriented Electrical Steel)</h2>
       <p>Silicon steel processed so its grain structure aligns with the magnetic flux path, which sharply reduces core loss. It is the material every transformer core is built from, and its constrained supply is the most-cited reason <a class="inline" href="guide-transformer-lead-times.html">transformer lead times</a> run into years. See <a class="inline" href="/voltfield-supply-catalog.html?q=Electrical%20Steel%20%26%20Core%20Laminations">electrical steel</a>.</p>
     </div>
     <div class="term" id="grid-forming">
-      <h3>Grid-forming vs. grid-following</h3>
+      <h2>Grid-forming vs. grid-following</h2>
       <p>Grid-forming inverters/<a class="inline" href="#pcs">PCS</a> can establish their own voltage and frequency reference and operate independent of the grid. Grid-following equipment instead synchronizes to an existing grid signal. Both appear on the <a class="inline" href="battery-storage.html">Battery Storage</a> sector's Power Conversion category.</p>
     </div>
     <div class="term" id="gsu">
-      <h3>GSU transformer (Generator Step-Up)</h3>
+      <h2>GSU transformer (Generator Step-Up)</h2>
       <p>Steps up voltage from a generator to transmission-line levels — used at power plants, substations, and utility-scale renewable sites.</p>
     </div>
     <div class="term" id="impedance">
-      <h3>Impedance (%Z)</h3>
+      <h2>Impedance (%Z)</h2>
       <p>A transformer's internal impedance, expressed as the percentage of rated voltage needed to drive rated current into a short circuit. It sets how much fault current reaches everything downstream: a lower %Z is a stiffer source and a <em>higher</em> available fault current. Specifying a transformer on kVA alone and ignoring %Z is how switchgear ends up under-rated.</p>
     </div>
     <div class="term" id="incident-energy">
-      <h3>Incident energy</h3>
+      <h2>Incident energy</h2>
       <p>The thermal energy an arc flash would deliver to a surface at a given distance, in cal/cm&sup2;. It is what determines the required PPE category and the <a class="inline" href="#arc-flash-boundary">arc-flash boundary</a>, and it depends on available fault current and how long the upstream device takes to clear &mdash; so faster protection means lower incident energy.</p>
     </div>
     <div class="term" id="interrupting-rating">
-      <h3>Interrupting rating (AIC)</h3>
+      <h2>Interrupting rating (AIC)</h2>
       <p>The maximum fault current a breaker or fuse can safely interrupt. It must exceed the fault current available at its point of installation, which is set by the upstream transformer's <a class="inline" href="#impedance">impedance</a>. A device correctly sized for load but under-rated for fault current can fail catastrophically instead of clearing.</p>
     </div>
     <div class="term" id="itc">
-      <h3>ITC (Investment Tax Credit)</h3>
+      <h2>ITC (Investment Tax Credit)</h2>
       <p>The federal tax credit for renewable energy and storage projects under IRC Section 48/48E, subject to <a class="inline" href="#feoc">FEOC</a> and content-sourcing rules.</p>
     </div>
     <div class="term" id="k-factor">
-      <h3>K-factor</h3>
+      <h2>K-factor</h2>
       <p>A rating stating how much additional eddy-current heating from harmonic load a transformer can absorb. K-4 through K-20 units appear wherever switch-mode power supplies and variable-frequency drives dominate the connected load. See <a class="inline" href="/voltfield-supply-catalog.html?q=Isolation%20%2F%20K-Rated%20Transformers">K-rated transformers</a>.</p>
     </div>
     <div class="term" id="kva-vs-kw">
-      <h3>kVA vs. kW</h3>
+      <h2>kVA vs. kW</h2>
       <p>kVA (kilovolt-amperes) measures apparent power; kW (kilowatts) measures real, usable power. The ratio between the two is the power factor — relevant when sizing transformers and generators.</p>
     </div>
     <div class="term" id="lfp-nmc">
-      <h3>LFP vs. NMC</h3>
+      <h2>LFP vs. NMC</h2>
       <p>The two dominant lithium chemistries in grid storage. Lithium iron phosphate trades energy density for thermal stability and cycle life; nickel manganese cobalt packs more energy into the same footprint but has a lower thermal-runaway threshold, which drives more demanding fire protection. For a system that sits on a pad for twenty years, LFP has become the default.</p>
     </div>
     <div class="term" id="mccb">
-      <h3>MCCB (Molded-Case Circuit Breaker)</h3>
+      <h2>MCCB (Molded-Case Circuit Breaker)</h2>
       <p>An overcurrent protection device typically rated up to about 2,500 A, sitting between miniature breakers and large power breakers.</p>
     </div>
     <div class="term" id="metal-clad">
-      <h3>Metal-clad vs. metal-enclosed</h3>
+      <h2>Metal-clad vs. metal-enclosed</h2>
       <p>Both describe switchgear in a grounded metal enclosure, but metal-clad adds specific requirements: drawout breakers, insulated bus, and grounded metal barriers between compartments. Those barriers decide what can be worked on safely while the lineup stays energised. See the <a class="inline" href="guide-switchgear-compartments.html">switchgear compartments guide</a>.</p>
     </div>
     <div class="term" id="mppt">
-      <h3>MPPT (Maximum Power Point Tracking)</h3>
+      <h2>MPPT (Maximum Power Point Tracking)</h2>
       <p>The inverter function that continuously adjusts operating voltage to extract the most power from a string as irradiance and temperature change. How finely an inverter divides its inputs into separate MPPT zones determines how much a shaded or soiled section drags down the rest.</p>
     </div>
     <div class="term" id="n-plus-1">
-      <h3>N+1, N+2 and 2N</h3>
+      <h2>N+1, N+2 and 2N</h2>
       <p>Redundancy notations. N is exactly the capacity the load needs; N+1 adds one spare unit; N+2 adds two; 2N duplicates the entire system on independent paths. 2N tolerates a whole-path failure, including maintenance on one side, which N+1 does not.</p>
     </div>
     <div class="term" id="nace">
-      <h3>NACE / sour service</h3>
+      <h2>NACE / sour service</h2>
       <p>Material requirements for equipment exposed to hydrogen sulphide, now published as ANSI/NACE MR0175 / ISO 15156. Sour service constrains alloy choice and hardness to resist sulphide stress cracking, and it disqualifies materials that would otherwise suit the pressure and temperature.</p>
     </div>
     <div class="term" id="nfpa-70e">
-      <h3>NFPA 70E</h3>
+      <h2>NFPA 70E</h2>
       <p>The US standard for electrical safety in the workplace. It defines the risk-assessment process, approach boundaries and PPE requirements for work on or near energised equipment, and it is the reason <a class="inline" href="#incident-energy">incident energy</a> appears on equipment labels at all.</p>
     </div>
     <div class="term" id="nfpa-855">
-      <h3>NFPA 855</h3>
+      <h2>NFPA 855</h2>
       <p>The National Fire Protection Association standard for the installation of stationary energy storage systems — a core compliance reference for the <a class="inline" href="battery-storage.html">Battery Storage</a> sector. See the <a class="inline" href="guide-bess-fire-safety-nfpa-855.html">BESS fire safety basics guide</a> for what it actually requires.</p>
     </div>
     <div class="term" id="octg">
-      <h3>OCTG (Oil Country Tubular Goods)</h3>
+      <h2>OCTG (Oil Country Tubular Goods)</h2>
       <p>The collective term for tubulars used in oil and gas wells: casing, tubing, and drill pipe, typically specified under API 5CT.</p>
     </div>
     <div class="term" id="pcs">
-      <h3>PCS (Power Conversion System)</h3>
+      <h2>PCS (Power Conversion System)</h2>
       <p>Equipment that converts DC battery power to AC (and back) for grid interconnection in a BESS — see <a class="inline" href="#grid-forming">grid-forming vs. grid-following</a> for the two operating modes.</p>
     </div>
     <div class="term" id="preload">
-      <h3>Preload (bolted joints)</h3>
+      <h2>Preload (bolted joints)</h2>
       <p>The clamping tension a bolt holds after tightening. It is what makes a flanged joint seal and what stops a bolt loosening under vibration &mdash; not the bolt's grade on its own. Achieved through a defined tightening sequence and torque or tension value, and it is why a joint is retensioned rather than simply retightened.</p>
     </div>
     <div class="term" id="pue">
-      <h3>PUE (Power Usage Effectiveness)</h3>
+      <h2>PUE (Power Usage Effectiveness)</h2>
       <p>Total facility power divided by IT equipment power. A PUE of 1.0 would mean every watt reaches IT equipment; real facilities sit between roughly 1.1 and 2.0. It measures overhead, not efficiency of the computing itself, and it moves with climate and load factor. See the <a class="inline" href="guide-pue-explained.html">PUE guide</a>.</p>
     </div>
     <div class="term" id="rtj">
-      <h3>RTJ gasket (ring-joint)</h3>
+      <h2>RTJ gasket (ring-joint)</h2>
       <p>A metal ring that seals a flanged joint by deforming plastically into machined grooves under bolt <a class="inline" href="#preload">preload</a>. Because it seals by permanent deformation it is single-use, and reusing one is a recurring cause of joint leaks in high-pressure service.</p>
     </div>
     <div class="term" id="safe-harbor">
-      <h3>Safe harbor (construction)</h3>
+      <h2>Safe harbor (construction)</h2>
       <p>IRS provisions that let a project lock in tax-credit eligibility by beginning construction or incurring qualifying costs before a deadline — referenced directly in the <a class="inline" href="guide-feoc-compliance.html">FEOC compliance guide</a>.</p>
     </div>
     <div class="term" id="sccr">
-      <h3>SCCR (Short-Circuit Current Rating)</h3>
+      <h2>SCCR (Short-Circuit Current Rating)</h2>
       <p>The fault current an entire assembly &mdash; not just one device &mdash; can withstand. It is set by the weakest component in the assembly, so a panel full of well-rated parts can still carry a low SCCR because of one item. Distinct from a single device's <a class="inline" href="#interrupting-rating">interrupting rating</a>.</p>
     </div>
     <div class="term" id="selective-coordination">
-      <h3>Selective coordination</h3>
+      <h2>Selective coordination</h2>
       <p>Arranging protective devices so that only the one nearest a fault opens, leaving everything upstream energised. It is demonstrated by comparing time-current curves across the whole path, which is why it is a system property rather than a device setting. See the <a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">short-circuit and coordination guide</a>.</p>
     </div>
     <div class="term" id="soc-soh">
-      <h3>SoC and SoH</h3>
+      <h2>SoC and SoH</h2>
       <p>State of charge is how full a battery is right now; state of health is how much of its original capacity remains after ageing. The <a class="inline" href="/voltfield-supply-catalog.html?q=Battery%20Management%20Systems">battery management system</a> estimates both, and the accuracy of those estimates determines usable capacity and whether warranty terms are met.</p>
     </div>
     <div class="term" id="ul-9540a">
-      <h3>UL 9540A</h3>
+      <h2>UL 9540A</h2>
       <p>A UL test method evaluating thermal runaway fire propagation in battery energy storage systems, alongside <a class="inline" href="#nfpa-855">NFPA 855</a> installation requirements. See the <a class="inline" href="guide-bess-fire-safety-nfpa-855.html">BESS fire safety basics guide</a> for how the two standards fit together.</p>
     </div>
     <div class="term" id="vector-group">
-      <h3>Vector group</h3>
+      <h2>Vector group</h2>
       <p>A transformer's winding configuration and the phase displacement between its primary and secondary, written as codes like Dyn11. It determines whether two transformers can be paralleled and how the system is earthed, and it is one of the fields on every <a class="inline" href="guide-transformer-nameplate.html">nameplate</a>.</p>
     </div>
 </div>
@@ -452,17 +452,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <footer>
   <div class="in">
     <div>
-      <h4>Voltfield</h4>
+      <h2>Voltfield</h2>
       <p>An independent engineering reference for energy-infrastructure and industrial power equipment. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer’s study.</p>
     </div>
-    <div><h4>Sectors</h4><ul>
+    <div><h2>Sectors</h2><ul>
       <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
       <li><a href="renewables.html">Solar / Wind BOS</a></li>
       <li><a href="battery-storage.html">Storage Systems</a></li>
       <li><a href="oil-gas.html">Drilling &amp; Completions</a></li>
       <li><a href="industrial-supply.html">Industrial Supply (MRO)</a></li>
     </ul></div>
-    <div><h4>Compliance</h4><ul><li>UL · IEEE · ANSI C57</li><li>API 5CT/6A/7K/16A/Q1</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>API 5CT/6A/7K/16A/Q1</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
   </div>
 </footer>
 <script src="voltfield-site-config.js"></script>

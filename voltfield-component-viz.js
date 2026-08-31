@@ -245,7 +245,7 @@
     const c = get(id);
     if (!c) return '';
     return '<div class="vfcv-explain">' +
-      '<h4>' + esc(c.name) + '</h4>' +
+      '<h3>' + esc(c.name) + '</h3>' +
       '<p class="vfcv-what">' + esc(c.what) + '</p>' +
       (c.note ? '<p class="vfcv-note">' + esc(c.note) + '</p>' : '') +
     '</div>';

@@ -333,7 +333,10 @@ const VF_ICON_PATHS = {
 
 function vfCatIconSVG(iconId,color){
   const draw=VF_ICON_PATHS[iconId]||VF_ICON_PATHS.generic;
-  return `<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">${draw(color)}</svg>`;
+  /* Category glyphs are decorative: every one sits beside the category name
+     it depicts, so exposing it to assistive tech adds an unnamed graphic and
+     no information. */
+  return `<svg aria-hidden="true" viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">${draw(color)}</svg>`;
 }
 
 /* The category-icon lookup, pulled out on its own so other renderers (the

@@ -92,7 +92,7 @@ html[data-theme="dark"] .basis-published{background:#152740;color:#8FB4E4;border
 .alertform input[type=email],.alertform input[type=text]{flex:1;min-width:220px;border:1px solid var(--line-dark);border-radius:var(--r-sm);background:var(--card);color:var(--ink);padding:11px 13px;font-family:var(--mono);font-size:13.5px}
 .alertform input[type=email]::placeholder,.alertform input[type=text]::placeholder{color:var(--slate)}
 .alertform .sectors{display:flex;flex-wrap:wrap;gap:10px;font-family:var(--mono);font-size:11.5px;color:var(--ink-2);align-items:center;width:100%}
-.alertform .sectors label{display:flex;align-items:center;gap:5px;cursor:pointer}
+.alertform .sectors label{display:flex;align-items:center;gap:6px;cursor:pointer;min-height:24px}
 .alertform button{background:var(--solid-bg);color:var(--solid-fg);border:0;border-radius:var(--r-pill);padding:12px 22px;font-family:var(--disp);font-weight:600;font-size:14.5px;letter-spacing:-.01em;text-transform:none}
 .alertform button:hover{background:var(--solid-bg);color:var(--solid-fg);box-shadow:var(--sh-2)}
 .alertform button:disabled{opacity:.6;cursor:default}
@@ -141,7 +141,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </form>
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield home">
-    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
     <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
   </a>
       <nav class="hnav">
@@ -184,7 +184,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main id="main" tabindex="-1">
 <section class="artban">
   <div class="artban-in">
-    <div style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="voltfield-insights.html" style="color:var(--slate);text-decoration:none">Insights</a> / <span style="color:var(--ink)">Lead-Time Index</span></div>
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="voltfield-insights.html" style="color:var(--slate);text-decoration:none">Insights</a> / <span style="color:var(--ink)">Lead-Time Index</span></nav>
     <div class="eyebrow">Live Reference Data</div>
     <h1>The Voltfield Lead-Time Index</h1>
     <p class="dek">Current indicative lead times and pricing across data center power, renewables, battery storage, and oilfield equipment — the same figures driving the catalog's lead-time flags, in one reference table.</p>
@@ -601,17 +601,17 @@ https://voltfield.org/lead-time-index.html</pre>
 <footer>
   <div class="in">
     <div>
-      <h4>Voltfield</h4>
+      <h2>Voltfield</h2>
       <p>An independent engineering reference for energy-infrastructure and industrial power equipment. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer’s study. This index reflects the same indicative data and is not a quote for any specific order — see <a href="methodology.html">how it's compiled</a>.</p>
     </div>
-    <div><h4>Sectors</h4><ul>
+    <div><h2>Sectors</h2><ul>
       <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
       <li><a href="renewables.html">Solar / Wind BOS</a></li>
       <li><a href="battery-storage.html">Storage Systems</a></li>
       <li><a href="oil-gas.html">Drilling &amp; Completions</a></li>
       <li><a href="industrial-supply.html">Industrial Supply (MRO)</a></li>
     </ul></div>
-    <div><h4>Compliance</h4><ul><li>UL · IEEE · ANSI C57</li><li>API 5CT/6A/7K/16A/Q1</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>API 5CT/6A/7K/16A/Q1</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
   </div>
 </footer>
 <script src="voltfield-site-config.js"></script>

@@ -83,7 +83,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .sidebar{align-self:start}
 @media(min-width:920px){.sidebar{position:sticky;top:84px;max-height:calc(100vh - 100px);overflow:auto}}
 .facet{background:var(--card);border:1px solid var(--line-dark);margin-bottom:14px}
-.facet h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);padding:12px 14px 8px;border-bottom:1px solid var(--line)}
+.facet h2,.facet h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);padding:12px 14px 8px;border-bottom:1px solid var(--line)}
 .facet .opts{padding:6px 0}
 .opt{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 14px;font-size:13px;cursor:pointer;border-left:3px solid transparent}
 .opt:hover{background:var(--paper)}
@@ -123,7 +123,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .skucard .sk-cat .c{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:#fff;padding:2px 6px}
 .skucard .sk-cat .d{font-family:var(--mono);font-size:9.5px;color:var(--slate)}
 .skucard .sk-pn{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--ink);margin-top:9px;letter-spacing:.01em}
-.skucard h4{font-family:var(--disp);font-weight:600;font-size:17.5px;line-height:1.12;margin-top:3px;letter-spacing:.005em}
+.skucard h3,.skucard h4{font-family:var(--disp);font-weight:600;font-size:17.5px;line-height:1.12;margin-top:3px;letter-spacing:.005em}
 .skucard .sk-spec{font-family:var(--mono);font-size:10.5px;color:var(--slate);margin-top:7px;line-height:1.5;flex:1}
 .skucard .sk-cmp{display:flex;flex-wrap:wrap;gap:4px;margin-top:9px}
 .skucard .sk-cmp span{font-family:var(--mono);font-size:9px;border:1px solid var(--line-dark);padding:2px 5px;color:var(--ink-2)}
@@ -219,7 +219,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield home">
-    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
     <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
   </a>
       <nav class="hnav">
@@ -292,19 +292,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="catlayout">
   <aside class="sidebar">
     <div class="facet">
-      <h3>Sector</h3>
+      <h2>Sector</h2>
       <div class="opts" id="facetSector"></div>
     </div>
     <div class="facet" id="facetCatWrap" style="display:none">
-      <h3 id="facetCatTitle">Category</h3>
+      <h2 id="facetCatTitle">Category</h2>
       <div class="opts" id="facetCat"></div>
     </div>
     <div class="facet">
-      <h3>Lead time</h3>
+      <h2>Lead time</h2>
       <div class="opts" id="facetLead"></div>
     </div>
     <div class="facet">
-      <h3>Supply Channel</h3>
+      <h2>Supply Channel</h2>
       <div class="opts" id="facetDist"></div>
       <div class="facetnote">Which manufacturer or mill network typically builds a part — useful if you already have a vendor preference and want to see what they cover. Voltfield does not supply any of it.</div>
     </div>
@@ -341,11 +341,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <footer>
   <div class="in">
     <div>
-      <h4>Voltfield</h4>
+      <h2>Voltfield</h2>
       <p>Configurable reference spanning grid &amp; data-center power, renewables BOS, battery storage, oilfield equipment, and industrial-scale MRO supply — an engineering reference, not a storefront. Configurations are generated on demand from a taxonomy of 243 equipment families and their attribute options; prices are indicative market bands published for budgeting, not offers.</p>
     </div>
     <div>
-      <h4>Jump to sector</h4>
+      <h2>Jump to sector</h2>
       <p><a href="voltfield-supply-catalog.html?sector=dc">Data Centers</a> &nbsp;·&nbsp; <a href="voltfield-supply-catalog.html?sector=re">Renewables</a> &nbsp;·&nbsp; <a href="voltfield-supply-catalog.html?sector=bess">Battery Storage</a> &nbsp;·&nbsp; <a href="voltfield-supply-catalog.html?sector=og">Oil &amp; Gas</a> &nbsp;·&nbsp; <a href="voltfield-supply-catalog.html?sector=mro">Industrial Supply (MRO)</a><br><br><a href="voltfield-suppliers.html">Browse all manufacturers &rarr;</a></p>
     </div>
   </div>
@@ -494,7 +494,7 @@ function renderResults(){
       <div class="sk-body">
         <div class="sk-cat"><span class="c" style="background:${col}">${f.c}</span>${f.d?`<span class="d">${DL[f.d]||""}</span>`:""}</div>
         <div class="sk-pn">${sku.pn}</div>
-        <h4>${sku.name}</h4>
+        <h3>${sku.name}</h3>
         <div class="sk-spec">${sku.spec}</div>
         <div class="sk-cmp">${f.cmp.map(x=>`<span>${x}</span>`).join('')}</div>
         <div class="sk-more">Configure &amp; details &rsaquo;</div>

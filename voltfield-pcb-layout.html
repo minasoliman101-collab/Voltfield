@@ -66,7 +66,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .howsteps b{color:var(--ink);font-family:var(--disp);font-weight:700}
 .examplegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin:14px 0 24px}
 .examplecard{background:var(--card);border:2px solid var(--line-dark);padding:14px 16px;display:flex;flex-direction:column;gap:8px}
-.examplecard h4{font-family:var(--disp);font-weight:700;font-size:15.5px;color:var(--ink)}
+.examplecard h3,.examplecard h4{font-family:var(--disp);font-weight:700;font-size:15.5px;color:var(--ink)}
 .examplecard p{font-size:12.5px;color:var(--ink-2);line-height:1.55;margin:0;flex:1}
 .examplecard button{background:var(--solid-bg);color:var(--solid-fg);border:0;padding:8px 14px;font-family:var(--disp);font-weight:700;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;align-self:flex-start}
 .examplecard button:hover{background:transparent;color:var(--ink)}
@@ -145,7 +145,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield home">
-    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
     <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
   </a>
       <nav class="hnav">
@@ -188,7 +188,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main id="main" tabindex="-1">
 <section class="artban">
   <div class="artban-in">
-    <div style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <span style="color:var(--ink)">PCB Layout Tool</span></div>
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <span style="color:var(--ink)">PCB Layout Tool</span></nav>
     <div class="eyebrow">Free · No Signup · Runs In Your Browser</div>
     <h1>Place components. Route copper. Check your work.</h1>
     <p class="dek">A free PCB layout tool, right in your browser. Tap a component tile, tap an empty grid cell to place it. Tap a pad, then tap another pad to route a trace on the current layer. Switch between Top and Bottom copper, then run a design check for unconnected pins and same-layer shorts — the same kind of check a real PCB tool runs before fabrication.</p>
@@ -220,7 +220,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 
-  <div class="pcbwrap"><svg id="pcbSvg" xmlns="http://www.w3.org/2000/svg"></svg></div>
+  <div class="pcbwrap"><svg aria-hidden="true" id="pcbSvg" xmlns="http://www.w3.org/2000/svg"></svg></div>
 
   <div class="est-row" style="margin:0 0 10px">
     <div class="est-field"><button type="button" class="ghost" id="clearBoardBtn">Clear board</button></div>
@@ -276,17 +276,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <footer>
   <div class="in">
     <div>
-      <h4>Voltfield — PCB Layout Tool</h4>
+      <h2>Voltfield — PCB Layout Tool</h2>
       <p>A free visual PCB layout sandbox for practicing component placement and two-layer trace routing, with a design-check pass for unconnected pins and same-layer shorts. Part of Voltfield's engineering knowledge tools, alongside the Practice Sandbox, BOM Generator, and Engineering Calculators.</p>
     </div>
-    <div><h4>Explore</h4><ul>
+    <div><h2>Explore</h2><ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="voltfield-pcb.html">PCB Builder (fab pricing)</a></li>
       <li><a href="voltfield-sandbox.html">Practice Sandbox</a></li>
       <li><a href="engineering-calculators.html">Engineering Calculators</a></li>
       <li><a href="voltfield-glossary-quiz.html">Glossary Quiz</a></li>
     </ul></div>
-    <div><h4>Reference Guides</h4><ul>
+    <div><h2>Reference Guides</h2><ul>
       <li><a href="guide-transformer-nameplate.html">Transformer Nameplate</a></li>
       <li><a href="guide-switchgear-compartments.html">Switchgear Compartments</a></li>
       <li><a href="guide-short-circuit-studies-breaker-coordination.html">Short-Circuit Studies</a></li>
@@ -618,7 +618,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   function renderExampleGrid(){
     $('exampleGrid').innerHTML=EXAMPLES.map(ex=>`
       <div class="examplecard">
-        <h4>${ex.name}</h4>
+        <h3>${ex.name}</h3>
         <p>${ex.why}</p>
         <button type="button" data-id="${ex.id}">Load this board</button>
       </div>`).join('');

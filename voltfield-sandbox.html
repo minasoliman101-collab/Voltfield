@@ -171,7 +171,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <header class="site">
   <a class="logo" href="index.html" aria-label="Voltfield home">
-    <span class="bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
     <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
   </a>
       <nav class="hnav">
@@ -214,7 +214,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main id="main" tabindex="-1">
 <section class="artban">
   <div class="artban-in">
-    <div style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <span style="color:var(--ink)">Practice Sandbox</span></div>
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <span style="color:var(--ink)">Practice Sandbox</span></nav>
     <div class="eyebrow">Free · No Signup · Runs In Your Browser</div>
     <h1>Build a one-line from a legend of parts.</h1>
     <p class="dek">A free one-line diagram practice tool — no signup required. Tap a tile from the legend below, then tap the board slot it belongs in (or drag it, if you'd rather). Assemble a transformer, main breaker, feeder, and panel loads — the diagram updates live as you build, and the right combination is recognized as a real assembly class, the same way the <a href="voltfield-bom-generator.html" style="color:var(--link)">BOM Generator</a> recognizes a part's components in reverse.</p>
@@ -248,7 +248,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <button type="button" id="tabSb3d" role="tab" aria-selected="false" aria-controls="sb3dPane">3D view</button>
   </div>
 
-  <div class="oneline" id="onelineWrap" role="tabpanel" aria-labelledby="tabLine"><svg id="onelineSvg" viewBox="0 0 900 190" xmlns="http://www.w3.org/2000/svg"></svg></div>
+  <div class="oneline" id="onelineWrap" role="tabpanel" aria-labelledby="tabLine"><svg aria-hidden="true" id="onelineSvg" viewBox="0 0 900 190" xmlns="http://www.w3.org/2000/svg"></svg></div>
 
   <div id="sb3dPane" role="tabpanel" aria-labelledby="tabSb3d" hidden>
     <div class="sb3d" id="sb3d"></div>
@@ -260,7 +260,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="tier2toggle" id="tier2ToggleWrap">
     <label><input type="checkbox" id="tier2Chk"> Add a second voltage tier (step down from Panel 1 to a second transformer, breaker, feeder, and panel — loads move to Panel 2)</label>
   </div>
-  <div class="oneline" id="oneline2Wrap" style="display:none"><svg id="oneline2Svg" viewBox="0 0 900 190" xmlns="http://www.w3.org/2000/svg"></svg></div>
+  <div class="oneline" id="oneline2Wrap" style="display:none"><svg aria-hidden="true" id="oneline2Svg" viewBox="0 0 900 190" xmlns="http://www.w3.org/2000/svg"></svg></div>
   <div class="board" id="board2Mount" style="display:none"></div>
 
   <div class="est-row" style="margin:0 0 10px">
@@ -322,10 +322,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <footer>
   <div class="in">
     <div>
-      <h4>Voltfield — Practice Sandbox</h4>
+      <h2>Voltfield — Practice Sandbox</h2>
       <p>A free one-line system design sandbox for practicing transformer, breaker, feeder, and panel sizing — with instant checks on sizing, voltage drop, and fault current. Part of Voltfield's engineering knowledge tools, alongside the BOM Generator, PCB Builder, and Engineering Calculators.</p>
     </div>
-    <div><h4>Explore</h4><ul>
+    <div><h2>Explore</h2><ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="engineering-calculators.html">Engineering Calculators</a></li>
       <li><a href="voltfield-bom-generator.html">BOM Generator</a></li>
@@ -333,7 +333,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <li><a href="voltfield-insights.html">Insights</a></li>
       <li><a href="whats-new.html">What's New</a></li>
     </ul></div>
-    <div><h4>Reference Guides</h4><ul>
+    <div><h2>Reference Guides</h2><ul>
       <li><a href="guide-transformer-nameplate.html">Transformer Nameplate</a></li>
       <li><a href="guide-switchgear-compartments.html">Switchgear Compartments</a></li>
       <li><a href="guide-arc-flash-boundary-basics.html">Arc-Flash Boundary Basics</a></li>

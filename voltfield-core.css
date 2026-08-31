@@ -161,11 +161,31 @@ h2{font-weight:700;letter-spacing:-.03em;line-height:1.1}
 /* Numbers set in mono should line up in columns. */
 .mono,.hstat .k,.tstat .k{font-variant-numeric:tabular-nums}
 
+/* WCAG 2.5.8 Target Size (Minimum), 24x24 CSS px.
+   Breadcrumb trails, the end-of-life card footers and the privacy back-link
+   are small text links set at 11-13px with no vertical padding, so they came
+   out 14-21px tall. Width was never the problem. Padding them out to 24 costs
+   no layout -- the padding is vertical, inside an inline-block, and the line
+   box already had the room -- and it makes them properly tappable.
+   Body-copy links inside a paragraph are left alone: 2.5.8 exempts a target
+   whose size is constrained by the line-height of the sentence around it. */
+nav[aria-label="Breadcrumb"] a,
+.crumb a,
+.eolfoot a,
+.viewall,
+a.back{display:inline-block;min-height:24px;padding-block:4px;line-height:16px;
+  vertical-align:middle}
+
 /* Form controls. The pages each style their own inputs, so rather than edit
    fifty copies this rounds every control at the tag level -- square-cornered
    inputs next to pill buttons was the last thing still reading as the old
    look. Anything that sets its own border-radius still wins. */
 input:not([type=checkbox]):not([type=radio]),select,textarea{border-radius:var(--r-sm)}
+/* 2.5.8 again, for the boxes themselves. Browsers default a checkbox to about
+   13x13. Every one on this site sits in or beside a <label> that already
+   activates it, so the practical target was never that small -- but the box is
+   what a pointer aims at, and 24 is the minimum the criterion names. */
+input[type=checkbox],input[type=radio]{width:24px;height:24px;accent-color:var(--signal)}
 input:not([type=checkbox]):not([type=radio]):focus-visible,
 select:focus-visible,textarea:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
 
@@ -709,7 +729,7 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
   letter-spacing:.07em;color:#fff;padding:3px 9px;border-radius:var(--r-pill);
   text-transform:uppercase}
 .newscard .nc-date{font-family:var(--mono);font-size:11px;color:var(--slate)}
-.newscard h4{font-size:16.5px;line-height:1.3;letter-spacing:-.02em}
+.newscard h3,.newscard h4{font-size:16.5px;line-height:1.3;letter-spacing:-.02em}
 .newscard p{font-size:14px;color:var(--slate);margin-top:8px;line-height:1.6;flex:1}
 .newscard .nc-src{font-size:12.5px;color:var(--slate);margin-top:14px;display:flex;
   justify-content:space-between;align-items:center;gap:10px;border-top:0;padding-top:0}
@@ -720,7 +740,7 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
 .catq .cq-sec{font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;
   text-transform:uppercase;color:#fff;padding:3px 9px;border-radius:var(--r-pill);
   align-self:flex-start}
-.catq h4{font-size:16px;letter-spacing:-.02em}
+.catq h3,.catq h4{font-size:16px;letter-spacing:-.02em}
 .catq .cq-n{font-family:var(--mono);font-size:11px;color:var(--slate);
   font-variant-numeric:tabular-nums}
 
@@ -770,7 +790,7 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
 footer{background:var(--ink);color:#93A7BD;padding:60px 24px 44px;font-size:14px}
 footer .in{max-width:var(--shell);margin:0 auto;display:grid;gap:34px}
 @media(min-width:780px){footer .in{grid-template-columns:2.1fr 1fr 1fr 1fr}}
-footer h4,footer h5{font-family:var(--disp);font-size:13px;letter-spacing:.01em;
+footer h2,footer h3,footer h4,footer h5{font-family:var(--disp);font-size:13px;letter-spacing:.01em;
   text-transform:none;color:#fff;margin-bottom:14px;font-weight:600}
 footer p{line-height:1.7;max-width:480px;font-size:13px;color:#7F94AC}
 footer li{list-style:none;padding:5px 0;font-family:var(--body);font-size:13.5px}
