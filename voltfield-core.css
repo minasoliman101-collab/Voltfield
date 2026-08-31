@@ -28,6 +28,17 @@
      white lets a 1px hairline do the same job quietly. */
   --paper:#F5F7FA;--card:#FFFFFF;--sunk:#EDF1F6;
   --line:#E3E9F0;--line-dark:#CBD5E1;--line-strong:#94A3B4;
+  /* WCAG 1.4.11 wants 3:1 for the visual boundary of a control, measured
+     against what is behind it. --line-dark is #CBD5E1, which is 1.48:1 on
+     white -- fine as decoration, not enough when the border is the only thing
+     telling you a control is there (the theme toggle, the hamburger, the
+     back-to-top button, an outlined button, a search box). This is the
+     boundary colour for those: 3.66:1 on --card, 3.41 on --paper, 3.23 on
+     --sunk, so it clears on every surface a control sits on.
+     Content cards deliberately keep --line: a card with a heading and body
+     copy is identified by its content, and 1.4.11 covers boundaries REQUIRED
+     to identify a component, not every drawn line. */
+  --line-control:#7A8796;
   --signal:#FFC400;--signal-deep:#E5AC00;
 
   /* Second accent. Amber alone had to be both the brand mark and every piece
@@ -192,7 +203,7 @@ header.site{background:rgba(255,255,255,.82);backdrop-filter:saturate(180%) blur
    of a decoration. */
 .hnav{display:none;gap:2px;align-items:center}
 .navtoggle{display:none;background:transparent;color:var(--ink);
-  border:1px solid var(--line-dark);border-radius:var(--r-sm);width:40px;height:40px;
+  border:1px solid var(--line-control);border-radius:var(--r-sm);width:40px;height:40px;
   font-size:18px;line-height:1;align-items:center;justify-content:center;flex-shrink:0;
   transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease)}
 .navtoggle:hover{background:var(--sunk);border-color:var(--line-strong)}
@@ -275,7 +286,7 @@ header.site{background:rgba(255,255,255,.82);backdrop-filter:saturate(180%) blur
    which used to carry these as inline styles; they live here so the control
    matches the rest of the header chrome and follows the theme tokens. */
 #themeToggle,.themetoggle{background:transparent;color:var(--ink-2);
-  border:1px solid var(--line-dark);border-radius:var(--r-sm);width:40px;height:40px;
+  border:1px solid var(--line-control);border-radius:var(--r-sm);width:40px;height:40px;
   font-size:16px;line-height:1;display:inline-flex;align-items:center;justify-content:center;
   flex-shrink:0;order:-1;
   transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease),
@@ -305,7 +316,7 @@ header.site{background:rgba(255,255,255,.82);backdrop-filter:saturate(180%) blur
 .btn-primary:hover{box-shadow:var(--sh-2)}
 .btn-signal{background:var(--signal);color:var(--on-signal)}
 .btn-signal:hover{box-shadow:0 6px 18px rgba(255,196,0,.34)}
-.btn-ghost{background:var(--card);color:var(--ink);border-color:var(--line-dark)}
+.btn-ghost{background:var(--card);color:var(--ink);border-color:var(--line-control)}
 .btn-ghost:hover{border-color:var(--line-strong);box-shadow:var(--sh-1)}
 .btn-sm{padding:8px 16px;font-size:14px}
 
@@ -633,7 +644,7 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
    rounded control that lifts on focus, with the button inset inside it. */
 .catsearch,.dirsearch,.searchrow:has(button){
   display:flex;align-items:center;gap:6px;background:var(--card);
-  border:1px solid var(--line-dark);border-radius:var(--r-pill);
+  border:1px solid var(--line-control);border-radius:var(--r-pill);
   padding:5px 5px 5px 8px;box-shadow:var(--sh-1);
   transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
 .catsearch:focus-within,.dirsearch:focus-within,.searchrow:has(button):focus-within{
@@ -768,7 +779,7 @@ footer a:hover{color:#fff}
 
 /* ---------- back to top / scroll reveal ---------- */
 .totop{position:fixed;right:22px;bottom:22px;width:44px;height:44px;
-  background:var(--card);color:var(--ink);border:1px solid var(--line-dark);
+  background:var(--card);color:var(--ink);border:1px solid var(--line-control);
   border-radius:50%;display:none;align-items:center;justify-content:center;
   font-size:17px;z-index:80;box-shadow:var(--sh-2);opacity:0;transform:translateY(8px);
   transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease)}

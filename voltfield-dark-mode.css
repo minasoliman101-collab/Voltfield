@@ -29,6 +29,9 @@ html[data-theme="dark"]{
      behind every hovered nav item. */
   --sunk:#1D2A3C;
   --line-strong:#4A6183;
+  /* Control boundaries, same 1.4.11 job as in the light theme: 4.17:1 on
+     --paper, 3.75 on --card, 3.27 on --sunk. */
+  --line-control:#63799B;
   /* Shadows on a dark ground read as smudges at light-theme opacity; deepened
      so elevation still separates a floating menu from the page behind it. */
   --sh-1:0 1px 2px rgba(0,0,0,.4);

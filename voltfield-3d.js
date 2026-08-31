@@ -1835,6 +1835,96 @@
   };
   function resolveBuilder(shapeId){ return BUILDERS[shapeId] || buildGeneric; }
 
+  /* ---------- coplanar-face separation ----------
+     Depth buffers cannot order two surfaces that occupy the same plane. Where
+     a model has coincident same-facing faces, which one wins is decided by
+     floating-point noise, so it flips per pixel and re-flips as the camera
+     moves: the shimmer reads as the model "glitching".
+
+     This is a modelling hazard, not a one-off mistake. Sweeping all 32 shapes
+     for axis-aligned boxes sharing a face plane with overlapping area found it
+     in 16 of them -- the diesel genset's skid rails share BOTH the fuel tank's
+     underside (y=0) and its end caps (x=+/-1.6), which is why it was reported
+     as glitching along the bottom; the CRAH's worst pair covers 3.0 square
+     units. Fixing sixteen builders by hand would leave the seventeenth to be
+     written next week, so the separation happens here, once, for anything the
+     library ever renders.
+
+     Method: find same-facing coplanar pairs with real overlap, and push the
+     SMALLER of the two a hair along that face's normal so it sits proud rather
+     than flush. Smaller-moves-outward is what keeps the result physically
+     sensible -- a skid rail ends up just below the tank it carries, which is
+     where a skid rail belongs. The offset is scaled to the model so it stays
+     sub-visible whether the subject is a 3-unit genset or a 0.2-unit connector,
+     and each mesh is moved at most once per axis so a part in several pairs
+     cannot drift. */
+  function separateCoplanar(THREE, root){
+    root.updateMatrixWorld(true);
+
+    const items = [];
+    root.traverse(function(n){
+      if (!n.isMesh || !n.geometry || n.geometry.type !== 'BoxGeometry') return;
+      /* Rotated boxes are skipped: their axis-aligned bounds are larger than
+         the box itself, so "coplanar" read off an AABB would be fiction. */
+      const e = new THREE.Euler().setFromQuaternion(n.getWorldQuaternion(new THREE.Quaternion()));
+      const aligned = [e.x, e.y, e.z].every(function(a){
+        const m = Math.abs(a) % (Math.PI / 2);
+        return m < 1e-4 || Math.abs(m - Math.PI / 2) < 1e-4;
+      });
+      if (!aligned) return;
+      const bb = new THREE.Box3().setFromObject(n);
+      const sz = bb.getSize(new THREE.Vector3());
+      items.push({ mesh: n, bb: bb, vol: sz.x * sz.y * sz.z });
+    });
+    if (items.length < 2) return;
+
+    const whole = new THREE.Box3().setFromObject(root).getSize(new THREE.Vector3());
+    const eps = Math.max(whole.x, whole.y, whole.z) * 0.0012;
+    const moved = new Set();
+
+    function faceOverlap(A, B, ax){
+      const o = [0, 1, 2].filter(function(i){ return i !== ax; });
+      const k = ['x', 'y', 'z'];
+      const w = Math.min(A.max[k[o[0]]], B.max[k[o[0]]]) - Math.max(A.min[k[o[0]]], B.min[k[o[0]]]);
+      const h = Math.min(A.max[k[o[1]]], B.max[k[o[1]]]) - Math.max(A.min[k[o[1]]], B.min[k[o[1]]]);
+      return (w > 1e-4 && h > 1e-4) ? w * h : 0;
+    }
+
+    const AX = ['x', 'y', 'z'];
+    const delta = new THREE.Vector3();
+    for (let i = 0; i < items.length; i++){
+      for (let j = i + 1; j < items.length; j++){
+        const A = items[i], B = items[j];
+        for (let ax = 0; ax < 3; ax++){
+          const k = AX[ax];
+          for (let sideI = 0; sideI < 2; sideI++){
+            const side = sideI ? 'max' : 'min';
+            if (Math.abs(A.bb[side][k] - B.bb[side][k]) > 1e-4) continue;
+            /* 0.01 square units filters out incidental contact between small
+               trim pieces, where the fight is a pixel or two and the nudge
+               would cost more than it fixes. */
+            if (faceOverlap(A.bb, B.bb, ax) < 0.01) continue;
+
+            const small = A.vol <= B.vol ? A : B;
+            const tag = small.mesh.uuid + ':' + k;
+            if (moved.has(tag)) continue;
+            moved.add(tag);
+
+            /* Outward along this face's normal: min faces point negative. */
+            delta.set(0, 0, 0);
+            delta[k] = side === 'min' ? -eps : eps;
+            const p = small.mesh.getWorldPosition(new THREE.Vector3()).add(delta);
+            small.mesh.parent.worldToLocal(p);
+            small.mesh.position.copy(p);
+            small.mesh.updateMatrixWorld(true);
+            small.bb.setFromObject(small.mesh);
+          }
+        }
+      }
+    }
+  }
+
+
   /* Per-shape opening camera angle. The default (phi 1.15) looks in from a bit
      above the horizon, which suits upright equipment but reduces a broad flat
      object to a line -- a tilted PV module was almost invisible until the
@@ -2305,6 +2395,7 @@
       fill.position.set(-4,2,-3); scene.add(fill);
 
       const model = build(THREE);
+      separateCoplanar(THREE, model);
       scene.add(model);
       addSurfaceDetail(THREE, model);
 
