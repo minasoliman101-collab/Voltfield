@@ -646,7 +646,7 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
 .ctaband-in{max-width:var(--shell);margin:0 auto;padding:34px 34px;display:flex;
   justify-content:space-between;align-items:center;gap:26px;flex-wrap:wrap;
   background:var(--sunk);border:1px solid var(--line);border-radius:var(--r-xl)}
-.ctaband h3{font-size:23px;letter-spacing:-.025em;color:var(--ink)}
+.ctaband h2,.ctaband h3{font-size:23px;letter-spacing:-.025em;color:var(--ink)}
 .ctaband p{color:var(--slate);font-size:15.5px;margin-top:9px;max-width:520px;
   line-height:1.6}
 .ctabtn{background:var(--solid-bg);color:var(--solid-fg);border:0;padding:13px 26px;
