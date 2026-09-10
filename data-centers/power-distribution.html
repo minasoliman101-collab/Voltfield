@@ -198,7 +198,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </table>
   </div>
 
-  <div class="callout"><b>Circuit sizing here is governed by the continuous-load rule.</b> A circuit supplying a continuous load must be sized at 125&nbsp;% of that load &mdash; equivalently, usable capacity is 80&nbsp;% of the breaker rating (NEC 210.19 and 210.20). Data center load is continuous by any reasonable reading, so a 20&nbsp;A circuit provides 16&nbsp;A of usable capacity. Budgeting racks against the nameplate rating rather than the derated figure is the single most common capacity error at this layer. The <a class="inline" href="/voltfield-rack-builder.html">Rack Elevation Builder</a> applies the derate for you.</div>
+  <div class="callout"><b>Circuit sizing here is governed by the continuous-load rule.</b> A circuit supplying a continuous load must be sized at 125% of that load &mdash; equivalently, usable capacity is 80% of the breaker rating (NEC 210.19 and 210.20). Data center load is continuous by any reasonable reading, so a 20&nbsp;A circuit provides 16&nbsp;A of usable capacity. Budgeting racks against the nameplate rating rather than the derated figure is the single most common capacity error at this layer. The <a class="inline" href="/voltfield-rack-builder.html">Rack Elevation Builder</a> applies the derate for you.</div>
 
   <h2>Specifications that decide the selection</h2>
   <div class="specgrid">
@@ -223,7 +223,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2>Selection criteria in practice</h2>
   <ul>
     <li><b>Design for change, not just for load.</b> This layer will be modified repeatedly over the building's life. Busway and modular PDUs cost more up front and far less on every subsequent change.</li>
-    <li><b>Apply the 80&nbsp;% derate before counting racks.</b> It is the difference between a plan that works and one that trips under load.</li>
+    <li><b>Apply the 80% derate before counting racks.</b> It is the difference between a plan that works and one that trips under load.</li>
     <li><b>Decide what you need to measure, before buying.</b> Retrofitting branch-level metering is expensive; specifying it at purchase is comparatively cheap.</li>
     <li><b>Trace both paths on dual-corded equipment.</b> A/B redundancy only holds if the two feeds are genuinely independent all the way back to their sources.</li>
     <li><b>Check enclosure depth against the deepest thing you will ever fit.</b> Depth constrains cable management and airflow, and it is fixed once the rows are set.</li>
@@ -253,8 +253,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <h2>Common questions</h2>
-  <h3>Why is usable circuit capacity only 80&nbsp;% of the breaker rating?</h3>
-  <p>Because a circuit supplying a continuous load must be sized at 125&nbsp;% of that load, which is the same constraint expressed the other way round. Data center load is continuous, so a 20&nbsp;A circuit yields 16&nbsp;A usable. Planning against the nameplate figure instead is how racks end up tripping under normal operation.</p>
+  <h3>Why is usable circuit capacity only 80% of the breaker rating?</h3>
+  <p>Because a circuit supplying a continuous load must be sized at 125% of that load, which is the same constraint expressed the other way round. Data center load is continuous, so a 20&nbsp;A circuit yields 16&nbsp;A usable. Planning against the nameplate figure instead is how racks end up tripping under normal operation.</p>
 
   <h3>Is busway worth it over cable feeders?</h3>
   <p>If loads will move or grow, generally yes. The premium buys the ability to add a tap-off without pulling new cable or de-energizing anything. On a fixed layout that will never change, feeders are cheaper and perfectly adequate &mdash; but that layout is rarer than people expect.</p>

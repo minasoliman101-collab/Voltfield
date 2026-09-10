@@ -33,7 +33,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
  ]},
  {"@type":"CollectionPage","name":"Battery Storage Power Conversion Systems","description":"Central, modular, grid-forming and behind-the-meter power conversion systems for battery storage, with ratings, standards and indicative lead times.","url":"https://voltfield.org/battery-storage/pcs-inverters.html","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
-   {"@type":"Question","name":"What is the practical difference between grid-following and grid-forming?","acceptedAnswer":{"@type":"Answer","text":"A grid-following converter measures the grid’s voltage and frequency and injects current in step with it — it cannot operate without a reference. A grid-forming converter creates that reference itself, behaving more like a synchronous generator. On a strong grid the difference is largely invisible; on a weak one, or during a black start, it is the difference between a plant that works and one that cannot energize."}},
+   {"@type":"Question","name":"What is the practical difference between grid-following and grid-forming?","acceptedAnswer":{"@type":"Answer","text":"A grid-following converter measures the grid's voltage and frequency and injects current in step with it — it cannot operate without a reference. A grid-forming converter creates that reference itself, behaving more like a synchronous generator. On a strong grid the difference is largely invisible; on a weak one, or during a black start, it is the difference between a plant that works and one that cannot energize."}},
    {"@type":"Question","name":"Should the PCS and the battery come from the same vendor?","acceptedAnswer":{"@type":"Answer","text":"Integrated supply removes an interface and usually shortens commissioning, which is a real benefit. The cost is a longer commercial dependency: augmentation, spares and warranty all route through one party. Split supply preserves options but puts the controls integration risk on you, and that risk is not small."}},
    {"@type":"Question","name":"How much oversizing is sensible?","acceptedAnswer":{"@type":"Answer","text":"Very little on the converter itself, but the derating at site conditions must be understood first — what looks like oversizing is often just the honest rating. Where genuine headroom is worth buying is in reactive capability, because interconnection requirements have tightened repeatedly and retrofitting that capability is expensive."}},
    {"@type":"Question","name":"Does a PCS need its own protection, or does the MV switchgear cover it?","acceptedAnswer":{"@type":"Answer","text":"Both, and they must be coordinated. Converters current-limit rather than delivering a large fault contribution, so protection schemes designed around synchronous sources may not see a fault at all. This is a study question, and it needs to be settled before the switchgear relay settings are finalized."}}
@@ -210,7 +210,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="speccard">
       <h3>DC window versus battery voltage</h3>
-      <p>The converter&rsquo;s usable DC voltage range must cover the battery&rsquo;s full state-of-charge range at the design C-rate. A mismatch quietly strands capacity at the ends of the range.</p>
+      <p>The converter's usable DC voltage range must cover the battery's full state-of-charge range at the design C-rate. A mismatch quietly strands capacity at the ends of the range.</p>
     </div>
   </div>
 
@@ -219,7 +219,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li><b>Start from the interconnection agreement, not the datasheet.</b> The required grid support functions, fault ride-through profile and reactive range are specified by the utility or ISO. Those requirements select the converter; the battery selection follows.</li>
     <li><b>Match the PCS platform to the study assumptions.</b> Interconnection studies are run on a specific converter model. Substituting a different platform after the study can require rework, and rework means re-queuing in some markets.</li>
     <li><b>Weigh central versus modular against your service model.</b> Central skids are cheaper per kilowatt and simpler to interface. Modular converters degrade gracefully and can be repaired without a crane. The right answer depends on site access and who does the maintenance.</li>
-    <li><b>Confirm the harmonic and short-circuit contribution.</b> Converter-based sources behave nothing like synchronous machines under fault. Protection coordination on the collector system depends on the converter&rsquo;s actual current contribution and duration.</li>
+    <li><b>Confirm the harmonic and short-circuit contribution.</b> Converter-based sources behave nothing like synchronous machines under fault. Protection coordination on the collector system depends on the converter's actual current contribution and duration.</li>
     <li><b>Establish the firmware governance early.</b> If certification is tied to firmware, then patching, cybersecurity requirements and certification maintenance are the same conversation. Agree who authorizes updates before commissioning.</li>
   </ul>
 
@@ -246,7 +246,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <h2>Common questions</h2>
   <h3>What is the practical difference between grid-following and grid-forming?</h3>
-  <p>A grid-following converter measures the grid&rsquo;s voltage and frequency and injects current in step with it &mdash; it cannot operate without a reference. A grid-forming converter creates that reference itself, behaving more like a synchronous generator. On a strong grid the difference is largely invisible; on a weak one, or during a black start, it is the difference between a plant that works and one that cannot energize.</p>
+  <p>A grid-following converter measures the grid's voltage and frequency and injects current in step with it &mdash; it cannot operate without a reference. A grid-forming converter creates that reference itself, behaving more like a synchronous generator. On a strong grid the difference is largely invisible; on a weak one, or during a black start, it is the difference between a plant that works and one that cannot energize.</p>
 
   <h3>Should the PCS and the battery come from the same vendor?</h3>
   <p>Integrated supply removes an interface and usually shortens commissioning, which is a real benefit. The cost is a longer commercial dependency: augmentation, spares and warranty all route through one party. Split supply preserves options but puts the controls integration risk on you, and that risk is not small.</p>
