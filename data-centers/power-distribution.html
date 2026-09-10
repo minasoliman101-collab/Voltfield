@@ -34,7 +34,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
  {"@type":"CollectionPage","name":"Data Center Power Distribution","description":"Busway, floor PDU and RPP, static transfer switches, rack PDUs and enclosures, with configurations, the NEC continuous-load derate and indicative lead times.","url":"https://voltfield.org/data-centers/power-distribution.html","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"Why is usable circuit capacity only 80 percent of the breaker rating?","acceptedAnswer":{"@type":"Answer","text":"A circuit supplying a continuous load must be sized at 125 percent of that load, which is the same constraint stated the other way round. Data center load is continuous, so a 20 A circuit yields 16 A usable. Planning against the nameplate rating is how racks trip under normal operation."}},
-   {"@type":"Question","name":"Is busway worth it over cable feeders?","acceptedAnswer":{"@type":"Answer","text":"If loads will move or grow, generally yes. The premium buys the ability to add a tap-off without pulling new cable or de-energising anything. On a genuinely fixed layout, feeders are cheaper and adequate."}},
+   {"@type":"Question","name":"Is busway worth it over cable feeders?","acceptedAnswer":{"@type":"Answer","text":"If loads will move or grow, generally yes. The premium buys the ability to add a tap-off without pulling new cable or de-energizing anything. On a genuinely fixed layout, feeders are cheaper and adequate."}},
    {"@type":"Question","name":"What is the difference between a floor PDU and an RPP?","acceptedAnswer":{"@type":"Answer","text":"A floor PDU usually includes a transformer, stepping distribution voltage down and splitting it into branch circuits. A remote power panel distributes at the incoming voltage with no transformer, so where no step-down is needed it is smaller, cheaper and produces less heat."}},
    {"@type":"Question","name":"Do I need switched rack PDUs?","acceptedAnswer":{"@type":"Answer","text":"Only if you need to power-cycle individual outlets remotely. Switched units cost meaningfully more and add a failure point. Monitored-but-not-switched is sufficient for most sites, which mainly want visibility rather than remote control."}}
  ]}
@@ -166,7 +166,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <tbody>
       <tr>
         <td><b>Busway (Feeder / Plug-In)</b>A rigid run you tap anywhere along its length. Replaces many parallel cable feeders where loads move.</td>
-        <td class="num">225&ndash;4,000 A<br>Feeder or plug-in<br>Copper or aluminium</td>
+        <td class="num">225&ndash;4,000 A<br>Feeder or plug-in<br>Copper or aluminum</td>
         <td><span class="lt short">~16 weeks</span></td>
         <td class="num">UL 857</td>
       </tr>
@@ -183,7 +183,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <td class="num">UL 1008</td>
       </tr>
       <tr>
-        <td><b>Rack PDUs</b>The last metre. Metered versions are how you find out what a rack really draws.</td>
+        <td><b>Rack PDUs</b>The last meter. Metered versions are how you find out what a rack really draws.</td>
         <td class="num">Metered / switched / monitored<br>208V / 240V / 415V<br>24&ndash;48 outlets</td>
         <td><span class="lt short">~8 weeks</span></td>
         <td class="num">UL 60950<br>UL 62368</td>
@@ -198,7 +198,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </table>
   </div>
 
-  <div class="callout"><b>Circuit sizing here is governed by the continuous-load rule.</b> A circuit supplying a continuous load must be sized at 125&nbsp;% of that load &mdash; equivalently, usable capacity is 80&nbsp;% of the breaker rating (NEC 210.19 and 210.20). Data centre load is continuous by any reasonable reading, so a 20&nbsp;A circuit provides 16&nbsp;A of usable capacity. Budgeting racks against the nameplate rating rather than the derated figure is the single most common capacity error at this layer. The <a class="inline" href="/voltfield-rack-builder.html">Rack Elevation Builder</a> applies the derate for you.</div>
+  <div class="callout"><b>Circuit sizing here is governed by the continuous-load rule.</b> A circuit supplying a continuous load must be sized at 125&nbsp;% of that load &mdash; equivalently, usable capacity is 80&nbsp;% of the breaker rating (NEC 210.19 and 210.20). Data center load is continuous by any reasonable reading, so a 20&nbsp;A circuit provides 16&nbsp;A of usable capacity. Budgeting racks against the nameplate rating rather than the derated figure is the single most common capacity error at this layer. The <a class="inline" href="/voltfield-rack-builder.html">Rack Elevation Builder</a> applies the derate for you.</div>
 
   <h2>Specifications that decide the selection</h2>
   <div class="specgrid">
@@ -254,10 +254,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <h2>Common questions</h2>
   <h3>Why is usable circuit capacity only 80&nbsp;% of the breaker rating?</h3>
-  <p>Because a circuit supplying a continuous load must be sized at 125&nbsp;% of that load, which is the same constraint expressed the other way round. Data centre load is continuous, so a 20&nbsp;A circuit yields 16&nbsp;A usable. Planning against the nameplate figure instead is how racks end up tripping under normal operation.</p>
+  <p>Because a circuit supplying a continuous load must be sized at 125&nbsp;% of that load, which is the same constraint expressed the other way round. Data center load is continuous, so a 20&nbsp;A circuit yields 16&nbsp;A usable. Planning against the nameplate figure instead is how racks end up tripping under normal operation.</p>
 
   <h3>Is busway worth it over cable feeders?</h3>
-  <p>If loads will move or grow, generally yes. The premium buys the ability to add a tap-off without pulling new cable or de-energising anything. On a fixed layout that will never change, feeders are cheaper and perfectly adequate &mdash; but that layout is rarer than people expect.</p>
+  <p>If loads will move or grow, generally yes. The premium buys the ability to add a tap-off without pulling new cable or de-energizing anything. On a fixed layout that will never change, feeders are cheaper and perfectly adequate &mdash; but that layout is rarer than people expect.</p>
 
   <h3>What is the practical difference between a PDU and an RPP?</h3>
   <p>A floor PDU usually includes a transformer, stepping distribution voltage down and splitting it into branch circuits. A remote power panel distributes at the incoming voltage with no transformer. If no step-down is needed, the RPP is smaller, cheaper and produces less heat.</p>

@@ -129,10 +129,10 @@ textarea#labelText{width:100%;min-height:120px;border:1px solid var(--line-dark)
  ]},
  {"@type":"WebApplication","name":"Part Identifier","url":"https://voltfield.org/voltfield-identify.html","applicationCategory":"EngineeringApplication","operatingSystem":"Any","description":"Identify electrical equipment from partial part numbers and markings.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
-   {"@type":"Question","name":"Can a part be identified from a photograph alone?","acceptedAnswer":{"@type":"Answer","text":"Sometimes, to family level. Case geometry, terminal arrangement and moulded markings are distinctive enough that an experienced eye can place many devices without a legible label. What a photograph generally cannot give you is the configuration — trip rating, accessories, interrupting rating — because those vary within a family that looks identical from outside."}},
+   {"@type":"Question","name":"Can a part be identified from a photograph alone?","acceptedAnswer":{"@type":"Answer","text":"Sometimes, to family level. Case geometry, terminal arrangement and molded markings are distinctive enough that an experienced eye can place many devices without a legible label. What a photograph generally cannot give you is the configuration — trip rating, accessories, interrupting rating — because those vary within a family that looks identical from outside."}},
    {"@type":"Question","name":"What if the nameplate is completely illegible?","acceptedAnswer":{"@type":"Answer","text":"Work from the physical evidence and the context. Frame dimensions, mounting arrangement, terminal type and the conductor sizes landing on it bound the rating considerably. The panel schedule, the original drawings, or the devices either side of it in a lineup often resolve the rest. This is slower than reading a label, but it is rarely a dead end."}},
-   {"@type":"Question","name":"Is the catalogue number the same as the part number?","acceptedAnswer":{"@type":"Answer","text":"Usually, but not always, and the distinction causes real confusion. Some manufacturers separate a catalogue number used for ordering from an internal part or model number stamped on the device, and resellers may add their own SKU on top. When they disagree, the number the manufacturer uses for ordering is the one that gets you the right part."}},
-   {"@type":"Question","name":"Does the date code matter?","acceptedAnswer":{"@type":"Answer","text":"It matters more than people expect. Long-running product families are revised repeatedly, and a revision can change accessory compatibility or the trip unit interface without changing the catalogue number. When ordering an accessory for an older device, the date code is often what determines whether it will fit."}}
+   {"@type":"Question","name":"Is the catalog number the same as the part number?","acceptedAnswer":{"@type":"Answer","text":"Usually, but not always, and the distinction causes real confusion. Some manufacturers separate a catalog number used for ordering from an internal part or model number stamped on the device, and resellers may add their own SKU on top. When they disagree, the number the manufacturer uses for ordering is the one that gets you the right part."}},
+   {"@type":"Question","name":"Does the date code matter?","acceptedAnswer":{"@type":"Answer","text":"It matters more than people expect. Long-running product families are revised repeatedly, and a revision can change accessory compatibility or the trip unit interface without changing the catalog number. When ordering an accessory for an older device, the date code is often what determines whether it will fit."}}
  ]}
 ]}
 </script></head>
@@ -226,7 +226,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="emptyres" id="resEmpty">Add a photo or type the label text, then hit <b>Identify part</b>. Results show replacement options, EOL alerts, BOM teardowns, and PCB routing.</div>
       <div id="results"></div>
     </div>
-    <div class="roadmap"><b>How this works &amp; what's next:</b> identification runs entirely in your browser — OCR reads the label, and the text is matched against 236 part families, 21 obsolete-platform records, and 22 OEM lines. Photos never leave your device. <b>Planned:</b> recognising bare-part photos with no label at all, expanding a parent assembly straight into its component BOM, and pre-filling the PCB Builder from a photographed board. None of that is live yet.</div>
+    <div class="roadmap"><b>How this works &amp; what's next:</b> identification runs entirely in your browser — OCR reads the label, and the text is matched against 236 part families, 21 obsolete-platform records, and 22 OEM lines. Photos never leave your device. <b>Planned:</b> recognizing bare-part photos with no label at all, expanding a parent assembly straight into its component BOM, and pre-filling the PCB Builder from a photographed board. None of that is live yet.</div>
   </div>
 </div>
 
@@ -234,7 +234,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="toolseo">
   <h2>Identifying an electrical part from what is printed on it</h2>
-  <p>The situation is nearly always the same: there is a device in front of you, it has some markings, and you need to know what it is before you can order another one. Sometimes the nameplate is complete. More often it is a partial catalogue number, a faded label, or a stamping that means something only to the manufacturer who applied it.</p>
+  <p>The situation is nearly always the same: there is a device in front of you, it has some markings, and you need to know what it is before you can order another one. Sometimes the nameplate is complete. More often it is a partial catalog number, a faded label, or a stamping that means something only to the manufacturer who applied it.</p>
   <p>This tool works from the markings you can actually read. Partial part numbers, manufacturer logos, frame stampings and rating plate fragments are all usable inputs &mdash; the aim is to narrow to a family and a likely configuration, which is generally enough to have a productive conversation with a manufacturer.</p>
 
   <h3>What the markings usually mean</h3>
@@ -243,9 +243,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h3>Where to find the markings</h3>
   <ul>
     <li><b>The rating plate</b> carries the electrical characteristics: voltage, current, interrupting rating, frequency, and the standards the device is listed to. This is the authoritative source when it is legible.</li>
-    <li><b>The catalogue number</b> is usually separate from the rating plate, often moulded or stamped into the case rather than printed, which is why it frequently survives when the label does not.</li>
+    <li><b>The catalog number</b> is usually separate from the rating plate, often molded or stamped into the case rather than printed, which is why it frequently survives when the label does not.</li>
     <li><b>A date code</b> narrows the platform generation, which matters when a family ran for decades across several revisions.</li>
-    <li><b>Case moulding and terminal arrangement</b> identify a family on their own when nothing legible remains. Frame proportions and lug configuration are genuinely diagnostic.</li>
+    <li><b>Case molding and terminal arrangement</b> identify a family on their own when nothing legible remains. Frame proportions and lug configuration are genuinely diagnostic.</li>
   </ul>
 
   <div class="note"><b>Photograph the device before removing it.</b> Markings are routinely destroyed during removal, and the orientation of a device in its enclosure &mdash; which way the line side faces, how the accessories are wired &mdash; is information you will want later and cannot recover afterwards. A photograph of the installation costs nothing and answers questions the part number does not.</div>
@@ -273,16 +273,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <h2>Common questions</h2>
   <h3>Can a part be identified from a photograph alone?</h3>
-  <p>Sometimes, to family level. Case geometry, terminal arrangement and moulded markings are distinctive enough that an experienced eye can place many devices without a legible label. What a photograph generally cannot give you is the configuration &mdash; trip rating, accessories, interrupting rating &mdash; because those vary within a family that looks identical from outside.</p>
+  <p>Sometimes, to family level. Case geometry, terminal arrangement and molded markings are distinctive enough that an experienced eye can place many devices without a legible label. What a photograph generally cannot give you is the configuration &mdash; trip rating, accessories, interrupting rating &mdash; because those vary within a family that looks identical from outside.</p>
 
   <h3>What if the nameplate is completely illegible?</h3>
   <p>Work from the physical evidence and the context. Frame dimensions, mounting arrangement, terminal type and the conductor sizes landing on it bound the rating considerably. The panel schedule, the original drawings, or the devices either side of it in a lineup often resolve the rest. This is slower than reading a label, but it is rarely a dead end.</p>
 
-  <h3>Is the catalogue number the same as the part number?</h3>
-  <p>Usually, but not always, and the distinction causes real confusion. Some manufacturers separate a catalogue number used for ordering from an internal part or model number stamped on the device, and resellers may add their own SKU on top. When they disagree, the number the manufacturer uses for ordering is the one that gets you the right part.</p>
+  <h3>Is the catalog number the same as the part number?</h3>
+  <p>Usually, but not always, and the distinction causes real confusion. Some manufacturers separate a catalog number used for ordering from an internal part or model number stamped on the device, and resellers may add their own SKU on top. When they disagree, the number the manufacturer uses for ordering is the one that gets you the right part.</p>
 
   <h3>Does the date code matter?</h3>
-  <p>It matters more than people expect. Long-running product families are revised repeatedly, and a revision can change accessory compatibility or the trip unit interface without changing the catalogue number. When ordering an accessory for an older device, the date code is often what determines whether it will fit.</p>
+  <p>It matters more than people expect. Long-running product families are revised repeatedly, and a revision can change accessory compatibility or the trip unit interface without changing the catalog number. When ordering an accessory for an older device, the date code is often what determines whether it will fit.</p>
 </div>
 
 

@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Transformer Inrush Current Calculator | Voltfield</title>
 <link rel="canonical" href="https://voltfield.org/calculators/inrush.html">
-<meta name="description" content="Estimate magnetizing inrush current on transformer energisation as a multiple of full-load amps, for upstream breaker and fuse selection. Free, no signup.">
+<meta name="description" content="Estimate magnetizing inrush current on transformer energization as a multiple of full-load amps, for upstream breaker and fuse selection. Free, no signup.">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Voltfield">
 <meta property="og:title" content="Transformer Inrush Current Calculator">
-<meta property="og:description" content="Estimate magnetizing inrush current on transformer energisation as a multiple of full-load amps, for upstream breaker and fuse selection. Free, no signup.">
+<meta property="og:description" content="Estimate magnetizing inrush current on transformer energization as a multiple of full-load amps, for upstream breaker and fuse selection. Free, no signup.">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="https://voltfield.org/social/social-engineering-calculators.jpg">
 <meta property="og:image:width" content="1200">
@@ -23,10 +23,10 @@
    {"@type":"ListItem","position":2,"name":"Calculators","item":"https://voltfield.org/engineering-calculators.html"},
    {"@type":"ListItem","position":3,"name":"Transformer Inrush Current Calculator","item":"https://voltfield.org/calculators/inrush.html"}
  ]},
- {"@type":"WebPage","name":"Transformer Inrush Current Calculator","description":"Estimate magnetizing inrush current on transformer energisation as a multiple of full-load amps, for upstream breaker and fuse selection. Free, no signup.","url":"https://voltfield.org/calculators/inrush.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebPage","name":"Transformer Inrush Current Calculator","description":"Estimate magnetizing inrush current on transformer energization as a multiple of full-load amps, for upstream breaker and fuse selection. Free, no signup.","url":"https://voltfield.org/calculators/inrush.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
-   {"@type":"Question","name":"What does the Transformer Inrush Current calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Energising a transformer draws a magnetizing inrush that is far above full-load current — commonly 8 to 12 times, decaying over several cycles. It is not a fault, but an upstream protective device cannot tell the difference unless it has been selected to ride through it. Getting this wrong produces a transformer that trips its own feeder breaker every time it is energised."}},
-   {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"The multiplier is an estimate, not a measurement. Actual inrush depends on residual core flux and the exact point on the voltage wave at which the switch closes, and worst-case energisation can exceed the typical figure. Magnitude also decays over several cycles, so a single peak number does not describe the whole event."}}
+   {"@type":"Question","name":"What does the Transformer Inrush Current calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Energizing a transformer draws a magnetizing inrush that is far above full-load current — commonly 8 to 12 times, decaying over several cycles. It is not a fault, but an upstream protective device cannot tell the difference unless it has been selected to ride through it. Getting this wrong produces a transformer that trips its own feeder breaker every time it is energized."}},
+   {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"The multiplier is an estimate, not a measurement. Actual inrush depends on residual core flux and the exact point on the voltage wave at which the switch closes, and worst-case energization can exceed the typical figure. Magnitude also decays over several cycles, so a single peak number does not describe the whole event."}}
  ]}
 ]}
 </script>
@@ -100,7 +100,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="artban-in">
     <div class="eyebrow">Free Calculator &middot; No Signup</div>
     <h1>Transformer Inrush Current Calculator</h1>
-    <p class="dek">Energising a transformer draws a magnetizing inrush that is far above full-load current — commonly 8 to 12 times, decaying over several cycles. It is not a fault, but an upstream protective device cannot tell the difference unless it has been selected to ride through it. Getting this wrong produces a transformer that trips its own feeder breaker every time it is energised.</p>
+    <p class="dek">Energizing a transformer draws a magnetizing inrush that is far above full-load current — commonly 8 to 12 times, decaying over several cycles. It is not a fault, but an upstream protective device cannot tell the difference unless it has been selected to ride through it. Getting this wrong produces a transformer that trips its own feeder breaker every time it is energized.</p>
   </div>
 </section>
 
@@ -121,12 +121,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="formula">FLA = kVA &times; 1000 / (1.732 &times; V)  [three-phase]<br>Peak inrush &asymp; M &times; FLA</div>
     <div class="tblwrap"><table class="famtable"><tbody>
       <tr><td class="num"><b>kVA</b></td><td>Transformer nameplate rating</td></tr>
-      <tr><td class="num"><b>V</b></td><td>Line-to-line voltage on the side being energised</td></tr>
+      <tr><td class="num"><b>V</b></td><td>Line-to-line voltage on the side being energized</td></tr>
       <tr><td class="num"><b>M</b></td><td>Inrush multiplier, typically 8 to 12 for modern units</td></tr>
     </tbody></table></div>
 
   <h2>Worked example</h2>
-  <p>A 1000 kVA transformer energised from a 480 V bus:</p>
+  <p>A 1000 kVA transformer energized from a 480 V bus:</p>
   <p>FLA = 1000 &times; 1000 / (1.732 &times; 480) = 1,203 A</p>
   <p>At a multiplier of 10, peak inrush is roughly 12,000 A for the first cycle.</p>
   <p>The upstream device must not see that as a fault, which usually means an instantaneous setting above it or a deliberately delayed curve.</p>
@@ -135,11 +135,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p>IEEE C57.12.00 covers transformer requirements. Overcurrent protection limits for transformers are set by NEC Article 450, which permits higher primary protection specifically to allow for inrush.</p>
 
   <h2>What this calculation does not account for</h2>
-  <p>The multiplier is an estimate, not a measurement. Actual inrush depends on residual core flux and the exact point on the voltage wave at which the switch closes, and worst-case energisation can exceed the typical figure. Magnitude also decays over several cycles, so a single peak number does not describe the whole event.</p>
+  <p>The multiplier is an estimate, not a measurement. Actual inrush depends on residual core flux and the exact point on the voltage wave at which the switch closes, and worst-case energization can exceed the typical figure. Magnitude also decays over several cycles, so a single peak number does not describe the whole event.</p>
     <div class="callout"><b>This is a screening estimate.</b> It is here to get you to the right order of magnitude and the right conversation — not to replace a stamped calculation by a qualified engineer.</div>
 
   <h2>Common mistakes</h2>
-  <p>Setting instantaneous protection from full-load current alone. Assuming inrush is the same on every energisation when it depends on residual flux from the last de-energisation. Applying a low multiplier to a modern low-loss core, which tends to have higher inrush than older designs.</p>
+  <p>Setting instantaneous protection from full-load current alone. Assuming inrush is the same on every energization when it depends on residual flux from the last de-energization. Applying a low multiplier to a modern low-loss core, which tends to have higher inrush than older designs.</p>
 
   <h2>Related</h2>
     <div class="rel">
@@ -154,13 +154,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h2 id="prov-h">Scope &amp; sources</h2>
     <dl>
       <dt>What this covers</dt>
-      <dd>Estimate magnetizing inrush current on transformer energisation as a multiple of full-load amps, for upstream breaker and fuse selection. Free, no signup.</dd>
+      <dd>Estimate magnetizing inrush current on transformer energization as a multiple of full-load amps, for upstream breaker and fuse selection. Free, no signup.</dd>
       <dt>Based on</dt>
       <dd><ul><li>IEEE C57.12.00 covers transformer requirements. Overcurrent protection limits for transformers are set by NEC Article 450, which permits higher primary protection specifically to allow for inrush.</li></ul></dd>
       <dt>What it is not</dt>
-      <dd>The multiplier is an estimate, not a measurement. Actual inrush depends on residual core flux and the exact point on the voltage wave at which the switch closes, and worst-case energisation can exceed the typical figure. Magnitude also decays over several cycles, so a single peak number does not describe the whole event. This is a screening estimate, not a stamped calculation.</dd>
+      <dd>The multiplier is an estimate, not a measurement. Actual inrush depends on residual core flux and the exact point on the voltage wave at which the switch closes, and worst-case energization can exceed the typical figure. Magnitude also decays over several cycles, so a single peak number does not describe the whole event. This is a screening estimate, not a stamped calculation.</dd>
       <dt>Provenance</dt>
-      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labelled as estimates. Worked examples are arithmetic you can reproduce against the <a href="/engineering-calculators.html#inrush">live calculator</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labeled as estimates. Worked examples are arithmetic you can reproduce against the <a href="/engineering-calculators.html#inrush">live calculator</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
     </dl>
   </aside>
 

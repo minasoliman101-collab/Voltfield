@@ -36,7 +36,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    {"@type":"Question","name":"At what rack density does air cooling stop working?","acceptedAnswer":{"@type":"Answer","text":"There is no hard line, but around 30 to 40 kW per rack moving sufficient air becomes impractical, both in airflow required and fan power to move it. Above that, heat is generally picked up in liquid closer to the source."}},
    {"@type":"Question","name":"What does a coolant distribution unit actually do?","acceptedAnswer":{"@type":"Answer","text":"It separates two water loops. Facility water is comparatively dirty and variable, while the technology loop reaching server cold plates needs tightly controlled chemistry, temperature and pressure. The CDU is the controlled interface between them and is usually where liquid-path redundancy is implemented."}},
    {"@type":"Question","name":"Does data center cooling need to survive a utility outage?","acceptedAnswer":{"@type":"Answer","text":"Yes, and it is frequently under-provisioned. IT load does not stop during transfer to generator, so heat production does not either. Chilled water thermal mass buys some time, but pumps and CDUs generally need backed-up power alongside the IT load."}},
-   {"@type":"Question","name":"Is a lower PUE always the right target?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. PUE is a ratio and can be improved by measures that raise total energy or trade water for electricity. It is a useful comparison metric rather than an objective function, and optimising it directly can produce decisions that are worse overall."}}
+   {"@type":"Question","name":"Is a lower PUE always the right target?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. PUE is a ratio and can be improved by measures that raise total energy or trade water for electricity. It is a useful comparison metric rather than an objective function, and optimizing it directly can produce decisions that are worse overall."}}
  ]}
 ]}
 </script>
@@ -192,7 +192,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </table>
   </div>
 
-  <div class="callout"><b>Refrigerant selection is now a procurement constraint, not just an engineering one.</b> Phase-down schedules are progressively restricting higher-GWP refrigerants, which affects both what can be bought and what can be serviced over a fifteen-year life. Confirm the refrigerant against the regulatory position in your jurisdiction before standardising a platform. Lead times shown are indicative modelled positions for North America, reviewed monthly, published with their basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>.</div>
+  <div class="callout"><b>Refrigerant selection is now a procurement constraint, not just an engineering one.</b> Phase-down schedules are progressively restricting higher-GWP refrigerants, which affects both what can be bought and what can be serviced over a fifteen-year life. Confirm the refrigerant against the regulatory position in your jurisdiction before standardizing a platform. Lead times shown are indicative modeled positions for North America, reviewed monthly, published with their basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>.</div>
 
   <h2>Specifications that decide the selection</h2>
   <div class="specgrid">
@@ -218,7 +218,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <ul>
     <li><b>Start from the electrical load, not a target PUE.</b> Cooling capacity follows IT load almost one for one. Efficiency targets are an outcome of the design, not an input to sizing.</li>
     <li><b>Establish whether liquid is required now or later.</b> Retrofitting a technology loop into a live room is materially harder than provisioning the pipework during construction, even if the CDUs come later.</li>
-    <li><b>Check the free-cooling hours for the actual site.</b> Economiser hours vary enormously by climate and drive the operating cost far more than nameplate efficiency does.</li>
+    <li><b>Check the free-cooling hours for the actual site.</b> Economizer hours vary enormously by climate and drive the operating cost far more than nameplate efficiency does.</li>
     <li><b>Confirm water availability and discharge rules.</b> Adiabatic and evaporative equipment buys capacity on design days by consuming water, which is increasingly constrained or reportable.</li>
     <li><b>Do not neglect the blanking panels.</b> An open rack unit lets hot exhaust recirculate to the intake above it. It is the cheapest thermal fix available and the one most often skipped.</li>
   </ul>
@@ -255,7 +255,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p>Yes, and this is frequently under-provisioned. IT load does not stop during transfer to generator, so heat production does not either. Chilled water thermal mass buys some time, but pumps and CDUs generally need to be on backed-up power alongside the IT load itself.</p>
 
   <h3>Is a lower PUE always the right target?</h3>
-  <p>Not necessarily. PUE is a ratio, and it can be improved by measures that raise total energy or that trade water for electricity. It is a useful comparison metric, not an objective function &mdash; optimising it directly can produce decisions that are worse overall.</p>
+  <p>Not necessarily. PUE is a ratio, and it can be improved by measures that raise total energy or that trade water for electricity. It is a useful comparison metric, not an objective function &mdash; optimizing it directly can produce decisions that are worse overall.</p>
 
 
   <h2 id="famref-block">Family reference pages</h2>

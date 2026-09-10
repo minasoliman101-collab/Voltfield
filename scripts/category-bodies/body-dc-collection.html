@@ -1,6 +1,6 @@
   <h2>The DC side is where a solar plant quietly loses money</h2>
   <p>Between the modules and the inverter sits the DC collection system: source-circuit fusing, combiners, recombiners, and the cable that ties them together. None of it generates anything. All of it can lose energy, start fires, and fail in ways that are difficult to find on a site covering several hundred acres.</p>
-  <p>The move to 1500&nbsp;V systems reshaped this layer. Longer strings mean fewer parallel circuits, fewer combiners and less copper for the same plant &mdash; a genuine cost reduction. It also means higher voltages present at more places on the site, tighter insulation and clearance requirements, and DC arc-fault behaviour that is unforgiving of poor terminations.</p>
+  <p>The move to 1500&nbsp;V systems reshaped this layer. Longer strings mean fewer parallel circuits, fewer combiners and less copper for the same plant &mdash; a genuine cost reduction. It also means higher voltages present at more places on the site, tighter insulation and clearance requirements, and DC arc-fault behavior that is unforgiving of poor terminations.</p>
 
   <div class="tblwrap">
   <table class="famtable">
@@ -28,7 +28,7 @@
       </tr>
       <tr>
         <td><b>Rapid Shutdown &amp; MLPE</b>Module-level shutdown required on buildings. Also provides per-module monitoring.</td>
-        <td class="num">Per-module or per-string<br>Rooftop mandatory<br>PLC or wireless signalling</td>
+        <td class="num">Per-module or per-string<br>Rooftop mandatory<br>PLC or wireless signaling</td>
         <td><span class="lt short">~12 weeks</span></td>
         <td class="num">NEC 690.12<br>UL 1741<br>SunSpec</td>
       </tr>
@@ -36,7 +36,7 @@
   </table>
   </div>
 
-  <div class="callout"><b>Connectors from different manufacturers should not be mated, even when they fit.</b> &ldquo;MC4-compatible&rdquo; describes the geometry, not the contact metallurgy or the sealing tolerance. Cross-mated pairs are a recognised cause of high-resistance joints, and a high-resistance DC joint in an array is a fire risk, not just a loss. Standardise on one connector family per site and record it. Lead times shown are indicative modelled positions for North America, reviewed monthly, published with their basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>.</div>
+  <div class="callout"><b>Connectors from different manufacturers should not be mated, even when they fit.</b> &ldquo;MC4-compatible&rdquo; describes the geometry, not the contact metallurgy or the sealing tolerance. Cross-mated pairs are a recognized cause of high-resistance joints, and a high-resistance DC joint in an array is a fire risk, not just a loss. Standardize on one connector family per site and record it. Lead times shown are indicative modeled positions for North America, reviewed monthly, published with their basis on the <a class="inline" href="/lead-time-index.html">Equipment Lead-Time Index</a>.</div>
 
   <h2>Specifications that decide the selection</h2>
   <div class="specgrid">
@@ -61,7 +61,7 @@
   <h2>Selection criteria in practice</h2>
   <ul>
     <li><b>Size the string on the record low temperature.</b> Open-circuit voltage at the coldest expected condition sets the maximum string length. Designing on annual average temperature is a straightforward route to exceeding the 1500&nbsp;V rating on a winter morning.</li>
-    <li><b>Standardise the connector family site-wide and enforce it.</b> This is a specification and quality-control matter, not a preference. Mixed connectors on a site are difficult to police later and produce faults years after commissioning.</li>
+    <li><b>Standardize the connector family site-wide and enforce it.</b> This is a specification and quality-control matter, not a preference. Mixed connectors on a site are difficult to police later and produce faults years after commissioning.</li>
     <li><b>Specify monitoring granularity deliberately.</b> String-level data changes how the plant is operated; array-level data only tells you something is wrong. The incremental cost is small against the energy recovered by finding faults quickly.</li>
     <li><b>Confirm rapid shutdown scope from the code edition in force.</b> NEC 690.12 requirements have changed between editions and are enforced locally. What the AHJ requires governs, and it affects whether module-level electronics are needed at all.</li>
     <li><b>Torque and inspect terminations, then document it.</b> The overwhelming majority of DC faults originate at terminations. A torque record is cheap insurance and is frequently the only evidence available when a fault is investigated years later.</li>

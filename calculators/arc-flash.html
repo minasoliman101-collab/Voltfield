@@ -25,8 +25,8 @@
  ]},
  {"@type":"WebPage","name":"Arc-Flash Incident Energy Calculator","description":"Estimate arc-flash incident energy and the arc-flash boundary using the Lee method, for a first-pass check before a full IEEE 1584 study. Free, no signup.","url":"https://voltfield.org/calculators/arc-flash.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
-   {"@type":"Question","name":"What does the Arc-Flash Incident Energy calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Incident energy is the thermal energy an arc would deliver to a surface at a working distance, in calories per square centimetre. It determines the PPE category and the arc-flash boundary that must appear on the equipment label. Two inputs dominate it, and only one is obvious: available fault current, and how long the upstream device takes to clear. Halving clearing time roughly halves incident energy, which is why protection settings matter more to arc-flash exposure than almost anything else."}},
-   {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"Lee is a theoretical open-air model and is conservative below 600 V, where IEEE 1584's empirical equations fit measured data far better. It does not model arc-in-a-box enclosure effects, electrode configuration or arc gap. This is a screening estimate only. Labelling and PPE selection require a full study by a qualified engineer."}}
+   {"@type":"Question","name":"What does the Arc-Flash Incident Energy calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Incident energy is the thermal energy an arc would deliver to a surface at a working distance, in calories per square centimeter. It determines the PPE category and the arc-flash boundary that must appear on the equipment label. Two inputs dominate it, and only one is obvious: available fault current, and how long the upstream device takes to clear. Halving clearing time roughly halves incident energy, which is why protection settings matter more to arc-flash exposure than almost anything else."}},
+   {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"Lee is a theoretical open-air model and is conservative below 600 V, where IEEE 1584's empirical equations fit measured data far better. It does not model arc-in-a-box enclosure effects, electrode configuration or arc gap. This is a screening estimate only. Labeling and PPE selection require a full study by a qualified engineer."}}
  ]}
 ]}
 </script>
@@ -100,7 +100,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="artban-in">
     <div class="eyebrow">Free Calculator &middot; No Signup</div>
     <h1>Arc-Flash Incident Energy Calculator</h1>
-    <p class="dek">Incident energy is the thermal energy an arc would deliver to a surface at a working distance, in calories per square centimetre. It determines the PPE category and the arc-flash boundary that must appear on the equipment label. Two inputs dominate it, and only one is obvious: available fault current, and how long the upstream device takes to clear. Halving clearing time roughly halves incident energy, which is why protection settings matter more to arc-flash exposure than almost anything else.</p>
+    <p class="dek">Incident energy is the thermal energy an arc would deliver to a surface at a working distance, in calories per square centimeter. It determines the PPE category and the arc-flash boundary that must appear on the equipment label. Two inputs dominate it, and only one is obvious: available fault current, and how long the upstream device takes to clear. Halving clearing time roughly halves incident energy, which is why protection settings matter more to arc-flash exposure than almost anything else.</p>
   </div>
 </section>
 
@@ -130,14 +130,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p>Doubling the clearing time from 0.1 s to 0.2 s does not double incident energy — it roughly quadruples it, because energy scales with the square of time. A breaker setting change that shaves 100 ms off clearing can move a task from one PPE category to a lower one without touching the hardware.</p>
 
   <h2>Which standard governs this</h2>
-  <p>The theoretical Lee equation is documented in IEEE 1584, which is the governing standard for arc-flash calculation. NFPA 70E sets the workplace requirements: risk assessment, approach boundaries, PPE, and equipment labelling.</p>
+  <p>The theoretical Lee equation is documented in IEEE 1584, which is the governing standard for arc-flash calculation. NFPA 70E sets the workplace requirements: risk assessment, approach boundaries, PPE, and equipment labeling.</p>
 
   <h2>What this calculation does not account for</h2>
-  <p>Lee is a theoretical open-air model and is conservative below 600 V, where IEEE 1584's empirical equations fit measured data far better. It does not model arc-in-a-box enclosure effects, electrode configuration or arc gap. This is a screening estimate only. Labelling and PPE selection require a full study by a qualified engineer.</p>
+  <p>Lee is a theoretical open-air model and is conservative below 600 V, where IEEE 1584's empirical equations fit measured data far better. It does not model arc-in-a-box enclosure effects, electrode configuration or arc gap. This is a screening estimate only. Labeling and PPE selection require a full study by a qualified engineer.</p>
     <div class="callout"><b>This is a screening estimate.</b> It is here to get you to the right order of magnitude and the right conversation — not to replace a stamped calculation by a qualified engineer.</div>
 
   <h2>Common mistakes</h2>
-  <p>Treating a screening number as a labelling result. Using a clearing time from the device curve without accounting for the arcing current being lower than bolted fault current, which can put the device on a slower part of its curve. Assuming higher fault current always means higher incident energy — sometimes it clears the device faster and lowers it.</p>
+  <p>Treating a screening number as a labeling result. Using a clearing time from the device curve without accounting for the arcing current being lower than bolted fault current, which can put the device on a slower part of its curve. Assuming higher fault current always means higher incident energy — sometimes it clears the device faster and lowers it.</p>
 
   <h2>Related</h2>
     <div class="rel">
@@ -154,11 +154,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>What this covers</dt>
       <dd>Estimate arc-flash incident energy and the arc-flash boundary using the Lee method, for a first-pass check before a full IEEE 1584 study. Free, no signup.</dd>
       <dt>Based on</dt>
-      <dd><ul><li>The theoretical Lee equation is documented in IEEE 1584, which is the governing standard for arc-flash calculation. NFPA 70E sets the workplace requirements: risk assessment, approach boundaries, PPE, and equipment labelling.</li></ul></dd>
+      <dd><ul><li>The theoretical Lee equation is documented in IEEE 1584, which is the governing standard for arc-flash calculation. NFPA 70E sets the workplace requirements: risk assessment, approach boundaries, PPE, and equipment labeling.</li></ul></dd>
       <dt>What it is not</dt>
-      <dd>Lee is a theoretical open-air model and is conservative below 600 V, where IEEE 1584's empirical equations fit measured data far better. It does not model arc-in-a-box enclosure effects, electrode configuration or arc gap. This is a screening estimate only. Labelling and PPE selection require a full study by a qualified engineer. This is a screening estimate, not a stamped calculation.</dd>
+      <dd>Lee is a theoretical open-air model and is conservative below 600 V, where IEEE 1584's empirical equations fit measured data far better. It does not model arc-in-a-box enclosure effects, electrode configuration or arc gap. This is a screening estimate only. Labeling and PPE selection require a full study by a qualified engineer. This is a screening estimate, not a stamped calculation.</dd>
       <dt>Provenance</dt>
-      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labelled as estimates. Worked examples are arithmetic you can reproduce against the <a href="/engineering-calculators.html#arc-flash">live calculator</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labeled as estimates. Worked examples are arithmetic you can reproduce against the <a href="/engineering-calculators.html#arc-flash">live calculator</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
     </dl>
   </aside>
 

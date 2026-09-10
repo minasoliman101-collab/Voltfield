@@ -110,7 +110,7 @@ table.breaks tr.cur td{background:var(--tint-signal);font-weight:600;color:var(-
  ]},
  {"@type":"WebApplication","name":"PCB Builder","url":"https://voltfield.org/voltfield-pcb.html","applicationCategory":"EngineeringApplication","operatingSystem":"Any","description":"Place through-hole components and learn what each one does.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
-   {"@type":"Question","name":"How do I read a resistor’s colour bands?","acceptedAnswer":{"@type":"Answer","text":"The first two bands are digits, the third is a multiplier, and a fourth band gives tolerance. Five-band resistors add a third digit for precision parts. Read from the end where the bands are grouped closest together — the tolerance band sits alone at the other end, which is what tells you which way to read it."}},
+   {"@type":"Question","name":"How do I read a resistor’s color bands?","acceptedAnswer":{"@type":"Answer","text":"The first two bands are digits, the third is a multiplier, and a fourth band gives tolerance. Five-band resistors add a third digit for precision parts. Read from the end where the bands are grouped closest together — the tolerance band sits alone at the other end, which is what tells you which way to read it."}},
    {"@type":"Question","name":"Which components are polarised?","acceptedAnswer":{"@type":"Answer","text":"Electrolytic capacitors, diodes, LEDs, transistors and integrated circuits all have a defined orientation. Resistors and ceramic capacitors do not. Each polarised part carries a physical marking — a stripe, a band, a flat, or a notch — and that marking exists precisely because getting it wrong usually destroys the part."}},
    {"@type":"Question","name":"What is the notch on an integrated circuit for?","acceptedAnswer":{"@type":"Answer","text":"It identifies pin 1. Pins are numbered counter-clockwise from the notch when viewed from above, and every pin assignment in the datasheet is relative to it. A DIP package is otherwise symmetrical, so without the notch there would be no way to orient it."}},
    {"@type":"Question","name":"Does the size of a capacitor tell you its value?","acceptedAnswer":{"@type":"Answer","text":"Only loosely, and only within one technology. A physically larger electrolytic generally holds more charge or withstands a higher voltage, but a ceramic and an electrolytic of similar size can differ by orders of magnitude in capacitance. The printed marking is the value; the size mostly tells you the voltage rating and the family."}}
@@ -182,7 +182,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="secthead">Geometry</div>
       <div class="frow"><label for="pName">Board name / silkscreen label</label><input type="text" id="pName" maxlength="24" value="VF-BOARD-01"></div>
       <div class="frow"><label id="seglbl-shape">Shape</label><div class="seg" role="group" aria-labelledby="seglbl-shape" data-k="shape"><button data-v="rect">Rect</button><button data-v="rounded">Rounded</button><button data-v="circle">Circle</button></div></div>
-      <div class="frow"><label>Width × height (mm)</label><div class="dims"><input type="number" id="pW" min="10" max="500" value="100" aria-label="Board width in millimetres"><span>×</span><input type="number" id="pH" min="10" max="500" value="80" aria-label="Board height in millimetres"></div></div>
+      <div class="frow"><label>Width × height (mm)</label><div class="dims"><input type="number" id="pW" min="10" max="500" value="100" aria-label="Board width in millimeters"><span>×</span><input type="number" id="pH" min="10" max="500" value="80" aria-label="Board height in millimeters"></div></div>
       <div class="frow"><label for="pThk">Board thickness</label><select id="pThk"><option>0.8 mm</option><option>1.0 mm</option><option selected>1.6 mm</option><option>2.0 mm</option><option>2.4 mm</option></select></div>
       <div class="secthead">Stack-up &amp; material</div>
       <div class="frow"><label id="seglbl-layers">Layers</label><div class="seg" role="group" aria-labelledby="seglbl-layers" data-k="layers"><button data-v="1">1</button><button data-v="2">2</button><button data-v="4">4</button><button data-v="6">6</button><button data-v="8">8</button></div></div>
@@ -251,12 +251,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="toolseo">
   <h2>What the components on a board actually do</h2>
-  <p>A populated circuit board is a small number of component families repeated in different values and arrangements. Learning to recognise them by sight &mdash; and knowing what each one is there for &mdash; is most of what separates reading a board from staring at one.</p>
-  <p>This builder places real through-hole parts so the physical form and the function stay attached to each other. A resistor looks like a resistor, its colour bands encode its value, and its leads bend down through the board to pads on the other side, because that is how the part is actually mounted.</p>
+  <p>A populated circuit board is a small number of component families repeated in different values and arrangements. Learning to recognize them by sight &mdash; and knowing what each one is there for &mdash; is most of what separates reading a board from staring at one.</p>
+  <p>This builder places real through-hole parts so the physical form and the function stay attached to each other. A resistor looks like a resistor, its color bands encode its value, and its leads bend down through the board to pads on the other side, because that is how the part is actually mounted.</p>
 
   <h3>The families worth knowing on sight</h3>
   <ul>
-    <li><b>Resistors</b> limit current and set voltages. The colour bands are the value; the body is otherwise featureless, which is exactly why the bands exist.</li>
+    <li><b>Resistors</b> limit current and set voltages. The color bands are the value; the body is otherwise featureless, which is exactly why the bands exist.</li>
     <li><b>Capacitors</b> store charge. Ceramic discs are small, non-polarised and used for decoupling. Electrolytic cans are larger, polarised, and marked with a stripe &mdash; installing one backwards is a classic and destructive mistake.</li>
     <li><b>Diodes</b> conduct one way. The band marks the cathode, and it is the only thing on the part telling you which way round it goes.</li>
     <li><b>LEDs</b> are diodes that emit light. The flat on the flange marks the cathode; the leads are the other cue before the part is trimmed.</li>
@@ -280,7 +280,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <h2>Common questions</h2>
-  <h3>How do I read a resistor&rsquo;s colour bands?</h3>
+  <h3>How do I read a resistor&rsquo;s color bands?</h3>
   <p>The first two bands are digits, the third is a multiplier, and a fourth band gives tolerance. Five-band resistors add a third digit for precision parts. Read from the end where the bands are grouped closest together &mdash; the tolerance band sits alone at the other end, which is what tells you which way to read it.</p>
 
   <h3>Which components are polarised?</h3>
