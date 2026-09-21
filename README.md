@@ -1,4 +1,6 @@
-# VOLTFIELD Supply Co. — Website (static site)
+# Voltfield — Website (static site)
+
+> **Positioning (Sept 2026).** Voltfield is a free, independent engineering reference for the electrical side of data center, solar and battery-storage projects: calculators, guides and practice tools. Nothing on the site is for sale, quoted or supplied through it. Sections of this README below that describe a parts storefront — Quick Order, the quote list, RFQ submissions, Sales@/RFQ@ inboxes — document features that have since been removed and are kept only as history.
 
 A self‑contained, **static‑first website** — plain HTML, CSS, and JavaScript, with no build step for the site itself. Every page still runs entirely in the browser and works offline once loaded. The one exception is the Practice Sandbox's optional anonymous leaderboard, which uses a single Netlify Function + Netlify Blobs (see `netlify/functions/sandbox-leaderboard.mjs`) — everything else on the site has no server or database at all, and the leaderboard fails silently (the feature just hides itself) if that function isn't deployed.
 
@@ -86,7 +88,7 @@ Every option above supports a custom domain (e.g. `parts.yourcompany.com`) with 
 ## 5. Important notes before sharing publicly
 - **No secrets or keys.** Everything is client‑side; there is nothing sensitive to leak.
 - **The catalog data is illustrative/modeled** for demonstration — SKUs are generated from a taxonomy, and pricing/lead times are indicative market ranges, not live inventory or firm quotes. Product images are original, AI‑generated illustrations of each part type (not vendor photography); the exact item shipped may differ. Review this before putting it in front of customers.
-- **Business model / sourcing framing.** Every part in the catalog — including the families tagged as sourced via Grainger, Uline, Graybar, or MSC Industrial — is presented as sold and fulfilled **directly by Voltfield**, priced by Voltfield (sourcing cost + markup), not as a mirrored third-party storefront or live data integration. The `f.d`/`f.d0` field is an internal sourcing-channel tag only; it drives the "Sourcing Channel" facet and the Insights sourcing-mix chart, both explicitly labeled as such. Catalog scope/counts are modeled on each distributor's publicly published product range. Keep this framing (no "live catalog," "mirrored," or "integration" language) anywhere new copy references these vendors — see `voltfield-suppliers.html`'s footer disclaimer for the canonical wording.
+- **Reference framing, not a storefront.** Nothing in the catalog is sold, quoted or fulfilled by Voltfield. Distributor names (Grainger, Uline, Graybar, MSC Industrial) appear only because their publicly published product ranges inform catalog scope; the `f.d`/`f.d0` field is an internal tag that drives the "Sourcing Channel" facet and the Insights chart, both labeled as such. Keep new copy consistent with the site footer: "Nothing on this site is for sale and nothing is sourced, quoted or supplied through it."
 - **News links** on the home page point to third‑party publishers.
 
 ### ⚠️ SharePoint / OneDrive is **not** a website host
