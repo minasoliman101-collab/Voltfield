@@ -191,6 +191,7 @@ Sizing to usable energy and ordering that as nameplate. Ignoring degradation, th
 /guide-bess-augmentation.html :: BESS Augmentation Explained
 /guide-bess-augmentation.html :: BESS Augmentation Explained
 /guide-bess-fire-safety-nfpa-855.html :: BESS Fire Safety: NFPA 855
+/guide-bess-c-rate.html :: BESS C-Rate Explained
 /guide-ups-sizing.html :: How to Size a UPS
 /calculators/solar-string.html :: Solar String Sizing Calculator
 /calculators/generator-runtime.html :: Generator Runtime Calculator
