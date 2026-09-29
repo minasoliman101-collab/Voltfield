@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Arc-Flash Incident Energy Calculator | Voltfield</title>
 <link rel="canonical" href="https://voltfield.org/calculators/arc-flash.html">
-<meta name="description" content="Estimate arc-flash incident energy and the arc-flash boundary using the Lee method, for a first-pass check before a full IEEE 1584 study. Free, no signup.">
+<meta name="description" content="Estimate arc-flash incident energy and boundary with the Lee and Doughty equations, as a first pass before a full IEEE 1584 study. Free, no signup.">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Voltfield">
 <meta property="og:title" content="Arc-Flash Incident Energy Calculator">
-<meta property="og:description" content="Estimate arc-flash incident energy and the arc-flash boundary using the Lee method, for a first-pass check before a full IEEE 1584 study. Free, no signup.">
+<meta property="og:description" content="Estimate arc-flash incident energy and boundary with the Lee and Doughty equations, as a first pass before a full IEEE 1584 study. Free, no signup.">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="https://voltfield.org/social/social-engineering-calculators.jpg">
 <meta property="og:image:width" content="1200">
@@ -23,10 +23,10 @@
    {"@type":"ListItem","position":2,"name":"Calculators","item":"https://voltfield.org/engineering-calculators.html"},
    {"@type":"ListItem","position":3,"name":"Arc-Flash Incident Energy Calculator","item":"https://voltfield.org/calculators/arc-flash.html"}
  ]},
- {"@type":"WebPage","name":"Arc-Flash Incident Energy Calculator","description":"Estimate arc-flash incident energy and the arc-flash boundary using the Lee method, for a first-pass check before a full IEEE 1584 study. Free, no signup.","url":"https://voltfield.org/calculators/arc-flash.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebPage","name":"Arc-Flash Incident Energy Calculator","description":"Estimate arc-flash incident energy and boundary with the Lee and Doughty equations, as a first pass before a full IEEE 1584 study. Free, no signup.","url":"https://voltfield.org/calculators/arc-flash.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What does the Arc-Flash Incident Energy calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Incident energy is the thermal energy an arc would deliver to a surface at a working distance, in calories per square centimeter. It determines the PPE category and the arc-flash boundary that must appear on the equipment label. Two inputs dominate it, and only one is obvious: available fault current, and how long the upstream device takes to clear. Halving clearing time roughly halves incident energy, which is why protection settings matter more to arc-flash exposure than almost anything else."}},
-   {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"Lee is a theoretical open-air model and is conservative below 600 V, where IEEE 1584's empirical equations fit measured data far better. It does not model arc-in-a-box enclosure effects, electrode configuration or arc gap. This is a screening estimate only. Labeling and PPE selection require a full study by a qualified engineer."}}
+   {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"The Lee equation is a theoretical open-air model and tends to be conservative. The Doughty equations used at 600 V and below are empirical, and valid only within the 16–50 kA range they were fitted to. Neither models electrode configuration, arc gap or enclosure size the way the IEEE 1584 arcing-current method does. This is a screening estimate only. Labeling and PPE selection require a full study by a qualified engineer."}}
  ]}
 ]}
 </script>
@@ -118,22 +118,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
   <h2>The formula</h2>
-    <div class="formula">The Lee method models an open-air arc. Incident energy rises with available fault current, with the square of arcing time, and falls with the square of working distance.</div>
+    <div class="formula">Above 600 V the Lee equation models an open-air arc; at 600 V and below the Doughty equations cover open-air and arc-in-a-box cases. In all of them, incident energy is directly proportional to arcing time, rises with available fault current, and falls steeply with working distance.</div>
     <div class="tblwrap"><table class="famtable"><tbody>
       <tr><td class="num"><b>Bolted fault current</b></td><td>From the fault-current calculation at that point</td></tr>
       <tr><td class="num"><b>Clearing time</b></td><td>How long the upstream protective device takes to interrupt, in seconds</td></tr>
       <tr><td class="num"><b>Working distance</b></td><td>Distance from the arc to the worker's face and chest, commonly 18 inches for LV gear</td></tr>
-      <tr><td class="num"><b>System voltage</b></td><td>The Lee method applies above 600 V; below that, IEEE 1584 empirical models apply</td></tr>
+      <tr><td class="num"><b>System voltage</b></td><td>Above 600 V the calculator uses the Lee equation; at 600 V and below, the Doughty equations. Both are from NFPA 70E Annex D</td></tr>
     </tbody></table></div>
 
   <h2>Worked example</h2>
-  <p>Doubling the clearing time from 0.1 s to 0.2 s does not double incident energy — it roughly quadruples it, because energy scales with the square of time. A breaker setting change that shaves 100 ms off clearing can move a task from one PPE category to a lower one without touching the hardware.</p>
+  <p>At 480 V in an enclosure, with 22.6 kA bolted fault current and an 18 in working distance, the Doughty equation gives 4.3 cal/cm&sup2; at 0.1 s clearing and 8.5 cal/cm&sup2; at 0.2 s. Double the time, double the energy: incident energy is directly proportional to arcing time. The arc-flash boundary grows less, from about 3.6 ft to 5.7 ft, because energy falls off steeply with distance. A breaker setting change that shaves 100 ms off clearing can move a task into a lower PPE category without touching the hardware.</p>
 
   <h2>Which standard governs this</h2>
-  <p>The theoretical Lee equation is documented in IEEE 1584, which is the governing standard for arc-flash calculation. NFPA 70E sets the workplace requirements: risk assessment, approach boundaries, PPE, and equipment labeling.</p>
+  <p>The Lee and Doughty equations are documented in NFPA 70E Annex D. IEEE 1584 is the governing standard for a full arc-flash calculation. NFPA 70E sets the workplace requirements: risk assessment, approach boundaries, PPE, and equipment labeling.</p>
 
   <h2>What this calculation does not account for</h2>
-  <p>Lee is a theoretical open-air model and is conservative below 600 V, where IEEE 1584's empirical equations fit measured data far better. It does not model arc-in-a-box enclosure effects, electrode configuration or arc gap. This is a screening estimate only. Labeling and PPE selection require a full study by a qualified engineer.</p>
+  <p>The Lee equation is a theoretical open-air model and tends to be conservative. The Doughty equations used at 600 V and below are empirical, and valid only within the 16&ndash;50 kA range they were fitted to. Neither models electrode configuration, arc gap or enclosure size the way the IEEE 1584 arcing-current method does. This is a screening estimate only. Labeling and PPE selection require a full study by a qualified engineer.</p>
     <div class="callout"><b>This is a screening estimate.</b> It is here to get you to the right order of magnitude and the right conversation — not to replace a stamped calculation by a qualified engineer.</div>
 
   <h2>Common mistakes</h2>
@@ -146,6 +146,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/glossary.html#incident-energy">Incident energy, defined</a>
       <a href="/glossary.html#nfpa-70e">NFPA 70E, defined</a>
       <a data-rel="xlink" href="/guide-arc-flash-boundary-basics.html">Arc-Flash Boundary Basics</a>
+      <a data-rel="xlink" href="/guide-arc-flash-ppe-categories.html">Arc-Flash PPE Categories Explained</a>
       <a data-rel="xlink" href="/guide-switchgear-compartments.html">Metal-Clad vs. Metal-Enclosed Switchgear</a>
       <a data-rel="xlink" href="/calculators/fault-current.html">Available Fault Current Calculator</a>
       <a href="/engineering-calculators.html">All 20 calculators</a>
@@ -155,11 +156,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h2 id="prov-h">Scope &amp; sources</h2>
     <dl>
       <dt>What this covers</dt>
-      <dd>Estimate arc-flash incident energy and the arc-flash boundary using the Lee method, for a first-pass check before a full IEEE 1584 study. Free, no signup.</dd>
+      <dd>Estimate arc-flash incident energy and boundary with the Lee and Doughty equations, as a first pass before a full IEEE 1584 study. Free, no signup.</dd>
       <dt>Based on</dt>
-      <dd><ul><li>The theoretical Lee equation is documented in IEEE 1584, which is the governing standard for arc-flash calculation. NFPA 70E sets the workplace requirements: risk assessment, approach boundaries, PPE, and equipment labeling.</li></ul></dd>
+      <dd><ul><li>The Lee and Doughty equations are documented in NFPA 70E Annex D. IEEE 1584 is the governing standard for a full arc-flash calculation. NFPA 70E sets the workplace requirements: risk assessment, approach boundaries, PPE, and equipment labeling.</li></ul></dd>
       <dt>What it is not</dt>
-      <dd>Lee is a theoretical open-air model and is conservative below 600 V, where IEEE 1584's empirical equations fit measured data far better. It does not model arc-in-a-box enclosure effects, electrode configuration or arc gap. This is a screening estimate only. Labeling and PPE selection require a full study by a qualified engineer. This is a screening estimate, not a stamped calculation.</dd>
+      <dd>The Lee equation is a theoretical open-air model and tends to be conservative. The Doughty equations used at 600 V and below are empirical, and valid only within the 16&ndash;50 kA range they were fitted to. Neither models electrode configuration, arc gap or enclosure size the way the IEEE 1584 arcing-current method does. This is a screening estimate only. Labeling and PPE selection require a full study by a qualified engineer. This is a screening estimate, not a stamped calculation.</dd>
       <dt>Provenance</dt>
       <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labeled as estimates. Worked examples are arithmetic you can reproduce against the <a href="/engineering-calculators.html#arc-flash">live calculator</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
     </dl>

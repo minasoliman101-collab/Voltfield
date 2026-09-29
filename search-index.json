@@ -1,5 +1,6 @@
 {
   "items": [
+    {"title": "Arc-Flash PPE Categories Explained", "url": "guide-arc-flash-ppe-categories.html", "category": "Guide", "description": "NFPA 70E PPE category and incident energy methods, category 1-4 arc ratings, table limits and labels."},
     {"title": "How to Size a Standby Generator", "url": "guide-generator-sizing.html", "category": "Guide", "description": "Ratings, running load, step-load acceptance, motor starting, derating and fuel, with a data center example."},
     {"title": "Harmonics & IEEE 519 Explained", "url": "guide-harmonics-ieee-519.html", "category": "Guide", "description": "THD vs. TDD, transformer heating, capacitor resonance, IEEE 519 limits and mitigation."},
     {"title": "BESS C-Rate Explained", "url": "guide-bess-c-rate.html", "category": "Guide", "description": "C-rate from MW and MWh, duration, why the basis matters, and how degradation raises it."},
