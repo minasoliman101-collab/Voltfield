@@ -134,7 +134,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <tr><td><b>2N</b></td><td>Two complete, independent UPS systems, each able to carry the full load alone. Normally each carries about half.</td></tr>
     <tr><td><b>2(N+1)</b></td><td>Two independent systems, each with its own spare module.</td></tr>
   </table>
-  <p>Redundancy is about the whole path, not just the UPS. An N+1 UPS feeding a single distribution path is still a single point of failure downstream. The <a class="inline" href="data-centers.html#redundancy">data center power page</a> covers how redundancy carries through the rest of the system.</p>
+  <p>Redundancy is about the whole path, not just the UPS. An N+1 UPS feeding a single distribution path is still a single point of failure downstream. <a class="inline" href="guide-n-plus-1-vs-2n-redundancy.html">N+1 vs. 2N Redundancy Explained</a> covers what each scheme survives and what it costs.</p>
 
   <h2>Step 5: Size the battery for runtime</h2>
   <p>Runtime only has to cover the gap to the generators, with margin. Standby generators for emergency systems are commonly required to pick up load within 10 seconds (NFPA 110, Type 10). The battery has to cover that, a possible failed first start, and the time to transfer. Specifications commonly land between about 5 and 15 minutes at full load. Sizing for a long outage is usually the wrong instinct: that's the generator's job, and every extra minute is battery you replace on a cycle.</p>

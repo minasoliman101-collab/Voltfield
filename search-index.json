@@ -1,5 +1,6 @@
 {
   "items": [
+    {"title": "N+1 vs. 2N Redundancy Explained", "url": "guide-n-plus-1-vs-2n-redundancy.html", "category": "Guide", "description": "What N+1, 2N, 2(N+1) and distributed redundancy survive, what each costs, and how they map to tiers."},
     {"title": "Transformer Impedance (%Z) Explained", "url": "guide-transformer-impedance.html", "category": "Guide", "description": "How %Z sets fault current, voltage regulation and motor-starting dip, the nameplate tolerance, and how to choose a value."},
     {"title": "How to Size a UPS", "url": "guide-ups-sizing.html", "category": "Guide", "description": "Design load, kW and kVA, loading limit, N+1 and 2N redundancy, and battery runtime, with a worked example."},
     {"title": "kW vs. kVA Explained", "url": "guide-kw-vs-kva.html", "category": "Guide", "description": "Real vs. apparent power, converting kW to kVA and amps, and how power factor sets transformer, generator and UPS sizing."},

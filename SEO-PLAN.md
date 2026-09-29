@@ -60,6 +60,7 @@ Descriptions over 160 characters on `calculators/bess-sizing.html` and `data-cen
 | kW vs kVA / convert kW to kVA / kVA to amps | learn | `guide-kw-vs-kva.html` **(new)** |
 | how to size a UPS / UPS sizing / UPS battery runtime | learn | `guide-ups-sizing.html` **(new)**. `data-centers/backup-power.html` is the equipment reference and links to it, so the two do not compete. |
 | transformer impedance / percent impedance / %Z fault current | learn | `guide-transformer-impedance.html` **(new)** |
+| N+1 vs 2N / data center redundancy / 2N+1 | learn | `guide-n-plus-1-vs-2n-redundancy.html` **(new)** |
 | power factor correction calculator | tool | `calculators/power-factor.html` |
 | available fault current calculator | tool | `calculators/fault-current.html` |
 | arc flash calculator / incident energy | tool | `calculators/arc-flash.html` |
@@ -96,7 +97,7 @@ Descriptions over 160 characters on `calculators/bess-sizing.html` and `data-cen
 ### Content gaps, in priority order (validate volume first)
 1. ~~**UPS sizing**~~ Done: `guide-ups-sizing.html` (Sept 2026).
 2. ~~**Transformer impedance (%Z) explained**~~ Done: `guide-transformer-impedance.html` (Sept 2026).
-3. **N+1 vs 2N redundancy**. It currently lives inside `data-centers.html`, and a dedicated page would target the query directly.
+3. ~~**N+1 vs 2N redundancy**~~ Done: `guide-n-plus-1-vs-2n-redundancy.html` (Sept 2026). `data-centers.html` keeps its summary and links to it.
 4. **BESS C-rate explained**.
 5. **NEC 3% / 5% voltage drop rule**. Consider an FAQ block on `calculators/voltage-drop.html` rather than a new page.
 
