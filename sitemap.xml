@@ -247,6 +247,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/guide-fully-rated-vs-series-rated.html</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/guide-generator-sizing.html</loc>
     <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>

@@ -1,5 +1,6 @@
 {
   "items": [
+    {"title": "Fully Rated vs. Series Rated Breakers", "url": "guide-fully-rated-vs-series-rated.html", "category": "Guide", "description": "Series combination ratings, NEC rules, the motor limit, selectivity conflict, and AIC vs. SCCR."},
     {"title": "Ground-Fault Protection Explained", "url": "guide-ground-fault-protection.html", "category": "Guide", "description": "NEC 230.95 GFP: why arcing faults evade overcurrent protection, settings, sensing and coordination."},
     {"title": "415 V vs. 480 V Data Center Distribution", "url": "guide-415v-vs-480v-distribution.html", "category": "Guide", "description": "240 V to the server without PDU transformers: losses, power per circuit, fault current and neutrals."},
     {"title": "Arc-Flash PPE Categories Explained", "url": "guide-arc-flash-ppe-categories.html", "category": "Guide", "description": "NFPA 70E PPE category and incident energy methods, category 1-4 arc ratings, table limits and labels."},
