@@ -1,5 +1,6 @@
 {
   "items": [
+    {"title": "Grid-Forming vs. Grid-Following Inverters", "url": "guide-grid-forming-vs-grid-following.html", "category": "Guide", "description": "GFL vs. GFM control, short-circuit ratio and weak grids, black start and fault current."},
     {"title": "UPS Topologies: Double Conversion vs. Eco Mode", "url": "guide-ups-topologies.html", "category": "Guide", "description": "VFI, VI and VFD classes, double conversion vs. eco mode, and transfer tolerance."},
     {"title": "The 80% Rule & Continuous Loads", "url": "guide-continuous-load-80-percent-rule.html", "category": "Guide", "description": "Continuous loads, the NEC 125% rule, the two conductor checks, and 100%-rated breakers."},
     {"title": "Cable Ampacity Derating Explained", "url": "guide-cable-ampacity-derating.html", "category": "Guide", "description": "NEC 310.15 ambient correction and conductor-count adjustment, and the 75°C terminal cap."},

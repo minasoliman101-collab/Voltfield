@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>Grid-Forming vs. Grid-Following Inverters | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-grid-forming-vs-grid-following.html">
+<meta name="description" content="Grid-forming vs. grid-following inverters explained: control modes, short-circuit ratio and weak grids, black start, fault current limits, and what GFM costs.">
+<meta name="keywords" content="grid forming vs grid following, grid forming inverter, grid following inverter, short circuit ratio weak grid, BESS grid forming, IEEE 2800, inverter based resources, black start battery">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Grid-Forming vs. Grid-Following Inverters">
+<meta property="og:description" content="How the two control modes differ, how to tell when a site needs grid-forming, and what it costs.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-guide-grid-forming-vs-grid-following.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-guide-grid-forming-vs-grid-following.jpg">
+<meta name="twitter:title" content="Grid-Forming vs. Grid-Following Inverters">
+<meta name="twitter:description" content="How the two control modes differ, how to tell when a site needs grid-forming, and what it costs.">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://voltfield.org/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://voltfield.org/guides.html"}, {"@type": "ListItem", "position": 3, "name": "Grid-Forming vs. Grid-Following Inverters", "item": "https://voltfield.org/guide-grid-forming-vs-grid-following.html"}]}, {"@type": "Article", "headline": "Grid-Forming vs. Grid-Following Inverters: Control, Weak Grids and What GFM Costs", "description": "Grid-forming vs. grid-following inverters explained: control modes, short-circuit ratio and weak grids, black start, fault current limits, and what GFM costs.", "image": "https://voltfield.org/social/social-guide-grid-forming-vs-grid-following.jpg", "author": {"@type": "Organization", "name": "Voltfield Editorial Team", "url": "https://voltfield.org/methodology.html"}, "publisher": {"@type": "Organization", "name": "Voltfield"}, "datePublished": "2026-09-29T00:00:00-05:00", "dateModified": "2026-09-29T00:00:00-05:00", "url": "https://voltfield.org/guide-grid-forming-vs-grid-following.html"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the difference between grid-forming and grid-following inverters?", "acceptedAnswer": {"@type": "Answer", "text": "A grid-following inverter tracks an existing grid voltage with a phase-locked loop and injects current in step with it. A grid-forming inverter holds its own internal voltage and frequency, so it responds to disturbances immediately and can operate where there’s no other source, including islands and black start."}}, {"@type": "Question", "name": "When is a grid considered weak?", "acceptedAnswer": {"@type": "Answer", "text": "A common first screen is the short-circuit ratio: short-circuit MVA at the point of interconnection divided by plant MW. Grids with an SCR below about 3 are commonly treated as weak, where grid-following controls can struggle."}}, {"@type": "Question", "name": "Can a grid-forming inverter black start a grid?", "acceptedAnswer": {"@type": "Answer", "text": "It can, if it is designed, sized and permitted to. Black start needs a source that sets its own voltage and frequency, which grid-following inverters can’t do, plus enough energy and current capability to energize the network."}}, {"@type": "Question", "name": "Do grid-forming inverters provide fault current like generators?", "acceptedAnswer": {"@type": "Answer", "text": "No. Inverters can supply only a small multiple of their rated current, far less than a synchronous generator, whichever control mode they use. Protection that depends on high fault current has to be checked."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="voltfield-eol.html"><b>Obsolete &amp; end-of-life</b><em>What replaced a discontinued platform</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">Grid-Forming vs. Grid-Following</span></nav>
+    <div class="eyebrow">Battery Storage</div>
+    <h1>Grid-Forming vs. Grid-Following Inverters</h1>
+    <p class="dek">Almost every inverter on the grid today follows a voltage that something else creates. As spinning generators retire, more inverters have to create that voltage themselves. Here is what separates the two control modes, how to tell when a site needs grid-forming, and what it costs.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published September 29, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+  </div>
+</section>
+<div class="artwrap">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <p>Battery storage, solar and wind connect to the grid through inverters, called <b>inverter-based resources (IBRs)</b>. How an inverter is controlled decides how it behaves when the grid is disturbed. There are two families:</p>
+  <table class="reftable">
+    <tr><th scope="col">Grid-following</th><th scope="col">Grid-forming</th></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Behaves like</td></tr>
+    <tr><td>A controlled current source</td><td>A voltage source behind an impedance</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Needs a grid to follow</td></tr>
+    <tr><td>Yes: it tracks the grid&rsquo;s voltage angle and frequency with a phase-locked loop</td><td>No: it sets its own voltage and frequency</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">On a disturbance</td></tr>
+    <tr><td>Responds after measuring it</td><td>Responds immediately, as the voltage it holds pushes back</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Weak grids</td></tr>
+    <tr><td>Can become unstable</td><td>Can help stabilize them</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Islands and black start</td></tr>
+    <tr><td>Cannot form an island</td><td>Can, if designed and permitted to</td></tr>
+  </table>
+
+  <h2>Grid-following</h2>
+  <p>A grid-following inverter measures the grid voltage with a phase-locked loop (PLL) and injects current in step with it. It&rsquo;s a mature, well-understood approach, and it&rsquo;s how nearly all solar and battery inverters have operated. Modern units still provide grid support, such as ride-through, volt-VAR and frequency response, under IEEE 1547-2018 and UL 1741 SB for distribution-connected resources, and IEEE 2800 for transmission-connected ones. But all of that depends on a stable voltage being there to follow.</p>
+
+  <h2>Grid-forming</h2>
+  <p>A grid-forming inverter holds an internal voltage of its own, with a magnitude and angle it controls, typically using droop or virtual-synchronous-machine control. When the grid voltage or frequency moves, the difference between the grid and the inverter&rsquo;s internal voltage drives a response straight away, much as a synchronous generator&rsquo;s rotor does. That gives the grid something grid-following inverters can&rsquo;t: a fast, inherent resistance to change, sometimes described as synthetic inertia, and the ability to hold up voltage where there&rsquo;s nothing else to follow.</p>
+
+  <h2>How weak is the grid? Short-circuit ratio</h2>
+  <p>The usual first screen is the <b>short-circuit ratio (SCR)</b>: the short-circuit capacity at the point of interconnection divided by the plant&rsquo;s rating.</p>
+  <div class="formula">SCR = short-circuit MVA at the point of interconnection &divide; plant MW</div>
+  <p>A point of interconnection with 500 MVA of short-circuit capacity gives an SCR of 5 for a 100 MW plant, but only 2.5 for a 200 MW plant. Grids with an SCR below about 3 are commonly treated as weak. There, grid-following controls can struggle, because the plant&rsquo;s own current visibly moves the voltage its PLL is trying to track. That&rsquo;s where grid-forming control, or additional studies and equipment, comes in. The same short-circuit capacity idea underlies the <a class="inline" href="guide-transformer-impedance.html">transformer impedance guide</a>, applied here at the transmission level.</p>
+
+  <h2>Where grid-forming matters</h2>
+  <ul>
+    <li><b>Weak interconnections,</b> including remote renewable zones and long radial lines.</li>
+    <li><b>Microgrids and islanded operation,</b> including campus microgrids, where there may be no other source to set voltage and frequency.</li>
+    <li><b>Black start,</b> restarting a network from nothing, which only a source that forms its own voltage can do.</li>
+    <li><b>Grids losing synchronous generation,</b> where system operators are beginning to require or reward grid-forming capability on new battery projects.</li>
+  </ul>
+
+  <h2>What grid-forming costs</h2>
+  <ul>
+    <li><b>Headroom.</b> Responding to a disturbance means delivering power or current the plant wasn&rsquo;t already producing. That takes margin in the inverter rating, and energy in the battery.</li>
+    <li><b>Limited fault current.</b> Inverters can deliver only a small multiple of their rated current at most, far less than the several-times-rated current a synchronous generator supplies in a fault. Protection schemes that rely on high fault current need checking, which the <a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">short-circuit study guide</a> covers.</li>
+    <li><b>Studies.</b> Grid-forming behavior depends on control tuning and interactions with nearby equipment. It&rsquo;s typically verified with electromagnetic-transient (EMT) simulation rather than only the simpler positive-sequence models used for grid-following plants.</li>
+    <li><b>Evolving requirements.</b> Grid-forming specifications differ between system operators and are still being written, so the exact functions required, and how they&rsquo;re tested, are a project-specific question.</li>
+  </ul>
+  <div class="callout"><b>Batteries are the natural fit.</b> A grid-forming response needs energy available in both directions at a moment&rsquo;s notice. A battery can provide that. A solar plant at full output has nothing extra to give upward unless it&rsquo;s deliberately curtailed. That&rsquo;s why most grid-forming deployments so far have been battery projects.</div>
+
+  <h2>Common mistakes</h2>
+  <ul>
+    <li><b>Treating grid-forming as a firmware toggle.</b> It needs rating headroom, energy, tuning and studies.</li>
+    <li><b>Assuming inverter-based plants supply fault current like generators.</b> They don&rsquo;t, and protection has to account for it.</li>
+    <li><b>Screening only on SCR.</b> It&rsquo;s a first check, not a stability study.</li>
+    <li><b>Specifying "grid-forming" without the functions.</b> State the required behaviors and how they&rsquo;ll be tested.</li>
+  </ul>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2 id="relatedGuides">Related guides</h2>
+  <ul>
+    <li><a class="inline" href="guide-bess-c-rate.html">BESS C-Rate Explained</a> &mdash; power, energy and the headroom a grid-forming response draws on</li>
+    <li><a class="inline" href="guide-grid-interconnection-process.html">The Grid Interconnection Process</a> &mdash; the studies where grid strength and inverter behavior are examined</li>
+    <li><a class="inline" href="guide-inverter-clipping-ratio.html">Inverter Clipping &amp; DC:AC Ratio</a> &mdash; the solar-side inverter ratio that shapes co-located storage</li>
+  </ul>
+
+  <h2>Where Voltfield fits in</h2>
+  <p>The <a class="inline" href="battery-storage/pcs-inverters.html">BESS Power Conversion Systems</a> reference covers central, modular and grid-forming PCS, and the <a class="inline" href="battery-storage.html">Battery Storage</a> pillar page covers the rest of the plant.</p>
+
+  <h2>Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the difference between grid-forming and grid-following inverters?</summary>
+    <p style="margin-top:10px">A grid-following inverter tracks an existing grid voltage with a phase-locked loop and injects current in step with it. A grid-forming inverter holds its own internal voltage and frequency, so it responds to disturbances immediately and can operate where there&rsquo;s no other source, including islands and black start.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">When is a grid considered weak?</summary>
+    <p style="margin-top:10px">A common first screen is the short-circuit ratio: short-circuit MVA at the point of interconnection divided by plant MW. Grids with an SCR below about 3 are commonly treated as weak, where grid-following controls can struggle.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Can a grid-forming inverter black start a grid?</summary>
+    <p style="margin-top:10px">It can, if it is designed, sized and permitted to. Black start needs a source that sets its own voltage and frequency, which grid-following inverters can&rsquo;t do, plus enough energy and current capability to energize the network.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Do grid-forming inverters provide fault current like generators?</summary>
+    <p style="margin-top:10px">No. Inverters can supply only a small multiple of their rated current, far less than a synchronous generator, whichever control mode they use. Protection that depends on high fault current has to be checked.</p>
+  </details>
+</div>
+<div class="ctaband">
+  <div class="ctaband-in">
+    <div>
+      <h3>Sizing the battery behind the inverter?</h3>
+      <p>Turn a load and duration into usable and nameplate kWh, with depth of discharge and efficiency applied. Free, no signup.</p>
+    </div>
+    <a class="ctabtn" href="calculators/bess-sizing.html">BESS SIZING &rarr;</a>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+<div class="artwrap artwrap-tail">
+  <h2>Equipment category</h2>
+<ul class="catlink">
+  <li><a class="inline" href="battery-storage/pcs-inverters.html">BESS Power Conversion Systems</a> &mdash; central, modular and grid-forming PCS.</li>
+  <li><a class="inline" href="battery-storage/balance-of-plant.html">BESS Balance of Plant</a> &mdash; the transformers and switchgear between the PCS and the grid.</li>
+</ul>
+
+  <h2 id="calcLinks">Run the numbers</h2>
+<ul class="catlink">
+  <li><a class="inline" href="calculators/bess-sizing.html">BESS Sizing Calculator</a> &mdash; usable and nameplate kWh from a critical load and backup time.</li>
+  <li><a class="inline" href="calculators/fault-current.html">Available Fault Current Calculator</a> &mdash; available symmetrical fault current at a transformer secondary.</li>
+</ul>
+
+  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Grid-Forming vs. Grid-Following Inverters,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-grid-forming-vs-grid-following.html</div>
+</div>
+
+<aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>How grid-following and grid-forming inverter controls differ, the short-circuit ratio as a first screen for grid strength, where grid-forming matters, and what it costs in headroom, fault current, studies and requirements.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>IEEE Std 2800-2022 &mdash; interconnection of inverter-based resources to transmission systems</li><li>IEEE Std 1547-2018 and UL 1741 SB &mdash; distributed energy resources and their grid support functions</li><li>NERC reliability guidelines on inverter-based resources and grid-forming technology</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A plant design or an interconnection study. Grid-forming requirements vary by system operator and are changing, and stability must be confirmed with the studies the interconnecting utility requires.</dd>
+      <dt>Provenance</dt>
+      <dd>Published September 29, 2026. Written and maintained by the Voltfield editorial team against the sources above. The short-circuit ratio example is arithmetic you can reproduce, and the weak-grid threshold is labeled as a common screening value &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
+    </dl>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>
