@@ -1,5 +1,6 @@
 {
   "items": [
+    {"title": "Harmonics & IEEE 519 Explained", "url": "guide-harmonics-ieee-519.html", "category": "Guide", "description": "THD vs. TDD, transformer heating, capacitor resonance, IEEE 519 limits and mitigation."},
     {"title": "BESS C-Rate Explained", "url": "guide-bess-c-rate.html", "category": "Guide", "description": "C-rate from MW and MWh, duration, why the basis matters, and how degradation raises it."},
     {"title": "N+1 vs. 2N Redundancy Explained", "url": "guide-n-plus-1-vs-2n-redundancy.html", "category": "Guide", "description": "What N+1, 2N, 2(N+1) and distributed redundancy survive, what each costs, and how they map to tiers."},
     {"title": "Transformer Impedance (%Z) Explained", "url": "guide-transformer-impedance.html", "category": "Guide", "description": "How %Z sets fault current, voltage regulation and motor-starting dip, the nameplate tolerance, and how to choose a value."},
