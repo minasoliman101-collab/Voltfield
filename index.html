@@ -18,7 +18,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
 <!-- End Google Tag Manager -->
-<title>Electrical Power Calculators for Data Centers, Solar &amp; BESS | Voltfield</title>
+<title>Data Center, Solar &amp; BESS Electrical Calculators | Voltfield</title>
 <link rel="canonical" href="https://voltfield.org/">
 <meta name="description" content="Free electrical power calculators, guides and practice tools for data center, solar and battery-storage projects. Every calculator shows its method. No signup.">
 <meta name="keywords" content="electrical power calculators, data center electrical design, solar electrical calculators, BESS sizing, one-line diagram practice, grid interconnection process, FEOC compliance, transformer sizing, arc-flash calculator, voltage drop calculator">
@@ -52,7 +52,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- Barlow Condensed was dropped in the 2026 redesign: the condensed uppercase
      display face was the loudest part of the old "industrial" look. One family
      now does display and body, so this is also one font file fewer. -->
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
 <link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
 <link rel="stylesheet" href="voltfield-core.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
@@ -746,8 +746,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
 /* Hero 3D showcase.
 
-   Deliberately deferred: voltfield-3d.js is injected only after window.load,
-   and Three.js itself is then fetched from a CDN on first mount. The homepage
+   Deliberately deferred: voltfield-3d.js is injected only after window.load
+   and once the stage scrolls into view, and Three.js itself is then
+   fetched (self-hosted, vendor/three/) on first mount. The homepage
    is the page most likely to be a search landing, so nothing here is allowed
    to compete with first paint or shift layout -- the stage height is reserved
    in CSS and the canvas replaces a static placeholder inside it.
@@ -804,8 +805,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     document.body.appendChild(s);
   }
 
-  if(document.readyState==='complete') setTimeout(load,200);
-  else window.addEventListener('load',function(){ setTimeout(load,200); });
+  /* Three.js is 1.2 MB, about 90% of this page's weight. Waiting for window.load
+     kept it off the critical path but still charged every visitor for it,
+     including the phone reader who never scrolls to the stage. So: never on
+     Save-Data or a 2G connection (the static placeholder stays), and otherwise
+     only once the stage actually scrolls into view. */
+  var conn=navigator.connection||{};
+  if(conn.saveData||/2g/.test(conn.effectiveType||'')) return;
+
+  function whenVisible(){
+    if(!('IntersectionObserver' in window)){ setTimeout(load,200); return; }
+    var io=new IntersectionObserver(function(entries){
+      if(!entries[0].isIntersecting) return;
+      io.disconnect();
+      load();
+    },{rootMargin:'0px'});
+    io.observe(stage);
+  }
+
+  if(document.readyState==='complete') setTimeout(whenVisible,200);
+  else window.addEventListener('load',function(){ setTimeout(whenVisible,200); });
 })();
 </script>
 <script>

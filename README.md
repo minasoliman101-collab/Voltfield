@@ -23,6 +23,7 @@ A self‑contained, **static‑first website** — plain HTML, CSS, and JavaScri
 | `ads.txt` | Authorized-sellers file for ad networks (instructions inside). |
 | `manifest.json` / `sw.js` / `icons/` | **PWA layer** — makes the site installable (Add to Home Screen) and fully offline-capable. Bump `VERSION` in `sw.js` when you redeploy changed files. |
 | `privacy-policy.html` | Privacy policy **template** — required by both app stores; fill in bracketed fields before publishing. |
+| `SEO-PLAN.md` | **SEO working plan** — speed, titles, keyword map, backlink outreach, internal linking and content standards; what's done and what's next. |
 | `APP-STORES.md` | **Step-by-step guide to publishing on Google Play and the Apple App Store.** |
 | `app-wrapper/` | Ready-made Capacitor scaffold for building native Android/iOS binaries (see APP-STORES.md Route C). |
 | `voltfield-insights.html` | **Insights** — live dashboard of the catalog (SKUs by source & sector, top categories, lead‑time mix). |

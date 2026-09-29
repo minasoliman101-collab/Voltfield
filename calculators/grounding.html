@@ -40,7 +40,7 @@
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
 <link rel="stylesheet" href="/voltfield-core.css">
 <link rel="stylesheet" href="/voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
@@ -148,7 +148,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/voltfield-supply-catalog.html?q=Surge%20Protective%20Devices">Surge Protective Devices</a>
       <a href="/data-centers/grounding-bonding.html">Grounding, Bonding &amp; Surge Protection</a>
       <a href="/guide-grounding-bonding-basics.html">Grounding &amp; Bonding Basics</a>
-      <a href="/engineering-calculators.html">All 21 calculators</a>
+      <a data-rel="xlink" href="/guide-grounding-bonding-basics.html">Grounding &amp; Bonding Basics</a>
+      <a data-rel="xlink" href="/calculators/fault-current.html">Available Fault Current Calculator</a>
+      <a href="/engineering-calculators.html">All 20 calculators</a>
     </div>
 
   <aside class="provenance" aria-labelledby="prov-h">

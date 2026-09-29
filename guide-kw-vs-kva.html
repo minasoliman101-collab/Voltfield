@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>kW vs. kVA: Power Factor &amp; Sizing Explained | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-kw-vs-kva.html">
+<meta name="description" content="kW vs. kVA explained: real vs. apparent power, how to convert kW to kVA and amps, and why transformers, generators and UPS systems are rated the way they are.">
+<meta name="keywords" content="kW vs kVA, kW to kVA, convert kW to kVA, kVA to kW, power factor explained, apparent power vs real power, generator 0.8 power factor, kVA to amps">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="kW vs. kVA Explained">
+<meta property="og:description" content="Real vs. apparent power, how to convert kW to kVA and amps, and why power equipment is rated in kVA.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-guide-kw-vs-kva.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-guide-kw-vs-kva.jpg">
+<meta name="twitter:title" content="kW vs. kVA Explained">
+<meta name="twitter:description" content="Real vs. apparent power, how to convert kW to kVA and amps, and why power equipment is rated in kVA.">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://voltfield.org/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Guides",
+     "item": "https://voltfield.org/guides.html"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "kW vs. kVA Explained",
+     "item": "https://voltfield.org/guide-kw-vs-kva.html"
+    }
+   ]
+  },
+  {
+   "@type": "Article",
+   "headline": "kW vs. kVA Explained: Real Power, Apparent Power and Equipment Sizing",
+   "description": "kW vs. kVA explained: real vs. apparent power, how to convert kW to kVA and amps, and why transformers, generators and UPS systems are rated the way they are.",
+   "image": "https://voltfield.org/social/social-guide-kw-vs-kva.jpg",
+   "author": {
+    "@type": "Organization",
+    "name": "Voltfield Editorial Team",
+    "url": "https://voltfield.org/methodology.html"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Voltfield"
+   },
+   "datePublished": "2026-09-29T00:00:00-05:00",
+   "dateModified": "2026-09-29T00:00:00-05:00",
+   "url": "https://voltfield.org/guide-kw-vs-kva.html"
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "How do I convert kW to kVA?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Divide kW by the power factor: kVA = kW / PF. For example, 400 kW at 0.9 power factor is 444.4 kVA. If the power factor isn't known, 0.8 is the conservative assumption most generator and older UPS ratings use."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Is kVA always bigger than kW?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "kVA is never smaller than kW. The two are equal at a power factor of 1.0, and kVA grows larger as power factor drops, because more current is needed to deliver the same real power."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Why are generators rated at 0.8 power factor?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "It is the industry convention for three-phase generator sets. The engine limits real power (kW) and the alternator limits apparent power (kVA), and stating the kW rating at 0.8 power factor fixes the relationship between the two: kVA = kW / 0.8."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Why are transformers rated in kVA instead of kW?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "A transformer's heating depends on the current in its windings and the voltage across its core, not on the power factor of the load. The same current heats the windings equally whether it is doing useful work or not, so the rating is stated in volt-amperes."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="voltfield-eol.html"><b>Obsolete &amp; end-of-life</b><em>What replaced a discontinued platform</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">kW vs. kVA Explained</span></nav>
+    <div class="eyebrow">Power Fundamentals</div>
+    <h1>kW vs. kVA Explained</h1>
+    <p class="dek">Loads are described in kW. Transformers, generators and UPS systems are rated in kVA. Mixing the two up is the most common way a piece of power equipment ends up undersized on day one.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published September 29, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+  </div>
+</section>
+<div class="artwrap">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <p><b>kW (kilowatts)</b> is real power: the part of the electrical supply that does work, turning a motor shaft, heating a resistor or running a server. <b>kVA (kilovolt-amperes)</b> is apparent power: the voltage multiplied by the current actually flowing, whether or not all of that current is doing work. The ratio between them is the <b>power factor</b>.</p>
+
+  <div class="formula">kVA = kW &divide; PF &nbsp;&nbsp;&middot;&nbsp;&nbsp; kW = kVA &times; PF</div>
+
+  <p>At a power factor of 1.0 the two are the same number. Below 1.0, kVA is always the larger one, because some of the current is flowing back and forth to set up magnetic and electric fields (reactive power, measured in kVAR) rather than delivering energy to the load. That current still has to be carried by every cable, breaker and transformer winding in the path.</p>
+
+  <h2>The power triangle</h2>
+  <p>Real power (kW) and reactive power (kVAR) are at right angles to each other, and apparent power (kVA) is the hypotenuse:</p>
+  <div class="formula">kVA&sup2; = kW&sup2; + kVAR&sup2; &nbsp;&nbsp;&middot;&nbsp;&nbsp; PF = kW &divide; kVA = cos &phi;</div>
+  <p>The angle &phi; is the phase shift between voltage and current. Inductive loads such as motors and transformers draw current that lags the voltage. Capacitive loads draw current that leads it. Either way, the further &phi; is from zero, the more kVA it takes to deliver the same kW.</p>
+
+  <h2>How much kVA per 100 kW</h2>
+  <table class="reftable">
+    <tr><th scope="col">PF</th><th scope="col" style="text-transform:none">kVA / 100&nbsp;kW</th><th scope="col" style="text-transform:none">kVAR / 100&nbsp;kW</th></tr>
+    <tr><td>1.00</td><td>100.0</td><td>0.0</td></tr>
+    <tr><td>0.95</td><td>105.3</td><td>32.9</td></tr>
+    <tr><td>0.90</td><td>111.1</td><td>48.4</td></tr>
+    <tr><td>0.85</td><td>117.6</td><td>62.0</td></tr>
+    <tr><td>0.80</td><td>125.0</td><td>75.0</td></tr>
+    <tr><td>0.70</td><td>142.9</td><td>102.0</td></tr>
+  </table>
+  <p>Every figure in the table is arithmetic from the two formulas above: kVA = 100 &divide; PF, and kVAR = &radic;(kVA&sup2; &minus; 100&sup2;). Going from 0.95 to 0.80 raises the apparent power by about 19% for exactly the same useful work.</p>
+
+  <h2>Converting kW to kVA and amps: a worked example</h2>
+  <p>A 400 kW load at 0.90 power factor, fed at 480 V three-phase:</p>
+  <ul>
+    <li><b>Apparent power:</b> kVA = 400 &divide; 0.90 = 444.4 kVA</li>
+    <li><b>Reactive power:</b> kVAR = &radic;(444.4&sup2; &minus; 400&sup2;) = 193.7 kVAR</li>
+    <li><b>Line current:</b> I = kVA &times; 1000 &divide; (1.732 &times; V) = 444,400 &divide; (1.732 &times; 480) = 535 A</li>
+  </ul>
+  <p>Drop the power factor to 0.80 and the same 400 kW becomes 500 kVA and 601 A: 66 more amps through every conductor, for no extra work done. For single-phase circuits, leave out the 1.732: I = kVA &times; 1000 &divide; V.</p>
+  <div class="formula">Three-phase: I = kVA &times; 1000 &divide; (&radic;3 &times; V<sub>LL</sub>) &nbsp;&nbsp;&middot;&nbsp;&nbsp; Single-phase: I = kVA &times; 1000 &divide; V</div>
+
+  <h2>Why equipment is rated in kVA</h2>
+  <p>A transformer or alternator does not know what the load is doing with the current. Its winding losses, and therefore its heating, scale with the current squared (I&sup2;R), and its core losses scale with voltage. Both depend on volts and amps, not on the phase angle between them. So the limit is stated in volt-amperes, and the equipment can deliver its full rating in kW only when the load's power factor is 1.0.</p>
+  <p>Loads, on the other hand, are described by the work they do, and energy is billed in kWh. That is why the conversion has to happen at the point where a load list meets an equipment rating.</p>
+
+  <h3>Transformers</h3>
+  <p>Size on kVA: divide the load in kW by the expected power factor, then go up to the next standard nameplate from ANSI/IEEE C57.12.00. The 444 kVA example above lands on a 500 kVA unit. The <a class="inline" href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a> does this step and returns full-load amps. Reading the result back off a real unit is covered in <a class="inline" href="guide-transformer-nameplate.html">How to Read a Transformer Nameplate</a>.</p>
+
+  <h3>Generators</h3>
+  <p>Generator sets carry both numbers because they have two limits. The engine limits kW, since real power is what burns fuel. The alternator limits kVA, since that sets winding current. By industry convention, three-phase gensets are rated in kW at 0.8 power factor, so a 2,000 kW set is a 2,500 kVA set. A load at 0.9 power factor can use the full kW rating. A load at 0.7 hits the alternator's kVA limit before the engine's kW limit. Generators also tolerate leading (capacitive) power factor poorly, so a lightly loaded site with large filter capacitors can have voltage-regulation problems even though it is well inside the kW rating. Fuel burn tracks kW, which is what the <a class="inline" href="calculators/generator-runtime.html">Generator Runtime Calculator</a> works from.</p>
+
+  <h3>UPS systems</h3>
+  <p>A UPS has a kVA rating and a kW rating, and either one can be the binding limit. Older three-phase designs were commonly rated at 0.8 output power factor, so a 500 kVA unit could only deliver 400 kW. Many current designs are rated at 0.9 or 1.0. Modern server power supplies with active power-factor correction typically run close to unity, so for IT load the kW rating is usually the one that runs out first. Always check the kW figure, not just the kVA on the front of the datasheet.</p>
+
+  <div class="callout"><b>The shortcut that goes wrong:</b> treating kW and kVA as interchangeable works only near unity power factor. It is close enough for a rack of modern servers and badly wrong for a motor-heavy mechanical plant, where power factor at part load can sit well below 0.8.</div>
+
+  <h2>Where power factor costs money</h2>
+  <p>Beyond equipment sizing, low power factor shows up on the utility bill. Some tariffs bill demand in kVA rather than kW, and others add a charge when power factor falls below a threshold set in the tariff. The fix is usually local correction: capacitor banks, or active filters where harmonics are present, that supply the reactive power on site so it is no longer drawn through the utility service. The <a class="inline" href="calculators/power-factor.html">Power Factor Correction Calculator</a> sizes the kVAR needed to reach a target power factor and shows how much apparent power is released.</p>
+
+  <h2>Common mistakes</h2>
+  <ul>
+    <li><b>Sizing a transformer on kW.</b> A 400 kW load at 0.85 needs about 471 kVA, not 400.</li>
+    <li><b>Applying power factor twice.</b> A genset's kW rating already assumes 0.8 power factor. Converting the load to kVA and then comparing it to the kW rating double-counts.</li>
+    <li><b>Checking only one UPS rating.</b> A load can fit the kVA rating and still exceed the kW rating, or the other way round.</li>
+    <li><b>Using the three-phase formula on a single-phase circuit.</b> Dividing by 1.732 when you shouldn't under-states current by about 42%.</li>
+    <li><b>Correcting to exactly 1.0.</b> As load drops, a fixed capacitor bank sized for unity will push the system into a leading power factor. Targets of 0.95 to 0.98 are the norm.</li>
+  </ul>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2 id="relatedGuides">Related guides</h2>
+  <ul>
+    <li><a class="inline" href="guide-transformer-nameplate.html">How to Read a Transformer Nameplate</a> &mdash; where the kVA rating, impedance and cooling class sit on a real unit</li>
+    <li><a class="inline" href="guide-pad-mount-vs-gsu-transformers.html">Pad-Mount vs. GSU Transformers</a> &mdash; which type the kVA figure you just calculated is going to be</li>
+    <li><a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">Short-Circuit Studies &amp; Breaker Coordination</a> &mdash; the study that follows once the transformer size is settled</li>
+  </ul>
+
+  <h2>Where Voltfield fits in</h2>
+  <p>kW-to-kVA conversion is the first step in almost every sizing exercise on this site. The <a class="inline" href="voltfield-pod-designer.html">POD &amp; Skid Designer</a> applies it when checking a power block against its target load, and the <a class="inline" href="data-centers.html">Data Center Power Equipment</a> pillar page covers the transformers, switchgear, UPS and generators whose ratings it feeds into.</p>
+
+  <h2>Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How do I convert kW to kVA?</summary>
+    <p style="margin-top:10px">Divide kW by the power factor: kVA = kW &divide; PF. For example, 400 kW at 0.9 power factor is 444.4 kVA. If the power factor isn't known, 0.8 is the conservative assumption most generator and older UPS ratings use.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Is kVA always bigger than kW?</summary>
+    <p style="margin-top:10px">kVA is never smaller than kW. The two are equal at a power factor of 1.0, and kVA grows larger as power factor drops, because more current is needed to deliver the same real power.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why are generators rated at 0.8 power factor?</summary>
+    <p style="margin-top:10px">It is the industry convention for three-phase generator sets. The engine limits real power (kW) and the alternator limits apparent power (kVA), and stating the kW rating at 0.8 power factor fixes the relationship between the two: kVA = kW &divide; 0.8.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why are transformers rated in kVA instead of kW?</summary>
+    <p style="margin-top:10px">A transformer's heating depends on the current in its windings and the voltage across its core, not on the power factor of the load. The same current heats the windings equally whether it is doing useful work or not, so the rating is stated in volt-amperes.</p>
+  </details>
+</div>
+<div class="ctaband">
+  <div class="ctaband-in">
+    <div>
+      <h3>Sizing a transformer or generator?</h3>
+      <p>Run the kW-to-kVA conversion, full-load amps and next standard nameplate in one step. Free, no signup.</p>
+    </div>
+    <a class="ctabtn" href="calculators/transformer-sizing.html">SIZE A TRANSFORMER &rarr;</a>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+<div class="artwrap artwrap-tail">
+  <h2>Equipment category</h2>
+<ul class="catlink">
+  <li><a class="inline" href="data-centers/transformers.html">Data Center Transformers</a> &mdash; the kVA-rated equipment this conversion is most often done for.</li>
+  <li><a class="inline" href="data-centers/backup-power.html">Data Center Backup Power</a> &mdash; gensets and UPS, each with both a kW and a kVA limit.</li>
+</ul>
+
+  <h2 id="calcLinks">Run the numbers</h2>
+<ul class="catlink">
+  <li><a class="inline" href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a> &mdash; kW load to the next standard kVA nameplate.</li>
+  <li><a class="inline" href="calculators/power-factor.html">Power Factor Correction Calculator</a> &mdash; capacitor kVAR to reach a target power factor.</li>
+  <li><a class="inline" href="calculators/generator-runtime.html">Generator Runtime Calculator</a> &mdash; fuel burn and runtime at a given load.</li>
+</ul>
+
+  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;kW vs. kVA Explained,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-kw-vs-kva.html</div>
+</div>
+
+<aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>The difference between real, reactive and apparent power, how to convert between them, and how each rating applies to transformers, generators and UPS systems.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>IEEE Std 1459 &mdash; definitions for the measurement of electric power quantities</li><li>ANSI/IEEE C57.12.00 &mdash; standard transformer kVA ratings</li><li>ISO 8528 series &mdash; reciprocating engine generating set ratings</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>The formulas assume sinusoidal voltage and current. On systems with significant harmonic distortion, true power factor is lower than displacement power factor, and equipment derating needs a harmonic study.</dd>
+      <dt>Provenance</dt>
+      <dd>Published September 29, 2026. Written and maintained by the Voltfield editorial team against the sources above. Every figure in the worked example and the table is arithmetic you can reproduce from the formulas on this page &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
+    </dl>
+  </aside>
+</main>
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

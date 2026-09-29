@@ -5,8 +5,15 @@
   <link>https://voltfield.org/voltfield-insights.html</link>
   <description>Engineering guides, calculators and reference data for energy-infrastructure and industrial power equipment, from Voltfield</description>
   <language>en-us</language>
-  <lastBuildDate>Mon, 31 Aug 2026 00:00:00 GMT</lastBuildDate>
+  <lastBuildDate>Tue, 29 Sep 2026 00:00:00 GMT</lastBuildDate>
   <atom:link href="https://voltfield.org/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>kW vs. kVA Explained: Real Power, Apparent Power and Equipment Sizing</title>
+    <link>https://voltfield.org/guide-kw-vs-kva.html</link>
+    <guid>https://voltfield.org/guide-kw-vs-kva.html</guid>
+    <description>Real vs. apparent power, how to convert kW to kVA and amps, and why transformers, generators and UPS systems are rated the way they are.</description>
+    <pubDate>Tue, 29 Sep 2026 00:00:00 GMT</pubDate>
+  </item>
   <item>
     <title>Pad-Mount vs. GSU Transformers: Which Do You Need?</title>
     <link>https://voltfield.org/guide-pad-mount-vs-gsu-transformers.html</link>

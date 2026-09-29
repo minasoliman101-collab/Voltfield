@@ -36,6 +36,9 @@ Using one-way distance where the formula wants it and then doubling it again —
 /parts/mv-power-cable.html :: MV Power Cable
 /data-centers/cabling.html :: Cable &amp; Busbar Sizing
 /glossary.html#ampacity :: Ampacity, defined
+/guide-kw-vs-kva.html :: kW vs. kVA Explained
+/calculators/ampacity.html :: Cable Ampacity Calculator
+/calculators/motor-start.html :: Motor Starting Voltage Dip Calculator
 
 ===transformer-sizing|transformer-sizing|Transformer Sizing Calculator|Transformer Sizing Calculator (kW to kVA)|Convert a kW load to the kVA rating you need, round to the nearest standard ANSI/IEEE C57.12.00 nameplate, and get full-load amps. Free, no signup.
 --intro
@@ -65,6 +68,11 @@ Sizing on kW and never dividing by power factor, which under-sizes by however fa
 /parts/dry-type-cast-resin-transformers.html :: Dry-Type Transformers
 /data-centers/transformers.html :: Data Center Transformers
 /guide-transformer-nameplate.html :: How to Read a Transformer Nameplate
+/guide-kw-vs-kva.html :: kW vs. kVA Explained
+/guide-transformer-nameplate.html :: How to Read a Transformer Nameplate
+/guide-pad-mount-vs-gsu-transformers.html :: Pad-Mount vs. GSU Transformers
+/calculators/inrush.html :: Transformer Inrush Calculator
+/calculators/power-factor.html :: Power Factor Correction Calculator
 
 ===fault-current|fault-current|Available Fault Current Calculator|Available Fault Current Calculator (Short Circuit)|Estimate available symmetrical fault current at a transformer secondary from kVA, voltage and %Z, and check equipment withstand ratings. Free, no signup.
 --intro
@@ -91,6 +99,10 @@ Using the calculated value as a final number instead of commissioning a study. F
 /parts/molded-case-breakers-mccb-15-1200a.html :: Molded-Case Breakers
 /guide-short-circuit-studies-breaker-coordination.html :: Short-Circuit Studies &amp; Coordination
 /glossary.html#impedance :: Impedance (%Z), defined
+/guide-short-circuit-studies-breaker-coordination.html :: Short-Circuit Studies &amp; Breaker Coordination
+/guide-arc-flash-boundary-basics.html :: Arc-Flash Boundary Basics
+/calculators/arc-flash.html :: Arc-Flash Incident Energy Calculator
+/calculators/transformer-sizing.html :: Transformer Sizing Calculator
 
 ===arc-flash|arc-flash|Arc-Flash Incident Energy Calculator|Arc-Flash Incident Energy Calculator|Estimate arc-flash incident energy and the arc-flash boundary using the Lee method, for a first-pass check before a full IEEE 1584 study. Free, no signup.
 --intro
@@ -115,6 +127,9 @@ Treating a screening number as a labelling result. Using a clearing time from th
 /guide-arc-flash-boundary-basics.html :: Arc-Flash Boundary Basics
 /glossary.html#incident-energy :: Incident energy, defined
 /glossary.html#nfpa-70e :: NFPA 70E, defined
+/guide-arc-flash-boundary-basics.html :: Arc-Flash Boundary Basics
+/guide-switchgear-compartments.html :: Metal-Clad vs. Metal-Enclosed Switchgear
+/calculators/fault-current.html :: Available Fault Current Calculator
 
 ===ampacity|ampacity|Cable Ampacity &amp; Conduit Fill Calculator|Cable Ampacity &amp; Conduit Fill Calculator|Look up NEC Table 310.16 conductor ampacity and check conduit fill against the 40% limit for three or more conductors. Free, no signup.
 --intro
@@ -141,6 +156,9 @@ Using the 90&deg;C column when the terminations are only rated 75&deg;C — the 
 /parts/conduit-raceway-and-fittings.html :: Conduit, Raceway &amp; Fittings
 /data-centers/cabling.html :: Cable &amp; Busbar Sizing
 /glossary.html#derating :: Derating, defined
+/guide-kw-vs-kva.html :: kW vs. kVA Explained
+/calculators/voltage-drop.html :: Voltage Drop Calculator
+/calculators/fault-current.html :: Available Fault Current Calculator
 
 ===bess-sizing|bess-sizing|BESS Sizing Calculator|BESS Sizing Calculator (kW and kWh)|Convert a critical load and backup duration into usable energy, then into the nameplate kWh you need once depth of discharge and round-trip efficiency are applied.
 --intro
@@ -169,6 +187,10 @@ Sizing to usable energy and ordering that as nameplate. Ignoring degradation, th
 /parts/grid-forming-pcs.html :: Grid-Forming PCS
 /battery-storage/bess-enclosures.html :: BESS Enclosures &amp; Modules
 /guide-bess-augmentation.html :: BESS Augmentation Explained
+/guide-bess-augmentation.html :: BESS Augmentation Explained
+/guide-bess-fire-safety-nfpa-855.html :: BESS Fire Safety: NFPA 855
+/calculators/solar-string.html :: Solar String Sizing Calculator
+/calculators/generator-runtime.html :: Generator Runtime Calculator
 
 ===solar-string|solar-string|Solar String Sizing Calculator|Solar String Sizing Calculator (Voc / Vmp)|Apply module temperature coefficients to site design temperatures to find maximum and minimum string length against inverter voltage limits. Free, no signup.
 --intro
@@ -198,6 +220,9 @@ Using average rather than record low temperature, which produces a string that i
 /parts/topcon-modules.html :: TOPCon Modules
 /parts/central-inverters-utility.html :: Central Inverters
 /guide-inverter-clipping-ratio.html :: Inverter Clipping &amp; DC:AC Ratio
+/guide-inverter-clipping-ratio.html :: Inverter Clipping &amp; DC:AC Ratio
+/calculators/bess-sizing.html :: BESS Sizing Calculator
+/calculators/voltage-drop.html :: Voltage Drop Calculator
 
 ===power-factor|power-factor|Power Factor Correction Calculator|Power Factor Correction Calculator (kVAR)|Size the capacitor bank in kVAR needed to raise an existing power factor to a target, and see the effect on apparent power. Free, no signup.
 --intro
@@ -224,6 +249,9 @@ Correcting to unity rather than to a target just below it, which risks over-corr
 /parts/power-meters-bms.html :: Power Meters &amp; BMS
 /data-centers/monitoring-controls.html :: Monitoring &amp; Controls
 /glossary.html#kva-vs-kw :: kVA vs. kW, defined
+/guide-kw-vs-kva.html :: kW vs. kVA Explained
+/calculators/transformer-sizing.html :: Transformer Sizing Calculator
+/calculators/generator-runtime.html :: Generator Runtime Calculator
 
 ===motor-start|motor-start|Motor Starting Voltage Dip Calculator|Motor Starting Voltage Dip Calculator|Estimate bus voltage dip when a large motor starts across the line, using locked-rotor kVA against source short-circuit kVA. Free, no signup.
 --intro
@@ -247,6 +275,9 @@ Using full-load kVA instead of locked-rotor kVA, which understates the dip by a 
 /parts/ac-motors.html :: AC Motors
 /parts/motor-controls-and-drives.html :: Motor Controls &amp; Drives
 /glossary.html#impedance :: Impedance (%Z), defined
+/guide-kw-vs-kva.html :: kW vs. kVA Explained
+/calculators/voltage-drop.html :: Voltage Drop Calculator
+/calculators/generator-runtime.html :: Generator Runtime Calculator
 
 ===inrush|inrush|Transformer Inrush Current Calculator|Transformer Inrush Current Calculator|Estimate magnetizing inrush current on transformer energisation as a multiple of full-load amps, for upstream breaker and fuse selection. Free, no signup.
 --intro
@@ -274,6 +305,10 @@ Setting instantaneous protection from full-load current alone. Assuming inrush i
 /parts/large-power-transformers.html :: Large Power Transformers
 /data-centers/transformers.html :: Data Center Transformers
 /guide-transformer-nameplate.html :: How to Read a Transformer Nameplate
+/guide-transformer-nameplate.html :: How to Read a Transformer Nameplate
+/guide-short-circuit-studies-breaker-coordination.html :: Short-Circuit Studies &amp; Breaker Coordination
+/calculators/transformer-sizing.html :: Transformer Sizing Calculator
+/calculators/fault-current.html :: Available Fault Current Calculator
 
 ===grounding|grounding|Ground Rod Resistance Calculator|Ground Rod Resistance Calculator (Dwight's Formula)|Estimate resistance-to-earth of a driven ground rod from soil resistivity, rod length and diameter, using Dwight's formula. Free, no signup.
 --intro
@@ -301,6 +336,8 @@ Treating a calculation as a substitute for measurement, when the code requiremen
 /parts/surge-protective-devices.html :: Surge Protective Devices
 /data-centers/grounding-bonding.html :: Grounding, Bonding &amp; Surge Protection
 /guide-grounding-bonding-basics.html :: Grounding &amp; Bonding Basics
+/guide-grounding-bonding-basics.html :: Grounding &amp; Bonding Basics
+/calculators/fault-current.html :: Available Fault Current Calculator
 
 ===generator-runtime|generator-runtime|Generator Runtime Calculator|Generator Runtime Calculator (Fuel)|Estimate how long a generator runs on a full tank at a given load, using the fuel consumption rate from its own spec sheet. Free, no signup.
 --intro
@@ -325,3 +362,7 @@ Using nameplate consumption for a lightly loaded set. Treating nominal tank capa
 /parts/fuel-and-starting-systems.html :: Fuel &amp; Starting Systems
 /data-centers/genset-components.html :: Genset Components
 /data-centers/backup-power.html :: Backup Power
+/guide-kw-vs-kva.html :: kW vs. kVA Explained
+/calculators/motor-start.html :: Motor Starting Voltage Dip Calculator
+/calculators/bess-sizing.html :: BESS Sizing Calculator
+

@@ -1,5 +1,6 @@
 {
   "items": [
+    {"title": "kW vs. kVA Explained", "url": "guide-kw-vs-kva.html", "category": "Guide", "description": "Real vs. apparent power, converting kW to kVA and amps, and how power factor sets transformer, generator and UPS sizing."},
     {"title": "How to Read a Transformer Nameplate", "url": "guide-transformer-nameplate.html", "category": "Guide", "description": "kVA ratings, cooling class codes, impedance, BIL, and vector group, explained field by field."},
     {"title": "Switchgear Compartment Types Explained", "url": "guide-switchgear-compartments.html", "category": "Guide", "description": "Metal-clad vs. metal-enclosed, and what's inside each compartment of a metal-clad lineup."},
     {"title": "Arc-Flash Boundary Basics", "url": "guide-arc-flash-boundary-basics.html", "category": "Guide", "description": "What an arc-flash boundary is, how it relates to incident energy, and NFPA 70E labeling requirements."},
