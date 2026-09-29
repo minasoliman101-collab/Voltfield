@@ -103,6 +103,7 @@ Using the calculated value as a final number instead of commissioning a study. F
 /guide-short-circuit-studies-breaker-coordination.html :: Short-Circuit Studies &amp; Breaker Coordination
 /guide-arc-flash-boundary-basics.html :: Arc-Flash Boundary Basics
 /guide-transformer-impedance.html :: Transformer Impedance (%Z) Explained
+/guide-fully-rated-vs-series-rated.html :: Fully Rated vs. Series Rated Breakers
 /calculators/arc-flash.html :: Arc-Flash Incident Energy Calculator
 /calculators/transformer-sizing.html :: Transformer Sizing Calculator
 

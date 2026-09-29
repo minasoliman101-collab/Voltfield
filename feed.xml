@@ -8,6 +8,13 @@
   <lastBuildDate>Tue, 29 Sep 2026 00:00:00 GMT</lastBuildDate>
   <atom:link href="https://voltfield.org/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Fully Rated vs. Series Rated Breakers: How Series Combinations Work and When They Can't Be Used</title>
+    <link>https://voltfield.org/guide-fully-rated-vs-series-rated.html</link>
+    <guid>https://voltfield.org/guide-fully-rated-vs-series-rated.html</guid>
+    <description>How series combination ratings work, the NEC 240.86 and 110.22(C) rules, the motor contribution limit, why they conflict with selective coordination, and AIC vs. SCCR.</description>
+    <pubDate>Tue, 29 Sep 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
     <title>Ground-Fault Protection Explained: NEC 230.95, Sensing and Coordination</title>
     <link>https://voltfield.org/guide-ground-fault-protection.html</link>
     <guid>https://voltfield.org/guide-ground-fault-protection.html</guid>
