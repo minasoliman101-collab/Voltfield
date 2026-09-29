@@ -58,6 +58,7 @@ Descriptions over 160 characters on `calculators/bess-sizing.html` and `data-cen
 | voltage drop calculator | tool | `calculators/voltage-drop.html` |
 | transformer sizing calculator / kW to kVA transformer | tool | `calculators/transformer-sizing.html` |
 | kW vs kVA / convert kW to kVA / kVA to amps | learn | `guide-kw-vs-kva.html` **(new)** |
+| how to size a UPS / UPS sizing / UPS battery runtime | learn | `guide-ups-sizing.html` **(new)**. `data-centers/backup-power.html` is the equipment reference and links to it, so the two do not compete. |
 | power factor correction calculator | tool | `calculators/power-factor.html` |
 | available fault current calculator | tool | `calculators/fault-current.html` |
 | arc flash calculator / incident energy | tool | `calculators/arc-flash.html` |
@@ -92,7 +93,7 @@ Descriptions over 160 characters on `calculators/bess-sizing.html` and `data-cen
 - `guides.html` vs. `voltfield-insights.html`: resolved by the retitle in §2.
 
 ### Content gaps, in priority order (validate volume first)
-1. **UPS sizing** (kW vs kVA rating, runtime, N+1). This pairs with the new kW/kVA guide.
+1. ~~**UPS sizing**~~ Done: `guide-ups-sizing.html` (Sept 2026).
 2. **Transformer impedance (%Z) explained**. It feeds both the fault-current and inrush calculators.
 3. **N+1 vs 2N redundancy**. It currently lives inside `data-centers.html`, and a dedicated page would target the query directly.
 4. **BESS C-rate explained**.
