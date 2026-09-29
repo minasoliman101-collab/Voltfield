@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>BESS C-Rate Explained: MW, MWh &amp; Duration | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-bess-c-rate.html">
+<meta name="description" content="BESS C-rate explained: how to calculate it from MW and MWh, duration vs. C-rate, why the basis matters, how degradation raises it, and what it drives.">
+<meta name="keywords" content="BESS C-rate, battery C-rate explained, C-rate calculation, 0.25C battery, 4-hour battery C-rate, MW to MWh ratio, battery duration, C-rate degradation">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="BESS C-Rate Explained">
+<meta property="og:description" content="What C-rate means, how to calculate it on the right basis, and why it decides cells, cooling and warranty terms.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-guide-bess-c-rate.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-guide-bess-c-rate.jpg">
+<meta name="twitter:title" content="BESS C-Rate Explained">
+<meta name="twitter:description" content="What C-rate means, how to calculate it on the right basis, and why it decides cells, cooling and warranty terms.">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://voltfield.org/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://voltfield.org/guides.html"}, {"@type": "ListItem", "position": 3, "name": "BESS C-Rate Explained", "item": "https://voltfield.org/guide-bess-c-rate.html"}]}, {"@type": "Article", "headline": "BESS C-Rate Explained: Power, Energy, Duration and Why the Basis Matters", "description": "BESS C-rate explained: how to calculate it from MW and MWh, duration vs. C-rate, why the basis matters, how degradation raises it, and what it drives.", "image": "https://voltfield.org/social/social-guide-bess-c-rate.jpg", "author": {"@type": "Organization", "name": "Voltfield Editorial Team", "url": "https://voltfield.org/methodology.html"}, "publisher": {"@type": "Organization", "name": "Voltfield"}, "datePublished": "2026-09-29T00:00:00-05:00", "dateModified": "2026-09-29T00:00:00-05:00", "url": "https://voltfield.org/guide-bess-c-rate.html"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is C-rate in a battery?", "acceptedAnswer": {"@type": "Answer", "text": "C-rate is how fast a battery charges or discharges relative to its capacity. At 1C a full charge is delivered in one hour, at 0.5C in two hours, and at 0.25C in four. For a storage system it's usually calculated as power divided by energy."}}, {"@type": "Question", "name": "What C-rate is a 4-hour battery?", "acceptedAnswer": {"@type": "Answer", "text": "A 4-hour battery is 0.25C on its headline rating, since 1 ÷ 4 = 0.25. The rate its cells actually see depends on conversion losses, depth of discharge and degradation, and is often a little different."}}, {"@type": "Question", "name": "Is a higher C-rate worse for a battery?", "acceptedAnswer": {"@type": "Answer", "text": "Higher C-rates generally generate more heat and accelerate capacity fade, which is why warranties set a maximum continuous C-rate. Cells designed for high power tolerate it better than energy-oriented cells, but the tradeoff is usually lower energy density or higher cost."}}, {"@type": "Question", "name": "How do I calculate C-rate from MW and MWh?", "acceptedAnswer": {"@type": "Answer", "text": "Divide power by energy: C-rate = MW ÷ MWh. A 50 MW / 200 MWh system is 50 ÷ 200 = 0.25C. Say which basis both numbers are on (point of interconnection, DC, nameplate or usable), because the answer changes with it."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="voltfield-eol.html"><b>Obsolete &amp; end-of-life</b><em>What replaced a discontinued platform</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">BESS C-Rate Explained</span></nav>
+    <div class="eyebrow">Battery Storage</div>
+    <h1>BESS C-Rate Explained</h1>
+    <p class="dek">A 4-hour battery runs at 0.25C, but the rate its cells actually see is usually higher, and it rises further as the battery ages. Here's what C-rate means, how to calculate it on the right basis, and why it decides cell choice, cooling and warranty terms.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published September 29, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+  </div>
+</section>
+<div class="artwrap">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <p><b>C-rate</b> is how fast a battery charges or discharges relative to its capacity. At <b>1C</b>, a full charge is delivered in one hour. At 0.5C it takes two hours, and at 0.25C four. For a single cell, C-rate is current divided by amp-hour capacity. For a storage system, it's normally stated as power divided by energy: MW &divide; MWh.</p>
+
+  <div class="formula">C-rate = Power &divide; Energy &nbsp;&nbsp;&middot;&nbsp;&nbsp; Duration (hours) = 1 &divide; C-rate</div>
+
+  <p>That makes C-rate the link between a project's two headline numbers. A "100 MW / 400 MWh" system is a 4-hour system, and 100 &divide; 400 = 0.25C.</p>
+
+  <h2>Duration and C-rate</h2>
+  <table class="reftable">
+    <tr><th scope="col">Duration</th><th scope="col">C-rate</th><th scope="col">Typical use</th></tr>
+    <tr><td>30 minutes</td><td>2C</td><td>Frequency response, fast ancillary services</td></tr>
+    <tr><td>1 hour</td><td>1C</td><td>Ancillary services, short peak support</td></tr>
+    <tr><td>2 hours</td><td>0.5C</td><td>Peak shaving, energy arbitrage</td></tr>
+    <tr><td>4 hours</td><td>0.25C</td><td>Capacity and resource adequacy, solar shifting</td></tr>
+    <tr><td>8 hours</td><td>0.125C</td><td>Long-duration shifting</td></tr>
+  </table>
+  <p>The C-rate column is arithmetic. The "typical use" column is indicative: the market a project serves sets the duration it needs, and markets and their rules change.</p>
+
+  <h2>The basis matters: nameplate, usable, and at the cells</h2>
+  <p>A system's headline rating is usually measured at the point of interconnection (POI): power and energy delivered to the grid. The cells see something different, for three reasons:</p>
+  <ul>
+    <li><b>Conversion losses.</b> Energy passes through the PCS, transformers and cabling on its way to the POI, so the cells must deliver more power than the POI receives.</li>
+    <li><b>Depth of discharge.</b> The battery management system reserves part of the nameplate capacity, so only the usable window does the work.</li>
+    <li><b>Degradation.</b> Capacity fades with age and cycling. At the same power, a smaller battery runs at a higher C-rate.</li>
+  </ul>
+
+  <h2>Worked example</h2>
+  <p>A 50 MW / 200 MWh (4-hour) project at the POI, with an assumed 96% one-way efficiency from battery to POI and 90% depth of discharge:</p>
+  <ul>
+    <li><b>Power at the battery:</b> 50 &divide; 0.96 = 52.1 MW</li>
+    <li><b>Energy the battery must deliver:</b> 200 &divide; 0.96 = 208.3 MWh of usable capacity</li>
+    <li><b>Nameplate capacity:</b> 208.3 &divide; 0.90 = 231.5 MWh</li>
+    <li><b>C-rate on the headline rating:</b> 50 &divide; 200 = 0.25C</li>
+    <li><b>C-rate on nameplate:</b> 52.1 &divide; 231.5 = 0.225C</li>
+    <li><b>C-rate on usable capacity:</b> 52.1 &divide; 208.3 = 0.25C</li>
+  </ul>
+  <p>Now let the battery fade to 80% of its original nameplate, with no augmentation. Nameplate becomes 185.2 MWh and usable becomes 166.7 MWh. At the same 52.1 MW, the C-rate on usable capacity rises to <b>0.31C</b>, and the system delivers full power for only 166.7 &divide; 52.1 = <b>3.2 hours</b>. It's no longer a 4-hour asset. This is the gap <a class="inline" href="guide-bess-augmentation.html">augmentation</a> is planned to close.</p>
+  <div class="callout"><b>Which number to ask for:</b> when comparing vendor offers, ask what basis each C-rate is quoted on: POI, DC, nameplate or usable. The same system can honestly be described as 0.225C or 0.25C, and the difference shows up in warranty terms.</div>
+  <p>The 96% efficiency and 90% depth of discharge are assumptions for the example. Use the vendor's figures for the actual PCS, transformer and battery. The one-way efficiency here is not the same as the round-trip efficiency used in the <a class="inline" href="calculators/bess-sizing.html">BESS Sizing Calculator</a>, which covers the full charge-and-discharge cycle.</p>
+
+  <h2>Why C-rate drives the design</h2>
+  <h3>Cell selection</h3>
+  <p>Cells are designed for a range of C-rates. Energy-oriented cells, common in multi-hour utility storage, trade power capability for energy density and cycle life. Power-oriented cells do the reverse. Choosing a cell outside its design range either wastes money or shortens life.</p>
+  <h3>Heat</h3>
+  <p>Resistive heating inside a cell scales with the square of current. At the same capacity, doubling the C-rate roughly quadruples resistive heat generation, so the thermal management system is sized around it. A 1-hour system needs much more cooling per MWh than a 4-hour system built from similar cells.</p>
+  <h3>Degradation and warranty</h3>
+  <p>Higher C-rates generally accelerate capacity fade, alongside temperature and depth of discharge. Vendors write warranties around them: a maximum continuous C-rate, a limit on cycles or energy throughput, and an operating temperature range. The warranty assumes a C-rate, so a change in how the project is operated can change what the warranty covers.</p>
+  <h3>Power conversion</h3>
+  <p>Duration changes the ratio of PCS capacity to battery capacity. A 1-hour system needs four times the PCS rating per MWh of a 4-hour system. That's why two systems can share a cell and still be very different products.</p>
+
+  <h2>Common mistakes</h2>
+  <ul>
+    <li><b>Quoting C-rate without its basis.</b> POI, DC, nameplate and usable figures can all be correct and all different.</li>
+    <li><b>Sizing on day-one capacity.</b> As capacity fades, C-rate at constant power rises, and duration falls.</li>
+    <li><b>Treating duration as a pricing detail.</b> It changes the cells, the cooling, the PCS and the warranty.</li>
+    <li><b>Mixing one-way and round-trip efficiency.</b> They answer different questions, and using one for the other mis-sizes the system.</li>
+  </ul>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2 id="relatedGuides">Related guides</h2>
+  <ul>
+    <li><a class="inline" href="guide-bess-augmentation.html">BESS Augmentation Explained</a> &mdash; how projects add capacity to hold duration as the battery fades</li>
+    <li><a class="inline" href="guide-bess-fire-safety-nfpa-855.html">BESS Fire Safety: NFPA 855 &amp; UL 9540A</a> &mdash; the safety requirements that apply whatever the C-rate</li>
+    <li><a class="inline" href="guide-inverter-clipping-ratio.html">Inverter Clipping &amp; DC:AC Ratio</a> &mdash; the solar-side ratio that often decides how a co-located battery is used</li>
+  </ul>
+
+  <h2>Where Voltfield fits in</h2>
+  <p>The <a class="inline" href="battery-storage.html">Battery Storage</a> pillar page covers the equipment C-rate feeds into: <a class="inline" href="battery-storage/pcs-inverters.html">PCS and inverters</a>, <a class="inline" href="battery-storage/bess-enclosures.html">enclosures and battery modules</a>, and the <a class="inline" href="battery-storage/balance-of-plant.html">balance of plant</a> between the battery and the POI.</p>
+
+  <h2>Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is C-rate in a battery?</summary>
+    <p style="margin-top:10px">C-rate is how fast a battery charges or discharges relative to its capacity. At 1C a full charge is delivered in one hour, at 0.5C in two hours, and at 0.25C in four. For a storage system it's usually calculated as power divided by energy.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What C-rate is a 4-hour battery?</summary>
+    <p style="margin-top:10px">A 4-hour battery is 0.25C on its headline rating, since 1 &divide; 4 = 0.25. The rate its cells actually see depends on conversion losses, depth of discharge and degradation, and is often a little different.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Is a higher C-rate worse for a battery?</summary>
+    <p style="margin-top:10px">Higher C-rates generally generate more heat and accelerate capacity fade, which is why warranties set a maximum continuous C-rate. Cells designed for high power tolerate it better than energy-oriented cells, but the tradeoff is usually lower energy density or higher cost.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How do I calculate C-rate from MW and MWh?</summary>
+    <p style="margin-top:10px">Divide power by energy: C-rate = MW &divide; MWh. A 50 MW / 200 MWh system is 50 &divide; 200 = 0.25C. Say which basis both numbers are on (point of interconnection, DC, nameplate or usable), because the answer changes with it.</p>
+  </details>
+</div>
+<div class="ctaband">
+  <div class="ctaband-in">
+    <div>
+      <h3>Sizing a battery?</h3>
+      <p>Turn a load and duration into usable and nameplate kWh, with depth of discharge and round-trip efficiency applied. Free, no signup.</p>
+    </div>
+    <a class="ctabtn" href="calculators/bess-sizing.html">BESS SIZING &rarr;</a>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+<div class="artwrap artwrap-tail">
+  <h2>Equipment category</h2>
+<ul class="catlink">
+  <li><a class="inline" href="battery-storage/bess-enclosures.html">BESS Enclosures &amp; Battery Modules</a> &mdash; the cells and enclosures C-rate is specified against.</li>
+  <li><a class="inline" href="battery-storage/pcs-inverters.html">BESS Power Conversion Systems</a> &mdash; the PCS whose rating sets power, and therefore C-rate.</li>
+</ul>
+
+  <h2 id="calcLinks">Run the numbers</h2>
+<ul class="catlink">
+  <li><a class="inline" href="calculators/bess-sizing.html">BESS Sizing Calculator</a> &mdash; usable and nameplate kWh from a critical load and backup time.</li>
+</ul>
+
+  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;BESS C-Rate Explained,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-bess-c-rate.html</div>
+</div>
+
+<aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>What C-rate means for cells and for storage systems, how duration maps to C-rate, why the basis matters, how degradation changes it, and how it drives cell choice, cooling, PCS rating and warranty terms.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>IEC 62933 series &mdash; electrical energy storage systems, including performance parameters</li><li>UL 1973 &mdash; batteries for stationary applications</li><li>UL 9540 and NFPA 855 &mdash; energy storage system safety and installation</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A basis for selecting cells or warranties. Allowable C-rates, degradation and efficiency are specific to each product and must come from the vendor's datasheet and warranty terms.</dd>
+      <dt>Provenance</dt>
+      <dd>Published September 29, 2026. Written and maintained by the Voltfield editorial team against the sources above. Every figure in the worked example is arithmetic you can reproduce, and its efficiency and depth-of-discharge values are labeled as assumptions &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
+    </dl>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>
