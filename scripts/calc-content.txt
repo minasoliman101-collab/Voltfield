@@ -106,22 +106,22 @@ Using the calculated value as a final number instead of commissioning a study. F
 /calculators/arc-flash.html :: Arc-Flash Incident Energy Calculator
 /calculators/transformer-sizing.html :: Transformer Sizing Calculator
 
-===arc-flash|arc-flash|Arc-Flash Incident Energy Calculator|Arc-Flash Incident Energy Calculator|Estimate arc-flash incident energy and the arc-flash boundary using the Lee method, for a first-pass check before a full IEEE 1584 study. Free, no signup.
+===arc-flash|arc-flash|Arc-Flash Incident Energy Calculator|Arc-Flash Incident Energy Calculator|Estimate arc-flash incident energy and boundary with the Lee and Doughty equations, as a first pass before a full IEEE 1584 study. Free, no signup.
 --intro
 Incident energy is the thermal energy an arc would deliver to a surface at a working distance, in calories per square centimetre. It determines the PPE category and the arc-flash boundary that must appear on the equipment label. Two inputs dominate it, and only one is obvious: available fault current, and how long the upstream device takes to clear. Halving clearing time roughly halves incident energy, which is why protection settings matter more to arc-flash exposure than almost anything else.
 --formula
-The Lee method models an open-air arc. Incident energy rises with available fault current, with the square of arcing time, and falls with the square of working distance.
+Above 600 V the Lee equation models an open-air arc; at 600 V and below the Doughty equations cover open-air and arc-in-a-box cases. In all of them, incident energy is directly proportional to arcing time, rises with available fault current, and falls steeply with working distance.
 --vars
 Bolted fault current :: From the fault-current calculation at that point
 Clearing time :: How long the upstream protective device takes to interrupt, in seconds
 Working distance :: Distance from the arc to the worker's face and chest, commonly 18 inches for LV gear
-System voltage :: The Lee method applies above 600 V; below that, IEEE 1584 empirical models apply
+System voltage :: Above 600 V the calculator uses the Lee equation; at 600 V and below, the Doughty equations. Both are from NFPA 70E Annex D
 --example
-Doubling the clearing time from 0.1 s to 0.2 s does not double incident energy — it roughly quadruples it, because energy scales with the square of time. A breaker setting change that shaves 100 ms off clearing can move a task from one PPE category to a lower one without touching the hardware.
+At 480 V in an enclosure, with 22.6 kA bolted fault current and an 18 in working distance, the Doughty equation gives 4.3 cal/cm&sup2; at 0.1 s clearing and 8.5 cal/cm&sup2; at 0.2 s. Double the time, double the energy: incident energy is directly proportional to arcing time. The arc-flash boundary grows less, from about 3.6 ft to 5.7 ft, because energy falls off steeply with distance. A breaker setting change that shaves 100 ms off clearing can move a task into a lower PPE category without touching the hardware.
 --standard
-The theoretical Lee equation is documented in IEEE 1584, which is the governing standard for arc-flash calculation. NFPA 70E sets the workplace requirements: risk assessment, approach boundaries, PPE, and equipment labelling.
+The Lee and Doughty equations are documented in NFPA 70E Annex D. IEEE 1584 is the governing standard for a full arc-flash calculation. NFPA 70E sets the workplace requirements: risk assessment, approach boundaries, PPE, and equipment labelling.
 --limits
-Lee is a theoretical open-air model and is conservative below 600 V, where IEEE 1584's empirical equations fit measured data far better. It does not model arc-in-a-box enclosure effects, electrode configuration or arc gap. This is a screening estimate only. Labelling and PPE selection require a full study by a qualified engineer.
+The Lee equation is a theoretical open-air model and tends to be conservative. The Doughty equations used at 600 V and below are empirical, and valid only within the 16&ndash;50 kA range they were fitted to. Neither models electrode configuration, arc gap or enclosure size the way the IEEE 1584 arcing-current method does. This is a screening estimate only. Labelling and PPE selection require a full study by a qualified engineer.
 --mistakes
 Treating a screening number as a labelling result. Using a clearing time from the device curve without accounting for the arcing current being lower than bolted fault current, which can put the device on a slower part of its curve. Assuming higher fault current always means higher incident energy — sometimes it clears the device faster and lowers it.
 --related
@@ -130,6 +130,7 @@ Treating a screening number as a labelling result. Using a clearing time from th
 /glossary.html#incident-energy :: Incident energy, defined
 /glossary.html#nfpa-70e :: NFPA 70E, defined
 /guide-arc-flash-boundary-basics.html :: Arc-Flash Boundary Basics
+/guide-arc-flash-ppe-categories.html :: Arc-Flash PPE Categories Explained
 /guide-switchgear-compartments.html :: Metal-Clad vs. Metal-Enclosed Switchgear
 /calculators/fault-current.html :: Available Fault Current Calculator
 
