@@ -17,17 +17,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:image" content="https://voltfield.org/social/social-data-centers.jpg">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[
- {"@type":"BreadcrumbList","itemListElement":[
-   {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
-   {"@type":"ListItem","position":2,"name":"Data Centers","item":"https://voltfield.org/data-centers.html"},
-   {"@type":"ListItem","position":3,"name":"Grounding & Bonding","item":"https://voltfield.org/data-centers/grounding-bonding.html"}
- ]},
- {"@type":"CollectionPage","name":"Grounding, bonding and surge protection","description":"Grounding & Bonding: the families, how each is specified, the standards they are built to, indicative lead times and market price bands. Reference data, nothing for sale.","url":"https://voltfield.org/data-centers/grounding-bonding.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
- {"@type":"FAQPage","mainEntity":[
-   {"@type":"Question","name":"What is the difference between grounding and bonding, and where does surge protection fit?","acceptedAnswer":{"@type":"Answer","text":"Grounding and bonding do two different jobs and are routinely conflated. Grounding establishes a reference to earth; bonding ties metal parts together so fault current has a low-impedance path back to its source and a protective device actually operates. The equipment grounding conductor is not the neutral, and treating it as one is a recurring and dangerous error. Surge protection is a separate layer again, rated by where it sits relative to the main overcurrent device."}}
- ]}
-]}
+{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://voltfield.org/"}, {"@type": "ListItem", "position": 2, "name": "Data Centers", "item": "https://voltfield.org/data-centers.html"}, {"@type": "ListItem", "position": 3, "name": "Grounding & Bonding", "item": "https://voltfield.org/data-centers/grounding-bonding.html"}]}, {"@type": "CollectionPage", "name": "Grounding, bonding and surge protection", "description": "Grounding & Bonding: the families, how each is specified, the standards they are built to, indicative lead times and market price bands. Reference data, nothing for sale.", "url": "https://voltfield.org/data-centers/grounding-bonding.html", "dateModified": "2026-08-26", "isPartOf": {"@type": "WebSite", "name": "Voltfield", "url": "https://voltfield.org/"}, "publisher": {"@type": "Organization", "name": "Voltfield", "url": "https://voltfield.org/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the difference between grounding and bonding, and where does surge protection fit?", "acceptedAnswer": {"@type": "Answer", "text": "Grounding and bonding do two different jobs and are routinely conflated. Grounding establishes a reference to earth; bonding ties metal parts together so fault current has a low-impedance path back to its source and a protective device actually operates. The equipment grounding conductor is not the neutral, and treating it as one is a recurring and dangerous error. Surge protection is a separate layer again, rated by where it sits relative to the main overcurrent device."}}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the difference between a TMGB and a TGB?", "acceptedAnswer": {"@type": "Answer", "text": "Under ANSI/TIA-607, the TMGB (primary bonding busbar) is the main bonding point for telecommunications, bonded to the building’s electrical service grounding. TGBs (secondary bonding busbars) sit in each telecom room and connect back to the TMGB through the telecommunications bonding backbone."}}, {"@type": "Question", "name": "What is the difference between Type 1 and Type 2 surge protective devices?", "acceptedAnswer": {"@type": "Answer", "text": "Under UL 1449, a Type 1 SPD can be installed on the line side of the service disconnect, and a Type 2 SPD is installed on the load side, usually at a switchboard or panelboard. Type 3 devices are point-of-use protection further downstream."}}, {"@type": "Question", "name": "Should grounding connections be exothermic or compression?", "acceptedAnswer": {"@type": "Answer", "text": "Both are used. Exothermic welds form a permanent molecular bond and are common below grade. Compression connectors qualified to IEEE 837 are also accepted for below-grade use. Mechanical, bolted connectors suit accessible locations where connections may need to be inspected or changed."}}]}]}
 </script>
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#101B2D">
@@ -141,11 +131,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="callout"><b>On these figures.</b> Price bands are market ranges for each family as a whole, published for budgeting — they are not quotes, and Voltfield sells nothing. Lead times are indicative and move with the market; the <a href="/lead-time-index.html">Lead-Time Index</a> covers what is driving them.</div>
 
+  <h2>What to settle in the specification</h2>
+  <div class="specgrid">
+    <div class="speccard">
+      <h3>Telecom bonding to ANSI/TIA-607</h3>
+      <p>Data center bonding for IT and telecom follows ANSI/TIA-607: a primary bonding busbar (TMGB) bonded to the building&rsquo;s electrical grounding, secondary busbars (TGBs) in each telecom space, and a bonding backbone between them. Specify busbar hole patterns for the lugs that will actually land on them.</p>
+    </div>
+    <div class="speccard">
+      <h3>Connection method</h3>
+      <p>Exothermic welds, compression connectors and mechanical connectors are all used. Below-grade and inaccessible joints are usually exothermic or compression connectors qualified for that duty (IEEE 837). Accessible joints can be bolted. Every product should be listed to UL 467.</p>
+    </div>
+    <div class="speccard">
+      <h3>SPD type by location</h3>
+      <p>UL 1449 types are defined by where the device sits. Type 1 can go on the line side of the service disconnect, Type 2 on the load side, and Type 3 at the point of use. Installation rules are in NEC Article 242 (Article 285 in editions before 2020).</p>
+    </div>
+    <div class="speccard">
+      <h3>SPD ratings that matter</h3>
+      <p>Compare voltage protection rating (VPR), nominal discharge current (In) and the short-circuit current rating (SCCR). The SCCR must meet the available fault current where the SPD is installed, which is set by the transformer impedance upstream.</p>
+    </div>
+    <div class="speccard">
+      <h3>Material and environment</h3>
+      <p>Tinned copper busbars and connectors resist corrosion better than bare copper in humid or corrosive environments. Insulated standoffs keep a busbar isolated from the wall it&rsquo;s mounted on, so the only bond is the one that was designed.</p>
+    </div>
+  </div>
+
+  <h2>Common questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the difference between a TMGB and a TGB?</summary>
+    <p style="margin-top:10px">Under ANSI/TIA-607, the TMGB (primary bonding busbar) is the main bonding point for telecommunications, bonded to the building&rsquo;s electrical service grounding. TGBs (secondary bonding busbars) sit in each telecom room and connect back to the TMGB through the telecommunications bonding backbone.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the difference between Type 1 and Type 2 surge protective devices?</summary>
+    <p style="margin-top:10px">Under UL 1449, a Type 1 SPD can be installed on the line side of the service disconnect, and a Type 2 SPD is installed on the load side, usually at a switchboard or panelboard. Type 3 devices are point-of-use protection further downstream.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Should grounding connections be exothermic or compression?</summary>
+    <p style="margin-top:10px">Both are used. Exothermic welds form a permanent molecular bond and are common below grade. Compression connectors qualified to IEEE 837 are also accepted for below-grade use. Mechanical, bolted connectors suit accessible locations where connections may need to be inspected or changed.</p>
+  </details>
+
   <h2>Related</h2>
     <div class="rel">
       <a href="/data-centers.html">Data Centers</a>
       <a href="/guide-grounding-bonding-basics.html">Grounding &amp; Bonding Basics</a>
       <a href="/guide-arc-flash-boundary-basics.html">Arc-Flash Boundary Basics</a>
+      <a href="/calculators/grounding.html">Ground Rod Resistance Calculator</a>
+      <a href="/calculators/fault-current.html">Available Fault Current Calculator</a>
     </div>
 
   <aside class="provenance" aria-labelledby="prov-h">
