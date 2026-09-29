@@ -8,6 +8,13 @@
   <lastBuildDate>Tue, 29 Sep 2026 00:00:00 GMT</lastBuildDate>
   <atom:link href="https://voltfield.org/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>How to Size a UPS: kW, kVA, Redundancy and Battery Runtime</title>
+    <link>https://voltfield.org/guide-ups-sizing.html</link>
+    <guid>https://voltfield.org/guide-ups-sizing.html</guid>
+    <description>Design load, kW and kVA ratings, loading limit, N+1 and 2N redundancy, and battery runtime, with a worked example.</description>
+    <pubDate>Tue, 29 Sep 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
     <title>kW vs. kVA Explained: Real Power, Apparent Power and Equipment Sizing</title>
     <link>https://voltfield.org/guide-kw-vs-kva.html</link>
     <guid>https://voltfield.org/guide-kw-vs-kva.html</guid>

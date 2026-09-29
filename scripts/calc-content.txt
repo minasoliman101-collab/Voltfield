@@ -189,6 +189,7 @@ Sizing to usable energy and ordering that as nameplate. Ignoring degradation, th
 /guide-bess-augmentation.html :: BESS Augmentation Explained
 /guide-bess-augmentation.html :: BESS Augmentation Explained
 /guide-bess-fire-safety-nfpa-855.html :: BESS Fire Safety: NFPA 855
+/guide-ups-sizing.html :: How to Size a UPS
 /calculators/solar-string.html :: Solar String Sizing Calculator
 /calculators/generator-runtime.html :: Generator Runtime Calculator
 
@@ -363,6 +364,7 @@ Using nameplate consumption for a lightly loaded set. Treating nominal tank capa
 /data-centers/genset-components.html :: Genset Components
 /data-centers/backup-power.html :: Backup Power
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
+/guide-ups-sizing.html :: How to Size a UPS
 /calculators/motor-start.html :: Motor Starting Voltage Dip Calculator
 /calculators/bess-sizing.html :: BESS Sizing Calculator
 
