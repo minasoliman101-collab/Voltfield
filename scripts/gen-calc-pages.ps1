@@ -14,6 +14,11 @@
 #
 # That is the difference between a landing page and a doorway page: this one
 # answers the question on its own.
+#
+# HAND EDITS NOT IN calc-content.txt: calculators/voltage-drop.html carries an
+# 'NEC 3% and 5% rule' section and a visible FAQ (with matching FAQPage entries)
+# that this generator has no record type for. Port them before regenerating, or
+# they will be lost.
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
 $utf8 = New-Object System.Text.UTF8Encoding($false)
