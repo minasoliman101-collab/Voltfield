@@ -8,6 +8,13 @@
   <lastBuildDate>Tue, 29 Sep 2026 00:00:00 GMT</lastBuildDate>
   <atom:link href="https://voltfield.org/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>415 V vs. 480 V Data Center Distribution: What Changes, What It Saves, What It Costs</title>
+    <link>https://voltfield.org/guide-415v-vs-480v-distribution.html</link>
+    <guid>https://voltfield.org/guide-415v-vs-480v-distribution.html</guid>
+    <description>What changes when servers are fed 240 V directly: PDU transformers removed, power per circuit, fault current at the rack, neutrals and connectors.</description>
+    <pubDate>Tue, 29 Sep 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
     <title>Arc-Flash PPE Categories Explained: NFPA 70E Methods, Ratings and Table Limits</title>
     <link>https://voltfield.org/guide-arc-flash-ppe-categories.html</link>
     <guid>https://voltfield.org/guide-arc-flash-ppe-categories.html</guid>
