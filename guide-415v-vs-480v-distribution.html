@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>415 V vs. 480 V Data Center Power Distribution | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-415v-vs-480v-distribution.html">
+<meta name="description" content="415 V vs. 480 V data center distribution: removing PDU transformers, 240 V to the server, power per circuit, fault current, neutrals and connectors.">
+<meta name="keywords" content="415V data center, 415V vs 480V, 415/240V distribution, 240V servers, PDU transformer elimination, 208V vs 240V data center, 415V rack power">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="415 V vs. 480 V Data Center Distribution">
+<meta property="og:description" content="What changes when servers get 240 V directly: losses, current per circuit, fault current, neutrals and connectors.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-guide-415v-vs-480v-distribution.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-guide-415v-vs-480v-distribution.jpg">
+<meta name="twitter:title" content="415 V vs. 480 V Data Center Distribution">
+<meta name="twitter:description" content="What changes when servers get 240 V directly: losses, current per circuit, fault current, neutrals and connectors.">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://voltfield.org/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://voltfield.org/guides.html"}, {"@type": "ListItem", "position": 3, "name": "415 V vs. 480 V Data Center Distribution", "item": "https://voltfield.org/guide-415v-vs-480v-distribution.html"}]}, {"@type": "Article", "headline": "415 V vs. 480 V Data Center Distribution: What Changes, What It Saves, What It Costs", "description": "415 V vs. 480 V data center distribution: removing PDU transformers, 240 V to the server, power per circuit, fault current, neutrals and connectors.", "image": "https://voltfield.org/social/social-guide-415v-vs-480v-distribution.jpg", "author": {"@type": "Organization", "name": "Voltfield Editorial Team", "url": "https://voltfield.org/methodology.html"}, "publisher": {"@type": "Organization", "name": "Voltfield"}, "datePublished": "2026-09-29T00:00:00-05:00", "dateModified": "2026-09-29T00:00:00-05:00", "url": "https://voltfield.org/guide-415v-vs-480v-distribution.html"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why do data centers use 415 V?", "acceptedAnswer": {"@type": "Answer", "text": "Distributing at 415Y/240 V lets servers be fed 240 V line-to-neutral directly, which removes the PDU transformer stage used in 480 V designs. That saves its losses and floor space, and delivers roughly twice the power per circuit of 208 V."}}, {"@type": "Question", "name": "What voltage do servers get in a 415 V system?", "acceptedAnswer": {"@type": "Answer", "text": "240 V, connected line-to-neutral, since 415 divided by the square root of three is 240. Most server power supplies accept a range of roughly 200 to 240 V, so the same units work on 208 V and 240 V."}}, {"@type": "Question", "name": "Does 415 V distribution increase fault current?", "acceptedAnswer": {"@type": "Answer", "text": "At the racks, usually yes. The PDU transformers it eliminates also limited fault current downstream of them. Branch breakers, busway plug-ins and rack PDUs need interrupting ratings and SCCRs for the higher value, and arc-flash labels need recalculating."}}, {"@type": "Question", "name": "How much power does a 415 V 30 A circuit deliver?", "acceptedAnswer": {"@type": "Answer", "text": "A three-phase 415 V, 30 A circuit loaded to 80% delivers about 17.3 kVA (√3 × 415 × 24 A). The same breaker at 208 V delivers about 8.6 kVA."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="voltfield-eol.html"><b>Obsolete &amp; end-of-life</b><em>What replaced a discontinued platform</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">415 V vs. 480 V Distribution</span></nav>
+    <div class="eyebrow">Data Center Power</div>
+    <h1>415 V vs. 480 V Data Center Distribution</h1>
+    <p class="dek">North American data centers traditionally distribute at 480 V and step down to 208 V at the rack. A growing number distribute at 415 V instead and feed servers 240 V directly. Here's what changes, what it saves, and what it costs.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published September 29, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+  </div>
+</section>
+<div class="artwrap">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <p>In the <b>traditional North American design</b>, power is distributed at 480Y/277 V from the UPS, and a PDU transformer near the racks steps it down to 208Y/120 V. Servers are fed 208 V line-to-line. In a <b>415 V design</b>, a transformer upstream produces 415Y/240 V, which is distributed all the way to the rack. Servers are fed 240 V line-to-neutral, and the PDU transformers disappear.</p>
+
+  <div class="formula">415 V &divide; &radic;3 = 240 V &nbsp;&nbsp;&middot;&nbsp;&nbsp; 208 V &divide; &radic;3 = 120 V &nbsp;&nbsp;&middot;&nbsp;&nbsp; 480 V &divide; &radic;3 = 277 V</div>
+
+  <p>415/240 V isn't a common utility service voltage in North America, but it's close to the 400/230 V standard used across much of the world. That's why the servers and power supplies built for global markets accept it without modification: most server power supplies are rated for a range of roughly 200 to 240 V.</p>
+
+  <h2>What changes</h2>
+  <table class="reftable">
+    <tr><th scope="col"></th><th scope="col">480 V with PDUs</th><th scope="col">415 V to the rack</th></tr>
+    <tr><td><b>Distribution</b></td><td>480Y/277 V</td><td>415Y/240 V</td></tr>
+    <tr><td><b>At the server</b></td><td>208 V (line-to-line)</td><td>240 V (line-to-neutral)</td></tr>
+    <tr><td><b>Transformers after UPS</b></td><td>One per PDU</td><td>None</td></tr>
+    <tr><td><b>Neutral to the rack</b></td><td>Not needed for 208 V loads</td><td>Required</td></tr>
+    <tr><td><b>Rack connector</b></td><td>NEMA locking types</td><td>Often IEC 60309</td></tr>
+  </table>
+
+  <h2>What it saves</h2>
+  <h3>A conversion stage</h3>
+  <p>Every transformer loses some of the energy passing through it, as core loss (always present when it's energized) and load loss (rising with the square of current). A low-voltage dry-type PDU transformer typically loses on the order of 1 to 2% at normal loading, and proportionally more at light load, where data center PDUs often sit. Removing the stage removes those losses, and the heat the cooling system then has to reject. Both show up in <a class="inline" href="guide-pue-explained.html">PUE</a>.</p>
+  <h3>Current, per kW delivered</h3>
+  <p>Higher voltage means less current for the same power. For a 10 kW rack at 0.95 power factor on a three-phase feed:</p>
+  <table class="reftable">
+    <tr><th scope="col">Voltage</th><th scope="col">Current for 10 kW</th></tr>
+    <tr><td>208 V three-phase</td><td>29.2 A</td></tr>
+    <tr><td>415 V three-phase</td><td>14.6 A</td></tr>
+    <tr><td>480 V three-phase</td><td>12.7 A</td></tr>
+  </table>
+  <p>The same circuit therefore delivers about twice the power at 415 V as at 208 V. With continuous load limited to 80% of the circuit rating:</p>
+  <table class="reftable">
+    <tr><th scope="col">Three-phase circuit</th><th scope="col">Usable at 80%</th></tr>
+    <tr><td>208 V, 30 A</td><td>8.6 kVA</td></tr>
+    <tr><td>208 V, 60 A</td><td>17.3 kVA</td></tr>
+    <tr><td>415 V, 30 A</td><td>17.3 kVA</td></tr>
+    <tr><td>415 V, 60 A</td><td>34.5 kVA</td></tr>
+  </table>
+  <p>As rack densities climb, that's the practical attraction: fewer circuits, smaller cables and fewer rack PDUs per kW. The formula is kVA = &radic;3 &times; V &times; I &divide; 1,000, and every figure above can be checked with it.</p>
+  <h3>Floor space and equipment</h3>
+  <p>Without PDU transformers, the white space loses a row of transformer-based PDUs, often replaced by remote power panels or busway. That's floor space returned to racks, and fewer pieces of equipment to maintain.</p>
+
+  <h2>What it costs</h2>
+  <h3>Higher fault current at the rack</h3>
+  <p>A PDU transformer's impedance limits the fault current available downstream of it. Remove it, and the rack circuits see fault current limited only by the upstream transformer and cables. Branch breakers, busway plug-in units and rack PDUs have to be rated for it (interrupting rating and SCCR), and arc-flash incident energy at the white-space equipment rises. The <a class="inline" href="guide-transformer-impedance.html">transformer impedance guide</a> covers the mechanism, and the <a class="inline" href="calculators/fault-current.html">fault current calculator</a> gives a first estimate.</p>
+  <h3>The neutral comes back</h3>
+  <p>Servers on 240 V are connected line-to-neutral, so the distribution needs a neutral to every rack. Single-phase power supplies on a four-wire system put triplen harmonics into the neutral. Modern power supplies with power-factor correction draw much cleaner current than older designs, but the neutral still needs checking, as the <a class="inline" href="guide-harmonics-ieee-519.html">harmonics guide</a> explains.</p>
+  <h3>A dedicated transformer, and equipment choices</h3>
+  <p>Because 415 V isn't the utility service voltage, it comes from a dedicated transformer: either medium voltage to 415 V ahead of a 415 V UPS, or a 480-to-415 V transformer after a 480 V UPS. Every piece of downstream equipment, from switchboards to breakers and rack PDUs, must be rated for 415Y/240 V. Receptacles and plugs are often IEC 60309 types rather than the NEMA configurations North American facilities teams are used to. Equipment that genuinely needs 120 V needs its own source.</p>
+
+  <h2>Which to choose</h2>
+  <ul>
+    <li><b>415 V suits</b> new builds with high rack densities, IT equipment that accepts 240 V throughout, and teams comfortable with IEC-style rack power.</li>
+    <li><b>480 V with PDUs suits</b> facilities with a mix of 120 V and 208 V equipment, existing 208 V infrastructure, or tenants who expect standard North American receptacles.</li>
+    <li><b>Some designs go further,</b> feeding 480Y/277 V to power shelves in the rack. That removes the step-down entirely, but it needs IT equipment built for 277 V input.</li>
+  </ul>
+
+  <h2>Common mistakes</h2>
+  <ul>
+    <li><b>Keeping the old breaker ratings.</b> Without PDU transformers, available fault current at the rack rises. Re-check interrupting ratings and SCCR.</li>
+    <li><b>Assuming every device accepts 240 V.</b> Check the input range of everything in the rack, not just the servers.</li>
+    <li><b>Sizing the neutral for balanced linear load.</b> Check it against the actual power supplies.</li>
+    <li><b>Comparing efficiency at full load only.</b> PDU transformers usually run lightly loaded, where their losses are proportionally largest.</li>
+  </ul>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2 id="relatedGuides">Related guides</h2>
+  <ul>
+    <li><a class="inline" href="guide-transformer-impedance.html">Transformer Impedance (%Z) Explained</a> &mdash; why removing a transformer stage raises fault current downstream</li>
+    <li><a class="inline" href="guide-pue-explained.html">PUE Explained</a> &mdash; where conversion losses show up in facility efficiency</li>
+    <li><a class="inline" href="guide-n-plus-1-vs-2n-redundancy.html">N+1 vs. 2N Redundancy Explained</a> &mdash; carrying A and B feeds to the rack at either voltage</li>
+  </ul>
+
+  <h2>Where Voltfield fits in</h2>
+  <p>The <a class="inline" href="data-centers/power-distribution.html">Data Center Power Distribution</a> reference covers the busway, PDUs and remote power panels involved, and the <a class="inline" href="voltfield-rack-builder.html">Rack Elevation Builder</a> budgets rack power against circuit capacity.</p>
+
+  <h2>Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why do data centers use 415 V?</summary>
+    <p style="margin-top:10px">Distributing at 415Y/240 V lets servers be fed 240 V line-to-neutral directly, which removes the PDU transformer stage used in 480 V designs. That saves its losses and floor space, and delivers roughly twice the power per circuit of 208 V.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What voltage do servers get in a 415 V system?</summary>
+    <p style="margin-top:10px">240 V, connected line-to-neutral, since 415 divided by the square root of three is 240. Most server power supplies accept a range of roughly 200 to 240 V, so the same units work on 208 V and 240 V.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Does 415 V distribution increase fault current?</summary>
+    <p style="margin-top:10px">At the racks, usually yes. The PDU transformers it eliminates also limited fault current downstream of them. Branch breakers, busway plug-ins and rack PDUs need interrupting ratings and SCCRs for the higher value, and arc-flash labels need recalculating.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How much power does a 415 V 30 A circuit deliver?</summary>
+    <p style="margin-top:10px">A three-phase 415 V, 30 A circuit loaded to 80% delivers about 17.3 kVA (&radic;3 &times; 415 &times; 24 A). The same breaker at 208 V delivers about 8.6 kVA.</p>
+  </details>
+</div>
+<div class="ctaband">
+  <div class="ctaband-in">
+    <div>
+      <h3>Planning rack power?</h3>
+      <p>Stack equipment into a rack and check U-space, circuit power and weight budgets. Free, no signup.</p>
+    </div>
+    <a class="ctabtn" href="voltfield-rack-builder.html">RACK BUILDER &rarr;</a>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+<div class="artwrap artwrap-tail">
+  <h2>Equipment category</h2>
+<ul class="catlink">
+  <li><a class="inline" href="data-centers/power-distribution.html">Data Center Power Distribution</a> &mdash; busway, PDUs and remote power panels.</li>
+  <li><a class="inline" href="data-centers/transformers.html">Data Center Transformers</a> &mdash; including the transformers that produce 415 V.</li>
+</ul>
+
+  <h2 id="calcLinks">Run the numbers</h2>
+<ul class="catlink">
+  <li><a class="inline" href="calculators/fault-current.html">Available Fault Current Calculator</a> &mdash; available symmetrical fault current at a transformer secondary.</li>
+  <li><a class="inline" href="calculators/voltage-drop.html">Voltage Drop Calculator</a> &mdash; feeder drop against the 3% and 5% design limits.</li>
+  <li><a class="inline" href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a> &mdash; kW load to the next standard kVA nameplate.</li>
+</ul>
+
+  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;415 V vs. 480 V Data Center Distribution,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-415v-vs-480v-distribution.html</div>
+</div>
+
+<aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>How 415Y/240 V distribution differs from 480Y/277 V distribution with PDU transformers, what it saves in conversion losses, current and floor space, and what it costs in fault current, neutrals and equipment choices.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>ANSI C84.1 &mdash; electric power systems and equipment voltage ratings</li><li>NFPA 70 (NEC) &mdash; branch-circuit and continuous-load rules, and interrupting ratings</li><li>IEC 60309 &mdash; plugs, socket-outlets and couplers for industrial purposes</li><li>DOE efficiency standards for low-voltage dry-type distribution transformers (10 CFR 431)</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A design recommendation. The right distribution voltage depends on the IT equipment, the utility service, tenant requirements and the fault-current study. Transformer loss figures are indicative, and actual losses come from the specific unit's test data.</dd>
+      <dt>Provenance</dt>
+      <dd>Published September 29, 2026. Written and maintained by the Voltfield editorial team against the sources above. Every current and circuit-capacity figure is arithmetic you can reproduce from the formula on this page &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
+    </dl>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>
