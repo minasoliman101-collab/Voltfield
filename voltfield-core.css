@@ -588,6 +588,9 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
    that is small; 17px at 1.75 on a 720px measure is a comfortable column. */
 .wrap,.dirwrap{max-width:var(--shell);margin:0 auto;padding:44px 24px 68px}
 .artwrap{max-width:720px;margin:0 auto;padding:48px 24px 8px}
+/* Guide tail (equipment category, calculator links, citation): same column
+   as the article, without re-adding the article's top padding. */
+.artwrap-tail{padding-top:8px}
 .artwrap h2,.wrap h2{font-size:27px;letter-spacing:-.028em;color:var(--ink);
   margin:44px 0 14px;line-height:1.2}
 .wrap h2:first-child{margin-top:0}

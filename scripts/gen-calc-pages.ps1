@@ -1,6 +1,6 @@
 # Generates a landing page per calculator from calc-content.txt.
 #
-# WHY: 21 calculators live on one page, reachable only by anchor. "Voltage drop
+# WHY: 20 calculators live on one page, reachable only by anchor. "Voltage drop
 # calculator" and "transformer sizing calculator" are among the highest-volume
 # queries this site could plausibly rank for, and all of them pointed at a
 # single 96KB URL whose title mentions none of them.
@@ -159,7 +159,7 @@ foreach ($r in $recs) {
     if ($i -lt 0) { continue }
     [void]$sb.AppendLine("      <a href=""$($l.Substring(0,$i))"">$($l.Substring($i+4))</a>")
   }
-  [void]$sb.AppendLine("      <a href=""/engineering-calculators.html"">All 21 calculators</a>")
+  [void]$sb.AppendLine("      <a href=""/engineering-calculators.html"">All 20 calculators</a>")
   [void]$sb.AppendLine('    </div>')
   [void]$sb.AppendLine('')
   # Provenance block, matching the pattern the guides use. The "what it is not"
