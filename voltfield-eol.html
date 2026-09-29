@@ -108,7 +108,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    {"@type":"Question","name":"Why does this tool show a replacement class rather than an exact part number?","acceptedAnswer":{"@type":"Answer","text":"Because an exact cross-reference would frequently be wrong. Choosing the specific catalog number requires the frame size, interrupting rating, trip unit, voltage and accessories for your application, and those are not derivable from the obsolete part number alone. The class narrows the search to the right family; the manufacturer completes it against your actual conditions."}}
  ]}
 ]}
-</script></head>
+</script><style>
+/* Mobile overflow: product-line names such as "CP-XT series (500/630/720/...)"
+   are one unbreakable token, which held each card wider than a phone. */
+.eolgrid>*{min-width:0}
+.eolcard h2,.eolcard h3,.eolcard .v{overflow-wrap:anywhere}
+</style>
+</head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <!-- Google Tag Manager (noscript) -->

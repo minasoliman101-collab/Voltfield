@@ -117,7 +117,13 @@ table.breaks tr.cur td{background:var(--tint-signal);font-weight:600;color:var(-
    {"@type":"Question","name":"Does the size of a capacitor tell you its value?","acceptedAnswer":{"@type":"Answer","text":"Only loosely, and only within one technology. A physically larger electrolytic generally holds more charge or withstands a higher voltage, but a ceramic and an electrolytic of similar size can differ by orders of magnitude in capacitance. The printed marking is the value; the size mostly tells you the voltage rating and the family."}}
  ]}
 ]}
-</script></head>
+</script><style>
+/* Mobile overflow: long uppercase button labels would not wrap at 320px. */
+@media(max-width:640px){
+  .actions .btn{white-space:normal;max-width:100%;text-align:center}
+}
+</style>
+</head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <!-- Google Tag Manager (noscript) -->
