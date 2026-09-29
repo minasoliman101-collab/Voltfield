@@ -8,6 +8,13 @@
   <lastBuildDate>Tue, 29 Sep 2026 00:00:00 GMT</lastBuildDate>
   <atom:link href="https://voltfield.org/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>How to Size a Standby Generator: Ratings, Step Load, Motor Starting and Fuel</title>
+    <link>https://voltfield.org/guide-generator-sizing.html</link>
+    <guid>https://voltfield.org/guide-generator-sizing.html</guid>
+    <description>ISO 8528 ratings, running load, step-load acceptance, motor starting with one set out, derating and fuel runtime, with a worked data center example.</description>
+    <pubDate>Tue, 29 Sep 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
     <title>Harmonics &amp; IEEE 519 Explained: THD, TDD, Resonance and the Limits</title>
     <link>https://voltfield.org/guide-harmonics-ieee-519.html</link>
     <guid>https://voltfield.org/guide-harmonics-ieee-519.html</guid>

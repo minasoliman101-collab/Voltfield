@@ -63,6 +63,7 @@ Descriptions over 160 characters on `calculators/bess-sizing.html` and `data-cen
 | N+1 vs 2N / data center redundancy / 2N+1 | learn | `guide-n-plus-1-vs-2n-redundancy.html` **(new)** |
 | BESS C-rate / battery C-rate / 4-hour battery C-rate | learn | `guide-bess-c-rate.html` **(new)** |
 | IEEE 519 / harmonics / THD vs TDD / capacitor resonance | learn | `guide-harmonics-ieee-519.html` **(new)** |
+| generator sizing / standby generator sizing / step load | learn | `guide-generator-sizing.html` **(new)**. `data-centers/backup-power.html` is the equipment reference and links to it. |
 | power factor correction calculator | tool | `calculators/power-factor.html` |
 | available fault current calculator | tool | `calculators/fault-current.html` |
 | arc flash calculator / incident energy | tool | `calculators/arc-flash.html` |
@@ -103,6 +104,7 @@ Descriptions over 160 characters on `calculators/bess-sizing.html` and `data-cen
 4. ~~**BESS C-rate explained**~~ Done: `guide-bess-c-rate.html` (Sept 2026).
 5. ~~**NEC 3% / 5% voltage drop rule**~~ Done as a section plus FAQ on `calculators/voltage-drop.html` (Sept 2026), not a new page. It is a hand edit, flagged in `scripts/gen-calc-pages.ps1`.
 6. ~~**Harmonics and IEEE 519**~~ Done: `guide-harmonics-ieee-519.html` (Sept 2026). IEEE 519 was cited in several places with nothing explaining it.
+7. ~~**Generator sizing**~~ Done: `guide-generator-sizing.html` (Sept 2026).
 
 ---
 

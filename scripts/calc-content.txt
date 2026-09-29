@@ -283,6 +283,7 @@ Using full-load kVA instead of locked-rotor kVA, which understates the dip by a 
 /glossary.html#impedance :: Impedance (%Z), defined
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
 /guide-transformer-impedance.html :: Transformer Impedance (%Z) Explained
+/guide-generator-sizing.html :: How to Size a Standby Generator
 /calculators/voltage-drop.html :: Voltage Drop Calculator
 /calculators/generator-runtime.html :: Generator Runtime Calculator
 
@@ -372,6 +373,7 @@ Using nameplate consumption for a lightly loaded set. Treating nominal tank capa
 /data-centers/backup-power.html :: Backup Power
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
 /guide-ups-sizing.html :: How to Size a UPS
+/guide-generator-sizing.html :: How to Size a Standby Generator
 /calculators/motor-start.html :: Motor Starting Voltage Dip Calculator
 /calculators/bess-sizing.html :: BESS Sizing Calculator
 
