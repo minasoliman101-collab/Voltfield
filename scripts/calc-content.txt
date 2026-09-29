@@ -71,6 +71,7 @@ Sizing on kW and never dividing by power factor, which under-sizes by however fa
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
 /guide-transformer-nameplate.html :: How to Read a Transformer Nameplate
 /guide-pad-mount-vs-gsu-transformers.html :: Pad-Mount vs. GSU Transformers
+/guide-transformer-impedance.html :: Transformer Impedance (%Z) Explained
 /calculators/inrush.html :: Transformer Inrush Calculator
 /calculators/power-factor.html :: Power Factor Correction Calculator
 
@@ -86,7 +87,7 @@ V :: Line-to-line secondary voltage
 Isc :: Symmetrical RMS fault current in amperes
 --example
 A 1000 kVA transformer at 480 V with 5.75% impedance:
-Isc = (100,000 &times; 1000) / (1.732 &times; 480 &times; 5.75) = 20,934 A
+Isc = (100,000 &times; 1000) / (1.732 &times; 480 &times; 5.75) = 20,919 A
 So roughly 21 kA at the secondary terminals, and the main breaker needs an interrupting rating above that. Drop the impedance to 4% and the same transformer delivers about 30 kA.
 --standard
 IEEE Std 141 covers the full method. For arc-flash and coordination work the governing analysis is IEEE 1584. Equipment interrupting ratings are marked per UL 489 for moulded-case breakers and ANSI C37 for power breakers.
@@ -101,6 +102,7 @@ Using the calculated value as a final number instead of commissioning a study. F
 /glossary.html#impedance :: Impedance (%Z), defined
 /guide-short-circuit-studies-breaker-coordination.html :: Short-Circuit Studies &amp; Breaker Coordination
 /guide-arc-flash-boundary-basics.html :: Arc-Flash Boundary Basics
+/guide-transformer-impedance.html :: Transformer Impedance (%Z) Explained
 /calculators/arc-flash.html :: Arc-Flash Incident Energy Calculator
 /calculators/transformer-sizing.html :: Transformer Sizing Calculator
 
@@ -277,6 +279,7 @@ Using full-load kVA instead of locked-rotor kVA, which understates the dip by a 
 /parts/motor-controls-and-drives.html :: Motor Controls &amp; Drives
 /glossary.html#impedance :: Impedance (%Z), defined
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
+/guide-transformer-impedance.html :: Transformer Impedance (%Z) Explained
 /calculators/voltage-drop.html :: Voltage Drop Calculator
 /calculators/generator-runtime.html :: Generator Runtime Calculator
 
@@ -308,6 +311,7 @@ Setting instantaneous protection from full-load current alone. Assuming inrush i
 /guide-transformer-nameplate.html :: How to Read a Transformer Nameplate
 /guide-transformer-nameplate.html :: How to Read a Transformer Nameplate
 /guide-short-circuit-studies-breaker-coordination.html :: Short-Circuit Studies &amp; Breaker Coordination
+/guide-transformer-impedance.html :: Transformer Impedance (%Z) Explained
 /calculators/transformer-sizing.html :: Transformer Sizing Calculator
 /calculators/fault-current.html :: Available Fault Current Calculator
 
