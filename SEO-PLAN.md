@@ -68,6 +68,7 @@ Descriptions over 160 characters on `calculators/bess-sizing.html` and `data-cen
 | 415V data center / 415V vs 480V / 240V servers | learn | `guide-415v-vs-480v-distribution.html` **(new)** |
 | ground fault protection / NEC 230.95 / GFPE vs GFCI | learn | `guide-ground-fault-protection.html` **(new)** |
 | series rated vs fully rated / NEC 240.86 / series combination | learn | `guide-fully-rated-vs-series-rated.html` **(new)** |
+| ampacity derating / NEC 310.15 adjustment factors | learn | `guide-cable-ampacity-derating.html` **(new)** |
 | power factor correction calculator | tool | `calculators/power-factor.html` |
 | available fault current calculator | tool | `calculators/fault-current.html` |
 | arc flash calculator / incident energy | tool | `calculators/arc-flash.html` |
@@ -113,6 +114,7 @@ Descriptions over 160 characters on `calculators/bess-sizing.html` and `data-cen
 9. ~~**415 V vs. 480 V distribution**~~ Done: `guide-415v-vs-480v-distribution.html` (Sept 2026).
 10. ~~**Ground-fault protection**~~ Done: `guide-ground-fault-protection.html` (Sept 2026).
 11. ~~**Fully rated vs. series rated breakers**~~ Done: `guide-fully-rated-vs-series-rated.html` (Sept 2026).
+12. ~~**Cable ampacity derating**~~ Done: `guide-cable-ampacity-derating.html` (Sept 2026).
 
 ---
 

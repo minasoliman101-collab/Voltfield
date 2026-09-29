@@ -8,6 +8,13 @@
   <lastBuildDate>Tue, 29 Sep 2026 00:00:00 GMT</lastBuildDate>
   <atom:link href="https://voltfield.org/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Cable Ampacity Derating Explained: Ambient, Conductor Count and Terminal Ratings</title>
+    <link>https://voltfield.org/guide-cable-ampacity-derating.html</link>
+    <guid>https://voltfield.org/guide-cable-ampacity-derating.html</guid>
+    <description>How to derate conductor ampacity: NEC 310.16 columns, ambient correction, conductor-count adjustment and the terminal-temperature cap, with worked examples.</description>
+    <pubDate>Tue, 29 Sep 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
     <title>Fully Rated vs. Series Rated Breakers: How Series Combinations Work and When They Can't Be Used</title>
     <link>https://voltfield.org/guide-fully-rated-vs-series-rated.html</link>
     <guid>https://voltfield.org/guide-fully-rated-vs-series-rated.html</guid>

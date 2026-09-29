@@ -162,6 +162,7 @@ Using the 90&deg;C column when the terminations are only rated 75&deg;C — the 
 /glossary.html#derating :: Derating, defined
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
 /guide-harmonics-ieee-519.html :: Harmonics &amp; IEEE 519 Explained
+/guide-cable-ampacity-derating.html :: Cable Ampacity Derating Explained
 /calculators/voltage-drop.html :: Voltage Drop Calculator
 /calculators/fault-current.html :: Available Fault Current Calculator
 
