@@ -821,4 +821,12 @@ footer a:hover{color:#fff}
   .wrap,.dirwrap{padding:34px 20px 52px}
   .ctaband{padding:0 20px 48px}
   .ctaband-in{padding:26px 22px}
+  /* flex-shrink:0 kept long labels ("BROWSE BATTERY STORAGE PARTS") at full
+     width once the button wrapped to its own line, pushing the page sideways. */
+  .ctabtn{flex-shrink:1;max-width:100%;text-align:center}
+  /* Four-column reference tables overflowed a 360px phone: nowrap headers plus
+     15px cell padding. Let headers wrap and tighten the padding instead. */
+  .reftable{font-size:14px}
+  .reftable th,.reftable td{padding:10px 10px}
+  .reftable th{white-space:normal}
 }

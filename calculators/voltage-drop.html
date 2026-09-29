@@ -26,7 +26,10 @@
  {"@type":"WebPage","name":"Voltage Drop Calculator","description":"Calculate voltage drop on a feeder using the K-factor method, check it against the 3% and 5% design limits, and size the conductor. Free, no signup.","url":"https://voltfield.org/calculators/voltage-drop.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What does the Voltage Drop calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Voltage drop is the loss along a conductor between the source and the load. It is not a code violation in itself — the NEC states its 3% branch-circuit and 5% total figures as recommendations in informational notes, not requirements — but equipment is rated to operate within a voltage band, and a long run that drops too far will leave a motor starting hard, a contactor chattering, or a drive faulting on undervoltage. On a long feeder it is usually voltage drop, not ampacity, that forces the conductor up a size."}},
-   {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"This is a resistance-only calculation. It ignores conductor reactance, which matters on larger conductors and longer runs — above roughly 250 ft, or above about 4/0, the reactive component starts to dominate and this method under-reads. It also assumes a 75°C conductor temperature and a balanced load."}}
+   {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"This is a resistance-only calculation. It ignores conductor reactance, which matters on larger conductors and longer runs — above roughly 250 ft, or above about 4/0, the reactive component starts to dominate and this method under-reads. It also assumes a 75°C conductor temperature and a balanced load."}},
+   {"@type": "Question", "name": "Is the NEC 3% voltage drop rule a requirement?", "acceptedAnswer": {"@type": "Answer", "text": "Not on most circuits. The 3% branch and 5% total figures appear in informational notes to NEC 210.19(A) and 215.2(A), and informational notes aren't enforceable. They become mandatory only where another rule adopts them, such as an energy code the jurisdiction has adopted, or for specific equipment covered by Articles 647 and 695."}},
+   {"@type": "Question", "name": "How is the 5% total voltage drop split between feeder and branch?", "acceptedAnswer": {"@type": "Answer", "text": "The NEC's recommendation is 3% maximum on either the feeder or the branch circuit, and 5% combined. A common split is 2% on the feeder and 3% on the branch, but any split that keeps each under 3% and the total under 5% meets the recommendation."}},
+   {"@type": "Question", "name": "What is 3% voltage drop at 480 V and 120 V?", "acceptedAnswer": {"@type": "Answer", "text": "3% of 480 V is 14.4 V, and 3% of 120 V is 3.6 V. The 5% totals are 24 V and 6 V."}}
  ]}
 ]}
 </script>
@@ -136,12 +139,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2>Which standard governs this</h2>
   <p>The K-factor method is the standard hand calculation. NEC 210.19(A) and 215.2(A) informational notes give the 3% branch and 5% total figures. For exact work, IEEE Std 141 (the Red Book) covers the full method with reactance included.</p>
 
+  <h2 id="nec-3-5-rule">The NEC 3% and 5% rule</h2>
+  <p>The NEC's voltage-drop figures come from informational notes to 210.19(A) for branch circuits and 215.2(A) for feeders. They recommend sizing conductors so that drop doesn't exceed 3% on a branch circuit or a feeder, and 5% in total from the service to the farthest outlet. Informational notes aren't enforceable requirements under the NEC (90.5(C)), so on most circuits these are design targets, not code limits.</p>
+  <p>In practice, the 5% total is a budget to split between feeder and branch. Spend 3% on the branch and only 2% is left for the feeder:</p>
+  <table class="reftable">
+    <tr><th scope="col">System voltage</th><th scope="col">2%</th><th scope="col">3%</th><th scope="col">5% total</th></tr>
+    <tr><td>120 V</td><td>2.4 V</td><td>3.6 V</td><td>6.0 V</td></tr>
+    <tr><td>208 V</td><td>4.2 V</td><td>6.2 V</td><td>10.4 V</td></tr>
+    <tr><td>240 V</td><td>4.8 V</td><td>7.2 V</td><td>12.0 V</td></tr>
+    <tr><td>277 V</td><td>5.5 V</td><td>8.3 V</td><td>13.9 V</td></tr>
+    <tr><td>480 V</td><td>9.6 V</td><td>14.4 V</td><td>24.0 V</td></tr>
+  </table>
+  <p>In the worked example above, the 400 ft feeder drops 2.8%. That's inside 3% on its own, but it leaves only 2.2% of the 5% budget for every branch circuit it feeds.</p>
+  <p>Voltage drop does become mandatory in some places. NEC Article 647 limits it for sensitive electronic equipment, and Article 695 limits voltage at a fire pump controller during starting and running. Energy codes such as ASHRAE 90.1 and the IECC set voltage-drop limits of their own, which are enforceable wherever the jurisdiction has adopted them. Check the edition in force, since those limits have changed between editions.</p>
+
   <h2>What this calculation does not account for</h2>
   <p>This is a resistance-only calculation. It ignores conductor reactance, which matters on larger conductors and longer runs — above roughly 250 ft, or above about 4/0, the reactive component starts to dominate and this method under-reads. It also assumes a 75&deg;C conductor temperature and a balanced load.</p>
     <div class="callout"><b>This is a screening estimate.</b> It is here to get you to the right order of magnitude and the right conversation — not to replace a stamped calculation by a qualified engineer.</div>
 
   <h2>Common mistakes</h2>
   <p>Using one-way distance where the formula wants it and then doubling it again — the 2 and the 1.732 already account for the return path. Sizing to ampacity first and never checking drop on a long run. Applying the single-phase formula to a three-phase circuit, which over-states drop by about 15%.</p>
+
+  <h2>Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Is the NEC 3% voltage drop rule a requirement?</summary>
+    <p style="margin-top:10px">Not on most circuits. The 3% branch and 5% total figures appear in informational notes to NEC 210.19(A) and 215.2(A), and informational notes aren't enforceable. They become mandatory only where another rule adopts them, such as an energy code the jurisdiction has adopted, or for specific equipment covered by Articles 647 and 695.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How is the 5% total voltage drop split between feeder and branch?</summary>
+    <p style="margin-top:10px">The NEC's recommendation is 3% maximum on either the feeder or the branch circuit, and 5% combined. A common split is 2% on the feeder and 3% on the branch, but any split that keeps each under 3% and the total under 5% meets the recommendation.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is 3% voltage drop at 480 V and 120 V?</summary>
+    <p style="margin-top:10px">3% of 480 V is 14.4 V, and 3% of 120 V is 3.6 V. The 5% totals are 24 V and 6 V.</p>
+  </details>
 
   <h2>Related</h2>
     <div class="rel">

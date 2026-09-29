@@ -100,7 +100,7 @@ Descriptions over 160 characters on `calculators/bess-sizing.html` and `data-cen
 2. ~~**Transformer impedance (%Z) explained**~~ Done: `guide-transformer-impedance.html` (Sept 2026).
 3. ~~**N+1 vs 2N redundancy**~~ Done: `guide-n-plus-1-vs-2n-redundancy.html` (Sept 2026). `data-centers.html` keeps its summary and links to it.
 4. ~~**BESS C-rate explained**~~ Done: `guide-bess-c-rate.html` (Sept 2026).
-5. **NEC 3% / 5% voltage drop rule**. Consider an FAQ block on `calculators/voltage-drop.html` rather than a new page.
+5. ~~**NEC 3% / 5% voltage drop rule**~~ Done as a section plus FAQ on `calculators/voltage-drop.html` (Sept 2026), not a new page. It is a hand edit, flagged in `scripts/gen-calc-pages.ps1`.
 
 ---
 
