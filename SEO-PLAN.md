@@ -71,6 +71,7 @@ Descriptions over 160 characters on `calculators/bess-sizing.html` and `data-cen
 | ampacity derating / NEC 310.15 adjustment factors | learn | `guide-cable-ampacity-derating.html` **(new)** |
 | 80 percent rule / continuous load / 100% rated breaker | learn | `guide-continuous-load-80-percent-rule.html` **(new)** |
 | UPS topologies / double conversion vs eco mode / VFI VI VFD | learn | `guide-ups-topologies.html` **(new)** |
+| grid forming vs grid following / short circuit ratio / BESS grid forming | learn | `guide-grid-forming-vs-grid-following.html` **(new)** |
 | power factor correction calculator | tool | `calculators/power-factor.html` |
 | available fault current calculator | tool | `calculators/fault-current.html` |
 | arc flash calculator / incident energy | tool | `calculators/arc-flash.html` |
@@ -119,6 +120,7 @@ Descriptions over 160 characters on `calculators/bess-sizing.html` and `data-cen
 12. ~~**Cable ampacity derating**~~ Done: `guide-cable-ampacity-derating.html` (Sept 2026).
 13. ~~**The 80% rule and continuous loads**~~ Done: `guide-continuous-load-80-percent-rule.html` (Sept 2026).
 14. ~~**UPS topologies**~~ Done: `guide-ups-topologies.html` (Sept 2026).
+15. ~~**Grid-forming vs. grid-following inverters**~~ Done: `guide-grid-forming-vs-grid-following.html` (Sept 2026).
 
 ---
 

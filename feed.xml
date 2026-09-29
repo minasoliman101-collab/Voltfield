@@ -8,6 +8,13 @@
   <lastBuildDate>Tue, 29 Sep 2026 00:00:00 GMT</lastBuildDate>
   <atom:link href="https://voltfield.org/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Grid-Forming vs. Grid-Following Inverters: Control, Weak Grids and What GFM Costs</title>
+    <link>https://voltfield.org/guide-grid-forming-vs-grid-following.html</link>
+    <guid>https://voltfield.org/guide-grid-forming-vs-grid-following.html</guid>
+    <description>How grid-following and grid-forming inverter controls differ, the short-circuit ratio as a weak-grid screen, where grid-forming matters, and what it costs.</description>
+    <pubDate>Tue, 29 Sep 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
     <title>UPS Topologies Explained: Double Conversion, Eco Mode, Line-Interactive and Standby</title>
     <link>https://voltfield.org/guide-ups-topologies.html</link>
     <guid>https://voltfield.org/guide-ups-topologies.html</guid>
