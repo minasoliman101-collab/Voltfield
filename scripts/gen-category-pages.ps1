@@ -1,5 +1,10 @@
 # Generates a category page per entry in category-intros.txt.
 #
+# HAND EDITS: data-centers/grounding-bonding.html and monitoring-controls.html carry
+# a "What to settle in the specification" section, a visible FAQ and a FAQPage
+# JSON-LD node that category-intros.txt has no fields for. Port them before
+# regenerating those two pages, or they will be lost.
+#
 # WHY: the catalog has 81 categories and only 13 had a page. A category is the
 # level a buyer actually searches at -- "data center switchgear", "transformer
 # spare parts" -- sitting between the sector hub and the 243 family pages. Where

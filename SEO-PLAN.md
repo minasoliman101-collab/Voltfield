@@ -150,4 +150,4 @@ Earning backlinks happens off-site, so the repo changes are limited to making Vo
 - Link to at least one calculator and two related guides, and get at least three contextual inbound links.
 - Keep byline, provenance and JSON-LD dates in sync. This pass found and fixed one mismatch, in the FEOC guide.
 
-**Next:** the thinnest reference pages are `data-centers/monitoring-controls.html` and `data-centers/grounding-bonding.html` (about 425 words each). Expanding their Q&A intros is the cheapest content win after the gap pages in §3.
+**Done (Sept 2026):** the two thinnest reference pages, `data-centers/monitoring-controls.html` and `data-centers/grounding-bonding.html`, went from about 425 to about 820 words each. Each gained a "What to settle in the specification" section, a visible FAQ and FAQPage schema. Both are hand edits, flagged in `scripts/gen-category-pages.ps1`.

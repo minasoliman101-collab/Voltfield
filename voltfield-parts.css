@@ -59,7 +59,7 @@
 .speccard{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
   padding:18px 20px}
 .speccard h3,.speccard h4{font-family:var(--disp);font-weight:600;font-size:16px;
-  color:var(--ink);margin-bottom:7px;letter-spacing:-.02em}
+  color:var(--ink);margin:0 0 7px;letter-spacing:-.02em}
 .speccard p{font-size:14.5px;margin:0;line-height:1.6;color:var(--slate)}
 
 /* related links */
