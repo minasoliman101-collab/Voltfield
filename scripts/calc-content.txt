@@ -159,6 +159,7 @@ Using the 90&deg;C column when the terminations are only rated 75&deg;C — the 
 /data-centers/cabling.html :: Cable &amp; Busbar Sizing
 /glossary.html#derating :: Derating, defined
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
+/guide-harmonics-ieee-519.html :: Harmonics &amp; IEEE 519 Explained
 /calculators/voltage-drop.html :: Voltage Drop Calculator
 /calculators/fault-current.html :: Available Fault Current Calculator
 
@@ -254,6 +255,7 @@ Correcting to unity rather than to a target just below it, which risks over-corr
 /data-centers/monitoring-controls.html :: Monitoring &amp; Controls
 /glossary.html#kva-vs-kw :: kVA vs. kW, defined
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
+/guide-harmonics-ieee-519.html :: Harmonics &amp; IEEE 519 Explained
 /calculators/transformer-sizing.html :: Transformer Sizing Calculator
 /calculators/generator-runtime.html :: Generator Runtime Calculator
 
