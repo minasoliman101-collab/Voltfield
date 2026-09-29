@@ -247,6 +247,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/guide-continuous-load-80-percent-rule.html</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/guide-feoc-compliance.html</loc>
     <lastmod>2026-08-31</lastmod>
     <changefreq>monthly</changefreq>

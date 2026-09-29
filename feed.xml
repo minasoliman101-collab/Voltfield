@@ -8,6 +8,13 @@
   <lastBuildDate>Tue, 29 Sep 2026 00:00:00 GMT</lastBuildDate>
   <atom:link href="https://voltfield.org/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>The 80% Rule and Continuous Loads: NEC 125% Sizing and 100%-Rated Breakers</title>
+    <link>https://voltfield.org/guide-continuous-load-80-percent-rule.html</link>
+    <guid>https://voltfield.org/guide-continuous-load-80-percent-rule.html</guid>
+    <description>What counts as a continuous load, the NEC 125% sizing rule and the 80% rule behind it, the two conductor checks, and when 100%-rated breakers change the answer.</description>
+    <pubDate>Tue, 29 Sep 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
     <title>Cable Ampacity Derating Explained: Ambient, Conductor Count and Terminal Ratings</title>
     <link>https://voltfield.org/guide-cable-ampacity-derating.html</link>
     <guid>https://voltfield.org/guide-cable-ampacity-derating.html</guid>
