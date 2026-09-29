@@ -66,6 +66,7 @@ Descriptions over 160 characters on `calculators/bess-sizing.html` and `data-cen
 | generator sizing / standby generator sizing / step load | learn | `guide-generator-sizing.html` **(new)**. `data-centers/backup-power.html` is the equipment reference and links to it. |
 | arc flash PPE categories / NFPA 70E PPE table | learn | `guide-arc-flash-ppe-categories.html` **(new)** |
 | 415V data center / 415V vs 480V / 240V servers | learn | `guide-415v-vs-480v-distribution.html` **(new)** |
+| ground fault protection / NEC 230.95 / GFPE vs GFCI | learn | `guide-ground-fault-protection.html` **(new)** |
 | power factor correction calculator | tool | `calculators/power-factor.html` |
 | available fault current calculator | tool | `calculators/fault-current.html` |
 | arc flash calculator / incident energy | tool | `calculators/arc-flash.html` |
@@ -109,6 +110,7 @@ Descriptions over 160 characters on `calculators/bess-sizing.html` and `data-cen
 7. ~~**Generator sizing**~~ Done: `guide-generator-sizing.html` (Sept 2026).
 8. ~~**Arc-flash PPE categories**~~ Done: `guide-arc-flash-ppe-categories.html` (Sept 2026). Same change corrected `calculators/arc-flash.html`, which said incident energy scales with the square of arcing time (it is linear, as the calculator itself computes), and the boundary guide, which said the site had no arc-flash calculator.
 9. ~~**415 V vs. 480 V distribution**~~ Done: `guide-415v-vs-480v-distribution.html` (Sept 2026).
+10. ~~**Ground-fault protection**~~ Done: `guide-ground-fault-protection.html` (Sept 2026).
 
 ---
 

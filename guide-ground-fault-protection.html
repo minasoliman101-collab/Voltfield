@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>Ground-Fault Protection (GFP) &amp; NEC 230.95 | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-ground-fault-protection.html">
+<meta name="description" content="Ground-fault protection explained: why arcing faults evade overcurrent protection, NEC 230.95 settings, sensing methods, coordination, and GFP vs. GFCI.">
+<meta name="keywords" content="ground fault protection, NEC 230.95, GFP settings 1200 A, ground fault protection of equipment, GFPE vs GFCI, arcing ground fault, modified differential ground fault">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Ground-Fault Protection Explained">
+<meta property="og:description" content="Why arcing ground faults evade overcurrent protection, what NEC 230.95 requires, and why GFP is easy to get wrong.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-guide-ground-fault-protection.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-guide-ground-fault-protection.jpg">
+<meta name="twitter:title" content="Ground-Fault Protection Explained">
+<meta name="twitter:description" content="Why arcing ground faults evade overcurrent protection, what NEC 230.95 requires, and why GFP is easy to get wrong.">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://voltfield.org/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://voltfield.org/guides.html"}, {"@type": "ListItem", "position": 3, "name": "Ground-Fault Protection Explained", "item": "https://voltfield.org/guide-ground-fault-protection.html"}]}, {"@type": "Article", "headline": "Ground-Fault Protection Explained: NEC 230.95, Sensing and Coordination", "description": "Ground-fault protection explained: why arcing faults evade overcurrent protection, NEC 230.95 settings, sensing methods, coordination, and GFP vs. GFCI.", "image": "https://voltfield.org/social/social-guide-ground-fault-protection.jpg", "author": {"@type": "Organization", "name": "Voltfield Editorial Team", "url": "https://voltfield.org/methodology.html"}, "publisher": {"@type": "Organization", "name": "Voltfield"}, "datePublished": "2026-09-29T00:00:00-05:00", "dateModified": "2026-09-29T00:00:00-05:00", "url": "https://voltfield.org/guide-ground-fault-protection.html"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "When is ground-fault protection required by the NEC?", "acceptedAnswer": {"@type": "Answer", "text": "NEC 230.95 requires equipment ground-fault protection on solidly grounded wye services with more than 150 V to ground, for each service disconnect rated 1,000 A or more. In practice, that means large 480Y/277 V services. Similar rules apply to large feeder and building disconnects."}}, {"@type": "Question", "name": "What are the NEC 230.95 GFP settings?", "acceptedAnswer": {"@type": "Answer", "text": "A maximum pickup of 1,200 A, and a maximum time delay of one second for ground-fault currents of 3,000 A or more. Lower settings are allowed, and are often needed for coordination with downstream devices."}}, {"@type": "Question", "name": "What is the difference between GFP and GFCI?", "acceptedAnswer": {"@type": "Answer", "text": "A GFCI protects people and trips at a few milliamps. Class A devices trip at 6 mA or less under UL 943. Equipment GFP protects equipment from arcing ground faults, with pickups in the hundreds of amps. They aren't interchangeable."}}, {"@type": "Question", "name": "Why does GFP trip when there is no ground fault?", "acceptedAnswer": {"@type": "Answer", "text": "Usually because of the neutral: a missing or reversed neutral CT, a CT on the wrong side of the neutral-to-ground bond, or a multi-source system where neutral current returns by more than one path. The required on-site performance test is where these errors are normally found."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="voltfield-eol.html"><b>Obsolete &amp; end-of-life</b><em>What replaced a discontinued platform</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">Ground-Fault Protection</span></nav>
+    <div class="eyebrow">Switchgear &amp; Protection</div>
+    <h1>Ground-Fault Protection Explained</h1>
+    <p class="dek">On a 480Y/277 V service, an arcing ground fault can burn for minutes while drawing less current than the main breaker's rating. Equipment ground-fault protection exists to catch it. Here's what NEC 230.95 requires, how GFP senses a fault, and why it's easy to get wrong.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published September 29, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+  </div>
+</section>
+<div class="artwrap">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <p><b>Ground-fault protection of equipment (GFP or GFPE)</b> detects current flowing to ground and opens the circuit before an arcing fault can destroy the equipment. It isn't a people-protection device. It's set in hundreds of amps, not milliamps, and its job is to stop a low-level arcing fault that ordinary overcurrent protection can't see.</p>
+
+  <h2>Why overcurrent protection isn't enough</h2>
+  <p>A bolted fault draws enormous current and trips a breaker almost instantly. An <b>arcing</b> ground fault is different: the arc itself has voltage across it, and the fault path has impedance, so the current can be a small fraction of the bolted value. On a 480Y/277 V system there's enough voltage to sustain that arc.</p>
+  <p>Take a 3,000 A service main and an arcing ground fault drawing 2,000 A. That's below the breaker's rating, so its phase overcurrent protection will never trip. The arc keeps burning, destroying the switchgear, until something else gives out. A GFP relay set at 1,200 A sees the 2,000 A going to ground and opens the breaker within its time delay.</p>
+  <p>Lower-voltage systems such as 208Y/120 V are less prone to sustained arcing faults, which is why the NEC requirement applies above 150 V to ground.</p>
+
+  <h2>What NEC 230.95 requires</h2>
+  <ul>
+    <li><b>Where:</b> solidly grounded wye services with more than 150 V to ground, for each service disconnect rated 1,000 A or more. In practice, that means 480Y/277 V services. Recent editions extend the voltage range up to 1,000 V phase-to-phase; earlier ones stopped at 600 V.</li>
+    <li><b>Settings:</b> a maximum pickup of 1,200 A, and a maximum time delay of one second for ground-fault currents of 3,000 A or more.</li>
+    <li><b>Testing:</b> the system must be performance-tested when first installed on site, following the manufacturer's instructions, with a written record kept.</li>
+    <li><b>Exceptions:</b> fire pumps are excluded, so that a ground fault doesn't shut down fire protection. So are continuous industrial processes where a non-orderly shutdown would add hazards.</li>
+  </ul>
+  <p>Similar requirements apply to large feeder disconnects (NEC 215.10) and building disconnects (240.13) where there's no GFP upstream. Health care facilities need an additional level of ground-fault protection on feeders, so that a downstream fault doesn't take out the whole service.</p>
+  <p>Emergency systems work differently. The NEC doesn't require equipment GFP on an emergency system's alternate source, because tripping the generator on a ground fault defeats the point of having it. Instead, it requires <b>ground-fault indication</b>, so the fault is alarmed and can be found.</p>
+
+  <h2>How GFP senses a ground fault</h2>
+  <table class="reftable">
+    <tr><th scope="col">Method</th><th scope="col">How it works</th></tr>
+    <tr><td><b>Residual</b></td><td>CTs on each phase and on the neutral. Their sum is zero unless current is leaving through ground. Common in breaker trip units.</td></tr>
+    <tr><td><b>Zero-sequence</b></td><td>One core-balance CT around all the phase and neutral conductors. Sensitive, but limited by the window size.</td></tr>
+    <tr><td><b>Ground return</b></td><td>A CT on the main bonding jumper measures the current returning through it. Simple, but it only works on a single-source service.</td></tr>
+  </table>
+  <p>The neutral CT is the part most often wired wrong. If it's missing, reversed or on the wrong side of the neutral-to-ground bond, normal unbalanced neutral current looks like a ground fault and the system trips on load. Or, just as bad, a real fault is missed.</p>
+
+  <h2>Coordination: why GFP on the main alone is a problem</h2>
+  <p>GFP is required at the service. If that's the only level of ground-fault protection, the main is the only device that can clear a low-level ground fault anywhere downstream. A fault on one branch circuit takes down the entire service. Selectivity needs GFP on the feeders as well, with settings and time delays graded so the device nearest the fault trips first. The <a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">coordination study</a> should include the ground-fault curves, not just the phase curves.</p>
+  <div class="callout"><b>Multiple sources make it harder.</b> In a main-tie-main lineup, or with a generator bonded at the switchgear, neutral current can return by more than one path. A simple residual scheme then sees current that isn't a fault and trips, or misses current that is. These systems need a <b>modified differential ground-fault</b> scheme, designed around the actual neutral and bonding arrangement.</div>
+
+  <h2>GFP is not GFCI</h2>
+  <p>A ground-fault circuit interrupter (GFCI) protects people. It trips at around 5 mA, and UL 943 requires Class A devices to trip at 6 mA or less, far below the level that could stop a heart. Equipment GFP protects equipment, with pickups in the hundreds of amps. One can't substitute for the other.</p>
+
+  <h2>Data center considerations</h2>
+  <ul>
+    <li><b>Multiple sources are normal.</b> Utility, generators and tie breakers mean the neutral and bonding arrangement has to be designed for ground-fault sensing from the start, not fixed at commissioning.</li>
+    <li><b>Separately derived systems reset the rules.</b> Transformers and some UPS configurations create new grounded systems downstream, each with its own bonding point, which the <a class="inline" href="guide-grounding-bonding-basics.html">grounding and bonding guide</a> covers.</li>
+    <li><b>Nuisance trips are expensive.</b> A GFP trip on a service main is a site-wide event. Performance testing and a documented ground-fault coordination study are cheap by comparison.</li>
+  </ul>
+
+  <h2>Common mistakes</h2>
+  <ul>
+    <li><b>Relying on phase overcurrent protection for arcing ground faults.</b> They can burn below the breaker rating.</li>
+    <li><b>Installing GFP on the main only.</b> Any downstream ground fault then trips the whole service.</li>
+    <li><b>Mis-wiring the neutral CT,</b> or placing it on the wrong side of the bond.</li>
+    <li><b>Using a simple residual scheme on a multi-source system.</b> It needs a scheme designed for the neutral paths.</li>
+    <li><b>Skipping the on-site performance test.</b> It's required, and it's where wiring errors are found.</li>
+  </ul>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2 id="relatedGuides">Related guides</h2>
+  <ul>
+    <li><a class="inline" href="guide-grounding-bonding-basics.html">Grounding &amp; Bonding Basics</a> &mdash; the bonding arrangement GFP sensing depends on</li>
+    <li><a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">Short-Circuit Studies &amp; Breaker Coordination</a> &mdash; where ground-fault settings are coordinated</li>
+    <li><a class="inline" href="guide-arc-flash-ppe-categories.html">Arc-Flash PPE Categories Explained</a> &mdash; the arcing-fault hazard from the worker's side</li>
+  </ul>
+
+  <h2>Where Voltfield fits in</h2>
+  <p>The <a class="inline" href="data-centers/switchgear.html">switchgear reference</a> covers the service and distribution equipment where GFP is installed, and <a class="inline" href="data-centers/switchgear-components.html">Switchgear Components</a> covers the trip units and current transformers it's built from.</p>
+
+  <h2>Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">When is ground-fault protection required by the NEC?</summary>
+    <p style="margin-top:10px">NEC 230.95 requires equipment ground-fault protection on solidly grounded wye services with more than 150 V to ground, for each service disconnect rated 1,000 A or more. In practice, that means large 480Y/277 V services. Similar rules apply to large feeder and building disconnects.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What are the NEC 230.95 GFP settings?</summary>
+    <p style="margin-top:10px">A maximum pickup of 1,200 A, and a maximum time delay of one second for ground-fault currents of 3,000 A or more. Lower settings are allowed, and are often needed for coordination with downstream devices.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the difference between GFP and GFCI?</summary>
+    <p style="margin-top:10px">A GFCI protects people and trips at a few milliamps. Class A devices trip at 6 mA or less under UL 943. Equipment GFP protects equipment from arcing ground faults, with pickups in the hundreds of amps. They aren't interchangeable.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why does GFP trip when there is no ground fault?</summary>
+    <p style="margin-top:10px">Usually because of the neutral: a missing or reversed neutral CT, a CT on the wrong side of the neutral-to-ground bond, or a multi-source system where neutral current returns by more than one path. The required on-site performance test is where these errors are normally found.</p>
+  </details>
+</div>
+<div class="ctaband">
+  <div class="ctaband-in">
+    <div>
+      <h3>Checking what the service can deliver?</h3>
+      <p>Estimate available fault current from transformer kVA, voltage and impedance. Free, no signup.</p>
+    </div>
+    <a class="ctabtn" href="calculators/fault-current.html">FAULT CURRENT &rarr;</a>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+<div class="artwrap artwrap-tail">
+  <h2>Equipment category</h2>
+<ul class="catlink">
+  <li><a class="inline" href="data-centers/switchgear.html">Data Center Switchgear</a> &mdash; service and distribution equipment where GFP is installed.</li>
+  <li><a class="inline" href="data-centers/switchgear-components.html">Switchgear Components</a> &mdash; trip units and current transformers.</li>
+</ul>
+
+  <h2 id="calcLinks">Run the numbers</h2>
+<ul class="catlink">
+  <li><a class="inline" href="calculators/fault-current.html">Available Fault Current Calculator</a> &mdash; available symmetrical fault current at a transformer secondary.</li>
+  <li><a class="inline" href="calculators/grounding.html">Ground Rod Resistance Calculator</a> &mdash; single-rod resistance from soil resistivity.</li>
+</ul>
+
+  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Ground-Fault Protection Explained,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-ground-fault-protection.html</div>
+</div>
+
+<aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>Why arcing ground faults need dedicated protection, what NEC 230.95 requires, how GFP senses ground faults, coordination and multi-source pitfalls, and the difference between GFP and GFCI.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>NFPA 70 (NEC) &mdash; 230.95 (services), 215.10 (feeders), 240.13 (building disconnects), 517 (health care) and 700 (emergency systems)</li><li>UL 943 &mdash; ground-fault circuit interrupters</li><li>IEEE Std 242 (Buff Book) &mdash; protection and coordination of industrial and commercial power systems</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A protection design. Ground-fault sensing on multi-source systems in particular depends on the specific neutral and bonding arrangement, and needs a qualified engineer and a coordination study. Section numbers and thresholds have changed between NEC editions, so check the edition your jurisdiction enforces.</dd>
+      <dt>Provenance</dt>
+      <dd>Published September 29, 2026. Written and maintained by the Voltfield editorial team against the sources above &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
+    </dl>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>
