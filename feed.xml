@@ -8,6 +8,13 @@
   <lastBuildDate>Tue, 29 Sep 2026 00:00:00 GMT</lastBuildDate>
   <atom:link href="https://voltfield.org/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>N+1 vs. 2N Redundancy Explained: What Each Survives and What It Costs</title>
+    <link>https://voltfield.org/guide-n-plus-1-vs-2n-redundancy.html</link>
+    <guid>https://voltfield.org/guide-n-plus-1-vs-2n-redundancy.html</guid>
+    <description>What the N, N+1, 2N and 2(N+1) redundancy schemes survive, what each costs in installed capacity, and how they relate to concurrent maintainability and fault tolerance.</description>
+    <pubDate>Tue, 29 Sep 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
     <title>Transformer Impedance (%Z) Explained: Fault Current, Regulation and Choosing a Value</title>
     <link>https://voltfield.org/guide-transformer-impedance.html</link>
     <guid>https://voltfield.org/guide-transformer-impedance.html</guid>
