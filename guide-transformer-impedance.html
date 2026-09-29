@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>Transformer Impedance (%Z) &amp; Fault Current | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-transformer-impedance.html">
+<meta name="description" content="Transformer impedance (%Z) explained: how it sets fault current, voltage regulation and motor-starting dip, the &plusmn;7.5% tolerance, and how to choose a value.">
+<meta name="keywords" content="transformer impedance, percent impedance, transformer %Z, transformer impedance fault current, 5.75% impedance, impedance tolerance, transformer voltage regulation, X/R ratio">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Transformer Impedance (%Z) Explained">
+<meta property="og:description" content="How one nameplate number sets fault current, voltage regulation and motor-starting dip, and how to choose it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-guide-transformer-impedance.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-guide-transformer-impedance.jpg">
+<meta name="twitter:title" content="Transformer Impedance (%Z) Explained">
+<meta name="twitter:description" content="How one nameplate number sets fault current, voltage regulation and motor-starting dip, and how to choose it.">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://voltfield.org/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://voltfield.org/guides.html"}, {"@type": "ListItem", "position": 3, "name": "Transformer Impedance (%Z) Explained", "item": "https://voltfield.org/guide-transformer-impedance.html"}]}, {"@type": "Article", "headline": "Transformer Impedance (%Z) Explained: Fault Current, Regulation and Choosing a Value", "description": "Transformer impedance (%Z) explained: how it sets fault current, voltage regulation and motor-starting dip, the ±7.5% tolerance, and how to choose a value.", "image": "https://voltfield.org/social/social-guide-transformer-impedance.jpg", "author": {"@type": "Organization", "name": "Voltfield Editorial Team", "url": "https://voltfield.org/methodology.html"}, "publisher": {"@type": "Organization", "name": "Voltfield"}, "datePublished": "2026-09-29T00:00:00-05:00", "dateModified": "2026-09-29T00:00:00-05:00", "url": "https://voltfield.org/guide-transformer-impedance.html"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does 5.75% impedance mean on a transformer?", "acceptedAnswer": {"@type": "Answer", "text": "It means 5.75% of rated voltage, applied with the secondary short-circuited, drives full rated current through the windings. At full voltage, a bolted fault on the secondary would therefore draw about 100 ÷ 5.75 = 17.4 times full-load current, assuming an infinite source."}}, {"@type": "Question", "name": "How do I calculate fault current from transformer impedance?", "acceptedAnswer": {"@type": "Answer", "text": "Divide full-load current by the impedance as a decimal: Isc = FLA ÷ (%Z ÷ 100). For a 1000 kVA, 480 V transformer at 5.75%, that is 1,203 A ÷ 0.0575 = about 20,900 A. This infinite-source figure is conservative, so it's suitable for screening."}}, {"@type": "Question", "name": "Is higher or lower transformer impedance better?", "acceptedAnswer": {"@type": "Answer", "text": "Neither. Lower impedance gives better voltage regulation and smaller motor-starting dips, but raises available fault current, which demands higher-rated switchgear. Higher impedance limits fault current at the cost of more voltage drop under load."}}, {"@type": "Question", "name": "What is the tolerance on transformer impedance?", "acceptedAnswer": {"@type": "Answer", "text": "IEEE C57.12.00 allows the tested impedance of a two-winding transformer to differ from the specified value by up to ±7.5%. For fault-duty calculations, use the low end of that range, or the tested value once it is known."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="voltfield-eol.html"><b>Obsolete &amp; end-of-life</b><em>What replaced a discontinued platform</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">Transformer Impedance (%Z) Explained</span></nav>
+    <div class="eyebrow">Transformers</div>
+    <h1>Transformer Impedance (%Z) Explained</h1>
+    <p class="dek">One number on the nameplate decides how much fault current reaches your switchgear, how far the voltage sags under load, and how hard a motor start hits the bus. Here's what %Z means and how to choose it.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published September 29, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+  </div>
+</section>
+<div class="artwrap">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <p><b>Percent impedance (%Z)</b> is the percentage of rated primary voltage that must be applied to a transformer, with its secondary short-circuited, to drive rated current through the windings. A transformer marked 5.75% needs only 5.75% of its rated voltage to push full-load current through a dead short. That is exactly why it will pass a very large current if a real short happens at full voltage.</p>
+
+  <div class="formula">Isc = FLA &divide; (%Z &divide; 100) &nbsp;&nbsp;&middot;&nbsp;&nbsp; Isc = (100,000 &times; kVA) &divide; (1.732 &times; V &times; %Z)</div>
+
+  <p>The value comes from the factory short-circuit (impedance) test and is stamped on the nameplate, usually at the transformer's reference temperature. It is one of the few figures that has to be specified deliberately. Left to the supplier, it gets chosen for the transformer's convenience, not the system's.</p>
+
+  <h2>What %Z controls</h2>
+  <p>A single number does three jobs, and they pull in opposite directions:</p>
+  <table class="reftable">
+    <tr><th scope="col">Effect</th><th scope="col">Lower %Z</th><th scope="col">Higher %Z</th></tr>
+    <tr><td>Available fault current</td><td>Higher</td><td>Lower</td></tr>
+    <tr><td>Voltage drop under load</td><td>Less</td><td>More</td></tr>
+    <tr><td>Motor-starting voltage dip</td><td>Smaller</td><td>Larger</td></tr>
+  </table>
+  <p>Lower impedance makes a stiffer source. That's good for voltage, and bad for everything downstream that has to interrupt or withstand a fault. Choosing %Z means choosing where on that tradeoff the system sits.</p>
+
+  <h2>Fault current: the worked example</h2>
+  <p>A 1000 kVA transformer, 480 V secondary, nameplate impedance 5.75%:</p>
+  <ul>
+    <li><b>Full-load current:</b> 1000 &times; 1000 &divide; (1.732 &times; 480) = 1,203 A</li>
+    <li><b>Available fault current:</b> 1,203 &divide; 0.0575 = about 20,900 A, or roughly 21 kA at the secondary terminals</li>
+    <li><b>Same transformer at 4.0% impedance:</b> about 30,100 A, a 44% increase from a change that looks small on paper</li>
+  </ul>
+  <p>These are infinite-source figures. They assume the utility can supply unlimited current into the primary, which over-states the real value. That makes them conservative, and so safe for a first pass. The <a class="inline" href="calculators/fault-current.html">Available Fault Current Calculator</a> runs this method directly. A full <a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">short-circuit study</a> adds the utility source impedance, cable impedance and motor contribution.</p>
+
+  <h2>The tolerance nobody reads</h2>
+  <p>The nameplate %Z is not exact. IEEE C57.12.00 allows the tested impedance of a two-winding transformer to differ from the specified value by up to &plusmn;7.5%. For fault-duty purposes, the low end is the one that matters. A 5.75% specification can legitimately arrive as 5.32%:</p>
+  <ul>
+    <li>5.75 &times; 0.925 = 5.32%</li>
+    <li>Fault current rises to about 22,600 A, roughly 8% above the nominal figure</li>
+  </ul>
+  <p>If the switchgear's interrupting rating was chosen with little margin over the nominal fault current, that 8% can matter. Use the minimum impedance within tolerance for equipment duty, or the tested value once the unit's test report is available.</p>
+
+  <h2>Voltage regulation</h2>
+  <p>Impedance has a resistive part (%R) and a reactive part (%X), related by %Z&sup2; = %R&sup2; + %X&sup2;. Their ratio (X/R) matters on its own: a higher X/R means a larger DC offset in the first cycles of a fault, which affects the asymmetrical current that breakers must be rated for. For voltage drop at full load, a common approximation is:</p>
+  <div class="formula">%Regulation &asymp; %R &times; cos &phi; + %X &times; sin &phi;</div>
+  <p>With the 5.75% transformer above, an assumed %R of 1.0 gives %X = &radic;(5.75&sup2; &minus; 1.0&sup2;) = 5.66%. At 0.85 power factor (sin &phi; = 0.53), regulation is about 1.0 &times; 0.85 + 5.66 &times; 0.53 = <b>3.8%</b>. The secondary voltage sags almost 4% between no load and full load, before any cable voltage drop is added. The %R value here is an assumption for the example: use the test report's load-loss figures for a real unit.</p>
+
+  <h2>Motor starting</h2>
+  <p>A motor starting across the line draws locked-rotor current, commonly around six times its full-load current, and the bus dips in proportion to how stiff the source is. The transformer's short-circuit kVA is its rating divided by %Z: 1000 &divide; 0.0575 = 17,391 kVA. A motor with 1,000 kVA of locked-rotor demand then dips the bus by about 1,000 &divide; (1,000 + 17,391) = <b>5.4%</b>. At 4% impedance the source is 25,000 kVA and the dip falls to about 3.8%. The <a class="inline" href="calculators/motor-start.html">Motor Starting Voltage Dip Calculator</a> uses the same screening method.</p>
+
+  <h2>Choosing %Z</h2>
+  <p>Distribution-class transformers typically fall between about 4% and 8%, and large power transformers are often higher. Within a range, the choice follows the system:</p>
+  <ul>
+    <li><b>Fault duty is the constraint:</b> if the downstream switchgear is existing, or a lower interrupting rating saves real cost, specify a higher %Z and accept more voltage drop.</li>
+    <li><b>Voltage is the constraint:</b> large motors, long feeders or voltage-sensitive loads argue for a lower %Z, with switchgear rated for the higher fault current that follows.</li>
+    <li><b>Arc flash:</b> lower fault current doesn't always mean lower incident energy. Incident energy also depends on how long the protective device takes to clear, and a lower current can slow it down. Check it in the <a class="inline" href="guide-arc-flash-boundary-basics.html">arc-flash analysis</a> rather than assuming.</li>
+    <li><b>Paralleled transformers:</b> units meant to share load in parallel need closely matched impedance, as well as matching ratios and vector groups. A mismatch makes the lower-impedance unit carry more than its share.</li>
+  </ul>
+
+  <div class="callout"><b>Replacing a failed unit?</b> Match the impedance of the transformer being replaced, not just its kVA. A replacement with lower %Z raises fault current at every downstream bus, which can leave existing breakers under-rated for the fault they now have to interrupt.</div>
+
+  <h2>Converting %Z to ohms</h2>
+  <p>Studies sometimes need the impedance in ohms, referred to one side of the transformer:</p>
+  <div class="formula">Z<sub>&Omega;</sub> = (%Z &divide; 100) &times; V&sup2; &divide; VA</div>
+  <p>For the example transformer, referred to the 480 V side: 0.0575 &times; 480&sup2; &divide; 1,000,000 = 0.0132 &Omega;. Referred to the primary, use the primary voltage instead. The percentage is the same from either side, which is why nameplates state it that way.</p>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2 id="relatedGuides">Related guides</h2>
+  <ul>
+    <li><a class="inline" href="guide-transformer-nameplate.html">How to Read a Transformer Nameplate</a> &mdash; where %Z sits among the other ratings, and how to read the rest</li>
+    <li><a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">Short-Circuit Studies &amp; Breaker Coordination</a> &mdash; the study that turns %Z into equipment ratings</li>
+    <li><a class="inline" href="guide-kw-vs-kva.html">kW vs. kVA Explained</a> &mdash; the kVA rating that %Z is expressed against</li>
+  </ul>
+
+  <h2>Where Voltfield fits in</h2>
+  <p>The <a class="inline" href="data-centers/transformers.html">Data Center Transformers</a> reference covers the pad-mount, dry-type and large power transformer families where %Z gets specified, and the <a class="inline" href="data-centers/switchgear.html">switchgear reference</a> covers the equipment whose interrupting ratings it drives.</p>
+
+  <h2>Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What does 5.75% impedance mean on a transformer?</summary>
+    <p style="margin-top:10px">It means 5.75% of rated voltage, applied with the secondary short-circuited, drives full rated current through the windings. At full voltage, a bolted fault on the secondary would therefore draw about 100 &divide; 5.75 = 17.4 times full-load current, assuming an infinite source.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How do I calculate fault current from transformer impedance?</summary>
+    <p style="margin-top:10px">Divide full-load current by the impedance as a decimal: Isc = FLA &divide; (%Z &divide; 100). For a 1000 kVA, 480 V transformer at 5.75%, that is 1,203 A &divide; 0.0575 = about 20,900 A. This infinite-source figure is conservative, so it's suitable for screening.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Is higher or lower transformer impedance better?</summary>
+    <p style="margin-top:10px">Neither. Lower impedance gives better voltage regulation and smaller motor-starting dips, but raises available fault current, which demands higher-rated switchgear. Higher impedance limits fault current at the cost of more voltage drop under load.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the tolerance on transformer impedance?</summary>
+    <p style="margin-top:10px">IEEE C57.12.00 allows the tested impedance of a two-winding transformer to differ from the specified value by up to &plusmn;7.5%. For fault-duty calculations, use the low end of that range, or the tested value once it is known.</p>
+  </details>
+</div>
+<div class="ctaband">
+  <div class="ctaband-in">
+    <div>
+      <h3>Checking what a transformer lets through?</h3>
+      <p>Estimate available fault current from kVA, voltage and %Z, and check it against equipment ratings. Free, no signup.</p>
+    </div>
+    <a class="ctabtn" href="calculators/fault-current.html">FAULT CURRENT &rarr;</a>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+<div class="artwrap artwrap-tail">
+  <h2>Equipment category</h2>
+<ul class="catlink">
+  <li><a class="inline" href="data-centers/transformers.html">Data Center Transformers</a> &mdash; the units where %Z is specified.</li>
+  <li><a class="inline" href="data-centers/switchgear.html">Data Center Switchgear</a> &mdash; the equipment whose interrupting ratings %Z decides.</li>
+</ul>
+
+  <h2 id="calcLinks">Run the numbers</h2>
+<ul class="catlink">
+  <li><a class="inline" href="calculators/fault-current.html">Available Fault Current Calculator</a> &mdash; available symmetrical fault current at a transformer secondary.</li>
+  <li><a class="inline" href="calculators/motor-start.html">Motor Starting Voltage Dip Calculator</a> &mdash; the dip a motor start puts on its source.</li>
+  <li><a class="inline" href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a> &mdash; kW load to the next standard kVA nameplate.</li>
+  <li><a class="inline" href="calculators/arc-flash.html">Arc-Flash Incident Energy Calculator</a> &mdash; screening incident energy and boundary by the Lee method.</li>
+</ul>
+
+  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Transformer Impedance (%Z) Explained,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-transformer-impedance.html</div>
+</div>
+
+<aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>What transformer percent impedance means, how it sets available fault current, voltage regulation and motor-starting dip, the nameplate tolerance, and how to choose a value.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>IEEE C57.12.00 &mdash; general requirements for liquid-immersed distribution, power and regulating transformers, including impedance tolerance</li><li>IEEE C57.12.90 &mdash; test code, including the impedance and load-loss test</li><li>IEEE Std 141 (Red Book) &mdash; short-circuit and voltage-drop calculation methods</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>Infinite-source fault current and approximate regulation are screening methods. Equipment ratings need a short-circuit study that includes source impedance, cables and motor contribution, carried out by a qualified engineer.</dd>
+      <dt>Provenance</dt>
+      <dd>Published September 29, 2026. Written and maintained by the Voltfield editorial team against the sources above. Every figure is arithmetic you can reproduce from the formulas on this page, and the one assumed value (%R in the regulation example) is labeled as such &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
+    </dl>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>
