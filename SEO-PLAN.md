@@ -70,6 +70,7 @@ Descriptions over 160 characters on `calculators/bess-sizing.html` and `data-cen
 | series rated vs fully rated / NEC 240.86 / series combination | learn | `guide-fully-rated-vs-series-rated.html` **(new)** |
 | ampacity derating / NEC 310.15 adjustment factors | learn | `guide-cable-ampacity-derating.html` **(new)** |
 | 80 percent rule / continuous load / 100% rated breaker | learn | `guide-continuous-load-80-percent-rule.html` **(new)** |
+| UPS topologies / double conversion vs eco mode / VFI VI VFD | learn | `guide-ups-topologies.html` **(new)** |
 | power factor correction calculator | tool | `calculators/power-factor.html` |
 | available fault current calculator | tool | `calculators/fault-current.html` |
 | arc flash calculator / incident energy | tool | `calculators/arc-flash.html` |
@@ -117,6 +118,7 @@ Descriptions over 160 characters on `calculators/bess-sizing.html` and `data-cen
 11. ~~**Fully rated vs. series rated breakers**~~ Done: `guide-fully-rated-vs-series-rated.html` (Sept 2026).
 12. ~~**Cable ampacity derating**~~ Done: `guide-cable-ampacity-derating.html` (Sept 2026).
 13. ~~**The 80% rule and continuous loads**~~ Done: `guide-continuous-load-80-percent-rule.html` (Sept 2026).
+14. ~~**UPS topologies**~~ Done: `guide-ups-topologies.html` (Sept 2026).
 
 ---
 

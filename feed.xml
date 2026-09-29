@@ -8,6 +8,13 @@
   <lastBuildDate>Tue, 29 Sep 2026 00:00:00 GMT</lastBuildDate>
   <atom:link href="https://voltfield.org/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>UPS Topologies Explained: Double Conversion, Eco Mode, Line-Interactive and Standby</title>
+    <link>https://voltfield.org/guide-ups-topologies.html</link>
+    <guid>https://voltfield.org/guide-ups-topologies.html</guid>
+    <description>The IEC 62040-3 VFI, VI and VFD classes, double conversion vs. eco mode efficiency and exposure, line-interactive and standby UPS, transfer tolerance and rotary UPS.</description>
+    <pubDate>Tue, 29 Sep 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
     <title>The 80% Rule and Continuous Loads: NEC 125% Sizing and 100%-Rated Breakers</title>
     <link>https://voltfield.org/guide-continuous-load-80-percent-rule.html</link>
     <guid>https://voltfield.org/guide-continuous-load-80-percent-rule.html</guid>
