@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>Cable Ampacity Derating: NEC 310.15 Explained | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-cable-ampacity-derating.html">
+<meta name="description" content="Cable ampacity derating explained: NEC 310.16 columns, ambient correction, the 4-6 conductor 80% adjustment, and the 75&deg;C terminal cap, with examples.">
+<meta name="keywords" content="ampacity derating, NEC 310.15 adjustment factors, ampacity correction factor, conduit fill derating, 90C column derating, 75C terminal rating, neutral current carrying conductor">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Cable Ampacity Derating Explained">
+<meta property="og:description" content="From the table value to the number you can use: ambient correction, conductor-count adjustment and the terminal cap.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-guide-cable-ampacity-derating.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-guide-cable-ampacity-derating.jpg">
+<meta name="twitter:title" content="Cable Ampacity Derating Explained">
+<meta name="twitter:description" content="From the table value to the number you can use: ambient correction, conductor-count adjustment and the terminal cap.">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://voltfield.org/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://voltfield.org/guides.html"}, {"@type": "ListItem", "position": 3, "name": "Cable Ampacity Derating Explained", "item": "https://voltfield.org/guide-cable-ampacity-derating.html"}]}, {"@type": "Article", "headline": "Cable Ampacity Derating Explained: Ambient, Conductor Count and Terminal Ratings", "description": "Cable ampacity derating explained: NEC 310.16 columns, ambient correction, the 4-6 conductor 80% adjustment, and the 75°C terminal cap, with examples.", "image": "https://voltfield.org/social/social-guide-cable-ampacity-derating.jpg", "author": {"@type": "Organization", "name": "Voltfield Editorial Team", "url": "https://voltfield.org/methodology.html"}, "publisher": {"@type": "Organization", "name": "Voltfield"}, "datePublished": "2026-09-29T00:00:00-05:00", "dateModified": "2026-09-29T00:00:00-05:00", "url": "https://voltfield.org/guide-cable-ampacity-derating.html"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is ampacity derating?", "acceptedAnswer": {"@type": "Answer", "text": "Ampacity derating reduces a conductor’s table ampacity to account for conditions hotter than the table assumes: an ambient temperature above 30°C, and more than three current-carrying conductors in a raceway or cable. Both factors are multiplied against the table value."}}, {"@type": "Question", "name": "Can I use the 90°C ampacity column?", "acceptedAnswer": {"@type": "Answer", "text": "For derating, yes, if the conductor is rated 90°C. The derated result must then be compared with the ampacity in the column matching the lowest-rated termination, usually 75°C, and the lower value used (NEC 110.14(C))."}}, {"@type": "Question", "name": "Does the neutral count as a current-carrying conductor?", "acceptedAnswer": {"@type": "Answer", "text": "Not usually on a balanced three-phase circuit, but it does when most of the load is non-linear, such as server power supplies, LED drivers or drives, because triplen harmonic currents add in the neutral. Equipment grounding conductors never count."}}, {"@type": "Question", "name": "What is the adjustment factor for 4 to 6 conductors?", "acceptedAnswer": {"@type": "Answer", "text": "80% of the table ampacity, under NEC 310.15(C)(1). It falls to 70% for 7 to 9 conductors and 50% for 10 to 20."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="voltfield-eol.html"><b>Obsolete &amp; end-of-life</b><em>What replaced a discontinued platform</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">Cable Ampacity Derating</span></nav>
+    <div class="eyebrow">Cables &amp; Conductors</div>
+    <h1>Cable Ampacity Derating Explained</h1>
+    <p class="dek">The ampacity table assumes three conductors in a raceway at 30&deg;C. Real installations rarely match either assumption, and the terminations may cap the answer anyway. Here is how to get from the table value to the number you can actually use.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published September 29, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+  </div>
+</section>
+<div class="artwrap">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <p><b>Ampacity</b> is the current a conductor can carry continuously without exceeding its insulation temperature rating. The NEC's ampacity tables, most often Table 310.16, give a starting value that assumes <b>no more than three current-carrying conductors</b> in a raceway or cable, at an <b>ambient temperature of 30&deg;C</b>. Where either assumption fails, the table value has to be reduced.</p>
+
+  <div class="formula">Usable ampacity = table ampacity &times; ambient correction &times; conductor-count adjustment, capped by the terminal rating</div>
+
+  <h2>Step 1: Start from the right column</h2>
+  <p>Table 310.16 has columns for 60&deg;C, 75&deg;C and 90&deg;C insulation. A copper 4/0 conductor, for example, is listed at 195 A, 230 A and 260 A respectively. For a 90&deg;C-rated conductor such as THHN or XHHW-2, derating can start from the 90&deg;C column. That's the practical value of 90&deg;C insulation: it absorbs derating that would otherwise force a bigger conductor.</p>
+
+  <h2>Step 2: Correct for ambient temperature</h2>
+  <p>Above 30&deg;C, the conductor has less headroom before it reaches its insulation limit. NEC 310.15(B) gives the correction factors:</p>
+  <table class="reftable">
+    <tr><th scope="col">Ambient</th><th scope="col">75&deg;C column</th><th scope="col">90&deg;C column</th></tr>
+    <tr><td>26&ndash;30&deg;C</td><td>1.00</td><td>1.00</td></tr>
+    <tr><td>31&ndash;35&deg;C</td><td>0.94</td><td>0.96</td></tr>
+    <tr><td>36&ndash;40&deg;C</td><td>0.88</td><td>0.91</td></tr>
+    <tr><td>41&ndash;45&deg;C</td><td>0.82</td><td>0.87</td></tr>
+    <tr><td>46&ndash;50&deg;C</td><td>0.75</td><td>0.82</td></tr>
+  </table>
+  <p>Raceways and cables exposed to sunlight on or just above a rooftop run much hotter than the surrounding air, and the NEC adds a temperature adder for the case where they sit very close to the roof surface. Hot aisles, plenums and equipment yards deserve the same scrutiny.</p>
+
+  <h2>Step 3: Adjust for more than three current-carrying conductors</h2>
+  <p>Conductors bundled together can't shed heat as well. NEC 310.15(C)(1) reduces ampacity when a raceway or cable holds more than three current-carrying conductors:</p>
+  <table class="reftable">
+    <tr><th scope="col">Current-carrying conductors</th><th scope="col">Adjustment</th></tr>
+    <tr><td>4&ndash;6</td><td>80%</td></tr>
+    <tr><td>7&ndash;9</td><td>70%</td></tr>
+    <tr><td>10&ndash;20</td><td>50%</td></tr>
+    <tr><td>21&ndash;30</td><td>45%</td></tr>
+    <tr><td>31&ndash;40</td><td>40%</td></tr>
+    <tr><td>41 and above</td><td>35%</td></tr>
+  </table>
+  <p>Equipment grounding conductors don't count. The neutral of a balanced three-phase circuit usually doesn't either, but it <b>does</b> count when most of the load is non-linear, such as server power supplies or drives, because it carries triplen harmonic current. The <a class="inline" href="guide-harmonics-ieee-519.html">harmonics guide</a> explains why. Short raceway nipples of 24 inches or less are exempt from adjustment.</p>
+
+  <h2>Step 4: Cap at the terminal rating</h2>
+  <p>A conductor is only as good as what it's connected to. Under NEC 110.14(C), the final ampacity can't exceed the value in the column matching the lowest-rated termination, which is usually 75&deg;C for equipment rated over 100 A, and often 60&deg;C for smaller equipment unless it's marked otherwise. Derating is done from the 90&deg;C column, but the result is then compared against the 75&deg;C (or 60&deg;C) value, and the lower number wins.</p>
+
+  <h2>Worked examples</h2>
+  <p><b>Nine 10 AWG copper THHN conductors in one conduit, 40&deg;C ambient, 75&deg;C terminals.</b></p>
+  <ul>
+    <li><b>90&deg;C table value:</b> 40 A</li>
+    <li><b>Derated:</b> 40 &times; 0.91 (ambient) &times; 0.70 (nine conductors) = <b>25.5 A</b></li>
+    <li><b>Terminal cap:</b> the 75&deg;C column gives 35 A, which is higher, so 25.5 A governs.</li>
+  </ul>
+  <p><b>A 4/0 copper feeder, four current-carrying conductors (the neutral counts, for non-linear load), 40&deg;C ambient.</b></p>
+  <ul>
+    <li><b>90&deg;C table value:</b> 260 A</li>
+    <li><b>Derated:</b> 260 &times; 0.91 &times; 0.80 = <b>189 A</b></li>
+    <li><b>Terminal cap:</b> 230 A at 75&deg;C, so 189 A governs.</li>
+  </ul>
+  <p>Without the correction and adjustment, the same 4/0 feeder would be sized as a 230 A conductor, 41 A more than it can actually carry. The same derating also interacts with the continuous-load rules, which size conductors at 125% of continuous load before derating is compared.</p>
+  <div class="callout"><b>Check the edition.</b> Table values and section numbers are quoted from recent NEC editions. Section numbering in 310.15 was reorganized in 2020, so older references (310.15(B)(2)(a), 310.15(B)(3)(a)) point to the same factors under different numbers.</div>
+
+  <h2>Common mistakes</h2>
+  <ul>
+    <li><b>Using the 90&deg;C column as the final answer</b> when the terminations are only rated 75&deg;C.</li>
+    <li><b>Not counting the neutral</b> on circuits feeding non-linear load.</li>
+    <li><b>Checking conduit fill and forgetting the adjustment</b> that the same conductor count triggers.</li>
+    <li><b>Using the room temperature</b> for a raceway that runs through a hot aisle, plenum or rooftop.</li>
+    <li><b>Applying the factors in the wrong column,</b> for example a 75&deg;C correction factor to a 90&deg;C table value.</li>
+  </ul>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2 id="relatedGuides">Related guides</h2>
+  <ul>
+    <li><a class="inline" href="guide-kw-vs-kva.html">kW vs. kVA Explained</a> &mdash; turning a load in kW into the current a conductor must carry</li>
+    <li><a class="inline" href="guide-harmonics-ieee-519.html">Harmonics &amp; IEEE 519 Explained</a> &mdash; why the neutral counts on non-linear load</li>
+    <li><a class="inline" href="guide-415v-vs-480v-distribution.html">415 V vs. 480 V Distribution</a> &mdash; how distribution voltage changes the current each conductor carries</li>
+  </ul>
+
+  <h2>Where Voltfield fits in</h2>
+  <p>The <a class="inline" href="data-centers/cabling.html">Data Center Cable &amp; Busbar</a> reference covers the conductors and busway involved, and the <a class="inline" href="calculators/ampacity.html">Cable Ampacity Calculator</a> looks up table values and checks conduit fill.</p>
+
+  <h2>Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is ampacity derating?</summary>
+    <p style="margin-top:10px">Ampacity derating reduces a conductor&rsquo;s table ampacity to account for conditions hotter than the table assumes: an ambient temperature above 30&deg;C, and more than three current-carrying conductors in a raceway or cable. Both factors are multiplied against the table value.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Can I use the 90&deg;C ampacity column?</summary>
+    <p style="margin-top:10px">For derating, yes, if the conductor is rated 90&deg;C. The derated result must then be compared with the ampacity in the column matching the lowest-rated termination, usually 75&deg;C, and the lower value used (NEC 110.14(C)).</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Does the neutral count as a current-carrying conductor?</summary>
+    <p style="margin-top:10px">Not usually on a balanced three-phase circuit, but it does when most of the load is non-linear, such as server power supplies, LED drivers or drives, because triplen harmonic currents add in the neutral. Equipment grounding conductors never count.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the adjustment factor for 4 to 6 conductors?</summary>
+    <p style="margin-top:10px">80% of the table ampacity, under NEC 310.15(C)(1). It falls to 70% for 7 to 9 conductors and 50% for 10 to 20.</p>
+  </details>
+</div>
+<div class="ctaband">
+  <div class="ctaband-in">
+    <div>
+      <h3>Checking a conductor?</h3>
+      <p>Look up table ampacity and check conduit fill against the 40% limit. Free, no signup.</p>
+    </div>
+    <a class="ctabtn" href="calculators/ampacity.html">AMPACITY CALCULATOR &rarr;</a>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+<div class="artwrap artwrap-tail">
+  <h2>Equipment category</h2>
+<ul class="catlink">
+  <li><a class="inline" href="data-centers/cabling.html">Data Center Cable &amp; Busbar</a> &mdash; conductors, busway and the sizing decisions behind them.</li>
+  <li><a class="inline" href="data-centers/power-distribution.html">Data Center Power Distribution</a> &mdash; the feeders and branch circuits being sized.</li>
+</ul>
+
+  <h2 id="calcLinks">Run the numbers</h2>
+<ul class="catlink">
+  <li><a class="inline" href="calculators/ampacity.html">Cable Ampacity Calculator</a> &mdash; NEC 310.16 ampacity and the 40% conduit-fill check.</li>
+  <li><a class="inline" href="calculators/voltage-drop.html">Voltage Drop Calculator</a> &mdash; feeder drop against the 3% and 5% design limits.</li>
+</ul>
+
+  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Cable Ampacity Derating Explained,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-cable-ampacity-derating.html</div>
+</div>
+
+<aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>How to derate conductor ampacity from NEC Table 310.16: column choice, ambient correction, conductor-count adjustment, and the terminal-temperature cap, with worked examples.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>NFPA 70 (NEC) &mdash; Table 310.16, 310.15(B) and (C)(1), 110.14(C)</li><li>IEEE Std 835 &mdash; power cable ampacity tables</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A conductor sizing. Ampacity also depends on installation method, cable type, burial and grouping of raceways, and must be determined under the edition of the NEC in force by a qualified designer.</dd>
+      <dt>Provenance</dt>
+      <dd>Published September 29, 2026. Written and maintained by the Voltfield editorial team against the sources above. Every worked figure is arithmetic you can reproduce from the table values and factors quoted on this page &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
+    </dl>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>
