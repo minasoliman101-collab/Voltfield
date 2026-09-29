@@ -107,6 +107,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .supcard .cmpline{font-family:var(--mono);font-size:9.5px;color:var(--slate);padding:0 16px 12px;line-height:1.5}
 .empty{background:var(--card);border:1px dashed var(--line-dark);padding:40px;text-align:center;color:var(--slate)}
 </style>
+<style>
+/* Mobile overflow: the name, archetype tag and nowrap type badge shared one row. */
+@media(max-width:640px){
+  .sc-top{flex-wrap:wrap}
+  .sc-top h3{overflow-wrap:anywhere;min-width:0}
+  /* the search form's input kept its default intrinsic width, holding the form at ~324px */
+  .dirhead .dirsearch{flex:1 1 100%;min-width:0}
+  .dirsearch input{width:0}
+}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>

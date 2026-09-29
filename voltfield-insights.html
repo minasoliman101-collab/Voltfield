@@ -110,6 +110,21 @@ table.ins tr.clickable:hover td{background:var(--paper)}
 .alert-msg.ok{color:#7FCB9E}
 .alert-msg.err{color:#E8A79A}
 </style>
+<style>
+/* Mobile overflow: four-column tables did not fit a phone inside the panel padding. */
+.ipanel{min-width:0}
+@media(max-width:640px){
+  .ipanel{padding:14px 12px 16px}
+  table.ins th,table.ins td{padding:7px 6px}
+  /* the badge class .lead collides with core.css's 19px .lead paragraph style */
+  table.ins .lead{font-size:13px;line-height:1.4}
+}
+/* "Configurations" is one word and can't wrap; below 400px the table scrolls
+   inside its panel rather than widening the page. */
+@media(max-width:400px){
+  table.ins{display:block;overflow-x:auto}
+}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
