@@ -199,12 +199,6 @@
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://voltfield.org/guide-arc-flash-ppe-categories.html</loc>
-    <lastmod>2026-09-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://voltfield.org/guide-415v-vs-480v-distribution.html</loc>
     <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
@@ -212,6 +206,12 @@
   </url>
   <url>
     <loc>https://voltfield.org/guide-arc-flash-boundary-basics.html</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/guide-arc-flash-ppe-categories.html</loc>
     <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -260,12 +260,6 @@
   </url>
   <url>
     <loc>https://voltfield.org/guide-fully-rated-vs-series-rated.html</loc>
-    <lastmod>2026-09-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://voltfield.org/guide-ups-topologies.html</loc>
     <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -331,16 +325,16 @@
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://voltfield.org/guide-liquid-vs-air-cooling.html</loc>
-    <lastmod>2026-09-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
     <loc>https://voltfield.org/guide-kw-vs-kva.html</loc>
     <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/guide-liquid-vs-air-cooling.html</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://voltfield.org/guide-n-plus-1-vs-2n-redundancy.html</loc>
@@ -397,6 +391,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/guide-ups-topologies.html</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/guides.html</loc>
     <lastmod>2026-09-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -404,7 +404,7 @@
   </url>
   <url>
     <loc>https://voltfield.org/</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
