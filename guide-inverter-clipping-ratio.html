@@ -124,6 +124,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a class="sharebtn" id="shareEmail">Email</a>
     <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
+  <p><b>Most utility-scale solar sites run a DC:AC ratio of 1.2 to 1.3, deliberately accepting some clipping at midday.</b> The extra DC capacity raises output in the many low- and moderate-irradiance hours, and that gain usually outweighs the energy clipped during the few peak hours.</p>
   <p>An inverter has a fixed maximum AC output. A solar array's DC output varies constantly with irradiance, temperature, and time of day, and only reaches its own peak rating under close-to-ideal conditions that don't happen very often. Sizing the DC array to exactly match the inverter's AC rating — a 1:1 ratio — means the inverter sits underutilized for nearly all of every day it isn't at that rare peak. Utility-scale design intentionally breaks that 1:1 match.</p>
 
   <h2>The ratio and the terminology</h2>
@@ -198,6 +199,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </ul>
 
   <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Inverter Clipping Ratio Explained,&rdquo; <i>Voltfield</i>, updated August 24, 2026. https://voltfield.org/guide-inverter-clipping-ratio.html</div>
+
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/guide-inverter-clipping-ratio.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
 </div>
 
 <aside class="provenance" aria-labelledby="prov-h">
@@ -229,6 +244,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 <script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
 <script>
 </script>
 <script>

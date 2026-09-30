@@ -24,6 +24,7 @@
    {"@type":"ListItem","position":3,"name":"BESS Sizing Calculator","item":"https://voltfield.org/calculators/bess-sizing.html"}
  ]},
  {"@type":"WebPage","name":"BESS Sizing Calculator","description":"Convert a critical load and backup duration into usable energy, then into the nameplate kWh you need once depth of discharge and round-trip efficiency are applied.","url":"https://voltfield.org/calculators/bess-sizing.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebApplication","name":"BESS Sizing Calculator","description":"Convert a critical load and backup duration into usable energy, then into the nameplate kWh you need once depth of discharge and round-trip efficiency are applied.","url":"https://voltfield.org/engineering-calculators.html#bess-sizing","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What does the BESS Sizing calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Battery storage is specified in two numbers that are easy to conflate: power in kW, which is how fast it can deliver, and energy in kWh, which is how long it can sustain that. The ratio between them is the C-rate, and it drives cell selection and thermal design. The other trap is that the energy you can use is not the energy on the nameplate — depth of discharge and round-trip efficiency both take a cut, and sizing to usable energy without grossing up for them under-sizes the system."}},
    {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"This is a day-one calculation. Capacity fades with cycling and calendar age, so a system sized exactly to requirement will miss it within a few years unless augmentation is planned. It also ignores auxiliary load — the thermal management system draws power from the same asset."}}
@@ -157,6 +158,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/engineering-calculators.html">All 20 calculators</a>
     </div>
 
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new calculators and guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/calculators/bess-sizing.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+
   <aside class="provenance" aria-labelledby="prov-h">
     <h2 id="prov-h">Scope &amp; sources</h2>
     <dl>
@@ -188,6 +203,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 <script src="/voltfield-site-config.js"></script>
+<script src="/voltfield-updates.js" defer></script>
 <script>
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>

@@ -645,6 +645,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How do you estimate how long a generator will run on a full tank?</summary>
     <p style="margin-top:10px">Divide the fuel tank capacity (gallons) by the fuel consumption rate at your expected load (gallons per hour), taken from the generator's own spec sheet — most gensets publish consumption rates at 50%, 75%, and 100% load.</p>
   </details>
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new calculators and guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/engineering-calculators.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
 </div>
 <div class="ctaband">
   <div class="ctaband-in">
@@ -676,6 +689,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 <script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
 <script src="voltfield-3d.js"></script>
 <script src="voltfield-component-viz.js"></script>
 <script>
@@ -792,7 +806,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const phase=document.getElementById('xfPhase').value;
     if(!(kw>0)||!(pf>0&&pf<=1)||!(V>0)){r.textContent='Enter load, power factor (0-1), and voltage.';r.className='est-result show';return;}
     const kvaReq=kw/pf;
-    const std=STD_KVA.find(s=>s>=kvaReq)||STD_KVA[STD_KVA.length-1];
+    const std=STD_KVA.find(s=>s>=kvaReq);
+    if(std===undefined){r.innerHTML='Required: <b>'+fmt(kvaReq)+' kVA</b>, above the largest standard rating in this table ('+fmt(STD_KVA[STD_KVA.length-1],0)+' kVA). Split the load or size a substation transformer with the manufacturer.';r.className='est-result show warn';return;}
     const fla=phase==='3'?(std*1000)/(1.732*V):(std*1000)/V;
     r.innerHTML='Required: <b>'+fmt(kvaReq)+' kVA</b> &rarr; nearest standard size: <b>'+fmt(std,1)+' kVA</b>. Estimated secondary FLA at that rating: <b>'+fmt(fla)+' A</b>.';
     r.className='est-result show';

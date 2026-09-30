@@ -45,6 +45,8 @@ Descriptions over 160 characters on `calculators/bess-sizing.html` and `data-cen
 
 **Rules to keep:** 60 characters or fewer including `| Voltfield`, primary keyword first, one page per keyword (see §3), and `og:title` kept consistent with the title.
 
+**Structured data (Sept 30, 2026).** Each of the 12 `calculators/*.html` pages now carries a `WebApplication` node (free `Offer`, pointing at the live tool's hub anchor) alongside its breadcrumb, `WebPage` and `FAQPage` nodes. Mirrored in `gen-calc-pages.ps1`. There is deliberately no `aggregateRating`: Google shows software rich results only with ratings, and there are none to report, so expect the node to help Google understand the page rather than to produce a star snippet.
+
 ---
 
 ## 3. Keyword research
@@ -130,6 +132,8 @@ Earning backlinks happens off-site, so the repo changes are limited to making Vo
 
 **Done.** Every guide ends with a **"Cite or link to this guide"** box. It contains a ready-to-paste citation with the canonical URL and the last-updated date (`id="citeThis"`). Students, forum posters and trade writers are more likely to link when they don't have to build the citation themselves.
 
+**Done (Sept 30, 2026): embeddable calculators.** `embed/calculator-widget.js` renders the voltage drop, transformer sizing and power factor calculators on any site, in a shadow root so the host page's CSS can't break it, with a footer link back to the matching `calculators/*.html` page. The three landing pages carry an "Embed this calculator" block with a copy-paste snippet (`scripts/tpl/calc-embed.html`, emitted by `gen-calc-pages.ps1`). Pitch these to the same audiences as the calculator pages below: a course page or a dealer FAQ that embeds one carries the link with it.
+
 **Already on site:** the embeddable lead-time widget (`embed/lead-time-widget.js`, promoted on `lead-time-index.html`) includes an attribution link automatically.
 
 **Outreach plan (manual)**
@@ -142,6 +146,10 @@ Earning backlinks happens off-site, so the repo changes are limited to making Vo
 | kW vs. kVA guide | Electrician-training sites, generator and UPS dealer FAQ pages |
 
 **Rules:** no paid links, no link exchanges, no PBNs. Answer the question first and link only when the page adds something. Track referring domains monthly in Search Console → Links.
+
+---
+
+**Email list (Sept 30, 2026).** Guides, calculator pages and both hubs carry a signup box for the Netlify form `site-updates` (`voltfield-updates.js`). Each submission records the page it came from (`source`), so Netlify → Forms shows which pages convert. Nothing sends email automatically yet: export the list, or connect Buttondown/ConvertKit to the form, and send one update per new guide or calculator. The box promises at most one email a month, so keep to that. The privacy policy covers it.
 
 ---
 
@@ -169,5 +177,7 @@ Earning backlinks happens off-site, so the repo changes are limited to making Vo
 - Say what the method does *not* cover.
 - Link to at least one calculator and two related guides, and get at least three contextual inbound links.
 - Keep byline, provenance and JSON-LD dates in sync. This pass found and fixed one mismatch, in the FEOC guide.
+
+**Done (Sept 30, 2026): answer-first leads.** All 33 guides were checked for whether the first paragraph answers the query. Six didn't: the PJM, MISO and ERCOT guides opened with "This guide assumes…", and liquid vs. air cooling, inverter clipping and PUE put the number the searcher wants (the 20–30 kW rack threshold, the 1.2–1.3 DC:AC ratio, the 1.1–1.3 PUE range) further down. Each now opens with a bolded one-to-two sentence answer drawn only from facts already on that page. That opening sentence is also what AI answer engines and featured snippets tend to quote.
 
 **Done (Sept 2026):** the two thinnest reference pages, `data-centers/monitoring-controls.html` and `data-centers/grounding-bonding.html`, went from about 425 to about 820 words each. Each gained a "What to settle in the specification" section, a visible FAQ and FAQPage schema. Both are hand edits, flagged in `scripts/gen-category-pages.ps1`.

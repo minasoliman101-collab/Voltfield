@@ -24,6 +24,7 @@
    {"@type":"ListItem","position":3,"name":"Available Fault Current Calculator","item":"https://voltfield.org/calculators/fault-current.html"}
  ]},
  {"@type":"WebPage","name":"Available Fault Current Calculator","description":"Estimate available symmetrical fault current at a transformer secondary from kVA, voltage and %Z, and check equipment withstand ratings. Free, no signup.","url":"https://voltfield.org/calculators/fault-current.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebApplication","name":"Available Fault Current Calculator","description":"Estimate available symmetrical fault current at a transformer secondary from kVA, voltage and %Z, and check equipment withstand ratings. Free, no signup.","url":"https://voltfield.org/engineering-calculators.html#fault-current","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What does the Available Fault Current calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Available fault current is how much current the system can deliver into a bolted short circuit at a given point. It sets the interrupting rating every protective device downstream must meet, and the withstand rating of the gear that has to survive the event. The counter-intuitive part: a lower transformer impedance means a stiffer source and therefore a higher fault current, so specifying a low-%Z transformer makes the downstream equipment problem worse, not better."}},
    {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"This is an infinite-source estimate: it assumes the utility can supply unlimited current into the transformer primary, which over-states the real figure — conservative, and therefore safe for a first pass. It ignores cable impedance between the transformer and the point of interest, which reduces fault current with distance, and it ignores motor contribution, which increases it for the first few cycles."}}
@@ -156,6 +157,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/engineering-calculators.html">All 20 calculators</a>
     </div>
 
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new calculators and guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/calculators/fault-current.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+
   <aside class="provenance" aria-labelledby="prov-h">
     <h2 id="prov-h">Scope &amp; sources</h2>
     <dl>
@@ -187,6 +202,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 <script src="/voltfield-site-config.js"></script>
+<script src="/voltfield-updates.js" defer></script>
 <script>
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>

@@ -24,6 +24,7 @@
    {"@type":"ListItem","position":3,"name":"Voltage Drop Calculator","item":"https://voltfield.org/calculators/voltage-drop.html"}
  ]},
  {"@type":"WebPage","name":"Voltage Drop Calculator","description":"Calculate voltage drop on a feeder using the K-factor method, check it against the 3% and 5% design limits, and size the conductor. Free, no signup.","url":"https://voltfield.org/calculators/voltage-drop.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebApplication","name":"Voltage Drop Calculator","description":"Calculate voltage drop on a feeder using the K-factor method, check it against the 3% and 5% design limits, and size the conductor. Free, no signup.","url":"https://voltfield.org/engineering-calculators.html#voltage-drop","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What does the Voltage Drop calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Voltage drop is the loss along a conductor between the source and the load. It is not a code violation in itself — the NEC states its 3% branch-circuit and 5% total figures as recommendations in informational notes, not requirements — but equipment is rated to operate within a voltage band, and a long run that drops too far will leave a motor starting hard, a contactor chattering, or a drive faulting on undervoltage. On a long feeder it is usually voltage drop, not ampacity, that forces the conductor up a size."}},
    {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"This is a resistance-only calculation. It ignores conductor reactance, which matters on larger conductors and longer runs — above roughly 250 ft, or above about 4/0, the reactive component starts to dominate and this method under-reads. It also assumes a 75°C conductor temperature and a balanced load."}},
@@ -174,6 +175,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p style="margin-top:10px">3% of 480 V is 14.4 V, and 3% of 120 V is 3.6 V. The 5% totals are 24 V and 6 V.</p>
   </details>
 
+  <h2>Embed this calculator</h2>
+  <p>Writing about this, or teaching it? Paste the snippet below into any web page to add a working copy of this calculator. It is free, runs entirely in the reader&rsquo;s browser, sends nothing anywhere, and links back to this page for the method.</p>
+    <div class="vf-embed">
+      <div class="vf-embed-demo"><div class="vf-calc-widget" data-calc="voltage-drop"></div></div>
+      <div class="vf-embed-code">
+        <pre id="embedSnippet">&lt;div class="vf-calc-widget" data-calc="voltage-drop"&gt;&lt;/div&gt;
+&lt;script src="https://voltfield.org/embed/calculator-widget.js" async&gt;&lt;/script&gt;</pre>
+        <button type="button" id="copyEmbedBtn">Copy snippet</button>
+        <p class="vf-embed-note">Also available: <code>voltage-drop</code>, <code>transformer-sizing</code> and <code>power-factor</code>. Change <code>data-calc</code> to switch.</p>
+      </div>
+    </div>
+    <script src="/embed/calculator-widget.js" async></script>
+    <script>
+    (function(){
+      var b=document.getElementById('copyEmbedBtn');
+      b.addEventListener('click',function(){
+        var t=document.getElementById('embedSnippet').textContent;
+        (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){
+          b.textContent='Copied';setTimeout(function(){b.textContent='Copy snippet';},1800);
+        },function(){b.textContent='Select the text to copy';setTimeout(function(){b.textContent='Copy snippet';},2200);});
+      });
+    })();
+    </script>
+
   <h2>Related</h2>
     <div class="rel">
       <a href="/voltfield-supply-catalog.html?q=LV%20Power%20Cable">LV Power Cable</a>
@@ -185,6 +210,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a data-rel="xlink" href="/calculators/motor-start.html">Motor Starting Voltage Dip Calculator</a>
       <a href="/engineering-calculators.html">All 20 calculators</a>
     </div>
+
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new calculators and guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/calculators/voltage-drop.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
 
   <aside class="provenance" aria-labelledby="prov-h">
     <h2 id="prov-h">Scope &amp; sources</h2>
@@ -217,6 +256,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 <script src="/voltfield-site-config.js"></script>
+<script src="/voltfield-updates.js" defer></script>
 <script>
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>

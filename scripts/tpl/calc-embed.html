@@ -1,0 +1,24 @@
+  <h2>Embed this calculator</h2>
+  <p>Writing about this, or teaching it? Paste the snippet below into any web page to add a working copy of this calculator. It is free, runs entirely in the reader&rsquo;s browser, sends nothing anywhere, and links back to this page for the method.</p>
+    <div class="vf-embed">
+      <div class="vf-embed-demo"><div class="vf-calc-widget" data-calc="{{SLUG}}"></div></div>
+      <div class="vf-embed-code">
+        <pre id="embedSnippet">&lt;div class="vf-calc-widget" data-calc="{{SLUG}}"&gt;&lt;/div&gt;
+&lt;script src="https://voltfield.org/embed/calculator-widget.js" async&gt;&lt;/script&gt;</pre>
+        <button type="button" id="copyEmbedBtn">Copy snippet</button>
+        <p class="vf-embed-note">Also available: <code>voltage-drop</code>, <code>transformer-sizing</code> and <code>power-factor</code>. Change <code>data-calc</code> to switch.</p>
+      </div>
+    </div>
+    <script src="/embed/calculator-widget.js" async></script>
+    <script>
+    (function(){
+      var b=document.getElementById('copyEmbedBtn');
+      b.addEventListener('click',function(){
+        var t=document.getElementById('embedSnippet').textContent;
+        (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){
+          b.textContent='Copied';setTimeout(function(){b.textContent='Copy snippet';},1800);
+        },function(){b.textContent='Select the text to copy';setTimeout(function(){b.textContent='Copy snippet';},2200);});
+      });
+    })();
+    </script>
+

@@ -18,6 +18,8 @@ A self‑contained, **static‑first website** — plain HTML, CSS, and JavaScri
 | `voltfield-pcb.html` | **Custom PCB Builder** — fab configurator (size, layers, material, copper, finish, mask, tolerances, vias) with live board preview, parametric budgetary pricing + quantity breaks, Gerber attach, printable spec sheet, add-to-quote. Pricing multipliers live at the top of the page script. |
 | `voltfield-eol.html` / `voltfield-eol-data.js` | **Obsolete/EOL reference** — discontinued series with OEM-recommended successors (see §10). |
 | `voltfield-bom-engine.js` | Component-template engine behind the BOM Generator (per-category teardowns that scale with configuration). |
+| `voltfield-updates.js` | **Email updates signup** — wires the "site-updates" Netlify form on guides, calculator pages and both hubs (inline confirmation; the form still posts without JS). Read signups in the Netlify dashboard → Forms. |
+| `embed/calculator-widget.js` | **Embeddable calculators** — voltage drop, transformer sizing and power factor for other sites to paste in, with an attribution link. Math mirrors `engineering-calculators.html`; change both together. |
 | `voltfield-site-config.js` | **Site config** — production domain (canonical/OG URLs) + ad monetization settings and slot renderer. |
 | `robots.txt` / `sitemap.xml` | Crawl control + sitemap (replace `YOUR-DOMAIN` before submitting to Search Console). |
 | `ads.txt` | Authorized-sellers file for ad networks (instructions inside). |

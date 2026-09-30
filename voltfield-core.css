@@ -830,3 +830,39 @@ footer a:hover{color:#fff}
   .reftable th,.reftable td{padding:10px 10px}
   .reftable th{white-space:normal}
 }
+
+/* ---------- email updates signup (voltfield-updates.js) ----------
+   One Netlify form ("site-updates") repeated on guides, calculator pages and
+   the two hubs. The form posts natively without JS; the script upgrades it to
+   an inline confirmation. The honeypot is moved off-screen rather than
+   display:none, which some bots detect and skip. */
+.vf-updates{background:var(--sunk);border-left:3px solid var(--signal);
+  border-radius:0 var(--r) var(--r) 0;padding:18px 20px;margin:26px 0}
+.vf-updates .vfu-h{font-size:16px;color:var(--ink);margin:0 0 4px;line-height:1.5}
+.vf-updates .vfu-p{font-size:14px;color:var(--slate);margin:0 0 12px;line-height:1.55}
+.vf-updates .vfu-form{margin:0}
+.vfu-form{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.vfu-form input[type=email]{flex:1;min-width:200px;border:1px solid var(--line-dark);
+  border-radius:var(--r-sm);background:var(--card);color:var(--ink);padding:11px 13px;
+  font-family:var(--mono);font-size:14px}
+.vfu-form input[type=email]::placeholder{color:var(--slate)}
+.vfu-form button{background:var(--solid-bg);color:var(--solid-fg);border:0;
+  border-radius:var(--r-pill);padding:12px 22px;font-family:var(--disp);font-weight:600;
+  font-size:14.5px;cursor:pointer}
+.vfu-form button:hover{box-shadow:var(--sh-2)}
+.vfu-form button[disabled]{opacity:.6;cursor:default}
+.vfu-hp,.vfu-sr{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.vf-updates .vfu-msg{flex-basis:100%;font-family:var(--mono);font-size:12.5px;line-height:1.5;margin:0}
+.vf-updates .vfu-msg:empty{display:none}
+.vf-updates .vfu-msg.ok{color:var(--ok-ink)}
+.vf-updates .vfu-msg.err{color:var(--crit-ink)}
+
+/* ---------- "Embed this calculator" block (embed/calculator-widget.js) ---------- */
+.vf-embed{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;margin:18px 0 26px;
+  background:var(--card);border:1px solid var(--line-dark);border-radius:var(--r);padding:18px}
+@media(min-width:760px){.vf-embed{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}}
+.vf-embed-code pre{background:#0F1B2D;color:#C9D3DF;padding:12px 14px;margin:0;border-radius:var(--r-sm);
+  font-family:var(--mono);font-size:12px;line-height:1.6;overflow-x:auto;white-space:pre}
+.vf-embed-code button{margin-top:10px;background:var(--solid-bg);color:var(--solid-fg);border:0;
+  border-radius:var(--r-pill);padding:9px 18px;font-family:var(--disp);font-weight:600;font-size:13.5px;cursor:pointer}
+.artwrap .vf-embed-code .vf-embed-note{font-size:13px;color:var(--slate);margin-top:10px;line-height:1.55}

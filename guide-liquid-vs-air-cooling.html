@@ -124,6 +124,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a class="sharebtn" id="shareEmail">Email</a>
     <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
+  <p><b>Above roughly 20&ndash;30 kW per rack, air cooling usually can&rsquo;t remove the heat without extraordinary airflow, and GPU racks for AI routinely run at several times that.</b> That is the point where designs move to liquid cooling: direct-to-chip cold plates, immersion or rear-door heat exchangers.</p>
   <p>Air cooling works by moving enough cold air across a server to carry its heat away, and it scaled fine for decades of data center growth. The problem is physics, not engineering effort: air has a much lower heat capacity than liquid, so as rack power density climbs, the volume of air — and the fan power to move it — needed to keep pace grows faster than most facilities can practically deliver. Racks running well above roughly 20–30kW commonly exceed what air cooling can remove without extraordinary airflow, and modern GPU racks for AI training and inference routinely run at multiples of that.</p>
 
   <h2>Direct-to-chip cooling</h2>
@@ -193,6 +194,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </ul>
 
   <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Liquid Cooling vs. Air Cooling for AI-Density Racks,&rdquo; <i>Voltfield</i>, updated August 24, 2026. https://voltfield.org/guide-liquid-vs-air-cooling.html</div>
+
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/guide-liquid-vs-air-cooling.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
 </div>
 
 <aside class="provenance" aria-labelledby="prov-h">
@@ -224,6 +239,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 <script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
 <script>
 </script>
 <script>
