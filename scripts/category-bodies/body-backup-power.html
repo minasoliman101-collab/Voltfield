@@ -68,13 +68,13 @@
   <ul>
     <li><b>Size the UPS for the gap, not the outage.</b> Its job is to carry load until the generator accepts it. Runtime beyond that is expensive battery you will replace on a cycle.</li>
     <li><b>Check step load acceptance against your actual block loads.</b> Cooling equipment restarting at once is usually the hardest step, and it is the one that gets missed.</li>
-    <li><b>Interrogate the fuel assumption.</b> Diesel means on-site storage, fuel polishing and a refuelling plan. Natural gas removes storage but adds dependence on a supply that may be affected by the same event.</li>
+    <li><b>Interrogate the fuel assumption.</b> Diesel means on-site storage, fuel polishing and a refueling plan. Natural gas removes storage but adds dependence on a supply that may be affected by the same event.</li>
     <li><b>Confirm the redundancy target applies to both layers.</b> N+1 generation with a single UPS path is not N+1 overall.</li>
     <li><b>Plan for testing, not just for outages.</b> NFPA 110 exercise requirements and permit hour limits shape the installation as much as the emergency case does.</li>
   </ul>
 
   <h2>Typical applications</h2>
-  <p>A conventional facility pairs a <b>static UPS</b> covering seconds of ride-through with <b>diesel gensets</b> sized for the full critical load plus cooling, transferring on loss of utility. <b>Natural-gas sets</b> appear where fuel storage is impractical or emissions limits favour them. <b>Flywheel or DC UPS</b> suits sites that want ride-through without a battery replacement cycle and can accept shorter autonomy. <b>Turbines</b> only make sense at campus scale, where the machine is closer to a generating asset than to backup equipment.</p>
+  <p>A conventional facility pairs a <b>static UPS</b> covering seconds of ride-through with <b>diesel gensets</b> sized for the full critical load plus cooling, transferring on loss of utility. <b>Natural-gas sets</b> appear where fuel storage is impractical or emissions limits favor them. <b>Flywheel or DC UPS</b> suits sites that want ride-through without a battery replacement cycle and can accept shorter autonomy. <b>Turbines</b> only make sense at campus scale, where the machine is closer to a generating asset than to backup equipment.</p>
 
   <h2>Work the numbers before you RFQ</h2>
   <div class="rel">
@@ -104,7 +104,7 @@
   <p>Long enough to cover generator start and load acceptance, with margin for a failed first start attempt. Sizing for a long outage is generally the wrong instinct &mdash; that is the generator's job, and the extra battery is capital you replace on a cycle.</p>
 
   <h3>Is natural gas better than diesel for standby?</h3>
-  <p>It depends on what you are protecting against. Gas removes on-site fuel storage and its maintenance burden, but it makes you dependent on a supply that may be disrupted by the same regional event causing the outage. Diesel is self-contained but brings storage, polishing and refuelling logistics.</p>
+  <p>It depends on what you are protecting against. Gas removes on-site fuel storage and its maintenance burden, but it makes you dependent on a supply that may be disrupted by the same regional event causing the outage. Diesel is self-contained but brings storage, polishing and refueling logistics.</p>
 
   <h3>What does &ldquo;step load acceptance&rdquo; mean and why does it matter more than kW?</h3>
   <p>It is how much load the set can take in a single block without the voltage or frequency dipping unacceptably. Data center loads restart in large blocks &mdash; particularly cooling &mdash; so a set with adequate kW but insufficient step capability will still fail the transfer.</p>

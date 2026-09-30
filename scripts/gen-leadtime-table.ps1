@@ -9,7 +9,7 @@
 # The 14 curated rows stay: they are the editorial headline, and several of them
 # carry market colour (\"Sold out through 2028\", \"2029+ delivery slots\") that
 # is not in the structured data. This adds the full table underneath, grouped by
-# sector, every row linking to that family's reference page.
+# sector.
 #
 # Rendered at build time from voltfield-catalog-data.js, so the figures cannot
 # drift from the family and category pages -- one source, three renderings.
@@ -37,7 +37,7 @@ $lws = @($withLead | ForEach-Object { [int]$_.lw })
 $sb = New-Object System.Text.StringBuilder
 [void]$sb.AppendLine('')
 [void]$sb.AppendLine("  <h2 id=""full-index"">The full index: every family with a published lead time</h2>")
-[void]$sb.AppendLine("  <p>$($withLead.Count) of the $($fams.Count) equipment families in the reference carry an indicative lead time. They are listed in full below, longest first within each sector, each linking to that family's page. The remaining $($fams.Count - $withLead.Count) are commodity items stocked and shipped to order, where a single lead-time figure would not mean anything.</p>")
+[void]$sb.AppendLine("  <p>$($withLead.Count) of the $($fams.Count) equipment families in the reference carry an indicative lead time. They are listed in full below, longest first within each sector. The remaining $($fams.Count - $withLead.Count) are commodity items stocked and shipped to order, where a single lead-time figure would not mean anything.</p>")
 [void]$sb.AppendLine("  <p class=""ltnote"">Every figure here is the same value rendered on the family and category pages &mdash; one source, so they cannot drift apart. All are indicative reference figures, not quotes.</p>")
 
 foreach ($k in $SEC.Keys) {

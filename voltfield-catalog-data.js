@@ -12,7 +12,7 @@
    "an authoritative SKU count", which it was not: it overstated each
    family's real configuration space by a median 30x (up to 1800x),
    and this header claimed ~1.23M while the same field summed to
-   2,191,366. The real figure is 11,429 across 243 families.
+   2,191,366. The real figure is 11,397 across 242 families.
    ============================================================ */
 const SECTORS={
   dc:{label:'Data Centers',code:'DC',color:'#2B6CB0'},
@@ -218,7 +218,6 @@ const FAM=[
 {s:'mro',c:'Welding',n:'Welding Machines & Power Sources',kw:'mig tig stick welder inverter power source multiprocess 3-phase',lo:420,hi:18000,pu:'/ea',lw:4,cmp:['UL 551','CSA'],ax:[['Process','MIG','TIG','Stick','Multi-Process'],['Amperage','140A','250A','400A','600A'],['Power','120V','240V','3-Phase 480V']]},
 /* Machining — 3,103 */
 {s:'mro',c:'Machining',n:'Cutting Tools & Inserts',img:'images/parts/mro-cutting-tools-inserts.jpg',kw:'end mill drill bit carbide insert tap reamer lathe machining hss',lo:1,hi:420,pu:'/ea',lw:1,cmp:['ANSI B94'],ax:[['Item','End Mill','Drill Bit','Insert','Tap','Reamer'],['Material','HSS','Cobalt','Carbide'],['Coating','Uncoated','TiN','TiAlN']]},
-{s:'mro',c:'Machining',n:'Toolholding & Workholding',img:'images/parts/mro-toolholding-workholding.jpg',kw:'collet chuck vise cat40 er toolholder machinist clamp workholding',lo:4,hi:1600,pu:'/ea',lw:2,cmp:['ANSI/ASME B5.50'],ax:[['Item','Collet','Toolholder','Vise','Clamp Set'],['Interface','ER','CAT40','R8','5C'],['Grade','Standard','Precision']]},
 
 /* ===== DISTRIBUTOR: ULINE (Industrial Supply) — 41,000 ===== */
 {s:'mro',d0:'uline',c:'Shipping Boxes',n:'Corrugated Shipping Boxes',img:'images/parts/mro-corrugated-shipping-boxes.jpg',kw:'box carton corrugated rsc mailer heavy duty shipping uline',lo:0.4,hi:8.5,pu:'/ea',lw:0,cmp:['ISTA','FEFCO'],ax:[['Style','RSC','Multi-Depth','Corrugated Mailer','Heavy-Duty'],['Wall','200# / ECT-32','275# / ECT-44','Double-Wall'],['Size','6x6x6','12x12x12','18x18x18','24x24x24']]},
@@ -242,7 +241,7 @@ const FAM=[
 /* ===== DISTRIBUTOR: MSC INDUSTRIAL (Metalworking / MRO) — 600,000 ===== */
 {s:'mro',d0:'msc',c:'Cutting Tools',n:'Metalworking Cutting Tools',img:'images/parts/mro-metalworking-cutting-tools.jpg',kw:'end mill drill bit tap reamer insert carbide hss metalworking msc lathe mill turning',lo:1,hi:640,pu:'/ea',lw:1,cmp:['ANSI B94','ISO 513'],ax:[['Type','End Mill','Drill','Tap','Reamer','Turning Insert','Milling Insert'],['Material','HSS','Cobalt','Solid Carbide','Carbide-Tipped'],['Coating','Uncoated','TiN','TiCN','TiAlN','AlTiN'],['Size','1/16"','1/8"','1/4"','3/8"','1/2"','3/4"','1"']]},
 {s:'mro',d0:'msc',c:'Measuring & Inspection',n:'Precision Measuring & Inspection',img:'images/parts/mro-precision-measuring-inspection.jpg',kw:'caliper micrometer indicator gage gauge height bore inspection metrology msc',lo:4,hi:4200,pu:'/ea',lw:1,cmp:['ISO 9001 cal','ASME B89'],ax:[['Type','Caliper','Micrometer','Dial Indicator','Bore Gage','Height Gage','Gage Block'],['Read','Digital','Dial','Vernier'],['Range','0-6"','0-12"','0-1"','2-3"']]},
-{s:'mro',d0:'msc',c:'Toolholding & Workholding',n:'Toolholding & Workholding',img:'images/parts/mro-toolholding-workholding-1.jpg',kw:'collet chuck vise cat40 bt30 er toolholder machinist clamp fixture workholding msc',lo:4,hi:2400,pu:'/ea',lw:2,cmp:['ANSI/ASME B5.50'],ax:[['Item','Collet','Toolholder','Milling Vise','Chuck','Clamp Kit'],['Interface','ER','CAT40','BT30','R8','5C'],['Grade','Standard','Precision']]},
+{s:'mro',d0:'msc',c:'Machining',n:'Toolholding & Workholding',img:'images/parts/mro-toolholding-workholding-1.jpg',kw:'collet chuck vise cat40 bt30 er toolholder machinist clamp fixture workholding msc',lo:4,hi:2400,pu:'/ea',lw:2,cmp:['ANSI/ASME B5.50'],ax:[['Item','Collet','Toolholder','Milling Vise','Chuck','Clamp Kit'],['Interface','ER','CAT40','BT30','R8','5C'],['Grade','Standard','Precision']]},
 {s:'mro',d0:'msc',c:'Metalworking Abrasives',n:'Metalworking Abrasives',img:'images/parts/mro-metalworking-abrasives.jpg',kw:'grinding wheel deburring flap disc sanding belt carbide bur abrasive metalworking msc',lo:0.4,hi:180,pu:'/ea',lw:1,cmp:['ANSI B7.1','oSa'],ax:[['Type','Grinding Wheel','Flap Disc','Carbide Bur','Sanding Belt','Deburring Wheel'],['Abrasive','Aluminum Oxide','Zirconia','Ceramic','Diamond','CBN'],['Grit','36','60','80','120','240']]},
 {s:'mro',d0:'msc',c:'Metalworking Fluids',n:'Coolants, Lubricants & Fluids',img:'images/parts/mro-coolants-lubricants-fluids.jpg',kw:'cutting fluid coolant way oil tapping metalworking soluble oil lubricant msc',lo:6,hi:420,pu:'/ea',lw:1,cmp:['OSHA','ISO 6743'],ax:[['Type','Soluble Oil','Semi-Synthetic','Synthetic','Cutting Oil','Tapping Fluid'],['Base','Water-Mix','Straight Oil'],['Size','Quart','Gallon','5-Gal','55-Gal']]},
 {s:'mro',d0:'msc',c:'Machine Accessories',n:'Machine Tool Accessories',img:'images/parts/mro-machine-tool-accessories.jpg',kw:'machine level parallel 1-2-3 block angle plate coolant nozzle chip accessory msc',lo:2,hi:1600,pu:'/ea',lw:2,cmp:['—'],ax:[['Item','Parallels','1-2-3 Block','Angle Plate','Coolant Nozzle','Machinist Jack'],['Material','Hardened Steel','Cast Iron','Aluminum'],['Grade','Shop','Precision']]},
@@ -330,7 +329,7 @@ FAM.forEach(f=>{ f.ct = f.ax.reduce((n,axis)=>n*(axis.length-1), 1); });
 
 /* Distribution channel.
    This used to default to 'voltfield', rendered everywhere as "Voltfield
-   Direct" -- a supply channel that does not exist. 145 of the 243 families
+   Direct" -- a supply channel that does not exist. 145 of the 242 families
    carried that label on their catalog card. Voltfield stocks nothing, sells
    nothing and is not a route to any of this, so the label was asserting a
    commercial relationship on the majority of the catalog.
