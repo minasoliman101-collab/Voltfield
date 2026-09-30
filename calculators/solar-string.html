@@ -24,6 +24,7 @@
    {"@type":"ListItem","position":3,"name":"Solar String Sizing Calculator","item":"https://voltfield.org/calculators/solar-string.html"}
  ]},
  {"@type":"WebPage","name":"Solar String Sizing Calculator","description":"Apply module temperature coefficients to site design temperatures to find maximum and minimum string length against inverter voltage limits. Free, no signup.","url":"https://voltfield.org/calculators/solar-string.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebApplication","name":"Solar String Sizing Calculator","description":"Apply module temperature coefficients to site design temperatures to find maximum and minimum string length against inverter voltage limits. Free, no signup.","url":"https://voltfield.org/engineering-calculators.html#solar-string","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What does the Solar String Sizing calculation account for?","acceptedAnswer":{"@type":"Answer","text":"String length is set by temperature, not by the module's rated voltage. Open-circuit voltage rises as it gets colder, so the binding constraint is the coldest morning of the year: if cold-weather Voc exceeds the inverter's maximum DC input, the string damages the inverter. At the other end, maximum-power voltage falls as it gets hotter, so a string that is too short drops below the inverter's MPPT window on the hottest afternoon and stops tracking. The usable range sits between those two."}},
    {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"The result is only as good as the design temperatures. Record low is not average winter low, and cell temperature in full sun runs 20-30°C above ambient. Uses module datasheet values, which carry their own tolerance."}}
@@ -155,6 +156,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/engineering-calculators.html">All 20 calculators</a>
     </div>
 
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new calculators and guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/calculators/solar-string.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+
   <aside class="provenance" aria-labelledby="prov-h">
     <h2 id="prov-h">Scope &amp; sources</h2>
     <dl>
@@ -186,6 +201,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 <script src="/voltfield-site-config.js"></script>
+<script src="/voltfield-updates.js" defer></script>
 <script>
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>

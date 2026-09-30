@@ -11,7 +11,7 @@
    old stylesheet for one full load, which reads as a broken page rather than
    a stale one. Bump VERSION on any change to core.css or the shared nav:
    activate() wipes every non-matching bucket, so nobody sees the half-state. */
-const VERSION = 'voltfield-v118';
+const VERSION = 'voltfield-v119';
 
 const CORE = [
   './',
@@ -29,6 +29,7 @@ const CORE = [
      precached -- same reasoning as the data files below. */
   './voltfield-3d.js',
   './voltfield-progress.js',
+  './voltfield-updates.js',
   './voltfield-component-viz.js',
   './voltfield-component-viz.css',
   './voltfield-pcb-layout.html',

@@ -38,6 +38,7 @@ Write-Host ("content date: {0}" -f $dataDate)
 $top   = [System.IO.File]::ReadAllText((Join-Path $PSScriptRoot 'tpl\chrome-top.html'), [System.Text.Encoding]::UTF8)
 $hTail = [System.IO.File]::ReadAllText((Join-Path $PSScriptRoot 'tpl\head-tail.html'), [System.Text.Encoding]::UTF8)
 $bot   = [System.IO.File]::ReadAllText((Join-Path $PSScriptRoot 'tpl\chrome-bot.html'), [System.Text.Encoding]::UTF8)
+$embedTpl = [System.IO.File]::ReadAllText((Join-Path $PSScriptRoot 'tpl\calc-embed.html'), [System.Text.Encoding]::UTF8)
 
 function EscJson([string]$s) {
   if ($null -eq $s) { return '' }
@@ -102,6 +103,10 @@ foreach ($r in $recs) {
   [void]$sb.AppendLine("   {""@type"":""ListItem"",""position"":3,""name"":""$(EscJson $r.h1)"",""item"":""$url""}")
   [void]$sb.AppendLine(' ]},')
   [void]$sb.AppendLine(" {""@type"":""WebPage"",""name"":""$(EscJson $r.h1)"",""description"":""$(EscJson $r.desc)"",""url"":""$url"",""dateModified"":""$dataDateISO"",""isPartOf"":{""@type"":""WebSite"",""name"":""Voltfield"",""url"":""https://voltfield.org/""},""publisher"":{""@type"":""Organization"",""name"":""Voltfield"",""url"":""https://voltfield.org/""}},")
+  # The page explains the method; the working tool lives at the hub anchor, so
+  # the WebApplication node points there. No aggregateRating: there are no
+  # ratings to report, and inventing them would be a spam signal.
+  [void]$sb.AppendLine(" {""@type"":""WebApplication"",""name"":""$(EscJson $r.h1)"",""description"":""$(EscJson $r.desc)"",""url"":""https://voltfield.org$toolUrl"",""applicationCategory"":""UtilitiesApplication"",""operatingSystem"":""Any (runs in a web browser)"",""browserRequirements"":""Requires JavaScript"",""isAccessibleForFree"":true,""offers"":{""@type"":""Offer"",""price"":""0"",""priceCurrency"":""USD""},""publisher"":{""@type"":""Organization"",""name"":""Voltfield"",""url"":""https://voltfield.org/""}},")
   [void]$sb.AppendLine(' {"@type":"FAQPage","mainEntity":[')
   [void]$sb.AppendLine("   {""@type"":""Question"",""name"":""What does the $(EscJson $r.h1.Replace(' Calculator','')) calculation account for?"",""acceptedAnswer"":{""@type"":""Answer"",""text"":""$(EscJson ($r.intro -join ' '))""}},")
   [void]$sb.AppendLine("   {""@type"":""Question"",""name"":""What does it not account for?"",""acceptedAnswer"":{""@type"":""Answer"",""text"":""$(EscJson ($r.limits -join ' '))""}}")
@@ -157,6 +162,11 @@ foreach ($r in $recs) {
   [void]$sb.AppendLine('  <h2>Common mistakes</h2>')
   foreach ($p in $r.mistakes) { [void]$sb.AppendLine("  <p>$p</p>") }
   [void]$sb.AppendLine('')
+  # Calculators that embed/calculator-widget.js supports get an "Embed this
+  # calculator" block. Keep this list in step with CALCS in that file.
+  if (@('voltage-drop','transformer-sizing','power-factor') -contains $r.slug) {
+    [void]$sb.Append($embedTpl.Replace('{{SLUG}}', $r.slug))
+  }
   [void]$sb.AppendLine('  <h2>Related</h2>')
   [void]$sb.AppendLine('    <div class="rel">')
   foreach ($l in $r.related) {
@@ -170,6 +180,22 @@ foreach ($r in $recs) {
   # Provenance block, matching the pattern the guides use. The "what it is not"
   # line matters most here: a calculator page that does not state where its
   # method stops being valid invites a screening number into a real design.
+  # Email updates signup (Netlify form "site-updates", wired by voltfield-updates.js).
+  # The same block is on every guide and both hubs; keep the field names identical.
+  [void]$sb.AppendLine('  <div class="vf-updates">')
+  [void]$sb.AppendLine('    <p class="vfu-h"><b>Get new calculators and guides by email</b></p>')
+  [void]$sb.AppendLine('    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>')
+  [void]$sb.AppendLine('    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">')
+  [void]$sb.AppendLine('      <input type="hidden" name="form-name" value="site-updates">')
+  [void]$sb.AppendLine("      <input type=""hidden"" name=""source"" value=""/calculators/$($r.slug).html"">")
+  [void]$sb.AppendLine('      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>')
+  [void]$sb.AppendLine('      <label class="vfu-sr" for="vfu-email">Email address</label>')
+  [void]$sb.AppendLine('      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">')
+  [void]$sb.AppendLine('      <button type="submit">Subscribe</button>')
+  [void]$sb.AppendLine('      <p class="vfu-msg" role="status" aria-live="polite"></p>')
+  [void]$sb.AppendLine('    </form>')
+  [void]$sb.AppendLine('  </div>')
+  [void]$sb.AppendLine('')
   [void]$sb.AppendLine('  <aside class="provenance" aria-labelledby="prov-h">')
   [void]$sb.AppendLine('    <h2 id="prov-h">Scope &amp; sources</h2>')
   [void]$sb.AppendLine('    <dl>')
@@ -186,7 +212,9 @@ foreach ($r in $recs) {
   [void]$sb.AppendLine('')
   [void]$sb.AppendLine('</div>')
   [void]$sb.AppendLine('</main>')
-  [void]$sb.Append($bot)
+  # Only the calculator pages carry the signup form, so the script is added here
+  # rather than in the shared chrome-bot template.
+  [void]$sb.Append($bot.Replace('<script src="/voltfield-site-config.js"></script>', "<script src=""/voltfield-site-config.js""></script>`n<script src=""/voltfield-updates.js"" defer></script>"))
 
   [System.IO.File]::WriteAllText((Join-Path $outDir "$($r.slug).html"), $sb.ToString(), $utf8)
   $written++
