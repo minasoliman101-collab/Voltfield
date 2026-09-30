@@ -165,6 +165,16 @@ Earning backlinks happens off-site, so the repo changes are limited to making Vo
 - Re-run the link audit after each new page. The script used for this pass counts contextual inbound links inside `<main>` only, so nav and footer links don't count. Keep every indexable page at 3 or more contextual inbound links.
 - `voltfield-pcb.html` (1 inbound) and `site-search.html` are the weakest remaining pages. Link the PCB tools from `free-tools.html` copy where relevant.
 
+**Storefront pages de-indexed (Sept 30, 2026).** `voltfield-supply-catalog.html` (Spec Library), `voltfield-suppliers.html` and `voltfield-eol.html` now carry `noindex, follow` and are out of the sitemap. They stay live for anyone using them. They are deliberately not blocked in robots.txt, because Google has to fetch a page to see its noindex. Their prominent links now point at guides and calculators instead:
+- The "Obsolete & end-of-life" entry in the Tools menu (93 pages) is now "Engineering guides".
+- 20 call-to-action banners that said "Browse the catalog" now each point to the closest guide or calculator, using the target page's own meta description as the blurb.
+- On the guides hub, the Spec Library and Suppliers cards are now Engineering Calculators and Specification Checklist.
+- `scripts/tpl/chrome-top.html` had drifted back to the old menu (Spec Library and Suppliers as top-level links). It now matches the live header, so regenerating doesn't bring them back.
+
+Contextual links from the category pages into the catalog stay. They serve readers, and `follow` means they cost nothing. Expect Google to drop these URLs over the next few weeks. Search Console → Pages → "Excluded by 'noindex' tag" shows the progress.
+
+**Still candidates for the same treatment:** `voltfield-insights.html` (a dashboard of the catalog), `voltfield-bom-generator.html` (indicative cost roll-ups per part) and `voltfield-identify.html`. All three sit close to the storefront positioning. Decide using their Search Console clicks.
+
 ---
 
 ## 6. High-quality content
