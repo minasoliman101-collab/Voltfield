@@ -173,7 +173,7 @@ Earning backlinks happens off-site, so the repo changes are limited to making Vo
 
 Contextual links from the category pages into the catalog stay. They serve readers, and `follow` means they cost nothing. Expect Google to drop these URLs over the next few weeks. Search Console → Pages → "Excluded by 'noindex' tag" shows the progress.
 
-**Still candidates for the same treatment:** `voltfield-insights.html` (a dashboard of the catalog), `voltfield-bom-generator.html` (indicative cost roll-ups per part) and `voltfield-identify.html`. All three sit close to the storefront positioning. Decide using their Search Console clicks.
+**Also de-indexed (Sept 30, 2026):** `voltfield-insights.html` (a dashboard of the catalog), `voltfield-bom-generator.html` (indicative cost roll-ups per part) and `voltfield-identify.html` get the same `noindex, follow` and are out of the sitemap. Unlike the first three, their menu and body links stay. They are still useful tools, and a link to a noindexed page costs nothing. `lead-time-index.html` still shows Insights in its breadcrumb; change that the next time the page is edited.
 
 ---
 
