@@ -24,7 +24,7 @@
    {"@type":"ListItem","position":3,"name":"Transformer Inrush Current Calculator","item":"https://voltfield.org/calculators/inrush.html"}
  ]},
  {"@type":"WebPage","name":"Transformer Inrush Current Calculator","description":"Estimate magnetizing inrush current on transformer energization as a multiple of full-load amps, for upstream breaker and fuse selection. Free, no signup.","url":"https://voltfield.org/calculators/inrush.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
- {"@type":"WebApplication","name":"Transformer Inrush Current Calculator","description":"Estimate magnetizing inrush current on transformer energization as a multiple of full-load amps, for upstream breaker and fuse selection. Free, no signup.","url":"https://voltfield.org/engineering-calculators.html#inrush","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebApplication","name":"Transformer Inrush Current Calculator","description":"Estimate magnetizing inrush current on transformer energization as a multiple of full-load amps, for upstream breaker and fuse selection. Free, no signup.","url":"https://voltfield.org/calculators/inrush.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What does the Transformer Inrush Current calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Energizing a transformer draws a magnetizing inrush that is far above full-load current — commonly 8 to 12 times, decaying over several cycles. It is not a fault, but an upstream protective device cannot tell the difference unless it has been selected to ride through it. Getting this wrong produces a transformer that trips its own feeder breaker every time it is energized."}},
    {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"The multiplier is an estimate, not a measurement. Actual inrush depends on residual core flux and the exact point on the voltage wave at which the switch closes, and worst-case energization can exceed the typical figure. Magnitude also decays over several cycles, so a single peak number does not describe the whole event."}}
@@ -41,6 +41,7 @@
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
 <link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
 <link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-calculators.css">
 <link rel="stylesheet" href="/voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <link rel="stylesheet" href="/voltfield-parts.css">
@@ -97,23 +98,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section class="artban">
   <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/engineering-calculators.html" style="color:var(--slate);text-decoration:none">Calculators</a> / <span style="color:var(--ink)">Transformer Inrush Current Calculator</span></nav>
     <div class="eyebrow">Free Calculator &middot; No Signup</div>
     <h1>Transformer Inrush Current Calculator</h1>
-    <p class="dek">Energizing a transformer draws a magnetizing inrush that is far above full-load current — commonly 8 to 12 times, decaying over several cycles. It is not a fault, but an upstream protective device cannot tell the difference unless it has been selected to ride through it. Getting this wrong produces a transformer that trips its own feeder breaker every time it is energized.</p>
+    <p class="dek">Estimate magnetizing inrush current on transformer energization as a multiple of full-load amps, for upstream breaker and fuse selection.</p>
   </div>
 </section>
 
-<nav class="crumb" aria-label="Breadcrumb">
-  <a href="/index.html">Home</a><span class="sep">/</span>
-  <a href="/engineering-calculators.html">Calculators</a><span class="sep">/</span>
-  <span>Transformer Inrush Current Calculator</span>
-</nav>
-
 <div class="artwrap">
-  <div class="ctaband"><div class="ctaband-in">
-    <div><h2>Run the numbers</h2><p>The working calculator is free and needs no signup.</p></div>
-    <a class="ctabtn" href="/engineering-calculators.html#inrush">OPEN THE CALCULATOR &rarr;</a>
-  </div></div>
+  <section class="calc-tool" id="calculator" aria-label="Transformer Inrush Current Calculator">
+  <div class="estimator" id="inrushCalc">
+    <h3>Inrush Current</h3>
+    <div class="sub">Pick the size class closest to your unit to auto-fill a typical multiplier range, or override it if your manufacturer publishes an actual figure.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="inClass">Transformer size class</label><select id="inClass">
+        <option value="small">Small control/instrument (up to a few kVA)</option>
+        <option value="dist" selected>Small&ndash;medium distribution (up to ~2500 kVA)</option>
+        <option value="large">Large power (&gt;2500 kVA)</option>
+      </select></div>
+      <div class="est-field"><label for="inKva">Transformer (kVA)</label><input type="number" id="inKva" min="0" step="1" placeholder="e.g. 2000"></div>
+      <div class="est-field"><label for="inV">Secondary voltage (V)</label><input type="number" id="inV" min="0" step="1" placeholder="e.g. 480"></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="inMlo">Multiplier, low (&times;FLA)</label><input type="number" id="inMlo" min="1" step="0.5" value="8"></div>
+      <div class="est-field"><label for="inMhi">Multiplier, high (&times;FLA)</label><input type="number" id="inMhi" min="1" step="0.5" value="12"></div>
+      <div class="est-field"><button type="button" id="inBtn">Calculate</button></div>
+    </div>
+    <div class="est-result" id="inResult"></div>
+  </div>
+  <div class="callout">This is a budgetary planning heuristic, not manufacturer inrush data or a time-domain simulation — it's not a substitute for the transformer's actual published inrush curve when sizing protective devices or generator/UPS ride-through.</div>
+  </section>
+
+  <p>Energizing a transformer draws a magnetizing inrush that is far above full-load current — commonly 8 to 12 times, decaying over several cycles. It is not a fault, but an upstream protective device cannot tell the difference unless it has been selected to ride through it. Getting this wrong produces a transformer that trips its own feeder breaker every time it is energized.</p>
 
 
   <h2>The formula</h2>
@@ -178,7 +194,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>What it is not</dt>
       <dd>The multiplier is an estimate, not a measurement. Actual inrush depends on residual core flux and the exact point on the voltage wave at which the switch closes, and worst-case energization can exceed the typical figure. Magnitude also decays over several cycles, so a single peak number does not describe the whole event. This is a screening estimate, not a stamped calculation.</dd>
       <dt>Provenance</dt>
-      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labeled as estimates. Worked examples are arithmetic you can reproduce against the <a href="/engineering-calculators.html#inrush">live calculator</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labeled as estimates. Worked examples are arithmetic you can reproduce against the <a href="#calculator">calculator at the top of this page</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
     </dl>
   </aside>
 
@@ -198,6 +214,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
   </div>
 </footer>
+<script src="/voltfield-calculators.js" defer></script>
 <script src="/voltfield-site-config.js"></script>
 <script src="/voltfield-updates.js" defer></script>
 <script>

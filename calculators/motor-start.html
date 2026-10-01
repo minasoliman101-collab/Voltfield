@@ -24,7 +24,7 @@
    {"@type":"ListItem","position":3,"name":"Motor Starting Voltage Dip Calculator","item":"https://voltfield.org/calculators/motor-start.html"}
  ]},
  {"@type":"WebPage","name":"Motor Starting Voltage Dip Calculator","description":"Estimate bus voltage dip when a large motor starts across the line, using locked-rotor kVA against source short-circuit kVA. Free, no signup.","url":"https://voltfield.org/calculators/motor-start.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
- {"@type":"WebApplication","name":"Motor Starting Voltage Dip Calculator","description":"Estimate bus voltage dip when a large motor starts across the line, using locked-rotor kVA against source short-circuit kVA. Free, no signup.","url":"https://voltfield.org/engineering-calculators.html#motor-start","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebApplication","name":"Motor Starting Voltage Dip Calculator","description":"Estimate bus voltage dip when a large motor starts across the line, using locked-rotor kVA against source short-circuit kVA. Free, no signup.","url":"https://voltfield.org/calculators/motor-start.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What does the Motor Starting Voltage Dip calculation account for?","acceptedAnswer":{"@type":"Answer","text":"A motor starting across the line draws locked-rotor current — commonly six times full load — and that inrush pulls the bus voltage down for as long as it takes to accelerate. If the dip is deep enough, contactors drop out, drives fault on undervoltage, and lighting visibly flickers. The screening question is simple: how stiff is the source relative to the motor's starting demand?"}},
    {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"A steady-state screening estimate. It does not model the acceleration curve, the load torque the motor is starting against, or how long the dip persists — and duration matters as much as depth for whether a contactor actually drops out. Reduced-voltage starting and soft starters change the picture entirely."}}
@@ -41,6 +41,7 @@
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
 <link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
 <link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-calculators.css">
 <link rel="stylesheet" href="/voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <link rel="stylesheet" href="/voltfield-parts.css">
@@ -97,23 +98,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section class="artban">
   <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/engineering-calculators.html" style="color:var(--slate);text-decoration:none">Calculators</a> / <span style="color:var(--ink)">Motor Starting Voltage Dip Calculator</span></nav>
     <div class="eyebrow">Free Calculator &middot; No Signup</div>
     <h1>Motor Starting Voltage Dip Calculator</h1>
-    <p class="dek">A motor starting across the line draws locked-rotor current — commonly six times full load — and that inrush pulls the bus voltage down for as long as it takes to accelerate. If the dip is deep enough, contactors drop out, drives fault on undervoltage, and lighting visibly flickers. The screening question is simple: how stiff is the source relative to the motor's starting demand?</p>
+    <p class="dek">Estimate bus voltage dip when a large motor starts across the line, using locked-rotor kVA against source short-circuit kVA.</p>
   </div>
 </section>
 
-<nav class="crumb" aria-label="Breadcrumb">
-  <a href="/index.html">Home</a><span class="sep">/</span>
-  <a href="/engineering-calculators.html">Calculators</a><span class="sep">/</span>
-  <span>Motor Starting Voltage Dip Calculator</span>
-</nav>
-
 <div class="artwrap">
-  <div class="ctaband"><div class="ctaband-in">
-    <div><h2>Run the numbers</h2><p>The working calculator is free and needs no signup.</p></div>
-    <a class="ctabtn" href="/engineering-calculators.html#motor-start">OPEN THE CALCULATOR &rarr;</a>
-  </div></div>
+  <section class="calc-tool" id="calculator" aria-label="Motor Starting Voltage Dip Calculator">
+  <div class="estimator" id="motorCalc">
+    <h3>Voltage Dip on Motor Start</h3>
+    <div class="sub">Use actual nameplate LRA when you have it — the NEMA code letter only gives a band, not an exact value. Use the system's minimum expected fault capacity (weakest condition), the opposite convention from a protective-device duty study.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="motorMethod">Motor data</label><select id="motorMethod">
+        <option value="letter" selected>NEMA code letter + HP</option>
+        <option value="lra">Nameplate LRA (A)</option>
+      </select></div>
+      <div class="est-field" id="motorHpWrap"><label for="motorHp">Motor rating (HP)</label><input type="number" id="motorHp" min="0" step="1" placeholder="e.g. 500"></div>
+      <div class="est-field" id="motorLetterWrap"><label for="motorLetter">NEMA code letter</label><select id="motorLetter"></select></div>
+      <div class="est-field" id="motorLraWrap" style="display:none"><label for="motorLra">Locked-rotor amps, LRA</label><input type="number" id="motorLra" min="0" step="1" placeholder="e.g. 3950"></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="motorV">System voltage, L-L (V)</label><input type="number" id="motorV" min="0" step="1" placeholder="e.g. 460"></div>
+      <div class="est-field"><label for="motorSc">Available fault capacity (kVA)</label><input type="number" id="motorSc" min="0" step="100" placeholder="e.g. 40000"></div>
+      <div class="est-field"><button type="button" id="motorBtn">Calculate</button></div>
+    </div>
+    <div class="est-result" id="motorResult"></div>
+  </div>
+  <div class="callout">Minimum acceptable starting-bus voltage is application-specific — commonly cited screening thresholds include ~80% of rated voltage at the starting motor's own terminals (NEMA Design B, full-torque load), ~85% for AC contactor pickup, and ~71% at the terminals of other motors on the same bus that need to reaccelerate. There's no single universal cutoff.</div>
+  </section>
+
+  <p>A motor starting across the line draws locked-rotor current — commonly six times full load — and that inrush pulls the bus voltage down for as long as it takes to accelerate. If the dip is deep enough, contactors drop out, drives fault on undervoltage, and lighting visibly flickers. The screening question is simple: how stiff is the source relative to the motor's starting demand?</p>
 
 
   <h2>The formula</h2>
@@ -175,7 +191,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>What it is not</dt>
       <dd>A steady-state screening estimate. It does not model the acceleration curve, the load torque the motor is starting against, or how long the dip persists — and duration matters as much as depth for whether a contactor actually drops out. Reduced-voltage starting and soft starters change the picture entirely. This is a screening estimate, not a stamped calculation.</dd>
       <dt>Provenance</dt>
-      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labeled as estimates. Worked examples are arithmetic you can reproduce against the <a href="/engineering-calculators.html#motor-start">live calculator</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labeled as estimates. Worked examples are arithmetic you can reproduce against the <a href="#calculator">calculator at the top of this page</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
     </dl>
   </aside>
 
@@ -195,6 +211,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
   </div>
 </footer>
+<script src="/voltfield-calculators.js" defer></script>
 <script src="/voltfield-site-config.js"></script>
 <script src="/voltfield-updates.js" defer></script>
 <script>

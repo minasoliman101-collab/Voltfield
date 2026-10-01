@@ -1,0 +1,23 @@
+<!-- Live calculator for calculators/arc-flash.html. Logic: voltfield-calculators.js. -->
+  <div class="formula" id="afFormula">E = 793 &times; F &times; V &times; t / D&sup2; &nbsp;[Lee, open air, &gt;600V]</div>
+  <div class="estimator" id="afCalc">
+    <h3>Arc-Flash Incident Energy</h3>
+    <div class="sub" id="afSub">Doughty equations (&le;600V) are only validated for 16&ndash;50 kA bolted fault current and working distances of 18 in or more — the tool will flag it if you're outside that range.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="afScenario">Scenario</label><select id="afScenario">
+        <option value="lee">Open air, &gt;600V (Lee)</option>
+        <option value="doughtyAir" selected>Open air, &le;600V (Doughty)</option>
+        <option value="doughtyBox">Arc in enclosure/box, &le;600V (Doughty)</option>
+      </select></div>
+      <div class="est-field" id="afVWrap" style="display:none"><label for="afV">System voltage (kV)</label><input type="number" id="afV" min="0" step="0.01" placeholder="e.g. 13.8"></div>
+      <div class="est-field"><label for="afIbf">Bolted fault current (kA)</label><input type="number" id="afIbf" min="0" step="0.1" placeholder="e.g. 22.6"></div>
+      <div class="est-field"><label for="afTime">Arc duration (s)</label><input type="number" id="afTime" min="0.01" step="0.01" placeholder="e.g. 0.1"></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="afDist">Working distance (in)</label><input type="number" id="afDist" min="1" step="0.5" placeholder="e.g. 18"></div>
+      <div class="est-field"><label for="afThresh">Boundary threshold (cal/cm&sup2;)</label><input type="number" id="afThresh" min="0.1" step="0.1" value="1.2"></div>
+      <div class="est-field"><button type="button" id="afBtn">Calculate</button></div>
+    </div>
+    <div class="est-result" id="afResult"></div>
+  </div>
+  <div class="callout">Arc duration is your upstream protective device's actual clearing time (breaker + relay, from a coordination study) — there's no universal default, since it's the single biggest driver of incident energy. Bolted fault current can come from the <a class="inline" href="/calculators/fault-current.html">Fault Current Estimate</a> calculator, or an actual short-circuit study. The 1.2 cal/cm&sup2; boundary threshold is the standard "just curable" second-degree-burn value from NFPA 70E Annex D — bump it to 1.5 cal/cm&sup2; if you're above 600V with a clearing time of 0.1s or less, per the same Annex D guidance.</div>

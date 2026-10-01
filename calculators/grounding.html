@@ -24,7 +24,7 @@
    {"@type":"ListItem","position":3,"name":"Ground Rod Resistance Calculator","item":"https://voltfield.org/calculators/grounding.html"}
  ]},
  {"@type":"WebPage","name":"Ground Rod Resistance Calculator","description":"Estimate resistance-to-earth of a driven ground rod from soil resistivity, rod length and diameter, using Dwight's formula. Free, no signup.","url":"https://voltfield.org/calculators/grounding.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
- {"@type":"WebApplication","name":"Ground Rod Resistance Calculator","description":"Estimate resistance-to-earth of a driven ground rod from soil resistivity, rod length and diameter, using Dwight's formula. Free, no signup.","url":"https://voltfield.org/engineering-calculators.html#grounding","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebApplication","name":"Ground Rod Resistance Calculator","description":"Estimate resistance-to-earth of a driven ground rod from soil resistivity, rod length and diameter, using Dwight's formula. Free, no signup.","url":"https://voltfield.org/calculators/grounding.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What does the Ground Rod Resistance calculation account for?","acceptedAnswer":{"@type":"Answer","text":"The resistance of a driven rod to earth is dominated by soil resistivity and by rod length — and much less than people expect by rod diameter. Doubling length roughly halves resistance; doubling diameter changes it by only a few percent. That is why grounding designs add rods and depth rather than thicker rods, and why the NEC's 25-ohm threshold is met with a second electrode rather than a bigger one."}},
    {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"Dwight's formula assumes uniform soil, which real ground is not — resistivity varies with depth, moisture and season, and a summer measurement can be far better than the same rod in a dry autumn. It models one rod: multiple rods interact, and their combined resistance is higher than simple parallel arithmetic suggests unless they are spaced at least one rod length apart."}}
@@ -41,6 +41,7 @@
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
 <link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
 <link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-calculators.css">
 <link rel="stylesheet" href="/voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <link rel="stylesheet" href="/voltfield-parts.css">
@@ -97,23 +98,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section class="artban">
   <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/engineering-calculators.html" style="color:var(--slate);text-decoration:none">Calculators</a> / <span style="color:var(--ink)">Ground Rod Resistance Calculator</span></nav>
     <div class="eyebrow">Free Calculator &middot; No Signup</div>
     <h1>Ground Rod Resistance Calculator</h1>
-    <p class="dek">The resistance of a driven rod to earth is dominated by soil resistivity and by rod length — and much less than people expect by rod diameter. Doubling length roughly halves resistance; doubling diameter changes it by only a few percent. That is why grounding designs add rods and depth rather than thicker rods, and why the NEC's 25-ohm threshold is met with a second electrode rather than a bigger one.</p>
+    <p class="dek">Estimate resistance-to-earth of a driven ground rod from soil resistivity, rod length and diameter, using Dwight's formula.</p>
   </div>
 </section>
 
-<nav class="crumb" aria-label="Breadcrumb">
-  <a href="/index.html">Home</a><span class="sep">/</span>
-  <a href="/engineering-calculators.html">Calculators</a><span class="sep">/</span>
-  <span>Ground Rod Resistance Calculator</span>
-</nav>
-
 <div class="artwrap">
-  <div class="ctaband"><div class="ctaband-in">
-    <div><h2>Run the numbers</h2><p>The working calculator is free and needs no signup.</p></div>
-    <a class="ctabtn" href="/engineering-calculators.html#grounding">OPEN THE CALCULATOR &rarr;</a>
-  </div></div>
+  <section class="calc-tool" id="calculator" aria-label="Ground Rod Resistance Calculator">
+  <div class="estimator" id="groundCalc">
+    <h3>Single Rod Resistance</h3>
+    <div class="sub">Soil resistivity presets are order-of-magnitude only (moisture, compaction, and mineral content routinely swing real resistivity by 10&times; within one "soil type") — a site resistivity test is the real number.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="gndPreset">Soil (typical &rho;, illustrative only)</label><select id="gndPreset">
+        <option value="">Custom &rho; (enter at right)</option>
+        <option value="10">Wet organic soil (~10 &Omega;&middot;m)</option>
+        <option value="100" selected>Moist soil (~100 &Omega;&middot;m)</option>
+        <option value="1000">Dry soil (~1,000 &Omega;&middot;m)</option>
+        <option value="10000">Bedrock (~10,000 &Omega;&middot;m)</option>
+      </select></div>
+      <div class="est-field"><label for="gndRho">Soil resistivity, &rho; (&Omega;&middot;m)</label><input type="number" id="gndRho" min="1" step="1" value="100"></div>
+      <div class="est-field"><label for="gndLen">Rod length (ft)</label><input type="number" id="gndLen" min="1" step="0.5" value="10"></div>
+      <div class="est-field"><label for="gndDia">Rod diameter (in)</label><select id="gndDia"><option value="0.5">1/2"</option><option value="0.625" selected>5/8"</option><option value="0.75">3/4"</option></select></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="gndBtn">Calculate</button></div></div>
+    <div class="est-result" id="gndResult"></div>
+  </div>
+  <div class="callout">The commonly cited 25-ohm figure (NEC 250.53(A)(2)) is a pass/fail test for whether a <b>single</b> rod/pipe/plate electrode needs a supplemental electrode — it's enforceable rule text (an Exception), not just an informational note, and it doesn't apply once you're already using multiple electrodes. It's also not a general "the grounding system must measure 25&Omega;" requirement. Always confirm against the NEC edition your jurisdiction has adopted.</div>
+  </section>
+
+  <p>The resistance of a driven rod to earth is dominated by soil resistivity and by rod length — and much less than people expect by rod diameter. Doubling length roughly halves resistance; doubling diameter changes it by only a few percent. That is why grounding designs add rods and depth rather than thicker rods, and why the NEC's 25-ohm threshold is met with a second electrode rather than a bigger one.</p>
 
 
   <h2>The formula</h2>
@@ -176,7 +191,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>What it is not</dt>
       <dd>Dwight's formula assumes uniform soil, which real ground is not — resistivity varies with depth, moisture and season, and a summer measurement can be far better than the same rod in a dry autumn. It models one rod: multiple rods interact, and their combined resistance is higher than simple parallel arithmetic suggests unless they are spaced at least one rod length apart. This is a screening estimate, not a stamped calculation.</dd>
       <dt>Provenance</dt>
-      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labeled as estimates. Worked examples are arithmetic you can reproduce against the <a href="/engineering-calculators.html#grounding">live calculator</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labeled as estimates. Worked examples are arithmetic you can reproduce against the <a href="#calculator">calculator at the top of this page</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
     </dl>
   </aside>
 
@@ -196,6 +211,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
   </div>
 </footer>
+<script src="/voltfield-calculators.js" defer></script>
 <script src="/voltfield-site-config.js"></script>
 <script src="/voltfield-updates.js" defer></script>
 <script>

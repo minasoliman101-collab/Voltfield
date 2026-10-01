@@ -19,7 +19,10 @@ A self‑contained, **static‑first website** — plain HTML, CSS, and JavaScri
 | `voltfield-eol.html` / `voltfield-eol-data.js` | **Obsolete/EOL reference** — discontinued series with OEM-recommended successors (see §10). |
 | `voltfield-bom-engine.js` | Component-template engine behind the BOM Generator (per-category teardowns that scale with configuration). |
 | `voltfield-updates.js` | **Email updates signup** — wires the "site-updates" Netlify form on guides, calculator pages and both hubs (inline confirmation; the form still posts without JS). Read signups in the Netlify dashboard → Forms. |
-| `embed/calculator-widget.js` | **Embeddable calculators** — voltage drop, transformer sizing and power factor for other sites to paste in, with an attribution link. Math mirrors `engineering-calculators.html`; change both together. |
+| `embed/calculator-widget.js` | **Embeddable calculators** — voltage drop, transformer sizing and power factor for other sites to paste in, with an attribution link. Math mirrors `voltfield-calculators.js`; change both together. |
+| `voltfield-calculators.js` / `.css` | **Calculator logic and styles**, shared by every page that carries a working calculator: the 12 `calculators/*.html` pages, `calculators/project-finance.html` and `calculators/reference-tables.html`. Each handler finds its elements by id and skips tools that are not on the page. |
+| `scripts/tpl/calc-tools/` | **Calculator markup**, one file per calculator page. `scripts/gen-calc-pages.ps1` places it under the page heading. |
+| `engineering-calculators.html` | **Calculators hub**: a grouped directory of every calculator. Its old `#anchors` forward to each tool's own page. |
 | `voltfield-site-config.js` | **Site config** — production domain (canonical/OG URLs) + ad monetization settings and slot renderer. |
 | `robots.txt` / `sitemap.xml` | Crawl control + sitemap (replace `YOUR-DOMAIN` before submitting to Search Console). |
 | `ads.txt` | Authorized-sellers file for ad networks (instructions inside). |

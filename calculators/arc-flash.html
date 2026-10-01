@@ -24,7 +24,7 @@
    {"@type":"ListItem","position":3,"name":"Arc-Flash Incident Energy Calculator","item":"https://voltfield.org/calculators/arc-flash.html"}
  ]},
  {"@type":"WebPage","name":"Arc-Flash Incident Energy Calculator","description":"Estimate arc-flash incident energy and boundary with the Lee and Doughty equations, as a first pass before a full IEEE 1584 study. Free, no signup.","url":"https://voltfield.org/calculators/arc-flash.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
- {"@type":"WebApplication","name":"Arc-Flash Incident Energy Calculator","description":"Estimate arc-flash incident energy and boundary with the Lee and Doughty equations, as a first pass before a full IEEE 1584 study. Free, no signup.","url":"https://voltfield.org/engineering-calculators.html#arc-flash","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebApplication","name":"Arc-Flash Incident Energy Calculator","description":"Estimate arc-flash incident energy and boundary with the Lee and Doughty equations, as a first pass before a full IEEE 1584 study. Free, no signup.","url":"https://voltfield.org/calculators/arc-flash.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What does the Arc-Flash Incident Energy calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Incident energy is the thermal energy an arc would deliver to a surface at a working distance, in calories per square centimeter. It determines the PPE category and the arc-flash boundary that must appear on the equipment label. Two inputs dominate it, and only one is obvious: available fault current, and how long the upstream device takes to clear. Halving clearing time roughly halves incident energy, which is why protection settings matter more to arc-flash exposure than almost anything else."}},
    {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"The Lee equation is a theoretical open-air model and tends to be conservative. The Doughty equations used at 600 V and below are empirical, and valid only within the 16–50 kA range they were fitted to. Neither models electrode configuration, arc gap or enclosure size the way the IEEE 1584 arcing-current method does. This is a screening estimate only. Labeling and PPE selection require a full study by a qualified engineer."}}
@@ -41,6 +41,7 @@
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
 <link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
 <link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-calculators.css">
 <link rel="stylesheet" href="/voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <link rel="stylesheet" href="/voltfield-parts.css">
@@ -97,23 +98,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section class="artban">
   <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/engineering-calculators.html" style="color:var(--slate);text-decoration:none">Calculators</a> / <span style="color:var(--ink)">Arc-Flash Incident Energy Calculator</span></nav>
     <div class="eyebrow">Free Calculator &middot; No Signup</div>
     <h1>Arc-Flash Incident Energy Calculator</h1>
-    <p class="dek">Incident energy is the thermal energy an arc would deliver to a surface at a working distance, in calories per square centimeter. It determines the PPE category and the arc-flash boundary that must appear on the equipment label. Two inputs dominate it, and only one is obvious: available fault current, and how long the upstream device takes to clear. Halving clearing time roughly halves incident energy, which is why protection settings matter more to arc-flash exposure than almost anything else.</p>
+    <p class="dek">Estimate arc-flash incident energy and boundary with the Lee and Doughty equations, as a first pass before a full IEEE 1584 study.</p>
   </div>
 </section>
 
-<nav class="crumb" aria-label="Breadcrumb">
-  <a href="/index.html">Home</a><span class="sep">/</span>
-  <a href="/engineering-calculators.html">Calculators</a><span class="sep">/</span>
-  <span>Arc-Flash Incident Energy Calculator</span>
-</nav>
-
 <div class="artwrap">
-  <div class="ctaband"><div class="ctaband-in">
-    <div><h2>Run the numbers</h2><p>The working calculator is free and needs no signup.</p></div>
-    <a class="ctabtn" href="/engineering-calculators.html#arc-flash">OPEN THE CALCULATOR &rarr;</a>
-  </div></div>
+  <section class="calc-tool" id="calculator" aria-label="Arc-Flash Incident Energy Calculator">
+  <div class="formula" id="afFormula">E = 793 &times; F &times; V &times; t / D&sup2; &nbsp;[Lee, open air, &gt;600V]</div>
+  <div class="estimator" id="afCalc">
+    <h3>Arc-Flash Incident Energy</h3>
+    <div class="sub" id="afSub">Doughty equations (&le;600V) are only validated for 16&ndash;50 kA bolted fault current and working distances of 18 in or more — the tool will flag it if you're outside that range.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="afScenario">Scenario</label><select id="afScenario">
+        <option value="lee">Open air, &gt;600V (Lee)</option>
+        <option value="doughtyAir" selected>Open air, &le;600V (Doughty)</option>
+        <option value="doughtyBox">Arc in enclosure/box, &le;600V (Doughty)</option>
+      </select></div>
+      <div class="est-field" id="afVWrap" style="display:none"><label for="afV">System voltage (kV)</label><input type="number" id="afV" min="0" step="0.01" placeholder="e.g. 13.8"></div>
+      <div class="est-field"><label for="afIbf">Bolted fault current (kA)</label><input type="number" id="afIbf" min="0" step="0.1" placeholder="e.g. 22.6"></div>
+      <div class="est-field"><label for="afTime">Arc duration (s)</label><input type="number" id="afTime" min="0.01" step="0.01" placeholder="e.g. 0.1"></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="afDist">Working distance (in)</label><input type="number" id="afDist" min="1" step="0.5" placeholder="e.g. 18"></div>
+      <div class="est-field"><label for="afThresh">Boundary threshold (cal/cm&sup2;)</label><input type="number" id="afThresh" min="0.1" step="0.1" value="1.2"></div>
+      <div class="est-field"><button type="button" id="afBtn">Calculate</button></div>
+    </div>
+    <div class="est-result" id="afResult"></div>
+  </div>
+  <div class="callout">Arc duration is your upstream protective device's actual clearing time (breaker + relay, from a coordination study) — there's no universal default, since it's the single biggest driver of incident energy. Bolted fault current can come from the <a class="inline" href="/calculators/fault-current.html">Fault Current Estimate</a> calculator, or an actual short-circuit study. The 1.2 cal/cm&sup2; boundary threshold is the standard "just curable" second-degree-burn value from NFPA 70E Annex D — bump it to 1.5 cal/cm&sup2; if you're above 600V with a clearing time of 0.1s or less, per the same Annex D guidance.</div>
+  </section>
+
+  <p>Incident energy is the thermal energy an arc would deliver to a surface at a working distance, in calories per square centimeter. It determines the PPE category and the arc-flash boundary that must appear on the equipment label. Two inputs dominate it, and only one is obvious: available fault current, and how long the upstream device takes to clear. Halving clearing time roughly halves incident energy, which is why protection settings matter more to arc-flash exposure than almost anything else.</p>
 
 
   <h2>The formula</h2>
@@ -175,7 +193,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>What it is not</dt>
       <dd>The Lee equation is a theoretical open-air model and tends to be conservative. The Doughty equations used at 600 V and below are empirical, and valid only within the 16&ndash;50 kA range they were fitted to. Neither models electrode configuration, arc gap or enclosure size the way the IEEE 1584 arcing-current method does. This is a screening estimate only. Labeling and PPE selection require a full study by a qualified engineer. This is a screening estimate, not a stamped calculation.</dd>
       <dt>Provenance</dt>
-      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labeled as estimates. Worked examples are arithmetic you can reproduce against the <a href="/engineering-calculators.html#arc-flash">live calculator</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labeled as estimates. Worked examples are arithmetic you can reproduce against the <a href="#calculator">calculator at the top of this page</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
     </dl>
   </aside>
 
@@ -195,6 +213,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
   </div>
 </footer>
+<script src="/voltfield-calculators.js" defer></script>
 <script src="/voltfield-site-config.js"></script>
 <script src="/voltfield-updates.js" defer></script>
 <script>

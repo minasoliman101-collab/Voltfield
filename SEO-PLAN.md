@@ -45,7 +45,7 @@ Descriptions over 160 characters on `calculators/bess-sizing.html` and `data-cen
 
 **Rules to keep:** 60 characters or fewer including `| Voltfield`, primary keyword first, one page per keyword (see §3), and `og:title` kept consistent with the title.
 
-**Structured data (Sept 30, 2026).** Each of the 12 `calculators/*.html` pages now carries a `WebApplication` node (free `Offer`, pointing at the live tool's hub anchor) alongside its breadcrumb, `WebPage` and `FAQPage` nodes. Mirrored in `gen-calc-pages.ps1`. There is deliberately no `aggregateRating`: Google shows software rich results only with ratings, and there are none to report, so expect the node to help Google understand the page rather than to produce a star snippet.
+**Structured data (Sept 30, 2026).** Each of the 12 `calculators/*.html` pages now carries a `WebApplication` node (free `Offer`; since Oct 1, 2026 it points at the page itself, which now carries the working tool) alongside its breadcrumb, `WebPage` and `FAQPage` nodes. Mirrored in `gen-calc-pages.ps1`. There is deliberately no `aggregateRating`: Google shows software rich results only with ratings, and there are none to report, so expect the node to help Google understand the page rather than to produce a star snippet.
 
 ---
 
@@ -105,6 +105,7 @@ Descriptions over 160 characters on `calculators/bess-sizing.html` and `data-cen
 
 ### Cannibalization to watch
 - `engineering-calculators.html` still lists "voltage drop calculator" and "transformer sizing calculator" in its meta keywords. The dedicated `calculators/*` pages should own those queries, and the hub should own "free electrical engineering calculators". If Search Console shows the hub ranking for a calculator query instead of the dedicated page, add a stronger contextual link from the hub to that page.
+  *Oct 1, 2026:* largely resolved. The hub no longer contains any calculator; it is a directory that links to each calculator page, so the dedicated pages are the only URLs with the tool on them.
 - `guides.html` vs. `voltfield-insights.html`: resolved by the retitle in §2.
 
 ### Content gaps, in priority order (validate volume first)
@@ -205,3 +206,19 @@ Contextual links from the category pages into the catalog stay. They serve reade
 | Fonts | Self-hosted; see section 1. |
 
 **`packets.html` de-indexed (Oct 1, 2026).** The page says "In development", so it now carries `noindex, follow` and is out of the sitemap, the same treatment as the storefront pages in section 5. When the packets ship, remove the tag, restore the sitemap entry, and give the page contextual links.
+
+---
+
+## Oct 1, 2026: calculators on their own pages
+
+**Problem.** 9 of the 12 `calculators/*.html` pages had no calculator on them; the other 3 had one only as an embed demo about six screens down. Each page explained the method and then linked to `engineering-calculators.html`, which held all 20 tools on one page: about 4,600 words and 43 phone screens. Someone searching "arc flash calculator" landed on a page without one.
+
+**Change.**
+- Each calculator page opens with its working tool directly under a short heading block. The long lead paragraph moved below the tool, and the breadcrumb moved into the hero to match the guides. Markup comes from `scripts/tpl/calc-tools/<slug>.html`, and the logic and styles from the shared `voltfield-calculators.js` / `.css`. `gen-calc-pages.ps1` emits the same structure; it was run and its output checked against the edited pages.
+- The hub is a directory of cards in five groups. On a phone it is about 9 screens instead of 43, and its weight fell from 99.5 KB to about 26 KB, with three.js and the component illustrations no longer loaded there.
+- Tools with no page of their own moved to two new pages: `calculators/project-finance.html` (TCO, payback and NPV, MACRS, landed cost, plus their three FAQ entries from the hub) and `calculators/reference-tables.html` (unit converter, standards cross-reference, compliance marks, HS codes, external data). Both are in the sitemap and site search.
+- The hub's old `#anchors` (section ids and estimator ids) forward to the tool's new page, so external links keep working. 93 internal links were repointed directly.
+- The `calculator_run` usage event moved into `voltfield-calculators.js` unchanged, so reports from before and after line up.
+- The embed block on the three embeddable calculators keeps the snippet but drops its second live copy of the tool.
+
+**Watch in Search Console:** whether queries like "voltage drop calculator" shift from the hub to the calculator pages, and engagement on the calculator pages.

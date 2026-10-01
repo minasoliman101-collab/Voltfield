@@ -24,7 +24,7 @@
    {"@type":"ListItem","position":3,"name":"BESS Sizing Calculator","item":"https://voltfield.org/calculators/bess-sizing.html"}
  ]},
  {"@type":"WebPage","name":"BESS Sizing Calculator","description":"Convert a critical load and backup duration into usable energy, then into the nameplate kWh you need once depth of discharge and round-trip efficiency are applied.","url":"https://voltfield.org/calculators/bess-sizing.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
- {"@type":"WebApplication","name":"BESS Sizing Calculator","description":"Convert a critical load and backup duration into usable energy, then into the nameplate kWh you need once depth of discharge and round-trip efficiency are applied.","url":"https://voltfield.org/engineering-calculators.html#bess-sizing","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebApplication","name":"BESS Sizing Calculator","description":"Convert a critical load and backup duration into usable energy, then into the nameplate kWh you need once depth of discharge and round-trip efficiency are applied.","url":"https://voltfield.org/calculators/bess-sizing.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What does the BESS Sizing calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Battery storage is specified in two numbers that are easy to conflate: power in kW, which is how fast it can deliver, and energy in kWh, which is how long it can sustain that. The ratio between them is the C-rate, and it drives cell selection and thermal design. The other trap is that the energy you can use is not the energy on the nameplate — depth of discharge and round-trip efficiency both take a cut, and sizing to usable energy without grossing up for them under-sizes the system."}},
    {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"This is a day-one calculation. Capacity fades with cycling and calendar age, so a system sized exactly to requirement will miss it within a few years unless augmentation is planned. It also ignores auxiliary load — the thermal management system draws power from the same asset."}}
@@ -41,6 +41,7 @@
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
 <link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
 <link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-calculators.css">
 <link rel="stylesheet" href="/voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <link rel="stylesheet" href="/voltfield-parts.css">
@@ -97,23 +98,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section class="artban">
   <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/engineering-calculators.html" style="color:var(--slate);text-decoration:none">Calculators</a> / <span style="color:var(--ink)">BESS Sizing Calculator</span></nav>
     <div class="eyebrow">Free Calculator &middot; No Signup</div>
     <h1>BESS Sizing Calculator</h1>
-    <p class="dek">Battery storage is specified in two numbers that are easy to conflate: power in kW, which is how fast it can deliver, and energy in kWh, which is how long it can sustain that. The ratio between them is the C-rate, and it drives cell selection and thermal design. The other trap is that the energy you can use is not the energy on the nameplate — depth of discharge and round-trip efficiency both take a cut, and sizing to usable energy without grossing up for them under-sizes the system.</p>
+    <p class="dek">Turn a critical load and backup duration into usable kWh, then the nameplate kWh you need after depth of discharge and round-trip efficiency.</p>
   </div>
 </section>
 
-<nav class="crumb" aria-label="Breadcrumb">
-  <a href="/index.html">Home</a><span class="sep">/</span>
-  <a href="/engineering-calculators.html">Calculators</a><span class="sep">/</span>
-  <span>BESS Sizing Calculator</span>
-</nav>
-
 <div class="artwrap">
-  <div class="ctaband"><div class="ctaband-in">
-    <div><h2>Run the numbers</h2><p>The working calculator is free and needs no signup.</p></div>
-    <a class="ctabtn" href="/engineering-calculators.html#bess-sizing">OPEN THE CALCULATOR &rarr;</a>
-  </div></div>
+  <section class="calc-tool" id="calculator" aria-label="BESS Sizing Calculator">
+  <div class="estimator" id="bessCalc">
+    <h3>BESS Size</h3>
+    <div class="sub">Defaults (90% DoD, 90% RTE) are typical for utility-scale LFP systems — adjust to your spec sheet.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="bessKw">Critical load (kW)</label><input type="number" id="bessKw" min="0" step="1" placeholder="e.g. 500"></div>
+      <div class="est-field"><label for="bessHrs">Backup duration (hrs)</label><input type="number" id="bessHrs" min="0" step="0.5" placeholder="e.g. 4"></div>
+      <div class="est-field"><label for="bessDod">Depth of discharge (%)</label><input type="number" id="bessDod" min="1" max="100" step="1" value="90"></div>
+      <div class="est-field"><label for="bessRte">Round-trip efficiency (%)</label><input type="number" id="bessRte" min="1" max="100" step="1" value="90"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="bessBtn">Calculate</button></div></div>
+    <div class="est-result" id="bessResult"></div>
+  </div>
+  </section>
+
+  <p>Battery storage is specified in two numbers that are easy to conflate: power in kW, which is how fast it can deliver, and energy in kWh, which is how long it can sustain that. The ratio between them is the C-rate, and it drives cell selection and thermal design. The other trap is that the energy you can use is not the energy on the nameplate — depth of discharge and round-trip efficiency both take a cut, and sizing to usable energy without grossing up for them under-sizes the system.</p>
 
 
   <h2>The formula</h2>
@@ -180,7 +188,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>What it is not</dt>
       <dd>This is a day-one calculation. Capacity fades with cycling and calendar age, so a system sized exactly to requirement will miss it within a few years unless augmentation is planned. It also ignores auxiliary load — the thermal management system draws power from the same asset. This is a screening estimate, not a stamped calculation.</dd>
       <dt>Provenance</dt>
-      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labeled as estimates. Worked examples are arithmetic you can reproduce against the <a href="/engineering-calculators.html#bess-sizing">live calculator</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labeled as estimates. Worked examples are arithmetic you can reproduce against the <a href="#calculator">calculator at the top of this page</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
     </dl>
   </aside>
 
@@ -200,6 +208,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
   </div>
 </footer>
+<script src="/voltfield-calculators.js" defer></script>
 <script src="/voltfield-site-config.js"></script>
 <script src="/voltfield-updates.js" defer></script>
 <script>

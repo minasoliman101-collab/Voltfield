@@ -11,8 +11,10 @@
    old stylesheet for one full load, which reads as a broken page rather than
    a stale one. Bump VERSION on any change to core.css or the shared nav:
    activate() wipes every non-matching bucket, so nobody sees the half-state. */
-/* v123: fonts moved from Google Fonts to fonts/ on this origin. */
-const VERSION = 'voltfield-v123';
+/* v123: fonts moved from Google Fonts to fonts/ on this origin.
+   v124: calculators moved off the hub onto their own pages; shared logic and
+   styles in voltfield-calculators.js/.css. */
+const VERSION = 'voltfield-v124';
 
 const CORE = [
   './',
@@ -35,6 +37,8 @@ const CORE = [
   './voltfield-component-viz.css',
   './voltfield-pcb-layout.html',
   './voltfield-core.css',
+  './voltfield-calculators.css',
+  './voltfield-calculators.js',
   './voltfield-fonts.css',
   './fonts/ibm-plex-sans-latin.woff2',
   './voltfield-parts.css',

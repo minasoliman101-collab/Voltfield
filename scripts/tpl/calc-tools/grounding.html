@@ -1,0 +1,20 @@
+<!-- Live calculator for calculators/grounding.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="groundCalc">
+    <h3>Single Rod Resistance</h3>
+    <div class="sub">Soil resistivity presets are order-of-magnitude only (moisture, compaction, and mineral content routinely swing real resistivity by 10&times; within one "soil type") — a site resistivity test is the real number.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="gndPreset">Soil (typical &rho;, illustrative only)</label><select id="gndPreset">
+        <option value="">Custom &rho; (enter at right)</option>
+        <option value="10">Wet organic soil (~10 &Omega;&middot;m)</option>
+        <option value="100" selected>Moist soil (~100 &Omega;&middot;m)</option>
+        <option value="1000">Dry soil (~1,000 &Omega;&middot;m)</option>
+        <option value="10000">Bedrock (~10,000 &Omega;&middot;m)</option>
+      </select></div>
+      <div class="est-field"><label for="gndRho">Soil resistivity, &rho; (&Omega;&middot;m)</label><input type="number" id="gndRho" min="1" step="1" value="100"></div>
+      <div class="est-field"><label for="gndLen">Rod length (ft)</label><input type="number" id="gndLen" min="1" step="0.5" value="10"></div>
+      <div class="est-field"><label for="gndDia">Rod diameter (in)</label><select id="gndDia"><option value="0.5">1/2"</option><option value="0.625" selected>5/8"</option><option value="0.75">3/4"</option></select></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="gndBtn">Calculate</button></div></div>
+    <div class="est-result" id="gndResult"></div>
+  </div>
+  <div class="callout">The commonly cited 25-ohm figure (NEC 250.53(A)(2)) is a pass/fail test for whether a <b>single</b> rod/pipe/plate electrode needs a supplemental electrode — it's enforceable rule text (an Exception), not just an informational note, and it doesn't apply once you're already using multiple electrodes. It's also not a general "the grounding system must measure 25&Omega;" requirement. Always confirm against the NEC edition your jurisdiction has adopted.</div>

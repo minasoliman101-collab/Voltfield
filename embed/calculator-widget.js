@@ -4,8 +4,8 @@
      <script src="https://voltfield.org/embed/calculator-widget.js" async></script>
    data-calc: voltage-drop | transformer-sizing | power-factor
 
-   The math and tables mirror the live calculators on
-   engineering-calculators.html. Change them there and here together.
+   The math and tables mirror the live calculators in
+   voltfield-calculators.js. Change them there and here together.
    Everything renders in a shadow root so the host page's CSS can't reach in,
    and the widget makes no network requests. */
 (function(){

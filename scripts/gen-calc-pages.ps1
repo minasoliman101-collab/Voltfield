@@ -5,12 +5,14 @@
 # queries this site could plausibly rank for, and all of them pointed at a
 # single 96KB URL whose title mentions none of them.
 #
-# The tool itself is NOT split. Every calculator shares one 28KB closure, and
-# carving it up would be surgery on working code for no user benefit. Each
-# landing page explains the calculation properly -- formula, variables, a worked
-# example the reader can check against the tool, the governing standard, what
-# the method does not account for, and the mistakes it invites -- then links
-# straight to the live calculator.
+# Each page opens with the working calculator (Oct 2026). Its markup comes from
+# scripts/tpl/calc-tools/<slug>.html and its logic from /voltfield-calculators.js,
+# which every calculator shares. Before that, the tools all lived on the hub and
+# these pages only linked to them, so a reader who searched for a calculator
+# landed on a page without one. Below the tool, each page explains the
+# calculation properly -- formula, variables, a worked example the reader can
+# check against the tool, the governing standard, what the method does not
+# account for, and the mistakes it invites.
 #
 # That is the difference between a landing page and a doorway page: this one
 # answers the question on its own.
@@ -74,7 +76,9 @@ if (-not (Test-Path $outDir)) { New-Item -ItemType Directory $outDir | Out-Null 
 $written = 0
 foreach ($r in $recs) {
   $url = "https://voltfield.org/calculators/$($r.slug).html"
-  $toolUrl = "/engineering-calculators.html#$($r.anchor)"
+  $tool = [System.IO.File]::ReadAllText((Join-Path $PSScriptRoot "tpl\calc-tools\$($r.slug).html"), [System.Text.Encoding]::UTF8)
+  $tool = ($tool -replace '^<!--.*?-->\r?\n','').TrimEnd()
+  $short = $r.desc -replace '\s*Free, no signup\.?\s*$',''
 
   $sb = New-Object System.Text.StringBuilder
   [void]$sb.AppendLine('<!DOCTYPE html>')
@@ -103,40 +107,35 @@ foreach ($r in $recs) {
   [void]$sb.AppendLine("   {""@type"":""ListItem"",""position"":3,""name"":""$(EscJson $r.h1)"",""item"":""$url""}")
   [void]$sb.AppendLine(' ]},')
   [void]$sb.AppendLine(" {""@type"":""WebPage"",""name"":""$(EscJson $r.h1)"",""description"":""$(EscJson $r.desc)"",""url"":""$url"",""dateModified"":""$dataDateISO"",""isPartOf"":{""@type"":""WebSite"",""name"":""Voltfield"",""url"":""https://voltfield.org/""},""publisher"":{""@type"":""Organization"",""name"":""Voltfield"",""url"":""https://voltfield.org/""}},")
-  # The page explains the method; the working tool lives at the hub anchor, so
-  # the WebApplication node points there. No aggregateRating: there are no
-  # ratings to report, and inventing them would be a spam signal.
-  [void]$sb.AppendLine(" {""@type"":""WebApplication"",""name"":""$(EscJson $r.h1)"",""description"":""$(EscJson $r.desc)"",""url"":""https://voltfield.org$toolUrl"",""applicationCategory"":""UtilitiesApplication"",""operatingSystem"":""Any (runs in a web browser)"",""browserRequirements"":""Requires JavaScript"",""isAccessibleForFree"":true,""offers"":{""@type"":""Offer"",""price"":""0"",""priceCurrency"":""USD""},""publisher"":{""@type"":""Organization"",""name"":""Voltfield"",""url"":""https://voltfield.org/""}},")
+  # The working tool is on this page, so the WebApplication node points here.
+  # No aggregateRating: there are no ratings to report, and inventing them would
+  # be a spam signal.
+  [void]$sb.AppendLine(" {""@type"":""WebApplication"",""name"":""$(EscJson $r.h1)"",""description"":""$(EscJson $r.desc)"",""url"":""$url"",""applicationCategory"":""UtilitiesApplication"",""operatingSystem"":""Any (runs in a web browser)"",""browserRequirements"":""Requires JavaScript"",""isAccessibleForFree"":true,""offers"":{""@type"":""Offer"",""price"":""0"",""priceCurrency"":""USD""},""publisher"":{""@type"":""Organization"",""name"":""Voltfield"",""url"":""https://voltfield.org/""}},")
   [void]$sb.AppendLine(' {"@type":"FAQPage","mainEntity":[')
   [void]$sb.AppendLine("   {""@type"":""Question"",""name"":""What does the $(EscJson $r.h1.Replace(' Calculator','')) calculation account for?"",""acceptedAnswer"":{""@type"":""Answer"",""text"":""$(EscJson ($r.intro -join ' '))""}},")
   [void]$sb.AppendLine("   {""@type"":""Question"",""name"":""What does it not account for?"",""acceptedAnswer"":{""@type"":""Answer"",""text"":""$(EscJson ($r.limits -join ' '))""}}")
   [void]$sb.AppendLine(' ]}')
   [void]$sb.AppendLine(']}')
   [void]$sb.AppendLine('</script>')
-  [void]$sb.Append($hTail)
+  [void]$sb.Append($hTail.Replace('<link rel="stylesheet" href="/voltfield-core.css">', "<link rel=""stylesheet"" href=""/voltfield-core.css"">`n<link rel=""stylesheet"" href=""/voltfield-calculators.css"">"))
   [void]$sb.Append($top)
   [void]$sb.AppendLine('<main id="main" tabindex="-1">')
   [void]$sb.AppendLine('')
   [void]$sb.AppendLine('<section class="artban">')
   [void]$sb.AppendLine('  <div class="artban-in">')
+  [void]$sb.AppendLine("    <nav aria-label=""Breadcrumb"" class=""crumbnav"" style=""font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px""><a href=""/index.html"" style=""color:var(--slate);text-decoration:none"">Home</a> / <a href=""/engineering-calculators.html"" style=""color:var(--slate);text-decoration:none"">Calculators</a> / <span style=""color:var(--ink)"">$($r.h1)</span></nav>")
   [void]$sb.AppendLine('    <div class="eyebrow">Free Calculator &middot; No Signup</div>')
   [void]$sb.AppendLine("    <h1>$($r.h1)</h1>")
-  [void]$sb.AppendLine("    <p class=""dek"">$($r.intro[0])</p>")
+  [void]$sb.AppendLine("    <p class=""dek"">$short</p>")
   [void]$sb.AppendLine('  </div>')
   [void]$sb.AppendLine('</section>')
   [void]$sb.AppendLine('')
-  [void]$sb.AppendLine('<nav class="crumb" aria-label="Breadcrumb">')
-  [void]$sb.AppendLine('  <a href="/index.html">Home</a><span class="sep">/</span>')
-  [void]$sb.AppendLine('  <a href="/engineering-calculators.html">Calculators</a><span class="sep">/</span>')
-  [void]$sb.AppendLine("  <span>$($r.h1)</span>")
-  [void]$sb.AppendLine('</nav>')
-  [void]$sb.AppendLine('')
   [void]$sb.AppendLine('<div class="artwrap">')
-  [void]$sb.AppendLine("  <div class=""ctaband""><div class=""ctaband-in"">")
-  [void]$sb.AppendLine("    <div><h3>Run the numbers</h3><p>The working calculator is free and needs no signup.</p></div>")
-  [void]$sb.AppendLine("    <a class=""ctabtn"" href=""$toolUrl"">OPEN THE CALCULATOR &rarr;</a>")
-  [void]$sb.AppendLine('  </div></div>')
+  [void]$sb.AppendLine("  <section class=""calc-tool"" id=""calculator"" aria-label=""$([System.Net.WebUtility]::HtmlEncode([System.Net.WebUtility]::HtmlDecode($r.h1)))"">")
+  [void]$sb.AppendLine($tool)
+  [void]$sb.AppendLine('  </section>')
   [void]$sb.AppendLine('')
+  [void]$sb.AppendLine("  <p>$($r.intro[0])</p>")
   if ($r.intro.Count -gt 1) { foreach ($p in $r.intro[1..($r.intro.Count-1)]) { [void]$sb.AppendLine("  <p>$p</p>") } }
   [void]$sb.AppendLine('')
   [void]$sb.AppendLine('  <h2>The formula</h2>')
@@ -206,7 +205,7 @@ foreach ($r in $recs) {
   [void]$sb.AppendLine("      <dt>What it is not</dt>")
   [void]$sb.AppendLine("      <dd>$($r.limits -join ' ') This is a screening estimate, not a stamped calculation.</dd>")
   [void]$sb.AppendLine("      <dt>Provenance</dt>")
-  [void]$sb.AppendLine("      <dd>Last reviewed $dataDate. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labelled as estimates. Worked examples are arithmetic you can reproduce against the <a href=""$toolUrl"">live calculator</a>. See the <a href=""/methodology.html"">methodology page</a>.</dd>")
+  [void]$sb.AppendLine("      <dd>Last reviewed $dataDate. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labelled as estimates. Worked examples are arithmetic you can reproduce against the <a href=""#calculator"">calculator at the top of this page</a>. See the <a href=""/methodology.html"">methodology page</a>.</dd>")
   [void]$sb.AppendLine('    </dl>')
   [void]$sb.AppendLine('  </aside>')
   [void]$sb.AppendLine('')
@@ -214,7 +213,7 @@ foreach ($r in $recs) {
   [void]$sb.AppendLine('</main>')
   # Only the calculator pages carry the signup form, so the script is added here
   # rather than in the shared chrome-bot template.
-  [void]$sb.Append($bot.Replace('<script src="/voltfield-site-config.js"></script>', "<script src=""/voltfield-site-config.js""></script>`n<script src=""/voltfield-updates.js"" defer></script>"))
+  [void]$sb.Append($bot.Replace('<script src="/voltfield-site-config.js"></script>', "<script src=""/voltfield-calculators.js"" defer></script>`n<script src=""/voltfield-site-config.js""></script>`n<script src=""/voltfield-updates.js"" defer></script>"))
 
   [System.IO.File]::WriteAllText((Join-Path $outDir "$($r.slug).html"), $sb.ToString(), $utf8)
   $written++

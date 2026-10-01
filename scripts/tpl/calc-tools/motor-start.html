@@ -1,0 +1,21 @@
+<!-- Live calculator for calculators/motor-start.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="motorCalc">
+    <h3>Voltage Dip on Motor Start</h3>
+    <div class="sub">Use actual nameplate LRA when you have it — the NEMA code letter only gives a band, not an exact value. Use the system's minimum expected fault capacity (weakest condition), the opposite convention from a protective-device duty study.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="motorMethod">Motor data</label><select id="motorMethod">
+        <option value="letter" selected>NEMA code letter + HP</option>
+        <option value="lra">Nameplate LRA (A)</option>
+      </select></div>
+      <div class="est-field" id="motorHpWrap"><label for="motorHp">Motor rating (HP)</label><input type="number" id="motorHp" min="0" step="1" placeholder="e.g. 500"></div>
+      <div class="est-field" id="motorLetterWrap"><label for="motorLetter">NEMA code letter</label><select id="motorLetter"></select></div>
+      <div class="est-field" id="motorLraWrap" style="display:none"><label for="motorLra">Locked-rotor amps, LRA</label><input type="number" id="motorLra" min="0" step="1" placeholder="e.g. 3950"></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="motorV">System voltage, L-L (V)</label><input type="number" id="motorV" min="0" step="1" placeholder="e.g. 460"></div>
+      <div class="est-field"><label for="motorSc">Available fault capacity (kVA)</label><input type="number" id="motorSc" min="0" step="100" placeholder="e.g. 40000"></div>
+      <div class="est-field"><button type="button" id="motorBtn">Calculate</button></div>
+    </div>
+    <div class="est-result" id="motorResult"></div>
+  </div>
+  <div class="callout">Minimum acceptable starting-bus voltage is application-specific — commonly cited screening thresholds include ~80% of rated voltage at the starting motor's own terminals (NEMA Design B, full-torque load), ~85% for AC contactor pickup, and ~71% at the terminals of other motors on the same bus that need to reaccelerate. There's no single universal cutoff.</div>
