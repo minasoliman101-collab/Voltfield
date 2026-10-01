@@ -204,4 +204,4 @@ Contextual links from the category pages into the catalog stay. They serve reade
 | E-E-A-T | `about.html` went from about 360 to about 730 words. New sections cover editorial rules, corrections (with the arc-flash example), citing and embedding, and independence. Every claim was checked against the pages it describes. |
 | Fonts | Self-hosted; see section 1. |
 
-**Open decision:** `packets.html` is indexable but says "In development". Either noindex it until the packets ship, or leave it with no contextual links, as now.
+**`packets.html` de-indexed (Oct 1, 2026).** The page says "In development", so it now carries `noindex, follow` and is out of the sitemap, the same treatment as the storefront pages in section 5. When the packets ship, remove the tag, restore the sitemap entry, and give the page contextual links.
