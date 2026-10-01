@@ -49,9 +49,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
 <link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
 <link rel="stylesheet" href="voltfield-core.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
@@ -180,7 +178,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </details>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is BIL on a transformer nameplate?</summary>
-    <p style="margin-top:10px">BIL (Basic Insulation Level) is the withstand voltage rating, in kV, that the transformer's insulation is designed to survive during a lightning-impulse or switching-surge event. It has to be matched or exceeded by the insulation levels of everything else connected to that voltage class — switchgear, bushings, surge arresters — not just the transformer itself.</p>
+    <p style="margin-top:10px">BIL (Basic Insulation Level) is the withstand voltage rating, in kV, that the transformer's insulation is designed to survive during a lightning-impulse or switching-surge event. It has to be matched or exceeded by the insulation levels of everything else connected to that voltage class — switchgear, <a class="inline" href="data-centers/transformer-components.html">bushings</a>, surge arresters — not just the transformer itself.</p>
   </details>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What does a transformer vector group like Dyn11 mean?</summary>

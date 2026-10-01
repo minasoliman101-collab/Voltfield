@@ -48,9 +48,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
 <link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
 <link rel="stylesheet" href="voltfield-core.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
@@ -147,7 +145,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li><b>Free cooling / economization</b> — using outside air or evaporative cooling instead of mechanical chillers whenever ambient conditions allow it, which is most of the year in favorable climates.</li>
     <li><b>Liquid cooling</b> — direct-to-chip and immersion cooling move heat more efficiently than air, cutting the fan and chiller load per watt of IT power. See <a class="inline" href="guide-liquid-vs-air-cooling.html">Liquid Cooling vs. Air Cooling</a> for how the two compare.</li>
     <li><b>Higher operating temperatures</b> — running the data hall warmer (within ASHRAE-recommended ranges) reduces the cooling delta the mechanical plant has to fight.</li>
-    <li><b>Efficient power conversion</b> — modern UPS topologies and higher-voltage distribution lose less to conversion between the utility feed and the server power supply.</li>
+    <li><b>Efficient power conversion</b> — modern <a class="inline" href="guide-ups-topologies.html">UPS topologies</a> and higher-voltage distribution lose less to conversion between the utility feed and the server power supply.</li>
   </ul>
 
   <div class="callout"><b>A number that moves with the seasons:</b> instantaneous PUE swings with outside temperature — a facility using free cooling reports its best PUE in winter and its worst on the hottest days of summer. The figure worth comparing across facilities is <i>annualized</i> PUE, not a single reading, and press releases don't always specify which one they're quoting.</p></div>

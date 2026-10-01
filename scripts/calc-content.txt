@@ -75,7 +75,7 @@ Sizing on kW and never dividing by power factor, which under-sizes by however fa
 /calculators/inrush.html :: Transformer Inrush Calculator
 /calculators/power-factor.html :: Power Factor Correction Calculator
 
-===fault-current|fault-current|Available Fault Current Calculator|Available Fault Current Calculator (Short Circuit)|Estimate available symmetrical fault current at a transformer secondary from kVA, voltage and %Z, and check equipment withstand ratings. Free, no signup.
+===fault-current|fault-current|Available Fault Current Calculator|Fault Current Calculator (Short Circuit)|Estimate available symmetrical fault current at a transformer secondary from kVA, voltage and %Z, and check equipment withstand ratings. Free, no signup.
 --intro
 Available fault current is how much current the system can deliver into a bolted short circuit at a given point. It sets the interrupting rating every protective device downstream must meet, and the withstand rating of the gear that has to survive the event. The counter-intuitive part: a lower transformer impedance means a stiffer source and therefore a higher fault current, so specifying a low-%Z transformer makes the downstream equipment problem worse, not better.
 --formula

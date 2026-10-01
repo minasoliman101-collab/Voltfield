@@ -36,6 +36,17 @@
 /vendor/*
   Cache-Control: public, max-age=31536000, immutable
 
+# Self-hosted IBM Plex (replaced Google Fonts in Oct 2026). fonts/ holds only
+# the woff2 files and their licence. They are named per family/weight/subset
+# and never edited in place (a Plex upgrade gets new filenames), so immutable
+# is correct. The @font-face rules live in /voltfield-fonts.css, outside this
+# directory, so that file keeps the short stylesheet max-age below.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/voltfield-fonts.css
+  Cache-Control: public, max-age=600, stale-while-revalidate=86400
+
 /icons/*
   Cache-Control: public, max-age=2592000
 

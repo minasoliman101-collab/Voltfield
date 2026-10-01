@@ -20,7 +20,7 @@ Working plan for the six SEO priorities: site speed, title tags, keyword researc
 
 **Next**
 - Check the field data (Core Web Vitals) in Search Console about 28 days after deploy. The lab numbers above leave out GTM and fonts.
-- Consider self-hosting IBM Plex (woff2, `font-display: swap`). That would remove the last third-party request on the critical path.
+- ~~Consider self-hosting IBM Plex.~~ Done (Oct 1, 2026): `fonts/` holds the woff2 files (latin, latin-ext and greek subsets, OFL licence included) and `voltfield-fonts.css` holds the `@font-face` rules, mirrored from what Google Fonts served. All 95 pages and `scripts/tpl/head-tail.html` load them, and every page preloads the Plex Sans latin file. No page makes a third-party request on the critical path any more. `_headers` caches `fonts/*` as immutable. `sw.js` is at `voltfield-v123`, precaches the font CSS and the Sans file, and no longer has a Google Fonts branch.
 - `voltfield-core.css` is 50 KB and loaded on every page. Splitting out the tool-only rules would help the text-only pages.
 
 ---
@@ -191,3 +191,17 @@ Contextual links from the category pages into the catalog stay. They serve reade
 **Done (Sept 30, 2026): answer-first leads.** All 33 guides were checked for whether the first paragraph answers the query. Six didn't: the PJM, MISO and ERCOT guides opened with "This guide assumes…", and liquid vs. air cooling, inverter clipping and PUE put the number the searcher wants (the 20–30 kW rack threshold, the 1.2–1.3 DC:AC ratio, the 1.1–1.3 PUE range) further down. Each now opens with a bolded one-to-two sentence answer drawn only from facts already on that page. That opening sentence is also what AI answer engines and featured snippets tend to quote.
 
 **Done (Sept 2026):** the two thinnest reference pages, `data-centers/monitoring-controls.html` and `data-centers/grounding-bonding.html`, went from about 425 to about 820 words each. Each gained a "What to settle in the specification" section, a visible FAQ and FAQPage schema. Both are hand edits, flagged in `scripts/gen-category-pages.ps1`.
+
+---
+
+## Oct 1, 2026 pass
+
+| Item | Change |
+|---|---|
+| Title length | `calculators/fault-current.html` title was 62 characters. It is now "Fault Current Calculator (Short Circuit)" (52 with the suffix). The H1 keeps "Available Fault Current Calculator". Mirrored in `scripts/calc-content.txt`. |
+| `dateModified` | Added to the main JSON-LD node on the 30 indexable pages that lacked it. The value is each page's sitemap `<lastmod>`. The Lead-Time Index `Dataset` uses `2026-07`, which matches its visible "Last updated: July 2026". Still without it: `whats-new.html` (breadcrumb markup only) and `privacy-policy.html` (no JSON-LD). |
+| Internal links | New contextual links: guides hub to What's new; calculators hub and methodology to About; transformer nameplate guide to transformer components; PUE guide to UPS topologies; harmonics guide to cable ampacity derating. |
+| E-E-A-T | `about.html` went from about 360 to about 730 words. New sections cover editorial rules, corrections (with the arc-flash example), citing and embedding, and independence. Every claim was checked against the pages it describes. |
+| Fonts | Self-hosted; see section 1. |
+
+**`packets.html` de-indexed (Oct 1, 2026).** The page says "In development", so it now carries `noindex, follow` and is out of the sitemap, the same treatment as the storefront pages in section 5. When the packets ship, remove the tag, restore the sitemap entry, and give the page contextual links.
