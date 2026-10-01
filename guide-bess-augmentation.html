@@ -114,17 +114,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>Every lithium battery loses capacity over time, whether or not it is used.</li>
+      <li>Augmentation adds DC blocks partway through a project's life so it keeps delivering its contracted capacity.</li>
+      <li>The augmentation plan has to exist before the project is built, because it shapes procurement, not just engineering.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 5 sections</summary>
+    <ol>
+      <li><a href="#why-capacity-fades">Why capacity fades</a></li>
+      <li><a href="#how-an-augmentation-plan-actually-works">How an augmentation plan actually works</a></li>
+      <li><a href="#the-product-generation-problem">The product-generation problem</a></li>
+      <li><a href="#why-this-is-a-procurement-decision-not-just-an-e">Why this is a procurement decision, not just an engineering one</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
   <p>Every lithium battery loses capacity over time, whether or not it's used. A BESS project contracted to deliver a fixed capacity — to an offtaker, a capacity market, or a utility — has to plan for that decline from day one, not discover it in year eight. <b>Augmentation</b> is that plan: adding <a class="inline" href="battery-storage.html">DC blocks</a> partway through the project's life to offset fade and hold the contracted capacity.</p>
 
-  <h2>Why capacity fades</h2>
+  <h2 id="why-capacity-fades">Why capacity fades</h2>
   <p>Two mechanisms drive it, and both are present in every lithium installation:</p>
   <ul>
     <li><b>Calendar aging</b> — chemical degradation that happens whether or not the battery cycles at all, driven mainly by time and temperature. A battery sitting idle at a hot site still loses capacity.</li>
@@ -132,7 +141,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </ul>
   <p>Manufacturers publish degradation curves combining both effects, and warranties are typically written against a guaranteed capacity floor at specific years — for example, a common structure guarantees something like 70% of nameplate capacity remains at year 10 or year 15, not a flat percentage-per-year line. The actual curve is steeper in the early years and flattens later, which is exactly why an augmentation plan needs real degradation data, not a straight-line estimate.</p>
 
-  <h2>How an augmentation plan actually works</h2>
+  <h2 id="how-an-augmentation-plan-actually-works">How an augmentation plan actually works</h2>
   <p>Rather than building a system oversized enough to cover its entire life of fade upfront — expensive, and wasteful in the early years when the extra capacity sits unused — an augmentation plan adds capacity in phases, timed to when fade has eaten into enough headroom to matter. A typical structure:</p>
   <ol>
     <li>Size the initial DC block capacity with a modest built-in buffer above the contracted capacity.</li>
@@ -143,26 +152,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="callout"><b>The step most projects get wrong:</b> reserving space and interconnection capacity for augmentation is easy to defer during initial construction budgeting — and expensive to fix later. A site with no room for another row of DC blocks, or an interconnection agreement sized exactly to the original capacity with no margin, turns a planned augmentation into a much harder retrofit.</div>
 
-  <h2>The product-generation problem</h2>
+  <h2 id="the-product-generation-problem">The product-generation problem</h2>
   <p>DC block products change generations every few years — a battery chemistry, form factor, or manufacturer's product line available at construction may be discontinued by the time an augmentation phase is due five or ten years later. Projects that don't account for this risk either over-provision the initial reserved capacity, negotiate a supply agreement that includes future-generation compatibility commitments, or accept that augmentation may require a mixed-generation system with the integration complexity that comes with it. None of these are free — the point is to decide deliberately rather than discover the constraint mid-project. See <a class="inline" href="voltfield-eol.html">Obsolete &amp; End-of-Life Parts</a> for how this plays out across other long-lived equipment categories.</p>
 
-  <h2>Why this is a procurement decision, not just an engineering one</h2>
+  <h2 id="why-this-is-a-procurement-decision-not-just-an-e">Why this is a procurement decision, not just an engineering one</h2>
   <p>Capacity guarantees in offtake agreements, tolling agreements, or capacity-market commitments are what actually make augmentation a contractual requirement rather than an optional maintenance choice. The augmentation schedule, who bears the cost, and what happens if a degradation curve turns out worse than modeled are all commercial terms that need to be negotiated alongside the equipment spec — not left to be sorted out once the fade shows up on a performance report.</p>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2 id="relatedGuides">Related guides</h2>
-  <ul>
-    <li><a class="inline" href="guide-bess-c-rate.html">BESS C-Rate Explained</a> &mdash; why a fading battery runs at a rising C-rate, and loses duration</li>
-    <li><a class="inline" href="guide-bess-fire-safety-nfpa-855.html">BESS Fire Safety: NFPA 855 & UL 9540A</a> &mdash; how separation distances and suppression get set for the blocks you're adding</li>
-    <li><a class="inline" href="guide-feoc-compliance.html">FEOC Compliance for Solar & Storage</a> &mdash; what documentation a tax-credit-eligible storage project needs</li>
-    <li><a class="inline" href="guide-grid-interconnection-process.html">The Grid Interconnection Process</a> &mdash; why the queue often outlasts the equipment order</li>
-  </ul>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>Augmentation planning starts with the same equipment covered on the <a class="inline" href="battery-storage.html">Battery Storage</a> pillar page — DC block sizing, C-rate, and PCS selection all factor into how much headroom a project needs to reserve. The <a class="inline" href="voltfield-bom-generator.html">BOM Generator</a> breaks down a DC block's component-level bill of materials, useful when evaluating whether a future augmentation phase can integrate with the original hardware generation.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is BESS augmentation?</summary>
     <p style="margin-top:10px">Adding DC blocks to a battery storage system partway through its life to offset capacity that has faded due to calendar and cycle aging, holding the system at its contracted capacity rather than letting delivered capacity decline year over year.</p>
@@ -175,31 +175,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why does augmentation need to be planned before construction, not just added later?</summary>
     <p style="margin-top:10px">Adding DC blocks later needs reserved physical space, spare PCS/interconnection capacity, and often a compatible product generation still in production. Projects that don't reserve for augmentation upfront can find the original DC block model discontinued by the time augmentation is due, forcing a more expensive mixed-generation retrofit.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Sizing the battery in the first place?</h3>
-      <p>Turn a critical load and backup duration into usable kWh, then the nameplate kWh you need after depth of discharge and round-trip efficiency. Free, no signup.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">Augmentation planning starts with the same equipment covered on the <a class="inline" href="battery-storage.html">Battery Storage</a> pillar page — DC block sizing, C-rate, and PCS selection all factor into how much headroom a project needs to reserve. The <a class="inline" href="voltfield-bom-generator.html">BOM Generator</a> breaks down a DC block's component-level bill of materials, useful when evaluating whether a future augmentation phase can integrate with the original hardware generation.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/bess-sizing.html">BESS Sizing Calculator</a>Usable and nameplate kWh from a critical load and backup time.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-bess-c-rate.html">BESS C-Rate Explained</a>Why a fading battery runs at a rising C-rate, and loses duration</li>
+        <li><a href="guide-bess-fire-safety-nfpa-855.html">BESS Fire Safety: NFPA 855 & UL 9540A</a>How separation distances and suppression get set for the blocks you're adding</li>
+        <li><a href="guide-feoc-compliance.html">FEOC Compliance for Solar & Storage</a>What documentation a tax-credit-eligible storage project needs</li>
+        <li><a href="guide-grid-interconnection-process.html">The Grid Interconnection Process</a>Why the queue often outlasts the equipment order</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="battery-storage/bess-enclosures.html">BESS Enclosures and Modules</a>The modules and enclosures an augmentation plan adds capacity to.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="calculators/bess-sizing.html">BESS SIZING CALCULATOR &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="battery-storage/bess-enclosures.html">BESS Enclosures and Modules</a> &mdash; the modules and enclosures an augmentation plan adds capacity to.</li>
-</ul>
-
-  <h2 id="calcLinks">Run the numbers</h2>
-<ul class="catlink">
-  <li><a class="inline" href="calculators/bess-sizing.html">BESS Sizing Calculator</a> &mdash; usable and nameplate kWh from a critical load and backup time.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;BESS Augmentation Explained,&rdquo; <i>Voltfield</i>, updated August 24, 2026. https://voltfield.org/guide-bess-augmentation.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;BESS Augmentation Explained,&rdquo; <i>Voltfield</i>, updated August 24, 2026. https://voltfield.org/guide-bess-augmentation.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -213,10 +228,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published August 23, 2026 &middot; last updated August 24, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>Why battery capacity fades, how augmentation is planned across a project's life, and what that does to the commercial model.</dd>
@@ -227,6 +246,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published August 23, 2026 &middot; last updated August 24, 2026. Written and maintained by the Voltfield editorial team against the sources above. Figures that are Voltfield's own estimates rather than published standards are labeled as such where they appear &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 <footer>

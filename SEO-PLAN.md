@@ -222,3 +222,15 @@ Contextual links from the category pages into the catalog stay. They serve reade
 - The embed block on the three embeddable calculators keeps the snippet but drops its second live copy of the tool.
 
 **Watch in Search Console:** whether queries like "voltage drop calculator" shift from the hub to the calculator pages, and engagement on the calculator pages.
+
+---
+
+## Oct 1, 2026: guide reading aids, page endings, phone header
+
+- **Top of every guide (33):** a *Key takeaways* box (three bullets, each drawn only from facts already in that guide and checked against its text) and a collapsible *On this page* menu built from the guide's own headings. Headings without an id got one (slug of the heading text). The share buttons moved from above the first paragraph to the end.
+- **End of every guide:** *Where Voltfield fits in*, *Related guides*, the CTA band, *Equipment category* and *Run the numbers* are now one *Next steps* panel. Its intro is the old fits-in paragraph, followed by columns for calculators and tools, guides to read next, and equipment. Each CTA band's target went into the matching column unless it was already listed. Every link destination on every guide survived; the total fell by 21 duplicates. The ids `relatedGuides`, `calcLinks` and `citeThis` are kept, as are the `catlink` and `provenance` classes the one-time migration scripts check for. Cite, share and email form a slim footer; *Scope & sources* is collapsible, with the published date shown on the closed row.
+- **Not changed:** guide dates. The takeaways restate what each guide already says, so `dateModified` and the sitemap stay as they were.
+- **Correction to the earlier plan:** *Where Voltfield fits in* was described as repeated boilerplate. It is not: 24 distinct versions across 34 pages with 97 contextual links, which is why it was kept as the panel intro rather than deleted.
+- **Phone header:** one row (61 px instead of about 110 px) below 520 px wide, by hiding the tagline under the wordmark.
+- **Reference tables:** the standards, compliance-mark and HS-code tables on `calculators/reference-tables.html` start collapsed.
+

@@ -115,17 +115,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>The headline numbers are the kVA or MVA rating, the primary and secondary voltages, and the cooling class.</li>
+      <li>A rating like 21/28/35 MVA ONAN/ONAF/ONAF2 steps up with fan stages; size against the ONAN figure if fan failure is a real scenario.</li>
+      <li>Impedance (%Z) sets fault current, BIL sets insulation level, and the vector group sets how the windings connect.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#rating-plate-kva-voltage-and-cooling-class">Rating plate: kVA, voltage, and cooling class</a></li>
+      <li><a href="#impedance-z-the-number-that-sets-fault-current">Impedance (%Z) — the number that sets fault current</a></li>
+      <li><a href="#bil-basic-insulation-level">BIL — Basic Insulation Level</a></li>
+      <li><a href="#vector-group-how-the-windings-are-connected">Vector group — how the windings are connected</a></li>
+      <li><a href="#terminal-markings-and-polarity">Terminal markings and polarity</a></li>
+      <li><a href="#losses-temperature-rise-and-weight">Losses, temperature rise, and weight</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
     <p>A transformer nameplate is required by <a class="inline" href="calculators/reference-tables.html#standards-crossref">IEEE/ANSI C57.12.00</a> to carry a specific set of ratings and markings — but the standard only requires that the information be present, not that everyone reads it the same way. Here's what each field controls, in the order you'll usually find it.</p>
 
-  <h2>Rating plate: kVA, voltage, and cooling class</h2>
+  <h2 id="rating-plate-kva-voltage-and-cooling-class">Rating plate: kVA, voltage, and cooling class</h2>
   <p>The headline numbers are kVA (or MVA) rating, primary and secondary voltage, and a cooling class code like <b>ONAN</b>, <b>ONAF</b>, or <b>OFAF</b>. The cooling code isn't decorative — it's a four-letter description of how the unit is cooled, and it often carries multiple ratings on one nameplate because forced cooling stages raise capacity above the base natural-cooling number.</p>
   <div style="overflow-x:auto"><table class="reftable">
     <tr><th scope="col">Position</th><th scope="col">Meaning</th><th scope="col">Common values</th></tr>
@@ -136,19 +147,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </table></div>
   <p>So a nameplate reading <b>21/28/35 MVA ONAN/ONAF/ONAF2</b> means: 21 MVA on natural oil and air cooling alone, 28 MVA once the first stage of cooling fans kicks on, 35 MVA with a second fan stage running. The base ONAN number is what the unit can carry indefinitely with no fans running at all — the number procurement should size against if fan failure is a real operating scenario.</p>
 
-  <h2>Impedance (%Z) — the number that sets fault current</h2>
+  <h2 id="impedance-z-the-number-that-sets-fault-current">Impedance (%Z) — the number that sets fault current</h2>
   <p>Percent impedance shows up as a single number, typically 4–8% for distribution-class units, but it does two jobs: it sets how much the secondary voltage sags under load, and it caps how much fault current the transformer will pass through to a downstream fault. Lower %Z means less voltage drop under load but higher available fault current — which drives the interrupting rating required of every breaker downstream. It's the direct input to a fault current estimate; see the <a class="inline" href="calculators/fault-current.html">fault current calculator</a> for the formula that uses it, and <a class="inline" href="guide-transformer-impedance.html">Transformer Impedance (%Z) Explained</a> for tolerance, regulation and how to choose a value.</p>
 
-  <h2>BIL — Basic Insulation Level</h2>
+  <h2 id="bil-basic-insulation-level">BIL — Basic Insulation Level</h2>
   <p>BIL, given in kV, is the surge/lightning-impulse withstand rating of the transformer's insulation system. It has to be coordinated with everything else at that voltage class on the system — bushings, switchgear, surge arresters — not evaluated on the transformer alone. A transformer with a higher BIL than the switchgear feeding it doesn't buy any extra protection; the weakest link in the chain sets the real withstand level.</p>
 
-  <h2>Vector group — how the windings are connected</h2>
+  <h2 id="vector-group-how-the-windings-are-connected">Vector group — how the windings are connected</h2>
   <p>A code like <b>Dyn11</b> describes the winding connection and phase relationship: the first letter is the primary connection (D = delta, Y = wye), the second is the secondary (lowercase, same letters, with "n" if the neutral is brought out and grounded), and the number is the phase displacement between primary and secondary in multiples of 30 degrees. Dyn11 is delta primary, grounded-wye secondary, secondary leading by 330 degrees. This matters most when paralleling transformers or matching an existing installation — units with different vector groups generally can't be paralleled, full stop.</p>
 
-  <h2>Terminal markings and polarity</h2>
+  <h2 id="terminal-markings-and-polarity">Terminal markings and polarity</h2>
   <p>High-voltage terminals are marked H1, H2, H3 (and H0 for a grounded neutral); low-voltage terminals are marked X1, X2, X3 (and X0). These markings, combined with the vector group, are what a field crew uses to confirm phasing before energizing — getting this wrong is one of the more expensive mistakes possible during commissioning.</p>
 
-  <h2>Losses, temperature rise, and weight</h2>
+  <h2 id="losses-temperature-rise-and-weight">Losses, temperature rise, and weight</h2>
   <p>No-load loss (core loss, present continuously) and load loss (winding loss at rated load) are sometimes printed on the nameplate and sometimes only on the factory test report — either way, they're the two figures needed for a lifetime <a class="inline" href="calculators/project-finance.html#transformer-tco">total-cost-of-ownership estimate</a>. Temperature rise (commonly 55&deg;C or 65&deg;C rise above ambient) sets how hard the unit can be loaded before insulation life is affected; total and oil weight matter for foundation design and rigging, not electrical performance.</p>
 
   <div class="callout"><b>Buying against a nameplate you don't have yet?</b> If you're comparing bids before a specific unit is selected, ask each bidder for the expected nameplate data up front — kVA/cooling class, %Z, BIL, and vector group — rather than discovering a mismatch (wrong vector group, insufficient BIL for the switchgear already ordered) after the transformer arrives.</div>
@@ -157,17 +168,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2 id="relatedGuides">Related guides</h2>
-  <ul>
-    <li><a class="inline" href="guide-pad-mount-vs-gsu-transformers.html">Pad-Mount vs. GSU Transformers</a> &mdash; which type the nameplate in front of you belongs to</li>
-    <li><a class="inline" href="guide-transformer-lead-times.html">Why Transformer Lead Times Hit 3+ Years</a> &mdash; what ordering that unit actually costs in schedule</li>
-    <li><a class="inline" href="guide-grounding-bonding-basics.html">Grounding & Bonding Basics</a> &mdash; how the nameplate's vector group ties into system grounding</li>
-  </ul>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>Every configurable transformer on the <a class="inline" href="data-centers.html">Data Centers</a> and <a class="inline" href="renewables.html">Renewables</a> sectors exposes cooling class, voltage class, and lead time at the configuration stage — no need to wait for a nameplate to know what you're ordering. Run the numbers once you have a real nameplate through the <a class="inline" href="engineering-calculators.html">engineering calculators</a>: fault current from %Z, or lifetime loss cost from no-load/load loss — then see the <a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">short-circuit studies guide</a> for how that number feeds into a full study. Unfamiliar with a related term? Check the <a class="inline" href="glossary.html">glossary</a>, or see current <a class="inline" href="lead-time-index.html">transformer lead times</a> across cooling classes and voltage tiers.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What does the cooling class code on a transformer nameplate mean?</summary>
     <p style="margin-top:10px">Codes like ONAN, ONAF, and OFAF describe the cooling method under IEEE C57.12.00: the first letter pair describes the internal cooling medium and circulation (O = mineral oil, N = natural circulation, F = forced circulation), and the second pair describes the external cooling medium and circulation (A = air, F = forced air, W = water). A transformer often carries multiple ratings — for example 21/28/35 MVA at ONAN/ONAF/ONAF2 — where forced cooling stages raise the effective capacity above the base natural-cooling rating.</p>
@@ -184,33 +187,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What does a transformer vector group like Dyn11 mean?</summary>
     <p style="margin-top:10px">The vector group describes the winding connections and phase-shift relationship between primary and secondary: the first letter is the primary winding connection (D = delta, Y = wye), the second is the secondary (lowercase y or d), and the number is the phase displacement in multiples of 30 degrees. Dyn11 means a delta primary, grounded wye secondary, with the secondary leading the primary by 330 degrees (11 x 30) — critical for paralleling transformers or matching an existing system.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>The nameplate number that sets fault current</h3>
-      <p>Transformer impedance (%Z) explained: how it sets fault current, voltage regulation and motor-starting dip, the &plusmn;7.5% tolerance, and how to choose a value.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">Every configurable transformer on the <a class="inline" href="data-centers.html">Data Centers</a> and <a class="inline" href="renewables.html">Renewables</a> sectors exposes cooling class, voltage class, and lead time at the configuration stage — no need to wait for a nameplate to know what you're ordering. Run the numbers once you have a real nameplate through the <a class="inline" href="engineering-calculators.html">engineering calculators</a>: fault current from %Z, or lifetime loss cost from no-load/load loss — then see the <a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">short-circuit studies guide</a> for how that number feeds into a full study. Unfamiliar with a related term? Check the <a class="inline" href="glossary.html">glossary</a>, or see current <a class="inline" href="lead-time-index.html">transformer lead times</a> across cooling classes and voltage tiers.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a>kW load to the next standard kVA nameplate.</li>
+        <li><a href="calculators/inrush.html">Transformer Inrush Calculator</a>Energization current, for protection settings.</li>
+        <li><a href="calculators/fault-current.html">Available Fault Current Calculator</a>Available symmetrical fault current at a transformer secondary.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-transformer-impedance.html">Transformer Impedance (%Z) Explained</a>Transformer impedance (%Z) explained: how it sets fault current, voltage regulation and motor-starting dip, the &plusmn;7.5% tolerance, and how to choose a value.</li>
+        <li><a href="guide-pad-mount-vs-gsu-transformers.html">Pad-Mount vs. GSU Transformers</a>Which type the nameplate in front of you belongs to</li>
+        <li><a href="guide-transformer-lead-times.html">Why Transformer Lead Times Hit 3+ Years</a>What ordering that unit actually costs in schedule</li>
+        <li><a href="guide-grounding-bonding-basics.html">Grounding & Bonding Basics</a>How the nameplate's vector group ties into system grounding</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="data-centers/transformers.html">Data Center Transformers</a>The families those nameplates belong to, and what separates them on paper.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="guide-transformer-impedance.html">READ THE IMPEDANCE GUIDE &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="data-centers/transformers.html">Data Center Transformers</a> &mdash; the families those nameplates belong to, and what separates them on paper.</li>
-</ul>
-
-  <h2 id="calcLinks">Run the numbers</h2>
-<ul class="catlink">
-  <li><a class="inline" href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a> &mdash; kW load to the next standard kVA nameplate.</li>
-  <li><a class="inline" href="calculators/inrush.html">Transformer Inrush Calculator</a> &mdash; energization current, for protection settings.</li>
-  <li><a class="inline" href="calculators/fault-current.html">Available Fault Current Calculator</a> &mdash; available symmetrical fault current at a transformer secondary.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;How to Read a Transformer Nameplate,&rdquo; <i>Voltfield</i>, updated August 23, 2026. https://voltfield.org/guide-transformer-nameplate.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;How to Read a Transformer Nameplate,&rdquo; <i>Voltfield</i>, updated August 23, 2026. https://voltfield.org/guide-transformer-nameplate.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -224,10 +242,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published July 25, 2026 &middot; last updated August 23, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>How to read a transformer nameplate field by field, and which entries actually constrain your design.</dd>
@@ -238,6 +260,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published July 25, 2026 &middot; last updated August 23, 2026. Written and maintained by the Voltfield editorial team against the sources above. Figures that are Voltfield's own estimates rather than published standards are labeled as such where they appear &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 <footer>

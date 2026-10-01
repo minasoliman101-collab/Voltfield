@@ -184,26 +184,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>kW is real power; kVA is apparent power. kVA = kW &divide; power factor, and kVA is never smaller than kW.</li>
+      <li>Size transformers on kVA: a 400 kW load at 0.85 power factor needs about 471 kVA, not 400.</li>
+      <li>A genset's kW rating already assumes 0.8 power factor, so don't apply it twice; check both the kW and kVA ratings of a UPS.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#the-power-triangle">The power triangle</a></li>
+      <li><a href="#how-much-kva-per-100-kw">How much kVA per 100 kW</a></li>
+      <li><a href="#converting-kw-to-kva-and-amps-a-worked-example">Converting kW to kVA and amps: a worked example</a></li>
+      <li><a href="#why-equipment-is-rated-in-kva">Why equipment is rated in kVA</a></li>
+      <li><a href="#where-power-factor-costs-money">Where power factor costs money</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
   <p><b>kW (kilowatts)</b> is real power: the part of the electrical supply that does work, turning a motor shaft, heating a resistor or running a server. <b>kVA (kilovolt-amperes)</b> is apparent power: the voltage multiplied by the current actually flowing, whether or not all of that current is doing work. The ratio between them is the <b>power factor</b>.</p>
 
   <div class="formula">kVA = kW &divide; PF &nbsp;&nbsp;&middot;&nbsp;&nbsp; kW = kVA &times; PF</div>
 
   <p>At a power factor of 1.0 the two are the same number. Below 1.0, kVA is always the larger one, because some of the current is flowing back and forth to set up magnetic and electric fields (reactive power, measured in kVAR) rather than delivering energy to the load. That current still has to be carried by every cable, breaker and transformer winding in the path.</p>
 
-  <h2>The power triangle</h2>
+  <h2 id="the-power-triangle">The power triangle</h2>
   <p>Real power (kW) and reactive power (kVAR) are at right angles to each other, and apparent power (kVA) is the hypotenuse:</p>
   <div class="formula">kVA&sup2; = kW&sup2; + kVAR&sup2; &nbsp;&nbsp;&middot;&nbsp;&nbsp; PF = kW &divide; kVA = cos &phi;</div>
   <p>The angle &phi; is the phase shift between voltage and current. Inductive loads such as motors and transformers draw current that lags the voltage. Capacitive loads draw current that leads it. Either way, the further &phi; is from zero, the more kVA it takes to deliver the same kW.</p>
 
-  <h2>How much kVA per 100 kW</h2>
+  <h2 id="how-much-kva-per-100-kw">How much kVA per 100 kW</h2>
   <table class="reftable">
     <tr><th scope="col">PF</th><th scope="col" style="text-transform:none">kVA / 100&nbsp;kW</th><th scope="col" style="text-transform:none">kVAR / 100&nbsp;kW</th></tr>
     <tr><td>1.00</td><td>100.0</td><td>0.0</td></tr>
@@ -215,7 +226,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </table>
   <p>Every figure in the table is arithmetic from the two formulas above: kVA = 100 &divide; PF, and kVAR = &radic;(kVA&sup2; &minus; 100&sup2;). Going from 0.95 to 0.80 raises the apparent power by about 19% for exactly the same useful work.</p>
 
-  <h2>Converting kW to kVA and amps: a worked example</h2>
+  <h2 id="converting-kw-to-kva-and-amps-a-worked-example">Converting kW to kVA and amps: a worked example</h2>
   <p>A 400 kW load at 0.90 power factor, fed at 480 V three-phase:</p>
   <ul>
     <li><b>Apparent power:</b> kVA = 400 &divide; 0.90 = 444.4 kVA</li>
@@ -225,7 +236,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p>Drop the power factor to 0.80 and the same 400 kW becomes 500 kVA and 601 A: 66 more amps through every conductor, for no extra work done. For single-phase circuits, leave out the 1.732: I = kVA &times; 1000 &divide; V.</p>
   <div class="formula">Three-phase: I = kVA &times; 1000 &divide; (&radic;3 &times; V<sub>LL</sub>) &nbsp;&nbsp;&middot;&nbsp;&nbsp; Single-phase: I = kVA &times; 1000 &divide; V</div>
 
-  <h2>Why equipment is rated in kVA</h2>
+  <h2 id="why-equipment-is-rated-in-kva">Why equipment is rated in kVA</h2>
   <p>A transformer or alternator does not know what the load is doing with the current. Its winding losses, and therefore its heating, scale with the current squared (I&sup2;R), and its core losses scale with voltage. Both depend on volts and amps, not on the phase angle between them. So the limit is stated in volt-amperes, and the equipment can deliver its full rating in kW only when the load's power factor is 1.0.</p>
   <p>Loads, on the other hand, are described by the work they do, and energy is billed in kWh. That is why the conversion has to happen at the point where a load list meets an equipment rating.</p>
 
@@ -240,10 +251,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="callout"><b>The shortcut that goes wrong:</b> treating kW and kVA as interchangeable works only near unity power factor. It is close enough for a rack of modern servers and badly wrong for a motor-heavy mechanical plant, where power factor at part load can sit well below 0.8.</div>
 
-  <h2>Where power factor costs money</h2>
+  <h2 id="where-power-factor-costs-money">Where power factor costs money</h2>
   <p>Beyond equipment sizing, low power factor shows up on the utility bill. Some tariffs bill demand in kVA rather than kW, and others add a charge when power factor falls below a threshold set in the tariff. The fix is usually local correction: capacitor banks, or active filters where harmonics are present, that supply the reactive power on site so it is no longer drawn through the utility service. The <a class="inline" href="calculators/power-factor.html">Power Factor Correction Calculator</a> sizes the kVAR needed to reach a target power factor and shows how much apparent power is released.</p>
 
-  <h2>Common mistakes</h2>
+  <h2 id="common-mistakes">Common mistakes</h2>
   <ul>
     <li><b>Sizing a transformer on kW.</b> A 400 kW load at 0.85 needs about 471 kVA, not 400.</li>
     <li><b>Applying power factor twice.</b> A genset's kW rating already assumes 0.8 power factor. Converting the load to kVA and then comparing it to the kW rating double-counts.</li>
@@ -254,17 +265,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2 id="relatedGuides">Related guides</h2>
-  <ul>
-    <li><a class="inline" href="guide-transformer-nameplate.html">How to Read a Transformer Nameplate</a> &mdash; where the kVA rating, impedance and cooling class sit on a real unit</li>
-    <li><a class="inline" href="guide-pad-mount-vs-gsu-transformers.html">Pad-Mount vs. GSU Transformers</a> &mdash; which type the kVA figure you just calculated is going to be</li>
-    <li><a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">Short-Circuit Studies &amp; Breaker Coordination</a> &mdash; the study that follows once the transformer size is settled</li>
-  </ul>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>kW-to-kVA conversion is the first step in almost every sizing exercise on this site. The <a class="inline" href="voltfield-pod-designer.html">POD &amp; Skid Designer</a> applies it when checking a power block against its target load, and the <a class="inline" href="data-centers.html">Data Center Power Equipment</a> pillar page covers the transformers, switchgear, UPS and generators whose ratings it feeds into.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How do I convert kW to kVA?</summary>
     <p style="margin-top:10px">Divide kW by the power factor: kVA = kW &divide; PF. For example, 400 kW at 0.9 power factor is 444.4 kVA. If the power factor isn't known, 0.8 is the conservative assumption most generator and older UPS ratings use.</p>
@@ -281,34 +284,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why are transformers rated in kVA instead of kW?</summary>
     <p style="margin-top:10px">A transformer's heating depends on the current in its windings and the voltage across its core, not on the power factor of the load. The same current heats the windings equally whether it is doing useful work or not, so the rating is stated in volt-amperes.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Sizing a transformer or generator?</h3>
-      <p>Run the kW-to-kVA conversion, full-load amps and next standard nameplate in one step. Free, no signup.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">kW-to-kVA conversion is the first step in almost every sizing exercise on this site. The <a class="inline" href="voltfield-pod-designer.html">POD &amp; Skid Designer</a> applies it when checking a power block against its target load, and the <a class="inline" href="data-centers.html">Data Center Power Equipment</a> pillar page covers the transformers, switchgear, UPS and generators whose ratings it feeds into.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a>kW load to the next standard kVA nameplate.</li>
+        <li><a href="calculators/power-factor.html">Power Factor Correction Calculator</a>Capacitor kVAR to reach a target power factor.</li>
+        <li><a href="calculators/generator-runtime.html">Generator Runtime Calculator</a>Fuel burn and runtime at a given load.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-transformer-nameplate.html">How to Read a Transformer Nameplate</a>Where the kVA rating, impedance and cooling class sit on a real unit</li>
+        <li><a href="guide-pad-mount-vs-gsu-transformers.html">Pad-Mount vs. GSU Transformers</a>Which type the kVA figure you just calculated is going to be</li>
+        <li><a href="guide-short-circuit-studies-breaker-coordination.html">Short-Circuit Studies &amp; Breaker Coordination</a>The study that follows once the transformer size is settled</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="data-centers/transformers.html">Data Center Transformers</a>The kVA-rated equipment this conversion is most often done for.</li>
+        <li><a href="data-centers/backup-power.html">Data Center Backup Power</a>Gensets and UPS, each with both a kW and a kVA limit.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="calculators/transformer-sizing.html">SIZE A TRANSFORMER &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="data-centers/transformers.html">Data Center Transformers</a> &mdash; the kVA-rated equipment this conversion is most often done for.</li>
-  <li><a class="inline" href="data-centers/backup-power.html">Data Center Backup Power</a> &mdash; gensets and UPS, each with both a kW and a kVA limit.</li>
-</ul>
-
-  <h2 id="calcLinks">Run the numbers</h2>
-<ul class="catlink">
-  <li><a class="inline" href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a> &mdash; kW load to the next standard kVA nameplate.</li>
-  <li><a class="inline" href="calculators/power-factor.html">Power Factor Correction Calculator</a> &mdash; capacitor kVAR to reach a target power factor.</li>
-  <li><a class="inline" href="calculators/generator-runtime.html">Generator Runtime Calculator</a> &mdash; fuel burn and runtime at a given load.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;kW vs. kVA Explained,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-kw-vs-kva.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;kW vs. kVA Explained,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-kw-vs-kva.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -322,10 +339,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published September 29, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>The difference between real, reactive and apparent power, how to convert between them, and how each rating applies to transformers, generators and UPS systems.</dd>
@@ -336,6 +357,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published September 29, 2026. Written and maintained by the Voltfield editorial team against the sources above. Every figure in the worked example and the table is arithmetic you can reproduce from the formulas on this page &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 

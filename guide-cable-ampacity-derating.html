@@ -102,22 +102,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>NEC Table 310.16 assumes no more than three current-carrying conductors at 30&deg;C ambient; where either fails, the value must be reduced.</li>
+      <li>Correct for ambient temperature and adjust for conductor count, then cap the result at the terminal temperature rating.</li>
+      <li>90&deg;C insulation helps by absorbing derating, but 75&deg;C terminations can still limit the final ampacity.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#step-1-start-from-the-right-column">Step 1: Start from the right column</a></li>
+      <li><a href="#step-2-correct-for-ambient-temperature">Step 2: Correct for ambient temperature</a></li>
+      <li><a href="#step-3-adjust-for-more-than-three-current-carryi">Step 3: Adjust for more than three current-carrying conductors</a></li>
+      <li><a href="#step-4-cap-at-the-terminal-rating">Step 4: Cap at the terminal rating</a></li>
+      <li><a href="#worked-examples">Worked examples</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
   <p><b>Ampacity</b> is the current a conductor can carry continuously without exceeding its insulation temperature rating. The NEC's ampacity tables, most often Table 310.16, give a starting value that assumes <b>no more than three current-carrying conductors</b> in a raceway or cable, at an <b>ambient temperature of 30&deg;C</b>. Where either assumption fails, the table value has to be reduced.</p>
 
   <div class="formula">Usable ampacity = table ampacity &times; ambient correction &times; conductor-count adjustment, capped by the terminal rating</div>
 
-  <h2>Step 1: Start from the right column</h2>
+  <h2 id="step-1-start-from-the-right-column">Step 1: Start from the right column</h2>
   <p>Table 310.16 has columns for 60&deg;C, 75&deg;C and 90&deg;C insulation. A copper 4/0 conductor, for example, is listed at 195 A, 230 A and 260 A respectively. For a 90&deg;C-rated conductor such as THHN or XHHW-2, derating can start from the 90&deg;C column. That's the practical value of 90&deg;C insulation: it absorbs derating that would otherwise force a bigger conductor.</p>
 
-  <h2>Step 2: Correct for ambient temperature</h2>
+  <h2 id="step-2-correct-for-ambient-temperature">Step 2: Correct for ambient temperature</h2>
   <p>Above 30&deg;C, the conductor has less headroom before it reaches its insulation limit. NEC 310.15(B) gives the correction factors:</p>
   <table class="reftable">
     <tr><th scope="col">Ambient</th><th scope="col">75&deg;C column</th><th scope="col">90&deg;C column</th></tr>
@@ -129,7 +140,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </table>
   <p>Raceways and cables exposed to sunlight on or just above a rooftop run much hotter than the surrounding air, and the NEC adds a temperature adder for the case where they sit very close to the roof surface. Hot aisles, plenums and equipment yards deserve the same scrutiny.</p>
 
-  <h2>Step 3: Adjust for more than three current-carrying conductors</h2>
+  <h2 id="step-3-adjust-for-more-than-three-current-carryi">Step 3: Adjust for more than three current-carrying conductors</h2>
   <p>Conductors bundled together can't shed heat as well. NEC 310.15(C)(1) reduces ampacity when a raceway or cable holds more than three current-carrying conductors:</p>
   <table class="reftable">
     <tr><th scope="col">Current-carrying conductors</th><th scope="col">Adjustment</th></tr>
@@ -142,10 +153,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </table>
   <p>Equipment grounding conductors don't count. The neutral of a balanced three-phase circuit usually doesn't either, but it <b>does</b> count when most of the load is non-linear, such as server power supplies or drives, because it carries triplen harmonic current. The <a class="inline" href="guide-harmonics-ieee-519.html">harmonics guide</a> explains why. Short raceway nipples of 24 inches or less are exempt from adjustment.</p>
 
-  <h2>Step 4: Cap at the terminal rating</h2>
+  <h2 id="step-4-cap-at-the-terminal-rating">Step 4: Cap at the terminal rating</h2>
   <p>A conductor is only as good as what it's connected to. Under NEC 110.14(C), the final ampacity can't exceed the value in the column matching the lowest-rated termination, which is usually 75&deg;C for equipment rated over 100 A, and often 60&deg;C for smaller equipment unless it's marked otherwise. Derating is done from the 90&deg;C column, but the result is then compared against the 75&deg;C (or 60&deg;C) value, and the lower number wins.</p>
 
-  <h2>Worked examples</h2>
+  <h2 id="worked-examples">Worked examples</h2>
   <p><b>Nine 10 AWG copper THHN conductors in one conduit, 40&deg;C ambient, 75&deg;C terminals.</b></p>
   <ul>
     <li><b>90&deg;C table value:</b> 40 A</li>
@@ -161,7 +172,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p>Without the correction and adjustment, the same 4/0 feeder would be sized as a 230 A conductor, 41 A more than it can actually carry. The same derating also interacts with the <a class="inline" href="guide-continuous-load-80-percent-rule.html">continuous-load rules</a>, which size conductors at 125% of continuous load before derating is compared.</p>
   <div class="callout"><b>Check the edition.</b> Table values and section numbers are quoted from recent NEC editions. Section numbering in 310.15 was reorganized in 2020, so older references (310.15(B)(2)(a), 310.15(B)(3)(a)) point to the same factors under different numbers.</div>
 
-  <h2>Common mistakes</h2>
+  <h2 id="common-mistakes">Common mistakes</h2>
   <ul>
     <li><b>Using the 90&deg;C column as the final answer</b> when the terminations are only rated 75&deg;C.</li>
     <li><b>Not counting the neutral</b> on circuits feeding non-linear load.</li>
@@ -172,18 +183,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2 id="relatedGuides">Related guides</h2>
-  <ul>
-    <li><a class="inline" href="guide-continuous-load-80-percent-rule.html">The 80% Rule &amp; Continuous Loads</a> &mdash; how continuous load and derating combine in conductor sizing</li>
-    <li><a class="inline" href="guide-kw-vs-kva.html">kW vs. kVA Explained</a> &mdash; turning a load in kW into the current a conductor must carry</li>
-    <li><a class="inline" href="guide-harmonics-ieee-519.html">Harmonics &amp; IEEE 519 Explained</a> &mdash; why the neutral counts on non-linear load</li>
-    <li><a class="inline" href="guide-415v-vs-480v-distribution.html">415 V vs. 480 V Distribution</a> &mdash; how distribution voltage changes the current each conductor carries</li>
-  </ul>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>The <a class="inline" href="data-centers/cabling.html">Data Center Cable &amp; Busbar</a> reference covers the conductors and busway involved, and the <a class="inline" href="calculators/ampacity.html">Cable Ampacity Calculator</a> looks up table values and checks conduit fill.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is ampacity derating?</summary>
     <p style="margin-top:10px">Ampacity derating reduces a conductor&rsquo;s table ampacity to account for conditions hotter than the table assumes: an ambient temperature above 30&deg;C, and more than three current-carrying conductors in a raceway or cable. Both factors are multiplied against the table value.</p>
@@ -200,33 +202,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the adjustment factor for 4 to 6 conductors?</summary>
     <p style="margin-top:10px">80% of the table ampacity, under NEC 310.15(C)(1). It falls to 70% for 7 to 9 conductors and 50% for 10 to 20.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Checking a conductor?</h3>
-      <p>Look up table ampacity and check conduit fill against the 40% limit. Free, no signup.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="data-centers/cabling.html">Data Center Cable &amp; Busbar</a> reference covers the conductors and busway involved, and the <a class="inline" href="calculators/ampacity.html">Cable Ampacity Calculator</a> looks up table values and checks conduit fill.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/ampacity.html">Cable Ampacity Calculator</a>NEC 310.16 ampacity and the 40% conduit-fill check.</li>
+        <li><a href="calculators/voltage-drop.html">Voltage Drop Calculator</a>Feeder drop against the 3% and 5% design limits.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-continuous-load-80-percent-rule.html">The 80% Rule &amp; Continuous Loads</a>How continuous load and derating combine in conductor sizing</li>
+        <li><a href="guide-kw-vs-kva.html">kW vs. kVA Explained</a>Turning a load in kW into the current a conductor must carry</li>
+        <li><a href="guide-harmonics-ieee-519.html">Harmonics &amp; IEEE 519 Explained</a>Why the neutral counts on non-linear load</li>
+        <li><a href="guide-415v-vs-480v-distribution.html">415 V vs. 480 V Distribution</a>How distribution voltage changes the current each conductor carries</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="data-centers/cabling.html">Data Center Cable &amp; Busbar</a>Conductors, busway and the sizing decisions behind them.</li>
+        <li><a href="data-centers/power-distribution.html">Data Center Power Distribution</a>The feeders and branch circuits being sized.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="calculators/ampacity.html">AMPACITY CALCULATOR &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="data-centers/cabling.html">Data Center Cable &amp; Busbar</a> &mdash; conductors, busway and the sizing decisions behind them.</li>
-  <li><a class="inline" href="data-centers/power-distribution.html">Data Center Power Distribution</a> &mdash; the feeders and branch circuits being sized.</li>
-</ul>
-
-  <h2 id="calcLinks">Run the numbers</h2>
-<ul class="catlink">
-  <li><a class="inline" href="calculators/ampacity.html">Cable Ampacity Calculator</a> &mdash; NEC 310.16 ampacity and the 40% conduit-fill check.</li>
-  <li><a class="inline" href="calculators/voltage-drop.html">Voltage Drop Calculator</a> &mdash; feeder drop against the 3% and 5% design limits.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Cable Ampacity Derating Explained,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-cable-ampacity-derating.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Cable Ampacity Derating Explained,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-cable-ampacity-derating.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -240,10 +257,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published September 29, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>How to derate conductor ampacity from NEC Table 310.16: column choice, ambient correction, conductor-count adjustment, and the terminal-temperature cap, with worked examples.</dd>
@@ -254,6 +275,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published September 29, 2026. Written and maintained by the Voltfield editorial team against the sources above. Every worked figure is arithmetic you can reproduce from the table values and factors quoted on this page &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 

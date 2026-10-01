@@ -102,17 +102,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>N+1 adds one spare unit to a single system and survives the loss of a component; 2N builds two independent systems and survives the loss of a whole path.</li>
+      <li>Redundancy is per subsystem: a 2N UPS behind N+1 generators and a single utility feed is not a 2N facility.</li>
+      <li>Keep A and B sides below half load each, and check what &ldquo;2N+1&rdquo; means, because it is used for two different designs.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 9 sections</summary>
+    <ol>
+      <li><a href="#the-notations">The notations</a></li>
+      <li><a href="#what-each-scheme-survives">What each scheme survives</a></li>
+      <li><a href="#what-it-costs-a-worked-example">What it costs: a worked example</a></li>
+      <li><a href="#2n-only-works-to-the-rack-if-the-load-has-two-co">2N only works to the rack if the load has two cords</a></li>
+      <li><a href="#redundancy-is-per-subsystem">Redundancy is per subsystem</a></li>
+      <li><a href="#how-this-relates-to-tiers">How this relates to tiers</a></li>
+      <li><a href="#choosing-between-n-1-and-2n">Choosing between N+1 and 2N</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
   <p><b>N</b> is the capacity the load needs, with nothing to spare. Every redundancy scheme is described relative to it. <b>N+1</b> adds one spare unit to a single system. <b>2N</b> builds two complete, independent systems, each able to carry the whole load alone. The difference sounds like a matter of quantity, but it's a difference in <i>what can fail</i>: N+1 survives the loss of a component, while 2N survives the loss of an entire path.</p>
 
-  <h2>The notations</h2>
+  <h2 id="the-notations">The notations</h2>
   <table class="reftable">
     <tr><th scope="col">Scheme</th><th scope="col">What is installed</th></tr>
     <tr><td><b>N</b></td><td>Exactly enough capacity for the load. Any failure, and any maintenance, affects the load.</td></tr>
@@ -124,7 +137,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </table>
   <p>"2N+1" is used inconsistently. Some specifications mean 2(N+1), others mean 2N plus one shared spare. When a document uses it, check what it actually means before comparing designs.</p>
 
-  <h2>What each scheme survives</h2>
+  <h2 id="what-each-scheme-survives">What each scheme survives</h2>
   <table class="reftable">
     <tr><th scope="col">Event</th><th scope="col">N</th><th scope="col">N+1</th><th scope="col">2N</th></tr>
     <tr><td>One unit fails</td><td>No</td><td>Yes</td><td>Yes</td></tr>
@@ -135,7 +148,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </table>
   <p>*Unless each side has its own spare: that's the case 2(N+1) exists for. The row that matters most is the third one. An N+1 UPS system still has a single output bus, a single paralleling control system and usually a single downstream switchboard. Any of those can take the whole system down, however many spare modules sit behind it.</p>
 
-  <h2>What it costs: a worked example</h2>
+  <h2 id="what-it-costs-a-worked-example">What it costs: a worked example</h2>
   <p>A 900 kW critical load, built from 500 kW UPS modules:</p>
   <table class="reftable">
     <tr><th scope="col">Scheme</th><th scope="col">Modules</th><th scope="col">Installed</th><th scope="col">Loading</th></tr>
@@ -149,16 +162,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="callout"><b>Low loading has a price too:</b> a 2N system spends its whole life with each side at or below half load. At light load, UPS conversion efficiency is typically lower than near its design point, so check the efficiency curve at the loading you'll actually run, not the headline figure. The <a class="inline" href="guide-pue-explained.html">PUE guide</a> covers where those losses show up.</div>
 
-  <h2>2N only works to the rack if the load has two cords</h2>
+  <h2 id="2n-only-works-to-the-rack-if-the-load-has-two-co">2N only works to the rack if the load has two cords</h2>
   <p>Two independent systems protect the load only if the load can draw from both. Most IT equipment has dual power supplies, fed from separate A and B circuits. Each supply, and each circuit, has to carry the whole device on its own if the other side drops. In normal operation, neither side should be loaded past half of what it's allowed to carry. That is an operational discipline, not a design feature, and exceeding it silently turns a 2N room into one that trips when either side fails. Single-corded equipment needs a static transfer switch or rack transfer switch to get the same benefit.</p>
 
-  <h2>Redundancy is per subsystem</h2>
+  <h2 id="redundancy-is-per-subsystem">Redundancy is per subsystem</h2>
   <p>A facility doesn't have one redundancy level. It has one per subsystem: utility feeds, generators, UPS, distribution, cooling. The weakest one sets what the facility can actually survive. N+1 generators feeding a single UPS path aren't N+1 overall, and a 2N UPS feeding a single cooling plant still depends on that plant. Cooling redundancy matters as much as electrical here: a lost chiller or CDU takes IT load down almost as reliably as a lost UPS, only more slowly.</p>
 
-  <h2>How this relates to tiers</h2>
+  <h2 id="how-this-relates-to-tiers">How this relates to tiers</h2>
   <p>Data center tier and rating systems (the Uptime Institute Tier Standard, and ANSI/TIA-942 ratings) are defined by outcomes, not by notations. Concurrent maintainability means any component or path can be taken out for planned work without affecting the load. Fault tolerance means the load survives an unplanned failure of any single component or path. A 2N design is a common route to fault tolerance, but the label alone guarantees neither. A shared control system, a common upstream breaker or a single fuel supply can defeat it.</p>
 
-  <h2>Choosing between N+1 and 2N</h2>
+  <h2 id="choosing-between-n-1-and-2n">Choosing between N+1 and 2N</h2>
   <ul>
     <li><b>N+1</b> suits loads that can tolerate a rare outage from a shared-component failure, or that have redundancy at a higher level, such as workloads replicated across sites. It installs the least spare capacity and runs at the highest utilization.</li>
     <li><b>2N</b> suits loads where any outage is costly, and where planned maintenance must never need a shutdown window. It needs dual-corded load, or transfer switches, and disciplined A/B loading.</li>
@@ -166,7 +179,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li><b>Distributed schemes</b> such as 4N/3 get survival of any single-system loss with less installed capacity than 2N. Four systems at 75% load is 1.33&times; the load installed, against 2.0&times; for 2N. The cost is more complex load assignment and transfer arrangements.</li>
   </ul>
 
-  <h2>Common mistakes</h2>
+  <h2 id="common-mistakes">Common mistakes</h2>
   <ul>
     <li><b>Counting spare modules and calling it fault tolerant.</b> N+1 modules on a single output bus don't survive a bus fault.</li>
     <li><b>Mixing redundancy levels without saying so.</b> A 2N UPS behind N+1 generators behind a single utility feed is not a 2N facility.</li>
@@ -177,17 +190,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2 id="relatedGuides">Related guides</h2>
-  <ul>
-    <li><a class="inline" href="guide-ups-sizing.html">How to Size a UPS</a> &mdash; applying N+1 and 2N to real module counts, including the kVA check</li>
-    <li><a class="inline" href="guide-liquid-vs-air-cooling.html">Liquid vs. Air Cooling for AI Racks</a> &mdash; the thermal side, where redundancy matters as much as electrical</li>
-    <li><a class="inline" href="guide-switchgear-compartments.html">Metal-Clad vs. Metal-Enclosed Switchgear</a> &mdash; the draw-out gear that makes concurrent maintenance practical</li>
-  </ul>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>The <a class="inline" href="voltfield-pod-designer.html">POD &amp; Skid Designer</a> lets you set a load and a redundancy target (N, N+1 or 2N) and checks a power block's equipment against it. The <a class="inline" href="data-centers.html#redundancy">data center power page</a> puts redundancy in context with the rest of the electrical design.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What does N+1 mean in a data center?</summary>
     <p style="margin-top:10px">N is the capacity the load needs. N+1 means one more unit is installed than the load requires, so any single unit, such as a UPS module, generator or cooling unit, can fail or be serviced without affecting the load.</p>
@@ -204,34 +209,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Does a 2N design make a data center fault tolerant?</summary>
     <p style="margin-top:10px">Not by itself. Fault tolerance means the load survives the failure of any single component or path. A 2N UPS can still be defeated by a shared control system, a common upstream breaker, single-corded loads, or a cooling plant that isn't redundant.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Testing a redundancy target?</h3>
-      <p>Set a load and N, N+1 or 2N, pick equipment, and check the power block instantly. Free, no signup.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="voltfield-pod-designer.html">POD &amp; Skid Designer</a> lets you set a load and a redundancy target (N, N+1 or 2N) and checks a power block's equipment against it. The <a class="inline" href="data-centers.html#redundancy">data center power page</a> puts redundancy in context with the rest of the electrical design.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="voltfield-pod-designer.html">Size a power POD — or the skid underneath it.</a>Set a load and N, N+1 or 2N, pick equipment, and check the power block instantly.</li>
+        <li><a href="calculators/generator-runtime.html">Generator Runtime Calculator</a>Fuel burn and runtime at a given load.</li>
+        <li><a href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a>kW load to the next standard kVA nameplate.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-ups-sizing.html">How to Size a UPS</a>Applying N+1 and 2N to real module counts, including the kVA check</li>
+        <li><a href="guide-liquid-vs-air-cooling.html">Liquid vs. Air Cooling for AI Racks</a>The thermal side, where redundancy matters as much as electrical</li>
+        <li><a href="guide-switchgear-compartments.html">Metal-Clad vs. Metal-Enclosed Switchgear</a>The draw-out gear that makes concurrent maintenance practical</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="data-centers/backup-power.html">Data Center Backup Power</a>The UPS and generator families redundancy is counted in.</li>
+        <li><a href="data-centers/power-distribution.html">Data Center Power Distribution</a>Busway, PDUs and the A/B distribution that carries 2N to the rack.</li>
+        <li><a href="data-centers/switchgear.html">Data Center Switchgear</a>The shared buses and switchboards that decide what N+1 really survives.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="voltfield-pod-designer.html">POD DESIGNER &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="data-centers/backup-power.html">Data Center Backup Power</a> &mdash; the UPS and generator families redundancy is counted in.</li>
-  <li><a class="inline" href="data-centers/power-distribution.html">Data Center Power Distribution</a> &mdash; busway, PDUs and the A/B distribution that carries 2N to the rack.</li>
-  <li><a class="inline" href="data-centers/switchgear.html">Data Center Switchgear</a> &mdash; the shared buses and switchboards that decide what N+1 really survives.</li>
-</ul>
-
-  <h2 id="calcLinks">Run the numbers</h2>
-<ul class="catlink">
-  <li><a class="inline" href="calculators/generator-runtime.html">Generator Runtime Calculator</a> &mdash; fuel burn and runtime at a given load.</li>
-  <li><a class="inline" href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a> &mdash; kW load to the next standard kVA nameplate.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;N+1 vs. 2N Redundancy Explained,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-n-plus-1-vs-2n-redundancy.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;N+1 vs. 2N Redundancy Explained,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-n-plus-1-vs-2n-redundancy.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -245,10 +265,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published September 29, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>What the N, N+1, 2N, 2(N+1) and distributed redundancy notations mean, what each survives, what each costs in installed capacity, and how they relate to concurrent maintainability and fault tolerance.</dd>
@@ -259,6 +283,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published September 29, 2026. Written and maintained by the Voltfield editorial team against the sources above. Every figure in the worked example is arithmetic you can reproduce &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 

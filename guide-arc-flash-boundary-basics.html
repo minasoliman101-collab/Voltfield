@@ -117,43 +117,50 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>The arc-flash boundary is the distance at which incident energy falls to 1.2 cal/cm&sup2;, the threshold for a second-degree burn.</li>
+      <li>It is not a fixed distance: it is calculated for each piece of equipment from fault current, clearing time, configuration and working distance.</li>
+      <li>Equipment likely to be worked on energized needs an arc-flash risk assessment and a current label showing incident energy or PPE category, working distance and boundary.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 5 sections</summary>
+    <ol>
+      <li><a href="#what-the-arc-flash-boundary-actually-is">What the arc-flash boundary actually is</a></li>
+      <li><a href="#incident-energy-vs-arc-flash-boundary">Incident energy vs. arc-flash boundary</a></li>
+      <li><a href="#what-should-exist-for-every-piece-of-equipment">What should exist for every piece of equipment</a></li>
+      <li><a href="#what-this-means-when-buying-or-replacing-equipme">What this means when buying or replacing equipment</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
   <div class="warncallout"><b>This is educational, not a safety procedure.</b> Arc-flash boundaries and PPE requirements must be determined by a qualified engineer using a site-specific study, per NFPA 70E. Nothing on this page should be used to make a real work-authorization or PPE decision.</div>
 
-  <h2>What the arc-flash boundary actually is</h2>
+  <h2 id="what-the-arc-flash-boundary-actually-is">What the arc-flash boundary actually is</h2>
   <p>The arc-flash boundary is the distance from exposed energized parts within which a person could receive a second-degree burn — defined as an incident energy of 1.2 cal/cm² — if an arc flash occurred at that equipment. It's one of several approach boundaries defined by <a class="inline" href="glossary.html">NFPA 70E</a> (the US standard for electrical safety in the workplace), alongside the limited approach boundary and restricted approach boundary, which govern how close an unqualified or qualified person may approach exposed energized parts under other electrical-shock rules.</p>
   <p>Critically, the arc-flash boundary is not a fixed distance — it's calculated per piece of equipment, based on the available fault current at that point, the clearing time of the upstream protective device, the equipment's configuration, and the working distance for the task. A 480V panel fed by a small transformer can have a completely different arc-flash boundary than an identical-looking panel fed by a much larger one.</p>
 
-  <h2>Incident energy vs. arc-flash boundary</h2>
+  <h2 id="incident-energy-vs-arc-flash-boundary">Incident energy vs. arc-flash boundary</h2>
   <p>Incident energy (in cal/cm²) is the thermal energy a person would receive at a given distance if an arc flash occurred; the arc-flash boundary is simply the distance at which that number equals 1.2 cal/cm². Closer than the boundary, incident energy is higher — which is what drives the PPE category required to work there. This is also why the calculation (governed by the IEEE 1584 method) needs real system data, not a rule of thumb: the same equipment can have a very different incident energy depending on how the upstream system is protected and configured.</p>
 
   <div class="callout"><b>About the site&rsquo;s arc-flash calculator.</b> The <a class="inline" href="calculators/arc-flash.html">Arc-Flash Incident Energy Calculator</a> uses the simplified Lee and Doughty equations from NFPA 70E Annex D. It is a screening tool for seeing how fault current, clearing time and working distance move the result, and nothing more. Real incident energy depends on protective-device time-current curves and site-specific data that a web calculator can&rsquo;t responsibly capture. Labels and PPE decisions need a full IEEE 1584 study by a qualified engineer. For how the result maps to PPE, see <a class="inline" href="guide-arc-flash-ppe-categories.html">Arc-Flash PPE Categories Explained</a>.</div>
 
-  <h2>What should exist for every piece of equipment</h2>
+  <h2 id="what-should-exist-for-every-piece-of-equipment">What should exist for every piece of equipment</h2>
   <ul>
     <li><b>An arc-flash risk assessment</b> covering every piece of equipment likely to be worked on while energized — not just switchgear, but panelboards, MCCs, and disconnects too.</li>
     <li><b>A current arc-flash label</b> on the equipment itself, showing the information a worker needs before opening it (per NFPA 70E's labeling requirement) — incident energy or PPE category, working distance, and the boundary.</li>
     <li><b>A re-assessment trigger</b> tied to system changes — a new transformer, a protective device setting change, or added load can all shift the available fault current and invalidate an old study, even if nothing on the equipment itself changed.</li>
   </ul>
 
-  <h2>What this means when buying or replacing equipment</h2>
+  <h2 id="what-this-means-when-buying-or-replacing-equipme">What this means when buying or replacing equipment</h2>
   <p>Any time switchgear, a transformer, or a protective device is replaced or added, treat an updated arc-flash study and re-labeling as part of the project scope, not an afterthought discovered during commissioning. If arc-resistant construction is required for personnel protection in the space where the equipment sits, specify it explicitly and per the applicable accessibility type — see the compartment and arc-resistant rating discussion in the <a class="inline" href="guide-switchgear-compartments.html">switchgear compartment types guide</a>. An outdated or missing label is one of the most common findings in electrical safety audits, and it's far cheaper to fold the re-study into a planned equipment change than to discover it later.</p>
 
   <div class="callout"><b>Practice this:</b> arc-flash energy and interrupting rating both trace back to available fault current. Try the <a class="inline" href="voltfield-sandbox.html?scenario=fault-current">Fault Current Exceeds Breaker Rating</a> scenario in the Practice Sandbox to see how transformer %Z drives that number.</div>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>The <a class="inline" href="data-centers.html">Data Centers</a> and <a class="inline" href="industrial-supply.html">Industrial Supply</a> sectors carry the switchgear, transformers, and protective devices that feed into an arc-flash study — configure by voltage class and interrupting rating, and loop in your engineer for the actual incident-energy calculation once the equipment is selected. If you need available fault current as a study input, the <a class="inline" href="calculators/fault-current.html">fault current estimator</a> gives a quick first-pass number from transformer nameplate data; see the <a class="inline" href="guide-transformer-nameplate.html">nameplate guide</a> for where to find %Z, and the <a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">short-circuit studies guide</a> for how a real study refines that estimate.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is an arc-flash boundary?</summary>
     <p style="margin-top:10px">The arc-flash boundary is the distance from exposed energized electrical parts within which a person could receive a second-degree burn (the standard incident-energy threshold of 1.2 cal/cm²) if an arc flash were to occur. It's one of several approach boundaries defined by NFPA 70E and is calculated per piece of equipment, not a single fixed distance.</p>
@@ -170,32 +177,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why do I need an arc-flash label on my equipment?</summary>
     <p style="margin-top:10px">NFPA 70E requires equipment likely to be worked on while energized to carry a label showing arc-flash hazard information so workers can select correct PPE before opening a panel. Buyers replacing or adding switchgear should treat an updated arc-flash study and labeling as part of the scope, not an afterthought — an unlabeled or outdated label is a common finding in electrical safety audits.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Estimate the incident energy</h3>
-      <p>Estimate arc-flash incident energy and boundary with the Lee and Doughty equations, as a first pass before a full IEEE 1584 study. Free, no signup.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="data-centers.html">Data Centers</a> and <a class="inline" href="industrial-supply.html">Industrial Supply</a> sectors carry the switchgear, transformers, and protective devices that feed into an arc-flash study — configure by voltage class and interrupting rating, and loop in your engineer for the actual incident-energy calculation once the equipment is selected. If you need available fault current as a study input, the <a class="inline" href="calculators/fault-current.html">fault current estimator</a> gives a quick first-pass number from transformer nameplate data; see the <a class="inline" href="guide-transformer-nameplate.html">nameplate guide</a> for where to find %Z, and the <a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">short-circuit studies guide</a> for how a real study refines that estimate.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/arc-flash.html">Arc-Flash Incident Energy Calculator</a>Screening incident energy and boundary by the Lee method.</li>
+        <li><a href="calculators/fault-current.html">Available Fault Current Calculator</a>Available symmetrical fault current at a transformer secondary.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="data-centers/switchgear.html">Data Center Switchgear</a>The equipment the boundary is calculated around, including arc-resistant options.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="calculators/arc-flash.html">ARC-FLASH CALCULATOR &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="data-centers/switchgear.html">Data Center Switchgear</a> &mdash; the equipment the boundary is calculated around, including arc-resistant options.</li>
-</ul>
-
-  <h2 id="calcLinks">Run the numbers</h2>
-<ul class="catlink">
-  <li><a class="inline" href="calculators/arc-flash.html">Arc-Flash Incident Energy Calculator</a> &mdash; screening incident energy and boundary by the Lee method.</li>
-  <li><a class="inline" href="calculators/fault-current.html">Available Fault Current Calculator</a> &mdash; available symmetrical fault current at a transformer secondary.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Arc-Flash Boundary Basics,&rdquo; <i>Voltfield</i>, updated August 23, 2026. https://voltfield.org/guide-arc-flash-boundary-basics.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Arc-Flash Boundary Basics,&rdquo; <i>Voltfield</i>, updated August 23, 2026. https://voltfield.org/guide-arc-flash-boundary-basics.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -209,10 +222,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published July 25, 2026 &middot; last updated August 23, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>How arc-flash boundaries are calculated, what the PPE categories mean, and why incident energy depends on clearing time as much as on fault current.</dd>
@@ -223,6 +240,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published July 25, 2026 &middot; last updated August 23, 2026. Written and maintained by the Voltfield editorial team against the sources above. Figures that are Voltfield's own estimates rather than published standards are labeled as such where they appear &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 <footer>

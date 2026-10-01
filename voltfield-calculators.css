@@ -24,3 +24,11 @@
 .pagejump a{font-family:var(--mono);font-size:12px;padding:6px 12px;border:1px solid var(--line-dark);border-radius:999px;color:var(--ink-2);background:var(--card);text-decoration:none}
 .pagejump a:hover{color:var(--link);border-color:var(--link)}
 .artwrap h2[id]{scroll-margin-top:80px}
+/* Long lookup tables start closed so the page reads as a short list of tools. */
+.refdetails{border:1px solid var(--line);border-radius:var(--r);background:var(--card);margin:6px 0 26px}
+.refdetails>summary{cursor:pointer;list-style:none;padding:12px 18px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--slate);display:flex;justify-content:space-between;align-items:center}
+.refdetails>summary::-webkit-details-marker{display:none}
+.refdetails>summary::after{content:"+";font-size:16px;line-height:1}
+.refdetails[open]>summary::after{content:"\2013"}
+.refdetails .reftable{margin:0}

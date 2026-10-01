@@ -114,20 +114,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
-    <h2>Grounding and bonding are not the same job</h2>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>Grounding connects to earth to limit voltage; bonding joins metal parts so fault current has a low-impedance path back to the source.</li>
+      <li>Earth is too poor a conductor to clear a fault: the ground rod does not trip the breaker, the bonding path does.</li>
+      <li>Every transformer secondary is a separately derived system that needs its own system bonding jumper and, usually, its own grounding electrode connection (NEC 250.30).</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 5 sections</summary>
+    <ol>
+      <li><a href="#grounding-and-bonding-are-not-the-same-job">Grounding and bonding are not the same job</a></li>
+      <li><a href="#why-the-ground-rod-doesnt-clear-a-fault">Why the ground rod doesn't clear a fault</a></li>
+      <li><a href="#separately-derived-systems-reset-the-rules">Separately derived systems reset the rules</a></li>
+      <li><a href="#why-low-impedance-is-the-number-that-actually-ma">Why low impedance is the number that actually matters</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+    <h2 id="grounding-and-bonding-are-not-the-same-job">Grounding and bonding are not the same job</h2>
   <p><b>Grounding</b> is an intentional connection to earth. It limits the voltage imposed on a system by lightning, line surges, or accidental contact with a higher-voltage line, and it stabilizes voltage-to-ground during normal operation. <b>Bonding</b> is an intentional connection between metal parts to make them electrically continuous and conductive — its job is to guarantee a low-impedance path for fault current to get back to the source and operate the overcurrent protective device. Bonding doesn't require earth at all; two bonded metal enclosures ten feet apart are doing their job whether or not either one touches a ground rod.</p>
 
   <div class="callout"><b>The common mix-up:</b> people say "make sure it's grounded" when what actually matters for personnel safety during a fault is that it's <i>bonded</i> — connected back to the source through a low-impedance path so the breaker trips fast. A perfectly grounded (earthed) enclosure with a poor bond back to the panel can still stay energized dangerously long during a fault.</p></div>
 
-  <h2>Why the ground rod doesn't clear a fault</h2>
+  <h2 id="why-the-ground-rod-doesnt-clear-a-fault">Why the ground rod doesn't clear a fault</h2>
   <p>Earth is a comparatively poor conductor — its impedance is high enough that a fault path relying on "through the enclosure, into the earth, back through the earth to the source" typically can't push enough current to trip a breaker or fuse in a useful time. That's the equipment grounding conductor's (EGC) job: a dedicated, low-impedance metallic path — conduit, a bonding wire, a busbar system — that runs alongside the circuit and ties every non-current-carrying metal part back to the source. The grounding electrode (rod, plate, ring, or concrete-encased/Ufer ground) mainly bleeds off lightning and surge energy and stabilizes system voltage; it is not what makes a breaker trip on a ground fault.</p>
 
   <div style="overflow-x:auto"><table class="reftable">
@@ -137,20 +146,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <tr><td>Bonding jumper</td><td>Ensures continuity across a joint, fitting, or separately derived system where the normal path might otherwise be interrupted or high-impedance.</td></tr>
   </table></div>
 
-  <h2>Separately derived systems reset the rules</h2>
+  <h2 id="separately-derived-systems-reset-the-rules">Separately derived systems reset the rules</h2>
   <p>Any transformer creates a <b>separately derived system</b> on its secondary — a new source with no direct electrical connection to the primary side's grounded conductor. Per NEC 250.30, each separately derived system needs its own system bonding jumper and, in most cases, its own grounding electrode connection at or near the source. This is easy to miss on a retrofit: adding a step-down transformer to feed a new panel means that panel's system needs to be grounded and bonded as its own system, not assumed to inherit the upstream system's grounding.</p>
 
-  <h2>Why low impedance is the number that actually matters</h2>
+  <h2 id="why-low-impedance-is-the-number-that-actually-ma">Why low impedance is the number that actually matters</h2>
   <p>A protective device only trips fast if enough fault current flows to exceed its instantaneous or short-time trip setting — and that current is entirely a function of the fault path's impedance. A loose bonding connection, a missing jumper across a flexible conduit fitting, or corrosion at a ground bar lug all raise that impedance, which lowers fault current, which can mean a breaker takes much longer to clear a fault than its trip curve assumes — or doesn't trip on a low-level ground fault at all. That low-level arcing fault is what <a class="inline" href="guide-ground-fault-protection.html">equipment ground-fault protection</a> exists to catch. This is exactly the same physics behind the sandbox's fault-current check, just on the other side of the equation: there, a stiff source with a tight low-impedance transformer produces high available fault current; here, a poor bond does the opposite by starving the fault path.</p>
 
   <div class="callout"><b>Practice this:</b> available fault current and the path it flows through are two sides of the same coin. Try the <a class="inline" href="voltfield-sandbox.html?scenario=fault-current">Fault Current Exceeds Breaker Rating</a> scenario in the Practice Sandbox to see how the source side of that equation is calculated.</div>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>The <a class="inline" href="data-centers.html">Data Centers</a> sector carries ground bars, kits, and surge protective devices under its dedicated Grounding &amp; Bonding category, cross-linked to the compliance standards each family references. Unfamiliar with a term above? Check the <a class="inline" href="glossary.html">glossary</a>, or see the related discussion of fault current and interrupting ratings in the <a class="inline" href="guide-arc-flash-boundary-basics.html">arc-flash boundary basics guide</a>.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What's the actual difference between grounding and bonding?</summary>
     <p style="margin-top:10px">Grounding is an intentional connection to earth, meant to limit voltage from lightning, line surges, or unintentional contact with higher-voltage lines, and to stabilize voltage-to-ground during normal operation. Bonding is an intentional connection between metal parts to ensure they're electrically continuous and conductive, creating a low-impedance path for fault current to return to the source and operate the protective device — bonding doesn't need to involve earth at all.</p>
@@ -163,32 +170,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why does a transformer create a new grounding requirement?</summary>
     <p style="margin-top:10px">Any transformer creates a separately derived system on its secondary side — a new source of power with no direct electrical connection to the primary side's grounded conductor. Each separately derived system needs its own bonding jumper and, in most cases, its own grounding electrode connection, per NEC 250.30. Skipping this step leaves the secondary system without a defined reference to ground, which is a common finding when an added step-down transformer wasn't grounded as its own system.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Check a ground electrode</h3>
-      <p>Estimate resistance-to-earth of a driven ground rod from soil resistivity, rod length and diameter, using Dwight's formula. Free, no signup.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="data-centers.html">Data Centers</a> sector carries ground bars, kits, and surge protective devices under its dedicated Grounding &amp; Bonding category, cross-linked to the compliance standards each family references. Unfamiliar with a term above? Check the <a class="inline" href="glossary.html">glossary</a>, or see the related discussion of fault current and interrupting ratings in the <a class="inline" href="guide-arc-flash-boundary-basics.html">arc-flash boundary basics guide</a>.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/grounding.html">Ground Rod Resistance Calculator</a>Single-rod resistance from soil resistivity.</li>
+        <li><a href="calculators/fault-current.html">Available Fault Current Calculator</a>Available symmetrical fault current at a transformer secondary.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="data-centers/power-distribution.html">Data Center Power Distribution</a>The distribution equipment these grounding and bonding rules apply to.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="calculators/grounding.html">GROUNDING CALCULATOR &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="data-centers/power-distribution.html">Data Center Power Distribution</a> &mdash; the distribution equipment these grounding and bonding rules apply to.</li>
-</ul>
-
-  <h2 id="calcLinks">Run the numbers</h2>
-<ul class="catlink">
-  <li><a class="inline" href="calculators/grounding.html">Ground Rod Resistance Calculator</a> &mdash; single-rod resistance from soil resistivity.</li>
-  <li><a class="inline" href="calculators/fault-current.html">Available Fault Current Calculator</a> &mdash; available symmetrical fault current at a transformer secondary.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Grounding vs. Bonding: Basics for Industrial Electrical Systems,&rdquo; <i>Voltfield</i>, updated August 23, 2026. https://voltfield.org/guide-grounding-bonding-basics.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Grounding vs. Bonding: Basics for Industrial Electrical Systems,&rdquo; <i>Voltfield</i>, updated August 23, 2026. https://voltfield.org/guide-grounding-bonding-basics.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -202,10 +215,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published July 28, 2026 &middot; last updated August 23, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>The difference between grounding and bonding, why separately derived systems are treated differently, and what the electrode system is actually for.</dd>
@@ -216,6 +233,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published July 28, 2026 &middot; last updated August 23, 2026. Written and maintained by the Voltfield editorial team against the sources above. Figures that are Voltfield's own estimates rather than published standards are labeled as such where they appear &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 <footer>

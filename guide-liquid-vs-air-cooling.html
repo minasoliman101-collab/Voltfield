@@ -114,24 +114,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>Above roughly 20&ndash;30 kW per rack, air cooling usually can't remove the heat without extraordinary airflow.</li>
+      <li>GPU racks for AI routinely run at several times that, which is where designs move to liquid cooling.</li>
+      <li>The options are direct-to-chip cold plates, immersion, and rear-door heat exchangers, with a coolant distribution unit (CDU) between the facility loop and the IT.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 6 sections</summary>
+    <ol>
+      <li><a href="#direct-to-chip-cooling">Direct-to-chip cooling</a></li>
+      <li><a href="#immersion-cooling">Immersion cooling</a></li>
+      <li><a href="#rear-door-heat-exchangers">Rear-door heat exchangers</a></li>
+      <li><a href="#where-the-cdu-fits-in">Where the CDU fits in</a></li>
+      <li><a href="#what-this-means-for-pue">What this means for PUE</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
   <p><b>Above roughly 20&ndash;30 kW per rack, air cooling usually can&rsquo;t remove the heat without extraordinary airflow, and GPU racks for AI routinely run at several times that.</b> That is the point where designs move to liquid cooling: direct-to-chip cold plates, immersion or rear-door heat exchangers.</p>
   <p>Air cooling works by moving enough cold air across a server to carry its heat away, and it scaled fine for decades of data center growth. The problem is physics, not engineering effort: air has a much lower heat capacity than liquid, so as rack power density climbs, the volume of air — and the fan power to move it — needed to keep pace grows faster than most facilities can practically deliver. Racks running well above roughly 20–30kW commonly exceed what air cooling can remove without extraordinary airflow, and modern GPU racks for AI training and inference routinely run at multiples of that.</p>
 
-  <h2>Direct-to-chip cooling</h2>
+  <h2 id="direct-to-chip-cooling">Direct-to-chip cooling</h2>
   <p>The most common liquid cooling approach in new deployments: cold plates mounted directly on the highest-heat components — CPUs and GPUs — circulate coolant that carries heat away at the source. Lower-heat components on the same board (memory, storage, networking) are usually still air-cooled, making this a hybrid approach rather than a fully liquid-cooled server. It's the least disruptive liquid-cooling retrofit path for an existing air-cooled hall, since the room-level air system can often stay in place for everything the cold plates don't cover.</p>
 
-  <h2>Immersion cooling</h2>
+  <h2 id="immersion-cooling">Immersion cooling</h2>
   <p>Submerges entire servers in a dielectric fluid that doesn't conduct electricity, removing heat from every component at once rather than just the highest-heat ones. Single-phase immersion circulates the fluid in liquid form throughout; two-phase immersion uses a fluid that boils at the operating temperature, carrying heat away as it changes phase and condenses for reuse. Immersion removes heat more thoroughly than direct-to-chip but requires a fundamentally different rack and server form factor — not a bolt-on retrofit to standard rack-mount hardware.</p>
 
-  <h2>Rear-door heat exchangers</h2>
+  <h2 id="rear-door-heat-exchangers">Rear-door heat exchangers</h2>
   <p>A hybrid that sits between air and liquid cooling: a liquid-cooled heat exchanger mounted on the back of a standard air-cooled rack captures hot exhaust air before it reaches the room, rather than cooling components directly. Servers inside the rack stay conventional and air-cooled internally — only the room-level heat rejection changes. It's a lower-disruption way to raise a facility's effective density ceiling without redesigning server hardware, though it doesn't reach the density levels direct-to-chip or immersion can support.</p>
 
   <table class="reftable">
@@ -141,26 +151,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <tr><td>Immersion</td><td>Entire server</td><td>High — different rack/server form factor</td></tr>
   </table>
 
-  <h2>Where the CDU fits in</h2>
+  <h2 id="where-the-cdu-fits-in">Where the CDU fits in</h2>
   <p>A <b>coolant distribution unit (CDU)</b> is the interface between the facility's main cooling loop and the rack-level liquid cooling loop, transferring heat between the two — often through a heat exchanger — while keeping the fluids and pressures on each side independently managed and monitored. It's become a standard electrical/mechanical BOM line on new data center builds rather than a specialty item, tracked on the <a class="inline" href="data-centers.html">Data Center Power Equipment</a> pillar page alongside transformers and switchgear.</p>
 
   <div class="callout"><b>Retrofit vs. new build:</b> a new-build facility can plan floor loading, plumbing, and CDU placement around liquid cooling from the start. A retrofit into an existing air-cooled hall has to work around whatever plumbing, floor loading, and rack layout already exist — which is exactly why rear-door heat exchangers and direct-to-chip see more retrofit use than immersion.</div>
 
-  <h2>What this means for PUE</h2>
+  <h2 id="what-this-means-for-pue">What this means for PUE</h2>
   <p>Liquid cooling generally lowers <a class="inline" href="guide-pue-explained.html">PUE</a> — moving heat with liquid is more efficient than moving it with fans and mechanical chillers — but the mechanism matters: rear-door heat exchangers still lean on the room-level cooling plant behind them, while direct-to-chip and immersion cut the amount of heat that plant has to handle in the first place. The market for liquid cooling overall is forecast to keep growing at roughly 20% a year as direct-to-chip deployments become standard on new high-density builds.</p>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2 id="relatedGuides">Related guides</h2>
-  <ul>
-    <li><a class="inline" href="guide-pue-explained.html">PUE Explained</a> &mdash; how cooling choice shows up in the efficiency number</li>
-    <li><a class="inline" href="guide-arc-flash-boundary-basics.html">Arc-Flash Boundary Basics</a> &mdash; safety checks on the electrical side of a high-density retrofit</li>
-  </ul>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>Cooling capacity is one of the sizing inputs on the <a class="inline" href="voltfield-pod-designer.html">POD &amp; Skid Designer</a> — set a critical load and the tool flags whether cooling capacity is present for it. For the electrical side of a liquid-cooling retrofit or new build, configure equipment directly on the <a class="inline" href="data-centers.html">Data Centers</a> sector and get a real indicative lead time.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why is air cooling struggling with modern GPU racks?</summary>
     <p style="margin-top:10px">Air has a much lower heat capacity than liquid, so moving enough air to cool a high-density GPU rack requires increasingly large volumes of airflow and fan power. Racks running well above 20–30kW commonly exceed what air cooling can practically remove, pushing designs toward liquid.</p>
@@ -173,26 +176,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What does a CDU do?</summary>
     <p style="margin-top:10px">A coolant distribution unit (CDU) is the interface between the facility's cooling loop and the rack-level liquid cooling loop, transferring heat between the two (often through a heat exchanger) while keeping the fluids and pressures on each side independently managed.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>How much does cooling cost you?</h3>
-      <p>PUE explained: the formula, what counts as facility power, typical ranges from 1.1 to 2.0, what drives it down, and where the metric falls short.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">Cooling capacity is one of the sizing inputs on the <a class="inline" href="voltfield-pod-designer.html">POD &amp; Skid Designer</a> — set a critical load and the tool flags whether cooling capacity is present for it. For the electrical side of a liquid-cooling retrofit or new build, configure equipment directly on the <a class="inline" href="data-centers.html">Data Centers</a> sector and get a real indicative lead time.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-pue-explained.html">PUE Explained</a>How cooling choice shows up in the efficiency number</li>
+        <li><a href="guide-arc-flash-boundary-basics.html">Arc-Flash Boundary Basics</a>Safety checks on the electrical side of a high-density retrofit</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="data-centers/cooling.html">Data Center Cooling</a>CDUs, CRAH units, rear-door exchangers and chillers, with lead times.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="guide-pue-explained.html">READ THE PUE GUIDE &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="data-centers/cooling.html">Data Center Cooling</a> &mdash; CDUs, CRAH units, rear-door exchangers and chillers, with lead times.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Liquid Cooling vs. Air Cooling for AI-Density Racks,&rdquo; <i>Voltfield</i>, updated August 24, 2026. https://voltfield.org/guide-liquid-vs-air-cooling.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Liquid Cooling vs. Air Cooling for AI-Density Racks,&rdquo; <i>Voltfield</i>, updated August 24, 2026. https://voltfield.org/guide-liquid-vs-air-cooling.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -206,10 +221,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published August 23, 2026 &middot; last updated August 24, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>Where air cooling stops being practical, what a liquid loop adds, and how the crossover is usually reasoned about.</dd>
@@ -220,6 +239,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published August 23, 2026 &middot; last updated August 24, 2026. Written and maintained by the Voltfield editorial team against the sources above. Figures that are Voltfield's own estimates rather than published standards are labeled as such where they appear &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 <footer>
