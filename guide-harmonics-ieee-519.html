@@ -36,9 +36,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
 <link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
 <link rel="stylesheet" href="voltfield-core.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
@@ -120,7 +118,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <h2>Which harmonics show up</h2>
   <p>A rectifier's pulse number decides which harmonics it produces. A 6-pulse rectifier, the most common front end in drives and older UPS systems, produces harmonics at orders 6k &plusmn; 1: the 5th, 7th, 11th, 13th and so on. A 12-pulse rectifier cancels the 5th and 7th, leaving 12k &plusmn; 1: the 11th, 13th, 23rd and 25th. That's why raising the pulse number is one of the oldest mitigation methods.</p>
-  <p>Single-phase non-linear loads on a four-wire system add <b>triplen harmonics</b> (3rd, 9th, 15th). Unlike most harmonics, triplens from the three phases add in the neutral instead of cancelling. On a panel full of single-phase power supplies, neutral current can exceed phase current, approaching about 1.7 times phase current in the limiting case. That's why the NEC requires the neutral to be counted as a current-carrying conductor when most of the load is non-linear (NEC 310.15), and why shared neutrals on such loads are a known problem.</p>
+  <p>Single-phase non-linear loads on a four-wire system add <b>triplen harmonics</b> (3rd, 9th, 15th). Unlike most harmonics, triplens from the three phases add in the neutral instead of cancelling. On a panel full of single-phase power supplies, neutral current can exceed phase current, approaching about 1.7 times phase current in the limiting case. That's why the NEC requires the neutral to be counted as a current-carrying conductor when most of the load is non-linear (NEC 310.15, see <a class="inline" href="guide-cable-ampacity-derating.html">cable ampacity derating</a>), and why shared neutrals on such loads are a known problem.</p>
 
   <h2>Worked example: THD, RMS current and TDD</h2>
   <p>A 6-pulse load draws 100 A of fundamental current, with harmonic currents of 30% (5th), 15% (7th), 8% (11th) and 5% (13th):</p>

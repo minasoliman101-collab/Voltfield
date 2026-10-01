@@ -29,7 +29,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
    {"@type":"ListItem","position":2,"name":"About","item":"https://voltfield.org/about.html"}
  ]},
- {"@type":"AboutPage","name":"About Voltfield — an independent engineering reference","description":"Voltfield is a free engineering reference and tools platform for data center, solar and battery-storage power equipment.","url":"https://voltfield.org/about.html","about":{"@type":"Organization","name":"Voltfield","description":"An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing here is for sale.","email":"Help@voltfield.org","telephone":"+1-850-686-1378"}}
+ {"@type":"AboutPage","dateModified":"2026-10-01","name":"About Voltfield — an independent engineering reference","description":"Voltfield is a free engineering reference and tools platform for data center, solar and battery-storage power equipment.","url":"https://voltfield.org/about.html","about":{"@type":"Organization","name":"Voltfield","description":"An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing here is for sale.","email":"Help@voltfield.org","telephone":"+1-850-686-1378"}}
 ]}
 </script>
 <link rel="manifest" href="manifest.json">
@@ -40,9 +40,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
 <link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
 <link rel="stylesheet" href="voltfield-core.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
@@ -145,6 +143,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p>A <a class="inline" href="glossary.html">glossary</a> of the standards and acronyms that show up across these sectors, plus guides on interconnection, domestic-content rules, FEOC compliance, and equipment safety codes.</p>
     </div>
   </div>
+
+  <h2>How the guides and calculators are written</h2>
+  <p>The <a class="inline" href="guides.html">33 engineering guides</a> and the calculator pages are written by Voltfield's editorial team to one set of rules. The <a class="inline" href="methodology.html">methodology page</a> sets them out in full; in short:</p>
+  <ul>
+    <li><b>Answer first.</b> The opening paragraph answers the question the page is named for, and the detail follows.</li>
+    <li><b>Show the working.</b> Where there is a number to calculate, the page works through it with figures you can reproduce from the formulas shown. The calculator pages explain the method each tool uses, not just the result.</li>
+    <li><b>Name the standard.</b> Guides cite the standard that governs the topic (the NEC, NFPA 70E and 855, IEEE 519, IEEE/ANSI C57 and so on), and each ends with a <i>Scope &amp; sources</i> section listing what it rests on.</li>
+    <li><b>Say what it does not cover.</b> Nothing here replaces a licensed engineer's stamped calculation, a protective device coordination study or a code sign-off, and the pages say so where it matters.</li>
+    <li><b>Date it.</b> Each guide shows when it was published and when it was last updated. Those dates come from the site's revision history, not from a date typed in by hand.</li>
+  </ul>
+
+  <h2>Corrections</h2>
+  <p>When something on Voltfield is wrong, it gets fixed. For example, the <a class="inline" href="calculators/arc-flash.html">arc-flash calculator</a> page once said incident energy rises with the square of arcing time. It rises in direct proportion to arcing time, which is what the calculator itself had always computed, and the page now says so. If you find an error or an out-of-date figure, email <a class="inline" href="mailto:Help@voltfield.org">Help@voltfield.org</a>. New guides, calculators and tools are listed, most recent first, on <a class="inline" href="whats-new.html">What's new</a>.</p>
+
+  <h2>Citing and embedding Voltfield</h2>
+  <p>Every guide ends with a ready-to-paste citation that includes its address and last-updated date. The <a class="inline" href="lead-time-index.html">Lead-Time Index</a> is also published as a <a class="inline" href="lead-time-index.json">JSON feed</a>, with each figure labeled by its basis, and as an embeddable widget. The <a class="inline" href="calculators/voltage-drop.html">voltage drop</a>, <a class="inline" href="calculators/transformer-sizing.html">transformer sizing</a> and <a class="inline" href="calculators/power-factor.html">power factor</a> calculators can be embedded on another site with a short copy-paste snippet, given on each of those pages.</p>
+
+  <h2>Independence</h2>
+  <p>Voltfield names manufacturers and product lines because engineers specify against them. It is not affiliated with, sponsored by, or endorsed by any manufacturer it references, and nothing on the site is for sale.</p>
 
   <h2>How Voltfield is positioned</h2>
   <p>This wasn't always the framing. The site originally read like a parts storefront — "sold and fulfilled directly," add-to-cart language, checkout flows. That has been rewritten sitewide. What replaced it is a reference: you can look up a family, see how it is specified, what standards apply, roughly what it costs and roughly how long it takes. There is no request to send and no one to send it to.</p>

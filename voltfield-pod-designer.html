@@ -40,16 +40,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
 <link rel="stylesheet" href="voltfield-core.css">
 <link rel="stylesheet" href="voltfield-component-viz.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
- {"@type":"WebApplication","name":"VOLTFIELD POD & Skid Designer","applicationCategory":"EngineeringApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"A drag-free sizing sandbox for a modular power block: pick a transformer, switchgear, distribution, backup power, and cooling against a target load and redundancy level (N/N+1/2N), toggle between an enclosed POD and an open-frame skid, and get instant sizing checks."},
+ {"@type":"WebApplication","dateModified":"2026-09-30","name":"VOLTFIELD POD & Skid Designer","applicationCategory":"EngineeringApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"A drag-free sizing sandbox for a modular power block: pick a transformer, switchgear, distribution, backup power, and cooling against a target load and redundancy level (N/N+1/2N), toggle between an enclosed POD and an open-frame skid, and get instant sizing checks."},
  {"@type":"HowTo","name":"How to size a power POD or skid","description":"Set a target load and redundancy, then pick equipment and check the sizing.","step":[
    {"@type":"HowToStep","name":"Set the load and redundancy target","text":"Enter the critical load in kW and choose a redundancy level: N, N+1, or 2N."},
    {"@type":"HowToStep","name":"Choose POD or Skid","text":"Toggle between an enclosed POD, which adds a footprint check, and an open-frame skid, which drops it."},

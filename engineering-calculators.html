@@ -39,7 +39,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
    {"@type":"ListItem","position":2,"name":"Engineering Calculators","item":"https://voltfield.org/engineering-calculators.html"}
  ]},
- {"@type":"FAQPage","mainEntity":[
+ {"@type":"FAQPage","dateModified":"2026-09-30","mainEntity":[
    {"@type":"Question","name":"How do you calculate voltage drop for a cable run?","acceptedAnswer":{"@type":"Answer","text":"Using the K-factor method: VD = (2 x K x I x D) / CM for single-phase or VD = (1.732 x K x I x D) / CM for three-phase, where K is a resistivity constant (about 12.9 for copper, 21.2 for aluminum), I is load current in amps, D is one-way distance in feet, and CM is the conductor's circular mil area. This is an approximation that ignores reactance and is best suited to feeders under about 250 feet."}},
    {"@type":"Question","name":"What size transformer do I need for my load?","acceptedAnswer":{"@type":"Answer","text":"Divide your real load in kW by its power factor to get required kVA, then round up to the nearest standard transformer nameplate rating (common ANSI/IEEE sizes include 75, 112.5, 150, 225, 300, 500, 750, and 1000 kVA). Always leave margin for future load growth."}},
    {"@type":"Question","name":"How do I size a battery energy storage system (BESS)?","acceptedAnswer":{"@type":"Answer","text":"Multiply the critical load in kW by the required backup duration in hours to get usable energy in kWh, then divide by your assumed depth of discharge and round-trip efficiency (commonly around 90% each for LFP systems) to get the nameplate energy rating you need to procure."}},
@@ -60,9 +60,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
 <link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
 <link rel="stylesheet" href="voltfield-core.css">
 <link rel="stylesheet" href="voltfield-component-viz.css">
@@ -175,7 +173,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="#generator-runtime">Generator Runtime Estimator</a>
   </div>
 
-  <p>These tools are built for the budgetary and early-design stage of a project — sizing a feeder, roughing in a transformer or BESS order, or checking a string configuration before it goes to a stamped design. They run entirely in your browser: nothing you enter is sent anywhere. None of them replace a licensed engineer's calculation for final design, protective device coordination, or code compliance sign-off.</p>
+  <p>These tools are built for the budgetary and early-design stage of a project — sizing a feeder, roughing in a transformer or BESS order, or checking a string configuration before it goes to a stamped design. They run entirely in your browser: nothing you enter is sent anywhere. None of them replace a licensed engineer's calculation for final design, protective device coordination, or code compliance sign-off. Who writes and checks these tools, and what the site is for, is on the <a class="inline" href="about.html">About</a> page.</p>
 
   <h2 id="voltage-drop">Voltage Drop / Cable Sizing Calculator</h2>
   <p>Estimates voltage drop across a feeder using the standard K-factor method, then flags runs that exceed the commonly used 3% branch-circuit / 5% total design guideline (NEC 210.19(A) informational note — a recommendation, not a hard limit).</p>

@@ -31,7 +31,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    {"@type":"ListItem","position":2,"name":"Renewables","item":"https://voltfield.org/renewables.html"},
    {"@type":"ListItem","position":3,"name":"DC Collection","item":"https://voltfield.org/renewables/dc-collection.html"}
  ]},
- {"@type":"CollectionPage","name":"PV DC Collection Equipment","description":"String combiner boxes, recombiners, PV wire and connectors, and rapid shutdown equipment, with configurations, standards and indicative lead times.","url":"https://voltfield.org/renewables/dc-collection.html","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"CollectionPage","dateModified":"2026-09-30","name":"PV DC Collection Equipment","description":"String combiner boxes, recombiners, PV wire and connectors, and rapid shutdown equipment, with configurations, standards and indicative lead times.","url":"https://voltfield.org/renewables/dc-collection.html","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"Do 1500 V systems still need string fuses?","acceptedAnswer":{"@type":"Answer","text":"Often not, but it has to be checked rather than assumed. Fusing protects a string against reverse current from the other parallel strings. With few enough strings in parallel, the worst-case reverse current stays below the module's reverse current rating and no fuse is required. The threshold depends on the specific module, so it is a calculation per design."}},
    {"@type":"Question","name":"Why is DC arcing more dangerous than AC arcing?","acceptedAnswer":{"@type":"Answer","text":"Alternating current crosses zero twice per cycle, which gives an arc a natural opportunity to extinguish. Direct current does not, so an established DC arc tends to sustain itself. That is why DC-rated disconnects and correct terminations matter more on the array side than the equivalent components do downstream of the inverter."}},
@@ -48,9 +48,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
 <!-- Root-relative asset paths throughout: this page lives one directory deep,
      so the relative paths used by the flat pages at the site root would break. -->
 <link rel="stylesheet" href="/voltfield-core.css">

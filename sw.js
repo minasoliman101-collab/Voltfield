@@ -11,7 +11,8 @@
    old stylesheet for one full load, which reads as a broken page rather than
    a stale one. Bump VERSION on any change to core.css or the shared nav:
    activate() wipes every non-matching bucket, so nobody sees the half-state. */
-const VERSION = 'voltfield-v122';
+/* v123: fonts moved from Google Fonts to fonts/ on this origin. */
+const VERSION = 'voltfield-v123';
 
 const CORE = [
   './',
@@ -34,6 +35,8 @@ const CORE = [
   './voltfield-component-viz.css',
   './voltfield-pcb-layout.html',
   './voltfield-core.css',
+  './voltfield-fonts.css',
+  './fonts/ibm-plex-sans-latin.woff2',
   './voltfield-parts.css',
   './voltfield-insights.html',
   './voltfield-part.html',
@@ -150,16 +153,5 @@ self.addEventListener('fetch', e => {
     e.waitUntil(net.catch(() => {}));
     e.respondWith(caches.match(req).then(hit => hit || net));
     return;
-  }
-
-  /* cross-origin (Google Fonts): stale-while-revalidate, same reasoning as above */
-  if (/fonts\.(googleapis|gstatic)\.com/.test(url.host)) {
-    const net = fetch(req, { cache: 'reload' }).then(r => {
-      const copy = r.clone();
-      caches.open(VERSION).then(c => c.put(req, copy));
-      return r;
-    });
-    e.waitUntil(net.catch(() => {}));
-    e.respondWith(caches.match(req).then(hit => hit || net));
   }
 });
