@@ -1,0 +1,24 @@
+<!-- Live calculator for calculators/ampacity.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="ampCalc">
+    <h3>Ampacity Lookup</h3>
+    <div class="sub">Base ampacity only — apply NEC 310.15(B) ambient/altitude correction and 310.15(C) bundling adjustment factors for your actual install conditions, and respect the 60&deg;C/75&deg;C termination rating of the equipment per NEC 110.14(C).</div>
+    <div class="est-row">
+      <div class="est-field"><label for="ampSize">Conductor size</label><select id="ampSize"></select></div>
+      <div class="est-field"><label for="ampMat">Conductor</label><select id="ampMat"><option value="Cu">Copper</option><option value="Al">Aluminum</option></select></div>
+      <div class="est-field"><label for="ampTemp">Insulation rating</label><select id="ampTemp"><option value="60">60&deg;C</option><option value="75" selected>75&deg;C</option><option value="90">90&deg;C</option></select></div>
+      <div class="est-field"><button type="button" id="ampBtn">Look up</button></div>
+    </div>
+    <div class="est-result" id="ampResult"></div>
+  </div>
+  <div class="estimator" id="fillCalc">
+    <h3>Conduit Fill</h3>
+    <div class="sub">EMT conduit and THHN/THWN-2 conductor areas, a handful of common sizes only. Mixed conductor sizes in one raceway, or other conduit/conductor types, need NEC Annex C or a real fill calc.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="fillConduit">Conduit (EMT)</label><select id="fillConduit"></select></div>
+      <div class="est-field"><label for="fillWire">Conductor (THHN)</label><select id="fillWire"></select></div>
+      <div class="est-field"><label for="fillN">Number of conductors</label><input type="number" id="fillN" min="1" step="1" placeholder="e.g. 4"></div>
+      <div class="est-field"><button type="button" id="fillBtn">Check fill</button></div>
+    </div>
+    <div class="est-result" id="fillResult"></div>
+  </div>
+  <div class="callout">NEC Annex C publishes the code's own pre-computed conductors-per-conduit tables, which can differ by about &plusmn;1 conductor from the simple area-ratio math here due to NFPA's own rounding conventions — use Annex C (or a licensed designer) for anything past a rough early estimate, and always confirm against the NEC/NFPA 70 edition actually adopted by your jurisdiction.</div>

@@ -24,7 +24,7 @@
    {"@type":"ListItem","position":3,"name":"Cable Ampacity & Conduit Fill Calculator","item":"https://voltfield.org/calculators/ampacity.html"}
  ]},
  {"@type":"WebPage","name":"Cable Ampacity & Conduit Fill Calculator","description":"Look up NEC Table 310.16 conductor ampacity and check conduit fill against the 40% limit for three or more conductors. Free, no signup.","url":"https://voltfield.org/calculators/ampacity.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
- {"@type":"WebApplication","name":"Cable Ampacity & Conduit Fill Calculator","description":"Look up NEC Table 310.16 conductor ampacity and check conduit fill against the 40% limit for three or more conductors. Free, no signup.","url":"https://voltfield.org/engineering-calculators.html#ampacity","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebApplication","name":"Cable Ampacity & Conduit Fill Calculator","description":"Look up NEC Table 310.16 conductor ampacity and check conduit fill against the 40% limit for three or more conductors. Free, no signup.","url":"https://voltfield.org/calculators/ampacity.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What does the Cable Ampacity & Conduit Fill calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Ampacity is the current a conductor can carry continuously without exceeding its insulation temperature rating. The table value is where the calculation starts, not where it ends: the published figure assumes no more than three current-carrying conductors in a raceway at 30°C ambient, and both of those assumptions fail routinely in real installations. Conduit fill is the companion check — too many conductors in a raceway makes them impossible to pull without damage and traps the heat that ampacity derating exists to manage."}},
    {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"The lookup gives the base table value before any correction. Real ampacity is the table value multiplied by both the ambient correction factor and the conductor-count adjustment factor, and either can be substantial. Terminal temperature ratings under 110.14(C) may limit the answer further regardless of the conductor's own rating."}}
@@ -41,6 +41,7 @@
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
 <link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
 <link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-calculators.css">
 <link rel="stylesheet" href="/voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <link rel="stylesheet" href="/voltfield-parts.css">
@@ -97,23 +98,41 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section class="artban">
   <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/engineering-calculators.html" style="color:var(--slate);text-decoration:none">Calculators</a> / <span style="color:var(--ink)">Cable Ampacity &amp; Conduit Fill Calculator</span></nav>
     <div class="eyebrow">Free Calculator &middot; No Signup</div>
     <h1>Cable Ampacity &amp; Conduit Fill Calculator</h1>
-    <p class="dek">Ampacity is the current a conductor can carry continuously without exceeding its insulation temperature rating. The table value is where the calculation starts, not where it ends: the published figure assumes no more than three current-carrying conductors in a raceway at 30&deg;C ambient, and both of those assumptions fail routinely in real installations. Conduit fill is the companion check — too many conductors in a raceway makes them impossible to pull without damage and traps the heat that ampacity derating exists to manage.</p>
+    <p class="dek">Look up NEC Table 310.16 conductor ampacity and check conduit fill against the 40% limit for three or more conductors.</p>
   </div>
 </section>
 
-<nav class="crumb" aria-label="Breadcrumb">
-  <a href="/index.html">Home</a><span class="sep">/</span>
-  <a href="/engineering-calculators.html">Calculators</a><span class="sep">/</span>
-  <span>Cable Ampacity &amp; Conduit Fill Calculator</span>
-</nav>
-
 <div class="artwrap">
-  <div class="ctaband"><div class="ctaband-in">
-    <div><h2>Run the numbers</h2><p>The working calculator is free and needs no signup.</p></div>
-    <a class="ctabtn" href="/engineering-calculators.html#ampacity">OPEN THE CALCULATOR &rarr;</a>
-  </div></div>
+  <section class="calc-tool" id="calculator" aria-label="Cable Ampacity &amp; Conduit Fill Calculator">
+  <div class="estimator" id="ampCalc">
+    <h3>Ampacity Lookup</h3>
+    <div class="sub">Base ampacity only — apply NEC 310.15(B) ambient/altitude correction and 310.15(C) bundling adjustment factors for your actual install conditions, and respect the 60&deg;C/75&deg;C termination rating of the equipment per NEC 110.14(C).</div>
+    <div class="est-row">
+      <div class="est-field"><label for="ampSize">Conductor size</label><select id="ampSize"></select></div>
+      <div class="est-field"><label for="ampMat">Conductor</label><select id="ampMat"><option value="Cu">Copper</option><option value="Al">Aluminum</option></select></div>
+      <div class="est-field"><label for="ampTemp">Insulation rating</label><select id="ampTemp"><option value="60">60&deg;C</option><option value="75" selected>75&deg;C</option><option value="90">90&deg;C</option></select></div>
+      <div class="est-field"><button type="button" id="ampBtn">Look up</button></div>
+    </div>
+    <div class="est-result" id="ampResult"></div>
+  </div>
+  <div class="estimator" id="fillCalc">
+    <h3>Conduit Fill</h3>
+    <div class="sub">EMT conduit and THHN/THWN-2 conductor areas, a handful of common sizes only. Mixed conductor sizes in one raceway, or other conduit/conductor types, need NEC Annex C or a real fill calc.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="fillConduit">Conduit (EMT)</label><select id="fillConduit"></select></div>
+      <div class="est-field"><label for="fillWire">Conductor (THHN)</label><select id="fillWire"></select></div>
+      <div class="est-field"><label for="fillN">Number of conductors</label><input type="number" id="fillN" min="1" step="1" placeholder="e.g. 4"></div>
+      <div class="est-field"><button type="button" id="fillBtn">Check fill</button></div>
+    </div>
+    <div class="est-result" id="fillResult"></div>
+  </div>
+  <div class="callout">NEC Annex C publishes the code's own pre-computed conductors-per-conduit tables, which can differ by about &plusmn;1 conductor from the simple area-ratio math here due to NFPA's own rounding conventions — use Annex C (or a licensed designer) for anything past a rough early estimate, and always confirm against the NEC/NFPA 70 edition actually adopted by your jurisdiction.</div>
+  </section>
+
+  <p>Ampacity is the current a conductor can carry continuously without exceeding its insulation temperature rating. The table value is where the calculation starts, not where it ends: the published figure assumes no more than three current-carrying conductors in a raceway at 30&deg;C ambient, and both of those assumptions fail routinely in real installations. Conduit fill is the companion check — too many conductors in a raceway makes them impossible to pull without damage and traps the heat that ampacity derating exists to manage.</p>
 
 
   <h2>The formula</h2>
@@ -177,7 +196,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>What it is not</dt>
       <dd>The lookup gives the base table value before any correction. Real ampacity is the table value multiplied by both the ambient correction factor and the conductor-count adjustment factor, and either can be substantial. Terminal temperature ratings under 110.14(C) may limit the answer further regardless of the conductor's own rating. This is a screening estimate, not a stamped calculation.</dd>
       <dt>Provenance</dt>
-      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labeled as estimates. Worked examples are arithmetic you can reproduce against the <a href="/engineering-calculators.html#ampacity">live calculator</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labeled as estimates. Worked examples are arithmetic you can reproduce against the <a href="#calculator">calculator at the top of this page</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
     </dl>
   </aside>
 
@@ -197,6 +216,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
   </div>
 </footer>
+<script src="/voltfield-calculators.js" defer></script>
 <script src="/voltfield-site-config.js"></script>
 <script src="/voltfield-updates.js" defer></script>
 <script>

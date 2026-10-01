@@ -24,7 +24,7 @@
    {"@type":"ListItem","position":3,"name":"Voltage Drop Calculator","item":"https://voltfield.org/calculators/voltage-drop.html"}
  ]},
  {"@type":"WebPage","name":"Voltage Drop Calculator","description":"Calculate voltage drop on a feeder using the K-factor method, check it against the 3% and 5% design limits, and size the conductor. Free, no signup.","url":"https://voltfield.org/calculators/voltage-drop.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
- {"@type":"WebApplication","name":"Voltage Drop Calculator","description":"Calculate voltage drop on a feeder using the K-factor method, check it against the 3% and 5% design limits, and size the conductor. Free, no signup.","url":"https://voltfield.org/engineering-calculators.html#voltage-drop","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebApplication","name":"Voltage Drop Calculator","description":"Calculate voltage drop on a feeder using the K-factor method, check it against the 3% and 5% design limits, and size the conductor. Free, no signup.","url":"https://voltfield.org/calculators/voltage-drop.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What does the Voltage Drop calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Voltage drop is the loss along a conductor between the source and the load. It is not a code violation in itself — the NEC states its 3% branch-circuit and 5% total figures as recommendations in informational notes, not requirements — but equipment is rated to operate within a voltage band, and a long run that drops too far will leave a motor starting hard, a contactor chattering, or a drive faulting on undervoltage. On a long feeder it is usually voltage drop, not ampacity, that forces the conductor up a size."}},
    {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"This is a resistance-only calculation. It ignores conductor reactance, which matters on larger conductors and longer runs — above roughly 250 ft, or above about 4/0, the reactive component starts to dominate and this method under-reads. It also assumes a 75°C conductor temperature and a balanced load."}},
@@ -44,6 +44,7 @@
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
 <link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
 <link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-calculators.css">
 <link rel="stylesheet" href="/voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <link rel="stylesheet" href="/voltfield-parts.css">
@@ -100,23 +101,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section class="artban">
   <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/engineering-calculators.html" style="color:var(--slate);text-decoration:none">Calculators</a> / <span style="color:var(--ink)">Voltage Drop Calculator</span></nav>
     <div class="eyebrow">Free Calculator &middot; No Signup</div>
     <h1>Voltage Drop Calculator</h1>
-    <p class="dek">Voltage drop is the loss along a conductor between the source and the load. It is not a code violation in itself — the NEC states its 3% branch-circuit and 5% total figures as recommendations in informational notes, not requirements — but equipment is rated to operate within a voltage band, and a long run that drops too far will leave a motor starting hard, a contactor chattering, or a drive faulting on undervoltage. On a long feeder it is usually voltage drop, not ampacity, that forces the conductor up a size.</p>
+    <p class="dek">Calculate voltage drop on a feeder using the K-factor method, check it against the 3% and 5% design limits, and size the conductor.</p>
   </div>
 </section>
 
-<nav class="crumb" aria-label="Breadcrumb">
-  <a href="/index.html">Home</a><span class="sep">/</span>
-  <a href="/engineering-calculators.html">Calculators</a><span class="sep">/</span>
-  <span>Voltage Drop Calculator</span>
-</nav>
-
 <div class="artwrap">
-  <div class="ctaband"><div class="ctaband-in">
-    <div><h2>Run the numbers</h2><p>The working calculator is free and needs no signup.</p></div>
-    <a class="ctabtn" href="/engineering-calculators.html#voltage-drop">OPEN THE CALCULATOR &rarr;</a>
-  </div></div>
+  <section class="calc-tool" id="calculator" aria-label="Voltage Drop Calculator">
+  <div class="estimator" id="vdCalc">
+    <h3>Voltage Drop</h3>
+    <div class="sub">K = 12.9 (copper) or 21.2 (aluminum) ohm&middot;cmil/ft — approximate, ignores conductor reactance. Best for runs under ~250 ft.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="vdPhase">Phase</label><select id="vdPhase"><option value="1">Single-phase</option><option value="3" selected>Three-phase</option></select></div>
+      <div class="est-field"><label for="vdMat">Conductor</label><select id="vdMat"><option value="12.9">Copper</option><option value="21.2">Aluminum</option></select></div>
+      <div class="est-field"><label for="vdSize">Wire size</label><select id="vdSize"></select></div>
+      <div class="est-field"><label for="vdI">Load current (A)</label><input type="number" id="vdI" min="0" step="1" placeholder="e.g. 100"></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="vdD">One-way distance (ft)</label><input type="number" id="vdD" min="0" step="1" placeholder="e.g. 150"></div>
+      <div class="est-field"><label for="vdV">System voltage (V)</label><input type="number" id="vdV" min="0" step="1" placeholder="e.g. 480"></div>
+      <div class="est-field"><button type="button" id="vdBtn">Calculate</button></div>
+    </div>
+    <div class="est-result" id="vdResult"></div>
+  </div>
+  </section>
+
+  <p>Voltage drop is the loss along a conductor between the source and the load. It is not a code violation in itself — the NEC states its 3% branch-circuit and 5% total figures as recommendations in informational notes, not requirements — but equipment is rated to operate within a voltage band, and a long run that drops too far will leave a motor starting hard, a contactor chattering, or a drive faulting on undervoltage. On a long feeder it is usually voltage drop, not ampacity, that forces the conductor up a size.</p>
 
 
   <h2>The formula</h2>
@@ -174,9 +186,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </details>
 
   <h2>Embed this calculator</h2>
-  <p>Writing about this, or teaching it? Paste the snippet below into any web page to add a working copy of this calculator. It is free, runs entirely in the reader&rsquo;s browser, sends nothing anywhere, and links back to this page for the method.</p>
-    <div class="vf-embed">
-      <div class="vf-embed-demo"><div class="vf-calc-widget" data-calc="voltage-drop"></div></div>
+  <p>Writing about this, or teaching it? Paste the snippet below into any web page to add a working copy of the calculator above. It is free, runs entirely in the reader&rsquo;s browser, sends nothing anywhere, and links back to this page for the method.</p>
+    <div class="vf-embed code-only">
       <div class="vf-embed-code">
         <pre id="embedSnippet">&lt;div class="vf-calc-widget" data-calc="voltage-drop"&gt;&lt;/div&gt;
 &lt;script src="https://voltfield.org/embed/calculator-widget.js" async&gt;&lt;/script&gt;</pre>
@@ -184,7 +195,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p class="vf-embed-note">Also available: <code>voltage-drop</code>, <code>transformer-sizing</code> and <code>power-factor</code>. Change <code>data-calc</code> to switch.</p>
       </div>
     </div>
-    <script src="/embed/calculator-widget.js" async></script>
     <script>
     (function(){
       var b=document.getElementById('copyEmbedBtn');
@@ -233,7 +243,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>What it is not</dt>
       <dd>This is a resistance-only calculation. It ignores conductor reactance, which matters on larger conductors and longer runs — above roughly 250 ft, or above about 4/0, the reactive component starts to dominate and this method under-reads. It also assumes a 75&deg;C conductor temperature and a balanced load. This is a screening estimate, not a stamped calculation.</dd>
       <dt>Provenance</dt>
-      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labeled as estimates. Worked examples are arithmetic you can reproduce against the <a href="/engineering-calculators.html#voltage-drop">live calculator</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labeled as estimates. Worked examples are arithmetic you can reproduce against the <a href="#calculator">calculator at the top of this page</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
     </dl>
   </aside>
 
@@ -253,6 +263,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
   </div>
 </footer>
+<script src="/voltfield-calculators.js" defer></script>
 <script src="/voltfield-site-config.js"></script>
 <script src="/voltfield-updates.js" defer></script>
 <script>

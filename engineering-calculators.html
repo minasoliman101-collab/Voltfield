@@ -4,14 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google Tag Manager -->
-<!-- three.js import map. Required by the examples/jsm postprocessing modules
-     that voltfield-3d.js loads for ambient occlusion: those are published with
-     a bare `from 'three'` specifier, which a browser cannot resolve on its own.
-     The url must match the one voltfield-3d.js imports, so the two resolve to a
-     single module instance rather than two copies of three. -->
-<script type="importmap">
-{"imports":{"three":"/vendor/three/build/three.module.js"}}
-</script>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -20,6 +12,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
 <title>20 Free Engineering Calculators | Voltfield</title>
 <link rel="canonical" href="https://voltfield.org/engineering-calculators.html">
+<script>
+/* Each calculator used to live on this page under an anchor. They now have
+   their own pages; send old links (bookmarks, other sites) to the right one.
+   A fragment never reaches the server, so this cannot be a redirect rule. */
+(function(){var m={"voltage-drop":"calculators/voltage-drop.html","vdCalc":"calculators/voltage-drop.html","ampacity":"calculators/ampacity.html","ampCalc":"calculators/ampacity.html","fillCalc":"calculators/ampacity.html","transformer-sizing":"calculators/transformer-sizing.html","xfCalc":"calculators/transformer-sizing.html","inrush":"calculators/inrush.html","inrushCalc":"calculators/inrush.html","bess-sizing":"calculators/bess-sizing.html","bessCalc":"calculators/bess-sizing.html","solar-string":"calculators/solar-string.html","strCalc":"calculators/solar-string.html","fault-current":"calculators/fault-current.html","faultCalc":"calculators/fault-current.html","motor-start":"calculators/motor-start.html","motorCalc":"calculators/motor-start.html","arc-flash":"calculators/arc-flash.html","afCalc":"calculators/arc-flash.html","grounding":"calculators/grounding.html","groundCalc":"calculators/grounding.html","power-factor":"calculators/power-factor.html","pfCalc":"calculators/power-factor.html","generator-runtime":"calculators/generator-runtime.html","genCalc":"calculators/generator-runtime.html","unit-converter":"calculators/reference-tables.html#unit-converter","convCalc":"calculators/reference-tables.html#unit-converter","awgCalc":"calculators/reference-tables.html#unit-converter","standards-crossref":"calculators/reference-tables.html#standards-crossref","external-data":"calculators/reference-tables.html#external-data","hs-codes":"calculators/reference-tables.html#hs-codes","compliance-marks":"calculators/reference-tables.html#compliance-marks","transformer-tco":"calculators/project-finance.html#transformer-tco","tcoCalc":"calculators/project-finance.html#transformer-tco","macrs-depreciation":"calculators/project-finance.html#macrs-depreciation","macrsCalc":"calculators/project-finance.html#macrs-depreciation","payback":"calculators/project-finance.html#payback","paybackCalc":"calculators/project-finance.html#payback","landed-cost":"calculators/project-finance.html#landed-cost","landedCalc":"calculators/project-finance.html#landed-cost"};var t=m[location.hash.slice(1)];if(t)location.replace(t);})();
+</script>
 <meta name="description" content="20 free engineering calculators: voltage drop, cable ampacity, transformer sizing, fault current, arc-flash incident energy and more. No signup.">
 <meta name="keywords" content="voltage drop calculator, transformer sizing calculator, BESS sizing calculator, solar string sizing calculator, fault current calculator, arc flash incident energy calculator, arc flash boundary calculator, Lee equation arc flash, Doughty equation arc flash, power factor correction calculator, transformer TCO calculator, MACRS depreciation calculator, landed cost calculator, generator runtime calculator, HS code lookup, UL vs. ETL vs. CSA, AWG to mm2 converter, NEMA to IP rating">
 <meta property="og:type" content="website">
@@ -39,15 +37,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
    {"@type":"ListItem","position":2,"name":"Engineering Calculators","item":"https://voltfield.org/engineering-calculators.html"}
  ]},
- {"@type":"FAQPage","dateModified":"2026-09-30","mainEntity":[
+ {"@type":"FAQPage","dateModified":"2026-10-01","mainEntity":[
    {"@type":"Question","name":"How do you calculate voltage drop for a cable run?","acceptedAnswer":{"@type":"Answer","text":"Using the K-factor method: VD = (2 x K x I x D) / CM for single-phase or VD = (1.732 x K x I x D) / CM for three-phase, where K is a resistivity constant (about 12.9 for copper, 21.2 for aluminum), I is load current in amps, D is one-way distance in feet, and CM is the conductor's circular mil area. This is an approximation that ignores reactance and is best suited to feeders under about 250 feet."}},
    {"@type":"Question","name":"What size transformer do I need for my load?","acceptedAnswer":{"@type":"Answer","text":"Divide your real load in kW by its power factor to get required kVA, then round up to the nearest standard transformer nameplate rating (common ANSI/IEEE sizes include 75, 112.5, 150, 225, 300, 500, 750, and 1000 kVA). Always leave margin for future load growth."}},
    {"@type":"Question","name":"How do I size a battery energy storage system (BESS)?","acceptedAnswer":{"@type":"Answer","text":"Multiply the critical load in kW by the required backup duration in hours to get usable energy in kWh, then divide by your assumed depth of discharge and round-trip efficiency (commonly around 90% each for LFP systems) to get the nameplate energy rating you need to procure."}},
    {"@type":"Question","name":"Are these calculators a substitute for a stamped engineering study?","acceptedAnswer":{"@type":"Answer","text":"No. These tools use standard simplified formulas for early-stage budgetary sizing and procurement planning. Final designs, especially fault current and arc-flash coordination, require a licensed engineer's study using actual system impedances."}},
    {"@type":"Question","name":"How do you estimate arc-flash incident energy?","acceptedAnswer":{"@type":"Answer","text":"The theoretical Lee equation (NFPA 70E Annex D, for open-air arcs above 600V) and the empirical Doughty equations (for open-air or in-a-box arcs at 600V or below) estimate incident energy in cal/cm2 from the bolted fault current, system voltage, arc duration, and working distance. These are simplified, standard-referenced methods for early-stage estimates — a real arc-flash study for PPE selection and labeling should use the full IEEE 1584 arcing-current method performed by a qualified person."}},
-   {"@type":"Question","name":"How do you calculate the total cost of ownership of a transformer?","acceptedAnswer":{"@type":"Answer","text":"Add the purchase price to the lifetime cost of its energy losses. No-load loss (core loss) runs continuously whenever the transformer is energized; load loss (winding loss) scales with the square of the load factor. Multiply each by 8760 hours/year and your electricity rate to get an annual loss cost, then extend it over the transformer's service life."}},
-   {"@type":"Question","name":"What is MACRS depreciation and how is it calculated for energy equipment?","acceptedAnswer":{"@type":"Answer","text":"MACRS (Modified Accelerated Cost Recovery System) lets businesses depreciate equipment faster than its useful life using IRS-published percentage tables (5-year and 7-year property are common for energy equipment). This is a simplified estimate only — it doesn't account for bonus depreciation or Section 179 expensing, and isn't tax advice."}},
-   {"@type":"Question","name":"How do you calculate the landed or delivered cost of imported equipment?","acceptedAnswer":{"@type":"Answer","text":"Add the equipment price, freight, duty (equipment price multiplied by the applicable duty rate), and cargo insurance together. The duty rate depends on the item's actual customs classification, which should come from a licensed customs broker, not an estimate."}},
    {"@type":"Question","name":"How do you estimate how long a generator will run on a full tank?","acceptedAnswer":{"@type":"Answer","text":"Divide the fuel tank capacity (gallons) by the fuel consumption rate at your expected load (gallons per hour), taken from the generator's own spec sheet — most gensets publish consumption rates at 50%, 75%, and 100% load."}}
  ]}
 ]}
@@ -63,32 +58,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
 <link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
 <link rel="stylesheet" href="voltfield-core.css">
-<link rel="stylesheet" href="voltfield-component-viz.css">
 <link rel="stylesheet" href="voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<style>
-.toc{background:var(--card);border:1px solid var(--line-dark);padding:16px 20px;margin:22px 0;display:grid;gap:6px}
-@media(min-width:600px){.toc{grid-template-columns:1fr 1fr}}
-.toc b{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);grid-column:1/-1;margin-bottom:2px}
-.toc a{font-family:var(--disp);font-weight:600;font-size:14.5px;color:var(--ink-2);text-decoration:none;padding:4px 0}
-.toc a:hover{color:var(--link)}
-.toc a::before{content:"→ ";color:var(--link)}
-.estimator{background:var(--card);border:1px solid var(--line-dark);padding:20px;margin:16px 0 26px;scroll-margin-top:80px}
-.estimator h3{font-family:var(--disp);font-weight:700;font-size:19px;color:var(--ink);margin-bottom:4px}
-.estimator .sub{font-size:12.5px;color:var(--slate);margin-bottom:14px}
-.est-row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:10px}
-.est-field{display:flex;flex-direction:column;gap:4px}
-.est-field label{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--slate)}
-.est-field input,.est-field select{width:140px;border:1px solid var(--line-dark);padding:8px 10px;font-family:var(--mono);font-size:14px;background:var(--card)}
-.est-field button{background:var(--solid-bg);color:var(--solid-fg);border:0;padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase}
-.est-field button:hover{background:transparent;color:var(--ink)}
-.est-result{font-family:var(--mono);font-size:13.5px;color:var(--ink);background:var(--card);border:1px solid var(--line);padding:12px 14px;margin-top:4px;display:none;line-height:1.6}
-.est-result.show{display:block}
-.est-result b{color:var(--link)}
-.est-result.warn{border-color:var(--og);background:#FBF1EC}
-.calclink{margin:-6px 0 14px}
-.calclink a{font-family:var(--mono);font-size:11.5px;color:var(--link);text-decoration:underline;text-decoration-color:var(--signal)}
-</style>
+
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -144,463 +116,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <span style="color:var(--ink)">Engineering Calculators</span></nav>
     <div class="eyebrow">Free Tools · No Signup</div>
     <h1>Engineering Calculators for Power &amp; Energy Systems</h1>
-    <p class="dek">A full set of client-side calculators for early-stage sizing and budgetary planning — cable sizing, transformer &amp; BESS sizing, solar strings, fault current, arc-flash incident energy, power factor correction, and unit conversion. Standard formulas, your inputs, nothing sent to a server.</p>
+    <p class="dek">Free calculators for sizing, protection and project planning on data center, solar and battery-storage power systems. Pick a tool below; each opens on its own page with the method and a worked example.</p>
   </div>
 </section>
 <div class="artwrap">
-  <div class="toc" aria-label="Jump to a calculator">
-    <b>Jump to a calculator</b>
-    <a href="#voltage-drop">Voltage Drop / Cable Sizing</a>
-    <a href="#ampacity">Cable Ampacity &amp; Conduit Fill</a>
-    <a href="#transformer-sizing">Transformer Sizing</a>
-    <a href="#inrush">Transformer Inrush Current</a>
-    <a href="#bess-sizing">BESS Sizing</a>
-    <a href="#solar-string">Solar String Sizing</a>
-    <a href="#fault-current">Fault Current &amp; Withstand Check</a>
-    <a href="#motor-start">Motor Starting Voltage Dip</a>
-    <a href="#arc-flash">Arc-Flash Incident Energy</a>
-    <a href="#grounding">Ground Rod Resistance</a>
-    <a href="#power-factor">Power Factor Correction</a>
-    <a href="#unit-converter">Unit &amp; Spec Converter</a>
-    <a href="#transformer-tco">Transformer TCO Estimator</a>
-    <a href="#macrs-depreciation">MACRS Depreciation Estimator</a>
-    <a href="#payback">Investment Payback &amp; NPV</a>
-    <a href="#standards-crossref">Standards Cross-Reference</a>
-    <a href="#external-data">External Data &amp; Price Trackers</a>
-    <a href="#landed-cost">Landed/Delivered Cost Calculator</a>
-    <a href="#hs-codes">HS Code Reference</a>
-    <a href="#compliance-marks">Compliance Mark Quick-Reference</a>
-    <a href="#generator-runtime">Generator Runtime Estimator</a>
-  </div>
-
   <p>These tools are built for the budgetary and early-design stage of a project — sizing a feeder, roughing in a transformer or BESS order, or checking a string configuration before it goes to a stamped design. They run entirely in your browser: nothing you enter is sent anywhere. None of them replace a licensed engineer's calculation for final design, protective device coordination, or code compliance sign-off. Who writes and checks these tools, and what the site is for, is on the <a class="inline" href="about.html">About</a> page.</p>
 
-  <h2 id="voltage-drop">Voltage Drop / Cable Sizing Calculator</h2>
-  <p>Estimates voltage drop across a feeder using the standard K-factor method, then flags runs that exceed the commonly used 3% branch-circuit / 5% total design guideline (NEC 210.19(A) informational note — a recommendation, not a hard limit).</p>
-    <p class="calclink"><a href="/calculators/voltage-drop.html">How this calculation works, with a worked example &rsaquo;</a></p>
-  <div class="formula">VD = (2 &times; K &times; I &times; D) / CM &nbsp;[single-phase]&nbsp; &middot; &nbsp;VD = (1.732 &times; K &times; I &times; D) / CM &nbsp;[three-phase]</div>
-  <div class="vfcv-mount" data-calc="voltage-drop" data-comp="conductor"></div>
-  <div class="estimator" id="vdCalc">
-    <h3>Voltage Drop</h3>
-    <div class="sub">K = 12.9 (copper) or 21.2 (aluminum) ohm&middot;cmil/ft — approximate, ignores conductor reactance. Best for runs under ~250 ft.</div>
-    <div class="est-row">
-      <div class="est-field"><label for="vdPhase">Phase</label><select id="vdPhase"><option value="1">Single-phase</option><option value="3" selected>Three-phase</option></select></div>
-      <div class="est-field"><label for="vdMat">Conductor</label><select id="vdMat"><option value="12.9">Copper</option><option value="21.2">Aluminum</option></select></div>
-      <div class="est-field"><label for="vdSize">Wire size</label><select id="vdSize"></select></div>
-      <div class="est-field"><label for="vdI">Load current (A)</label><input type="number" id="vdI" min="0" step="1" placeholder="e.g. 100"></div>
-    </div>
-    <div class="est-row">
-      <div class="est-field"><label for="vdD">One-way distance (ft)</label><input type="number" id="vdD" min="0" step="1" placeholder="e.g. 150"></div>
-      <div class="est-field"><label for="vdV">System voltage (V)</label><input type="number" id="vdV" min="0" step="1" placeholder="e.g. 480"></div>
-      <div class="est-field"><button type="button" id="vdBtn">Calculate</button></div>
-    </div>
-    <div class="est-result" id="vdResult"></div>
+  <h2 class="gsec">Cables &amp; conductors</h2>
+  <div class="gdgrid">
+    <a class="gdcard" href="calculators/voltage-drop.html"><h3>Voltage Drop Calculator</h3><p>Calculate voltage drop on a feeder using the K-factor method, check it against the 3% and 5% design limits, and size the conductor.</p></a>
+    <a class="gdcard" href="calculators/ampacity.html"><h3>Cable Ampacity &amp; Conduit Fill Calculator</h3><p>Look up NEC Table 310.16 conductor ampacity and check conduit fill against the 40% limit for three or more conductors.</p></a>
   </div>
 
-  <h2 id="ampacity">Cable Ampacity &amp; Conduit Fill Calculators</h2>
-  <p>Looks up base conductor ampacity from NEC Table 310.16 (no more than 3 current-carrying conductors, 30&deg;C ambient — before any correction factors) and checks conduit fill against NEC Chapter 9's percentage caps. This covers a curated subset of common sizes for early-stage estimating, not the full code table.</p>
-    <p class="calclink"><a href="/calculators/ampacity.html">How this calculation works, with a worked example &rsaquo;</a></p>
-  <div class="formula">Fill % = 100 &times; (n &times; A<sub>conductor</sub>) / A<sub>conduit</sub> &nbsp;&middot;&nbsp; cap: 53% (1 conductor) &middot; 31% (2) &middot; 40% (3+)</div>
-  <div class="vfcv-mount" data-calc="ampacity" data-comp="conductor"></div>
-  <div class="estimator" id="ampCalc">
-    <h3>Ampacity Lookup</h3>
-    <div class="sub">Base ampacity only — apply NEC 310.15(B) ambient/altitude correction and 310.15(C) bundling adjustment factors for your actual install conditions, and respect the 60&deg;C/75&deg;C termination rating of the equipment per NEC 110.14(C).</div>
-    <div class="est-row">
-      <div class="est-field"><label for="ampSize">Conductor size</label><select id="ampSize"></select></div>
-      <div class="est-field"><label for="ampMat">Conductor</label><select id="ampMat"><option value="Cu">Copper</option><option value="Al">Aluminum</option></select></div>
-      <div class="est-field"><label for="ampTemp">Insulation rating</label><select id="ampTemp"><option value="60">60&deg;C</option><option value="75" selected>75&deg;C</option><option value="90">90&deg;C</option></select></div>
-      <div class="est-field"><button type="button" id="ampBtn">Look up</button></div>
-    </div>
-    <div class="est-result" id="ampResult"></div>
-  </div>
-  <div class="estimator" id="fillCalc">
-    <h3>Conduit Fill</h3>
-    <div class="sub">EMT conduit and THHN/THWN-2 conductor areas, a handful of common sizes only. Mixed conductor sizes in one raceway, or other conduit/conductor types, need NEC Annex C or a real fill calc.</div>
-    <div class="est-row">
-      <div class="est-field"><label for="fillConduit">Conduit (EMT)</label><select id="fillConduit"></select></div>
-      <div class="est-field"><label for="fillWire">Conductor (THHN)</label><select id="fillWire"></select></div>
-      <div class="est-field"><label for="fillN">Number of conductors</label><input type="number" id="fillN" min="1" step="1" placeholder="e.g. 4"></div>
-      <div class="est-field"><button type="button" id="fillBtn">Check fill</button></div>
-    </div>
-    <div class="est-result" id="fillResult"></div>
-  </div>
-  <div class="callout">NEC Annex C publishes the code's own pre-computed conductors-per-conduit tables, which can differ by about &plusmn;1 conductor from the simple area-ratio math here due to NFPA's own rounding conventions — use Annex C (or a licensed designer) for anything past a rough early estimate, and always confirm against the NEC/NFPA 70 edition actually adopted by your jurisdiction.</div>
-
-  <h2 id="transformer-sizing">Transformer Sizing Calculator</h2>
-  <p>Converts a real load in kW to required kVA and rounds up to the nearest standard ANSI/IEEE C57.12.00 transformer nameplate rating, plus estimated full-load amps on the secondary.</p>
-    <p class="calclink"><a href="/calculators/transformer-sizing.html">How this calculation works, with a worked example &rsaquo;</a></p>
-  <div class="formula">kVA = kW / PF &nbsp;&middot;&nbsp; FLA = kVA &times; 1000 / (1.732 &times; V) &nbsp;[3&phi;]&nbsp; or &nbsp;kVA &times; 1000 / V &nbsp;[1&phi;]</div>
-  <div class="vfcv-mount" data-calc="transformer-sizing" data-comp="transformer"></div>
-  <div class="estimator" id="xfCalc">
-    <h3>Transformer Size</h3>
-    <div class="sub">Rounds up to the nearest standard kVA nameplate rating. Add your own margin for future load growth — this doesn't assume any.</div>
-    <div class="est-row">
-      <div class="est-field"><label for="xfPhase">Phase</label><select id="xfPhase"><option value="1">Single-phase</option><option value="3" selected>Three-phase</option></select></div>
-      <div class="est-field"><label for="xfKw">Load (kW)</label><input type="number" id="xfKw" min="0" step="1" placeholder="e.g. 300"></div>
-      <div class="est-field"><label for="xfPf">Power factor</label><input type="number" id="xfPf" min="0.1" max="1" step="0.01" placeholder="e.g. 0.9"></div>
-      <div class="est-field"><label for="xfV">Secondary voltage (V)</label><input type="number" id="xfV" min="0" step="1" placeholder="e.g. 480"></div>
-    </div>
-    <div class="est-row"><div class="est-field"><button type="button" id="xfBtn">Calculate</button></div></div>
-    <div class="est-result" id="xfResult"></div>
+  <h2 class="gsec">Equipment sizing</h2>
+  <div class="gdgrid">
+    <a class="gdcard" href="calculators/transformer-sizing.html"><h3>Transformer Sizing Calculator</h3><p>Convert a kW load to the kVA rating you need, round to the nearest standard ANSI/IEEE C57.12.00 nameplate, and get full-load amps.</p></a>
+    <a class="gdcard" href="calculators/bess-sizing.html"><h3>BESS Sizing Calculator</h3><p>Turn a critical load and backup duration into usable kWh, then the nameplate kWh you need after depth of discharge and round-trip efficiency.</p></a>
+    <a class="gdcard" href="calculators/solar-string.html"><h3>Solar String Sizing Calculator</h3><p>Apply module temperature coefficients to site design temperatures to find maximum and minimum string length against inverter voltage limits.</p></a>
+    <a class="gdcard" href="calculators/generator-runtime.html"><h3>Generator Runtime Calculator</h3><p>Estimate how long a generator runs on a full tank at a given load, using the fuel consumption rate from its own spec sheet.</p></a>
   </div>
 
-  <h2 id="inrush">Transformer Inrush Current Estimator</h2>
-  <p>Energizing a transformer briefly draws a magnetizing inrush current well above full-load amps — enough to matter for upstream breaker/fuse selection and protective coordination. The multiplier below is an industry rule of thumb (commonly cited around IEEE 141/242 and manufacturer application literature), not a precise physical constant — it varies by core design, steel grade, residual flux, and point-on-wave of energization.</p>
-    <p class="calclink"><a href="/calculators/inrush.html">How this calculation works, with a worked example &rsaquo;</a></p>
-  <div class="formula">FLA = kVA &times; 1000 / (1.732 &times; V) &nbsp;[3&phi;] &nbsp;&middot;&nbsp; Peak inrush &asymp; M &times; FLA</div>
-  <div class="vfcv-mount" data-calc="inrush" data-comp="transformer"></div>
-  <div class="estimator" id="inrushCalc">
-    <h3>Inrush Current</h3>
-    <div class="sub">Pick the size class closest to your unit to auto-fill a typical multiplier range, or override it if your manufacturer publishes an actual figure.</div>
-    <div class="est-row">
-      <div class="est-field"><label for="inClass">Transformer size class</label><select id="inClass">
-        <option value="small">Small control/instrument (up to a few kVA)</option>
-        <option value="dist" selected>Small&ndash;medium distribution (up to ~2500 kVA)</option>
-        <option value="large">Large power (&gt;2500 kVA)</option>
-      </select></div>
-      <div class="est-field"><label for="inKva">Transformer (kVA)</label><input type="number" id="inKva" min="0" step="1" placeholder="e.g. 2000"></div>
-      <div class="est-field"><label for="inV">Secondary voltage (V)</label><input type="number" id="inV" min="0" step="1" placeholder="e.g. 480"></div>
-    </div>
-    <div class="est-row">
-      <div class="est-field"><label for="inMlo">Multiplier, low (&times;FLA)</label><input type="number" id="inMlo" min="1" step="0.5" value="8"></div>
-      <div class="est-field"><label for="inMhi">Multiplier, high (&times;FLA)</label><input type="number" id="inMhi" min="1" step="0.5" value="12"></div>
-      <div class="est-field"><button type="button" id="inBtn">Calculate</button></div>
-    </div>
-    <div class="est-result" id="inResult"></div>
-  </div>
-  <div class="callout">This is a budgetary planning heuristic, not manufacturer inrush data or a time-domain simulation — it's not a substitute for the transformer's actual published inrush curve when sizing protective devices or generator/UPS ride-through.</div>
-
-  <h2 id="bess-sizing">BESS Sizing Calculator</h2>
-  <p>Converts a critical load and backup duration into usable energy, then to the nameplate energy rating you'd need to procure once depth of discharge and round-trip efficiency losses are factored in. See <a class="inline" href="battery-storage.html">Battery Storage</a> for DC block configurations.</p>
-    <p class="calclink"><a href="/calculators/bess-sizing.html">How this calculation works, with a worked example &rsaquo;</a></p>
-  <div class="formula">Usable kWh = kW &times; hours &nbsp;&middot;&nbsp; Nameplate kWh = Usable kWh / (DoD &times; RTE)</div>
-  <div class="vfcv-mount" data-calc="bess-sizing" data-comp="battery"></div>
-  <div class="estimator" id="bessCalc">
-    <h3>BESS Size</h3>
-    <div class="sub">Defaults (90% DoD, 90% RTE) are typical for utility-scale LFP systems — adjust to your spec sheet.</div>
-    <div class="est-row">
-      <div class="est-field"><label for="bessKw">Critical load (kW)</label><input type="number" id="bessKw" min="0" step="1" placeholder="e.g. 500"></div>
-      <div class="est-field"><label for="bessHrs">Backup duration (hrs)</label><input type="number" id="bessHrs" min="0" step="0.5" placeholder="e.g. 4"></div>
-      <div class="est-field"><label for="bessDod">Depth of discharge (%)</label><input type="number" id="bessDod" min="1" max="100" step="1" value="90"></div>
-      <div class="est-field"><label for="bessRte">Round-trip efficiency (%)</label><input type="number" id="bessRte" min="1" max="100" step="1" value="90"></div>
-    </div>
-    <div class="est-row"><div class="est-field"><button type="button" id="bessBtn">Calculate</button></div></div>
-    <div class="est-result" id="bessResult"></div>
+  <h2 class="gsec">Protection &amp; power quality</h2>
+  <div class="gdgrid">
+    <a class="gdcard" href="calculators/fault-current.html"><h3>Available Fault Current Calculator</h3><p>Estimate available symmetrical fault current at a transformer secondary from kVA, voltage and %Z, and check equipment withstand ratings.</p></a>
+    <a class="gdcard" href="calculators/arc-flash.html"><h3>Arc-Flash Incident Energy Calculator</h3><p>Estimate arc-flash incident energy and boundary with the Lee and Doughty equations, as a first pass before a full IEEE 1584 study.</p></a>
+    <a class="gdcard" href="calculators/inrush.html"><h3>Transformer Inrush Current Calculator</h3><p>Estimate magnetizing inrush current on transformer energization as a multiple of full-load amps, for upstream breaker and fuse selection.</p></a>
+    <a class="gdcard" href="calculators/motor-start.html"><h3>Motor Starting Voltage Dip Calculator</h3><p>Estimate bus voltage dip when a large motor starts across the line, using locked-rotor kVA against source short-circuit kVA.</p></a>
+    <a class="gdcard" href="calculators/grounding.html"><h3>Ground Rod Resistance Calculator</h3><p>Estimate resistance-to-earth of a driven ground rod from soil resistivity, rod length and diameter, using Dwight's formula.</p></a>
+    <a class="gdcard" href="calculators/power-factor.html"><h3>Power Factor Correction Calculator</h3><p>Size the capacitor bank in kVAR needed to raise an existing power factor to a target, and see the effect on apparent power.</p></a>
   </div>
 
-  <h2 id="solar-string">Solar String Sizing Calculator</h2>
-  <p>Applies module temperature coefficients to your site's design temperatures to find the maximum string length (cold-weather Voc must stay under the inverter's max input voltage) and minimum string length (hot-weather Vmp must stay in the inverter's MPPT window).</p>
-    <p class="calclink"><a href="/calculators/solar-string.html">How this calculation works, with a worked example &rsaquo;</a></p>
-  <div class="formula">Voc(cold) = Voc &times; (1 + (Tc&middot;Voc/100) &times; (Tmin&minus;25)) &nbsp;&middot;&nbsp; Vmp(hot) = Vmp &times; (1 + (Tc&middot;Vmp/100) &times; (Tmax&minus;25))</div>
-  <div class="vfcv-mount" data-calc="solar-string" data-comp="pvmodule"></div>
-  <div class="estimator" id="strCalc">
-    <h3>String Size</h3>
-    <div class="sub">All values from the module and inverter datasheets — this tool does no lookups of its own.</div>
-    <div class="est-row">
-      <div class="est-field"><label for="strVoc">Module Voc, STC (V)</label><input type="number" id="strVoc" min="0" step="0.1" placeholder="e.g. 49.5"></div>
-      <div class="est-field"><label for="strVmp">Module Vmp, STC (V)</label><input type="number" id="strVmp" min="0" step="0.1" placeholder="e.g. 41.4"></div>
-      <div class="est-field"><label for="strTcVoc">Voc temp coeff (%/&deg;C)</label><input type="number" id="strTcVoc" step="0.01" placeholder="e.g. -0.27"></div>
-      <div class="est-field"><label for="strTcVmp">Vmp temp coeff (%/&deg;C)</label><input type="number" id="strTcVmp" step="0.01" placeholder="e.g. -0.35"></div>
-    </div>
-    <div class="est-row">
-      <div class="est-field"><label for="strTmin">Design min temp (&deg;C)</label><input type="number" id="strTmin" step="1" placeholder="e.g. -10"></div>
-      <div class="est-field"><label for="strTmax">Design max temp (&deg;C)</label><input type="number" id="strTmax" step="1" placeholder="e.g. 45"></div>
-      <div class="est-field"><label for="strVmax">Inverter max input (V)</label><input type="number" id="strVmax" step="1" placeholder="e.g. 1500"></div>
-      <div class="est-field"><label for="strVmppt">Inverter MPPT min (V)</label><input type="number" id="strVmppt" step="1" placeholder="e.g. 200"></div>
-    </div>
-    <div class="est-row"><div class="est-field"><button type="button" id="strBtn">Calculate</button></div></div>
-    <div class="est-result" id="strResult"></div>
+  <h2 class="gsec">Project finance</h2>
+  <div class="gdgrid">
+    <a class="gdcard" href="calculators/project-finance.html#transformer-tco"><h3>Transformer TCO Estimator</h3><p>Purchase price plus the lifetime cost of no-load and load losses, so two transformer bids can be compared on what they will actually cost.</p></a>
+    <a class="gdcard" href="calculators/project-finance.html#payback"><h3>Payback &amp; NPV Calculator</h3><p>Simple payback and net present value for a BESS, solar or efficiency-upgrade investment.</p></a>
+    <a class="gdcard" href="calculators/project-finance.html#macrs-depreciation"><h3>MACRS Depreciation Estimator</h3><p>Year-by-year depreciation from the standard 5- and 7-year MACRS percentage tables.</p></a>
+    <a class="gdcard" href="calculators/project-finance.html#landed-cost"><h3>Landed Cost Calculator</h3><p>Equipment price plus freight, duty and insurance: what imported equipment costs delivered.</p></a>
   </div>
 
-  <h2 id="fault-current">Fault Current Estimate &amp; Withstand Check</h2>
-  <p>A simplified, infinite-source estimate of available symmetrical fault current at a transformer's secondary terminals — useful for a first-pass equipment rating check, not a substitute for a full short-circuit/coordination study that accounts for source and cable impedance.</p>
-    <p class="calclink"><a href="/calculators/fault-current.html">How this calculation works, with a worked example &rsaquo;</a></p>
-  <div class="formula">Isc = (100,000 &times; kVA) / (1.732 &times; V &times; %Z)</div>
-  <div class="vfcv-mount" data-calc="fault-current" data-comp="switchgear"></div>
-  <div class="estimator" id="faultCalc">
-    <h3>Available Fault Current</h3>
-    <div class="sub">%Z comes from the transformer nameplate — typical distribution transformers run 5.75%&ndash;6.5%, but always use the actual nameplate value. Common standard equipment AIC/withstand ratings: 10, 14, 18, 22, 25, 35, 42, 50, 65, 100, 150, 200 kA.</div>
-    <div class="est-row">
-      <div class="est-field"><label for="faultKva">Transformer (kVA)</label><input type="number" id="faultKva" min="0" step="1" placeholder="e.g. 1500"></div>
-      <div class="est-field"><label for="faultZ">Impedance %Z</label><input type="number" id="faultZ" min="0.1" step="0.01" placeholder="e.g. 5.75"></div>
-      <div class="est-field"><label for="faultV">Secondary voltage, L-L (V)</label><input type="number" id="faultV" min="0" step="1" placeholder="e.g. 480"></div>
-    </div>
-    <div class="est-row">
-      <div class="est-field"><label for="faultAic">Equipment AIC/withstand rating (kA, optional)</label><input type="number" id="faultAic" min="0" step="1" placeholder="e.g. 42"></div>
-      <div class="est-field"><button type="button" id="faultBtn">Calculate</button></div>
-    </div>
-    <div class="est-result" id="faultResult"></div>
-  </div>
-
-  <h2 id="motor-start">Motor Starting Voltage Dip</h2>
-  <p>Estimates the voltage dip at a bus when a large motor starts across-the-line, using the standard "infinite bus minus source impedance" screening method behind IEEE Std 399 motor-starting studies — the motor's locked-rotor demand as a fraction of itself plus the source's short-circuit capacity. It's a snapshot of maximum dip only; it doesn't model acceleration time, other motors reaccelerating, or a limited-capacity generator source (which needs its transient reactance modeled separately, not this infinite-bus assumption).</p>
-    <p class="calclink"><a href="/calculators/motor-start.html">How this calculation works, with a worked example &rsaquo;</a></p>
-  <div class="formula">%VoltageDip = LRkVA / (LRkVA + SCkVA) &times; 100</div>
-  <div class="vfcv-mount" data-calc="motor-start" data-comp="motor"></div>
-  <div class="estimator" id="motorCalc">
-    <h3>Voltage Dip on Motor Start</h3>
-    <div class="sub">Use actual nameplate LRA when you have it — the NEMA code letter only gives a band, not an exact value. Use the system's minimum expected fault capacity (weakest condition), the opposite convention from a protective-device duty study.</div>
-    <div class="est-row">
-      <div class="est-field"><label for="motorMethod">Motor data</label><select id="motorMethod">
-        <option value="letter" selected>NEMA code letter + HP</option>
-        <option value="lra">Nameplate LRA (A)</option>
-      </select></div>
-      <div class="est-field" id="motorHpWrap"><label for="motorHp">Motor rating (HP)</label><input type="number" id="motorHp" min="0" step="1" placeholder="e.g. 500"></div>
-      <div class="est-field" id="motorLetterWrap"><label for="motorLetter">NEMA code letter</label><select id="motorLetter"></select></div>
-      <div class="est-field" id="motorLraWrap" style="display:none"><label for="motorLra">Locked-rotor amps, LRA</label><input type="number" id="motorLra" min="0" step="1" placeholder="e.g. 3950"></div>
-    </div>
-    <div class="est-row">
-      <div class="est-field"><label for="motorV">System voltage, L-L (V)</label><input type="number" id="motorV" min="0" step="1" placeholder="e.g. 460"></div>
-      <div class="est-field"><label for="motorSc">Available fault capacity (kVA)</label><input type="number" id="motorSc" min="0" step="100" placeholder="e.g. 40000"></div>
-      <div class="est-field"><button type="button" id="motorBtn">Calculate</button></div>
-    </div>
-    <div class="est-result" id="motorResult"></div>
-  </div>
-  <div class="callout">Minimum acceptable starting-bus voltage is application-specific — commonly cited screening thresholds include ~80% of rated voltage at the starting motor's own terminals (NEMA Design B, full-torque load), ~85% for AC contactor pickup, and ~71% at the terminals of other motors on the same bus that need to reaccelerate. There's no single universal cutoff.</div>
-
-  <h2 id="arc-flash">Arc-Flash Incident Energy Calculator</h2>
-  <p>A first-pass estimate of arc-flash incident energy and the arc-flash protection boundary, using the theoretical <b>Lee equation</b> (open-air arcs above 600V) and the empirical <b>Doughty equations</b> (open-air or arc-in-a-box, 600V and below) — both documented in NFPA 70E Annex D. <b>These are not the IEEE 1584 arcing-current method</b> that a real arc-flash study or PPE label uses; they're simpler closed-form equations meant for early budgetary estimates, and they don't account for equipment-specific arcing current, electrode configuration, or enclosure size the way IEEE 1584 does. Always get a qualified arc-flash study for PPE selection and labeling.</p>
-    <p class="calclink"><a href="/calculators/arc-flash.html">How this calculation works, with a worked example &rsaquo;</a></p>
-  <div class="formula" id="afFormula">E = 793 &times; F &times; V &times; t / D&sup2; &nbsp;[Lee, open air, &gt;600V]</div>
-  <div class="vfcv-mount" data-calc="arc-flash" data-comp="switchgear"></div>
-  <div class="estimator" id="afCalc">
-    <h3>Arc-Flash Incident Energy</h3>
-    <div class="sub" id="afSub">Doughty equations (&le;600V) are only validated for 16&ndash;50 kA bolted fault current and working distances of 18 in or more — the tool will flag it if you're outside that range.</div>
-    <div class="est-row">
-      <div class="est-field"><label for="afScenario">Scenario</label><select id="afScenario">
-        <option value="lee">Open air, &gt;600V (Lee)</option>
-        <option value="doughtyAir" selected>Open air, &le;600V (Doughty)</option>
-        <option value="doughtyBox">Arc in enclosure/box, &le;600V (Doughty)</option>
-      </select></div>
-      <div class="est-field" id="afVWrap" style="display:none"><label for="afV">System voltage (kV)</label><input type="number" id="afV" min="0" step="0.01" placeholder="e.g. 13.8"></div>
-      <div class="est-field"><label for="afIbf">Bolted fault current (kA)</label><input type="number" id="afIbf" min="0" step="0.1" placeholder="e.g. 22.6"></div>
-      <div class="est-field"><label for="afTime">Arc duration (s)</label><input type="number" id="afTime" min="0.01" step="0.01" placeholder="e.g. 0.1"></div>
-    </div>
-    <div class="est-row">
-      <div class="est-field"><label for="afDist">Working distance (in)</label><input type="number" id="afDist" min="1" step="0.5" placeholder="e.g. 18"></div>
-      <div class="est-field"><label for="afThresh">Boundary threshold (cal/cm&sup2;)</label><input type="number" id="afThresh" min="0.1" step="0.1" value="1.2"></div>
-      <div class="est-field"><button type="button" id="afBtn">Calculate</button></div>
-    </div>
-    <div class="est-result" id="afResult"></div>
-  </div>
-  <div class="callout">Arc duration is your upstream protective device's actual clearing time (breaker + relay, from a coordination study) — there's no universal default, since it's the single biggest driver of incident energy. Bolted fault current can come from the <a class="inline" href="#fault-current">Fault Current Estimate</a> calculator above, or an actual short-circuit study. The 1.2 cal/cm&sup2; boundary threshold is the standard "just curable" second-degree-burn value from NFPA 70E Annex D — bump it to 1.5 cal/cm&sup2; if you're above 600V with a clearing time of 0.1s or less, per the same Annex D guidance.</div>
-
-  <h2 id="grounding">Ground Rod Resistance Estimator</h2>
-  <p>Estimates the resistance-to-earth of a single driven ground rod using Dwight's formula, the standard starting point for grounding-grid work referenced in IEEE Std 142. Real (layered, non-uniform) soil commonly deviates from this uniform-resistivity assumption by 10&ndash;20% or more — treat this as a first-pass design estimate, not a substitute for a field measurement (Wenner four-point method, IEEE Std 81) or a full grounding-grid study.</p>
-    <p class="calclink"><a href="/calculators/grounding.html">How this calculation works, with a worked example &rsaquo;</a></p>
-  <div class="formula">R = [&rho; / (2&pi;L)] &times; [ln(4L/d) &minus; 1]</div>
-  <div class="vfcv-mount" data-calc="grounding" data-comp="groundrod"></div>
-  <div class="estimator" id="groundCalc">
-    <h3>Single Rod Resistance</h3>
-    <div class="sub">Soil resistivity presets are order-of-magnitude only (moisture, compaction, and mineral content routinely swing real resistivity by 10&times; within one "soil type") — a site resistivity test is the real number.</div>
-    <div class="est-row">
-      <div class="est-field"><label for="gndPreset">Soil (typical &rho;, illustrative only)</label><select id="gndPreset">
-        <option value="">Custom &rho; (enter at right)</option>
-        <option value="10">Wet organic soil (~10 &Omega;&middot;m)</option>
-        <option value="100" selected>Moist soil (~100 &Omega;&middot;m)</option>
-        <option value="1000">Dry soil (~1,000 &Omega;&middot;m)</option>
-        <option value="10000">Bedrock (~10,000 &Omega;&middot;m)</option>
-      </select></div>
-      <div class="est-field"><label for="gndRho">Soil resistivity, &rho; (&Omega;&middot;m)</label><input type="number" id="gndRho" min="1" step="1" value="100"></div>
-      <div class="est-field"><label for="gndLen">Rod length (ft)</label><input type="number" id="gndLen" min="1" step="0.5" value="10"></div>
-      <div class="est-field"><label for="gndDia">Rod diameter (in)</label><select id="gndDia"><option value="0.5">1/2"</option><option value="0.625" selected>5/8"</option><option value="0.75">3/4"</option></select></div>
-    </div>
-    <div class="est-row"><div class="est-field"><button type="button" id="gndBtn">Calculate</button></div></div>
-    <div class="est-result" id="gndResult"></div>
-  </div>
-  <div class="callout">The commonly cited 25-ohm figure (NEC 250.53(A)(2)) is a pass/fail test for whether a <b>single</b> rod/pipe/plate electrode needs a supplemental electrode — it's enforceable rule text (an Exception), not just an informational note, and it doesn't apply once you're already using multiple electrodes. It's also not a general "the grounding system must measure 25&Omega;" requirement. Always confirm against the NEC edition your jurisdiction has adopted.</div>
-
-  <h2 id="power-factor">Power Factor Correction Calculator</h2>
-  <p>Sizes the capacitor bank (kVAR) needed to raise real power at an existing power factor up to a target power factor.</p>
-    <p class="calclink"><a href="/calculators/power-factor.html">How this calculation works, with a worked example &rsaquo;</a></p>
-  <div class="formula">kVAR = kW &times; (tan(cos<sup>&minus;1</sup>PF1) &minus; tan(cos<sup>&minus;1</sup>PF2))</div>
-  <div class="vfcv-mount" data-calc="power-factor" data-comp="pfcap"></div>
-  <div class="estimator" id="pfCalc">
-    <h3>PF Correction Size</h3>
-    <div class="est-row">
-      <div class="est-field"><label for="pfKw">Real power (kW)</label><input type="number" id="pfKw" min="0" step="1" placeholder="e.g. 400"></div>
-      <div class="est-field"><label for="pfExisting">Existing PF</label><input type="number" id="pfExisting" min="0.1" max="1" step="0.01" placeholder="e.g. 0.75"></div>
-      <div class="est-field"><label for="pfTarget">Target PF</label><input type="number" id="pfTarget" min="0.1" max="1" step="0.01" placeholder="e.g. 0.95"></div>
-      <div class="est-field"><button type="button" id="pfBtn">Calculate</button></div>
-    </div>
-    <div class="est-result" id="pfResult"></div>
-  </div>
-
-  <div class="ad-unit" data-ad="incontent"></div>
-
-  <h2 id="unit-converter">Unit &amp; Spec Converter</h2>
-  <p>Quick conversions between <a class="inline" href="glossary.html#kva-vs-kw">kVA, kW, and power factor</a>, AWG wire gauge and mm&sup2;, and an approximate NEMA-to-IP enclosure rating cross-reference.</p>
-  <div class="estimator" id="convCalc">
-    <h3>kVA &harr; kW &harr; PF</h3>
-    <div class="sub">Enter any two fields to solve the third.</div>
-    <div class="est-row">
-      <div class="est-field"><label for="cvKva">kVA</label><input type="number" id="cvKva" step="0.1"></div>
-      <div class="est-field"><label for="cvKw">kW</label><input type="number" id="cvKw" step="0.1"></div>
-      <div class="est-field"><label for="cvPf">Power factor</label><input type="number" id="cvPf" step="0.01" min="0.1" max="1"></div>
-      <div class="est-field"><button type="button" id="cvBtn">Solve</button></div>
-    </div>
-    <div class="est-result" id="cvResult"></div>
-  </div>
-  <div class="estimator" id="awgCalc">
-    <h3>AWG &harr; mm&sup2;</h3>
-    <div class="est-row">
-      <div class="est-field"><label for="awgSize">AWG / kcmil size</label><select id="awgSize"></select></div>
-      <div class="est-field"><label for="mm2In">or enter mm&sup2;</label><input type="number" id="mm2In" step="0.1" placeholder="e.g. 16"></div>
-      <div class="est-field"><button type="button" id="awgBtn">Convert</button></div>
-    </div>
-    <div class="est-result" id="awgResult"></div>
-  </div>
-  <div class="estimator">
-    <h3>NEMA &harr; IP Enclosure Rating (approximate)</h3>
-    <div class="sub">NEMA (UL 50/50E) and IP (IEC 60529) use different test methods, so this is a commonly cited approximate cross-reference, not an exact regulatory equivalence — always verify against the enclosure's actual dual listing.</div>
-    <div style="overflow-x:auto"><table class="reftable">
-      <tr><th scope="col">NEMA type</th><th scope="col">Approx. IP equivalent</th><th scope="col">Typical use</th></tr>
-      <tr><td>1</td><td>IP20</td><td>Indoor, general purpose</td></tr>
-      <tr><td>2</td><td>IP21</td><td>Indoor, light dripping water</td></tr>
-      <tr><td>3</td><td>IP54</td><td>Outdoor, windblown dust/rain</td></tr>
-      <tr><td>3R</td><td>IP14</td><td>Outdoor, rain/sleet (vented)</td></tr>
-      <tr><td>4</td><td>IP56</td><td>Outdoor, hosedown/splashing water</td></tr>
-      <tr><td>4X</td><td>IP66</td><td>Outdoor, corrosion-resistant + hosedown</td></tr>
-      <tr><td>6</td><td>IP67</td><td>Occasional temporary submersion</td></tr>
-      <tr><td>6P</td><td>IP67</td><td>Prolonged submersion + corrosion-resistant</td></tr>
-      <tr><td>12</td><td>IP52</td><td>Indoor, dust/dripping non-corrosive liquids</td></tr>
-    </table></div>
-  </div>
-
-  <div class="callout"><b>Not a substitute for a licensed engineer's calculation.</b> These calculators use standard simplified formulas intended for early-stage budgetary sizing and procurement planning. Final designs — especially fault current, protective device coordination, and code compliance — need a full study with actual system impedances, performed or stamped by a licensed engineer as required by your jurisdiction.</div>
-
-  <h2 id="transformer-tco">Transformer TCO Estimator</h2>
-  <p>A transformer loses energy as heat continuously: a fixed <b>no-load loss</b> (core loss, present anytime it's energized, loaded or not) and a <b>load loss</b> (winding loss that scales with the square of the load factor). Over a 20&ndash;30 year service life, that loss can cost more than the transformer itself — so total cost of ownership, not sticker price, is often the better basis for comparing bids of the same kVA size. Enter both loss figures from the nameplate or factory test report.</p>
-  <div class="formula">Annual loss cost = [(Pnl &times; 8760) + (Pll &times; LoadFactor&sup2; &times; 8760)] &times; $/kWh</div>
-  <div class="vfcv-mount" data-calc="transformer-tco" data-comp="transformer"></div>
-  <div class="estimator" id="tcoCalc">
-    <h3>Transformer TCO</h3>
-    <div class="sub">Loss figures come from the transformer's nameplate or factory test report — this tool does no lookups of its own.</div>
-    <div class="est-row">
-      <div class="est-field"><label for="tcoNl">No-load loss (W)</label><input type="number" id="tcoNl" min="0" step="1" placeholder="e.g. 1100"></div>
-      <div class="est-field"><label for="tcoLl">Load loss at rated load (W)</label><input type="number" id="tcoLl" min="0" step="1" placeholder="e.g. 9500"></div>
-      <div class="est-field"><label for="tcoLf">Average load factor (%)</label><input type="number" id="tcoLf" min="1" max="150" step="1" placeholder="e.g. 60"></div>
-      <div class="est-field"><label for="tcoRate">Electricity rate ($/kWh)</label><input type="number" id="tcoRate" min="0" step="0.001" placeholder="e.g. 0.09"></div>
-    </div>
-    <div class="est-row">
-      <div class="est-field"><label for="tcoYears">Service life (years)</label><input type="number" id="tcoYears" min="1" step="1" placeholder="e.g. 25"></div>
-      <div class="est-field"><label for="tcoDiscount">Discount rate (%, optional)</label><input type="number" id="tcoDiscount" min="0" max="30" step="0.1" placeholder="e.g. 5"></div>
-      <div class="est-field"><button type="button" id="tcoBtn">Calculate</button></div>
-    </div>
-    <div class="est-result" id="tcoResult"></div>
-  </div>
-
-  <h2 id="macrs-depreciation">MACRS Depreciation Estimator</h2>
-  <p>MACRS (Modified Accelerated Cost Recovery System) lets US businesses depreciate equipment faster than its useful life, using the IRS's published 200%-declining-balance, half-year-convention percentage tables (Publication 946, Table A-1). Most energy equipment falls under 5-year or 7-year property.</p>
-  <div class="estimator" id="macrsCalc">
-    <h3>MACRS Schedule</h3>
-    <div class="est-row">
-      <div class="est-field"><label for="macrsCost">Equipment cost ($)</label><input type="number" id="macrsCost" min="0" step="100" placeholder="e.g. 500000"></div>
-      <div class="est-field"><label for="macrsClass">Property class</label><select id="macrsClass"><option value="5">5-year</option><option value="7">7-year</option></select></div>
-      <div class="est-field"><button type="button" id="macrsBtn">Build schedule</button></div>
-    </div>
-    <div class="est-result" id="macrsResult"></div>
-  </div>
-  <div class="callout"><b>Not tax advice.</b> This is the standard MACRS percentage table only — it doesn't account for bonus depreciation (many new energy assets qualify for significant first-year expensing), Section 179 expensing, or your specific tax situation. Confirm your actual depreciation schedule and eligibility with a qualified CPA.</div>
-
-  <h2 id="payback">Investment Payback &amp; NPV Calculator</h2>
-  <p>Simple payback and net present value for a BESS, solar, or efficiency-upgrade investment — how many years until annual savings/revenue cover the upfront cost, and what that cash flow is worth today once a discount rate is applied. Same NPV-of-a-level-annuity method as the Transformer TCO estimator above.</p>
-  <div class="formula">Simple payback (yrs) = Upfront cost / Annual savings &nbsp;&middot;&nbsp; NPV = Annual savings &times; [1 &minus; (1+r)<sup>&minus;n</sup>] / r &minus; Upfront cost</div>
-  <div class="estimator" id="paybackCalc">
-    <h3>Payback &amp; NPV</h3>
-    <div class="sub">"Annual savings/revenue" is your own estimate — energy arbitrage, demand-charge reduction, incentive payments, avoided utility spend, whatever applies. This assumes a level (non-escalating) annual figure.</div>
-    <div class="est-row">
-      <div class="est-field"><label for="pbCost">Upfront cost ($)</label><input type="number" id="pbCost" min="0" step="1000" placeholder="e.g. 850000"></div>
-      <div class="est-field"><label for="pbSavings">Annual savings/revenue ($/yr)</label><input type="number" id="pbSavings" min="0" step="100" placeholder="e.g. 120000"></div>
-      <div class="est-field"><label for="pbDiscount">Discount rate (%)</label><input type="number" id="pbDiscount" min="0" max="30" step="0.1" placeholder="e.g. 8"></div>
-      <div class="est-field"><label for="pbYears">Analysis period (years)</label><input type="number" id="pbYears" min="1" step="1" placeholder="e.g. 15"></div>
-    </div>
-    <div class="est-row"><div class="est-field"><button type="button" id="pbBtn">Calculate</button></div></div>
-    <div class="est-result" id="pbResult"></div>
-  </div>
-  <div class="callout">Simple payback ignores the time value of money and stops counting once the analysis period is over — a project that pays back in year 12 of a 15-year analysis still needs the discount rate/NPV figure to judge whether it was worth doing, not just the payback year alone. This also doesn't model financing costs, tax credits/depreciation (see the MACRS estimator above), or savings escalation over time.</div>
-
-  <h2 id="standards-crossref">Standards Cross-Reference (US &harr; International)</h2>
-  <p>A quick-reference pairing of common US standards (ANSI/IEEE/NEMA/UL) with their closest international (IEC) counterpart for the same equipment category. These are commonly paired equivalents for similar equipment classes, not certified legal equivalencies — a UL listing and an IEC/CE certification are separate compliance processes with their own testing requirements.</p>
-  <div style="overflow-x:auto"><table class="reftable">
-    <tr><th scope="col">Equipment category</th><th scope="col">US standard</th><th scope="col">International (IEC) standard</th></tr>
-    <tr><td>Power transformers</td><td>IEEE/ANSI C57.12.00</td><td>IEC 60076</td></tr>
-    <tr><td>Medium-voltage switchgear</td><td>IEEE C37 series</td><td>IEC 62271 series</td></tr>
-    <tr><td>Low-voltage circuit breakers</td><td>UL 489</td><td>IEC 60947-2</td></tr>
-    <tr><td>AC motors</td><td>NEMA MG-1</td><td>IEC 60034</td></tr>
-    <tr><td>Enclosure ratings</td><td>NEMA 250</td><td>IEC 60529 (IP code)</td></tr>
-    <tr><td>Wire/cable sizing</td><td>AWG / NEC Chapter 9</td><td>IEC 60228 (mm&sup2;)</td></tr>
-    <tr><td>Battery energy storage safety</td><td>UL 9540 / UL 9540A</td><td>IEC 62619 / IEC 63056</td></tr>
-    <tr><td>Grounding / earthing</td><td>IEEE 80</td><td>IEC 61936-1</td></tr>
-    <tr><td>Surge protective devices</td><td>UL 1449</td><td>IEC 61643</td></tr>
-  </table></div>
-
-  <h2 id="external-data">External Data &amp; Price Trackers</h2>
-  <p>Copper/aluminum pricing and interconnection queue congestion both move fast enough that a static number on this page would be stale within days — so rather than publish figures we can't keep current, here are the real sources procurement and interconnection teams actually track:</p>
-  <ul>
-    <li><b><a class="inline" href="https://www.lme.com/metals/non-ferrous/lme-copper" target="_blank" rel="noopener">LME Copper</a></b> and <b><a class="inline" href="https://www.lme.com/metals/non-ferrous/lme-aluminium" target="_blank" rel="noopener">LME Aluminium</a></b> — London Metal Exchange official daily reference prices, the standard benchmark for copper and aluminum used in cable, bus, and transformer winding cost.</li>
-    <li><b><a class="inline" href="https://www.eia.gov/electricity/data.php" target="_blank" rel="noopener">EIA Electricity Data</a></b> — U.S. Energy Information Administration's industrial and commercial electricity price data by state, useful as an input to the TCO calculator above.</li>
-    <li><b><a class="inline" href="https://emp.lbl.gov/queues" target="_blank" rel="noopener">Berkeley Lab "Queued Up"</a></b> — Lawrence Berkeley National Laboratory's annual survey of US interconnection queues, aggregating data from ISOs/RTOs and utility balancing areas nationwide.</li>
-  </ul>
-
-  <h2 id="landed-cost">Landed/Delivered Cost Calculator</h2>
-  <p>Sticker price and delivered cost are rarely the same number once freight, duty, and insurance are added — this rolls them into one figure for budgeting.</p>
-  <div class="formula">Landed cost = Equipment price + Freight + (Equipment price &times; Duty rate) + Insurance</div>
-  <div class="estimator" id="landedCalc">
-    <h3>Landed Cost</h3>
-    <div class="sub">Freight and insurance are your own estimates or quotes; duty rate should come from an actual customs classification (see HS code reference below) — always confirm with a licensed customs broker before relying on this for a real shipment.</div>
-    <div class="est-row">
-      <div class="est-field"><label for="landedPrice">Equipment price ($)</label><input type="number" id="landedPrice" min="0" step="1" placeholder="e.g. 500000"></div>
-      <div class="est-field"><label for="landedFreight">Freight ($)</label><input type="number" id="landedFreight" min="0" step="1" placeholder="e.g. 15000"></div>
-      <div class="est-field"><label for="landedDuty">Duty/tariff rate (%)</label><input type="number" id="landedDuty" min="0" step="0.1" placeholder="e.g. 25"></div>
-      <div class="est-field"><label for="landedIns">Insurance ($, optional)</label><input type="number" id="landedIns" min="0" step="1" placeholder="e.g. 2000"></div>
-    </div>
-    <div class="est-row"><div class="est-field"><button type="button" id="landedBtn">Calculate</button></div></div>
-    <div class="est-result" id="landedResult"></div>
-  </div>
-
-  <h2 id="hs-codes">HS Code Reference (Common Equipment Categories)</h2>
-  <p>The Harmonized System (HS) is the WCO's internationally standardized product classification, used as the basis for every country's customs tariff schedule. The 4-digit headings below are stable across countries; the more specific 6&ndash;10-digit subheading that actually sets your duty rate depends on technical details (voltage class, power rating, technology) and the importing country's own tariff schedule — always confirm final classification with a licensed customs broker.</p>
-  <div style="overflow-x:auto"><table class="reftable">
-    <tr><th scope="col">Equipment category</th><th scope="col">HS heading</th><th scope="col">Description</th></tr>
-    <tr><td>Transformers</td><td>8504</td><td>Electrical transformers, static converters, and inductors</td></tr>
-    <tr><td>Switchgear &gt;1000V</td><td>8535</td><td>Electrical apparatus for switching/protecting circuits, voltage &gt;1000V</td></tr>
-    <tr><td>Switchgear/breakers &le;1000V</td><td>8536</td><td>Electrical apparatus for switching/protecting circuits, voltage &le;1000V</td></tr>
-    <tr><td>Panels &amp; switchboards</td><td>8537</td><td>Boards, panels, and consoles for electric control or distribution</td></tr>
-    <tr><td>Generating sets</td><td>8502</td><td>Electric generating sets and rotary converters</td></tr>
-    <tr><td>Motors</td><td>8501</td><td>Electric motors and generators (other than generating sets)</td></tr>
-    <tr><td>Batteries / accumulators</td><td>8507</td><td>Electric accumulators, including separators</td></tr>
-    <tr><td>Solar cells / modules</td><td>8541</td><td>Semiconductor and photosensitive devices, including photovoltaic cells</td></tr>
-    <tr><td>Insulated wire &amp; cable</td><td>8544</td><td>Insulated wire, cable, and other insulated electric conductors</td></tr>
-  </table></div>
-
-  <h2 id="compliance-marks">Compliance Mark Quick-Reference</h2>
-  <p>Buyers often treat these marks as interchangeable — they aren't. Some are independent third-party certifications; one is a manufacturer's own self-declaration.</p>
-  <div style="overflow-x:auto"><table class="reftable">
-    <tr><th scope="col">Mark</th><th scope="col">Issued by</th><th scope="col">What it actually means</th></tr>
-    <tr><td>UL Listed</td><td>UL (Underwriters Laboratories)</td><td>Third-party safety testing and certification to a US standard — the most common NRTL mark in North America.</td></tr>
-    <tr><td>ETL Listed</td><td>Intertek</td><td>An equivalent third-party NRTL certification to UL, testing against the same underlying US safety standards.</td></tr>
-    <tr><td>cULus</td><td>UL</td><td>Certifies compliance with both US and Canadian safety standards in a single mark.</td></tr>
-    <tr><td>CSA (or cCSAus)</td><td>CSA Group</td><td>Canadian safety certification; the cCSAus variant covers both Canada and the US.</td></tr>
-    <tr><td>CE Marking</td><td>Manufacturer (self-declared)</td><td>The manufacturer's own declaration of conformity to applicable EU directives, required for sale in the European Economic Area — not a third-party lab certification like UL.</td></tr>
-    <tr><td>RoHS</td><td>EU directive compliance</td><td>Restricts specific hazardous substances (lead, mercury, cadmium, and others) in electrical and electronic equipment.</td></tr>
-    <tr><td>FCC</td><td>US Federal Communications Commission</td><td>Certifies electromagnetic interference / radio-frequency emissions compliance for equipment containing electronics.</td></tr>
-  </table></div>
-
-  <h2 id="generator-runtime">Generator Runtime Estimator</h2>
-  <p>How long a generator will actually run on a full tank at a given load — use the fuel consumption rate from the genset's own spec sheet at your expected load point (most spec sheets publish gal/hr at 50%, 75%, and 100% load).</p>
-    <p class="calclink"><a href="/calculators/generator-runtime.html">How this calculation works, with a worked example &rsaquo;</a></p>
-  <div class="formula">Runtime (hrs) = Fuel tank capacity (gal) / Fuel consumption rate (gal/hr)</div>
-  <div class="vfcv-mount" data-calc="generator-runtime" data-comp="genset"></div>
-  <div class="estimator" id="genCalc">
-    <h3>Generator Runtime</h3>
-    <div class="sub">Looking for battery/UPS backup runtime instead? See the <a class="inline" href="#bess-sizing">BESS sizing calculator</a> above.</div>
-    <div class="est-row">
-      <div class="est-field"><label for="genTank">Fuel tank capacity (gal)</label><input type="number" id="genTank" min="0" step="1" placeholder="e.g. 500"></div>
-      <div class="est-field"><label for="genRate">Consumption rate at load (gal/hr)</label><input type="number" id="genRate" min="0" step="0.1" placeholder="e.g. 22"></div>
-      <div class="est-field"><button type="button" id="genBtn">Calculate</button></div>
-    </div>
-    <div class="est-result" id="genResult"></div>
+  <h2 class="gsec">Conversions &amp; reference</h2>
+  <div class="gdgrid">
+    <a class="gdcard" href="calculators/reference-tables.html#unit-converter"><h3>Unit &amp; Spec Converter</h3><p>kVA, kW and power factor; AWG to mm&sup2;; NEMA enclosure types to approximate IP ratings.</p></a>
+    <a class="gdcard" href="calculators/reference-tables.html#standards-crossref"><h3>Standards Cross-Reference</h3><p>Common US standards (ANSI, IEEE, NEMA, UL) paired with their closest IEC equivalents.</p></a>
+    <a class="gdcard" href="calculators/reference-tables.html#compliance-marks"><h3>Compliance Mark Quick-Reference</h3><p>What UL, CSA, CE, CB and the other marks actually certify, and who issues them.</p></a>
+    <a class="gdcard" href="calculators/reference-tables.html#hs-codes"><h3>HS Code Reference</h3><p>Harmonized System headings for common power equipment categories.</p></a>
+    <a class="gdcard" href="calculators/reference-tables.html#external-data"><h3>External Data &amp; Price Trackers</h3><p>Where to check live copper and aluminum prices and interconnection queue data.</p></a>
   </div>
 
   <h2>Where Voltfield fits in</h2>
@@ -626,18 +186,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How do you estimate arc-flash incident energy?</summary>
     <p style="margin-top:10px">The theoretical Lee equation (NFPA 70E Annex D, for open-air arcs above 600V) and the empirical Doughty equations (for open-air or in-a-box arcs at 600V or below) estimate incident energy in cal/cm&sup2; from the bolted fault current, system voltage, arc duration, and working distance. These are simplified, standard-referenced methods for early-stage estimates — a real arc-flash study for PPE selection and labeling should use the full IEEE 1584 arcing-current method performed by a qualified person.</p>
-  </details>
-  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
-    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How do you calculate the total cost of ownership of a transformer?</summary>
-    <p style="margin-top:10px">Add the purchase price to the lifetime cost of its energy losses. No-load loss (core loss) runs continuously whenever the transformer is energized; load loss (winding loss) scales with the square of the load factor. Multiply each by 8760 hours/year and your electricity rate to get an annual loss cost, then extend it over the transformer's service life.</p>
-  </details>
-  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
-    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is MACRS depreciation and how is it calculated for energy equipment?</summary>
-    <p style="margin-top:10px">MACRS (Modified Accelerated Cost Recovery System) lets businesses depreciate equipment faster than its useful life using IRS-published percentage tables (5-year and 7-year property are common for energy equipment). This is a simplified estimate only — it doesn't account for bonus depreciation or Section 179 expensing, and isn't tax advice.</p>
-  </details>
-  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
-    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How do you calculate the landed or delivered cost of imported equipment?</summary>
-    <p style="margin-top:10px">Add the equipment price, freight, duty (equipment price multiplied by the applicable duty rate), and cargo insurance together. The duty rate depends on the item's actual customs classification, which should come from a licensed customs broker, not an estimate.</p>
   </details>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How do you estimate how long a generator will run on a full tank?</summary>
@@ -688,450 +236,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 <script src="voltfield-site-config.js"></script>
 <script src="voltfield-updates.js" defer></script>
-<script src="voltfield-3d.js"></script>
-<script src="voltfield-component-viz.js"></script>
-<script>
-/* Fill each calculator's component mount. The markup is generated rather than
-   inlined thirteen times so the wording of "what a transformer is" lives in one
-   place (voltfield-component-viz.js) and cannot drift between sections. */
-(function(){
-  if(!window.VFCV) return;
-  document.querySelectorAll('.vfcv-mount[data-comp]').forEach(function(m){
-    var id=m.getAttribute('data-comp');
-    if(!VFCV.has(id)){ m.remove(); return; }   // never leave an empty box behind
-    m.innerHTML=VFCV.cardHTML(id);
-  });
-  VFCV.bindCards(document);
-})();
-</script>
-<script>
-</script>
-<script>
-(function(){
-  const AWG=[
-    {n:'14 AWG',cm:4110},{n:'12 AWG',cm:6530},{n:'10 AWG',cm:10380},{n:'8 AWG',cm:16510},
-    {n:'6 AWG',cm:26240},{n:'4 AWG',cm:41740},{n:'3 AWG',cm:52620},{n:'2 AWG',cm:66360},
-    {n:'1 AWG',cm:83690},{n:'1/0 AWG',cm:105600},{n:'2/0 AWG',cm:133100},{n:'3/0 AWG',cm:167800},
-    {n:'4/0 AWG',cm:211600},{n:'250 kcmil',cm:250000},{n:'300 kcmil',cm:300000},{n:'350 kcmil',cm:350000},
-    {n:'400 kcmil',cm:400000},{n:'500 kcmil',cm:500000},{n:'600 kcmil',cm:600000},{n:'750 kcmil',cm:750000},
-    {n:'1000 kcmil',cm:1000000}
-  ];
-  const STD_KVA=[15,25,37.5,50,75,100,112.5,150,167,225,300,500,750,1000,1500,2000,2500,3000,3750,5000,7500,10000];
-  const vdSel=document.getElementById('vdSize'), awgSel=document.getElementById('awgSize');
-  [vdSel,awgSel].forEach(sel=>{ if(!sel)return; sel.innerHTML=AWG.map((a,i)=>'<option value="'+i+'"'+(a.n==='4/0 AWG'?' selected':'')+'>'+a.n+'</option>').join(''); });
-
-  function fmt(v,d){d=d===undefined?2:d;return Number(v).toLocaleString('en-US',{maximumFractionDigits:d});}
-
-  const vdBtn=document.getElementById('vdBtn');
-  if(vdBtn)vdBtn.addEventListener('click',function(){
-    const r=document.getElementById('vdResult');
-    const I=parseFloat(document.getElementById('vdI').value), D=parseFloat(document.getElementById('vdD').value), V=parseFloat(document.getElementById('vdV').value);
-    const K=parseFloat(document.getElementById('vdMat').value), phase=document.getElementById('vdPhase').value;
-    const cm=AWG[+vdSel.value].cm;
-    if(!(I>0)||!(D>0)||!(V>0)){r.textContent='Enter current, distance, and voltage.';r.className='est-result show';return;}
-    const mult=phase==='3'?1.732:2;
-    const vd=(mult*K*I*D)/cm;
-    const pct=(vd/V)*100;
-    const warn=pct>3;
-    r.innerHTML='Voltage drop: <b>'+fmt(vd)+' V</b> ('+fmt(pct)+'%) over '+D+' ft of '+AWG[+vdSel.value].n+'.'+(warn?' <br>This exceeds the common 3% branch-circuit guideline — consider a larger conductor.':' Within the common 3% branch-circuit guideline.');
-    r.className='est-result show'+(warn?' warn':'');
-  });
-
-  /* ---- NEC Table 310.16 ampacity (curated subset, base conditions: <=3 CCC, 30C ambient)
-     and NEC Chapter 9 conduit fill (Table 1 caps, Table 4 EMT areas, Table 5 THHN areas) ---- */
-  const NEC_AMPACITY=[
-    {n:'14 AWG',Cu:{60:15,75:20,90:25},Al:{60:null,75:null,90:null}},
-    {n:'12 AWG',Cu:{60:20,75:25,90:30},Al:{60:15,75:20,90:25}},
-    {n:'10 AWG',Cu:{60:30,75:35,90:40},Al:{60:25,75:30,90:35}},
-    {n:'8 AWG', Cu:{60:40,75:50,90:55},Al:{60:35,75:40,90:45}},
-    {n:'6 AWG', Cu:{60:55,75:65,90:75},Al:{60:40,75:50,90:55}},
-    {n:'4 AWG', Cu:{60:70,75:85,90:95},Al:{60:55,75:65,90:75}},
-    {n:'3 AWG', Cu:{60:85,75:100,90:115},Al:{60:65,75:75,90:85}},
-    {n:'2 AWG', Cu:{60:95,75:115,90:130},Al:{60:75,75:90,90:100}},
-    {n:'1 AWG', Cu:{60:110,75:130,90:145},Al:{60:85,75:100,90:115}},
-    {n:'1/0 AWG',Cu:{60:125,75:150,90:170},Al:{60:100,75:120,90:135}},
-    {n:'2/0 AWG',Cu:{60:145,75:175,90:195},Al:{60:115,75:135,90:150}},
-    {n:'3/0 AWG',Cu:{60:165,75:200,90:225},Al:{60:130,75:155,90:175}},
-    {n:'4/0 AWG',Cu:{60:195,75:230,90:260},Al:{60:150,75:180,90:205}},
-    {n:'250 kcmil',Cu:{60:215,75:255,90:290},Al:{60:170,75:205,90:230}},
-    {n:'300 kcmil',Cu:{60:240,75:285,90:320},Al:{60:195,75:230,90:260}},
-    {n:'350 kcmil',Cu:{60:260,75:310,90:350},Al:{60:210,75:250,90:280}},
-    {n:'400 kcmil',Cu:{60:280,75:335,90:380},Al:{60:225,75:270,90:305}},
-    {n:'500 kcmil',Cu:{60:320,75:380,90:430},Al:{60:260,75:310,90:350}}
-  ];
-  const EMT_AREA={'1-2in':0.122,'3-4in':0.213,'1in':0.346,'2in':1.342}; /* in^2 at 40% fill */
-  const EMT_LABEL={'1-2in':'1/2"','3-4in':'3/4"','1in':'1"','2in':'2"'};
-  const THHN_AREA={'14 AWG':0.0097,'12 AWG':0.0133,'10 AWG':0.0211,'8 AWG':0.0366,'6 AWG':0.0507,'1/0 AWG':0.1855};
-  const FILL_CAP={1:0.53,2:0.31}; /* 3+ uses 0.40, handled separately */
-
-  const ampSizeSel=document.getElementById('ampSize'), fillConduitSel=document.getElementById('fillConduit'), fillWireSel=document.getElementById('fillWire');
-  if(ampSizeSel)ampSizeSel.innerHTML=NEC_AMPACITY.map((a,i)=>'<option value="'+i+'"'+(a.n==='4/0 AWG'?' selected':'')+'>'+a.n+'</option>').join('');
-  if(fillConduitSel)fillConduitSel.innerHTML=Object.keys(EMT_AREA).map(k=>'<option value="'+k+'"'+(k==='3-4in'?' selected':'')+'>'+EMT_LABEL[k]+' EMT</option>').join('');
-  if(fillWireSel)fillWireSel.innerHTML=Object.keys(THHN_AREA).map(k=>'<option value="'+k+'"'+(k==='12 AWG'?' selected':'')+'>'+k+' THHN</option>').join('');
-
-  const ampBtn=document.getElementById('ampBtn');
-  if(ampBtn)ampBtn.addEventListener('click',function(){
-    const r=document.getElementById('ampResult');
-    const row=NEC_AMPACITY[+ampSizeSel.value], mat=document.getElementById('ampMat').value, temp=document.getElementById('ampTemp').value;
-    const a=row[mat][temp];
-    if(a===null){r.textContent=row.n+' has no standard aluminum ampacity in this table (aluminum conductors typically start at 12 AWG).';r.className='est-result show warn';return;}
-    r.innerHTML=row.n+' '+(mat==='Cu'?'copper':'aluminum')+', '+temp+'&deg;C column: <b>'+a+' A</b> base ampacity (&le;3 current-carrying conductors, 30&deg;C ambient, before any correction factors).';
-    r.className='est-result show';
-  });
-
-  const fillBtn=document.getElementById('fillBtn');
-  if(fillBtn)fillBtn.addEventListener('click',function(){
-    const r=document.getElementById('fillResult');
-    const conduit=fillConduitSel.value, wire=fillWireSel.value, n=parseInt(document.getElementById('fillN').value,10);
-    if(!(n>0)){r.textContent='Enter the number of conductors.';r.className='est-result show';return;}
-    const conduitArea40=EMT_AREA[conduit]; /* already the 40%-fill area */
-    const conduitAreaTotal=conduitArea40/0.40;
-    const wireArea=THHN_AREA[wire];
-    const usedArea=n*wireArea;
-    const cap=n>=3?0.40:FILL_CAP[n];
-    const capArea=conduitAreaTotal*cap;
-    const pct=(usedArea/conduitAreaTotal)*100;
-    const fits=usedArea<=capArea;
-    const nMax=Math.floor(capArea/wireArea);
-    r.innerHTML=n+' &times; '+wire+' THHN in '+EMT_LABEL[conduit]+' EMT: <b>'+fmt(pct,1)+'% fill</b> (cap for '+n+' conductor'+(n===1?'':'s')+': '+(cap*100)+'%). '+(fits?'Fits within the cap.':'<b>Exceeds the fill cap</b> — over by '+fmt(usedArea-capArea,4)+' in&sup2;.')+' Max '+wire+' conductors in this conduit at the applicable cap: <b>'+nMax+'</b>.';
-    r.className='est-result show'+(fits?'':' warn');
-  });
-
-  const xfBtn=document.getElementById('xfBtn');
-  if(xfBtn)xfBtn.addEventListener('click',function(){
-    const r=document.getElementById('xfResult');
-    const kw=parseFloat(document.getElementById('xfKw').value), pf=parseFloat(document.getElementById('xfPf').value), V=parseFloat(document.getElementById('xfV').value);
-    const phase=document.getElementById('xfPhase').value;
-    if(!(kw>0)||!(pf>0&&pf<=1)||!(V>0)){r.textContent='Enter load, power factor (0-1), and voltage.';r.className='est-result show';return;}
-    const kvaReq=kw/pf;
-    const std=STD_KVA.find(s=>s>=kvaReq);
-    if(std===undefined){r.innerHTML='Required: <b>'+fmt(kvaReq)+' kVA</b>, above the largest standard rating in this table ('+fmt(STD_KVA[STD_KVA.length-1],0)+' kVA). Split the load or size a substation transformer with the manufacturer.';r.className='est-result show warn';return;}
-    const fla=phase==='3'?(std*1000)/(1.732*V):(std*1000)/V;
-    r.innerHTML='Required: <b>'+fmt(kvaReq)+' kVA</b> &rarr; nearest standard size: <b>'+fmt(std,1)+' kVA</b>. Estimated secondary FLA at that rating: <b>'+fmt(fla)+' A</b>.';
-    r.className='est-result show';
-  });
-
-  /* ---- Transformer inrush: rule-of-thumb multiplier x FLA, ranges commonly cited around IEEE 141/242 ---- */
-  const INRUSH_CLASS={
-    small:{lo:15,hi:25,decay:'within a few cycles (roughly 50-100 ms)'},
-    dist:{lo:8,hi:12,decay:'over roughly 6-12 cycles (~0.1-0.2 s)'},
-    large:{lo:4,hi:10,decay:'over several cycles up to roughly 1 second, sometimes longer on a high-X/R source'}
-  };
-  const inClassSel=document.getElementById('inClass');
-  if(inClassSel)inClassSel.addEventListener('change',function(){
-    const c=INRUSH_CLASS[this.value];
-    document.getElementById('inMlo').value=c.lo;
-    document.getElementById('inMhi').value=c.hi;
-  });
-  const inBtn=document.getElementById('inBtn');
-  if(inBtn)inBtn.addEventListener('click',function(){
-    const r=document.getElementById('inResult');
-    const kva=parseFloat(document.getElementById('inKva').value), V=parseFloat(document.getElementById('inV').value);
-    const mlo=parseFloat(document.getElementById('inMlo').value), mhi=parseFloat(document.getElementById('inMhi').value);
-    if(!(kva>0)||!(V>0)||!(mlo>0)||!(mhi>0)){r.textContent='Enter transformer kVA, voltage, and both multipliers.';r.className='est-result show';return;}
-    const fla=(kva*1000)/(1.732*V);
-    const lo=mlo*fla, hi=mhi*fla;
-    const decay=INRUSH_CLASS[inClassSel.value].decay;
-    r.innerHTML='Full-load amps: <b>'+fmt(fla)+' A</b>. Estimated peak inrush: <b>'+fmt(lo,0)+'&ndash;'+fmt(hi,0)+' A</b> ('+fmt(mlo)+'&times;&ndash;'+fmt(mhi)+'&times; FLA), decaying '+decay+'. Treat this as an order-of-magnitude planning figure — actual peak and duration depend heavily on the specific unit\'s design.';
-    r.className='est-result show';
-  });
-
-  const bessBtn=document.getElementById('bessBtn');
-  if(bessBtn)bessBtn.addEventListener('click',function(){
-    const r=document.getElementById('bessResult');
-    const kw=parseFloat(document.getElementById('bessKw').value), hrs=parseFloat(document.getElementById('bessHrs').value);
-    const dod=parseFloat(document.getElementById('bessDod').value)/100, rte=parseFloat(document.getElementById('bessRte').value)/100;
-    if(!(kw>0)||!(hrs>0)||!(dod>0&&dod<=1)||!(rte>0&&rte<=1)){r.textContent='Enter load, duration, DoD, and RTE.';r.className='est-result show';return;}
-    const usable=kw*hrs;
-    const nameplate=usable/(dod*rte);
-    r.innerHTML='Usable energy needed: <b>'+fmt(usable)+' kWh</b>. Nameplate energy to procure (after DoD/RTE losses): <b>'+fmt(nameplate)+' kWh</b>.';
-    r.className='est-result show';
-  });
-
-  const strBtn=document.getElementById('strBtn');
-  if(strBtn)strBtn.addEventListener('click',function(){
-    const r=document.getElementById('strResult');
-    const voc=parseFloat(document.getElementById('strVoc').value), vmp=parseFloat(document.getElementById('strVmp').value);
-    const tcVoc=parseFloat(document.getElementById('strTcVoc').value), tcVmp=parseFloat(document.getElementById('strTcVmp').value);
-    const tmin=parseFloat(document.getElementById('strTmin').value), tmax=parseFloat(document.getElementById('strTmax').value);
-    const vmax=parseFloat(document.getElementById('strVmax').value), vmppt=parseFloat(document.getElementById('strVmppt').value);
-    if(![voc,vmp,tcVoc,tcVmp,tmin,tmax,vmax,vmppt].every(v=>!isNaN(v))){r.textContent='Fill in every field (temp coefficients are typically negative).';r.className='est-result show';return;}
-    const vocCold=voc*(1+(tcVoc/100)*(tmin-25));
-    const vmpHot=vmp*(1+(tcVmp/100)*(tmax-25));
-    const maxLen=Math.floor(vmax/vocCold);
-    const minLen=Math.ceil(vmppt/vmpHot);
-    const bad=minLen>maxLen;
-    r.innerHTML='Cold Voc: <b>'+fmt(vocCold)+' V</b>/module. Hot Vmp: <b>'+fmt(vmpHot)+' V</b>/module. Max string length: <b>'+maxLen+' modules</b>. Min string length: <b>'+minLen+' modules</b>.'+(bad?' <br>No valid string length fits this window — recheck your inputs or inverter selection.':'');
-    r.className='est-result show'+(bad?' warn':'');
-  });
-
-  const faultBtn=document.getElementById('faultBtn');
-  if(faultBtn)faultBtn.addEventListener('click',function(){
-    const r=document.getElementById('faultResult');
-    const kva=parseFloat(document.getElementById('faultKva').value), z=parseFloat(document.getElementById('faultZ').value), V=parseFloat(document.getElementById('faultV').value);
-    const aic=parseFloat(document.getElementById('faultAic').value);
-    if(!(kva>0)||!(z>0)||!(V>0)){r.textContent='Enter transformer kVA, %Z, and secondary voltage.';r.className='est-result show';return;}
-    const isc=(100000*kva)/(1.732*V*z);
-    let out='Estimated available symmetrical fault current: <b>'+fmt(isc,0)+' A</b> ('+fmt(isc/1000)+' kA) at the transformer secondary, assuming an infinite source and ignoring cable impedance.';
-    let warn=false;
-    if(aic>0){
-      const iscKa=isc/1000, under=iscKa>aic;
-      out+=' <br>Equipment rated '+fmt(aic,1)+' kA AIC: '+(under?'<b>under-rated</b> — available fault current exceeds the equipment\'s withstand rating.':'adequate — available fault current is within the equipment\'s withstand rating.')+' (Remember: this ignores upstream/cable impedance, which only ever reduces actual fault current from this infinite-source figure — so a marginal pass here deserves a real study, not just this estimate.)';
-      warn=under;
-    }
-    r.innerHTML=out;
-    r.className='est-result show'+(warn?' warn':'');
-  });
-
-  /* ---- Motor starting voltage dip: infinite-bus-minus-source-impedance method (IEEE Std 399) ---- */
-  const NEMA_CODE=[
-    {l:'A',lo:0,hi:3.15},{l:'B',lo:3.15,hi:3.55},{l:'C',lo:3.55,hi:4.00},{l:'D',lo:4.00,hi:4.50},
-    {l:'E',lo:4.50,hi:5.00},{l:'F',lo:5.00,hi:5.60},{l:'G',lo:5.60,hi:6.30},{l:'H',lo:6.30,hi:7.10},
-    {l:'J',lo:7.10,hi:8.00},{l:'K',lo:8.00,hi:9.00},{l:'L',lo:9.00,hi:10.00},{l:'M',lo:10.00,hi:11.20},
-    {l:'N',lo:11.20,hi:12.50},{l:'P',lo:12.50,hi:14.00},{l:'R',lo:14.00,hi:16.00},{l:'S',lo:16.00,hi:18.00},
-    {l:'T',lo:18.00,hi:20.00},{l:'U',lo:20.00,hi:22.40},{l:'V',lo:22.40,hi:26.00}
-  ];
-  const motorLetterSel=document.getElementById('motorLetter'), motorMethodSel=document.getElementById('motorMethod');
-  if(motorLetterSel)motorLetterSel.innerHTML=NEMA_CODE.map(c=>'<option value="'+c.l+'"'+(c.l==='G'?' selected':'')+'>'+c.l+' ('+c.lo.toFixed(2)+'&ndash;'+c.hi.toFixed(2)+' kVA/HP)</option>').join('');
-  function motorSyncMethod(){
-    const isLetter=motorMethodSel.value==='letter';
-    document.getElementById('motorHpWrap').style.display=isLetter?'':'none';
-    document.getElementById('motorLetterWrap').style.display=isLetter?'':'none';
-    document.getElementById('motorLraWrap').style.display=isLetter?'none':'';
-  }
-  if(motorMethodSel){motorMethodSel.addEventListener('change',motorSyncMethod);motorSyncMethod();}
-
-  const motorBtn=document.getElementById('motorBtn');
-  if(motorBtn)motorBtn.addEventListener('click',function(){
-    const r=document.getElementById('motorResult');
-    const V=parseFloat(document.getElementById('motorV').value), sc=parseFloat(document.getElementById('motorSc').value);
-    if(!(V>0)||!(sc>0)){r.textContent='Enter system voltage and available fault capacity.';r.className='est-result show';return;}
-    let out,warn=false;
-    if(motorMethodSel.value==='letter'){
-      const hp=parseFloat(document.getElementById('motorHp').value);
-      if(!(hp>0)){r.textContent='Enter motor HP.';r.className='est-result show';return;}
-      const code=NEMA_CODE.find(c=>c.l===motorLetterSel.value);
-      const lrkvaLo=code.lo*hp, lrkvaHi=code.hi*hp;
-      const dipLo=lrkvaLo/(lrkvaLo+sc)*100, dipHi=lrkvaHi/(lrkvaHi+sc)*100;
-      warn=dipHi>20;
-      out='Locked-rotor kVA (Code '+code.l+' band): <b>'+fmt(lrkvaLo,0)+'&ndash;'+fmt(lrkvaHi,0)+' kVA</b>. Estimated voltage dip: <b>'+fmt(dipLo,1)+'%&ndash;'+fmt(dipHi,1)+'%</b> (terminal voltage sags to roughly '+fmt(100-dipHi,1)+'%&ndash;'+fmt(100-dipLo,1)+'% of nominal). Use actual nameplate LRA instead of the code-letter band for a precise figure.'+(warn?' This is a large enough dip to check against your minimum acceptable starting voltage.':'');
-    } else {
-      const lra=parseFloat(document.getElementById('motorLra').value);
-      if(!(lra>0)){r.textContent='Enter locked-rotor amps (LRA).';r.className='est-result show';return;}
-      const lrkva=1.732*V*lra/1000;
-      const dip=lrkva/(lrkva+sc)*100;
-      warn=dip>20;
-      out='Locked-rotor kVA: <b>'+fmt(lrkva,0)+' kVA</b>. Estimated voltage dip: <b>'+fmt(dip,1)+'%</b> (terminal voltage sags to roughly '+fmt(100-dip,1)+'% of nominal).'+(warn?' This is a large enough dip to check against your minimum acceptable starting voltage.':'');
-    }
-    r.innerHTML=out;
-    r.className='est-result show'+(warn?' warn':'');
-  });
-
-  /* ---- Arc-flash incident energy: Lee equation (open air, >600V) + Doughty equations
-     (open air / arc-in-box, <=600V) -- both from NFPA 70E Annex D. Not the IEEE 1584
-     arcing-current method. Every constant/exponent below was checked against worked
-     numeric examples (V=0.48kV or 1kV, F=22.6kA, t=0.1s, D=18in) before shipping. */
-  const AF_FORMULAS={
-    lee:'E = 793 &times; F &times; V &times; t / D&sup2; &nbsp;&middot;&nbsp; Dc = &radic;(793 &times; F &times; V &times; t / E) &nbsp;[Lee, open air, &gt;600V]',
-    doughtyAir:'E = 5271 &times; D<sup>&minus;1.9593</sup> &times; t &times; (0.0016F&sup2; &minus; 0.0076F + 0.8938) &nbsp;[Doughty, open air, &le;600V]',
-    doughtyBox:'E = 1038.7 &times; D<sup>&minus;1.4738</sup> &times; t &times; (0.0093F&sup2; &minus; 0.3453F + 5.9675) &nbsp;[Doughty, arc in box, &le;600V]'
-  };
-  const afScenarioSel=document.getElementById('afScenario'), afVWrap=document.getElementById('afVWrap'), afFormulaEl=document.getElementById('afFormula');
-  function afSyncScenario(){
-    const sc=afScenarioSel.value;
-    afVWrap.style.display=sc==='lee'?'':'none';
-    afFormulaEl.innerHTML=AF_FORMULAS[sc];
-  }
-  if(afScenarioSel){afScenarioSel.addEventListener('change',afSyncScenario);afSyncScenario();}
-
-  const afBtn=document.getElementById('afBtn');
-  if(afBtn)afBtn.addEventListener('click',function(){
-    const r=document.getElementById('afResult');
-    const sc=afScenarioSel.value;
-    const F=parseFloat(document.getElementById('afIbf').value), t=parseFloat(document.getElementById('afTime').value);
-    const D=parseFloat(document.getElementById('afDist').value), thresh=parseFloat(document.getElementById('afThresh').value)||1.2;
-    const V=parseFloat(document.getElementById('afV').value);
-    if(!(F>0)||!(t>0)||!(D>0)){r.textContent='Enter bolted fault current, arc duration, and working distance.';r.className='est-result show';return;}
-    if(sc==='lee'&&!(V>0)){r.textContent='Enter system voltage (kV) for the open-air, >600V scenario.';r.className='est-result show';return;}
-    let E,Dc,warn=false,warnMsg='';
-    if(sc==='lee'){
-      E=793*F*V*t/(D*D);
-      Dc=Math.sqrt(793*F*V*t/thresh);
-    } else {
-      const bracket=sc==='doughtyAir' ? (0.0016*F*F-0.0076*F+0.8938) : (0.0093*F*F-0.3453*F+5.9675);
-      const k=sc==='doughtyAir'?5271:1038.7, exp=sc==='doughtyAir'?1.9593:1.4738;
-      E=k*Math.pow(D,-exp)*t*bracket;
-      Dc=Math.pow(k*t*bracket/thresh,1/exp);
-      if(F<16||F>50){warn=true;warnMsg+=' Bolted fault current is outside the 16-50 kA range the Doughty equations were fit to — treat this result as extrapolated, not validated.';}
-      if(D<18){warn=true;warnMsg+=' Working distance under 18 in is outside the Doughty equations\' validated range.';}
-    }
-    r.innerHTML='Estimated incident energy: <b>'+fmt(E)+' cal/cm&sup2;</b> at '+D+' in. Arc-flash boundary (at '+thresh+' cal/cm&sup2;): <b>'+fmt(Dc)+' in</b> ('+fmt(Dc/12)+' ft). Select PPE with an arc rating (ATPV/EBT) at or above the incident energy figure.'+warnMsg;
-    r.className='est-result show'+(warn?' warn':'');
-  });
-
-  /* ---- Ground rod resistance: Dwight's formula (IEEE Std 142), R = [rho/(2*pi*L)] * [ln(4L/d) - 1] ---- */
-  const gndPresetSel=document.getElementById('gndPreset');
-  if(gndPresetSel)gndPresetSel.addEventListener('change',function(){
-    if(this.value)document.getElementById('gndRho').value=this.value;
-  });
-  const gndBtn=document.getElementById('gndBtn');
-  if(gndBtn)gndBtn.addEventListener('click',function(){
-    const r=document.getElementById('gndResult');
-    const rho=parseFloat(document.getElementById('gndRho').value);
-    const Lft=parseFloat(document.getElementById('gndLen').value);
-    const dIn=parseFloat(document.getElementById('gndDia').value);
-    if(!(rho>0)||!(Lft>0)||!(dIn>0)){r.textContent='Enter soil resistivity, rod length, and rod diameter.';r.className='est-result show';return;}
-    const L=Lft*0.3048, d=dIn*0.0254;
-    const R=(rho/(2*Math.PI*L))*(Math.log(4*L/d)-1);
-    const warn=R>25;
-    r.innerHTML='Estimated resistance to earth: <b>'+fmt(R,1)+' &Omega;</b> for a '+Lft+' ft, '+dIn+'in-diameter rod in '+fmt(rho,0)+' &Omega;&middot;m soil.'+(warn?' <br>Exceeds the commonly cited 25&Omega; single-electrode benchmark — a supplemental electrode, longer/multiple rods, or soil treatment is the typical next step.':' Within the commonly cited 25&Omega; single-electrode benchmark.');
-    r.className='est-result show'+(warn?' warn':'');
-  });
-
-  const pfBtn=document.getElementById('pfBtn');
-  if(pfBtn)pfBtn.addEventListener('click',function(){
-    const r=document.getElementById('pfResult');
-    const kw=parseFloat(document.getElementById('pfKw').value), pf1=parseFloat(document.getElementById('pfExisting').value), pf2=parseFloat(document.getElementById('pfTarget').value);
-    if(!(kw>0)||!(pf1>0&&pf1<=1)||!(pf2>0&&pf2<=1)){r.textContent='Enter real power and both power factors (0-1).';r.className='est-result show';return;}
-    if(pf2<pf1){r.textContent='Target PF should be higher than existing PF.';r.className='est-result show warn';return;}
-    const kvar=kw*(Math.tan(Math.acos(pf1))-Math.tan(Math.acos(pf2)));
-    r.innerHTML='Capacitor bank required: <b>'+fmt(Math.max(kvar,0))+' kVAR</b> to raise PF from '+pf1+' to '+pf2+' at '+kw+' kW.';
-    r.className='est-result show';
-  });
-
-  const cvBtn=document.getElementById('cvBtn');
-  if(cvBtn)cvBtn.addEventListener('click',function(){
-    const r=document.getElementById('cvResult');
-    const kva=parseFloat(document.getElementById('cvKva').value), kw=parseFloat(document.getElementById('cvKw').value), pf=parseFloat(document.getElementById('cvPf').value);
-    const has=[!isNaN(kva),!isNaN(kw),!isNaN(pf)].filter(Boolean).length;
-    if(has<2){r.textContent='Enter any two of kVA, kW, PF to solve for the third.';r.className='est-result show';return;}
-    let out;
-    if(isNaN(pf)){out='Power factor: <b>'+fmt(kw/kva)+'</b>';}
-    else if(isNaN(kw)){out='kW: <b>'+fmt(kva*pf)+'</b>';}
-    else{out='kVA: <b>'+fmt(kw/pf)+'</b>';}
-    r.innerHTML=out;
-    r.className='est-result show';
-  });
-
-  const awgBtn=document.getElementById('awgBtn');
-  if(awgBtn)awgBtn.addEventListener('click',function(){
-    const r=document.getElementById('awgResult');
-    const mm2In=parseFloat(document.getElementById('mm2In').value);
-    const CM_PER_MM2=1973.53;
-    if(mm2In>0){
-      const cm=mm2In*CM_PER_MM2;
-      let best=AWG[0],bd=Infinity;
-      AWG.forEach(a=>{const d=Math.abs(a.cm-cm);if(d<bd){bd=d;best=a;}});
-      r.innerHTML=fmt(mm2In)+' mm&sup2; = <b>'+fmt(cm,0)+' cmil</b> &rarr; closest standard size: <b>'+best.n+'</b>.';
-    } else {
-      const a=AWG[+awgSel.value];
-      const mm2=a.cm/CM_PER_MM2;
-      r.innerHTML=a.n+' = <b>'+fmt(a.cm)+' cmil</b> = <b>'+fmt(mm2)+' mm&sup2;</b>.';
-    }
-    r.className='est-result show';
-  });
-
-  const tcoBtn=document.getElementById('tcoBtn');
-  if(tcoBtn)tcoBtn.addEventListener('click',function(){
-    const r=document.getElementById('tcoResult');
-    const nl=parseFloat(document.getElementById('tcoNl').value), ll=parseFloat(document.getElementById('tcoLl').value);
-    const lf=parseFloat(document.getElementById('tcoLf').value)/100, rate=parseFloat(document.getElementById('tcoRate').value);
-    const years=parseFloat(document.getElementById('tcoYears').value), disc=parseFloat(document.getElementById('tcoDiscount').value);
-    if(!(nl>=0)||!(ll>=0)||!(lf>0)||!(rate>0)||!(years>0)){r.textContent='Enter no-load loss, load loss, load factor, rate, and service life.';r.className='est-result show';return;}
-    const nlKwh=(nl/1000)*8760;
-    const llKwh=(ll/1000)*Math.pow(lf,2)*8760;
-    const annualCost=(nlKwh+llKwh)*rate;
-    let lifetime,method;
-    if(disc>0){
-      const r_=disc/100;
-      lifetime=annualCost*(1-Math.pow(1+r_,-years))/r_;
-      method='NPV at '+disc+'% discount rate';
-    } else {
-      lifetime=annualCost*years;
-      method='undiscounted total';
-    }
-    r.innerHTML='Annual energy loss: <b>'+fmt(nlKwh+llKwh,0)+' kWh</b> ($'+fmt(annualCost,0)+'/yr). Lifetime cost of losses over '+years+' years ('+method+'): <b>$'+fmt(lifetime,0)+'</b>.';
-    r.className='est-result show';
-  });
-
-  const MACRS_PCT={5:[20.00,32.00,19.20,11.52,11.52,5.76],7:[14.29,24.49,17.49,12.49,8.93,8.92,8.93,4.46]};
-  const macrsBtn=document.getElementById('macrsBtn');
-  if(macrsBtn)macrsBtn.addEventListener('click',function(){
-    const r=document.getElementById('macrsResult');
-    const cost=parseFloat(document.getElementById('macrsCost').value);
-    const cls=document.getElementById('macrsClass').value;
-    if(!(cost>0)){r.textContent='Enter equipment cost.';r.className='est-result show';return;}
-    const pcts=MACRS_PCT[cls];
-    let rows='<div style="overflow-x:auto"><table class="reftable" style="margin-top:8px"><tr><th scope="col">Year</th><th scope="col">%</th><th scope="col">Deduction</th></tr>';
-    let total=0;
-    pcts.forEach((p,i)=>{
-      const amt=cost*p/100;
-      total+=amt;
-      rows+='<tr><td>Year '+(i+1)+'</td><td>'+p.toFixed(2)+'%</td><td>$'+fmt(amt,0)+'</td></tr>';
-    });
-    rows+='</table></div>';
-    r.innerHTML='MACRS '+cls+'-year schedule for $'+fmt(cost,0)+' of equipment (half-year convention):'+rows+'<div style="margin-top:8px">Total depreciated: <b>$'+fmt(total,0)+'</b></div>';
-    r.className='est-result show';
-  });
-
-  const pbBtn=document.getElementById('pbBtn');
-  if(pbBtn)pbBtn.addEventListener('click',function(){
-    const r=document.getElementById('pbResult');
-    const cost=parseFloat(document.getElementById('pbCost').value), savings=parseFloat(document.getElementById('pbSavings').value);
-    const disc=parseFloat(document.getElementById('pbDiscount').value), years=parseFloat(document.getElementById('pbYears').value);
-    if(!(cost>0)||!(savings>0)||!(years>0)){r.textContent='Enter upfront cost, annual savings, and analysis period.';r.className='est-result show';return;}
-    const payback=cost/savings;
-    const r_=disc>0?disc/100:0;
-    const pvOfSavings=r_>0 ? savings*(1-Math.pow(1+r_,-years))/r_ : savings*years;
-    const npv=pvOfSavings-cost;
-    const noPayback=payback>years;
-    const method=r_>0?'NPV at '+disc+'% discount rate':'undiscounted total (enter a discount rate for a true NPV)';
-    r.innerHTML='Simple payback: <b>'+fmt(payback,1)+' years</b>'+(noPayback?' — longer than the '+years+'-year analysis period.':'.')+' Present value of '+years+' years of savings: <b>$'+fmt(pvOfSavings,0)+'</b> ('+method+'). Net present value: <b>$'+fmt(npv,0)+'</b>'+(npv>=0?' (positive — savings exceed cost in present-value terms).':' (negative — cost exceeds the present value of savings over this period).');
-    r.className='est-result show'+(npv<0||noPayback?' warn':'');
-  });
-
-  const landedBtn=document.getElementById('landedBtn');
-  if(landedBtn)landedBtn.addEventListener('click',function(){
-    const r=document.getElementById('landedResult');
-    const price=parseFloat(document.getElementById('landedPrice').value);
-    const freight=parseFloat(document.getElementById('landedFreight').value)||0;
-    const duty=parseFloat(document.getElementById('landedDuty').value)||0;
-    const ins=parseFloat(document.getElementById('landedIns').value)||0;
-    if(!(price>0)){r.textContent='Enter equipment price.';r.className='est-result show';return;}
-    const dutyAmt=price*duty/100;
-    const landed=price+freight+dutyAmt+ins;
-    const pct=(landed-price)/price*100;
-    r.innerHTML='Duty amount: <b>$'+fmt(dutyAmt,0)+'</b>. Total landed cost: <b>$'+fmt(landed,0)+'</b> ('+fmt(pct,1)+'% above equipment price).';
-    r.className='est-result show';
-  });
-
-  const genBtn=document.getElementById('genBtn');
-  if(genBtn)genBtn.addEventListener('click',function(){
-    const r=document.getElementById('genResult');
-    const tank=parseFloat(document.getElementById('genTank').value);
-    const rate=parseFloat(document.getElementById('genRate').value);
-    if(!(tank>0)||!(rate>0)){r.textContent='Enter fuel tank capacity and consumption rate.';r.className='est-result show';return;}
-    const hrs=tank/rate;
-    const days=hrs/24;
-    r.innerHTML='Estimated runtime: <b>'+fmt(hrs,1)+' hours</b> ('+fmt(days,1)+' days) on a full tank at this load.';
-    r.className='est-result show';
-  });
-})();
-</script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
 <script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
-<script>
-/* ---------- usage tracking: which of the 20 calculators actually get used.
-   Delegated so it covers every .estimator/*Btn pair, including any added later. ---------- */
-(function(){
-  document.addEventListener('click',function(e){
-    var btn=e.target.closest('button[id$="Btn"]');
-    if(!btn)return;
-    var est=btn.closest('.estimator');
-    if(!est||!est.id)return;
-    if(window.vfGtag)window.vfGtag('event','calculator_run',{calc:est.id});
-  });
-})();
-</script>
 </body>
 </html>

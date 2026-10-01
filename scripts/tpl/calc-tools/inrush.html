@@ -1,0 +1,21 @@
+<!-- Live calculator for calculators/inrush.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="inrushCalc">
+    <h3>Inrush Current</h3>
+    <div class="sub">Pick the size class closest to your unit to auto-fill a typical multiplier range, or override it if your manufacturer publishes an actual figure.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="inClass">Transformer size class</label><select id="inClass">
+        <option value="small">Small control/instrument (up to a few kVA)</option>
+        <option value="dist" selected>Small&ndash;medium distribution (up to ~2500 kVA)</option>
+        <option value="large">Large power (&gt;2500 kVA)</option>
+      </select></div>
+      <div class="est-field"><label for="inKva">Transformer (kVA)</label><input type="number" id="inKva" min="0" step="1" placeholder="e.g. 2000"></div>
+      <div class="est-field"><label for="inV">Secondary voltage (V)</label><input type="number" id="inV" min="0" step="1" placeholder="e.g. 480"></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="inMlo">Multiplier, low (&times;FLA)</label><input type="number" id="inMlo" min="1" step="0.5" value="8"></div>
+      <div class="est-field"><label for="inMhi">Multiplier, high (&times;FLA)</label><input type="number" id="inMhi" min="1" step="0.5" value="12"></div>
+      <div class="est-field"><button type="button" id="inBtn">Calculate</button></div>
+    </div>
+    <div class="est-result" id="inResult"></div>
+  </div>
+  <div class="callout">This is a budgetary planning heuristic, not manufacturer inrush data or a time-domain simulation — it's not a substitute for the transformer's actual published inrush curve when sizing protective devices or generator/UPS ride-through.</div>

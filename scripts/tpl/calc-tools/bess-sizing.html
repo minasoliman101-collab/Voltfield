@@ -1,0 +1,13 @@
+<!-- Live calculator for calculators/bess-sizing.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="bessCalc">
+    <h3>BESS Size</h3>
+    <div class="sub">Defaults (90% DoD, 90% RTE) are typical for utility-scale LFP systems — adjust to your spec sheet.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="bessKw">Critical load (kW)</label><input type="number" id="bessKw" min="0" step="1" placeholder="e.g. 500"></div>
+      <div class="est-field"><label for="bessHrs">Backup duration (hrs)</label><input type="number" id="bessHrs" min="0" step="0.5" placeholder="e.g. 4"></div>
+      <div class="est-field"><label for="bessDod">Depth of discharge (%)</label><input type="number" id="bessDod" min="1" max="100" step="1" value="90"></div>
+      <div class="est-field"><label for="bessRte">Round-trip efficiency (%)</label><input type="number" id="bessRte" min="1" max="100" step="1" value="90"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="bessBtn">Calculate</button></div></div>
+    <div class="est-result" id="bessResult"></div>
+  </div>

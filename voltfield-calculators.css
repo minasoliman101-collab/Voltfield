@@ -1,0 +1,26 @@
+/* VOLTFIELD calculator UI (estimator boxes). Loaded by every page that
+   carries a working calculator; moved out of engineering-calculators.html. */
+.estimator{background:var(--card);border:1px solid var(--line-dark);padding:20px;margin:16px 0 26px;scroll-margin-top:80px}
+.estimator h3{font-family:var(--disp);font-weight:700;font-size:19px;color:var(--ink);margin-top:0;margin-bottom:4px}
+.estimator .sub{font-size:12.5px;color:var(--slate);margin-bottom:14px}
+.est-row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:10px}
+.est-field{display:flex;flex-direction:column;gap:4px}
+.est-field label{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--slate)}
+.est-field input,.est-field select{width:140px;border:1px solid var(--line-dark);padding:8px 10px;font-family:var(--mono);font-size:14px;background:var(--card)}
+.est-field button{background:var(--solid-bg);color:var(--solid-fg);border:0;padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase}
+.est-field button:hover{background:transparent;color:var(--ink)}
+.est-result{font-family:var(--mono);font-size:13.5px;color:var(--ink);background:var(--card);border:1px solid var(--line);padding:12px 14px;margin-top:4px;display:none;line-height:1.6}
+.est-result.show{display:block}
+.est-result b{color:var(--link)}
+.est-result.warn{border-color:var(--og);background:#FBF1EC}
+/* The calculator sits directly under the page heading. */
+.calc-tool{margin:8px 0 30px}
+.calc-tool .estimator{margin:0 0 18px}
+.calc-tool .callout{margin-top:0}
+/* Embed block without a second live copy of the tool (the real one is at the top). */
+.vf-embed.code-only{grid-template-columns:minmax(0,1fr)}
+/* "On this page" links on the pages that hold several tools. */
+.pagejump{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 22px}
+.pagejump a{font-family:var(--mono);font-size:12px;padding:6px 12px;border:1px solid var(--line-dark);border-radius:999px;color:var(--ink-2);background:var(--card);text-decoration:none}
+.pagejump a:hover{color:var(--link);border-color:var(--link)}
+.artwrap h2[id]{scroll-margin-top:80px}

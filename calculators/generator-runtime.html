@@ -24,7 +24,7 @@
    {"@type":"ListItem","position":3,"name":"Generator Runtime Calculator","item":"https://voltfield.org/calculators/generator-runtime.html"}
  ]},
  {"@type":"WebPage","name":"Generator Runtime Calculator","description":"Estimate how long a generator runs on a full tank at a given load, using the fuel consumption rate from its own spec sheet. Free, no signup.","url":"https://voltfield.org/calculators/generator-runtime.html","dateModified":"2026-08-26","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
- {"@type":"WebApplication","name":"Generator Runtime Calculator","description":"Estimate how long a generator runs on a full tank at a given load, using the fuel consumption rate from its own spec sheet. Free, no signup.","url":"https://voltfield.org/engineering-calculators.html#generator-runtime","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebApplication","name":"Generator Runtime Calculator","description":"Estimate how long a generator runs on a full tank at a given load, using the fuel consumption rate from its own spec sheet. Free, no signup.","url":"https://voltfield.org/calculators/generator-runtime.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What does the Generator Runtime calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Runtime is tank capacity divided by consumption rate, but consumption is not a single number — it varies strongly with load. A set at 25% load burns far less per hour than at 75%, and using the full-load figure for a lightly loaded standby set will badly understate how long it runs. The number that matters for a standby installation is usually how long it lasts at the actual connected load, not at nameplate."}},
    {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"Depends entirely on the consumption figure used, which should come from the manufacturer's data at the actual load, not a rule of thumb. Ignores the unusable heel at the bottom of the tank, ambient temperature effects, and fuel-quality degradation in long-idle standby installations — which is a more common cause of failure than running out."}}
@@ -41,6 +41,7 @@
 <meta name="apple-mobile-web-app-title" content="VOLTFIELD">
 <link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
 <link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-calculators.css">
 <link rel="stylesheet" href="/voltfield-dark-mode.css">
 <script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <link rel="stylesheet" href="/voltfield-parts.css">
@@ -97,23 +98,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section class="artban">
   <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/engineering-calculators.html" style="color:var(--slate);text-decoration:none">Calculators</a> / <span style="color:var(--ink)">Generator Runtime Calculator</span></nav>
     <div class="eyebrow">Free Calculator &middot; No Signup</div>
     <h1>Generator Runtime Calculator</h1>
-    <p class="dek">Runtime is tank capacity divided by consumption rate, but consumption is not a single number — it varies strongly with load. A set at 25% load burns far less per hour than at 75%, and using the full-load figure for a lightly loaded standby set will badly understate how long it runs. The number that matters for a standby installation is usually how long it lasts at the actual connected load, not at nameplate.</p>
+    <p class="dek">Estimate how long a generator runs on a full tank at a given load, using the fuel consumption rate from its own spec sheet.</p>
   </div>
 </section>
 
-<nav class="crumb" aria-label="Breadcrumb">
-  <a href="/index.html">Home</a><span class="sep">/</span>
-  <a href="/engineering-calculators.html">Calculators</a><span class="sep">/</span>
-  <span>Generator Runtime Calculator</span>
-</nav>
-
 <div class="artwrap">
-  <div class="ctaband"><div class="ctaband-in">
-    <div><h2>Run the numbers</h2><p>The working calculator is free and needs no signup.</p></div>
-    <a class="ctabtn" href="/engineering-calculators.html#generator-runtime">OPEN THE CALCULATOR &rarr;</a>
-  </div></div>
+  <section class="calc-tool" id="calculator" aria-label="Generator Runtime Calculator">
+  <div class="estimator" id="genCalc">
+    <h3>Generator Runtime</h3>
+    <div class="sub">Looking for battery/UPS backup runtime instead? See the <a class="inline" href="/calculators/bess-sizing.html">BESS sizing calculator</a>.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="genTank">Fuel tank capacity (gal)</label><input type="number" id="genTank" min="0" step="1" placeholder="e.g. 500"></div>
+      <div class="est-field"><label for="genRate">Consumption rate at load (gal/hr)</label><input type="number" id="genRate" min="0" step="0.1" placeholder="e.g. 22"></div>
+      <div class="est-field"><button type="button" id="genBtn">Calculate</button></div>
+    </div>
+    <div class="est-result" id="genResult"></div>
+  </div>
+  </section>
+
+  <p>Runtime is tank capacity divided by consumption rate, but consumption is not a single number — it varies strongly with load. A set at 25% load burns far less per hour than at 75%, and using the full-load figure for a lightly loaded standby set will badly understate how long it runs. The number that matters for a standby installation is usually how long it lasts at the actual connected load, not at nameplate.</p>
 
 
   <h2>The formula</h2>
@@ -176,7 +182,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>What it is not</dt>
       <dd>Depends entirely on the consumption figure used, which should come from the manufacturer's data at the actual load, not a rule of thumb. Ignores the unusable heel at the bottom of the tank, ambient temperature effects, and fuel-quality degradation in long-idle standby installations — which is a more common cause of failure than running out. This is a screening estimate, not a stamped calculation.</dd>
       <dt>Provenance</dt>
-      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labeled as estimates. Worked examples are arithmetic you can reproduce against the <a href="/engineering-calculators.html#generator-runtime">live calculator</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+      <dd>Last reviewed August 26, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labeled as estimates. Worked examples are arithmetic you can reproduce against the <a href="#calculator">calculator at the top of this page</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
     </dl>
   </aside>
 
@@ -196,6 +202,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
   </div>
 </footer>
+<script src="/voltfield-calculators.js" defer></script>
 <script src="/voltfield-site-config.js"></script>
 <script src="/voltfield-updates.js" defer></script>
 <script>

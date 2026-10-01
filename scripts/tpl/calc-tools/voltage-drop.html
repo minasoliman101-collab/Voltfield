@@ -1,0 +1,17 @@
+<!-- Live calculator for calculators/voltage-drop.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="vdCalc">
+    <h3>Voltage Drop</h3>
+    <div class="sub">K = 12.9 (copper) or 21.2 (aluminum) ohm&middot;cmil/ft — approximate, ignores conductor reactance. Best for runs under ~250 ft.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="vdPhase">Phase</label><select id="vdPhase"><option value="1">Single-phase</option><option value="3" selected>Three-phase</option></select></div>
+      <div class="est-field"><label for="vdMat">Conductor</label><select id="vdMat"><option value="12.9">Copper</option><option value="21.2">Aluminum</option></select></div>
+      <div class="est-field"><label for="vdSize">Wire size</label><select id="vdSize"></select></div>
+      <div class="est-field"><label for="vdI">Load current (A)</label><input type="number" id="vdI" min="0" step="1" placeholder="e.g. 100"></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="vdD">One-way distance (ft)</label><input type="number" id="vdD" min="0" step="1" placeholder="e.g. 150"></div>
+      <div class="est-field"><label for="vdV">System voltage (V)</label><input type="number" id="vdV" min="0" step="1" placeholder="e.g. 480"></div>
+      <div class="est-field"><button type="button" id="vdBtn">Calculate</button></div>
+    </div>
+    <div class="est-result" id="vdResult"></div>
+  </div>
