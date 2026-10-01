@@ -114,20 +114,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
-    <h2>Metal-clad vs. metal-enclosed: the actual distinction</h2>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>Metal-clad switchgear (IEEE C37.20.2) requires draw-out breakers, grounded metal barriers between compartments and automatic shutters.</li>
+      <li>Metal-enclosed switchgear (IEEE C37.20.1) requires none of that; breakers or fused switches can be fixed-mounted.</li>
+      <li>The two are not interchangeable on a spec, and arc-resistant ratings are a separate requirement on top of either.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 6 sections</summary>
+    <ol>
+      <li><a href="#metal-clad-vs-metal-enclosed-the-actual-distinct">Metal-clad vs. metal-enclosed: the actual distinction</a></li>
+      <li><a href="#the-four-compartments-in-a-metal-clad-section">The four compartments in a metal-clad section</a></li>
+      <li><a href="#low-voltage-switchgear-is-its-own-category">Low-voltage switchgear is its own category</a></li>
+      <li><a href="#arc-resistant-ratings-a-separate-spec-on-top">Arc-resistant ratings — a separate spec on top</a></li>
+      <li><a href="#why-this-affects-lead-time">Why this affects lead time</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+    <h2 id="metal-clad-vs-metal-enclosed-the-actual-distinct">Metal-clad vs. metal-enclosed: the actual distinction</h2>
   <p>Both terms describe medium-voltage switchgear enclosed in grounded metal, but the similarity mostly ends there. <b>Metal-clad switchgear</b>, defined by IEEE C37.20.2, requires: draw-out circuit breakers that can be racked in and out without opening the compartment, grounded metal barriers separating the major compartments from each other, and automatic shutters that close over the primary disconnects the moment a breaker is withdrawn. <b>Metal-enclosed switchgear</b>, defined by IEEE C37.20.1, doesn't require any of that — breakers or fused switches can be fixed-mounted, and the internal barriers are less strict. Metal-clad is the higher-integrity category, and it's built and priced accordingly.</p>
 
   <div class="callout"><b>Why this matters at spec time:</b> a spec that just says "switchgear" without naming the standard leaves room for a bidder to quote metal-enclosed equipment against what the buyer assumed was a metal-clad requirement — same voltage class, different compartmentalization, different price and lead time.</div>
 
-  <h2>The four compartments in a metal-clad section</h2>
+  <h2 id="the-four-compartments-in-a-metal-clad-section">The four compartments in a metal-clad section</h2>
   <p>A typical metal-clad vertical section is divided into four separated compartments, each isolated from the others by grounded metal barriers:</p>
   <div style="overflow-x:auto"><table class="reftable">
     <tr><th scope="col">Compartment</th><th scope="col">Contains</th></tr>
@@ -138,30 +148,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </table></div>
   <p>The compartment separation is the actual safety mechanism: a technician can open the low-voltage compartment to work on protection relays while the bus and cable compartments stay fully enclosed and energized, without needing to de-energize the whole section.</p>
 
-  <h2>Low-voltage switchgear is its own category</h2>
+  <h2 id="low-voltage-switchgear-is-its-own-category">Low-voltage switchgear is its own category</h2>
   <p>Below about 1000V, the relevant standards shift again — low-voltage metal-enclosed switchgear falls under IEEE C37.20.1 as well, but is more commonly specified and tested to UL 1558 in North America. Draw-out breakers are common but not universal at this voltage class, and the compartmentalization requirements are lighter than medium-voltage metal-clad gear.</p>
 
-  <h2>Arc-resistant ratings — a separate spec on top</h2>
+  <h2 id="arc-resistant-ratings-a-separate-spec-on-top">Arc-resistant ratings — a separate spec on top</h2>
   <p>Arc-resistant switchgear (tested per IEEE C37.20.7) is an additional certification layered on top of the metal-clad or metal-enclosed base design — it verifies the enclosure can vent and contain an internal arc fault without the doors or panels becoming projectiles, protecting personnel standing at the front, sides, or rear (Type 1, 2, or 2B accessibility, depending on which sides are rated). It's a separate spec line from "metal-clad" and should be called out explicitly if required — see the related concepts in the <a class="inline" href="guide-arc-flash-boundary-basics.html">arc-flash boundary basics guide</a>.</p>
 
-  <h2>Why this affects lead time</h2>
+  <h2 id="why-this-affects-lead-time">Why this affects lead time</h2>
   <p>Metal-clad construction requires more manufacturing steps than metal-enclosed — draw-out mechanisms, interlocking shutters, barriered compartments built and tested to a stricter standard — so it typically carries a longer lead time at the same voltage and current rating. Current MV switchgear lead time is tracked on the <a class="inline" href="lead-time-index.html">Lead-Time Index</a>; as of this writing it's effectively sold out through 2028 across the market, which makes getting the compartment-type spec right the first time more important than usual — a respec after the order is placed can mean starting the queue over.</p>
 
   <div class="callout"><b>Practice this:</b> a breaker's trip rating and its interrupting rating are two different checks people mix up. Try the <a class="inline" href="voltfield-sandbox.html?scenario=undersized-main">Undersized Main Breaker</a> scenario in the Practice Sandbox to work through both.</div>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2 id="relatedGuides">Related guides</h2>
-  <ul>
-    <li><a class="inline" href="guide-arc-flash-boundary-basics.html">Arc-Flash Boundary Basics</a> &mdash; why metal-clad containment matters for incident energy</li>
-    <li><a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">Short-Circuit & Breaker Coordination</a> &mdash; how the breakers inside that lineup get sized and coordinated</li>
-    <li><a class="inline" href="guide-grounding-bonding-basics.html">Grounding & Bonding Basics</a> &mdash; the bonding requirements that come with a switchgear lineup</li>
-  </ul>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>The <a class="inline" href="data-centers.html">Data Centers</a> and <a class="inline" href="industrial-supply.html">Industrial Supply</a> sectors carry MV switchgear configured by compartment type, voltage class, and interrupting rating, with current lead time shown before you commit to a spec. Unfamiliar with a term above? Check the <a class="inline" href="glossary.html">glossary</a>, or run available fault current — the number that ultimately sets breaker interrupting rating — through the <a class="inline" href="calculators/fault-current.html">fault current calculator</a>.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What's the difference between metal-clad and metal-enclosed switchgear?</summary>
     <p style="margin-top:10px">Metal-clad switchgear (IEEE C37.20.2) requires draw-out circuit breakers, grounded metal barriers separating the main compartments, and automatic shutters that cover primary disconnects when a breaker is withdrawn. Metal-enclosed switchgear (IEEE C37.20.1) doesn't require those features — breakers or fused switches may be fixed-mounted rather than draw-out, and the internal compartmentalization is less strict. Metal-clad is the higher-integrity, and typically higher-cost and longer-lead-time, category.</p>
@@ -174,32 +176,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why does switchgear compartment type affect lead time?</summary>
     <p style="margin-top:10px">Metal-clad switchgear requires more manufacturing steps — draw-out mechanisms, interlocking shutters, barriered compartments — and is built to firmer utility and industrial specs, so it generally carries longer lead times than metal-enclosed equipment at the same voltage class. Current market lead time for MV switchgear is tracked on the Voltfield Lead-Time Index.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Choosing interrupting ratings next?</h3>
-      <p>Fully rated vs. series rated breakers: how series combinations work, NEC 240.86 and 110.22(C) rules, the motor limit, and the conflict with selectivity.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="data-centers.html">Data Centers</a> and <a class="inline" href="industrial-supply.html">Industrial Supply</a> sectors carry MV switchgear configured by compartment type, voltage class, and interrupting rating, with current lead time shown before you commit to a spec. Unfamiliar with a term above? Check the <a class="inline" href="glossary.html">glossary</a>, or run available fault current — the number that ultimately sets breaker interrupting rating — through the <a class="inline" href="calculators/fault-current.html">fault current calculator</a>.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/fault-current.html">Available Fault Current Calculator</a>Available symmetrical fault current at a transformer secondary.</li>
+        <li><a href="calculators/arc-flash.html">Arc-Flash Incident Energy Calculator</a>Screening incident energy and boundary by the Lee method.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-fully-rated-vs-series-rated.html">Fully Rated vs. Series Rated Breakers</a>Fully rated vs. series rated breakers: how series combinations work, NEC 240.86 and 110.22(C) rules, the motor limit, and the conflict with selectivity.</li>
+        <li><a href="guide-arc-flash-boundary-basics.html">Arc-Flash Boundary Basics</a>Why metal-clad containment matters for incident energy</li>
+        <li><a href="guide-short-circuit-studies-breaker-coordination.html">Short-Circuit & Breaker Coordination</a>How the breakers inside that lineup get sized and coordinated</li>
+        <li><a href="guide-grounding-bonding-basics.html">Grounding & Bonding Basics</a>The bonding requirements that come with a switchgear lineup</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="data-centers/switchgear.html">Data Center Switchgear</a>The MV and LV lineups these compartment types appear in.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="guide-fully-rated-vs-series-rated.html">FULLY VS. SERIES RATED GUIDE &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="data-centers/switchgear.html">Data Center Switchgear</a> &mdash; the MV and LV lineups these compartment types appear in.</li>
-</ul>
-
-  <h2 id="calcLinks">Run the numbers</h2>
-<ul class="catlink">
-  <li><a class="inline" href="calculators/fault-current.html">Available Fault Current Calculator</a> &mdash; available symmetrical fault current at a transformer secondary.</li>
-  <li><a class="inline" href="calculators/arc-flash.html">Arc-Flash Incident Energy Calculator</a> &mdash; screening incident energy and boundary by the Lee method.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Switchgear Compartment Types: Metal-Clad vs. Metal-Enclosed,&rdquo; <i>Voltfield</i>, updated August 23, 2026. https://voltfield.org/guide-switchgear-compartments.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Switchgear Compartment Types: Metal-Clad vs. Metal-Enclosed,&rdquo; <i>Voltfield</i>, updated August 23, 2026. https://voltfield.org/guide-switchgear-compartments.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -213,10 +230,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published July 25, 2026 &middot; last updated August 23, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>What sits inside each compartment of a switchgear lineup and why the construction is arranged that way.</dd>
@@ -227,6 +248,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published July 25, 2026 &middot; last updated August 23, 2026. Written and maintained by the Voltfield editorial team against the sources above. Figures that are Voltfield's own estimates rather than published standards are labeled as such where they appear &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 <footer>

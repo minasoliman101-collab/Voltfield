@@ -102,21 +102,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>A continuous load runs at maximum current for three hours or more, and data center IT load qualifies.</li>
+      <li>Conductors and breakers must be sized at 125% of continuous load; that is the 80% rule (1 &divide; 1.25 = 0.80).</li>
+      <li>A 100%-rated breaker removes the 125% factor for the breaker, but cable derating often still governs.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 6 sections</summary>
+    <ol>
+      <li><a href="#what-it-means-at-the-rack">What it means at the rack</a></li>
+      <li><a href="#conductors-two-checks-not-one">Conductors: two checks, not one</a></li>
+      <li><a href="#worked-example">Worked example</a></li>
+      <li><a href="#100-rated-breakers">100%-rated breakers</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
   <p>A <b>continuous load</b> is one where the maximum current is expected to continue for <b>three hours or more</b> (NEC Article 100). Data center IT load, lighting in occupied buildings, and most process loads qualify. The NEC requires conductors and overcurrent devices serving continuous load to be sized at <b>125% of the continuous load</b>, plus 100% of any non-continuous load. That is the "80% rule" in reverse: 1 &divide; 1.25 = 0.80.</p>
 
   <div class="formula">Rating &ge; 1.25 &times; continuous load + 1.00 &times; non-continuous load &nbsp;&nbsp;&middot;&nbsp;&nbsp; Continuous load &le; 0.80 &times; rating</div>
 
   <p>The same requirement appears for branch circuits (NEC 210.19 and 210.20), feeders (215.2 and 215.3) and services (230.42). It exists because standard breakers and their enclosures are tested to carry their rated current in open air, not continuously inside an enclosure next to other heat sources. Running them at full rating for hours can overheat terminations and cause nuisance trips.</p>
 
-  <h2>What it means at the rack</h2>
+  <h2 id="what-it-means-at-the-rack">What it means at the rack</h2>
   <table class="reftable">
     <tr><th scope="col">Circuit</th><th scope="col">Max continuous</th><th scope="col">Usable power</th></tr>
     <tr><td>208 V three-phase, 30 A</td><td>24 A</td><td>8.6 kVA</td></tr>
@@ -124,7 +134,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </table>
   <p>Usable power is &radic;3 &times; V &times; 24 A. Designers and colocation contracts often express rack power in exactly these terms, and a breaker that trips at 80% of its rating after hours of load is usually doing what it was built to do. The <a class="inline" href="guide-415v-vs-480v-distribution.html">415 V guide</a> shows why the higher voltage doubles the usable power per circuit.</p>
 
-  <h2>Conductors: two checks, not one</h2>
+  <h2 id="conductors-two-checks-not-one">Conductors: two checks, not one</h2>
   <p>For conductors, NEC 210.19(A)(1) and 215.2(A)(1) require two separate checks, and the conductor must pass both:</p>
   <ul>
     <li><b>Check A, before derating:</b> the conductor's table ampacity, in the column matching the terminations (usually 75&deg;C), must be at least 125% of the continuous load plus the non-continuous load.</li>
@@ -132,7 +142,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </ul>
   <p>The 125% factor and the derating factors are not multiplied together. They answer different questions: check A protects the terminations, and check B protects the insulation. The <a class="inline" href="guide-cable-ampacity-derating.html">ampacity derating guide</a> covers check B in detail.</p>
 
-  <h2>Worked example</h2>
+  <h2 id="worked-example">Worked example</h2>
   <p>A feeder carrying 200 A of continuous load, four current-carrying conductors in the raceway (the neutral counts, for non-linear load), 40&deg;C ambient, copper conductors, 75&deg;C terminations.</p>
   <ul>
     <li><b>Overcurrent device:</b> 200 &times; 1.25 = 250 A, a standard size.</li>
@@ -141,12 +151,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </ul>
   <p>The conductor is <b>250 kcmil</b>, protected at 250 A.</p>
 
-  <h2>100%-rated breakers</h2>
+  <h2 id="100-rated-breakers">100%-rated breakers</h2>
   <p>Some breakers, usually in larger frames, are listed for continuous operation at 100% of their rating when installed under the conditions on their label, which typically cover conductor temperature ratings and enclosure size. With a 100%-rated assembly, the NEC allows the device and conductors to be sized at 100% of the continuous load rather than 125%.</p>
   <p>In the example, a 100%-rated 200 A breaker would pass check A with 3/0 copper (200 A at 75&deg;C). But check B still applies: 3/0 at 90&deg;C derates to 225 &times; 0.91 &times; 0.80 = 164 A, and 4/0 to 189 A, both below 200 A. The conductor still has to be 250 kcmil. <b>Where derating governs, a 100%-rated breaker saves the breaker size, not the cable.</b> Where the conductors run cool and uncrowded, it can save both.</p>
   <div class="callout"><b>Check the listing, not the frame size.</b> Whether a particular breaker, in a particular enclosure, is 100% rated is stated on the equipment. Assuming it from the frame size is how an 80%-rated assembly ends up loaded to 100%.</div>
 
-  <h2>Common mistakes</h2>
+  <h2 id="common-mistakes">Common mistakes</h2>
   <ul>
     <li><b>Multiplying 125% by the derating factors.</b> They're two separate checks.</li>
     <li><b>Treating IT load as non-continuous.</b> It runs around the clock.</li>
@@ -157,17 +167,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2 id="relatedGuides">Related guides</h2>
-  <ul>
-    <li><a class="inline" href="guide-cable-ampacity-derating.html">Cable Ampacity Derating Explained</a> &mdash; the derating side of conductor sizing</li>
-    <li><a class="inline" href="guide-415v-vs-480v-distribution.html">415 V vs. 480 V Distribution</a> &mdash; usable power per rack circuit at each voltage</li>
-    <li><a class="inline" href="guide-fully-rated-vs-series-rated.html">Fully Rated vs. Series Rated Breakers</a> &mdash; the other rating question every breaker has to answer</li>
-  </ul>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>The <a class="inline" href="voltfield-rack-builder.html">Rack Elevation Builder</a> budgets rack power against NEC-derated circuit capacity, and the <a class="inline" href="data-centers/power-distribution.html">Data Center Power Distribution</a> reference covers the panels and busway these circuits come from.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the 80% rule for breakers?</summary>
     <p style="margin-top:10px">A standard breaker may carry continuous load of no more than 80% of its rating. It&rsquo;s the inverse of the NEC requirement to size breakers and conductors at 125% of continuous load, since 1 divided by 1.25 is 0.80.</p>
@@ -184,33 +186,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How much power can a 30 A, 208 V three-phase circuit deliver continuously?</summary>
     <p style="margin-top:10px">At 80% of 30 A, or 24 A, it delivers about 8.6 kVA (&radic;3 &times; 208 &times; 24). The same circuit at 415 V delivers about 17.3 kVA.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Planning rack power?</h3>
-      <p>Stack equipment into a rack and check its power against NEC-derated circuit capacity. Free, no signup.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="voltfield-rack-builder.html">Rack Elevation Builder</a> budgets rack power against NEC-derated circuit capacity, and the <a class="inline" href="data-centers/power-distribution.html">Data Center Power Distribution</a> reference covers the panels and busway these circuits come from.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="voltfield-rack-builder.html">Plan a rack before you order the rail kit.</a>Stack equipment into a rack and check its power against NEC-derated circuit capacity.</li>
+        <li><a href="calculators/ampacity.html">Cable Ampacity Calculator</a>NEC 310.16 ampacity and the 40% conduit-fill check.</li>
+        <li><a href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a>kW load to the next standard kVA nameplate.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-cable-ampacity-derating.html">Cable Ampacity Derating Explained</a>The derating side of conductor sizing</li>
+        <li><a href="guide-415v-vs-480v-distribution.html">415 V vs. 480 V Distribution</a>Usable power per rack circuit at each voltage</li>
+        <li><a href="guide-fully-rated-vs-series-rated.html">Fully Rated vs. Series Rated Breakers</a>The other rating question every breaker has to answer</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="data-centers/power-distribution.html">Data Center Power Distribution</a>Panels, busway and rack PDUs.</li>
+        <li><a href="data-centers/switchgear.html">Data Center Switchgear</a>Breakers and their continuous ratings.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="voltfield-rack-builder.html">RACK BUILDER &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="data-centers/power-distribution.html">Data Center Power Distribution</a> &mdash; panels, busway and rack PDUs.</li>
-  <li><a class="inline" href="data-centers/switchgear.html">Data Center Switchgear</a> &mdash; breakers and their continuous ratings.</li>
-</ul>
-
-  <h2 id="calcLinks">Run the numbers</h2>
-<ul class="catlink">
-  <li><a class="inline" href="calculators/ampacity.html">Cable Ampacity Calculator</a> &mdash; NEC 310.16 ampacity and the 40% conduit-fill check.</li>
-  <li><a class="inline" href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a> &mdash; kW load to the next standard kVA nameplate.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;The 80% Rule &amp; Continuous Loads,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-continuous-load-80-percent-rule.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;The 80% Rule &amp; Continuous Loads,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-continuous-load-80-percent-rule.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -224,10 +241,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published September 29, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>What a continuous load is, the NEC 125% sizing rule and the 80% rule that follows from it, the two separate conductor checks, and when 100%-rated breakers change the answer.</dd>
@@ -238,6 +259,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published September 29, 2026. Written and maintained by the Voltfield editorial team against the sources above. Every worked figure is arithmetic you can reproduce from NEC Table 310.16 values and the factors quoted on this page &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 

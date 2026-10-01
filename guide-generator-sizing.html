@@ -102,17 +102,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>Size against four questions, not one: running load, block loading, largest motor start, and a rating valid for the actual run time.</li>
+      <li>Size on the UPS input, including losses and recharge, not the UPS output, and check motor starting with one set out (N+1).</li>
+      <li>Derate for altitude, ambient temperature and enclosure airflow, and pick the ISO 8528-1 rating that matches the duty.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 9 sections</summary>
+    <ol>
+      <li><a href="#step-1-pick-the-right-rating">Step 1: Pick the right rating</a></li>
+      <li><a href="#step-2-build-the-running-load">Step 2: Build the running load</a></li>
+      <li><a href="#step-3-check-block-loading">Step 3: Check block loading</a></li>
+      <li><a href="#step-4-check-the-largest-motor-start">Step 4: Check the largest motor start</a></li>
+      <li><a href="#worked-example">Worked example</a></li>
+      <li><a href="#step-5-derate-for-site-conditions">Step 5: Derate for site conditions</a></li>
+      <li><a href="#step-6-fuel-and-runtime">Step 6: Fuel and runtime</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
   <p>A standby generator is sized against four questions, not one. <b>Can it carry the running load?</b> <b>Can it pick that load up in the blocks it will actually arrive in?</b> <b>Can it start the largest motor without an unacceptable voltage dip?</b> And <b>is its rating valid for how long, and how often, it will run?</b> The running load is the easy part. The other three are where transfers fail.</p>
 
-  <h2>Step 1: Pick the right rating</h2>
+  <h2 id="step-1-pick-the-right-rating">Step 1: Pick the right rating</h2>
   <p>The same engine and alternator carry different published ratings depending on the duty. ISO 8528-1 defines them:</p>
   <table class="reftable">
     <tr><th scope="col">Rating</th><th scope="col">What it assumes</th></tr>
@@ -124,7 +137,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </table>
   <p>A standby rating comes with conditions, typically a limit on average load over the run and on annual operating hours. The exact limits are set by the manufacturer, so read the rating definitions on the datasheet, not just the kW figure. For data centers this matters twice. First, a facility that treats the generators as its long-duration source is running them outside what "standby" assumes. Second, data center tier certification schemes generally expect generators rated to run without a runtime limit at the design load.</p>
 
-  <h2>Step 2: Build the running load</h2>
+  <h2 id="step-2-build-the-running-load">Step 2: Build the running load</h2>
   <p>List what the generators must carry after transfer, in kW:</p>
   <ul>
     <li><b>UPS input, not UPS output.</b> The UPS draws its own losses plus battery recharge current after an outage, at exactly the moment the generators take over. Use the rated input from the UPS datasheet. The <a class="inline" href="guide-ups-sizing.html">UPS sizing guide</a> covers why.</li>
@@ -133,16 +146,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </ul>
   <p>Generators are rated in kW at 0.8 power factor, which fixes their kVA. A 2,000 kW set is a 2,500 kVA set. Check the load in kVA too, and watch for a <i>leading</i> power factor at light load, which generators tolerate poorly. The <a class="inline" href="guide-kw-vs-kva.html">kW vs. kVA guide</a> covers both.</p>
 
-  <h2>Step 3: Check block loading</h2>
+  <h2 id="step-3-check-block-loading">Step 3: Check block loading</h2>
   <p>After an outage, load arrives in blocks as transfer switches close and equipment restarts. Each block causes a transient voltage and frequency dip while the engine governor and alternator regulator respond. <b>Step-load acceptance</b>, the largest block a set can take within its transient limits, varies widely with engine design. It's often what decides the generator size in a data center, rather than kW. ISO 8528-5 defines performance classes (G1 to G4) with progressively tighter transient limits. Specify the class, then check the manufacturer's step-load data against your actual blocks.</p>
   <p>Timing matters too. NFPA 110 Type 10 systems must pick up emergency load within 10 seconds of an outage. Loads that aren't on the emergency system are usually sequenced in afterwards, with transfer-switch time delays, so no single step exceeds what the sets can accept. UPS rectifiers typically ramp their input up over several seconds (walk-in) rather than stepping it on, which softens the largest electrical block.</p>
 
-  <h2>Step 4: Check the largest motor start</h2>
+  <h2 id="step-4-check-the-largest-motor-start">Step 4: Check the largest motor start</h2>
   <p>A generator is a much softer source than a utility transformer. Its short-circuit capacity is set by its subtransient reactance (X&Prime;d), typically a few times higher than a transformer's %Z. The same screening formula used in the <a class="inline" href="calculators/motor-start.html">Motor Starting Voltage Dip Calculator</a> applies:</p>
   <div class="formula">Dip &asymp; LRkVA &divide; (LRkVA + source short-circuit kVA) &nbsp;&nbsp;&middot;&nbsp;&nbsp; Generator short-circuit kVA &asymp; kVA &divide; X&Prime;d</div>
   <p>Motors on drives or soft starters draw far less starting current than across-the-line starts. That's one reason modern chillers are rarely the problem they used to be. Harmonic distortion is also worse on a generator bus for the same reason, covered in the <a class="inline" href="guide-harmonics-ieee-519.html">harmonics guide</a>.</p>
 
-  <h2>Worked example</h2>
+  <h2 id="worked-example">Worked example</h2>
   <p>A data hall with the following running load after transfer: 1,850 kW of UPS input (including recharge, from the UPS datasheet), 700 kW of mechanical load and 50 kW of building load, for <b>2,600 kW</b> in total. Sets are 2,000 kW / 2,500 kVA with an assumed X&Prime;d of 0.15, in N+1.</p>
   <ul>
     <li><b>Sets for N:</b> 2,600 &divide; 2,000 = 1.3, so 2 sets. <b>N+1 is 3 sets</b>, 6,000 kW installed.</li>
@@ -154,13 +167,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p>For comparison, the same motor on a 2,500 kVA, 5.75% utility transformer (43,478 kVA short-circuit) dips the bus about 6.5%. Losing one generator makes the motor start worse than on utility power. That's the case to design for, not the all-sets-running case.</p>
   <div class="callout"><b>The assumptions:</b> the X&Prime;d of 0.15, the load split and the across-the-line chiller start are illustrative. Use the alternator datasheet's X&Prime;d, your own load schedule, and the chiller's actual starting method. A drive-started chiller would make the motor check trivial.</div>
 
-  <h2>Step 5: Derate for site conditions</h2>
+  <h2 id="step-5-derate-for-site-conditions">Step 5: Derate for site conditions</h2>
   <p>Published ratings apply at reference conditions. At high altitude and high ambient temperature, engines lose output, and the manufacturer's derating curves say by how much. A generator room or enclosure also runs hotter than outdoors, and radiator airflow has to be checked at the site's design temperature, not the rating's.</p>
 
-  <h2>Step 6: Fuel and runtime</h2>
+  <h2 id="step-6-fuel-and-runtime">Step 6: Fuel and runtime</h2>
   <p>NFPA 110 classifies emergency power systems by how long they must run at rated load without refueling: Class 2 is two hours, Class 48 is 48 hours, and so on. The class is set by the application and the authority having jurisdiction. Data centers commonly store a day or more on site. Fuel burn depends on actual load, so a set running at 43% burns far less per hour than at full load. The <a class="inline" href="calculators/generator-runtime.html">Generator Runtime Calculator</a> works this out from the set's own consumption data.</p>
 
-  <h2>Common mistakes</h2>
+  <h2 id="common-mistakes">Common mistakes</h2>
   <ul>
     <li><b>Sizing on UPS output.</b> The generator feeds the UPS input, including losses and recharge.</li>
     <li><b>Sizing on running kW alone.</b> Step-load acceptance and motor starting often need a bigger set, or more sets.</li>
@@ -172,17 +185,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2 id="relatedGuides">Related guides</h2>
-  <ul>
-    <li><a class="inline" href="guide-ups-sizing.html">How to Size a UPS</a> &mdash; the load the generator actually sees, including input losses and recharge</li>
-    <li><a class="inline" href="guide-n-plus-1-vs-2n-redundancy.html">N+1 vs. 2N Redundancy Explained</a> &mdash; how many sets, and what losing one has to survive</li>
-    <li><a class="inline" href="guide-harmonics-ieee-519.html">Harmonics &amp; IEEE 519 Explained</a> &mdash; why rectifier load distorts a generator bus more than a utility bus</li>
-  </ul>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>The <a class="inline" href="data-centers/backup-power.html">Data Center Backup Power</a> reference covers the diesel, natural-gas and turbine generator families, and <a class="inline" href="data-centers/genset-components.html">Genset Components</a> covers the engines, alternators, controls and fuel systems inside them. The <a class="inline" href="voltfield-pod-designer.html">POD &amp; Skid Designer</a> checks a power block's generator capacity against a target load and redundancy level.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How do I size a standby generator?</summary>
     <p style="margin-top:10px">Choose the rating that matches the duty, add up the running load in kW (UPS input, mechanical and building load), then check it in kVA. After that, check the largest load block against the set's step-load acceptance, the largest motor start against its voltage dip, and derate for altitude and temperature. Size for the redundancy case with one set out.</p>
@@ -199,34 +204,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why is a generator rated at 0.8 power factor?</summary>
     <p style="margin-top:10px">It's the industry convention for three-phase gensets. The engine limits real power (kW) and the alternator limits apparent power (kVA), and stating kW at 0.8 power factor fixes the relationship: a 2,000 kW set is a 2,500 kVA set.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>How long will the fuel last?</h3>
-      <p>Estimate runtime at your actual load from the set's own fuel consumption data. Free, no signup.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="data-centers/backup-power.html">Data Center Backup Power</a> reference covers the diesel, natural-gas and turbine generator families, and <a class="inline" href="data-centers/genset-components.html">Genset Components</a> covers the engines, alternators, controls and fuel systems inside them. The <a class="inline" href="voltfield-pod-designer.html">POD &amp; Skid Designer</a> checks a power block's generator capacity against a target load and redundancy level.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/generator-runtime.html">Generator Runtime Calculator</a>Fuel burn and runtime at a given load.</li>
+        <li><a href="calculators/motor-start.html">Motor Starting Voltage Dip Calculator</a>The dip a motor start puts on its source.</li>
+        <li><a href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a>kW load to the next standard kVA nameplate.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-ups-sizing.html">How to Size a UPS</a>The load the generator actually sees, including input losses and recharge</li>
+        <li><a href="guide-n-plus-1-vs-2n-redundancy.html">N+1 vs. 2N Redundancy Explained</a>How many sets, and what losing one has to survive</li>
+        <li><a href="guide-harmonics-ieee-519.html">Harmonics &amp; IEEE 519 Explained</a>Why rectifier load distorts a generator bus more than a utility bus</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="data-centers/backup-power.html">Data Center Backup Power</a>Diesel, natural-gas and turbine generator families, with ratings and lead times.</li>
+        <li><a href="data-centers/genset-components.html">Generator Set Components</a>Engines, alternators, controls, cooling and fuel systems.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="calculators/generator-runtime.html">GENERATOR RUNTIME &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="data-centers/backup-power.html">Data Center Backup Power</a> &mdash; diesel, natural-gas and turbine generator families, with ratings and lead times.</li>
-  <li><a class="inline" href="data-centers/genset-components.html">Generator Set Components</a> &mdash; engines, alternators, controls, cooling and fuel systems.</li>
-</ul>
-
-  <h2 id="calcLinks">Run the numbers</h2>
-<ul class="catlink">
-  <li><a class="inline" href="calculators/generator-runtime.html">Generator Runtime Calculator</a> &mdash; fuel burn and runtime at a given load.</li>
-  <li><a class="inline" href="calculators/motor-start.html">Motor Starting Voltage Dip Calculator</a> &mdash; the dip a motor start puts on its source.</li>
-  <li><a class="inline" href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a> &mdash; kW load to the next standard kVA nameplate.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;How to Size a Standby Generator,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-generator-sizing.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;How to Size a Standby Generator,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-generator-sizing.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -240,10 +259,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published September 29, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>How to size a standby generator for a critical facility: rating selection, running load, step-load acceptance, motor starting, site derating, fuel runtime and redundancy, with a worked data center example.</dd>
@@ -254,6 +277,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published September 29, 2026. Written and maintained by the Voltfield editorial team against the sources above. Every figure in the worked example is arithmetic you can reproduce, and its X&Prime;d, load split and motor starting method are labeled as assumptions &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 

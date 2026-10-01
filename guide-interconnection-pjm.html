@@ -120,14 +120,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>PJM has moved from one-at-a-time studies to cluster studies, working through its backlog in Transition Cycles.</li>
+      <li>Readiness requirements matter more than filing date: missing one can push a project back a full cycle.</li>
+      <li>Data center load in Northern Virginia adds queue pressure most other regions don't face at the same scale.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 5 sections</summary>
+    <ol>
+      <li><a href="#from-serial-studies-to-transition-cycles">From serial studies to Transition Cycles</a></li>
+      <li><a href="#readiness-requirements-matter-more-than-filing-d">Readiness requirements matter more than filing date</a></li>
+      <li><a href="#the-data-center-dimension">The data-center dimension</a></li>
+      <li><a href="#where-this-diverges-from-other-regions">Where this diverges from other regions</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
   <p><b>PJM has moved from studying interconnection requests one at a time to batch cluster studies, working through its backlog in Transition Cycles before settling into periodic cycles.</b> A project that misses a cycle&rsquo;s readiness requirements can be pushed to the next cycle, adding a full cycle to its wait. Data center load in Northern Virginia adds pressure to the queue that most other regions don&rsquo;t face at the same scale.</p>
   <p>This guide assumes the <a class="inline" href="guide-grid-interconnection-process.html">general interconnection process</a> — request, feasibility study, system impact study, facilities study, interconnection agreement — as background. What follows is specific to PJM: the largest RTO by footprint in the US, spanning all or part of 13 states and DC, and the FERC-jurisdictional transmission provider for the mid-Atlantic corridor.</p>
 
@@ -138,26 +147,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="fact"><div class="fl">Notable pressure</div><div class="fv">Data center load growth</div></div>
   </div>
 
-  <h2>From serial studies to Transition Cycles</h2>
+  <h2 id="from-serial-studies-to-transition-cycles">From serial studies to Transition Cycles</h2>
   <p>PJM's queue had, like most RTOs, historically studied interconnection requests one at a time in the order they were filed — a workable model until the volume of renewable and storage requests grew far faster than the queue could process them, leaving a backlog stretching years. Ahead of FERC Order 2023's industry-wide cluster-study mandate, PJM restructured its own process around <b>Transition Cycles</b>: large batch studies specifically designed to work through the existing backlog, followed by a move to steady-state periodic cluster cycles for new requests going forward. The mechanics track the same logic covered in the <a class="inline" href="guide-grid-interconnection-process.html">general interconnection guide</a> — feasibility, system impact, and facilities studies — just run for a batch of projects together rather than one at a time.</p>
 
-  <h2>Readiness requirements matter more than filing date</h2>
+  <h2 id="readiness-requirements-matter-more-than-filing-d">Readiness requirements matter more than filing date</h2>
   <p>A consequence of moving to batch cluster studies: PJM's process leans harder on readiness deposits and site-control requirements to keep speculative projects from occupying a study slot without a realistic path to construction. A project's queue position is necessary but not sufficient — whether it clears each readiness milestone on schedule now matters as much as when it was originally filed. Confirm current deposit amounts and readiness milestones directly against PJM's published tariff and queue documents before budgeting a project timeline around them; these are exactly the kind of figures that get revised between tariff filings.</p>
 
   <div class="callout"><b>Why this matters for procurement:</b> a project that clears its readiness milestones on the first attempt stays on PJM's published cycle timeline. One that doesn't can be pushed to a later cycle entirely — turning a study delay into a full extra cycle's wait, not just a few months.</div>
 
-  <h2>The data-center dimension</h2>
+  <h2 id="the-data-center-dimension">The data-center dimension</h2>
   <p>PJM's footprint includes Northern Virginia's "Data Center Alley" — the largest concentration of data center load anywhere in the world — which adds a demand-side pressure most other US grid regions haven't faced at the same scale. That shows up two ways: generation interconnection requests inside PJM increasingly cite data-center demand growth as the driver, and PJM has also had to work through direct <b>large-load interconnection</b> requests from data-center operators themselves, a process that runs alongside (and shares transmission-planning attention with) the generation queue rather than through it. If a data center project's power plan depends on new PJM generation clearing the queue on a specific timeline, that assumption deserves the same scrutiny as an equipment lead time — see <a class="inline" href="data-centers.html#redundancy">Data Center Power Equipment</a> for how redundancy targets and equipment sizing interact with a project's power delivery timeline.</p>
 
-  <h2>Where this diverges from other regions</h2>
+  <h2 id="where-this-diverges-from-other-regions">Where this diverges from other regions</h2>
   <p>PJM's Transition Cycle structure, its specific readiness-deposit tiers, and its data-center-driven large-load process are particular to PJM's own FERC-filed tariff — they don't transfer directly to <a class="inline" href="guide-interconnection-miso.html">MISO</a>'s Definitive Planning Phase or to <a class="inline" href="guide-interconnection-ercot.html">ERCOT</a>'s non-FERC process next door. A project spanning PJM and a neighboring region needs its timeline built separately for each.</p>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>Once a PJM facilities study specifies the interconnection equipment — GSU transformers, switchgear, protection relays — configure it on the <a class="inline" href="data-centers.html">Data Centers</a> or <a class="inline" href="renewables.html">Renewables</a> reference and check its indicative lead time before that estimate is locked into a facilities-study cost. The <a class="inline" href="lead-time-index.html">Lead-Time Index</a> tracks current equipment lead times to plan alongside a PJM cycle timeline, and the <a class="inline" href="voltfield-pod-designer.html">POD &amp; Skid Designer</a> is a free way to first-pass-size the power block a data-center interconnection request is actually built around.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is PJM's Transition Cycle?</summary>
     <p style="margin-top:10px">PJM's own move from serial, one-at-a-time interconnection studies to batch cluster studies, run to work through a large historical backlog before settling into steady-state periodic cluster cycles — broadly the same shift FERC Order 2023 later required industry-wide, but PJM began restructuring its own queue process ahead of that mandate.</p>
@@ -170,26 +177,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Does PJM's reform match FERC Order 2023?</summary>
     <p style="margin-top:10px">PJM is FERC-jurisdictional and its current process reflects Order 2023's cluster-study and readiness-deposit requirements, but PJM's specific cycle structure, deposit amounts, and deadlines are set in its own FERC-filed tariff — always confirm current rules directly with PJM rather than assuming they match another RTO's implementation.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Plan the equipment alongside the queue</h3>
-      <p>What is driving the multi-year power transformer shortage, why lead times stretch past three years, and how to plan a project schedule around it.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">Once a PJM facilities study specifies the interconnection equipment — GSU transformers, switchgear, protection relays — configure it on the <a class="inline" href="data-centers.html">Data Centers</a> or <a class="inline" href="renewables.html">Renewables</a> reference and check its indicative lead time before that estimate is locked into a facilities-study cost. The <a class="inline" href="lead-time-index.html">Lead-Time Index</a> tracks current equipment lead times to plan alongside a PJM cycle timeline, and the <a class="inline" href="voltfield-pod-designer.html">POD &amp; Skid Designer</a> is a free way to first-pass-size the power block a data-center interconnection request is actually built around.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-transformer-lead-times.html">Why Transformer Lead Times Stretch Past 3 Years — And How to Plan Around It</a>What is driving the multi-year power transformer shortage, why lead times stretch past three years, and how to plan a project schedule around it.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="renewables/ac-collection.html">Renewable Plant AC Collection</a>The long-lead collector and substation equipment to release against the study.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="guide-transformer-lead-times.html">READ THE LEAD-TIME GUIDE &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="renewables/ac-collection.html">Renewable Plant AC Collection</a> &mdash; the long-lead collector and substation equipment to release against the study.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;PJM Interconnection Timeline, Explained,&rdquo; <i>Voltfield</i>, updated August 24, 2026. https://voltfield.org/guide-interconnection-pjm.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;PJM Interconnection Timeline, Explained,&rdquo; <i>Voltfield</i>, updated August 24, 2026. https://voltfield.org/guide-interconnection-pjm.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -203,10 +221,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published August 23, 2026 &middot; last updated August 24, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>PJM's transition to a cycle-based interconnection process and what it changes for project developers.</dd>
@@ -217,6 +239,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published August 23, 2026 &middot; last updated August 24, 2026. Written and maintained by the Voltfield editorial team against the sources above. Figures that are Voltfield's own estimates rather than published standards are labeled as such where they appear &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 <footer>

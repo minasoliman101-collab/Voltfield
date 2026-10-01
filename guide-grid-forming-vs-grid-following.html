@@ -102,14 +102,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>A grid-following inverter tracks an existing grid voltage with a phase-locked loop; a grid-forming inverter creates that voltage itself.</li>
+      <li>Short-circuit ratio is a first screen for a weak grid, not a stability study.</li>
+      <li>Grid-forming is not a firmware toggle: it needs rating headroom, energy, tuning, studies and specified, testable functions.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#grid-following">Grid-following</a></li>
+      <li><a href="#grid-forming">Grid-forming</a></li>
+      <li><a href="#how-weak-is-the-grid-short-circuit-ratio">How weak is the grid? Short-circuit ratio</a></li>
+      <li><a href="#where-grid-forming-matters">Where grid-forming matters</a></li>
+      <li><a href="#what-grid-forming-costs">What grid-forming costs</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
   <p>Battery storage, solar and wind connect to the grid through inverters, called <b>inverter-based resources (IBRs)</b>. How an inverter is controlled decides how it behaves when the grid is disturbed. There are two families:</p>
   <table class="reftable">
     <tr><th scope="col">Grid-following</th><th scope="col">Grid-forming</th></tr>
@@ -125,18 +136,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <tr><td>Cannot form an island</td><td>Can, if designed and permitted to</td></tr>
   </table>
 
-  <h2>Grid-following</h2>
+  <h2 id="grid-following">Grid-following</h2>
   <p>A grid-following inverter measures the grid voltage with a phase-locked loop (PLL) and injects current in step with it. It&rsquo;s a mature, well-understood approach, and it&rsquo;s how nearly all solar and battery inverters have operated. Modern units still provide grid support, such as ride-through, volt-VAR and frequency response, under IEEE 1547-2018 and UL 1741 SB for distribution-connected resources, and IEEE 2800 for transmission-connected ones. But all of that depends on a stable voltage being there to follow.</p>
 
-  <h2>Grid-forming</h2>
+  <h2 id="grid-forming">Grid-forming</h2>
   <p>A grid-forming inverter holds an internal voltage of its own, with a magnitude and angle it controls, typically using droop or virtual-synchronous-machine control. When the grid voltage or frequency moves, the difference between the grid and the inverter&rsquo;s internal voltage drives a response straight away, much as a synchronous generator&rsquo;s rotor does. That gives the grid something grid-following inverters can&rsquo;t: a fast, inherent resistance to change, sometimes described as synthetic inertia, and the ability to hold up voltage where there&rsquo;s nothing else to follow.</p>
 
-  <h2>How weak is the grid? Short-circuit ratio</h2>
+  <h2 id="how-weak-is-the-grid-short-circuit-ratio">How weak is the grid? Short-circuit ratio</h2>
   <p>The usual first screen is the <b>short-circuit ratio (SCR)</b>: the short-circuit capacity at the point of interconnection divided by the plant&rsquo;s rating.</p>
   <div class="formula">SCR = short-circuit MVA at the point of interconnection &divide; plant MW</div>
   <p>A point of interconnection with 500 MVA of short-circuit capacity gives an SCR of 5 for a 100 MW plant, but only 2.5 for a 200 MW plant. Grids with an SCR below about 3 are commonly treated as weak. There, grid-following controls can struggle, because the plant&rsquo;s own current visibly moves the voltage its PLL is trying to track. That&rsquo;s where grid-forming control, or additional studies and equipment, comes in. The same short-circuit capacity idea underlies the <a class="inline" href="guide-transformer-impedance.html">transformer impedance guide</a>, applied here at the transmission level.</p>
 
-  <h2>Where grid-forming matters</h2>
+  <h2 id="where-grid-forming-matters">Where grid-forming matters</h2>
   <ul>
     <li><b>Weak interconnections,</b> including remote renewable zones and long radial lines.</li>
     <li><b>Microgrids and islanded operation,</b> including campus microgrids, where there may be no other source to set voltage and frequency.</li>
@@ -144,7 +155,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li><b>Grids losing synchronous generation,</b> where system operators are beginning to require or reward grid-forming capability on new battery projects.</li>
   </ul>
 
-  <h2>What grid-forming costs</h2>
+  <h2 id="what-grid-forming-costs">What grid-forming costs</h2>
   <ul>
     <li><b>Headroom.</b> Responding to a disturbance means delivering power or current the plant wasn&rsquo;t already producing. That takes margin in the inverter rating, and energy in the battery.</li>
     <li><b>Limited fault current.</b> Inverters can deliver only a small multiple of their rated current at most, far less than the several-times-rated current a synchronous generator supplies in a fault. Protection schemes that rely on high fault current need checking, which the <a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">short-circuit study guide</a> covers.</li>
@@ -153,7 +164,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </ul>
   <div class="callout"><b>Batteries are the natural fit.</b> A grid-forming response needs energy available in both directions at a moment&rsquo;s notice. A battery can provide that. A solar plant at full output has nothing extra to give upward unless it&rsquo;s deliberately curtailed. That&rsquo;s why most grid-forming deployments so far have been battery projects.</div>
 
-  <h2>Common mistakes</h2>
+  <h2 id="common-mistakes">Common mistakes</h2>
   <ul>
     <li><b>Treating grid-forming as a firmware toggle.</b> It needs rating headroom, energy, tuning and studies.</li>
     <li><b>Assuming inverter-based plants supply fault current like generators.</b> They don&rsquo;t, and protection has to account for it.</li>
@@ -163,17 +174,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2 id="relatedGuides">Related guides</h2>
-  <ul>
-    <li><a class="inline" href="guide-bess-c-rate.html">BESS C-Rate Explained</a> &mdash; power, energy and the headroom a grid-forming response draws on</li>
-    <li><a class="inline" href="guide-grid-interconnection-process.html">The Grid Interconnection Process</a> &mdash; the studies where grid strength and inverter behavior are examined</li>
-    <li><a class="inline" href="guide-inverter-clipping-ratio.html">Inverter Clipping &amp; DC:AC Ratio</a> &mdash; the solar-side inverter ratio that shapes co-located storage</li>
-  </ul>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>The <a class="inline" href="battery-storage/pcs-inverters.html">BESS Power Conversion Systems</a> reference covers central, modular and grid-forming PCS, and the <a class="inline" href="battery-storage.html">Battery Storage</a> pillar page covers the rest of the plant.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the difference between grid-forming and grid-following inverters?</summary>
     <p style="margin-top:10px">A grid-following inverter tracks an existing grid voltage with a phase-locked loop and injects current in step with it. A grid-forming inverter holds its own internal voltage and frequency, so it responds to disturbances immediately and can operate where there&rsquo;s no other source, including islands and black start.</p>
@@ -190,33 +193,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Do grid-forming inverters provide fault current like generators?</summary>
     <p style="margin-top:10px">No. Inverters can supply only a small multiple of their rated current, far less than a synchronous generator, whichever control mode they use. Protection that depends on high fault current has to be checked.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Sizing the battery behind the inverter?</h3>
-      <p>Turn a load and duration into usable and nameplate kWh, with depth of discharge and efficiency applied. Free, no signup.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="battery-storage/pcs-inverters.html">BESS Power Conversion Systems</a> reference covers central, modular and grid-forming PCS, and the <a class="inline" href="battery-storage.html">Battery Storage</a> pillar page covers the rest of the plant.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/bess-sizing.html">BESS Sizing Calculator</a>Usable and nameplate kWh from a critical load and backup time.</li>
+        <li><a href="calculators/fault-current.html">Available Fault Current Calculator</a>Available symmetrical fault current at a transformer secondary.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-bess-c-rate.html">BESS C-Rate Explained</a>Power, energy and the headroom a grid-forming response draws on</li>
+        <li><a href="guide-grid-interconnection-process.html">The Grid Interconnection Process</a>The studies where grid strength and inverter behavior are examined</li>
+        <li><a href="guide-inverter-clipping-ratio.html">Inverter Clipping &amp; DC:AC Ratio</a>The solar-side inverter ratio that shapes co-located storage</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="battery-storage/pcs-inverters.html">BESS Power Conversion Systems</a>Central, modular and grid-forming PCS.</li>
+        <li><a href="battery-storage/balance-of-plant.html">BESS Balance of Plant</a>The transformers and switchgear between the PCS and the grid.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="calculators/bess-sizing.html">BESS SIZING &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="battery-storage/pcs-inverters.html">BESS Power Conversion Systems</a> &mdash; central, modular and grid-forming PCS.</li>
-  <li><a class="inline" href="battery-storage/balance-of-plant.html">BESS Balance of Plant</a> &mdash; the transformers and switchgear between the PCS and the grid.</li>
-</ul>
-
-  <h2 id="calcLinks">Run the numbers</h2>
-<ul class="catlink">
-  <li><a class="inline" href="calculators/bess-sizing.html">BESS Sizing Calculator</a> &mdash; usable and nameplate kWh from a critical load and backup time.</li>
-  <li><a class="inline" href="calculators/fault-current.html">Available Fault Current Calculator</a> &mdash; available symmetrical fault current at a transformer secondary.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Grid-Forming vs. Grid-Following Inverters,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-grid-forming-vs-grid-following.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Grid-Forming vs. Grid-Following Inverters,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-grid-forming-vs-grid-following.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -230,10 +247,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published September 29, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>How grid-following and grid-forming inverter controls differ, the short-circuit ratio as a first screen for grid strength, where grid-forming matters, and what it costs in headroom, fault current, studies and requirements.</dd>
@@ -244,6 +265,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published September 29, 2026. Written and maintained by the Voltfield editorial team against the sources above. The short-circuit ratio example is arithmetic you can reproduce, and the weak-grid threshold is labeled as a common screening value &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 

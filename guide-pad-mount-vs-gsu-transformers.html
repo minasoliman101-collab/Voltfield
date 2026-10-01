@@ -123,22 +123,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
-    <h2>The short answer: which direction is the voltage going?</h2>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>Stepping voltage down to serve a load needs a pad-mount transformer; stepping it up from a generator or inverter to the grid needs a GSU.</li>
+      <li>Pad-mounts are ground-mounted, tamper-resistant distribution units, typically 15&ndash;35 kV class down to 480 V or 208 V.</li>
+      <li>Mixing them up on a spec sheet costs real time, given current lead times for both.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 5 sections</summary>
+    <ol>
+      <li><a href="#the-short-answer-which-direction-is-the-voltage">The short answer: which direction is the voltage going?</a></li>
+      <li><a href="#what-each-one-actually-is">What each one actually is</a></li>
+      <li><a href="#side-by-side">Side-by-side</a></li>
+      <li><a href="#the-one-case-that-trips-people-up">The one case that trips people up</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+    <h2 id="the-short-answer-which-direction-is-the-voltage">The short answer: which direction is the voltage going?</h2>
   <p>If you're stepping voltage <b>down</b> to serve a load — a building, a data center, a distribution feeder — you need a <b>pad-mount transformer</b>. If you're stepping voltage <b>up</b> from a generator or inverter to interconnect with the transmission grid, you need a <b>GSU (Generator Step-Up) transformer</b>. That single distinction resolves most of the confusion, but the practical differences go further.</p>
 
-  <h2>What each one actually is</h2>
+  <h2 id="what-each-one-actually-is">What each one actually is</h2>
   <p><b>Pad-mount transformers</b> are ground-mounted, tamper-resistant distribution transformers, typically stepping down from a primary distribution voltage (commonly 15kV–35kV class) to utilization voltage (480V, 208V, etc.). They're the standard way to bring underground power to a commercial site, and they're what most data center power drops from the local utility feeder use.</p>
   <p><b>GSU transformers</b> sit at the generation side of the system — at a power plant, substation, or a utility-scale solar/wind/storage site — stepping voltage up from generator or inverter output (often in the low-kV range) to transmission-line levels (69kV and up, sometimes well over 300kV). They're substation-class equipment, frequently engineered to the specific project rather than pulled from a standard catalog configuration.</p>
 
-  <h2>Side-by-side</h2>
+  <h2 id="side-by-side">Side-by-side</h2>
   <table class="cmptable">
     <thead><tr><th scope="col"></th><th scope="col">Pad-mount</th><th scope="col">GSU</th></tr></thead>
     <tbody>
@@ -151,10 +160,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </table>
   <p style="font-size:12.5px;color:var(--slate)">Lead times reflect current indicative market figures — see the <a class="inline" href="lead-time-index.html">Lead-Time Index</a> for the live reference table.</p>
 
-  <h2>The one case that trips people up</h2>
+  <h2 id="the-one-case-that-trips-people-up">The one case that trips people up</h2>
   <p>A generation site still needs some step-down power for house loads — lighting, controls, HVAC in the switchgear building. That's a legitimate, smaller pad-mount (or dry-type) transformer application sitting right next to a GSU. The two aren't interchangeable, but they do coexist on the same site doing different jobs — don't assume "it's a generation site" automatically means every transformer on it is a GSU.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details>
     <summary>What's the main difference between a pad-mount and a GSU transformer?</summary>
     <p>Direction and purpose: a pad-mount transformer steps voltage down to serve a load, while a GSU steps voltage up from a generator or inverter to interconnect with the transmission grid.</p>
@@ -172,34 +181,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>Both transformer types are on the <a class="inline" href="data-centers.html">Data Centers</a> sector, each with an indicative lead time attached to the specific configuration. For deeper context on why both are quoting this far out, see <a class="inline" href="guide-transformer-lead-times.html">why transformer lead times stretch past 3 years</a>.</p>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Know which one you need? Now size it</h3>
-      <p>Convert a kW load to the kVA rating you need, round to the nearest standard ANSI/IEEE C57.12.00 nameplate, and get full-load amps. Free, no signup.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">Both transformer types are on the <a class="inline" href="data-centers.html">Data Centers</a> sector, each with an indicative lead time attached to the specific configuration. For deeper context on why both are quoting this far out, see <a class="inline" href="guide-transformer-lead-times.html">why transformer lead times stretch past 3 years</a>.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a>kW load to the next standard kVA nameplate.</li>
+        <li><a href="calculators/fault-current.html">Available Fault Current Calculator</a>Available symmetrical fault current at a transformer secondary.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="data-centers/transformers.html">Data Center Transformers</a>Both types side by side, with the ratings and lead times that decide between them.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="calculators/transformer-sizing.html">TRANSFORMER SIZING CALCULATOR &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="data-centers/transformers.html">Data Center Transformers</a> &mdash; both types side by side, with the ratings and lead times that decide between them.</li>
-</ul>
-
-  <h2 id="calcLinks">Run the numbers</h2>
-<ul class="catlink">
-  <li><a class="inline" href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a> &mdash; kW load to the next standard kVA nameplate.</li>
-  <li><a class="inline" href="calculators/fault-current.html">Available Fault Current Calculator</a> &mdash; available symmetrical fault current at a transformer secondary.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Pad-Mount vs. GSU Transformers: Which Do You Need?,&rdquo; <i>Voltfield</i>, updated August 23, 2026. https://voltfield.org/guide-pad-mount-vs-gsu-transformers.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Pad-Mount vs. GSU Transformers: Which Do You Need?,&rdquo; <i>Voltfield</i>, updated August 23, 2026. https://voltfield.org/guide-pad-mount-vs-gsu-transformers.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -213,10 +226,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published July 24, 2026 &middot; last updated August 23, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>What separates a pad-mount from a generator step-up transformer, and when each is the right answer.</dd>
@@ -227,6 +244,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published July 24, 2026 &middot; last updated August 23, 2026. Written and maintained by the Voltfield editorial team against the sources above. Figures that are Voltfield's own estimates rather than published standards are labeled as such where they appear &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 <footer>

@@ -102,29 +102,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>Size a UPS twice: for power (can it carry the load) and for energy (for how long).</li>
+      <li>Check both kW and kVA, because the kW rating often runs out first, and size from measured load, not summed nameplates.</li>
+      <li>Size the battery on aged capacity using the manufacturer's constant-power tables, and the upstream feeder on UPS input, not output.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 9 sections</summary>
+    <ol>
+      <li><a href="#step-1-establish-the-design-load">Step 1: Establish the design load</a></li>
+      <li><a href="#step-2-check-kw-and-kva-both">Step 2: Check kW and kVA, both</a></li>
+      <li><a href="#step-3-dont-plan-to-run-it-at-100">Step 3: Don't plan to run it at 100%</a></li>
+      <li><a href="#step-4-apply-the-redundancy-scheme">Step 4: Apply the redundancy scheme</a></li>
+      <li><a href="#step-5-size-the-battery-for-runtime">Step 5: Size the battery for runtime</a></li>
+      <li><a href="#worked-example">Worked example</a></li>
+      <li><a href="#dont-forget-the-input-side">Don't forget the input side</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
   <p>An <b>uninterruptible power supply (UPS)</b> carries the critical load through the gap between a utility outage and the standby generators taking over. Sizing one comes down to five decisions: the design load, the power rating in both kW and kVA, the loading limit, the redundancy scheme, and the battery runtime. They're made in that order, because each one feeds the next.</p>
 
   <div class="formula">UPS rating &ge; design load (kW <i>and</i> kVA) &divide; loading limit &nbsp;&nbsp;&middot;&nbsp;&nbsp; Battery kWh = kW &times; minutes &divide; 60 &divide; efficiency</div>
 
-  <h2>Step 1: Establish the design load</h2>
+  <h2 id="step-1-establish-the-design-load">Step 1: Establish the design load</h2>
   <p>Start from what the protected equipment actually draws, not from its nameplate. A server's power supply rating is the most it could ever draw, and real IT load commonly sits well below the sum of nameplates. Measured load from a running facility, or the IT vendor's power calculator for a new one, is the better basis.</p>
   <p>Then add growth. The UPS will be in service for years, and the load rarely shrinks. The growth allowance is a design decision, not a formula, but it should be written down, because it's the number most often argued about later.</p>
 
-  <h2>Step 2: Check kW and kVA, both</h2>
+  <h2 id="step-2-check-kw-and-kva-both">Step 2: Check kW and kVA, both</h2>
   <p>A UPS has two output limits: real power (kW) and apparent power (kVA). The ratio between them is the UPS's rated output power factor. Older three-phase designs were commonly rated at 0.8, so a 500 kVA unit could deliver only 400 kW. Many current designs are rated at 0.9 or 1.0. Convert the load to kVA using its power factor (kVA = kW &divide; PF) and confirm it fits <i>both</i> ratings. The <a class="inline" href="guide-kw-vs-kva.html">kW vs. kVA guide</a> covers the conversion in detail.</p>
 
-  <h2>Step 3: Don't plan to run it at 100%</h2>
+  <h2 id="step-3-dont-plan-to-run-it-at-100">Step 3: Don't plan to run it at 100%</h2>
   <p>Many designers keep steady-state loading at or below about 80% of the UPS rating. That leaves room for load steps, inrush from equipment restarting, and measurement error in the load estimate. This is design practice rather than a code requirement, and the right limit depends on the load profile and the manufacturer's guidance.</p>
 
-  <h2>Step 4: Apply the redundancy scheme</h2>
+  <h2 id="step-4-apply-the-redundancy-scheme">Step 4: Apply the redundancy scheme</h2>
   <table class="reftable">
     <tr><th scope="col">Scheme</th><th scope="col">What gets installed</th></tr>
     <tr><td><b>N</b></td><td>Just enough capacity for the load. Any module failure drops capacity below the load.</td></tr>
@@ -134,12 +147,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </table>
   <p>Redundancy is about the whole path, not just the UPS. An N+1 UPS feeding a single distribution path is still a single point of failure downstream. <a class="inline" href="guide-n-plus-1-vs-2n-redundancy.html">N+1 vs. 2N Redundancy Explained</a> covers what each scheme survives and what it costs.</p>
 
-  <h2>Step 5: Size the battery for runtime</h2>
+  <h2 id="step-5-size-the-battery-for-runtime">Step 5: Size the battery for runtime</h2>
   <p>Runtime only has to cover the gap to the generators, with margin. Standby generators for emergency systems are commonly required to pick up load within 10 seconds (NFPA 110, Type 10). The battery has to cover that, a possible failed first start, and the time to transfer. Specifications commonly land between about 5 and 15 minutes at full load. Sizing for a long outage is usually the wrong instinct: that's the generator's job, and every extra minute is battery you replace on a cycle.</p>
   <p>The energy the battery must deliver is the load multiplied by the runtime, divided by the efficiency of the conversion from battery to output. Then allow for the battery losing capacity with age: IEEE 485 applies an aging factor of 1.25 to lead-acid batteries, so the battery still meets the runtime when it has faded to 80% of rated capacity at replacement. For lithium-ion, the manufacturer's end-of-life capacity figure plays the same role.</p>
   <p>Final selection is made from the battery manufacturer's constant-power discharge tables, not from kWh alone. Battery capacity depends on discharge rate. A lead-acid battery delivers noticeably less energy in 5 minutes than in an hour, which is also why halving the load more than doubles the runtime.</p>
 
-  <h2>Worked example</h2>
+  <h2 id="worked-example">Worked example</h2>
   <p>A data hall with a measured IT load of 400 kW at 0.95 power factor, 20% growth allowance, N+1 redundancy using 250 kW / 250 kVA modules (unity output power factor), and 5 minutes of runtime.</p>
   <ul>
     <li><b>Design load:</b> 400 kW &times; 1.20 = 480 kW, which is 480 &divide; 0.95 = 505 kVA</li>
@@ -152,10 +165,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="callout"><b>The trap in that example:</b> on kW alone, two 250 kW modules look like enough for N, and three for N+1. But 505 kVA doesn't fit in 500 kVA. Sized on kW alone, this system would have been N, not N+1, on the day it was commissioned.</div>
   <p>The 95% efficiency and 20% growth figures are assumptions for the example. Use the UPS datasheet's figure at the expected load, and your own project's growth plan.</p>
 
-  <h2>Don't forget the input side</h2>
+  <h2 id="dont-forget-the-input-side">Don't forget the input side</h2>
   <p>A UPS draws more from its input than it delivers at its output. It draws its own losses plus battery recharge current after an outage, when the batteries are depleted and the load is still running. Feeders, breakers and the generator upstream are sized on the UPS's rated input current from its datasheet, not on the output rating. The topology matters too: <a class="inline" href="guide-ups-topologies.html">double conversion and eco mode</a> draw from the input very differently. Generator compatibility deserves its own check. Older rectifier designs with high input harmonic distortion often forced a generator to be oversized relative to the UPS. Modern IGBT rectifiers with low input distortion reduce that, but the UPS manufacturer's generator guidance governs. <a class="inline" href="guide-generator-sizing.html">How to Size a Standby Generator</a> covers the generator side.</p>
 
-  <h2>Common mistakes</h2>
+  <h2 id="common-mistakes">Common mistakes</h2>
   <ul>
     <li><b>Checking only the kVA on the front of the datasheet.</b> The kW rating is often the one that runs out first.</li>
     <li><b>Summing nameplates.</b> This oversizes the UPS and leaves it running at low load for years, where efficiency is worst.</li>
@@ -167,17 +180,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2 id="relatedGuides">Related guides</h2>
-  <ul>
-    <li><a class="inline" href="guide-kw-vs-kva.html">kW vs. kVA Explained</a> &mdash; the conversion behind step 2, and why power equipment carries both ratings</li>
-    <li><a class="inline" href="guide-pue-explained.html">PUE Explained</a> &mdash; where UPS conversion losses show up in the facility efficiency number</li>
-    <li><a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">Short-Circuit Studies &amp; Breaker Coordination</a> &mdash; how the breakers upstream and downstream of the UPS get set</li>
-  </ul>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>The <a class="inline" href="data-centers/backup-power.html">Data Center Backup Power</a> reference covers the UPS, flywheel and generator families this sizing feeds into. The <a class="inline" href="voltfield-pod-designer.html">POD &amp; Skid Designer</a> lets you check a power block's UPS and generator capacity against a target load and redundancy level (N, N+1 or 2N).</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How do I calculate what size UPS I need?</summary>
     <p style="margin-top:10px">Take the measured load plus a growth allowance, convert it to both kW and kVA, and divide by your loading limit (commonly about 80%). Then choose a UPS whose kW and kVA ratings both exceed that figure, adding modules for redundancy. Size the battery separately for the runtime you need.</p>
@@ -194,34 +199,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the difference between N+1 and 2N UPS redundancy?</summary>
     <p style="margin-top:10px">N+1 adds one spare module to a single UPS system, so any one module can fail. 2N installs two complete, independent UPS systems, each able to carry the full load, so an entire system can fail or be maintained without affecting the load.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Checking the generator behind the UPS?</h3>
-      <p>Estimate fuel burn and runtime at your actual load, from the set's own spec sheet. Free, no signup.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="data-centers/backup-power.html">Data Center Backup Power</a> reference covers the UPS, flywheel and generator families this sizing feeds into. The <a class="inline" href="voltfield-pod-designer.html">POD &amp; Skid Designer</a> lets you check a power block's UPS and generator capacity against a target load and redundancy level (N, N+1 or 2N).</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/bess-sizing.html">BESS Sizing Calculator</a>The same load-times-duration energy method, with depth of discharge and efficiency applied.</li>
+        <li><a href="calculators/generator-runtime.html">Generator Runtime Calculator</a>Fuel burn and runtime at a given load.</li>
+        <li><a href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a>kW load to the next standard kVA nameplate.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-kw-vs-kva.html">kW vs. kVA Explained</a>The conversion behind step 2, and why power equipment carries both ratings</li>
+        <li><a href="guide-pue-explained.html">PUE Explained</a>Where UPS conversion losses show up in the facility efficiency number</li>
+        <li><a href="guide-short-circuit-studies-breaker-coordination.html">Short-Circuit Studies &amp; Breaker Coordination</a>How the breakers upstream and downstream of the UPS get set</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="data-centers/backup-power.html">Data Center Backup Power</a>UPS, flywheel and generator families, with ratings and indicative lead times.</li>
+        <li><a href="data-centers/power-distribution.html">Data Center Power Distribution</a>The busway and PDUs downstream of the UPS.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="calculators/generator-runtime.html">GENERATOR RUNTIME &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="data-centers/backup-power.html">Data Center Backup Power</a> &mdash; UPS, flywheel and generator families, with ratings and indicative lead times.</li>
-  <li><a class="inline" href="data-centers/power-distribution.html">Data Center Power Distribution</a> &mdash; the busway and PDUs downstream of the UPS.</li>
-</ul>
-
-  <h2 id="calcLinks">Run the numbers</h2>
-<ul class="catlink">
-  <li><a class="inline" href="calculators/bess-sizing.html">BESS Sizing Calculator</a> &mdash; the same load-times-duration energy method, with depth of discharge and efficiency applied.</li>
-  <li><a class="inline" href="calculators/generator-runtime.html">Generator Runtime Calculator</a> &mdash; fuel burn and runtime at a given load.</li>
-  <li><a class="inline" href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a> &mdash; kW load to the next standard kVA nameplate.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;How to Size a UPS,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-ups-sizing.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;How to Size a UPS,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-ups-sizing.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -235,10 +254,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published September 29, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>How to size a three-phase UPS for a critical load: design load, kW and kVA ratings, loading limit, redundancy and battery runtime, with a worked example.</dd>
@@ -249,6 +272,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published September 29, 2026. Written and maintained by the Voltfield editorial team against the sources above. Every figure in the worked example is arithmetic you can reproduce, and the assumptions it uses (efficiency, growth, runtime) are labeled as assumptions &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 

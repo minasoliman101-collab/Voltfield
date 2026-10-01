@@ -13,8 +13,9 @@
    activate() wipes every non-matching bucket, so nobody sees the half-state. */
 /* v123: fonts moved from Google Fonts to fonts/ on this origin.
    v124: calculators moved off the hub onto their own pages; shared logic and
-   styles in voltfield-calculators.js/.css. */
-const VERSION = 'voltfield-v124';
+   styles in voltfield-calculators.js/.css.
+   v125: guide reading aids and the one-row phone header, both in core.css. */
+const VERSION = 'voltfield-v125';
 
 const CORE = [
   './',

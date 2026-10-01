@@ -102,14 +102,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>IEC 62040-3 classifies UPS systems as VFI (double conversion), VI (line-interactive) or VFD (standby).</li>
+      <li>Eco mode recovers most of double conversion's losses by passing utility power through, so check harmonics and transfer tolerance before enabling it.</li>
+      <li>Read the full code, such as VFI-SS-111, and compare efficiency at the light loads data center UPS systems actually run at.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 9 sections</summary>
+    <ol>
+      <li><a href="#double-conversion-vfi">Double conversion (VFI)</a></li>
+      <li><a href="#eco-mode-high-efficiency-mode">Eco mode (high-efficiency mode)</a></li>
+      <li><a href="#line-interactive-vi">Line-interactive (VI)</a></li>
+      <li><a href="#standby-offline-vfd">Standby / offline (VFD)</a></li>
+      <li><a href="#will-the-load-ride-through-a-transfer">Will the load ride through a transfer?</a></li>
+      <li><a href="#rotary-and-flywheel-ups">Rotary and flywheel UPS</a></li>
+      <li><a href="#modular-or-monolithic">Modular or monolithic</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
   <p>A UPS topology describes where the load gets its power from in normal operation, and what happens when the utility misbehaves. IEC 62040-3 classifies UPS systems by how dependent their output is on the input, in three classes:</p>
   <table class="reftable">
     <tr><th scope="col">Class</th><th scope="col">Topology</th><th scope="col">What the output depends on</th></tr>
@@ -119,32 +132,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </table>
   <p>On a datasheet the class is followed by performance codes, for example <b>VFI-SS-111</b>. The letters after the class describe the output waveform in normal and battery operation, and the digits describe dynamic performance during transfers and load steps. Class 1 is the tightest.</p>
 
-  <h2>Double conversion (VFI)</h2>
+  <h2 id="double-conversion-vfi">Double conversion (VFI)</h2>
   <p>A rectifier converts incoming AC to DC, the DC bus charges the battery, and an inverter rebuilds clean AC for the load, continuously. Because the load always runs from the inverter, a utility outage causes no transfer at all: the battery simply takes over the DC bus. The load is isolated from sags, surges, frequency drift and utility harmonics.</p>
   <p>The cost is that every watt passes through two conversions. Modern large three-phase double-conversion units commonly quote efficiencies in the mid-90s percent at typical load, falling at light load, and that loss becomes heat the cooling system has to remove.</p>
 
-  <h2>Eco mode (high-efficiency mode)</h2>
+  <h2 id="eco-mode-high-efficiency-mode">Eco mode (high-efficiency mode)</h2>
   <p>In eco mode, a double-conversion UPS runs the load on its static bypass, straight from the utility, with the inverter on standby. When the input goes out of tolerance, it transfers to the inverter within a few milliseconds. Efficiency typically rises to around 99%, because almost nothing is being converted.</p>
   <p>The trade-off is exposure. While on bypass, the load sees utility disturbances until the transfer happens, and the UPS no longer filters the load's harmonics from the upstream system. Some manufacturers offer advanced modes that keep the inverter running in parallel to correct harmonics and power factor, which recovers part of the protection for part of the efficiency gain.</p>
   <h3>What the difference is worth</h3>
   <p>For 1 MW of IT load, a UPS at 96% efficiency loses 1,000 &divide; 0.96 &minus; 1,000 = <b>41.7 kW</b>. At 99% it loses <b>10.1 kW</b>. The difference, 31.6 kW, is about <b>277 MWh a year</b>, before the cooling energy saved by not having to remove it. That shows up directly in <a class="inline" href="guide-pue-explained.html">PUE</a>. The efficiencies here are illustrative: use the manufacturer&rsquo;s curve at the load you will actually run.</p>
 
-  <h2>Line-interactive (VI)</h2>
+  <h2 id="line-interactive-vi">Line-interactive (VI)</h2>
   <p>The inverter sits in parallel with the utility path, and an automatic voltage regulator, usually a tapped transformer, corrects sags and swells without going to battery. On an outage the inverter takes over. Line-interactive units are efficient and common in smaller sizes, in IT closets and edge sites, but the output frequency follows the input, and there is a brief transfer on an outage.</p>
 
-  <h2>Standby / offline (VFD)</h2>
+  <h2 id="standby-offline-vfd">Standby / offline (VFD)</h2>
   <p>The load runs directly from the utility, and the UPS switches to battery and inverter when the input fails. It is the simplest and cheapest topology, used for desktop and small loads. Transfer takes a few milliseconds.</p>
 
-  <h2>Will the load ride through a transfer?</h2>
+  <h2 id="will-the-load-ride-through-a-transfer">Will the load ride through a transfer?</h2>
   <p>Server power supplies store enough energy to ride through a short interruption, and the ITIC (CBEMA) curve, the usual reference for IT equipment tolerance, allows a complete loss of voltage for up to 20 ms. A transfer of a few milliseconds is normally within that. Loads that are not IT power supplies, such as motors, drives and some controls, may be less tolerant and need checking.</p>
 
-  <h2>Rotary and flywheel UPS</h2>
+  <h2 id="rotary-and-flywheel-ups">Rotary and flywheel UPS</h2>
   <p>Not every UPS is static. Flywheel systems store energy mechanically and deliver seconds of ride-through, enough to start a generator but not much more. Diesel rotary UPS (DRUPS) couples a motor-generator and flywheel to a diesel engine in one machine. Both avoid large battery installations, at the price of mechanical maintenance. The <a class="inline" href="data-centers/backup-power.html">backup power reference</a> covers them alongside static UPS.</p>
 
-  <h2>Modular or monolithic</h2>
+  <h2 id="modular-or-monolithic">Modular or monolithic</h2>
   <p>Large UPS systems come either as single large units or as frames of hot-swappable power modules. Modular designs let capacity be added as load grows, keep modules closer to their efficient loading range, and put N+1 redundancy inside one frame. But the frame, its bypass and its controls are still shared, which the <a class="inline" href="guide-n-plus-1-vs-2n-redundancy.html">redundancy guide</a> explains.</p>
 
-  <h2>Common mistakes</h2>
+  <h2 id="common-mistakes">Common mistakes</h2>
   <ul>
     <li><b>Comparing efficiencies at full load.</b> Data center UPS systems run lightly loaded, especially in 2N designs.</li>
     <li><b>Enabling eco mode without checking the load.</b> Harmonics and transfer tolerance need checking first.</li>
@@ -154,17 +167,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2 id="relatedGuides">Related guides</h2>
-  <ul>
-    <li><a class="inline" href="guide-ups-sizing.html">How to Size a UPS</a> &mdash; kW and kVA, loading limits, redundancy and battery runtime</li>
-    <li><a class="inline" href="guide-harmonics-ieee-519.html">Harmonics &amp; IEEE 519 Explained</a> &mdash; what rectifiers put back into the system, and what eco mode stops filtering</li>
-    <li><a class="inline" href="guide-generator-sizing.html">How to Size a Standby Generator</a> &mdash; the source the UPS hands the load to</li>
-  </ul>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>The <a class="inline" href="data-centers/backup-power.html">Data Center Backup Power</a> reference covers static, flywheel and rotary UPS families, and the <a class="inline" href="voltfield-pod-designer.html">POD &amp; Skid Designer</a> checks UPS capacity against a target load and redundancy level.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the difference between VFI, VI and VFD UPS?</summary>
     <p style="margin-top:10px">They are the IEC 62040-3 classes. VFI (double conversion) output is independent of input voltage and frequency; VI (line-interactive) output regulates voltage but follows input frequency; VFD (standby) output follows the input until the UPS transfers to battery.</p>
@@ -181,33 +186,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Can servers ride through a UPS transfer?</summary>
     <p style="margin-top:10px">Usually. Server power supplies store energy for short interruptions, and the ITIC curve allows a complete loss of voltage for up to 20 ms, longer than a typical transfer. Motors, drives and some controls may be less tolerant.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Sizing the UPS itself?</h3>
-      <p>Design load, kW and kVA, loading limit, redundancy and battery runtime, with a worked example.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="data-centers/backup-power.html">Data Center Backup Power</a> reference covers static, flywheel and rotary UPS families, and the <a class="inline" href="voltfield-pod-designer.html">POD &amp; Skid Designer</a> checks UPS capacity against a target load and redundancy level.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/bess-sizing.html">BESS Sizing Calculator</a>Usable and nameplate kWh from a critical load and backup time.</li>
+        <li><a href="calculators/generator-runtime.html">Generator Runtime Calculator</a>Fuel burn and runtime at a given load.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-ups-sizing.html">How to Size a UPS</a>kW and kVA, loading limits, redundancy and battery runtime</li>
+        <li><a href="guide-harmonics-ieee-519.html">Harmonics &amp; IEEE 519 Explained</a>What rectifiers put back into the system, and what eco mode stops filtering</li>
+        <li><a href="guide-generator-sizing.html">How to Size a Standby Generator</a>The source the UPS hands the load to</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="data-centers/backup-power.html">Data Center Backup Power</a>Static, flywheel and rotary UPS, and generators.</li>
+        <li><a href="data-centers/power-distribution.html">Data Center Power Distribution</a>What the UPS output feeds.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="guide-ups-sizing.html">UPS SIZING GUIDE &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="data-centers/backup-power.html">Data Center Backup Power</a> &mdash; static, flywheel and rotary UPS, and generators.</li>
-  <li><a class="inline" href="data-centers/power-distribution.html">Data Center Power Distribution</a> &mdash; what the UPS output feeds.</li>
-</ul>
-
-  <h2 id="calcLinks">Run the numbers</h2>
-<ul class="catlink">
-  <li><a class="inline" href="calculators/bess-sizing.html">BESS Sizing Calculator</a> &mdash; usable and nameplate kWh from a critical load and backup time.</li>
-  <li><a class="inline" href="calculators/generator-runtime.html">Generator Runtime Calculator</a> &mdash; fuel burn and runtime at a given load.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;UPS Topologies: Double Conversion vs. Eco Mode,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-ups-topologies.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;UPS Topologies: Double Conversion vs. Eco Mode,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-ups-topologies.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -221,10 +240,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published September 29, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>The IEC 62040-3 UPS classes (VFI, VI, VFD) and their performance codes, double conversion, eco mode and its trade-offs, line-interactive and standby topologies, transfer tolerance, rotary and flywheel UPS, and modular designs.</dd>
@@ -235,6 +258,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published September 29, 2026. Written and maintained by the Voltfield editorial team against the sources above. The efficiency example is arithmetic you can reproduce, and its 96% and 99% figures are labeled as illustrative &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 

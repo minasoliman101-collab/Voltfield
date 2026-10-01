@@ -122,17 +122,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>Interconnection is a multi-stage study process run by the grid operator, and each stage can take months to years.</li>
+      <li>FERC Order 2023 moved queues to cluster studies, with readiness deposits and use-it-or-lose-it deadlines.</li>
+      <li>For many projects the queue, not equipment lead time, is the longer pole in the tent.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 6 sections</summary>
+    <ol>
+      <li><a href="#the-five-stages-in-order">The five stages, in order</a></li>
+      <li><a href="#cluster-studies-the-post-2023-reform">Cluster studies: the post-2023 reform</a></li>
+      <li><a href="#how-this-varies-by-region">How this varies by region</a></li>
+      <li><a href="#why-most-queued-projects-never-get-built">Why most queued projects never get built</a></li>
+      <li><a href="#interconnection-timeline-vs-equipment-lead-time">Interconnection timeline vs. equipment lead time</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
   <p>Connecting a generation project — solar, wind, storage, or a new load — to the transmission or distribution grid isn't a permit you apply for once. It's a multi-stage technical study process run by the transmission provider or grid operator (a regional ISO/RTO like PJM, MISO, ERCOT, or CAISO, or a utility running its own queue), and each stage can take months to years depending on how congested the local grid already is.</p>
 
-  <h2>The five stages, in order</h2>
+  <h2 id="the-five-stages-in-order">The five stages, in order</h2>
   <div class="stagelist">
     <div class="stage"><div><div class="st-t">Interconnection request</div><div class="st-d">The developer files a formal request establishing queue position, along with a study deposit. This is the moment that starts the clock — and the position in line matters, because studies are often done in the order requests were filed (or in batches, see cluster studies below).</div></div></div>
     <div class="stage"><div><div class="st-t">Feasibility study</div><div class="st-d">A first-pass, relatively quick study estimating potential system impacts and a rough order-of-magnitude cost and timeline. It's meant to flag obvious problems early, not to be the final answer.</div></div></div>
@@ -141,12 +151,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="stage"><div><div class="st-t">Interconnection agreement (IA)</div><div class="st-d">The executed contract: the developer commits to funding and often building the required upgrades, and the transmission provider commits to interconnecting the project once they're complete. This is the document that actually allows energization.</div></div></div>
   </div>
 
-  <h2>Cluster studies: the post-2023 reform</h2>
+  <h2 id="cluster-studies-the-post-2023-reform">Cluster studies: the post-2023 reform</h2>
   <p>For years, most queues studied projects one at a time, in strict filing order — a project near the back of a long queue could wait years just for its turn to be studied, even if it was otherwise ready to build. FERC Order 2023 (2023) required transmission providers to move toward <b>cluster studies</b>: batches of interconnection requests studied together on a fixed cycle, paired with stricter readiness deposits and "use-it-or-lose-it" deadlines meant to push out speculative projects that were holding a queue position without a realistic path to construction.</p>
 
   <div class="callout"><b>Why this matters for procurement:</b> a project's queue cohort and study cycle timing now matter as much as its position number. Two projects filed the same month in different regions can be on completely different timelines depending on how their transmission provider has implemented cluster reform.</div>
 
-  <h2>How this varies by region</h2>
+  <h2 id="how-this-varies-by-region">How this varies by region</h2>
   <p>FERC Order 2023 only reaches transmission providers under FERC jurisdiction — PJM, MISO, SPP, CAISO, and NYISO among them — and each has implemented cluster studies on its own timeline and with its own specific rules. ERCOT sits outside FERC jurisdiction entirely and runs its own generator interconnection process, so its reform path and timelines don't automatically track the others. Comparing queue position across regions really means comparing different rulebooks, not just different backlogs — check the specific transmission provider's own process before assuming a timeline transfers from one region to another.</p>
   <ul>
     <li><a class="inline" href="guide-interconnection-pjm.html">PJM</a> — Transition Cycles, readiness requirements, and the Northern Virginia data-center load boom</li>
@@ -154,18 +164,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li><a class="inline" href="guide-interconnection-ercot.html">ERCOT</a> — why it sits outside FERC entirely, and how growth has reshaped a historically faster process</li>
   </ul>
 
-  <h2>Why most queued projects never get built</h2>
+  <h2 id="why-most-queued-projects-never-get-built">Why most queued projects never get built</h2>
   <p>Lawrence Berkeley National Laboratory's annual <a class="inline" href="https://emp.lbl.gov/queues" target="_blank" rel="noopener">"Queued Up"</a> report has tracked this for years: only a minority of projects that enter an interconnection queue ultimately reach commercial operation. Many withdraw once system impact study results show the required network upgrade costs, or after a competing project ahead of them in the queue claims the available capacity first. That attrition rate is exactly why queue position alone is a weak signal of whether a project will actually get built on schedule.</p>
 
-  <h2>Interconnection timeline vs. equipment lead time</h2>
+  <h2 id="interconnection-timeline-vs-equipment-lead-time">Interconnection timeline vs. equipment lead time</h2>
   <p>For a lot of projects today, the interconnection study-and-upgrade timeline runs longer than the equipment procurement timeline — even with <a class="inline" href="guide-transformer-lead-times.html">transformer lead times stretching past 3 years</a>. That reshuffles the usual planning order: instead of finalizing interconnection and then ordering equipment, both need to move in parallel from the earliest feasible point, with the equipment order placed against a preliminary spec rather than waiting for the facilities study to finalize every detail.</p>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>Once your interconnection facilities study specifies the equipment — GSU transformers, switchgear, protection relays — configure it directly on the <a class="inline" href="renewables.html">Renewables</a> or <a class="inline" href="data-centers.html">Data Centers</a> reference and check its indicative lead time before you're locked into a facilities-study cost estimate. Tracking multiple studies and equipment orders across projects? The <a class="inline" href="specification-checklist.html">specification checklist</a> keeps every vendor spec consistent, and the <a class="inline" href="lead-time-index.html">Lead-Time Index</a> shows current equipment lead times to plan alongside your queue timeline.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What are the stages of the grid interconnection process?</summary>
     <p style="margin-top:10px">In order: an interconnection request establishes queue position, a feasibility study gives a rough first look at impacts and cost, a system impact study identifies specific required upgrades (thermal, voltage, stability, short-circuit), a facilities study prices and engineers those upgrades in detail, and an interconnection agreement is the executed contract that obligates the developer to fund the upgrades and the transmission provider to interconnect the project.</p>
@@ -182,31 +190,43 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How does interconnection timeline compare to equipment lead time?</summary>
     <p style="margin-top:10px">For many projects, interconnection studies and required network upgrades now take longer than procuring the generation equipment itself — which is why queue position and study milestones need to be tracked in parallel with equipment ordering from day one, not treated as a formality to clear after equipment is already on order.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>The other long pole: equipment</h3>
-      <p>What is driving the multi-year power transformer shortage, why lead times stretch past three years, and how to plan a project schedule around it.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">Once your interconnection facilities study specifies the equipment — GSU transformers, switchgear, protection relays — configure it directly on the <a class="inline" href="renewables.html">Renewables</a> or <a class="inline" href="data-centers.html">Data Centers</a> reference and check its indicative lead time before you're locked into a facilities-study cost estimate. Tracking multiple studies and equipment orders across projects? The <a class="inline" href="specification-checklist.html">specification checklist</a> keeps every vendor spec consistent, and the <a class="inline" href="lead-time-index.html">Lead-Time Index</a> shows current equipment lead times to plan alongside your queue timeline.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/fault-current.html">Available Fault Current Calculator</a>Available symmetrical fault current at a transformer secondary.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-transformer-lead-times.html">Why Transformer Lead Times Stretch Past 3 Years — And How to Plan Around It</a>What is driving the multi-year power transformer shortage, why lead times stretch past three years, and how to plan a project schedule around it.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="renewables/ac-collection.html">Renewable Plant AC Collection</a>The collector and substation equipment the interconnection agreement governs.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="guide-transformer-lead-times.html">READ THE LEAD-TIME GUIDE &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="renewables/ac-collection.html">Renewable Plant AC Collection</a> &mdash; the collector and substation equipment the interconnection agreement governs.</li>
-</ul>
-
-  <h2 id="calcLinks">Run the numbers</h2>
-<ul class="catlink">
-  <li><a class="inline" href="calculators/fault-current.html">Available Fault Current Calculator</a> &mdash; available symmetrical fault current at a transformer secondary.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;The Grid Interconnection Process, Explained,&rdquo; <i>Voltfield</i>, updated August 23, 2026. https://voltfield.org/guide-grid-interconnection-process.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;The Grid Interconnection Process, Explained,&rdquo; <i>Voltfield</i>, updated August 23, 2026. https://voltfield.org/guide-grid-interconnection-process.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -220,10 +240,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published August 2, 2026 &middot; last updated August 23, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>How a generation or large-load interconnection request moves through study, agreement and construction, and where the delays concentrate.</dd>
@@ -234,6 +258,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published August 2, 2026 &middot; last updated August 23, 2026. Written and maintained by the Voltfield editorial team against the sources above. Figures that are Voltfield's own estimates rather than published standards are labeled as such where they appear &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 <footer>

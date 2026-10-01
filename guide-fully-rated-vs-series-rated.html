@@ -102,21 +102,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>Every interrupting device must be rated for the fault current at its terminals (NEC 110.9), either individually or as a tested series combination.</li>
+      <li>A series rating is valid only for the exact tested combination; a &ldquo;compatible&rdquo; replacement breaks it.</li>
+      <li>Series ratings and selective coordination do not mix, and a series rating does not reduce arc-flash energy.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#how-a-series-rating-works">How a series rating works</a></li>
+      <li><a href="#worked-example">Worked example</a></li>
+      <li><a href="#what-the-nec-requires-for-series-ratings">What the NEC requires for series ratings</a></li>
+      <li><a href="#why-series-ratings-and-selective-coordination-do">Why series ratings and selective coordination don't mix</a></li>
+      <li><a href="#interrupting-rating-sccr-and-withstand">Interrupting rating, SCCR and withstand</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
   <p>The NEC requires every device intended to interrupt a fault to have an interrupting rating at least equal to the fault current available at its line terminals (NEC 110.9). There are two ways to meet that. In a <b>fully rated</b> system, every breaker and fuse is individually rated for the available fault current. In a <b>series rated</b> system, a downstream breaker with a lower interrupting rating is protected by a specific upstream device, and the two have been tested together as a combination rated for the higher fault current.</p>
 
-  <h2>How a series rating works</h2>
+  <h2 id="how-a-series-rating-works">How a series rating works</h2>
   <p>When a large fault occurs downstream, the upstream device (a current-limiting fuse or breaker) opens fast enough to limit the let-through current and energy. The downstream breaker, which couldn't interrupt the full fault on its own, only has to handle what gets through. The combination is only valid because it was tested that way, under UL 489 for breakers, and it's listed by the manufacturer for those exact devices.</p>
   <div class="formula">Fully rated: every device &ge; available fault current &nbsp;&nbsp;&middot;&nbsp;&nbsp; Series rated: the tested combination &ge; available fault current</div>
 
-  <h2>Worked example</h2>
+  <h2 id="worked-example">Worked example</h2>
   <p>A panelboard fed from a 2,000 kVA, 480 V transformer with 5.75% impedance. As an infinite-source estimate at the transformer terminals, available fault current is 100,000 &times; 2,000 &divide; (1.732 &times; 480 &times; 5.75) = <b>about 41,800 A</b>. The real value at the panel will be lower once cable impedance is included, but take 42 kA as the design figure.</p>
   <ul>
     <li><b>Fully rated:</b> every branch breaker in the panel must be rated at 42 kA or more. That usually means a higher-interrupting frame for every branch circuit.</li>
@@ -124,18 +135,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </ul>
   <p>The series-rated panel is usually cheaper, because a panel full of lower-rated branch breakers costs less than a panel full of high-interrupting ones. The fault-current figure uses the same method as the <a class="inline" href="calculators/fault-current.html">fault current calculator</a>, and the <a class="inline" href="guide-transformer-impedance.html">impedance guide</a> explains why the transformer's tolerance can push it higher.</p>
 
-  <h2>What the NEC requires for series ratings</h2>
+  <h2 id="what-the-nec-requires-for-series-ratings">What the NEC requires for series ratings</h2>
   <ul>
     <li><b>Tested combinations only.</b> New installations must use combinations that have been tested and are marked on the equipment (NEC 240.86). Existing installations can use engineered series ratings selected by a licensed engineer, under specific conditions.</li>
     <li><b>Field marking.</b> The equipment must be labeled "Caution &mdash; Series Combination System Rated ___ Amperes. Identified Replacement Components Required." (NEC 110.22(C)). A like-for-like swap with a different breaker voids the rating.</li>
     <li><b>The motor limit.</b> A series rating can't be used where motors connected between the two devices contribute more than 1% of the lower-rated breaker's interrupting rating. For an 18 kA breaker, that's 180 A of motor full-load current. Motors feed fault current back through the downstream breaker, which the tested combination didn't account for.</li>
   </ul>
 
-  <h2>Why series ratings and selective coordination don't mix</h2>
+  <h2 id="why-series-ratings-and-selective-coordination-do">Why series ratings and selective coordination don't mix</h2>
   <p>A series rating works <i>because</i> the upstream device opens on a large downstream fault. That's the opposite of selective coordination, which requires only the device nearest the fault to open. A series-rated combination is non-selective by design for high-level faults.</p>
   <p>That matters wherever the NEC requires selective coordination: emergency systems, legally required standby systems, critical operations power systems, elevator circuits and certain health care feeders. In those systems, series ratings generally can't be relied on, and devices have to be fully rated. Data centers, where losing an upstream breaker takes out far more than the faulted circuit, usually choose fully rated, coordinated designs for the same reason, whether or not the code requires it. The <a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">short-circuit and coordination guide</a> covers the study that checks this.</p>
 
-  <h2>Interrupting rating, SCCR and withstand</h2>
+  <h2 id="interrupting-rating-sccr-and-withstand">Interrupting rating, SCCR and withstand</h2>
   <table class="reftable">
     <tr><th scope="col">Rating</th><th scope="col">Applies to</th></tr>
     <tr><td><b>Interrupting rating (AIC)</b></td><td>A device that opens a fault: breakers and fuses. The fault it can safely interrupt.</td></tr>
@@ -144,7 +155,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </table>
   <p>All three have to be checked against available fault current, and a new transformer or utility upgrade can invalidate any of them.</p>
 
-  <h2>Common mistakes</h2>
+  <h2 id="common-mistakes">Common mistakes</h2>
   <ul>
     <li><b>Replacing a series-rated breaker with a "compatible" one</b> that isn't part of the tested combination.</li>
     <li><b>Using series ratings in systems that require selective coordination.</b></li>
@@ -155,17 +166,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2 id="relatedGuides">Related guides</h2>
-  <ul>
-    <li><a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">Short-Circuit Studies &amp; Breaker Coordination</a> &mdash; available fault current and selectivity</li>
-    <li><a class="inline" href="guide-transformer-impedance.html">Transformer Impedance (%Z) Explained</a> &mdash; the number that sets available fault current</li>
-    <li><a class="inline" href="guide-ground-fault-protection.html">Ground-Fault Protection Explained</a> &mdash; the other protection layer to coordinate</li>
-  </ul>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>The <a class="inline" href="data-centers/switchgear.html">switchgear reference</a> covers the breakers and lineups these ratings apply to, and <a class="inline" href="data-centers/switchgear-components.html">Switchgear Components</a> covers the trip units that set their behavior.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the difference between fully rated and series rated?</summary>
     <p style="margin-top:10px">In a fully rated system, every breaker and fuse is individually rated for the available fault current. In a series rated system, a lower-rated downstream breaker is protected by a specific upstream device, and the tested combination carries the higher rating.</p>
@@ -182,33 +185,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the difference between interrupting rating and SCCR?</summary>
     <p style="margin-top:10px">Interrupting rating applies to devices that open a fault, such as breakers and fuses. SCCR applies to assemblies such as panels, control panels and rack PDUs, and states the fault current they can withstand with their specified protection. Both must meet the available fault current.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>What fault current will the panel see?</h3>
-      <p>Estimate available fault current from transformer kVA, voltage and impedance. Free, no signup.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="data-centers/switchgear.html">switchgear reference</a> covers the breakers and lineups these ratings apply to, and <a class="inline" href="data-centers/switchgear-components.html">Switchgear Components</a> covers the trip units that set their behavior.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/fault-current.html">Available Fault Current Calculator</a>Available symmetrical fault current at a transformer secondary.</li>
+        <li><a href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a>kW load to the next standard kVA nameplate.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-short-circuit-studies-breaker-coordination.html">Short-Circuit Studies &amp; Breaker Coordination</a>Available fault current and selectivity</li>
+        <li><a href="guide-transformer-impedance.html">Transformer Impedance (%Z) Explained</a>The number that sets available fault current</li>
+        <li><a href="guide-ground-fault-protection.html">Ground-Fault Protection Explained</a>The other protection layer to coordinate</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="data-centers/switchgear.html">Data Center Switchgear</a>Breakers, lineups and their interrupting ratings.</li>
+        <li><a href="data-centers/switchgear-components.html">Switchgear Components</a>Trip units and accessories.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="calculators/fault-current.html">FAULT CURRENT &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="data-centers/switchgear.html">Data Center Switchgear</a> &mdash; breakers, lineups and their interrupting ratings.</li>
-  <li><a class="inline" href="data-centers/switchgear-components.html">Switchgear Components</a> &mdash; trip units and accessories.</li>
-</ul>
-
-  <h2 id="calcLinks">Run the numbers</h2>
-<ul class="catlink">
-  <li><a class="inline" href="calculators/fault-current.html">Available Fault Current Calculator</a> &mdash; available symmetrical fault current at a transformer secondary.</li>
-  <li><a class="inline" href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a> &mdash; kW load to the next standard kVA nameplate.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Fully Rated vs. Series Rated Breakers,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-fully-rated-vs-series-rated.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Fully Rated vs. Series Rated Breakers,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-fully-rated-vs-series-rated.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -222,10 +239,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published September 29, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>How fully rated and series rated systems meet interrupting-rating requirements, the NEC rules for series ratings, why series ratings conflict with selective coordination, and the difference between interrupting rating, SCCR and short-time withstand.</dd>
@@ -236,6 +257,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published September 29, 2026. Written and maintained by the Voltfield editorial team against the sources above. The fault-current figure is arithmetic you can reproduce with the site's fault current calculator &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 

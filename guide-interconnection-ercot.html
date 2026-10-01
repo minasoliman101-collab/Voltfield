@@ -120,14 +120,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>ERCOT's grid stands alone, so its interconnection process is regulated by the Public Utility Commission of Texas, not FERC.</li>
+      <li>Its &ldquo;connect and manage&rdquo; approach long made it one of the faster US queues.</li>
+      <li>Growth in wind, solar and storage has added reforms and stability studies, so check current timing against ERCOT's published queue data.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 5 sections</summary>
+    <ol>
+      <li><a href="#why-ercot-sits-outside-ferc-jurisdiction">Why ERCOT sits outside FERC jurisdiction</a></li>
+      <li><a href="#connect-and-manage-historically-one-of-the-faste">"Connect and manage": historically one of the faster queues</a></li>
+      <li><a href="#why-stability-studies-got-added">Why stability studies got added</a></li>
+      <li><a href="#what-this-means-for-equipment-planning">What this means for equipment planning</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
   <p><b>ERCOT runs its own interconnection process, regulated by the Public Utility Commission of Texas rather than FERC.</b> It was long cited as one of the faster US queues, because its &ldquo;connect and manage&rdquo; approach required fewer upfront network upgrades. Rapid growth in wind, solar and storage has since added reforms and stability studies, so confirm current timing against ERCOT&rsquo;s published queue data rather than its reputation.</p>
   <p>This guide assumes the <a class="inline" href="guide-grid-interconnection-process.html">general interconnection process</a> as background. ERCOT is the exception to nearly everything in that guide: it isn't a FERC-jurisdictional RTO, it runs a process built around different priorities, and — because Texas's grid stands alone, disconnected from the Eastern and Western Interconnections — the usual federal framework simply doesn't reach it.</p>
 
@@ -138,26 +147,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="fact"><div class="fl">Recent addition</div><div class="fv">Stability studies</div></div>
   </div>
 
-  <h2>Why ERCOT sits outside FERC jurisdiction</h2>
+  <h2 id="why-ercot-sits-outside-ferc-jurisdiction">Why ERCOT sits outside FERC jurisdiction</h2>
   <p>FERC's authority over wholesale electricity markets comes from the Federal Power Act, which reaches interstate transmission of electric energy. ERCOT's grid is electrically isolated from the Eastern and Western Interconnections — Texas deliberately built and kept it that way, historically to avoid exactly this kind of federal jurisdiction — so ERCOT's wholesale market and interconnection process are regulated instead by the <b>Public Utility Commission of Texas (PUCT)</b>, not FERC. That means FERC Order 2023's cluster-study mandate, covered in the <a class="inline" href="guide-grid-interconnection-process.html">general interconnection guide</a>, doesn't directly apply to ERCOT — any reforms to ERCOT's process happen through PUCT proceedings and ERCOT's own protocols on their own schedule.</p>
 
-  <h2>"Connect and manage": historically one of the faster queues</h2>
+  <h2 id="connect-and-manage-historically-one-of-the-faste">"Connect and manage": historically one of the faster queues</h2>
   <p>ERCOT has long been cited as having one of the more developer-friendly interconnection processes in the US, largely because of its "connect and manage" philosophy: rather than requiring a project to fund extensive upfront network upgrades before interconnecting, ERCOT has historically allowed more projects to connect with fewer prerequisite upgrades, managing resulting congestion through market operations afterward instead of blocking interconnection beforehand. That's a meaningfully different tradeoff than the network-upgrade-heavy facilities-study model most FERC-jurisdictional regions run, and it's a large part of why Texas built out wind, solar, and storage capacity as fast as it did.</p>
 
   <div class="callout"><b>Worth confirming directly:</b> "historically faster" isn't the same as "currently fast." The volume of interconnection requests ERCOT has processed in recent years has driven its own queue reforms and added study requirements — treat ERCOT's reputation as a starting expectation to verify against ERCOT's current published queue data, not a guarantee.</div>
 
-  <h2>Why stability studies got added</h2>
+  <h2 id="why-stability-studies-got-added">Why stability studies got added</h2>
   <p>As wind, solar, and storage — all inverter-based resources — became a much larger share of ERCOT's generation mix, the interconnection process picked up additional <b>stability and dynamic performance study</b> requirements that matter far less on a grid dominated by conventional synchronous generation. These studies evaluate how a new inverter-based project behaves during grid disturbances and how it interacts with other inverter-based resources already on the system — a real engineering question at high penetration levels, and one every other US grid region with fast-growing renewable and storage capacity is working through in its own way.</p>
 
-  <h2>What this means for equipment planning</h2>
+  <h2 id="what-this-means-for-equipment-planning">What this means for equipment planning</h2>
   <p>A comparatively faster interconnection process doesn't shorten equipment lead times — a GSU transformer or MV switchgear order for an ERCOT project runs against the same multi-year industry-wide lead times covered in <a class="inline" href="guide-transformer-lead-times.html">Why Transformer Lead Times Stretch Past 3 Years</a>. If anything, a faster queue makes it more likely that equipment procurement, not interconnection studies, is the actual critical path for a Texas project — worth confirming early rather than assuming the equipment will simply be ready when the interconnection clears.</p>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>Once an ERCOT interconnection study specifies the equipment, configure it on the <a class="inline" href="renewables.html">Renewables</a> or <a class="inline" href="battery-storage.html">Battery Storage</a> reference and check its indicative lead time — and check the <a class="inline" href="lead-time-index.html">Lead-Time Index</a> before assuming equipment will keep pace with ERCOT's queue. The <a class="inline" href="voltfield-pod-designer.html">POD &amp; Skid Designer</a> is a free way to first-pass-size a project's power block, including skid-mounted equipment common on ERCOT storage and temporary power builds.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why isn't ERCOT regulated by FERC?</summary>
     <p style="margin-top:10px">ERCOT's grid is electrically isolated from the Eastern and Western Interconnections and does not engage in interstate transmission of electricity, so it falls outside FERC's jurisdiction under the Federal Power Act. ERCOT's wholesale market and interconnection process are instead regulated by the Public Utility Commission of Texas (PUCT).</p>
@@ -170,26 +177,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why did ERCOT add stability studies to its interconnection process?</summary>
     <p style="margin-top:10px">As inverter-based resources (solar, wind, storage) became a larger share of generation on the ERCOT grid, additional stability and dynamic performance study requirements were added to the interconnection process to evaluate how new inverter-based projects interact with the grid and with each other — a study dimension that mattered less when generation was predominantly conventional, synchronous machines.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Facing ERCOT stability studies?</h3>
-      <p>Grid-forming vs. grid-following inverters explained: control modes, short-circuit ratio and weak grids, black start, fault current limits, and what GFM costs.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">Once an ERCOT interconnection study specifies the equipment, configure it on the <a class="inline" href="renewables.html">Renewables</a> or <a class="inline" href="battery-storage.html">Battery Storage</a> reference and check its indicative lead time — and check the <a class="inline" href="lead-time-index.html">Lead-Time Index</a> before assuming equipment will keep pace with ERCOT's queue. The <a class="inline" href="voltfield-pod-designer.html">POD &amp; Skid Designer</a> is a free way to first-pass-size a project's power block, including skid-mounted equipment common on ERCOT storage and temporary power builds.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-grid-forming-vs-grid-following.html">Grid-Forming vs. Grid-Following Inverters</a>Grid-forming vs. grid-following inverters explained: control modes, short-circuit ratio and weak grids, black start, fault current limits, and what GFM costs.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="renewables/ac-collection.html">Renewable Plant AC Collection</a>The long-lead collector and substation equipment to release against the study.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="guide-grid-forming-vs-grid-following.html">READ THE GRID-FORMING GUIDE &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="renewables/ac-collection.html">Renewable Plant AC Collection</a> &mdash; the long-lead collector and substation equipment to release against the study.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;ERCOT Interconnection Timeline, Explained,&rdquo; <i>Voltfield</i>, updated August 24, 2026. https://voltfield.org/guide-interconnection-ercot.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;ERCOT Interconnection Timeline, Explained,&rdquo; <i>Voltfield</i>, updated August 24, 2026. https://voltfield.org/guide-interconnection-ercot.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -203,10 +221,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published August 23, 2026 &middot; last updated August 24, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>How ERCOT's interconnection process differs from the FERC-jurisdictional model, and what that means for project timing.</dd>
@@ -217,6 +239,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published August 23, 2026 &middot; last updated August 24, 2026. Written and maintained by the Voltfield editorial team against the sources above. Figures that are Voltfield's own estimates rather than published standards are labeled as such where they appear &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 <footer>

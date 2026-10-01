@@ -120,14 +120,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>MISO studies requests in batches called Definitive Planning Phase (DPP) cycles.</li>
+      <li>Several cycles ran years behind their targets because request volume outgrew study capacity.</li>
+      <li>Wait times depend heavily on where a project sits in MISO's footprint, because congestion and upgrades differ by sub-region.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 5 sections</summary>
+    <ol>
+      <li><a href="#the-definitive-planning-phase-dpp">The Definitive Planning Phase (DPP)</a></li>
+      <li><a href="#why-dpp-cycles-ran-so-far-behind-schedule">Why DPP cycles ran so far behind schedule</a></li>
+      <li><a href="#why-misos-footprint-size-matters-more-than-most">Why MISO's footprint size matters more than most</a></li>
+      <li><a href="#how-this-compares-to-neighboring-regions">How this compares to neighboring regions</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
   <p><b>MISO studies interconnection requests in batches, called Definitive Planning Phase (DPP) cycles, and in several cycles those studies ran years behind their targets.</b> Request volume grew far faster than MISO&rsquo;s study capacity. How long a project waits depends heavily on where it sits in MISO&rsquo;s footprint, because congestion and required network upgrades differ by sub-region.</p>
   <p>This guide assumes the <a class="inline" href="guide-grid-interconnection-process.html">general interconnection process</a> as background. MISO is the largest RTO by geographic footprint in North America — a north-south corridor running from Manitoba, Canada down through the upper Midwest into the lower Mississippi Valley — and FERC-jurisdictional throughout.</p>
 
@@ -138,26 +147,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="fact"><div class="fl">Key variable</div><div class="fv">Sub-region congestion</div></div>
   </div>
 
-  <h2>The Definitive Planning Phase (DPP)</h2>
+  <h2 id="the-definitive-planning-phase-dpp">The Definitive Planning Phase (DPP)</h2>
   <p>MISO's cluster-study stage is called the <b>Definitive Planning Phase</b>, or DPP: a cohort of interconnection requests filed within the same window is studied together for system impacts and the specific network upgrades each project would require, following the same feasibility-study-then-system-impact-study logic covered in the <a class="inline" href="guide-grid-interconnection-process.html">general interconnection guide</a>, just run for a batch rather than one request at a time. It's MISO's version of the cluster-study concept FERC Order 2023 later mandated industry-wide.</p>
 
-  <h2>Why DPP cycles ran so far behind schedule</h2>
+  <h2 id="why-dpp-cycles-ran-so-far-behind-schedule">Why DPP cycles ran so far behind schedule</h2>
   <p>MISO's DPP process became a widely-cited example of interconnection queue strain: the volume of wind, solar, and storage interconnection requests grew far faster than MISO's study capacity could absorb in several cycles, and cohorts targeted to complete on a schedule measured in months instead stretched to multiple years. That experience — MISO's own version of the same industry-wide backlog problem — fed directly into both MISO-specific process reforms and the broader push toward FERC Order 2023's stricter readiness requirements and use-it-or-lose-it deadlines.</p>
 
   <div class="callout"><b>Why this matters for procurement:</b> a DPP cohort running behind schedule doesn't just delay the interconnection agreement — it delays the facilities study that specifies exact equipment ratings, which pushes back the point at which a project can place a firm equipment order with confidence. Track DPP cycle status directly, not just an original filing-to-completion estimate.</div>
 
-  <h2>Why MISO's footprint size matters more than most</h2>
+  <h2 id="why-misos-footprint-size-matters-more-than-most">Why MISO's footprint size matters more than most</h2>
   <p>MISO's north-south geographic span means transmission congestion and available capacity look completely different depending on sub-region. <b>MISO South</b> — added later, covering much of the lower Mississippi Valley and built around the transmission systems formerly operated independently there — has its own congestion patterns distinct from the upper Midwest. A project's specific location inside MISO's footprint, not just its MISO membership, is what actually determines which network upgrades a system impact study is likely to identify and how long they'll take to build.</p>
 
-  <h2>How this compares to neighboring regions</h2>
+  <h2 id="how-this-compares-to-neighboring-regions">How this compares to neighboring regions</h2>
   <p>MISO borders <a class="inline" href="guide-interconnection-pjm.html">PJM</a> to the east and SPP to the west, and a project near either boundary should confirm which RTO's queue it actually falls in — that determines everything from study timeline to which tariff governs readiness deposits. None of MISO's DPP-specific mechanics transfer to a neighboring region's process.</p>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>Once a MISO facilities study specifies the interconnection equipment, configure it on the <a class="inline" href="renewables.html">Renewables</a> or <a class="inline" href="battery-storage.html">Battery Storage</a> reference and check its indicative lead time before that estimate is locked into a facilities-study cost. The <a class="inline" href="lead-time-index.html">Lead-Time Index</a> tracks current equipment lead times to plan alongside a DPP cycle timeline, and the <a class="inline" href="voltfield-sandbox.html">Practice Sandbox</a> is a free way to check one-line sizing before a design goes to a facilities study.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is MISO's Definitive Planning Phase?</summary>
     <p style="margin-top:10px">The Definitive Planning Phase (DPP) is MISO's cluster-study stage, where a batch (cohort) of interconnection requests filed in the same cycle is studied together for system impacts and required network upgrades — MISO's implementation of the same cluster-study concept FERC Order 2023 later required industry-wide.</p>
@@ -170,26 +177,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Does MISO's interconnection timeline vary by region?</summary>
     <p style="margin-top:10px">Yes. MISO's footprint runs from Manitoba to the Gulf Coast, including a South region added later covering much of the lower Mississippi Valley, and transmission congestion and required network upgrades differ significantly by sub-region — a project's specific location inside MISO's footprint matters more than its MISO membership alone.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Specifying the step-up transformer?</h3>
-      <p>Pad-mount and GSU transformers solve different problems and carry very different lead times. How to tell which one a project actually needs.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">Once a MISO facilities study specifies the interconnection equipment, configure it on the <a class="inline" href="renewables.html">Renewables</a> or <a class="inline" href="battery-storage.html">Battery Storage</a> reference and check its indicative lead time before that estimate is locked into a facilities-study cost. The <a class="inline" href="lead-time-index.html">Lead-Time Index</a> tracks current equipment lead times to plan alongside a DPP cycle timeline, and the <a class="inline" href="voltfield-sandbox.html">Practice Sandbox</a> is a free way to check one-line sizing before a design goes to a facilities study.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-pad-mount-vs-gsu-transformers.html">Pad-Mount vs. GSU Transformers: Which Do You Need?</a>Pad-mount and GSU transformers solve different problems and carry very different lead times. How to tell which one a project actually needs.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="renewables/ac-collection.html">Renewable Plant AC Collection</a>The long-lead collector and substation equipment to release against the study.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="guide-pad-mount-vs-gsu-transformers.html">PAD-MOUNT VS. GSU GUIDE &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="renewables/ac-collection.html">Renewable Plant AC Collection</a> &mdash; the long-lead collector and substation equipment to release against the study.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;MISO Interconnection Timeline, Explained,&rdquo; <i>Voltfield</i>, updated August 24, 2026. https://voltfield.org/guide-interconnection-miso.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;MISO Interconnection Timeline, Explained,&rdquo; <i>Voltfield</i>, updated August 24, 2026. https://voltfield.org/guide-interconnection-miso.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -203,10 +221,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published August 23, 2026 &middot; last updated August 24, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>MISO's interconnection queue structure, study phases, and where projects typically stall.</dd>
@@ -217,6 +239,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published August 23, 2026 &middot; last updated August 24, 2026. Written and maintained by the Voltfield editorial team against the sources above. Figures that are Voltfield's own estimates rather than published standards are labeled as such where they appear &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 <footer>

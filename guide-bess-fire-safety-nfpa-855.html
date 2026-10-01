@@ -114,23 +114,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
-    <h2>What NFPA 855 actually covers</h2>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>UL 9540A is a fire test: it measures whether thermal runaway in one cell spreads to modules and units.</li>
+      <li>NFPA 855 is the installation standard: separation distances, detection, suppression, ventilation and emergency planning.</li>
+      <li>Separation distances are not one-size-fits-all; they depend on the UL 9540A results for the specific product.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 6 sections</summary>
+    <ol>
+      <li><a href="#what-nfpa-855-actually-covers">What NFPA 855 actually covers</a></li>
+      <li><a href="#ul-9540a-the-test-that-feeds-nfpa-855s-numbers">UL 9540A: the test that feeds NFPA 855's numbers</a></li>
+      <li><a href="#separation-distances-arent-one-size-fits-all">Separation distances aren't one-size-fits-all</a></li>
+      <li><a href="#fire-detection-venting-and-suppression-basics">Fire detection, venting, and suppression basics</a></li>
+      <li><a href="#the-emergency-response-plan-is-not-optional-pape">The emergency response plan is not optional paperwork</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+    <h2 id="what-nfpa-855-actually-covers">What NFPA 855 actually covers</h2>
   <p>NFPA 855, the Standard for the Installation of Stationary Energy Storage Systems, sets requirements for site layout, separation distances, fire detection and suppression, ventilation, signage, and emergency response planning for battery energy storage installations above certain size thresholds. It doesn't specify battery chemistry or performance — that's the equipment spec. What it governs is everything around the equipment: how far units sit from each other, from exposures, and from occupied buildings, and what has to happen automatically if something goes wrong inside a unit.</p>
 
   <div class="callout"><b>Jurisdiction matters.</b> Which edition of NFPA 855 applies, and at what size threshold, is set by the local Authority Having Jurisdiction (AHJ) — not by the equipment vendor. Confirm the applicable edition and thresholds with the AHJ before finalizing a site plan, not after.</div>
 
-  <h2>UL 9540A: the test that feeds NFPA 855's numbers</h2>
+  <h2 id="ul-9540a-the-test-that-feeds-nfpa-855s-numbers">UL 9540A: the test that feeds NFPA 855's numbers</h2>
   <p>UL 9540A is a large-scale fire test method, not an installation code. It evaluates whether thermal runaway triggered in one cell propagates to adjacent cells, then to adjacent modules, and then to adjacent units — and if it does propagate, it characterizes the resulting heat flux, flammable gas concentration, and explosion severity. Three things can happen in a UL 9540A test at increasing scale: propagation is fully contained at the cell level, it propagates to the module but not beyond, or it propagates unit-to-unit. The result at each level is what NFPA 855 uses to set (or waive) required separation distances for that specific product — a unit that demonstrates non-propagation to adjacent units can often be installed with reduced spacing compared to one that doesn't.</p>
 
-  <h2>Separation distances aren't one-size-fits-all</h2>
+  <h2 id="separation-distances-arent-one-size-fits-all">Separation distances aren't one-size-fits-all</h2>
   <p>Because separation distance is derived from a specific product's test data rather than a flat rule, two BESS products with identical nameplate energy can carry different required setbacks — from each other, from property lines, and from exposures like buildings or fuel storage. This is one of the most common surprises in early-stage site planning: a layout sized to a generic "typical" spacing assumption can turn out to be wrong once the actual selected product's UL 9540A report is in hand.</p>
 
   <div style="overflow-x:auto"><table class="reftable">
@@ -141,27 +151,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <tr><td>Suppression</td><td>Product-specific — some systems rely on thermal isolation and venting rather than active suppression; verify what the listed system actually includes.</td></tr>
   </table></div>
 
-  <h2>Fire detection, venting, and suppression basics</h2>
+  <h2 id="fire-detection-venting-and-suppression-basics">Fire detection, venting, and suppression basics</h2>
   <p>Most modern DC block/enclosure products include integrated off-gas detection (sensing the specific gases released before visible smoke or open flame), deflagration venting panels designed to relieve pressure from a vented gas event without becoming projectiles, and either an integrated suppression system or an engineered decision to rely on thermal isolation between modules instead of active suppression. Which approach a given product uses is not interchangeable information — it's specific to that product's UL 9540A test configuration and listing, and it drives what the site's emergency response plan needs to say.</p>
 
-  <h2>The emergency response plan is not optional paperwork</h2>
+  <h2 id="the-emergency-response-plan-is-not-optional-pape">The emergency response plan is not optional paperwork</h2>
   <p>NFPA 855 requires a written emergency response plan coordinated with the local fire department before occupancy, covering hazard identification, notification procedures, and firefighter access/tactics specific to the installed equipment. This has to be developed with the actual selected equipment's documentation in hand — a generic template plan written before equipment selection typically has to be redone.</p>
 
   <div class="callout"><b>Practice this:</b> the transformer or PCS feeding a BESS interconnection has to be sized for the actual pack, same as any other system. Try the <a class="inline" href="voltfield-sandbox.html?scenario=xfmr-overload">Transformer Overloaded</a> scenario in the Practice Sandbox to see how an undersized transformer shows up in the numbers.</div>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2 id="relatedGuides">Related guides</h2>
-  <ul>
-    <li><a class="inline" href="guide-bess-augmentation.html">BESS Augmentation Explained</a> &mdash; how adding DC blocks later interacts with your original site layout</li>
-    <li><a class="inline" href="guide-grounding-bonding-basics.html">Grounding & Bonding Basics</a> &mdash; the other safety system every BESS install has to close out</li>
-    <li><a class="inline" href="guide-feoc-compliance.html">FEOC Compliance for Solar & Storage</a> &mdash; sourcing documentation for tax-credit-eligible storage</li>
-  </ul>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>The <a class="inline" href="battery-storage.html">Battery Storage</a> sector carries DC blocks, PCS, BMS, and fire detection/suppression components with compliance references called out per family. Unfamiliar with a term above? Check <a class="inline" href="glossary.html#nfpa-855">NFPA 855</a> and <a class="inline" href="glossary.html#ul-9540a">UL 9540A</a> in the glossary, or see current BESS equipment lead times on the <a class="inline" href="lead-time-index.html">Lead-Time Index</a>.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Does NFPA 855 apply to every battery storage installation?</summary>
     <p style="margin-top:10px">NFPA 855 applies broadly to stationary energy storage systems above certain size thresholds, which vary by jurisdiction and edition adopted. Small residential-scale systems are often exempt or subject to lighter requirements, while utility-scale and commercial/industrial installations are almost always in scope. The local Authority Having Jurisdiction (AHJ) determines which edition and thresholds apply — confirm early, not after equipment is ordered.</p>
@@ -174,31 +176,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why does BESS site layout need to be decided early?</summary>
     <p style="margin-top:10px">Separation distances, fire detection/suppression system design, and emergency response planning all depend on the specific DC block/enclosure product and its UL 9540A test data — not a generic assumption. Deciding layout after equipment is already on order risks a site plan that doesn't match what the AHJ will approve, forcing a costly respec.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Specifying a BESS installation?</h3>
-      <p>Configure DC blocks, PCS, and fire safety components by rating and see current lead time.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="battery-storage.html">Battery Storage</a> sector carries DC blocks, PCS, BMS, and fire detection/suppression components with compliance references called out per family. Unfamiliar with a term above? Check <a class="inline" href="glossary.html#nfpa-855">NFPA 855</a> and <a class="inline" href="glossary.html#ul-9540a">UL 9540A</a> in the glossary, or see current BESS equipment lead times on the <a class="inline" href="lead-time-index.html">Lead-Time Index</a>.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/bess-sizing.html">BESS Sizing Calculator</a>Usable and nameplate kWh from a critical load and backup time.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-bess-augmentation.html">BESS Augmentation Explained</a>How adding DC blocks later interacts with your original site layout</li>
+        <li><a href="guide-grounding-bonding-basics.html">Grounding & Bonding Basics</a>The other safety system every BESS install has to close out</li>
+        <li><a href="guide-feoc-compliance.html">FEOC Compliance for Solar & Storage</a>Sourcing documentation for tax-credit-eligible storage</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="battery-storage.html">Utility-Scale Battery Storage Reference</a>Configure DC blocks, PCS, and fire safety components by rating and see current lead time.</li>
+        <li><a href="battery-storage/bess-enclosures.html">BESS Enclosures and Modules</a>The enclosures NFPA 855 separation distances and UL 9540A evidence apply to.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="battery-storage.html">BROWSE BATTERY STORAGE &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="battery-storage/bess-enclosures.html">BESS Enclosures and Modules</a> &mdash; the enclosures NFPA 855 separation distances and UL 9540A evidence apply to.</li>
-</ul>
-
-  <h2 id="calcLinks">Run the numbers</h2>
-<ul class="catlink">
-  <li><a class="inline" href="calculators/bess-sizing.html">BESS Sizing Calculator</a> &mdash; usable and nameplate kWh from a critical load and backup time.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;BESS Fire Safety Basics: NFPA 855 &amp; UL 9540A Explained,&rdquo; <i>Voltfield</i>, updated August 23, 2026. https://voltfield.org/guide-bess-fire-safety-nfpa-855.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;BESS Fire Safety Basics: NFPA 855 &amp; UL 9540A Explained,&rdquo; <i>Voltfield</i>, updated August 23, 2026. https://voltfield.org/guide-bess-fire-safety-nfpa-855.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -212,10 +229,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published July 28, 2026 &middot; last updated August 23, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>What NFPA 855 requires of a storage installation, how UL 9540A test data feeds into it, and where the separation and suppression requirements come from.</dd>
@@ -226,6 +247,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published July 28, 2026 &middot; last updated August 23, 2026. Written and maintained by the Voltfield editorial team against the sources above. Figures that are Voltfield's own estimates rather than published standards are labeled as such where they appear &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 <footer>

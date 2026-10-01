@@ -102,19 +102,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>NFPA 70E gives two ways to choose PPE: calculate incident energy, or use the category tables (categories 1 to 4). Use one or the other on a piece of equipment, not both.</li>
+      <li>The category tables apply only inside their fault-current and clearing-time limits.</li>
+      <li>Lower fault current does not guarantee lower energy, and PPE is the last line of defense: de-energizing is the plan.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#the-four-categories">The four categories</a></li>
+      <li><a href="#the-category-method-and-where-it-stops-applying">The category method, and where it stops applying</a></li>
+      <li><a href="#worked-example">Worked example</a></li>
+      <li><a href="#what-goes-on-the-label">What goes on the label</a></li>
+      <li><a href="#ppe-is-the-last-line-of-defense">PPE is the last line of defense</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
   <div class="callout"><b>This is educational, not a safety procedure.</b> PPE for energized work must be selected by a qualified person, from a site-specific arc-flash risk assessment under NFPA 70E. Nothing on this page should be used to make a real work-authorization or PPE decision.</div>
 
   <p>An <b>arc-flash PPE category</b> is a level, from 1 to 4, that stands for a set of protective clothing and equipment with a minimum arc rating. NFPA 70E offers two ways to decide what PPE a task needs. The <b>incident energy analysis method</b> calculates the energy at the working distance and requires PPE rated at or above it. The <b>arc-flash PPE category method</b> looks the task up in tables that assign a category, provided the equipment falls inside the table's limits. The same piece of equipment can use one method or the other, not both.</p>
 
-  <h2>The four categories</h2>
+  <h2 id="the-four-categories">The four categories</h2>
   <table class="reftable">
     <tr><th scope="col">Category</th><th scope="col">Minimum arc rating</th><th scope="col">In broad terms</th></tr>
     <tr><td><b>1</b></td><td>4 cal/cm&sup2;</td><td>Arc-rated shirt and pants or coverall, arc-rated face shield</td></tr>
@@ -126,7 +137,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p>The arc rating on a garment is its ATPV or E<sub>BT</sub>, determined by testing to ASTM F1959. It's the incident energy the fabric can take before the wearer is likely to receive a second-degree burn, or before the fabric breaks open.</p>
   <p>There is no category above 4. Where incident energy exceeds 40 cal/cm&sup2;, NFPA 70E advises putting greater emphasis on de-energizing the equipment, because PPE alone becomes an increasingly thin margin.</p>
 
-  <h2>The category method, and where it stops applying</h2>
+  <h2 id="the-category-method-and-where-it-stops-applying">The category method, and where it stops applying</h2>
   <p>The category tables list equipment types, each with conditions attached: a maximum available fault current, a maximum fault-clearing time and a minimum working distance. Inside those limits, the table gives a PPE category and an arc-flash boundary. Outside them, the table doesn't apply, and an incident energy analysis is required.</p>
   <table class="reftable">
     <tr><th scope="col">Equipment</th><th scope="col">Limits</th><th scope="col">Category and boundary</th></tr>
@@ -139,7 +150,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p>Working distance is 455 mm (18 in) for the low-voltage rows and 910 mm (36 in) for metal-clad switchgear. These rows are abridged from NFPA 70E-2021 Table 130.7(C)(15)(a), and table numbering and content have shifted between editions, so use the edition your program adopts.</p>
   <p>The clearing-time limit of 0.03 seconds (two cycles) on most low-voltage rows is the one that catches people out. A panelboard fed from a breaker that takes a tenth of a second to clear is outside the table, however modest the fault current.</p>
 
-  <h2>Worked example</h2>
+  <h2 id="worked-example">Worked example</h2>
   <p>A 480 V panelboard with 22.6 kA of available fault current, fed from a breaker that clears in 0.1 s. The fault current is inside the table's 25 kA limit, but the clearing time is not: 0.1 s is more than three times the 0.03 s limit. The category method can't be used, and the task needs an incident energy analysis.</p>
   <p>As a screening illustration only, the Doughty equation for an arc in an enclosure, used by the site's <a class="inline" href="calculators/arc-flash.html">arc-flash calculator</a>, gives:</p>
   <ul>
@@ -149,10 +160,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </ul>
   <p>Incident energy is directly proportional to clearing time, so halving the time halves the energy. The boundary moves less, because energy falls off steeply with distance. Notice that at 0.03 s the screening figure sits well inside what the table's Category 2 and 3 ft boundary assume. The tables are deliberately conservative within their limits. A real label needs the IEEE 1584 method, with the actual arcing current and device curves.</p>
 
-  <h2>What goes on the label</h2>
+  <h2 id="what-goes-on-the-label">What goes on the label</h2>
   <p>NFPA 70E requires equipment likely to be worked on while energized to carry an arc-flash label. The label states the nominal voltage and the arc-flash boundary, plus at least one of the following: the available incident energy and its working distance, the PPE category, the minimum arc rating of clothing, or a site-specific PPE level. It must not show both an incident energy and a PPE category. The risk assessment behind the label has to be reviewed at least every five years, and whenever the system changes in a way that could affect it.</p>
 
-  <h2>PPE is the last line of defense</h2>
+  <h2 id="ppe-is-the-last-line-of-defense">PPE is the last line of defense</h2>
   <p>NFPA 70E ranks risk controls: elimination first, then substitution, engineering controls, awareness, administrative controls, and PPE last. Putting the equipment in an electrically safe work condition, de-energized, locked out and verified, eliminates the arc-flash hazard altogether. Where energized work can't be avoided, engineering controls reduce the incident energy before PPE is chosen:</p>
   <ul>
     <li><b>Faster clearing:</b> energy-reducing maintenance switches, zone-selective interlocking, differential protection, and light-sensing arc-flash relays. The NEC requires an arc energy reduction method on circuit breakers rated or adjustable to 1,200 A or more (NEC 240.87).</li>
@@ -160,7 +171,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li><b>Containment:</b> arc-resistant switchgear directs arc energy away from the operator, within the limits of its accessibility type. See the <a class="inline" href="guide-switchgear-compartments.html">switchgear compartments guide</a>.</li>
   </ul>
 
-  <h2>Common mistakes</h2>
+  <h2 id="common-mistakes">Common mistakes</h2>
   <ul>
     <li><b>Using the category tables outside their limits.</b> Check fault current and clearing time before reading the category.</li>
     <li><b>Assuming lower fault current means lower energy.</b> Lower arcing current can put a device on a slower part of its curve and raise incident energy.</li>
@@ -171,17 +182,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2 id="relatedGuides">Related guides</h2>
-  <ul>
-    <li><a class="inline" href="guide-arc-flash-boundary-basics.html">Arc-Flash Boundary Basics</a> &mdash; what the boundary is, and what every piece of equipment should have</li>
-    <li><a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">Short-Circuit Studies &amp; Breaker Coordination</a> &mdash; the study that supplies fault current and clearing times</li>
-    <li><a class="inline" href="guide-switchgear-compartments.html">Metal-Clad vs. Metal-Enclosed Switchgear</a> &mdash; arc-resistant construction and remote racking</li>
-  </ul>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>The <a class="inline" href="data-centers/switchgear.html">switchgear reference</a> covers the equipment an arc-flash study labels, including arc-resistant options, and <a class="inline" href="data-centers/monitoring-controls.html">Monitoring &amp; Controls</a> covers the protective relays whose clearing times decide the result.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What are the four arc-flash PPE categories?</summary>
     <p style="margin-top:10px">NFPA 70E defines categories 1 through 4, with minimum clothing arc ratings of 4, 8, 25 and 40 cal/cm&sup2;. Categories 1 and 2 use arc-rated shirt and pants or coveralls with face protection; categories 3 and 4 use a full arc-rated flash suit.</p>
@@ -198,33 +201,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Can an arc-flash label show both incident energy and a PPE category?</summary>
     <p style="margin-top:10px">No. NFPA 70E requires the label to show the voltage and arc-flash boundary, plus at least one way of selecting PPE, but it must not show both a calculated incident energy and a PPE category for the same equipment.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>See how clearing time moves the number</h3>
-      <p>A screening estimate of incident energy and boundary from fault current, clearing time and working distance. Not for labeling.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="data-centers/switchgear.html">switchgear reference</a> covers the equipment an arc-flash study labels, including arc-resistant options, and <a class="inline" href="data-centers/monitoring-controls.html">Monitoring &amp; Controls</a> covers the protective relays whose clearing times decide the result.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/arc-flash.html">Arc-Flash Incident Energy Calculator</a>Screening incident energy and boundary by the Lee and Doughty equations.</li>
+        <li><a href="calculators/fault-current.html">Available Fault Current Calculator</a>Available symmetrical fault current at a transformer secondary.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-arc-flash-boundary-basics.html">Arc-Flash Boundary Basics</a>What the boundary is, and what every piece of equipment should have</li>
+        <li><a href="guide-short-circuit-studies-breaker-coordination.html">Short-Circuit Studies &amp; Breaker Coordination</a>The study that supplies fault current and clearing times</li>
+        <li><a href="guide-switchgear-compartments.html">Metal-Clad vs. Metal-Enclosed Switchgear</a>Arc-resistant construction and remote racking</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="data-centers/switchgear.html">Data Center Switchgear</a>The equipment arc-flash labels are calculated for, including arc-resistant options.</li>
+        <li><a href="data-centers/monitoring-controls.html">Power Monitoring &amp; Protective Relays</a>The relays whose clearing times drive incident energy.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="calculators/arc-flash.html">ARC-FLASH CALCULATOR &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="data-centers/switchgear.html">Data Center Switchgear</a> &mdash; the equipment arc-flash labels are calculated for, including arc-resistant options.</li>
-  <li><a class="inline" href="data-centers/monitoring-controls.html">Power Monitoring &amp; Protective Relays</a> &mdash; the relays whose clearing times drive incident energy.</li>
-</ul>
-
-  <h2 id="calcLinks">Run the numbers</h2>
-<ul class="catlink">
-  <li><a class="inline" href="calculators/arc-flash.html">Arc-Flash Incident Energy Calculator</a> &mdash; screening incident energy and boundary by the Lee and Doughty equations.</li>
-  <li><a class="inline" href="calculators/fault-current.html">Available Fault Current Calculator</a> &mdash; available symmetrical fault current at a transformer secondary.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Arc-Flash PPE Categories Explained,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-arc-flash-ppe-categories.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Arc-Flash PPE Categories Explained,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-arc-flash-ppe-categories.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -238,10 +255,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published September 29, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>The two NFPA 70E methods for selecting arc-flash PPE, the four PPE categories and their minimum arc ratings, the limits on the category tables, label content, and the hierarchy of risk controls.</dd>
@@ -252,6 +273,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published September 29, 2026. Written and maintained by the Voltfield editorial team against the sources above. The worked example uses the same equations as the site's arc-flash calculator, and the tables are abridged from the named edition of NFPA 70E &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 

@@ -114,24 +114,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>PUE is total facility power divided by IT power. It is always 1.0 or higher, and lower is better.</li>
+      <li>Modern hyperscale builds commonly report 1.1&ndash;1.3; older air-cooled facilities often sit at 1.5&ndash;2.0.</li>
+      <li>PUE alone can hide trade-offs: evaporative cooling can lower PUE while raising water use, which is why WUE and CUE exist.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 6 sections</summary>
+    <ol>
+      <li><a href="#what-counts-as-facility-power">What counts as "facility power"</a></li>
+      <li><a href="#typical-ranges">Typical ranges</a></li>
+      <li><a href="#what-actually-drives-pue-down">What actually drives PUE down</a></li>
+      <li><a href="#where-the-metric-falls-short">Where the metric falls short</a></li>
+      <li><a href="#related-metrics-wue-and-cue">Related metrics: WUE and CUE</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
   <p><b>Power Usage Effectiveness (PUE)</b> is the ratio of everything a data center draws from the utility to what actually reaches the IT equipment doing useful work. It's the industry's default efficiency yardstick, defined by The Green Grid in 2007 and still the number every hyperscaler leads with in a press release. A modern hyperscale build commonly reports <b>1.1&ndash;1.3</b>. Older air-cooled facilities often sit at 1.5&ndash;2.0. The theoretical floor is 1.0.</p>
 
   <div class="formula">PUE = Total Facility Power &divide; IT Equipment Power</div>
 
   <p>A PUE of 1.0 would mean every watt entering the building reaches a server — physically impossible, since cooling, power conversion, and lighting always draw something. The number is always 1.0 or higher, and lower is better.</p>
 
-  <h2>What counts as "facility power"</h2>
+  <h2 id="what-counts-as-facility-power">What counts as "facility power"</h2>
   <p>The denominator (IT power) is what reaches servers, storage, and network gear — the actual compute. The numerator (total facility power) is everything else the site draws to support that: chillers, CRAHs, CDUs and pumps for the cooling plant; conversion losses in the UPS and PDUs between the utility meter and the server power supply; and building loads like lighting and office space. A facility with a PUE of 1.2 is spending an extra 20% of its IT load on everything that isn't compute.</p>
 
-  <h2>Typical ranges</h2>
+  <h2 id="typical-ranges">Typical ranges</h2>
   <table class="reftable">
     <tr><th scope="col">Facility type</th><th scope="col">Typical PUE</th></tr>
     <tr><td>Older air-cooled enterprise data center</td><td>1.5 – 2.0</td></tr>
@@ -140,7 +150,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </table>
   <p>The gap between the top and bottom of that range is almost entirely climate and cooling architecture, not IT hardware. Two facilities running identical servers can post very different PUE numbers based on whether they're in a cool, dry climate that supports free cooling for most of the year, or a hot, humid one that runs mechanical chillers year-round.</p>
 
-  <h2>What actually drives PUE down</h2>
+  <h2 id="what-actually-drives-pue-down">What actually drives PUE down</h2>
   <ul>
     <li><b>Free cooling / economization</b> — using outside air or evaporative cooling instead of mechanical chillers whenever ambient conditions allow it, which is most of the year in favorable climates.</li>
     <li><b>Liquid cooling</b> — direct-to-chip and immersion cooling move heat more efficiently than air, cutting the fan and chiller load per watt of IT power. See <a class="inline" href="guide-liquid-vs-air-cooling.html">Liquid Cooling vs. Air Cooling</a> for how the two compare.</li>
@@ -150,24 +160,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="callout"><b>A number that moves with the seasons:</b> instantaneous PUE swings with outside temperature — a facility using free cooling reports its best PUE in winter and its worst on the hottest days of summer. The figure worth comparing across facilities is <i>annualized</i> PUE, not a single reading, and press releases don't always specify which one they're quoting.</p></div>
 
-  <h2>Where the metric falls short</h2>
+  <h2 id="where-the-metric-falls-short">Where the metric falls short</h2>
   <p>PUE measures overhead, not total efficiency — it says nothing about whether the IT power itself is being used well. A facility running old, underutilized servers at low load can post an excellent PUE while wasting far more energy overall than a facility with a slightly worse PUE running modern, well-utilized hardware. PUE is a useful, standardized way to compare infrastructure overhead across sites — it was never meant to be a complete efficiency picture on its own.</p>
 
-  <h2>Related metrics: WUE and CUE</h2>
+  <h2 id="related-metrics-wue-and-cue">Related metrics: WUE and CUE</h2>
   <p>Water Usage Effectiveness (WUE) and Carbon Usage Effectiveness (CUE) are built the same way — water or carbon per unit of IT energy — specifically because optimizing for PUE alone can push a design toward more evaporative cooling, which lowers PUE but raises water consumption. Facilities reporting all three side by side are being more complete about the actual tradeoffs than PUE alone can show.</p>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2 id="relatedGuides">Related guides</h2>
-  <ul>
-    <li><a class="inline" href="guide-liquid-vs-air-cooling.html">Liquid vs. Air Cooling for AI Racks</a> &mdash; the cooling architecture choice that moves PUE most</li>
-    <li><a class="inline" href="guide-transformer-lead-times.html">Why Transformer Lead Times Hit 3+ Years</a> &mdash; the constraint upstream of any efficiency gain</li>
-  </ul>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>PUE is one piece of the larger data center power picture covered on the <a class="inline" href="data-centers.html">Data Center Power Equipment</a> pillar page — redundancy, transformer and switchgear sizing, backup power, and cooling all sit alongside it. Once a cooling approach is chosen, the <a class="inline" href="voltfield-pod-designer.html">POD &amp; Skid Designer</a> is a free way to first-pass-check that a power block's cooling capacity is sized against its critical load.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is a good PUE for a modern data center?</summary>
     <p style="margin-top:10px">Modern hyperscale builds using free cooling and liquid cooling commonly report PUE in the 1.1–1.3 range. Older air-cooled facilities often sit closer to 1.5–2.0. Best-in-class facilities in favorable climates have reported PUE approaching 1.05–1.1.</p>
@@ -180,26 +183,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What are WUE and CUE?</summary>
     <p style="margin-top:10px">Water Usage Effectiveness (WUE) and Carbon Usage Effectiveness (CUE) are companion metrics built the same way as PUE — water or carbon per unit of IT energy — tracked because a design that lowers PUE by using more evaporative cooling can raise WUE at the same time.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Deciding how to cool dense racks?</h3>
-      <p>Why GPU rack density is pushing data centers to liquid cooling: direct-to-chip, immersion and rear-door heat exchangers compared.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">PUE is one piece of the larger data center power picture covered on the <a class="inline" href="data-centers.html">Data Center Power Equipment</a> pillar page — redundancy, transformer and switchgear sizing, backup power, and cooling all sit alongside it. Once a cooling approach is chosen, the <a class="inline" href="voltfield-pod-designer.html">POD &amp; Skid Designer</a> is a free way to first-pass-check that a power block's cooling capacity is sized against its critical load.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-liquid-vs-air-cooling.html">Liquid vs. Air Cooling for AI Racks</a>The cooling architecture choice that moves PUE most</li>
+        <li><a href="guide-transformer-lead-times.html">Why Transformer Lead Times Hit 3+ Years</a>The constraint upstream of any efficiency gain</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="data-centers/cooling.html">Data Center Cooling</a>The cooling equipment whose efficiency PUE is measuring.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="guide-liquid-vs-air-cooling.html">LIQUID VS. AIR COOLING GUIDE &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="data-centers/cooling.html">Data Center Cooling</a> &mdash; the cooling equipment whose efficiency PUE is measuring.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;PUE Explained,&rdquo; <i>Voltfield</i>, updated August 24, 2026. https://voltfield.org/guide-pue-explained.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;PUE Explained,&rdquo; <i>Voltfield</i>, updated August 24, 2026. https://voltfield.org/guide-pue-explained.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -213,10 +228,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published August 23, 2026 &middot; last updated August 24, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>What PUE measures, what a good figure looks like, and the ways the number can mislead.</dd>
@@ -227,6 +246,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published August 23, 2026 &middot; last updated August 24, 2026. Written and maintained by the Voltfield editorial team against the sources above. Figures that are Voltfield's own estimates rather than published standards are labeled as such where they appear &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 <footer>

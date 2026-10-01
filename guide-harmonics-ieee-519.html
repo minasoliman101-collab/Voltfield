@@ -102,25 +102,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>Non-linear loads such as UPS rectifiers, drives and server power supplies draw harmonic currents that heat transformers and neutrals.</li>
+      <li>IEEE 519 current limits use TDD, relative to maximum demand, and apply at the point of common coupling, not at each device.</li>
+      <li>Check resonance before adding a capacitor bank, and check harmonics on generator power, where the same load distorts the bus far more.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#which-harmonics-show-up">Which harmonics show up</a></li>
+      <li><a href="#worked-example-thd-rms-current-and-tdd">Worked example: THD, RMS current and TDD</a></li>
+      <li><a href="#what-harmonics-do">What harmonics do</a></li>
+      <li><a href="#ieee-519-limits">IEEE 519 limits</a></li>
+      <li><a href="#mitigation">Mitigation</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
   <p><b>Harmonics</b> are currents and voltages at whole-number multiples of the supply frequency. On a 60 Hz system, the 5th harmonic is 300 Hz and the 7th is 420 Hz. They come from <b>non-linear loads</b>, equipment that draws current in pulses rather than smoothly: rectifiers in UPS systems and drives, switch-mode power supplies in servers, LED drivers and battery inverters. The pulses can be broken down into the fundamental plus a series of harmonics, and those harmonic currents flow back through the system to the source.</p>
 
   <div class="formula">THD = &radic;(I<sub>2</sub>&sup2; + I<sub>3</sub>&sup2; + I<sub>4</sub>&sup2; + &hellip;) &divide; I<sub>1</sub></div>
 
   <p><b>Total harmonic distortion (THD)</b> compares the combined harmonic content to the fundamental. It applies to current (THD<sub>I</sub>), which is what the load draws, and to voltage (THD<sub>V</sub>), which is what that current does to the bus as it flows through the source impedance.</p>
 
-  <h2>Which harmonics show up</h2>
+  <h2 id="which-harmonics-show-up">Which harmonics show up</h2>
   <p>A rectifier's pulse number decides which harmonics it produces. A 6-pulse rectifier, the most common front end in drives and older UPS systems, produces harmonics at orders 6k &plusmn; 1: the 5th, 7th, 11th, 13th and so on. A 12-pulse rectifier cancels the 5th and 7th, leaving 12k &plusmn; 1: the 11th, 13th, 23rd and 25th. That's why raising the pulse number is one of the oldest mitigation methods.</p>
   <p>Single-phase non-linear loads on a four-wire system add <b>triplen harmonics</b> (3rd, 9th, 15th). Unlike most harmonics, triplens from the three phases add in the neutral instead of cancelling. On a panel full of single-phase power supplies, neutral current can exceed phase current, approaching about 1.7 times phase current in the limiting case. That's why the NEC requires the neutral to be counted as a current-carrying conductor when most of the load is non-linear (NEC 310.15, see <a class="inline" href="guide-cable-ampacity-derating.html">cable ampacity derating</a>), and why shared neutrals on such loads are a known problem.</p>
 
-  <h2>Worked example: THD, RMS current and TDD</h2>
+  <h2 id="worked-example-thd-rms-current-and-tdd">Worked example: THD, RMS current and TDD</h2>
   <p>A 6-pulse load draws 100 A of fundamental current, with harmonic currents of 30% (5th), 15% (7th), 8% (11th) and 5% (13th):</p>
   <ul>
     <li><b>Current THD:</b> &radic;(0.30&sup2; + 0.15&sup2; + 0.08&sup2; + 0.05&sup2;) = &radic;0.1214 = <b>34.8%</b></li>
@@ -129,7 +140,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </ul>
   <p>The difference between THD and TDD matters. THD is relative to whatever the load happens to be drawing, so a lightly loaded drive can show an alarming THD while injecting very little harmonic current in absolute terms. TDD is relative to maximum demand, which is why IEEE 519 states its current limits in TDD.</p>
 
-  <h2>What harmonics do</h2>
+  <h2 id="what-harmonics-do">What harmonics do</h2>
   <h3>Transformer heating</h3>
   <p>Eddy-current losses in transformer windings rise roughly with the square of the harmonic order, so a 7th-harmonic amp heats the windings far more than a fundamental amp. A standard transformer serving heavy non-linear load can overheat while its ammeter reads below nameplate. The response is either a K-rated transformer, built to absorb a stated harmonic heating (see <a class="inline" href="glossary.html#k-factor">K-factor</a>), or derating a standard unit using the method in IEEE C57.110.</p>
   <h3>Capacitor resonance</h3>
@@ -140,7 +151,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h3>Generators</h3>
   <p>A generator has a much higher source impedance than a utility transformer, so the same harmonic current produces much more voltage distortion when a site runs on standby power. Non-linear load also adds alternator heating. That's why generator compatibility with UPS and drive front ends needs its own check, covered in the <a class="inline" href="guide-ups-sizing.html">UPS sizing guide</a>.</p>
 
-  <h2>IEEE 519 limits</h2>
+  <h2 id="ieee-519-limits">IEEE 519 limits</h2>
   <p>IEEE 519 sets harmonic limits at the <b>point of common coupling (PCC)</b>, the point where the utility's system meets the customer's, not at each piece of equipment. It divides responsibility: the utility is responsible for voltage distortion, and the customer for the harmonic current it injects.</p>
   <h3>Voltage distortion limits</h3>
   <table class="reftable">
@@ -164,7 +175,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p>For example, suppose the PCC is at the secondary of the 1000 kVA transformer, with 20,919 A available and a maximum demand of 1,000 A. The ratio is about 21, which falls in the 20-to-50 row: the facility's TDD must stay at or below 8%. The load in the worked example above, at 17.4% TDD, would need mitigation if it were the whole facility.</p>
   <div class="callout"><b>Measured, not snapshotted:</b> IEEE 519 compliance is judged statistically, from a week or more of measurements, not from a single reading. Specify instruments that measure to IEC 61000-4-30 Class A so results from different meters can be compared.</div>
 
-  <h2>Mitigation</h2>
+  <h2 id="mitigation">Mitigation</h2>
   <ul>
     <li><b>Line reactors and DC chokes</b> on drives and rectifiers: cheap, and they noticeably reduce current distortion.</li>
     <li><b>Higher pulse numbers</b> (12- or 18-pulse) using phase-shifting transformers, which cancel the lowest-order harmonics.</li>
@@ -174,7 +185,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li><b>K-rated or derated transformers</b> and <b>full-size or oversized neutrals</b>. These don't reduce harmonics, but they carry them safely.</li>
   </ul>
 
-  <h2>Common mistakes</h2>
+  <h2 id="common-mistakes">Common mistakes</h2>
   <ul>
     <li><b>Judging compliance from THD at light load.</b> IEEE 519's current limits use TDD, relative to maximum demand.</li>
     <li><b>Adding a capacitor bank without checking resonance.</b> Check where h<sub>r</sub> falls against the harmonics present before choosing plain or detuned steps.</li>
@@ -185,17 +196,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2 id="relatedGuides">Related guides</h2>
-  <ul>
-    <li><a class="inline" href="guide-transformer-impedance.html">Transformer Impedance (%Z) Explained</a> &mdash; the source impedance that sets short-circuit kVA, I<sub>SC</sub>/I<sub>L</sub> and resonance</li>
-    <li><a class="inline" href="guide-kw-vs-kva.html">kW vs. kVA Explained</a> &mdash; displacement power factor, and why true power factor is lower with harmonics</li>
-    <li><a class="inline" href="guide-ups-sizing.html">How to Size a UPS</a> &mdash; rectifier input distortion and generator compatibility</li>
-  </ul>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>The <a class="inline" href="data-centers/monitoring-controls.html">Monitoring &amp; Controls</a> reference covers the power-quality meters that measure harmonics, and the <a class="inline" href="data-centers/transformers.html">Data Center Transformers</a> reference covers the K-rated units that carry them.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is total harmonic distortion (THD)?</summary>
     <p style="margin-top:10px">THD is the combined size of all harmonic components relative to the fundamental: the square root of the sum of the squared harmonic magnitudes, divided by the fundamental. It's quoted separately for current (THDi) and voltage (THDv).</p>
@@ -212,34 +215,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why do capacitor banks fail on systems with harmonics?</summary>
     <p style="margin-top:10px">A capacitor bank and the source inductance form a resonant circuit, at roughly the square root of short-circuit kVA divided by capacitor kVAR. If that lands near a harmonic the loads produce, the harmonic is amplified, overloading the capacitors. Detuned banks with series reactors move the resonance below the 5th harmonic.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Adding power factor correction?</h3>
-      <p>Size the capacitor bank in kVAR, then check where it resonates before choosing plain or detuned steps. Free, no signup.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="data-centers/monitoring-controls.html">Monitoring &amp; Controls</a> reference covers the power-quality meters that measure harmonics, and the <a class="inline" href="data-centers/transformers.html">Data Center Transformers</a> reference covers the K-rated units that carry them.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/power-factor.html">Power Factor Correction Calculator</a>Capacitor kVAR to reach a target power factor.</li>
+        <li><a href="calculators/fault-current.html">Available Fault Current Calculator</a>The I<sub>SC</sub> that sets which IEEE 519 row applies.</li>
+        <li><a href="calculators/ampacity.html">Cable Ampacity Calculator</a>Including when the neutral counts as current-carrying.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-transformer-impedance.html">Transformer Impedance (%Z) Explained</a>The source impedance that sets short-circuit kVA, I<sub>SC</sub>/I<sub>L</sub> and resonance</li>
+        <li><a href="guide-kw-vs-kva.html">kW vs. kVA Explained</a>Displacement power factor, and why true power factor is lower with harmonics</li>
+        <li><a href="guide-ups-sizing.html">How to Size a UPS</a>Rectifier input distortion and generator compatibility</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="data-centers/monitoring-controls.html">Power Monitoring &amp; Protective Relays</a>The power-quality meters that measure harmonic distortion.</li>
+        <li><a href="data-centers/transformers.html">Data Center Transformers</a>Including K-rated units built for harmonic load.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="calculators/power-factor.html">POWER FACTOR &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="data-centers/monitoring-controls.html">Power Monitoring &amp; Protective Relays</a> &mdash; the power-quality meters that measure harmonic distortion.</li>
-  <li><a class="inline" href="data-centers/transformers.html">Data Center Transformers</a> &mdash; including K-rated units built for harmonic load.</li>
-</ul>
-
-  <h2 id="calcLinks">Run the numbers</h2>
-<ul class="catlink">
-  <li><a class="inline" href="calculators/power-factor.html">Power Factor Correction Calculator</a> &mdash; capacitor kVAR to reach a target power factor.</li>
-  <li><a class="inline" href="calculators/fault-current.html">Available Fault Current Calculator</a> &mdash; the I<sub>SC</sub> that sets which IEEE 519 row applies.</li>
-  <li><a class="inline" href="calculators/ampacity.html">Cable Ampacity Calculator</a> &mdash; including when the neutral counts as current-carrying.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Harmonics &amp; IEEE 519 Explained,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-harmonics-ieee-519.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Harmonics &amp; IEEE 519 Explained,&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-harmonics-ieee-519.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -253,10 +270,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published September 29, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>What harmonics are and where they come from, THD and TDD, the effects on transformers, neutrals, capacitor banks and generators, the IEEE 519 voltage and current limits, and the main mitigation methods.</dd>
@@ -267,6 +288,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published September 29, 2026. Written and maintained by the Voltfield editorial team against the sources above. Every figure in the worked examples is arithmetic you can reproduce, and the limit tables are quoted from the named edition of IEEE 519 &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 

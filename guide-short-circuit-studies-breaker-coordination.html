@@ -116,23 +116,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <div class="artwrap">
-  <div class="sharebar" id="shareBar">
-    <span class="sharebar-lbl">Share this guide:</span>
-    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
-    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
-    <a class="sharebtn" id="shareEmail">Email</a>
-    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
-  </div>
-    <h2>What a short-circuit study actually calculates</h2>
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>A short-circuit study calculates fault current at every bus from the utility's actual source impedance, then checks each device's interrupting rating against it.</li>
+      <li>An infinite-source estimate, like the fault current calculator, is only a first pass.</li>
+      <li>Both the short-circuit and coordination studies must be redone when the system changes: a new transformer, a resized breaker, a longer feeder or added motor load.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 6 sections</summary>
+    <ol>
+      <li><a href="#what-a-short-circuit-study-actually-calculates">What a short-circuit study actually calculates</a></li>
+      <li><a href="#why-an-infinite-source-estimate-is-only-a-first">Why an infinite-source estimate is only a first pass</a></li>
+      <li><a href="#breaker-coordination-who-trips-first">Breaker coordination: who trips first</a></li>
+      <li><a href="#why-this-needs-to-be-redone-not-assumed-current">Why this needs to be redone, not assumed current</a></li>
+      <li><a href="#ground-fault-coordination">Ground-fault coordination</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+    <h2 id="what-a-short-circuit-study-actually-calculates">What a short-circuit study actually calculates</h2>
   <p>A short-circuit study calculates the available fault current at every bus in an electrical system — starting from the utility's actual source impedance (not an assumed infinite source), then adding the impedance of every transformer, cable, and busway in the path in series, down to each panel and piece of equipment. The output is a fault-current number at each location, which gets compared against the interrupting rating (AIC) of every breaker, fuse, and switchgear assembly at that location. Any device rated below the calculated fault current at its location is a real safety and code problem, not a formality.</p>
 
   <div class="warncallout"><b>This is reference material, not a substitute for a licensed study.</b> A real short-circuit and coordination study has to be performed and stamped by a qualified engineer using actual utility data, equipment impedances, and site-specific conditions. Nothing here should be used to make an equipment-rating or safety decision.</p></div>
 
-  <h2>Why an infinite-source estimate is only a first pass</h2>
+  <h2 id="why-an-infinite-source-estimate-is-only-a-first">Why an infinite-source estimate is only a first pass</h2>
   <p>Tools like the <a class="inline" href="calculators/fault-current.html">fault current calculator</a> and the Practice Sandbox both use a simplified infinite-source method — they assume the utility source has zero impedance and ignore the impedance of the cable/feeder between the transformer and the point being checked. That's a deliberately conservative simplification for early sizing: real utility source impedance and real cable impedance both reduce available fault current somewhat versus the infinite-source number, and motor contribution during a fault can add to it at motor-heavy sites. An infinite-source estimate is useful for catching an obviously wrong breaker selection early; it is not what gets stamped for actual equipment ratings.</p>
 
-  <h2>Breaker coordination: who trips first</h2>
+  <h2 id="breaker-coordination-who-trips-first">Breaker coordination: who trips first</h2>
   <p>Coordination (also called selective coordination) is a separate study layered on top of the fault-current numbers. It compares the time-current trip curve of every protective device against the devices immediately upstream and downstream of it, to confirm that during a fault, only the nearest upstream device trips — not a device further back that would black out a much larger part of the system. Properly coordinated devices "hand off" cleanly: a branch breaker clears a branch fault before the feeder breaker feeding it even notices; a feeder breaker clears a feeder fault before the main does.</p>
 
   <div style="overflow-x:auto"><table class="reftable">
@@ -142,20 +152,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <tr><td>Arc-flash study</td><td>Given the fault current and how fast the device actually clears it, what's the incident energy exposure at that location? (See the <a class="inline" href="guide-arc-flash-boundary-basics.html">arc-flash boundary basics guide</a>.)</td></tr>
   </table></div>
 
-  <h2>Why this needs to be redone, not assumed current</h2>
+  <h2 id="why-this-needs-to-be-redone-not-assumed-current">Why this needs to be redone, not assumed current</h2>
   <p>Both studies are only valid for the system configuration they were performed against. Adding a transformer, resizing a breaker, extending a feeder, or adding significant motor load can all change the fault current and trip-curve relationships enough to invalidate the existing study. A common finding in electrical audits is equipment installed or modified after the last study without a re-check — which is exactly the gap between "someone studied this once" and "this reflects what's actually installed today."</p>
 
   <div class="callout"><b>Practice this:</b> try the <a class="inline" href="voltfield-sandbox.html?scenario=fault-current">Fault Current Exceeds Breaker Rating</a> scenario in the Practice Sandbox to work through the infinite-source method these tools use — then compare it against how a real study would refine that number.</div>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
-  <h2>Ground-fault coordination</h2>
+  <h2 id="ground-fault-coordination">Ground-fault coordination</h2>
   <p>Phase coordination isn't the whole study. On 480Y/277 V services, ground-fault protection has its own pickups, delays and curves, and they need coordinating too, or a downstream ground fault trips the service main. See <a class="inline" href="guide-ground-fault-protection.html">Ground-Fault Protection Explained</a>. Series-rated equipment can't be selectively coordinated for high-level faults, which is covered in <a class="inline" href="guide-fully-rated-vs-series-rated.html">Fully Rated vs. Series Rated Breakers</a>.</p>
 
-  <h2>Where Voltfield fits in</h2>
-  <p>The <a class="inline" href="data-centers.html">Data Centers</a> and <a class="inline" href="industrial-supply.html">Industrial Supply</a> sectors carry switchgear and breakers configured by interrupting rating, so the AIC number is visible before you commit to a spec — feed a real study's fault-current result straight into the configurator. Unfamiliar with a term above? Check the <a class="inline" href="glossary.html">glossary</a>, or see how %Z drives fault current in the <a class="inline" href="guide-transformer-nameplate.html">transformer nameplate guide</a>.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What does a short-circuit study actually calculate?</summary>
     <p style="margin-top:10px">A short-circuit study calculates the available fault current at every bus in a system, working from the utility's actual source impedance through every transformer, cable, and busway in series down to each panel and piece of equipment. It's what confirms every breaker, fuse, and piece of switchgear has an interrupting rating equal to or greater than the fault current it could actually see.</p>
@@ -168,33 +176,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is breaker coordination and why does it matter?</summary>
     <p style="margin-top:10px">Breaker coordination (also called selective coordination) means arranging protective devices so that during a fault, only the breaker or fuse closest to the fault trips — not an upstream device that would black out a much larger part of the system. It's verified by comparing each device's time-current trip curve against the ones upstream and downstream of it, and it's a common finding to fail when devices are added or resized without re-checking the whole coordination study.</p>
   </details>
-</div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Need a first fault-current number?</h3>
-      <p>Estimate available symmetrical fault current at a transformer secondary from kVA, voltage and %Z, and check equipment withstand ratings. Free, no signup.</p>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="data-centers.html">Data Centers</a> and <a class="inline" href="industrial-supply.html">Industrial Supply</a> sectors carry switchgear and breakers configured by interrupting rating, so the AIC number is visible before you commit to a spec — feed a real study's fault-current result straight into the configurator. Unfamiliar with a term above? Check the <a class="inline" href="glossary.html">glossary</a>, or see how %Z drives fault current in the <a class="inline" href="guide-transformer-nameplate.html">transformer nameplate guide</a>.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/fault-current.html">Available Fault Current Calculator</a>Available symmetrical fault current at a transformer secondary.</li>
+        <li><a href="calculators/arc-flash.html">Arc-Flash Incident Energy Calculator</a>Screening incident energy and boundary by the Lee method.</li>
+        <li><a href="calculators/inrush.html">Transformer Inrush Calculator</a>Energization current, for protection settings.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3>Equipment</h3>
+      <ul class="catlink">
+        <li><a href="data-centers/switchgear.html">Data Center Switchgear</a>The breakers and lineups a coordination study is run against.</li>
+      </ul>
+      </div>
     </div>
-    <a class="ctabtn" href="calculators/fault-current.html">FAULT CURRENT CALCULATOR &rarr;</a>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
   </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-
-<div class="artwrap artwrap-tail">
-  <h2>Equipment category</h2>
-<ul class="catlink">
-  <li><a class="inline" href="data-centers/switchgear.html">Data Center Switchgear</a> &mdash; the breakers and lineups a coordination study is run against.</li>
-</ul>
-
-  <h2 id="calcLinks">Run the numbers</h2>
-<ul class="catlink">
-  <li><a class="inline" href="calculators/fault-current.html">Available Fault Current Calculator</a> &mdash; available symmetrical fault current at a transformer secondary.</li>
-  <li><a class="inline" href="calculators/arc-flash.html">Arc-Flash Incident Energy Calculator</a> &mdash; screening incident energy and boundary by the Lee method.</li>
-  <li><a class="inline" href="calculators/inrush.html">Transformer Inrush Calculator</a> &mdash; energization current, for protection settings.</li>
-</ul>
-
-  <div class="callout" id="citeThis"><b>Cite or link to this guide.</b> Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Short-Circuit Studies &amp; Breaker Coordination Basics,&rdquo; <i>Voltfield</i>, updated August 23, 2026. https://voltfield.org/guide-short-circuit-studies-breaker-coordination.html</div>
-
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Short-Circuit Studies &amp; Breaker Coordination Basics,&rdquo; <i>Voltfield</i>, updated August 23, 2026. https://voltfield.org/guide-short-circuit-studies-breaker-coordination.html</p>
+  </details>
   <div class="vf-updates">
     <p class="vfu-h"><b>Get new guides by email</b></p>
     <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
@@ -208,10 +222,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="vfu-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
+  </div>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
+
 
 <aside class="provenance" aria-labelledby="prov-h">
-    <h2 id="prov-h">Scope &amp; sources</h2>
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published July 28, 2026 &middot; last updated August 23, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>Why short-circuit studies are run, how selective coordination works, and why coordination and arc-flash mitigation pull against each other.</dd>
@@ -222,6 +240,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <dt>Provenance</dt>
       <dd>Published July 28, 2026 &middot; last updated August 23, 2026. Written and maintained by the Voltfield editorial team against the sources above. Figures that are Voltfield's own estimates rather than published standards are labeled as such where they appear &mdash; see the <a href="methodology.html">methodology page</a>.</dd>
     </dl>
+  </details>
   </aside>
 </main>
 <footer>
