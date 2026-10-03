@@ -93,12 +93,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </header>
 <main id="main" tabindex="-1">
 <section class="artban">
-  <div class="artban-in">
-    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">N+1 vs. 2N Redundancy</span></nav>
-    <div class="eyebrow">Data Center Power</div>
-    <h1>N+1 vs. 2N Redundancy Explained</h1>
-    <p class="dek">The redundancy label is usually the first number in any data center power conversation. Here's what each one actually protects against, what it costs in installed capacity, and where the label stops telling the truth.</p>
-    <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published September 29, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+  <div class="artban-in has-photo">
+    <div class="artban-text">
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">N+1 vs. 2N Redundancy</span></nav>
+      <div class="eyebrow">Data Center Power</div>
+      <h1>N+1 vs. 2N Redundancy Explained</h1>
+      <p class="dek">The redundancy label is usually the first number in any data center power conversation. Here's what each one actually protects against, what it costs in installed capacity, and where the label stops telling the truth.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published September 29, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+    </div>
+    <figure class="artban-photo">
+      <picture><source srcset="images/parts/dc-static-transfer-switches.webp" type="image/webp"><img src="images/parts/dc-static-transfer-switches.jpg" width="340" height="340" alt="A static transfer switch cabinet" decoding="async" fetchpriority="high"></picture>
+      <figcaption>Static transfer switch (illustration)</figcaption>
+    </figure>
   </div>
 </section>
 <div class="artwrap">
@@ -126,15 +132,41 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p><b>N</b> is the capacity the load needs, with nothing to spare. Every redundancy scheme is described relative to it. <b>N+1</b> adds one spare unit to a single system. <b>2N</b> builds two complete, independent systems, each able to carry the whole load alone. The difference sounds like a matter of quantity, but it's a difference in <i>what can fail</i>: N+1 survives the loss of a component, while 2N survives the loss of an entire path.</p>
 
   <h2 id="the-notations">The notations</h2>
-  <table class="reftable">
-    <tr><th scope="col">Scheme</th><th scope="col">What is installed</th></tr>
-    <tr><td><b>N</b></td><td>Exactly enough capacity for the load. Any failure, and any maintenance, affects the load.</td></tr>
-    <tr><td><b>N+1</b></td><td>One more unit than the load needs, in one system. Any single unit can fail or be taken out for service.</td></tr>
-    <tr><td><b>N+2</b></td><td>Two spare units in one system. One unit can be in maintenance while another fails.</td></tr>
-    <tr><td><b>2N</b></td><td>Two independent systems (A and B), each sized for the full load. Normally each carries about half.</td></tr>
-    <tr><td><b>2(N+1)</b></td><td>Two independent systems, each with its own spare unit.</td></tr>
-    <tr><td><b>Distributed (e.g. 4N/3)</b></td><td>Several systems sized so the load survives losing any one. With 4N/3, four systems share a load that any three can carry.</td></tr>
-  </table>
+  <figure class="redun redun-6">
+    <div class="redun-grid">
+      <div class="rd">
+        <div class="rd-mods" aria-hidden="true"><div class="rd-sys"><i></i><i></i></div></div>
+        <b>N</b>
+        <p>Exactly enough capacity for the load. Any failure, and any maintenance, affects the load.</p>
+      </div>
+      <div class="rd">
+        <div class="rd-mods" aria-hidden="true"><div class="rd-sys"><i></i><i></i><i class="sp"></i></div></div>
+        <b>N+1</b>
+        <p>One more unit than the load needs, in one system. Any single unit can fail or be taken out for service.</p>
+      </div>
+      <div class="rd">
+        <div class="rd-mods" aria-hidden="true"><div class="rd-sys"><i></i><i></i><i class="sp"></i><i class="sp"></i></div></div>
+        <b>N+2</b>
+        <p>Two spare units in one system. One unit can be in maintenance while another fails.</p>
+      </div>
+      <div class="rd">
+        <div class="rd-mods" aria-hidden="true"><div class="rd-sys"><i></i><i></i></div><div class="rd-sys"><i></i><i></i></div></div>
+        <b>2N</b>
+        <p>Two independent systems (A and B), each sized for the full load. Normally each carries about half.</p>
+      </div>
+      <div class="rd">
+        <div class="rd-mods" aria-hidden="true"><div class="rd-sys"><i></i><i></i><i class="sp"></i></div><div class="rd-sys"><i></i><i></i><i class="sp"></i></div></div>
+        <b>2(N+1)</b>
+        <p>Two independent systems, each with its own spare unit.</p>
+      </div>
+      <div class="rd">
+        <div class="rd-mods rd-row" aria-hidden="true"><div class="rd-sys"><i></i></div><div class="rd-sys"><i></i></div><div class="rd-sys"><i></i></div><div class="rd-sys"><i></i></div></div>
+        <b>Distributed (e.g. 4N/3)</b>
+        <p>Several systems sized so the load survives losing any one. With 4N/3, four systems share a load that any three can carry.</p>
+      </div>
+    </div>
+    <figcaption><span class="rd-key"><i></i> unit the load needs</span><span class="rd-key"><i class="sp"></i> spare unit</span><span class="rd-key"><span class="rd-sysk"></span> one independent system</span></figcaption>
+  </figure>
   <p>"2N+1" is used inconsistently. Some specifications mean 2(N+1), others mean 2N plus one shared spare. When a document uses it, check what it actually means before comparing designs.</p>
 
   <h2 id="what-each-scheme-survives">What each scheme survives</h2>

@@ -170,9 +170,13 @@
       what: 'Bonds the electrical system to earth.',
       note: 'Resistance is dominated by the SOIL, not the rod: the same rod can measure a few ohms in wet clay and hundreds in dry sand or rock. Doubling rod length helps far more than thickening it.'
     },
+    /* img:null on purpose. re-dc-link-film-capacitors.jpg is one of the 62
+       library files that are byte-identical copies of the same oil-filled
+       transformer render, so this card was showing a transformer beside a
+       capacitor-bank description. 3D only until a real capacitor image exists. */
     pfcap: {
       name: 'PF correction capacitor bank', shape: 'pfcap', color: '#2B6CB0',
-      img: 're-dc-link-film-capacitors',
+      img: null,
       what: 'Supplies reactive power locally so the supply does not have to.',
       note: 'Switched in stages rather than all at once, because a bank sized for full load and left connected at light load overshoots into leading power factor.'
     },

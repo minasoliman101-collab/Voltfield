@@ -111,123 +111,188 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="dirwrap">
 
-  <h2 class="gsec">Power fundamentals</h2>
-  <div class="gdgrid">
-    <a class="gdcard" href="guide-harmonics-ieee-519.html"><h3>Harmonics &amp; IEEE 519 Explained</h3><p>THD vs. TDD, transformer heating, capacitor resonance, the IEEE 519 limit tables, and the main ways to mitigate harmonics.</p></a>
-    <a class="gdcard" href="guide-ups-sizing.html"><h3>How to Size a UPS</h3><p>Design load, kW and kVA, loading limit, N+1 and 2N redundancy, and battery runtime, with a worked example that shows why the kVA check matters.</p></a>
-    <a class="gdcard" href="guide-continuous-load-80-percent-rule.html"><h3>The 80% Rule &amp; Continuous Loads</h3><p>The NEC 125% rule, the two separate conductor checks, rack circuit capacity, and when a 100%-rated breaker changes the answer.</p></a>
-    <a class="gdcard" href="guide-cable-ampacity-derating.html"><h3>Cable Ampacity Derating Explained</h3><p>Ambient correction, the conductor-count adjustment, and the 75&deg;C terminal cap, with worked examples.</p></a>
-    <a class="gdcard" href="guide-kw-vs-kva.html"><h3>kW vs. kVA Explained</h3><p>Real vs. apparent power, converting kW to kVA and amps, and why transformers, generators and UPS systems carry the ratings they do.</p></a>
+  <!-- One box per topic: a picture, the topic, and the titles. Was 71 cards of
+       title plus description across 11 headings, with no pictures. Equipment
+       topics use a reference illustration; topics with no honest photo (a grid
+       queue, a compliance rule, a calculator) use a line icon instead. -->
+  <h2 class="hubsec">Guides</h2>
+  <div class="hubgrid">
+    <section class="hubgroup" aria-labelledby="g-power-fundamentals">
+      <div class="hg-pic"><picture><source srcset="images/parts/dc-power-meters-bms.webp" type="image/webp"><img src="images/parts/dc-power-meters-bms.jpg" width="340" height="340" alt="Panel power meter" loading="lazy" decoding="async"></picture></div>
+      <div class="hg-body">
+        <h3 id="g-power-fundamentals">Power fundamentals <span class="hg-n">5</span></h3>
+        <ul>
+          <li><a href="guide-harmonics-ieee-519.html">Harmonics &amp; IEEE 519 Explained</a></li>
+          <li><a href="guide-ups-sizing.html">How to Size a UPS</a></li>
+          <li><a href="guide-continuous-load-80-percent-rule.html">The 80% Rule &amp; Continuous Loads</a></li>
+          <li><a href="guide-cable-ampacity-derating.html">Cable Ampacity Derating Explained</a></li>
+          <li><a href="guide-kw-vs-kva.html">kW vs. kVA Explained</a></li>
+        </ul>
+      </div>
+    </section>
+    <section class="hubgroup" aria-labelledby="g-transformers-and-substation">
+      <div class="hg-pic"><picture><source srcset="images/parts/dc-large-power-transformers.webp" type="image/webp"><img src="images/parts/dc-large-power-transformers.jpg" width="340" height="340" alt="Large power transformer" loading="lazy" decoding="async"></picture></div>
+      <div class="hg-body">
+        <h3 id="g-transformers-and-substation">Transformers &amp; substation <span class="hg-n">4</span></h3>
+        <ul>
+          <li><a href="guide-transformer-nameplate.html">How to Read a Transformer Nameplate</a></li>
+          <li><a href="guide-transformer-impedance.html">Transformer Impedance (%Z) Explained</a></li>
+          <li><a href="guide-pad-mount-vs-gsu-transformers.html">Pad-Mount vs. GSU Transformers</a></li>
+          <li><a href="guide-transformer-lead-times.html">Why Transformer Lead Times Hit 3+ Years</a></li>
+        </ul>
+      </div>
+    </section>
+    <section class="hubgroup" aria-labelledby="g-switchgear-and-protection">
+      <div class="hg-pic"><picture><source srcset="images/parts/dc-mv-switchgear-5-38kv.webp" type="image/webp"><img src="images/parts/dc-mv-switchgear-5-38kv.jpg" width="340" height="340" alt="Switchgear lineup" loading="lazy" decoding="async"></picture></div>
+      <div class="hg-body">
+        <h3 id="g-switchgear-and-protection">Switchgear &amp; protection <span class="hg-n">7</span></h3>
+        <ul>
+          <li><a href="guide-switchgear-compartments.html">Metal-Clad vs. Metal-Enclosed Switchgear</a></li>
+          <li><a href="guide-short-circuit-studies-breaker-coordination.html">Short-Circuit Studies &amp; Breaker Coordination</a></li>
+          <li><a href="guide-fully-rated-vs-series-rated.html">Fully Rated vs. Series Rated Breakers</a></li>
+          <li><a href="guide-ground-fault-protection.html">Ground-Fault Protection Explained</a></li>
+          <li><a href="guide-arc-flash-ppe-categories.html">Arc-Flash PPE Categories Explained</a></li>
+          <li><a href="guide-arc-flash-boundary-basics.html">Arc-Flash Boundary Basics</a></li>
+          <li><a href="guide-grounding-bonding-basics.html">Grounding &amp; Bonding Basics</a></li>
+        </ul>
+      </div>
+    </section>
+    <section class="hubgroup" aria-labelledby="g-data-center-power-and-cooling">
+      <div class="hg-pic"><picture><source srcset="images/parts/dc-ups-systems-static.webp" type="image/webp"><img src="images/parts/dc-ups-systems-static.jpg" width="340" height="340" alt="Static UPS cabinet" loading="lazy" decoding="async"></picture></div>
+      <div class="hg-body">
+        <h3 id="g-data-center-power-and-cooling">Data center power &amp; cooling <span class="hg-n">6</span></h3>
+        <ul>
+          <li><a href="guide-generator-sizing.html">How to Size a Standby Generator</a></li>
+          <li><a href="guide-ups-topologies.html">UPS Topologies: Double Conversion vs. Eco Mode</a></li>
+          <li><a href="guide-n-plus-1-vs-2n-redundancy.html">N+1 vs. 2N Redundancy Explained</a></li>
+          <li><a href="guide-415v-vs-480v-distribution.html">415 V vs. 480 V Distribution</a></li>
+          <li><a href="guide-pue-explained.html">PUE Explained</a></li>
+          <li><a href="guide-liquid-vs-air-cooling.html">Liquid vs. Air Cooling for AI Racks</a></li>
+        </ul>
+      </div>
+    </section>
+    <section class="hubgroup" aria-labelledby="g-renewables-and-storage">
+      <div class="hg-pic"><picture><source srcset="images/parts/re-mono-perc-modules.webp" type="image/webp"><img src="images/parts/re-mono-perc-modules.jpg" width="340" height="340" alt="Solar PV module" loading="lazy" decoding="async"></picture></div>
+      <div class="hg-body">
+        <h3 id="g-renewables-and-storage">Renewables &amp; storage <span class="hg-n">5</span></h3>
+        <ul>
+          <li><a href="guide-inverter-clipping-ratio.html">Inverter Clipping &amp; DC:AC Ratio</a></li>
+          <li><a href="guide-grid-forming-vs-grid-following.html">Grid-Forming vs. Grid-Following Inverters</a></li>
+          <li><a href="guide-bess-c-rate.html">BESS C-Rate Explained</a></li>
+          <li><a href="guide-bess-augmentation.html">BESS Augmentation Explained</a></li>
+          <li><a href="guide-bess-fire-safety-nfpa-855.html">BESS Fire Safety: NFPA 855 &amp; UL 9540A</a></li>
+        </ul>
+      </div>
+    </section>
+    <section class="hubgroup" aria-labelledby="g-grid-interconnection">
+      <div class="hg-pic is-icon"><svg class="hg-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M20 5 12 35M20 5l8 30M10 12h20M12 19h16M14 12l12 7M26 12l-12 7M15 19l10 8M25 19l-10 8M13 27h14"/><path class="acc" d="M3 12h7M30 12h7"/></svg></div>
+      <div class="hg-body">
+        <h3 id="g-grid-interconnection">Grid interconnection <span class="hg-n">4</span></h3>
+        <ul>
+          <li><a href="guide-grid-interconnection-process.html">The Grid Interconnection Process</a></li>
+          <li><a href="guide-interconnection-pjm.html">PJM Interconnection Timeline</a></li>
+          <li><a href="guide-interconnection-miso.html">MISO Interconnection Timeline</a></li>
+          <li><a href="guide-interconnection-ercot.html">ERCOT Interconnection Timeline</a></li>
+        </ul>
+      </div>
+    </section>
+    <section class="hubgroup" aria-labelledby="g-procurement-and-compliance">
+      <div class="hg-pic is-icon"><svg class="hg-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="5" width="21" height="29" rx="2"/><path d="M13 12h11M13 18h11M13 24h6"/><path class="acc" d="M22 29l4 4 8-9"/></svg></div>
+      <div class="hg-body">
+        <h3 id="g-procurement-and-compliance">Procurement &amp; compliance <span class="hg-n">2</span></h3>
+        <ul>
+          <li><a href="guide-buy-america-iija.html">Buy America (BABA) for Procurement</a></li>
+          <li><a href="guide-feoc-compliance.html">FEOC Compliance for Solar &amp; Storage</a></li>
+        </ul>
+      </div>
+    </section>
   </div>
 
-  <h2 class="gsec">Transformers &amp; substation</h2>
-  <div class="gdgrid">
-    <a class="gdcard" href="guide-transformer-nameplate.html"><h3>How to Read a Transformer Nameplate</h3><p>kVA ratings, cooling class codes, impedance, BIL and vector group: what every field means and which ones decide the rest of your design.</p></a>
-    <a class="gdcard" href="guide-transformer-impedance.html"><h3>Transformer Impedance (%Z) Explained</h3><p>How one nameplate number sets fault current, voltage regulation and motor-starting dip, the &plusmn;7.5% tolerance, and how to choose a value.</p></a>
-    <a class="gdcard" href="guide-pad-mount-vs-gsu-transformers.html"><h3>Pad-Mount vs. GSU Transformers</h3><p>They solve different problems and carry very different lead times. How to tell which one your application actually needs.</p></a>
-    <a class="gdcard" href="guide-transformer-lead-times.html"><h3>Why Transformer Lead Times Hit 3+ Years</h3><p>What is driving the multi-year power transformer shortage, and how to sequence a project around it.</p></a>
+  <h2 class="hubsec">Equipment references</h2>
+  <div class="hubgrid">
+    <section class="hubgroup" aria-labelledby="g-data-center-equipment">
+      <div class="hg-pic"><picture><source srcset="images/parts/dc-diesel-gensets.webp" type="image/webp"><img src="images/parts/dc-diesel-gensets.jpg" width="340" height="340" alt="Diesel generator set" loading="lazy" decoding="async"></picture></div>
+      <div class="hg-body">
+        <h3 id="g-data-center-equipment">Data center equipment <span class="hg-n">12</span></h3>
+        <ul class="hg-cols">
+          <li><a href="data-centers.html">Data Centers overview</a></li>
+          <li><a href="data-centers/transformers.html">Data Center Transformers</a></li>
+          <li><a href="data-centers/switchgear.html">Data Center Switchgear &amp; Breakers</a></li>
+          <li><a href="data-centers/backup-power.html">Backup Power: Gensets &amp; UPS</a></li>
+          <li><a href="data-centers/cooling.html">Data Center Cooling</a></li>
+          <li><a href="data-centers/power-distribution.html">Power Distribution: Busway &amp; PDUs</a></li>
+          <li><a href="data-centers/cabling.html">Cable &amp; Busbar Sizing</a></li>
+          <li><a href="data-centers/transformer-components.html">Transformer Components</a></li>
+          <li><a href="data-centers/switchgear-components.html">Switchgear Components</a></li>
+          <li><a href="data-centers/genset-components.html">Genset Components</a></li>
+          <li><a href="data-centers/grounding-bonding.html">Grounding &amp; Bonding</a></li>
+          <li><a href="data-centers/monitoring-controls.html">Monitoring &amp; Controls</a></li>
+        </ul>
+      </div>
+    </section>
+    <section class="hubgroup" aria-labelledby="g-renewables-equipment">
+      <div class="hg-pic"><picture><source srcset="images/parts/re-central-inverters-utility.webp" type="image/webp"><img src="images/parts/re-central-inverters-utility.jpg" width="340" height="340" alt="Utility-scale central inverter" loading="lazy" decoding="async"></picture></div>
+      <div class="hg-body">
+        <h3 id="g-renewables-equipment">Renewables equipment <span class="hg-n">4</span></h3>
+        <ul>
+          <li><a href="renewables.html">Renewables overview</a></li>
+          <li><a href="renewables/solar-inverters.html">Solar Inverters</a></li>
+          <li><a href="renewables/dc-collection.html">PV Combiners &amp; DC Cable</a></li>
+          <li><a href="renewables/ac-collection.html">Solar AC Collection</a></li>
+        </ul>
+      </div>
+    </section>
+    <section class="hubgroup" aria-labelledby="g-battery-storage-equipment">
+      <div class="hg-pic"><picture><source srcset="images/parts/bess-containerized-enclosures.webp" type="image/webp"><img src="images/parts/bess-containerized-enclosures.jpg" width="340" height="340" alt="Containerized battery enclosure" loading="lazy" decoding="async"></picture></div>
+      <div class="hg-body">
+        <h3 id="g-battery-storage-equipment">Battery storage equipment <span class="hg-n">4</span></h3>
+        <ul>
+          <li><a href="battery-storage.html">Battery Storage overview</a></li>
+          <li><a href="battery-storage/pcs-inverters.html">BESS Power Conversion (PCS)</a></li>
+          <li><a href="battery-storage/bess-enclosures.html">BESS Enclosures &amp; Modules</a></li>
+          <li><a href="battery-storage/balance-of-plant.html">BESS Balance of Plant</a></li>
+        </ul>
+      </div>
+    </section>
   </div>
 
-  <h2 class="gsec">Switchgear &amp; protection</h2>
-  <div class="gdgrid">
-    <a class="gdcard" href="guide-switchgear-compartments.html"><h3>Metal-Clad vs. Metal-Enclosed Switchgear</h3><p>How the standards define them, what sits inside each compartment, and why the distinction changes what you can safely work on.</p></a>
-    <a class="gdcard" href="guide-short-circuit-studies-breaker-coordination.html"><h3>Short-Circuit Studies &amp; Breaker Coordination</h3><p>What a short-circuit study calculates, why a quick fault-current estimate is not a substitute, and how coordination follows from it.</p></a>
-    <a class="gdcard" href="guide-fully-rated-vs-series-rated.html"><h3>Fully Rated vs. Series Rated Breakers</h3><p>How series combinations work, the NEC rules and motor limit, why they conflict with selective coordination, and AIC vs. SCCR.</p></a>
-    <a class="gdcard" href="guide-ground-fault-protection.html"><h3>Ground-Fault Protection Explained</h3><p>Why arcing ground faults evade overcurrent protection, what NEC 230.95 requires, sensing methods, coordination and GFP vs. GFCI.</p></a>
-    <a class="gdcard" href="guide-arc-flash-ppe-categories.html"><h3>Arc-Flash PPE Categories Explained</h3><p>The two NFPA 70E methods, category 1&ndash;4 arc ratings, where the category tables stop applying, labels and the hierarchy of controls.</p></a>
-    <a class="gdcard" href="guide-arc-flash-boundary-basics.html"><h3>Arc-Flash Boundary Basics</h3><p>What an arc-flash boundary is, how it relates to incident energy, and what NFPA 70E requires on equipment labels.</p></a>
-    <a class="gdcard" href="guide-grounding-bonding-basics.html"><h3>Grounding &amp; Bonding Basics</h3><p>They do two different jobs. What each actually does, and why the equipment grounding conductor is not the neutral.</p></a>
-  </div>
-
-  <h2 class="gsec">Data center power &amp; cooling</h2>
-  <div class="gdgrid">
-    <a class="gdcard" href="guide-generator-sizing.html"><h3>How to Size a Standby Generator</h3><p>ISO 8528 ratings, running load, step-load acceptance, motor starting with one set out, derating and fuel, with a data center example.</p></a>
-    <a class="gdcard" href="guide-ups-topologies.html"><h3>UPS Topologies: Double Conversion vs. Eco Mode</h3><p>The IEC 62040-3 VFI, VI and VFD classes, what eco mode saves and exposes, transfer tolerance, and rotary UPS.</p></a>
-    <a class="gdcard" href="guide-n-plus-1-vs-2n-redundancy.html"><h3>N+1 vs. 2N Redundancy Explained</h3><p>What each redundancy scheme survives, what it costs in installed capacity, 2(N+1) and distributed designs, and how they map to tiers.</p></a>
-    <a class="gdcard" href="guide-415v-vs-480v-distribution.html"><h3>415 V vs. 480 V Distribution</h3><p>What changes when servers get 240 V directly: PDU transformers removed, power per circuit, fault current at the rack, neutrals and connectors.</p></a>
-    <a class="gdcard" href="guide-pue-explained.html"><h3>PUE Explained</h3><p>The formula, what counts as facility power, typical ranges from 1.1 to 2.0, and what actually drives the number.</p></a>
-    <a class="gdcard" href="guide-liquid-vs-air-cooling.html"><h3>Liquid vs. Air Cooling for AI Racks</h3><p>Why GPU rack density is pushing data centers to liquid: direct-to-chip, immersion and rear-door heat exchangers compared.</p></a>
-  </div>
-
-  <h2 class="gsec">Renewables &amp; storage</h2>
-  <div class="gdgrid">
-    <a class="gdcard" href="guide-inverter-clipping-ratio.html"><h3>Inverter Clipping &amp; DC:AC Ratio</h3><p>Why utility-scale solar oversizes the DC array on purpose, how clipping works, and the ratios typically used.</p></a>
-    <a class="gdcard" href="guide-grid-forming-vs-grid-following.html"><h3>Grid-Forming vs. Grid-Following Inverters</h3><p>How the two control modes differ, the short-circuit ratio screen for weak grids, black start, and what grid-forming costs.</p></a>
-    <a class="gdcard" href="guide-bess-c-rate.html"><h3>BESS C-Rate Explained</h3><p>How to calculate C-rate from MW and MWh, why the basis matters, how degradation raises it, and why it decides cells, cooling and warranty terms.</p></a>
-    <a class="gdcard" href="guide-bess-augmentation.html"><h3>BESS Augmentation Explained</h3><p>Why lithium capacity fades, how augmentation plans for it with phased DC block additions, and what that means contractually.</p></a>
-    <a class="gdcard" href="guide-bess-fire-safety-nfpa-855.html"><h3>BESS Fire Safety: NFPA 855 &amp; UL 9540A</h3><p>What NFPA 855 requires for battery storage installations, and how UL 9540A test data sets separation distances.</p></a>
-  </div>
-
-  <h2 class="gsec">Grid interconnection</h2>
-  <div class="gdgrid">
-    <a class="gdcard" href="guide-grid-interconnection-process.html"><h3>The Grid Interconnection Process</h3><p>What happens between filing a request and energizing: queue position, the study sequence, and where projects stall.</p></a>
-    <a class="gdcard" href="guide-interconnection-pjm.html"><h3>PJM Interconnection Timeline</h3><p>How the PJM queue works: Transition Cycles, readiness requirements, and what Northern Virginia data-center load has done to it.</p></a>
-    <a class="gdcard" href="guide-interconnection-miso.html"><h3>MISO Interconnection Timeline</h3><p>How the MISO Definitive Planning Phase works, why cycles ran years behind schedule, and why sub-region matters.</p></a>
-    <a class="gdcard" href="guide-interconnection-ercot.html"><h3>ERCOT Interconnection Timeline</h3><p>Why ERCOT sits outside FERC jurisdiction, how connect-and-manage differs, and why stability screening still bites.</p></a>
-  </div>
-
-  <h2 class="gsec">Procurement &amp; compliance</h2>
-  <div class="gdgrid">
-    <a class="gdcard" href="guide-buy-america-iija.html"><h3>Buy America (BABA) for Procurement</h3><p>What Build America, Buy America requires for IIJA-funded projects, and how it differs from the IRA domestic-content rules.</p></a>
-    <a class="gdcard" href="guide-feoc-compliance.html"><h3>FEOC Compliance for Solar &amp; Storage</h3><p>What FEOC rules mean for procurement, what documentation to gather, and how they interact with domestic content.</p></a>
-  </div>
-
-  <h2 class="gsec">Equipment references by sector</h2>
-  <p class="gnote">Each sector page covers the engineering behind the equipment; the pages beneath it go deeper on one equipment class.</p>
-  <div class="gdgrid">
-    <a class="gdcard" href="data-centers.html"><h3>Data Centers</h3><p>Pad-mount vs. GSU transformers, N/N+1/2N redundancy, switchgear, backup power and cooling.</p><span class="gsub">Transformers &middot; Switchgear &middot; Backup Power &middot; Cooling &middot; Power Distribution &middot; Cabling</span></a>
-    <a class="gdcard" href="renewables.html"><h3>Renewables</h3><p>DC:AC ratio and clipping, fixed-tilt vs. tracker, GSU transformers and collection systems.</p><span class="gsub">Solar Inverters &middot; DC Collection &middot; AC Collection</span></a>
-    <a class="gdcard" href="battery-storage.html"><h3>Battery Storage</h3><p>Duration and C-rate, grid-forming vs. grid-following PCS, augmentation and fire safety.</p><span class="gsub">PCS &amp; Inverters &middot; Enclosures &middot; Balance of Plant</span></a>
-  </div>
-
-  <h2 class="gsec">Equipment deep-dives</h2>
-  <div class="gdgrid">
-    <a class="gdcard" href="data-centers/transformers.html"><h3>Data Center Transformers</h3><p>Pad-mount, large power, dry-type and K-rated compared, with indicative lead times.</p></a>
-    <a class="gdcard" href="data-centers/switchgear.html"><h3>Data Center Switchgear &amp; Breakers</h3><p>MV switchgear, LV switchgear, air circuit breakers and MCCBs.</p></a>
-    <a class="gdcard" href="data-centers/backup-power.html"><h3>Backup Power: Gensets &amp; UPS</h3><p>Diesel and gas gensets, turbines, static UPS and flywheel systems.</p></a>
-    <a class="gdcard" href="data-centers/cooling.html"><h3>Data Center Cooling</h3><p>CDUs, CRAH/CRAC units, rear-door heat exchangers and chillers.</p></a>
-    <a class="gdcard" href="data-centers/power-distribution.html"><h3>Power Distribution: Busway &amp; PDUs</h3><p>Busway, floor PDUs, RPPs, static transfer switches and rack PDUs.</p></a>
-    <a class="gdcard" href="data-centers/cabling.html"><h3>Cable &amp; Busbar Sizing</h3><p>MV and LV power cable, copper busbar and fiber trunks, with ampacity guidance.</p></a>
-    <a class="gdcard" href="data-centers/transformer-components.html"><h3>Transformer Components</h3><p>Bushings, tap changers, radiators, insulating fluid, core steel and winding conductor.</p></a>
-    <a class="gdcard" href="data-centers/switchgear-components.html"><h3>Switchgear Components</h3><p>Instrument transformers, trip units, contact and arc-chute kits, enclosure hardware.</p></a>
-    <a class="gdcard" href="data-centers/genset-components.html"><h3>Genset Components</h3><p>Engines, alternators, controls and governors, cooling, exhaust, fuel and starting.</p></a>
-    <a class="gdcard" href="data-centers/grounding-bonding.html"><h3>Grounding &amp; Bonding</h3><p>Ground bars, exothermic connections, earthing kits and surge protective devices.</p></a>
-    <a class="gdcard" href="data-centers/monitoring-controls.html"><h3>Monitoring &amp; Controls</h3><p>Revenue and power-quality metering, and the protective relays behind breaker operation.</p></a>
-    <a class="gdcard" href="renewables/solar-inverters.html"><h3>Solar Inverters</h3><p>String, central, commercial and hybrid PV inverters: ratings and MPPT granularity.</p></a>
-    <a class="gdcard" href="renewables/dc-collection.html"><h3>PV Combiners &amp; DC Cable</h3><p>String combiners, recombiners, PV wire and rapid shutdown at 1500V.</p></a>
-    <a class="gdcard" href="renewables/ac-collection.html"><h3>Solar AC Collection</h3><p>Pad-mount step-up transformers, collector feeders and collector switchgear.</p></a>
-    <a class="gdcard" href="battery-storage/pcs-inverters.html"><h3>BESS Power Conversion (PCS)</h3><p>Central, modular and grid-forming PCS, with UL 1741 SB considerations.</p></a>
-    <a class="gdcard" href="battery-storage/bess-enclosures.html"><h3>BESS Enclosures &amp; Modules</h3><p>Containerized enclosures, battery modules and fire protection.</p></a>
-    <a class="gdcard" href="battery-storage/balance-of-plant.html"><h3>BESS Balance of Plant</h3><p>MV step-up transformers, collector switchgear, protection relays and station service.</p></a>
-  </div>
-
-
-
-
-  <h2 class="gsec" id="calc-block">Calculators explained</h2>
-  <p class="gnote">Each page covers the method, the formula, a worked example you can check against the tool, the governing standard, and what the calculation does not account for.</p>
-  <div class="gdgrid gdtight">
-    <a class="gdcard gdmini" href="calculators/voltage-drop.html"><h3>Voltage Drop</h3><span class="gsub">K-factor method, 3% / 5% design limits, conductor sizing.</span></a>
-    <a class="gdcard gdmini" href="calculators/transformer-sizing.html"><h3>Transformer Sizing</h3><span class="gsub">kW to kVA, standard nameplate ratings, full-load amps.</span></a>
-    <a class="gdcard gdmini" href="calculators/fault-current.html"><h3>Available Fault Current</h3><span class="gsub">Short-circuit current at a transformer secondary from %Z.</span></a>
-    <a class="gdcard gdmini" href="calculators/arc-flash.html"><h3>Arc-Flash Incident Energy</h3><span class="gsub">Incident energy and boundary, Lee method screening estimate.</span></a>
-    <a class="gdcard gdmini" href="calculators/ampacity.html"><h3>Ampacity &amp; Conduit Fill</h3><span class="gsub">NEC Table 310.16 lookup and raceway fill limits.</span></a>
-    <a class="gdcard gdmini" href="calculators/bess-sizing.html"><h3>BESS Sizing</h3><span class="gsub">Load and duration to usable kWh, then to nameplate.</span></a>
-    <a class="gdcard gdmini" href="calculators/solar-string.html"><h3>Solar String Sizing</h3><span class="gsub">Temperature-corrected Voc and Vmp against inverter limits.</span></a>
-    <a class="gdcard gdmini" href="calculators/power-factor.html"><h3>Power Factor Correction</h3><span class="gsub">Capacitor bank kVAR to reach a target power factor.</span></a>
-    <a class="gdcard gdmini" href="calculators/motor-start.html"><h3>Motor Starting Voltage Dip</h3><span class="gsub">Bus dip from locked-rotor kVA against source stiffness.</span></a>
-    <a class="gdcard gdmini" href="calculators/inrush.html"><h3>Transformer Inrush</h3><span class="gsub">Magnetizing inrush as a multiple of full-load amps.</span></a>
-    <a class="gdcard gdmini" href="calculators/grounding.html"><h3>Ground Rod Resistance</h3><span class="gsub">Dwight's formula from soil resistivity and rod length.</span></a>
-    <a class="gdcard gdmini" href="calculators/generator-runtime.html"><h3>Generator Runtime</h3><span class="gsub">Tank capacity against fuel consumption at real load.</span></a>
-  </div>
-  <h2 class="gsec">Data &amp; tools</h2>
-  <div class="gdgrid">
-    <a class="gdcard" href="lead-time-index.html"><h3>Lead-Time Index</h3><p>Indicative lead times across every equipment family, with what is driving each one.</p></a>
-    <a class="gdcard" href="engineering-calculators.html"><h3>Engineering Calculators</h3><p>Voltage drop, transformer sizing, fault current, arc flash, BESS sizing and more, with the method shown for each.</p></a>
-    <a class="gdcard" href="voltfield-insights.html"><h3>Catalog Insights</h3><p>Lead-time distribution and configuration mix across the whole reference set.</p></a>
-    <a class="gdcard" href="glossary.html"><h3>Glossary</h3><p>The terms that show up on nameplates, drawings and submittals, defined plainly.</p></a>
-    <a class="gdcard" href="free-tools.html"><h3>Free Tools</h3><p>Calculators, a design sandbox, PCB tools and reference utilities. No signup.</p></a>
-    <a class="gdcard" href="specification-checklist.html"><h3>Specification Checklist</h3><p>A completeness checklist plus copy-paste specification templates for transformers, switchgear and BESS.</p></a>
+  <h2 class="hubsec">Calculators &amp; tools</h2>
+  <div class="hubgrid">
+    <section class="hubgroup" aria-labelledby="calc-block">
+      <div class="hg-pic is-icon"><svg class="hg-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="5" width="22" height="30" rx="2"/><rect x="13" y="9" width="14" height="6"/><path class="acc" d="M14 21h.01M20 21h.01M26 21h.01M14 27h.01M20 27h.01M26 27h.01" stroke-width="3.2" stroke-linecap="round"/></svg></div>
+      <div class="hg-body">
+        <h3 id="calc-block">Calculators explained <span class="hg-n">12</span></h3>
+        <p class="hg-note">The method, formula and a worked example behind each calculator.</p>
+        <ul class="hg-cols">
+          <li><a href="calculators/voltage-drop.html">Voltage Drop</a></li>
+          <li><a href="calculators/transformer-sizing.html">Transformer Sizing</a></li>
+          <li><a href="calculators/fault-current.html">Available Fault Current</a></li>
+          <li><a href="calculators/arc-flash.html">Arc-Flash Incident Energy</a></li>
+          <li><a href="calculators/ampacity.html">Ampacity &amp; Conduit Fill</a></li>
+          <li><a href="calculators/bess-sizing.html">BESS Sizing</a></li>
+          <li><a href="calculators/solar-string.html">Solar String Sizing</a></li>
+          <li><a href="calculators/power-factor.html">Power Factor Correction</a></li>
+          <li><a href="calculators/motor-start.html">Motor Starting Voltage Dip</a></li>
+          <li><a href="calculators/inrush.html">Transformer Inrush</a></li>
+          <li><a href="calculators/grounding.html">Ground Rod Resistance</a></li>
+          <li><a href="calculators/generator-runtime.html">Generator Runtime</a></li>
+        </ul>
+      </div>
+    </section>
+    <section class="hubgroup" aria-labelledby="g-data-and-tools">
+      <div class="hg-pic is-icon"><svg class="hg-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M5 34h30"/><rect x="8" y="21" width="6" height="13"/><rect class="acc" x="17" y="11" width="6" height="23"/><rect x="26" y="16" width="6" height="18"/></svg></div>
+      <div class="hg-body">
+        <h3 id="g-data-and-tools">Data &amp; tools <span class="hg-n">6</span></h3>
+        <ul>
+          <li><a href="lead-time-index.html">Lead-Time Index</a></li>
+          <li><a href="engineering-calculators.html">Engineering Calculators</a></li>
+          <li><a href="voltfield-insights.html">Catalog Insights</a></li>
+          <li><a href="glossary.html">Glossary</a></li>
+          <li><a href="free-tools.html">Free Tools</a></li>
+          <li><a href="specification-checklist.html">Specification Checklist</a></li>
+        </ul>
+      </div>
+    </section>
   </div>
 
   <div class="vf-updates">

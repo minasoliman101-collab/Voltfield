@@ -234,3 +234,18 @@ Contextual links from the category pages into the catalog stay. They serve reade
 - **Phone header:** one row (61 px instead of about 110 px) below 520 px wide, by hiding the tagline under the wordmark.
 - **Reference tables:** the standards, compliance-mark and HS-code tables on `calculators/reference-tables.html` start collapsed.
 
+
+
+---
+
+## Oct 3, 2026: pictures, sector pages and the guides hub
+
+- **Guide header photos (27 of 33):** a reference illustration from `images/parts/` beside the headline, via `scripts/add-guide-photos.mjs` (re-runnable; skips guides that already have one). The six policy and process guides (BABA, FEOC, the interconnection process and the PJM, MISO and ERCOT timelines) get none, because no illustration in the library honestly shows them. None of the 62 files that are byte-identical copies of the transformer render is used, except for the large power transformer it actually depicts.
+- **Redundancy diagrams:** the N/N+1/2N tables in the UPS sizing and N+1 vs. 2N guides are now module diagrams carrying the same descriptions word for word.
+- **Sector pages (data centers, renewables, battery storage):** categories lead as one photo grid (they had been listed up to three times). The overview keeps its first paragraph visible and the rest in a `<details>`; news and the full family list are folded at the end. All of it stays in the HTML. `#redundancy` and `#dur`, linked from three guides and the POD designer, still land: Chrome opens the details on fragment navigation and a small script covers other browsers. Removed: the "Top families" cards (filtered links into the noindexed catalog) and the BOM CTA band, already listed under Tools. The family list intro no longer says each family has its own reference page; those pages were retired and the links go to the spec library.
+- **Guides hub:** 12 topic boxes, each with a picture (or a line icon where no photo fits) and titles only, instead of 71 title-plus-description cards. All 71 links kept.
+- **Calculator directory:** each card shows the equipment it sizes, or a text badge for finance and reference tools.
+- **Component registry:** the PF correction capacitor entry pointed at `re-dc-link-film-capacitors.jpg`, one of the transformer-render copies. It is now 3D-only.
+- **Not changed:** dates and the sitemap. These are presentation changes, so `dateModified` and `<lastmod>` stay as they were, as with the Oct 1 guide pass.
+
+**Watch in Search Console:** whether the sector pages hold their queries now that most of each overview starts collapsed.

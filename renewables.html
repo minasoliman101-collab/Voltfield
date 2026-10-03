@@ -127,43 +127,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </section>
-<div class="section" style="padding-bottom:0">
-  <div class="section-head"><div><div class="section-eyebrow">Sector overview</div><h2>What's driving solar &amp; wind equipment</h2></div></div>
-  <div style="max-width:760px;display:grid;gap:14px;font-size:14.5px;color:var(--ink-2);line-height:1.65">
-    <p>FEOC and domestic-content rules have become the central sourcing variable for solar and storage procurement. Treasury's first "material assistance" safe-harbor guidance gave developers a workable path to document component sourcing and keep ITC eligibility, after months of uncertainty — but it also means sourcing decisions now carry compliance weight they didn't a few years ago.</p>
-    <p>Section 301 tariffs and domestic-content incentives are pulling inverter manufacturing toward the US, and utility-scale module pricing has climbed as buyers weigh tariff exposure against domestic-content bonuses. Both trends show up directly in the lead times and pricing on this catalog.</p>
-    <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Inverters, DC:AC ratio, and clipping</h3>
-    <p>Most utility-scale sites now oversize the DC array relative to the inverter's AC rating on purpose — a DC:AC (or ILR, inverter loading ratio) of 1.2–1.3 is typical. The inverter simply caps ("clips") output on the highest-irradiance hours rather than running below capacity most of the day, and the energy lost to clipping is usually smaller than the energy gained from the extra DC capacity everywhere else. Getting the ratio right is a sizing problem before it's a procurement problem — run it on the <a href="calculators/solar-string.html" style="color:var(--link);font-weight:600;text-decoration:underline">solar string sizing calculator</a> before locking a BOM. See <a href="guide-inverter-clipping-ratio.html" style="color:var(--link);font-weight:600;text-decoration:underline">Inverter Clipping Ratio Explained</a> for the full breakdown.</p>
-
-    <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Fixed-tilt vs. tracker: what changes on the BOM</h3>
-    <p>Single-axis trackers add torque tubes, slew drives, motors, and controllers to what a fixed-tilt racking system doesn't need at all — more equipment, more moving parts, more O&amp;M line items. In exchange, trackers typically add somewhere around 15–25% more annual energy yield versus fixed-tilt at the same DC capacity, which is why they now dominate new utility-scale ground-mount design in most of the US despite the added structural BOS complexity. The right call comes down to land cost, wind/snow loading at the site, and whether the extra yield outweighs the extra maintenance surface.</p>
-
-    <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">GSU transformers, MV collection, and interconnection</h3>
-    <p>A solar or wind site's GSU (generator step-up) transformer steps the site's collection voltage up to transmission level at the point of interconnection — a different role than a data center's on-site GSU, but the same equipment class and the same multi-year lead times; see <a href="guide-pad-mount-vs-gsu-transformers.html" style="color:var(--link);font-weight:600;text-decoration:underline">Pad-Mount vs. GSU Transformers</a> for how the two compare. Getting from an interconnection request to an executed agreement is frequently the longer critical-path item on a renewables project, not the equipment itself — see <a href="guide-grid-interconnection-process.html" style="color:var(--link);font-weight:600;text-decoration:underline">The Grid Interconnection Process, Explained</a>, or the region-specific timeline for <a href="guide-interconnection-miso.html" style="color:var(--link);font-weight:600;text-decoration:underline">MISO</a> and <a href="guide-interconnection-ercot.html" style="color:var(--link);font-weight:600;text-decoration:underline">ERCOT</a>, the two regions carrying the most new wind, solar, and storage interconnection volume.</p>
-
-    <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">FEOC and Buy America, together</h3>
-    <p>FEOC material-assistance documentation and Buy America / BABA domestic-content rules are two separate federal programs that often apply to the same project at once — one triggered by ownership/control of the supply chain, the other by how the project is funded. See <a href="guide-feoc-compliance.html" style="color:var(--link);font-weight:600;text-decoration:underline">FEOC Compliance for Solar &amp; Storage</a> for what to document for ITC eligibility, and <a href="guide-buy-america-iija.html" style="color:var(--link);font-weight:600;text-decoration:underline">Buy America / BABA</a> for the funding-triggered version of the same problem.</p>
-  </div>
-  <a class="ctabtn" style="display:inline-block;margin-top:22px" href="voltfield-supply-catalog.html?sector=re">BROWSE THE RENEWABLES SPEC LIBRARY &rarr;</a>
-</div>
-<div class="section" style="padding-top:0">
+<!-- Equipment categories: one photo grid. Replaces up to three lists of the
+     same categories (a text grid, a described grid, and "Top families" cards
+     into the catalog). Component categories have no honest photo in the
+     library (all of their files are the shared transformer placeholder), so
+     they sit in a text row instead of borrowing a picture. -->
+<div class="section sec-cats">
   <div class="section-head"><div><div class="section-eyebrow">Equipment categories</div><h2>Renewable plant equipment by category</h2></div></div>
-  <div class="catquick">
-    <a class="catq" href="renewables/solar-inverters.html">
-      <span class="cq-sec" style="background:var(--re)">CATEGORY</span>
-      <span class="cq-n">Solar Inverters</span>
-      <span class="cq-d">String, central, commercial and hybrid. Why the architecture is a site decision, and what UL 1741 SB certification now gates.</span>
-    </a>
-    <a class="catq" href="renewables/dc-collection.html">
-      <span class="cq-sec" style="background:var(--re)">CATEGORY</span>
-      <span class="cq-n">DC Collection</span>
-      <span class="cq-d">Combiners, recombiners, PV wire and rapid shutdown &mdash; the layer that generates nothing and quietly loses energy.</span>
-    </a>
-    <a class="catq" href="renewables/ac-collection.html">
-      <span class="cq-sec" style="background:var(--re)">CATEGORY</span>
-      <span class="cq-n">AC Collection</span>
-      <span class="cq-d">Step-up transformers, collector feeders, switchgear and the substation interface &mdash; the longest lead times on the project.</span>
-    </a>
+  <div class="sectiles">
+    <a class="st-tile" href="renewables/solar-inverters.html"><span class="st-img"><picture><source srcset="images/parts/re-string-inverters-feoc-clean.webp" type="image/webp"><img src="images/parts/re-string-inverters-feoc-clean.jpg" width="340" height="340" alt="String inverter" loading="lazy" decoding="async"></picture></span><span class="st-name">Solar Inverters</span></a>
+    <a class="st-tile" href="renewables/dc-collection.html"><span class="st-img"><picture><source srcset="images/parts/re-dc-combiner-boxes.webp" type="image/webp"><img src="images/parts/re-dc-combiner-boxes.jpg" width="340" height="340" alt="Open DC combiner box with fuses" loading="lazy" decoding="async"></picture></span><span class="st-name">DC Collection</span></a>
+    <a class="st-tile" href="renewables/ac-collection.html"><span class="st-img"><picture><source srcset="images/parts/re-pad-mount-collection.webp" type="image/webp"><img src="images/parts/re-pad-mount-collection.jpg" width="340" height="340" alt="Pad-mount step-up transformer" loading="lazy" decoding="async"></picture></span><span class="st-name">AC Collection</span></a>
   </div>
 </div>
 <div class="section" style="padding-top:0">
@@ -185,6 +159,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h3>BOM Generator</h3><span class="cq-n">Component teardown for any inverter, module, or GSU</span>
     </a>
   </div>
+</div>
+<div class="section sec-overview">
+  <div class="section-head"><div><div class="section-eyebrow">Sector overview</div><h2>What's driving solar &amp; wind equipment</h2></div></div>
+  <div style="max-width:760px;display:grid;gap:14px;font-size:14.5px;color:var(--ink-2);line-height:1.65">
+    <p>FEOC and domestic-content rules have become the central sourcing variable for solar and storage procurement. Treasury's first "material assistance" safe-harbor guidance gave developers a workable path to document component sourcing and keep ITC eligibility, after months of uncertainty — but it also means sourcing decisions now carry compliance weight they didn't a few years ago.</p>
+  </div>
+  <details class="sec-more">
+    <summary>Read the full overview</summary>
+    <div style="max-width:760px;display:grid;gap:14px;font-size:14.5px;color:var(--ink-2);line-height:1.65">
+      <p>Section 301 tariffs and domestic-content incentives are pulling inverter manufacturing toward the US, and utility-scale module pricing has climbed as buyers weigh tariff exposure against domestic-content bonuses. Both trends show up directly in the lead times and pricing on this catalog.</p>
+      <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Inverters, DC:AC ratio, and clipping</h3>
+      <p>Most utility-scale sites now oversize the DC array relative to the inverter's AC rating on purpose — a DC:AC (or ILR, inverter loading ratio) of 1.2–1.3 is typical. The inverter simply caps ("clips") output on the highest-irradiance hours rather than running below capacity most of the day, and the energy lost to clipping is usually smaller than the energy gained from the extra DC capacity everywhere else. Getting the ratio right is a sizing problem before it's a procurement problem — run it on the <a href="calculators/solar-string.html" style="color:var(--link);font-weight:600;text-decoration:underline">solar string sizing calculator</a> before locking a BOM. See <a href="guide-inverter-clipping-ratio.html" style="color:var(--link);font-weight:600;text-decoration:underline">Inverter Clipping Ratio Explained</a> for the full breakdown.</p>
+      <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Fixed-tilt vs. tracker: what changes on the BOM</h3>
+      <p>Single-axis trackers add torque tubes, slew drives, motors, and controllers to what a fixed-tilt racking system doesn't need at all — more equipment, more moving parts, more O&amp;M line items. In exchange, trackers typically add somewhere around 15–25% more annual energy yield versus fixed-tilt at the same DC capacity, which is why they now dominate new utility-scale ground-mount design in most of the US despite the added structural BOS complexity. The right call comes down to land cost, wind/snow loading at the site, and whether the extra yield outweighs the extra maintenance surface.</p>
+      <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">GSU transformers, MV collection, and interconnection</h3>
+      <p>A solar or wind site's GSU (generator step-up) transformer steps the site's collection voltage up to transmission level at the point of interconnection — a different role than a data center's on-site GSU, but the same equipment class and the same multi-year lead times; see <a href="guide-pad-mount-vs-gsu-transformers.html" style="color:var(--link);font-weight:600;text-decoration:underline">Pad-Mount vs. GSU Transformers</a> for how the two compare. Getting from an interconnection request to an executed agreement is frequently the longer critical-path item on a renewables project, not the equipment itself — see <a href="guide-grid-interconnection-process.html" style="color:var(--link);font-weight:600;text-decoration:underline">The Grid Interconnection Process, Explained</a>, or the region-specific timeline for <a href="guide-interconnection-miso.html" style="color:var(--link);font-weight:600;text-decoration:underline">MISO</a> and <a href="guide-interconnection-ercot.html" style="color:var(--link);font-weight:600;text-decoration:underline">ERCOT</a>, the two regions carrying the most new wind, solar, and storage interconnection volume.</p>
+      <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">FEOC and Buy America, together</h3>
+      <p>FEOC material-assistance documentation and Buy America / BABA domestic-content rules are two separate federal programs that often apply to the same project at once — one triggered by ownership/control of the supply chain, the other by how the project is funded. See <a href="guide-feoc-compliance.html" style="color:var(--link);font-weight:600;text-decoration:underline">FEOC Compliance for Solar &amp; Storage</a> for what to document for ITC eligibility, and <a href="guide-buy-america-iija.html" style="color:var(--link);font-weight:600;text-decoration:underline">Buy America / BABA</a> for the funding-triggered version of the same problem.</p>
+    </div>
+  </details>
 </div>
 <div class="section" style="padding-top:0">
   <div class="section-head"><div><div class="section-eyebrow">FAQ</div><h2>Common questions</h2></div></div>
@@ -209,29 +203,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p style="margin-top:10px;font-size:13.5px;color:var(--ink-2)">Around 20 weeks industry-wide as of mid-2026. Configure the exact spec for an indicative lead time.</p>
   </details>
 </div>
-<div class="section">
-  <div class="section-head"><div><div class="section-eyebrow">Popular categories</div><h2>Top renewables families</h2></div></div>
-  <div class="catquick">
-    <a class="catq" href="voltfield-supply-catalog.html?sector=re&cat=Inverters%20%26%20PCS">
-      <span class="cq-sec" style="background:var(--re)">RENEWABLES</span>
-      <svg aria-hidden="true" class="cq-icon" viewBox="0 0 40 40" fill="none" stroke="#22334C" stroke-width="2"><rect x="8" y="10" width="24" height="20" rx="2" fill="#E9EEF3"/><path d="M13 24l6-9 4 6 5-7" stroke="#FFC400"/></svg>
-      <h3>Inverters &amp; PCS</h3><span class="cq-n">42 configurations</span>
-    </a>
-    <a class="catq" href="voltfield-supply-catalog.html?sector=re&cat=Structural%20BOS">
-      <span class="cq-sec" style="background:var(--re)">RENEWABLES</span>
-      <svg aria-hidden="true" class="cq-icon" viewBox="0 0 40 40" fill="none" stroke="#22334C" stroke-width="2"><rect x="6" y="16" width="28" height="8" fill="#E9EEF3"/><rect x="18" y="22" width="4" height="10" fill="#B9C4D0"/></svg>
-      <h3>Structural BOS</h3><span class="cq-n">78 configurations</span>
-    </a>
-    <a class="catq" href="voltfield-supply-catalog.html?sector=re">
-      <span class="cq-sec" style="background:var(--re)">RENEWABLES</span>
-      <svg aria-hidden="true" class="cq-icon" viewBox="0 0 40 40" fill="none" stroke="#22334C" stroke-width="2"><path d="M20 6v6M20 28v6M6 20h6M28 20h6M10 10l4 4M26 26l4 4M30 10l-4 4M14 26l-4 4"/><circle cx="20" cy="20" r="7" fill="#E9EEF3"/></svg>
-      <h3>Modules, Trackers &amp; GSUs</h3><span class="cq-n">673 configurations</span>
-    </a>
-  </div>
-</div>
-<div class="section" style="padding-top:0">
-  <div class="section-head"><div><div class="section-eyebrow">Industry news &amp; insights</div><h2>What's moving in renewables</h2></div></div>
-  <div class="newsgrid">
+<div class="ad-unit" data-ad="leaderboard"></div>
+<!-- Industry news and the full family list: kept, but folded, because both
+     are long lists of links that most visitors to a sector page are not here for. -->
+<div class="section sec-tail">
+  <details class="sec-fold">
+    <summary><span class="section-eyebrow">Industry news &amp; insights</span><h2>What's moving in renewables</h2><span class="sf-n">3 articles</span></summary>
+    <div class="newsgrid">
     <a class="newscard" target="_blank" rel="noopener" href="https://www.pv-tech.org/us-treasurys-first-interim-feoc-guidance-met-with-some-relief/">
       <div class="nc-img"><picture><source srcset="images/parts/re-mono-perc-modules.webp" type="image/webp"><img src="images/parts/re-mono-perc-modules.jpg" alt="Mono PERC PV module &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div><div class="nc-tag"><span class="nc-sec" style="background:var(--re)">RENEWABLES</span><span class="nc-date">Feb 18, 2026</span></div>
       <div class="nc-body">
@@ -257,22 +235,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </a>
   </div>
-</div>
-<div class="ad-unit" data-ad="leaderboard"></div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Specifying a solar or hybrid site?</h3>
-      <p>Paste your equipment list — every line is matched against 673 renewables reference configurations, with FEOC-clean options flagged, so you can check what you have specified.</p>
-    </div>
-    <a class="ctabtn" href="voltfield-bom-generator.html">LOOK UP YOUR BOM &rarr;</a>
-  </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-<div class="section" style="padding-top:0">
-  <div class="section-head"><div><div class="section-eyebrow">Equipment families</div><h2>Every family, with its specs and lead time</h2></div></div>
-  <p style="font-size:13.5px;color:var(--ink-2);line-height:1.7;margin:0 0 14px">Each family below has its own reference page: how it is specified, the standards it is built to, its indicative lead time and its market price band.</p>
-  <div id="famref-block">
+  </details>
+  <details class="sec-fold">
+    <summary><span class="section-eyebrow">Equipment families</span><h2>Every family, with its specs and lead time</h2><span class="sf-n">42 families</span></summary>
+    <p class="sectiondek">Each family opens in the <a href="voltfield-supply-catalog.html?sector=re">Renewables spec library</a> with its configurations and indicative lead time.</p>
+    <div id="famref-block">
     <p class="fr-cat">Combiners &amp; Protection</p>
     <div class="fr-grid">
       <a class="fr-card" href="/voltfield-supply-catalog.html?q=DC%20Combiner%20Boxes"><b>DC Combiner Boxes</b><span>16 configurations &middot; ~10 wk</span></a>
@@ -346,7 +313,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a class="fr-card" href="/voltfield-supply-catalog.html?q=PV%20Wire%20%2F%20DC%20String%20Cable"><b>PV Wire / DC String Cable</b><span>24 configurations &middot; ~6 wk</span></a>
     </div>
   </div>
+  </details>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
 </main>
 <footer>
   <div class="in">
@@ -367,5 +336,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
 <script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+<script>
+/* Open a collapsed section when a link points inside it (data-centers.html#redundancy,
+   battery-storage.html#dur). Chrome does this natively; this covers the rest. */
+(function(){function o(){var id=decodeURIComponent(location.hash.slice(1));if(!id)return;var t=document.getElementById(id);if(!t)return;var d=t.closest('details');if(d&&!d.open){d.open=true;t.scrollIntoView();}}o();addEventListener('hashchange',o);})();
+</script>
 </body>
 </html>
