@@ -127,89 +127,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </section>
-<div class="section" style="padding-bottom:0">
-  <div class="section-head"><div><div class="section-eyebrow">Sector overview</div><h2>What's driving data center equipment</h2></div></div>
-  <div style="max-width:760px;display:grid;gap:14px;font-size:14.5px;color:var(--ink-2);line-height:1.65">
-    <p>Power procurement for new data center capacity is running into the same bottleneck everywhere: large power transformers. Lead times on the largest units are stretching toward four years industry-wide, and utilities are now bidding against hyperscale developers for the same limited pool of transformers and switchgear — pushing some orders three to five years out. Specifying data center power equipment has become as much a lead-time exercise as a spec exercise. Current figures across every category on this sector are tracked live on the <a href="lead-time-index.html" style="color:var(--link);font-weight:600;text-decoration:underline">Lead-Time Index</a>.</p>
-
-    <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Power distribution: pad-mount vs. GSU, and where switchgear fits</h3>
-    <p>Most campuses run two distinct transformer types with very different jobs. A <b>pad-mount transformer</b> steps utility service down to the low- or medium-voltage distribution used inside the building — it's the workhorse spec that shows up dozens of times across a large campus, currently quoting around 85 weeks. A <b>GSU (generator step-up) transformer</b> does the opposite job at the utility interconnection point, and on a campus with on-site generation or a dedicated substation it's typically the single highest-value, longest-lead item on the whole electrical BOM — current lead times run past 140 weeks. Confusing the two on an early spec sheet is a common, expensive mistake; see <a href="guide-pad-mount-vs-gsu-transformers.html" style="color:var(--link);font-weight:600;text-decoration:underline">Pad-Mount vs. GSU Transformers</a> for the full breakdown, or <a href="guide-transformer-nameplate.html" style="color:var(--link);font-weight:600;text-decoration:underline">How to Read a Transformer Nameplate</a> once you're comparing specific units.</p>
-    <p>MV switchgear sits between the transformers and the distribution system, and it comes in two families that aren't interchangeable on a spec sheet: <b>metal-clad</b>, built around draw-out breakers for easier maintenance and higher arc-flash containment, and <b>metal-enclosed</b>, a lower-cost fixed-breaker design common on less critical distribution. Data center design almost always specifies metal-clad for anything upstream of critical IT load — see <a href="guide-switchgear-compartments.html" style="color:var(--link);font-weight:600;text-decoration:underline">Switchgear Compartment Types Explained</a> for what's actually inside each, and <a href="guide-short-circuit-studies-breaker-coordination.html" style="color:var(--link);font-weight:600;text-decoration:underline">Short-Circuit Studies &amp; Breaker Coordination</a> for how breakers get sized and coordinated once switchgear is on the one-line.</p>
-
-    <h3 id="redundancy" style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Redundancy: N, N+1, and 2N</h3>
-    <p>Every data center power design gets described by a redundancy notation before anything else. <b>N</b> is just enough capacity to run the load, with zero spare. <b>N+1</b> adds one extra unit of whatever's being sized — a UPS module, a generator, a cooling unit — so a single failure doesn't take the load down. <b>2N</b> duplicates the entire path: two independent UPS systems, two independent utility feeds, two of everything, so a full system can go offline for maintenance without ever touching the load. The redundancy level drives equipment count directly — a 2N electrical design roughly doubles the switchgear, UPS, and generator line items on the BOM compared to an N design of the same IT capacity — which is why redundancy level is usually the first number in a capacity conversation, not an afterthought. See <a class="inline" href="guide-n-plus-1-vs-2n-redundancy.html">N+1 vs. 2N Redundancy Explained</a> for what each scheme survives and costs.</p>
-
-    <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Backup power and cooling</h3>
-    <p>Generators and UPS cover two different failure windows. UPS batteries bridge the seconds to low minutes between a utility outage and generators reaching full speed and taking the load; the generators then carry the full load for as long as fuel holds out. Diesel generator lead times are running around 90 weeks industry-wide. On the mechanical side, rising GPU rack densities are pushing new builds and retrofits from air cooling toward direct-to-chip liquid cooling, with CDUs (coolant distribution units) becoming a standard electrical/mechanical BOM line rather than an exception — the liquid cooling market is on pace for roughly $29B by 2033 as this shift plays out — see <a href="guide-liquid-vs-air-cooling.html" style="color:var(--link);font-weight:600;text-decoration:underline">Liquid Cooling vs. Air Cooling</a> for how direct-to-chip, immersion, and rear-door heat exchangers compare. PUE (power usage effectiveness — total facility power divided by IT power) is the standard efficiency metric tracked across it: a lower PUE means less power spent on cooling and distribution overhead per watt actually delivered to compute. See <a href="guide-pue-explained.html" style="color:var(--link);font-weight:600;text-decoration:underline">PUE Explained</a> for the full formula and what actually drives it down.</p>
-
-    <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Interconnection, grounding, and compliance</h3>
-    <p>For campuses adding on-site generation or requesting new utility capacity, the interconnection queue is frequently a longer critical-path item than any single piece of equipment — see <a href="guide-grid-interconnection-process.html" style="color:var(--link);font-weight:600;text-decoration:underline">The Grid Interconnection Process, Explained</a>, or the <a href="guide-interconnection-pjm.html" style="color:var(--link);font-weight:600;text-decoration:underline">PJM-specific timeline</a> if the campus sits in the mid-Atlantic. <a href="guide-grounding-bonding-basics.html" style="color:var(--link);font-weight:600;text-decoration:underline">Grounding &amp; Bonding Basics</a> and <a href="guide-arc-flash-boundary-basics.html" style="color:var(--link);font-weight:600;text-decoration:underline">Arc-Flash Boundary Basics</a> cover the two safety-critical checks every data center electrical design has to close out before energizing. And for projects touching federal funding or incentive programs, <a href="guide-buy-america-iija.html" style="color:var(--link);font-weight:600;text-decoration:underline">Buy America / BABA</a> sourcing-documentation rules can constrain vendor selection well before a spec sheet is finalized.</p>
-  </div>
-  <a class="ctabtn" style="display:inline-block;margin-top:22px" href="voltfield-supply-catalog.html?sector=dc">BROWSE THE DATA CENTER SPEC LIBRARY &rarr;</a>
-</div>
-
-<!-- Category pages. These carry the explanatory content that the filtered
-     catalog cannot: specifications, selection criteria, standards and lead-time
-     context in the initial HTML response. The catalog filter link stays as the
-     interactive path; these are the pages built to be found and read. -->
-<div class="section" style="padding-bottom:0">
+<!-- Equipment categories: one photo grid. Replaces up to three lists of the
+     same categories (a text grid, a described grid, and "Top families" cards
+     into the catalog). Component categories have no honest photo in the
+     library (all of their files are the shared transformer placeholder), so
+     they sit in a text row instead of borrowing a picture. -->
+<div class="section sec-cats">
   <div class="section-head"><div><div class="section-eyebrow">Equipment categories</div><h2>All eleven data-center categories</h2></div></div>
-  <p style="font-size:13.5px;color:var(--ink-2);line-height:1.7;margin:0 0 14px">Each category page compares the families inside it side by side: how each is specified, its standards, its indicative lead time and its market price band.</p>
-  <div id="catref-block">
-    <div class="fr-grid">
-      <a class="fr-card" href="/data-centers/transformers.html"><b>Transformers</b><span>4 families &middot; 141 configurations</span></a>
-      <a class="fr-card" href="/data-centers/switchgear.html"><b>Switchgear &amp; Breakers</b><span>4 families &middot; 116 configurations</span></a>
-      <a class="fr-card" href="/data-centers/backup-power.html"><b>Backup Power</b><span>5 families &middot; 116 configurations</span></a>
-      <a class="fr-card" href="/data-centers/cooling.html"><b>Cooling</b><span>4 families &middot; 84 configurations</span></a>
-      <a class="fr-card" href="/data-centers/power-distribution.html"><b>Power Distribution</b><span>5 families &middot; 99 configurations</span></a>
-      <a class="fr-card" href="/data-centers/cabling.html"><b>Cabling &amp; Busbar</b><span>4 families &middot; 126 configurations</span></a>
-      <a class="fr-card" href="/data-centers/transformer-components.html"><b>Transformer Components</b><span>9 families &middot; 230 configurations</span></a>
-      <a class="fr-card" href="/data-centers/switchgear-components.html"><b>Switchgear Components</b><span>6 families &middot; 270 configurations</span></a>
-      <a class="fr-card" href="/data-centers/genset-components.html"><b>Genset Components</b><span>5 families &middot; 84 configurations</span></a>
-      <a class="fr-card" href="/data-centers/grounding-bonding.html"><b>Grounding &amp; Bonding</b><span>2 families &middot; 36 configurations</span></a>
-      <a class="fr-card" href="/data-centers/monitoring-controls.html"><b>Monitoring &amp; Controls</b><span>2 families &middot; 24 configurations</span></a>
-    </div>
+  <p class="sectiondek">Start with the <a href="data-center-electrical-equipment.html" style="color:var(--link);font-weight:600;text-decoration:underline">data center electrical procurement hub</a> for the sequence &mdash; which decisions constrain which, and why the long-lead items have to be ordered against a preliminary spec.</p>
+  <div class="sectiles" id="catref-block">
+    <a class="st-tile" href="/data-centers/transformers.html"><span class="st-img"><picture><source srcset="images/parts/dc-pad-mount-transformers.webp" type="image/webp"><img src="images/parts/dc-pad-mount-transformers.jpg" width="340" height="340" alt="Pad-mount transformer" loading="lazy" decoding="async"></picture></span><span class="st-name">Transformers</span></a>
+    <a class="st-tile" href="/data-centers/switchgear.html"><span class="st-img"><picture><source srcset="images/parts/dc-lv-switchgear.webp" type="image/webp"><img src="images/parts/dc-lv-switchgear.jpg" width="340" height="340" alt="Low-voltage switchgear section" loading="lazy" decoding="async"></picture></span><span class="st-name">Switchgear &amp; Breakers</span></a>
+    <a class="st-tile" href="/data-centers/backup-power.html"><span class="st-img"><picture><source srcset="images/parts/dc-diesel-gensets.webp" type="image/webp"><img src="images/parts/dc-diesel-gensets.jpg" width="340" height="340" alt="Diesel generator set" loading="lazy" decoding="async"></picture></span><span class="st-name">Backup Power</span></a>
+    <a class="st-tile" href="/data-centers/cooling.html"><span class="st-img"><picture><source srcset="images/parts/dc-crah-crac-units.webp" type="image/webp"><img src="images/parts/dc-crah-crac-units.jpg" width="340" height="340" alt="Computer-room air handler" loading="lazy" decoding="async"></picture></span><span class="st-name">Cooling</span></a>
+    <a class="st-tile" href="/data-centers/power-distribution.html"><span class="st-img"><picture><source srcset="images/parts/dc-floor-pdu-rpp.webp" type="image/webp"><img src="images/parts/dc-floor-pdu-rpp.jpg" width="340" height="340" alt="Floor-standing PDU" loading="lazy" decoding="async"></picture></span><span class="st-name">Power Distribution</span></a>
+    <a class="st-tile" href="/data-centers/cabling.html"><span class="st-img"><picture><source srcset="images/parts/dc-lv-power-cable.webp" type="image/webp"><img src="images/parts/dc-lv-power-cable.jpg" width="340" height="340" alt="Coils of power cable" loading="lazy" decoding="async"></picture></span><span class="st-name">Cabling &amp; Busbar</span></a>
+    <a class="st-tile" href="/data-centers/grounding-bonding.html"><span class="st-img"><picture><source srcset="images/parts/dc-ground-bars-kits.webp" type="image/webp"><img src="images/parts/dc-ground-bars-kits.jpg" width="340" height="340" alt="Copper ground bar" loading="lazy" decoding="async"></picture></span><span class="st-name">Grounding &amp; Bonding</span></a>
+    <a class="st-tile" href="/data-centers/monitoring-controls.html"><span class="st-img"><picture><source srcset="images/parts/dc-power-meters-bms.webp" type="image/webp"><img src="images/parts/dc-power-meters-bms.jpg" width="340" height="340" alt="Panel power meter" loading="lazy" decoding="async"></picture></span><span class="st-name">Monitoring &amp; Controls</span></a>
   </div>
+  <p class="st-minor"><span>Components &amp; spares</span><a href="/data-centers/transformer-components.html">Transformer Components</a><a href="/data-centers/switchgear-components.html">Switchgear Components</a><a href="/data-centers/genset-components.html">Genset Components</a></p>
 </div>
-<div class="section" style="padding-top:0">
-  <div class="section-head"><div><div class="section-eyebrow">Equipment categories</div><h2>Specify it before you source it</h2></div></div>
-  <p style="font-size:14px;color:var(--ink-2);line-height:1.6;max-width:720px;margin:-6px 0 16px">
-    Start with the <a href="data-center-electrical-equipment.html" style="color:var(--link);font-weight:600;text-decoration:underline">data center electrical procurement hub</a> for the sequence &mdash; which decisions constrain which, and why the long-lead items have to be ordered against a preliminary spec.
-  </p>
-  <div class="catquick">
-    <a class="catq" href="data-centers/transformers.html">
-      <span class="cq-sec" style="background:var(--dc)">CATEGORY</span>
-      <span class="cq-n">Transformers</span>
-      <span class="cq-d">Pad-mount, large power, dry-type and K-rated &mdash; what separates them, why impedance drives your switchgear rating, and the lead times that decide sequencing.</span>
-    </a>
-    <a class="catq" href="data-centers/switchgear.html">
-      <span class="cq-sec" style="background:var(--dc)">CATEGORY</span>
-      <span class="cq-n">Switchgear &amp; Breakers</span>
-      <span class="cq-d">MV and LV lineups, air circuit breakers and MCCBs. Interrupting rating versus trip rating, selective coordination, and the arc-flash trade-off.</span>
-    </a>
-    <a class="catq" href="data-centers/backup-power.html">
-      <span class="cq-sec" style="background:var(--dc)">CATEGORY</span>
-      <span class="cq-n">Backup Power</span>
-      <span class="cq-d">Gensets, turbines, static UPS and flywheels. Why ride-through and generation are two different problems, and what step load acceptance really decides.</span>
-    </a>
-    <a class="catq" href="data-centers/cooling.html">
-      <span class="cq-sec" style="background:var(--dc)">CATEGORY</span>
-      <span class="cq-n">Cooling</span>
-      <span class="cq-d">CDUs, CRAH/CRAC, rear-door heat exchangers and chillers. Where air stops being enough, and what the liquid loop adds.</span>
-    </a>
-    <a class="catq" href="data-centers/power-distribution.html">
-      <span class="cq-sec" style="background:var(--dc)">CATEGORY</span>
-      <span class="cq-n">Power Distribution</span>
-      <span class="cq-d">Busway, PDUs, RPPs and transfer switches. Metering granularity, and the 80% derate that quietly decides how many racks fit.</span>
-    </a>
-    <a class="catq" href="data-centers/cabling.html">
-      <span class="cq-sec" style="background:var(--dc)">CATEGORY</span>
-      <span class="cq-n">Cable &amp; Busbar</span>
-      <span class="cq-d">MV and LV cable, copper busbar and fiber. Ampacity versus voltage drop, and pricing that tracks the metal market.</span>
-    </a>
-  </div>
-</div>
-
 <div class="section" style="padding-top:0">
   <div class="section-head"><div><div class="section-eyebrow">Free tools</div><h2>Tools for data center engineers</h2></div></div>
   <div class="catquick">
@@ -240,6 +177,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </a>
   </div>
 </div>
+<div class="section sec-overview">
+  <div class="section-head"><div><div class="section-eyebrow">Sector overview</div><h2>What's driving data center equipment</h2></div></div>
+  <div style="max-width:760px;display:grid;gap:14px;font-size:14.5px;color:var(--ink-2);line-height:1.65">
+    <p>Power procurement for new data center capacity is running into the same bottleneck everywhere: large power transformers. Lead times on the largest units are stretching toward four years industry-wide, and utilities are now bidding against hyperscale developers for the same limited pool of transformers and switchgear — pushing some orders three to five years out. Specifying data center power equipment has become as much a lead-time exercise as a spec exercise. Current figures across every category on this sector are tracked live on the <a href="lead-time-index.html" style="color:var(--link);font-weight:600;text-decoration:underline">Lead-Time Index</a>.</p>
+  </div>
+  <details class="sec-more">
+    <summary>Read the full overview</summary>
+    <div style="max-width:760px;display:grid;gap:14px;font-size:14.5px;color:var(--ink-2);line-height:1.65">
+      <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Power distribution: pad-mount vs. GSU, and where switchgear fits</h3>
+      <p>Most campuses run two distinct transformer types with very different jobs. A <b>pad-mount transformer</b> steps utility service down to the low- or medium-voltage distribution used inside the building — it's the workhorse spec that shows up dozens of times across a large campus, currently quoting around 85 weeks. A <b>GSU (generator step-up) transformer</b> does the opposite job at the utility interconnection point, and on a campus with on-site generation or a dedicated substation it's typically the single highest-value, longest-lead item on the whole electrical BOM — current lead times run past 140 weeks. Confusing the two on an early spec sheet is a common, expensive mistake; see <a href="guide-pad-mount-vs-gsu-transformers.html" style="color:var(--link);font-weight:600;text-decoration:underline">Pad-Mount vs. GSU Transformers</a> for the full breakdown, or <a href="guide-transformer-nameplate.html" style="color:var(--link);font-weight:600;text-decoration:underline">How to Read a Transformer Nameplate</a> once you're comparing specific units.</p>
+      <p>MV switchgear sits between the transformers and the distribution system, and it comes in two families that aren't interchangeable on a spec sheet: <b>metal-clad</b>, built around draw-out breakers for easier maintenance and higher arc-flash containment, and <b>metal-enclosed</b>, a lower-cost fixed-breaker design common on less critical distribution. Data center design almost always specifies metal-clad for anything upstream of critical IT load — see <a href="guide-switchgear-compartments.html" style="color:var(--link);font-weight:600;text-decoration:underline">Switchgear Compartment Types Explained</a> for what's actually inside each, and <a href="guide-short-circuit-studies-breaker-coordination.html" style="color:var(--link);font-weight:600;text-decoration:underline">Short-Circuit Studies &amp; Breaker Coordination</a> for how breakers get sized and coordinated once switchgear is on the one-line.</p>
+      <h3 id="redundancy" style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Redundancy: N, N+1, and 2N</h3>
+      <p>Every data center power design gets described by a redundancy notation before anything else. <b>N</b> is just enough capacity to run the load, with zero spare. <b>N+1</b> adds one extra unit of whatever's being sized — a UPS module, a generator, a cooling unit — so a single failure doesn't take the load down. <b>2N</b> duplicates the entire path: two independent UPS systems, two independent utility feeds, two of everything, so a full system can go offline for maintenance without ever touching the load. The redundancy level drives equipment count directly — a 2N electrical design roughly doubles the switchgear, UPS, and generator line items on the BOM compared to an N design of the same IT capacity — which is why redundancy level is usually the first number in a capacity conversation, not an afterthought. See <a class="inline" href="guide-n-plus-1-vs-2n-redundancy.html">N+1 vs. 2N Redundancy Explained</a> for what each scheme survives and costs.</p>
+      <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Backup power and cooling</h3>
+      <p>Generators and UPS cover two different failure windows. UPS batteries bridge the seconds to low minutes between a utility outage and generators reaching full speed and taking the load; the generators then carry the full load for as long as fuel holds out. Diesel generator lead times are running around 90 weeks industry-wide. On the mechanical side, rising GPU rack densities are pushing new builds and retrofits from air cooling toward direct-to-chip liquid cooling, with CDUs (coolant distribution units) becoming a standard electrical/mechanical BOM line rather than an exception — the liquid cooling market is on pace for roughly $29B by 2033 as this shift plays out — see <a href="guide-liquid-vs-air-cooling.html" style="color:var(--link);font-weight:600;text-decoration:underline">Liquid Cooling vs. Air Cooling</a> for how direct-to-chip, immersion, and rear-door heat exchangers compare. PUE (power usage effectiveness — total facility power divided by IT power) is the standard efficiency metric tracked across it: a lower PUE means less power spent on cooling and distribution overhead per watt actually delivered to compute. See <a href="guide-pue-explained.html" style="color:var(--link);font-weight:600;text-decoration:underline">PUE Explained</a> for the full formula and what actually drives it down.</p>
+      <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Interconnection, grounding, and compliance</h3>
+      <p>For campuses adding on-site generation or requesting new utility capacity, the interconnection queue is frequently a longer critical-path item than any single piece of equipment — see <a href="guide-grid-interconnection-process.html" style="color:var(--link);font-weight:600;text-decoration:underline">The Grid Interconnection Process, Explained</a>, or the <a href="guide-interconnection-pjm.html" style="color:var(--link);font-weight:600;text-decoration:underline">PJM-specific timeline</a> if the campus sits in the mid-Atlantic. <a href="guide-grounding-bonding-basics.html" style="color:var(--link);font-weight:600;text-decoration:underline">Grounding &amp; Bonding Basics</a> and <a href="guide-arc-flash-boundary-basics.html" style="color:var(--link);font-weight:600;text-decoration:underline">Arc-Flash Boundary Basics</a> cover the two safety-critical checks every data center electrical design has to close out before energizing. And for projects touching federal funding or incentive programs, <a href="guide-buy-america-iija.html" style="color:var(--link);font-weight:600;text-decoration:underline">Buy America / BABA</a> sourcing-documentation rules can constrain vendor selection well before a spec sheet is finalized.</p>
+    </div>
+  </details>
+</div>
 <div class="section" style="padding-top:0">
   <div class="section-head"><div><div class="section-eyebrow">FAQ</div><h2>Common questions</h2></div></div>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
@@ -263,29 +220,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p style="margin-top:10px;font-size:13.5px;color:var(--ink-2)">Utilities and hyperscale developers are now bidding for the same limited pool of transformers and switchgear, on top of an existing electrical-steel and skilled-labor shortage.</p>
   </details>
 </div>
-<div class="section">
-  <div class="section-head"><div><div class="section-eyebrow">Popular categories</div><h2>Top data center families</h2></div></div>
-  <div class="catquick">
-    <a class="catq" href="voltfield-supply-catalog.html?sector=dc&cat=Transformers">
-      <span class="cq-sec" style="background:var(--dc)">DATA CENTERS</span>
-      <svg aria-hidden="true" class="cq-icon" viewBox="0 0 40 40" fill="none" stroke="#22334C" stroke-width="2"><rect x="8" y="14" width="24" height="14" rx="2" fill="#E9EEF3"/><rect x="14" y="8" width="4" height="8" fill="#B9C4D0"/><rect x="22" y="8" width="4" height="8" fill="#B9C4D0"/></svg>
-      <h3>Transformers</h3><span class="cq-n">141 configurations</span>
-    </a>
-    <a class="catq" href="voltfield-supply-catalog.html?sector=dc&cat=Switchgear%20%26%20Breakers">
-      <span class="cq-sec" style="background:var(--dc)">DATA CENTERS</span>
-      <svg aria-hidden="true" class="cq-icon" viewBox="0 0 40 40" fill="none" stroke="#22334C" stroke-width="2"><rect x="7" y="8" width="26" height="22" fill="#E9EEF3"/><path d="M20 8v22"/><circle cx="13" cy="14" r="2" fill="#FFC400" stroke="none"/><circle cx="27" cy="14" r="2" fill="#FFC400" stroke="none"/></svg>
-      <h3>Switchgear &amp; Breakers</h3><span class="cq-n">116 configurations</span>
-    </a>
-    <a class="catq" href="voltfield-supply-catalog.html?sector=dc">
-      <span class="cq-sec" style="background:var(--dc)">DATA CENTERS</span>
-      <svg aria-hidden="true" class="cq-icon" viewBox="0 0 40 40" fill="none" stroke="#22334C" stroke-width="2"><rect x="6" y="8" width="28" height="24" rx="2" fill="#E9EEF3"/><path d="M6 16h28M6 24h28"/><circle cx="30" cy="12" r="1.6" fill="#FFC400" stroke="none"/></svg>
-      <h3>Cooling &amp; Backup Power</h3><span class="cq-n">1,326 configurations</span>
-    </a>
-  </div>
-</div>
-<div class="section" style="padding-top:0">
-  <div class="section-head"><div><div class="section-eyebrow">Industry news &amp; insights</div><h2>What's moving in data centers</h2></div></div>
-  <div class="newsgrid">
+<div class="ad-unit" data-ad="leaderboard"></div>
+<!-- Industry news and the full family list: kept, but folded, because both
+     are long lists of links that most visitors to a sector page are not here for. -->
+<div class="section sec-tail">
+  <details class="sec-fold">
+    <summary><span class="section-eyebrow">Industry news &amp; insights</span><h2>What's moving in data centers</h2><span class="sf-n">3 articles</span></summary>
+    <div class="newsgrid">
     <a class="newscard" target="_blank" rel="noopener" href="https://www.techradar.com/pro/darkness-looms-across-europe-and-america-as-power-hungry-ai-data-centers-and-electric-cars-drain-the-grid-decimate-factory-capacity-and-engineer-a-four-year-wait-for-transformers-threatening-to-leave-entire-regions-in-the-dark">
       <div class="nc-img"><picture><source srcset="images/parts/dc-large-power-transformers.webp" type="image/webp"><img src="images/parts/dc-large-power-transformers.jpg" alt="Large power transformer &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div><div class="nc-tag"><span class="nc-sec" style="background:var(--dc)">DATA CENTERS</span><span class="nc-date">Jul 14, 2026</span></div>
       <div class="nc-body">
@@ -311,22 +252,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </a>
   </div>
-</div>
-<div class="ad-unit" data-ad="leaderboard"></div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Building a data center bid?</h3>
-      <p>Paste your electrical BOM or spec sheet — every line is matched against 1,326 data center reference configurations, so you can check part numbers, ratings and indicative lead times in one pass.</p>
-    </div>
-    <a class="ctabtn" href="voltfield-bom-generator.html">LOOK UP YOUR BOM &rarr;</a>
-  </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-<div class="section" style="padding-top:0">
-  <div class="section-head"><div><div class="section-eyebrow">Equipment families</div><h2>Every family, with its specs and lead time</h2></div></div>
-  <p style="font-size:13.5px;color:var(--ink-2);line-height:1.7;margin:0 0 14px">Each family below has its own reference page: how it is specified, the standards it is built to, its indicative lead time and its market price band.</p>
-  <div id="famref-block">
+  </details>
+  <details class="sec-fold">
+    <summary><span class="section-eyebrow">Equipment families</span><h2>Every family, with its specs and lead time</h2><span class="sf-n">50 families</span></summary>
+    <p class="sectiondek">Each family opens in the <a href="voltfield-supply-catalog.html?sector=dc">Data center spec library</a> with its configurations and indicative lead time.</p>
+    <div id="famref-block">
     <p class="fr-cat">Backup Power</p>
     <div class="fr-grid">
       <a class="fr-card" href="/voltfield-supply-catalog.html?q=Diesel%20Gensets"><b>Diesel Gensets</b><span>36 configurations &middot; ~90 wk</span></a>
@@ -411,7 +341,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a class="fr-card" href="/voltfield-supply-catalog.html?q=Pad-Mount%20Transformers"><b>Pad-Mount Transformers</b><span>36 configurations &middot; ~85 wk</span></a>
     </div>
   </div>
+  </details>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
 </main>
 <footer>
   <div class="in">
@@ -432,5 +364,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
 <script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+<script>
+/* Open a collapsed section when a link points inside it (data-centers.html#redundancy,
+   battery-storage.html#dur). Chrome does this natively; this covers the rest. */
+(function(){function o(){var id=decodeURIComponent(location.hash.slice(1));if(!id)return;var t=document.getElementById(id);if(!t)return;var d=t.closest('details');if(d&&!d.open){d.open=true;t.scrollIntoView();}}o();addEventListener('hashchange',o);})();
+</script>
 </body>
 </html>

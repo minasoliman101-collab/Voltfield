@@ -127,46 +127,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </section>
-<div class="section" style="padding-bottom:0">
-  <div class="section-head"><div><div class="section-eyebrow">Sector overview</div><h2>What's driving BESS equipment</h2></div></div>
-  <div style="max-width:760px;display:grid;gap:14px;font-size:14.5px;color:var(--ink-2);line-height:1.65">
-    <p>Global battery storage capacity has now overtaken pumped hydro, with more than 130 GW of further additions expected this year, led by the US, China, and Australia — BESS has gone from a niche grid asset to a mainstream one in a few years.</p>
-    <p>Turnkey pricing keeps falling — BloombergNEF's latest survey put the global average around $117/kWh, down roughly 31% year over year — though FEOC-compliant sourcing for US buyers chasing tax credits still carries a premium over that global average. At the same time, operators say the business itself has gotten more complex, shifting from simple energy arbitrage toward active risk management as markets like ERCOT mature.</p>
-    <p>The Storage sector covers DC block BESS units, PCS (power conversion system) and BMS, EMS, BESS fire suppression equipment, and thermal management — 212 configurations built to NFPA 855 and UL 9540A, configured and quoted against current lead times.</p>
-    <p>Sourcing storage components on a tax-credit-eligible project? See <a href="guide-feoc-compliance.html" style="color:var(--link);font-weight:600;text-decoration:underline">FEOC Compliance for Solar &amp; Storage</a>. Planning site layout around NFPA 855? See <a href="guide-bess-fire-safety-nfpa-855.html" style="color:var(--link);font-weight:600;text-decoration:underline">BESS Fire Safety Basics</a>.</p>
-
-    <h3 id="dur" style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Duration and C-rate</h3>
-    <p>A "4-hour BESS" means the system can discharge its full rated power continuously for 4 hours — the industry shorthand for that is <b>C-rate</b>, where a 4-hour system is C/4 (a quarter of capacity per hour) and a 1-hour system is 1C. Duration is set first, then it drives how many DC blocks get specified for a given power (MW) rating — a 100 MW / 4-hour project needs roughly four times the DC block count of a 100 MW / 1-hour project at the same power electronics. Most new US utility-scale BESS is now specified at 4 hours or longer, largely to qualify for ITC stacking and to better match evening peak-demand windows as solar penetration grows. See <a class="inline" href="guide-bess-c-rate.html">BESS C-Rate Explained</a> for why the C-rate the cells see differs from the headline figure.</p>
-
-    <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Grid-forming vs. grid-following PCS</h3>
-    <p>Most PCS (power conversion system) units installed to date are <b>grid-following</b> — they synchronize to a voltage and frequency the grid is already providing. <b>Grid-forming</b> PCS can establish that voltage and frequency itself, the way a spinning generator does, which matters increasingly on grids adding large amounts of inverter-based renewable and storage capacity that need to keep the grid stable without conventional generation doing all the work. Grid-forming PCS currently quotes around 32 weeks and is increasingly specified on new interconnection requests as utilities update their technical requirements.</p>
-
-    <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Augmentation: planning for capacity fade</h3>
-    <p>Lithium battery capacity fades over the life of a project — a system sized to meet its nameplate rating on day one won't still meet it in year 10 without adding capacity back. <b>Augmentation</b> is the practice of specifying and budgeting for additional DC blocks partway through the project's life to offset that fade and hold the contracted capacity, and it's now standard practice to plan for in the original procurement rather than treat as a surprise mid-life expense. See <a href="guide-bess-augmentation.html" style="color:var(--link);font-weight:600;text-decoration:underline">BESS Augmentation Explained</a> for how fade actually happens and how a phased plan gets built.</p>
-
-    <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Fire suppression, BMS, and EMS</h3>
-    <p>NFPA 855 and UL 9540A drive both equipment selection and site layout — clean-agent and aerosol suppression systems are common choices for containerized BESS, sized and spaced according to the same test data that sets separation distances between units; see <a href="guide-bess-fire-safety-nfpa-855.html" style="color:var(--link);font-weight:600;text-decoration:underline">BESS Fire Safety Basics</a> for how the two standards fit together. Inside the system, the <b>BMS</b> (battery management system) manages cell-level voltage, temperature, and balancing within each block, while the <b>EMS</b> (energy management system) operates at the plant level — dispatch, market participation, and coordinating multiple DC blocks and PCS units as one asset.</p>
-  </div>
-  <a class="ctabtn" style="display:inline-block;margin-top:22px" href="voltfield-supply-catalog.html?sector=bess">BROWSE THE BATTERY STORAGE SPEC LIBRARY &rarr;</a>
-</div>
-<div class="section" style="padding-top:0">
+<!-- Equipment categories: one photo grid. Replaces up to three lists of the
+     same categories (a text grid, a described grid, and "Top families" cards
+     into the catalog). Component categories have no honest photo in the
+     library (all of their files are the shared transformer placeholder), so
+     they sit in a text row instead of borrowing a picture. -->
+<div class="section sec-cats">
   <div class="section-head"><div><div class="section-eyebrow">Equipment categories</div><h2>Storage equipment by category</h2></div></div>
-  <div class="catquick">
-    <a class="catq" href="battery-storage/bess-enclosures.html">
-      <span class="cq-sec" style="background:var(--bess)">CATEGORY</span>
-      <span class="cq-n">Enclosures &amp; Modules</span>
-      <span class="cq-d">Containerized enclosures, modular cabinets and battery modules &mdash; and the fire protection evidence that decides whether any of it can be permitted.</span>
-    </a>
-    <a class="catq" href="battery-storage/pcs-inverters.html">
-      <span class="cq-sec" style="background:var(--bess)">CATEGORY</span>
-      <span class="cq-n">Power Conversion</span>
-      <span class="cq-d">Central, modular and grid-forming PCS. Why UL 1741 SB certification is interconnection-critical, and what grid-forming actually buys you.</span>
-    </a>
-    <a class="catq" href="battery-storage/balance-of-plant.html">
-      <span class="cq-sec" style="background:var(--bess)">CATEGORY</span>
-      <span class="cq-n">Balance of Plant</span>
-      <span class="cq-d">MV step-up transformers, collector switchgear, protection and station service &mdash; the items that usually set the energization date.</span>
-    </a>
+  <div class="sectiles">
+    <a class="st-tile" href="battery-storage/bess-enclosures.html"><span class="st-img"><picture><source srcset="images/parts/bess-containerized-enclosures.webp" type="image/webp"><img src="images/parts/bess-containerized-enclosures.jpg" width="340" height="340" alt="Containerized battery enclosure" loading="lazy" decoding="async"></picture></span><span class="st-name">Enclosures &amp; Modules</span></a>
+    <a class="st-tile" href="battery-storage/pcs-inverters.html"><span class="st-img"><picture><source srcset="images/parts/bess-grid-forming-pcs.webp" type="image/webp"><img src="images/parts/bess-grid-forming-pcs.jpg" width="340" height="340" alt="Battery power conversion system" loading="lazy" decoding="async"></picture></span><span class="st-name">Power Conversion</span></a>
+    <a class="st-tile" href="battery-storage/balance-of-plant.html"><span class="st-img"><picture><source srcset="images/parts/bess-switchboard-ac-panels.webp" type="image/webp"><img src="images/parts/bess-switchboard-ac-panels.jpg" width="340" height="340" alt="AC switchboard sections" loading="lazy" decoding="async"></picture></span><span class="st-name">Balance of Plant</span></a>
   </div>
 </div>
 <div class="section" style="padding-top:0">
@@ -188,6 +159,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h3>BOM Generator</h3><span class="cq-n">Component teardown for any DC block or PCS</span>
     </a>
   </div>
+</div>
+<div class="section sec-overview">
+  <div class="section-head"><div><div class="section-eyebrow">Sector overview</div><h2>What's driving BESS equipment</h2></div></div>
+  <div style="max-width:760px;display:grid;gap:14px;font-size:14.5px;color:var(--ink-2);line-height:1.65">
+    <p>Global battery storage capacity has now overtaken pumped hydro, with more than 130 GW of further additions expected this year, led by the US, China, and Australia — BESS has gone from a niche grid asset to a mainstream one in a few years.</p>
+  </div>
+  <details class="sec-more">
+    <summary>Read the full overview</summary>
+    <div style="max-width:760px;display:grid;gap:14px;font-size:14.5px;color:var(--ink-2);line-height:1.65">
+      <p>Turnkey pricing keeps falling — BloombergNEF's latest survey put the global average around $117/kWh, down roughly 31% year over year — though FEOC-compliant sourcing for US buyers chasing tax credits still carries a premium over that global average. At the same time, operators say the business itself has gotten more complex, shifting from simple energy arbitrage toward active risk management as markets like ERCOT mature.</p>
+      <p>The Storage sector covers DC block BESS units, PCS (power conversion system) and BMS, EMS, BESS fire suppression equipment, and thermal management — 212 configurations built to NFPA 855 and UL 9540A, configured and quoted against current lead times.</p>
+      <p>Sourcing storage components on a tax-credit-eligible project? See <a href="guide-feoc-compliance.html" style="color:var(--link);font-weight:600;text-decoration:underline">FEOC Compliance for Solar &amp; Storage</a>. Planning site layout around NFPA 855? See <a href="guide-bess-fire-safety-nfpa-855.html" style="color:var(--link);font-weight:600;text-decoration:underline">BESS Fire Safety Basics</a>.</p>
+      <h3 id="dur" style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Duration and C-rate</h3>
+      <p>A "4-hour BESS" means the system can discharge its full rated power continuously for 4 hours — the industry shorthand for that is <b>C-rate</b>, where a 4-hour system is C/4 (a quarter of capacity per hour) and a 1-hour system is 1C. Duration is set first, then it drives how many DC blocks get specified for a given power (MW) rating — a 100 MW / 4-hour project needs roughly four times the DC block count of a 100 MW / 1-hour project at the same power electronics. Most new US utility-scale BESS is now specified at 4 hours or longer, largely to qualify for ITC stacking and to better match evening peak-demand windows as solar penetration grows. See <a class="inline" href="guide-bess-c-rate.html">BESS C-Rate Explained</a> for why the C-rate the cells see differs from the headline figure.</p>
+      <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Grid-forming vs. grid-following PCS</h3>
+      <p>Most PCS (power conversion system) units installed to date are <b>grid-following</b> — they synchronize to a voltage and frequency the grid is already providing. <b>Grid-forming</b> PCS can establish that voltage and frequency itself, the way a spinning generator does, which matters increasingly on grids adding large amounts of inverter-based renewable and storage capacity that need to keep the grid stable without conventional generation doing all the work. Grid-forming PCS currently quotes around 32 weeks and is increasingly specified on new interconnection requests as utilities update their technical requirements.</p>
+      <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Augmentation: planning for capacity fade</h3>
+      <p>Lithium battery capacity fades over the life of a project — a system sized to meet its nameplate rating on day one won't still meet it in year 10 without adding capacity back. <b>Augmentation</b> is the practice of specifying and budgeting for additional DC blocks partway through the project's life to offset that fade and hold the contracted capacity, and it's now standard practice to plan for in the original procurement rather than treat as a surprise mid-life expense. See <a href="guide-bess-augmentation.html" style="color:var(--link);font-weight:600;text-decoration:underline">BESS Augmentation Explained</a> for how fade actually happens and how a phased plan gets built.</p>
+      <h3 style="font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);margin-top:10px">Fire suppression, BMS, and EMS</h3>
+      <p>NFPA 855 and UL 9540A drive both equipment selection and site layout — clean-agent and aerosol suppression systems are common choices for containerized BESS, sized and spaced according to the same test data that sets separation distances between units; see <a href="guide-bess-fire-safety-nfpa-855.html" style="color:var(--link);font-weight:600;text-decoration:underline">BESS Fire Safety Basics</a> for how the two standards fit together. Inside the system, the <b>BMS</b> (battery management system) manages cell-level voltage, temperature, and balancing within each block, while the <b>EMS</b> (energy management system) operates at the plant level — dispatch, market participation, and coordinating multiple DC blocks and PCS units as one asset.</p>
+    </div>
+  </details>
 </div>
 <div class="section" style="padding-top:0">
   <div class="section-head"><div><div class="section-eyebrow">FAQ</div><h2>Common questions</h2></div></div>
@@ -212,29 +205,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p style="margin-top:10px;font-size:13.5px;color:var(--ink-2)">Yes — global BESS capacity topped 250 GW in 2025, overtaking pumped hydro, per Rystad Energy's 2026 outlook.</p>
   </details>
 </div>
-<div class="section">
-  <div class="section-head"><div><div class="section-eyebrow">Popular categories</div><h2>Top storage families</h2></div></div>
-  <div class="catquick">
-    <a class="catq" href="voltfield-supply-catalog.html?sector=bess&cat=Storage%20Blocks">
-      <span class="cq-sec" style="background:var(--bess)">STORAGE</span>
-      <svg aria-hidden="true" class="cq-icon" viewBox="0 0 40 40" fill="none" stroke="#22334C" stroke-width="2"><path d="M8 14l6-3h18v18l-6 3H8z" fill="#E9EEF3"/><path d="M8 14h18v18" stroke-width="1.6"/></svg>
-      <h3>Storage Blocks</h3><span class="cq-n">21 configurations</span>
-    </a>
-    <a class="catq" href="voltfield-supply-catalog.html?sector=bess&cat=Power%20Conversion">
-      <span class="cq-sec" style="background:var(--bess)">STORAGE</span>
-      <svg aria-hidden="true" class="cq-icon" viewBox="0 0 40 40" fill="none" stroke="#22334C" stroke-width="2"><rect x="8" y="10" width="24" height="20" rx="2" fill="#E9EEF3"/><path d="M14 24l5-7 4 5 5-6" stroke="#FFC400"/></svg>
-      <h3>Power Conversion</h3><span class="cq-n">21 configurations</span>
-    </a>
-    <a class="catq" href="voltfield-supply-catalog.html?sector=bess">
-      <span class="cq-sec" style="background:var(--bess)">STORAGE</span>
-      <svg aria-hidden="true" class="cq-icon" viewBox="0 0 40 40" fill="none" stroke="#22334C" stroke-width="2"><rect x="10" y="8" width="20" height="26" rx="2" fill="#E9EEF3"/><rect x="16" y="4" width="8" height="4" fill="#FFC400" stroke="none"/><path d="M15 16h10M15 22h10M15 28h6"/></svg>
-      <h3>BMS, Safety &amp; Thermal</h3><span class="cq-n">212 configurations</span>
-    </a>
-  </div>
-</div>
-<div class="section" style="padding-top:0">
-  <div class="section-head"><div><div class="section-eyebrow">Industry news &amp; insights</div><h2>What's moving in battery storage</h2></div></div>
-  <div class="newsgrid">
+<div class="ad-unit" data-ad="leaderboard"></div>
+<!-- Industry news and the full family list: kept, but folded, because both
+     are long lists of links that most visitors to a sector page are not here for. -->
+<div class="section sec-tail">
+  <details class="sec-fold">
+    <summary><span class="section-eyebrow">Industry news &amp; insights</span><h2>What's moving in battery storage</h2><span class="sf-n">3 articles</span></summary>
+    <div class="newsgrid">
     <a class="newscard" target="_blank" rel="noopener" href="https://www.energy-storage.news/global-bess-deployments-soar-27-in-h1-2026-saudi-arabia-drives-figures-in-june/">
       <div class="nc-img"><picture><source srcset="images/parts/bess-containerized-enclosures.webp" type="image/webp"><img src="images/parts/bess-containerized-enclosures.jpg" alt="Containerized BESS enclosure &mdash; reference illustration" width="340" height="340" loading="lazy" decoding="async" onerror="this.closest(&quot;.nc-img&quot;).remove()"></picture><span class="nc-illus">Illustration</span></div><div class="nc-tag"><span class="nc-sec" style="background:var(--bess)">STORAGE</span><span class="nc-date">Jul 15, 2026</span></div>
       <div class="nc-body">
@@ -260,22 +237,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </a>
   </div>
-</div>
-<div class="ad-unit" data-ad="leaderboard"></div>
-<div class="ctaband">
-  <div class="ctaband-in">
-    <div>
-      <h3>Specifying a BESS project?</h3>
-      <p>Paste your DC block, PCS, and BMS list — every line is matched against 212 storage configurations, with current $/kWh benchmark ranges.</p>
-    </div>
-    <a class="ctabtn" href="voltfield-bom-generator.html">LOOK UP YOUR BOM &rarr;</a>
-  </div>
-</div>
-<div class="ad-unit" data-ad="footer"></div>
-<div class="section" style="padding-top:0">
-  <div class="section-head"><div><div class="section-eyebrow">Equipment families</div><h2>Every family, with its specs and lead time</h2></div></div>
-  <p style="font-size:13.5px;color:var(--ink-2);line-height:1.7;margin:0 0 14px">Each family below has its own reference page: how it is specified, the standards it is built to, its indicative lead time and its market price band.</p>
-  <div id="famref-block">
+  </details>
+  <details class="sec-fold">
+    <summary><span class="section-eyebrow">Equipment families</span><h2>Every family, with its specs and lead time</h2><span class="sf-n">20 families</span></summary>
+    <p class="sectiondek">Each family opens in the <a href="voltfield-supply-catalog.html?sector=bess">Battery storage spec library</a> with its configurations and indicative lead time.</p>
+    <div id="famref-block">
     <p class="fr-cat">Battery Components</p>
     <div class="fr-grid">
       <a class="fr-card" href="/voltfield-supply-catalog.html?q=Battery%20Cells%20(Prismatic%20LFP%20%2F%20NMC)"><b>Battery Cells (Prismatic LFP / NMC)</b><span>12 configurations &middot; ~18 wk</span></a>
@@ -318,7 +284,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a class="fr-card" href="/voltfield-supply-catalog.html?q=Liquid%20Cooling%20Skids"><b>Liquid Cooling Skids</b><span>12 configurations &middot; ~20 wk</span></a>
     </div>
   </div>
+  </details>
 </div>
+<div class="ad-unit" data-ad="footer"></div>
 </main>
 <footer>
   <div class="in">
@@ -339,5 +307,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </script>
 <script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
 <script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+<script>
+/* Open a collapsed section when a link points inside it (data-centers.html#redundancy,
+   battery-storage.html#dur). Chrome does this natively; this covers the rest. */
+(function(){function o(){var id=decodeURIComponent(location.hash.slice(1));if(!id)return;var t=document.getElementById(id);if(!t)return;var d=t.closest('details');if(d&&!d.open){d.open=true;t.scrollIntoView();}}o();addEventListener('hashchange',o);})();
+</script>
 </body>
 </html>

@@ -642,6 +642,169 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
     box-shadow var(--dur) var(--ease)}
 .sharebtn:hover{border-color:var(--line-dark);color:var(--ink);box-shadow:var(--sh-1)}
 
+/* ---------- pictures and simpler hubs ----------
+   Guides carry a reference illustration beside the headline
+   (scripts/add-guide-photos.mjs); two guides show redundancy as a diagram;
+   sector pages and the guides hub lead with photo tiles; the calculator
+   directory cards carry a photo or a badge. */
+
+/* Header photo. The illustrations in images/parts/ are 340px on white, so the
+   plate stays white in both themes (a dark plate leaves a hard white square
+   inside it) and the image is never shown wider than about half its pixels.
+   The text column keeps the 672px register with the article body. */
+.artban-in.has-photo{display:grid;grid-template-columns:minmax(0,1fr) 168px;
+  gap:28px;align-items:center}
+.artban-photo{margin:0;background:#fff;border:1px solid var(--line);
+  border-radius:var(--r-lg);padding:10px;box-shadow:var(--sh-1)}
+.artban-photo img{display:block;width:100%;height:auto}
+.artban-photo figcaption{font-family:var(--mono);font-size:10px;color:#556475;
+  text-align:center;margin-top:4px;letter-spacing:.02em}
+@media(max-width:640px){
+  .artban-in.has-photo{grid-template-columns:minmax(0,1fr) 96px;gap:16px;align-items:start}
+  .artban-photo{padding:6px;border-radius:var(--r)}
+  .artban-photo figcaption{display:none}
+}
+
+/* Redundancy schemes as a picture: each square is a UPS module, the dashed
+   frame around a group is one independent system. Replaces a four-row table
+   whose point (how much hardware each scheme adds) is easier seen than read.
+   2x2 on purpose: the right column adds a spare, the bottom row doubles the
+   system, so the grid itself carries the comparison. */
+.redun{margin:24px 0 26px}
+.redun-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.rd{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto 1fr;
+  gap:4px 16px;align-items:start;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.rd-mods{grid-row:span 2;display:flex;flex-direction:column;gap:6px;min-width:80px}
+.rd-sys{display:flex;gap:5px;padding:5px;border:1.5px dashed var(--slate);
+  border-radius:var(--r-sm);width:max-content}
+.rd i,.rd-key i{display:block;width:18px;height:18px;border-radius:3px;background:var(--dc)}
+.rd i.sp,.rd-key i.sp{background:transparent;border:2px solid var(--signal-deep)}
+.rd b{font-family:var(--disp);font-size:18px;font-weight:600;color:var(--ink);line-height:1.2}
+.artwrap .rd p{font-size:14.5px;line-height:1.55;margin:0;color:var(--ink-2)}
+.redun figcaption{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:10px;
+  font-family:var(--mono);font-size:11px;color:var(--slate)}
+.rd-key{display:inline-flex;align-items:center;gap:6px}
+.rd-key i{width:11px;height:11px}
+.rd-key i.sp{border-width:1.5px}
+.rd-sysk{display:inline-block;width:16px;height:11px;border:1.5px dashed var(--slate);border-radius:2px}
+/* Six-scheme version (guide-n-plus-1-vs-2n-redundancy.html): top row is one
+   system, bottom row two or more, so it reads as three columns of 2. The
+   squares sit above the text because a 3-up card is too narrow for both. */
+.redun-6 .redun-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.redun-6 .rd{display:block}
+.redun-6 .rd-mods{min-height:70px;margin-bottom:10px}
+.redun-6 .rd b{display:block;margin-bottom:4px}
+.rd-mods.rd-row{flex-direction:row;flex-wrap:wrap}
+@media(max-width:720px){ .redun-6 .redun-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media(max-width:560px){
+  .redun-grid,.redun-6 .redun-grid{grid-template-columns:1fr}
+  .redun-6 .rd-mods{min-height:0}
+}
+
+/* ---------- sector pages (data-centers, renewables, battery-storage) ----------
+   Order is now: hero, categories as photo tiles, tools, a one-paragraph
+   overview with the rest folded, FAQ, then news and the family list folded.
+   Before, a 500-750 word essay sat between the hero and the first category,
+   and the categories were listed up to three times without a picture. */
+.sec-cats{padding-bottom:40px}
+.sec-overview,.sec-tail{padding-top:0}
+.sectiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.st-tile{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r-lg);overflow:hidden;text-decoration:none;color:var(--ink);
+  transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease),transform var(--dur) var(--ease)}
+.st-tile:hover{border-color:var(--line-strong);box-shadow:var(--sh-2);transform:translateY(-1px)}
+/* White plate in both themes, as on the guides: the illustrations are on white. */
+.st-img{display:flex;align-items:center;justify-content:center;height:150px;padding:12px;
+  background:#fff;border-bottom:1px solid var(--line)}
+/* display:contents makes the <img> the flex item, so its height:100% resolves
+   against the plate; through the inline <picture> it fell back to 340px. */
+.st-img picture{display:contents}
+.st-img img{display:block;height:100%;width:auto;max-width:100%;object-fit:contain}
+.st-name{font-family:var(--disp);font-weight:600;font-size:16px;letter-spacing:-.01em;padding:12px 14px}
+.st-minor{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;margin:18px 0 0;font-size:14.5px}
+.st-minor span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}
+.st-minor a{color:var(--ink);font-weight:500;text-decoration:underline;
+  text-decoration-color:var(--line-dark);text-underline-offset:3px}
+.st-minor a:hover{text-decoration-color:var(--signal)}
+@media(max-width:900px){ .sectiles{grid-template-columns:repeat(3,minmax(0,1fr))} }
+@media(max-width:640px){
+  .sectiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .st-img{height:112px;padding:10px}
+  .st-name{font-size:14.5px;padding:10px 12px}
+}
+.sec-more{max-width:760px;margin-top:12px}
+.sec-more > summary{cursor:pointer;list-style:none;display:inline-block;font-family:var(--mono);
+  font-size:12px;letter-spacing:.04em;color:var(--link);padding:6px 0}
+.sec-more > summary::-webkit-details-marker{display:none}
+.sec-more > summary::after{content:" +"}
+.sec-more[open] > summary::after{content:" \2212"}
+.sec-more[open] > summary{margin-bottom:12px}
+.sec-fold{border-top:1px solid var(--line)}
+.sec-fold:last-child{border-bottom:1px solid var(--line)}
+.sec-fold > summary{cursor:pointer;list-style:none;display:flex;flex-wrap:wrap;align-items:baseline;
+  gap:4px 14px;padding:20px 0}
+.sec-fold > summary::-webkit-details-marker{display:none}
+.sec-fold > summary .section-eyebrow{flex-basis:100%;margin:0}
+.sec-fold > summary h2{font-size:clamp(20px,2.4vw,24px);letter-spacing:-.022em;color:var(--ink);margin:0}
+.sec-fold > summary .sf-n{font-family:var(--mono);font-size:12px;color:var(--slate)}
+.sec-fold > summary::after{content:"+";margin-left:auto;font-family:var(--mono);font-size:18px;color:var(--slate)}
+.sec-fold[open] > summary::after{content:"\2212"}
+.sec-fold[open]{padding-bottom:28px}
+
+/* ---------- Guides hub (guides.html) ----------
+   One box per topic: picture, topic, count, titles. Replaces 71 title-plus-
+   description cards under 11 headings. The homepage still uses .gdcard, so
+   those rules stay. Icon plates are tinted rather than white so they read as
+   drawings, not as missing photos. */
+.hubsec{font-size:clamp(22px,2.6vw,27px);letter-spacing:-.026em;color:var(--ink);margin:52px 0 16px}
+.dirwrap > .hubsec:first-of-type{margin-top:6px}
+.hubgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.hubgroup{display:grid;grid-template-columns:96px minmax(0,1fr);gap:18px;align-items:start;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px}
+.hg-pic{width:96px;height:96px;border-radius:var(--r);background:#fff;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;padding:8px}
+.hg-pic picture{display:contents}
+.hg-pic img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.hg-pic.is-icon{background:var(--sunk);color:var(--ink-2);padding:22px}
+.hg-icon{display:block;width:100%;height:100%}
+.hg-icon .acc{stroke:var(--signal-deep)}
+.hubgroup h3{font-size:17px;letter-spacing:-.015em;color:var(--ink);margin:2px 0 10px;
+  display:flex;align-items:baseline;gap:8px}
+.hg-n{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--slate)}
+.hg-note{font-size:13.5px;line-height:1.5;color:var(--slate);margin:-4px 0 10px}
+.hubgroup ul{list-style:none;margin:0;padding:0}
+.hubgroup li{font-size:15px;line-height:1.35;margin:0 0 8px;break-inside:avoid}
+.hubgroup li:last-child{margin-bottom:0}
+.hubgroup ul.hg-cols{columns:2;column-gap:22px}
+.hubgroup a{color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--line-dark);
+  text-underline-offset:3px}
+.hubgroup a:hover{color:var(--ink);text-decoration-color:var(--signal)}
+@media(max-width:900px){ .hubgrid{grid-template-columns:1fr} }
+@media(max-width:560px){
+  .hubgroup{grid-template-columns:56px minmax(0,1fr);gap:14px;padding:14px}
+  .hg-pic{width:56px;height:56px;padding:5px}
+  .hg-pic.is-icon{padding:12px}
+  .hubgroup ul.hg-cols{columns:1}
+}
+
+/* ---------- calculator directory (engineering-calculators.html) ----------
+   A photo of the equipment on each equipment calculator's card; finance and
+   reference tools get a text badge, since no photo honestly shows them. The
+   homepage also uses .gdcard, so the layout only changes with .has-thumb. */
+/* Thumbnail beside the title only; the description keeps the full card width
+   so the card does not grow taller for the picture. */
+.gdcard.has-thumb{display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:14px;row-gap:10px;
+  align-items:center;align-content:start}
+.gdcard.has-thumb > .gd-thumb{grid-column:1;grid-row:1}
+.gdcard.has-thumb > h3{grid-column:2;grid-row:1;margin:0}
+.gdcard.has-thumb > :not(.gd-thumb):not(h3){grid-column:1 / -1}
+.gd-thumb{width:52px;height:52px;border-radius:var(--r-sm);background:#fff;
+  border:1px solid var(--line);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.gd-thumb picture{display:contents}
+.gd-thumb img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.gd-thumb.is-badge{background:var(--sunk);font-family:var(--mono);font-size:11px;color:var(--ink-2)}
+
 /* ---------- closing CTA band ----------
    Was a full-bleed navy-to-slate gradient under a 4px amber rule, with a
    square amber button. Now a rounded panel inside the page measure. */

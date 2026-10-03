@@ -93,12 +93,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </header>
 <main id="main" tabindex="-1">
 <section class="artban">
-  <div class="artban-in">
-    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">How to Size a UPS</span></nav>
-    <div class="eyebrow">Data Center Power</div>
-    <h1>How to Size a UPS</h1>
-    <p class="dek">A UPS is sized twice: once for power (can it carry the load?) and once for energy (for how long?). Get either wrong and the system fails exactly when it's needed. Here's the method, step by step, with a worked example.</p>
-    <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published September 29, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+  <div class="artban-in has-photo">
+    <div class="artban-text">
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">How to Size a UPS</span></nav>
+      <div class="eyebrow">Data Center Power</div>
+      <h1>How to Size a UPS</h1>
+      <p class="dek">A UPS is sized twice: once for power (can it carry the load?) and once for energy (for how long?). Get either wrong and the system fails exactly when it's needed. Here's the method, step by step, with a worked example.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published September 29, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+    </div>
+    <figure class="artban-photo">
+      <picture><source srcset="images/parts/dc-ups-systems-static.webp" type="image/webp"><img src="images/parts/dc-ups-systems-static.jpg" width="340" height="340" alt="A static UPS cabinet with a front display panel" decoding="async" fetchpriority="high"></picture>
+      <figcaption>Static UPS cabinet (illustration)</figcaption>
+    </figure>
   </div>
 </section>
 <div class="artwrap">
@@ -138,13 +144,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p>Many designers keep steady-state loading at or below about 80% of the UPS rating. That leaves room for load steps, inrush from equipment restarting, and measurement error in the load estimate. This is design practice rather than a code requirement, and the right limit depends on the load profile and the manufacturer's guidance.</p>
 
   <h2 id="step-4-apply-the-redundancy-scheme">Step 4: Apply the redundancy scheme</h2>
-  <table class="reftable">
-    <tr><th scope="col">Scheme</th><th scope="col">What gets installed</th></tr>
-    <tr><td><b>N</b></td><td>Just enough capacity for the load. Any module failure drops capacity below the load.</td></tr>
-    <tr><td><b>N+1</b></td><td>One more module than the load needs. Any single module can fail or be serviced without losing the load.</td></tr>
-    <tr><td><b>2N</b></td><td>Two complete, independent UPS systems, each able to carry the full load alone. Normally each carries about half.</td></tr>
-    <tr><td><b>2(N+1)</b></td><td>Two independent systems, each with its own spare module.</td></tr>
-  </table>
+  <figure class="redun">
+    <div class="redun-grid">
+      <div class="rd">
+        <div class="rd-mods" aria-hidden="true"><div class="rd-sys"><i></i><i></i></div></div>
+        <b>N</b>
+        <p>Just enough capacity for the load. Any module failure drops capacity below the load.</p>
+      </div>
+      <div class="rd">
+        <div class="rd-mods" aria-hidden="true"><div class="rd-sys"><i></i><i></i><i class="sp"></i></div></div>
+        <b>N+1</b>
+        <p>One more module than the load needs. Any single module can fail or be serviced without losing the load.</p>
+      </div>
+      <div class="rd">
+        <div class="rd-mods" aria-hidden="true"><div class="rd-sys"><i></i><i></i></div><div class="rd-sys"><i></i><i></i></div></div>
+        <b>2N</b>
+        <p>Two complete, independent UPS systems, each able to carry the full load alone. Normally each carries about half.</p>
+      </div>
+      <div class="rd">
+        <div class="rd-mods" aria-hidden="true"><div class="rd-sys"><i></i><i></i><i class="sp"></i></div><div class="rd-sys"><i></i><i></i><i class="sp"></i></div></div>
+        <b>2(N+1)</b>
+        <p>Two independent systems, each with its own spare module.</p>
+      </div>
+    </div>
+    <figcaption><span class="rd-key"><i></i> module the load needs</span><span class="rd-key"><i class="sp"></i> spare module</span><span class="rd-key"><span class="rd-sysk"></span> one independent UPS system</span></figcaption>
+  </figure>
   <p>Redundancy is about the whole path, not just the UPS. An N+1 UPS feeding a single distribution path is still a single point of failure downstream. <a class="inline" href="guide-n-plus-1-vs-2n-redundancy.html">N+1 vs. 2N Redundancy Explained</a> covers what each scheme survives and what it costs.</p>
 
   <h2 id="step-5-size-the-battery-for-runtime">Step 5: Size the battery for runtime</h2>
