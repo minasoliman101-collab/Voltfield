@@ -962,6 +962,11 @@ footer p{line-height:1.7;max-width:480px;font-size:13px;color:#7F94AC}
 footer li{list-style:none;padding:5px 0;font-family:var(--body);font-size:13.5px}
 footer a{color:#93A7BD;text-decoration:none;transition:color var(--dur) var(--ease)}
 footer a:hover{color:#fff}
+/* Links inside the footer's prose paragraphs sit in running text in a grey only
+   1.26:1 off the text around them, so colour alone can't mark them as links
+   (WCAG 1.4.1). Underline them. The column link lists are not running text
+   and stay as they are. */
+footer p a{text-decoration:underline;text-underline-offset:2px}
 
 /* ---------- back to top / scroll reveal ---------- */
 .totop{position:fixed;right:22px;bottom:22px;width:44px;height:44px;
