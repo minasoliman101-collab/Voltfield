@@ -138,6 +138,14 @@ canvas[role="img"]:focus-visible{outline:3px solid var(--signal);outline-offset:
    ring around the whole page. */
 #main:focus{outline:none}
 
+/* The UA stylesheet's [hidden]{display:none} is a plain element rule, so any
+   author rule that sets display -- .rackinner{display:flex}, for one -- wins
+   and the element stays laid out and keyboard-focusable while scripts believe
+   they have hidden it. Panes toggled by the view tabs on the rack builder,
+   sandbox and POD designer all depend on the attribute, so enforce it once
+   here rather than per-component. */
+[hidden]{display:none!important}
+
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:var(--body);background:var(--paper);color:var(--ink);
