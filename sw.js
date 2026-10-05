@@ -15,7 +15,7 @@
    v124: calculators moved off the hub onto their own pages; shared logic and
    styles in voltfield-calculators.js/.css.
    v125: guide reading aids and the one-row phone header, both in core.css. */
-const VERSION = 'voltfield-v127';
+const VERSION = 'voltfield-v128';
 
 const CORE = [
   './',

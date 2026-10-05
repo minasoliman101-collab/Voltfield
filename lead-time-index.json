@@ -2,7 +2,7 @@
   "source": "Voltfield",
   "url": "https://voltfield.org/lead-time-index.html",
   "region": "North America",
-  "lastUpdated": "2026-07",
+  "lastUpdated": "2026-10",
   "reviewCadence": "monthly",
   "license": "Free to cite or embed with attribution and a link back to https://voltfield.org/lead-time-index.html",
   "basisNote": "Every figure carries a 'basis' describing where it comes from, so anyone citing this index can see exactly what kind of number they are quoting. Figures marked 'modeled' are Voltfield's own derived estimates and should be attributed to Voltfield, not presented as survey or manufacturer data.",
@@ -11,18 +11,49 @@
     "operator": "Reported by buyers or distributors through the submission form and reviewed by hand before publishing.",
     "published": "Traceable to a named public source, given in sourceName and sourceUrl on the item."
   },
+  "headlineNote": "The sectors below are the curated headline figures shown at the top of the page. Several carry market context that has no equivalent in the structured data, so they are maintained by hand. fullIndex holds every family that carries a lead time, generated from the same catalog that drives the site.",
   "sectors": [
     {
       "key": "dc",
       "label": "Data Centers",
       "caption": "Data Center Power & Backup Equipment",
       "items": [
-        {"equipment": "Large power transformers", "value": "160 wk", "trend": "up", "basis": "modeled"},
-        {"equipment": "Pad-mount transformers", "value": "85 wk", "trend": "up", "basis": "modeled"},
-        {"equipment": "MV switchgear", "value": "Sold out through 2028", "trend": "flat", "basis": "modeled"},
-        {"equipment": "Gas turbines", "value": "2029+ delivery slots", "trend": "up", "basis": "modeled"},
-        {"equipment": "Diesel gensets", "value": "90 wk", "trend": "up", "basis": "modeled"},
-        {"equipment": "MCCBs (15–1200 A)", "value": "12 wk", "trend": "flat", "basis": "modeled"}
+        {
+          "equipment": "Large power transformers",
+          "value": "160 wk",
+          "trend": "up",
+          "basis": "modeled"
+        },
+        {
+          "equipment": "Pad-mount transformers",
+          "value": "85 wk",
+          "trend": "up",
+          "basis": "modeled"
+        },
+        {
+          "equipment": "MV switchgear",
+          "value": "Sold out through 2028",
+          "trend": "flat",
+          "basis": "modeled"
+        },
+        {
+          "equipment": "Gas turbines",
+          "value": "2029+ delivery slots",
+          "trend": "up",
+          "basis": "modeled"
+        },
+        {
+          "equipment": "Diesel gensets",
+          "value": "90 wk",
+          "trend": "up",
+          "basis": "modeled"
+        },
+        {
+          "equipment": "MCCBs (15–1200 A)",
+          "value": "12 wk",
+          "trend": "flat",
+          "basis": "modeled"
+        }
       ]
     },
     {
@@ -30,10 +61,30 @@
       "label": "Renewables",
       "caption": "Solar, Wind & Hybrid Equipment",
       "items": [
-        {"equipment": "GSU transformers", "value": "144 wk", "trend": "up", "basis": "modeled"},
-        {"equipment": "Grid-forming PCS", "value": "32 wk", "trend": "flat", "basis": "modeled"},
-        {"equipment": "FEOC-clean inverters", "value": "20 wk", "trend": "up", "basis": "modeled"},
-        {"equipment": "PV modules (import)", "value": "$0.09–0.13/W", "trend": "down", "basis": "modeled"}
+        {
+          "equipment": "GSU transformers",
+          "value": "144 wk",
+          "trend": "up",
+          "basis": "modeled"
+        },
+        {
+          "equipment": "Grid-forming PCS",
+          "value": "32 wk",
+          "trend": "flat",
+          "basis": "modeled"
+        },
+        {
+          "equipment": "FEOC-clean inverters",
+          "value": "20 wk",
+          "trend": "up",
+          "basis": "modeled"
+        },
+        {
+          "equipment": "PV modules (import)",
+          "value": "$0.09–0.13/W",
+          "trend": "down",
+          "basis": "modeled"
+        }
       ]
     },
     {
@@ -41,7 +92,12 @@
       "label": "Battery Storage",
       "caption": "Utility-Scale BESS Equipment",
       "items": [
-        {"equipment": "LFP DC blocks", "value": "$110–140/kWh", "trend": "down", "basis": "modeled"}
+        {
+          "equipment": "LFP DC blocks",
+          "value": "$110–140/kWh",
+          "trend": "down",
+          "basis": "modeled"
+        }
       ]
     },
     {
@@ -49,10 +105,2135 @@
       "label": "Oil & Gas",
       "caption": "Drilling & Completions Equipment",
       "items": [
-        {"equipment": "Drill pipe (S-135)", "value": "34 wk", "trend": "flat", "basis": "modeled"},
-        {"equipment": "Frac valves", "value": "24 wk", "trend": "down", "basis": "modeled"},
-        {"equipment": "Hydraulic hose assemblies", "value": "Same-week crimp", "trend": "down", "basis": "modeled"}
+        {
+          "equipment": "Drill pipe (S-135)",
+          "value": "34 wk",
+          "trend": "flat",
+          "basis": "modeled"
+        },
+        {
+          "equipment": "Frac valves",
+          "value": "24 wk",
+          "trend": "down",
+          "basis": "modeled"
+        },
+        {
+          "equipment": "Hydraulic hose assemblies",
+          "value": "Same-week crimp",
+          "trend": "down",
+          "basis": "modeled"
+        }
       ]
+    }
+  ],
+  "fullIndexCount": 234,
+  "familiesTotal": 242,
+  "fullIndex": [
+    {
+      "equipment": "Gas Turbine Generators",
+      "category": "Backup Power",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 180,
+      "value": "180 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Large Power Transformers",
+      "category": "Transformers",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 160,
+      "value": "160 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "MV Switchgear (5–38kV)",
+      "category": "Switchgear & Breakers",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 130,
+      "value": "130 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Diesel Gensets",
+      "category": "Backup Power",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 90,
+      "value": "90 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Pad-Mount Transformers",
+      "category": "Transformers",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 85,
+      "value": "85 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Natural-Gas Gensets",
+      "category": "Backup Power",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 78,
+      "value": "78 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Industrial Engines (Diesel & Gas)",
+      "category": "Genset Components",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 38,
+      "value": "38 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Alternators & Generator Ends",
+      "category": "Genset Components",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 30,
+      "value": "30 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Dry-Type / Cast-Resin Transformers",
+      "category": "Transformers",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 30,
+      "value": "30 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Air Circuit Breakers",
+      "category": "Switchgear & Breakers",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 26,
+      "value": "26 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Electrical Steel & Core Laminations",
+      "category": "Transformer Components",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 26,
+      "value": "26 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Dry Coolers & Chillers",
+      "category": "Cooling",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 24,
+      "value": "24 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "LV Switchgear",
+      "category": "Switchgear & Breakers",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 24,
+      "value": "24 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Static Transfer Switches",
+      "category": "Power Distribution",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 22,
+      "value": "22 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Tanks, Skids & Fabricated Steel",
+      "category": "Transformer Components",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 22,
+      "value": "22 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "UPS Systems (Static)",
+      "category": "Backup Power",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 22,
+      "value": "22 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Coolant Distribution Units (CDU)",
+      "category": "Cooling",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 20,
+      "value": "20 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Floor PDU / RPP",
+      "category": "Power Distribution",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 20,
+      "value": "20 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Protective Relays",
+      "category": "Monitoring & Controls",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 20,
+      "value": "20 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Transformer Bushings",
+      "category": "Transformer Components",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 20,
+      "value": "20 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "CRAH / CRAC Units",
+      "category": "Cooling",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 18,
+      "value": "18 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Isolation / K-Rated Transformers",
+      "category": "Transformers",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 18,
+      "value": "18 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "MV Power Cable",
+      "category": "Cabling & Busbar",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 18,
+      "value": "18 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Busway (Feeder / Plug-In)",
+      "category": "Power Distribution",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 16,
+      "value": "16 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "De-Energized Tap Changers",
+      "category": "Transformer Components",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 16,
+      "value": "16 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Flywheel / DC UPS",
+      "category": "Backup Power",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 16,
+      "value": "16 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Instrument Transformers (CT / VT)",
+      "category": "Switchgear Components",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 14,
+      "value": "14 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Rear-Door Heat Exchangers",
+      "category": "Cooling",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 14,
+      "value": "14 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Engine Cooling & Exhaust",
+      "category": "Genset Components",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 12,
+      "value": "12 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Molded-Case Breakers (MCCB 15–1200A)",
+      "category": "Switchgear & Breakers",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 12,
+      "value": "12 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Transformer Radiators & Cooling Fans",
+      "category": "Transformer Components",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 12,
+      "value": "12 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Breaker Trip Units & Accessories",
+      "category": "Switchgear Components",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 10,
+      "value": "10 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Copper Busbar",
+      "category": "Cabling & Busbar",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 10,
+      "value": "10 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Fuel & Starting Systems",
+      "category": "Genset Components",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 10,
+      "value": "10 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Magnet Wire & Winding Conductor",
+      "category": "Transformer Components",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 10,
+      "value": "10 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Server Rack Enclosures",
+      "category": "Power Distribution",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 10,
+      "value": "10 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Surge Protective Devices",
+      "category": "Grounding & Bonding",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 10,
+      "value": "10 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Breaker Repair Kits — Contacts, Arc Chutes & Mechanisms",
+      "category": "Switchgear Components",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 8,
+      "value": "8 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Fiber Optic Trunk Assemblies & Patch Panels",
+      "category": "Cabling & Busbar",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 8,
+      "value": "8 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Genset Controls, AVRs & Governors",
+      "category": "Genset Components",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 8,
+      "value": "8 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Power Meters / BMS",
+      "category": "Monitoring & Controls",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 8,
+      "value": "8 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Rack PDUs",
+      "category": "Power Distribution",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 8,
+      "value": "8 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Transformer Gauges & Protective Devices",
+      "category": "Transformer Components",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 8,
+      "value": "8 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Transformer Insulation & Pressboard",
+      "category": "Transformer Components",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 8,
+      "value": "8 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Bus Insulators & Standoffs",
+      "category": "Switchgear Components",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 6,
+      "value": "6 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Electrical Enclosures & Cabinets",
+      "category": "Switchgear Components",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 6,
+      "value": "6 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "LV Power Cable",
+      "category": "Cabling & Busbar",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 6,
+      "value": "6 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Ground Bars & Kits",
+      "category": "Grounding & Bonding",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 4,
+      "value": "4 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Insulating Oils & Dielectric Fluids",
+      "category": "Transformer Components",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 4,
+      "value": "4 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Panel Heaters, Terminal Blocks & Control Wiring",
+      "category": "Switchgear Components",
+      "sector": "Data Centers",
+      "sectorKey": "dc",
+      "weeks": 4,
+      "value": "4 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "GSU Transformers",
+      "category": "GSU & MV Transformers",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 144,
+      "value": "144 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Collector Substation Transformers",
+      "category": "GSU & MV Transformers",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 120,
+      "value": "120 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Pad-Mount (Collection)",
+      "category": "GSU & MV Transformers",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 72,
+      "value": "72 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Medium-Voltage PCS Skids",
+      "category": "Inverters & PCS",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 32,
+      "value": "32 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Pitch / Yaw Drives",
+      "category": "Wind Components",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 30,
+      "value": "30 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Central Inverters (Utility)",
+      "category": "Inverters & PCS",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 28,
+      "value": "28 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Slip Rings & Converters",
+      "category": "Wind Components",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 26,
+      "value": "26 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Thin-Film (CdTe) Modules",
+      "category": "Solar Modules",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 26,
+      "value": "26 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Mono PERC Modules",
+      "category": "Solar Modules",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 24,
+      "value": "24 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Single-Axis Trackers",
+      "category": "Structural BOS",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 22,
+      "value": "22 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "String Inverters (FEOC-Clean)",
+      "category": "Inverters & PCS",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 20,
+      "value": "20 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Bifacial Modules",
+      "category": "Solar Modules",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 18,
+      "value": "18 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "MV Collection Cable",
+      "category": "Wire & Cable",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 18,
+      "value": "18 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "IGBT & SiC Power Modules",
+      "category": "Inverter & PE Components",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 16,
+      "value": "16 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Plant Controllers",
+      "category": "Monitoring & SCADA",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 16,
+      "value": "16 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "TOPCon Modules",
+      "category": "Solar Modules",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 16,
+      "value": "16 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Recombiners",
+      "category": "Combiners & Protection",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 14,
+      "value": "14 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Solar Glass, Encapsulants & Backsheets",
+      "category": "Module & BOS Components",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 14,
+      "value": "14 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Blade Bolts & Foundation Hardware",
+      "category": "Wind Components",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 12,
+      "value": "12 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "DC-Link Film Capacitors",
+      "category": "Inverter & PE Components",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 12,
+      "value": "12 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Filter Inductors & Magnetics",
+      "category": "Inverter & PE Components",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 12,
+      "value": "12 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Fixed-Tilt Racking",
+      "category": "Structural BOS",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 12,
+      "value": "12 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Solar Cells & Interconnect Ribbon",
+      "category": "Module & BOS Components",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 12,
+      "value": "12 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Controller Boards, HMIs & Industrial Power Supplies",
+      "category": "Inverter & PE Components",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 10,
+      "value": "10 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "DC Combiner Boxes",
+      "category": "Combiners & Protection",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 10,
+      "value": "10 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Gate Driver Boards",
+      "category": "Inverter & PE Components",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 10,
+      "value": "10 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Heat Sinks, Cold Plates & Fan Trays",
+      "category": "Inverter & PE Components",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 10,
+      "value": "10 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "PV Power Optimizers",
+      "category": "Inverter & PE Components",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 10,
+      "value": "10 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Revenue Meters & SCADA Gateways",
+      "category": "Monitoring & SCADA",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 10,
+      "value": "10 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Tracker Drives & Row Controllers",
+      "category": "Module & BOS Components",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 10,
+      "value": "10 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "EMI Filters & Surge Components",
+      "category": "Inverter & PE Components",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 8,
+      "value": "8 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Foundation Piles",
+      "category": "Structural BOS",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 8,
+      "value": "8 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Met Stations & Sensors",
+      "category": "Monitoring & SCADA",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 8,
+      "value": "8 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Module Frames & Aluminum Extrusions",
+      "category": "Module & BOS Components",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 8,
+      "value": "8 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "PV Junction Boxes, Diodes & Potting",
+      "category": "Module & BOS Components",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 8,
+      "value": "8 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Wiring Harnesses & Cable Assemblies",
+      "category": "Inverter & PE Components",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 8,
+      "value": "8 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "PV & DC Fuses, Holders & Disconnects",
+      "category": "Module & BOS Components",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 6,
+      "value": "6 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "PV Wire / DC String Cable",
+      "category": "Wire & Cable",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 6,
+      "value": "6 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Rapid Shutdown Devices",
+      "category": "Combiners & Protection",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 6,
+      "value": "6 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Sensors & Transducers",
+      "category": "Inverter & PE Components",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 6,
+      "value": "6 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Module Clamps & Hardware",
+      "category": "Structural BOS",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 4,
+      "value": "4 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "MC4 Connectors & Jumpers",
+      "category": "Wire & Cable",
+      "sector": "Renewables",
+      "sectorKey": "re",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Grid-Forming PCS",
+      "category": "Power Conversion",
+      "sector": "Battery Storage",
+      "sectorKey": "bess",
+      "weeks": 32,
+      "value": "32 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "LFP DC Blocks (5MWh)",
+      "category": "Storage Blocks",
+      "sector": "Battery Storage",
+      "sectorKey": "bess",
+      "weeks": 30,
+      "value": "30 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Grid-Following PCS",
+      "category": "Power Conversion",
+      "sector": "Battery Storage",
+      "sectorKey": "bess",
+      "weeks": 26,
+      "value": "26 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "NMC DC Blocks",
+      "category": "Storage Blocks",
+      "sector": "Battery Storage",
+      "sectorKey": "bess",
+      "weeks": 24,
+      "value": "24 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Containerized Enclosures",
+      "category": "Enclosures & Integration",
+      "sector": "Battery Storage",
+      "sectorKey": "bess",
+      "weeks": 22,
+      "value": "22 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Bi-Directional DC-DC",
+      "category": "Power Conversion",
+      "sector": "Battery Storage",
+      "sectorKey": "bess",
+      "weeks": 20,
+      "value": "20 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Liquid Cooling Skids",
+      "category": "Thermal Management",
+      "sector": "Battery Storage",
+      "sectorKey": "bess",
+      "weeks": 20,
+      "value": "20 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Battery Cells (Prismatic LFP / NMC)",
+      "category": "Battery Components",
+      "sector": "Battery Storage",
+      "sectorKey": "bess",
+      "weeks": 18,
+      "value": "18 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Energy Management Systems",
+      "category": "Controls (BMS/EMS)",
+      "sector": "Battery Storage",
+      "sectorKey": "bess",
+      "weeks": 18,
+      "value": "18 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Modular Battery Racks",
+      "category": "Storage Blocks",
+      "sector": "Battery Storage",
+      "sectorKey": "bess",
+      "weeks": 18,
+      "value": "18 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Battery Management Systems",
+      "category": "Controls (BMS/EMS)",
+      "sector": "Battery Storage",
+      "sectorKey": "bess",
+      "weeks": 16,
+      "value": "16 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "HVAC / Chiller Units",
+      "category": "Thermal Management",
+      "sector": "Battery Storage",
+      "sectorKey": "bess",
+      "weeks": 16,
+      "value": "16 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Aerosol / Clean-Agent Suppression",
+      "category": "Fire Suppression & Safety",
+      "sector": "Battery Storage",
+      "sectorKey": "bess",
+      "weeks": 14,
+      "value": "14 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Battery Modules & Rack Hardware",
+      "category": "Battery Components",
+      "sector": "Battery Storage",
+      "sectorKey": "bess",
+      "weeks": 14,
+      "value": "14 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Battery Racking & Structural Steel",
+      "category": "Enclosures & Integration",
+      "sector": "Battery Storage",
+      "sectorKey": "bess",
+      "weeks": 14,
+      "value": "14 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Switchboard / AC Panels",
+      "category": "Enclosures & Integration",
+      "sector": "Battery Storage",
+      "sectorKey": "bess",
+      "weeks": 14,
+      "value": "14 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Gas Detection & Deflagration Panels",
+      "category": "Fire Suppression & Safety",
+      "sector": "Battery Storage",
+      "sectorKey": "bess",
+      "weeks": 12,
+      "value": "12 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Battery Thermal Components",
+      "category": "Battery Components",
+      "sector": "Battery Storage",
+      "sectorKey": "bess",
+      "weeks": 10,
+      "value": "10 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "DC Contactors, Fuses & Pre-Charge",
+      "category": "Battery Components",
+      "sector": "Battery Storage",
+      "sectorKey": "bess",
+      "weeks": 8,
+      "value": "8 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Fire Detection & Suppression Components",
+      "category": "Fire Suppression & Safety",
+      "sector": "Battery Storage",
+      "sectorKey": "bess",
+      "weeks": 8,
+      "value": "8 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "BOPs (Annular / Ram)",
+      "category": "Pressure Control",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 36,
+      "value": "36 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Drill Pipe (S-135)",
+      "category": "Tubulars",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 34,
+      "value": "34 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Wellheads & Christmas Trees",
+      "category": "Pressure Control",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 30,
+      "value": "30 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "OCTG Casing",
+      "category": "Tubulars",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 28,
+      "value": "28 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "OCTG Tubing",
+      "category": "Tubulars",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 26,
+      "value": "26 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Compressors",
+      "category": "Pumps & Rotating",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 24,
+      "value": "24 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Forged Bodies, Bonnets & Spools",
+      "category": "Valve & Wellhead Components",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 24,
+      "value": "24 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Frac Valves",
+      "category": "Valves",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 24,
+      "value": "24 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "ESP Systems",
+      "category": "Downhole & Artificial Lift",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 22,
+      "value": "22 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Coiled Tubing Units & Injector Heads",
+      "category": "Downhole & Artificial Lift",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 20,
+      "value": "20 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Line Pipe",
+      "category": "Tubulars",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 20,
+      "value": "20 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Choke & Kill Valves",
+      "category": "Valves",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 18,
+      "value": "18 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Positive-Displacement Pumps",
+      "category": "Pumps & Rotating",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 18,
+      "value": "18 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Centrifugal Pumps",
+      "category": "Pumps & Rotating",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 16,
+      "value": "16 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Packers & Completion Tools",
+      "category": "Downhole & Artificial Lift",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 16,
+      "value": "16 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Wellhead Hangers, Packoffs & Seals",
+      "category": "Valve & Wellhead Components",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 16,
+      "value": "16 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Downhole Cable & Wellsite Electrical",
+      "category": "Valve & Wellhead Components",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 14,
+      "value": "14 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Gate / Globe / Check Valves",
+      "category": "Valves",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 14,
+      "value": "14 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Wellsite Controllers / RTUs",
+      "category": "Instrumentation & Controls",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 14,
+      "value": "14 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Adapters & Spools",
+      "category": "Pressure Control",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 12,
+      "value": "12 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Ball Valves",
+      "category": "Valves",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 12,
+      "value": "12 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Flow Meters",
+      "category": "Instrumentation & Controls",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 12,
+      "value": "12 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Valve Operators & Actuators",
+      "category": "Valve & Wellhead Components",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 12,
+      "value": "12 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Flanges (WN / SO / Blind)",
+      "category": "Fittings & Flanges",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 10,
+      "value": "10 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Rod Pumps & Sucker Rods",
+      "category": "Downhole & Artificial Lift",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 10,
+      "value": "10 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Valve Trim, Seats & Repair Kits",
+      "category": "Valve & Wellhead Components",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 10,
+      "value": "10 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Pressure / Temp Transmitters",
+      "category": "Instrumentation & Controls",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 8,
+      "value": "8 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Weld Fittings (Elbows / Tees)",
+      "category": "Fittings & Flanges",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 8,
+      "value": "8 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Threaded / Forged Fittings",
+      "category": "Fittings & Flanges",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 6,
+      "value": "6 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Ring-Joint & Spiral-Wound Gaskets",
+      "category": "Gaskets, Seals & Fasteners",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 4,
+      "value": "4 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Thread Protectors, Dope & Pipe Care",
+      "category": "Valve & Wellhead Components",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 4,
+      "value": "4 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "O-Rings & Seal Kits",
+      "category": "Gaskets, Seals & Fasteners",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 3,
+      "value": "3 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Stud Bolts & Nuts (B7 / 2H)",
+      "category": "Gaskets, Seals & Fasteners",
+      "sector": "Oil & Gas",
+      "sectorKey": "og",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Coils & Heat Exchangers",
+      "category": "HVAC & Refrigeration",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 8,
+      "value": "8 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Motor Repair Parts",
+      "category": "Motors",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 6,
+      "value": "6 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Pump Repair Parts & Impellers",
+      "category": "Pumps",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 6,
+      "value": "6 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Mechanical Seals & Packing",
+      "category": "Power Transmission",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 4,
+      "value": "4 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Shaft Couplings, Gearboxes & Drive Parts",
+      "category": "Power Transmission",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 4,
+      "value": "4 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Welding Machines & Power Sources",
+      "category": "Welding",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 4,
+      "value": "4 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "DC & Gearmotors",
+      "category": "Motors",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 3,
+      "value": "3 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Industrial Batteries & Chargers",
+      "category": "Electrical",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 3,
+      "value": "3 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "LED Modules, Drivers & Optics",
+      "category": "Lighting",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 3,
+      "value": "3 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Reels, Crates & Protective Packaging",
+      "category": "Identification & Packaging",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 3,
+      "value": "3 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "AC Motors",
+      "category": "Motors",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Anchors",
+      "category": "Fasteners & Hardware",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Bearings & Bushings",
+      "category": "Power Transmission",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Carts, Trucks & Shelving",
+      "category": "Material Handling",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Centrifugal & Utility Pumps",
+      "category": "Pumps",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Controls & Refrigeration Parts",
+      "category": "HVAC & Refrigeration",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Cylinders & Valves",
+      "category": "Pneumatics & Hydraulics",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Diaphragm & Drum Pumps",
+      "category": "Pumps",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Electrical Distribution Equipment",
+      "category": "Electrical Distribution Equipment",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Fixtures, Pumps & Drains",
+      "category": "Plumbing",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Fuses & Circuit Protection",
+      "category": "Electrical",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Hex Cap Screws & Bolts",
+      "category": "Fasteners & Hardware",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Hoists, Slings & Rigging",
+      "category": "Material Handling",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Industrial Automation & Controls",
+      "category": "Industrial Automation",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Labels, Nameplates & Signage",
+      "category": "Identification & Packaging",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Machine Tool Accessories",
+      "category": "Machine Accessories",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Motor Controls & Drives",
+      "category": "Motors",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Motors, Blowers & Fans",
+      "category": "HVAC & Refrigeration",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Paints & Protective Coatings",
+      "category": "Adhesives, Sealants & Tape",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Refrigerants & Heat-Transfer Fluids",
+      "category": "HVAC & Refrigeration",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Rivets",
+      "category": "Fasteners & Hardware",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Saws & Grinders",
+      "category": "Power Tools",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Security & Life Safety",
+      "category": "Security & Life Safety",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Socket Screws",
+      "category": "Fasteners & Hardware",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Structural Shapes",
+      "category": "Raw Materials",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Threaded Rod & Studs",
+      "category": "Fasteners & Hardware",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Toolholding & Workholding",
+      "category": "Machining",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 2,
+      "value": "2 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Adhesives & Epoxies",
+      "category": "Adhesives, Sealants & Tape",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Building Wire & Cable",
+      "category": "Building Wire & Cable",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Casters & Wheels",
+      "category": "Material Handling",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Chemicals & Degreasers",
+      "category": "Cleaning & Janitorial",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Commercial Lighting & Controls",
+      "category": "Lighting & Controls",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Conduit, Boxes & Fittings",
+      "category": "Electrical",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Conduit, Raceway & Fittings",
+      "category": "Conduit, Raceway & Fittings",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Coolants, Lubricants & Fluids",
+      "category": "Metalworking Fluids",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Corded & Cordless Drills / Drivers",
+      "category": "Power Tools",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Cutting & Layout Tools",
+      "category": "Hand Tools",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Cutting Tools & Inserts",
+      "category": "Machining",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Datacomm & Networking",
+      "category": "Datacomm & Networking",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Devices, Switches & Controls",
+      "category": "Electrical",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Dimensional & Environmental",
+      "category": "Test Instruments",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Electrical Testers & Meters",
+      "category": "Test Instruments",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Filler Metal & Electrodes",
+      "category": "Welding",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Filters & Belts",
+      "category": "HVAC & Refrigeration",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Foam, Felt & Insulation Stock",
+      "category": "Raw Materials",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Gloves & Protective Clothing",
+      "category": "Safety & PPE",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Grinding & Cut-Off Wheels",
+      "category": "Abrasives",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Head, Eye & Face Protection",
+      "category": "Safety & PPE",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Industrial Fasteners & Anchors",
+      "category": "Industrial Fasteners",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Industrial Tape",
+      "category": "Adhesives, Sealants & Tape",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "LED Fixtures & Lamps",
+      "category": "Lighting",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Machine Screws",
+      "category": "Fasteners & Hardware",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Metal Bar, Sheet & Plate",
+      "category": "Raw Materials",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Metal Tubing & Pipe Stock",
+      "category": "Raw Materials",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Metalworking Abrasives",
+      "category": "Metalworking Abrasives",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Metalworking Cutting Tools",
+      "category": "Cutting Tools",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Nuts",
+      "category": "Fasteners & Hardware",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Oils, Greases & Fluids",
+      "category": "Lubrication",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Pins, Rings & Clips",
+      "category": "Fasteners & Hardware",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Pipe, Tube & Hose",
+      "category": "Plumbing",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Plastic Sheet, Rod & Tube",
+      "category": "Raw Materials",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Pliers, Screwdrivers & Striking",
+      "category": "Hand Tools",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Pneumatic Fittings & FRLs",
+      "category": "Pneumatics & Hydraulics",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Portable & Task Lighting",
+      "category": "Lighting",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Precision Measuring & Inspection",
+      "category": "Measuring & Inspection",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Respiratory & Hearing",
+      "category": "Safety & PPE",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Rubber & Gasket Stock",
+      "category": "Raw Materials",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Sanding & Surface Finishing",
+      "category": "Abrasives",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Sealants & Caulks",
+      "category": "Adhesives, Sealants & Tape",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Torches, Guns & Accessories",
+      "category": "Welding",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Valves & Fittings",
+      "category": "Plumbing",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Warehouse & Material Handling",
+      "category": "Warehouse & Material Handling",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Washers",
+      "category": "Fasteners & Hardware",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Waste, Trash & Restroom",
+      "category": "Cleaning & Janitorial",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Wipers, Rags & Sorbents",
+      "category": "Cleaning & Janitorial",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Wire, Cable & Cord",
+      "category": "Electrical",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Wire, Coil & Fine Stock",
+      "category": "Raw Materials",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Wood / Sheet-Metal / Self-Drilling Screws",
+      "category": "Fasteners & Hardware",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
+    },
+    {
+      "equipment": "Wrenches & Sockets",
+      "category": "Hand Tools",
+      "sector": "Industrial Supply (MRO)",
+      "sectorKey": "mro",
+      "weeks": 1,
+      "value": "1 wk",
+      "basis": "modeled"
     }
   ]
 }
