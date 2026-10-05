@@ -2682,10 +2682,14 @@
     const list = (items || []).map(function(it){
       return { shape: it.shape, u: it.u || 1, color: normColor(it.color) };
     });
-    const accent = normColor((opts||{}).accent || '#2B6CB0');
+    const o = opts || {};
+    const accent = normColor(o.accent || '#2B6CB0');
+    /* Without a label the canvas falls back to the generic "power equipment",
+       which never tells a screen-reader user that this is the rack they just
+       filled. The caller knows the height and the contents, so let it say so. */
     return VF3D.mountScene(container, function(THREE){
       return buildRackAssembly(THREE, list, rackU || 42, accent);
-    }, { zoom: 1.12, theta: 0.55 });
+    }, { zoom: 1.12, theta: 0.55, label: o.label || ((rackU || 42) + 'U rack elevation') });
   };
 
   /* items: [{shape, color}] left-to-right; opts.shell draws the container skin
