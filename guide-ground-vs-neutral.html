@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>Ground vs. Neutral Explained | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-ground-vs-neutral.html">
+<meta name="description" content="Ground vs. neutral explained: the grounded conductor against the equipment grounding conductor, the single bonding point at the service, why a second bond is dangerous, separately derived systems and subpanels.">
+<meta name="keywords" content="ground vs neutral, neutral vs ground, equipment grounding conductor, grounded conductor, main bonding jumper, NEC 250.24, subpanel neutral ground, separately derived system, objectionable current">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Ground vs. Neutral">
+<meta property="og:description" content="The grounded conductor against the equipment grounding conductor, the single bonding point, and what a second bond actually does.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta name="twitter:title" content="Ground vs. Neutral">
+<meta name="twitter:description" content="The grounded conductor against the equipment grounding conductor, the single bonding point, and what a second bond actually does.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://voltfield.org/guides.html"},{"@type":"ListItem","position":3,"name":"Ground vs. Neutral","item":"https://voltfield.org/guide-ground-vs-neutral.html"}]},{"@type":"Article","headline":"Ground vs. Neutral: One Bonding Point, and What Goes Wrong With Two","description":"Ground vs. neutral explained: the grounded conductor against the equipment grounding conductor, the single bonding point at the service, why a second bond is dangerous, separately derived systems and subpanels.","image":"https://voltfield.org/social/social-generic.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-11-03T00:00:00-05:00","dateModified":"2026-11-03T00:00:00-05:00","url":"https://voltfield.org/guide-ground-vs-neutral.html"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between ground and neutral?","acceptedAnswer":{"@type":"Answer","text":"The neutral is a circuit conductor that carries load current back to the source whenever the load is on. The equipment grounding conductor carries no current in normal operation; it exists to give fault current a low-impedance path back to the source so the overcurrent device opens, and to keep metal enclosures at the same potential. They are sized by different rules because one carries load and the other carries faults."}},{"@type":"Question","name":"Can neutral and ground be connected in a subpanel?","acceptedAnswer":{"@type":"Answer","text":"No. They are bonded at exactly one point, the main bonding jumper at the service disconnect, or at each separately derived system such as a transformer secondary. Bonding them again in a subpanel puts normal load current onto the equipment grounding conductor and onto every bonded metal enclosure in that path, and interferes with ground-fault protection. NEC 250.6 calls this objectionable current and requires it to be corrected."}},{"@type":"Question","name":"Why is the neutral bonded to ground at all?","acceptedAnswer":{"@type":"Answer","text":"Because that bond is what turns a line-to-enclosure fault into a line-to-neutral fault electrically. Without it, a fault to a metal enclosure would not draw enough current to open the breaker, and the enclosure would simply sit energized. The single bond is what makes overcurrent protection work for ground faults."}},{"@type":"Question","name":"Does a ground rod clear a fault?","acceptedAnswer":{"@type":"Answer","text":"No. A driven rod may present around 25 ohms to earth, which at 120 V passes only a few amps — far too little to open a 20 A breaker and more than enough to be lethal. Faults are cleared by the equipment grounding conductor back through metal to the source. The electrode system exists to reference the system to earth and to handle surges."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in has-photo">
+    <div class="artban-text">
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">Ground vs. Neutral</span></nav>
+      <div class="eyebrow">Grounding</div>
+      <h1>Ground vs. Neutral: Why They Bond Once and Never Again</h1>
+      <p class="dek">They are tied together at the service, which is why they get confused, and they must not be tied anywhere else. The neutral carries load current every second the system runs. The equipment grounding conductor carries current only when something has already gone wrong.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published November 3, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+    </div>
+    <figure class="artban-photo">
+      <picture><source srcset="images/parts/dc-ground-bars-kits.webp" type="image/webp"><img src="images/parts/dc-ground-bars-kits.jpg" width="340" height="340" alt="A ground bar and bonding kit" decoding="async" fetchpriority="high"></picture>
+      <figcaption>Ground bar and bonding kit (illustration)</figcaption>
+    </figure>
+  </div>
+</section>
+<div class="artwrap">
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>The neutral is a circuit conductor that carries load current continuously. The equipment grounding conductor carries current only during a fault.</li>
+      <li>They are bonded at exactly one point: the main bonding jumper at the service disconnect, or at each separately derived system.</li>
+      <li>A second bond puts normal neutral current onto equipment enclosures and onto every parallel metallic path in the building.</li>
+      <li>The ground rod does not clear faults. The equipment grounding conductor does. Earth is far too poor a conductor to open a breaker.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#two-conductors-two-jobs">Two conductors, two jobs</a></li>
+      <li><a href="#the-single-bonding-point">The single bonding point</a></li>
+      <li><a href="#what-a-second-bond-does">What a second bond actually does</a></li>
+      <li><a href="#subpanels">Subpanels</a></li>
+      <li><a href="#the-ground-rod-does-not-clear-faults">The ground rod does not clear faults</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+  <h2 id="two-conductors-two-jobs">Two conductors, two jobs</h2>
+  <p>The <b>neutral</b> &mdash; the code calls it the grounded conductor &mdash; is part of the circuit. On a single-phase branch circuit it returns every amp the load draws. It is insulated, it is sized for load, and it is expected to have current on it whenever anything is switched on.</p>
+  <p>The <b>equipment grounding conductor</b>, or EGC, is not part of the circuit. In normal operation it carries nothing. Its one job is to give fault current a deliberate low-impedance path back to the source so that enough current flows to open the overcurrent device quickly, and to hold every metal enclosure it touches at the same potential while that happens.</p>
+  <p>They are sized by different rules for that reason. The neutral is sized from load, under NEC 220.61. The EGC is sized from the rating of the overcurrent device ahead of it, under NEC 250.122, because what it has to survive is the fault, not the load.</p>
+  <h2 id="the-single-bonding-point">The single bonding point</h2>
+  <p>At the service disconnect the two are deliberately connected, by the main bonding jumper, under NEC 250.24 and 250.28. That connection is what makes a line-to-enclosure fault into a line-to-neutral fault electrically, which is what makes the fault current large enough for a breaker to see.</p>
+  <p>It happens once. A separately derived system &mdash; most commonly a transformer secondary, also a generator with a switched neutral &mdash; gets its own bond at the transformer or at the first disconnect, under NEC 250.30, because it is a new source with its own neutral. One source, one bonding point.</p>
+  <div class="ad-unit" data-ad="incontent"></div>
+  <h2 id="what-a-second-bond-does">What a second bond actually does</h2>
+  <p>Bond neutral to ground a second time &mdash; typically by leaving the bonding screw in a subpanel &mdash; and the neutral now has two paths back to the source: its own conductor, and the EGC. Current divides between them by impedance, so a share of normal load current flows on the EGC from that moment on.</p>
+  <p>That has four consequences, and none of them announce themselves:</p>
+  <ul>
+    <li><b>Enclosures carry current.</b> Conduit, panel cans, equipment frames and any bonded metal in the path become current-carrying parts under normal conditions.</li>
+    <li><b>Ground-fault protection stops working properly.</b> A GFCI or a GFP scheme measures the difference between outgoing and returning current. Neutral current on the EGC is exactly the imbalance it is built to trip on, so it either trips for no reason or has its margin quietly eaten.</li>
+    <li><b>The fault path is no longer predictable.</b> The thing the EGC exists for &mdash; a known low impedance back to the source &mdash; now shares its path with load current.</li>
+    <li><b>It is hard to find.</b> Everything works. Lights come on, loads run, and nothing fails until someone measures current on a ground conductor or a GFCI starts tripping on a circuit with nothing wrong with it.</li>
+  </ul>
+  <p>NEC 250.6 names this directly as objectionable current over grounding conductors, and requires the arrangement to be altered to stop it.</p>
+  <h2 id="subpanels">Subpanels</h2>
+  <p>A subpanel is where this goes wrong most often, because a panelboard ships ready to be a service panel. It arrives with a bonding screw or strap that ties the neutral bar to the can, which is correct in exactly one place and wrong everywhere else.</p>
+  <p>Fed as a subpanel, the panel needs four wires &mdash; two or three ungrounded conductors, a neutral and an EGC &mdash; the neutral bar isolated from the enclosure, a separate ground bar bonded to the enclosure, and that bonding screw removed. Neutrals land on the isolated bar, grounds land on the bonded bar, and the two never touch again downstream of the service.</p>
+  <h2 id="the-ground-rod-does-not-clear-faults">The ground rod does not clear faults</h2>
+  <p>This is the most persistent misunderstanding in the subject, and it is worth being blunt about. A driven ground rod might present 25 ohms to earth on a good day. At 120 V that is under 5 amps &mdash; nowhere near enough to open a 20 A breaker, and quite enough to kill someone. Earth is not a fault-clearing path.</p>
+  <p>The grounding electrode system exists for different reasons: to reference the system to earth so its voltage to ground is defined, to give lightning and switching surges somewhere to go, and to limit the voltage imposed by a higher-voltage line contacting a lower-voltage one. Clearing faults is the EGC's job, through metal, back to the source, every time.</p>
+  <h2 id="common-mistakes">Common mistakes</h2>
+  <ul>
+    <li><b>Leaving the bonding screw in a subpanel.</b> The default state of a new panelboard, and wrong anywhere but the service.</li>
+    <li><b>Using the EGC as a neutral.</b> Running a three-wire feeder to a subpanel and landing neutrals on the ground bar is the same fault with extra steps.</li>
+    <li><b>Assuming a ground rod protects anything.</b> It does not clear faults and never did.</li>
+    <li><b>Sizing the EGC from load.</b> It is sized from the overcurrent device, under NEC 250.122, because the fault is what it has to carry.</li>
+    <li><b>Treating a generator as always separately derived.</b> It depends on whether the neutral is switched. A generator with a solid neutral is not an SDS, and bonding it as one creates the second bond.</li>
+  </ul>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the difference between ground and neutral?</summary>
+    <p style="margin-top:10px">The neutral is a circuit conductor that carries load current back to the source whenever the load is on. The equipment grounding conductor carries no current in normal operation; it exists to give fault current a low-impedance path back to the source so the overcurrent device opens, and to keep metal enclosures at the same potential. They are sized by different rules because one carries load and the other carries faults.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Can neutral and ground be connected in a subpanel?</summary>
+    <p style="margin-top:10px">No. They are bonded at exactly one point, the main bonding jumper at the service disconnect, or at each separately derived system such as a transformer secondary. Bonding them again in a subpanel puts normal load current onto the equipment grounding conductor and onto every bonded metal enclosure in that path, and interferes with ground-fault protection. NEC 250.6 calls this objectionable current and requires it to be corrected.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why is the neutral bonded to ground at all?</summary>
+    <p style="margin-top:10px">Because that bond is what turns a line-to-enclosure fault into a line-to-neutral fault electrically. Without it, a fault to a metal enclosure would not draw enough current to open the breaker, and the enclosure would simply sit energized. The single bond is what makes overcurrent protection work for ground faults.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Does a ground rod clear a fault?</summary>
+    <p style="margin-top:10px">No. A driven rod may present around 25 ohms to earth, which at 120 V passes only a few amps &mdash; far too little to open a 20 A breaker and more than enough to be lethal. Faults are cleared by the equipment grounding conductor back through metal to the source. The electrode system exists to reference the system to earth and to handle surges.</p>
+  </details>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="data-centers/grounding-bonding.html">grounding and bonding</a> reference covers the hardware, and <a class="inline" href="guide-ground-fault-protection.html">ground-fault protection</a> covers what the EGC makes possible.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/grounding.html">Ground Rod Resistance Calculator</a>Resistance to earth from soil resistivity and rod length.</li>
+        <li><a href="calculators/fault-current.html">Available Fault Current Calculator</a>The current the EGC has to carry at a transformer secondary.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-grounding-bonding-basics.html">Grounding &amp; Bonding Basics</a></li>
+        <li><a href="guide-ground-fault-protection.html">Ground-Fault Protection &amp; NEC 230.95</a></li>
+        <li><a href="guide-arc-flash-boundary-basics.html">Arc-Flash Boundary Basics</a></li>
+        <li><a href="guide-delta-vs-wye.html">Delta vs. Wye Connections</a></li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Ground vs. Neutral: Why They Bond Once and Never Again&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-grid-forming-vs-grid-following.html</p>
+  </details>
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/guide-ground-vs-neutral.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+
+<aside class="provenance" aria-labelledby="prov-h">
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published November 3, 2026.</span></summary>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>The difference between the grounded conductor and the equipment grounding conductor, why they are bonded at exactly one point, what a second bond does to enclosures and to ground-fault protection, how subpanels and separately derived systems are handled, and why the grounding electrode is not a fault-clearing path.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>NEC Article 250, in particular 250.6, 250.24, 250.28, 250.30 and 250.122</li><li>NEC 220.61 for neutral load calculation</li><li>IEEE Std 142 (the Green Book) &mdash; grounding of industrial and commercial power systems</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A design or an inspection. Grounding requirements are enforced by the local authority having jurisdiction, system grounding arrangements vary, and the code edition in force where you are may differ from the sections cited.</dd>
+      <dt>Provenance</dt>
+      <dd>Published November 3, 2026. Written and maintained by the Voltfield editorial team against the sources above. Worked figures in the text are arithmetic the reader can check; nothing here states a measured value.</dd>
+    </dl>
+  </details>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

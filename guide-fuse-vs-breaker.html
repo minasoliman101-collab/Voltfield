@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>Fuse vs. Circuit Breaker Compared | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-fuse-vs-breaker.html">
+<meta name="description" content="Fuse vs. circuit breaker compared: clearing time and current limitation, let-through energy and arc-flash incident energy, selective coordination by ratio against time-current curves, single-phasing, and series ratings.">
+<meta name="keywords" content="fuse vs circuit breaker, current limiting fuse, let through energy, selective coordination, series rating, interrupting rating, AIC, single phasing, UL 248, UL 489">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Fuse vs. Breaker">
+<meta property="og:description" content="Clearing time and current limitation, let-through energy, selective coordination, single-phasing, and where series ratings apply.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta name="twitter:title" content="Fuse vs. Breaker">
+<meta name="twitter:description" content="Clearing time and current limitation, let-through energy, selective coordination, single-phasing, and where series ratings apply.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://voltfield.org/guides.html"},{"@type":"ListItem","position":3,"name":"Fuse vs. Breaker","item":"https://voltfield.org/guide-fuse-vs-breaker.html"}]},{"@type":"Article","headline":"Fuse vs. Circuit Breaker: Clearing Time, Let-Through Energy and Coordination","description":"Fuse vs. circuit breaker compared: clearing time and current limitation, let-through energy and arc-flash incident energy, selective coordination by ratio against time-current curves, single-phasing, and series ratings.","image":"https://voltfield.org/social/social-generic.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-11-03T00:00:00-05:00","dateModified":"2026-11-03T00:00:00-05:00","url":"https://voltfield.org/guide-fuse-vs-breaker.html"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which is better, a fuse or a circuit breaker?","acceptedAnswer":{"@type":"Answer","text":"Neither in general. A current-limiting fuse clears faster, passes far less energy downstream, reaches much higher interrupting ratings and coordinates by a simple ampere ratio. A breaker is resettable, opens all poles together, and can be adjusted. The right choice depends on available fault current, whether selective coordination is required, arc-flash exposure, and how the installation will be operated and maintained."}},{"@type":"Question","name":"What does current-limiting mean?","acceptedAnswer":{"@type":"Answer","text":"A current-limiting fuse clears so quickly, inside the first half cycle, that the fault current never reaches the peak the system could have delivered. That caps the energy passed to downstream equipment, which is what makes series ratings possible and what can substantially reduce arc-flash incident energy."}},{"@type":"Question","name":"Why does a fuse single-phase a motor?","acceptedAnswer":{"@type":"Answer","text":"A fuse protects one phase, so it may be the only one of three that opens. A three-phase induction motor then runs on two phases, drawing heavily unbalanced current, and can overheat and fail. Motor circuits pair fuses with an overload relay that opens all three poles rather than relying on the fuses to do it."}},{"@type":"Question","name":"Can I use a breaker above its interrupting rating?","acceptedAnswer":{"@type":"Answer","text":"Only as part of a tested and marked series combination with a specific upstream device, which is usually a current-limiting fuse that clears before the downstream breaker is exposed to the full fault. The combination is valid only as tested; substituting a different fuse class or breaker voids it, and nothing about the installation will look different afterwards."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in has-photo">
+    <div class="artban-text">
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">Fuse vs. Breaker</span></nav>
+      <div class="eyebrow">Protection</div>
+      <h1>Fuse vs. Circuit Breaker: Clearing Time, Let-Through and Coordination</h1>
+      <p class="dek">Both interrupt a fault. They do it on different timescales, pass different amounts of energy to whatever is downstream, and coordinate with each other by completely different rules. The resettable one is not simply the better one.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published November 3, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+    </div>
+    <figure class="artban-photo">
+      <picture><source srcset="images/parts/dc-air-circuit-breakers.webp" type="image/webp"><img src="images/parts/dc-air-circuit-breakers.jpg" width="340" height="340" alt="A low-voltage air circuit breaker" decoding="async" fetchpriority="high"></picture>
+      <figcaption>Air circuit breaker (illustration)</figcaption>
+    </figure>
+  </div>
+</section>
+<div class="artwrap">
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>A current-limiting fuse can clear inside a quarter cycle. A breaker has a mechanism to move, so it needs cycles.</li>
+      <li>That difference shows up as let-through energy, which sets what downstream equipment has to withstand and drives arc-flash incident energy.</li>
+      <li>Fuses coordinate by ampere ratio, commonly 2:1. Breakers coordinate by overlaying time-current curves, and often do not coordinate at all at high fault current.</li>
+      <li>A fuse opens one phase. A breaker opens all poles. On a three-phase motor that distinction can destroy the motor.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#how-each-one-interrupts">How each one interrupts</a></li>
+      <li><a href="#let-through-energy">Let-through energy</a></li>
+      <li><a href="#interrupting-rating">Interrupting rating</a></li>
+      <li><a href="#selective-coordination">Selective coordination</a></li>
+      <li><a href="#single-phasing-and-practicalities">Single-phasing and practicalities</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+  <h2 id="how-each-one-interrupts">How each one interrupts</h2>
+  <p>A fuse is a calibrated conductor in a sand-filled barrel. Fault current heats the element until it melts and vaporizes, the filler quenches the arc, and the circuit is open. There is no mechanism, nothing to maintain, and nothing to reset. A <b>current-limiting</b> fuse is built so that this happens before the first half cycle has peaked, which means the fault current never reaches the value the system could have delivered.</p>
+  <p>A circuit breaker senses the fault and then operates a mechanism: contacts part, an arc draws across them, and arc chutes cool and extinguish it, usually at the next current zero. Even a fast breaker therefore needs something on the order of one and a half to three cycles to clear, and a breaker with an intentional short delay for coordination needs considerably more.</p>
+  <h2 id="let-through-energy">Let-through energy</h2>
+  <p>Clearing time is not an academic figure. Energy passed into a fault goes as current squared times time, and the equipment downstream has to survive it. A current-limiting fuse clearing in a quarter cycle passes a small fraction of the energy a breaker clearing in three cycles does, against the same available fault current.</p>
+  <p>Two things follow. The first is equipment withstand: a low let-through is what makes a series rating possible, where a downstream device is applied above its own interrupting rating because an upstream current-limiting device will clear first. The second is arc flash. Incident energy in IEEE 1584 scales with duration, so a quarter-cycle clearing device can put a working distance into a far lower PPE category than a breaker on the same bus.</p>
+  <div class="ad-unit" data-ad="incontent"></div>
+  <h2 id="interrupting-rating">Interrupting rating</h2>
+  <p>NEC 110.9 requires any device intended to interrupt a fault to have an interrupting rating at least equal to the available fault current at its terminals. The two technologies sit in different places on that scale.</p>
+  <p>Current-limiting fuses are readily available at 200 to 300 kA. Molded-case breakers typically run 10 to 65 kA depending on the frame and the interrupting class, and reaching higher usually means either a more expensive frame or a tested series combination with an upstream device.</p>
+  <p>The series rating is where this gets misapplied. A series combination is only valid as tested and as marked on the equipment: a specific upstream device with a specific downstream one. Substituting a same-ampere fuse of a different class, or a different breaker of the same frame size, voids it, and nothing on the installation will look different afterwards.</p>
+  <h2 id="selective-coordination">Selective coordination</h2>
+  <p>Selective coordination means the device nearest the fault opens and nothing upstream does. The two technologies achieve it in ways that are not interchangeable.</p>
+  <p>Fuses of the same class coordinate by ampere ratio. For many classes a 2:1 ratio between upstream and downstream ratings is selective across the whole range, including the instantaneous region, and the manufacturer's ratio tables are the authority.</p>
+  <p>Breakers coordinate by time-current curve. In the overload region that usually works. In the instantaneous region it often does not: both devices see the same current and both trip, which is why coordination studies so often end up specifying zone-selective interlocking, short-time delay with no instantaneous, or a current-limiting fuse upstream after all.</p>
+  <p>This matters more than a preference because NEC 700.32, 701.32 and 708.54 require selective coordination for emergency systems, legally required standby and critical operations power systems. Those are design requirements, not recommendations.</p>
+  <h2 id="single-phasing-and-practicalities">Single-phasing and practicalities</h2>
+  <table class="reftable">
+    <tr><th scope="col">Fuse</th><th scope="col">Circuit breaker</th></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">After operating</td></tr>
+    <tr><td>Replaced; the element is consumed</td><td>Reset; the device is reused</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Typical clearing time at high fault current</td></tr>
+    <tr><td>Under a quarter cycle if current-limiting</td><td>Roughly 1.5 to 3 cycles, more with intentional delay</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Poles opened</td></tr>
+    <tr><td>Only the phase that faulted</td><td>All poles together</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Adjustability</td></tr>
+    <tr><td>None; characteristic is fixed by class and rating</td><td>Electronic trip units adjust pickup and delay</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Coordination method</td></tr>
+    <tr><td>Ampere ratio from the manufacturer's tables</td><td>Overlaid time-current curves</td></tr>
+  </table>
+  <p>The single-phasing difference deserves its own note. A fuse protects one phase, so on a three-phase fault it may be the only one that opens. A three-phase induction motor left running on two phases draws heavily unbalanced current and can overheat and fail, which is why motor circuits pair fuses with an overload relay that opens all three poles rather than relying on the fuses alone.</p>
+  <p>The operational trade is mundane but real. Fuses need the right class and rating in stock, and someone who will fit the right one at two in the morning rather than whatever is in the van. Breakers avoid that, and in exchange need periodic exercise, testing and eventually maintenance, because a mechanism that has not moved in fifteen years is not a mechanism anyone should rely on.</p>
+  <h2 id="common-mistakes">Common mistakes</h2>
+  <ul>
+    <li><b>Substituting a non-current-limiting fuse of the same ampere rating.</b> It fits, it carries load, and it silently voids the series rating that made the downstream device legal.</li>
+    <li><b>Coordinating breakers by ampere ratio.</b> That is the fuse rule. Breakers coordinate by curve overlay, and two breakers in a 2:1 ratio commonly both trip on a close-in fault.</li>
+    <li><b>Ignoring single-phasing on motor circuits.</b> Fuses alone do not open all three poles.</li>
+    <li><b>Treating interrupting rating as a nameplate formality.</b> NEC 110.9 is a requirement, and applying a 10 kA device where 22 kA is available is a failure waiting for the fault.</li>
+    <li><b>Adding short-time delay for coordination without rechecking arc flash.</b> Delay is duration, and duration is incident energy. Coordination and arc-flash mitigation pull in opposite directions and have to be settled together.</li>
+  </ul>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Which is better, a fuse or a circuit breaker?</summary>
+    <p style="margin-top:10px">Neither in general. A current-limiting fuse clears faster, passes far less energy downstream, reaches much higher interrupting ratings and coordinates by a simple ampere ratio. A breaker is resettable, opens all poles together, and can be adjusted. The right choice depends on available fault current, whether selective coordination is required, arc-flash exposure, and how the installation will be operated and maintained.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What does current-limiting mean?</summary>
+    <p style="margin-top:10px">A current-limiting fuse clears so quickly, inside the first half cycle, that the fault current never reaches the peak the system could have delivered. That caps the energy passed to downstream equipment, which is what makes series ratings possible and what can substantially reduce arc-flash incident energy.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why does a fuse single-phase a motor?</summary>
+    <p style="margin-top:10px">A fuse protects one phase, so it may be the only one of three that opens. A three-phase induction motor then runs on two phases, drawing heavily unbalanced current, and can overheat and fail. Motor circuits pair fuses with an overload relay that opens all three poles rather than relying on the fuses to do it.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Can I use a breaker above its interrupting rating?</summary>
+    <p style="margin-top:10px">Only as part of a tested and marked series combination with a specific upstream device, which is usually a current-limiting fuse that clears before the downstream breaker is exposed to the full fault. The combination is valid only as tested; substituting a different fuse class or breaker voids it, and nothing about the installation will look different afterwards.</p>
+  </details>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="data-centers/switchgear-components.html">switchgear components</a> reference covers the devices themselves, and <a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">short-circuit studies and coordination</a> covers the study this feeds.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/fault-current.html">Available Fault Current Calculator</a>What the device has to interrupt, from kVA, voltage and %Z.</li>
+        <li><a href="calculators/arc-flash.html">Arc-Flash Incident Energy Calculator</a>How clearing time drives incident energy at a working distance.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-short-circuit-studies-breaker-coordination.html">Short-Circuit Studies &amp; Coordination</a></li>
+        <li><a href="guide-fully-rated-vs-series-rated.html">Fully Rated vs. Series Rated Breakers</a></li>
+        <li><a href="guide-arc-flash-ppe-categories.html">Arc-Flash PPE Categories</a></li>
+        <li><a href="guide-transformer-impedance.html">Transformer Impedance (%Z)</a></li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Fuse vs. Circuit Breaker: Clearing Time, Let-Through and Coordination&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-grid-forming-vs-grid-following.html</p>
+  </details>
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/guide-fuse-vs-breaker.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+
+<aside class="provenance" aria-labelledby="prov-h">
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published November 3, 2026.</span></summary>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>How fuses and circuit breakers interrupt a fault, the clearing times involved, let-through energy and what it means for equipment withstand and arc flash, interrupting and series ratings, the two different approaches to selective coordination, and single-phasing on motor circuits.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>UL 248 for fuses and UL 489 for molded-case circuit breakers</li><li>NEC 110.9 and 110.10 for interrupting rating and circuit impedance, and NEC Article 240 for overcurrent protection</li><li>NEC 700.32, 701.32 and 708.54 for selective coordination requirements</li><li>IEEE Std 1584 for arc-flash incident energy, and IEEE Std 242 (the Buff Book) for protection and coordination</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A coordination or arc-flash study. Device characteristics vary by manufacturer and class, series ratings are valid only as tested and marked, and both coordination and incident energy have to be established for the specific installation.</dd>
+      <dt>Provenance</dt>
+      <dd>Published November 3, 2026. Written and maintained by the Voltfield editorial team against the sources above. Worked figures in the text are arithmetic the reader can check; nothing here states a measured value.</dd>
+    </dl>
+  </details>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

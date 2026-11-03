@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>Delta vs. Wye Connections Explained | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-delta-vs-wye.html">
+<meta name="description" content="Delta vs. wye three-phase connections explained: line and phase voltage, the square root of three, neutrals and grounding, triplen harmonics, Dyn11 vector groups and the 30-degree shift.">
+<meta name="keywords" content="delta vs wye, wye vs delta, three phase connections, delta wye transformer, Dyn11, vector group, line voltage phase voltage, triplen harmonics, 480Y 277">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Delta vs. Wye">
+<meta property="og:description" content="Line and phase voltage, neutrals and grounding, triplen harmonics, and why vector group decides whether two transformers can be paralleled.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta name="twitter:title" content="Delta vs. Wye">
+<meta name="twitter:description" content="Line and phase voltage, neutrals and grounding, triplen harmonics, and why vector group decides whether two transformers can be paralleled.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://voltfield.org/guides.html"},{"@type":"ListItem","position":3,"name":"Delta vs. Wye","item":"https://voltfield.org/guide-delta-vs-wye.html"}]},{"@type":"Article","headline":"Delta vs. Wye: Voltage, Neutrals, Harmonics and the 30-Degree Shift","description":"Delta vs. wye three-phase connections explained: line and phase voltage, the square root of three, neutrals and grounding, triplen harmonics, Dyn11 vector groups and the 30-degree shift.","image":"https://voltfield.org/social/social-generic.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-11-03T00:00:00-05:00","dateModified":"2026-11-03T00:00:00-05:00","url":"https://voltfield.org/guide-delta-vs-wye.html"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the main difference between delta and wye?","acceptedAnswer":{"@type":"Answer","text":"A delta joins three windings in a closed triangle with no common point, so there is no neutral. A wye joins one end of each winding to a common star point, which can be brought out as a neutral and used as a ground reference. Delta has line voltage equal to winding voltage; wye has line voltage 1.732 times winding voltage."}},{"@type":"Question","name":"Does a delta system have a neutral?","acceptedAnswer":{"@type":"Answer","text":"No. A three-wire delta has no neutral and no line-to-neutral voltage. If a ground reference is needed, it has to be created deliberately — by corner-grounding one phase, or by adding a zig-zag or wye-delta grounding transformer to derive an artificial neutral."}},{"@type":"Question","name":"Why are distribution transformers usually delta-wye?","acceptedAnswer":{"@type":"Answer","text":"Two reasons at once. The delta primary keeps triplen harmonics generated downstream circulating inside the winding instead of passing into the utility system. The wye secondary provides the neutral that single-phase loads need and the ground reference that makes ground-fault protection work."}},{"@type":"Question","name":"Can I parallel a delta-wye transformer with a wye-wye one?","acceptedAnswer":{"@type":"Answer","text":"No. A delta-wye connection shifts phase by 30 degrees and a wye-wye does not, so paralleling them drives circulating current between the two units with no load connected. Transformers can only be paralleled when their vector groups match, which is a nameplate check rather than a calculation."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in has-photo">
+    <div class="artban-text">
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">Delta vs. Wye</span></nav>
+      <div class="eyebrow">Transformers</div>
+      <h1>Delta vs. Wye: Three-Phase Connections Explained</h1>
+      <p class="dek">Two ways to connect three windings, and almost every practical difference in a three-phase system follows from which one you picked: whether you have a neutral, what your line-to-ground voltage is, where harmonics go, and whether two transformers can be paralleled at all.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published November 3, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+    </div>
+    <figure class="artban-photo">
+      <picture><source srcset="images/parts/dc-dry-type-cast-resin-transformers.webp" type="image/webp"><img src="images/parts/dc-dry-type-cast-resin-transformers.jpg" width="340" height="340" alt="A dry-type cast-resin transformer" decoding="async" fetchpriority="high"></picture>
+      <figcaption>Dry-type transformer (illustration)</figcaption>
+    </figure>
+  </div>
+</section>
+<div class="artwrap">
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>In delta, line voltage equals winding voltage and line current is the square root of three times winding current. In wye it is the other way round.</li>
+      <li>Wye gives you a neutral and a ground reference. Delta gives you neither, which is why a delta system needs a deliberate grounding scheme.</li>
+      <li>Triplen harmonics circulate inside a delta winding and add up in a wye neutral. That decides whether the neutral needs oversizing.</li>
+      <li>A delta-wye transformer shifts phase by 30 degrees. Two transformers cannot be paralleled unless their vector groups match.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#the-two-connections">The two connections</a></li>
+      <li><a href="#neutrals-and-grounding">Neutrals and grounding</a></li>
+      <li><a href="#harmonics-and-the-neutral">Harmonics and the neutral</a></li>
+      <li><a href="#vector-groups-and-the-30-degree-shift">Vector groups and the 30-degree shift</a></li>
+      <li><a href="#where-each-one-is-used">Where each one is used</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+  <h2 id="the-two-connections">The two connections</h2>
+  <p>Three-phase equipment has three windings. There are only two useful ways to join them. Connect each winding end-to-end in a closed triangle and you have a <b>delta</b>. Connect one end of each to a common point and you have a <b>wye</b>, also called a star. Everything else follows from that choice.</p>
+  <p>The arithmetic matters because it is where most mistakes start. In a delta, each winding sees the full line-to-line voltage, so winding voltage and line voltage are the same number &mdash; but the line current splits between two windings, so line current is 1.732 times the winding current. In a wye, each winding sees line-to-neutral voltage, so line voltage is 1.732 times winding voltage, while line current passes straight through one winding and the two are equal.</p>
+  <h2 id="neutrals-and-grounding">Neutrals and grounding</h2>
+  <p>This is the difference that shows up on a drawing. A wye has a physical fourth point, and bringing it out gives you a neutral: 480Y/277 V means 480 V between any two phases and 277 V from any phase to neutral, which is where the lighting circuits come from. A 480 V delta has three wires and no neutral at all, so there is no line-to-neutral voltage to use and nothing to reference ground to.</p>
+  <p>That absence has to be dealt with deliberately. A delta system is either left ungrounded, corner-grounded on one phase, or given an artificial neutral with a zig-zag or wye-delta grounding transformer. Ungrounded delta keeps running through a first ground fault, which is why it survived in process plants &mdash; and also why the second fault is the one that takes the plant down. The wye neutral, bonded once at the service, is what makes ground-fault current large enough and predictable enough for a protective device to see.</p>
+  <div class="ad-unit" data-ad="incontent"></div>
+  <h2 id="harmonics-and-the-neutral">Harmonics and the neutral</h2>
+  <p>Third-harmonic currents, and their odd multiples, are in phase with each other across all three phases. They are called triplen harmonics, and they behave very differently in the two connections.</p>
+  <p>In a wye with a neutral, triplens do not cancel. They add. A four-wire wye feeding a floor of switch-mode power supplies can carry more current in the neutral than in any phase, which is why NEC 220.61 stops allowing a reduced neutral once the load is largely non-linear, and why data-center panelboards are specified with a 200 percent neutral.</p>
+  <p>In a delta there is nowhere for them to go, so they circulate inside the closed triangle instead of travelling upstream. That is the real reason distribution transformers are usually delta on the primary: the delta winding keeps the triplens generated downstream out of the utility's system.</p>
+  <h2 id="vector-groups-and-the-30-degree-shift">Vector groups and the 30-degree shift</h2>
+  <p>A delta-wye transformer does not just change voltage. It rotates the phase relationship by 30 degrees. That is not a defect and cannot be designed out; it is a consequence of referencing a line-to-line winding on one side and a line-to-neutral winding on the other.</p>
+  <p>The nameplate records it as a vector group: Dyn11 means a delta primary, a wye secondary with the neutral brought out, and the secondary lagging the primary by 30 degrees. The number is a clock position, not a count. Dy1 and Dy11 are both delta-wye and they are 60 degrees apart.</p>
+  <p>The practical consequence is paralleling. Two transformers can share a bus only if their vector groups match. Put a Dyn11 in parallel with a Dyn1 and the 60-degree difference drives circulating current between them with no load connected at all. This is the single most expensive thing on this page to get wrong, and it is a nameplate check, not a calculation.</p>
+  <h2 id="where-each-one-is-used">Where each one is used</h2>
+  <table class="reftable">
+    <tr><th scope="col">Delta</th><th scope="col">Wye</th></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Neutral available</td></tr>
+    <tr><td>No</td><td>Yes, if the star point is brought out</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Line vs winding voltage</td></tr>
+    <tr><td>Equal</td><td>Line is 1.732 &times; winding</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Line vs winding current</td></tr>
+    <tr><td>Line is 1.732 &times; winding</td><td>Equal</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Triplen harmonics</td></tr>
+    <tr><td>Circulate within the winding</td><td>Add in the neutral</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Typically used for</td></tr>
+    <tr><td>Transformer primaries, motor windings, generator stators where no neutral is wanted</td><td>Distribution secondaries, anywhere single-phase loads or a ground reference are needed</td></tr>
+  </table>
+  <p>The common distribution transformer is delta on the primary and wye on the secondary for both reasons at once: the delta keeps downstream harmonics contained, and the wye secondary provides the neutral and the ground reference the premises wiring needs.</p>
+  <p>One variant worth knowing: an <b>open delta</b> runs on two transformers instead of three. It will deliver three-phase power, but only about 57.7 percent of the capacity the same two units would give in another configuration, and with unbalanced regulation. It exists as a way to restore service after a unit fails, not as a design.</p>
+  <h2 id="common-mistakes">Common mistakes</h2>
+  <ul>
+    <li><b>Expecting a neutral on a delta.</b> There is no line-to-neutral voltage on a three-wire delta. A 480 V delta cannot feed a 277 V load, whatever the panel schedule says.</li>
+    <li><b>Paralleling across vector groups.</b> Dyn1 and Dyn11 look interchangeable on a one-line and are 60 degrees apart. Check the nameplate before the bus is tied.</li>
+    <li><b>Reducing the neutral on a four-wire wye.</b> Fine on linear load, wrong on non-linear load, where triplens can push neutral current above phase current.</li>
+    <li><b>Applying the square root of three in the wrong place.</b> It belongs on voltage in a wye and on current in a delta. Using it on both, or neither, is the usual source of an answer off by 73 percent.</li>
+    <li><b>Treating an ungrounded delta as safe because it rides through a fault.</b> It rides through the first one. The point of a ground-detection scheme is to find it before the second.</li>
+  </ul>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the main difference between delta and wye?</summary>
+    <p style="margin-top:10px">A delta joins three windings in a closed triangle with no common point, so there is no neutral. A wye joins one end of each winding to a common star point, which can be brought out as a neutral and used as a ground reference. Delta has line voltage equal to winding voltage; wye has line voltage 1.732 times winding voltage.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Does a delta system have a neutral?</summary>
+    <p style="margin-top:10px">No. A three-wire delta has no neutral and no line-to-neutral voltage. If a ground reference is needed, it has to be created deliberately &mdash; by corner-grounding one phase, or by adding a zig-zag or wye-delta grounding transformer to derive an artificial neutral.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why are distribution transformers usually delta-wye?</summary>
+    <p style="margin-top:10px">Two reasons at once. The delta primary keeps triplen harmonics generated downstream circulating inside the winding instead of passing into the utility system. The wye secondary provides the neutral that single-phase loads need and the ground reference that makes ground-fault protection work.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Can I parallel a delta-wye transformer with a wye-wye one?</summary>
+    <p style="margin-top:10px">No. A delta-wye connection shifts phase by 30 degrees and a wye-wye does not, so paralleling them drives circulating current between the two units with no load connected. Transformers can only be paralleled when their vector groups match, which is a nameplate check rather than a calculation.</p>
+  </details>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="data-centers/transformers.html">data center transformers</a> reference covers the families this applies to, and <a class="inline" href="guide-transformer-nameplate.html">how to read a transformer nameplate</a> covers where the vector group is written.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/kva-to-amps.html">kVA to Amps Calculator</a>Full-load amps on either winding, with no power factor term.</li>
+        <li><a href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a>A kW load to the kVA rating and the nearest standard nameplate.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-transformer-nameplate.html">How to Read a Transformer Nameplate</a></li>
+        <li><a href="guide-grounding-bonding-basics.html">Grounding &amp; Bonding Basics</a></li>
+        <li><a href="guide-harmonics-ieee-519.html">Harmonics &amp; IEEE 519 Limits</a></li>
+        <li><a href="guide-pad-mount-vs-gsu-transformers.html">Pad-Mount vs. GSU Transformers</a></li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Delta vs. Wye: Three-Phase Connections Explained&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-grid-forming-vs-grid-following.html</p>
+  </details>
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/guide-delta-vs-wye.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+
+<aside class="provenance" aria-labelledby="prov-h">
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published November 3, 2026.</span></summary>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>How delta and wye connections differ, the relationship between line and winding voltage and current, what a neutral gives you and what a delta system needs instead, how triplen harmonics behave in each, vector groups and the 30-degree shift, and why vector group governs paralleling.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>ANSI/IEEE C57.12.00 &mdash; general requirements for liquid-immersed distribution and power transformers</li><li>ANSI/IEEE C57.12.70 &mdash; terminal markings and connections</li><li>IEC 60076-1 &mdash; power transformers, general, for vector group notation</li><li>NEC Article 250 for grounding and bonding, and NEC 220.61 for neutral load</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A transformer specification or a protection study. Grounding scheme selection depends on the system, the loads and the local authority, and paralleling requires checking impedance and tap range as well as vector group.</dd>
+      <dt>Provenance</dt>
+      <dd>Published November 3, 2026. Written and maintained by the Voltfield editorial team against the sources above. Worked figures in the text are arithmetic the reader can check; nothing here states a measured value.</dd>
+    </dl>
+  </details>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

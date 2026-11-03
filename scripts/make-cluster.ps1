@@ -8,7 +8,7 @@
 # ANSI, so a literal em-dash in this file becomes mojibake in the output. HTML
 # entities are converted to real characters at runtime instead.
 $ErrorActionPreference = 'Stop'
-$root = 'C:\Users\minas\AppData\Local\Temp\claude\C--Users-minas-Desktop\57cb7386-2fb4-45d2-b459-f0af4d0e9662\scratchpad\Voltfield'
+$root = Split-Path -Parent $PSScriptRoot
 $bodies = Join-Path $root 'scripts\category-bodies'
 
 function Unent([string]$t){
