@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>Rack Power Density Explained | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-rack-power-density.html">
+<meta name="description" content="Rack power density explained: average against design against nameplate, sizing rack circuits at 208 V and 415 V, diversity, dual-corded A and B feeds, and why provisioned capacity gets stranded.">
+<meta name="keywords" content="rack power density, kw per rack, rack circuit sizing, nameplate vs actual power, stranded capacity data center, dual corded rack, 415V rack distribution, diversity factor">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Rack Power Density">
+<meta property="og:description" content="Average against design against nameplate, rack circuit sizing, and why provisioned capacity ends up stranded.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta name="twitter:title" content="Rack Power Density">
+<meta name="twitter:description" content="Average against design against nameplate, rack circuit sizing, and why provisioned capacity ends up stranded.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://voltfield.org/guides.html"},{"@type":"ListItem","position":3,"name":"Rack Power Density","item":"https://voltfield.org/guide-rack-power-density.html"}]},{"@type":"Article","headline":"Rack Power Density: Average, Design and Nameplate, and the Capacity That Gets Stranded","description":"Rack power density explained: average against design against nameplate, sizing rack circuits at 208 V and 415 V, diversity, dual-corded A and B feeds, and why provisioned capacity gets stranded.","image":"https://voltfield.org/social/social-generic.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-11-03T00:00:00-05:00","dateModified":"2026-11-03T00:00:00-05:00","url":"https://voltfield.org/guide-rack-power-density.html"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is rack power density?","acceptedAnswer":{"@type":"Answer","text":"The IT load a rack draws or is provisioned for, in kilowatts. It appears as three different figures that get used interchangeably: average density, which is total load divided by rack count; design density, which is what a given position is provisioned to support; and nameplate, which is the sum of equipment power supply ratings and usually well above actual draw."}},{"@type":"Question","name":"What size circuit does a 10 kW rack need?","acceptedAnswer":{"@type":"Answer","text":"At 208 V three-phase a 10 kW rack draws about 27.8 A, and because IT load is continuous the circuit is sized at 125 percent of that, so a 40 A circuit. The same rack on 415 V three-phase draws about 13.9 A and needs a 20 A circuit, which is why higher-voltage distribution is standard in large halls."}},{"@type":"Question","name":"Should each of the A and B feeds be sized for half the load?","acceptedAnswer":{"@type":"Answer","text":"No. Both are sized for the full design density. Load divides between them in normal operation, but the purpose of two independent feeds is that either can be taken out of service or lost, and the surviving one then carries the entire rack. This is why a dual-path facility provisions roughly twice the distribution capacity of its IT load."}},{"@type":"Question","name":"What is stranded capacity?","acceptedAnswer":{"@type":"Answer","text":"Power that has been provisioned and paid for but cannot be used. It happens when cooling cannot remove the heat the electrical system could deliver, when the branch circuits in a rack are too small to carry additional load even though upstream capacity exists, or most commonly when circuits were provisioned from equipment nameplate ratings rather than measured draw."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in has-photo">
+    <div class="artban-text">
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">Rack Power Density</span></nav>
+      <div class="eyebrow">Data Centers</div>
+      <h1>Rack Power Density: Designing and Provisioning It</h1>
+      <p class="dek">Density is three different numbers that all get called one thing. Confusing them is how a room ends up with power it cannot deliver to the racks that need it, and circuits sized for a load nothing ever draws.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published November 3, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+    </div>
+    <figure class="artban-photo">
+      <picture><source srcset="images/parts/dc-rack-pdus.webp" type="image/webp"><img src="images/parts/dc-rack-pdus.jpg" width="340" height="340" alt="Rack power distribution units" decoding="async" fetchpriority="high"></picture>
+      <figcaption>Rack PDUs (illustration)</figcaption>
+    </figure>
+  </div>
+</section>
+<div class="artwrap">
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>Average density is total IT load divided by rack count. Nothing is designed to it, because the load is never spread evenly.</li>
+      <li>Nameplate is the sum of power supply ratings and typically runs well above actual draw. Provisioning to nameplate strands capacity.</li>
+      <li>A 10 kW rack draws about 28 A at 208 V three-phase, needing a 40 A circuit at 125 percent. The same rack at 415 V needs half that.</li>
+      <li>Dual-corded equipment means each of the A and B feeds carries the full load when the other is out, so both are sized for all of it.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 6 sections</summary>
+    <ol>
+      <li><a href="#three-numbers-one-word">Three numbers, one word</a></li>
+      <li><a href="#sizing-the-rack-circuit">Sizing the rack circuit</a></li>
+      <li><a href="#dual-corded-feeds">Dual-corded feeds</a></li>
+      <li><a href="#diversity-and-stranded-capacity">Diversity and stranded capacity</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+  <h2 id="three-numbers-one-word">Three numbers, one word</h2>
+  <p><b>Average density</b> is arithmetic: total IT load divided by the number of racks. A 1.2 MW hall across 150 racks averages 8 kW. It is a useful planning figure and nothing is ever designed to it.</p>
+  <p><b>Design density</b> is what a given rack position is provisioned to support. It varies across the floor deliberately, because the load does. Put ten 40 kW AI racks in that same 1.2 MW hall and they consume 400 kW between them, leaving under 6 kW each for the remaining 140 &mdash; so the room needs at least two design densities, and the drawing has to say which positions are which.</p>
+  <p><b>Nameplate</b> is the sum of what the equipment labels claim. It is the least useful of the three and the most often used, because it is the only one available before anything is installed. A dual-supply server with two 1600 W supplies has a 3200 W nameplate, draws perhaps 700 W at typical utilisation, and will never draw more than 1600 W on either cord because the second is redundant.</p>
+  <h2 id="sizing-the-rack-circuit">Sizing the rack circuit</h2>
+  <p>Once a design density is fixed, the branch circuit follows from it. At 208 V three-phase a rack drawing its full design load needs:</p>
+  <table class="reftable">
+    <tr><th scope="col">Design density</th><th scope="col">208 V 3-phase</th><th scope="col">415 V 3-phase</th></tr>
+    <tr><td>5 kW</td><td>13.9 A &rarr; 20 A circuit</td><td>7.0 A &rarr; 15 A circuit</td></tr>
+    <tr><td>10 kW</td><td>27.8 A &rarr; 40 A circuit</td><td>13.9 A &rarr; 20 A circuit</td></tr>
+    <tr><td>15 kW</td><td>41.6 A &rarr; 60 A circuit</td><td>20.9 A &rarr; 30 A circuit</td></tr>
+    <tr><td>20 kW</td><td>55.5 A &rarr; 70 A circuit</td><td>27.8 A &rarr; 40 A circuit</td></tr>
+  </table>
+  <p>Circuit ratings allow for the 125 percent continuous-load factor, since IT load is continuous by any definition; the <a class="inline" href="calculators/kw-to-amps.html">kW to amps calculator</a> gives the current and the <a class="inline" href="calculators/wire-size.html">wire size calculator</a> the conductor. The 415 V column is the reason 415/240 V distribution became standard in large halls: the same density at roughly half the current means less copper, fewer circuits and less transformation loss.</p>
+  <div class="ad-unit" data-ad="incontent"></div>
+  <h2 id="dual-corded-feeds">Dual-corded feeds</h2>
+  <p>IT equipment in a concurrently maintainable or fault tolerant facility is dual-corded, drawing from independent A and B feeds. The arithmetic trap is in what each feed has to carry.</p>
+  <p>In normal operation the load divides between the two, so each cord sees roughly half. But the whole point of the arrangement is that either path can be lost &mdash; for planned work or a failure &mdash; and when that happens the surviving feed carries the entire rack. Both feeds, both PDUs, both upstream paths and both sets of conductors are therefore sized for the full design density, not half of it.</p>
+  <p>That is why a dual-path facility provisions roughly twice the distribution capacity of its IT load, and why monitoring a rack at 45 percent on each feed is the normal, healthy reading rather than evidence of waste. <a class="inline" href="guide-uptime-institute-tiers.html">The Uptime Institute tiers</a> describe the topology this supports.</p>
+  <h2 id="diversity-and-stranded-capacity">Diversity and stranded capacity</h2>
+  <p>Racks do not all peak together, and a diversity factor acknowledges that: the sum of design densities across a hall exceeds what the hall will ever draw at once. Applying diversity upstream &mdash; sizing the UPS and the transformer below the sum of the branch circuits &mdash; is normal and necessary, because provisioning for simultaneous peaks on every rack would double the plant.</p>
+  <p>The failure mode in the other direction is <b>stranded capacity</b>: power that has been paid for, is sitting in the plant, and cannot be used. It happens in three recognisable ways.</p>
+  <ul>
+    <li><b>Cooling-limited.</b> The electrical system can deliver 15 kW to a position the air handling can only cool to 8. Above roughly 20 to 30 kW per rack this becomes the binding constraint &mdash; <a class="inline" href="guide-liquid-vs-air-cooling.html">liquid vs air cooling</a> covers where that line sits and what crosses it.</li>
+    <li><b>Circuit-limited.</b> Capacity exists upstream but the rack has 20 A circuits in it. Adding density means re-pulling branch circuits, often in an occupied hall.</li>
+    <li><b>Provisioned to nameplate.</b> Circuits sized for 3200 W of labelled supplies feeding 700 W of actual draw. The capacity is committed in the records and idle in reality, and this is the most common form by a wide margin.</li>
+  </ul>
+  <h2 id="common-mistakes">Common mistakes</h2>
+  <ul>
+    <li><b>Designing to average density.</b> It describes the room, not any position in it, and a single high-density row invalidates it.</li>
+    <li><b>Provisioning from nameplate.</b> It overstates draw substantially and strands capacity in the capacity-management records rather than in the plant.</li>
+    <li><b>Sizing dual feeds at half load each.</b> Either feed must carry the whole rack, which is the entire purpose of having two.</li>
+    <li><b>Reading 45 percent utilisation on an A feed as waste.</b> In a dual-path design that is the correct number.</li>
+    <li><b>Treating power and cooling density as one figure.</b> They are provisioned by different systems and the lower one governs what the position can actually hold.</li>
+  </ul>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is rack power density?</summary>
+    <p style="margin-top:10px">The IT load a rack draws or is provisioned for, in kilowatts. It appears as three different figures that get used interchangeably: average density, which is total load divided by rack count; design density, which is what a given position is provisioned to support; and nameplate, which is the sum of equipment power supply ratings and usually well above actual draw.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What size circuit does a 10 kW rack need?</summary>
+    <p style="margin-top:10px">At 208 V three-phase a 10 kW rack draws about 27.8 A, and because IT load is continuous the circuit is sized at 125 percent of that, so a 40 A circuit. The same rack on 415 V three-phase draws about 13.9 A and needs a 20 A circuit, which is why higher-voltage distribution is standard in large halls.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Should each of the A and B feeds be sized for half the load?</summary>
+    <p style="margin-top:10px">No. Both are sized for the full design density. Load divides between them in normal operation, but the purpose of two independent feeds is that either can be taken out of service or lost, and the surviving one then carries the entire rack. This is why a dual-path facility provisions roughly twice the distribution capacity of its IT load.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is stranded capacity?</summary>
+    <p style="margin-top:10px">Power that has been provisioned and paid for but cannot be used. It happens when cooling cannot remove the heat the electrical system could deliver, when the branch circuits in a rack are too small to carry additional load even though upstream capacity exists, or most commonly when circuits were provisioned from equipment nameplate ratings rather than measured draw.</p>
+  </details>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="data-centers/power-distribution.html">power distribution</a> reference covers the PDUs and busway this runs through, and <a class="inline" href="guide-liquid-vs-air-cooling.html">liquid vs air cooling</a> covers the thermal limit that usually binds before the electrical one.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/kw-to-amps.html">kW to Amps Calculator</a>Rack current at 208 V or 415 V, with the 125 percent figure.</li>
+        <li><a href="calculators/wire-size.html">Wire Size Calculator</a>The branch-circuit conductor for that current.</li>
+        <li><a href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a>The upstream kVA once diversity is applied.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-liquid-vs-air-cooling.html">Liquid vs. Air Cooling for AI Racks</a></li>
+        <li><a href="guide-415v-vs-480v-distribution.html">415 V vs. 480 V Distribution</a></li>
+        <li><a href="guide-uptime-institute-tiers.html">Uptime Institute Tiers Explained</a></li>
+        <li><a href="guide-pue-explained.html">PUE Explained</a></li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Rack Power Density: Designing and Provisioning It&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-grid-forming-vs-grid-following.html</p>
+  </details>
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/guide-rack-power-density.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+
+<aside class="provenance" aria-labelledby="prov-h">
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published November 3, 2026.</span></summary>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>The difference between average, design and nameplate density, branch-circuit sizing at 208 V and 415 V with the continuous-load factor, why both feeds of a dual-corded rack carry the full load, diversity applied upstream, and the three ways provisioned capacity gets stranded.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>NEC 210.19(A) and 215.2 for the continuous-load factor applied to the circuit figures</li><li>ASHRAE thermal guidelines for the cooling limit that usually binds first</li><li>Voltfield’s own guides on liquid cooling, 415 V distribution and facility topology</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A capacity plan or an electrical design. The circuit figures are arithmetic from the stated voltages and are subject to the termination and derating rules in NEC 110.14(C) and 310.15; diversity factors are site-specific and the cooling limit depends on the containment and air-handling design.</dd>
+      <dt>Provenance</dt>
+      <dd>Published November 3, 2026. Written and maintained by the Voltfield editorial team against the sources above. Worked figures in the text are arithmetic the reader can check; nothing here states a measured value.</dd>
+    </dl>
+  </details>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

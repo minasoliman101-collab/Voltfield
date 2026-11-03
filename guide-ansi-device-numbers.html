@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>ANSI Device Numbers Explained | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-ansi-device-numbers.html">
+<meta name="description" content="ANSI device numbers explained: the common IEEE C37.2 function numbers including 50, 51, 87 and 86, how suffix letters like G, N and T narrow them, and what 52a and 52b auxiliary contacts actually mean.">
+<meta name="keywords" content="ANSI device numbers, IEEE C37.2, device function numbers, relay 50 51 87, 52a 52b, 51G, 87T, 86 lockout relay, protection one line symbols">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="ANSI Device Numbers">
+<meta property="og:description" content="The common function numbers, how suffixes narrow them, and the 52a / 52b auxiliary contact convention.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta name="twitter:title" content="ANSI Device Numbers">
+<meta name="twitter:description" content="The common function numbers, how suffixes narrow them, and the 52a / 52b auxiliary contact convention.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://voltfield.org/guides.html"},{"@type":"ListItem","position":3,"name":"ANSI Device Numbers","item":"https://voltfield.org/guide-ansi-device-numbers.html"}]},{"@type":"Article","headline":"ANSI Device Numbers: Reading 50, 51, 87 and the Suffix System","description":"ANSI device numbers explained: the common IEEE C37.2 function numbers including 50, 51, 87 and 86, how suffix letters like G, N and T narrow them, and what 52a and 52b auxiliary contacts actually mean.","image":"https://voltfield.org/social/social-generic.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-11-03T00:00:00-05:00","dateModified":"2026-11-03T00:00:00-05:00","url":"https://voltfield.org/guide-ansi-device-numbers.html"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What do ANSI device numbers 50, 51 and 87 mean?","acceptedAnswer":{"@type":"Answer","text":"50 is instantaneous overcurrent, 51 is time overcurrent, and 87 is differential protection. They come from IEEE C37.2, which assigns a number to each device function so that one-line diagrams and relay schedules can reference functions without prose. Written together as 50/51 they mean the instantaneous and time elements of the same overcurrent protection."}},{"@type":"Question","name":"What is the difference between 52a and 52b?","acceptedAnswer":{"@type":"Answer","text":"Device 52 is the AC circuit breaker. A 52a auxiliary contact follows the breaker, closed when the breaker is closed. A 52b contact is the opposite, closed when the breaker is open. The trip coil is wired through a 52a so it cannot be energised on an already-open breaker; the close circuit uses a 52b. Swapping them produces a breaker that will not trip, and the symptom looks like a control-logic fault."}},{"@type":"Question","name":"What do the suffix letters on device numbers mean?","acceptedAnswer":{"@type":"Answer","text":"They narrow the function to what it is applied to. G is ground, N is neutral, T is transformer, B is bus, L is line and M is motor. So 51G is ground time overcurrent, 87T is transformer differential and 87B is bus differential. A prefix number distinguishes several identical devices, as in 1-51 and 2-51."}},{"@type":"Question","name":"Is one device number one relay?","acceptedAnswer":{"@type":"Answer","text":"Not any more. In electromechanical panels each number was a separate relay, so the number and the hardware matched. A modern multifunction relay performs dozens of functions at once, and the one-line still shows each separately because the drawing is describing the protection scheme rather than the equipment list."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in has-photo">
+    <div class="artban-text">
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">ANSI Device Numbers</span></nav>
+      <div class="eyebrow">Protection</div>
+      <h1>ANSI Device Numbers: Reading 50, 51, 87 and the Rest</h1>
+      <p class="dek">The two-digit codes on every protection one-line are IEEE C37.2 device function numbers. Learning twenty of them, plus how the suffixes work, makes a relay schedule readable &mdash; and explains why 52a and 52b are the two that catch people out.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published November 3, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+    </div>
+    <figure class="artban-photo">
+      <picture><source srcset="images/parts/dc-protective-relays.webp" type="image/webp"><img src="images/parts/dc-protective-relays.jpg" width="340" height="340" alt="Protective relays in a switchgear panel" decoding="async" fetchpriority="high"></picture>
+      <figcaption>Protective relays (illustration)</figcaption>
+    </figure>
+  </div>
+</section>
+<div class="artwrap">
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>The numbers come from IEEE C37.2 and name a protective function, not a product. One modern relay performs dozens of them.</li>
+      <li>50 is instantaneous overcurrent, 51 is time overcurrent, 87 is differential. Those three cover most of what appears on a one-line.</li>
+      <li>Suffix letters narrow the function: G for ground, N for neutral, T for transformer, B for bus. 51G is ground time overcurrent.</li>
+      <li>52 is the circuit breaker itself. 52a follows the breaker, 52b opposes it, and mixing them up is a wiring error that looks like a logic fault.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#what-the-numbers-are">What the numbers are</a></li>
+      <li><a href="#the-ones-worth-knowing">The ones worth knowing</a></li>
+      <li><a href="#suffixes-and-combinations">Suffixes and combinations</a></li>
+      <li><a href="#the-52a-and-52b-trap">The 52a and 52b trap</a></li>
+      <li><a href="#reading-a-one-line-with-them">Reading a one-line with them</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+  <h2 id="what-the-numbers-are">What the numbers are</h2>
+  <p>IEEE C37.2 assigns a number to each device function in a power system, so a one-line diagram, a relay schedule and a protection setting sheet can all refer to the same thing without prose. They are universally called ANSI device numbers, from the standard’s earlier designation, and the usage has not changed.</p>
+  <p>The important thing about them is that they name a <i>function</i>, not a box. A 1960s panel had one electromechanical relay per number, so the number and the hardware matched. A modern multifunction relay performs 50, 51, 51G, 46, 49, 27, 59, 81 and more simultaneously, and the one-line still shows each function separately because the protection scheme is what the drawing is describing.</p>
+  <h2 id="the-ones-worth-knowing">The ones worth knowing</h2>
+  <table class="reftable">
+    <tr><th scope="col">Number</th><th scope="col">Function</th></tr>
+    <tr><td><b>21</b></td><td>Distance &mdash; trips on impedance, used for transmission line protection</td></tr>
+    <tr><td><b>25</b></td><td>Synchronising or sync-check &mdash; permits closing only when two sources are in step</td></tr>
+    <tr><td><b>27</b></td><td>Undervoltage</td></tr>
+    <tr><td><b>32</b></td><td>Directional power &mdash; commonly reverse power on a generator</td></tr>
+    <tr><td><b>46</b></td><td>Phase balance, or negative-sequence current &mdash; catches single-phasing and unbalance</td></tr>
+    <tr><td><b>49</b></td><td>Thermal &mdash; machine or transformer overtemperature</td></tr>
+    <tr><td><b>50</b></td><td>Instantaneous overcurrent</td></tr>
+    <tr><td><b>51</b></td><td>Time overcurrent</td></tr>
+    <tr><td><b>52</b></td><td>AC circuit breaker</td></tr>
+    <tr><td><b>59</b></td><td>Overvoltage</td></tr>
+    <tr><td><b>63</b></td><td>Pressure &mdash; the sudden-pressure relay on a liquid-filled transformer</td></tr>
+    <tr><td><b>64</b></td><td>Ground detector</td></tr>
+    <tr><td><b>67</b></td><td>Directional overcurrent</td></tr>
+    <tr><td><b>81</b></td><td>Frequency, over or under</td></tr>
+    <tr><td><b>86</b></td><td>Lockout relay &mdash; latches a trip until deliberately reset</td></tr>
+    <tr><td><b>87</b></td><td>Differential</td></tr>
+  </table>
+  <p>That is sixteen of roughly a hundred, and it will read most industrial and data-centre one-lines. The standard itself is the authority for the rest, including the device numbers used for specific machine and station functions.</p>
+  <div class="ad-unit" data-ad="incontent"></div>
+  <h2 id="suffixes-and-combinations">Suffixes and combinations</h2>
+  <p>A bare number is often too broad, so C37.2 provides suffix letters that say what the function is applied to. The common ones are <b>G</b> for ground, <b>N</b> for neutral, <b>T</b> for transformer, <b>B</b> for bus, <b>L</b> for line and <b>M</b> for motor.</p>
+  <p>So <b>51G</b> is ground time overcurrent, <b>87T</b> is transformer differential, <b>87B</b> is bus differential, and <b>50/51</b> written together means the instantaneous and time elements of the same overcurrent protection &mdash; which is how overcurrent protection is almost always specified, the instantaneous element handling close-in faults and the time element providing coordination.</p>
+  <p>Where several identical devices exist, a prefix number distinguishes them: 1-51 and 2-51 are two separate time-overcurrent functions. And the difference between G and N is worth knowing, because they are not the same measurement: a G suffix generally refers to a function fed from a ground-sensing arrangement such as a residual or window CT, while N refers to one fed from the neutral conductor. On a drawing they look interchangeable and in the current they are not.</p>
+  <h2 id="the-52a-and-52b-trap">The 52a and 52b trap</h2>
+  <p>Device 52 is the circuit breaker, and its auxiliary contacts carry the two suffixes most likely to cause a real problem.</p>
+  <p>A <b>52a</b> contact follows the breaker: closed when the breaker is closed, open when it is open. A <b>52b</b> contact does the opposite: closed when the breaker is open. The letters are not arbitrary and they are not a manufacturer convention &mdash; they are the standard, and every schematic assumes them.</p>
+  <p>They matter because the trip coil is wired through a 52a: there is no reason to energise a trip coil on an already-open breaker, and leaving it energised would burn it out. The close circuit is wired through a 52b for the mirror-image reason. Swap them and the breaker will refuse to trip, or will trip and immediately attempt to reclose, and the symptom presents as a control-logic fault rather than as two wires in the wrong terminals.</p>
+  <h2 id="reading-a-one-line-with-them">Reading a one-line with them</h2>
+  <p>In practice the numbers cluster in recognisable patterns, and recognising the pattern is faster than decoding each number.</p>
+  <p>A transformer protection package is typically <b>87T</b> differential, <b>50/51</b> on each side for backup overcurrent, <b>51G</b> for ground faults, <b>49</b> and <b>63</b> from the transformer’s own thermal and pressure devices, all collected into an <b>86</b> lockout so that a transformer trip stays tripped until somebody has looked at it.</p>
+  <p>A generator package adds <b>32</b> reverse power, <b>40</b> loss of field, <b>46</b> negative sequence and <b>25</b> sync-check. A motor feeder is usually <b>50/51</b>, <b>49</b> or <b>51</b> as overload, <b>46</b> for single-phasing and <b>27</b> for undervoltage. An incoming utility feeder carries <b>27</b>, <b>59</b>, <b>81</b> and often <b>67</b> directional overcurrent where the service can backfeed.</p>
+  <h2 id="common-mistakes">Common mistakes</h2>
+  <ul>
+    <li><b>Reading a number as a device.</b> One multifunction relay provides many numbers; one number does not imply one box to buy.</li>
+    <li><b>Swapping 52a and 52b.</b> The classic control-wiring error, and the symptom looks like a logic problem rather than a wiring one.</li>
+    <li><b>Treating 51G and 51N as the same function.</b> Different source of current, different sensitivity, and they do not detect the same faults equally.</li>
+    <li><b>Omitting 86 and wiring trips directly.</b> Without a lockout, a transformer or bus trip can be reclosed onto a fault by someone who did not know why it opened.</li>
+    <li><b>Specifying 50 without coordination.</b> An instantaneous element set too low defeats selective coordination with everything downstream of it.</li>
+  </ul>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What do ANSI device numbers 50, 51 and 87 mean?</summary>
+    <p style="margin-top:10px">50 is instantaneous overcurrent, 51 is time overcurrent, and 87 is differential protection. They come from IEEE C37.2, which assigns a number to each device function so that one-line diagrams and relay schedules can reference functions without prose. Written together as 50/51 they mean the instantaneous and time elements of the same overcurrent protection.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the difference between 52a and 52b?</summary>
+    <p style="margin-top:10px">Device 52 is the AC circuit breaker. A 52a auxiliary contact follows the breaker, closed when the breaker is closed. A 52b contact is the opposite, closed when the breaker is open. The trip coil is wired through a 52a so it cannot be energised on an already-open breaker; the close circuit uses a 52b. Swapping them produces a breaker that will not trip, and the symptom looks like a control-logic fault.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What do the suffix letters on device numbers mean?</summary>
+    <p style="margin-top:10px">They narrow the function to what it is applied to. G is ground, N is neutral, T is transformer, B is bus, L is line and M is motor. So 51G is ground time overcurrent, 87T is transformer differential and 87B is bus differential. A prefix number distinguishes several identical devices, as in 1-51 and 2-51.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Is one device number one relay?</summary>
+    <p style="margin-top:10px">Not any more. In electromechanical panels each number was a separate relay, so the number and the hardware matched. A modern multifunction relay performs dozens of functions at once, and the one-line still shows each separately because the drawing is describing the protection scheme rather than the equipment list.</p>
+  </details>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="data-centers/switchgear-components.html">switchgear components</a> reference covers the relays and trip units themselves, and <a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">short-circuit studies and coordination</a> covers what the settings behind these numbers are chosen against.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/fault-current.html">Available Fault Current Calculator</a>The current these elements are set against.</li>
+        <li><a href="calculators/arc-flash.html">Arc-Flash Incident Energy Calculator</a>How clearing time, and therefore the settings, drive incident energy.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-short-circuit-studies-breaker-coordination.html">Short-Circuit Studies &amp; Coordination</a></li>
+        <li><a href="guide-fuse-vs-breaker.html">Fuse vs. Circuit Breaker Compared</a></li>
+        <li><a href="guide-ground-fault-protection.html">Ground-Fault Protection &amp; NEC 230.95</a></li>
+        <li><a href="guide-switchgear-compartments.html">Metal-Clad vs. Metal-Enclosed Switchgear</a></li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;ANSI Device Numbers: Reading 50, 51, 87 and the Rest&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-grid-forming-vs-grid-following.html</p>
+  </details>
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/guide-ansi-device-numbers.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+
+<aside class="provenance" aria-labelledby="prov-h">
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published November 3, 2026.</span></summary>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>What IEEE C37.2 device function numbers are, sixteen of the commonly used ones, how suffix letters and prefix numbers narrow and distinguish them, the 52a and 52b auxiliary contact convention and why it matters in trip and close circuits, and the recognisable protection packages these numbers form on a one-line.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>IEEE Std C37.2 &mdash; standard for electrical power system device function numbers, acronyms and contact designations</li><li>IEEE Std 242 (the Buff Book) for protection and coordination practice</li><li>IEEE Std C37.91 for transformer protection packages</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A substitute for IEEE C37.2. Sixteen numbers of roughly a hundred are listed to make a drawing readable; the standard governs, including the numbers and suffixes not covered here, and relay settings are a study rather than a lookup.</dd>
+      <dt>Provenance</dt>
+      <dd>Published November 3, 2026. Written and maintained by the Voltfield editorial team against the sources above. Worked figures in the text are arithmetic the reader can check; nothing here states a measured value.</dd>
+    </dl>
+  </details>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>Uptime Institute Tiers Explained | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-uptime-institute-tiers.html">
+<meta name="description" content="Uptime Institute Tiers I to IV explained: redundant capacity, concurrent maintainability, fault tolerance, the three certification awards, and why the familiar 99.982 percent availability figures are not in the Tier Standard.">
+<meta name="keywords" content="uptime institute tiers, tier 3 data center, tier iii vs tier iv, concurrently maintainable, fault tolerant data center, tier certification, tier standard topology, data center redundancy levels">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Uptime Institute Tiers">
+<meta property="og:description" content="What each tier defines, why certification is not the same as a design claim, and where the availability percentages came from.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta name="twitter:title" content="Uptime Institute Tiers">
+<meta name="twitter:description" content="What each tier defines, why certification is not the same as a design claim, and where the availability percentages came from.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://voltfield.org/guides.html"},{"@type":"ListItem","position":3,"name":"Uptime Institute Tiers","item":"https://voltfield.org/guide-uptime-institute-tiers.html"}]},{"@type":"Article","headline":"Uptime Institute Tiers I to IV: Topology, Certification and the Numbers That Are Not in the Standard","description":"Uptime Institute Tiers I to IV explained: redundant capacity, concurrent maintainability, fault tolerance, the three certification awards, and why the familiar 99.982 percent availability figures are not in the Tier Standard.","image":"https://voltfield.org/social/social-generic.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-11-03T00:00:00-05:00","dateModified":"2026-11-03T00:00:00-05:00","url":"https://voltfield.org/guide-uptime-institute-tiers.html"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between Tier III and Tier IV?","acceptedAnswer":{"@type":"Answer","text":"Tier III is concurrently maintainable: every capacity component and distribution path element can be removed from service for planned work without affecting the IT load. Tier IV is fault tolerant: any single unplanned failure is survived automatically, with no human action. Tier IV additionally requires continuous cooling through a utility outage and physical separation of the redundant systems."}},{"@type":"Question","name":"Does N+1 redundancy make a data center Tier III?","acceptedAnswer":{"@type":"Answer","text":"No. N+1 is redundant capacity, which is Tier II. Tier III requires redundant distribution paths as well, each able to be isolated for planned work while the other carries the load, which in practice means dual-powered IT equipment. A facility can have N+1 on every machine and still be Tier II if there is only one path to the floor."}},{"@type":"Question","name":"Are the Tier availability percentages real?","acceptedAnswer":{"@type":"Answer","text":"The figures of 99.671, 99.741, 99.982 and 99.995 percent are widely quoted but are not part of the current Tier Standard, and Uptime Institute has distanced itself from them. Topology does not determine availability; operations largely do, which is why a separate Operational Sustainability certification exists. Treat the percentages as a decades-old secondary source rather than a specification."}},{"@type":"Question","name":"Can a data center call itself Tier III without certification?","acceptedAnswer":{"@type":"Answer","text":"Tier and the Tier Classification System are Uptime Institute trademarks and the classification is awarded, so an uncertified claim is a self-assessment. There are also three separate awards — design documents, constructed facility, and operational sustainability — which are not interchangeable. Ask which award, issued when, and for which building."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in has-photo">
+    <div class="artban-text">
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">Uptime Institute Tiers</span></nav>
+      <div class="eyebrow">Data Centers</div>
+      <h1>Uptime Institute Tiers I&ndash;IV: What They Actually Define</h1>
+      <p class="dek">Four levels describing what a facility can survive and what it can maintain without going down. The word is a trademark and the classification is an award, which is why most things called Tier III are not, and the availability percentages everyone quotes are not part of the standard at all.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published November 3, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+    </div>
+    <figure class="artban-photo">
+      <picture><source srcset="images/parts/dc-floor-pdu-rpp.webp" type="image/webp"><img src="images/parts/dc-floor-pdu-rpp.jpg" width="340" height="340" alt="A floor power distribution unit and remote power panel" decoding="async" fetchpriority="high"></picture>
+      <figcaption>Floor PDU and remote power panel (illustration)</figcaption>
+    </figure>
+  </div>
+</section>
+<div class="artwrap">
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>Tier I and II are about redundant capacity. Tier III and IV are about distribution paths, which is the real dividing line.</li>
+      <li>Tier III means concurrently maintainable: anything can be taken out of service for planned work without affecting IT.</li>
+      <li>Tier IV means fault tolerant: any single unplanned failure is survived, which additionally requires continuous cooling.</li>
+      <li>Tier is an Uptime Institute trademark and an awarded certification. A design described as Tier III without an award is a self-assessment.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#the-four-levels">The four levels</a></li>
+      <li><a href="#maintainable-against-tolerant">Maintainable against tolerant</a></li>
+      <li><a href="#certification-is-not-a-design-claim">Certification is not a design claim</a></li>
+      <li><a href="#the-availability-percentages">The availability percentages</a></li>
+      <li><a href="#what-the-tiers-do-not-cover">What the tiers do not cover</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+  <h2 id="the-four-levels">The four levels</h2>
+  <p>The classification describes topology &mdash; what the power and cooling systems are made of and how they are connected &mdash; rather than equipment quality or operational practice. Each level includes everything below it.</p>
+  <table class="reftable">
+    <tr><th scope="col">Tier</th><th scope="col">What it defines</th></tr>
+    <tr><td><b>I</b> &mdash; Basic Capacity</td><td>A single path for power and cooling, no redundant capacity components. Planned work on almost anything requires shutting the IT load down, and an unplanned failure does the same.</td></tr>
+    <tr><td><b>II</b> &mdash; Redundant Capacity</td><td>Redundant capacity components &mdash; a spare generator, a spare chiller &mdash; but still a single distribution path. A component can fail without taking the load down; work on the path still cannot be done live.</td></tr>
+    <tr><td><b>III</b> &mdash; Concurrently Maintainable</td><td>Every capacity component <i>and every distribution path element</i> can be removed from service on a planned basis without affecting IT. In practice that means multiple independent distribution paths, with dual-powered IT equipment.</td></tr>
+    <tr><td><b>IV</b> &mdash; Fault Tolerant</td><td>Any single unplanned failure of any capacity component or distribution element is survived with no IT impact, automatically. Adds continuous cooling and physical separation of redundant systems.</td></tr>
+  </table>
+  <p>The step that matters is between II and III, and it is not about having more equipment. Tier II adds spare components; Tier III adds <i>paths</i>. A site can have N+1 on every machine in the building and still be Tier II if there is one way for the power to get from those machines to the floor.</p>
+  <h2 id="maintainable-against-tolerant">Maintainable against tolerant</h2>
+  <p>Tier III and Tier IV answer two different questions, and conflating them is the most common technical error in the subject.</p>
+  <p><b>Concurrently maintainable</b> is about planned work. Can you isolate a UPS, a switchboard, a distribution path or a chiller, work on it, and put it back, with the IT load running throughout? That is a question about valves, breakers, isolation points and whether the second path can carry the whole load while the first is open.</p>
+  <p><b>Fault tolerant</b> is about the unplanned. When something fails with no warning and nobody is standing there, does the load ride through without human action? That is a question about automatic response, and it is a harder one. A Tier III site may well survive a failure &mdash; but it is not required to, and may need an operator to act.</p>
+  <p>Tier IV also brings two requirements Tier III does not. <b>Continuous cooling</b> means the thermal environment is maintained through a utility outage and generator start, which usually means chilled water storage or a flywheel on the cooling plant, because IT equipment at high density overheats in minutes. And <b>compartmentalisation</b>, meaning the redundant systems are physically separated so a single event &mdash; a fire, a flood, a failure that propagates &mdash; cannot take both.</p>
+  <div class="ad-unit" data-ad="incontent"></div>
+  <h2 id="certification-is-not-a-design-claim">Certification is not a design claim</h2>
+  <p>Tier, Tier Standard and the Tier Classification System are trademarks of Uptime Institute, and the classification is awarded rather than self-declared. There are three distinct awards, and they are not interchangeable:</p>
+  <ul>
+    <li><b>Tier Certification of Design Documents</b> &mdash; the drawings were reviewed and meet the topology.</li>
+    <li><b>Tier Certification of Constructed Facility</b> &mdash; the building as built was inspected and demonstrated, which is a different and much harder thing than the drawings.</li>
+    <li><b>Tier Certification of Operational Sustainability</b> &mdash; the staffing, maintenance and operating practice were assessed.</li>
+  </ul>
+  <p>So "Tier III" in a sales document can mean a certified constructed facility, a certified set of drawings for a building that was then value-engineered, or nothing more than somebody's opinion of their own topology. The question worth asking is which award, issued when, and for this building. Design certification without construction certification is common and is a reasonable thing to hold &mdash; it just is not the same claim.</p>
+  <p>The honest way to describe an uncertified facility is by what it does: concurrently maintainable power with dual paths and N+1 cooling says more than a tier number anyway, and does not borrow a trademark.</p>
+  <h2 id="the-availability-percentages">The availability percentages</h2>
+  <p>Nearly every summary of this subject carries a table of availability figures &mdash; 99.671, 99.741, 99.982 and 99.995 percent, mapped to the four tiers. Those numbers are not in the current Tier Standard, and Uptime Institute has distanced itself from them.</p>
+  <p>They originated in much older material and spread because they are concrete and easy to tabulate. The problem is that topology does not determine availability: a Tier IV facility operated badly will beat a Tier II one and lose to a well-run Tier III, and the standard says nothing about how many minutes a year any of them will be down. The Operational Sustainability certification exists precisely because topology alone does not predict outcomes.</p>
+  <p>If someone quotes those percentages at you as a specification, they are quoting a decades-old secondary source. What a tier tells you is what the facility can survive and what it can maintain, not how often it will fail.</p>
+  <h2 id="what-the-tiers-do-not-cover">What the tiers do not cover</h2>
+  <p>The classification is about power and cooling topology for the critical environment. Several things people expect to find in it are not there.</p>
+  <p>It says nothing about physical security, network redundancy or carrier diversity, nothing about geographic risk, and nothing about whether the IT architecture can tolerate losing the site &mdash; which, for most modern workloads, matters more than the facility tier. Nor does it grade equipment: a Tier IV topology built from poorly maintained equipment is still Tier IV topology.</p>
+  <p>It also does not map onto the redundancy notation people use alongside it. N+1 and 2N describe how much spare capacity a system has; the tiers describe what the whole facility can do. <a class="inline" href="guide-n-plus-1-vs-2n-redundancy.html">N+1 vs 2N</a> covers that distinction, and the two vocabularies are routinely mixed in the same sentence to no good effect.</p>
+  <h2 id="common-mistakes">Common mistakes</h2>
+  <ul>
+    <li><b>Equating N+1 with Tier III.</b> Redundant capacity is Tier II. Tier III needs redundant distribution paths that can each be isolated.</li>
+    <li><b>Quoting the availability percentages as a requirement.</b> They are not in the standard and never described a guarantee.</li>
+    <li><b>Treating design certification as construction certification.</b> Different awards, different evidence, and the gap between them is where value engineering lives.</li>
+    <li><b>Using "Tier 3" as a generic adjective.</b> It is a trademark and an award; writing "concurrently maintainable" costs two more words and is defensible.</li>
+    <li><b>Forgetting continuous cooling at Tier IV.</b> It is a requirement, it is expensive, and it is the item most often missing from a design that otherwise looks fault tolerant.</li>
+  </ul>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the difference between Tier III and Tier IV?</summary>
+    <p style="margin-top:10px">Tier III is concurrently maintainable: every capacity component and distribution path element can be removed from service for planned work without affecting the IT load. Tier IV is fault tolerant: any single unplanned failure is survived automatically, with no human action. Tier IV additionally requires continuous cooling through a utility outage and physical separation of the redundant systems.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Does N+1 redundancy make a data center Tier III?</summary>
+    <p style="margin-top:10px">No. N+1 is redundant capacity, which is Tier II. Tier III requires redundant distribution paths as well, each able to be isolated for planned work while the other carries the load, which in practice means dual-powered IT equipment. A facility can have N+1 on every machine and still be Tier II if there is only one path to the floor.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Are the Tier availability percentages real?</summary>
+    <p style="margin-top:10px">The figures of 99.671, 99.741, 99.982 and 99.995 percent are widely quoted but are not part of the current Tier Standard, and Uptime Institute has distanced itself from them. Topology does not determine availability; operations largely do, which is why a separate Operational Sustainability certification exists. Treat the percentages as a decades-old secondary source rather than a specification.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Can a data center call itself Tier III without certification?</summary>
+    <p style="margin-top:10px">Tier and the Tier Classification System are Uptime Institute trademarks and the classification is awarded, so an uncertified claim is a self-assessment. There are also three separate awards &mdash; design documents, constructed facility, and operational sustainability &mdash; which are not interchangeable. Ask which award, issued when, and for which building.</p>
+  </details>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="data-centers/backup-power.html">backup power</a> reference covers the equipment these topologies are built from, and <a class="inline" href="guide-n-plus-1-vs-2n-redundancy.html">N+1 vs 2N</a> covers the redundancy vocabulary used alongside the tiers.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/generator-runtime.html">Generator Runtime Calculator</a>On-site fuel against consumption at real load.</li>
+        <li><a href="calculators/bess-sizing.html">BESS Sizing Calculator</a>Usable and nameplate kWh for a ride-through requirement.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-n-plus-1-vs-2n-redundancy.html">N+1 vs. 2N Redundancy</a></li>
+        <li><a href="guide-ups-topologies.html">UPS Topologies</a></li>
+        <li><a href="guide-pue-explained.html">PUE Explained</a></li>
+        <li><a href="guide-liquid-vs-air-cooling.html">Liquid vs. Air Cooling</a></li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Uptime Institute Tiers I&ndash;IV: What They Actually Define&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-grid-forming-vs-grid-following.html</p>
+  </details>
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/guide-uptime-institute-tiers.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+
+<aside class="provenance" aria-labelledby="prov-h">
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published November 3, 2026.</span></summary>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>What each of the four Uptime Institute tiers defines, the distinction between redundant capacity and redundant distribution paths, concurrent maintainability against fault tolerance, the continuous cooling and compartmentalisation requirements at Tier IV, the three certification awards, and the status of the availability percentages commonly quoted alongside the tiers.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>Uptime Institute’s published description of the Tier Classification System and its certification awards</li><li>IEEE and ASHRAE material on continuous cooling and thermal ride-through, for the Tier IV requirement</li><li>Voltfield’s own guides on redundancy notation and UPS topology for the adjacent vocabulary</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>An Uptime Institute publication, a certification, or a substitute for the Tier Standard. Tier, Tier Standard and the Tier Classification System are trademarks of Uptime Institute; this page describes the classification and is not affiliated with or endorsed by them. Only Uptime Institute can award a Tier Certification.</dd>
+      <dt>Provenance</dt>
+      <dd>Published November 3, 2026. Written and maintained by the Voltfield editorial team against the sources above. Worked figures in the text are arithmetic the reader can check; nothing here states a measured value.</dd>
+    </dl>
+  </details>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

@@ -175,6 +175,7 @@ const GUIDES = [
     ['calculators/fault-current.html', 'Available Fault Current Calculator', 'The current the EGC has to carry at a transformer secondary.'],
   ],
   guides: [
+    ['guide-nec-250-122-egc-sizing.html', 'NEC 250.122 EGC Sizing Explained'],
     ['guide-grounding-bonding-basics.html', 'Grounding &amp; Bonding Basics'],
     ['guide-ground-fault-protection.html', 'Ground-Fault Protection &amp; NEC 230.95'],
     ['guide-arc-flash-boundary-basics.html', 'Arc-Flash Boundary Basics'],
@@ -256,6 +257,7 @@ const GUIDES = [
     ['calculators/arc-flash.html', 'Arc-Flash Incident Energy Calculator', 'How clearing time drives incident energy at a working distance.'],
   ],
   guides: [
+    ['guide-nec-430-250-motor-fla.html', 'NEC 430.250 Motor Full-Load Current'],
     ['guide-short-circuit-studies-breaker-coordination.html', 'Short-Circuit Studies &amp; Coordination'],
     ['guide-fully-rated-vs-series-rated.html', 'Fully Rated vs. Series Rated Breakers'],
     ['guide-arc-flash-ppe-categories.html', 'Arc-Flash PPE Categories'],
@@ -478,6 +480,251 @@ const GUIDES = [
   notThis: 'A substitute for the tables or for a design. The one table value quoted is illustrative; the published tables govern, several 430.52 percentages depend on motor and device type, and local amendments and code editions differ.',
 },
 
+{
+  slug: 'guide-uptime-institute-tiers',
+  eyebrow: 'Data Centers',
+  crumb: 'Uptime Institute Tiers',
+  h1: 'Uptime Institute Tiers I&ndash;IV: What They Actually Define',
+  title: 'Uptime Institute Tiers Explained',
+  headline: 'Uptime Institute Tiers I to IV: Topology, Certification and the Numbers That Are Not in the Standard',
+  dek: 'Four levels describing what a facility can survive and what it can maintain without going down. The word is a trademark and the classification is an award, which is why most things called Tier III are not, and the availability percentages everyone quotes are not part of the standard at all.',
+  description: 'Uptime Institute Tiers I to IV explained: redundant capacity, concurrent maintainability, fault tolerance, the three certification awards, and why the familiar 99.982 percent availability figures are not in the Tier Standard.',
+  ogDesc: 'What each tier defines, why certification is not the same as a design claim, and where the availability percentages came from.',
+  keywords: 'uptime institute tiers, tier 3 data center, tier iii vs tier iv, concurrently maintainable, fault tolerant data center, tier certification, tier standard topology, data center redundancy levels',
+  photo: { src: 'images/parts/dc-floor-pdu-rpp', alt: 'A floor power distribution unit and remote power panel', caption: 'Floor PDU and remote power panel (illustration)' },
+  takeaways: [
+    'Tier I and II are about redundant capacity. Tier III and IV are about distribution paths, which is the real dividing line.',
+    'Tier III means concurrently maintainable: anything can be taken out of service for planned work without affecting IT.',
+    'Tier IV means fault tolerant: any single unplanned failure is survived, which additionally requires continuous cooling.',
+    'Tier is an Uptime Institute trademark and an awarded certification. A design described as Tier III without an award is a self-assessment.',
+  ],
+  sections: [
+    { id: 'the-four-levels', h2: 'The four levels', html: `
+  <p>The classification describes topology &mdash; what the power and cooling systems are made of and how they are connected &mdash; rather than equipment quality or operational practice. Each level includes everything below it.</p>
+  <table class="reftable">
+    <tr><th scope="col">Tier</th><th scope="col">What it defines</th></tr>
+    <tr><td><b>I</b> &mdash; Basic Capacity</td><td>A single path for power and cooling, no redundant capacity components. Planned work on almost anything requires shutting the IT load down, and an unplanned failure does the same.</td></tr>
+    <tr><td><b>II</b> &mdash; Redundant Capacity</td><td>Redundant capacity components &mdash; a spare generator, a spare chiller &mdash; but still a single distribution path. A component can fail without taking the load down; work on the path still cannot be done live.</td></tr>
+    <tr><td><b>III</b> &mdash; Concurrently Maintainable</td><td>Every capacity component <i>and every distribution path element</i> can be removed from service on a planned basis without affecting IT. In practice that means multiple independent distribution paths, with dual-powered IT equipment.</td></tr>
+    <tr><td><b>IV</b> &mdash; Fault Tolerant</td><td>Any single unplanned failure of any capacity component or distribution element is survived with no IT impact, automatically. Adds continuous cooling and physical separation of redundant systems.</td></tr>
+  </table>
+  <p>The step that matters is between II and III, and it is not about having more equipment. Tier II adds spare components; Tier III adds <i>paths</i>. A site can have N+1 on every machine in the building and still be Tier II if there is one way for the power to get from those machines to the floor.</p>` },
+    { id: 'maintainable-against-tolerant', h2: 'Maintainable against tolerant', html: `
+  <p>Tier III and Tier IV answer two different questions, and conflating them is the most common technical error in the subject.</p>
+  <p><b>Concurrently maintainable</b> is about planned work. Can you isolate a UPS, a switchboard, a distribution path or a chiller, work on it, and put it back, with the IT load running throughout? That is a question about valves, breakers, isolation points and whether the second path can carry the whole load while the first is open.</p>
+  <p><b>Fault tolerant</b> is about the unplanned. When something fails with no warning and nobody is standing there, does the load ride through without human action? That is a question about automatic response, and it is a harder one. A Tier III site may well survive a failure &mdash; but it is not required to, and may need an operator to act.</p>
+  <p>Tier IV also brings two requirements Tier III does not. <b>Continuous cooling</b> means the thermal environment is maintained through a utility outage and generator start, which usually means chilled water storage or a flywheel on the cooling plant, because IT equipment at high density overheats in minutes. And <b>compartmentalisation</b>, meaning the redundant systems are physically separated so a single event &mdash; a fire, a flood, a failure that propagates &mdash; cannot take both.</p>` },
+    { id: 'certification-is-not-a-design-claim', h2: 'Certification is not a design claim', html: `
+  <p>Tier, Tier Standard and the Tier Classification System are trademarks of Uptime Institute, and the classification is awarded rather than self-declared. There are three distinct awards, and they are not interchangeable:</p>
+  <ul>
+    <li><b>Tier Certification of Design Documents</b> &mdash; the drawings were reviewed and meet the topology.</li>
+    <li><b>Tier Certification of Constructed Facility</b> &mdash; the building as built was inspected and demonstrated, which is a different and much harder thing than the drawings.</li>
+    <li><b>Tier Certification of Operational Sustainability</b> &mdash; the staffing, maintenance and operating practice were assessed.</li>
+  </ul>
+  <p>So "Tier III" in a sales document can mean a certified constructed facility, a certified set of drawings for a building that was then value-engineered, or nothing more than somebody's opinion of their own topology. The question worth asking is which award, issued when, and for this building. Design certification without construction certification is common and is a reasonable thing to hold &mdash; it just is not the same claim.</p>
+  <p>The honest way to describe an uncertified facility is by what it does: concurrently maintainable power with dual paths and N+1 cooling says more than a tier number anyway, and does not borrow a trademark.</p>` },
+    { id: 'the-availability-percentages', h2: 'The availability percentages', html: `
+  <p>Nearly every summary of this subject carries a table of availability figures &mdash; 99.671, 99.741, 99.982 and 99.995 percent, mapped to the four tiers. Those numbers are not in the current Tier Standard, and Uptime Institute has distanced itself from them.</p>
+  <p>They originated in much older material and spread because they are concrete and easy to tabulate. The problem is that topology does not determine availability: a Tier IV facility operated badly will beat a Tier II one and lose to a well-run Tier III, and the standard says nothing about how many minutes a year any of them will be down. The Operational Sustainability certification exists precisely because topology alone does not predict outcomes.</p>
+  <p>If someone quotes those percentages at you as a specification, they are quoting a decades-old secondary source. What a tier tells you is what the facility can survive and what it can maintain, not how often it will fail.</p>` },
+    { id: 'what-the-tiers-do-not-cover', h2: 'What the tiers do not cover', html: `
+  <p>The classification is about power and cooling topology for the critical environment. Several things people expect to find in it are not there.</p>
+  <p>It says nothing about physical security, network redundancy or carrier diversity, nothing about geographic risk, and nothing about whether the IT architecture can tolerate losing the site &mdash; which, for most modern workloads, matters more than the facility tier. Nor does it grade equipment: a Tier IV topology built from poorly maintained equipment is still Tier IV topology.</p>
+  <p>It also does not map onto the redundancy notation people use alongside it. N+1 and 2N describe how much spare capacity a system has; the tiers describe what the whole facility can do. <a class="inline" href="guide-n-plus-1-vs-2n-redundancy.html">N+1 vs 2N</a> covers that distinction, and the two vocabularies are routinely mixed in the same sentence to no good effect.</p>` },
+    { id: 'common-mistakes', h2: 'Common mistakes', html: `
+  <ul>
+    <li><b>Equating N+1 with Tier III.</b> Redundant capacity is Tier II. Tier III needs redundant distribution paths that can each be isolated.</li>
+    <li><b>Quoting the availability percentages as a requirement.</b> They are not in the standard and never described a guarantee.</li>
+    <li><b>Treating design certification as construction certification.</b> Different awards, different evidence, and the gap between them is where value engineering lives.</li>
+    <li><b>Using "Tier 3" as a generic adjective.</b> It is a trademark and an award; writing "concurrently maintainable" costs two more words and is defensible.</li>
+    <li><b>Forgetting continuous cooling at Tier IV.</b> It is a requirement, it is expensive, and it is the item most often missing from a design that otherwise looks fault tolerant.</li>
+  </ul>` },
+  ],
+  faqs: [
+    { q: 'What is the difference between Tier III and Tier IV?', a: 'Tier III is concurrently maintainable: every capacity component and distribution path element can be removed from service for planned work without affecting the IT load. Tier IV is fault tolerant: any single unplanned failure is survived automatically, with no human action. Tier IV additionally requires continuous cooling through a utility outage and physical separation of the redundant systems.' },
+    { q: 'Does N+1 redundancy make a data center Tier III?', a: 'No. N+1 is redundant capacity, which is Tier II. Tier III requires redundant distribution paths as well, each able to be isolated for planned work while the other carries the load, which in practice means dual-powered IT equipment. A facility can have N+1 on every machine and still be Tier II if there is only one path to the floor.' },
+    { q: 'Are the Tier availability percentages real?', a: 'The figures of 99.671, 99.741, 99.982 and 99.995 percent are widely quoted but are not part of the current Tier Standard, and Uptime Institute has distanced itself from them. Topology does not determine availability; operations largely do, which is why a separate Operational Sustainability certification exists. Treat the percentages as a decades-old secondary source rather than a specification.' },
+    { q: 'Can a data center call itself Tier III without certification?', a: 'Tier and the Tier Classification System are Uptime Institute trademarks and the classification is awarded, so an uncertified claim is a self-assessment. There are also three separate awards &mdash; design documents, constructed facility, and operational sustainability &mdash; which are not interchangeable. Ask which award, issued when, and for which building.' },
+  ],
+  nextIntro: 'The <a class="inline" href="data-centers/backup-power.html">backup power</a> reference covers the equipment these topologies are built from, and <a class="inline" href="guide-n-plus-1-vs-2n-redundancy.html">N+1 vs 2N</a> covers the redundancy vocabulary used alongside the tiers.',
+  calcs: [
+    ['calculators/generator-runtime.html', 'Generator Runtime Calculator', 'On-site fuel against consumption at real load.'],
+    ['calculators/bess-sizing.html', 'BESS Sizing Calculator', 'Usable and nameplate kWh for a ride-through requirement.'],
+  ],
+  guides: [
+    ['guide-n-plus-1-vs-2n-redundancy.html', 'N+1 vs. 2N Redundancy'],
+    ['guide-ups-topologies.html', 'UPS Topologies'],
+    ['guide-pue-explained.html', 'PUE Explained'],
+    ['guide-liquid-vs-air-cooling.html', 'Liquid vs. Air Cooling'],
+  ],
+  covers: 'What each of the four Uptime Institute tiers defines, the distinction between redundant capacity and redundant distribution paths, concurrent maintainability against fault tolerance, the continuous cooling and compartmentalisation requirements at Tier IV, the three certification awards, and the status of the availability percentages commonly quoted alongside the tiers.',
+  basedOn: ['Uptime Institute’s published description of the Tier Classification System and its certification awards', 'IEEE and ASHRAE material on continuous cooling and thermal ride-through, for the Tier IV requirement', 'Voltfield’s own guides on redundancy notation and UPS topology for the adjacent vocabulary'],
+  notThis: 'An Uptime Institute publication, a certification, or a substitute for the Tier Standard. Tier, Tier Standard and the Tier Classification System are trademarks of Uptime Institute; this page describes the classification and is not affiliated with or endorsed by them. Only Uptime Institute can award a Tier Certification.',
+},
+
+{
+  slug: 'guide-ansi-device-numbers',
+  eyebrow: 'Protection',
+  crumb: 'ANSI Device Numbers',
+  h1: 'ANSI Device Numbers: Reading 50, 51, 87 and the Rest',
+  title: 'ANSI Device Numbers Explained',
+  headline: 'ANSI Device Numbers: Reading 50, 51, 87 and the Suffix System',
+  dek: 'The two-digit codes on every protection one-line are IEEE C37.2 device function numbers. Learning twenty of them, plus how the suffixes work, makes a relay schedule readable &mdash; and explains why 52a and 52b are the two that catch people out.',
+  description: 'ANSI device numbers explained: the common IEEE C37.2 function numbers including 50, 51, 87 and 86, how suffix letters like G, N and T narrow them, and what 52a and 52b auxiliary contacts actually mean.',
+  ogDesc: 'The common function numbers, how suffixes narrow them, and the 52a / 52b auxiliary contact convention.',
+  keywords: 'ANSI device numbers, IEEE C37.2, device function numbers, relay 50 51 87, 52a 52b, 51G, 87T, 86 lockout relay, protection one line symbols',
+  photo: { src: 'images/parts/dc-protective-relays', alt: 'Protective relays in a switchgear panel', caption: 'Protective relays (illustration)' },
+  takeaways: [
+    'The numbers come from IEEE C37.2 and name a protective function, not a product. One modern relay performs dozens of them.',
+    '50 is instantaneous overcurrent, 51 is time overcurrent, 87 is differential. Those three cover most of what appears on a one-line.',
+    'Suffix letters narrow the function: G for ground, N for neutral, T for transformer, B for bus. 51G is ground time overcurrent.',
+    '52 is the circuit breaker itself. 52a follows the breaker, 52b opposes it, and mixing them up is a wiring error that looks like a logic fault.',
+  ],
+  sections: [
+    { id: 'what-the-numbers-are', h2: 'What the numbers are', html: `
+  <p>IEEE C37.2 assigns a number to each device function in a power system, so a one-line diagram, a relay schedule and a protection setting sheet can all refer to the same thing without prose. They are universally called ANSI device numbers, from the standard’s earlier designation, and the usage has not changed.</p>
+  <p>The important thing about them is that they name a <i>function</i>, not a box. A 1960s panel had one electromechanical relay per number, so the number and the hardware matched. A modern multifunction relay performs 50, 51, 51G, 46, 49, 27, 59, 81 and more simultaneously, and the one-line still shows each function separately because the protection scheme is what the drawing is describing.</p>` },
+    { id: 'the-ones-worth-knowing', h2: 'The ones worth knowing', html: `
+  <table class="reftable">
+    <tr><th scope="col">Number</th><th scope="col">Function</th></tr>
+    <tr><td><b>21</b></td><td>Distance &mdash; trips on impedance, used for transmission line protection</td></tr>
+    <tr><td><b>25</b></td><td>Synchronising or sync-check &mdash; permits closing only when two sources are in step</td></tr>
+    <tr><td><b>27</b></td><td>Undervoltage</td></tr>
+    <tr><td><b>32</b></td><td>Directional power &mdash; commonly reverse power on a generator</td></tr>
+    <tr><td><b>46</b></td><td>Phase balance, or negative-sequence current &mdash; catches single-phasing and unbalance</td></tr>
+    <tr><td><b>49</b></td><td>Thermal &mdash; machine or transformer overtemperature</td></tr>
+    <tr><td><b>50</b></td><td>Instantaneous overcurrent</td></tr>
+    <tr><td><b>51</b></td><td>Time overcurrent</td></tr>
+    <tr><td><b>52</b></td><td>AC circuit breaker</td></tr>
+    <tr><td><b>59</b></td><td>Overvoltage</td></tr>
+    <tr><td><b>63</b></td><td>Pressure &mdash; the sudden-pressure relay on a liquid-filled transformer</td></tr>
+    <tr><td><b>64</b></td><td>Ground detector</td></tr>
+    <tr><td><b>67</b></td><td>Directional overcurrent</td></tr>
+    <tr><td><b>81</b></td><td>Frequency, over or under</td></tr>
+    <tr><td><b>86</b></td><td>Lockout relay &mdash; latches a trip until deliberately reset</td></tr>
+    <tr><td><b>87</b></td><td>Differential</td></tr>
+  </table>
+  <p>That is sixteen of roughly a hundred, and it will read most industrial and data-centre one-lines. The standard itself is the authority for the rest, including the device numbers used for specific machine and station functions.</p>` },
+    { id: 'suffixes-and-combinations', h2: 'Suffixes and combinations', html: `
+  <p>A bare number is often too broad, so C37.2 provides suffix letters that say what the function is applied to. The common ones are <b>G</b> for ground, <b>N</b> for neutral, <b>T</b> for transformer, <b>B</b> for bus, <b>L</b> for line and <b>M</b> for motor.</p>
+  <p>So <b>51G</b> is ground time overcurrent, <b>87T</b> is transformer differential, <b>87B</b> is bus differential, and <b>50/51</b> written together means the instantaneous and time elements of the same overcurrent protection &mdash; which is how overcurrent protection is almost always specified, the instantaneous element handling close-in faults and the time element providing coordination.</p>
+  <p>Where several identical devices exist, a prefix number distinguishes them: 1-51 and 2-51 are two separate time-overcurrent functions. And the difference between G and N is worth knowing, because they are not the same measurement: a G suffix generally refers to a function fed from a ground-sensing arrangement such as a residual or window CT, while N refers to one fed from the neutral conductor. On a drawing they look interchangeable and in the current they are not.</p>` },
+    { id: 'the-52a-and-52b-trap', h2: 'The 52a and 52b trap', html: `
+  <p>Device 52 is the circuit breaker, and its auxiliary contacts carry the two suffixes most likely to cause a real problem.</p>
+  <p>A <b>52a</b> contact follows the breaker: closed when the breaker is closed, open when it is open. A <b>52b</b> contact does the opposite: closed when the breaker is open. The letters are not arbitrary and they are not a manufacturer convention &mdash; they are the standard, and every schematic assumes them.</p>
+  <p>They matter because the trip coil is wired through a 52a: there is no reason to energise a trip coil on an already-open breaker, and leaving it energised would burn it out. The close circuit is wired through a 52b for the mirror-image reason. Swap them and the breaker will refuse to trip, or will trip and immediately attempt to reclose, and the symptom presents as a control-logic fault rather than as two wires in the wrong terminals.</p>` },
+    { id: 'reading-a-one-line-with-them', h2: 'Reading a one-line with them', html: `
+  <p>In practice the numbers cluster in recognisable patterns, and recognising the pattern is faster than decoding each number.</p>
+  <p>A transformer protection package is typically <b>87T</b> differential, <b>50/51</b> on each side for backup overcurrent, <b>51G</b> for ground faults, <b>49</b> and <b>63</b> from the transformer’s own thermal and pressure devices, all collected into an <b>86</b> lockout so that a transformer trip stays tripped until somebody has looked at it.</p>
+  <p>A generator package adds <b>32</b> reverse power, <b>40</b> loss of field, <b>46</b> negative sequence and <b>25</b> sync-check. A motor feeder is usually <b>50/51</b>, <b>49</b> or <b>51</b> as overload, <b>46</b> for single-phasing and <b>27</b> for undervoltage. An incoming utility feeder carries <b>27</b>, <b>59</b>, <b>81</b> and often <b>67</b> directional overcurrent where the service can backfeed.</p>` },
+    { id: 'common-mistakes', h2: 'Common mistakes', html: `
+  <ul>
+    <li><b>Reading a number as a device.</b> One multifunction relay provides many numbers; one number does not imply one box to buy.</li>
+    <li><b>Swapping 52a and 52b.</b> The classic control-wiring error, and the symptom looks like a logic problem rather than a wiring one.</li>
+    <li><b>Treating 51G and 51N as the same function.</b> Different source of current, different sensitivity, and they do not detect the same faults equally.</li>
+    <li><b>Omitting 86 and wiring trips directly.</b> Without a lockout, a transformer or bus trip can be reclosed onto a fault by someone who did not know why it opened.</li>
+    <li><b>Specifying 50 without coordination.</b> An instantaneous element set too low defeats selective coordination with everything downstream of it.</li>
+  </ul>` },
+  ],
+  faqs: [
+    { q: 'What do ANSI device numbers 50, 51 and 87 mean?', a: '50 is instantaneous overcurrent, 51 is time overcurrent, and 87 is differential protection. They come from IEEE C37.2, which assigns a number to each device function so that one-line diagrams and relay schedules can reference functions without prose. Written together as 50/51 they mean the instantaneous and time elements of the same overcurrent protection.' },
+    { q: 'What is the difference between 52a and 52b?', a: 'Device 52 is the AC circuit breaker. A 52a auxiliary contact follows the breaker, closed when the breaker is closed. A 52b contact is the opposite, closed when the breaker is open. The trip coil is wired through a 52a so it cannot be energised on an already-open breaker; the close circuit uses a 52b. Swapping them produces a breaker that will not trip, and the symptom looks like a control-logic fault.' },
+    { q: 'What do the suffix letters on device numbers mean?', a: 'They narrow the function to what it is applied to. G is ground, N is neutral, T is transformer, B is bus, L is line and M is motor. So 51G is ground time overcurrent, 87T is transformer differential and 87B is bus differential. A prefix number distinguishes several identical devices, as in 1-51 and 2-51.' },
+    { q: 'Is one device number one relay?', a: 'Not any more. In electromechanical panels each number was a separate relay, so the number and the hardware matched. A modern multifunction relay performs dozens of functions at once, and the one-line still shows each separately because the drawing is describing the protection scheme rather than the equipment list.' },
+  ],
+  nextIntro: 'The <a class="inline" href="data-centers/switchgear-components.html">switchgear components</a> reference covers the relays and trip units themselves, and <a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">short-circuit studies and coordination</a> covers what the settings behind these numbers are chosen against.',
+  calcs: [
+    ['calculators/fault-current.html', 'Available Fault Current Calculator', 'The current these elements are set against.'],
+    ['calculators/arc-flash.html', 'Arc-Flash Incident Energy Calculator', 'How clearing time, and therefore the settings, drive incident energy.'],
+  ],
+  guides: [
+    ['guide-short-circuit-studies-breaker-coordination.html', 'Short-Circuit Studies &amp; Coordination'],
+    ['guide-fuse-vs-breaker.html', 'Fuse vs. Circuit Breaker Compared'],
+    ['guide-ground-fault-protection.html', 'Ground-Fault Protection &amp; NEC 230.95'],
+    ['guide-switchgear-compartments.html', 'Metal-Clad vs. Metal-Enclosed Switchgear'],
+  ],
+  covers: 'What IEEE C37.2 device function numbers are, sixteen of the commonly used ones, how suffix letters and prefix numbers narrow and distinguish them, the 52a and 52b auxiliary contact convention and why it matters in trip and close circuits, and the recognisable protection packages these numbers form on a one-line.',
+  basedOn: ['IEEE Std C37.2 &mdash; standard for electrical power system device function numbers, acronyms and contact designations', 'IEEE Std 242 (the Buff Book) for protection and coordination practice', 'IEEE Std C37.91 for transformer protection packages'],
+  notThis: 'A substitute for IEEE C37.2. Sixteen numbers of roughly a hundred are listed to make a drawing readable; the standard governs, including the numbers and suffixes not covered here, and relay settings are a study rather than a lookup.',
+},
+
+{
+  slug: 'guide-rack-power-density',
+  eyebrow: 'Data Centers',
+  crumb: 'Rack Power Density',
+  h1: 'Rack Power Density: Designing and Provisioning It',
+  title: 'Rack Power Density Explained',
+  headline: 'Rack Power Density: Average, Design and Nameplate, and the Capacity That Gets Stranded',
+  dek: 'Density is three different numbers that all get called one thing. Confusing them is how a room ends up with power it cannot deliver to the racks that need it, and circuits sized for a load nothing ever draws.',
+  description: 'Rack power density explained: average against design against nameplate, sizing rack circuits at 208 V and 415 V, diversity, dual-corded A and B feeds, and why provisioned capacity gets stranded.',
+  ogDesc: 'Average against design against nameplate, rack circuit sizing, and why provisioned capacity ends up stranded.',
+  keywords: 'rack power density, kw per rack, rack circuit sizing, nameplate vs actual power, stranded capacity data center, dual corded rack, 415V rack distribution, diversity factor',
+  photo: { src: 'images/parts/dc-rack-pdus', alt: 'Rack power distribution units', caption: 'Rack PDUs (illustration)' },
+  takeaways: [
+    'Average density is total IT load divided by rack count. Nothing is designed to it, because the load is never spread evenly.',
+    'Nameplate is the sum of power supply ratings and typically runs well above actual draw. Provisioning to nameplate strands capacity.',
+    'A 10 kW rack draws about 28 A at 208 V three-phase, needing a 40 A circuit at 125 percent. The same rack at 415 V needs half that.',
+    'Dual-corded equipment means each of the A and B feeds carries the full load when the other is out, so both are sized for all of it.',
+  ],
+  sections: [
+    { id: 'three-numbers-one-word', h2: 'Three numbers, one word', html: `
+  <p><b>Average density</b> is arithmetic: total IT load divided by the number of racks. A 1.2 MW hall across 150 racks averages 8 kW. It is a useful planning figure and nothing is ever designed to it.</p>
+  <p><b>Design density</b> is what a given rack position is provisioned to support. It varies across the floor deliberately, because the load does. Put ten 40 kW AI racks in that same 1.2 MW hall and they consume 400 kW between them, leaving under 6 kW each for the remaining 140 &mdash; so the room needs at least two design densities, and the drawing has to say which positions are which.</p>
+  <p><b>Nameplate</b> is the sum of what the equipment labels claim. It is the least useful of the three and the most often used, because it is the only one available before anything is installed. A dual-supply server with two 1600 W supplies has a 3200 W nameplate, draws perhaps 700 W at typical utilisation, and will never draw more than 1600 W on either cord because the second is redundant.</p>` },
+    { id: 'sizing-the-rack-circuit', h2: 'Sizing the rack circuit', html: `
+  <p>Once a design density is fixed, the branch circuit follows from it. At 208 V three-phase a rack drawing its full design load needs:</p>
+  <table class="reftable">
+    <tr><th scope="col">Design density</th><th scope="col">208 V 3-phase</th><th scope="col">415 V 3-phase</th></tr>
+    <tr><td>5 kW</td><td>13.9 A &rarr; 20 A circuit</td><td>7.0 A &rarr; 15 A circuit</td></tr>
+    <tr><td>10 kW</td><td>27.8 A &rarr; 40 A circuit</td><td>13.9 A &rarr; 20 A circuit</td></tr>
+    <tr><td>15 kW</td><td>41.6 A &rarr; 60 A circuit</td><td>20.9 A &rarr; 30 A circuit</td></tr>
+    <tr><td>20 kW</td><td>55.5 A &rarr; 70 A circuit</td><td>27.8 A &rarr; 40 A circuit</td></tr>
+  </table>
+  <p>Circuit ratings allow for the 125 percent continuous-load factor, since IT load is continuous by any definition; the <a class="inline" href="calculators/kw-to-amps.html">kW to amps calculator</a> gives the current and the <a class="inline" href="calculators/wire-size.html">wire size calculator</a> the conductor. The 415 V column is the reason 415/240 V distribution became standard in large halls: the same density at roughly half the current means less copper, fewer circuits and less transformation loss.</p>` },
+    { id: 'dual-corded-feeds', h2: 'Dual-corded feeds', html: `
+  <p>IT equipment in a concurrently maintainable or fault tolerant facility is dual-corded, drawing from independent A and B feeds. The arithmetic trap is in what each feed has to carry.</p>
+  <p>In normal operation the load divides between the two, so each cord sees roughly half. But the whole point of the arrangement is that either path can be lost &mdash; for planned work or a failure &mdash; and when that happens the surviving feed carries the entire rack. Both feeds, both PDUs, both upstream paths and both sets of conductors are therefore sized for the full design density, not half of it.</p>
+  <p>That is why a dual-path facility provisions roughly twice the distribution capacity of its IT load, and why monitoring a rack at 45 percent on each feed is the normal, healthy reading rather than evidence of waste. <a class="inline" href="guide-uptime-institute-tiers.html">The Uptime Institute tiers</a> describe the topology this supports.</p>` },
+    { id: 'diversity-and-stranded-capacity', h2: 'Diversity and stranded capacity', html: `
+  <p>Racks do not all peak together, and a diversity factor acknowledges that: the sum of design densities across a hall exceeds what the hall will ever draw at once. Applying diversity upstream &mdash; sizing the UPS and the transformer below the sum of the branch circuits &mdash; is normal and necessary, because provisioning for simultaneous peaks on every rack would double the plant.</p>
+  <p>The failure mode in the other direction is <b>stranded capacity</b>: power that has been paid for, is sitting in the plant, and cannot be used. It happens in three recognisable ways.</p>
+  <ul>
+    <li><b>Cooling-limited.</b> The electrical system can deliver 15 kW to a position the air handling can only cool to 8. Above roughly 20 to 30 kW per rack this becomes the binding constraint &mdash; <a class="inline" href="guide-liquid-vs-air-cooling.html">liquid vs air cooling</a> covers where that line sits and what crosses it.</li>
+    <li><b>Circuit-limited.</b> Capacity exists upstream but the rack has 20 A circuits in it. Adding density means re-pulling branch circuits, often in an occupied hall.</li>
+    <li><b>Provisioned to nameplate.</b> Circuits sized for 3200 W of labelled supplies feeding 700 W of actual draw. The capacity is committed in the records and idle in reality, and this is the most common form by a wide margin.</li>
+  </ul>` },
+    { id: 'common-mistakes', h2: 'Common mistakes', html: `
+  <ul>
+    <li><b>Designing to average density.</b> It describes the room, not any position in it, and a single high-density row invalidates it.</li>
+    <li><b>Provisioning from nameplate.</b> It overstates draw substantially and strands capacity in the capacity-management records rather than in the plant.</li>
+    <li><b>Sizing dual feeds at half load each.</b> Either feed must carry the whole rack, which is the entire purpose of having two.</li>
+    <li><b>Reading 45 percent utilisation on an A feed as waste.</b> In a dual-path design that is the correct number.</li>
+    <li><b>Treating power and cooling density as one figure.</b> They are provisioned by different systems and the lower one governs what the position can actually hold.</li>
+  </ul>` },
+  ],
+  faqs: [
+    { q: 'What is rack power density?', a: 'The IT load a rack draws or is provisioned for, in kilowatts. It appears as three different figures that get used interchangeably: average density, which is total load divided by rack count; design density, which is what a given position is provisioned to support; and nameplate, which is the sum of equipment power supply ratings and usually well above actual draw.' },
+    { q: 'What size circuit does a 10 kW rack need?', a: 'At 208 V three-phase a 10 kW rack draws about 27.8 A, and because IT load is continuous the circuit is sized at 125 percent of that, so a 40 A circuit. The same rack on 415 V three-phase draws about 13.9 A and needs a 20 A circuit, which is why higher-voltage distribution is standard in large halls.' },
+    { q: 'Should each of the A and B feeds be sized for half the load?', a: 'No. Both are sized for the full design density. Load divides between them in normal operation, but the purpose of two independent feeds is that either can be taken out of service or lost, and the surviving one then carries the entire rack. This is why a dual-path facility provisions roughly twice the distribution capacity of its IT load.' },
+    { q: 'What is stranded capacity?', a: 'Power that has been provisioned and paid for but cannot be used. It happens when cooling cannot remove the heat the electrical system could deliver, when the branch circuits in a rack are too small to carry additional load even though upstream capacity exists, or most commonly when circuits were provisioned from equipment nameplate ratings rather than measured draw.' },
+  ],
+  nextIntro: 'The <a class="inline" href="data-centers/power-distribution.html">power distribution</a> reference covers the PDUs and busway this runs through, and <a class="inline" href="guide-liquid-vs-air-cooling.html">liquid vs air cooling</a> covers the thermal limit that usually binds before the electrical one.',
+  calcs: [
+    ['calculators/kw-to-amps.html', 'kW to Amps Calculator', 'Rack current at 208 V or 415 V, with the 125 percent figure.'],
+    ['calculators/wire-size.html', 'Wire Size Calculator', 'The branch-circuit conductor for that current.'],
+    ['calculators/transformer-sizing.html', 'Transformer Sizing Calculator', 'The upstream kVA once diversity is applied.'],
+  ],
+  guides: [
+    ['guide-liquid-vs-air-cooling.html', 'Liquid vs. Air Cooling for AI Racks'],
+    ['guide-415v-vs-480v-distribution.html', '415 V vs. 480 V Distribution'],
+    ['guide-uptime-institute-tiers.html', 'Uptime Institute Tiers Explained'],
+    ['guide-pue-explained.html', 'PUE Explained'],
+  ],
+  covers: 'The difference between average, design and nameplate density, branch-circuit sizing at 208 V and 415 V with the continuous-load factor, why both feeds of a dual-corded rack carry the full load, diversity applied upstream, and the three ways provisioned capacity gets stranded.',
+  basedOn: ['NEC 210.19(A) and 215.2 for the continuous-load factor applied to the circuit figures', 'ASHRAE thermal guidelines for the cooling limit that usually binds first', 'Voltfield’s own guides on liquid cooling, 415 V distribution and facility topology'],
+  notThis: 'A capacity plan or an electrical design. The circuit figures are arithmetic from the stated voltages and are subject to the termination and derating rules in NEC 110.14(C) and 310.15; diversity factors are site-specific and the cooling limit depends on the containment and air-handling design.',
+},
+
 ];
 
 /* ------------------------------------------------------------- builders ---- */
@@ -602,7 +849,15 @@ const tpl = fs.readFileSync(path.join(root, TEMPLATE), 'utf8');
 const eol = tpl.includes('\r\n') ? '\r\n' : '\n';
 let made = 0;
 
+/* Slugs on the command line restrict the run to those guides. A full run
+   rewrites every page in GUIDES, which destroys anything hand-added to one
+   afterwards -- that happened once, to two cross-links added to generated
+   guides between batches. Put such a link in the spec, or pass the slugs you
+   mean. */
+const only = process.argv.slice(2).filter((a) => !a.startsWith('-'));
+
 for (const g of GUIDES) {
+  if (only.length && !only.includes(g.slug)) continue;
   let s = tpl.replace(/\r\n/g, '\n');
   const url = BASE + g.slug + '.html';
   const card = BASE + 'social/social-generic.jpg';
