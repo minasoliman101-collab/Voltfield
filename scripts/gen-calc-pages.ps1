@@ -21,6 +21,12 @@
 # 'NEC 3% and 5% rule' section and a visible FAQ (with matching FAQPage entries)
 # that this generator has no record type for. Port them before regenerating, or
 # they will be lost.
+# -Only <slug[,slug]> writes just those pages. It exists because of the hand
+# edits noted above: calculators/voltage-drop.html carries sections this
+# generator has no record type for, so a full run silently destroys them.
+# Generating one new page should not require risking twelve working ones.
+param([string[]]$Only)
+
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
 $utf8 = New-Object System.Text.UTF8Encoding($false)
@@ -74,7 +80,9 @@ $outDir = Join-Path $root 'calculators'
 if (-not (Test-Path $outDir)) { New-Item -ItemType Directory $outDir | Out-Null }
 
 $written = 0
+$skipped = 0
 foreach ($r in $recs) {
+  if ($Only -and ($Only -notcontains $r.slug)) { $skipped++; continue }
   $url = "https://voltfield.org/calculators/$($r.slug).html"
   $tool = [System.IO.File]::ReadAllText((Join-Path $PSScriptRoot "tpl\calc-tools\$($r.slug).html"), [System.Text.Encoding]::UTF8)
   $tool = ($tool -replace '^<!--.*?-->\r?\n','').TrimEnd()
@@ -171,7 +179,18 @@ foreach ($r in $recs) {
   foreach ($l in $r.related) {
     $i = $l.IndexOf(' :: ')
     if ($i -lt 0) { continue }
-    [void]$sb.AppendLine("      <a href=""$($l.Substring(0,$i))"">$($l.Substring($i+4))</a>")
+    $href = $l.Substring(0,$i)
+    # Related links used to be emitted unchecked, and 22 of them pointed at the
+    # /parts/ pages retired in August -- the content file kept them long after
+    # the pages were gone. A path-shaped target is now resolved on disk before
+    # it ships; a query string is stripped first, since those address a page
+    # plus a filter, not a file.
+    $probe = ($href -split '[?#]')[0]
+    if ($probe.StartsWith('/') -and -not (Test-Path (Join-Path $root $probe.TrimStart('/')))) {
+      Write-Host ("  SKIPPED dead related link on {0}: {1}" -f $r.slug, $href)
+      continue
+    }
+    [void]$sb.AppendLine("      <a href=""$href"">$($l.Substring($i+4))</a>")
   }
   [void]$sb.AppendLine("      <a href=""/engineering-calculators.html"">All 20 calculators</a>")
   [void]$sb.AppendLine('    </div>')

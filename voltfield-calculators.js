@@ -423,6 +423,130 @@
    Moved here from engineering-calculators.html with the calculators, so the
    event names (calc = the estimator id) are unchanged and old reports still line up. ---------- */
 (function(){
+/* ---- Unit conversions: amps/kW/kVA/HP/watts ----
+     One shared square root of three, used by every handler below and quoted as
+     1.732 in the formulas on the pages, so a reader checking the page against
+     the tool gets the same answer to the digits shown. Each handler ignores
+     power factor on DC rather than silently applying a meaningless one, and
+     hides the field so nobody types into it expecting an effect. */
+  const R3=Math.sqrt(3);
+
+  /* Show or hide a power factor field when the system selector changes, so the
+     form only ever asks for what the selected system actually uses. */
+  function wirePfToggle(selId,wrapId){
+    const sel=document.getElementById(selId), wrap=document.getElementById(wrapId);
+    if(!sel||!wrap)return;
+    const sync=function(){ wrap.hidden = (sel.value==='dc'); };
+    sel.addEventListener('change',sync); sync();
+  }
+  wirePfToggle('a2kPhase','a2kPfWrap');
+  wirePfToggle('k2aPhase','k2aPfWrap');
+  wirePfToggle('w2aPhase','w2aPfWrap');
+
+  /* Amps to kW */
+  const a2kBtn=document.getElementById('a2kBtn');
+  if(a2kBtn)a2kBtn.addEventListener('click',function(){
+    const r=document.getElementById('a2kResult');
+    const sys=document.getElementById('a2kPhase').value;
+    const I=parseFloat(document.getElementById('a2kI').value);
+    const V=parseFloat(document.getElementById('a2kV').value);
+    const pfRaw=parseFloat(document.getElementById('a2kPf').value);
+    const pf = sys==='dc' ? 1 : pfRaw;
+    if(!(I>0)||!(V>0)){r.textContent='Enter current and voltage.';r.className='est-result show';return;}
+    if(sys!=='dc'&&!(pf>0&&pf<=1)){r.textContent='Enter a power factor between 0 and 1.';r.className='est-result show';return;}
+    const kw = sys==='3' ? (R3*V*I*pf)/1000 : (V*I*pf)/1000;
+    const kva = sys==='dc' ? null : (sys==='3' ? (R3*V*I)/1000 : (V*I)/1000);
+    let msg='<b>'+fmt(kw)+' kW</b> real power';
+    if(kva!==null) msg+=', from <b>'+fmt(kva)+' kVA</b> apparent at PF '+fmt(pf,2);
+    msg+='.';
+    if(sys==='3') msg+=' Three-phase, so the square root of three is included.';
+    if(sys==='dc') msg+=' DC has no power factor, so real and apparent power are the same.';
+    r.innerHTML=msg; r.className='est-result show';
+  });
+
+  /* kW to amps */
+  const k2aBtn=document.getElementById('k2aBtn');
+  if(k2aBtn)k2aBtn.addEventListener('click',function(){
+    const r=document.getElementById('k2aResult');
+    const sys=document.getElementById('k2aPhase').value;
+    const kw=parseFloat(document.getElementById('k2aKw').value);
+    const V=parseFloat(document.getElementById('k2aV').value);
+    const pfRaw=parseFloat(document.getElementById('k2aPf').value);
+    const pf = sys==='dc' ? 1 : pfRaw;
+    if(!(kw>0)||!(V>0)){r.textContent='Enter power and voltage.';r.className='est-result show';return;}
+    if(sys!=='dc'&&!(pf>0&&pf<=1)){r.textContent='Enter a power factor between 0 and 1.';r.className='est-result show';return;}
+    const I = sys==='3' ? (kw*1000)/(R3*V*pf) : (kw*1000)/(V*pf);
+    /* The 125% continuous-load figure is shown alongside because sizing from
+       the bare current is the most common way this result is misused. */
+    const cont=I*1.25;
+    let msg='<b>'+fmt(I)+' A</b>';
+    if(sys==='3') msg+=' per phase';
+    msg+='. At 125% for a continuous load: <b>'+fmt(cont)+' A</b>, which is the figure NEC 210.19(A) sizes the conductor from.';
+    if(sys==='dc') msg+=' DC, so no power factor applies.';
+    r.innerHTML=msg; r.className='est-result show';
+  });
+
+  /* kVA to amps -- no power factor by design */
+  const kva2aBtn=document.getElementById('kva2aBtn');
+  if(kva2aBtn)kva2aBtn.addEventListener('click',function(){
+    const r=document.getElementById('kva2aResult');
+    const sys=document.getElementById('kva2aPhase').value;
+    const kva=parseFloat(document.getElementById('kva2aKva').value);
+    const V=parseFloat(document.getElementById('kva2aV').value);
+    if(!(kva>0)||!(V>0)){r.textContent='Enter a kVA rating and the voltage on the side you are calculating.';r.className='est-result show';return;}
+    const I = sys==='3' ? (kva*1000)/(R3*V) : (kva*1000)/V;
+    r.innerHTML='<b>'+fmt(I)+' A</b> full-load'+(sys==='3'?' per phase':'')+
+      '. No power factor term: kVA is already apparent power. Calculate the other winding separately &mdash; the kVA is the same on both sides, the current is not.';
+    r.className='est-result show';
+  });
+
+  /* Motor HP to kW, and to full-load amps */
+  const hp2kBtn=document.getElementById('hp2kBtn');
+  if(hp2kBtn)hp2kBtn.addEventListener('click',function(){
+    const r=document.getElementById('hp2kResult');
+    const hp=parseFloat(document.getElementById('hp2kHp').value);
+    const eff=parseFloat(document.getElementById('hp2kEff').value);
+    const V=parseFloat(document.getElementById('hp2kV').value);
+    const pf=parseFloat(document.getElementById('hp2kPf').value);
+    if(!(hp>0)){r.textContent='Enter horsepower.';r.className='est-result show';return;}
+    if(!(eff>0&&eff<=1)){r.textContent='Enter an efficiency between 0 and 1, for example 0.93.';r.className='est-result show';return;}
+    const out=hp*0.7457;
+    const inp=out/eff;
+    let msg='Shaft output <b>'+fmt(out)+' kW</b>, drawn from the supply <b>'+fmt(inp)+' kW</b>.';
+    if(V>0&&pf>0&&pf<=1){
+      const I=(hp*745.7)/(R3*V*pf*eff);
+      msg+=' Full-load current at '+fmt(V,0)+' V three-phase: <b>'+fmt(I)+' A</b>. '+
+           'Size conductors and protection from NEC Table 430.250, which is deliberately more conservative than this figure.';
+    } else {
+      msg+=' Add voltage and power factor for full-load current.';
+    }
+    r.innerHTML=msg; r.className='est-result show';
+  });
+
+  /* Watts to amps */
+  const w2aBtn=document.getElementById('w2aBtn');
+  if(w2aBtn)w2aBtn.addEventListener('click',function(){
+    const r=document.getElementById('w2aResult');
+    const sys=document.getElementById('w2aPhase').value;
+    const W=parseFloat(document.getElementById('w2aW').value);
+    const V=parseFloat(document.getElementById('w2aV').value);
+    const pfRaw=parseFloat(document.getElementById('w2aPf').value);
+    const pf = sys==='dc' ? 1 : pfRaw;
+    if(!(W>0)||!(V>0)){r.textContent='Enter power and voltage.';r.className='est-result show';return;}
+    if(sys!=='dc'&&!(pf>0&&pf<=1)){r.textContent='Enter a power factor between 0 and 1.';r.className='est-result show';return;}
+    const I = sys==='3' ? W/(R3*V*pf) : W/(V*pf);
+    let msg='<b>'+fmt(I)+' A</b>'+(sys==='3'?' per phase':'')+'.';
+    /* Branch-circuit context only where it is meaningful: a single-phase load
+       on a standard residential or commercial branch circuit. */
+    if(sys==='1'&&V<=277){
+      const cont=I*1.25;
+      msg+=' At 125% for a continuous load: <b>'+fmt(cont)+' A</b>. On a 15 A circuit the continuous limit is 12 A, on a 20 A circuit 16 A.';
+    }
+    if(sys==='dc') msg+=' DC, so no power factor applies.';
+    r.innerHTML=msg; r.className='est-result show';
+  });
+
+
   document.addEventListener('click',function(e){
     var btn=e.target.closest('button[id$="Btn"]');
     if(!btn)return;

@@ -1,0 +1,12 @@
+<!-- Live calculator for calculators/kva-to-amps.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="kva2aCalc">
+    <h2>kVA to Amps</h2>
+    <div class="sub">Full-load amps at the nameplate rating. There is deliberately no power factor field: kVA is already apparent power.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="kva2aPhase">System</label><select id="kva2aPhase"><option value="3" selected>Three-phase</option><option value="1">Single-phase</option></select></div>
+      <div class="est-field"><label for="kva2aKva">Rating (kVA)</label><input type="number" id="kva2aKva" min="0" step="1" placeholder="e.g. 500"></div>
+      <div class="est-field"><label for="kva2aV">Voltage on this side (V)</label><input type="number" id="kva2aV" min="0" step="1" placeholder="e.g. 480"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="kva2aBtn">Calculate</button></div></div>
+    <div class="est-result" id="kva2aResult"></div>
+  </div>

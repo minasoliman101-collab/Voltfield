@@ -1,0 +1,13 @@
+<!-- Live calculator for calculators/hp-to-kw.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="hp2kCalc">
+    <h2>Motor HP to kW</h2>
+    <div class="sub">Shaft output, power drawn from the supply, and full-load amps. Size conductors from NEC Table 430.250, not from the calculated current.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="hp2kHp">Horsepower</label><input type="number" id="hp2kHp" min="0" step="0.5" placeholder="e.g. 50"></div>
+      <div class="est-field"><label for="hp2kEff">Efficiency</label><input type="number" id="hp2kEff" min="0.1" max="1" step="0.01" placeholder="e.g. 0.93"></div>
+      <div class="est-field"><label for="hp2kV">Voltage (V, three-phase)</label><input type="number" id="hp2kV" min="0" step="1" placeholder="e.g. 460"></div>
+      <div class="est-field"><label for="hp2kPf">Power factor</label><input type="number" id="hp2kPf" min="0.1" max="1" step="0.01" placeholder="e.g. 0.86"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="hp2kBtn">Calculate</button></div></div>
+    <div class="est-result" id="hp2kResult"></div>
+  </div>

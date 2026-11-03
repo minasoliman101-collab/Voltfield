@@ -1,0 +1,13 @@
+<!-- Live calculator for calculators/kw-to-amps.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="k2aCalc">
+    <h2>kW to Amps</h2>
+    <div class="sub">Steady-state current at the stated power factor. This is before the 125% continuous-load factor and before any derating.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="k2aPhase">System</label><select id="k2aPhase"><option value="3" selected>Three-phase AC</option><option value="1">Single-phase AC</option><option value="dc">DC</option></select></div>
+      <div class="est-field"><label for="k2aKw">Real power (kW)</label><input type="number" id="k2aKw" min="0" step="0.1" placeholder="e.g. 75"></div>
+      <div class="est-field"><label for="k2aV">Voltage (V)</label><input type="number" id="k2aV" min="0" step="1" placeholder="e.g. 480"></div>
+      <div class="est-field" id="k2aPfWrap"><label for="k2aPf">Power factor</label><input type="number" id="k2aPf" min="0.1" max="1" step="0.01" placeholder="e.g. 0.9"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="k2aBtn">Calculate</button></div></div>
+    <div class="est-result" id="k2aResult"></div>
+  </div>

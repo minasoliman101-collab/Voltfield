@@ -32,8 +32,8 @@ This is a resistance-only calculation. It ignores conductor reactance, which mat
 --mistakes
 Using one-way distance where the formula wants it and then doubling it again — the 2 and the 1.732 already account for the return path. Sizing to ampacity first and never checking drop on a long run. Applying the single-phase formula to a three-phase circuit, which over-states drop by about 15%.
 --related
-/parts/lv-power-cable.html :: LV Power Cable
-/parts/mv-power-cable.html :: MV Power Cable
+/voltfield-supply-catalog.html?q=LV%20Power%20Cable :: LV Power Cable
+/voltfield-supply-catalog.html?q=MV%20Power%20Cable :: MV Power Cable
 /data-centers/cabling.html :: Cable &amp; Busbar Sizing
 /glossary.html#ampacity :: Ampacity, defined
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
@@ -64,8 +64,8 @@ This sizes for steady-state load only. It does not account for future growth, ha
 --mistakes
 Sizing on kW and never dividing by power factor, which under-sizes by however far PF sits below unity. Sizing exactly to calculated load with no growth allowance. Choosing on kVA alone and leaving %Z to the supplier, which is how switchgear ends up under-rated for the fault current the transformer can deliver.
 --related
-/parts/pad-mount-transformers.html :: Pad-Mount Transformers
-/parts/dry-type-cast-resin-transformers.html :: Dry-Type Transformers
+/voltfield-supply-catalog.html?q=Pad-Mount%20Transformers :: Pad-Mount Transformers
+/voltfield-supply-catalog.html?q=Dry-Type%20%2F%20Cast-Resin%20Transformers :: Dry-Type Transformers
 /data-centers/transformers.html :: Data Center Transformers
 /guide-transformer-nameplate.html :: How to Read a Transformer Nameplate
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
@@ -96,8 +96,8 @@ This is an infinite-source estimate: it assumes the utility can supply unlimited
 --mistakes
 Using the calculated value as a final number instead of commissioning a study. Forgetting motor contribution on a motor-heavy bus. Assuming a lower impedance is always better. Applying the secondary-terminal figure to equipment far downstream, where the real value is lower.
 --related
-/parts/lv-switchgear.html :: LV Switchgear
-/parts/molded-case-breakers-mccb-15-1200a.html :: Molded-Case Breakers
+/voltfield-supply-catalog.html?q=LV%20Switchgear :: LV Switchgear
+/voltfield-supply-catalog.html?q=Molded-Case%20Breakers%20(MCCB%2015%E2%80%931200A) :: Molded-Case Breakers
 /guide-short-circuit-studies-breaker-coordination.html :: Short-Circuit Studies &amp; Coordination
 /glossary.html#impedance :: Impedance (%Z), defined
 /guide-short-circuit-studies-breaker-coordination.html :: Short-Circuit Studies &amp; Breaker Coordination
@@ -156,8 +156,8 @@ The lookup gives the base table value before any correction. Real ampacity is th
 --mistakes
 Using the 90&deg;C column when the terminations are only rated 75&deg;C — the termination governs. Counting the neutral as non-current-carrying on a circuit feeding non-linear load, where it carries harmonic current. Checking fill and forgetting the derating that the same conductor count triggers.
 --related
-/parts/lv-power-cable.html :: LV Power Cable
-/parts/conduit-raceway-and-fittings.html :: Conduit, Raceway &amp; Fittings
+/voltfield-supply-catalog.html?q=LV%20Power%20Cable :: LV Power Cable
+/voltfield-supply-catalog.html?q=Conduit%2C%20Raceway%20%26%20Fittings :: Conduit, Raceway &amp; Fittings
 /data-centers/cabling.html :: Cable &amp; Busbar Sizing
 /glossary.html#derating :: Derating, defined
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
@@ -189,8 +189,8 @@ This is a day-one calculation. Capacity fades with cycling and calendar age, so 
 --mistakes
 Sizing to usable energy and ordering that as nameplate. Ignoring degradation, then discovering the shortfall in year three. Treating power and energy as one specification, which produces a system that meets the kWh and cannot deliver the kW.
 --related
-/parts/lfp-dc-blocks-5mwh.html :: LFP DC Blocks
-/parts/grid-forming-pcs.html :: Grid-Forming PCS
+/voltfield-supply-catalog.html?q=LFP%20DC%20Blocks%20(5MWh) :: LFP DC Blocks
+/voltfield-supply-catalog.html?q=Grid-Forming%20PCS :: Grid-Forming PCS
 /battery-storage/bess-enclosures.html :: BESS Enclosures &amp; Modules
 /guide-bess-augmentation.html :: BESS Augmentation Explained
 /guide-bess-augmentation.html :: BESS Augmentation Explained
@@ -224,9 +224,9 @@ The result is only as good as the design temperatures. Record low is not average
 --mistakes
 Using average rather than record low temperature, which produces a string that is legal on paper and over-voltage in practice. Ignoring the hot-weather minimum entirely and building strings that fall out of the MPPT window in summer. Applying one site's temperatures to another project.
 --related
-/parts/mono-perc-modules.html :: Mono PERC Modules
-/parts/topcon-modules.html :: TOPCon Modules
-/parts/central-inverters-utility.html :: Central Inverters
+/voltfield-supply-catalog.html?q=Mono%20PERC%20Modules :: Mono PERC Modules
+/voltfield-supply-catalog.html?q=TOPCon%20Modules :: TOPCon Modules
+/voltfield-supply-catalog.html?q=Central%20Inverters%20(Utility) :: Central Inverters
 /guide-inverter-clipping-ratio.html :: Inverter Clipping &amp; DC:AC Ratio
 /guide-inverter-clipping-ratio.html :: Inverter Clipping &amp; DC:AC Ratio
 /calculators/bess-sizing.html :: BESS Sizing Calculator
@@ -254,7 +254,7 @@ This sizes a fixed bank for one operating point. Loads vary, and a fixed bank on
 --mistakes
 Correcting to unity rather than to a target just below it, which risks over-correction as load varies. Installing capacitors on a harmonic-heavy bus without a detuning reactor. Sizing from a peak-demand reading and leaving the bank connected through the night.
 --related
-/parts/power-meters-bms.html :: Power Meters &amp; BMS
+/voltfield-supply-catalog.html?q=Power%20Meters%20%2F%20BMS :: Power Meters &amp; BMS
 /data-centers/monitoring-controls.html :: Monitoring &amp; Controls
 /glossary.html#kva-vs-kw :: kVA vs. kW, defined
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
@@ -281,8 +281,8 @@ A steady-state screening estimate. It does not model the acceleration curve, the
 --mistakes
 Using full-load kVA instead of locked-rotor kVA, which understates the dip by a factor of about six. Ignoring dip duration. Assuming a generator-backed bus behaves like a utility source, when a generator is far softer and dips much further.
 --related
-/parts/ac-motors.html :: AC Motors
-/parts/motor-controls-and-drives.html :: Motor Controls &amp; Drives
+/voltfield-supply-catalog.html?q=AC%20Motors :: AC Motors
+/voltfield-supply-catalog.html?q=Motor%20Controls%20%26%20Drives :: Motor Controls &amp; Drives
 /glossary.html#impedance :: Impedance (%Z), defined
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
 /guide-transformer-impedance.html :: Transformer Impedance (%Z) Explained
@@ -312,8 +312,8 @@ The multiplier is an estimate, not a measurement. Actual inrush depends on resid
 --mistakes
 Setting instantaneous protection from full-load current alone. Assuming inrush is the same on every energisation when it depends on residual flux from the last de-energisation. Applying a low multiplier to a modern low-loss core, which tends to have higher inrush than older designs.
 --related
-/parts/pad-mount-transformers.html :: Pad-Mount Transformers
-/parts/large-power-transformers.html :: Large Power Transformers
+/voltfield-supply-catalog.html?q=Pad-Mount%20Transformers :: Pad-Mount Transformers
+/voltfield-supply-catalog.html?q=Large%20Power%20Transformers :: Large Power Transformers
 /data-centers/transformers.html :: Data Center Transformers
 /guide-transformer-nameplate.html :: How to Read a Transformer Nameplate
 /guide-transformer-nameplate.html :: How to Read a Transformer Nameplate
@@ -344,8 +344,8 @@ Dwight's formula assumes uniform soil, which real ground is not — resistivity 
 --mistakes
 Treating a calculation as a substitute for measurement, when the code requirement is about measured resistance. Specifying a larger diameter to hit a resistance target. Spacing multiple rods too closely, so their shells of influence overlap and the array performs worse than expected.
 --related
-/parts/ground-bars-and-kits.html :: Ground Bars &amp; Kits
-/parts/surge-protective-devices.html :: Surge Protective Devices
+/voltfield-supply-catalog.html?q=Ground%20Bars%20%26%20Kits :: Ground Bars &amp; Kits
+/voltfield-supply-catalog.html?q=Surge%20Protective%20Devices :: Surge Protective Devices
 /data-centers/grounding-bonding.html :: Grounding, Bonding &amp; Surge Protection
 /guide-grounding-bonding-basics.html :: Grounding &amp; Bonding Basics
 /guide-grounding-bonding-basics.html :: Grounding &amp; Bonding Basics
@@ -370,8 +370,8 @@ Depends entirely on the consumption figure used, which should come from the manu
 --mistakes
 Using nameplate consumption for a lightly loaded set. Treating nominal tank capacity as usable. Sizing storage for runtime without checking what the local fire code allows to be stored on site. Ignoring fuel polishing on a tank that sits full for years.
 --related
-/parts/diesel-gensets.html :: Diesel Gensets
-/parts/fuel-and-starting-systems.html :: Fuel &amp; Starting Systems
+/voltfield-supply-catalog.html?q=Diesel%20Gensets :: Diesel Gensets
+/voltfield-supply-catalog.html?q=Fuel%20%26%20Starting%20Systems :: Fuel &amp; Starting Systems
 /data-centers/genset-components.html :: Genset Components
 /data-centers/backup-power.html :: Backup Power
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
@@ -380,3 +380,161 @@ Using nameplate consumption for a lightly loaded set. Treating nominal tank capa
 /calculators/motor-start.html :: Motor Starting Voltage Dip Calculator
 /calculators/bess-sizing.html :: BESS Sizing Calculator
 
+===amps-to-kw|amps-to-kw|Amps to kW Calculator|Amps to kW Calculator (1-Phase, 3-Phase, DC)|Convert amps to kilowatts for single-phase, three-phase and DC circuits, with the power factor term that makes the difference. Free, no signup.
+--intro
+Amps measure current. Kilowatts measure real power &mdash; the part actually doing work. Converting between them needs the voltage, and on an AC circuit it also needs the power factor, because current and voltage are not in step. Leave power factor out and the answer comes back high by however far the load sits from unity, which on a motor-heavy feeder is 10 to 20 percent.
+The three-phase case carries an extra factor of the square root of three. That term is not a fudge: it falls out of three voltages 120 degrees apart, and it is the single most commonly dropped part of this calculation.
+--formula
+kW = (V &times; I &times; PF) / 1000  [single-phase]
+kW = (1.732 &times; V &times; I &times; PF) / 1000  [three-phase]
+kW = (V &times; I) / 1000  [DC]
+--vars
+V :: Voltage. Line-to-line for three-phase, line-to-neutral for single-phase
+I :: Current in amperes
+PF :: Power factor, between 0 and 1. Unity on a purely resistive load; roughly 0.8 to 0.9 on a motor
+1.732 :: The square root of three, which appears in every three-phase power calculation
+--example
+A 100 A three-phase load at 480 V with a power factor of 0.9:
+kW = (1.732 &times; 480 &times; 100 &times; 0.9) / 1000 = 74.8 kW
+The same 100 A single-phase at 240 V, purely resistive:
+kW = (240 &times; 100 &times; 1.0) / 1000 = 24 kW
+Same current, very different power. The voltage and the number of phases do most of the work here.
+--standard
+There is no code section governing the arithmetic; it is the definition of real power. The place a standard enters is the current you put in: NEC Article 220 covers how load current is calculated for sizing purposes, and NEC 430.250 gives the full-load current tables for motors rather than letting you derive them.
+--limits
+This returns real power at the operating point you describe. It is not a demand figure, and it says nothing about what happens while a motor starts, where current can run six to eight times full-load for a few seconds. On a non-linear load &mdash; drives, rectifiers, switch-mode supplies &mdash; a single power factor also hides the distortion component, and the true power factor is lower than the displacement figure a meter reports.
+--mistakes
+Dropping the square root of three on a three-phase circuit, which overstates power by 73 percent. Using unity power factor because the real figure is unknown, which overstates it again. Mixing line-to-line and line-to-neutral voltage on the same calculation. Reading nameplate amps as operating amps: a nameplate states full-load current, and most equipment does not run there.
+--related
+/guide-kw-vs-kva.html :: kW vs. kVA Explained
+/calculators/kw-to-amps.html :: kW to Amps Calculator
+/calculators/kva-to-amps.html :: kVA to Amps Calculator
+/calculators/watts-to-amps.html :: Watts to Amps Calculator
+/calculators/power-factor.html :: Power Factor Correction Calculator
+/calculators/reference-tables.html :: Unit Converter &amp; Reference Tables
+
+===kw-to-amps|kw-to-amps|kW to Amps Calculator|kW to Amps Calculator (1-Phase, 3-Phase, DC)|Convert kilowatts to amps for single-phase, three-phase and DC circuits, and get the current a conductor actually has to carry. Free, no signup.
+--intro
+This is the direction that matters for sizing. Equipment is specified in kilowatts and conductors are sized in amperes, so every feeder calculation starts by turning one into the other. The current you get out is the figure that drives conductor ampacity, overcurrent device rating and voltage drop.
+Power factor works the opposite way here: a lower power factor means more current for the same kilowatts, not less. That is the whole reason power factor correction pays for itself &mdash; the real power is unchanged, but the current the system carries falls.
+--formula
+I = (kW &times; 1000) / (V &times; PF)  [single-phase]
+I = (kW &times; 1000) / (1.732 &times; V &times; PF)  [three-phase]
+I = (kW &times; 1000) / V  [DC]
+--vars
+kW :: Real power
+V :: Voltage. Line-to-line for three-phase
+PF :: Power factor, between 0 and 1
+I :: Resulting current in amperes
+--example
+A 75 kW three-phase load at 480 V, power factor 0.9:
+I = (75 &times; 1000) / (1.732 &times; 480 &times; 0.9) = 100.2 A
+Drop the power factor to 0.75 and the same 75 kW draws 120.2 A &mdash; twenty percent more current for identical work, which can be the difference between one conductor size and the next.
+--standard
+The arithmetic is definitional. What the result feeds into is not: NEC 210.19 and 215.2 govern conductor sizing for branch circuits and feeders, NEC 310.16 gives the ampacity tables, and NEC 210.20 and 215.3 set how the overcurrent device relates to the calculated load. For continuous loads, the 125 percent rule in NEC 210.19(A) applies on top of this figure.
+--limits
+This is steady-state current at one operating point. It does not apply the 125 percent continuous-load factor, add any demand factor from NEC Article 220, or account for starting current. It also assumes balanced three-phase load; on an unbalanced system the phase currents differ and the highest one is what sizes the conductor.
+--mistakes
+Sizing a conductor on this number alone, with no continuous-load factor and no derating for ambient temperature or conduit fill. Forgetting that the overcurrent device, not the calculated current, is what the conductor must coordinate with. Using the same power factor for a resistive and a motor load. Assuming three-phase current is simply one third of the single-phase figure, which it is not.
+--related
+/calculators/amps-to-kw.html :: Amps to kW Calculator
+/calculators/voltage-drop.html :: Voltage Drop Calculator
+/calculators/ampacity.html :: Cable Ampacity &amp; Conduit Fill
+/guide-continuous-load-80-percent-rule.html :: The 80% Rule &amp; Continuous Loads
+/guide-cable-ampacity-derating.html :: Cable Ampacity Derating
+/guide-kw-vs-kva.html :: kW vs. kVA Explained
+
+===kva-to-amps|kva-to-amps|kVA to Amps Calculator|kVA to Amps Calculator (Transformer Full-Load Amps)|Convert a kVA rating to full-load amps for single-phase and three-phase transformers. No power factor needed, and this page explains why. Free, no signup.
+--intro
+Transformers, generators and UPS systems are rated in kVA &mdash; apparent power. Converting a kVA rating to amperes gives full-load current, the figure that sizes secondary conductors, sets the frame of the main device and tells you whether existing gear can carry the unit.
+The useful thing about this conversion is what it does not need: power factor. kVA is already apparent power, the product of volts and amps, so the power factor term that belongs in every kW calculation has no place here. If you find yourself dividing by power factor, you are converting kW, not kVA.
+--formula
+I = (kVA &times; 1000) / V  [single-phase]
+I = (kVA &times; 1000) / (1.732 &times; V)  [three-phase]
+--vars
+kVA :: Apparent power, the nameplate rating
+V :: Voltage on the side you are calculating. Line-to-line for three-phase
+I :: Full-load amperes on that side
+--example
+A 500 kVA transformer with a 480 V three-phase secondary:
+I = (500 &times; 1000) / (1.732 &times; 480) = 601 A
+On the 13.8 kV primary the same 500 kVA is only 20.9 A, which is why primary conductors are small and secondary conductors are not. Calculate each side separately; the kVA is the same on both, the current is not.
+--standard
+Standard kVA nameplate ratings come from ANSI/IEEE C57.12.00. How far a transformer may be loaded beyond nameplate, and for how long, is covered by IEEE C57.91. Secondary conductor and overcurrent protection rules are in NEC Article 450 for the transformer itself and Article 240 for the protection.
+--limits
+This is full-load current at nameplate rating, not the current your load actually draws. It also says nothing about inrush, which on energization can reach eight to twenty-five times this figure for a few cycles, or about fault current, which depends on the transformer's impedance rather than its rating.
+--mistakes
+Dividing by power factor, which belongs in kW calculations and not here. Calculating one side and assuming the other scales with voltage in the wrong direction. Treating full-load amps as operating amps when sizing cooling or estimating losses. Forgetting that a transformer's ability to deliver fault current comes from %Z, so a correctly sized conductor can still sit downstream of under-rated switchgear.
+--related
+/calculators/transformer-sizing.html :: Transformer Sizing Calculator
+/calculators/inrush.html :: Transformer Inrush Calculator
+/calculators/fault-current.html :: Fault Current Calculator
+/guide-transformer-nameplate.html :: How to Read a Transformer Nameplate
+/guide-transformer-impedance.html :: Transformer Impedance (%Z)
+/guide-kw-vs-kva.html :: kW vs. kVA Explained
+
+===hp-to-kw|hp-to-kw|Motor HP to kW Calculator|Motor HP to kW Calculator (and HP to Amps)|Convert motor horsepower to kW output, to kW drawn from the supply, and to full-load amps, with the efficiency term most converters leave out. Free, no signup.
+--intro
+Horsepower on a motor nameplate is mechanical output at the shaft, not electrical input. One horsepower is 745.7 watts, so the conversion to kilowatts looks trivial &mdash; and it is, as long as you are clear which side of the motor you mean.
+The number that matters for sizing is input power, which is higher, because the motor is not perfectly efficient. A 50 hp motor does not draw 37 kW; it draws 37 kW divided by its efficiency. Converters that stop at the 0.7457 multiplier give you the shaft figure and let you under-size the supply.
+--formula
+kW (shaft output) = HP &times; 0.7457
+kW (drawn from supply) = (HP &times; 0.7457) / &eta;
+I = (HP &times; 745.7) / (1.732 &times; V &times; PF &times; &eta;)  [three-phase]
+--vars
+HP :: Nameplate horsepower, mechanical output
+0.7457 :: Watts per horsepower, divided by a thousand. 1 hp = 745.7 W
+&eta; :: Efficiency as a decimal. Commonly 0.90 to 0.96 on a modern premium-efficiency motor
+PF :: Power factor at full load, typically 0.80 to 0.88 on an induction motor
+--example
+A 50 hp motor at 460 V three-phase, 93 percent efficient, power factor 0.86:
+Shaft output = 50 &times; 0.7457 = 37.3 kW
+Drawn from the supply = 37.3 / 0.93 = 40.1 kW
+Current = (50 &times; 745.7) / (1.732 &times; 460 &times; 0.86 &times; 0.93) = 58.5 A
+Worth comparing: NEC Table 430.250 lists 65 A for a 50 hp motor at 460 V. The code table is deliberately conservative and is what you size conductors and protection from, not the calculated figure. Use the calculation to understand the motor; use the table to size the circuit.
+--standard
+NEC 430.250 gives the full-load current tables that must be used for conductor and overcurrent sizing, and NEC 430.22 sets the 125 percent factor on top. Motor efficiency classes are defined by NEMA MG1 in North America and IEC 60034-30-1 internationally. The 745.7 W per horsepower figure is the mechanical definition, not a convention.
+--limits
+This covers steady-state operation at full load. It says nothing about starting: locked-rotor current typically runs six to eight times full-load amps, which is what sizes a soft starter or sets the voltage dip on the bus. Efficiency and power factor both fall at part load, so a motor running at 40 percent load draws proportionally more current than this suggests.
+--mistakes
+Converting horsepower to kilowatts and treating the result as input power, which under-states the supply by the efficiency. Sizing conductors from the calculated current instead of the NEC 430.250 table. Using full-load power factor for a motor that spends its life lightly loaded. Ignoring starting current entirely, which is how a correctly sized feeder still trips on inrush.
+--related
+/calculators/motor-start.html :: Motor Starting Voltage Dip Calculator
+/calculators/kw-to-amps.html :: kW to Amps Calculator
+/calculators/amps-to-kw.html :: Amps to kW Calculator
+/voltfield-supply-catalog.html?q=AC%20Motors :: AC Motors
+/guide-kw-vs-kva.html :: kW vs. kVA Explained
+/calculators/power-factor.html :: Power Factor Correction Calculator
+
+===watts-to-amps|watts-to-amps|Watts to Amps Calculator|Watts to Amps Calculator (1-Phase, 3-Phase, DC)|Convert watts to amps for DC, single-phase and three-phase circuits, with the power factor and square-root-of-three terms in the right places. Free, no signup.
+--intro
+Watts to amps is the same calculation as kilowatts to amps without the factor of a thousand, and it is the form that comes up on small loads: a power supply, a heater, a rack of equipment quoted in watts rather than kW.
+The DC case is the clean one &mdash; amps are simply watts over volts. On AC, power factor enters, and on three-phase the square root of three enters as well. Most of the wrong answers in this conversion come from applying the DC form to an AC circuit.
+--formula
+I = W / V  [DC]
+I = W / (V &times; PF)  [single-phase AC]
+I = W / (1.732 &times; V &times; PF)  [three-phase AC]
+--vars
+W :: Real power in watts
+V :: Voltage. Line-to-line for three-phase
+PF :: Power factor, between 0 and 1. Unity for a resistive load such as a heater
+I :: Resulting current in amperes
+--example
+A 1500 W space heater on a 120 V circuit, purely resistive:
+I = 1500 / (120 &times; 1.0) = 12.5 A
+That is why a 1500 W heater is the practical limit on a 15 A branch circuit: at 12.5 A it sits right at the 80 percent continuous-load figure.
+A 50 kW three-phase load at 480 V, power factor 0.95:
+I = 50,000 / (1.732 &times; 480 &times; 0.95) = 63.3 A
+--standard
+The arithmetic is definitional. The limits around it are not: NEC 210.19(A) requires branch-circuit conductors to be sized at 125 percent of a continuous load, which is where the familiar 80 percent figure comes from, and NEC 210.23 governs what may be connected to a given branch-circuit rating.
+--limits
+A steady-state figure at the stated power factor. It does not apply the continuous-load factor, and it does not cover inrush on a motor, a transformer or a switch-mode supply, each of which draws far more than this for a short time. For a load quoted in VA rather than watts, this is the wrong form &mdash; VA is apparent power, so there is no power factor term.
+--mistakes
+Using the DC form on an AC circuit, which omits power factor. Assuming unity power factor on anything with a motor or a drive in it. Treating a VA rating as watts. Loading a branch circuit to the calculated current with no allowance for the 125 percent continuous-load requirement.
+--related
+/calculators/amps-to-kw.html :: Amps to kW Calculator
+/calculators/kw-to-amps.html :: kW to Amps Calculator
+/guide-continuous-load-80-percent-rule.html :: The 80% Rule &amp; Continuous Loads
+/calculators/ampacity.html :: Cable Ampacity &amp; Conduit Fill
+/calculators/voltage-drop.html :: Voltage Drop Calculator
+/guide-kw-vs-kva.html :: kW vs. kVA Explained
