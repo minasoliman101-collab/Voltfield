@@ -119,6 +119,11 @@
 /calculators/solar-string           /calculators/solar-string.html          301!
 /calculators/transformer-sizing     /calculators/transformer-sizing.html    301!
 /calculators/voltage-drop           /calculators/voltage-drop.html          301!
+/calculators/amps-to-kw             /calculators/amps-to-kw.html   301!
+/calculators/kw-to-amps             /calculators/kw-to-amps.html   301!
+/calculators/kva-to-amps            /calculators/kva-to-amps.html   301!
+/calculators/hp-to-kw               /calculators/hp-to-kw.html   301!
+/calculators/watts-to-amps          /calculators/watts-to-amps.html   301!
 # ---- END generated ----
 
 # ---- legacy aliases ----

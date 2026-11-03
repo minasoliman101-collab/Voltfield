@@ -416,13 +416,6 @@
     r.innerHTML='Estimated runtime: <b>'+fmt(hrs,1)+' hours</b> ('+fmt(days,1)+' days) on a full tank at this load.';
     r.className='est-result show';
   });
-})();
-
-/* ---------- usage tracking: which of the 20 calculators actually get used.
-   Delegated so it covers every .estimator/*Btn pair, including any added later.
-   Moved here from engineering-calculators.html with the calculators, so the
-   event names (calc = the estimator id) are unchanged and old reports still line up. ---------- */
-(function(){
 /* ---- Unit conversions: amps/kW/kVA/HP/watts ----
      One shared square root of three, used by every handler below and quoted as
      1.732 in the formulas on the pages, so a reader checking the page against
@@ -547,6 +540,13 @@
   });
 
 
+})();
+
+/* ---------- usage tracking: which of the 20 calculators actually get used.
+   Delegated so it covers every .estimator/*Btn pair, including any added later.
+   Moved here from engineering-calculators.html with the calculators, so the
+   event names (calc = the estimator id) are unchanged and old reports still line up. ---------- */
+(function(){
   document.addEventListener('click',function(e){
     var btn=e.target.closest('button[id$="Btn"]');
     if(!btn)return;
