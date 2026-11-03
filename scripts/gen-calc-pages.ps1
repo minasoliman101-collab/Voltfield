@@ -192,7 +192,7 @@ foreach ($r in $recs) {
     }
     [void]$sb.AppendLine("      <a href=""$href"">$($l.Substring($i+4))</a>")
   }
-  [void]$sb.AppendLine("      <a href=""/engineering-calculators.html"">All 20 calculators</a>")
+  [void]$sb.AppendLine("      <a href=""/engineering-calculators.html"">All calculators</a>")
   [void]$sb.AppendLine('    </div>')
   [void]$sb.AppendLine('')
   # Provenance block, matching the pattern the guides use. The "what it is not"

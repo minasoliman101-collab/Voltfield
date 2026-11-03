@@ -538,3 +538,35 @@ Using the DC form on an AC circuit, which omits power factor. Assuming unity pow
 /calculators/ampacity.html :: Cable Ampacity &amp; Conduit Fill
 /calculators/voltage-drop.html :: Voltage Drop Calculator
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
+
+===wire-size|ampacity|Wire Size Calculator|Wire Size Calculator (What Size Wire for X Amps)|Size a conductor properly: the 125% continuous-load factor, the termination temperature limit under NEC 110.14(C), and ambient and bundling adjustment. Free, no signup.
+--intro
+"What size wire for 100 amps" has no single answer, which is why the charts that give one are so often wrong. The conductor has to satisfy two separate checks, and the answer is whichever is larger.
+The first is the termination temperature. Equipment terminals are listed for 60&deg;C or 75&deg;C, and NEC 110.14(C) says the whole circuit is limited by the lowest-rated termination in it &mdash; so a 90&deg;C conductor landing on a 75&deg;C lug is sized from the 75&deg;C column no matter what the insulation can take. The second is the conductor's own derating: ambient temperature and the number of current-carrying conductors bundled together both reduce what it can safely carry, and that calculation runs on the insulation's own column.
+--formula
+Required ampacity = (continuous load &times; 1.25) + non-continuous load
+Derated ampacity = base ampacity at the insulation rating &times; ambient factor &times; bundling factor
+Conductor = the larger of the two results
+--vars
+Continuous load :: Any load expected to run three hours or more, per NEC 210.19(A)
+Termination rating :: 60 or 75&deg;C, from the equipment listing, per NEC 110.14(C)
+Ambient factor :: From NEC 310.15(B)(1), applied when ambient is not 30&deg;C
+Bundling factor :: From NEC 310.15(C)(1), applied for four or more current-carrying conductors
+--example
+A 100 A continuous load, copper, 75&deg;C terminations, in a 40&deg;C attic with six current-carrying conductors in the raceway:
+Termination check: 100 &times; 1.25 = 125 A required. In the 75&deg;C copper column, 1 AWG carries 130 A. 1 AWG passes.
+Derating check: 1 AWG copper at 90&deg;C is 145 A. At 40&deg;C ambient the factor is 0.91, and six conductors gives 0.80: 145 &times; 0.91 &times; 0.80 = 105.6 A, against an actual load of 100 A. 1 AWG passes again.
+Both checks land on 1 AWG, so that is the answer. Change the ambient to 50&deg;C and the derating check gives 145 &times; 0.82 &times; 0.80 = 95.1 A, below the load, and the conductor goes up to 1/0 while the termination check has not moved at all.
+--standard
+NEC 110.14(C) sets the termination temperature limitation. NEC 210.19(A) and 215.2(A) give the 125 percent continuous-load factor for branch circuits and feeders. Base ampacities are in NEC Table 310.16, ambient correction in 310.15(B)(1) and bundling adjustment in 310.15(C)(1). Overcurrent device selection follows NEC 240.4 and the standard ratings in 240.6.
+--limits
+This sizes for ampacity only. It does not check voltage drop, which on a long run is frequently what forces the conductor up rather than heat, and it does not check short-circuit withstand. It covers conductors in a raceway or cable at a single ambient; buried runs, conductors in sunlight on a rooftop and conductors passing through different ambients each have their own rules. It also does not handle motor circuits, where NEC Article 430 requires the table full-load current rather than the actual load, or the 83 percent allowance in 310.12 for certain dwelling services.
+--mistakes
+Sizing from the 90&deg;C column because the wire is THHN, when the terminals are listed for 75&deg;C. Applying the 125 percent factor to the derated figure rather than running the two checks separately. Forgetting that the neutral counts as a current-carrying conductor on a circuit with significant harmonic content. Counting only the conductors of one circuit when several share the raceway. Treating a chart found online as authoritative when it states neither the termination temperature nor the ambient it assumed.
+--related
+/calculators/ampacity.html :: Cable Ampacity &amp; Conduit Fill
+/calculators/voltage-drop.html :: Voltage Drop Calculator
+/guide-cable-ampacity-derating.html :: Cable Ampacity Derating Explained
+/guide-continuous-load-80-percent-rule.html :: The 80% Rule &amp; Continuous Loads
+/calculators/kw-to-amps.html :: kW to Amps Calculator
+/guide-nec-250-122-egc-sizing.html :: Sizing the Equipment Grounding Conductor

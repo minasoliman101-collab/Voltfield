@@ -416,6 +416,71 @@
     r.innerHTML='Estimated runtime: <b>'+fmt(hrs,1)+' hours</b> ('+fmt(days,1)+' days) on a full tank at this load.';
     r.className='est-result show';
   });
+  /* ---- Wire size: the two checks NEC 110.14(C) and 310.15 actually require ----
+     The existing ampacity tool above is a pure table lookup. This one performs
+     the selection: a conductor has to satisfy the termination temperature limit
+     at 125% of a continuous load AND survive ambient and bundling adjustment on
+     its own insulation column against the real load. The answer is whichever
+     check demands more copper, and they move independently -- raising ambient
+     changes the second and leaves the first alone.
+
+     Adjustment factors are NEC 310.15(B)(1) and 310.15(C)(1). Only the factors
+     needed to run the calculation are here; base ampacities come from the
+     curated NEC_AMPACITY subset already in this file. */
+  const WS_AMB={           /* ambient correction, by insulation rating */
+    90:{30:1.00,35:0.96,40:0.91,45:0.87,50:0.82,55:0.76,60:0.71},
+    75:{30:1.00,35:0.94,40:0.88,45:0.82,50:0.75,55:0.67,60:0.58}
+  };
+  const WS_CCC={3:1.00,6:0.80,9:0.70,20:0.50,30:0.45,40:0.40,41:0.35};
+
+  const wsBtn=document.getElementById('wsBtn');
+  if(wsBtn)wsBtn.addEventListener('click',function(){
+    const r=document.getElementById('wsResult');
+    const load=parseFloat(document.getElementById('wsLoad').value);
+    const cont=document.getElementById('wsCont').value==='1';
+    const mat=document.getElementById('wsMat').value;
+    const term=document.getElementById('wsTerm').value;
+    const ins=document.getElementById('wsIns').value;
+    const amb=document.getElementById('wsAmb').value;
+    const ccc=document.getElementById('wsCcc').value;
+    if(!(load>0)){r.textContent='Enter the load current.';r.className='est-result show';return;}
+
+    /* An insulation rating below the termination rating would make the second
+       check run on a lower column than the first, which is not a real
+       installation -- it means the wrong wire for those terminals. */
+    if(Number(ins)<Number(term)){
+      r.innerHTML='Insulation rated below the terminations. A '+ins+'&deg;C conductor cannot be used on '+term+'&deg;C terminals; pick an insulation rating at or above the termination rating.';
+      r.className='est-result show warn'; return;
+    }
+
+    const required=cont ? load*1.25 : load;
+    const ambF=WS_AMB[ins][amb], cccF=WS_CCC[ccc];
+
+    const pick=(fn)=>{ for(const row of NEC_AMPACITY){ const v=fn(row); if(v!==null&&v!==undefined&&v>0) return row; } return null; };
+    /* Check 1: termination column must carry 125% of a continuous load. */
+    const byTerm=pick(row=> (row[mat][term]!==null && row[mat][term]>=required) ? row[mat][term] : null);
+    /* Check 2: insulation column, adjusted, must carry the real load. */
+    const byDerate=pick(row=> (row[mat][ins]!==null && row[mat][ins]*ambF*cccF>=load) ? row[mat][ins] : null);
+
+    if(!byTerm||!byDerate){
+      r.innerHTML='Above the largest size in this table ('+NEC_AMPACITY[NEC_AMPACITY.length-1].n+'). Parallel conductors or a busway, and a full calculation rather than a lookup.';
+      r.className='est-result show warn'; return;
+    }
+
+    const iT=NEC_AMPACITY.indexOf(byTerm), iD=NEC_AMPACITY.indexOf(byDerate);
+    const winner=iD>iT ? byDerate : byTerm;
+    const governed=iD>iT ? 'the derating check' : (iD===iT ? 'both checks equally' : 'the termination limit');
+    const dv=byDerate[mat][ins]*ambF*cccF;
+
+    let msg='<b>'+winner.n+' '+(mat==='Cu'?'copper':'aluminum')+'</b>, governed by '+governed+'.';
+    msg+='<br>Termination check: '+(cont?'125% of ':'')+load+' A = '+fmt(required,1)+' A required &rarr; '+byTerm.n+' carries '+byTerm[mat][term]+' A in the '+term+'&deg;C column.';
+    msg+='<br>Derating check: '+byDerate.n+' at '+ins+'&deg;C is '+byDerate[mat][ins]+' A &times; '+fmt(ambF,2)+' ambient &times; '+fmt(cccF,2)+' bundling = '+fmt(dv,1)+' A against a '+load+' A load.';
+    if(cont) msg+='<br>The overcurrent device is a separate selection under NEC 240.4 and 240.6.';
+    msg+=' Voltage drop is not checked here.';
+    r.innerHTML=msg; r.className='est-result show';
+  });
+
+
 /* ---- Unit conversions: amps/kW/kVA/HP/watts ----
      One shared square root of three, used by every handler below and quoted as
      1.732 in the formulas on the pages, so a reader checking the page against

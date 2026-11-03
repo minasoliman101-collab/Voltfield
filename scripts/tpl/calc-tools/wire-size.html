@@ -1,0 +1,18 @@
+<!-- Live calculator for calculators/wire-size.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="wsCalc">
+    <h2>Wire Size</h2>
+    <div class="sub">Runs both checks and reports the larger result. Ampacity only &mdash; check voltage drop separately on a long run.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="wsLoad">Load (A)</label><input type="number" id="wsLoad" min="0" step="1" placeholder="e.g. 100"></div>
+      <div class="est-field"><label for="wsCont">Load type</label><select id="wsCont"><option value="1" selected>Continuous (3 hours or more)</option><option value="0">Non-continuous</option></select></div>
+      <div class="est-field"><label for="wsMat">Conductor</label><select id="wsMat"><option value="Cu" selected>Copper</option><option value="Al">Aluminum</option></select></div>
+      <div class="est-field"><label for="wsTerm">Termination rating</label><select id="wsTerm"><option value="60">60 &deg;C</option><option value="75" selected>75 &deg;C</option></select></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="wsIns">Insulation rating</label><select id="wsIns"><option value="90" selected>90 &deg;C (THHN/THWN-2, XHHW-2)</option><option value="75">75 &deg;C (THW, XHHW)</option></select></div>
+      <div class="est-field"><label for="wsAmb">Ambient (&deg;C)</label><select id="wsAmb"><option value="30" selected>26&ndash;30 (base)</option><option value="35">31&ndash;35</option><option value="40">36&ndash;40</option><option value="45">41&ndash;45</option><option value="50">46&ndash;50</option><option value="55">51&ndash;55</option><option value="60">56&ndash;60</option></select></div>
+      <div class="est-field"><label for="wsCcc">Current-carrying conductors</label><select id="wsCcc"><option value="3" selected>3 or fewer</option><option value="6">4&ndash;6</option><option value="9">7&ndash;9</option><option value="20">10&ndash;20</option><option value="30">21&ndash;30</option><option value="40">31&ndash;40</option><option value="41">41 or more</option></select></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="wsBtn">Calculate</button></div></div>
+    <div class="est-result" id="wsResult"></div>
+  </div>

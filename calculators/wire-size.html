@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wire Size Calculator (What Size Wire for X Amps) | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/calculators/wire-size.html">
+<meta name="description" content="Size a conductor properly: the 125% continuous-load factor, the termination temperature limit under NEC 110.14(C), and ambient and bundling adjustment. Free, no signup.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Wire Size Calculator">
+<meta property="og:description" content="Size a conductor properly: the 125% continuous-load factor, the termination temperature limit under NEC 110.14(C), and ambient and bundling adjustment. Free, no signup.">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"BreadcrumbList","itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
+   {"@type":"ListItem","position":2,"name":"Calculators","item":"https://voltfield.org/engineering-calculators.html"},
+   {"@type":"ListItem","position":3,"name":"Wire Size Calculator","item":"https://voltfield.org/calculators/wire-size.html"}
+ ]},
+ {"@type":"WebPage","name":"Wire Size Calculator","description":"Size a conductor properly: the 125% continuous-load factor, the termination temperature limit under NEC 110.14(C), and ambient and bundling adjustment. Free, no signup.","url":"https://voltfield.org/calculators/wire-size.html","dateModified":"2026-11-03","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebApplication","name":"Wire Size Calculator","description":"Size a conductor properly: the 125% continuous-load factor, the termination temperature limit under NEC 110.14(C), and ambient and bundling adjustment. Free, no signup.","url":"https://voltfield.org/calculators/wire-size.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"What does the Wire Size calculation account for?","acceptedAnswer":{"@type":"Answer","text":"\"What size wire for 100 amps\" has no single answer, which is why the charts that give one are so often wrong. The conductor has to satisfy two separate checks, and the answer is whichever is larger. The first is the termination temperature. Equipment terminals are listed for 60°C or 75°C, and NEC 110.14(C) says the whole circuit is limited by the lowest-rated termination in it — so a 90°C conductor landing on a 75°C lug is sized from the 75°C column no matter what the insulation can take. The second is the conductor's own derating: ambient temperature and the number of current-carrying conductors bundled together both reduce what it can safely carry, and that calculation runs on the insulation's own column."}},
+   {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"This sizes for ampacity only. It does not check voltage drop, which on a long run is frequently what forces the conductor up rather than heat, and it does not check short-circuit withstand. It covers conductors in a raceway or cable at a single ambient; buried runs, conductors in sunlight on a rooftop and conductors passing through different ambients each have their own rules. It also does not handle motor circuits, where NEC Article 430 requires the table full-load current rather than the actual load, or the 83 percent allowance in 310.12 for certain dwelling services."}}
+ ]}
+]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-calculators.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="/index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/engineering-calculators.html" style="color:var(--slate);text-decoration:none">Calculators</a> / <span style="color:var(--ink)">Wire Size Calculator</span></nav>
+    <div class="eyebrow">Free Calculator &middot; No Signup</div>
+    <h1>Wire Size Calculator</h1>
+    <p class="dek">Size a conductor properly: the 125% continuous-load factor, the termination temperature limit under NEC 110.14(C), and ambient and bundling adjustment.</p>
+  </div>
+</section>
+
+<div class="artwrap">
+  <section class="calc-tool" id="calculator" aria-label="Wire Size Calculator">
+  <div class="estimator" id="wsCalc">
+    <h2>Wire Size</h2>
+    <div class="sub">Runs both checks and reports the larger result. Ampacity only &mdash; check voltage drop separately on a long run.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="wsLoad">Load (A)</label><input type="number" id="wsLoad" min="0" step="1" placeholder="e.g. 100"></div>
+      <div class="est-field"><label for="wsCont">Load type</label><select id="wsCont"><option value="1" selected>Continuous (3 hours or more)</option><option value="0">Non-continuous</option></select></div>
+      <div class="est-field"><label for="wsMat">Conductor</label><select id="wsMat"><option value="Cu" selected>Copper</option><option value="Al">Aluminum</option></select></div>
+      <div class="est-field"><label for="wsTerm">Termination rating</label><select id="wsTerm"><option value="60">60 &deg;C</option><option value="75" selected>75 &deg;C</option></select></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="wsIns">Insulation rating</label><select id="wsIns"><option value="90" selected>90 &deg;C (THHN/THWN-2, XHHW-2)</option><option value="75">75 &deg;C (THW, XHHW)</option></select></div>
+      <div class="est-field"><label for="wsAmb">Ambient (&deg;C)</label><select id="wsAmb"><option value="30" selected>26&ndash;30 (base)</option><option value="35">31&ndash;35</option><option value="40">36&ndash;40</option><option value="45">41&ndash;45</option><option value="50">46&ndash;50</option><option value="55">51&ndash;55</option><option value="60">56&ndash;60</option></select></div>
+      <div class="est-field"><label for="wsCcc">Current-carrying conductors</label><select id="wsCcc"><option value="3" selected>3 or fewer</option><option value="6">4&ndash;6</option><option value="9">7&ndash;9</option><option value="20">10&ndash;20</option><option value="30">21&ndash;30</option><option value="40">31&ndash;40</option><option value="41">41 or more</option></select></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="wsBtn">Calculate</button></div></div>
+    <div class="est-result" id="wsResult"></div>
+  </div>
+  </section>
+
+  <p>"What size wire for 100 amps" has no single answer, which is why the charts that give one are so often wrong. The conductor has to satisfy two separate checks, and the answer is whichever is larger.</p>
+  <p>The first is the termination temperature. Equipment terminals are listed for 60&deg;C or 75&deg;C, and NEC 110.14(C) says the whole circuit is limited by the lowest-rated termination in it &mdash; so a 90&deg;C conductor landing on a 75&deg;C lug is sized from the 75&deg;C column no matter what the insulation can take. The second is the conductor's own derating: ambient temperature and the number of current-carrying conductors bundled together both reduce what it can safely carry, and that calculation runs on the insulation's own column.</p>
+
+  <h2>The formula</h2>
+    <div class="formula">Required ampacity = (continuous load &times; 1.25) + non-continuous load<br>Derated ampacity = base ampacity at the insulation rating &times; ambient factor &times; bundling factor<br>Conductor = the larger of the two results</div>
+    <div class="tblwrap"><table class="famtable"><tbody>
+      <tr><td class="num"><b>Continuous load</b></td><td>Any load expected to run three hours or more, per NEC 210.19(A)</td></tr>
+      <tr><td class="num"><b>Termination rating</b></td><td>60 or 75&deg;C, from the equipment listing, per NEC 110.14(C)</td></tr>
+      <tr><td class="num"><b>Ambient factor</b></td><td>From NEC 310.15(B)(1), applied when ambient is not 30&deg;C</td></tr>
+      <tr><td class="num"><b>Bundling factor</b></td><td>From NEC 310.15(C)(1), applied for four or more current-carrying conductors</td></tr>
+    </tbody></table></div>
+
+  <h2>Worked example</h2>
+  <p>A 100 A continuous load, copper, 75&deg;C terminations, in a 40&deg;C attic with six current-carrying conductors in the raceway:</p>
+  <p>Termination check: 100 &times; 1.25 = 125 A required. In the 75&deg;C copper column, 1 AWG carries 130 A. 1 AWG passes.</p>
+  <p>Derating check: 1 AWG copper at 90&deg;C is 145 A. At 40&deg;C ambient the factor is 0.91, and six conductors gives 0.80: 145 &times; 0.91 &times; 0.80 = 105.6 A, against an actual load of 100 A. 1 AWG passes again.</p>
+  <p>Both checks land on 1 AWG, so that is the answer. Change the ambient to 50&deg;C and the derating check gives 145 &times; 0.82 &times; 0.80 = 95.1 A, below the load, and the conductor goes up to 1/0 while the termination check has not moved at all.</p>
+
+  <h2>Which standard governs this</h2>
+  <p>NEC 110.14(C) sets the termination temperature limitation. NEC 210.19(A) and 215.2(A) give the 125 percent continuous-load factor for branch circuits and feeders. Base ampacities are in NEC Table 310.16, ambient correction in 310.15(B)(1) and bundling adjustment in 310.15(C)(1). Overcurrent device selection follows NEC 240.4 and the standard ratings in 240.6.</p>
+
+  <h2>What this calculation does not account for</h2>
+  <p>This sizes for ampacity only. It does not check voltage drop, which on a long run is frequently what forces the conductor up rather than heat, and it does not check short-circuit withstand. It covers conductors in a raceway or cable at a single ambient; buried runs, conductors in sunlight on a rooftop and conductors passing through different ambients each have their own rules. It also does not handle motor circuits, where NEC Article 430 requires the table full-load current rather than the actual load, or the 83 percent allowance in 310.12 for certain dwelling services.</p>
+    <div class="callout"><b>This is a screening estimate.</b> It is here to get you to the right order of magnitude and the right conversation — not to replace a stamped calculation by a qualified engineer.</div>
+
+  <h2>Common mistakes</h2>
+  <p>Sizing from the 90&deg;C column because the wire is THHN, when the terminals are listed for 75&deg;C. Applying the 125 percent factor to the derated figure rather than running the two checks separately. Forgetting that the neutral counts as a current-carrying conductor on a circuit with significant harmonic content. Counting only the conductors of one circuit when several share the raceway. Treating a chart found online as authoritative when it states neither the termination temperature nor the ambient it assumed.</p>
+
+  <h2>Related</h2>
+    <div class="rel">
+      <a href="/calculators/ampacity.html">Cable Ampacity &amp; Conduit Fill</a>
+      <a href="/calculators/voltage-drop.html">Voltage Drop Calculator</a>
+      <a href="/guide-cable-ampacity-derating.html">Cable Ampacity Derating Explained</a>
+      <a href="/guide-continuous-load-80-percent-rule.html">The 80% Rule &amp; Continuous Loads</a>
+      <a href="/calculators/kw-to-amps.html">kW to Amps Calculator</a>
+      <a href="/guide-nec-250-122-egc-sizing.html">Sizing the Equipment Grounding Conductor</a>
+      <a href="/engineering-calculators.html">All calculators</a>
+    </div>
+
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new calculators and guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/calculators/wire-size.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+
+  <aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>Size a conductor properly: the 125% continuous-load factor, the termination temperature limit under NEC 110.14(C), and ambient and bundling adjustment. Free, no signup.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>NEC 110.14(C) sets the termination temperature limitation. NEC 210.19(A) and 215.2(A) give the 125 percent continuous-load factor for branch circuits and feeders. Base ampacities are in NEC Table 310.16, ambient correction in 310.15(B)(1) and bundling adjustment in 310.15(C)(1). Overcurrent device selection follows NEC 240.4 and the standard ratings in 240.6.</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>This sizes for ampacity only. It does not check voltage drop, which on a long run is frequently what forces the conductor up rather than heat, and it does not check short-circuit withstand. It covers conductors in a raceway or cable at a single ambient; buried runs, conductors in sunlight on a rooftop and conductors passing through different ambients each have their own rules. It also does not handle motor circuits, where NEC Article 430 requires the table full-load current rather than the actual load, or the 83 percent allowance in 310.12 for certain dwelling services. This is a screening estimate, not a stamped calculation.</dd>
+      <dt>Provenance</dt>
+      <dd>Last reviewed November 3, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labelled as estimates. Worked examples are arithmetic you can reproduce against the <a href="#calculator">calculator at the top of this page</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+    </dl>
+  </aside>
+
+</div>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h4>Voltfield</h4>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h4>Sectors</h4><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h4>Compliance</h4><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="/voltfield-calculators.js" defer></script>
+<script src="/voltfield-site-config.js"></script>
+<script src="/voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

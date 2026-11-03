@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>NEC 250.122 EGC Sizing Explained | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-nec-250-122-egc-sizing.html">
+<meta name="description" content="NEC 250.122 equipment grounding conductor sizing explained: sizing from the overcurrent device rating, the proportional upsizing rule when conductors are increased, parallel runs, and the ceiling at the circuit conductor size.">
+<meta name="keywords" content="NEC 250.122, EGC sizing, equipment grounding conductor size, 250.122 table, ground wire size, 250.122(B) upsizing, parallel EGC, voltage drop ground wire">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="NEC 250.122 EGC Sizing">
+<meta property="og:description" content="Sizing from the overcurrent device rather than the load, the proportional upsizing rule, and parallel runs.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta name="twitter:title" content="NEC 250.122 EGC Sizing">
+<meta name="twitter:description" content="Sizing from the overcurrent device rather than the load, the proportional upsizing rule, and parallel runs.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://voltfield.org/guides.html"},{"@type":"ListItem","position":3,"name":"NEC 250.122 EGC Sizing","item":"https://voltfield.org/guide-nec-250-122-egc-sizing.html"}]},{"@type":"Article","headline":"NEC 250.122: Sizing the Equipment Grounding Conductor, and the Upsizing Rule","description":"NEC 250.122 equipment grounding conductor sizing explained: sizing from the overcurrent device rating, the proportional upsizing rule when conductors are increased, parallel runs, and the ceiling at the circuit conductor size.","image":"https://voltfield.org/social/social-generic.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-11-03T00:00:00-05:00","dateModified":"2026-11-03T00:00:00-05:00","url":"https://voltfield.org/guide-nec-250-122-egc-sizing.html"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is the equipment grounding conductor sized?","acceptedAnswer":{"@type":"Answer","text":"From the rating or setting of the overcurrent device ahead of the circuit, using NEC Table 250.122 — not from the load and not from the phase conductor size. The EGC carries fault current only, for as long as the device takes to open, so the device rating is what determines the duty. Representative copper sizes are 14 AWG at 15 A, 8 AWG at 100 A and 6 AWG at 200 A."}},{"@type":"Question","name":"Do I have to upsize the ground wire if I upsize the conductors?","acceptedAnswer":{"@type":"Answer","text":"Yes. NEC 250.122(B) requires the equipment grounding conductor to be increased proportionally by circular mil area whenever the ungrounded conductors are increased above the minimum size that would have had sufficient ampacity. Upsizing a feeder for voltage drop is the usual trigger, and the overcurrent device rating does not change, so the table lookup alone will not reveal it."}},{"@type":"Question","name":"Can the EGC be smaller than the phase conductors?","acceptedAnswer":{"@type":"Answer","text":"Usually yes, and that is normal: a 100 A circuit on 3 AWG copper takes an 8 AWG copper EGC. The code also caps it in the other direction, since NEC 250.122(A) provides that the equipment grounding conductor need not be larger than the ungrounded circuit conductors it runs with."}},{"@type":"Question","name":"Is the EGC the same as the grounding electrode conductor?","acceptedAnswer":{"@type":"Answer","text":"No. The equipment grounding conductor bonds equipment back to the source so fault current can clear a device, and is sized from Table 250.122 against the overcurrent device. The grounding electrode conductor connects the system to earth and is sized from Table 250.66 against the service conductors. Different conductors, different tables, different purposes."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in has-photo">
+    <div class="artban-text">
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">NEC 250.122 EGC Sizing</span></nav>
+      <div class="eyebrow">Grounding</div>
+      <h1>NEC 250.122: Sizing the Equipment Grounding Conductor</h1>
+      <p class="dek">The equipment grounding conductor is sized from the overcurrent device, not from the load, because what it has to survive is a fault rather than a duty cycle. Two provisions around that table account for most of the errors.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published November 3, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+    </div>
+    <figure class="artban-photo">
+      <picture><source srcset="images/parts/dc-ground-bars-kits.webp" type="image/webp"><img src="images/parts/dc-ground-bars-kits.jpg" width="340" height="340" alt="A ground bar and bonding kit" decoding="async" fetchpriority="high"></picture>
+      <figcaption>Ground bar and bonding kit (illustration)</figcaption>
+    </figure>
+  </div>
+</section>
+<div class="artwrap">
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>The EGC is sized from the rating of the overcurrent device ahead of the circuit, not from the load and not from the phase conductor.</li>
+      <li>If the ungrounded conductors are upsized for any reason, including voltage drop, the EGC must be increased proportionally by circular mil area.</li>
+      <li>The EGC is never required to be larger than the ungrounded circuit conductors it runs with.</li>
+      <li>Representative copper sizes: 15 A takes 14 AWG, 100 A takes 8 AWG, 200 A takes 6 AWG, 400 A takes 3 AWG.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 6 sections</summary>
+    <ol>
+      <li><a href="#why-the-device-and-not-the-load">Why the device, and not the load</a></li>
+      <li><a href="#the-upsizing-rule">The upsizing rule in 250.122(B)</a></li>
+      <li><a href="#the-ceiling-and-parallel-runs">The ceiling, and parallel runs</a></li>
+      <li><a href="#what-the-egc-is-not-for">What the EGC is not for</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+  <h2 id="why-the-device-and-not-the-load">Why the device, and not the load</h2>
+  <p>Every other conductor in the circuit is sized from what it carries continuously. The equipment grounding conductor carries nothing until something fails, and then it carries the entire available fault current for as long as the protective device takes to open. That is the duty it is sized for.</p>
+  <p>So NEC 250.122(A) sizes it from the rating or setting of the overcurrent device ahead of the circuit, through Table 250.122. A 100 A breaker gets an 8 AWG copper EGC whether the load behind it is 95 amps or 12. Sizing it from the load, which looks reasonable, produces a conductor that may not survive long enough for the breaker to clear.</p>
+  <p>Representative copper values from that table: 15 A takes 14 AWG, 20 A takes 12 AWG, 60 A takes 10 AWG, 100 A takes 8 AWG, 200 A takes 6 AWG, 400 A takes 3 AWG, 600 A takes 1 AWG. Aluminum runs larger at each step, and the table itself is the authority rather than this summary.</p>
+  <h2 id="the-upsizing-rule">The upsizing rule in 250.122(B)</h2>
+  <p>This is the provision most often missed, and it is missed because it is triggered by a decision made for an entirely unrelated reason.</p>
+  <p>250.122(B) says that where ungrounded conductors are increased in size from the minimum that would have sufficient ampacity, the equipment grounding conductor must be increased in size proportionally, by circular mil area.</p>
+  <p>The usual trigger is voltage drop. A 100 A feeder needs 3 AWG copper on ampacity, the run is long, so the designer specifies 1/0 to hold the drop inside 3 percent. The breaker is still 100 A, so the table still says 8 AWG &mdash; but the phase conductors went from 52,620 to 105,600 circular mils, a ratio of about 2.0, and the EGC has to grow by the same ratio. 8 AWG is 16,510 circular mils, so the EGC needs at least 33,020, which is 4 AWG.</p>
+  <p>Nothing about the installation signals this. The breaker did not change, the load did not change, and the table lookup gives the same answer it always did. Only the reason for the larger phase conductor triggers it.</p>
+  <div class="ad-unit" data-ad="incontent"></div>
+  <h2 id="the-ceiling-and-parallel-runs">The ceiling, and parallel runs</h2>
+  <p>Two limits keep the result sensible. First, 250.122(A) provides that the EGC need not be larger than the ungrounded circuit conductors it accompanies &mdash; on a small circuit with a large device the table could otherwise ask for more copper in the ground than in the phases.</p>
+  <p>Second, parallel runs. Where circuit conductors are run in parallel in multiple raceways, 250.122(F) requires an equipment grounding conductor in each raceway, and each one is sized from the overcurrent device protecting the circuit &mdash; not from the device rating divided by the number of raceways. The reasoning is straightforward once stated: a fault in one raceway is cleared by the one device, so the EGC in that raceway sees the whole fault.</p>
+  <p>Where a cable tray or a metal raceway is itself the equipment grounding conductor, 250.118 lists what qualifies, and the sizing question changes shape entirely.</p>
+  <h2 id="what-the-egc-is-not-for">What the EGC is not for</h2>
+  <p>Two things commonly loaded onto this conductor do not belong on it. It is not a neutral: it is bonded to the grounded conductor at exactly one point, and using it to return load current puts normal current on every enclosure in the path. <a class="inline" href="guide-ground-vs-neutral.html">Ground vs. neutral</a> covers that separately.</p>
+  <p>It is also not the grounding electrode conductor. The GEC connects the system to earth and is sized from Table 250.66 against the service conductors; the EGC connects equipment back to the source and is sized from Table 250.122 against the overcurrent device. They are different conductors, sized from different tables, doing different jobs, and the similar names cause real errors in submittals.</p>
+  <h2 id="common-mistakes">Common mistakes</h2>
+  <ul>
+    <li><b>Sizing from the load.</b> The table is indexed on the overcurrent device, because the fault is the duty.</li>
+    <li><b>Missing 250.122(B).</b> Upsizing phase conductors for voltage drop obliges a proportional increase in the EGC, and nothing in the lookup reminds you.</li>
+    <li><b>Dividing the device rating across parallel raceways.</b> Each raceway's EGC is sized from the full device rating.</li>
+    <li><b>Confusing Table 250.122 with Table 250.66.</b> One sizes the equipment grounding conductor, the other the grounding electrode conductor.</li>
+    <li><b>Using the EGC as a neutral.</b> A different fault with the same symptom: current on metal that should never carry any.</li>
+  </ul>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How is the equipment grounding conductor sized?</summary>
+    <p style="margin-top:10px">From the rating or setting of the overcurrent device ahead of the circuit, using NEC Table 250.122 &mdash; not from the load and not from the phase conductor size. The EGC carries fault current only, for as long as the device takes to open, so the device rating is what determines the duty. Representative copper sizes are 14 AWG at 15 A, 8 AWG at 100 A and 6 AWG at 200 A.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Do I have to upsize the ground wire if I upsize the conductors?</summary>
+    <p style="margin-top:10px">Yes. NEC 250.122(B) requires the equipment grounding conductor to be increased proportionally by circular mil area whenever the ungrounded conductors are increased above the minimum size that would have had sufficient ampacity. Upsizing a feeder for voltage drop is the usual trigger, and the overcurrent device rating does not change, so the table lookup alone will not reveal it.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Can the EGC be smaller than the phase conductors?</summary>
+    <p style="margin-top:10px">Usually yes, and that is normal: a 100 A circuit on 3 AWG copper takes an 8 AWG copper EGC. The code also caps it in the other direction, since NEC 250.122(A) provides that the equipment grounding conductor need not be larger than the ungrounded circuit conductors it runs with.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Is the EGC the same as the grounding electrode conductor?</summary>
+    <p style="margin-top:10px">No. The equipment grounding conductor bonds equipment back to the source so fault current can clear a device, and is sized from Table 250.122 against the overcurrent device. The grounding electrode conductor connects the system to earth and is sized from Table 250.66 against the service conductors. Different conductors, different tables, different purposes.</p>
+  </details>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="data-centers/grounding-bonding.html">grounding and bonding</a> reference covers the hardware, and the <a class="inline" href="calculators/wire-size.html">wire size calculator</a> covers the phase conductors this is sized alongside.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/wire-size.html">Wire Size Calculator</a>Phase conductors, including the upsizing that triggers 250.122(B).</li>
+        <li><a href="calculators/voltage-drop.html">Voltage Drop Calculator</a>The usual reason a feeder gets upsized in the first place.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-ground-vs-neutral.html">Ground vs. Neutral Explained</a></li>
+        <li><a href="guide-grounding-bonding-basics.html">Grounding &amp; Bonding Basics</a></li>
+        <li><a href="guide-ground-fault-protection.html">Ground-Fault Protection &amp; NEC 230.95</a></li>
+        <li><a href="guide-cable-ampacity-derating.html">Cable Ampacity Derating</a></li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;NEC 250.122: Sizing the Equipment Grounding Conductor&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-grid-forming-vs-grid-following.html</p>
+  </details>
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/guide-nec-250-122-egc-sizing.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+
+<aside class="provenance" aria-labelledby="prov-h">
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published November 3, 2026.</span></summary>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>Why the equipment grounding conductor is sized from the overcurrent device rather than the load, representative values from Table 250.122, the proportional upsizing requirement in 250.122(B) and what triggers it, the ceiling at the circuit conductor size, parallel runs under 250.122(F), and the distinction from the grounding electrode conductor.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>NEC 250.122, including (A), (B) and (F), and Table 250.122</li><li>NEC 250.66 and Table 250.66 for the grounding electrode conductor, for contrast</li><li>NEC 250.118 for raceways and enclosures that qualify as an equipment grounding conductor</li><li>IEEE Std 142 (the Green Book) for grounding practice</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A substitute for the table or for a design. Representative sizes are given to show the shape of the requirement; the published table governs, aluminum differs at every step, and the code edition in force where you are may not match the sections cited.</dd>
+      <dt>Provenance</dt>
+      <dd>Published November 3, 2026. Written and maintained by the Voltfield editorial team against the sources above. Worked figures in the text are arithmetic the reader can check; nothing here states a measured value.</dd>
+    </dl>
+  </details>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>NEC 430.250 Motor Full-Load Current | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-nec-430-250-motor-fla.html">
+<meta name="description" content="NEC 430.250 motor full-load current explained: why the table value and not the nameplate sizes conductors, the 125 percent rule in 430.22, overload protection from the nameplate, and short-circuit protection percentages.">
+<meta name="keywords" content="NEC 430.250, motor full load current, motor FLC table, motor FLA, 430.6, 430.22, motor conductor sizing, motor overload protection, 430.52">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="NEC 430.250 Motor FLC">
+<meta property="og:description" content="Why conductors are sized from the table rather than the nameplate, the 125 percent rule, and where the nameplate is actually used.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta name="twitter:title" content="NEC 430.250 Motor FLC">
+<meta name="twitter:description" content="Why conductors are sized from the table rather than the nameplate, the 125 percent rule, and where the nameplate is actually used.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://voltfield.org/guides.html"},{"@type":"ListItem","position":3,"name":"NEC 430.250 Motor FLC","item":"https://voltfield.org/guide-nec-430-250-motor-fla.html"}]},{"@type":"Article","headline":"NEC 430.250: Motor Full-Load Current, and Why the Nameplate Is Not Used","description":"NEC 430.250 motor full-load current explained: why the table value and not the nameplate sizes conductors, the 125 percent rule in 430.22, overload protection from the nameplate, and short-circuit protection percentages.","image":"https://voltfield.org/social/social-generic.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-11-03T00:00:00-05:00","dateModified":"2026-11-03T00:00:00-05:00","url":"https://voltfield.org/guide-nec-430-250-motor-fla.html"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why does the NEC use a table instead of the motor nameplate?","acceptedAnswer":{"@type":"Answer","text":"NEC 430.6(A)(1) requires the table values in 430.247 through 430.250 for sizing conductors, short-circuit protection and the disconnecting means. Table values are conservative and standardised, so a circuit sized from them will carry any compliant motor of that horsepower and voltage, including a future replacement. A circuit sized to one nameplate is correct for one motor."}},{"@type":"Question","name":"Where is the motor nameplate current used?","acceptedAnswer":{"@type":"Answer","text":"For overload protection, under NEC 430.32. That is the one job that depends on the individual machine rather than its horsepower class. Conductors, short-circuit and ground-fault protection and the disconnecting means all come from the table instead."}},{"@type":"Question","name":"What size conductor does a 50 hp motor at 460 V need?","acceptedAnswer":{"@type":"Answer","text":"The table full-load current is 65 amperes, and NEC 430.22 requires branch-circuit conductors with at least 125 percent of that, so 81.25 amperes of required ampacity. Selecting the conductor from there is a normal ampacity problem, subject to the termination temperature limit in 110.14(C) and any ambient or bundling adjustment."}},{"@type":"Question","name":"Why is a motor breaker so much larger than the conductor ampacity?","acceptedAnswer":{"@type":"Answer","text":"Because it is not protecting the conductor against overload. NEC 430.52 sizes the short-circuit and ground-fault device as a percentage of the table full-load current — 250 percent for an inverse-time breaker on a squirrel-cage motor — so it rides through the six to eight times full-load starting current. Overload protection is a separate device sized from the nameplate under 430.32."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in has-photo">
+    <div class="artban-text">
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">NEC 430.250 Motor FLC</span></nav>
+      <div class="eyebrow">Motors</div>
+      <h1>NEC 430.250: Motor Full-Load Current, and Why Not the Nameplate</h1>
+      <p class="dek">Motor circuits are the one place the code tells you to ignore the number printed on the equipment. Conductors and protection are sized from a table value; the nameplate is used for overload protection and almost nothing else.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published November 3, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+    </div>
+    <figure class="artban-photo">
+      <picture><source srcset="images/parts/mro-ac-motors.webp" type="image/webp"><img src="images/parts/mro-ac-motors.jpg" width="340" height="340" alt="A three-phase AC induction motor" decoding="async" fetchpriority="high"></picture>
+      <figcaption>AC induction motor (illustration)</figcaption>
+    </figure>
+  </div>
+</section>
+<div class="artwrap">
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>NEC 430.6(A)(1) requires conductor and protection sizing to use the table full-load current, not the motor nameplate.</li>
+      <li>Branch-circuit conductors are sized at 125 percent of that table value, under 430.22.</li>
+      <li>The nameplate current is used for overload protection, under 430.32, and for little else.</li>
+      <li>Short-circuit and ground-fault protection is a percentage of the table value, and it is a large one: 250 percent for an inverse-time breaker on a squirrel-cage motor.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 6 sections</summary>
+    <ol>
+      <li><a href="#the-rule-that-surprises-people">The rule that surprises people</a></li>
+      <li><a href="#what-each-number-is-used-for">What each number is used for</a></li>
+      <li><a href="#the-125-percent-rule">The 125 percent rule</a></li>
+      <li><a href="#why-the-breaker-looks-oversized">Why the breaker looks oversized</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+  <h2 id="the-rule-that-surprises-people">The rule that surprises people</h2>
+  <p>On any other load, you size the circuit from what the equipment says it draws. On a motor circuit, NEC 430.6(A)(1) says to use the values in Tables 430.247 through 430.250 instead &mdash; 430.250 being the three-phase alternating-current table &mdash; rather than the current marked on the motor.</p>
+  <p>It reads like a mistake and it is deliberate. Table values are conservative and standardised, which means a circuit sized from them will carry any compliant motor of that horsepower and voltage, including the replacement fitted in eight years by someone who never sees the original calculation. Sizing to a specific nameplate produces a circuit that is correct for exactly one motor.</p>
+  <p>The gap is real. At 460 volts three-phase, the table gives 65 amperes for a 50 horsepower motor. A particular efficient 50 horsepower motor might draw closer to 58 amperes at full load, which the <a class="inline" href="calculators/hp-to-kw.html">HP to kW calculator</a> will show. The circuit is sized on 65.</p>
+  <h2 id="what-each-number-is-used-for">What each number is used for</h2>
+  <table class="reftable">
+    <tr><th scope="col">Purpose</th><th scope="col">Which current, and the section</th></tr>
+    <tr><td>Branch-circuit conductors</td><td>Table value &times; 125 percent &mdash; 430.22</td></tr>
+    <tr><td>Short-circuit and ground-fault protection</td><td>Table value &times; a percentage by device and motor type &mdash; 430.52</td></tr>
+    <tr><td>Overload protection</td><td>Nameplate current &mdash; 430.32</td></tr>
+    <tr><td>Disconnecting means</td><td>Table value, horsepower-based rating &mdash; 430.110</td></tr>
+    <tr><td>Feeder serving several motors</td><td>125 percent of the largest motor's table value plus the others' &mdash; 430.24</td></tr>
+  </table>
+  <p>So the nameplate is not ignored. It is used for the one job that genuinely depends on that individual machine: protecting it from running overloaded. Everything structural &mdash; what the conductors are, what the breaker is, what the disconnect is rated &mdash; comes from the table.</p>
+  <div class="ad-unit" data-ad="incontent"></div>
+  <h2 id="the-125-percent-rule">The 125 percent rule</h2>
+  <p>430.22 requires branch-circuit conductors supplying a single motor used in a continuous-duty application to have an ampacity of at least 125 percent of the motor's table full-load current.</p>
+  <p>For the 50 horsepower motor at 460 volts: 65 &times; 1.25 = 81.25 amperes of required ampacity. That is then a conductor selection problem like any other, subject to the termination temperature limit and any ambient or bundling adjustment, which the <a class="inline" href="calculators/wire-size.html">wire size calculator</a> handles.</p>
+  <p>The 125 percent here is not the continuous-load factor from 210.19(A). It is a separate motor provision that happens to use the same multiplier, and on a motor circuit it is this one that applies.</p>
+  <h2 id="why-the-breaker-looks-oversized">Why the breaker looks oversized</h2>
+  <p>A motor branch circuit routinely carries an overcurrent device far above the conductor ampacity, and that is correct rather than an error. Starting current on an induction motor runs six to eight times full-load for a few seconds, so a device sized to the running current would trip on every start.</p>
+  <p>430.52 therefore sets the short-circuit and ground-fault device as a percentage of the table full-load current: for a squirrel-cage motor, 250 percent for an inverse-time circuit breaker, 300 percent for a dual-element time-delay fuse, 1700 percent for an instantaneous-trip breaker. On the 65 ampere example an inverse-time breaker may be sized up to about 163 amperes, on conductors with 81 amperes of required ampacity.</p>
+  <p>What protects the conductor at those levels is the overload device, sized from the nameplate under 430.32, which is a separate element in the starter and the reason the arrangement is safe. The breaker is there for short circuits and ground faults; the overload relay is there for overload. Treating the breaker as the conductor's protection is the misreading that makes this look wrong.</p>
+  <h2 id="common-mistakes">Common mistakes</h2>
+  <ul>
+    <li><b>Sizing conductors from the nameplate.</b> 430.6(A)(1) requires the table value. The nameplate belongs to overload protection.</li>
+    <li><b>Setting the overload from the table.</b> The reverse error, and it leaves a specific motor unprotected or nuisance-tripping.</li>
+    <li><b>Reading the breaker as conductor protection.</b> On a motor circuit the overload relay does that, which is why the breaker can sit well above the conductor ampacity.</li>
+    <li><b>Using the wrong table.</b> 430.247 is direct current, 430.248 single-phase, 430.249 two-phase, 430.250 three-phase. Picking the wrong one produces a plausible number.</li>
+    <li><b>Applying 210.19(A) instead of 430.22.</b> Same multiplier, different provision; on a motor circuit the motor article governs.</li>
+  </ul>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why does the NEC use a table instead of the motor nameplate?</summary>
+    <p style="margin-top:10px">NEC 430.6(A)(1) requires the table values in 430.247 through 430.250 for sizing conductors, short-circuit protection and the disconnecting means. Table values are conservative and standardised, so a circuit sized from them will carry any compliant motor of that horsepower and voltage, including a future replacement. A circuit sized to one nameplate is correct for one motor.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Where is the motor nameplate current used?</summary>
+    <p style="margin-top:10px">For overload protection, under NEC 430.32. That is the one job that depends on the individual machine rather than its horsepower class. Conductors, short-circuit and ground-fault protection and the disconnecting means all come from the table instead.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What size conductor does a 50 hp motor at 460 V need?</summary>
+    <p style="margin-top:10px">The table full-load current is 65 amperes, and NEC 430.22 requires branch-circuit conductors with at least 125 percent of that, so 81.25 amperes of required ampacity. Selecting the conductor from there is a normal ampacity problem, subject to the termination temperature limit in 110.14(C) and any ambient or bundling adjustment.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why is a motor breaker so much larger than the conductor ampacity?</summary>
+    <p style="margin-top:10px">Because it is not protecting the conductor against overload. NEC 430.52 sizes the short-circuit and ground-fault device as a percentage of the table full-load current &mdash; 250 percent for an inverse-time breaker on a squirrel-cage motor &mdash; so it rides through the six to eight times full-load starting current. Overload protection is a separate device sized from the nameplate under 430.32.</p>
+  </details>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The <a class="inline" href="voltfield-supply-catalog.html?q=AC%20Motors">AC motors</a> family in the Spec Library covers the equipment, and <a class="inline" href="calculators/motor-start.html">motor starting voltage dip</a> covers what that starting current does to the bus.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/hp-to-kw.html">Motor HP to kW Calculator</a>Shaft output, supply power and calculated full-load amps.</li>
+        <li><a href="calculators/motor-start.html">Motor Starting Voltage Dip Calculator</a>Bus dip from locked-rotor kVA against source stiffness.</li>
+        <li><a href="calculators/wire-size.html">Wire Size Calculator</a>The conductor for the 125 percent figure.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-fuse-vs-breaker.html">Fuse vs. Circuit Breaker Compared</a></li>
+        <li><a href="guide-continuous-load-80-percent-rule.html">The 80% Rule &amp; Continuous Loads</a></li>
+        <li><a href="guide-kw-vs-kva.html">kW vs. kVA Explained</a></li>
+        <li><a href="guide-short-circuit-studies-breaker-coordination.html">Short-Circuit Studies &amp; Coordination</a></li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;NEC 430.250: Motor Full-Load Current, and Why Not the Nameplate&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-grid-forming-vs-grid-following.html</p>
+  </details>
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/guide-nec-430-250-motor-fla.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+
+<aside class="provenance" aria-labelledby="prov-h">
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published November 3, 2026.</span></summary>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>Why NEC 430.6(A)(1) requires table full-load current rather than the nameplate, which number is used for each purpose, the 125 percent conductor rule in 430.22, the short-circuit and ground-fault percentages in 430.52, and why a motor breaker sits above the conductor ampacity.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>NEC Article 430, in particular 430.6, 430.22, 430.24, 430.32, 430.52 and 430.110</li><li>NEC Tables 430.247 through 430.250 for full-load current</li><li>NEC 110.14(C) and Table 310.16 for the conductor selection that follows</li><li>NEMA MG1 for motor ratings and efficiency classes</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A substitute for the tables or for a design. The one table value quoted is illustrative; the published tables govern, several 430.52 percentages depend on motor and device type, and local amendments and code editions differ.</dd>
+      <dt>Provenance</dt>
+      <dd>Published November 3, 2026. Written and maintained by the Voltfield editorial team against the sources above. Worked figures in the text are arithmetic the reader can check; nothing here states a measured value.</dd>
+    </dl>
+  </details>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

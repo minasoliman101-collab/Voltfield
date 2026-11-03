@@ -62,6 +62,9 @@
 /guide-transformer-impedance        /guide-transformer-impedance.html       301!
 /guide-transformer-lead-times       /guide-transformer-lead-times.html      301!
 /guide-transformer-nameplate        /guide-transformer-nameplate.html       301!
+/guide-nec-110-26-working-space     /guide-nec-110-26-working-space.html   301!
+/guide-nec-250-122-egc-sizing       /guide-nec-250-122-egc-sizing.html   301!
+/guide-nec-430-250-motor-fla        /guide-nec-430-250-motor-fla.html   301!
 /guide-delta-vs-wye                 /guide-delta-vs-wye.html   301!
 /guide-ground-vs-neutral            /guide-ground-vs-neutral.html   301!
 /guide-fuse-vs-breaker              /guide-fuse-vs-breaker.html   301!
@@ -122,6 +125,7 @@
 /calculators/solar-string           /calculators/solar-string.html          301!
 /calculators/transformer-sizing     /calculators/transformer-sizing.html    301!
 /calculators/voltage-drop           /calculators/voltage-drop.html          301!
+/calculators/wire-size              /calculators/wire-size.html   301!
 /calculators/amps-to-kw             /calculators/amps-to-kw.html   301!
 /calculators/kw-to-amps             /calculators/kw-to-amps.html   301!
 /calculators/kva-to-amps            /calculators/kva-to-amps.html   301!

@@ -265,6 +265,219 @@ const GUIDES = [
   basedOn: ['UL 248 for fuses and UL 489 for molded-case circuit breakers', 'NEC 110.9 and 110.10 for interrupting rating and circuit impedance, and NEC Article 240 for overcurrent protection', 'NEC 700.32, 701.32 and 708.54 for selective coordination requirements', 'IEEE Std 1584 for arc-flash incident energy, and IEEE Std 242 (the Buff Book) for protection and coordination'],
   notThis: 'A coordination or arc-flash study. Device characteristics vary by manufacturer and class, series ratings are valid only as tested and marked, and both coordination and incident energy have to be established for the specific installation.',
 },
+{
+  slug: 'guide-nec-110-26-working-space',
+  eyebrow: 'Code Requirements',
+  crumb: 'NEC 110.26 Working Space',
+  h1: 'NEC 110.26: Working Space Around Electrical Equipment',
+  title: 'NEC 110.26 Working Space Explained',
+  headline: 'NEC 110.26: Working Space, Dedicated Space and Entrances',
+  dek: 'The clearance rule that gets designed out on paper and discovered on site. Three dimensions, a condition that changes one of them, a dedicated space above the equipment, and an entrance requirement that applies once the gear gets large.',
+  description: 'NEC 110.26 working space explained: depth by condition, the 30-inch width and 6.5-foot height, the dedicated equipment space above a panel, entrance requirements for large equipment, and illumination.',
+  ogDesc: 'Depth by condition, width and height, the dedicated space above the panel, and when large gear needs two entrances.',
+  keywords: 'NEC 110.26, working space, working clearance, electrical panel clearance, dedicated equipment space, condition 1 2 3, 110.26 entrance, 36 inch clearance panel',
+  photo: { src: 'images/parts/dc-lv-switchgear', alt: 'A low-voltage switchgear lineup', caption: 'Low-voltage switchgear (illustration)' },
+  takeaways: [
+    'Three dimensions: depth in front of the equipment, 30 inches of width, and 6.5 feet of height. Width and height do not change with voltage.',
+    'Depth depends on what is on the opposite side, which the code calls Condition 1, 2 or 3. At 151 to 1000 volts those are 3, 3.5 and 4 feet.',
+    'The space above a panel is separately reserved. Piping and ducts not serving the equipment cannot pass through it.',
+    'Equipment rated 1200 A or more and over 6 feet wide needs an entrance at each end, unless an exception is satisfied.',
+  ],
+  sections: [
+    { id: 'the-three-dimensions', h2: 'The three dimensions', html: `
+  <p>NEC 110.26(A) requires working space at any equipment likely to need examination, adjustment, servicing or maintenance while energized. It is specified in three directions and all three have to be satisfied at once.</p>
+  <p><b>Depth</b>, under 110.26(A)(1), is measured from the exposed live parts or from the enclosure front where parts are enclosed, and it is the one that varies. <b>Width</b>, under 110.26(A)(2), is 30 inches or the width of the equipment, whichever is greater, and the space has to allow any door or hinged panel to open at least 90 degrees. <b>Height</b>, under 110.26(A)(3), is 6.5 feet or the height of the equipment, whichever is greater.</p>
+  <p>The width is often misread. It does not have to be centred on the equipment, but it does have to be continuous, and it is measured in front of the equipment rather than along it. Nothing may be stored in any of it &mdash; 110.26(B) is explicit that the working space is not storage space, which is the most common field violation on the whole section.</p>` },
+    { id: 'depth-and-the-three-conditions', h2: 'Depth and the three conditions', html: `
+  <p>Depth changes with what a worker could contact behind them while reaching into energized equipment. The code names three cases:</p>
+  <ul>
+    <li><b>Condition 1</b> &mdash; exposed live parts on one side, and nothing live or grounded on the other, or the other side effectively guarded by suitable insulating material.</li>
+    <li><b>Condition 2</b> &mdash; exposed live parts on one side and grounded parts on the other. Concrete, brick and tile walls count as grounded.</li>
+    <li><b>Condition 3</b> &mdash; exposed live parts on both sides of the working space, not guarded.</li>
+  </ul>
+  <p>For nominal voltage to ground of 151 to 1000 volts those give 3 feet, 3 feet 6 inches and 4 feet respectively. At 0 to 150 volts all three conditions are 3 feet, which is why a residential panel is a straightforward 36 inches regardless of what is opposite it.</p>
+  <p>The practical trap is Condition 2. A panel on a wall facing a concrete wall three feet away looks compliant against the familiar 36-inch figure and is not, because the opposite wall is grounded and the requirement is 42 inches.</p>` },
+    { id: 'the-dedicated-equipment-space', h2: 'The dedicated equipment space', html: `
+  <p>110.26(E) is a separate requirement and it is routinely confused with working space. Working space is in front of the equipment and is about access. Dedicated space is <i>above and below</i> it and is about keeping other trades out.</p>
+  <p>For indoor installations the space above the equipment footprint, extending from the floor to a height of 6 feet above the equipment or to the structural ceiling &mdash; whichever is lower &mdash; is reserved for electrical. Piping, ducts and equipment foreign to the electrical installation cannot be installed in it. Sprinkler protection is permitted, and a suspended ceiling with removable panels counts as the structural ceiling for this purpose.</p>
+  <p>This is the requirement that gets lost in coordination. The electrical layout is correct, the mechanical contractor runs a condensate line across the ceiling above a panelboard, and the violation is discovered at inspection with the pipe already hung.</p>` },
+    { id: 'entrances-to-working-space', h2: 'Entrances to working space', html: `
+  <p>110.26(C) governs getting out. Every working space needs at least one entrance of sufficient area, and large equipment needs more than one.</p>
+  <p>Where equipment is rated 1200 A or more and is over 6 feet wide, there must be an entrance at each end of the working space, not less than 24 inches wide and 6.5 feet high. Two exceptions allow a single entrance: where the location permits a continuous and unobstructed way of exit, or where the working space depth is twice the figure 110.26(A)(1) requires and the single entrance is positioned so a worker never has to pass within that minimum depth to leave.</p>
+  <p>Where an entrance serves such equipment, personnel doors less than 25 feet from the nearest edge of the working space must open in the direction of egress and be equipped with panic hardware or listed fire-exit hardware. That requirement exists because the thing you are escaping is an arc flash, and it is not a dimension anyone can negotiate.</p>` },
+    { id: 'illumination-and-elevation', h2: 'Illumination and elevation', html: `
+  <p>110.26(D) requires illumination for all working spaces about service equipment, switchboards, switchgear, panelboards and motor control centers installed indoors. It cannot be controlled by automatic means alone, which rules out a lone occupancy sensor as the only control, and in general a luminaire is required rather than merely borrowed light.</p>
+  <p>110.26(A)(4) covers limited access, such as equipment above a suspended ceiling or in a crawl space, with its own access and clearance rules. 110.27 and 110.28 then deal with guarding live parts and enclosure types, which are separate subjects frequently cited alongside this one.</p>` },
+    { id: 'common-mistakes', h2: 'Common mistakes', html: `
+  <ul>
+    <li><b>Using 36 inches everywhere.</b> It is the Condition 1 figure. A grounded surface opposite makes it 42 inches above 150 volts.</li>
+    <li><b>Storing anything in the working space.</b> 110.26(B) prohibits it outright, and a stack of boxes in front of a panel is a violation whether or not the panel is being worked on.</li>
+    <li><b>Confusing dedicated space with working space.</b> One is in front and about access, the other is above and about other trades.</li>
+    <li><b>Measuring width along the equipment instead of in front of it.</b> The 30 inches is depth-wise clear space in front, not a strip beside the gear.</li>
+    <li><b>Forgetting the 90-degree door swing.</b> A panel in a narrow corridor can satisfy every dimension and still fail because the door cannot open.</li>
+  </ul>` },
+  ],
+  faqs: [
+    { q: 'How much clearance does NEC 110.26 require in front of a panel?', a: 'Depth depends on the condition. For nominal voltage to ground of 151 to 1000 volts it is 3 feet for Condition 1, 3 feet 6 inches for Condition 2 and 4 feet for Condition 3. At 0 to 150 volts all three conditions are 3 feet. Width is 30 inches or the equipment width, whichever is greater, and height is 6.5 feet or the equipment height.' },
+    { q: 'What is the difference between Condition 1, 2 and 3?', a: 'Condition 1 has exposed live parts on one side and nothing live or grounded opposite. Condition 2 has exposed live parts on one side and grounded parts opposite, which includes concrete, brick and tile walls. Condition 3 has exposed live parts on both sides of the space. Each step increases the required depth above 150 volts.' },
+    { q: 'Can storage be placed in electrical working space?', a: 'No. NEC 110.26(B) requires the working space to be kept clear and states it is not to be used for storage. It applies all the time, not only while the equipment is being serviced, and it is the most commonly cited violation in the section.' },
+    { q: 'What is dedicated equipment space?', a: 'A separate requirement in NEC 110.26(E) covering the space above and below the equipment footprint rather than in front of it. Indoors, the space above extends to 6 feet above the equipment or to the structural ceiling, whichever is lower, and piping, ducts and other equipment foreign to the electrical installation cannot be placed in it. Sprinkler protection is permitted.' },
+  ],
+  nextIntro: 'The <a class="inline" href="data-centers/switchgear-components.html">switchgear components</a> reference covers the equipment these clearances apply to, and <a class="inline" href="guide-arc-flash-boundary-basics.html">arc-flash boundary basics</a> covers why the egress rules read the way they do.',
+  calcs: [
+    ['calculators/arc-flash.html', 'Arc-Flash Incident Energy Calculator', 'Incident energy and boundary at a working distance.'],
+    ['calculators/fault-current.html', 'Available Fault Current Calculator', 'The fault current the gear in that space can deliver.'],
+  ],
+  guides: [
+    ['guide-arc-flash-boundary-basics.html', 'Arc-Flash Boundary Basics'],
+    ['guide-arc-flash-ppe-categories.html', 'Arc-Flash PPE Categories'],
+    ['guide-switchgear-compartments.html', 'Metal-Clad vs. Metal-Enclosed Switchgear'],
+    ['guide-ground-vs-neutral.html', 'Ground vs. Neutral Explained'],
+  ],
+  covers: 'The three working-space dimensions in NEC 110.26(A), how depth varies with Condition 1, 2 and 3, the prohibition on storage, the dedicated equipment space in 110.26(E), entrance and egress requirements for large equipment in 110.26(C), and illumination in 110.26(D).',
+  basedOn: ['NEC Article 110, Part II, in particular 110.26(A) through (E)', 'NEC 110.27 and 110.28 for guarding and enclosure types', 'NFPA 70E for the electrically safe work practices these clearances support'],
+  notThis: 'A compliance determination. Dimensions are stated as the code requires them, but the condition that applies, the voltage class and any local amendment are matters for the authority having jurisdiction, and code editions differ.',
+},
+
+{
+  slug: 'guide-nec-250-122-egc-sizing',
+  eyebrow: 'Grounding',
+  crumb: 'NEC 250.122 EGC Sizing',
+  h1: 'NEC 250.122: Sizing the Equipment Grounding Conductor',
+  title: 'NEC 250.122 EGC Sizing Explained',
+  headline: 'NEC 250.122: Sizing the Equipment Grounding Conductor, and the Upsizing Rule',
+  dek: 'The equipment grounding conductor is sized from the overcurrent device, not from the load, because what it has to survive is a fault rather than a duty cycle. Two provisions around that table account for most of the errors.',
+  description: 'NEC 250.122 equipment grounding conductor sizing explained: sizing from the overcurrent device rating, the proportional upsizing rule when conductors are increased, parallel runs, and the ceiling at the circuit conductor size.',
+  ogDesc: 'Sizing from the overcurrent device rather than the load, the proportional upsizing rule, and parallel runs.',
+  keywords: 'NEC 250.122, EGC sizing, equipment grounding conductor size, 250.122 table, ground wire size, 250.122(B) upsizing, parallel EGC, voltage drop ground wire',
+  photo: { src: 'images/parts/dc-ground-bars-kits', alt: 'A ground bar and bonding kit', caption: 'Ground bar and bonding kit (illustration)' },
+  takeaways: [
+    'The EGC is sized from the rating of the overcurrent device ahead of the circuit, not from the load and not from the phase conductor.',
+    'If the ungrounded conductors are upsized for any reason, including voltage drop, the EGC must be increased proportionally by circular mil area.',
+    'The EGC is never required to be larger than the ungrounded circuit conductors it runs with.',
+    'Representative copper sizes: 15 A takes 14 AWG, 100 A takes 8 AWG, 200 A takes 6 AWG, 400 A takes 3 AWG.',
+  ],
+  sections: [
+    { id: 'why-the-device-and-not-the-load', h2: 'Why the device, and not the load', html: `
+  <p>Every other conductor in the circuit is sized from what it carries continuously. The equipment grounding conductor carries nothing until something fails, and then it carries the entire available fault current for as long as the protective device takes to open. That is the duty it is sized for.</p>
+  <p>So NEC 250.122(A) sizes it from the rating or setting of the overcurrent device ahead of the circuit, through Table 250.122. A 100 A breaker gets an 8 AWG copper EGC whether the load behind it is 95 amps or 12. Sizing it from the load, which looks reasonable, produces a conductor that may not survive long enough for the breaker to clear.</p>
+  <p>Representative copper values from that table: 15 A takes 14 AWG, 20 A takes 12 AWG, 60 A takes 10 AWG, 100 A takes 8 AWG, 200 A takes 6 AWG, 400 A takes 3 AWG, 600 A takes 1 AWG. Aluminum runs larger at each step, and the table itself is the authority rather than this summary.</p>` },
+    { id: 'the-upsizing-rule', h2: 'The upsizing rule in 250.122(B)', html: `
+  <p>This is the provision most often missed, and it is missed because it is triggered by a decision made for an entirely unrelated reason.</p>
+  <p>250.122(B) says that where ungrounded conductors are increased in size from the minimum that would have sufficient ampacity, the equipment grounding conductor must be increased in size proportionally, by circular mil area.</p>
+  <p>The usual trigger is voltage drop. A 100 A feeder needs 3 AWG copper on ampacity, the run is long, so the designer specifies 1/0 to hold the drop inside 3 percent. The breaker is still 100 A, so the table still says 8 AWG &mdash; but the phase conductors went from 52,620 to 105,600 circular mils, a ratio of about 2.0, and the EGC has to grow by the same ratio. 8 AWG is 16,510 circular mils, so the EGC needs at least 33,020, which is 4 AWG.</p>
+  <p>Nothing about the installation signals this. The breaker did not change, the load did not change, and the table lookup gives the same answer it always did. Only the reason for the larger phase conductor triggers it.</p>` },
+    { id: 'the-ceiling-and-parallel-runs', h2: 'The ceiling, and parallel runs', html: `
+  <p>Two limits keep the result sensible. First, 250.122(A) provides that the EGC need not be larger than the ungrounded circuit conductors it accompanies &mdash; on a small circuit with a large device the table could otherwise ask for more copper in the ground than in the phases.</p>
+  <p>Second, parallel runs. Where circuit conductors are run in parallel in multiple raceways, 250.122(F) requires an equipment grounding conductor in each raceway, and each one is sized from the overcurrent device protecting the circuit &mdash; not from the device rating divided by the number of raceways. The reasoning is straightforward once stated: a fault in one raceway is cleared by the one device, so the EGC in that raceway sees the whole fault.</p>
+  <p>Where a cable tray or a metal raceway is itself the equipment grounding conductor, 250.118 lists what qualifies, and the sizing question changes shape entirely.</p>` },
+    { id: 'what-the-egc-is-not-for', h2: 'What the EGC is not for', html: `
+  <p>Two things commonly loaded onto this conductor do not belong on it. It is not a neutral: it is bonded to the grounded conductor at exactly one point, and using it to return load current puts normal current on every enclosure in the path. <a class="inline" href="guide-ground-vs-neutral.html">Ground vs. neutral</a> covers that separately.</p>
+  <p>It is also not the grounding electrode conductor. The GEC connects the system to earth and is sized from Table 250.66 against the service conductors; the EGC connects equipment back to the source and is sized from Table 250.122 against the overcurrent device. They are different conductors, sized from different tables, doing different jobs, and the similar names cause real errors in submittals.</p>` },
+    { id: 'common-mistakes', h2: 'Common mistakes', html: `
+  <ul>
+    <li><b>Sizing from the load.</b> The table is indexed on the overcurrent device, because the fault is the duty.</li>
+    <li><b>Missing 250.122(B).</b> Upsizing phase conductors for voltage drop obliges a proportional increase in the EGC, and nothing in the lookup reminds you.</li>
+    <li><b>Dividing the device rating across parallel raceways.</b> Each raceway's EGC is sized from the full device rating.</li>
+    <li><b>Confusing Table 250.122 with Table 250.66.</b> One sizes the equipment grounding conductor, the other the grounding electrode conductor.</li>
+    <li><b>Using the EGC as a neutral.</b> A different fault with the same symptom: current on metal that should never carry any.</li>
+  </ul>` },
+  ],
+  faqs: [
+    { q: 'How is the equipment grounding conductor sized?', a: 'From the rating or setting of the overcurrent device ahead of the circuit, using NEC Table 250.122 &mdash; not from the load and not from the phase conductor size. The EGC carries fault current only, for as long as the device takes to open, so the device rating is what determines the duty. Representative copper sizes are 14 AWG at 15 A, 8 AWG at 100 A and 6 AWG at 200 A.' },
+    { q: 'Do I have to upsize the ground wire if I upsize the conductors?', a: 'Yes. NEC 250.122(B) requires the equipment grounding conductor to be increased proportionally by circular mil area whenever the ungrounded conductors are increased above the minimum size that would have had sufficient ampacity. Upsizing a feeder for voltage drop is the usual trigger, and the overcurrent device rating does not change, so the table lookup alone will not reveal it.' },
+    { q: 'Can the EGC be smaller than the phase conductors?', a: 'Usually yes, and that is normal: a 100 A circuit on 3 AWG copper takes an 8 AWG copper EGC. The code also caps it in the other direction, since NEC 250.122(A) provides that the equipment grounding conductor need not be larger than the ungrounded circuit conductors it runs with.' },
+    { q: 'Is the EGC the same as the grounding electrode conductor?', a: 'No. The equipment grounding conductor bonds equipment back to the source so fault current can clear a device, and is sized from Table 250.122 against the overcurrent device. The grounding electrode conductor connects the system to earth and is sized from Table 250.66 against the service conductors. Different conductors, different tables, different purposes.' },
+  ],
+  nextIntro: 'The <a class="inline" href="data-centers/grounding-bonding.html">grounding and bonding</a> reference covers the hardware, and the <a class="inline" href="calculators/wire-size.html">wire size calculator</a> covers the phase conductors this is sized alongside.',
+  calcs: [
+    ['calculators/wire-size.html', 'Wire Size Calculator', 'Phase conductors, including the upsizing that triggers 250.122(B).'],
+    ['calculators/voltage-drop.html', 'Voltage Drop Calculator', 'The usual reason a feeder gets upsized in the first place.'],
+  ],
+  guides: [
+    ['guide-ground-vs-neutral.html', 'Ground vs. Neutral Explained'],
+    ['guide-grounding-bonding-basics.html', 'Grounding &amp; Bonding Basics'],
+    ['guide-ground-fault-protection.html', 'Ground-Fault Protection &amp; NEC 230.95'],
+    ['guide-cable-ampacity-derating.html', 'Cable Ampacity Derating'],
+  ],
+  covers: 'Why the equipment grounding conductor is sized from the overcurrent device rather than the load, representative values from Table 250.122, the proportional upsizing requirement in 250.122(B) and what triggers it, the ceiling at the circuit conductor size, parallel runs under 250.122(F), and the distinction from the grounding electrode conductor.',
+  basedOn: ['NEC 250.122, including (A), (B) and (F), and Table 250.122', 'NEC 250.66 and Table 250.66 for the grounding electrode conductor, for contrast', 'NEC 250.118 for raceways and enclosures that qualify as an equipment grounding conductor', 'IEEE Std 142 (the Green Book) for grounding practice'],
+  notThis: 'A substitute for the table or for a design. Representative sizes are given to show the shape of the requirement; the published table governs, aluminum differs at every step, and the code edition in force where you are may not match the sections cited.',
+},
+
+{
+  slug: 'guide-nec-430-250-motor-fla',
+  eyebrow: 'Motors',
+  crumb: 'NEC 430.250 Motor FLC',
+  h1: 'NEC 430.250: Motor Full-Load Current, and Why Not the Nameplate',
+  title: 'NEC 430.250 Motor Full-Load Current',
+  headline: 'NEC 430.250: Motor Full-Load Current, and Why the Nameplate Is Not Used',
+  dek: 'Motor circuits are the one place the code tells you to ignore the number printed on the equipment. Conductors and protection are sized from a table value; the nameplate is used for overload protection and almost nothing else.',
+  description: 'NEC 430.250 motor full-load current explained: why the table value and not the nameplate sizes conductors, the 125 percent rule in 430.22, overload protection from the nameplate, and short-circuit protection percentages.',
+  ogDesc: 'Why conductors are sized from the table rather than the nameplate, the 125 percent rule, and where the nameplate is actually used.',
+  keywords: 'NEC 430.250, motor full load current, motor FLC table, motor FLA, 430.6, 430.22, motor conductor sizing, motor overload protection, 430.52',
+  photo: { src: 'images/parts/mro-ac-motors', alt: 'A three-phase AC induction motor', caption: 'AC induction motor (illustration)' },
+  takeaways: [
+    'NEC 430.6(A)(1) requires conductor and protection sizing to use the table full-load current, not the motor nameplate.',
+    'Branch-circuit conductors are sized at 125 percent of that table value, under 430.22.',
+    'The nameplate current is used for overload protection, under 430.32, and for little else.',
+    'Short-circuit and ground-fault protection is a percentage of the table value, and it is a large one: 250 percent for an inverse-time breaker on a squirrel-cage motor.',
+  ],
+  sections: [
+    { id: 'the-rule-that-surprises-people', h2: 'The rule that surprises people', html: `
+  <p>On any other load, you size the circuit from what the equipment says it draws. On a motor circuit, NEC 430.6(A)(1) says to use the values in Tables 430.247 through 430.250 instead &mdash; 430.250 being the three-phase alternating-current table &mdash; rather than the current marked on the motor.</p>
+  <p>It reads like a mistake and it is deliberate. Table values are conservative and standardised, which means a circuit sized from them will carry any compliant motor of that horsepower and voltage, including the replacement fitted in eight years by someone who never sees the original calculation. Sizing to a specific nameplate produces a circuit that is correct for exactly one motor.</p>
+  <p>The gap is real. At 460 volts three-phase, the table gives 65 amperes for a 50 horsepower motor. A particular efficient 50 horsepower motor might draw closer to 58 amperes at full load, which the <a class="inline" href="calculators/hp-to-kw.html">HP to kW calculator</a> will show. The circuit is sized on 65.</p>` },
+    { id: 'what-each-number-is-used-for', h2: 'What each number is used for', html: `
+  <table class="reftable">
+    <tr><th scope="col">Purpose</th><th scope="col">Which current, and the section</th></tr>
+    <tr><td>Branch-circuit conductors</td><td>Table value &times; 125 percent &mdash; 430.22</td></tr>
+    <tr><td>Short-circuit and ground-fault protection</td><td>Table value &times; a percentage by device and motor type &mdash; 430.52</td></tr>
+    <tr><td>Overload protection</td><td>Nameplate current &mdash; 430.32</td></tr>
+    <tr><td>Disconnecting means</td><td>Table value, horsepower-based rating &mdash; 430.110</td></tr>
+    <tr><td>Feeder serving several motors</td><td>125 percent of the largest motor's table value plus the others' &mdash; 430.24</td></tr>
+  </table>
+  <p>So the nameplate is not ignored. It is used for the one job that genuinely depends on that individual machine: protecting it from running overloaded. Everything structural &mdash; what the conductors are, what the breaker is, what the disconnect is rated &mdash; comes from the table.</p>` },
+    { id: 'the-125-percent-rule', h2: 'The 125 percent rule', html: `
+  <p>430.22 requires branch-circuit conductors supplying a single motor used in a continuous-duty application to have an ampacity of at least 125 percent of the motor's table full-load current.</p>
+  <p>For the 50 horsepower motor at 460 volts: 65 &times; 1.25 = 81.25 amperes of required ampacity. That is then a conductor selection problem like any other, subject to the termination temperature limit and any ambient or bundling adjustment, which the <a class="inline" href="calculators/wire-size.html">wire size calculator</a> handles.</p>
+  <p>The 125 percent here is not the continuous-load factor from 210.19(A). It is a separate motor provision that happens to use the same multiplier, and on a motor circuit it is this one that applies.</p>` },
+    { id: 'why-the-breaker-looks-oversized', h2: 'Why the breaker looks oversized', html: `
+  <p>A motor branch circuit routinely carries an overcurrent device far above the conductor ampacity, and that is correct rather than an error. Starting current on an induction motor runs six to eight times full-load for a few seconds, so a device sized to the running current would trip on every start.</p>
+  <p>430.52 therefore sets the short-circuit and ground-fault device as a percentage of the table full-load current: for a squirrel-cage motor, 250 percent for an inverse-time circuit breaker, 300 percent for a dual-element time-delay fuse, 1700 percent for an instantaneous-trip breaker. On the 65 ampere example an inverse-time breaker may be sized up to about 163 amperes, on conductors with 81 amperes of required ampacity.</p>
+  <p>What protects the conductor at those levels is the overload device, sized from the nameplate under 430.32, which is a separate element in the starter and the reason the arrangement is safe. The breaker is there for short circuits and ground faults; the overload relay is there for overload. Treating the breaker as the conductor's protection is the misreading that makes this look wrong.</p>` },
+    { id: 'common-mistakes', h2: 'Common mistakes', html: `
+  <ul>
+    <li><b>Sizing conductors from the nameplate.</b> 430.6(A)(1) requires the table value. The nameplate belongs to overload protection.</li>
+    <li><b>Setting the overload from the table.</b> The reverse error, and it leaves a specific motor unprotected or nuisance-tripping.</li>
+    <li><b>Reading the breaker as conductor protection.</b> On a motor circuit the overload relay does that, which is why the breaker can sit well above the conductor ampacity.</li>
+    <li><b>Using the wrong table.</b> 430.247 is direct current, 430.248 single-phase, 430.249 two-phase, 430.250 three-phase. Picking the wrong one produces a plausible number.</li>
+    <li><b>Applying 210.19(A) instead of 430.22.</b> Same multiplier, different provision; on a motor circuit the motor article governs.</li>
+  </ul>` },
+  ],
+  faqs: [
+    { q: 'Why does the NEC use a table instead of the motor nameplate?', a: 'NEC 430.6(A)(1) requires the table values in 430.247 through 430.250 for sizing conductors, short-circuit protection and the disconnecting means. Table values are conservative and standardised, so a circuit sized from them will carry any compliant motor of that horsepower and voltage, including a future replacement. A circuit sized to one nameplate is correct for one motor.' },
+    { q: 'Where is the motor nameplate current used?', a: 'For overload protection, under NEC 430.32. That is the one job that depends on the individual machine rather than its horsepower class. Conductors, short-circuit and ground-fault protection and the disconnecting means all come from the table instead.' },
+    { q: 'What size conductor does a 50 hp motor at 460 V need?', a: 'The table full-load current is 65 amperes, and NEC 430.22 requires branch-circuit conductors with at least 125 percent of that, so 81.25 amperes of required ampacity. Selecting the conductor from there is a normal ampacity problem, subject to the termination temperature limit in 110.14(C) and any ambient or bundling adjustment.' },
+    { q: 'Why is a motor breaker so much larger than the conductor ampacity?', a: 'Because it is not protecting the conductor against overload. NEC 430.52 sizes the short-circuit and ground-fault device as a percentage of the table full-load current &mdash; 250 percent for an inverse-time breaker on a squirrel-cage motor &mdash; so it rides through the six to eight times full-load starting current. Overload protection is a separate device sized from the nameplate under 430.32.' },
+  ],
+  nextIntro: 'The <a class="inline" href="voltfield-supply-catalog.html?q=AC%20Motors">AC motors</a> family in the Spec Library covers the equipment, and <a class="inline" href="calculators/motor-start.html">motor starting voltage dip</a> covers what that starting current does to the bus.',
+  calcs: [
+    ['calculators/hp-to-kw.html', 'Motor HP to kW Calculator', 'Shaft output, supply power and calculated full-load amps.'],
+    ['calculators/motor-start.html', 'Motor Starting Voltage Dip Calculator', 'Bus dip from locked-rotor kVA against source stiffness.'],
+    ['calculators/wire-size.html', 'Wire Size Calculator', 'The conductor for the 125 percent figure.'],
+  ],
+  guides: [
+    ['guide-fuse-vs-breaker.html', 'Fuse vs. Circuit Breaker Compared'],
+    ['guide-continuous-load-80-percent-rule.html', 'The 80% Rule &amp; Continuous Loads'],
+    ['guide-kw-vs-kva.html', 'kW vs. kVA Explained'],
+    ['guide-short-circuit-studies-breaker-coordination.html', 'Short-Circuit Studies &amp; Coordination'],
+  ],
+  covers: 'Why NEC 430.6(A)(1) requires table full-load current rather than the nameplate, which number is used for each purpose, the 125 percent conductor rule in 430.22, the short-circuit and ground-fault percentages in 430.52, and why a motor breaker sits above the conductor ampacity.',
+  basedOn: ['NEC Article 430, in particular 430.6, 430.22, 430.24, 430.32, 430.52 and 430.110', 'NEC Tables 430.247 through 430.250 for full-load current', 'NEC 110.14(C) and Table 310.16 for the conductor selection that follows', 'NEMA MG1 for motor ratings and efficiency classes'],
+  notThis: 'A substitute for the tables or for a design. The one table value quoted is illustrative; the published tables govern, several 430.52 percentages depend on motor and device type, and local amendments and code editions differ.',
+},
+
 ];
 
 /* ------------------------------------------------------------- builders ---- */
