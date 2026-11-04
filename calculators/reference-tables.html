@@ -116,18 +116,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="est-result" id="cvResult"></div>
   </div>
-  <div class="estimator" id="awgCalc">
+  <div class="estimator">
     <h3>AWG &harr; mm&sup2;</h3>
-    <div class="est-row">
-      <div class="est-field"><label for="awgSize">AWG / kcmil size</label><select id="awgSize"></select></div>
-      <div class="est-field"><label for="mm2In">or enter mm&sup2;</label><input type="number" id="mm2In" step="0.1" placeholder="e.g. 16"></div>
-      <div class="est-field"><button type="button" id="awgBtn">Convert</button></div>
-    </div>
-    <div class="est-result" id="awgResult"></div>
+    <div class="sub">This converter now has its own page, computed from the AWG geometric definition across the full range and reporting the nearest IEC standard size: <a class="inline" href="awg-to-mm2.html">AWG to mm&sup2; converter</a>.</div>
   </div>
   <div class="estimator">
-    <h3>NEMA &harr; IP Enclosure Rating (approximate)</h3>
-    <div class="sub">NEMA (UL 50/50E) and IP (IEC 60529) use different test methods, so this is a commonly cited approximate cross-reference, not an exact regulatory equivalence — always verify against the enclosure's actual dual listing.</div>
+    <h3>NEMA Type to Approximate IP (one direction only)</h3>
+    <div class="sub">A NEMA Type can be said to meet or exceed an IP degree; an IP degree can never be said to equal a NEMA Type, because IP covers only solid-object and water ingress while a NEMA Type also covers icing, corrosion and lubricant resistance and construction details. <b>NEC 110.28 states that IP ratings are not a substitute for enclosure Type ratings.</b> Read this table left to right as a rough guide only, verify against the enclosure&rsquo;s actual listing, and see <a class="inline" href="../guide-nema-enclosure-types.html">NEMA enclosure types explained</a>.</div>
     <div style="overflow-x:auto"><table class="reftable">
       <tr><th scope="col">NEMA type</th><th scope="col">Approx. IP equivalent</th><th scope="col">Typical use</th></tr>
       <tr><td>1</td><td>IP20</td><td>Indoor, general purpose</td></tr>

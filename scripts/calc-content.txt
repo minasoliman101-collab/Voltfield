@@ -570,3 +570,34 @@ Sizing from the 90&deg;C column because the wire is THHN, when the terminals are
 /guide-continuous-load-80-percent-rule.html :: The 80% Rule &amp; Continuous Loads
 /calculators/kw-to-amps.html :: kW to Amps Calculator
 /guide-nec-250-122-egc-sizing.html :: Sizing the Equipment Grounding Conductor
+===awg-to-mm2|awg-to-mm2|AWG to mm&sup2; Converter|AWG to mm&sup2; Converter (Wire Size Conversion)|Convert AWG and kcmil to square millimetres and back, with the nearest IEC standard size. Built from the AWG geometric definition. Free, no signup.
+--intro
+AWG is not an arbitrary list of sizes. It is a geometric progression, and knowing that is the difference between looking a number up and understanding what it means: the diameter of gauge n is 0.005 inch multiplied by 92 raised to the power (36 minus n) over 39. Every size in the system falls out of that one expression.
+Two consequences follow immediately. The familiar rules of thumb are exact properties of the definition rather than approximations &mdash; six gauge steps is almost precisely four times the area, three steps almost precisely double. And the gauge numbers run backwards, because they originally counted the number of drawing dies the wire was pulled through, so a larger number means a thinner conductor. Above 4/0 the system runs out and sizes are given in thousands of circular mils instead.
+--formula
+Diameter (in) = 0.005 &times; 92<sup>(36 &minus; n)/39</sup>, where n is the gauge number and 4/0 is n = &minus;3
+Circular mils = (diameter in mils)<sup>2</sup>
+Area (mm&sup2;) = circular mils &times; 0.0005067
+--vars
+n :: Gauge number. 1/0 is 0, 2/0 is &minus;1, 3/0 is &minus;2, 4/0 is &minus;3
+Circular mil :: The area of a circle one mil (0.001 inch) in diameter
+kcmil :: One thousand circular mils, used for every size above 4/0
+IEC size :: A standard metric cross-section from the series 1.5, 2.5, 4, 6, 10, 16, 25 mm&sup2; and upward
+--example
+Take 12 AWG. The gauge number is 12, so the diameter is 0.005 &times; 92<sup>24/39</sup> = 0.0808 inch, which is 80.8 mils.
+Squaring that gives 6,530 circular mils, the figure NEC Chapter 9 Table 8 lists for 12 AWG. Multiplying by 0.0005067 gives 3.31 mm&sup2;.
+The nearest IEC standard size is 4 mm&sup2;, which is 21 percent larger. There is no metric size that equals 12 AWG, which is the single most important thing this conversion tells you.
+Checking the rule of thumb: six steps up from 12 AWG is 6 AWG, at 26,240 circular mils. That is 4.02 times the area of 12 AWG, not exactly four, because the ratio is 92 raised to the power 12 over 39.
+--standard
+The AWG geometric definition is the basis of the conductor sizes in ASTM B258. NEC Chapter 9 Table 8 gives the standardized conductor properties used for code work in the United States, including circular mil area, cross-sectional area in square millimetres, and DC resistance for both solid and stranded constructions. IEC 60228 defines the metric conductor classes and their standard cross-sections. Ampacity comes from NEC Table 310.16 and its adjustment rules, or from IEC 60364-5-52 outside North America.
+--limits
+This converts area and nothing else. It does not convert ampacity, and the two are not interchangeable: NEC and IEC rate conductors under different installation methods, ambient references and grouping assumptions, so two conductors of equal cross-section can carry different permitted currents under the two systems. The areas given are the geometric definition for a solid conductor, so a stranded conductor of the same size has a larger overall diameter and a slightly different standardized area, and conduit fill must use the actual overall diameter rather than the conductor area. It also says nothing about insulation thickness, voltage rating, temperature rating or stranding class, any of which can decide whether a nominally equivalent conductor is actually a substitute.
+--mistakes
+Treating the nearest metric size as an equivalent when it is usually several percent away, and substituting downward without noticing. Converting an ampacity figure along with the area. Using the conductor area for conduit fill instead of the overall insulated diameter. Assuming the gauge numbers increase with size. Reading a cmil figure as if it were a mm&sup2; figure, which differs by a factor of about 1,974. Specifying a metric conductor for a North American installation without checking that the terminations are listed for it.
+--related
+/calculators/wire-size.html :: Wire Size Calculator
+/calculators/ampacity.html :: Cable Ampacity &amp; Conduit Fill
+/calculators/voltage-drop.html :: Voltage Drop Calculator
+/guide-cable-ampacity-derating.html :: Cable Ampacity Derating Explained
+/calculators/reference-tables.html :: Reference Tables
+/guide-nec-250-122-egc-sizing.html :: Sizing the Equipment Grounding Conductor

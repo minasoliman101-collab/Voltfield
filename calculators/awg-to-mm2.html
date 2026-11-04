@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWG to mm&sup2; Converter (Wire Size Conversion) | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/calculators/awg-to-mm2.html">
+<meta name="description" content="Convert AWG and kcmil to square millimetres and back, with the nearest IEC standard size. Built from the AWG geometric definition. Free, no signup.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="AWG to mm&sup2; Converter">
+<meta property="og:description" content="Convert AWG and kcmil to square millimetres and back, with the nearest IEC standard size. Built from the AWG geometric definition. Free, no signup.">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"BreadcrumbList","itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
+   {"@type":"ListItem","position":2,"name":"Calculators","item":"https://voltfield.org/engineering-calculators.html"},
+   {"@type":"ListItem","position":3,"name":"AWG to mm&sup2; Converter","item":"https://voltfield.org/calculators/awg-to-mm2.html"}
+ ]},
+ {"@type":"WebPage","name":"AWG to mm&sup2; Converter","description":"Convert AWG and kcmil to square millimetres and back, with the nearest IEC standard size. Built from the AWG geometric definition. Free, no signup.","url":"https://voltfield.org/calculators/awg-to-mm2.html","dateModified":"2026-11-03","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebApplication","name":"AWG to mm&sup2; Converter","description":"Convert AWG and kcmil to square millimetres and back, with the nearest IEC standard size. Built from the AWG geometric definition. Free, no signup.","url":"https://voltfield.org/calculators/awg-to-mm2.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"What does the AWG to mm&sup2; Converter calculation account for?","acceptedAnswer":{"@type":"Answer","text":"AWG is not an arbitrary list of sizes. It is a geometric progression, and knowing that is the difference between looking a number up and understanding what it means: the diameter of gauge n is 0.005 inch multiplied by 92 raised to the power (36 minus n) over 39. Every size in the system falls out of that one expression. Two consequences follow immediately. The familiar rules of thumb are exact properties of the definition rather than approximations — six gauge steps is almost precisely four times the area, three steps almost precisely double. And the gauge numbers run backwards, because they originally counted the number of drawing dies the wire was pulled through, so a larger number means a thinner conductor. Above 4/0 the system runs out and sizes are given in thousands of circular mils instead."}},
+   {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"This converts area and nothing else. It does not convert ampacity, and the two are not interchangeable: NEC and IEC rate conductors under different installation methods, ambient references and grouping assumptions, so two conductors of equal cross-section can carry different permitted currents under the two systems. The areas given are the geometric definition for a solid conductor, so a stranded conductor of the same size has a larger overall diameter and a slightly different standardized area, and conduit fill must use the actual overall diameter rather than the conductor area. It also says nothing about insulation thickness, voltage rating, temperature rating or stranding class, any of which can decide whether a nominally equivalent conductor is actually a substitute."}}
+ ]}
+]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-calculators.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="/index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/engineering-calculators.html" style="color:var(--slate);text-decoration:none">Calculators</a> / <span style="color:var(--ink)">AWG to mm&sup2; Converter</span></nav>
+    <div class="eyebrow">Free Calculator &middot; No Signup</div>
+    <h1>AWG to mm&sup2; Converter</h1>
+    <p class="dek">Convert AWG and kcmil to square millimetres and back, with the nearest IEC standard size. Built from the AWG geometric definition.</p>
+  </div>
+</section>
+
+<div class="artwrap">
+  <section class="calc-tool" id="calculator" aria-label="AWG to mm&#178; Converter">
+  <div class="estimator" id="awgCalc">
+    <h2>AWG to mm&sup2;</h2>
+    <div class="sub">Converts conductor cross-section both ways and names the nearest IEC standard size. Area only &mdash; ampacity does not convert between NEC and IEC.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="awgDir">Convert</label><select id="awgDir"><option value="a2m" selected>AWG or kcmil to mm&sup2;</option><option value="m2a">mm&sup2; to nearest AWG</option></select></div>
+      <div class="est-field" id="awgPickWrap"><label for="awgPick">Size</label><select id="awgPick"></select></div>
+      <div class="est-field" id="awgMm2Wrap" hidden><label for="awgMm2">Area (mm&sup2;)</label><input type="number" id="awgMm2" min="0" step="0.01" placeholder="e.g. 16"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="awgBtn">Convert</button></div></div>
+    <div class="est-result" id="awgResult"></div>
+  </div>
+  </section>
+
+  <p>AWG is not an arbitrary list of sizes. It is a geometric progression, and knowing that is the difference between looking a number up and understanding what it means: the diameter of gauge n is 0.005 inch multiplied by 92 raised to the power (36 minus n) over 39. Every size in the system falls out of that one expression.</p>
+  <p>Two consequences follow immediately. The familiar rules of thumb are exact properties of the definition rather than approximations &mdash; six gauge steps is almost precisely four times the area, three steps almost precisely double. And the gauge numbers run backwards, because they originally counted the number of drawing dies the wire was pulled through, so a larger number means a thinner conductor. Above 4/0 the system runs out and sizes are given in thousands of circular mils instead.</p>
+
+  <h2>The formula</h2>
+    <div class="formula">Diameter (in) = 0.005 &times; 92<sup>(36 &minus; n)/39</sup>, where n is the gauge number and 4/0 is n = &minus;3<br>Circular mils = (diameter in mils)<sup>2</sup><br>Area (mm&sup2;) = circular mils &times; 0.0005067</div>
+    <div class="tblwrap"><table class="famtable"><tbody>
+      <tr><td class="num"><b>n</b></td><td>Gauge number. 1/0 is 0, 2/0 is &minus;1, 3/0 is &minus;2, 4/0 is &minus;3</td></tr>
+      <tr><td class="num"><b>Circular mil</b></td><td>The area of a circle one mil (0.001 inch) in diameter</td></tr>
+      <tr><td class="num"><b>kcmil</b></td><td>One thousand circular mils, used for every size above 4/0</td></tr>
+      <tr><td class="num"><b>IEC size</b></td><td>A standard metric cross-section from the series 1.5, 2.5, 4, 6, 10, 16, 25 mm&sup2; and upward</td></tr>
+    </tbody></table></div>
+
+  <h2>Worked example</h2>
+  <p>Take 12 AWG. The gauge number is 12, so the diameter is 0.005 &times; 92<sup>24/39</sup> = 0.0808 inch, which is 80.8 mils.</p>
+  <p>Squaring that gives 6,530 circular mils, the figure NEC Chapter 9 Table 8 lists for 12 AWG. Multiplying by 0.0005067 gives 3.31 mm&sup2;.</p>
+  <p>The nearest IEC standard size is 4 mm&sup2;, which is 21 percent larger. There is no metric size that equals 12 AWG, which is the single most important thing this conversion tells you.</p>
+  <p>Checking the rule of thumb: six steps up from 12 AWG is 6 AWG, at 26,240 circular mils. That is 4.02 times the area of 12 AWG, not exactly four, because the ratio is 92 raised to the power 12 over 39.</p>
+
+  <h2>Which standard governs this</h2>
+  <p>The AWG geometric definition is the basis of the conductor sizes in ASTM B258. NEC Chapter 9 Table 8 gives the standardized conductor properties used for code work in the United States, including circular mil area, cross-sectional area in square millimetres, and DC resistance for both solid and stranded constructions. IEC 60228 defines the metric conductor classes and their standard cross-sections. Ampacity comes from NEC Table 310.16 and its adjustment rules, or from IEC 60364-5-52 outside North America.</p>
+
+  <h2>What this calculation does not account for</h2>
+  <p>This converts area and nothing else. It does not convert ampacity, and the two are not interchangeable: NEC and IEC rate conductors under different installation methods, ambient references and grouping assumptions, so two conductors of equal cross-section can carry different permitted currents under the two systems. The areas given are the geometric definition for a solid conductor, so a stranded conductor of the same size has a larger overall diameter and a slightly different standardized area, and conduit fill must use the actual overall diameter rather than the conductor area. It also says nothing about insulation thickness, voltage rating, temperature rating or stranding class, any of which can decide whether a nominally equivalent conductor is actually a substitute.</p>
+    <div class="callout"><b>This is a screening estimate.</b> It is here to get you to the right order of magnitude and the right conversation — not to replace a stamped calculation by a qualified engineer.</div>
+
+  <h2>Common mistakes</h2>
+  <p>Treating the nearest metric size as an equivalent when it is usually several percent away, and substituting downward without noticing. Converting an ampacity figure along with the area. Using the conductor area for conduit fill instead of the overall insulated diameter. Assuming the gauge numbers increase with size. Reading a cmil figure as if it were a mm&sup2; figure, which differs by a factor of about 1,974. Specifying a metric conductor for a North American installation without checking that the terminations are listed for it.</p>
+
+  <h2>Related</h2>
+    <div class="rel">
+      <a href="/calculators/wire-size.html">Wire Size Calculator</a>
+      <a href="/calculators/ampacity.html">Cable Ampacity &amp; Conduit Fill</a>
+      <a href="/calculators/voltage-drop.html">Voltage Drop Calculator</a>
+      <a href="/guide-cable-ampacity-derating.html">Cable Ampacity Derating Explained</a>
+      <a href="/calculators/reference-tables.html">Reference Tables</a>
+      <a href="/guide-nec-250-122-egc-sizing.html">Sizing the Equipment Grounding Conductor</a>
+      <a href="/engineering-calculators.html">All calculators</a>
+    </div>
+
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new calculators and guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/calculators/awg-to-mm2.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+
+  <aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>Convert AWG and kcmil to square millimetres and back, with the nearest IEC standard size. Built from the AWG geometric definition. Free, no signup.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>The AWG geometric definition is the basis of the conductor sizes in ASTM B258. NEC Chapter 9 Table 8 gives the standardized conductor properties used for code work in the United States, including circular mil area, cross-sectional area in square millimetres, and DC resistance for both solid and stranded constructions. IEC 60228 defines the metric conductor classes and their standard cross-sections. Ampacity comes from NEC Table 310.16 and its adjustment rules, or from IEC 60364-5-52 outside North America.</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>This converts area and nothing else. It does not convert ampacity, and the two are not interchangeable: NEC and IEC rate conductors under different installation methods, ambient references and grouping assumptions, so two conductors of equal cross-section can carry different permitted currents under the two systems. The areas given are the geometric definition for a solid conductor, so a stranded conductor of the same size has a larger overall diameter and a slightly different standardized area, and conduit fill must use the actual overall diameter rather than the conductor area. It also says nothing about insulation thickness, voltage rating, temperature rating or stranding class, any of which can decide whether a nominally equivalent conductor is actually a substitute. This is a screening estimate, not a stamped calculation.</dd>
+      <dt>Provenance</dt>
+      <dd>Last reviewed November 3, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labelled as estimates. Worked examples are arithmetic you can reproduce against the <a href="#calculator">calculator at the top of this page</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+    </dl>
+  </aside>
+
+</div>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h4>Voltfield</h4>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h4>Sectors</h4><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h4>Compliance</h4><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="/voltfield-calculators.js" defer></script>
+<script src="/voltfield-site-config.js"></script>
+<script src="/voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

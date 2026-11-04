@@ -17,8 +17,8 @@
     {n:'1000 kcmil',cm:1000000}
   ];
   const STD_KVA=[15,25,37.5,50,75,100,112.5,150,167,225,300,500,750,1000,1500,2000,2500,3000,3750,5000,7500,10000];
-  const vdSel=document.getElementById('vdSize'), awgSel=document.getElementById('awgSize');
-  [vdSel,awgSel].forEach(sel=>{ if(!sel)return; sel.innerHTML=AWG.map((a,i)=>'<option value="'+i+'"'+(a.n==='4/0 AWG'?' selected':'')+'>'+a.n+'</option>').join(''); });
+  const vdSel=document.getElementById('vdSize');
+  if(vdSel) vdSel.innerHTML=AWG.map((a,i)=>'<option value="'+i+'"'+(a.n==='4/0 AWG'?' selected':'')+'>'+a.n+'</option>').join('');
 
   function fmt(v,d){d=d===undefined?2:d;return Number(v).toLocaleString('en-US',{maximumFractionDigits:d});}
 
@@ -313,22 +313,120 @@
     r.className='est-result show';
   });
 
+  /* ---- AWG to mm2 -------------------------------------------------------
+     Replaces a smaller widget that lived on calculators/reference-tables.html
+     and converted between a 21-row lookup table. AWG is defined by a geometric
+     progression rather than tabulated arbitrarily -- the diameter of gauge n is
+     0.005 in x 92^((36-n)/39) -- so every size is computed here instead, which
+     covers 40 AWG through 2000 kcmil rather than 14 AWG through 1000 kcmil.
+     That definition is also where the familiar rules of thumb come from: six
+     gauge steps is very nearly four times the area, three steps very nearly
+     double.
+
+     Sizes above 4/0 leave the gauge system and are specified in thousands of
+     circular mils, so those entries carry a cmil value instead of a gauge
+     number.
+
+     What this deliberately does NOT do is convert ampacity. NEC Table 310.16
+     and IEC 60364-5-52 rest on different installation methods, ambient
+     references and grouping assumptions, so equal area is not equal current
+     rating. The estimator id stays awgCalc so the usage events still line up
+     with reports from before the move. */
+  const CMIL_MM2 = Math.PI / 4 * Math.pow(0.0254, 2);   /* mm2 per circular mil */
+  const IEC_MM2 = [0.5,0.75,1,1.5,2.5,4,6,10,16,25,35,50,70,95,120,150,185,240,300,400,500,630,800,1000];
+  /* n = gauge number for the formula (4/0 is -3); cmil given directly above 4/0. */
+  const AWG_SIZES = [
+    {label:'2000 kcmil',cmil:2000000},{label:'1750 kcmil',cmil:1750000},
+    {label:'1500 kcmil',cmil:1500000},{label:'1250 kcmil',cmil:1250000},
+    {label:'1000 kcmil',cmil:1000000},{label:'900 kcmil',cmil:900000},
+    {label:'800 kcmil',cmil:800000},{label:'750 kcmil',cmil:750000},
+    {label:'700 kcmil',cmil:700000},{label:'600 kcmil',cmil:600000},
+    {label:'500 kcmil',cmil:500000},{label:'400 kcmil',cmil:400000},
+    {label:'350 kcmil',cmil:350000},{label:'300 kcmil',cmil:300000},
+    {label:'250 kcmil',cmil:250000},
+    {label:'4/0 AWG',n:-3},{label:'3/0 AWG',n:-2},{label:'2/0 AWG',n:-1},{label:'1/0 AWG',n:0}
+  ];
+  for(let gn=1;gn<=40;gn++) AWG_SIZES.push({label:gn+' AWG',n:gn});
+
+  function awgCmil(s){ return s.cmil!==undefined ? s.cmil : Math.pow(0.005*Math.pow(92,(36-s.n)/39)*1000,2); }
+  function awgArea(s){ return awgCmil(s)*CMIL_MM2; }
+  function awgDiaMm(s){ return Math.sqrt(awgCmil(s))/1000*25.4; }
+  /* The standardized tables carry these to four significant figures, and their
+     values differ from the pure formula in the last digit (6 AWG is listed as
+     26,240 where the definition gives 26,250). Round the same way and say so. */
+  function awgSig4(v){ const e=Math.pow(10,Math.floor(Math.log10(v))-3); return Math.round(v/e)*e; }
+  function awgNote(){
+    return '<br>Area is the AWG geometric definition for a solid conductor. Circular mils are rounded to four significant figures as the tables present them, and the standardized values in NEC Chapter 9 Table 8 can differ from the definition in the last digit. A stranded conductor of the same size has a larger overall diameter. Use Table 8 for code work. Ampacity does not convert: NEC and IEC rate conductors under different installation and ambient assumptions.';
+  }
+
+  const awgPick = document.getElementById('awgPick');
+  if(awgPick && !awgPick.options.length){
+    awgPick.innerHTML = AWG_SIZES.map(function(s,i){
+      return '<option value="'+i+'"'+(s.label==='12 AWG'?' selected':'')+'>'+s.label+'</option>';
+    }).join('');
+  }
+
+  const awgDirSel = document.getElementById('awgDir');
+  if(awgDirSel){
+    const awgSync=function(){
+      const toMm = awgDirSel.value==='a2m';
+      document.getElementById('awgPickWrap').hidden = !toMm;
+      document.getElementById('awgMm2Wrap').hidden = toMm;
+    };
+    awgDirSel.addEventListener('change',awgSync); awgSync();
+  }
+
   const awgBtn=document.getElementById('awgBtn');
   if(awgBtn)awgBtn.addEventListener('click',function(){
     const r=document.getElementById('awgResult');
-    const mm2In=parseFloat(document.getElementById('mm2In').value);
-    const CM_PER_MM2=1973.53;
-    if(mm2In>0){
-      const cm=mm2In*CM_PER_MM2;
-      let best=AWG[0],bd=Infinity;
-      AWG.forEach(a=>{const d=Math.abs(a.cm-cm);if(d<bd){bd=d;best=a;}});
-      r.innerHTML=fmt(mm2In)+' mm&sup2; = <b>'+fmt(cm,0)+' cmil</b> &rarr; closest standard size: <b>'+best.n+'</b>.';
-    } else {
-      const a=AWG[+awgSel.value];
-      const mm2=a.cm/CM_PER_MM2;
-      r.innerHTML=a.n+' = <b>'+fmt(a.cm)+' cmil</b> = <b>'+fmt(mm2)+' mm&sup2;</b>.';
+    const nearestIec=function(mm2){ return IEC_MM2.reduce(function(a,b){ return Math.abs(b-mm2)<Math.abs(a-mm2)?b:a; }); };
+
+    if(document.getElementById('awgDir').value==='a2m'){
+      const s=AWG_SIZES[parseInt(document.getElementById('awgPick').value,10)];
+      if(!s){r.textContent='Pick a size.';r.className='est-result show';return;}
+      const mm2=awgArea(s), iec=nearestIec(mm2);
+      let msg='<b>'+s.label+' = '+fmt(mm2,mm2<10?3:1)+' mm&sup2;</b>';
+      msg+='<br>'+fmt(awgSig4(awgCmil(s)),0)+' circular mils, '+fmt(awgDiaMm(s),2)+' mm nominal diameter.';
+      /* The nearest IEC size is almost never equal, and which way it rounds matters. */
+      if(Math.abs(iec-mm2)/mm2<0.005){
+        msg+='<br>IEC standard size '+iec+' mm&sup2; is effectively identical.';
+      } else {
+        msg+='<br>Nearest IEC standard size: <b>'+iec+' mm&sup2;</b>, '+fmt(Math.abs(iec-mm2)/mm2*100,1)+'% '+(iec>mm2?'larger':'smaller')+'.';
+        if(iec<mm2){
+          const up=IEC_MM2[IEC_MM2.indexOf(iec)+1];
+          msg+=' That is less copper, so a substitution steps up to '+(up?up+' mm&sup2;':'the next size')+' instead.';
+        }
+      }
+      r.innerHTML=msg+awgNote(); r.className='est-result show'; return;
     }
-    r.className='est-result show';
+
+    const mm2=parseFloat(document.getElementById('awgMm2').value);
+    if(!(mm2>0)){r.textContent='Enter an area in mm\u00b2.';r.className='est-result show';return;}
+    const biggest=awgArea(AWG_SIZES[0]);
+    if(mm2>biggest){
+      r.innerHTML='Above '+AWG_SIZES[0].label+' ('+fmt(biggest,0)+' mm&sup2;), the largest single conductor here. Larger cross-sections run as parallel conductors or busbar.';
+      r.className='est-result show warn'; return;
+    }
+    /* Nearest by area, and separately the smallest size that is not smaller --
+       for a substitution those are two different questions. */
+    let near=AWG_SIZES[0];
+    AWG_SIZES.forEach(function(s){ if(Math.abs(awgArea(s)-mm2)<Math.abs(awgArea(near)-mm2)) near=s; });
+    const notSmaller=AWG_SIZES.filter(function(s){ return awgArea(s)>=mm2; }).pop()||AWG_SIZES[0];
+    const na=awgArea(near), shown=fmt(mm2,mm2<10?2:1);
+    /* Within half a percent the figure entered IS that size -- almost always a
+       value read off an AWG table in the first place -- so do not report a 0%
+       difference and do not push the reader up a size for nothing. */
+    if(Math.abs(na-mm2)/mm2<0.005){
+      r.innerHTML='<b>'+shown+' mm&sup2; is '+near.label+'</b> ('+fmt(na,na<10?3:1)+' mm&sup2;). The two are the same size.'+awgNote();
+      r.className='est-result show'; return;
+    }
+    let msg='<b>'+shown+' mm&sup2; is closest to '+near.label+'</b> ('+fmt(na,na<10?3:1)+' mm&sup2;, '+fmt(Math.abs(na-mm2)/mm2*100,1)+'% '+(na>mm2?'larger':'smaller')+').';
+    if(notSmaller.label!==near.label){
+      msg+='<br>Smallest size not smaller than '+shown+' mm&sup2;: <b>'+notSmaller.label+'</b> ('+fmt(awgArea(notSmaller),1)+' mm&sup2;). Use that one for a substitution.';
+    } else {
+      msg+='<br>That is also the smallest size no smaller than the figure entered.';
+    }
+    r.innerHTML=msg+awgNote(); r.className='est-result show';
   });
 
   const tcoBtn=document.getElementById('tcoBtn');
@@ -607,7 +705,7 @@
 
 })();
 
-/* ---------- usage tracking: which of the 20 calculators actually get used.
+/* ---------- usage tracking: which of the 21 calculators actually get used.
    Delegated so it covers every .estimator/*Btn pair, including any added later.
    Moved here from engineering-calculators.html with the calculators, so the
    event names (calc = the estimator id) are unchanged and old reports still line up. ---------- */
