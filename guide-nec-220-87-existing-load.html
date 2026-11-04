@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>NEC 220.87 Existing Load Explained | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-nec-220-87-existing-load.html">
+<meta name="description" content="NEC 220.87 explained: the one-year maximum demand route, the 30-day recording route, what the recording has to capture, why 125 percent and adding 25 percent are the same thing, and how an EV charger enters the calculation.">
+<meta name="keywords" content="NEC 220.87, determining existing loads, existing load calculation, 30 day load study, maximum demand 125 percent, service capacity EV charger, NEC 220.57, NEC 625.42, load management ALMS">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="NEC 220.87">
+<meta property="og:description" content="The two permitted routes, what the load study has to capture, and how an EV charger enters the calculation.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta name="twitter:title" content="NEC 220.87">
+<meta name="twitter:description" content="The two permitted routes, what the load study has to capture, and how an EV charger enters the calculation.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://voltfield.org/guides.html"},{"@type":"ListItem","position":3,"name":"NEC 220.87","item":"https://voltfield.org/guide-nec-220-87-existing-load.html"}]},{"@type":"Article","headline":"NEC 220.87: Measuring an Existing Load Instead of Calculating It","description":"NEC 220.87 explained: the one-year maximum demand route, the 30-day recording route, what the recording has to capture, why 125 percent and adding 25 percent are the same thing, and how an EV charger enters the calculation.","image":"https://voltfield.org/social/social-generic.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-11-03T00:00:00-05:00","dateModified":"2026-11-03T00:00:00-05:00","url":"https://voltfield.org/guide-nec-220-87-existing-load.html"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I use utility bills for a NEC 220.87 calculation?","acceptedAnswer":{"@type":"Answer","text":"Yes, if they give maximum demand for a one-year period. That is the first permitted route, and the calculated load is 125 percent of that maximum demand. Most utilities will provide twelve months of interval data to the account holder on request, and it is better evidence than a 30-day study because it captures both the heating and the cooling peak."}},{"@type":"Question","name":"Is 125 percent of maximum demand the same as adding 25 percent?","acceptedAnswer":{"@type":"Answer","text":"Yes. Multiplying the recorded maximum demand by 1.25 and adding a quarter of it are the same arithmetic. Published sources describe the method both ways, which makes it look like there are two competing methods. There are not."}},{"@type":"Question","name":"How long does the load study have to run?","acceptedAnswer":{"@type":"Answer","text":"A minimum of 30 days, continuously recorded, using a recording ammeter or power meter on the highest-loaded phase. Length alone is not enough: the recording has to reflect the building while occupied and include the larger of the heating or cooling load, by measurement or by calculation, along with loads that run only periodically."}},{"@type":"Question","name":"Does an EV charger get a demand factor in the calculation?","acceptedAnswer":{"@type":"Answer","text":"No. EV supply equipment enters a service or feeder calculation at the larger of 7,200 VA or its nameplate rating, at 100 percent. Article 625 treats EV charging as a continuous load. The route to a smaller number is not a demand factor but an automatic load management system, which under NEC 625.42 lets the service see the limit the system enforces rather than the sum of the nameplates."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in has-photo">
+    <div class="artban-text">
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">NEC 220.87</span></nav>
+      <div class="eyebrow">Load Calculations</div>
+      <h1>NEC 220.87: Measuring an Existing Load</h1>
+      <p class="dek">Adding load to an existing service does not require recalculating the whole building from scratch. Measured demand is allowed to stand in for the calculation, and the conditions attached to that measurement are where it comes apart.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published November 3, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+    </div>
+    <figure class="artban-photo">
+      <picture><source srcset="images/parts/dc-power-meters-bms.webp" type="image/webp"><img src="images/parts/dc-power-meters-bms.jpg" width="340" height="340" alt="Panel-mounted power meters" decoding="async" fetchpriority="high"></picture>
+      <figcaption>Recording power meters (illustration)</figcaption>
+    </figure>
+  </div>
+</section>
+<div class="artwrap">
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>Two routes are permitted: one year of maximum demand data, or a continuous recording over at least 30 days.</li>
+      <li>125 percent of maximum demand and adding 25 percent to it are the same arithmetic. Sources that present these as competing methods are describing one method twice.</li>
+      <li>The 30-day recording must capture the building occupied and the larger of the heating or cooling load, by measurement or calculation.</li>
+      <li>EV charging equipment enters a service calculation at the larger of 7,200 VA or its nameplate rating, with no demand factor.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#why-the-section-exists">Why the section exists</a></li>
+      <li><a href="#the-two-routes">The two routes</a></li>
+      <li><a href="#what-the-recording-has-to-capture">What the recording has to capture</a></li>
+      <li><a href="#where-the-method-does-not-apply">Where the method does not apply</a></li>
+      <li><a href="#the-ev-charger-case">The EV charger case</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+  <h2 id="why-the-section-exists">Why the section exists</h2>
+  <p>The standard load calculation in Article 220 is built for a building being designed. It works forward from connected load and applies demand factors to arrive at a figure for the service. Run that same calculation on a forty-year-old commercial building and two things go wrong: nobody knows what is actually connected any more, and the result comes back absurdly conservative, because the demand factors assume a diversity the building has already proven it exceeds in the other direction.</p>
+  <p>220.87 resolves this by letting you measure instead. If the building has been running, its own demand history is better evidence than a calculation from an inventory nobody can verify. This is the section behind nearly every &ldquo;will my service take this new load&rdquo; question, and it is the reason a service that fails a paper calculation can still be perfectly adequate.</p>
+  <h2 id="the-two-routes">The two routes</h2>
+  <p><b>One year of demand data.</b> If maximum demand data for a one-year period is available, the calculated load is permitted to be 125 percent of that maximum demand. This is the preferred route because a full year captures both the heating and the cooling peak without any argument about which season you measured in.</p>
+  <p><b>A 30-day recording.</b> Where a year of data is not available, the calculated load is permitted to be based on the maximum demand continuously recorded over a minimum 30-day period, using a recording ammeter or power meter connected to the highest-loaded phase. The demand figure is an average over a 15-minute interval, not an instantaneous peak &mdash; which matters, because an inrush spike is not what the section is asking for.</p>
+  <p>Then the arithmetic: the recorded maximum demand at 125 percent, plus the new load being added, compared against the service rating or the feeder ampacity.</p>
+  <p>One point worth settling, because the published sources make it look like a disagreement. Some describe the method as 125 percent of maximum demand and others as adding 25 percent to maximum demand. These are the same operation. Multiplying by 1.25 and adding a quarter produce an identical number, and there is no third method hiding behind the difference in wording.</p>
+  <div class="ad-unit" data-ad="incontent"></div>
+  <h2 id="what-the-recording-has-to-capture">What the recording has to capture</h2>
+  <p>The 30-day route is the one that gets misapplied, because leaving a meter on a panel for a month is easy and the conditions on that month are not obvious.</p>
+  <p>The recording has to reflect the building <b>occupied</b>. A load study run over a holiday shutdown, or on a tenant space between leases, does not measure the maximum demand of anything. It has to include the larger of the heating or the cooling load, by measurement or by calculation &mdash; so a study run in October in a climate with both a winter and a summer peak needs the missing season added analytically rather than ignored. And it has to account for loads that are periodic in nature, the ones that may simply not have run during the window.</p>
+  <p>This is also why the one-year route is better whenever the data exists. Utility interval data for twelve months answers all three conditions at once, and most utilities will provide it to the account holder on request.</p>
+  <h2 id="where-the-method-does-not-apply">Where the method does not apply</h2>
+  <p>Measured demand is evidence about the building as it was operating during the measurement. Where something is actively shaping that measurement, the evidence no longer describes the underlying load. On-site generation, storage and deliberate peak shaving all do exactly that: they suppress the recorded demand without reducing what the building would draw if the shaping stopped. Several editions restrict the method on that basis, and the restriction is worth checking rather than assumed either way.</p>
+  <p>The same logic applies informally to any site where the historic demand was limited by something that is about to change. A warehouse recorded while half empty, a restaurant space recorded as a retail unit, a building whose process equipment was idle &mdash; in each case the measurement is accurate and irrelevant.</p>
+  <p>Two further cautions. The method establishes the <i>existing</i> load; the new load is added at its own full calculated value and gets no benefit from the measurement. And this is a section AHJs read closely, since it is the basis on which a service passes without being upgraded, so the load study and its conditions are worth documenting as carefully as the arithmetic.</p>
+  <h2 id="the-ev-charger-case">The EV charger case</h2>
+  <p>Most 220.87 questions now arrive attached to an EV charger, and the EV side has its own rules that the 220.87 result does not override.</p>
+  <p>Under NEC 220.57, electric vehicle supply equipment enters a service or feeder calculation at the larger of 7,200 VA or its nameplate rating, at 100 percent, with no demand factor applied. The 7,200 VA figure is a floor, not a value: a 40 A EVSE at 240 V is 9,600 VA and enters at 9,600. Article 625 also treats EV charging as a continuous load, which is why no demand factor is available here even though comparable appliance loads get one.</p>
+  <p>That is what makes the arithmetic tight, and it is also why load management is the usual answer rather than a service upgrade. Where an automatic load management system is installed, NEC 625.42 permits the maximum load on the service or feeder to be the maximum the management system allows, rather than the sum of the connected equipment nameplates. Four chargers behind an enforceable ALMS present as the system limit. The word doing the work is <i>enforceable</i>: the system has to actually constrain the load, not merely schedule it.</p>
+  <h2 id="common-mistakes">Common mistakes</h2>
+  <p>Running the load study while the space is unoccupied or between tenants. Recording in one season and ignoring the opposite peak instead of adding it by calculation. Reading an instantaneous peak off a meter rather than the 15-minute average demand. Treating 125 percent and adding 25 percent as two different methods and wondering which applies. Applying the 125 percent factor to the new load as well as the measured existing load. Giving an EV charger a demand factor. Using measured demand from a site with on-site generation or peak shaving without checking whether the method is available there. Citing section numbers from an edition the jurisdiction has not adopted &mdash; Article 220 is reorganized in the 2026 NEC, so the number itself is worth confirming.</p>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Can I use utility bills for a NEC 220.87 calculation?</summary>
+    <p style="margin-top:10px">Yes, if they give maximum demand for a one-year period. That is the first permitted route, and the calculated load is 125 percent of that maximum demand. Most utilities will provide twelve months of interval data to the account holder on request, and it is better evidence than a 30-day study because it captures both the heating and the cooling peak.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Is 125 percent of maximum demand the same as adding 25 percent?</summary>
+    <p style="margin-top:10px">Yes. Multiplying the recorded maximum demand by 1.25 and adding a quarter of it are the same arithmetic. Published sources describe the method both ways, which makes it look like there are two competing methods. There are not.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How long does the load study have to run?</summary>
+    <p style="margin-top:10px">A minimum of 30 days, continuously recorded, using a recording ammeter or power meter on the highest-loaded phase. Length alone is not enough: the recording has to reflect the building while occupied and include the larger of the heating or cooling load, by measurement or by calculation, along with loads that run only periodically.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Does an EV charger get a demand factor in the calculation?</summary>
+    <p style="margin-top:10px">No. EV supply equipment enters a service or feeder calculation at the larger of 7,200 VA or its nameplate rating, at 100 percent. Article 625 treats EV charging as a continuous load. The route to a smaller number is not a demand factor but an automatic load management system, which under NEC 625.42 lets the service see the limit the system enforces rather than the sum of the nameplates.</p>
+  </details>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The continuous-load factor that governs the new circuit is covered in <a class="inline" href="guide-continuous-load-80-percent-rule.html">the 80% rule and continuous loads</a>, and the conductor itself comes out of the <a class="inline" href="calculators/wire-size.html">wire size calculator</a>.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/wire-size.html">Wire Size Calculator</a>The conductor for the new load, with both NEC checks run.</li>
+        <li><a href="calculators/kw-to-amps.html">kW to Amps Calculator</a>Converting a demand figure in kW to the current the service sees.</li>
+        <li><a href="calculators/voltage-drop.html">Voltage Drop Calculator</a>Whether the run length forces the conductor up.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-continuous-load-80-percent-rule.html">The 80% Rule & Continuous Loads</a></li>
+        <li><a href="guide-nec-430-250-motor-fla.html">NEC 430.250 Motor Full-Load Current</a></li>
+        <li><a href="guide-cable-ampacity-derating.html">Cable Ampacity Derating Explained</a></li>
+        <li><a href="guide-nec-110-26-working-space.html">NEC 110.26 Working Space</a></li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;NEC 220.87: Measuring an Existing Load&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-grid-forming-vs-grid-following.html</p>
+  </details>
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/guide-nec-220-87-existing-load.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+
+<aside class="provenance" aria-labelledby="prov-h">
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published November 3, 2026.</span></summary>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>The one-year maximum demand route and the 30-day recording route, the conditions the recording has to satisfy, why 125 percent and adding 25 percent are one method, when measured demand stops being valid evidence, and how EV supply equipment and automatic load management enter the calculation.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>NEC 220.87 for the two permitted methods of determining an existing load</li><li>NEC 220.57 for the EV supply equipment load value and 625.42 for load management</li><li>NEC 210.19(A) and 215.2 for the continuous-load treatment of the new circuit</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A load calculation or a substitute for the code text. Whether the measured-demand method is available on a given site, and the exact conditions on the recording, vary between NEC editions and are read closely by the AHJ; Article 220 is reorganized in the 2026 edition, so confirm the section number against the edition your jurisdiction has adopted before citing it.</dd>
+      <dt>Provenance</dt>
+      <dd>Published November 3, 2026. Written and maintained by the Voltfield editorial team against the sources above. Worked figures in the text are arithmetic the reader can check; nothing here states a measured value.</dd>
+    </dl>
+  </details>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

@@ -472,6 +472,7 @@ const GUIDES = [
   guides: [
     ['guide-fuse-vs-breaker.html', 'Fuse vs. Circuit Breaker Compared'],
     ['guide-continuous-load-80-percent-rule.html', 'The 80% Rule &amp; Continuous Loads'],
+    ['guide-nec-220-87-existing-load.html', 'NEC 220.87 Existing Load Explained'],
     ['guide-kw-vs-kva.html', 'kW vs. kVA Explained'],
     ['guide-short-circuit-studies-breaker-coordination.html', 'Short-Circuit Studies &amp; Coordination'],
   ],
@@ -725,6 +726,134 @@ const GUIDES = [
   notThis: 'A capacity plan or an electrical design. The circuit figures are arithmetic from the stated voltages and are subject to the termination and derating rules in NEC 110.14(C) and 310.15; diversity factors are site-specific and the cooling limit depends on the containment and air-handling design.',
 },
 
+{
+  slug: 'guide-spd-types-1-2-3',
+  eyebrow: 'Protection',
+  crumb: 'SPD Types',
+  h1: 'SPD Types 1, 2 and 3: Where Each One Is Allowed',
+  title: 'SPD Types 1, 2 and 3 Explained',
+  headline: 'SPD Types 1, 2 and 3: The Type Number Is a Location, Not a Grade',
+  dek: 'The type number does not rank these devices by quality or by how much energy they absorb. It states where in the system the device is permitted to be connected, and the boundary that matters is the service disconnect.',
+  description: 'SPD Types 1, 2 and 3 explained: what the type number controls, which types may sit on the supply side of the service disconnect under NEC 242.12 and 242.14, the short-circuit and voltage checks in 242.10, and where 230.67 now requires one.',
+  ogDesc: 'What the type number actually controls, the service-disconnect boundary, and the two ratings checks that get skipped.',
+  keywords: 'SPD types, type 1 vs type 2 SPD, surge protective device types, NEC 242, NEC 230.67, surge protector service panel, UL 1449, type 3 SPD, SPD short circuit current rating',
+  photo: { src: 'images/parts/dc-surge-protective-devices', alt: 'Panel-mounted surge protective devices', caption: 'Surge protective devices (illustration)' },
+  takeaways: [
+    'The type number describes the permitted connection point, not performance. A Type 2 is not a weaker Type 1.',
+    'Type 1 is the only type permitted on the supply side of the service disconnect. It may also go on the load side.',
+    'Type 2 is load side only. Type 3 is point-of-utilization and needs protection upstream of it.',
+    'Two ratings have to be checked before any of this matters: the short-circuit current rating against available fault current, and the voltage rating against the maximum continuous phase-to-ground voltage.',
+  ],
+  sections: [
+    { id: 'what-the-type-number-means', h2: 'What the type number means', html: `
+  <p>The single most common error about these devices is reading the type number as a grade, as though a Type 1 were heavy-duty and a Type 3 were a budget version. It is not a ranking. Under UL 1449, the standard these devices are listed to, the type classifies the device by <b>where it is permitted to be connected</b> relative to the service disconnect.</p>
+  <p>There are four. Type 1 and Type 2 are permanently connected devices distinguished by which side of the service disconnecting means they may sit on. Type 3 is a point-of-utilization device, installed near the equipment it protects. Type 4 is a component assembly, which is what goes inside listed equipment rather than onto a wall.</p>
+  <p>Two devices can therefore have identical surge ratings and different type numbers, and a Type 1 and a Type 2 of the same brand and series frequently do. The difference is what the listing permits, which in turn is about whether the device can be installed without an overcurrent device ahead of it.</p>` },
+    { id: 'the-service-disconnect-boundary', h2: 'The service disconnect boundary', html: `
+  <p>This is where the published answers contradict each other, so it is worth stating plainly.</p>
+  <p><b>Type 1 may be connected on the supply side of the service disconnecting means.</b> That is its defining permission, under NEC 242.12. It may <i>also</i> be connected on the load side, subject to the requirements that apply to Type 2 locations &mdash; so a Type 1 on a feeder serving a large motor is a normal installation, not a misapplication.</p>
+  <p><b>Type 2 may only be connected on the load side of the service disconnect</b>, under NEC 242.14. Within that restriction it is flexible: anywhere on the load side of the feeder overcurrent device, and anywhere on the premises wiring of a separately derived system.</p>
+  <p>So the asymmetry runs one way. Type 1 can go either side; Type 2 cannot go on the line side. If a source tells you a Type 2 may be installed on either side of the service disconnect, it has the two reversed. The reason behind the rule is overcurrent protection: a device on the supply side has no branch or feeder overcurrent device ahead of it, and only a Type 1 is listed to be connected that way.</p>` },
+    { id: 'type-3-and-the-point-of-use', h2: 'Type 3 and the point of use', html: `
+  <p>Type 3 is the plug strip, the receptacle-type device, the unit at the equipment. It is listed as a point-of-utilization device, which carries a consequence people miss: a Type 3 is not a substitute for protection at the service. It is designed to work downstream of a Type 1 or Type 2, dealing with what gets past that device and with transients generated inside the building rather than arriving from outside.</p>
+  <p>Type 3 listings also carry a minimum conductor length from the service &mdash; the device is qualified on the assumption that there is impedance between it and the service entrance. Installing one directly at a panel is outside what it was listed for.</p>
+  <p>The practical reading: a facility with only Type 3 devices at the equipment has not addressed the service-entrance surge, and a facility with only a service SPD has not addressed what reaches sensitive electronics. These are complementary layers, which is why the trade calls it cascaded protection rather than choosing one.</p>` },
+    { id: 'the-two-checks-that-get-skipped', h2: 'The two checks that get skipped', html: `
+  <p>Choosing the right type settles where the device may go. It does not establish that this particular device may go <i>there</i>. Two ratings do that, and both get skipped routinely.</p>
+  <p><b>Short-circuit current rating.</b> An SPD carries a marked short-circuit current rating, and under NEC 242.10 it may not be installed where the available fault current exceeds it. This is the same discipline as any other equipment SCCR check: it needs a fault-current figure at the point of installation, not an assumption. A service-entrance location in a large facility is precisely where available fault current is highest.</p>
+  <p><b>Voltage rating.</b> The device rating has to equal or exceed the maximum continuous phase-to-ground voltage available at the point of application. A device chosen from the nominal system voltage alone can fail this on a system that runs high, and the failure mode is the SPD degrading in normal service rather than during a surge.</p>
+  <p>Article 242 also rules out certain systems outright unless the device is specifically listed for them: ungrounded systems, impedance-grounded systems and corner-grounded delta systems. A standard SPD assumes a grounded system with a predictable phase-to-ground voltage, and none of those three provide one.</p>` },
+    { id: 'where-an-spd-is-now-required', h2: 'Where an SPD is now required', html: `
+  <p>Surge protection used to be entirely optional. It is not any more, and this is the part of the subject that has changed most recently.</p>
+  <p>NEC 230.67 requires that services supplying dwelling units be provided with a surge-protective device, and that the device be a Type 1 or Type 2. The requirement reaches replacements as well as new work: replacing the service equipment on an existing dwelling triggers it. Later editions extended the same requirement to additional occupancies, so the scope depends on which edition your jurisdiction has adopted.</p>
+  <p>Note what the rule does <i>not</i> say. It does not require a Type 1 specifically, and it does not require a device at every panel. A single listed Type 2 at the service satisfies it. Claims that the code mandates a device at the service plus one at every downstream panel are good engineering practice stated as a code requirement, and the two are worth keeping separate when you are signing off on an installation.</p>` },
+    { id: 'common-mistakes', h2: 'Common mistakes', html: `
+  <p>Reading the type number as a performance tier and specifying a Type 1 where a Type 2 is both permitted and identical in surge rating. Installing a Type 2 on the supply side of the service disconnect, which the listing does not allow. Treating plug-strip Type 3 devices as the building's surge protection. Selecting a device from nominal system voltage without checking it against the maximum continuous phase-to-ground voltage. Skipping the short-circuit current rating check at a service entrance, which is the one location where available fault current is most likely to exceed it. Quoting a dwelling-unit requirement from an edition the local jurisdiction has not adopted.</p>` },
+  ],
+  faqs: [
+    { q: 'What is the difference between a Type 1 and a Type 2 SPD?', a: 'Where each may be connected, not how much surge energy it handles. A Type 1 is listed for connection on the supply side of the service disconnecting means, and may also be installed on the load side. A Type 2 is listed for the load side only. Two devices with identical surge ratings can carry different type numbers, because the type reflects the listed connection point.' },
+    { q: 'Can a Type 2 SPD be installed on the line side of the service disconnect?', a: 'No. Type 2 is restricted to the load side of the service disconnect under NEC 242.14. Only a Type 1 is listed for supply-side connection, because a device there has no overcurrent device ahead of it. Sources stating that a Type 2 may be installed on either side have Type 1 and Type 2 reversed.' },
+    { q: 'Do I need both a service SPD and point-of-use devices?', a: 'They do different jobs. A Type 1 or Type 2 at the service handles what arrives from outside; a Type 3 at the equipment handles what gets past it and what the building generates internally. A Type 3 is listed as a point-of-utilization device and is not a substitute for protection at the service. Cascaded protection is good practice, but note that the code requirement is for a device at the service, not at every panel.' },
+    { q: 'Does the NEC require a surge protective device?', a: 'For dwelling-unit services, yes. NEC 230.67 requires a Type 1 or Type 2 SPD on services supplying dwelling units, including when existing service equipment is replaced. Later editions extended the requirement to further occupancies, so the scope depends on the edition your jurisdiction has adopted. Outside those cases an SPD is a design decision rather than a code requirement.' },
+  ],
+  nextIntro: 'Sizing and coordinating the protective devices around it is covered in <a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">short-circuit studies and breaker coordination</a>, and the fault-current figure the SCCR check needs comes from the <a class="inline" href="calculators/fault-current.html">fault current calculator</a>.',
+  calcs: [
+    ['calculators/fault-current.html', 'Fault Current Calculator', 'The available fault current the SPD short-circuit rating is checked against.'],
+  ],
+  guides: [
+    ['guide-fully-rated-vs-series-rated.html', 'Fully Rated vs. Series Rated'],
+    ['guide-grounding-bonding-basics.html', 'Grounding & Bonding Basics'],
+    ['guide-ground-fault-protection.html', 'Ground-Fault Protection Explained'],
+    ['guide-harmonics-ieee-519.html', 'Harmonics & IEEE 519'],
+  ],
+  covers: 'What the UL 1449 type number classifies, which types may be connected on each side of the service disconnecting means under NEC 242.12 and 242.14, what a Type 3 point-of-utilization listing assumes, the short-circuit and voltage rating checks in Article 242, and the dwelling-unit requirement in NEC 230.67.',
+  basedOn: ['NEC Article 242, Part II, for SPD connection locations and the ratings checks', 'NEC 230.67 for the dwelling-unit service requirement', 'UL 1449 as the product standard the type classification comes from'],
+  notThis: 'A substitute for the code text or for a device listing. Section numbering and the scope of the 230.67 requirement differ between NEC editions, and the 2026 edition reorganizes several of these articles, so verify against the edition your jurisdiction has adopted. Selecting a specific device still requires the available fault current and the maximum continuous phase-to-ground voltage at the point of installation.',
+},
+{
+  slug: 'guide-nec-220-87-existing-load',
+  eyebrow: 'Load Calculations',
+  crumb: 'NEC 220.87',
+  h1: 'NEC 220.87: Measuring an Existing Load',
+  title: 'NEC 220.87 Existing Load Explained',
+  headline: 'NEC 220.87: Measuring an Existing Load Instead of Calculating It',
+  dek: 'Adding load to an existing service does not require recalculating the whole building from scratch. Measured demand is allowed to stand in for the calculation, and the conditions attached to that measurement are where it comes apart.',
+  description: 'NEC 220.87 explained: the one-year maximum demand route, the 30-day recording route, what the recording has to capture, why 125 percent and adding 25 percent are the same thing, and how an EV charger enters the calculation.',
+  ogDesc: 'The two permitted routes, what the load study has to capture, and how an EV charger enters the calculation.',
+  keywords: 'NEC 220.87, determining existing loads, existing load calculation, 30 day load study, maximum demand 125 percent, service capacity EV charger, NEC 220.57, NEC 625.42, load management ALMS',
+  photo: { src: 'images/parts/dc-power-meters-bms', alt: 'Panel-mounted power meters', caption: 'Recording power meters (illustration)' },
+  takeaways: [
+    'Two routes are permitted: one year of maximum demand data, or a continuous recording over at least 30 days.',
+    '125 percent of maximum demand and adding 25 percent to it are the same arithmetic. Sources that present these as competing methods are describing one method twice.',
+    'The 30-day recording must capture the building occupied and the larger of the heating or cooling load, by measurement or calculation.',
+    'EV charging equipment enters a service calculation at the larger of 7,200 VA or its nameplate rating, with no demand factor.',
+  ],
+  sections: [
+    { id: 'why-the-section-exists', h2: 'Why the section exists', html: `
+  <p>The standard load calculation in Article 220 is built for a building being designed. It works forward from connected load and applies demand factors to arrive at a figure for the service. Run that same calculation on a forty-year-old commercial building and two things go wrong: nobody knows what is actually connected any more, and the result comes back absurdly conservative, because the demand factors assume a diversity the building has already proven it exceeds in the other direction.</p>
+  <p>220.87 resolves this by letting you measure instead. If the building has been running, its own demand history is better evidence than a calculation from an inventory nobody can verify. This is the section behind nearly every &ldquo;will my service take this new load&rdquo; question, and it is the reason a service that fails a paper calculation can still be perfectly adequate.</p>` },
+    { id: 'the-two-routes', h2: 'The two routes', html: `
+  <p><b>One year of demand data.</b> If maximum demand data for a one-year period is available, the calculated load is permitted to be 125 percent of that maximum demand. This is the preferred route because a full year captures both the heating and the cooling peak without any argument about which season you measured in.</p>
+  <p><b>A 30-day recording.</b> Where a year of data is not available, the calculated load is permitted to be based on the maximum demand continuously recorded over a minimum 30-day period, using a recording ammeter or power meter connected to the highest-loaded phase. The demand figure is an average over a 15-minute interval, not an instantaneous peak &mdash; which matters, because an inrush spike is not what the section is asking for.</p>
+  <p>Then the arithmetic: the recorded maximum demand at 125 percent, plus the new load being added, compared against the service rating or the feeder ampacity.</p>
+  <p>One point worth settling, because the published sources make it look like a disagreement. Some describe the method as 125 percent of maximum demand and others as adding 25 percent to maximum demand. These are the same operation. Multiplying by 1.25 and adding a quarter produce an identical number, and there is no third method hiding behind the difference in wording.</p>` },
+    { id: 'what-the-recording-has-to-capture', h2: 'What the recording has to capture', html: `
+  <p>The 30-day route is the one that gets misapplied, because leaving a meter on a panel for a month is easy and the conditions on that month are not obvious.</p>
+  <p>The recording has to reflect the building <b>occupied</b>. A load study run over a holiday shutdown, or on a tenant space between leases, does not measure the maximum demand of anything. It has to include the larger of the heating or the cooling load, by measurement or by calculation &mdash; so a study run in October in a climate with both a winter and a summer peak needs the missing season added analytically rather than ignored. And it has to account for loads that are periodic in nature, the ones that may simply not have run during the window.</p>
+  <p>This is also why the one-year route is better whenever the data exists. Utility interval data for twelve months answers all three conditions at once, and most utilities will provide it to the account holder on request.</p>` },
+    { id: 'where-the-method-does-not-apply', h2: 'Where the method does not apply', html: `
+  <p>Measured demand is evidence about the building as it was operating during the measurement. Where something is actively shaping that measurement, the evidence no longer describes the underlying load. On-site generation, storage and deliberate peak shaving all do exactly that: they suppress the recorded demand without reducing what the building would draw if the shaping stopped. Several editions restrict the method on that basis, and the restriction is worth checking rather than assumed either way.</p>
+  <p>The same logic applies informally to any site where the historic demand was limited by something that is about to change. A warehouse recorded while half empty, a restaurant space recorded as a retail unit, a building whose process equipment was idle &mdash; in each case the measurement is accurate and irrelevant.</p>
+  <p>Two further cautions. The method establishes the <i>existing</i> load; the new load is added at its own full calculated value and gets no benefit from the measurement. And this is a section AHJs read closely, since it is the basis on which a service passes without being upgraded, so the load study and its conditions are worth documenting as carefully as the arithmetic.</p>` },
+    { id: 'the-ev-charger-case', h2: 'The EV charger case', html: `
+  <p>Most 220.87 questions now arrive attached to an EV charger, and the EV side has its own rules that the 220.87 result does not override.</p>
+  <p>Under NEC 220.57, electric vehicle supply equipment enters a service or feeder calculation at the larger of 7,200 VA or its nameplate rating, at 100 percent, with no demand factor applied. The 7,200 VA figure is a floor, not a value: a 40 A EVSE at 240 V is 9,600 VA and enters at 9,600. Article 625 also treats EV charging as a continuous load, which is why no demand factor is available here even though comparable appliance loads get one.</p>
+  <p>That is what makes the arithmetic tight, and it is also why load management is the usual answer rather than a service upgrade. Where an automatic load management system is installed, NEC 625.42 permits the maximum load on the service or feeder to be the maximum the management system allows, rather than the sum of the connected equipment nameplates. Four chargers behind an enforceable ALMS present as the system limit. The word doing the work is <i>enforceable</i>: the system has to actually constrain the load, not merely schedule it.</p>` },
+    { id: 'common-mistakes', h2: 'Common mistakes', html: `
+  <p>Running the load study while the space is unoccupied or between tenants. Recording in one season and ignoring the opposite peak instead of adding it by calculation. Reading an instantaneous peak off a meter rather than the 15-minute average demand. Treating 125 percent and adding 25 percent as two different methods and wondering which applies. Applying the 125 percent factor to the new load as well as the measured existing load. Giving an EV charger a demand factor. Using measured demand from a site with on-site generation or peak shaving without checking whether the method is available there. Citing section numbers from an edition the jurisdiction has not adopted &mdash; Article 220 is reorganized in the 2026 NEC, so the number itself is worth confirming.</p>` },
+  ],
+  faqs: [
+    { q: 'Can I use utility bills for a NEC 220.87 calculation?', a: 'Yes, if they give maximum demand for a one-year period. That is the first permitted route, and the calculated load is 125 percent of that maximum demand. Most utilities will provide twelve months of interval data to the account holder on request, and it is better evidence than a 30-day study because it captures both the heating and the cooling peak.' },
+    { q: 'Is 125 percent of maximum demand the same as adding 25 percent?', a: 'Yes. Multiplying the recorded maximum demand by 1.25 and adding a quarter of it are the same arithmetic. Published sources describe the method both ways, which makes it look like there are two competing methods. There are not.' },
+    { q: 'How long does the load study have to run?', a: 'A minimum of 30 days, continuously recorded, using a recording ammeter or power meter on the highest-loaded phase. Length alone is not enough: the recording has to reflect the building while occupied and include the larger of the heating or cooling load, by measurement or by calculation, along with loads that run only periodically.' },
+    { q: 'Does an EV charger get a demand factor in the calculation?', a: 'No. EV supply equipment enters a service or feeder calculation at the larger of 7,200 VA or its nameplate rating, at 100 percent. Article 625 treats EV charging as a continuous load. The route to a smaller number is not a demand factor but an automatic load management system, which under NEC 625.42 lets the service see the limit the system enforces rather than the sum of the nameplates.' },
+  ],
+  nextIntro: 'The continuous-load factor that governs the new circuit is covered in <a class="inline" href="guide-continuous-load-80-percent-rule.html">the 80% rule and continuous loads</a>, and the conductor itself comes out of the <a class="inline" href="calculators/wire-size.html">wire size calculator</a>.',
+  calcs: [
+    ['calculators/wire-size.html', 'Wire Size Calculator', 'The conductor for the new load, with both NEC checks run.'],
+    ['calculators/kw-to-amps.html', 'kW to Amps Calculator', 'Converting a demand figure in kW to the current the service sees.'],
+    ['calculators/voltage-drop.html', 'Voltage Drop Calculator', 'Whether the run length forces the conductor up.'],
+  ],
+  guides: [
+    ['guide-continuous-load-80-percent-rule.html', 'The 80% Rule & Continuous Loads'],
+    ['guide-nec-430-250-motor-fla.html', 'NEC 430.250 Motor Full-Load Current'],
+    ['guide-cable-ampacity-derating.html', 'Cable Ampacity Derating Explained'],
+    ['guide-nec-110-26-working-space.html', 'NEC 110.26 Working Space'],
+  ],
+  covers: 'The one-year maximum demand route and the 30-day recording route, the conditions the recording has to satisfy, why 125 percent and adding 25 percent are one method, when measured demand stops being valid evidence, and how EV supply equipment and automatic load management enter the calculation.',
+  basedOn: ['NEC 220.87 for the two permitted methods of determining an existing load', 'NEC 220.57 for the EV supply equipment load value and 625.42 for load management', 'NEC 210.19(A) and 215.2 for the continuous-load treatment of the new circuit'],
+  notThis: 'A load calculation or a substitute for the code text. Whether the measured-demand method is available on a given site, and the exact conditions on the recording, vary between NEC editions and are read closely by the AHJ; Article 220 is reorganized in the 2026 edition, so confirm the section number against the edition your jurisdiction has adopted before citing it.',
+},
 ];
 
 /* ------------------------------------------------------------- builders ---- */

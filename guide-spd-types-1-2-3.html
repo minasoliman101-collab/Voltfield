@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>SPD Types 1, 2 and 3 Explained | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-spd-types-1-2-3.html">
+<meta name="description" content="SPD Types 1, 2 and 3 explained: what the type number controls, which types may sit on the supply side of the service disconnect under NEC 242.12 and 242.14, the short-circuit and voltage checks in 242.10, and where 230.67 now requires one.">
+<meta name="keywords" content="SPD types, type 1 vs type 2 SPD, surge protective device types, NEC 242, NEC 230.67, surge protector service panel, UL 1449, type 3 SPD, SPD short circuit current rating">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="SPD Types">
+<meta property="og:description" content="What the type number actually controls, the service-disconnect boundary, and the two ratings checks that get skipped.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta name="twitter:title" content="SPD Types">
+<meta name="twitter:description" content="What the type number actually controls, the service-disconnect boundary, and the two ratings checks that get skipped.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://voltfield.org/guides.html"},{"@type":"ListItem","position":3,"name":"SPD Types","item":"https://voltfield.org/guide-spd-types-1-2-3.html"}]},{"@type":"Article","headline":"SPD Types 1, 2 and 3: The Type Number Is a Location, Not a Grade","description":"SPD Types 1, 2 and 3 explained: what the type number controls, which types may sit on the supply side of the service disconnect under NEC 242.12 and 242.14, the short-circuit and voltage checks in 242.10, and where 230.67 now requires one.","image":"https://voltfield.org/social/social-generic.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-11-03T00:00:00-05:00","dateModified":"2026-11-03T00:00:00-05:00","url":"https://voltfield.org/guide-spd-types-1-2-3.html"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between a Type 1 and a Type 2 SPD?","acceptedAnswer":{"@type":"Answer","text":"Where each may be connected, not how much surge energy it handles. A Type 1 is listed for connection on the supply side of the service disconnecting means, and may also be installed on the load side. A Type 2 is listed for the load side only. Two devices with identical surge ratings can carry different type numbers, because the type reflects the listed connection point."}},{"@type":"Question","name":"Can a Type 2 SPD be installed on the line side of the service disconnect?","acceptedAnswer":{"@type":"Answer","text":"No. Type 2 is restricted to the load side of the service disconnect under NEC 242.14. Only a Type 1 is listed for supply-side connection, because a device there has no overcurrent device ahead of it. Sources stating that a Type 2 may be installed on either side have Type 1 and Type 2 reversed."}},{"@type":"Question","name":"Do I need both a service SPD and point-of-use devices?","acceptedAnswer":{"@type":"Answer","text":"They do different jobs. A Type 1 or Type 2 at the service handles what arrives from outside; a Type 3 at the equipment handles what gets past it and what the building generates internally. A Type 3 is listed as a point-of-utilization device and is not a substitute for protection at the service. Cascaded protection is good practice, but note that the code requirement is for a device at the service, not at every panel."}},{"@type":"Question","name":"Does the NEC require a surge protective device?","acceptedAnswer":{"@type":"Answer","text":"For dwelling-unit services, yes. NEC 230.67 requires a Type 1 or Type 2 SPD on services supplying dwelling units, including when existing service equipment is replaced. Later editions extended the requirement to further occupancies, so the scope depends on the edition your jurisdiction has adopted. Outside those cases an SPD is a design decision rather than a code requirement."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in has-photo">
+    <div class="artban-text">
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">SPD Types</span></nav>
+      <div class="eyebrow">Protection</div>
+      <h1>SPD Types 1, 2 and 3: Where Each One Is Allowed</h1>
+      <p class="dek">The type number does not rank these devices by quality or by how much energy they absorb. It states where in the system the device is permitted to be connected, and the boundary that matters is the service disconnect.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published November 3, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+    </div>
+    <figure class="artban-photo">
+      <picture><source srcset="images/parts/dc-surge-protective-devices.webp" type="image/webp"><img src="images/parts/dc-surge-protective-devices.jpg" width="340" height="340" alt="Panel-mounted surge protective devices" decoding="async" fetchpriority="high"></picture>
+      <figcaption>Surge protective devices (illustration)</figcaption>
+    </figure>
+  </div>
+</section>
+<div class="artwrap">
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>The type number describes the permitted connection point, not performance. A Type 2 is not a weaker Type 1.</li>
+      <li>Type 1 is the only type permitted on the supply side of the service disconnect. It may also go on the load side.</li>
+      <li>Type 2 is load side only. Type 3 is point-of-utilization and needs protection upstream of it.</li>
+      <li>Two ratings have to be checked before any of this matters: the short-circuit current rating against available fault current, and the voltage rating against the maximum continuous phase-to-ground voltage.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#what-the-type-number-means">What the type number means</a></li>
+      <li><a href="#the-service-disconnect-boundary">The service disconnect boundary</a></li>
+      <li><a href="#type-3-and-the-point-of-use">Type 3 and the point of use</a></li>
+      <li><a href="#the-two-checks-that-get-skipped">The two checks that get skipped</a></li>
+      <li><a href="#where-an-spd-is-now-required">Where an SPD is now required</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+  <h2 id="what-the-type-number-means">What the type number means</h2>
+  <p>The single most common error about these devices is reading the type number as a grade, as though a Type 1 were heavy-duty and a Type 3 were a budget version. It is not a ranking. Under UL 1449, the standard these devices are listed to, the type classifies the device by <b>where it is permitted to be connected</b> relative to the service disconnect.</p>
+  <p>There are four. Type 1 and Type 2 are permanently connected devices distinguished by which side of the service disconnecting means they may sit on. Type 3 is a point-of-utilization device, installed near the equipment it protects. Type 4 is a component assembly, which is what goes inside listed equipment rather than onto a wall.</p>
+  <p>Two devices can therefore have identical surge ratings and different type numbers, and a Type 1 and a Type 2 of the same brand and series frequently do. The difference is what the listing permits, which in turn is about whether the device can be installed without an overcurrent device ahead of it.</p>
+  <h2 id="the-service-disconnect-boundary">The service disconnect boundary</h2>
+  <p>This is where the published answers contradict each other, so it is worth stating plainly.</p>
+  <p><b>Type 1 may be connected on the supply side of the service disconnecting means.</b> That is its defining permission, under NEC 242.12. It may <i>also</i> be connected on the load side, subject to the requirements that apply to Type 2 locations &mdash; so a Type 1 on a feeder serving a large motor is a normal installation, not a misapplication.</p>
+  <p><b>Type 2 may only be connected on the load side of the service disconnect</b>, under NEC 242.14. Within that restriction it is flexible: anywhere on the load side of the feeder overcurrent device, and anywhere on the premises wiring of a separately derived system.</p>
+  <p>So the asymmetry runs one way. Type 1 can go either side; Type 2 cannot go on the line side. If a source tells you a Type 2 may be installed on either side of the service disconnect, it has the two reversed. The reason behind the rule is overcurrent protection: a device on the supply side has no branch or feeder overcurrent device ahead of it, and only a Type 1 is listed to be connected that way.</p>
+  <div class="ad-unit" data-ad="incontent"></div>
+  <h2 id="type-3-and-the-point-of-use">Type 3 and the point of use</h2>
+  <p>Type 3 is the plug strip, the receptacle-type device, the unit at the equipment. It is listed as a point-of-utilization device, which carries a consequence people miss: a Type 3 is not a substitute for protection at the service. It is designed to work downstream of a Type 1 or Type 2, dealing with what gets past that device and with transients generated inside the building rather than arriving from outside.</p>
+  <p>Type 3 listings also carry a minimum conductor length from the service &mdash; the device is qualified on the assumption that there is impedance between it and the service entrance. Installing one directly at a panel is outside what it was listed for.</p>
+  <p>The practical reading: a facility with only Type 3 devices at the equipment has not addressed the service-entrance surge, and a facility with only a service SPD has not addressed what reaches sensitive electronics. These are complementary layers, which is why the trade calls it cascaded protection rather than choosing one.</p>
+  <h2 id="the-two-checks-that-get-skipped">The two checks that get skipped</h2>
+  <p>Choosing the right type settles where the device may go. It does not establish that this particular device may go <i>there</i>. Two ratings do that, and both get skipped routinely.</p>
+  <p><b>Short-circuit current rating.</b> An SPD carries a marked short-circuit current rating, and under NEC 242.10 it may not be installed where the available fault current exceeds it. This is the same discipline as any other equipment SCCR check: it needs a fault-current figure at the point of installation, not an assumption. A service-entrance location in a large facility is precisely where available fault current is highest.</p>
+  <p><b>Voltage rating.</b> The device rating has to equal or exceed the maximum continuous phase-to-ground voltage available at the point of application. A device chosen from the nominal system voltage alone can fail this on a system that runs high, and the failure mode is the SPD degrading in normal service rather than during a surge.</p>
+  <p>Article 242 also rules out certain systems outright unless the device is specifically listed for them: ungrounded systems, impedance-grounded systems and corner-grounded delta systems. A standard SPD assumes a grounded system with a predictable phase-to-ground voltage, and none of those three provide one.</p>
+  <h2 id="where-an-spd-is-now-required">Where an SPD is now required</h2>
+  <p>Surge protection used to be entirely optional. It is not any more, and this is the part of the subject that has changed most recently.</p>
+  <p>NEC 230.67 requires that services supplying dwelling units be provided with a surge-protective device, and that the device be a Type 1 or Type 2. The requirement reaches replacements as well as new work: replacing the service equipment on an existing dwelling triggers it. Later editions extended the same requirement to additional occupancies, so the scope depends on which edition your jurisdiction has adopted.</p>
+  <p>Note what the rule does <i>not</i> say. It does not require a Type 1 specifically, and it does not require a device at every panel. A single listed Type 2 at the service satisfies it. Claims that the code mandates a device at the service plus one at every downstream panel are good engineering practice stated as a code requirement, and the two are worth keeping separate when you are signing off on an installation.</p>
+  <h2 id="common-mistakes">Common mistakes</h2>
+  <p>Reading the type number as a performance tier and specifying a Type 1 where a Type 2 is both permitted and identical in surge rating. Installing a Type 2 on the supply side of the service disconnect, which the listing does not allow. Treating plug-strip Type 3 devices as the building's surge protection. Selecting a device from nominal system voltage without checking it against the maximum continuous phase-to-ground voltage. Skipping the short-circuit current rating check at a service entrance, which is the one location where available fault current is most likely to exceed it. Quoting a dwelling-unit requirement from an edition the local jurisdiction has not adopted.</p>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the difference between a Type 1 and a Type 2 SPD?</summary>
+    <p style="margin-top:10px">Where each may be connected, not how much surge energy it handles. A Type 1 is listed for connection on the supply side of the service disconnecting means, and may also be installed on the load side. A Type 2 is listed for the load side only. Two devices with identical surge ratings can carry different type numbers, because the type reflects the listed connection point.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Can a Type 2 SPD be installed on the line side of the service disconnect?</summary>
+    <p style="margin-top:10px">No. Type 2 is restricted to the load side of the service disconnect under NEC 242.14. Only a Type 1 is listed for supply-side connection, because a device there has no overcurrent device ahead of it. Sources stating that a Type 2 may be installed on either side have Type 1 and Type 2 reversed.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Do I need both a service SPD and point-of-use devices?</summary>
+    <p style="margin-top:10px">They do different jobs. A Type 1 or Type 2 at the service handles what arrives from outside; a Type 3 at the equipment handles what gets past it and what the building generates internally. A Type 3 is listed as a point-of-utilization device and is not a substitute for protection at the service. Cascaded protection is good practice, but note that the code requirement is for a device at the service, not at every panel.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Does the NEC require a surge protective device?</summary>
+    <p style="margin-top:10px">For dwelling-unit services, yes. NEC 230.67 requires a Type 1 or Type 2 SPD on services supplying dwelling units, including when existing service equipment is replaced. Later editions extended the requirement to further occupancies, so the scope depends on the edition your jurisdiction has adopted. Outside those cases an SPD is a design decision rather than a code requirement.</p>
+  </details>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">Sizing and coordinating the protective devices around it is covered in <a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">short-circuit studies and breaker coordination</a>, and the fault-current figure the SCCR check needs comes from the <a class="inline" href="calculators/fault-current.html">fault current calculator</a>.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/fault-current.html">Fault Current Calculator</a>The available fault current the SPD short-circuit rating is checked against.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-fully-rated-vs-series-rated.html">Fully Rated vs. Series Rated</a></li>
+        <li><a href="guide-grounding-bonding-basics.html">Grounding & Bonding Basics</a></li>
+        <li><a href="guide-ground-fault-protection.html">Ground-Fault Protection Explained</a></li>
+        <li><a href="guide-harmonics-ieee-519.html">Harmonics & IEEE 519</a></li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;SPD Types 1, 2 and 3: Where Each One Is Allowed&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-grid-forming-vs-grid-following.html</p>
+  </details>
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/guide-spd-types-1-2-3.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+
+<aside class="provenance" aria-labelledby="prov-h">
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published November 3, 2026.</span></summary>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>What the UL 1449 type number classifies, which types may be connected on each side of the service disconnecting means under NEC 242.12 and 242.14, what a Type 3 point-of-utilization listing assumes, the short-circuit and voltage rating checks in Article 242, and the dwelling-unit requirement in NEC 230.67.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>NEC Article 242, Part II, for SPD connection locations and the ratings checks</li><li>NEC 230.67 for the dwelling-unit service requirement</li><li>UL 1449 as the product standard the type classification comes from</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A substitute for the code text or for a device listing. Section numbering and the scope of the 230.67 requirement differ between NEC editions, and the 2026 edition reorganizes several of these articles, so verify against the edition your jurisdiction has adopted. Selecting a specific device still requires the available fault current and the maximum continuous phase-to-ground voltage at the point of installation.</dd>
+      <dt>Provenance</dt>
+      <dd>Published November 3, 2026. Written and maintained by the Voltfield editorial team against the sources above. Worked figures in the text are arithmetic the reader can check; nothing here states a measured value.</dd>
+    </dl>
+  </details>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>
