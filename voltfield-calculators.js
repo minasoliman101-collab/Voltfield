@@ -37,8 +37,8 @@
     r.className='est-result show'+(warn?' warn':'');
   });
 
-  /* ---- NEC Table 310.16 ampacity (curated subset, base conditions: <=3 CCC, 30C ambient)
-     and NEC Chapter 9 conduit fill (Table 1 caps, Table 4 EMT areas, Table 5 THHN areas) ---- */
+  /* ---- NEC Table 310.16 ampacity (curated subset, base conditions: <=3 CCC, 30C ambient).
+     Conduit fill has its own data block lower down, with the conduit-fill page. ---- */
   const NEC_AMPACITY=[
     {n:'14 AWG',Cu:{60:15,75:20,90:25},Al:{60:null,75:null,90:null}},
     {n:'12 AWG',Cu:{60:20,75:25,90:30},Al:{60:15,75:20,90:25}},
@@ -59,15 +59,9 @@
     {n:'400 kcmil',Cu:{60:280,75:335,90:380},Al:{60:225,75:270,90:305}},
     {n:'500 kcmil',Cu:{60:320,75:380,90:430},Al:{60:260,75:310,90:350}}
   ];
-  const EMT_AREA={'1-2in':0.122,'3-4in':0.213,'1in':0.346,'2in':1.342}; /* in^2 at 40% fill */
-  const EMT_LABEL={'1-2in':'1/2"','3-4in':'3/4"','1in':'1"','2in':'2"'};
-  const THHN_AREA={'14 AWG':0.0097,'12 AWG':0.0133,'10 AWG':0.0211,'8 AWG':0.0366,'6 AWG':0.0507,'1/0 AWG':0.1855};
-  const FILL_CAP={1:0.53,2:0.31}; /* 3+ uses 0.40, handled separately */
 
-  const ampSizeSel=document.getElementById('ampSize'), fillConduitSel=document.getElementById('fillConduit'), fillWireSel=document.getElementById('fillWire');
+  const ampSizeSel=document.getElementById('ampSize');
   if(ampSizeSel)ampSizeSel.innerHTML=NEC_AMPACITY.map((a,i)=>'<option value="'+i+'"'+(a.n==='4/0 AWG'?' selected':'')+'>'+a.n+'</option>').join('');
-  if(fillConduitSel)fillConduitSel.innerHTML=Object.keys(EMT_AREA).map(k=>'<option value="'+k+'"'+(k==='3-4in'?' selected':'')+'>'+EMT_LABEL[k]+' EMT</option>').join('');
-  if(fillWireSel)fillWireSel.innerHTML=Object.keys(THHN_AREA).map(k=>'<option value="'+k+'"'+(k==='12 AWG'?' selected':'')+'>'+k+' THHN</option>').join('');
 
   const ampBtn=document.getElementById('ampBtn');
   if(ampBtn)ampBtn.addEventListener('click',function(){
@@ -77,24 +71,6 @@
     if(a===null){r.textContent=row.n+' has no standard aluminum ampacity in this table (aluminum conductors typically start at 12 AWG).';r.className='est-result show warn';return;}
     r.innerHTML=row.n+' '+(mat==='Cu'?'copper':'aluminum')+', '+temp+'&deg;C column: <b>'+a+' A</b> base ampacity (&le;3 current-carrying conductors, 30&deg;C ambient, before any correction factors).';
     r.className='est-result show';
-  });
-
-  const fillBtn=document.getElementById('fillBtn');
-  if(fillBtn)fillBtn.addEventListener('click',function(){
-    const r=document.getElementById('fillResult');
-    const conduit=fillConduitSel.value, wire=fillWireSel.value, n=parseInt(document.getElementById('fillN').value,10);
-    if(!(n>0)){r.textContent='Enter the number of conductors.';r.className='est-result show';return;}
-    const conduitArea40=EMT_AREA[conduit]; /* already the 40%-fill area */
-    const conduitAreaTotal=conduitArea40/0.40;
-    const wireArea=THHN_AREA[wire];
-    const usedArea=n*wireArea;
-    const cap=n>=3?0.40:FILL_CAP[n];
-    const capArea=conduitAreaTotal*cap;
-    const pct=(usedArea/conduitAreaTotal)*100;
-    const fits=usedArea<=capArea;
-    const nMax=Math.floor(capArea/wireArea);
-    r.innerHTML=n+' &times; '+wire+' THHN in '+EMT_LABEL[conduit]+' EMT: <b>'+fmt(pct,1)+'% fill</b> (cap for '+n+' conductor'+(n===1?'':'s')+': '+(cap*100)+'%). '+(fits?'Fits within the cap.':'<b>Exceeds the fill cap</b> — over by '+fmt(usedArea-capArea,4)+' in&sup2;.')+' Max '+wire+' conductors in this conduit at the applicable cap: <b>'+nMax+'</b>.';
-    r.className='est-result show'+(fits?'':' warn');
   });
 
   const xfBtn=document.getElementById('xfBtn');
@@ -578,7 +554,6 @@
     r.innerHTML=msg; r.className='est-result show';
   });
 
-
 /* ---- Unit conversions: amps/kW/kVA/HP/watts ----
      One shared square root of three, used by every handler below and quoted as
      1.732 in the formulas on the pages, so a reader checking the page against
@@ -702,10 +677,117 @@
     r.innerHTML=msg; r.className='est-result show';
   });
 
+  /* ---- Conduit fill: mixed sizes, the right cap, and the smallest raceway ----
+     Replaces the single-size widget on calculators/ampacity.html, which could
+     not take more than one conductor size and said so. Real raceways carry
+     mixed sizes -- phases plus a smaller equipment grounding conductor is the
+     normal case -- and the cap depends on the TOTAL conductor count, so the
+     mixed case is not a sum of single-size answers.
+
+     Chapter 9 Table 1 caps: 53% for one conductor, 31% for two, 40% for more
+     than two. A nipple not exceeding 24 inches may be filled to 60% under the
+     notes to Table 1. Equipment grounding and bonding conductors count toward
+     the fill. A multiconductor cable counts as a single conductor.
+
+     DATA SCOPE: the conduit and conductor areas here are the same curated
+     subset the previous widget used, cross-checked against the 40% EMT figures
+     it carried. They are not a reproduction of Chapter 9 Tables 4 and 5, and
+     the conductor list was deliberately NOT extended: published sources
+     disagree on some Table 5 areas (2 AWG THHN appears as both 0.1158 and
+     0.1333 in different places), and a fill tool that is confidently wrong is
+     worse than one that asks for the number. Hence the direct-entry fields for
+     anything outside the list. Annex C is the code's own pre-computed answer
+     and can differ by about one conductor either way from area-ratio math. */
+  const CF_RACEWAY=[
+    {k:'emt-1-2',label:'1/2" EMT',area:0.304},
+    {k:'emt-3-4',label:'3/4" EMT',area:0.533},
+    {k:'emt-1',label:'1" EMT',area:0.864},
+    {k:'emt-2',label:'2" EMT',area:3.356}
+  ];
+  const CF_COND=[
+    {k:'14',label:'14 AWG THHN',area:0.0097},
+    {k:'12',label:'12 AWG THHN',area:0.0133},
+    {k:'10',label:'10 AWG THHN',area:0.0211},
+    {k:'8',label:'8 AWG THHN',area:0.0366},
+    {k:'6',label:'6 AWG THHN',area:0.0507},
+    {k:'1-0',label:'1/0 AWG THHN',area:0.1855}
+  ];
+  function cfCap(n,nipple){ return nipple ? 0.60 : (n===1?0.53:(n===2?0.31:0.40)); }
+
+  const cfConduitSel=document.getElementById('cfConduit');
+  if(cfConduitSel && !cfConduitSel.options.length){
+    cfConduitSel.innerHTML=CF_RACEWAY.map(function(c){
+      return '<option value="'+c.k+'"'+(c.k==='emt-3-4'?' selected':'')+'>'+c.label+'</option>';
+    }).join('')+'<option value="custom">Other (enter area)</option>';
+    cfConduitSel.addEventListener('change',function(){
+      document.getElementById('cfAreaWrap').hidden = cfConduitSel.value!=='custom';
+    });
+  }
+  ['cfSize1','cfSize2','cfSize3'].forEach(function(id,i){
+    const sel=document.getElementById(id);
+    if(sel && !sel.options.length){
+      sel.innerHTML=CF_COND.map(function(c){
+        return '<option value="'+c.k+'"'+((i===0&&c.k==='12')||(i===1&&c.k==='10')?' selected':'')+'>'+c.label+'</option>';
+      }).join('');
+    }
+  });
+
+  const cfBtn=document.getElementById('cfBtn');
+  if(cfBtn)cfBtn.addEventListener('click',function(){
+    const r=document.getElementById('cfResult');
+    const num=function(id){ const v=parseFloat(document.getElementById(id).value); return isNaN(v)?0:v; };
+    const sel=document.getElementById('cfConduit').value;
+    const race=CF_RACEWAY.filter(function(c){return c.k===sel;})[0];
+    const total = race ? race.area : num('cfArea');
+    const raceName = race ? race.label : 'the raceway';
+    if(!(total>0)){ r.textContent='Enter the raceway internal area from Chapter 9 Table 4.'; r.className='est-result show'; return; }
+
+    const groups=[];
+    [['cfQty1','cfSize1'],['cfQty2','cfSize2'],['cfQty3','cfSize3']].forEach(function(p){
+      const q=Math.floor(num(p[0]));
+      if(q>0){ const c=CF_COND.filter(function(x){return x.k===document.getElementById(p[1]).value;})[0];
+               if(c) groups.push({q:q,label:c.label,area:c.area}); }
+    });
+    const otherN=Math.floor(num('cfOtherN')), otherA=num('cfOtherA');
+    if(otherN>0 && !(otherA>0)){ r.textContent='Give the total area for the other conductors, from Chapter 9 Table 5.'; r.className='est-result show'; return; }
+
+    const n = groups.reduce(function(a,g){return a+g.q;},0) + otherN;
+    if(n<1){ r.textContent='Enter at least one conductor.'; r.className='est-result show'; return; }
+    const used = groups.reduce(function(a,g){return a+g.q*g.area;},0) + otherA;
+
+    const nipple = document.getElementById('cfNipple').value==='1';
+    const cap = cfCap(n,nipple);
+    const capArea = total*cap;
+    const pct = used/total*100;
+    const fits = used<=capArea;
+
+    let msg = '<b>'+fmt(pct,1)+'% fill</b> in '+raceName+' &mdash; '+fmt(used,4)+' in&sup2; of conductor in '+fmt(total,3)+' in&sup2; total area.';
+    msg += '<br>'+n+' conductor'+(n===1?'':'s')+', so the cap is <b>'+Math.round(cap*100)+'%</b>'+(nipple?' (nipple, 24 in. or less)':'')+' = '+fmt(capArea,4)+' in&sup2;. ';
+    msg += fits ? '<b>Fits.</b>' : '<b>Over the cap</b> by '+fmt(used-capArea,4)+' in&sup2;.';
+
+    if(groups.length){
+      msg += '<br>Counted: '+groups.map(function(g){return g.q+' &times; '+g.label;}).join(', ')+
+             (otherN>0 ? ', plus '+otherN+' other at '+fmt(otherA,4)+' in&sup2;' : '')+'.';
+    }
+    /* The smallest listed raceway that works -- the question actually being asked. */
+    const ok=CF_RACEWAY.filter(function(c){ return used <= c.area*cfCap(n,nipple); });
+    if(ok.length) msg += '<br>Smallest listed size that fits this bundle: <b>'+ok[0].label+'</b>.';
+    else msg += '<br>No listed size fits; larger raceways are in Chapter 9 Table 4.';
+
+    /* Single-size bundles have a meaningful maximum count; mixed ones do not. */
+    if(groups.length===1 && otherN===0){
+      let best=0;
+      for(let k=1;k<=1000;k++){ if(k*groups[0].area <= total*cfCap(k,nipple)) best=k; }
+      msg += '<br>Maximum '+groups[0].label+' in '+raceName+': <b>'+best+'</b>.';
+    }
+    msg += '<br>Equipment grounding conductors count toward fill, and a multiconductor cable counts as one conductor. NEC Annex C gives the code\u2019s own pre-computed counts and can differ by about one conductor from this arithmetic.';
+    r.innerHTML=msg;
+    r.className='est-result show'+(fits?'':' warn');
+  });
 
 })();
 
-/* ---------- usage tracking: which of the 21 calculators actually get used.
+/* ---------- usage tracking: which of the 22 calculators actually get used.
    Delegated so it covers every .estimator/*Btn pair, including any added later.
    Moved here from engineering-calculators.html with the calculators, so the
    event names (calc = the estimator id) are unchanged and old reports still line up. ---------- */

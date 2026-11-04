@@ -601,3 +601,34 @@ Treating the nearest metric size as an equivalent when it is usually several per
 /guide-cable-ampacity-derating.html :: Cable Ampacity Derating Explained
 /calculators/reference-tables.html :: Reference Tables
 /guide-nec-250-122-egc-sizing.html :: Sizing the Equipment Grounding Conductor
+===conduit-fill|conduit-fill|Conduit Fill Calculator|Conduit Fill Calculator (NEC Chapter 9)|Check conduit fill with mixed conductor sizes: the Chapter 9 Table 1 caps, what counts toward fill, the 60 percent nipple allowance, and why Annex C can disagree. Free, no signup.
+--intro
+Conduit fill is a ratio, and the arithmetic is the easy part. What makes it go wrong is the three questions around it: which percentage cap applies, which conductors count, and whether the answer has to match NEC Annex C.
+The cap is not a single number. One conductor in a raceway may fill 53 percent of it, two conductors 31 percent, and more than two 40 percent. That ordering looks wrong until you see what it is for &mdash; the limit exists so conductors can be pulled without damaging the insulation and so heat can get out, and a single conductor has no neighbours to bind against while two round conductors in a round raceway waste the space between them.
+--formula
+Fill % = 100 &times; (total conductor area) / (raceway internal area)
+Total conductor area = sum over each size of (count &times; area from Chapter 9 Table 5)
+Cap = 53% for one conductor, 31% for two, 40% for more than two, 60% for a nipple of 24 in. or less
+--vars
+Raceway internal area :: Total internal area for the trade size and type, from Chapter 9 Table 4
+Conductor area :: Approximate area including insulation, from Chapter 9 Table 5. Not the conductor metal area
+Conductor count :: Every current-carrying conductor plus every equipment grounding and bonding conductor
+Nipple :: A raceway not exceeding 600 mm, or 24 in., between enclosures
+--example
+Three 12 AWG THHN phase conductors, one 12 AWG neutral and one 10 AWG equipment grounding conductor, in 3/4 inch EMT.
+Conductor area: 4 &times; 0.0133 + 1 &times; 0.0211 = 0.0743 in&sup2;.
+The raceway is 0.533 in&sup2; total internal area. That is five conductors, which is more than two, so the cap is 40 percent: 0.533 &times; 0.40 = 0.2132 in&sup2;.
+Fill is 0.0743 / 0.533 = 13.9 percent, comfortably inside the cap. Note that the grounding conductor was counted, and that a mixed bundle cannot be checked by looking up either size on its own, because the cap depends on the total count rather than on any one size.
+--standard
+NEC Chapter 9, Table 1 gives the percentage caps and its notes carry most of the rules that get missed: equipment grounding and bonding conductors are included in the calculation, a multiconductor cable is treated as a single conductor, and a nipple not exceeding 24 in. may be filled to 60 percent. Table 4 gives raceway internal areas by type and trade size, and Table 5 gives approximate conductor areas including insulation. NEC Annex C publishes pre-computed conductor counts per raceway for the case where every conductor is the same size and type.
+--limits
+This is area arithmetic, and area arithmetic is not the whole of a raceway design. It says nothing about the number of bends between pull points under NEC 358.26 and its equivalents, nothing about pulling tension or lubrication, and nothing about ampacity: more than three current-carrying conductors in a raceway triggers the adjustment factors in NEC 310.15(C)(1), and a raceway that passes fill can still force the conductors up a size. The raceway and conductor areas offered here are a curated subset rather than a reproduction of Tables 4 and 5, so anything outside the list has to be entered from the tables directly. Results can differ from Annex C by about one conductor, because Annex C carries NFPA's own rounding conventions.
+--mistakes
+Leaving the equipment grounding conductor out of the count. Using the conductor metal area, or a figure from a wire gauge conversion, instead of the Table 5 area including insulation. Applying the 40 percent cap to one or two conductors, where the cap is actually higher and lower respectively. Checking a mixed bundle by looking up each size separately, when the cap depends on the total count. Treating a multiconductor cable as its individual conductors. Assuming a passing fill means the ampacity is fine. Using the 60 percent nipple allowance on a raceway longer than 24 in. Taking area-ratio math as authoritative where the jurisdiction expects Annex C.
+--related
+/calculators/ampacity.html :: Cable Ampacity &amp; Conduit Fill
+/calculators/wire-size.html :: Wire Size Calculator
+/calculators/awg-to-mm2.html :: AWG to mm&sup2; Converter
+/guide-cable-ampacity-derating.html :: Cable Ampacity Derating Explained
+/guide-nec-250-122-egc-sizing.html :: Sizing the Equipment Grounding Conductor
+/calculators/voltage-drop.html :: Voltage Drop Calculator

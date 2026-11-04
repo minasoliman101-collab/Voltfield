@@ -1,0 +1,24 @@
+<!-- Live calculator for calculators/conduit-fill.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="cfCalc">
+    <h2>Conduit Fill</h2>
+    <div class="sub">Handles mixed conductor sizes in one raceway, applies the right Chapter 9 Table 1 cap for the total count, and names the smallest listed size that fits. Conductor and raceway areas come from Chapter 9 Tables 4 and 5 &mdash; a curated subset, with direct entry for anything not listed.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="cfConduit">Raceway</label><select id="cfConduit"></select></div>
+      <div class="est-field" id="cfAreaWrap" hidden><label for="cfArea">Internal area (in&sup2;)</label><input type="number" id="cfArea" min="0" step="0.001" placeholder="Table 4 total area"></div>
+      <div class="est-field"><label for="cfNipple">Length</label><select id="cfNipple"><option value="0" selected>Normal raceway</option><option value="1">Nipple, 24 in. or less</option></select></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="cfQty1">Conductors</label><input type="number" id="cfQty1" min="0" step="1" placeholder="e.g. 3"></div>
+      <div class="est-field"><label for="cfSize1">Size</label><select id="cfSize1"></select></div>
+      <div class="est-field"><label for="cfQty2">Plus</label><input type="number" id="cfQty2" min="0" step="1" placeholder="optional"></div>
+      <div class="est-field"><label for="cfSize2">Size</label><select id="cfSize2"></select></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="cfQty3">Plus</label><input type="number" id="cfQty3" min="0" step="1" placeholder="optional"></div>
+      <div class="est-field"><label for="cfSize3">Size</label><select id="cfSize3"></select></div>
+      <div class="est-field"><label for="cfOtherN">Other conductors</label><input type="number" id="cfOtherN" min="0" step="1" placeholder="count"></div>
+      <div class="est-field"><label for="cfOtherA">Their total area (in&sup2;)</label><input type="number" id="cfOtherA" min="0" step="0.0001" placeholder="from Table 5"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="cfBtn">Check fill</button></div></div>
+    <div class="est-result" id="cfResult"></div>
+  </div>
