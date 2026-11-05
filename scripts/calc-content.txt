@@ -666,3 +666,69 @@ Looking for a fixed conversion factor, or assuming 0.8 because generator sets ar
 /calculators/power-factor.html :: Power Factor Correction
 /calculators/transformer-sizing.html :: Transformer Sizing Calculator
 /calculators/amps-to-kw.html :: Amps to kW Calculator
+===three-phase-power|three-phase-power|Three-Phase Power Calculator|Three-Phase Power Calculator (Line and Phase Values)|Solve for voltage, current, power or power factor in a balanced three-phase system, with line and phase values for delta and wye. Free, no signup.
+--intro
+Almost every three-phase mistake is a factor of &radic;3 in the wrong place, and the reason is that the formula people memorise hides where it belongs.
+Power in a balanced three-phase system is &radic;3 &times; line voltage &times; line current &times; power factor. The &radic;3 is there because line voltage and phase voltage are not the same thing, and which one differs depends on how the windings are connected. In a wye, line voltage is &radic;3 times phase voltage and the line current passes straight through one winding, so line and phase current are equal. In a delta it reverses: each winding sees full line voltage, while line current splits between two windings, so line current is &radic;3 times winding current.
+Nameplates and meters give line values. The phase values are what you need when you are working inside a winding, checking one leg, or reading a current transformer.
+--formula
+kW = &radic;3 &times; V<sub>line</sub> &times; I<sub>line</sub> &times; PF / 1000
+kVA = &radic;3 &times; V<sub>line</sub> &times; I<sub>line</sub> / 1000
+Wye: V<sub>phase</sub> = V<sub>line</sub> / &radic;3, I<sub>phase</sub> = I<sub>line</sub>
+Delta: V<sub>phase</sub> = V<sub>line</sub>, I<sub>phase</sub> = I<sub>line</sub> / &radic;3
+--vars
+V line :: Line-to-line voltage. The figure on the nameplate and on the drawing
+I line :: Current in one of the three supply conductors
+PF :: Power factor of the load, between 0 and 1
+&radic;3 :: 1.732, from the 120-degree phase displacement between the three voltages
+--example
+A motor on a 480 V three-phase supply draws 100 A at 0.85 power factor.
+kVA = 1.732 &times; 480 &times; 100 / 1000 = 83.1 kVA.
+kW = 83.1 &times; 0.85 = 70.6 kW of real power, with 43.8 kvar reactive.
+Now the part that gets missed. If that load is wye-connected, each winding sees 480 / 1.732 = 277 V and carries the full 100 A. If it is delta-connected, each winding sees the full 480 V and carries 100 / 1.732 = 57.7 A. The supply is identical in both cases and the line measurements are identical; only the internal stresses differ.
+--standard
+This is circuit theory rather than a code requirement, and it holds for any balanced three-phase system at a single frequency. The voltage designations used in North America, such as 208Y/120, 480Y/277 and 240 delta, come from ANSI C84.1, which also sets the permitted voltage ranges at the service and at the point of utilization. Conductor sizing from the resulting current follows NEC 310 and, for motors specifically, Article 430, which requires the table full-load current rather than measured load.
+--limits
+Everything here assumes a balanced load, meaning equal current in all three phases. On an unbalanced system the single-figure answer stops being meaningful: real power has to be summed per phase, and a neutral current appears that the balanced formula does not predict. It also assumes reasonably sinusoidal current, so a heavily non-linear load breaks the simple power-factor relationship, and it says nothing about which direction reactive power flows. The connection shown is the load's, which is not necessarily the transformer secondary's.
+--mistakes
+Applying &radic;3 to a single-phase circuit, or omitting it from a three-phase one. Using phase voltage where the formula wants line voltage, which on a 480Y/277 system gives an answer low by a factor of 1.732. Dividing three-phase power by three to get per-phase power and then applying &radic;3 again. Treating a measured line current as the winding current in a delta load. Using the balanced formula on a visibly unbalanced panel. Reading kVA as kW, which only match at unity power factor.
+--related
+/calculators/amps-to-kw.html :: Amps to kW Calculator
+/calculators/kw-to-amps.html :: kW to Amps Calculator
+/calculators/kva-to-kw.html :: kVA to kW Converter
+/guide-delta-vs-wye.html :: Delta vs. Wye Connections Explained
+/guide-kw-vs-kva.html :: kW vs. kVA Explained
+/calculators/wire-size.html :: Wire Size Calculator
+
+===btu-to-tons|btu-to-tons|BTU to Tons Converter|BTU to Tons Calculator (Cooling Capacity)|Convert BTU/h, tons of refrigeration and kW, including IT load to cooling tons. What a ton actually measures and what the figure leaves out. Free, no signup.
+--intro
+A ton of refrigeration is not a weight, and nothing about the unit makes that obvious. It is a rate of heat removal, defined as the rate that would melt a short ton of ice over 24 hours. That definition fixes it at exactly 12,000 BTU per hour, or about 3.517 kW.
+The conversions are therefore exact and uninteresting. What makes the question worth a page is the one most people are actually asking: how much cooling does a given electrical load need. For IT equipment the answer is unintuitively simple, because essentially all the electrical energy going into a server leaves it as heat. A 100 kW IT load is a 100 kW thermal load, so the problem reduces to a unit conversion rather than an energy balance.
+--formula
+Tons = BTU/h / 12,000
+kW (thermal) = tons &times; 3.517
+BTU/h = kW &times; 3,412
+IT load: thermal kW &asymp; electrical kW
+--vars
+Ton of refrigeration :: 12,000 BTU/h by definition. A rate, not a mass
+BTU/h :: British thermal units per hour, the conventional HVAC capacity unit in North America
+kW thermal :: Heat removal rate in kilowatts. Not the power the chiller draws
+Spare capacity :: Headroom added on top of the calculated load, as a percentage
+--example
+A data hall carries 250 kW of IT load.
+Essentially all of it becomes heat, so the thermal load is 250 kW.
+250 / 3.517 = 71.1 tons, which is 853,000 BTU/h.
+Adding 20 percent spare gives 85.3 tons, or 300 kW of cooling capacity.
+Note what that figure is not. It is the heat the plant has to remove, not the electricity the plant consumes doing it, and not the capacity the facility needs once redundancy is applied. A room designed to lose no cooling on a single failure needs more installed capacity than 85 tons, arranged so that the remaining units still cover the load.
+--standard
+The ton of refrigeration is a conventional unit rather than an SI one, fixed at 12,000 BTU/h. Equipment capacity ratings and the conditions they are measured at come from AHRI certification standards, which matters because a nominal tonnage is stated at specific entering and ambient conditions and real capacity falls away from them. ASHRAE publishes the thermal guidelines that set the temperature and humidity envelopes data center equipment is expected to operate within, which determine what the cooling system has to achieve rather than how much capacity it needs.
+--limits
+This converts capacity units and nothing else. It does not size a cooling system: it ignores the latent load from humidity control, the outside-air and envelope loads in a mixed-use space, the power the cooling plant itself draws, and the redundancy the facility is designed to, all of which sit between a heat load and an equipment schedule. Nominal equipment tonnage is rated at standard conditions and the delivered capacity differs at real entering water and ambient air temperatures. The IT assumption that electrical input equals thermal output is very close but not exact, and it does not hold for loads that do external work, such as motors driving something outside the space.
+--mistakes
+Reading a ton as a weight or as a size of unit rather than a rate of heat removal. Confusing cooling capacity in kW with the electrical power the chiller draws, which differ by the system's efficiency. Sizing cooling from a UPS or transformer rating rather than the actual IT load, which inflates the figure by whatever the equipment is oversized by. Taking nominal tonnage as available capacity at design-day conditions. Adding spare capacity and redundancy as if they were the same thing. Applying the electrical-equals-thermal shortcut to motor loads doing work outside the room.
+--related
+/guide-liquid-vs-air-cooling.html :: Liquid vs. Air Cooling for AI Racks
+/guide-rack-power-density.html :: Rack Power Density Explained
+/guide-pue-explained.html :: PUE Explained
+/calculators/kw-to-amps.html :: kW to Amps Calculator
+/data-centers/cooling.html :: Data Center Cooling

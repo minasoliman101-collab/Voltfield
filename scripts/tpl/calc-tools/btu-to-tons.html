@@ -1,0 +1,12 @@
+<!-- Live calculator for calculators/btu-to-tons.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="btCalc">
+    <h2>BTU/h, Tons and kW</h2>
+    <div class="sub">Converts between the three cooling-capacity units. For an IT load, enter the electrical kW &mdash; essentially all of it becomes heat, so the thermal load is the same number.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="btUnit">Convert from</label><select id="btUnit"><option value="ton" selected>Tons of refrigeration</option><option value="btu">BTU per hour</option><option value="kw">Kilowatts (thermal)</option><option value="it">IT load in kW (electrical)</option></select></div>
+      <div class="est-field"><label for="btVal">Value</label><input type="number" id="btVal" min="0" step="0.01" placeholder="e.g. 100"></div>
+      <div class="est-field"><label for="btSpare">Spare capacity (%)</label><input type="number" id="btSpare" min="0" max="100" step="1" placeholder="optional, e.g. 20"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="btBtn">Convert</button></div></div>
+    <div class="est-result" id="btResult"></div>
+  </div>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTU to Tons Calculator (Cooling Capacity) | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/calculators/btu-to-tons.html">
+<meta name="description" content="Convert BTU/h, tons of refrigeration and kW, including IT load to cooling tons. What a ton actually measures and what the figure leaves out. Free, no signup.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="BTU to Tons Converter">
+<meta property="og:description" content="Convert BTU/h, tons of refrigeration and kW, including IT load to cooling tons. What a ton actually measures and what the figure leaves out. Free, no signup.">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"BreadcrumbList","itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
+   {"@type":"ListItem","position":2,"name":"Calculators","item":"https://voltfield.org/engineering-calculators.html"},
+   {"@type":"ListItem","position":3,"name":"BTU to Tons Converter","item":"https://voltfield.org/calculators/btu-to-tons.html"}
+ ]},
+ {"@type":"WebPage","name":"BTU to Tons Converter","description":"Convert BTU/h, tons of refrigeration and kW, including IT load to cooling tons. What a ton actually measures and what the figure leaves out. Free, no signup.","url":"https://voltfield.org/calculators/btu-to-tons.html","dateModified":"2026-11-04","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebApplication","name":"BTU to Tons Converter","description":"Convert BTU/h, tons of refrigeration and kW, including IT load to cooling tons. What a ton actually measures and what the figure leaves out. Free, no signup.","url":"https://voltfield.org/calculators/btu-to-tons.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"What does the BTU to Tons Converter calculation account for?","acceptedAnswer":{"@type":"Answer","text":"A ton of refrigeration is not a weight, and nothing about the unit makes that obvious. It is a rate of heat removal, defined as the rate that would melt a short ton of ice over 24 hours. That definition fixes it at exactly 12,000 BTU per hour, or about 3.517 kW. The conversions are therefore exact and uninteresting. What makes the question worth a page is the one most people are actually asking: how much cooling does a given electrical load need. For IT equipment the answer is unintuitively simple, because essentially all the electrical energy going into a server leaves it as heat. A 100 kW IT load is a 100 kW thermal load, so the problem reduces to a unit conversion rather than an energy balance."}},
+   {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"This converts capacity units and nothing else. It does not size a cooling system: it ignores the latent load from humidity control, the outside-air and envelope loads in a mixed-use space, the power the cooling plant itself draws, and the redundancy the facility is designed to, all of which sit between a heat load and an equipment schedule. Nominal equipment tonnage is rated at standard conditions and the delivered capacity differs at real entering water and ambient air temperatures. The IT assumption that electrical input equals thermal output is very close but not exact, and it does not hold for loads that do external work, such as motors driving something outside the space."}}
+ ]}
+]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-calculators.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="/index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/engineering-calculators.html" style="color:var(--slate);text-decoration:none">Calculators</a> / <span style="color:var(--ink)">BTU to Tons Converter</span></nav>
+    <div class="eyebrow">Free Calculator &middot; No Signup</div>
+    <h1>BTU to Tons Converter</h1>
+    <p class="dek">Convert BTU/h, tons of refrigeration and kW, including IT load to cooling tons. What a ton actually measures and what the figure leaves out.</p>
+  </div>
+</section>
+
+<div class="artwrap">
+  <section class="calc-tool" id="calculator" aria-label="BTU to Tons Converter">
+  <div class="estimator" id="btCalc">
+    <h2>BTU/h, Tons and kW</h2>
+    <div class="sub">Converts between the three cooling-capacity units. For an IT load, enter the electrical kW &mdash; essentially all of it becomes heat, so the thermal load is the same number.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="btUnit">Convert from</label><select id="btUnit"><option value="ton" selected>Tons of refrigeration</option><option value="btu">BTU per hour</option><option value="kw">Kilowatts (thermal)</option><option value="it">IT load in kW (electrical)</option></select></div>
+      <div class="est-field"><label for="btVal">Value</label><input type="number" id="btVal" min="0" step="0.01" placeholder="e.g. 100"></div>
+      <div class="est-field"><label for="btSpare">Spare capacity (%)</label><input type="number" id="btSpare" min="0" max="100" step="1" placeholder="optional, e.g. 20"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="btBtn">Convert</button></div></div>
+    <div class="est-result" id="btResult"></div>
+  </div>
+  </section>
+
+  <p>A ton of refrigeration is not a weight, and nothing about the unit makes that obvious. It is a rate of heat removal, defined as the rate that would melt a short ton of ice over 24 hours. That definition fixes it at exactly 12,000 BTU per hour, or about 3.517 kW.</p>
+  <p>The conversions are therefore exact and uninteresting. What makes the question worth a page is the one most people are actually asking: how much cooling does a given electrical load need. For IT equipment the answer is unintuitively simple, because essentially all the electrical energy going into a server leaves it as heat. A 100 kW IT load is a 100 kW thermal load, so the problem reduces to a unit conversion rather than an energy balance.</p>
+
+  <h2>The formula</h2>
+    <div class="formula">Tons = BTU/h / 12,000<br>kW (thermal) = tons &times; 3.517<br>BTU/h = kW &times; 3,412<br>IT load: thermal kW &asymp; electrical kW</div>
+    <div class="tblwrap"><table class="famtable"><tbody>
+      <tr><td class="num"><b>Ton of refrigeration</b></td><td>12,000 BTU/h by definition. A rate, not a mass</td></tr>
+      <tr><td class="num"><b>BTU/h</b></td><td>British thermal units per hour, the conventional HVAC capacity unit in North America</td></tr>
+      <tr><td class="num"><b>kW thermal</b></td><td>Heat removal rate in kilowatts. Not the power the chiller draws</td></tr>
+      <tr><td class="num"><b>Spare capacity</b></td><td>Headroom added on top of the calculated load, as a percentage</td></tr>
+    </tbody></table></div>
+
+  <h2>Worked example</h2>
+  <p>A data hall carries 250 kW of IT load.</p>
+  <p>Essentially all of it becomes heat, so the thermal load is 250 kW.</p>
+  <p>250 / 3.517 = 71.1 tons, which is 853,000 BTU/h.</p>
+  <p>Adding 20 percent spare gives 85.3 tons, or 300 kW of cooling capacity.</p>
+  <p>Note what that figure is not. It is the heat the plant has to remove, not the electricity the plant consumes doing it, and not the capacity the facility needs once redundancy is applied. A room designed to lose no cooling on a single failure needs more installed capacity than 85 tons, arranged so that the remaining units still cover the load.</p>
+
+  <h2>Which standard governs this</h2>
+  <p>The ton of refrigeration is a conventional unit rather than an SI one, fixed at 12,000 BTU/h. Equipment capacity ratings and the conditions they are measured at come from AHRI certification standards, which matters because a nominal tonnage is stated at specific entering and ambient conditions and real capacity falls away from them. ASHRAE publishes the thermal guidelines that set the temperature and humidity envelopes data center equipment is expected to operate within, which determine what the cooling system has to achieve rather than how much capacity it needs.</p>
+
+  <h2>What this calculation does not account for</h2>
+  <p>This converts capacity units and nothing else. It does not size a cooling system: it ignores the latent load from humidity control, the outside-air and envelope loads in a mixed-use space, the power the cooling plant itself draws, and the redundancy the facility is designed to, all of which sit between a heat load and an equipment schedule. Nominal equipment tonnage is rated at standard conditions and the delivered capacity differs at real entering water and ambient air temperatures. The IT assumption that electrical input equals thermal output is very close but not exact, and it does not hold for loads that do external work, such as motors driving something outside the space.</p>
+    <div class="callout"><b>This is a screening estimate.</b> It is here to get you to the right order of magnitude and the right conversation — not to replace a stamped calculation by a qualified engineer.</div>
+
+  <h2>Common mistakes</h2>
+  <p>Reading a ton as a weight or as a size of unit rather than a rate of heat removal. Confusing cooling capacity in kW with the electrical power the chiller draws, which differ by the system's efficiency. Sizing cooling from a UPS or transformer rating rather than the actual IT load, which inflates the figure by whatever the equipment is oversized by. Taking nominal tonnage as available capacity at design-day conditions. Adding spare capacity and redundancy as if they were the same thing. Applying the electrical-equals-thermal shortcut to motor loads doing work outside the room.</p>
+
+  <h2>Related</h2>
+    <div class="rel">
+      <a href="/guide-liquid-vs-air-cooling.html">Liquid vs. Air Cooling for AI Racks</a>
+      <a href="/guide-rack-power-density.html">Rack Power Density Explained</a>
+      <a href="/guide-pue-explained.html">PUE Explained</a>
+      <a href="/calculators/kw-to-amps.html">kW to Amps Calculator</a>
+      <a href="/data-centers/cooling.html">Data Center Cooling</a>
+      <a href="/engineering-calculators.html">All calculators</a>
+    </div>
+
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new calculators and guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/calculators/btu-to-tons.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+
+  <aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>Convert BTU/h, tons of refrigeration and kW, including IT load to cooling tons. What a ton actually measures and what the figure leaves out. Free, no signup.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>The ton of refrigeration is a conventional unit rather than an SI one, fixed at 12,000 BTU/h. Equipment capacity ratings and the conditions they are measured at come from AHRI certification standards, which matters because a nominal tonnage is stated at specific entering and ambient conditions and real capacity falls away from them. ASHRAE publishes the thermal guidelines that set the temperature and humidity envelopes data center equipment is expected to operate within, which determine what the cooling system has to achieve rather than how much capacity it needs.</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>This converts capacity units and nothing else. It does not size a cooling system: it ignores the latent load from humidity control, the outside-air and envelope loads in a mixed-use space, the power the cooling plant itself draws, and the redundancy the facility is designed to, all of which sit between a heat load and an equipment schedule. Nominal equipment tonnage is rated at standard conditions and the delivered capacity differs at real entering water and ambient air temperatures. The IT assumption that electrical input equals thermal output is very close but not exact, and it does not hold for loads that do external work, such as motors driving something outside the space. This is a screening estimate, not a stamped calculation.</dd>
+      <dt>Provenance</dt>
+      <dd>Last reviewed November 4, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labelled as estimates. Worked examples are arithmetic you can reproduce against the <a href="#calculator">calculator at the top of this page</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+    </dl>
+  </aside>
+
+</div>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h4>Voltfield</h4>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h4>Sectors</h4><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h4>Compliance</h4><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="/voltfield-calculators.js" defer></script>
+<script src="/voltfield-site-config.js"></script>
+<script src="/voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

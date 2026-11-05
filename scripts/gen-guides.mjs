@@ -98,6 +98,7 @@ const GUIDES = [
   ],
   nextIntro: 'The <a class="inline" href="data-centers/transformers.html">data center transformers</a> reference covers the families this applies to, and <a class="inline" href="guide-transformer-nameplate.html">how to read a transformer nameplate</a> covers where the vector group is written.',
   calcs: [
+    ['calculators/three-phase-power.html', 'Three-Phase Power Calculator', 'Line and phase values for either connection.'],
     ['calculators/kva-to-amps.html', 'kVA to Amps Calculator', 'Full-load amps on either winding, with no power factor term.'],
     ['calculators/transformer-sizing.html', 'Transformer Sizing Calculator', 'A kW load to the kVA rating and the nearest standard nameplate.'],
   ],
@@ -712,6 +713,7 @@ const GUIDES = [
   ],
   nextIntro: 'The <a class="inline" href="data-centers/power-distribution.html">power distribution</a> reference covers the PDUs and busway this runs through, and <a class="inline" href="guide-liquid-vs-air-cooling.html">liquid vs air cooling</a> covers the thermal limit that usually binds before the electrical one.',
   calcs: [
+    ['calculators/btu-to-tons.html', 'BTU to Tons Converter', 'The cooling capacity that density implies.'],
     ['calculators/kw-to-amps.html', 'kW to Amps Calculator', 'Rack current at 208 V or 415 V, with the 125 percent figure.'],
     ['calculators/wire-size.html', 'Wire Size Calculator', 'The branch-circuit conductor for that current.'],
     ['calculators/transformer-sizing.html', 'Transformer Sizing Calculator', 'The upstream kVA once diversity is applied.'],

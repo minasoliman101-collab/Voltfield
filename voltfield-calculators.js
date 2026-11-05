@@ -843,9 +843,89 @@
   });
 
 
+  /* ---- Three-phase power: solve the fourth value, and show where root-3 goes
+     This is NOT another one-way conversion -- amps-to-kw, kw-to-amps and
+     kva-to-amps already each do one of those. The job here is solving for
+     whichever value is unknown, and separating line quantities from phase
+     quantities, which is the part that actually causes errors. In wye the line
+     current IS the phase current and line voltage is root-3 times phase
+     voltage; in delta it is the other way round. Equipment nameplates give line
+     values, so the phase figures are what you need when working inside a
+     winding or checking a single leg. */
+  const TP_R3=Math.sqrt(3);
+  const tpBtn=document.getElementById('tpBtn');
+  if(tpBtn)tpBtn.addEventListener('click',function(){
+    const r=document.getElementById('tpResult');
+    const g=function(id){ const v=parseFloat(document.getElementById(id).value); return isNaN(v)?null:v; };
+    let V=g('tpV'), I=g('tpI'), Pk=g('tpP'), pf=g('tpPf');
+    const given=[V,I,Pk,pf].filter(function(v){return v!==null;}).length;
+    if(given<3){ r.textContent='Enter any three of line voltage, line current, real power and power factor.'; r.className='est-result show'; return; }
+    if(pf!==null&&(pf<=0||pf>1)){ r.textContent='Power factor is between 0 and 1.'; r.className='est-result show warn'; return; }
+    if((V!==null&&V<=0)||(I!==null&&I<=0)||(Pk!==null&&Pk<=0)){ r.textContent='Voltage, current and power must be greater than zero.'; r.className='est-result show warn'; return; }
+
+    let solvedFor='';
+    /* P = root3 * V * I * pf, rearranged for whichever one is missing. */
+    if(Pk===null){ Pk=TP_R3*V*I*pf/1000; solvedFor='real power'; }
+    else if(I===null){ I=Pk*1000/(TP_R3*V*pf); solvedFor='line current'; }
+    else if(V===null){ V=Pk*1000/(TP_R3*I*pf); solvedFor='line voltage'; }
+    else if(pf===null){
+      pf=Pk*1000/(TP_R3*V*I); solvedFor='power factor';
+      if(pf>1.0001){ r.innerHTML='That gives a power factor of '+fmt(pf,3)+', which is impossible &mdash; real power cannot exceed apparent power. Check the voltage and current, or whether the power figure is actually kVA.'; r.className='est-result show warn'; return; }
+      if(pf>1) pf=1;
+    }
+    else solvedFor='nothing (all four given)';
+
+    const S=TP_R3*V*I/1000, Q=Math.sqrt(Math.max(S*S-Pk*Pk,0));
+    let msg='<b>'+fmt(V,0)+' V line &middot; '+fmt(I,1)+' A line &middot; '+fmt(Pk,2)+' kW &middot; PF '+fmt(pf,3)+'</b>';
+    if(solvedFor!=='nothing (all four given)') msg+='<br>Solved for '+solvedFor+'.';
+    else msg+='<br>All four given, so nothing was solved; the figures below follow from them.';
+    msg+='<br>kW = &radic;3 &times; V &times; I &times; PF = 1.732 &times; '+fmt(V,0)+' &times; '+fmt(I,1)+' &times; '+fmt(pf,3)+' = '+fmt(Pk,2)+' kW.';
+    msg+='<br>Apparent power '+fmt(S,2)+' kVA, reactive '+fmt(Q,2)+' kvar.';
+    msg+='<br><b>Wye:</b> phase voltage '+fmt(V/TP_R3,1)+' V, phase current '+fmt(I,1)+' A (same as line). <b>Delta:</b> phase voltage '+fmt(V,0)+' V (same as line), phase current '+fmt(I/TP_R3,1)+' A.';
+    msg+='<br>This assumes a balanced load at one frequency. Nameplates give line values, and the &radic;3 belongs in exactly one place depending on the connection.';
+    r.innerHTML=msg; r.className='est-result show';
+  });
+
+  /* ---- Cooling capacity: BTU/h, tons and kW --------------------------------
+     A ton of refrigeration is not a weight. It is the rate of heat removal that
+     would melt a short ton of ice in 24 hours, which works out to 12,000 BTU/h
+     exactly by definition, or about 3.517 kW.
+
+     The IT option exists because the data-center question is almost always
+     "how much cooling for this load", and the answer is unintuitively simple:
+     essentially all electrical energy into IT equipment leaves as heat, so the
+     thermal load in kW equals the electrical load in kW. The arithmetic is then
+     a unit conversion, not an energy balance. */
+  const BTU_PER_TON=12000, KW_PER_TON=3.516852842;
+  const btBtn=document.getElementById('btBtn');
+  if(btBtn)btBtn.addEventListener('click',function(){
+    const r=document.getElementById('btResult');
+    const v=parseFloat(document.getElementById('btVal').value);
+    const unit=document.getElementById('btUnit').value;
+    const spareRaw=parseFloat(document.getElementById('btSpare').value);
+    const spare=isNaN(spareRaw)?0:spareRaw;
+    if(!(v>0)){ r.textContent='Enter a value greater than zero.'; r.className='est-result show'; return; }
+    if(spare<0||spare>100){ r.textContent='Spare capacity is a percentage between 0 and 100.'; r.className='est-result show warn'; return; }
+
+    let tons;
+    if(unit==='ton') tons=v;
+    else if(unit==='btu') tons=v/BTU_PER_TON;
+    else tons=v/KW_PER_TON;           /* kw and it are both thermal kW */
+
+    const f=1+spare/100, t2=tons*f;
+    const tonWord = Math.abs(t2-1)<0.005 ? ' ton' : ' tons';
+    let msg='<b>'+fmt(t2,2)+tonWord+' &middot; '+fmt(t2*BTU_PER_TON,0)+' BTU/h &middot; '+fmt(t2*KW_PER_TON,2)+' kW</b>';
+    if(unit==='it') msg+='<br>A '+fmt(v,2)+' kW IT load produces very nearly '+fmt(v,2)+' kW of heat, because essentially all the electrical energy into the equipment leaves as heat. That is the figure converted above.';
+    if(spare>0) msg+='<br>Includes '+fmt(spare,0)+'% spare on a base of '+fmt(tons,2)+' tons ('+fmt(tons*KW_PER_TON,2)+' kW).';
+    msg+='<br>One ton is 12,000 BTU/h by definition &mdash; the rate that would melt a short ton of ice in 24 hours &mdash; or about 3.517 kW. It is a rate of heat removal, not a weight.';
+    msg+='<br>This is sensible cooling capacity only. It excludes the power the cooling plant itself draws, any latent load, and the redundancy the facility is designed to.';
+    r.innerHTML=msg; r.className='est-result show';
+  });
+
+
 })();
 
-/* ---------- usage tracking: which of the 23 calculators actually get used.
+/* ---------- usage tracking: which of the 25 calculators actually get used.
    Delegated so it covers every .estimator/*Btn pair, including any added later.
    Moved here from engineering-calculators.html with the calculators, so the
    event names (calc = the estimator id) are unchanged and old reports still line up. ---------- */

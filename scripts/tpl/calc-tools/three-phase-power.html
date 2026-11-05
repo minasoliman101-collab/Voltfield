@@ -1,0 +1,13 @@
+<!-- Live calculator for calculators/three-phase-power.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="tpCalc">
+    <h2>Three-Phase Power</h2>
+    <div class="sub">Enter any three of line voltage, line current, real power and power factor; the fourth follows. Reports line and phase values for both delta and wye, since that is where the factor of &radic;3 actually goes.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="tpV">Line voltage (V)</label><input type="number" id="tpV" min="0" step="1" placeholder="e.g. 480"></div>
+      <div class="est-field"><label for="tpI">Line current (A)</label><input type="number" id="tpI" min="0" step="0.1" placeholder="e.g. 100"></div>
+      <div class="est-field"><label for="tpP">Real power (kW)</label><input type="number" id="tpP" min="0" step="0.1" placeholder="e.g. 70"></div>
+      <div class="est-field"><label for="tpPf">Power factor</label><input type="number" id="tpPf" min="0" max="1" step="0.01" placeholder="e.g. 0.85"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="tpBtn">Solve</button></div></div>
+    <div class="est-result" id="tpResult"></div>
+  </div>
