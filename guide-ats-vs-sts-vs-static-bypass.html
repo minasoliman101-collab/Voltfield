@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>ATS vs. STS vs. Static Bypass | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-ats-vs-sts-vs-static-bypass.html">
+<meta name="description" content="Automatic transfer switch against static transfer switch against UPS static bypass: transfer times, what each one switches between, why only one of them is internal to the UPS, and where each belongs in a facility topology.">
+<meta name="keywords" content="ATS vs STS, static transfer switch, UPS static bypass, automatic transfer switch, closed transition transfer, dual corded load, transfer time milliseconds">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="ATS vs. STS vs. Static Bypass">
+<meta property="og:description" content="Transfer times, what each one switches between, and which of the three is part of the UPS.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta name="twitter:title" content="ATS vs. STS vs. Static Bypass">
+<meta name="twitter:description" content="Transfer times, what each one switches between, and which of the three is part of the UPS.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://voltfield.org/guides.html"},{"@type":"ListItem","position":3,"name":"ATS vs. STS vs. Static Bypass","item":"https://voltfield.org/guide-ats-vs-sts-vs-static-bypass.html"}]},{"@type":"Article","headline":"ATS, STS and Static Bypass: What Transfers, How Fast, and Which One Is Inside the UPS","description":"Automatic transfer switch against static transfer switch against UPS static bypass: transfer times, what each one switches between, why only one of them is internal to the UPS, and where each belongs in a facility topology.","image":"https://voltfield.org/social/social-generic.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-11-03T00:00:00-05:00","dateModified":"2026-11-03T00:00:00-05:00","url":"https://voltfield.org/guide-ats-vs-sts-vs-static-bypass.html"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between an ATS and an STS?","acceptedAnswer":{"@type":"Answer","text":"An ATS is mechanical and switches between two power sources, classically utility and generator, taking a noticeable fraction of a second to several seconds. An STS is solid-state and transfers within a fraction of a cycle, a handful of milliseconds. The ATS is appropriate where a UPS carries the load during the transfer; the STS is used where the load itself must not see an interruption."}},{"@type":"Question","name":"Is a static bypass the same as a static transfer switch?","acceptedAnswer":{"@type":"Answer","text":"No. A static transfer switch is a standalone device selecting between two external sources. A static bypass is a path built into a UPS, from its input to its output around the inverter, that carries the load when the inverter cannot. One appears on a one-line as equipment; the other is a feature of the UPS."}},{"@type":"Question","name":"Is the load still protected on static bypass?","acceptedAnswer":{"@type":"Answer","text":"No. On static bypass the load is fed from raw UPS input power, unconditioned and with the battery out of the path, so an input disturbance reaches the load directly. This matters because static bypass is the normal state during UPS maintenance, which is why working on a single-module UPS usually means arranging an alternative source rather than relying on bypass."}},{"@type":"Question","name":"What is closed transition transfer?","acceptedAnswer":{"@type":"Answer","text":"An ATS arrangement that briefly parallels both sources so the load sees no interruption, as opposed to open transition which breaks before it makes. It requires the sources to be synchronised in voltage, frequency and phase, so it needs synchronising controls and the utility’s agreement to the momentary parallel. It is most useful returning to utility after a test, since the forward transfer on an actual failure has nothing to synchronise to."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in has-photo">
+    <div class="artban-text">
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">ATS vs. STS vs. Static Bypass</span></nav>
+      <div class="eyebrow">Data Centers</div>
+      <h1>ATS, STS and Static Bypass: Three Different Transfers</h1>
+      <p class="dek">Three devices that all move a load from one source to another, separated by two things people conflate: how fast the transfer happens, and whether the device is a standalone piece of equipment or a part of the UPS it lives in.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published November 3, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+    </div>
+    <figure class="artban-photo">
+      <picture><source srcset="images/parts/dc-static-transfer-switches.webp" type="image/webp"><img src="images/parts/dc-static-transfer-switches.jpg" width="340" height="340" alt="Static transfer switches" decoding="async" fetchpriority="high"></picture>
+      <figcaption>Static transfer switches (illustration)</figcaption>
+    </figure>
+  </div>
+</section>
+<div class="artwrap">
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>An ATS is mechanical and transfers in seconds. It exists to bring a generator onto the load after utility failure.</li>
+      <li>An STS is solid-state and transfers in a fraction of a cycle. It exists to feed a single-corded load from two independent UPS sources.</li>
+      <li>A static bypass is not a standalone device. It is the path inside a UPS that carries the load when the inverter cannot.</li>
+      <li>Transfer time only means something relative to what the load tolerates, which is why an ATS is fine behind a UPS and not in front of a bare server.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#three-devices-three-jobs">Three devices, three jobs</a></li>
+      <li><a href="#what-transfer-time-actually-means">What transfer time actually means</a></li>
+      <li><a href="#open-and-closed-transition">Open and closed transition</a></li>
+      <li><a href="#the-sts-and-single-corded-loads">The STS and single-corded loads</a></li>
+      <li><a href="#the-static-bypass-and-its-trap">The static bypass and its trap</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+  <h2 id="three-devices-three-jobs">Three devices, three jobs</h2>
+  <p>All three move a load from one source to another, which is why the terms get used loosely. They are not interchangeable and they do not sit in the same place.</p>
+  <p>An <b>automatic transfer switch</b> switches between two power sources, classically utility and generator. It is a mechanical device: contacts move, and the transfer takes a noticeable fraction of a second to several seconds, dominated by the time the generator needs to start and reach speed.</p>
+  <p>A <b>static transfer switch</b> switches between two AC sources using thyristors rather than moving contacts, which lets it transfer within a fraction of a cycle &mdash; a handful of milliseconds. It is used to give a single-corded load the benefit of two independent upstream paths.</p>
+  <p>A <b>static bypass</b> is the one that is not a standalone product at all. It is a path built into a UPS, from the UPS input to the UPS output, bypassing the inverter. It transfers the load onto raw input power when the inverter cannot support it, and it is part of the UPS rather than a device you place in a one-line.</p>
+  <h2 id="what-transfer-time-actually-means">What transfer time actually means</h2>
+  <p>Quoting transfer times without reference to the load is how these devices get misapplied.</p>
+  <p>An IT power supply holds through a short interruption on its own internal energy storage &mdash; conventionally expected to ride through on the order of half a cycle. A transfer completed faster than that is invisible to the load. A transfer taking seconds is a power outage as far as the load is concerned, regardless of how reliably it happened.</p>
+  <p>So the mechanical speed of an ATS is not a deficiency; it is appropriate to its job. Behind a UPS, where the UPS carries the load on its batteries during the generator start, seconds are entirely acceptable, and that arrangement is the normal one. In front of an unprotected load, the same device produces a dropout.</p>
+  <p>An STS is fast enough to be transparent, which is exactly why it is used where there is no UPS between it and a sensitive load &mdash; or where the two sources it selects between are themselves UPS outputs.</p>
+  <div class="ad-unit" data-ad="incontent"></div>
+  <h2 id="open-and-closed-transition">Open and closed transition</h2>
+  <p>An ATS can be specified to break before it makes, or to make before it breaks, and the choice has consequences beyond the switch.</p>
+  <p><b>Open transition</b> disconnects one source before connecting the other. There is a brief dead interval, the two sources are never paralleled, and the switch is simpler. This is the default and it is correct for most installations.</p>
+  <p><b>Closed transition</b> briefly parallels the two sources so the load sees no interruption at all. That requires the sources to be synchronised in voltage, frequency and phase angle before the transfer, which means synchronising controls and a generator capable of it. It also requires the utility&rsquo;s agreement, because for a moment the generator is connected in parallel with the grid, and that brings the whole interconnection question into a transfer scheme.</p>
+  <p>Where closed transition earns its cost is returning to utility after a test or an outage, which is a planned event that need not disturb the load at all. The forward transfer on an actual utility failure is open by necessity &mdash; there is nothing to synchronise to.</p>
+  <h2 id="the-sts-and-single-corded-loads">The STS and single-corded loads</h2>
+  <p>An STS exists for one problem: equipment with a single power cord in a facility with two power paths.</p>
+  <p>A dual-corded server simply takes a feed from each path and its own power supplies handle the rest; no transfer device is needed, which is why dual-corded equipment is preferred wherever it is available. But plenty of equipment has one cord &mdash; network gear, storage controllers, older plant, anything with a single supply &mdash; and connecting it to one path makes that path a single point of failure for it.</p>
+  <p>An STS sits between the two paths and presents one output. It normally draws from a preferred source and transfers to the alternate within milliseconds if the preferred one degrades. The load never notices.</p>
+  <p>The caveat worth stating is that the STS then becomes the single point of failure it was installed to eliminate. It is one device with one output, and that is why facilities with many single-corded loads typically distribute them across several STS units rather than consolidating, and why the STS itself is a maintainability consideration rather than a solved problem.</p>
+  <h2 id="the-static-bypass-and-its-trap">The static bypass and its trap</h2>
+  <p>The static bypass carries the load when the UPS inverter cannot: an inverter fault, a severe overload, an over-temperature condition, or a commanded transfer for maintenance. It operates fast enough that the load stays up.</p>
+  <p>The trap is what the load is connected to afterwards. On static bypass, the load is fed from raw UPS input power. It is no longer conditioned, and crucially it is <b>no longer protected by the battery</b>. A facility running on static bypass is a facility with no UPS, and an input disturbance at that moment reaches the load directly.</p>
+  <p>That matters because static bypass is not a rare event. It is the normal state during UPS maintenance, and on a single-module system it is the only way to work on the UPS without dropping the load. Treating that window as protected time is the mistake, and it is why the maintenance procedure for a single-module UPS usually involves arranging an alternative source rather than relying on bypass alone.</p>
+  <p>A static bypass should also not be confused with a <b>maintenance bypass</b>, which is a mechanical arrangement &mdash; typically a wrap-around breaker or switch &mdash; allowing the UPS to be fully isolated and worked on while the load runs on utility. The static bypass is electronic, automatic and internal; the maintenance bypass is manual and allows the unit to be de-energised entirely.</p>
+  <h2 id="common-mistakes">Common mistakes</h2>
+  <p>Using the terms interchangeably on a one-line, so a reviewer cannot tell what was intended. Putting an ATS in front of an unprotected IT load and expecting a transparent transfer. Specifying closed transition without the synchronising controls or the utility agreement it requires. Treating an STS as removing a single point of failure when it introduces itself as one. Running on static bypass and assuming the load is still protected, when the battery is out of the path. Confusing static bypass with maintenance bypass, which is a different arrangement with a different purpose. Quoting transfer times without reference to what the load actually rides through.</p>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the difference between an ATS and an STS?</summary>
+    <p style="margin-top:10px">An ATS is mechanical and switches between two power sources, classically utility and generator, taking a noticeable fraction of a second to several seconds. An STS is solid-state and transfers within a fraction of a cycle, a handful of milliseconds. The ATS is appropriate where a UPS carries the load during the transfer; the STS is used where the load itself must not see an interruption.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Is a static bypass the same as a static transfer switch?</summary>
+    <p style="margin-top:10px">No. A static transfer switch is a standalone device selecting between two external sources. A static bypass is a path built into a UPS, from its input to its output around the inverter, that carries the load when the inverter cannot. One appears on a one-line as equipment; the other is a feature of the UPS.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Is the load still protected on static bypass?</summary>
+    <p style="margin-top:10px">No. On static bypass the load is fed from raw UPS input power, unconditioned and with the battery out of the path, so an input disturbance reaches the load directly. This matters because static bypass is the normal state during UPS maintenance, which is why working on a single-module UPS usually means arranging an alternative source rather than relying on bypass.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is closed transition transfer?</summary>
+    <p style="margin-top:10px">An ATS arrangement that briefly parallels both sources so the load sees no interruption, as opposed to open transition which breaks before it makes. It requires the sources to be synchronised in voltage, frequency and phase, so it needs synchronising controls and the utility’s agreement to the momentary parallel. It is most useful returning to utility after a test, since the forward transfer on an actual failure has nothing to synchronise to.</p>
+  </details>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The UPS itself and its modes are covered in <a class="inline" href="guide-ups-topologies.html">UPS topologies</a>, and the redundancy arrangement these devices serve in <a class="inline" href="guide-n-plus-1-vs-2n-redundancy.html">N+1 vs. 2N</a>.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/generator-runtime.html">Generator Runtime Calculator</a>Fuel and runtime behind the generator an ATS starts.</li>
+        <li><a href="calculators/kva-to-kw.html">kVA to kW Converter</a>The load figure a generator is sized against.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-ups-topologies.html">UPS Topologies Compared</a></li>
+        <li><a href="guide-n-plus-1-vs-2n-redundancy.html">N+1 vs. 2N Redundancy</a></li>
+        <li><a href="guide-uptime-institute-tiers.html">Uptime Institute Tiers Explained</a></li>
+        <li><a href="guide-generator-sizing.html">How to Size a Generator</a></li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;ATS, STS and Static Bypass: Three Different Transfers&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-grid-forming-vs-grid-following.html</p>
+  </details>
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/guide-ats-vs-sts-vs-static-bypass.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+
+<aside class="provenance" aria-labelledby="prov-h">
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published November 3, 2026.</span></summary>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>What each of the three devices switches between and how fast, why transfer time is only meaningful relative to what the load rides through, open against closed transition on an ATS and what closed transition requires, why an STS exists for single-corded loads and how it becomes a single point of failure, and why a load on static bypass is unprotected.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>Transfer switch and UPS operating principles, with NEC Articles 700, 701 and 702 for emergency, legally required and optional standby systems</li><li>Voltfield’s own guides on UPS topologies and facility redundancy</li><li>IT equipment ride-through expectations for the transfer-time comparison</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A specification or a topology design. Actual transfer times, ride-through capability and bypass behaviour are properties of specific equipment and have to come from manufacturer data. Closed transition and any momentary parallel operation with the utility require that utility’s agreement, and emergency system requirements are set by the applicable NEC articles and the AHJ.</dd>
+      <dt>Provenance</dt>
+      <dd>Published November 3, 2026. Written and maintained by the Voltfield editorial team against the sources above. Worked figures in the text are arithmetic the reader can check; nothing here states a measured value.</dd>
+    </dl>
+  </details>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

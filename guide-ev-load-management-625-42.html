@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>EV Load Management Explained (NEC 625.42) | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-ev-load-management-625-42.html">
+<meta name="description" content="NEC 625.42 load management explained: why EV charging gets no demand factor, how an automatic load management system changes the calculated load, what makes a system enforceable, and when load management beats a service upgrade.">
+<meta name="keywords" content="NEC 625.42, EV load management, ALMS, automatic load management system, EV charger service capacity, EVEMS, 220.57, multiple EV chargers one circuit">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="EV Load Management">
+<meta property="og:description" content="Why EV charging gets no demand factor, and how an automatic load management system changes the calculation.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta name="twitter:title" content="EV Load Management">
+<meta name="twitter:description" content="Why EV charging gets no demand factor, and how an automatic load management system changes the calculation.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://voltfield.org/guides.html"},{"@type":"ListItem","position":3,"name":"EV Load Management","item":"https://voltfield.org/guide-ev-load-management-625-42.html"}]},{"@type":"Article","headline":"EV Load Management: Why Four Chargers Need Not Add Up to Four Chargers","description":"NEC 625.42 load management explained: why EV charging gets no demand factor, how an automatic load management system changes the calculated load, what makes a system enforceable, and when load management beats a service upgrade.","image":"https://voltfield.org/social/social-generic.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-11-03T00:00:00-05:00","dateModified":"2026-11-03T00:00:00-05:00","url":"https://voltfield.org/guide-ev-load-management-625-42.html"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does an EV charger get a demand factor in a load calculation?","acceptedAnswer":{"@type":"Answer","text":"No. Article 625 treats EV charging as a continuous load, so the equipment enters a service or feeder calculation at the larger of 7,200 VA or its nameplate rating, at 100 percent. The 7,200 VA figure is a floor, not a value: a 40 A unit at 240 V is 9,600 VA and enters at 9,600. Two units present as two full loads."}},{"@type":"Question","name":"What does NEC 625.42 allow?","acceptedAnswer":{"@type":"Answer","text":"Where an automatic load management system is installed, the maximum equipment load on a service or feeder is permitted to be the maximum load the management system allows, rather than the sum of the connected equipment nameplate ratings. Four 48 A chargers held by a listed system to 48 A total present to the service as 48 A."}},{"@type":"Question","name":"Does a scheduling feature count as load management?","acceptedAnswer":{"@type":"Answer","text":"No. Scheduling, timers, app notifications and written procedures all reduce the likelihood of coincident load without reducing the maximum, and the calculation is about the maximum. A qualifying system has to monitor and be able to reduce or interrupt charging current to hold the total at or below its configured limit, automatically, without anyone intervening."}},{"@type":"Question","name":"Is load management better than upgrading the service?","acceptedAnswer":{"@type":"Answer","text":"Usually, where the existing service has headroom and the shortfall comes from the EV load alone: it avoids utility coordination and the wait that goes with it. It is also what makes multi-unit garages feasible, since sizing a service for every space at full value rarely is. It does not help if the service is already inadequate from its existing load, which is a capacity problem rather than a coincidence problem."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in has-photo">
+    <div class="artban-text">
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">EV Load Management</span></nav>
+      <div class="eyebrow">Load Calculations</div>
+      <h1>EV Load Management: NEC 625.42 and ALMS</h1>
+      <p class="dek">EV charging enters a load calculation at full value with no demand factor, which is what makes the arithmetic so tight. An automatic load management system changes what the service has to be sized for, and the word doing the work is enforceable.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published November 3, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+    </div>
+    <figure class="artban-photo">
+      <picture><source srcset="images/parts/dc-power-meters-bms.webp" type="image/webp"><img src="images/parts/dc-power-meters-bms.jpg" width="340" height="340" alt="Panel-mounted power meters" decoding="async" fetchpriority="high"></picture>
+      <figcaption>Load monitoring (illustration)</figcaption>
+    </figure>
+  </div>
+</section>
+<div class="artwrap">
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>EV supply equipment enters a service calculation at the larger of 7,200 VA or its nameplate, at 100 percent, with no demand factor.</li>
+      <li>Article 625 treats EV charging as a continuous load, which is why no demand factor is available.</li>
+      <li>With an automatic load management system, the calculated load is the maximum the system permits rather than the sum of the nameplates.</li>
+      <li>The system has to actually constrain the load, not merely schedule or recommend. That is the difference between a compliant design and a story.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 6 sections</summary>
+    <ol>
+      <li><a href="#why-the-arithmetic-is-tight">Why the arithmetic is tight</a></li>
+      <li><a href="#what-load-management-changes">What load management changes</a></li>
+      <li><a href="#what-makes-a-system-enforceable">What makes a system enforceable</a></li>
+      <li><a href="#when-it-beats-a-service-upgrade">When it beats a service upgrade</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+  <h2 id="why-the-arithmetic-is-tight">Why the arithmetic is tight</h2>
+  <p>Most appliance loads get some relief in a service calculation. Several ranges, several dryers, a row of fixed appliances &mdash; Article 220 applies demand factors on the reasonable assumption that they will not all run flat out at once.</p>
+  <p>EV charging gets none of that, and the reason is in Article 625: EV charging is treated as a <b>continuous load</b>. A car plugged in overnight draws its full current for hours, which is exactly what a demand factor assumes will not happen. So the equipment enters the calculation at the larger of 7,200 VA or its nameplate rating, at 100 percent.</p>
+  <p>Note that 7,200 VA is a floor rather than a value. A 40 A unit at 240 V is 9,600 VA and enters at 9,600. And the figure is per unit, so two chargers present as two full loads with nothing deducted for the near-certainty that only one car is usually charging.</p>
+  <p>Put a second charger on a dwelling that already has a heat pump and a range and the service calculation frequently fails. That is not a conservative result produced by a cautious engineer; it is what the rules require when applied straightforwardly.</p>
+  <h2 id="what-load-management-changes">What load management changes</h2>
+  <p>NEC 625.42 provides the route out, and it is worth being precise about what it does.</p>
+  <p>Where an automatic load management system is installed, the maximum equipment load on a service or feeder is permitted to be the <b>maximum load the management system allows</b>, rather than the sum of the connected equipment ratings. The calculation is performed against the enforced limit.</p>
+  <p>So four 48 A chargers behind a system configured and listed to hold the group to 48 A total present to the service as 48 A, not 192 A. The hardware is unchanged; what changed is that there is now something guaranteeing the aggregate cannot exceed the figure the service was sized for.</p>
+  <p>This is the same logic as power control systems for interconnection under NEC 705.13, and recognising that the two are the same idea makes both easier to reason about: in each case a listed control system substitutes an enforced limit for a nameplate sum.</p>
+  <div class="ad-unit" data-ad="incontent"></div>
+  <h2 id="what-makes-a-system-enforceable">What makes a system enforceable</h2>
+  <p>The provision rests entirely on the word <i>automatic</i>, and this is where designs fail review.</p>
+  <p>A system qualifies by actually constraining the load. It has to monitor, and it has to be able to reduce or interrupt charging current to hold the total at or below the configured limit, without relying on anyone doing anything. The limit has to be a setting the system enforces, not a target it aims at.</p>
+  <p>Things that are not load management, despite being sold alongside it: a scheduling feature that charges overnight, because nothing stops two cars charging overnight simultaneously. An app that notifies the owner. A written operating procedure. A timer. Each of these reduces the <i>likelihood</i> of coincident load and none of them reduces the <i>maximum</i>, and the calculation is about the maximum.</p>
+  <p>The practical consequences are that the system has to be listed for the purpose, the configured limit has to be documented and field marked so an inspector can see what the service was sized to, and the limit has to be set before the installation is signed off rather than left at a default.</p>
+  <h2 id="when-it-beats-a-service-upgrade">When it beats a service upgrade</h2>
+  <p>The comparison is usually straightforward once the numbers are on the table.</p>
+  <p>A service upgrade means a new service, frequently a new meter base and panel, utility coordination, and on a constrained distribution network a wait that can run to many months. Load management means equipment and configuration, and no utility involvement at all. Where the existing service has some headroom and the shortfall is created by the EV load alone, load management is almost always faster and cheaper.</p>
+  <p>It is also the answer that scales for multi-unit buildings, where the alternative is sizing a service for every parking space at full value. A garage with thirty spaces cannot realistically be served by thirty full charger loads, and load management is what makes the project exist at all rather than merely cheaper.</p>
+  <p>Where it does not help: if the service is already at its limit from the non-EV load, managing the EV load down to nothing still leaves the service inadequate. Load management solves a coincidence problem, not a capacity problem, and establishing which one you have is what NEC 220.87 is for.</p>
+  <h2 id="common-mistakes">Common mistakes</h2>
+  <p>Applying a demand factor to EV charging, which Article 625 does not permit because the load is continuous. Reading 7,200 VA as the value rather than the floor, and understating a 48 A unit. Treating scheduling, timers or an app notification as load management, when none of them limits the maximum. Leaving the system at a default limit instead of configuring and documenting the figure the service was sized to. Omitting the field marking, so nobody can later tell what the service capacity assumed. Expecting load management to rescue a service that is already inadequate from its existing load. Sizing the branch circuit from the managed limit rather than the individual equipment rating, which is a separate calculation.</p>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Does an EV charger get a demand factor in a load calculation?</summary>
+    <p style="margin-top:10px">No. Article 625 treats EV charging as a continuous load, so the equipment enters a service or feeder calculation at the larger of 7,200 VA or its nameplate rating, at 100 percent. The 7,200 VA figure is a floor, not a value: a 40 A unit at 240 V is 9,600 VA and enters at 9,600. Two units present as two full loads.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What does NEC 625.42 allow?</summary>
+    <p style="margin-top:10px">Where an automatic load management system is installed, the maximum equipment load on a service or feeder is permitted to be the maximum load the management system allows, rather than the sum of the connected equipment nameplate ratings. Four 48 A chargers held by a listed system to 48 A total present to the service as 48 A.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Does a scheduling feature count as load management?</summary>
+    <p style="margin-top:10px">No. Scheduling, timers, app notifications and written procedures all reduce the likelihood of coincident load without reducing the maximum, and the calculation is about the maximum. A qualifying system has to monitor and be able to reduce or interrupt charging current to hold the total at or below its configured limit, automatically, without anyone intervening.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Is load management better than upgrading the service?</summary>
+    <p style="margin-top:10px">Usually, where the existing service has headroom and the shortfall comes from the EV load alone: it avoids utility coordination and the wait that goes with it. It is also what makes multi-unit garages feasible, since sizing a service for every space at full value rarely is. It does not help if the service is already inadequate from its existing load, which is a capacity problem rather than a coincidence problem.</p>
+  </details>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">Establishing what the existing service is actually carrying comes first, and that is <a class="inline" href="guide-nec-220-87-existing-load.html">NEC 220.87</a>. The continuous-load treatment behind the no-demand-factor rule is in <a class="inline" href="guide-continuous-load-80-percent-rule.html">the 80% rule</a>.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/wire-size.html">Wire Size Calculator</a>The branch circuit for an individual charger.</li>
+        <li><a href="calculators/kw-to-amps.html">kW to Amps Calculator</a>Converting charger power to current.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-nec-220-87-existing-load.html">NEC 220.87 Existing Load Explained</a></li>
+        <li><a href="guide-continuous-load-80-percent-rule.html">The 80% Rule &amp; Continuous Loads</a></li>
+        <li><a href="guide-nec-705-supply-side-vs-load-side.html">NEC 705 Supply-Side vs. Load-Side</a></li>
+        <li><a href="guide-rack-power-density.html">Rack Power Density Explained</a></li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;EV Load Management: NEC 625.42 and ALMS&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-grid-forming-vs-grid-following.html</p>
+  </details>
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/guide-ev-load-management-625-42.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+
+<aside class="provenance" aria-labelledby="prov-h">
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published November 3, 2026.</span></summary>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>Why EV charging receives no demand factor and enters at the larger of 7,200 VA or nameplate, what NEC 625.42 permits an automatic load management system to change, what makes such a system enforceable rather than advisory, how it compares with a service upgrade, and where it does not help.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>NEC Article 625, with 625.42 for load management and the continuous-load treatment of EV charging</li><li>NEC 220.57 for the EV supply equipment load value and NEC 220.87 for establishing the existing load</li><li>NEC 705.13 as the directly comparable power control system provision</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A load calculation or a substitute for the code text. Whether a particular product qualifies depends on its listing, the configured limit has to be documented for the specific installation, and Article 220 is reorganized in the 2026 NEC, so confirm section numbering against the edition your jurisdiction has adopted. Local amendments and utility requirements can be more restrictive.</dd>
+      <dt>Provenance</dt>
+      <dd>Published November 3, 2026. Written and maintained by the Voltfield editorial team against the sources above. Worked figures in the text are arithmetic the reader can check; nothing here states a measured value.</dd>
+    </dl>
+  </details>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

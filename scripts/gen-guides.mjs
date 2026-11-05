@@ -399,6 +399,7 @@ const GUIDES = [
     ['calculators/voltage-drop.html', 'Voltage Drop Calculator', 'The usual reason a feeder gets upsized in the first place.'],
   ],
   guides: [
+    ['guide-interrupting-rating-vs-sccr.html', 'Interrupting Rating vs. SCCR'],
     ['guide-ground-vs-neutral.html', 'Ground vs. Neutral Explained'],
     ['guide-grounding-bonding-basics.html', 'Grounding &amp; Bonding Basics'],
     ['guide-ground-fault-protection.html', 'Ground-Fault Protection &amp; NEC 230.95'],
@@ -472,6 +473,7 @@ const GUIDES = [
     ['calculators/wire-size.html', 'Wire Size Calculator', 'The conductor for the 125 percent figure.'],
   ],
   guides: [
+    ['guide-vfd-vs-soft-starter.html', 'VFD vs. Soft Starter Compared'],
     ['guide-fuse-vs-breaker.html', 'Fuse vs. Circuit Breaker Compared'],
     ['guide-continuous-load-80-percent-rule.html', 'The 80% Rule &amp; Continuous Loads'],
     ['guide-nec-220-87-existing-load.html', 'NEC 220.87 Existing Load Explained'],
@@ -555,6 +557,7 @@ const GUIDES = [
     ['calculators/bess-sizing.html', 'BESS Sizing Calculator', 'Usable and nameplate kWh for a ride-through requirement.'],
   ],
   guides: [
+    ['guide-ats-vs-sts-vs-static-bypass.html', 'ATS vs. STS vs. Static Bypass'],
     ['guide-n-plus-1-vs-2n-redundancy.html', 'N+1 vs. 2N Redundancy'],
     ['guide-ups-topologies.html', 'UPS Topologies'],
     ['guide-pue-explained.html', 'PUE Explained'],
@@ -848,6 +851,7 @@ const GUIDES = [
     ['calculators/voltage-drop.html', 'Voltage Drop Calculator', 'Whether the run length forces the conductor up.'],
   ],
   guides: [
+    ['guide-ev-load-management-625-42.html', 'EV Load Management (NEC 625.42)'],
     ['guide-continuous-load-80-percent-rule.html', 'The 80% Rule & Continuous Loads'],
     ['guide-nec-430-250-motor-fla.html', 'NEC 430.250 Motor Full-Load Current'],
     ['guide-cable-ampacity-derating.html', 'Cable Ampacity Derating Explained'],
@@ -1000,6 +1004,402 @@ const GUIDES = [
   covers: 'Why no ampere threshold divides these three and what the NEC definitions turn on instead, the UL 67, UL 891 and UL 1558 listing standards and the UL 489 and UL 1066 breaker standards under them, the short-time rating that only switchgear carries and its role in selective coordination, the construction and maintainability differences, and what each assembly may and may not contain.',
   basedOn: ['UL 67, UL 891 and UL 1558 as the listing standards for panelboards, switchboards and low-voltage switchgear, with UL 489 and UL 1066 for the breakers', 'NEC Article 100 definitions and Article 408, which since the 2017 edition covers switchboards, switchgear and panelboards', 'Published engineering comparisons of UL 1558 switchgear and UL 891 switchboards for the withstand and short-time figures'],
   notThis: 'A specification or a substitute for the standards and the product listings. The withstand and short-time figures describe what each standard covers rather than any particular product, and a specific assembly&rsquo;s ratings come from its label and its listing. The rear-access wording is descriptive rather than a classification rule and has drifted in modern equipment. Confirm NEC article and definition wording against the edition your jurisdiction has adopted.',
+},
+{
+  slug: 'guide-nec-705-supply-side-vs-load-side',
+  eyebrow: 'Interconnection',
+  crumb: 'NEC 705 Tap Rules',
+  h1: 'NEC 705: Supply-Side and Load-Side Connections',
+  title: 'NEC 705 Supply-Side vs. Load-Side Tap',
+  headline: 'NEC 705: The 120% Rule, the 100% Case Nobody Mentions, and the Supply-Side Alternative',
+  dek: 'Where an inverter lands relative to the service disconnect decides which rules apply, and the familiar 120 percent allowance is only one of several paths. It also quietly depends on a breaker position that most summaries leave out.',
+  description: 'NEC 705 interconnection explained: load-side connection and the 120 percent busbar allowance, the 100 percent case when the backfeed breaker is not at the opposite end, supply-side connection under 705.11, and power control systems under 705.13.',
+  ogDesc: 'The 120 percent busbar allowance, the breaker-position condition behind it, and the supply-side alternative.',
+  keywords: 'NEC 705, 120 percent rule solar, 705.12, 705.11 supply side, backfeed breaker busbar, solar interconnection panel, power control system 705.13, line side tap',
+  photo: { src: 'images/parts/re-central-inverters-utility', alt: 'Utility-scale central inverters', caption: 'Inverters (illustration)' },
+  takeaways: [
+    'The first question is not how big the inverter is. It is whether the connection lands on the supply side or the load side of the service disconnect.',
+    'The 120 percent busbar allowance applies on the load side and depends on the backfeed breaker sitting at the opposite end of the bus from the main.',
+    'Where that position is not met, the limit is 100 percent of the busbar, not 120.',
+    'A supply-side connection is not subject to the busbar calculation at all, which is why it is the usual answer when a panel will not take the backfeed.',
+  ],
+  sections: [
+    { id: 'the-question-that-comes-first', h2: 'The question that comes first', html: `
+  <p>Article 705 governs interconnecting a power production source &mdash; solar, storage, a generator operating in parallel &mdash; with an existing electrical system. Almost every practical question about it reduces to one thing: which side of the service disconnecting means the connection lands on.</p>
+  <p>A <b>supply-side</b> connection sits between the utility and the service disconnect, on conductors that have no overcurrent device ahead of them. A <b>load-side</b> connection sits downstream of the service disconnect, typically as a breaker in an existing panel. These are different rule sets, not two ways of describing the same thing, and the busbar arithmetic everyone knows belongs only to the second.</p>
+  <p>The reason the distinction exists is heat. On the load side, a panel busbar can now be fed from two directions at once, and the sum of what can be pushed into it may exceed what it was rated and listed for. On the supply side there is no busbar in between, so the problem does not arise and the question becomes one of service conductor and disconnect ratings instead.</p>` },
+    { id: 'the-120-percent-allowance', h2: 'The 120 percent allowance', html: `
+  <p>On the load side, the familiar method permits the main overcurrent device plus the backfeed breaker to total up to 120 percent of the busbar rating. The arithmetic is simple and it is where most interconnection designs start.</p>
+  <p>Take a 200 A busbar with a 200 A main. 120 percent of 200 is 240 A, less the 200 A main leaves <b>40 A</b> available for backfeed. Because inverter output is a continuous load carrying the 125 percent factor, that 40 A breaker corresponds to a maximum continuous inverter output of 40 / 1.25 = <b>32 A</b>. That is the number the design is actually constrained to, and it is noticeably smaller than the breaker figure people quote.</p>
+  <p>Why 120 percent is allowed at all is worth understanding, because it explains the condition attached to it. The allowance assumes current enters the bus at one end and leaves at the other, so no single section of the busbar carries both contributions at once. That assumption is what the extra 20 percent is buying.</p>` },
+    { id: 'the-100-percent-case', h2: 'The 100 percent case', html: `
+  <p>This is the part most summaries omit, and it is the one that fails an inspection.</p>
+  <p>The 120 percent allowance is conditional on the backfeed breaker being located at the <b>opposite end of the busbar from the main</b>. That position is what makes the end-to-end current assumption true. Put the backfeed breaker somewhere in the middle of the bus and a section of it can see the main contribution and the inverter contribution together, and the justification for exceeding 100 percent disappears.</p>
+  <p>Where the opposite-end position is not satisfied, the limit is <b>100 percent</b> of the busbar rating. On that same 200 A panel with a 200 A main, 100 percent of 200 leaves nothing: zero available for backfeed. The design does not get smaller, it stops being available on that path.</p>
+  <p>That is the real reason so many residential retrofits end in a main breaker derate or a service upgrade. It is not that the panel is too small in general; it is that the breaker position available in that panel does not support the allowance the design was counting on.</p>` },
+    { id: 'the-supply-side-alternative', h2: 'The supply-side alternative', html: `
+  <p>Where the load-side path will not work &mdash; the panel will not take more backfeed, the position is wrong, or the system is simply larger than the busbar arithmetic permits &mdash; a supply-side connection is the usual answer.</p>
+  <p>Because the connection is ahead of the service disconnect, the busbar calculation does not apply. There is no busbar in the path to protect. What governs instead is the service: the connection is made to the service conductors, and the questions become whether those conductors and the service equipment can carry the combined current, and what disconnecting means and overcurrent protection the source itself needs.</p>
+  <p>The practical cost is that supply-side work touches the service. It frequently means utility coordination, a meter pull, work on unfused conductors, and in many jurisdictions a different permit path. It solves the capacity problem and buys a scheduling problem.</p>` },
+    { id: 'power-control-systems', h2: 'Power control systems', html: `
+  <p>There is a third route that the older guidance predates, and it is increasingly the answer on a battery project.</p>
+  <p>NEC 705.13 recognises power control systems: a listed system that actively monitors and limits current at the points it controls, so the design is constrained by what the system will actually permit rather than by the sum of the connected equipment ratings. Where one is used, the busbar and conductor calculations are performed against the control setting instead of against nameplate capacity.</p>
+  <p>This matters most where the connected equipment could in principle overload something but in practice never will, because the control system prevents it. A battery inverter that can export 48 A but is configured and listed to limit to 20 A at that point presents as 20 A. The arithmetic stops being about what the hardware can do and becomes about what the listed system allows, which is the same logic as the automatic load management permitted for EV charging.</p>` },
+    { id: 'common-mistakes', h2: 'Common mistakes', html: `
+  <p>Quoting the 120 percent allowance without the opposite-end breaker position it depends on. Reading the available backfeed breaker size as the available inverter output, when the 125 percent continuous factor sits between them. Applying the busbar calculation to a supply-side connection, where no busbar is in the path. Assuming a supply-side connection is simply the easier option, when it is service work with its own coordination and permitting. Treating the busbar rating as the panel's main breaker rating, which are not always the same number. Citing subsection numbers from an edition the jurisdiction has not adopted &mdash; Article 705 was reorganized and the published sources disagree with each other on the paragraph citation as a result.</p>` },
+  ],
+  faqs: [
+    { q: 'What is the 120% rule for solar?', a: 'On a load-side connection, the main overcurrent device plus the backfeed breaker may total up to 120 percent of the busbar rating. On a 200 A busbar with a 200 A main that leaves 40 A for backfeed, which because of the 125 percent continuous-load factor corresponds to about 32 A of inverter output. The allowance is conditional on the backfeed breaker being at the opposite end of the bus from the main.' },
+    { q: 'What happens if the backfeed breaker is not at the opposite end of the busbar?', a: 'The limit becomes 100 percent of the busbar rating rather than 120 percent. The extra 20 percent exists because current entering at one end and leaving at the other means no busbar section carries both contributions at once; a breaker in the middle of the bus breaks that assumption. On a 200 A bus with a 200 A main, the 100 percent case leaves nothing available for backfeed.' },
+    { q: 'Does the 120% rule apply to a supply-side connection?', a: 'No. A supply-side connection is made between the utility and the service disconnecting means, so there is no panel busbar in the path to protect and the busbar calculation does not apply. What governs instead is the service conductor and equipment ratings, plus the disconnecting means and overcurrent protection for the source. It is the usual route when a panel cannot accept the backfeed.' },
+    { q: 'What is a power control system under NEC 705.13?', a: 'A listed system that monitors and actively limits current at the points it controls, so the calculations are performed against the configured limit rather than the sum of equipment nameplate ratings. An inverter capable of 48 A but limited by a listed control system to 20 A at that point presents as 20 A. It is the same logic as automatic load management for EV charging, and it often resolves a battery interconnection that neither tap rule would permit.' },
+  ],
+  nextIntro: 'The queue and study process ahead of any of this is covered in <a class="inline" href="guide-grid-interconnection-process.html">the grid interconnection process</a>, and the continuous-load factor behind the 125 percent step in <a class="inline" href="guide-continuous-load-80-percent-rule.html">the 80% rule</a>.',
+  calcs: [
+    ['calculators/kw-to-amps.html', 'kW to Amps Calculator', 'Inverter output current from its power rating.'],
+    ['calculators/wire-size.html', 'Wire Size Calculator', 'The conductor for that current, with both NEC checks.'],
+  ],
+  guides: [
+    ['guide-grid-interconnection-process.html', 'The Grid Interconnection Process'],
+    ['guide-continuous-load-80-percent-rule.html', 'The 80% Rule &amp; Continuous Loads'],
+    ['guide-grid-forming-vs-grid-following.html', 'Grid-Forming vs. Grid-Following'],
+    ['guide-inverter-clipping-ratio.html', 'Inverter Clipping &amp; DC/AC Ratio'],
+  ],
+  covers: 'The difference between a supply-side and a load-side connection and why it decides the rule set, the 120 percent busbar allowance and the breaker position it depends on, the 100 percent limit where that position is not met, how the 125 percent continuous factor converts a breaker size into inverter output, the supply-side route under 705.11, and power control systems under 705.13.',
+  basedOn: ['NEC Article 705 for interconnection requirements, with 705.11 for supply-side connections, 705.12 for load-side and 705.13 for power control systems', 'NEC 210.19(A) and 215.2 for the continuous-load factor applied to inverter output', 'Published engineering and installer guidance for the worked busbar arithmetic'],
+  notThis: 'A design or a substitute for the code text. Article 705 was reorganized between recent editions and published sources disagree on the paragraph numbering of the busbar provisions, so confirm the citation against the edition your jurisdiction has adopted. Utility interconnection requirements are separate from the NEC and can be more restrictive than either tap rule.',
+},
+{
+  slug: 'guide-interrupting-rating-vs-sccr',
+  eyebrow: 'Protection',
+  crumb: 'Interrupting Rating vs. SCCR',
+  h1: 'Interrupting Rating vs. SCCR: Two Different Questions',
+  title: 'Interrupting Rating vs. SCCR Explained',
+  headline: 'Interrupting Rating vs. Short-Circuit Current Rating: Clearing a Fault and Surviving One',
+  dek: 'One is a device’s ability to break fault current and stop it. The other is an assembly’s ability to be subjected to that current without becoming a hazard. They are different numbers, set by different code sections, and meeting one says nothing about the other.',
+  description: 'Interrupting rating against short-circuit current rating: what NEC 110.9 and 110.10 each require, why a breaker rating does not establish an assembly rating, how the weakest component sets an SCCR, and where series ratings fit.',
+  ogDesc: 'What 110.9 and 110.10 each require, and why clearing a fault and surviving one are separate ratings.',
+  keywords: 'interrupting rating vs SCCR, NEC 110.9, NEC 110.10, AIC rating, short circuit current rating, available fault current, series rated, equipment SCCR',
+  photo: { src: 'images/parts/dc-molded-case-breakers-mccb-15-1200a', alt: 'Molded-case circuit breakers', caption: 'Molded-case breakers (illustration)' },
+  takeaways: [
+    'Interrupting rating is about a device clearing fault current. SCCR is about an assembly withstanding it. Both must exceed the available fault current.',
+    'NEC 110.9 governs the first, NEC 110.10 the second. They are separate requirements and a design can satisfy one and fail the other.',
+    'An assembly SCCR is set by its weakest component, not by its breaker. A 65 kA breaker in a panel with a 5 kA control relay does not make a 65 kA assembly.',
+    'Both are checked against available fault current at that point, which means a fault-current study, not an assumption.',
+  ],
+  sections: [
+    { id: 'two-different-questions', h2: 'Two different questions', html: `
+  <p>Ask what happens during a bolted fault and there are two things to establish, and they are genuinely separate.</p>
+  <p>The first: can the protective device <b>break</b> this current and stop it, without failing in the attempt? That is the <b>interrupting rating</b>, often marked AIC, and it belongs to the overcurrent device alone. A breaker marked 65 kA can interrupt 65,000 A of prospective fault current and remain a breaker afterwards.</p>
+  <p>The second: can everything else in the circuit <b>be subjected to</b> that current, for however long it takes the device to clear, without becoming a hazard? That is the <b>short-circuit current rating</b>, or SCCR, and it belongs to an assembly: a panel, an industrial control panel, a motor controller, a piece of equipment. It is a withstand rating, not a clearing rating.</p>
+  <p>Nothing about the first answers the second. A device can clear a fault beautifully while the enclosure it sits in is destroyed by the same event, and that is precisely the failure the two requirements exist to prevent separately.</p>` },
+    { id: 'what-the-code-requires', h2: 'What the code requires', html: `
+  <p>The NEC keeps these in adjacent sections, which is both convenient and a source of confusion.</p>
+  <p><b>110.9</b> addresses interrupting rating. Equipment intended to interrupt current at fault levels must have an interrupting rating at nominal circuit voltage sufficient for the current available at its line terminals. The phrase doing the work is <i>at its line terminals</i>: the figure is the fault current available at that specific point, not at the service, and not the utility&rsquo;s headline number.</p>
+  <p><b>110.10</b> addresses the rest. The circuit impedance, equipment short-circuit current ratings and other characteristics must be selected and coordinated so that the protective devices can clear a fault without extensive damage to the electrical components of the circuit. This is the withstand requirement, and it reaches everything in the fault path rather than just the device at the top of it.</p>
+  <p>So a compliant design has to answer both. 110.9 is satisfied by picking a device with enough interrupting rating. 110.10 is satisfied by establishing that the assembly and the components in it can take what passes through before the device clears.</p>` },
+    { id: 'the-weakest-component-rule', h2: 'The weakest component sets the SCCR', html: `
+  <p>This is where the practical errors concentrate, and it is the same logic as the fitting that limits an enclosure rating.</p>
+  <p>An assembly&rsquo;s SCCR is determined by the lowest-rated component in the fault current path, not by the largest breaker in it. A control panel containing a 65 kA main breaker, a 10 kA rated contactor and a 5 kA rated control relay has an assembly SCCR of 5 kA. The breaker&rsquo;s 65 kA is real and relevant to 110.9; it does nothing for the assembly rating.</p>
+  <p>That has a consequence that surprises people: improving the SCCR of an industrial control panel is usually not a matter of buying a bigger breaker. It is a matter of finding and replacing the one small component that set the number, or protecting it with a current-limiting device ahead of it so that what reaches it is less than what is available upstream.</p>
+  <p>Industrial control panels are required to be marked with their SCCR precisely so this is checkable, and a panel whose marked rating is below the available fault current at its point of installation cannot be installed there.</p>` },
+    { id: 'where-series-ratings-fit', h2: 'Where series ratings fit', html: `
+  <p>A series rating is a tested combination in which an upstream device limits what reaches a downstream device, letting the downstream device be applied above its own standalone interrupting rating.</p>
+  <p>It is worth being clear what that does and does not change. A series rating is a way of satisfying 110.9 for the downstream device using a tested, listed, specific pairing &mdash; not a calculation, and not transferable to a different combination of manufacturers or frames. It does not convert into an assembly SCCR, and it does not relieve the 110.10 requirement for everything else in the path.</p>
+  <p>The failure mode is substitution. A series-rated combination is valid only as the exact pairing that was tested and is marked on the equipment; swapping the upstream device for an equivalent from another manufacturer voids it silently, and nothing about the installation looks different afterwards.</p>` },
+    { id: 'the-number-both-are-checked-against', h2: 'The number both are checked against', html: `
+  <p>Both requirements compare a rating against the available fault current at a point, so both depend on actually knowing that figure.</p>
+  <p>Available fault current falls as you move away from the source, because conductor impedance and transformer impedance limit it. That means the governing number is different at the service, at a downstream panel and at a piece of equipment at the end of a long feeder &mdash; and a device that is inadequate at the service may be entirely adequate thirty metres downstream.</p>
+  <p>It also means the common shortcuts are unsafe in both directions. Using the utility&rsquo;s available fault current everywhere is conservative but can force expensive equipment where it is not needed. Assuming a comfortable figure without a study is the dangerous direction, and transformer replacements are a frequent cause of a previously adequate installation no longer being so: a larger transformer with lower impedance raises available fault current throughout everything downstream of it.</p>` },
+    { id: 'common-mistakes', h2: 'Common mistakes', html: `
+  <p>Treating a breaker&rsquo;s interrupting rating as the assembly&rsquo;s short-circuit current rating. Reading 110.9 and 110.10 as one requirement, or assuming satisfying either one satisfies both. Determining an industrial control panel&rsquo;s SCCR from its largest device rather than its smallest. Trying to raise a panel SCCR by upsizing the main breaker. Substituting an equivalent upstream device into a series-rated combination. Using the utility&rsquo;s fault current figure at every point in the system. Leaving the fault-current study unrevised after a transformer is replaced with a larger or lower-impedance unit.</p>` },
+  ],
+  faqs: [
+    { q: 'What is the difference between interrupting rating and SCCR?', a: 'An interrupting rating is a protective device’s ability to break fault current and stop it, and belongs to the device alone. A short-circuit current rating is an assembly’s ability to be subjected to that current without becoming a hazard while the device clears, and belongs to the whole assembly. Both have to exceed the available fault current at that point, and meeting one says nothing about the other.' },
+    { q: 'What do NEC 110.9 and 110.10 each require?', a: 'NEC 110.9 requires that equipment intended to interrupt current at fault levels have an interrupting rating sufficient for the current available at its line terminals. NEC 110.10 requires that circuit impedance, equipment short-circuit current ratings and other characteristics be coordinated so the protective device can clear a fault without extensive damage. The first is a clearing requirement on the device; the second is a withstand requirement on everything in the path.' },
+    { q: 'Does a 65 kA breaker give a panel a 65 kA SCCR?', a: 'No. An assembly’s SCCR is set by the lowest-rated component in the fault current path. A panel with a 65 kA breaker, a 10 kA contactor and a 5 kA control relay has a 5 kA assembly rating. Raising it usually means replacing the component that set the number or adding a current-limiting device ahead of it, not fitting a larger breaker.' },
+    { q: 'Can a series rating be used to satisfy SCCR?', a: 'No. A series rating is a tested, listed combination that lets a downstream device be applied above its own standalone interrupting rating, which addresses NEC 110.9 for that device. It does not establish an assembly SCCR and does not relieve the 110.10 withstand requirement for the rest of the path. It is also valid only as the exact pairing marked on the equipment, so substituting an equivalent upstream device voids it.' },
+  ],
+  nextIntro: 'The study that produces the fault-current figure both ratings are checked against is covered in <a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">short-circuit studies and breaker coordination</a>, and the tested combinations themselves in <a class="inline" href="guide-fully-rated-vs-series-rated.html">fully rated vs. series rated</a>.',
+  calcs: [
+    ['calculators/fault-current.html', 'Fault Current Calculator', 'The available fault current both ratings are compared against.'],
+    ['calculators/transformer-sizing.html', 'Transformer Sizing Calculator', 'The upstream impedance that sets it.'],
+  ],
+  guides: [
+    ['guide-fully-rated-vs-series-rated.html', 'Fully Rated vs. Series Rated Breakers'],
+    ['guide-short-circuit-studies-breaker-coordination.html', 'Short-Circuit Studies &amp; Breaker Coordination'],
+    ['guide-transformer-impedance.html', 'Transformer Impedance Explained'],
+    ['guide-spd-types-1-2-3.html', 'SPD Types 1, 2 and 3 Explained'],
+  ],
+  covers: 'The difference between a device interrupting rating and an assembly short-circuit current rating, what NEC 110.9 and 110.10 each require, why the lowest-rated component sets an assembly SCCR and how that changes the fix, what a series rating does and does not establish, and why both ratings depend on available fault current at the specific point of installation.',
+  basedOn: ['NEC 110.9 for interrupting rating and NEC 110.10 for equipment short-circuit current ratings and coordination', 'UL 508A for industrial control panel SCCR determination and marking', 'Voltfield’s own guides on series rating, transformer impedance and short-circuit studies'],
+  notThis: 'A substitute for a short-circuit study or for the equipment listings. Determining an assembly SCCR follows a defined procedure against the component ratings and any current-limiting protection ahead of them, and both requirements depend on an available fault current figure for the specific point of installation. Confirm section numbering against the NEC edition your jurisdiction has adopted.',
+},
+{
+  slug: 'guide-nec-240-87-arc-energy-reduction',
+  eyebrow: 'Protection',
+  crumb: 'NEC 240.87',
+  h1: 'NEC 240.87: Arc Energy Reduction',
+  title: 'NEC 240.87 Arc Energy Reduction Explained',
+  headline: 'NEC 240.87: Reducing Clearing Time Above 1200 Amps, and the Method That Does Not Count',
+  dek: 'Incident energy is roughly proportional to how long the arc burns, so the code requires a deliberate way of clearing faster on large devices. One obvious-looking approach is specifically not an accepted method.',
+  description: 'NEC 240.87 arc energy reduction explained: the 1200 A threshold, the accepted methods including zone-selective interlocking and energy-reducing maintenance switching, why adjusting the instantaneous setting does not qualify, and the testing and documentation requirements.',
+  ogDesc: 'The 1200 A threshold, the accepted methods, and why temporarily lowering a trip setting does not qualify.',
+  keywords: 'NEC 240.87, arc energy reduction, energy reducing maintenance switch, zone selective interlocking, arc flash mitigation, 240.67 fuses, incident energy clearing time',
+  photo: { src: 'images/parts/dc-breaker-trip-units-accessories', alt: 'Circuit breaker trip units', caption: 'Breaker trip units (illustration)' },
+  takeaways: [
+    'Incident energy scales with arcing time, so halving the clearing time roughly halves the energy a worker would be exposed to.',
+    'The requirement applies where the overcurrent device is rated or can be adjusted to 1200 A or more.',
+    'Temporarily lowering the instantaneous trip setting for maintenance is not an accepted method. Energy-reducing maintenance switching with a local status indicator is.',
+    'The system has to be performance tested when first installed, and the method and documentation location have to be recorded.',
+  ],
+  sections: [
+    { id: 'why-clearing-time-is-the-lever', h2: 'Why clearing time is the lever', html: `
+  <p>Incident energy is what an arc flash study produces and what personal protective equipment is selected against, and it depends on three things: the arcing current, the working distance, and how long the arc burns.</p>
+  <p>Of those, the arcing current is set by the system and the working distance is set by the task. The duration is the one a designer can change, and it responds proportionally &mdash; cut the clearing time in half and the incident energy falls by roughly half. Nothing else available at the design stage moves the number that directly.</p>
+  <p>That is the whole basis of 240.87. On large devices, the settings that give good selective coordination in normal operation tend to be exactly the settings that let an arcing fault burn for a long time. The section requires a deliberate way out of that trade-off rather than leaving it to the coordination study.</p>` },
+    { id: 'where-the-requirement-applies', h2: 'Where the requirement applies', html: `
+  <p>The trigger is the device rating, and the wording is broader than it first appears: it applies where the highest continuous current trip setting for which the installed overcurrent device is rated, <b>or can be adjusted</b>, is 1200 A or more.</p>
+  <p>The adjustable clause catches installations people assume are outside the scope. A breaker in a 2000 A frame set to 1000 A is still a device that can be adjusted to 1200 A or more, so it is in scope at the setting it could carry rather than the setting it currently has. The question is what the device is capable of, not what someone dialled in.</p>
+  <p>Fuses have their own parallel requirement at 240.67, on the same 1200 A basis, which is a more recent addition and still gets missed on fused services. A system is not outside the arc energy reduction requirements because it uses fuses rather than breakers.</p>` },
+    { id: 'the-accepted-methods', h2: 'The accepted methods', html: `
+  <p>The section lists specific means, and any one of them satisfies it. They are not equivalent in cost or in what they protect.</p>
+  <p><b>Zone-selective interlocking</b> lets a downstream device tell an upstream one that it has seen the fault, so the upstream device holds in only while that communication is present and otherwise trips without delay. It preserves coordination and reduces clearing time, which is why it is the common choice on new switchgear.</p>
+  <p><b>Differential relaying</b> compares current in and out of a protected zone and trips on the difference, which is inherently fast and does not depend on coordination margins at all.</p>
+  <p><b>Energy-reducing maintenance switching with a local status indicator</b> provides a separate, lower-set protection scheme that a worker enables before working on the equipment and that visibly indicates it is active. This is the retrofit answer and by far the most common on existing installations.</p>
+  <p><b>An energy-reducing active arc flash mitigation system</b> detects the arc and extinguishes or diverts it, typically in a few milliseconds, which reduces energy without altering the protection settings.</p>
+  <p>Also listed: an <b>instantaneous trip</b> setting below the available arcing current, an <b>instantaneous override</b>, and an approved equivalent means. The first two are the cheapest where the coordination study allows them, and that is the condition that usually rules them out.</p>` },
+    { id: 'the-method-that-does-not-count', h2: 'The method that does not count', html: `
+  <p>There is an obvious-looking approach that is specifically not acceptable, and it is worth stating plainly because it is what people reach for.</p>
+  <p>Temporarily turning down the instantaneous trip setting on a breaker before maintenance, and turning it back up afterwards, does not satisfy the requirement. It looks functionally identical to energy-reducing maintenance switching and it is not. What it lacks is the separate, deliberate switching function and the <b>local status indicator</b> &mdash; a visible confirmation at the equipment that the reduced-energy mode is actually engaged.</p>
+  <p>The reasoning is about failure modes rather than physics. A setting someone adjusted depends on that person having adjusted it correctly, on nobody having changed it since, and on it being restored afterwards. None of that is verifiable at the equipment by the next worker. A maintenance switch with an indicator is, and the whole point of the provision is that the person about to open the enclosure can confirm the protection they are relying on is live.</p>` },
+    { id: 'testing-and-documentation', h2: 'Testing and documentation', html: `
+  <p>Two requirements attach to whichever method is chosen, and both are frequently the gap found at commissioning rather than in design.</p>
+  <p>The arc energy reduction system has to be <b>performance tested when first installed</b>, by a qualified person, to demonstrate it actually works. A scheme that exists on the drawings and in the relay settings file but has never been proven to operate does not meet the section.</p>
+  <p>The <b>method and the location of its documentation</b> have to be recorded and available. In practice this means field marking at the equipment identifying what method is in use and where the supporting documentation lives, so that the next person working on it knows what protection exists and how to engage it. An arc energy reduction scheme nobody knows about protects nobody.</p>` },
+    { id: 'common-mistakes', h2: 'Common mistakes', html: `
+  <p>Reading the 1200 A threshold against the current setting rather than the rating or the adjustable range, and concluding a large frame set low is out of scope. Using a temporary change to the instantaneous setting in place of energy-reducing maintenance switching. Omitting the local status indicator, which is part of the method rather than an accessory to it. Assuming a fused service is outside the arc energy reduction requirements, when 240.67 applies on the same basis. Specifying an instantaneous setting below the arcing current without checking that the coordination study tolerates it. Treating the scheme as complete at design, with no performance test and no field marking. Confusing arc energy reduction, which is a design measure, with the PPE requirements in NFPA 70E, which are separate and still apply.</p>` },
+  ],
+  faqs: [
+    { q: 'When does NEC 240.87 apply?', a: 'Where the highest continuous current trip setting for which the installed overcurrent device is rated, or can be adjusted, is 1200 A or more. The adjustable clause matters: a breaker in a large frame set to 1000 A is still capable of 1200 A or more and is therefore in scope. Fuses have a parallel requirement at 240.67 on the same 1200 A basis.' },
+    { q: 'What methods satisfy the arc energy reduction requirement?', a: 'Zone-selective interlocking, differential relaying, energy-reducing maintenance switching with a local status indicator, an energy-reducing active arc flash mitigation system, an instantaneous trip set below the available arcing current, an instantaneous override, or an approved equivalent means. Any one is sufficient, but they differ widely in cost and in whether an existing coordination study will tolerate them.' },
+    { q: 'Can I just lower the instantaneous trip setting before maintenance?', a: 'No. Temporarily adjusting the setting is not an accepted method. The accepted equivalent is energy-reducing maintenance switching with a local status indicator, and the indicator is the point: a worker about to open the enclosure can confirm the reduced-energy mode is actually engaged, which they cannot do with a setting someone adjusted earlier and may or may not have restored.' },
+    { q: 'Does an arc energy reduction system have to be tested?', a: 'Yes. It has to be performance tested when first installed, by a qualified person, to demonstrate it operates as intended. The method in use and the location of its documentation also have to be recorded and available at the equipment, so the next person working on it knows what protection exists and how to engage it.' },
+  ],
+  nextIntro: 'The incident energy this reduces is covered in <a class="inline" href="guide-arc-flash-boundary-basics.html">arc-flash boundary basics</a>, and the PPE selected against it in <a class="inline" href="guide-arc-flash-ppe-categories.html">arc-flash PPE categories</a>.',
+  calcs: [
+    ['calculators/arc-flash.html', 'Arc Flash Calculator', 'Incident energy, and how it moves with clearing time.'],
+    ['calculators/fault-current.html', 'Fault Current Calculator', 'The available fault current behind the arcing current.'],
+  ],
+  guides: [
+    ['guide-arc-flash-boundary-basics.html', 'Arc-Flash Boundary Basics'],
+    ['guide-arc-flash-ppe-categories.html', 'Arc-Flash PPE Categories Explained'],
+    ['guide-short-circuit-studies-breaker-coordination.html', 'Short-Circuit Studies &amp; Breaker Coordination'],
+    ['guide-interrupting-rating-vs-sccr.html', 'Interrupting Rating vs. SCCR'],
+  ],
+  covers: 'Why clearing time is the variable that moves incident energy, the 1200 A rating-or-adjustable threshold and the parallel fuse requirement at 240.67, each accepted method and what it costs, why a temporary instantaneous setting change is not accepted while energy-reducing maintenance switching is, and the performance testing and documentation the section requires.',
+  basedOn: ['NEC 240.87 for arc energy reduction on circuit breakers and 240.67 for fuses', 'NFPA 70E for the PPE and work practice requirements that remain separate from this design measure', 'Published engineering guidance and manufacturer technical material on the listed methods'],
+  notThis: 'A substitute for the code text, an arc flash study or a protection design. Which method a given installation can use depends on its coordination study and its existing equipment, incident energy has to be calculated for the specific system, and the list of accepted methods has changed between editions, so confirm against the edition your jurisdiction has adopted.',
+},
+{
+  slug: 'guide-ev-load-management-625-42',
+  eyebrow: 'Load Calculations',
+  crumb: 'EV Load Management',
+  h1: 'EV Load Management: NEC 625.42 and ALMS',
+  title: 'EV Load Management Explained (NEC 625.42)',
+  headline: 'EV Load Management: Why Four Chargers Need Not Add Up to Four Chargers',
+  dek: 'EV charging enters a load calculation at full value with no demand factor, which is what makes the arithmetic so tight. An automatic load management system changes what the service has to be sized for, and the word doing the work is enforceable.',
+  description: 'NEC 625.42 load management explained: why EV charging gets no demand factor, how an automatic load management system changes the calculated load, what makes a system enforceable, and when load management beats a service upgrade.',
+  ogDesc: 'Why EV charging gets no demand factor, and how an automatic load management system changes the calculation.',
+  keywords: 'NEC 625.42, EV load management, ALMS, automatic load management system, EV charger service capacity, EVEMS, 220.57, multiple EV chargers one circuit',
+  photo: { src: 'images/parts/dc-power-meters-bms', alt: 'Panel-mounted power meters', caption: 'Load monitoring (illustration)' },
+  takeaways: [
+    'EV supply equipment enters a service calculation at the larger of 7,200 VA or its nameplate, at 100 percent, with no demand factor.',
+    'Article 625 treats EV charging as a continuous load, which is why no demand factor is available.',
+    'With an automatic load management system, the calculated load is the maximum the system permits rather than the sum of the nameplates.',
+    'The system has to actually constrain the load, not merely schedule or recommend. That is the difference between a compliant design and a story.',
+  ],
+  sections: [
+    { id: 'why-the-arithmetic-is-tight', h2: 'Why the arithmetic is tight', html: `
+  <p>Most appliance loads get some relief in a service calculation. Several ranges, several dryers, a row of fixed appliances &mdash; Article 220 applies demand factors on the reasonable assumption that they will not all run flat out at once.</p>
+  <p>EV charging gets none of that, and the reason is in Article 625: EV charging is treated as a <b>continuous load</b>. A car plugged in overnight draws its full current for hours, which is exactly what a demand factor assumes will not happen. So the equipment enters the calculation at the larger of 7,200 VA or its nameplate rating, at 100 percent.</p>
+  <p>Note that 7,200 VA is a floor rather than a value. A 40 A unit at 240 V is 9,600 VA and enters at 9,600. And the figure is per unit, so two chargers present as two full loads with nothing deducted for the near-certainty that only one car is usually charging.</p>
+  <p>Put a second charger on a dwelling that already has a heat pump and a range and the service calculation frequently fails. That is not a conservative result produced by a cautious engineer; it is what the rules require when applied straightforwardly.</p>` },
+    { id: 'what-load-management-changes', h2: 'What load management changes', html: `
+  <p>NEC 625.42 provides the route out, and it is worth being precise about what it does.</p>
+  <p>Where an automatic load management system is installed, the maximum equipment load on a service or feeder is permitted to be the <b>maximum load the management system allows</b>, rather than the sum of the connected equipment ratings. The calculation is performed against the enforced limit.</p>
+  <p>So four 48 A chargers behind a system configured and listed to hold the group to 48 A total present to the service as 48 A, not 192 A. The hardware is unchanged; what changed is that there is now something guaranteeing the aggregate cannot exceed the figure the service was sized for.</p>
+  <p>This is the same logic as power control systems for interconnection under NEC 705.13, and recognising that the two are the same idea makes both easier to reason about: in each case a listed control system substitutes an enforced limit for a nameplate sum.</p>` },
+    { id: 'what-makes-a-system-enforceable', h2: 'What makes a system enforceable', html: `
+  <p>The provision rests entirely on the word <i>automatic</i>, and this is where designs fail review.</p>
+  <p>A system qualifies by actually constraining the load. It has to monitor, and it has to be able to reduce or interrupt charging current to hold the total at or below the configured limit, without relying on anyone doing anything. The limit has to be a setting the system enforces, not a target it aims at.</p>
+  <p>Things that are not load management, despite being sold alongside it: a scheduling feature that charges overnight, because nothing stops two cars charging overnight simultaneously. An app that notifies the owner. A written operating procedure. A timer. Each of these reduces the <i>likelihood</i> of coincident load and none of them reduces the <i>maximum</i>, and the calculation is about the maximum.</p>
+  <p>The practical consequences are that the system has to be listed for the purpose, the configured limit has to be documented and field marked so an inspector can see what the service was sized to, and the limit has to be set before the installation is signed off rather than left at a default.</p>` },
+    { id: 'when-it-beats-a-service-upgrade', h2: 'When it beats a service upgrade', html: `
+  <p>The comparison is usually straightforward once the numbers are on the table.</p>
+  <p>A service upgrade means a new service, frequently a new meter base and panel, utility coordination, and on a constrained distribution network a wait that can run to many months. Load management means equipment and configuration, and no utility involvement at all. Where the existing service has some headroom and the shortfall is created by the EV load alone, load management is almost always faster and cheaper.</p>
+  <p>It is also the answer that scales for multi-unit buildings, where the alternative is sizing a service for every parking space at full value. A garage with thirty spaces cannot realistically be served by thirty full charger loads, and load management is what makes the project exist at all rather than merely cheaper.</p>
+  <p>Where it does not help: if the service is already at its limit from the non-EV load, managing the EV load down to nothing still leaves the service inadequate. Load management solves a coincidence problem, not a capacity problem, and establishing which one you have is what NEC 220.87 is for.</p>` },
+    { id: 'common-mistakes', h2: 'Common mistakes', html: `
+  <p>Applying a demand factor to EV charging, which Article 625 does not permit because the load is continuous. Reading 7,200 VA as the value rather than the floor, and understating a 48 A unit. Treating scheduling, timers or an app notification as load management, when none of them limits the maximum. Leaving the system at a default limit instead of configuring and documenting the figure the service was sized to. Omitting the field marking, so nobody can later tell what the service capacity assumed. Expecting load management to rescue a service that is already inadequate from its existing load. Sizing the branch circuit from the managed limit rather than the individual equipment rating, which is a separate calculation.</p>` },
+  ],
+  faqs: [
+    { q: 'Does an EV charger get a demand factor in a load calculation?', a: 'No. Article 625 treats EV charging as a continuous load, so the equipment enters a service or feeder calculation at the larger of 7,200 VA or its nameplate rating, at 100 percent. The 7,200 VA figure is a floor, not a value: a 40 A unit at 240 V is 9,600 VA and enters at 9,600. Two units present as two full loads.' },
+    { q: 'What does NEC 625.42 allow?', a: 'Where an automatic load management system is installed, the maximum equipment load on a service or feeder is permitted to be the maximum load the management system allows, rather than the sum of the connected equipment nameplate ratings. Four 48 A chargers held by a listed system to 48 A total present to the service as 48 A.' },
+    { q: 'Does a scheduling feature count as load management?', a: 'No. Scheduling, timers, app notifications and written procedures all reduce the likelihood of coincident load without reducing the maximum, and the calculation is about the maximum. A qualifying system has to monitor and be able to reduce or interrupt charging current to hold the total at or below its configured limit, automatically, without anyone intervening.' },
+    { q: 'Is load management better than upgrading the service?', a: 'Usually, where the existing service has headroom and the shortfall comes from the EV load alone: it avoids utility coordination and the wait that goes with it. It is also what makes multi-unit garages feasible, since sizing a service for every space at full value rarely is. It does not help if the service is already inadequate from its existing load, which is a capacity problem rather than a coincidence problem.' },
+  ],
+  nextIntro: 'Establishing what the existing service is actually carrying comes first, and that is <a class="inline" href="guide-nec-220-87-existing-load.html">NEC 220.87</a>. The continuous-load treatment behind the no-demand-factor rule is in <a class="inline" href="guide-continuous-load-80-percent-rule.html">the 80% rule</a>.',
+  calcs: [
+    ['calculators/wire-size.html', 'Wire Size Calculator', 'The branch circuit for an individual charger.'],
+    ['calculators/kw-to-amps.html', 'kW to Amps Calculator', 'Converting charger power to current.'],
+  ],
+  guides: [
+    ['guide-nec-220-87-existing-load.html', 'NEC 220.87 Existing Load Explained'],
+    ['guide-continuous-load-80-percent-rule.html', 'The 80% Rule &amp; Continuous Loads'],
+    ['guide-nec-705-supply-side-vs-load-side.html', 'NEC 705 Supply-Side vs. Load-Side'],
+    ['guide-rack-power-density.html', 'Rack Power Density Explained'],
+  ],
+  covers: 'Why EV charging receives no demand factor and enters at the larger of 7,200 VA or nameplate, what NEC 625.42 permits an automatic load management system to change, what makes such a system enforceable rather than advisory, how it compares with a service upgrade, and where it does not help.',
+  basedOn: ['NEC Article 625, with 625.42 for load management and the continuous-load treatment of EV charging', 'NEC 220.57 for the EV supply equipment load value and NEC 220.87 for establishing the existing load', 'NEC 705.13 as the directly comparable power control system provision'],
+  notThis: 'A load calculation or a substitute for the code text. Whether a particular product qualifies depends on its listing, the configured limit has to be documented for the specific installation, and Article 220 is reorganized in the 2026 NEC, so confirm section numbering against the edition your jurisdiction has adopted. Local amendments and utility requirements can be more restrictive.',
+},
+{
+  slug: 'guide-vfd-vs-soft-starter',
+  eyebrow: 'Motors',
+  crumb: 'VFD vs. Soft Starter',
+  h1: 'VFD vs. Soft Starter: What Each One Actually Solves',
+  title: 'VFD vs. Soft Starter Compared',
+  headline: 'VFD vs. Soft Starter: One Limits the Start, the Other Changes the Job',
+  dek: 'Both reduce starting current, which is why they get compared. Only one of them changes anything after the motor is up to speed, and that difference decides the choice far more often than the starting current does.',
+  description: 'VFD against soft starter: how each limits inrush, why only a VFD saves energy at partial load, torque at low speed, harmonics and cable length limits, bypass contactors, and which one fits which load.',
+  ogDesc: 'How each limits inrush, why only one saves energy at partial load, and the trade-offs that follow.',
+  keywords: 'VFD vs soft starter, soft starter vs variable frequency drive, motor starting current, reduced voltage starter, VFD harmonics, affinity laws, bypass contactor',
+  photo: { src: 'images/parts/mro-motor-controls-drives', alt: 'Motor control and drive equipment', caption: 'Motor controls and drives (illustration)' },
+  takeaways: [
+    'A soft starter manages the start and then gets out of the way. A VFD controls the motor continuously.',
+    'Only a VFD can reduce speed, and on a pump or fan that is where almost all the energy saving is, because power follows roughly the cube of speed.',
+    'A VFD can deliver full torque at low speed. A soft starter reduces torque as it reduces voltage, which is what makes it unsuitable for hard-starting loads.',
+    'A VFD brings harmonics, cable length limits and bearing-current risk that a soft starter does not.',
+  ],
+  sections: [
+    { id: 'what-each-one-does', h2: 'What each one does', html: `
+  <p>A motor started directly across the line draws a large inrush &mdash; commonly six to eight times full-load current &mdash; and develops a sharp torque step. Both devices exist to soften that, and they do it by different means with very different consequences.</p>
+  <p>A <b>soft starter</b> is a set of thyristors in series with the motor that ramps the applied voltage up over a few seconds. Once the motor reaches speed, the soft starter has done its job; most then close a bypass contactor and take the semiconductors out of the circuit entirely, so the motor runs directly across the line as if the starter were not there.</p>
+  <p>A <b>variable frequency drive</b> rectifies the incoming AC to DC and synthesises a new AC waveform at whatever frequency and voltage it chooses. It is in the circuit permanently, and because it controls frequency it controls speed &mdash; during the start and for as long as the motor runs.</p>
+  <p>That is the distinction that matters. The starting behaviour is a side effect of what a VFD is; it is the entire purpose of a soft starter.</p>` },
+    { id: 'the-energy-argument', h2: 'The energy argument', html: `
+  <p>If the load is a centrifugal pump or fan, this is usually the whole decision, and it has nothing to do with starting.</p>
+  <p>Flow in a centrifugal machine is roughly proportional to speed, while the power required follows roughly the <b>cube</b> of speed. Run a fan at 80 percent speed and it absorbs around half the power. Run it at 50 percent and it absorbs around an eighth. Those are the affinity laws, and they are why variable speed is transformative on this class of load.</p>
+  <p>Now compare the alternative. A soft-started fan runs at full speed whenever it runs, and flow is reduced by throttling a damper or a valve &mdash; which is to say by deliberately wasting the excess. The motor keeps drawing close to full power while the system destroys the surplus across a restriction.</p>
+  <p>So on a throttled pump or fan, a VFD is not a more expensive way of achieving the same outcome; it is a different outcome. On a load that runs at one speed whenever it runs &mdash; a conveyor, a compressor with its own unloading arrangement, a crusher &mdash; this argument disappears entirely, and with it most of the case for a VFD.</p>` },
+    { id: 'torque-and-hard-starting-loads', h2: 'Torque and hard-starting loads', html: `
+  <p>The second real difference is what torque is available while the motor comes up to speed.</p>
+  <p>A soft starter reduces current by reducing voltage, and motor torque falls roughly with the square of voltage. Reduce the voltage to 50 percent to halve the current and the available torque falls to about a quarter. If the load needs more than that to break away, the motor stalls, the ramp times out, and nothing starts. That is the whole reason a soft starter is unsuitable for a loaded conveyor or a machine with high static friction.</p>
+  <p>A VFD does not face that trade-off, because it reduces frequency alongside voltage and keeps the magnetic flux where it should be. It can develop full rated torque from very low speed while drawing current close to full-load rather than a multiple of it. For a high-inertia or high-breakaway load, that capability is the reason to choose it even where variable speed is not wanted in operation.</p>` },
+    { id: 'what-a-vfd-brings-with-it', h2: 'What a VFD brings with it', html: `
+  <p>A VFD is the more capable device and it is not free of consequences. These are the ones that cause problems after commissioning.</p>
+  <p><b>Harmonics.</b> The rectifier front end draws non-sinusoidal current, injecting harmonic currents into the supply. On a system with many drives relative to its source capacity this shows up as voltage distortion, transformer heating and neutral current, and it is assessed against IEEE 519 limits. Mitigation &mdash; line reactors, multi-pulse arrangements, active front ends, filters &mdash; is a cost that belongs in the comparison. A soft starter in bypass draws essentially sinusoidal current and contributes none of this in normal running.</p>
+  <p><b>Cable length and reflected waves.</b> The fast switching edges a drive produces travel down the motor cable and reflect from the motor terminals, which can roughly double the voltage seen by the winding insulation. There is a practical cable length limit for any drive and motor combination, beyond which output filtering or an inverter-duty motor is required. A soft starter has no equivalent limit.</p>
+  <p><b>Bearing currents.</b> Common-mode voltage from the drive can drive current through the motor bearings, pitting the races. Insulated bearings, shaft grounding rings or a filter address it, and on larger machines this is a specification item rather than an afterthought.</p>
+  <p><b>Motor suitability.</b> Continuous low-speed running reduces the motor&rsquo;s own cooling if it is shaft-mounted-fan cooled, and the voltage stress asks more of the insulation. Inverter-duty construction exists for this reason.</p>` },
+    { id: 'choosing-between-them', h2: 'Choosing between them', html: `
+  <p>The decision resolves quickly with three questions, in order.</p>
+  <p><b>Does the process benefit from varying speed?</b> On a throttled pump or fan, yes, decisively, and the energy case usually settles it. A VFD.</p>
+  <p><b>Does the load need substantial torque to break away?</b> If so, a soft starter will struggle regardless of ramp settings, and a VFD is the answer even for a fixed-speed application.</p>
+  <p><b>Neither?</b> Then the requirement is genuinely only to limit inrush &mdash; a fixed-speed load that is easy to start, often driven by a utility demand charge or a limit on a generator or soft supply. A soft starter is smaller, cheaper, simpler, generates no harmonics in bypass, and imposes nothing on the motor or the cable. It is the right answer, and specifying a VFD here buys complexity for no return.</p>` },
+    { id: 'common-mistakes', h2: 'Common mistakes', html: `
+  <p>Comparing the two on starting current alone, which is the smallest of the real differences. Expecting a soft starter to save energy in running, when in bypass it is electrically absent. Specifying a soft starter for a high-breakaway load and then adjusting ramp settings to fix a torque shortfall that settings cannot fix. Reducing fan or pump flow by throttling while a VFD is installed, which gives up almost all of the benefit. Omitting harmonic assessment where many drives sit on one transformer. Exceeding the drive-to-motor cable length limit without output filtering. Using a standard motor for continuous low-speed operation or long-cable drive duty. Assuming a VFD is the better device in general rather than the better device for a particular job.</p>` },
+  ],
+  faqs: [
+    { q: 'What is the difference between a VFD and a soft starter?', a: 'A soft starter ramps voltage to limit inrush during starting and then typically closes a bypass contactor, leaving the motor running directly across the line. A VFD synthesises its own AC waveform and controls frequency, so it controls speed continuously while the motor runs. The starting behaviour is incidental to what a VFD is and is the entire purpose of a soft starter.' },
+    { q: 'Does a soft starter save energy?', a: 'Not in running. Once the motor is up to speed a soft starter is normally bypassed and electrically absent, so the motor consumes what it would have consumed anyway. Energy saving on pumps and fans comes from reducing speed, which only a VFD can do, and it is substantial because the power required follows roughly the cube of speed.' },
+    { q: 'Can a soft starter handle a hard-starting load?', a: 'Often not. A soft starter reduces current by reducing voltage, and torque falls with roughly the square of voltage, so halving the current leaves about a quarter of the torque. If the load needs more than that to break away the motor stalls and the ramp times out. A VFD reduces frequency with voltage and can develop full torque at low speed, which is why it suits high-breakaway and high-inertia loads even at fixed speed.' },
+    { q: 'What problems does a VFD introduce?', a: 'Harmonic currents from its rectifier front end, assessed against IEEE 519 and often needing reactors or filters; a cable length limit, because fast switching edges reflect from the motor terminals and can nearly double the winding voltage; bearing currents from common-mode voltage, addressed with insulated bearings or shaft grounding; and greater demands on the motor itself, which is why inverter-duty construction exists. A soft starter in bypass introduces none of these.' },
+  ],
+  nextIntro: 'The starting current itself is covered in <a class="inline" href="guide-generator-sizing.html">generator sizing</a> where it usually matters most, and the harmonic consequences in <a class="inline" href="guide-harmonics-ieee-519.html">harmonics and IEEE 519</a>.',
+  calcs: [
+    ['calculators/motor-start.html', 'Motor Starting Calculator', 'Starting current and voltage dip for each method.'],
+    ['calculators/inrush.html', 'Inrush Current Calculator', 'The inrush both devices exist to limit.'],
+    ['calculators/hp-to-kw.html', 'HP to kW Calculator', 'Motor rating conversion.'],
+  ],
+  guides: [
+    ['guide-harmonics-ieee-519.html', 'Harmonics &amp; IEEE 519 Explained'],
+    ['guide-nec-430-250-motor-fla.html', 'NEC 430.250 Motor Full-Load Current'],
+    ['guide-generator-sizing.html', 'How to Size a Generator'],
+    ['guide-kw-vs-kva.html', 'kW vs. kVA Explained'],
+  ],
+  covers: 'How a soft starter and a VFD each limit starting current and what happens after the start, the affinity-law energy case that decides pump and fan applications, why reduced-voltage starting loses torque as the square of voltage, the harmonic, cable-length and bearing-current consequences of a drive, and a decision order for choosing between them.',
+  basedOn: ['Induction motor torque-voltage and affinity-law relationships', 'IEEE 519 for the harmonic limits a drive installation is assessed against', 'NEC Article 430 for motor circuit requirements and Part X for adjustable-speed drive systems'],
+  notThis: 'A specification or a selection. Starting torque depends on the motor design and the driven load, harmonic distortion depends on the ratio of drive load to source capacity, and cable length limits are specific to a drive and motor combination. Manufacturer data for the actual equipment governs in each case.',
+},
+{
+  slug: 'guide-ats-vs-sts-vs-static-bypass',
+  eyebrow: 'Data Centers',
+  crumb: 'ATS vs. STS vs. Static Bypass',
+  h1: 'ATS, STS and Static Bypass: Three Different Transfers',
+  title: 'ATS vs. STS vs. Static Bypass',
+  headline: 'ATS, STS and Static Bypass: What Transfers, How Fast, and Which One Is Inside the UPS',
+  dek: 'Three devices that all move a load from one source to another, separated by two things people conflate: how fast the transfer happens, and whether the device is a standalone piece of equipment or a part of the UPS it lives in.',
+  description: 'Automatic transfer switch against static transfer switch against UPS static bypass: transfer times, what each one switches between, why only one of them is internal to the UPS, and where each belongs in a facility topology.',
+  ogDesc: 'Transfer times, what each one switches between, and which of the three is part of the UPS.',
+  keywords: 'ATS vs STS, static transfer switch, UPS static bypass, automatic transfer switch, closed transition transfer, dual corded load, transfer time milliseconds',
+  photo: { src: 'images/parts/dc-static-transfer-switches', alt: 'Static transfer switches', caption: 'Static transfer switches (illustration)' },
+  takeaways: [
+    'An ATS is mechanical and transfers in seconds. It exists to bring a generator onto the load after utility failure.',
+    'An STS is solid-state and transfers in a fraction of a cycle. It exists to feed a single-corded load from two independent UPS sources.',
+    'A static bypass is not a standalone device. It is the path inside a UPS that carries the load when the inverter cannot.',
+    'Transfer time only means something relative to what the load tolerates, which is why an ATS is fine behind a UPS and not in front of a bare server.',
+  ],
+  sections: [
+    { id: 'three-devices-three-jobs', h2: 'Three devices, three jobs', html: `
+  <p>All three move a load from one source to another, which is why the terms get used loosely. They are not interchangeable and they do not sit in the same place.</p>
+  <p>An <b>automatic transfer switch</b> switches between two power sources, classically utility and generator. It is a mechanical device: contacts move, and the transfer takes a noticeable fraction of a second to several seconds, dominated by the time the generator needs to start and reach speed.</p>
+  <p>A <b>static transfer switch</b> switches between two AC sources using thyristors rather than moving contacts, which lets it transfer within a fraction of a cycle &mdash; a handful of milliseconds. It is used to give a single-corded load the benefit of two independent upstream paths.</p>
+  <p>A <b>static bypass</b> is the one that is not a standalone product at all. It is a path built into a UPS, from the UPS input to the UPS output, bypassing the inverter. It transfers the load onto raw input power when the inverter cannot support it, and it is part of the UPS rather than a device you place in a one-line.</p>` },
+    { id: 'what-transfer-time-actually-means', h2: 'What transfer time actually means', html: `
+  <p>Quoting transfer times without reference to the load is how these devices get misapplied.</p>
+  <p>An IT power supply holds through a short interruption on its own internal energy storage &mdash; conventionally expected to ride through on the order of half a cycle. A transfer completed faster than that is invisible to the load. A transfer taking seconds is a power outage as far as the load is concerned, regardless of how reliably it happened.</p>
+  <p>So the mechanical speed of an ATS is not a deficiency; it is appropriate to its job. Behind a UPS, where the UPS carries the load on its batteries during the generator start, seconds are entirely acceptable, and that arrangement is the normal one. In front of an unprotected load, the same device produces a dropout.</p>
+  <p>An STS is fast enough to be transparent, which is exactly why it is used where there is no UPS between it and a sensitive load &mdash; or where the two sources it selects between are themselves UPS outputs.</p>` },
+    { id: 'open-and-closed-transition', h2: 'Open and closed transition', html: `
+  <p>An ATS can be specified to break before it makes, or to make before it breaks, and the choice has consequences beyond the switch.</p>
+  <p><b>Open transition</b> disconnects one source before connecting the other. There is a brief dead interval, the two sources are never paralleled, and the switch is simpler. This is the default and it is correct for most installations.</p>
+  <p><b>Closed transition</b> briefly parallels the two sources so the load sees no interruption at all. That requires the sources to be synchronised in voltage, frequency and phase angle before the transfer, which means synchronising controls and a generator capable of it. It also requires the utility&rsquo;s agreement, because for a moment the generator is connected in parallel with the grid, and that brings the whole interconnection question into a transfer scheme.</p>
+  <p>Where closed transition earns its cost is returning to utility after a test or an outage, which is a planned event that need not disturb the load at all. The forward transfer on an actual utility failure is open by necessity &mdash; there is nothing to synchronise to.</p>` },
+    { id: 'the-sts-and-single-corded-loads', h2: 'The STS and single-corded loads', html: `
+  <p>An STS exists for one problem: equipment with a single power cord in a facility with two power paths.</p>
+  <p>A dual-corded server simply takes a feed from each path and its own power supplies handle the rest; no transfer device is needed, which is why dual-corded equipment is preferred wherever it is available. But plenty of equipment has one cord &mdash; network gear, storage controllers, older plant, anything with a single supply &mdash; and connecting it to one path makes that path a single point of failure for it.</p>
+  <p>An STS sits between the two paths and presents one output. It normally draws from a preferred source and transfers to the alternate within milliseconds if the preferred one degrades. The load never notices.</p>
+  <p>The caveat worth stating is that the STS then becomes the single point of failure it was installed to eliminate. It is one device with one output, and that is why facilities with many single-corded loads typically distribute them across several STS units rather than consolidating, and why the STS itself is a maintainability consideration rather than a solved problem.</p>` },
+    { id: 'the-static-bypass-and-its-trap', h2: 'The static bypass and its trap', html: `
+  <p>The static bypass carries the load when the UPS inverter cannot: an inverter fault, a severe overload, an over-temperature condition, or a commanded transfer for maintenance. It operates fast enough that the load stays up.</p>
+  <p>The trap is what the load is connected to afterwards. On static bypass, the load is fed from raw UPS input power. It is no longer conditioned, and crucially it is <b>no longer protected by the battery</b>. A facility running on static bypass is a facility with no UPS, and an input disturbance at that moment reaches the load directly.</p>
+  <p>That matters because static bypass is not a rare event. It is the normal state during UPS maintenance, and on a single-module system it is the only way to work on the UPS without dropping the load. Treating that window as protected time is the mistake, and it is why the maintenance procedure for a single-module UPS usually involves arranging an alternative source rather than relying on bypass alone.</p>
+  <p>A static bypass should also not be confused with a <b>maintenance bypass</b>, which is a mechanical arrangement &mdash; typically a wrap-around breaker or switch &mdash; allowing the UPS to be fully isolated and worked on while the load runs on utility. The static bypass is electronic, automatic and internal; the maintenance bypass is manual and allows the unit to be de-energised entirely.</p>` },
+    { id: 'common-mistakes', h2: 'Common mistakes', html: `
+  <p>Using the terms interchangeably on a one-line, so a reviewer cannot tell what was intended. Putting an ATS in front of an unprotected IT load and expecting a transparent transfer. Specifying closed transition without the synchronising controls or the utility agreement it requires. Treating an STS as removing a single point of failure when it introduces itself as one. Running on static bypass and assuming the load is still protected, when the battery is out of the path. Confusing static bypass with maintenance bypass, which is a different arrangement with a different purpose. Quoting transfer times without reference to what the load actually rides through.</p>` },
+  ],
+  faqs: [
+    { q: 'What is the difference between an ATS and an STS?', a: 'An ATS is mechanical and switches between two power sources, classically utility and generator, taking a noticeable fraction of a second to several seconds. An STS is solid-state and transfers within a fraction of a cycle, a handful of milliseconds. The ATS is appropriate where a UPS carries the load during the transfer; the STS is used where the load itself must not see an interruption.' },
+    { q: 'Is a static bypass the same as a static transfer switch?', a: 'No. A static transfer switch is a standalone device selecting between two external sources. A static bypass is a path built into a UPS, from its input to its output around the inverter, that carries the load when the inverter cannot. One appears on a one-line as equipment; the other is a feature of the UPS.' },
+    { q: 'Is the load still protected on static bypass?', a: 'No. On static bypass the load is fed from raw UPS input power, unconditioned and with the battery out of the path, so an input disturbance reaches the load directly. This matters because static bypass is the normal state during UPS maintenance, which is why working on a single-module UPS usually means arranging an alternative source rather than relying on bypass.' },
+    { q: 'What is closed transition transfer?', a: 'An ATS arrangement that briefly parallels both sources so the load sees no interruption, as opposed to open transition which breaks before it makes. It requires the sources to be synchronised in voltage, frequency and phase, so it needs synchronising controls and the utility’s agreement to the momentary parallel. It is most useful returning to utility after a test, since the forward transfer on an actual failure has nothing to synchronise to.' },
+  ],
+  nextIntro: 'The UPS itself and its modes are covered in <a class="inline" href="guide-ups-topologies.html">UPS topologies</a>, and the redundancy arrangement these devices serve in <a class="inline" href="guide-n-plus-1-vs-2n-redundancy.html">N+1 vs. 2N</a>.',
+  calcs: [
+    ['calculators/generator-runtime.html', 'Generator Runtime Calculator', 'Fuel and runtime behind the generator an ATS starts.'],
+    ['calculators/kva-to-kw.html', 'kVA to kW Converter', 'The load figure a generator is sized against.'],
+  ],
+  guides: [
+    ['guide-ups-topologies.html', 'UPS Topologies Compared'],
+    ['guide-n-plus-1-vs-2n-redundancy.html', 'N+1 vs. 2N Redundancy'],
+    ['guide-uptime-institute-tiers.html', 'Uptime Institute Tiers Explained'],
+    ['guide-generator-sizing.html', 'How to Size a Generator'],
+  ],
+  covers: 'What each of the three devices switches between and how fast, why transfer time is only meaningful relative to what the load rides through, open against closed transition on an ATS and what closed transition requires, why an STS exists for single-corded loads and how it becomes a single point of failure, and why a load on static bypass is unprotected.',
+  basedOn: ['Transfer switch and UPS operating principles, with NEC Articles 700, 701 and 702 for emergency, legally required and optional standby systems', 'Voltfield’s own guides on UPS topologies and facility redundancy', 'IT equipment ride-through expectations for the transfer-time comparison'],
+  notThis: 'A specification or a topology design. Actual transfer times, ride-through capability and bypass behaviour are properties of specific equipment and have to come from manufacturer data. Closed transition and any momentary parallel operation with the utility require that utility’s agreement, and emergency system requirements are set by the applicable NEC articles and the AHJ.',
 },
 ];
 

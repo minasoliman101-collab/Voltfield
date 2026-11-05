@@ -301,6 +301,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/guide-ats-vs-sts-vs-static-bypass.html</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/guide-bess-augmentation.html</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
@@ -338,7 +344,13 @@
   </url>
   <url>
     <loc>https://voltfield.org/guide-delta-vs-wye.html</loc>
-    <lastmod>2026-11-03</lastmod>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/guide-ev-load-management-625-42.html</loc>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -421,6 +433,12 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/guide-interrupting-rating-vs-sccr.html</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/guide-inverter-clipping-ratio.html</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
@@ -428,7 +446,7 @@
   </url>
   <url>
     <loc>https://voltfield.org/guide-kw-vs-kva.html</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -457,6 +475,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/guide-nec-240-87-arc-energy-reduction.html</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/guide-nec-250-122-egc-sizing.html</loc>
     <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
@@ -464,6 +488,12 @@
   </url>
   <url>
     <loc>https://voltfield.org/guide-nec-430-250-motor-fla.html</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/guide-nec-705-supply-side-vs-load-side.html</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -494,7 +524,7 @@
   </url>
   <url>
     <loc>https://voltfield.org/guide-rack-power-density.html</loc>
-    <lastmod>2026-11-03</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -549,6 +579,12 @@
   <url>
     <loc>https://voltfield.org/guide-uptime-institute-tiers.html</loc>
     <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/guide-vfd-vs-soft-starter.html</loc>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

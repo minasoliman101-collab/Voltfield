@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>Interrupting Rating vs. SCCR Explained | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-interrupting-rating-vs-sccr.html">
+<meta name="description" content="Interrupting rating against short-circuit current rating: what NEC 110.9 and 110.10 each require, why a breaker rating does not establish an assembly rating, how the weakest component sets an SCCR, and where series ratings fit.">
+<meta name="keywords" content="interrupting rating vs SCCR, NEC 110.9, NEC 110.10, AIC rating, short circuit current rating, available fault current, series rated, equipment SCCR">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Interrupting Rating vs. SCCR">
+<meta property="og:description" content="What 110.9 and 110.10 each require, and why clearing a fault and surviving one are separate ratings.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta name="twitter:title" content="Interrupting Rating vs. SCCR">
+<meta name="twitter:description" content="What 110.9 and 110.10 each require, and why clearing a fault and surviving one are separate ratings.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://voltfield.org/guides.html"},{"@type":"ListItem","position":3,"name":"Interrupting Rating vs. SCCR","item":"https://voltfield.org/guide-interrupting-rating-vs-sccr.html"}]},{"@type":"Article","headline":"Interrupting Rating vs. Short-Circuit Current Rating: Clearing a Fault and Surviving One","description":"Interrupting rating against short-circuit current rating: what NEC 110.9 and 110.10 each require, why a breaker rating does not establish an assembly rating, how the weakest component sets an SCCR, and where series ratings fit.","image":"https://voltfield.org/social/social-generic.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-11-03T00:00:00-05:00","dateModified":"2026-11-03T00:00:00-05:00","url":"https://voltfield.org/guide-interrupting-rating-vs-sccr.html"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between interrupting rating and SCCR?","acceptedAnswer":{"@type":"Answer","text":"An interrupting rating is a protective device’s ability to break fault current and stop it, and belongs to the device alone. A short-circuit current rating is an assembly’s ability to be subjected to that current without becoming a hazard while the device clears, and belongs to the whole assembly. Both have to exceed the available fault current at that point, and meeting one says nothing about the other."}},{"@type":"Question","name":"What do NEC 110.9 and 110.10 each require?","acceptedAnswer":{"@type":"Answer","text":"NEC 110.9 requires that equipment intended to interrupt current at fault levels have an interrupting rating sufficient for the current available at its line terminals. NEC 110.10 requires that circuit impedance, equipment short-circuit current ratings and other characteristics be coordinated so the protective device can clear a fault without extensive damage. The first is a clearing requirement on the device; the second is a withstand requirement on everything in the path."}},{"@type":"Question","name":"Does a 65 kA breaker give a panel a 65 kA SCCR?","acceptedAnswer":{"@type":"Answer","text":"No. An assembly’s SCCR is set by the lowest-rated component in the fault current path. A panel with a 65 kA breaker, a 10 kA contactor and a 5 kA control relay has a 5 kA assembly rating. Raising it usually means replacing the component that set the number or adding a current-limiting device ahead of it, not fitting a larger breaker."}},{"@type":"Question","name":"Can a series rating be used to satisfy SCCR?","acceptedAnswer":{"@type":"Answer","text":"No. A series rating is a tested, listed combination that lets a downstream device be applied above its own standalone interrupting rating, which addresses NEC 110.9 for that device. It does not establish an assembly SCCR and does not relieve the 110.10 withstand requirement for the rest of the path. It is also valid only as the exact pairing marked on the equipment, so substituting an equivalent upstream device voids it."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in has-photo">
+    <div class="artban-text">
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">Interrupting Rating vs. SCCR</span></nav>
+      <div class="eyebrow">Protection</div>
+      <h1>Interrupting Rating vs. SCCR: Two Different Questions</h1>
+      <p class="dek">One is a device’s ability to break fault current and stop it. The other is an assembly’s ability to be subjected to that current without becoming a hazard. They are different numbers, set by different code sections, and meeting one says nothing about the other.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published November 3, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+    </div>
+    <figure class="artban-photo">
+      <picture><source srcset="images/parts/dc-molded-case-breakers-mccb-15-1200a.webp" type="image/webp"><img src="images/parts/dc-molded-case-breakers-mccb-15-1200a.jpg" width="340" height="340" alt="Molded-case circuit breakers" decoding="async" fetchpriority="high"></picture>
+      <figcaption>Molded-case breakers (illustration)</figcaption>
+    </figure>
+  </div>
+</section>
+<div class="artwrap">
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>Interrupting rating is about a device clearing fault current. SCCR is about an assembly withstanding it. Both must exceed the available fault current.</li>
+      <li>NEC 110.9 governs the first, NEC 110.10 the second. They are separate requirements and a design can satisfy one and fail the other.</li>
+      <li>An assembly SCCR is set by its weakest component, not by its breaker. A 65 kA breaker in a panel with a 5 kA control relay does not make a 65 kA assembly.</li>
+      <li>Both are checked against available fault current at that point, which means a fault-current study, not an assumption.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#two-different-questions">Two different questions</a></li>
+      <li><a href="#what-the-code-requires">What the code requires</a></li>
+      <li><a href="#the-weakest-component-rule">The weakest component sets the SCCR</a></li>
+      <li><a href="#where-series-ratings-fit">Where series ratings fit</a></li>
+      <li><a href="#the-number-both-are-checked-against">The number both are checked against</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+  <h2 id="two-different-questions">Two different questions</h2>
+  <p>Ask what happens during a bolted fault and there are two things to establish, and they are genuinely separate.</p>
+  <p>The first: can the protective device <b>break</b> this current and stop it, without failing in the attempt? That is the <b>interrupting rating</b>, often marked AIC, and it belongs to the overcurrent device alone. A breaker marked 65 kA can interrupt 65,000 A of prospective fault current and remain a breaker afterwards.</p>
+  <p>The second: can everything else in the circuit <b>be subjected to</b> that current, for however long it takes the device to clear, without becoming a hazard? That is the <b>short-circuit current rating</b>, or SCCR, and it belongs to an assembly: a panel, an industrial control panel, a motor controller, a piece of equipment. It is a withstand rating, not a clearing rating.</p>
+  <p>Nothing about the first answers the second. A device can clear a fault beautifully while the enclosure it sits in is destroyed by the same event, and that is precisely the failure the two requirements exist to prevent separately.</p>
+  <h2 id="what-the-code-requires">What the code requires</h2>
+  <p>The NEC keeps these in adjacent sections, which is both convenient and a source of confusion.</p>
+  <p><b>110.9</b> addresses interrupting rating. Equipment intended to interrupt current at fault levels must have an interrupting rating at nominal circuit voltage sufficient for the current available at its line terminals. The phrase doing the work is <i>at its line terminals</i>: the figure is the fault current available at that specific point, not at the service, and not the utility&rsquo;s headline number.</p>
+  <p><b>110.10</b> addresses the rest. The circuit impedance, equipment short-circuit current ratings and other characteristics must be selected and coordinated so that the protective devices can clear a fault without extensive damage to the electrical components of the circuit. This is the withstand requirement, and it reaches everything in the fault path rather than just the device at the top of it.</p>
+  <p>So a compliant design has to answer both. 110.9 is satisfied by picking a device with enough interrupting rating. 110.10 is satisfied by establishing that the assembly and the components in it can take what passes through before the device clears.</p>
+  <div class="ad-unit" data-ad="incontent"></div>
+  <h2 id="the-weakest-component-rule">The weakest component sets the SCCR</h2>
+  <p>This is where the practical errors concentrate, and it is the same logic as the fitting that limits an enclosure rating.</p>
+  <p>An assembly&rsquo;s SCCR is determined by the lowest-rated component in the fault current path, not by the largest breaker in it. A control panel containing a 65 kA main breaker, a 10 kA rated contactor and a 5 kA rated control relay has an assembly SCCR of 5 kA. The breaker&rsquo;s 65 kA is real and relevant to 110.9; it does nothing for the assembly rating.</p>
+  <p>That has a consequence that surprises people: improving the SCCR of an industrial control panel is usually not a matter of buying a bigger breaker. It is a matter of finding and replacing the one small component that set the number, or protecting it with a current-limiting device ahead of it so that what reaches it is less than what is available upstream.</p>
+  <p>Industrial control panels are required to be marked with their SCCR precisely so this is checkable, and a panel whose marked rating is below the available fault current at its point of installation cannot be installed there.</p>
+  <h2 id="where-series-ratings-fit">Where series ratings fit</h2>
+  <p>A series rating is a tested combination in which an upstream device limits what reaches a downstream device, letting the downstream device be applied above its own standalone interrupting rating.</p>
+  <p>It is worth being clear what that does and does not change. A series rating is a way of satisfying 110.9 for the downstream device using a tested, listed, specific pairing &mdash; not a calculation, and not transferable to a different combination of manufacturers or frames. It does not convert into an assembly SCCR, and it does not relieve the 110.10 requirement for everything else in the path.</p>
+  <p>The failure mode is substitution. A series-rated combination is valid only as the exact pairing that was tested and is marked on the equipment; swapping the upstream device for an equivalent from another manufacturer voids it silently, and nothing about the installation looks different afterwards.</p>
+  <h2 id="the-number-both-are-checked-against">The number both are checked against</h2>
+  <p>Both requirements compare a rating against the available fault current at a point, so both depend on actually knowing that figure.</p>
+  <p>Available fault current falls as you move away from the source, because conductor impedance and transformer impedance limit it. That means the governing number is different at the service, at a downstream panel and at a piece of equipment at the end of a long feeder &mdash; and a device that is inadequate at the service may be entirely adequate thirty metres downstream.</p>
+  <p>It also means the common shortcuts are unsafe in both directions. Using the utility&rsquo;s available fault current everywhere is conservative but can force expensive equipment where it is not needed. Assuming a comfortable figure without a study is the dangerous direction, and transformer replacements are a frequent cause of a previously adequate installation no longer being so: a larger transformer with lower impedance raises available fault current throughout everything downstream of it.</p>
+  <h2 id="common-mistakes">Common mistakes</h2>
+  <p>Treating a breaker&rsquo;s interrupting rating as the assembly&rsquo;s short-circuit current rating. Reading 110.9 and 110.10 as one requirement, or assuming satisfying either one satisfies both. Determining an industrial control panel&rsquo;s SCCR from its largest device rather than its smallest. Trying to raise a panel SCCR by upsizing the main breaker. Substituting an equivalent upstream device into a series-rated combination. Using the utility&rsquo;s fault current figure at every point in the system. Leaving the fault-current study unrevised after a transformer is replaced with a larger or lower-impedance unit.</p>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the difference between interrupting rating and SCCR?</summary>
+    <p style="margin-top:10px">An interrupting rating is a protective device’s ability to break fault current and stop it, and belongs to the device alone. A short-circuit current rating is an assembly’s ability to be subjected to that current without becoming a hazard while the device clears, and belongs to the whole assembly. Both have to exceed the available fault current at that point, and meeting one says nothing about the other.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What do NEC 110.9 and 110.10 each require?</summary>
+    <p style="margin-top:10px">NEC 110.9 requires that equipment intended to interrupt current at fault levels have an interrupting rating sufficient for the current available at its line terminals. NEC 110.10 requires that circuit impedance, equipment short-circuit current ratings and other characteristics be coordinated so the protective device can clear a fault without extensive damage. The first is a clearing requirement on the device; the second is a withstand requirement on everything in the path.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Does a 65 kA breaker give a panel a 65 kA SCCR?</summary>
+    <p style="margin-top:10px">No. An assembly’s SCCR is set by the lowest-rated component in the fault current path. A panel with a 65 kA breaker, a 10 kA contactor and a 5 kA control relay has a 5 kA assembly rating. Raising it usually means replacing the component that set the number or adding a current-limiting device ahead of it, not fitting a larger breaker.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Can a series rating be used to satisfy SCCR?</summary>
+    <p style="margin-top:10px">No. A series rating is a tested, listed combination that lets a downstream device be applied above its own standalone interrupting rating, which addresses NEC 110.9 for that device. It does not establish an assembly SCCR and does not relieve the 110.10 withstand requirement for the rest of the path. It is also valid only as the exact pairing marked on the equipment, so substituting an equivalent upstream device voids it.</p>
+  </details>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The study that produces the fault-current figure both ratings are checked against is covered in <a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">short-circuit studies and breaker coordination</a>, and the tested combinations themselves in <a class="inline" href="guide-fully-rated-vs-series-rated.html">fully rated vs. series rated</a>.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/fault-current.html">Fault Current Calculator</a>The available fault current both ratings are compared against.</li>
+        <li><a href="calculators/transformer-sizing.html">Transformer Sizing Calculator</a>The upstream impedance that sets it.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-fully-rated-vs-series-rated.html">Fully Rated vs. Series Rated Breakers</a></li>
+        <li><a href="guide-short-circuit-studies-breaker-coordination.html">Short-Circuit Studies &amp; Breaker Coordination</a></li>
+        <li><a href="guide-transformer-impedance.html">Transformer Impedance Explained</a></li>
+        <li><a href="guide-spd-types-1-2-3.html">SPD Types 1, 2 and 3 Explained</a></li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Interrupting Rating vs. SCCR: Two Different Questions&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-grid-forming-vs-grid-following.html</p>
+  </details>
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/guide-interrupting-rating-vs-sccr.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+
+<aside class="provenance" aria-labelledby="prov-h">
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published November 3, 2026.</span></summary>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>The difference between a device interrupting rating and an assembly short-circuit current rating, what NEC 110.9 and 110.10 each require, why the lowest-rated component sets an assembly SCCR and how that changes the fix, what a series rating does and does not establish, and why both ratings depend on available fault current at the specific point of installation.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>NEC 110.9 for interrupting rating and NEC 110.10 for equipment short-circuit current ratings and coordination</li><li>UL 508A for industrial control panel SCCR determination and marking</li><li>Voltfield’s own guides on series rating, transformer impedance and short-circuit studies</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A substitute for a short-circuit study or for the equipment listings. Determining an assembly SCCR follows a defined procedure against the component ratings and any current-limiting protection ahead of them, and both requirements depend on an available fault current figure for the specific point of installation. Confirm section numbering against the NEC edition your jurisdiction has adopted.</dd>
+      <dt>Provenance</dt>
+      <dd>Published November 3, 2026. Written and maintained by the Voltfield editorial team against the sources above. Worked figures in the text are arithmetic the reader can check; nothing here states a measured value.</dd>
+    </dl>
+  </details>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

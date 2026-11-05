@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPXZWTBW');</script>
+<!-- End Google Tag Manager -->
+<title>VFD vs. Soft Starter Compared | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-vfd-vs-soft-starter.html">
+<meta name="description" content="VFD against soft starter: how each limits inrush, why only a VFD saves energy at partial load, torque at low speed, harmonics and cable length limits, bypass contactors, and which one fits which load.">
+<meta name="keywords" content="VFD vs soft starter, soft starter vs variable frequency drive, motor starting current, reduced voltage starter, VFD harmonics, affinity laws, bypass contactor">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="VFD vs. Soft Starter">
+<meta property="og:description" content="How each limits inrush, why only one saves energy at partial load, and the trade-offs that follow.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta name="twitter:title" content="VFD vs. Soft Starter">
+<meta name="twitter:description" content="How each limits inrush, why only one saves energy at partial load, and the trade-offs that follow.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://voltfield.org/guides.html"},{"@type":"ListItem","position":3,"name":"VFD vs. Soft Starter","item":"https://voltfield.org/guide-vfd-vs-soft-starter.html"}]},{"@type":"Article","headline":"VFD vs. Soft Starter: One Limits the Start, the Other Changes the Job","description":"VFD against soft starter: how each limits inrush, why only a VFD saves energy at partial load, torque at low speed, harmonics and cable length limits, bypass contactors, and which one fits which load.","image":"https://voltfield.org/social/social-generic.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-11-03T00:00:00-05:00","dateModified":"2026-11-03T00:00:00-05:00","url":"https://voltfield.org/guide-vfd-vs-soft-starter.html"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between a VFD and a soft starter?","acceptedAnswer":{"@type":"Answer","text":"A soft starter ramps voltage to limit inrush during starting and then typically closes a bypass contactor, leaving the motor running directly across the line. A VFD synthesises its own AC waveform and controls frequency, so it controls speed continuously while the motor runs. The starting behaviour is incidental to what a VFD is and is the entire purpose of a soft starter."}},{"@type":"Question","name":"Does a soft starter save energy?","acceptedAnswer":{"@type":"Answer","text":"Not in running. Once the motor is up to speed a soft starter is normally bypassed and electrically absent, so the motor consumes what it would have consumed anyway. Energy saving on pumps and fans comes from reducing speed, which only a VFD can do, and it is substantial because the power required follows roughly the cube of speed."}},{"@type":"Question","name":"Can a soft starter handle a hard-starting load?","acceptedAnswer":{"@type":"Answer","text":"Often not. A soft starter reduces current by reducing voltage, and torque falls with roughly the square of voltage, so halving the current leaves about a quarter of the torque. If the load needs more than that to break away the motor stalls and the ramp times out. A VFD reduces frequency with voltage and can develop full torque at low speed, which is why it suits high-breakaway and high-inertia loads even at fixed speed."}},{"@type":"Question","name":"What problems does a VFD introduce?","acceptedAnswer":{"@type":"Answer","text":"Harmonic currents from its rectifier front end, assessed against IEEE 519 and often needing reactors or filters; a cable length limit, because fast switching edges reflect from the motor terminals and can nearly double the winding voltage; bearing currents from common-mode voltage, addressed with insulated bearings or shaft grounding; and greater demands on the motor itself, which is why inverter-duty construction exists. A soft starter in bypass introduces none of these."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPXZWTBW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site">
+  <a class="logo" href="index.html" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="index.html">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in has-photo">
+    <div class="artban-text">
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">VFD vs. Soft Starter</span></nav>
+      <div class="eyebrow">Motors</div>
+      <h1>VFD vs. Soft Starter: What Each One Actually Solves</h1>
+      <p class="dek">Both reduce starting current, which is why they get compared. Only one of them changes anything after the motor is up to speed, and that difference decides the choice far more often than the starting current does.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published November 3, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+    </div>
+    <figure class="artban-photo">
+      <picture><source srcset="images/parts/mro-motor-controls-drives.webp" type="image/webp"><img src="images/parts/mro-motor-controls-drives.jpg" width="340" height="340" alt="Motor control and drive equipment" decoding="async" fetchpriority="high"></picture>
+      <figcaption>Motor controls and drives (illustration)</figcaption>
+    </figure>
+  </div>
+</section>
+<div class="artwrap">
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>A soft starter manages the start and then gets out of the way. A VFD controls the motor continuously.</li>
+      <li>Only a VFD can reduce speed, and on a pump or fan that is where almost all the energy saving is, because power follows roughly the cube of speed.</li>
+      <li>A VFD can deliver full torque at low speed. A soft starter reduces torque as it reduces voltage, which is what makes it unsuitable for hard-starting loads.</li>
+      <li>A VFD brings harmonics, cable length limits and bearing-current risk that a soft starter does not.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#what-each-one-does">What each one does</a></li>
+      <li><a href="#the-energy-argument">The energy argument</a></li>
+      <li><a href="#torque-and-hard-starting-loads">Torque and hard-starting loads</a></li>
+      <li><a href="#what-a-vfd-brings-with-it">What a VFD brings with it</a></li>
+      <li><a href="#choosing-between-them">Choosing between them</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+  <h2 id="what-each-one-does">What each one does</h2>
+  <p>A motor started directly across the line draws a large inrush &mdash; commonly six to eight times full-load current &mdash; and develops a sharp torque step. Both devices exist to soften that, and they do it by different means with very different consequences.</p>
+  <p>A <b>soft starter</b> is a set of thyristors in series with the motor that ramps the applied voltage up over a few seconds. Once the motor reaches speed, the soft starter has done its job; most then close a bypass contactor and take the semiconductors out of the circuit entirely, so the motor runs directly across the line as if the starter were not there.</p>
+  <p>A <b>variable frequency drive</b> rectifies the incoming AC to DC and synthesises a new AC waveform at whatever frequency and voltage it chooses. It is in the circuit permanently, and because it controls frequency it controls speed &mdash; during the start and for as long as the motor runs.</p>
+  <p>That is the distinction that matters. The starting behaviour is a side effect of what a VFD is; it is the entire purpose of a soft starter.</p>
+  <h2 id="the-energy-argument">The energy argument</h2>
+  <p>If the load is a centrifugal pump or fan, this is usually the whole decision, and it has nothing to do with starting.</p>
+  <p>Flow in a centrifugal machine is roughly proportional to speed, while the power required follows roughly the <b>cube</b> of speed. Run a fan at 80 percent speed and it absorbs around half the power. Run it at 50 percent and it absorbs around an eighth. Those are the affinity laws, and they are why variable speed is transformative on this class of load.</p>
+  <p>Now compare the alternative. A soft-started fan runs at full speed whenever it runs, and flow is reduced by throttling a damper or a valve &mdash; which is to say by deliberately wasting the excess. The motor keeps drawing close to full power while the system destroys the surplus across a restriction.</p>
+  <p>So on a throttled pump or fan, a VFD is not a more expensive way of achieving the same outcome; it is a different outcome. On a load that runs at one speed whenever it runs &mdash; a conveyor, a compressor with its own unloading arrangement, a crusher &mdash; this argument disappears entirely, and with it most of the case for a VFD.</p>
+  <div class="ad-unit" data-ad="incontent"></div>
+  <h2 id="torque-and-hard-starting-loads">Torque and hard-starting loads</h2>
+  <p>The second real difference is what torque is available while the motor comes up to speed.</p>
+  <p>A soft starter reduces current by reducing voltage, and motor torque falls roughly with the square of voltage. Reduce the voltage to 50 percent to halve the current and the available torque falls to about a quarter. If the load needs more than that to break away, the motor stalls, the ramp times out, and nothing starts. That is the whole reason a soft starter is unsuitable for a loaded conveyor or a machine with high static friction.</p>
+  <p>A VFD does not face that trade-off, because it reduces frequency alongside voltage and keeps the magnetic flux where it should be. It can develop full rated torque from very low speed while drawing current close to full-load rather than a multiple of it. For a high-inertia or high-breakaway load, that capability is the reason to choose it even where variable speed is not wanted in operation.</p>
+  <h2 id="what-a-vfd-brings-with-it">What a VFD brings with it</h2>
+  <p>A VFD is the more capable device and it is not free of consequences. These are the ones that cause problems after commissioning.</p>
+  <p><b>Harmonics.</b> The rectifier front end draws non-sinusoidal current, injecting harmonic currents into the supply. On a system with many drives relative to its source capacity this shows up as voltage distortion, transformer heating and neutral current, and it is assessed against IEEE 519 limits. Mitigation &mdash; line reactors, multi-pulse arrangements, active front ends, filters &mdash; is a cost that belongs in the comparison. A soft starter in bypass draws essentially sinusoidal current and contributes none of this in normal running.</p>
+  <p><b>Cable length and reflected waves.</b> The fast switching edges a drive produces travel down the motor cable and reflect from the motor terminals, which can roughly double the voltage seen by the winding insulation. There is a practical cable length limit for any drive and motor combination, beyond which output filtering or an inverter-duty motor is required. A soft starter has no equivalent limit.</p>
+  <p><b>Bearing currents.</b> Common-mode voltage from the drive can drive current through the motor bearings, pitting the races. Insulated bearings, shaft grounding rings or a filter address it, and on larger machines this is a specification item rather than an afterthought.</p>
+  <p><b>Motor suitability.</b> Continuous low-speed running reduces the motor&rsquo;s own cooling if it is shaft-mounted-fan cooled, and the voltage stress asks more of the insulation. Inverter-duty construction exists for this reason.</p>
+  <h2 id="choosing-between-them">Choosing between them</h2>
+  <p>The decision resolves quickly with three questions, in order.</p>
+  <p><b>Does the process benefit from varying speed?</b> On a throttled pump or fan, yes, decisively, and the energy case usually settles it. A VFD.</p>
+  <p><b>Does the load need substantial torque to break away?</b> If so, a soft starter will struggle regardless of ramp settings, and a VFD is the answer even for a fixed-speed application.</p>
+  <p><b>Neither?</b> Then the requirement is genuinely only to limit inrush &mdash; a fixed-speed load that is easy to start, often driven by a utility demand charge or a limit on a generator or soft supply. A soft starter is smaller, cheaper, simpler, generates no harmonics in bypass, and imposes nothing on the motor or the cable. It is the right answer, and specifying a VFD here buys complexity for no return.</p>
+  <h2 id="common-mistakes">Common mistakes</h2>
+  <p>Comparing the two on starting current alone, which is the smallest of the real differences. Expecting a soft starter to save energy in running, when in bypass it is electrically absent. Specifying a soft starter for a high-breakaway load and then adjusting ramp settings to fix a torque shortfall that settings cannot fix. Reducing fan or pump flow by throttling while a VFD is installed, which gives up almost all of the benefit. Omitting harmonic assessment where many drives sit on one transformer. Exceeding the drive-to-motor cable length limit without output filtering. Using a standard motor for continuous low-speed operation or long-cable drive duty. Assuming a VFD is the better device in general rather than the better device for a particular job.</p>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the difference between a VFD and a soft starter?</summary>
+    <p style="margin-top:10px">A soft starter ramps voltage to limit inrush during starting and then typically closes a bypass contactor, leaving the motor running directly across the line. A VFD synthesises its own AC waveform and controls frequency, so it controls speed continuously while the motor runs. The starting behaviour is incidental to what a VFD is and is the entire purpose of a soft starter.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Does a soft starter save energy?</summary>
+    <p style="margin-top:10px">Not in running. Once the motor is up to speed a soft starter is normally bypassed and electrically absent, so the motor consumes what it would have consumed anyway. Energy saving on pumps and fans comes from reducing speed, which only a VFD can do, and it is substantial because the power required follows roughly the cube of speed.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Can a soft starter handle a hard-starting load?</summary>
+    <p style="margin-top:10px">Often not. A soft starter reduces current by reducing voltage, and torque falls with roughly the square of voltage, so halving the current leaves about a quarter of the torque. If the load needs more than that to break away the motor stalls and the ramp times out. A VFD reduces frequency with voltage and can develop full torque at low speed, which is why it suits high-breakaway and high-inertia loads even at fixed speed.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What problems does a VFD introduce?</summary>
+    <p style="margin-top:10px">Harmonic currents from its rectifier front end, assessed against IEEE 519 and often needing reactors or filters; a cable length limit, because fast switching edges reflect from the motor terminals and can nearly double the winding voltage; bearing currents from common-mode voltage, addressed with insulated bearings or shaft grounding; and greater demands on the motor itself, which is why inverter-duty construction exists. A soft starter in bypass introduces none of these.</p>
+  </details>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The starting current itself is covered in <a class="inline" href="guide-generator-sizing.html">generator sizing</a> where it usually matters most, and the harmonic consequences in <a class="inline" href="guide-harmonics-ieee-519.html">harmonics and IEEE 519</a>.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/motor-start.html">Motor Starting Calculator</a>Starting current and voltage dip for each method.</li>
+        <li><a href="calculators/inrush.html">Inrush Current Calculator</a>The inrush both devices exist to limit.</li>
+        <li><a href="calculators/hp-to-kw.html">HP to kW Calculator</a>Motor rating conversion.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-harmonics-ieee-519.html">Harmonics &amp; IEEE 519 Explained</a></li>
+        <li><a href="guide-nec-430-250-motor-fla.html">NEC 430.250 Motor Full-Load Current</a></li>
+        <li><a href="guide-generator-sizing.html">How to Size a Generator</a></li>
+        <li><a href="guide-kw-vs-kva.html">kW vs. kVA Explained</a></li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;VFD vs. Soft Starter: What Each One Actually Solves&rdquo; <i>Voltfield</i>, updated September 29, 2026. https://voltfield.org/guide-grid-forming-vs-grid-following.html</p>
+  </details>
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/guide-vfd-vs-soft-starter.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+
+<aside class="provenance" aria-labelledby="prov-h">
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published November 3, 2026.</span></summary>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>How a soft starter and a VFD each limit starting current and what happens after the start, the affinity-law energy case that decides pump and fan applications, why reduced-voltage starting loses torque as the square of voltage, the harmonic, cable-length and bearing-current consequences of a drive, and a decision order for choosing between them.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>Induction motor torque-voltage and affinity-law relationships</li><li>IEEE 519 for the harmonic limits a drive installation is assessed against</li><li>NEC Article 430 for motor circuit requirements and Part X for adjustable-speed drive systems</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A specification or a selection. Starting torque depends on the motor design and the driven load, harmonic distortion depends on the ratio of drive load to source capacity, and cable length limits are specific to a drive and motor combination. Manufacturer data for the actual equipment governs in each case.</dd>
+      <dt>Provenance</dt>
+      <dd>Published November 3, 2026. Written and maintained by the Voltfield editorial team against the sources above. Worked figures in the text are arithmetic the reader can check; nothing here states a measured value.</dd>
+    </dl>
+  </details>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>
