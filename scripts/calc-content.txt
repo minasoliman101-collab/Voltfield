@@ -632,3 +632,37 @@ Leaving the equipment grounding conductor out of the count. Using the conductor 
 /guide-cable-ampacity-derating.html :: Cable Ampacity Derating Explained
 /guide-nec-250-122-egc-sizing.html :: Sizing the Equipment Grounding Conductor
 /calculators/voltage-drop.html :: Voltage Drop Calculator
+===kva-to-kw|kva-to-kw|kVA to kW Converter|kVA to kW Calculator (and kW to kVA)|Convert kVA to kW and back, with reactive power. Why there is no fixed conversion factor, where the 0.8 assumption comes from, and why transformers are rated in kVA. Free, no signup.
+--intro
+There is no conversion factor between kVA and kW. That is the whole answer, and every wrong result in this calculation comes from wanting one.
+kVA is apparent power: volts times amps, the product the equipment in the supply path actually has to carry. kW is real power: the part doing work. The ratio between them is the power factor, and power factor is a property of the load &mdash; what is connected and how it draws current. Nothing about the transformer, the cable or the switchgear determines it.
+That is precisely why transformers are rated in kVA. The manufacturer cannot know what you will connect, so it rates the equipment by what it must carry rather than by what the load will usefully do with it. A 500 kVA transformer is a 500 kVA transformer whether the load runs at 0.95 or 0.65.
+--formula
+kW = kVA &times; PF
+kVA = kW / PF
+kvar = &radic;(kVA&sup2; &minus; kW&sup2;)
+kVA&sup2; = kW&sup2; + kvar&sup2;
+--vars
+kVA :: Apparent power. What the transformer, conductors and switchgear are sized for
+kW :: Real power. The component that does work and that the meter bills for
+PF :: Power factor, between 0 and 1. The ratio kW / kVA, set by the load
+kvar :: Reactive power. Current the system carries that produces no work
+--example
+A facility draws 500 kVA at 0.8 power factor.
+kW = 500 &times; 0.8 = 400 kW of real power.
+kvar = &radic;(500&sup2; &minus; 400&sup2;) = &radic;(250,000 &minus; 160,000) = 300 kvar of reactive power.
+So 400 kW of useful output requires 500 kVA of capacity through every component upstream &mdash; 25 percent more apparent power than real power, and the conductors are sized for the 500.
+Now correct the power factor to 0.95 without changing the real load. The 400 kW still needs doing, but the apparent power falls to 400 / 0.95 = 421 kVA. The same work now moves through 79 kVA less capacity, which is the entire economic case for power-factor correction.
+--standard
+This is the definition of apparent, real and reactive power rather than a code rule, and it holds for any single-frequency AC system. Transformer kVA ratings follow IEEE C57.12.00 for liquid-immersed and IEEE C57.12.01 for dry-type units. Generator sets are conventionally rated with a kW output and a 0.8 power factor, giving the alternator kVA, under ISO 8528. Utility power-factor penalties and any required correction are set by the local tariff, not by a standard.
+--limits
+The relationship assumes a single frequency and reasonably sinusoidal current. Where there is significant harmonic distortion the simple power triangle stops describing the system: distortion adds an apparent-power component that is neither real nor conventionally reactive, so the measured power factor splits into a displacement part and a distortion part and kW is no longer kVA times the displacement power factor. It also says nothing about which direction the reactive power flows &mdash; leading and lagging power factor have the same magnitude here &mdash; and nothing about whether a power factor is acceptable, which is a tariff question. DC has no power factor at all, so kVA is not a meaningful quantity on a DC system.
+--mistakes
+Looking for a fixed conversion factor, or assuming 0.8 because generator sets are rated that way. Converting a transformer's kVA nameplate into kW and treating the result as a capacity limit, when the limit is the kVA. Sizing conductors or switchgear from kW rather than kVA. Using the simple triangle on a heavily non-linear load, where distortion breaks it. Confusing kvar with kVA. Assuming correcting power factor reduces the real energy bill, when what it reduces is apparent power, demand charges and any penalty. Treating a leading power factor as equivalent to the same figure lagging.
+--related
+/guide-kw-vs-kva.html :: kW vs. kVA Explained
+/calculators/kva-to-amps.html :: kVA to Amps Calculator
+/calculators/kw-to-amps.html :: kW to Amps Calculator
+/calculators/power-factor.html :: Power Factor Correction
+/calculators/transformer-sizing.html :: Transformer Sizing Calculator
+/calculators/amps-to-kw.html :: Amps to kW Calculator

@@ -275,20 +275,6 @@
     r.className='est-result show';
   });
 
-  const cvBtn=document.getElementById('cvBtn');
-  if(cvBtn)cvBtn.addEventListener('click',function(){
-    const r=document.getElementById('cvResult');
-    const kva=parseFloat(document.getElementById('cvKva').value), kw=parseFloat(document.getElementById('cvKw').value), pf=parseFloat(document.getElementById('cvPf').value);
-    const has=[!isNaN(kva),!isNaN(kw),!isNaN(pf)].filter(Boolean).length;
-    if(has<2){r.textContent='Enter any two of kVA, kW, PF to solve for the third.';r.className='est-result show';return;}
-    let out;
-    if(isNaN(pf)){out='Power factor: <b>'+fmt(kw/kva)+'</b>';}
-    else if(isNaN(kw)){out='kW: <b>'+fmt(kva*pf)+'</b>';}
-    else{out='kVA: <b>'+fmt(kw/pf)+'</b>';}
-    r.innerHTML=out;
-    r.className='est-result show';
-  });
-
   /* ---- AWG to mm2 -------------------------------------------------------
      Replaces a smaller widget that lived on calculators/reference-tables.html
      and converted between a 21-row lookup table. AWG is defined by a geometric
@@ -785,9 +771,81 @@
     r.className='est-result show'+(fits?'':' warn');
   });
 
+  /* ---- kVA / kW / PF / kvar: solve the power triangle -------------------
+     Replaces a three-field solver that lived under #unit-converter on
+     calculators/reference-tables.html. Adding reactive power makes it the whole
+     triangle rather than three quarters of it, and lets the tool check an
+     over-specified entry instead of silently ignoring a field.
+
+     S^2 = P^2 + Q^2, and PF = P/S. Everything below is those two relations
+     rearranged. The estimator id stays convCalc so the usage events still match
+     reports from before the move.
+
+     The editorial point the page is built on: power factor is a property of the
+     load, not of the equipment feeding it. That is WHY transformers are rated
+     in kVA -- the manufacturer cannot know the load. So kVA to kW is not a unit
+     conversion with a fixed factor, and 0.8 is a generator-set design
+     convention rather than a default to reach for. */
+  function ptSolve(S,Pk,pf,Q){
+    const has=function(v){ return v!==null && !isNaN(v); };
+    let n=[S,Pk,pf,Q].filter(has).length;
+    if(n<2) return {err:'Enter at least two values.'};
+    if(has(pf)&&(pf<=0||pf>1)) return {err:'Power factor is between 0 and 1. Leading and lagging share the same magnitude here.'};
+    if(has(S)&&S<0||has(Pk)&&Pk<0||has(Q)&&Q<0) return {err:'Powers cannot be negative.'};
+
+    /* Derive from whichever pair is present, in order of directness. */
+    if(has(S)&&has(pf)){ const p=S*pf; return fin(S,p,pf,Math.sqrt(Math.max(S*S-p*p,0)),S,Pk,pf,Q); }
+    if(has(Pk)&&has(pf)){ const s2=Pk/pf; return fin(s2,Pk,pf,Math.sqrt(Math.max(s2*s2-Pk*Pk,0)),S,Pk,pf,Q); }
+    if(has(S)&&has(Pk)){
+      if(Pk>S) return {err:'Real power cannot exceed apparent power. kW is at most kVA, and they are equal only at unity power factor.'};
+      return fin(S,Pk,Pk/S,Math.sqrt(Math.max(S*S-Pk*Pk,0)),S,Pk,pf,Q);
+    }
+    if(has(Pk)&&has(Q)){ const s3=Math.sqrt(Pk*Pk+Q*Q); return fin(s3,Pk,s3===0?1:Pk/s3,Q,S,Pk,pf,Q); }
+    if(has(S)&&has(Q)){
+      if(Q>S) return {err:'Reactive power cannot exceed apparent power.'};
+      const p4=Math.sqrt(Math.max(S*S-Q*Q,0)); return fin(S,p4,S===0?1:p4/S,Q,S,Pk,pf,Q);
+    }
+    if(has(pf)&&has(Q)){
+      if(pf>=1) return {err:'At unity power factor the reactive power is zero, so these two cannot both be given unless kvar is 0.'};
+      const s5=Q/Math.sin(Math.acos(pf)); return fin(s5,s5*pf,pf,Q,S,Pk,pf,Q);
+    }
+    return {err:'Enter at least two values.'};
+  }
+  /* Flag any supplied value the solution contradicts by more than 1%. */
+  function fin(S,Pk,pf,Q,iS,iP,ipf,iQ){
+    const out={S:S,P:Pk,pf:pf,Q:Q,conflicts:[]};
+    const chk=function(given,solved,name,unit){
+      if(given===null||isNaN(given))return;
+      const d=Math.abs(given-solved), rel=Math.max(Math.abs(solved),1e-9);
+      if(d/rel>0.01) out.conflicts.push(name+' given as '+given+unit+' but the others imply '+fmt(solved,2)+unit);
+    };
+    chk(iS,S,'kVA',' kVA'); chk(iP,Pk,'kW',' kW'); chk(ipf,pf,'PF',''); chk(iQ,Q,'kvar',' kvar');
+    return out;
+  }
+
+  const ptBtn=document.getElementById('ptBtn');
+  if(ptBtn)ptBtn.addEventListener('click',function(){
+    const r=document.getElementById('ptResult');
+    const g=function(id){ const v=parseFloat(document.getElementById(id).value); return isNaN(v)?null:v; };
+    const res=ptSolve(g('ptKva'),g('ptKw'),g('ptPf'),g('ptKvar'));
+    if(res.err){ r.textContent=res.err; r.className='est-result show warn'; return; }
+
+    let msg='<b>'+fmt(res.S,2)+' kVA &middot; '+fmt(res.P,2)+' kW &middot; '+fmt(res.Q,2)+' kvar &middot; PF '+fmt(res.pf,3)+'</b>';
+    msg+='<br>kW = kVA &times; PF = '+fmt(res.S,2)+' &times; '+fmt(res.pf,3)+' = '+fmt(res.P,2)+' kW.';
+    if(res.Q>0.005) msg+=' The '+fmt(res.Q,2)+' kvar is reactive: it is current the system carries and nothing useful comes out of it.';
+    else msg+=' At unity power factor there is no reactive component.';
+    /* The figure that matters when sizing anything upstream. */
+    if(res.pf<0.999) msg+='<br>Everything in the supply path &mdash; transformer, conductors, switchgear &mdash; is sized for the '+fmt(res.S,2)+' kVA, not the '+fmt(res.P,2)+' kW. That is '+fmt((res.S/res.P-1)*100,0)+'% more apparent power than real power.';
+    if(res.conflicts.length) msg+='<br><b>Check the inputs:</b> '+res.conflicts.join('; ')+'. The solution above was derived from the other fields.';
+    msg+='<br>Power factor is a property of the load, so a transformer rating converts to kW only once the load is known. There is no default value, and 0.8 is a generator-set convention rather than a general one.';
+    r.innerHTML=msg;
+    r.className='est-result show'+(res.conflicts.length?' warn':'');
+  });
+
+
 })();
 
-/* ---------- usage tracking: which of the 22 calculators actually get used.
+/* ---------- usage tracking: which of the 23 calculators actually get used.
    Delegated so it covers every .estimator/*Btn pair, including any added later.
    Moved here from engineering-calculators.html with the calculators, so the
    event names (calc = the estimator id) are unchanged and old reports still line up. ---------- */
