@@ -212,6 +212,72 @@
       lug(THREE, g, metal, sx * (TW/2 - 0.16), TH + 0.06, sz * (TD/2 - 0.14));
     }
 
+    /* ---- the fittings, which are most of what is on a real tank ----
+       A liquid-filled transformer is a tank with about two dozen things bolted
+       or plumbed to it, and the model had the tank, the radiators and the
+       bushings. The rest is gauges, valves, a breather and the pipework between
+       them: small parts and short runs, which the batching makes free. */
+
+    /* Conservator pipework, with the Buchholz gas relay in the run. Oil goes
+       from the tank cover up to the conservator through this pipe, and the
+       relay sits in it precisely because that is where gas collects. */
+    tubeRun(THREE, g, dark, [[0.30,1.62,0.50],[0.30,1.80,0.50]], 0.055, metal);
+    g.add(box(THREE, dark, 0.20, 0.16, 0.18, 0.30, 1.72, 0.50));
+    g.add(cyl(THREE, M.gold, 0.045, 0.045, 0.03, 10, 0.30, 1.72, 0.60).rotateX(Math.PI/2));
+
+    /* Silica-gel breather: a pipe down off the conservator into a clear
+       canister with its oil seal cup. The one fitting a maintenance engineer
+       looks at first, because its colour tells you whether it is saturated. */
+    tubeRun(THREE, g, dark, [[-0.66,1.86,0.50],[-0.66,1.44,0.56],[-0.80,1.30,0.56]], 0.035);
+    g.add(cyl(THREE, M.porcelain, 0.075, 0.075, 0.26, 14, -0.80, 1.14, 0.56));
+    g.add(cyl(THREE, dark, 0.090, 0.090, 0.05, 14, -0.80, 0.99, 0.56));
+    g.add(cyl(THREE, dark, 0.090, 0.090, 0.04, 14, -0.80, 1.29, 0.56));
+
+    /* Dial thermometer and winding-temperature indicator on the tank face. */
+    for (let i = 0; i < 2; i++) {
+      const gx = -0.30 + i * 0.30;
+      g.add(cyl(THREE, dark, 0.105, 0.105, 0.05, 16, gx, 0.86, TD/2 + 0.02).rotateX(Math.PI/2));
+      g.add(cyl(THREE, M.porcelain, 0.085, 0.085, 0.02, 16, gx, 0.86, TD/2 + 0.05).rotateX(Math.PI/2));
+      g.add(box(THREE, M.gold, 0.012, 0.062, 0.012, gx + 0.018, 0.885, TD/2 + 0.062));
+      /* capillary from the bulb in the tank wall up to the dial */
+      tubeRun(THREE, g, metal, [[gx,0.91,TD/2+0.02],[gx,1.26,TD/2+0.02]], 0.012);
+    }
+
+    /* Valves at the tank bottom: the main drain with its sampling cock, and a
+       filter-press valve on the opposite side. */
+    for (const vx of [-0.62, 0.62]) {
+      g.add(cyl(THREE, dark, 0.055, 0.055, 0.12, 12, vx, 0.22, TD/2 + 0.06).rotateX(Math.PI/2));
+      const hw = cyl(THREE, metal, 0.085, 0.085, 0.022, 14, vx, 0.22, TD/2 + 0.14);
+      hw.rotation.x = Math.PI/2; g.add(hw);
+      g.add(box(THREE, metal, 0.016, 0.15, 0.016, vx, 0.22, TD/2 + 0.14));
+    }
+
+    /* Bolted cover flange. The tank lid on these is gasketed and bolted all the
+       way round, and a lid that simply meets the tank is one of the plainer
+       tells that a model was drawn rather than fabricated. */
+    g.add(box(THREE, dark, TW + 0.06, 0.06, TD + 0.06, 0, TH + 0.02, 0));
+    for (let i = 0; i < 9; i++) {
+      const bx = -TW/2 + 0.12 + i * ((TW - 0.24) / 8);
+      for (const bz of [TD/2 + 0.025, -TD/2 - 0.025]) {
+        g.add(cyl(THREE, metal, 0.026, 0.026, 0.035, 6, bx, TH + 0.06, bz));
+      }
+    }
+
+    /* Earth conductor from the ground pad down to grade, which is what the pad
+       is for and what the 250-series guides keep pointing at. */
+    tubeRun(THREE, g, cu, [[-0.95,0.20,TD/2+0.03],[-1.05,-0.02,TD/2+0.10],[-1.05,-0.30,TD/2+0.10]], 0.022);
+
+    /* Pressure-relief discharge pipe, directing oil away from the cover. */
+    tubeRun(THREE, g, dark, [[0.30,1.68,0],[0.30,1.70,-0.30],[0.30,1.40,-0.46]], 0.038);
+
+    /* Guard rings over the cooling fans -- a bare fan under a radiator bank is
+       something no utility would energise. */
+    for (const sx of [-1, 1]) for (let k = 0; k < 3; k++) {
+      const rr = 0.09 + k * 0.075;
+      const ring = cyl(THREE, metal, rr, rr, 0.010, 20, sx * (TW/2 + 0.22), 0.16, 0);
+      g.add(ring);
+    }
+
     /* Skid base with channel ends. */
     g.add(box(THREE, dark, TW + 0.24, 0.16, TD + 0.24, 0, -0.08, 0));
     for (const s of [-1, 1]) g.add(box(THREE, metal, 0.10, 0.20, TD + 0.24, s*(TW/2 + 0.06), -0.06, 0));
@@ -285,6 +351,76 @@
     for (let i = 0; i < n - 1; i++) {
       g.add(box(THREE, metal, 0.07, 0.20, d + 0.10, (i - (n-2)/2) * w, h + 0.12, 0));
     }
+
+    /* ---- lineup hardware ----
+       The front of each cubicle was well covered and everything that makes a
+       lineup a lineup -- the seams between sections, how it is lifted, how
+       cable gets into it and how pressure gets out of it -- was not. */
+
+    /* Vertical joint strips where sections bolt together. */
+    for (let i = 0; i < n - 1; i++) {
+      g.add(box(THREE, dark, 0.05, h - 0.10, 0.03, (i - (n-2)/2) * w, h/2, fz + 0.005));
+    }
+
+    /* Pressure-relief chimneys over the arc-vent flaps. An arc vent that opens
+       into the room rather than into a duct is the thing switchgear standards
+       spend the most words on. */
+    for (let i = 0; i < n; i++) {
+      const x = (i - (n-1)/2) * w;
+      g.add(box(THREE, dark, w*0.52, 0.26, 0.28, x, h + 0.33, -0.20));
+      louvers(THREE, g, metal, {n: 3, x: x, y0: h + 0.26, y1: h + 0.40, z: -0.335, w: w*0.44, h: 0.035});
+    }
+
+    /* Control-wiring trough running the length of the roof, which is how the
+       sections are actually tied together. */
+    g.add(box(THREE, metal, w*n - 0.20, 0.11, 0.16, 0, h + 0.27, 0.30));
+    for (let i = 0; i < n; i++) {
+      const x = (i - (n-1)/2) * w;
+      tubeRun(THREE, g, dark, [[x + 0.18, h + 0.22, 0.30],[x + 0.18, h + 0.06, 0.34]], 0.030);
+    }
+
+    /* Lifting angles at the roof corners. */
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+      lug(THREE, g, metal, sx * (w*n/2 - 0.14), h + 0.22, sz * (d/2 - 0.12));
+    }
+
+    /* Conduit stubs rising into the cable compartments through the floor,
+       because the lineup has to be fed from somewhere. */
+    for (let i = 0; i < n; i++) {
+      const x = (i - (n-1)/2) * w;
+      for (const cz of [-0.22, 0.10]) {
+        g.add(cyl(THREE, metal, 0.075, 0.075, 0.30, 12, x - 0.18, 0.00, cz));
+        g.add(cyl(THREE, dark, 0.090, 0.090, 0.05, 12, x - 0.18, 0.16, cz));
+      }
+    }
+
+    /* Ground bus along the base, with a connection stud at each section. */
+    g.add(box(THREE, M.copper, w*n - 0.14, 0.055, 0.016, 0, 0.21, fz + 0.015));
+    for (let i = 0; i < n; i++) {
+      const x = (i - (n-1)/2) * w;
+      g.add(cyl(THREE, M.brass, 0.026, 0.026, 0.05, 8, x, 0.21, fz + 0.035).rotateX(Math.PI/2));
+    }
+
+    /* Hinges and handles on the lower cable-compartment covers, which were
+       bolted-looking blanks with louvres punched in them. */
+    for (let i = 0; i < n; i++) {
+      const x = (i - (n-1)/2) * w;
+      for (const sy of [h*0.07, h*0.27]) {
+        g.add(cyl(THREE, metal, 0.040, 0.040, 0.12, 8, x - w*0.38, sy, fz + 0.025));
+      }
+      g.add(box(THREE, metal, 0.05, 0.18, 0.045, x + w*0.34, h*0.17, fz + 0.035));
+    }
+
+    /* Lineup rating plate on the end panel: the short-circuit rating is the
+       number the whole interrupting-rating guide is about. */
+    decal(THREE, g, {key:'sg-np', w:0.46, h:0.30, x: w*n/2 + 0.035, y: h*0.62, z: 0.10,
+      ry: Math.PI/2, cw:280, ch:180, metal:0.35, rough:0.42,
+      draw: npDraw('LOW-VOLTAGE SWITCHGEAR', [
+        ['BUS',   '3000 A'],
+        ['VOLTS', '480Y/277'],
+        ['SC',    '100 kA'],
+        ['STD',   'UL 1558']
+      ])});
 
     /* End panels, base channel and floor bolts. */
     for (const s of [-1, 1]) g.add(box(THREE, dark, 0.05, h, d, s * (w*n/2), h/2, 0));
@@ -431,6 +567,75 @@
 
     /* Lifting lugs on the skid corners. */
     for (const sx of [-1, 1]) for (const sz of [-1, 1]) lug(THREE, g, metal, sx*1.42, 0.36, sz*0.50);
+
+    /* ---- the parts that make it read as a machine rather than an assembly ----
+       Everything above was a correct set of major components sitting near each
+       other. What a packaged set actually looks like is those components
+       plumbed, belted, bolted and filtered together, and none of that was here
+       because each piece of it is a diagonal run or a small casting that was
+       not worth hand-solving a rotation for. tube() makes the runs cheap and
+       the static batching makes the small parts free. */
+
+    /* Sump flange below the block, standing proud of it the way a cast oil pan
+       does rather than continuing the block's own face. */
+    g.add(box(THREE, blk, 1.12, 0.11, 0.84, -0.55, 0.45, 0));
+    /* Spin-on oil filters off the side of the block. */
+    for (let i = 0; i < 2; i++) {
+      const f = cyl(THREE, mat, 0.075, 0.075, 0.20, 12, -0.95 + i*0.22, 0.66, 0.48);
+      f.rotation.x = Math.PI/2; g.add(f);
+    }
+    /* Starter motor, low on the flywheel end where it meets the alternator. */
+    const st = cyl(THREE, metal, 0.095, 0.095, 0.30, 12, 0.00, 0.52, -0.42);
+    st.rotation.z = Math.PI/2; g.add(st);
+    g.add(cyl(THREE, blk, 0.055, 0.055, 0.10, 10, 0.16, 0.52, -0.42));
+
+    /* Front crank pulley and its belt guard. The drive end of an engine is
+       never a flat face, and this is the end the camera passes on every
+       rotation. */
+    const pul = cyl(THREE, metal, 0.17, 0.17, 0.09, 16, -1.27, 0.72, 0);
+    pul.rotation.z = Math.PI/2; g.add(pul);
+    g.add(box(THREE, dark, 0.04, 0.70, 0.56, -1.31, 0.74, 0));
+    for (let i = 0; i < 4; i++) g.add(box(THREE, blk, 0.015, 0.05, 0.50, -1.34, 0.50 + i*0.16, 0));
+
+    /* Upper radiator hose, engine thermostat housing to the top tank. Routed
+       over the alternator and clear of the control panel. */
+    tubeRun(THREE, g, blk, [[0.02,1.16,0.28],[0.62,1.34,0.44],[1.22,1.18,0.32]], 0.072, dark);
+    /* Lower hose, water pump to the bottom tank, outboard of the alternator. */
+    tubeRun(THREE, g, blk, [[-0.10,0.56,0.52],[0.70,0.50,0.60],[1.22,0.44,0.44]], 0.062, dark);
+
+    /* Radiator top and bottom tanks with a filler cap, so the core is plumbed
+       into something instead of ending in air. */
+    for (const ty of [1.42, 0.34]) g.add(box(THREE, dark, 0.20, 0.13, 1.10, 1.33, ty, 0));
+    g.add(cyl(THREE, metal, 0.075, 0.075, 0.07, 12, 1.33, 1.52, 0.30));
+
+    /* Fuel: tank gauge, vent and a drain valve under the skid. */
+    g.add(cyl(THREE, M.gold, 0.055, 0.055, 0.02, 12, 1.16, 0.20, 0.63));
+    g.add(cyl(THREE, metal, 0.030, 0.030, 0.12, 8, 0.86, 0.40, 0.42));
+    g.add(cyl(THREE, M.copper, 0.035, 0.035, 0.07, 8, -1.50, 0.12, 0.30));
+    /* Fuel line, tank to the engine's lift pump. */
+    tubeRun(THREE, g, M.copper, [[-1.45,0.32,0.38],[-1.30,0.46,0.44],[-1.00,0.48,0.44]], 0.022);
+
+    /* Dipstick and its tube. */
+    tube(THREE, g, metal, [-0.20,0.52,0.44], [-0.20,0.98,0.50], 0.016, 8);
+    g.add(cyl(THREE, M.gold, 0.030, 0.030, 0.05, 8, -0.20, 1.01, 0.50));
+
+    /* Cable glands under the alternator terminal box, and the earth stud that
+       every one of these has to have. */
+    for (let i = 0; i < 3; i++) {
+      g.add(cyl(THREE, M.brass, 0.040, 0.040, 0.07, 10, 0.48 + i*0.14, 1.07, 0.09));
+    }
+    g.add(cyl(THREE, M.copper, 0.028, 0.028, 0.09, 8, 1.30, 0.42, 0.55));
+    tubeRun(THREE, g, M.copper, [[1.30,0.46,0.55],[1.44,0.30,0.58],[1.44,0.10,0.58]], 0.018);
+
+    /* Rating plate on the alternator terminal box: the numbers are the reason
+       the machine is on this page at all. */
+    decal(THREE, g, {
+      key:'genset-np', x:0.62, y:1.26, z:0.18, w:0.30, h:0.19, cw:300, ch:190,
+      draw: npDraw('GENERATING SET', [
+        ['STANDBY', '500 kW'], ['PRIME', '455 kW'],
+        ['VOLTS', '480Y/277'], ['PF', '0.8'], ['RPM', '1800']
+      ])
+    });
     return g;
   }
 
@@ -772,7 +977,15 @@
        inlays are 0.012-0.03 thick, so a bevel would consume the whole slab and
        round it into a lozenge. They also sit flat against a parent face where
        no edge is visible, so it would be vertices spent on nothing. */
-    if (RoundedBox && smallest > 0.05) {
+    /* The threshold was 0.05, which left every trim piece, cover plate, rail
+       and small bracket -- a large share of what is actually silhouetted
+       against the background -- with perfectly sharp edges, and a perfectly
+       sharp edge is the most reliable CG tell there is: it cannot catch the
+       thin highlight that runs along every real one. Lowered to 0.028, with the
+       radius still proportional so a thin plate gets a thin chamfer rather than
+       being rounded into a lozenge. Below that the part is a printed marking or
+       a vent slot lying flat on a parent face, where no edge is visible. */
+    if (RoundedBox && smallest > 0.028) {
       /* Proportional, but capped: a chamfer is a fixed small size on real
          equipment, not a fraction of the panel. Without the cap a large tank
          face turns into a pillow. */
@@ -792,8 +1005,16 @@
      *relative* detail (a bolt head still gets less than a transformer tank).
      Clamped at both ends: never coarser than 10, never finer than 48, since past
      that the extra triangles buy nothing at these screen sizes. */
-  const DETAIL = 2.0;
-  function segs(n){ return Math.max(10, Math.min(48, Math.round((n || 14) * DETAIL))); }
+  /* Raised per mount by opts.detail. A grid of 90px thumbnails and one 560px
+     hero are not the same picture and should not carry the same silhouette
+     budget: at thumbnail size a 10-sided bushing is indistinguishable from a
+     round one, and at hero size it is the most obvious thing on the model.
+     Segments are now nearly free -- the parts are merged into one draw call per
+     material, so a finer cylinder costs triangles, which there is room for, and
+     not submissions, which there was not. */
+  const DETAIL_BASE = 2.0;
+  let DETAIL = DETAIL_BASE;
+  function segs(n){ return Math.max(10, Math.min(64, Math.round((n || 14) * DETAIL))); }
 
   function cyl(THREE, m, rt,rb,h, seg, x,y,z){
     const c = new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,segs(seg)), m);
@@ -841,6 +1062,42 @@
       const l = box(THREE, m, o.w, o.h || 0.045, 0.02, o.x || 0, y, o.z);
       if (o.tilt) l.rotation.x = o.tilt;
       g.add(l);
+    }
+  }
+
+  /* A cylinder spanning two points. Hoses, conduit, cable drops, earth straps,
+     jumpers and fuel lines are all "a round thing running from here to there",
+     and having to write each one as a CylinderGeometry with a hand-solved
+     rotation is the reason the builders had almost none of them. Everything on
+     real equipment is connected to something else; the models were a set of
+     boxes sitting near each other. */
+  function tube(THREE, g, m, a, b, r, seg){
+    const A = new THREE.Vector3(a[0], a[1], a[2]);
+    const d = new THREE.Vector3(b[0] - a[0], b[1] - a[1], b[2] - a[2]);
+    const len = d.length();
+    if (!(len > 1e-6)) return null;
+    const c = new THREE.Mesh(new THREE.CylinderGeometry(r, r, len, segs(seg || 10)), m);
+    c.position.set(A.x + d.x / 2, A.y + d.y / 2, A.z + d.z / 2);
+    c.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.normalize());
+    g.add(c);
+    return c;
+  }
+
+  /* A run of tube through a list of points, with a collar at each joint so the
+     bends read as fittings rather than as two cylinders meeting at an angle. */
+  function tubeRun(THREE, g, m, pts, r, collar){
+    for (let i = 0; i < pts.length - 1; i++) tube(THREE, g, m, pts[i], pts[i + 1], r);
+    for (let i = 1; i < pts.length - 1; i++) {
+      const j = new THREE.Mesh(new THREE.SphereGeometry(r * 1.02, segs(10), segs(7)), m);
+      j.position.set(pts[i][0], pts[i][1], pts[i][2]);
+      g.add(j);
+    }
+    if (collar) {
+      for (const p of [pts[0], pts[pts.length - 1]]) {
+        const c = new THREE.Mesh(new THREE.CylinderGeometry(r * 1.22, r * 1.22, r * 0.7, segs(10)), collar);
+        c.position.set(p[0], p[1], p[2]);
+        g.add(c);
+      }
     }
   }
 
@@ -1091,6 +1348,43 @@
     g.add(box(THREE, M.dark, 0.16, 0.07, 0.03, 1.76, h*0.26, faceZ()));   // USB
     /* Pull-out asset tag between the bays and the vents. */
     g.add(box(THREE, M.dark, 0.10, h*0.34, 0.03, 0.72, h*0.5, faceZ()));
+
+    /* ---- the parts that are in your hands ----
+       Everything on this faceplate was something to look at. What you actually
+       touch on a rack server -- the ear handles you pull it out by, the rail
+       latches, the service label on the lid -- was missing, and at hero size
+       the faceplate is most of the silhouette. */
+
+    /* Rack-ear pull handles. */
+    for (const sx of [-1, 1]) {
+      g.add(box(THREE, metal, 0.05, h*0.62, 0.05, sx*((RW/2) + 0.07), h*0.5, RD/2 + 0.14));
+      for (const sy of [-1, 1]) {
+        g.add(box(THREE, metal, 0.05, 0.05, 0.14, sx*((RW/2) + 0.07), h*0.5 + sy*h*0.31, RD/2 + 0.08));
+      }
+    }
+
+    /* Diagnostic display, which on a 2U sits between the bays and the control
+       cluster and is the first thing anyone looks at in a cold aisle. */
+    if (u > 1) {
+      g.add(box(THREE, M.deep, 0.52, h*0.22, 0.02, 0.30, h*0.74, faceZ()));
+      decal(THREE, g, {key:'srv-lcd', w:0.46, h:h*0.17, x:0.30, y:h*0.74, z:faceZ()+0.016,
+        cw:240, ch:90, rough:0.25, metal:0.0,
+        draw: function(x,W,H){
+          x.fillStyle='#0A1A12'; x.fillRect(0,0,W,H);
+          x.fillStyle='#5BE39B'; x.textBaseline='middle';
+          x.font='bold '+Math.round(H*0.34)+'px "IBM Plex Mono",monospace';
+          x.fillText('NODE-07  OK', W*0.07, H*0.52);
+        }});
+    }
+
+    /* Chassis lid seam and its release latch, running back from the faceplate. */
+    g.add(box(THREE, M.dark, RW - 0.26, 0.012, RD - 0.16, 0, h + 0.012, -0.02));
+    g.add(box(THREE, metal, 0.30, 0.035, 0.12, 0, h + 0.03, RD/2 - 0.16));
+
+    /* Slide-rail members down each flank -- how it is held in the rack. */
+    for (const sx of [-1, 1]) {
+      g.add(box(THREE, metal, 0.035, h*0.34, RD - 0.22, sx*(RW/2 + 0.025), h*0.5, -0.06));
+    }
     return g;
   }
   function buildSwitchNet(THREE, color){
@@ -1425,6 +1719,39 @@
       g.add(box(THREE, M.dark, 0.42, 0.16, 0.30, sx*0.86, 0.14, sz*0.60));
       g.add(cyl(THREE, blk, 0.06, 0.06, 0.18, 8, sx*0.86, 0.16, sz*0.60));
     }
+    /* ---- the connections ----
+       A motor that is not wired to anything and not coupled to anything is a
+       casting, not a machine, and the load at the end of a one-line is the
+       whole reason this shape is on the page. */
+
+    /* Flexible conduit from the terminal-box gland down to the base, which is
+       where the supply actually arrives. */
+    tubeRun(THREE, g, M.dark, [[-0.05,1.86,0.52],[-0.05,1.60,0.86],[-0.05,0.90,0.96],[-0.05,0.32,0.90]], 0.075, metal);
+
+    /* Coupling half on the shaft, with its set screws -- the drive end now
+       drives something. */
+    const cph = cyl(THREE, M.dark, 0.28, 0.28, 0.26, 20, 1.92, 1.0, 0);
+    cph.rotation.z = Math.PI/2; g.add(cph);
+    for (let i = 0; i < 4; i++) {
+      const a = (i/4) * Math.PI * 2;
+      g.add(cyl(THREE, metal, 0.030, 0.030, 0.05, 6, 1.92, 1.0 + Math.sin(a)*0.29, Math.cos(a)*0.29));
+    }
+
+    /* Grease nipples and relief plugs on both bearing housings. */
+    for (const sx of [-1, 1]) {
+      g.add(cyl(THREE, M.brass, 0.028, 0.028, 0.07, 8, sx*1.10, 1.36, 0.10));
+      g.add(cyl(THREE, M.brass, 0.022, 0.022, 0.05, 8, sx*1.10, 0.66, 0.10));
+    }
+
+    /* Earthing lug on the near foot. Bonding the frame is a code requirement,
+       not a detail. */
+    g.add(box(THREE, M.copper, 0.10, 0.07, 0.030, 0.86, 0.26, 0.76));
+    g.add(cyl(THREE, M.brass, 0.022, 0.022, 0.05, 8, 0.86, 0.26, 0.80).rotateX(Math.PI/2));
+    tubeRun(THREE, g, M.copper, [[0.86,0.26,0.82],[1.00,0.16,0.88],[1.00,0.04,0.78]], 0.018);
+
+    /* Condensate drain plugs at the bottom of each end bell. */
+    for (const sx of [-1, 1]) g.add(cyl(THREE, M.brass, 0.030, 0.030, 0.05, 8, sx*1.06, 0.24, 0.30));
+
     g.add(box(THREE, M.dark, 2.30, 0.10, 1.44, 0, 0.05, 0));                   // base rails
     return g;
   }
@@ -1572,6 +1899,68 @@
     g.add(box(THREE, M.dark, 0.46, 0.36, 0.05, W/2 - 0.36, 2.42, fz + 0.02));
     g.add(box(THREE, M.lit, 0.30, 0.16, 0.02, W/2 - 0.36, 2.46, fz + 0.05));
     g.add(cyl(THREE, metal, 0.06, 0.06, 0.22, 8, -W/2 + 0.24, 0.16, fz - 0.20).rotateX(Math.PI/2));
+
+    /* ---- the pipework, and the parts that make it a serviceable unit ----
+       The chilled-water pipes stopped in mid-air above the cabinet and never
+       entered it, which is the one connection the whole machine exists to
+       make: cooling load tracks the electrical load through these two pipes. */
+
+    /* The risers already pass through the cabinet roof: they run from y =
+       H-0.28 up to H+0.72 and carry their isolation valve at H+0.52. What they
+       lacked was anything holding them there -- an insulated pipe standing on
+       a roof with no flange, no banding and no support is the part of this
+       model that reads as a drawing rather than an install. */
+    const PB = H - 0.28;                                     // riser foot
+    for (const sp of [-1, 1]) {
+      /* Flange where the riser passes through the cabinet roof. */
+      g.add(cyl(THREE, metal, 0.21, 0.21, 0.04, 16, sp*0.68, PB + 0.06, -0.42));
+      /* Banding round the lagging, below the support and clear of the valve. */
+      g.add(cyl(THREE, metal, 0.178, 0.178, 0.035, 16, sp*0.68, PB + 0.26, -0.42));
+    }
+    /* Riser support bracket off the cabinet roof, with a clamp round each pipe.
+       Chilled-water pipe this size is always anchored at the unit. */
+    g.add(box(THREE, metal, 1.80, 0.045, 0.09, 0, H + 0.12, -0.42));
+    for (const sp of [-1, 1]) {
+      g.add(box(THREE, metal, 0.07, 0.14, 0.09, sp*0.86, H + 0.05, -0.42));
+      g.add(cyl(THREE, metal, 0.19, 0.19, 0.035, 16, sp*0.68, H + 0.12, -0.42));
+    }
+
+    /* Condensate pump box and its discharge line, the other pipe every one of
+       these has and nobody draws. */
+    g.add(box(THREE, M.deep, 0.34, 0.16, 0.22, -W/2 + 0.30, 0.30, fz - 0.10));
+    tubeRun(THREE, g, metal, [[-W/2 + 0.30, 0.38, fz - 0.10],[-W/2 + 0.30, 0.62, fz - 0.02],[-W/2 + 0.62, 0.62, fz - 0.02]], 0.022);
+
+    /* Filter differential-pressure gauge beside the controls -- the instrument
+       that says when the filter section behind that door needs changing. */
+    g.add(cyl(THREE, M.dark, 0.105, 0.105, 0.05, 16, -W/2 + 0.40, 2.42, fz + 0.02).rotateX(Math.PI/2));
+    g.add(cyl(THREE, M.porcelain, 0.085, 0.085, 0.02, 16, -W/2 + 0.40, 2.42, fz + 0.05).rotateX(Math.PI/2));
+    g.add(box(THREE, M.gold, 0.012, 0.060, 0.012, -W/2 + 0.42, 2.445, fz + 0.062));
+
+    /* Hinges and a latch on the filter door, which had neither. */
+    for (const hy of [0.26, 0.78]) {
+      g.add(cyl(THREE, metal, 0.042, 0.042, 0.13, 8, -(W - 0.24)/2 + 0.03, hy, fz + 0.035));
+    }
+    g.add(box(THREE, metal, 0.05, 0.20, 0.05, (W - 0.24)/2 - 0.08, 0.52, fz + 0.05));
+
+    /* Side service panel with quarter-turn fasteners. */
+    g.add(box(THREE, M.dark, 0.03, H - 0.52, D - 0.30, W/2 + 0.005, 1.42, 0));
+    for (const py of [0.62, 1.42, 2.22]) for (const pz of [-0.42, 0.42]) {
+      g.add(cyl(THREE, metal, 0.035, 0.035, 0.03, 8, W/2 + 0.025, py, pz).rotateZ(Math.PI/2));
+    }
+
+    /* BMS/control conduit leaving the top of the cabinet. */
+    tubeRun(THREE, g, M.dark, [[W/2 - 0.36, H + 0.02, 0.30],[W/2 - 0.36, H + 0.30, 0.30],[W/2 + 0.14, H + 0.30, 0.30]], 0.045, metal);
+
+    /* Rating plate: the tonnage and the airflow are what a sizing calculation
+       hands you, and this is where they live. */
+    decal(THREE, g, {key:'crah-np', w:0.40, h:0.26, x: -W/2 - 0.005, y: 1.70, z: 0.10,
+      ry: -Math.PI/2, cw:280, ch:180, metal:0.35, rough:0.42,
+      draw: npDraw('COMPUTER-ROOM AIR HANDLER', [
+        ['CAPACITY', '30 tons'],
+        ['AIRFLOW',  '12,000 cfm'],
+        ['CHW',      '45/57 F'],
+        ['VOLTS',    '480/3/60']
+      ])});
 
     /* Plinth with levelling feet. */
     g.add(box(THREE, M.dark, W + 0.20, 0.14, D + 0.20, 0, 0.07, 0));
@@ -2591,10 +2980,6 @@
       const dir = dirLight = new THREE.DirectionalLight(0xffffff, 0.85);
       dir.position.set(4,6,5); scene.add(dir);
       dir.castShadow = true;
-      /* 2048 rather than 1024. The shadow camera is fitted tightly to each
-         model, so the map is spread over a small world volume and the extra
-         resolution goes straight into the self-shadowing that gives radiator
-         fins, louvres and fan blades their depth. */
       /* 2048 is spread over a frustum fitted tightly to one model, so it buys
          real self-shadowing detail rather than general softness -- but it is
          also a 16MB depth target, which is not a sensible thing to allocate on
@@ -2615,7 +3000,19 @@
          the subject without tearing down and rebuilding a WebGL context every
          seven seconds, which is what it used to do. */
       function install(buildFn){
-        model = buildFn(THREE);
+        /* Set around the build and restored after it. Builders run
+           synchronously, so no other mount can observe the raised value. */
+        const _d = DETAIL;
+        /* Capped by tier. Finer cylinders cost triangles, which every tier has
+           room for, but they also cost CPU: each one is a geometry built, a
+           matrix baked and vertices copied during the merge, all on the main
+           thread while the reader is waiting. That budget is not the same on
+           a phone as on a workstation. */
+        DETAIL = o.detail > 0
+          ? (T === 0 ? Math.min(o.detail, DETAIL_BASE)
+            : T === 1 ? Math.min(o.detail, 2.6) : o.detail)
+          : DETAIL_BASE;
+        try { model = buildFn(THREE); } finally { DETAIL = _d; }
         separateCoplanar(THREE, model);
         surfCache = addSurfaceDetail(THREE, model);
         /* Before the first render, so the original per-part geometries are

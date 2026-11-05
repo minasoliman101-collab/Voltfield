@@ -455,7 +455,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="tp-grid">
           <div class="tp-col">
             <span class="navdrop-grp">Calculate</span>
-            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>23 tools, method shown for each</em></a>
             <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
           </div>
           <div class="tp-col">
@@ -536,8 +536,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="ltband band-accent">
   <div class="ltband-in">
     <div class="ltgrid">
-      <a class="ltfig" href="engineering-calculators.html"><div class="k">20</div><div class="l">Engineering calculators, each showing its method</div></a>
-      <a class="ltfig" href="guides.html"><div class="k">18</div><div class="l">In-depth technical guides</div></a>
+      <a class="ltfig" href="engineering-calculators.html"><div class="k">23</div><div class="l">Engineering calculators, each showing its method</div></a>
+      <a class="ltfig" href="guides.html"><div class="k">52</div><div class="l">In-depth technical guides</div></a>
       <a class="ltfig" href="free-tools.html"><div class="k">7</div><div class="l">Interactive design and practice tools</div></a>
       <a class="ltfig" href="glossary.html"><div class="k">56</div><div class="l">Glossary terms, defined plainly</div></a>
     </div>
@@ -792,8 +792,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
        Ambient occlusion stays requested: this is one large hero view rather
        than a grid, so it can afford the post-process pass on hardware that has
        the headroom, and the library declines it on hardware that does not. */
-    if(!VF3D.swapShape(handle,p.id,p.color,{ao:true})){
-      handle=VF3D.mount(stage,p.id,p.color,{ao:true});
+    var VIEW={ao:true,detail:3.2};
+    if(!VF3D.swapShape(handle,p.id,p.color,VIEW)){
+      handle=VF3D.mount(stage,p.id,p.color,VIEW);
     }
     document.getElementById('showcaseName').textContent=p.name;
     document.getElementById('showcaseHint').textContent=p.hint;
