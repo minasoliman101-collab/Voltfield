@@ -109,10 +109,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="artban-in">
     <div class="eyebrow">Changelog</div>
     <h1>What's new</h1>
-    <p class="dek">A dated log of what's shipped — new guides, calculators, and tools, in the order they landed. Most recent first. Recent themes: sourcing-compliance guides (grid interconnection, Buy America), site-wide search, and ways to find every free tool and calculator in one place.</p>
+    <p class="dek">A dated log of what's shipped — new guides, calculators, and tools, in the order they landed. Most recent first. Recent themes: NEC and standards references written method-first, calculators that show their working, and giving each tool a page of its own.</p>
   </div>
 </section>
 <div class="wrap">
+
+  <div class="entry">
+    <div class="date">November 4, 2026</div>
+    <ul>
+      <li>Four guides on questions where the published answers contradict each other. <a class="inline" href="guide-spd-types-1-2-3.html">SPD Types 1, 2 and 3</a> &mdash; the type number is a permitted location, not a quality grade, and Type 1 is the only one allowed on the supply side of the service disconnect. <a class="inline" href="guide-nema-enclosure-types.html">NEMA Enclosure Types</a> &mdash; the numbers are not a ladder, Type 12 is indoor while the lower-numbered Type 3R is outdoor, and an IP code cannot be converted into a Type rating. <a class="inline" href="guide-panelboard-vs-switchboard-vs-switchgear.html">Panelboard vs. Switchboard vs. Switchgear</a> &mdash; no ampere threshold separates them; the listing standard and the short-time rating do. <a class="inline" href="guide-nec-220-87-existing-load.html">NEC 220.87</a> &mdash; measuring an existing load instead of calculating it.</li>
+      <li>Six more guides: <a class="inline" href="guide-nec-705-supply-side-vs-load-side.html">NEC 705 supply-side vs. load-side</a>, including the breaker position the 120% allowance depends on and the 100% case that applies without it; <a class="inline" href="guide-interrupting-rating-vs-sccr.html">interrupting rating vs. SCCR</a>; <a class="inline" href="guide-nec-240-87-arc-energy-reduction.html">NEC 240.87 arc energy reduction</a>; <a class="inline" href="guide-ev-load-management-625-42.html">EV load management under NEC 625.42</a>; <a class="inline" href="guide-vfd-vs-soft-starter.html">VFD vs. soft starter</a>; and <a class="inline" href="guide-ats-vs-sts-vs-static-bypass.html">ATS vs. STS vs. static bypass</a>.</li>
+      <li>Three converters that were buried inside other pages now have their own, with more capability than before. <a class="inline" href="calculators/awg-to-mm2.html">AWG to mm&sup2;</a> is computed from the AWG geometric definition across the full range rather than from a 21-row table, and names the nearest IEC standard size and which way it rounds. <a class="inline" href="calculators/conduit-fill.html">Conduit fill</a> now takes mixed conductor sizes, which is the normal case and the one the old widget could not do. <a class="inline" href="calculators/kva-to-kw.html">kVA to kW</a> solves the whole power triangle from any two values and checks a third against them.</li>
+      <li>Two new calculators: <a class="inline" href="calculators/three-phase-power.html">three-phase power</a>, which solves for whichever value is unknown and separates line from phase figures for delta and wye, and <a class="inline" href="calculators/btu-to-tons.html">BTU, tons and kW</a>, including IT load to cooling tons.</li>
+      <li>Correction: the NEMA-to-IP cross-reference on <a class="inline" href="calculators/reference-tables.html">Reference Tables</a> presented a two-way equivalence. It now states that the mapping reads in one direction only &mdash; a NEMA Type can meet or exceed an IP degree, but an IP degree never equals a Type &mdash; and notes that NEC 110.28 does not accept IP ratings as a substitute.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="date">November 3, 2026</div>
+    <ul>
+      <li>Six new calculators, each on its own page with the method and a worked example below the tool: <a class="inline" href="calculators/amps-to-kw.html">amps to kW</a>, kW to amps, kVA to amps, HP to kW, watts to amps, and <a class="inline" href="calculators/wire-size.html">wire size</a>. The wire size calculator runs both checks the NEC actually requires &mdash; the termination temperature limit at 125% of a continuous load, and ambient plus bundling adjustment against the real load &mdash; and reports whichever demands more copper.</li>
+      <li>Three comparison guides: <a class="inline" href="guide-delta-vs-wye.html">delta vs. wye</a>, <a class="inline" href="guide-ground-vs-neutral.html">ground vs. neutral</a>, and <a class="inline" href="guide-fuse-vs-breaker.html">fuse vs. circuit breaker</a>.</li>
+      <li>Three NEC guides written method-first, without reproducing the code tables: <a class="inline" href="guide-nec-110-26-working-space.html">110.26 working space</a>, <a class="inline" href="guide-nec-250-122-egc-sizing.html">250.122 equipment grounding conductor sizing</a>, and <a class="inline" href="guide-nec-430-250-motor-fla.html">430.250 motor full-load current</a>.</li>
+      <li>Three data-center reference guides: <a class="inline" href="guide-uptime-institute-tiers.html">Uptime Institute Tiers</a>, which leads on the fact that &ldquo;Tier&rdquo; is a trademark and the familiar availability percentages are not in the current standard; <a class="inline" href="guide-ansi-device-numbers.html">ANSI device numbers</a>; and <a class="inline" href="guide-rack-power-density.html">rack power density</a>.</li>
+    </ul>
+  </div>
 
   <div class="entry">
     <div class="date">October 3, 2026</div>
@@ -142,6 +163,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <li>15 new guides: <a class="inline" href="guide-ups-sizing.html">How to Size a UPS</a>, <a class="inline" href="guide-transformer-impedance.html">Transformer Impedance (%Z)</a>, <a class="inline" href="guide-n-plus-1-vs-2n-redundancy.html">N+1 vs. 2N Redundancy</a>, <a class="inline" href="guide-bess-c-rate.html">BESS C-Rate</a>, <a class="inline" href="guide-harmonics-ieee-519.html">Harmonics &amp; IEEE 519</a>, <a class="inline" href="guide-generator-sizing.html">Standby Generator Sizing</a>, <a class="inline" href="guide-arc-flash-ppe-categories.html">Arc-Flash PPE Categories</a>, <a class="inline" href="guide-415v-vs-480v-distribution.html">415 V vs. 480 V Distribution</a>, <a class="inline" href="guide-ground-fault-protection.html">Ground-Fault Protection</a>, <a class="inline" href="guide-fully-rated-vs-series-rated.html">Fully Rated vs. Series Rated Breakers</a>, <a class="inline" href="guide-cable-ampacity-derating.html">Cable Ampacity Derating</a>, <a class="inline" href="guide-continuous-load-80-percent-rule.html">The 80% Rule &amp; Continuous Loads</a>, <a class="inline" href="guide-ups-topologies.html">UPS Topologies</a>, <a class="inline" href="guide-grid-forming-vs-grid-following.html">Grid-Forming vs. Grid-Following Inverters</a>, <a class="inline" href="guide-kw-vs-kva.html">kW vs. kVA</a>.</li>
       <li>The <a class="inline" href="calculators/voltage-drop.html">voltage drop</a>, <a class="inline" href="calculators/transformer-sizing.html">transformer sizing</a> and <a class="inline" href="calculators/power-factor.html">power factor</a> calculators can be embedded on other sites.</li>
       <li>Optional email updates: at most one short email a month when a new guide or calculator is published.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="date">August 25&ndash;31, 2026</div>
+    <ul>
+      <li>Voltfield is an engineering reference and a source of data, not a place to buy parts, and the site now says so throughout. The sourcing-desk framing, the quote machinery and the remaining supply-channel language are gone.</li>
+      <li>The 243 per-family <code>/parts/</code> pages were retired. Measured against the guides they were largely duplicates &mdash; a median of about a third distinctive text, and one page had a single unique sentence in it &mdash; which made it hard for a search engine to tell what the site was for. Every one of those URLs now redirects to its family in the <a class="inline" href="voltfield-supply-catalog.html">catalog</a>, so no link anywhere is broken.</li>
+      <li>The Tools menu became a single pane you can scan instead of a long dropdown, and a new <a class="inline" href="packets.html">Reference Packets</a> section covers the topics people most often want collected in one place.</li>
+      <li>The street address has been removed from the site.</li>
+      <li>A full accessibility pass against the WCAG POUR principles, closing 202 findings: table row and column headers, focus order and visible focus, screen-reader labelling, colour contrast, and a reduced-motion option on the 3D models. The underlying cause of the 3D model glitching was fixed at the same time.</li>
     </ul>
   </div>
 
