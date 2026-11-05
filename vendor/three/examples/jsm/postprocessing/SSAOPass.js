@@ -22,7 +22,7 @@ import {
 	Vector3,
 	WebGLRenderTarget,
 	ZeroFactor
-} from '../../../build/three.module.js';
+} from '../../../build/three.module.min.js';
 import { Pass, FullScreenQuad } from './Pass.js';
 import { SimplexNoise } from '../math/SimplexNoise.js';
 import { SSAOShader } from '../shaders/SSAOShader.js';

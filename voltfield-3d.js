@@ -20,7 +20,14 @@
      module graph (13 files, three plus the four postprocessing passes and
      their shaders) now ships from this origin under vendor/three/, so the 3D
      views have no external dependency at all. */
-  const THREE_URL = '/vendor/three/build/three.module.js';
+  /* The minified build, generated from the unminified one next to it by
+     scripts/build-three.sh and committed alongside it. Three ships r160 as
+     1,295KB of commented source; the browser has to lex all of it before a
+     single triangle is drawn, and this page's whole job on a phone is to not
+     do that. Minifying halves it to 652KB raw and takes the brotli transfer
+     from 197KB to 136KB. The readable build stays in the tree, unreferenced,
+     so the minified one can be regenerated and diffed against its source. */
+  const THREE_URL = '/vendor/three/build/three.module.min.js';
   let threeModPromise = null;
   function loadThree(){
     if (!threeModPromise) threeModPromise = import(THREE_URL);
@@ -83,6 +90,43 @@
       });
     }
     return ppPromise;
+  }
+
+  /* ---------- device tier ----------
+     The render settings below this point were all sized for the machine the
+     library was developed on: a 2048x2048 shadow map, a 1.5x supersample, a 4x
+     multisampled half-float composer and a two-pass SSAO prepass, handed to
+     every visitor including a mid-range phone on a bus. The picture those
+     settings buy is worth having on hardware that can draw it and worth nothing
+     at all on hardware that drops to 12fps producing it.
+
+     Read once per page, from what the platform will actually tell us. No user
+     agent sniffing: the question is not which phone this is, it is how many
+     cores and how much memory it has and whether the person asked us to go easy
+     on their data. Where an API is missing the answer falls to the middle tier
+     rather than the top one, because the devices that do not report are
+     overwhelmingly the older ones.
+
+     0 = minimal, 1 = standard, 2 = full. */
+  let _tier = null;
+  function tier(){
+    if (_tier !== null) return _tier;
+    const c = navigator.connection || {};
+    const cores = navigator.hardwareConcurrency || 0;
+    /* GB, quantised by the UA to 0.25/0.5/1/2/4/8. Chromium only; 0 elsewhere. */
+    const mem = navigator.deviceMemory || 0;
+    let coarse = false;
+    try { coarse = matchMedia('(pointer: coarse)').matches; } catch (e) {}
+
+    if (c.saveData || /(^|-)[23]g$/.test(c.effectiveType || '')) { _tier = 0; return 0; }
+    if ((cores && cores <= 4) || (mem && mem <= 2)) { _tier = 0; return 0; }
+    /* A touch device with reported headroom still renders on a thermally
+       limited GPU, so it gets the standard tier rather than the full one: no
+       SSAO, which submits the whole scene twice more per frame and is the
+       single most expensive thing in here. */
+    if (coarse) { _tier = 1; return 1; }
+    if (cores >= 8 || mem >= 8) { _tier = 2; return 2; }
+    _tier = 1; return 1;
   }
 
   /* ---------- shape builders: each returns a THREE.Group centered near the origin ---------- */
@@ -545,6 +589,116 @@
         m.needsUpdate = true;
       }
     });
+    /* Handed back so a caller that replaces the model can free these. The
+       textures are per-call (one WebGL context's worth), unlike the canvas
+       behind them, which is shared at module scope. */
+    return cache;
+  }
+
+  /* ---------- static batching ----------
+     Measured on the homepage showcase before this existed: the hero models drew
+     roughly 16,000 triangles per frame through roughly 400 draw calls. That
+     ratio is the whole performance story. 16,000 triangles is nothing -- a phone
+     from 2016 draws that without noticing -- but every one of the hundred or so
+     boxes and cylinders a builder emits is its own mesh, so it is its own draw
+     call, and the scene is submitted up to four times a frame (shadow map, SSAO
+     depth, SSAO normals, colour). The cost was never the geometry. It was the
+     per-mesh submission overhead, and it is what capped how much detail the
+     builders could afford.
+
+     So: once the model is built, nudged and textured, collapse every static
+     mesh sharing a material into one merged mesh. Nothing about the picture
+     changes -- identical triangles, identical materials, identical UVs, each
+     part's transform baked in -- but the submission count falls to roughly the
+     number of distinct materials in the model.
+
+     Deliberately not merged:
+       - InstancedMesh, already one draw call by construction
+       - transparent materials: merging fixes the draw order of the faces inside
+         the merged mesh, and a glass door or a POD shell has to sort per-face
+         against what is behind it
+       - skinned or morphed meshes, whose vertices move after this runs
+       - a mesh with children, which would be removed along with its parent
+       - geometries whose attribute set differs from the group's, which would
+         concatenate into garbage rather than fail loudly
+
+     A mirrored transform (negative determinant) has its winding reversed on the
+     way in, or the part turns inside out once its matrix is baked.
+
+     Call only before the first render, which is where mountScene calls it: the
+     original geometries have never been uploaded at that point, so dropping
+     them frees nothing on the GPU and cannot pull a buffer out from under a
+     mesh that is still being drawn. */
+  function flipWinding(geo){
+    for (const name in geo.attributes) {
+      const a = geo.attributes[name], n = a.itemSize, arr = a.array;
+      for (let i = 0; i + 3 * n <= arr.length; i += 3 * n) {
+        for (let k = 0; k < n; k++) {
+          const t = arr[i + n + k]; arr[i + n + k] = arr[i + 2 * n + k]; arr[i + 2 * n + k] = t;
+        }
+      }
+    }
+  }
+
+  const MERGE_SIG = 'normal,position,uv';
+  function mergeByMaterial(THREE, root){
+    root.updateMatrixWorld(true);
+    const groups = new Map();
+    root.traverse(function(n){
+      if (!n.isMesh || n.isInstancedMesh || n.isSkinnedMesh) return;
+      if (!n.visible || n.children.length) return;
+      if (!n.geometry || !n.material || Array.isArray(n.material)) return;
+      if (n.morphTargetInfluences && n.morphTargetInfluences.length) return;
+      if (n.material.transparent) return;
+      if (Object.keys(n.geometry.attributes).sort().join(',') !== MERGE_SIG) return;
+      /* Keyed by parent as well as material, so a subassembly the caller moves
+         afterwards -- the rack and POD builders position whole units -- keeps
+         moving as one piece instead of being welded to its neighbours. */
+      const key = n.material.uuid + '|' + (n.parent ? n.parent.uuid : 'root');
+      let e = groups.get(key);
+      if (!e) { e = { mat: n.material, parent: n.parent || root, meshes: [] }; groups.set(key, e); }
+      e.meshes.push(n);
+    });
+
+    let batches = 0, collapsed = 0;
+    groups.forEach(function(e){
+      if (e.meshes.length < 2) return;
+      const parts = [];
+      let verts = 0, bad = false;
+      for (const n of e.meshes) {
+        try {
+          const g = n.geometry.index ? n.geometry.toNonIndexed() : n.geometry.clone();
+          g.applyMatrix4(n.matrix);
+          if (n.matrix.determinant() < 0) flipWinding(g);
+          parts.push(g);
+          verts += g.attributes.position.count;
+        } catch (err) { bad = true; break; }
+      }
+      /* Any part that will not transform leaves the whole group unmerged rather
+         than half-merged, which would drop geometry out of the picture. */
+      if (bad || !verts) return;
+      const pos = new Float32Array(verts * 3), nor = new Float32Array(verts * 3), uv = new Float32Array(verts * 2);
+      let vo = 0;
+      for (const g of parts) {
+        const c = g.attributes.position.count;
+        pos.set(g.attributes.position.array.subarray(0, c * 3), vo * 3);
+        nor.set(g.attributes.normal.array.subarray(0, c * 3), vo * 3);
+        uv.set(g.attributes.uv.array.subarray(0, c * 2), vo * 2);
+        vo += c;
+      }
+      const out = new THREE.BufferGeometry();
+      out.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+      out.setAttribute('normal', new THREE.BufferAttribute(nor, 3));
+      out.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
+      const mesh = new THREE.Mesh(out, e.mat);
+      mesh.name = 'batch';
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      e.parent.add(mesh);
+      for (const n of e.meshes) if (n.parent) n.parent.remove(n);
+      batches++; collapsed += e.meshes.length;
+    });
+    return { batches: batches, collapsed: collapsed };
   }
 
   /* ---------- material library ----------
@@ -2283,6 +2437,31 @@
     }, merged);
   };
 
+  /* Replace the subject of a live mount, reusing its WebGL context. Same
+     arguments as VF3D.mount with the handle in place of the container.
+
+     Returns false if the handle predates this (or is not one), so a caller can
+     fall back to mount() rather than silently showing nothing.
+
+     Every view option is restated, not merged: the options object behind the
+     mount persists across swaps, so a shape with a camera hint followed by one
+     without would otherwise keep the first shape's angle. Writing undefined is
+     the same as absent to every reader of these, which all test for null. */
+  VF3D.swapShape = function(handle, shapeId, colorHex, opts){
+    if (!handle || typeof handle.swap !== 'function') return false;
+    if (!VF3D.hasShape(shapeId)) return false;
+    const color = normColor(colorHex);
+    const hint = VIEW_HINT[shapeId] || {};
+    const merged = { phi: undefined, theta: undefined, zoom: undefined, yBias: undefined };
+    for (const k in hint) merged[k] = hint[k];
+    if (opts) for (const k in opts) merged[k] = opts[k];
+    if (merged.label == null) {
+      merged.label = String(shapeId || '').replace(/[-_]+/g, ' ').trim() || 'power equipment';
+    }
+    handle.swap(function(THREE){ return resolveBuilder(shapeId)(THREE, color); }, merged);
+    return true;
+  };
+
   function normColor(c){
     if (typeof c === 'number') return c;
     return parseInt(String(c == null ? '2B6CB0' : c).replace('#',''), 16);
@@ -2294,6 +2473,10 @@
   VF3D.mountScene = function(container, build, opts){
     const o = opts || {};
     let disposed = false, renderer, camera, orbit, animId, ro, envRT, composer;
+    /* Held across a swap: the context, the environment map, the lights and the
+       composer all outlive any one model. */
+    let scene, model, dirLight, surfCache, visIO, onVis, dirTargetIn = false, onScreen = true;
+    let swap = null, runRef = null;
 
     /* RoundedBoxGeometry has to be resolved before build() runs, because box()
        reaches for it synchronously. Fetched in parallel with three and capped
@@ -2304,13 +2487,27 @@
       if (disposed) return;
       const w = container.clientWidth || 300, h = container.clientHeight || 260;
 
-      const scene = new THREE.Scene();
+      scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(38, w/h, 0.1, 100);
 
       // preserveDrawingBuffer keeps the last frame readable after render, which
       // lets a viewer right-click-save the 3D view (and makes the shape library
       // testable by reading frames back). Negligible cost at these sizes.
-      renderer = new THREE.WebGLRenderer({antialias:true, alpha:true, preserveDrawingBuffer:true});
+      const T = tier();
+      renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+        /* preserveDrawingBuffer keeps the last frame readable after render,
+           which lets a viewer right-click-save the 3D view and makes the shape
+           library testable by reading frames back. It is not free: it stops the
+           driver discarding the buffer at the end of a frame, which on a
+           tile-based mobile GPU means resolving and writing out the whole
+           surface every frame. Kept where it is cheap and where someone might
+           actually use it; dropped on touch hardware, where nobody right-clicks
+           and the bandwidth is the scarce thing. */
+        preserveDrawingBuffer: T === 2,
+        powerPreference: T === 2 ? 'high-performance' : 'default'
+      });
       /* Supersample on non-retina displays. A plain 1.0 device ratio renders
          one sample per screen pixel, which MSAA only partly rescues: MSAA
          antialiases geometry EDGES but not shading, so specular glints on the
@@ -2321,8 +2518,17 @@
          these canvases (a few hundred px square, a handful of thousand
          triangles) absorb easily, while 2.0 on an already-2x display would be
          4x for no visible gain. Retina screens are left at 2. */
+      /* A phone reports devicePixelRatio 3, so the old floor-and-cap handed it
+         2.0 -- four times the fragment work of 1.0, on the weakest GPU of the
+         three tiers, to supersample a canvas a few hundred pixels across. The
+         supersample is there to antialias SHADING, which MSAA cannot do, and
+         1.5 already does that; past it the returns are invisible and the cost
+         is quadratic. */
       const _dpr = window.devicePixelRatio || 1;
-      renderer.setPixelRatio(Math.min(Math.max(_dpr, 1.5), 2));
+      renderer.setPixelRatio(
+        T === 0 ? Math.min(_dpr, 1) :
+        T === 1 ? Math.min(_dpr, 1.5) :
+                  Math.min(Math.max(_dpr, 1.5), 2));
       /* Record the GPU's real anisotropic-filtering limit once. Textures were
          pinned at 4; hardware typically allows 16, and the difference shows on
          any surface viewed at a shallow angle -- which here means every
@@ -2365,7 +2571,11 @@
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.15;
       renderer.shadowMap.enabled = true;
-      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      /* The soft filter takes several taps per fragment. Worth it where there is
+         headroom; on the minimal tier a single tap keeps the self-shadowing
+         that gives the fins and louvres their depth, which is the point of
+         having shadows at all here, and drops the rest. */
+      renderer.shadowMap.type = T === 0 ? THREE.PCFShadowMap : THREE.PCFSoftShadowMap;
 
       container.innerHTML = '';
       container.appendChild(renderer.domElement);
@@ -2378,14 +2588,19 @@
          all of the specular, so the previous intensities double-count and wash
          the models out. */
       scene.add(new THREE.HemisphereLight(0xffffff, 0x22334C, 0.30));
-      const dir = new THREE.DirectionalLight(0xffffff, 0.85);
+      const dir = dirLight = new THREE.DirectionalLight(0xffffff, 0.85);
       dir.position.set(4,6,5); scene.add(dir);
       dir.castShadow = true;
       /* 2048 rather than 1024. The shadow camera is fitted tightly to each
          model, so the map is spread over a small world volume and the extra
          resolution goes straight into the self-shadowing that gives radiator
          fins, louvres and fan blades their depth. */
-      dir.shadow.mapSize.set(2048, 2048);
+      /* 2048 is spread over a frustum fitted tightly to one model, so it buys
+         real self-shadowing detail rather than general softness -- but it is
+         also a 16MB depth target, which is not a sensible thing to allocate on
+         a phone for a decorative hero. */
+      const _sm = T === 2 ? 2048 : 1024;
+      dir.shadow.mapSize.set(_sm, _sm);
       /* Shadow acne on this geometry comes from the many thin coplanar plates
          (louvre slats, faceplate details, PCB pads). normalBias handles those
          far better than depth bias alone, which would detach contact shadows. */
@@ -2394,171 +2609,232 @@
       const fill = new THREE.DirectionalLight(0xAFC0D3, 0.22);
       fill.position.set(-4,2,-3); scene.add(fill);
 
-      const model = build(THREE);
-      separateCoplanar(THREE, model);
-      scene.add(model);
-      addSurfaceDetail(THREE, model);
+      /* Everything from here to the end of the framing pass depends only on
+         WHICH model is being shown, not on the context, the lights or the
+         composer. Pulled into a function so the homepage carousel can replace
+         the subject without tearing down and rebuilding a WebGL context every
+         seven seconds, which is what it used to do. */
+      function install(buildFn){
+        model = buildFn(THREE);
+        separateCoplanar(THREE, model);
+        surfCache = addSurfaceDetail(THREE, model);
+        /* Before the first render, so the original per-part geometries are
+           dropped without ever having been uploaded. */
+        /* opts.merge:false is an escape hatch for comparing a merged render
+           against an unmerged one; nothing in the site sets it. */
+        if (o.merge !== false) mergeByMaterial(THREE, model);
+        scene.add(model);
 
-      /* Self-shadowing only -- no ground plane. These shapes are framed on their
-         own bounds and several (conductor, busway, the PCB parts) have no ground
-         to stand on, so a catcher plane would either float or cut through them.
-         Radiator fins, louvres, fan blades and cable trays shadowing themselves
-         is where the depth cue actually comes from. */
-      model.traverse(function(n){
-        if (!n.isMesh) return;
-        /* A transparent mesh must NOT cast: the shadow map has no notion of
-           opacity, so a see-through surface casts a fully solid shadow. Every
-           translucent surface in this library exists specifically so you can
-           see what is behind it -- the soil around a ground rod, the glass door
-           on a capacitor cabinet, the POD shell -- and casting would black out
-           exactly the interior they were made transparent to reveal. */
-        const m = n.material;
-        const clear = Array.isArray(m) ? m.some(function(x){ return x && x.transparent; })
-                                       : !!(m && m.transparent);
-        n.castShadow = !clear;
-        n.receiveShadow = true;
-      });
+        /* Self-shadowing only -- no ground plane. These shapes are framed on their
+           own bounds and several (conductor, busway, the PCB parts) have no ground
+           to stand on, so a catcher plane would either float or cut through them.
+           Radiator fins, louvres, fan blades and cable trays shadowing themselves
+           is where the depth cue actually comes from. */
+        model.traverse(function(n){
+          if (!n.isMesh) return;
+          /* A transparent mesh must NOT cast: the shadow map has no notion of
+             opacity, so a see-through surface casts a fully solid shadow. Every
+             translucent surface in this library exists specifically so you can
+             see what is behind it -- the soil around a ground rod, the glass door
+             on a capacitor cabinet, the POD shell -- and casting would black out
+             exactly the interior they were made transparent to reveal. */
+          const m = n.material;
+          const clear = Array.isArray(m) ? m.some(function(x){ return x && x.transparent; })
+                                         : !!(m && m.transparent);
+          n.castShadow = !clear;
+          n.receiveShadow = true;
+        });
 
-      /* Frame the model from its own bounds. Fit the LARGER of the horizontal
-         and vertical requirement against the matching half-FOV: a 48U rack is
-         height-limited, a busway run is width-limited, and using only one of
-         them crops the other.
+        /* Frame the model from its own bounds. Fit the LARGER of the horizontal
+           and vertical requirement against the matching half-FOV: a 48U rack is
+           height-limited, a busway run is width-limited, and using only one of
+           them crops the other.
 
-         Horizontally we fit the XZ bounding RADIUS, not the X extent. The camera
-         orbits, so a long row of gear presents its full length at one angle and
-         its depth at another; sizing to the half-diagonal keeps it framed all the
-         way round instead of clipping the ends once the user drags. */
-      const bb = new THREE.Box3().setFromObject(model);
-      const size = bb.getSize(new THREE.Vector3());
-      const ctr  = bb.getCenter(new THREE.Vector3());
-      const vFov = camera.fov * Math.PI/180;
-      const hFov = 2 * Math.atan(Math.tan(vFov/2) * camera.aspect);
-      const radXZ = Math.sqrt(size.x*size.x + size.z*size.z) / 2;
+           Horizontally we fit the XZ bounding RADIUS, not the X extent. The camera
+           orbits, so a long row of gear presents its full length at one angle and
+           its depth at another; sizing to the half-diagonal keeps it framed all the
+           way round instead of clipping the ends once the user drags. */
+        const bb = new THREE.Box3().setFromObject(model);
+        const size = bb.getSize(new THREE.Vector3());
+        const ctr  = bb.getCenter(new THREE.Vector3());
+        const vFov = camera.fov * Math.PI/180;
+        const hFov = 2 * Math.atan(Math.tan(vFov/2) * camera.aspect);
+        const radXZ = Math.sqrt(size.x*size.x + size.z*size.z) / 2;
 
-      /* Framing is solved by projection, not by a closed-form estimate.
+        /* Framing is solved by projection, not by a closed-form estimate.
 
-         The previous version fitted (size.y/2) against the vertical half-FOV
-         and added radXZ as a rotation margin. That treats the model as
-         symmetric about its bounding-box centre, and under perspective from an
-         elevated camera it is not: the near-bottom of the object is closer to
-         the lens than the far-top, so it projects further from centre and
-         leaves the frame first. On a wide, low model the error is large --
-         measured on the diesel genset at the homepage showcase's 563x340, the
-         skid ran off the bottom edge while roughly a fifth of the frame sat
-         empty above the exhaust.
+           The previous version fitted (size.y/2) against the vertical half-FOV
+           and added radXZ as a rotation margin. That treats the model as
+           symmetric about its bounding-box centre, and under perspective from an
+           elevated camera it is not: the near-bottom of the object is closer to
+           the lens than the far-top, so it projects further from centre and
+           leaves the frame first. On a wide, low model the error is large --
+           measured on the diesel genset at the homepage showcase's 563x340, the
+           skid ran off the bottom edge while roughly a fifth of the frame sat
+           empty above the exhaust.
 
-         So: place the camera, project the eight bounding-box corners, and read
-         the real screen-space bounds. Sample right around the orbit, because
-         theta auto-rotates and a long object presents its length at one angle
-         and its depth at another -- framing that holds only at the opening
-         angle clips halfway through the first rotation. Then centre on what
-         was actually measured and scale to fit. Converges in a few passes. */
-      const phi0 = o.phi != null ? o.phi : 1.15;
-      const corners = [];
-      for (let xi = 0; xi < 2; xi++)
-        for (let yi = 0; yi < 2; yi++)
-          for (let zi = 0; zi < 2; zi++)
-            corners.push(new THREE.Vector3(
-              xi ? bb.max.x : bb.min.x,
-              yi ? bb.max.y : bb.min.y,
-              zi ? bb.max.z : bb.min.z));
+           So: place the camera, project the eight bounding-box corners, and read
+           the real screen-space bounds. Sample right around the orbit, because
+           theta auto-rotates and a long object presents its length at one angle
+           and its depth at another -- framing that holds only at the opening
+           angle clips halfway through the first rotation. Then centre on what
+           was actually measured and scale to fit. Converges in a few passes. */
+        const phi0 = o.phi != null ? o.phi : 1.15;
+        const corners = [];
+        for (let xi = 0; xi < 2; xi++)
+          for (let yi = 0; yi < 2; yi++)
+            for (let zi = 0; zi < 2; zi++)
+              corners.push(new THREE.Vector3(
+                xi ? bb.max.x : bb.min.x,
+                yi ? bb.max.y : bb.min.y,
+                zi ? bb.max.z : bb.min.z));
 
-      const target = ctr.clone();
-      /* Opening estimate, then refined below. */
-      let radius = Math.max(
-        (size.y/2) / Math.tan(vFov/2) + radXZ,
-        radXZ / Math.tan(hFov/2) + radXZ
-      );
-      /* Fraction of the half-frame the model is allowed to occupy. 0.92 leaves
-         a visible margin on the tightest axis; the old 1.06 distance multiplier
-         is kept as o.zoom for callers that set it. */
-      const FILL = 0.92;
-      /* Sit the model slightly above the middle of the frame rather than dead
-         centre. Equipment reads better with a little more room under it than
-         over it -- dead-centre leaves the subject looking like it is sinking --
-         and it keeps the silhouette clear of the caption bar directly beneath
-         the canvas. In NDC, where 1.0 is half the frame height. */
-      const Y_BIAS = o.yBias != null ? o.yBias : 0.07;
-      const THETA_SAMPLES = 24;
-      const probe = new THREE.Vector3();
+        const target = ctr.clone();
+        /* Opening estimate, then refined below. */
+        let radius = Math.max(
+          (size.y/2) / Math.tan(vFov/2) + radXZ,
+          radXZ / Math.tan(hFov/2) + radXZ
+        );
+        /* Fraction of the half-frame the model is allowed to occupy. 0.92 leaves
+           a visible margin on the tightest axis; the old 1.06 distance multiplier
+           is kept as o.zoom for callers that set it. */
+        const FILL = 0.92;
+        /* Sit the model slightly above the middle of the frame rather than dead
+           centre. Equipment reads better with a little more room under it than
+           over it -- dead-centre leaves the subject looking like it is sinking --
+           and it keeps the silhouette clear of the caption bar directly beneath
+           the canvas. In NDC, where 1.0 is half the frame height. */
+        const Y_BIAS = o.yBias != null ? o.yBias : 0.07;
+        const THETA_SAMPLES = 24;
+        const probe = new THREE.Vector3();
 
-      for (let pass = 0; pass < 5; pass++) {
-        let minY = Infinity, maxY = -Infinity, maxAbsX = 0;
-        for (let t = 0; t < THETA_SAMPLES; t++) {
-          const th = (t / THETA_SAMPLES) * Math.PI * 2;
-          const s = Math.sin(phi0);
-          camera.position.set(
-            target.x + radius * s * Math.sin(th),
-            target.y + radius * Math.cos(phi0),
-            target.z + radius * s * Math.cos(th)
-          );
-          camera.lookAt(target);
-          camera.updateMatrixWorld(true);
-          for (let i = 0; i < corners.length; i++) {
-            probe.copy(corners[i]).project(camera);
-            if (probe.y < minY) minY = probe.y;
-            if (probe.y > maxY) maxY = probe.y;
-            const ax = Math.abs(probe.x);
-            if (ax > maxAbsX) maxAbsX = ax;
+        for (let pass = 0; pass < 5; pass++) {
+          let minY = Infinity, maxY = -Infinity, maxAbsX = 0;
+          for (let t = 0; t < THETA_SAMPLES; t++) {
+            const th = (t / THETA_SAMPLES) * Math.PI * 2;
+            const s = Math.sin(phi0);
+            camera.position.set(
+              target.x + radius * s * Math.sin(th),
+              target.y + radius * Math.cos(phi0),
+              target.z + radius * s * Math.cos(th)
+            );
+            camera.lookAt(target);
+            camera.updateMatrixWorld(true);
+            for (let i = 0; i < corners.length; i++) {
+              probe.copy(corners[i]).project(camera);
+              if (probe.y < minY) minY = probe.y;
+              if (probe.y > maxY) maxY = probe.y;
+              const ax = Math.abs(probe.x);
+              if (ax > maxAbsX) maxAbsX = ax;
+            }
           }
+          /* Vertical placement: move the look-at point so the measured box
+             centre lands on Y_BIAS rather than wherever perspective put it. One
+             NDC unit is half the frustum height at the target's depth. */
+          const dy = (minY + maxY) / 2 - Y_BIAS;
+          target.y += dy * radius * Math.tan(vFov/2);
+          /* Then scale distance to fit. Measured against the biased centre and
+             taking the larger side, so the offset cannot push the top out of
+             frame -- which a symmetric half-span test would miss. */
+          const halfV = Math.max(Math.abs(maxY - dy), Math.abs(minY - dy));
+          const need = Math.max(halfV, maxAbsX) / FILL;
+          if (isFinite(need) && need > 0) radius *= need;
         }
-        /* Vertical placement: move the look-at point so the measured box
-           centre lands on Y_BIAS rather than wherever perspective put it. One
-           NDC unit is half the frustum height at the target's depth. */
-        const dy = (minY + maxY) / 2 - Y_BIAS;
-        target.y += dy * radius * Math.tan(vFov/2);
-        /* Then scale distance to fit. Measured against the biased centre and
-           taking the larger side, so the offset cannot push the top out of
-           frame -- which a symmetric half-span test would miss. */
-        const halfV = Math.max(Math.abs(maxY - dy), Math.abs(minY - dy));
-        const need = Math.max(halfV, maxAbsX) / FILL;
-        if (isFinite(need) && need > 0) radius *= need;
+        radius *= (o.zoom || 1);
+
+        /* Fit the shadow camera to this model. The shapes span a wide range of
+           scales -- a DIP-8 on a board stub against a 48U rack -- and a single
+           fixed frustum either misses the small ones entirely or spreads 1024px
+           across so much world space that the large ones get blocky shadows. */
+        const shadowR = Math.max(size.x, size.y, size.z) * 0.85 + 0.5;
+        dir.position.set(ctr.x + shadowR*0.8, ctr.y + shadowR*1.2, ctr.z + shadowR*1.0);
+        dir.target.position.copy(ctr);
+        if (!dirTargetIn) { scene.add(dir.target); dirTargetIn = true; }
+        const sc = dir.shadow.camera;
+        sc.left = -shadowR; sc.right = shadowR;
+        sc.top  =  shadowR; sc.bottom = -shadowR;
+        sc.near = 0.1;      sc.far = shadowR * 5;
+        sc.updateProjectionMatrix();
+
+        /* Fit the depth range to the model instead of leaving the 0.1..100
+           default. These models are only a few world units across, so a 100-unit
+           far plane spends nearly all of the depth buffer's precision on empty
+           space behind them. Measured effect on the SSAO depth prepass: with
+           far=100 the AO buffer bottomed out at 175/255 (almost no occlusion
+           detected); fitted, it reaches 69. It also sharpens the shadow map. */
+        camera.near = Math.max(0.05, radius * 0.15);
+        /* `radius` is now the solved orbit distance, so the far plane is that
+           plus the object's own half-diagonal and the room the orbit's maxR
+           allows the viewer to pull back to. */
+        camera.far  = radius * 4 + radXZ;
+        camera.updateProjectionMatrix();
+
+        /* `target` is the solved look-at from the framing pass above -- it is the
+           box centre nudged vertically so the model sits centred on screen, not
+           the raw bounding-box centre. */
+        if (orbit) { orbit.dispose(); orbit = null; }
+        orbit = attachOrbit(camera, renderer.domElement, target, {
+          radius: radius,
+          minR: radius * 0.35,
+          maxR: radius * 2.4,
+          theta: o.theta,
+          phi: o.phi,
+          autoRotate: o.autoRotate
+        });
       }
-      radius *= (o.zoom || 1);
 
-      /* Fit the shadow camera to this model. The shapes span a wide range of
-         scales -- a DIP-8 on a board stub against a 48U rack -- and a single
-         fixed frustum either misses the small ones entirely or spreads 1024px
-         across so much world space that the large ones get blocky shadows. */
-      const shadowR = Math.max(size.x, size.y, size.z) * 0.85 + 0.5;
-      dir.position.set(ctr.x + shadowR*0.8, ctr.y + shadowR*1.2, ctr.z + shadowR*1.0);
-      dir.target.position.copy(ctr);
-      scene.add(dir.target);
-      const sc = dir.shadow.camera;
-      sc.left = -shadowR; sc.right = shadowR;
-      sc.top  =  shadowR; sc.bottom = -shadowR;
-      sc.near = 0.1;      sc.far = shadowR * 5;
-      sc.updateProjectionMatrix();
+      /* Frees one model's GPU resources without touching anything shared.
+         Material.dispose() does not release textures in three, so the label
+         maps and the shared noise textures are released explicitly -- the
+         canvases behind them are cached at module scope and are not touched. */
+      function uninstall(){
+        if (!model) return;
+        scene.remove(model);
+        model.traverse(function(n){
+          if (!n.isMesh && !n.isInstancedMesh && !n.isPoints && !n.isLine) return;
+          if (n.geometry) { try { n.geometry.dispose(); } catch (e) {} }
+          const ms = Array.isArray(n.material) ? n.material : [n.material];
+          for (const m of ms) {
+            if (!m) continue;
+            if (m.map) { try { m.map.dispose(); } catch (e) {} }
+            try { m.dispose(); } catch (e) {}
+          }
+        });
+        if (surfCache) {
+          surfCache.forEach(function(t){ try { t.dispose(); } catch (e) {} });
+          surfCache = null;
+        }
+        if (dirTargetIn && dirLight) { scene.remove(dirLight.target); dirTargetIn = false; }
+        model = null;
+      }
 
-      /* Fit the depth range to the model instead of leaving the 0.1..100
-         default. These models are only a few world units across, so a 100-unit
-         far plane spends nearly all of the depth buffer's precision on empty
-         space behind them. Measured effect on the SSAO depth prepass: with
-         far=100 the AO buffer bottomed out at 175/255 (almost no occlusion
-         detected); fitted, it reaches 69. It also sharpens the shadow map. */
-      camera.near = Math.max(0.05, radius * 0.15);
-      /* `radius` is now the solved orbit distance, so the far plane is that
-         plus the object's own half-diagonal and the room the orbit's maxR
-         allows the viewer to pull back to. */
-      camera.far  = radius * 4 + radXZ;
-      camera.updateProjectionMatrix();
+      /* Replace the subject in place. Reuses the context, the environment map,
+         the lights, the shadow map and the AO composer, all of which cost more
+         to build than the model does. */
+      swap = function(nextBuild, nextOpts){
+        if (disposed || !nextBuild) return;
+        if (nextOpts) for (const k in nextOpts) o[k] = nextOpts[k];
+        /* The canvas survives the swap, so its accessible name has to be
+           re-stated or a screen reader keeps announcing the previous subject. */
+        if (renderer && renderer.domElement) {
+          renderer.domElement.setAttribute('aria-label', '3D model of ' + (o.label || 'power equipment'));
+        }
+        uninstall();
+        install(nextBuild);
+        run();
+      };
 
-      /* `target` is the solved look-at from the framing pass above -- it is the
-         box centre nudged vertically so the model sits centred on screen, not
-         the raw bounding-box centre. */
-      orbit = attachOrbit(camera, renderer.domElement, target, {
-        radius: radius,
-        minR: radius * 0.35,
-        maxR: radius * 2.4,
-        theta: o.theta,
-        phi: o.phi,
-        autoRotate: o.autoRotate
-      });
+      install(build);
 
       /* Ambient occlusion, opt-in per mount. Until (and unless) the modules
          land, `composer` stays null and the loop renders exactly as before, so
          a slow CDN delays AO rather than the model. */
-      if (o.ao === true) {
+      /* AO is the single most expensive thing in this file: SSAOPass renders
+         the whole scene twice more per frame, into a depth target and a normal
+         target, before the colour pass. On the full tier that is affordable and
+         it is what makes a crevice read as a crevice. Below it, the honest
+         trade is to render fewer, cleaner frames without it. */
+      if (o.ao === true && T === 2) {
         loadPostFX().then(function(PP){
           if (disposed) return;
           const cw = container.clientWidth || w, ch = container.clientHeight || h;
@@ -2612,13 +2888,40 @@
         }).catch(function(){ /* no AO; direct rendering continues */ });
       }
 
+      /* The loop used to run from mount until dispose. A reader who scrolled
+         past the showcase and carried on down the homepage kept a GPU busy and
+         a battery draining on a picture nobody could see -- and on the homepage,
+         where the carousel also kept swapping models behind them, it never
+         stopped. Rendering now follows the canvas: paused when it leaves the
+         viewport or the tab is hidden, resumed where it left off.
+
+         animId doubles as the "is the loop live" flag, so nothing can start a
+         second one. */
       function animate(){
-        if (disposed) return;
+        animId = null;
+        if (disposed || !onScreen || document.hidden) return;
         orbit.tick();
         if (composer) composer.render(); else renderer.render(scene, camera);
         animId = requestAnimationFrame(animate);
       }
-      animate();
+      function run(){
+        if (disposed || animId != null || !onScreen || document.hidden) return;
+        animId = requestAnimationFrame(animate);
+      }
+      runRef = run;
+
+      if ('IntersectionObserver' in window) {
+        /* A margin, so the first frame is already drawn by the time the stage
+           reaches the viewport rather than appearing after it. */
+        visIO = new IntersectionObserver(function(entries){
+          onScreen = entries[entries.length - 1].isIntersecting;
+          if (onScreen) run();
+        }, { rootMargin: '150px' });
+        visIO.observe(container);
+      }
+      onVis = function(){ run(); };
+      document.addEventListener('visibilitychange', onVis);
+      run();
 
       if (window.ResizeObserver) {
         ro = new ResizeObserver(() => {
@@ -2647,6 +2950,8 @@
       disposed = true;
       if (animId) cancelAnimationFrame(animId);
       if (ro) ro.disconnect();
+      if (visIO) { try { visIO.disconnect(); } catch (e) {} visIO = null; }
+      if (onVis) { document.removeEventListener('visibilitychange', onVis); onVis = null; }
       if (orbit) orbit.dispose();
       /* The PMREM render target is GPU memory owned by this context. It has to
          go before the context is lost, or it is leaked for as long as the page
@@ -2669,6 +2974,11 @@
       const i = live.findIndex(function(x){ return x.dispose === dispose; });
       if (i > -1) live.splice(i, 1);
     }
+
+    /* The handle has always been a bare dispose function and callers call it as
+       one, so swap and resume hang off it rather than changing its shape. */
+    dispose.swap = function(nextBuild, nextOpts){ if (swap) swap(nextBuild, nextOpts); };
+    dispose.resume = function(){ if (runRef) runRef(); };
 
     live.push({ dispose: dispose, container: container });
     retire();

@@ -4,13 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google Tag Manager -->
-<!-- three.js import map. Required by the examples/jsm postprocessing modules
-     that voltfield-3d.js loads for ambient occlusion: those are published with
-     a bare `from 'three'` specifier, which a browser cannot resolve on its own.
-     The url must match the one voltfield-3d.js imports, so the two resolve to a
-     single module instance rather than two copies of three. -->
+<!-- three.js import map. The examples/jsm modules voltfield-3d.js loads for
+     ambient occlusion ship with a bare `from 'three'` specifier, which a
+     browser cannot resolve on its own; the copies vendored here are rewritten
+     to a relative path instead, so this map is a safety net rather than
+     load-bearing. Either way the url has to be the one voltfield-3d.js imports
+     and the one those modules reach for. Let them diverge and the page ends up
+     holding two copies of three, where nothing built by one is recognised by
+     the other -- which is how the minified build was first wired up, and the
+     symptom was ambient occlusion quietly doing nothing. -->
 <script type="importmap">
-{"imports":{"three":"/vendor/three/build/three.module.js"}}
+{"imports":{"three":"/vendor/three/build/three.module.min.js"}}
 </script>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -768,31 +772,56 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     {id:'cooling',    color:'#2B6CB0',name:'CRAH unit',            hint:'Cooling load tracks the electrical load'},
     {id:'motor',      color:'#5B6B7E',name:'AC induction motor',   hint:'The load at the end of a practice one-line'}
   ];
-  var i=Math.floor(Math.random()*PICKS.length), dispose=null, timer=null;
+  var i=Math.floor(Math.random()*PICKS.length), handle=null, timer=null, onScreen=true;
 
   function show(){
+    timer=null;
     var p=PICKS[i%PICKS.length];
-    if(dispose){ try{dispose();}catch(e){} dispose=null; }
     var fb=document.getElementById('showcaseFallback');
     if(fb) fb.remove();
-    /* Ambient occlusion on: this is one large hero view, not a grid, so it can
-       afford the post-process pass. If the extra modules do not load the
-       viewer just renders without AO. */
-    dispose=VF3D.mount(stage,p.id,p.color,{ao:true});
+    /* Swap the subject inside the viewer that is already running.
+
+       This used to call dispose() and then mount() on every cycle, which threw
+       away a WebGL context, a prefiltered environment map, a 2048px shadow map
+       and the whole ambient-occlusion composer, and built all of them again --
+       measured at one new context every seven seconds, so about seventeen
+       created and destroyed over a two-minute visit, against a browser limit
+       of sixteen live at once. None of that depends on which machine is being
+       shown. Only the model does.
+
+       Ambient occlusion stays requested: this is one large hero view rather
+       than a grid, so it can afford the post-process pass on hardware that has
+       the headroom, and the library declines it on hardware that does not. */
+    if(!VF3D.swapShape(handle,p.id,p.color,{ao:true})){
+      handle=VF3D.mount(stage,p.id,p.color,{ao:true});
+    }
     document.getElementById('showcaseName').textContent=p.name;
     document.getElementById('showcaseHint').textContent=p.hint;
     i++;
     if(!reduce) timer=setTimeout(show,7000);
   }
 
+  function resume(delay){ if(!timer&&!reduce&&onScreen&&!document.hidden) timer=setTimeout(show,delay); }
+
   function start(){
     if(!window.VF3D) return;
     show();
-    /* stop burning a GL context and a rAF loop while the tab is hidden */
+    /* stop cycling while the tab is hidden */
     document.addEventListener('visibilitychange',function(){
       if(document.hidden){ if(timer){clearTimeout(timer);timer=null;} }
-      else if(!timer&&!reduce){ timer=setTimeout(show,3000); }
+      else resume(3000);
     });
+    /* ...and while the stage is scrolled off. The renderer pauses itself when
+       the canvas leaves the viewport, so without this the carousel would go on
+       changing the subject behind a reader who had moved down the page, doing
+       the work of building each model for a picture nobody is looking at. */
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(entries){
+        onScreen=entries[entries.length-1].isIntersecting;
+        if(onScreen) resume(1200);
+        else if(timer){ clearTimeout(timer); timer=null; }
+      },{rootMargin:'100px'}).observe(stage);
+    }
   }
 
   function load(){
@@ -813,11 +842,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   function whenVisible(){
     if(!('IntersectionObserver' in window)){ setTimeout(load,200); return; }
+    /* A viewport of lead time. At rootMargin 0 the fetch only started once the
+       stage was already on screen, so the reader watched the placeholder for as
+       long as 1.4MB of module took to arrive and compile. Starting a screen
+       early costs the reader who never scrolls that far nothing at all, which
+       is the whole point of the gate. */
     var io=new IntersectionObserver(function(entries){
-      if(!entries[0].isIntersecting) return;
+      if(!entries[entries.length-1].isIntersecting) return;
       io.disconnect();
       load();
-    },{rootMargin:'0px'});
+    },{rootMargin:'800px 0px'});
     io.observe(stage);
   }
 

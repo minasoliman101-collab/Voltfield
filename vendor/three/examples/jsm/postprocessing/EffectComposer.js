@@ -4,7 +4,7 @@ import {
 	NoBlending,
 	Vector2,
 	WebGLRenderTarget
-} from '../../../build/three.module.js';
+} from '../../../build/three.module.min.js';
 import { CopyShader } from '../shaders/CopyShader.js';
 import { ShaderPass } from './ShaderPass.js';
 import { MaskPass } from './MaskPass.js';
