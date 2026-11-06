@@ -290,7 +290,10 @@
          see the WebGL budget note at the top of this file -- so it is the right
          place to spend a post-process pass on ambient occlusion. Falls back to
          plain rendering if the extra modules are unavailable. */
-      if (window.VF3D) dispose = window.VF3D.mount(stage, c.shape, c.color, {ao: true});
+      /* Name the viewer after the component, not its shape id: without a label
+         VF3D.mount falls back to the id, so the inspector announced "3D model
+         of server" where the page everywhere else says "1U Rack Server". */
+      if (window.VF3D) dispose = window.VF3D.mount(stage, c.shape, c.color, {ao: true, label: c.name || c.shape});
       side.innerHTML = explainHTML(id) + photoHTML(id, {size: 220});
       if (o.onShow) o.onShow(id, c);
     }

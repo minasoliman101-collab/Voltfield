@@ -81,7 +81,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chips .chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line-dark);background:var(--card);padding:4px 6px 4px 8px;font-family:var(--mono);font-size:10.5px;color:var(--ink)}
 .chips .chip i{width:9px;height:9px;flex-shrink:0;display:inline-block}
-.chips .chip button{background:none;border:0;color:var(--crit);font-size:14px;line-height:1;cursor:pointer;padding:0 2px}
+/* picture.vfcv-thumb has no intrinsic width and its img is width:100%, so
+   without a cap here the 20px thumbnail stretched to the chip's full width --
+   three chips made a 743px-tall block. Matches the px passed to thumbHTML. */
+.chips .chip picture.vfcv-thumb{width:20px}
+.chips .chip .chip-x{background:none;border:0;color:var(--crit);font-size:14px;line-height:1;cursor:pointer;padding:0 2px}
+.chips .chip .chip-info{background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px}
 .chips .chipnone{font-family:var(--mono);font-size:11px;color:var(--slate)}
 /* The elevation's ruled-paper stripes and the chip fills are hardcoded light
    values, so they need explicit dark equivalents rather than inheriting. */
@@ -94,9 +100,13 @@ h2.compdetail-hd,.compdetail-hd{font-family:var(--mono);font-size:10px;letter-sp
 .rackinner{display:flex;flex-direction:column;border:1px solid var(--line-dark);background:repeating-linear-gradient(180deg,#fff,#fff 15px,#F3F6FA 15px,#F3F6FA 16px)}
 .rackitem{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 10px;border-bottom:1px solid var(--ink);background:var(--card);font-family:var(--mono);font-size:11px;color:var(--ink)}
 .rackitem:last-child{border-bottom:0}
-.rackitem .ri-n{font-family:var(--disp);font-weight:600;font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rackitem .ri-n{font-family:var(--disp);font-weight:600;font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  background:none;border:0;padding:0;color:inherit;text-align:left;cursor:pointer;flex:1 1 auto;min-width:0}
 .rackitem .ri-u{color:var(--slate);flex-shrink:0}
-.rackitem button{background:none;border:0;color:var(--crit);font-size:15px;cursor:pointer;flex-shrink:0;line-height:1}
+.rackitem .ri-x{background:none;border:0;color:var(--crit);font-size:15px;cursor:pointer;flex-shrink:0;line-height:1}
+/* A row is only 15-17px tall, so the global 3px focus offset would be clipped
+   by the neighbouring rows; pull it in and let the ring sit on the row itself. */
+.rackitem .ri-n:focus-visible,.rackitem .ri-x:focus-visible{outline:2px solid var(--ink);outline-offset:-1px}
 .rackempty{flex:1;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--slate);letter-spacing:.05em;text-transform:uppercase;min-height:60px}
 
 .addpanel{background:var(--card);border:1px solid var(--line-dark);padding:14px;align-self:start}
@@ -126,6 +136,8 @@ h2.compdetail-hd,.compdetail-hd{font-family:var(--mono);font-size:10px;letter-sp
 
 .checklist{display:none;flex-direction:column;gap:8px;margin-bottom:20px}
 .checklist.show{display:flex}
+.checklist:focus{outline:none}
+.checklist:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .checkcard{border:1px solid var(--line-dark);background:var(--card);padding:12px 14px;display:flex;gap:12px;align-items:flex-start}
 .checkcard .cx{width:24px;height:24px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;font-family:var(--mono)}
 .checkcard.pass .cx{background:#DCEEE1;color:var(--ok)}
@@ -232,12 +244,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="rackarea">
     <div class="rackshell">
-      <div class="viewtabs" role="tablist" aria-label="Rack view">
-        <button type="button" id="tab2d" role="tab" aria-selected="true" aria-controls="rackInner" class="on">Elevation</button>
-        <button type="button" id="tab3d" role="tab" aria-selected="false" aria-controls="rack3dPane">3D view</button>
+      <div class="viewtabs" role="tablist" aria-label="Rack view" id="viewTabs">
+        <button type="button" id="tab2d" role="tab" aria-selected="true" aria-controls="rackInner" tabindex="0" class="on">Elevation</button>
+        <button type="button" id="tab3d" role="tab" aria-selected="false" aria-controls="rack3dPane" tabindex="-1">3D view</button>
       </div>
-      <div class="rackinner" id="rackInner" role="tabpanel" aria-labelledby="tab2d"></div>
-      <div id="rack3dPane" role="tabpanel" aria-labelledby="tab3d" hidden>
+      <div class="rackinner" id="rackInner" role="tabpanel" aria-labelledby="tab2d" tabindex="-1"></div>
+      <div id="rack3dPane" role="tabpanel" aria-labelledby="tab3d" tabindex="-1" hidden>
         <div class="rack3d" id="rack3d"></div>
         <p class="r3dhint">Drag or arrow keys to rotate &middot; pinch, scroll or +/&minus; to zoom</p>
         <div class="chips" id="rackChips"></div>
@@ -246,7 +258,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="addpanel">
       <label for="eqSel">Add equipment</label>
       <select id="eqSel"></select>
-      <div class="eqspecs" id="eqSpecs"></div>
+      <div class="eqspecs" id="eqSpecs" role="status" aria-live="polite"></div>
       <button type="button" id="addBtn">Add to rack</button>
     </div>
   </div>
@@ -256,7 +268,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div id="eqInspector"></div>
   </div>
 
-  <div class="budgetrow" id="budgetRow"></div>
+  <div class="budgetrow" id="budgetRow" role="group" aria-label="Rack budgets"></div>
+  <!-- The budget row is rewritten on every keystroke in the circuit and weight
+       fields; announcing the whole thing each time would be unusable, so a
+       debounced one-line summary carries the change instead. -->
+  <p class="vf-sr-only" id="budgetLive" role="status" aria-live="polite"></p>
 
   <div class="btnrow">
     <button type="button" id="checkBtn">Check My Rack</button>
@@ -264,7 +280,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <button type="button" class="ghost" id="copyLinkBtn">Copy link</button>
   </div>
 
-  <div class="checklist" id="checklist"></div>
+  <div class="checklist" id="checklist" tabindex="-1" role="group" aria-label="Rack check results"></div>
 
   <div class="section">
     <h2>Why these checks</h2>
@@ -380,11 +396,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     var wrap=$('rackInner');
     wrap.style.height=(rackU*PX_PER_U)+'px';
     var html='';
+    /* The name is a button rather than a span: the detail panel used to be
+       reachable only by clicking the row, which left it unusable without a
+       pointer. Each remove button is named after its row too -- three buttons
+       all reading "Remove" are indistinguishable to a screen reader. */
     items.forEach(function(it){
-      html+='<div class="rackitem" style="height:'+(it.eq.u*PX_PER_U)+'px" data-inst="'+it.instId+'" data-shape="'+it.eq.shape+'" title="Click to see what this is">'+
-        '<span class="ri-n">'+it.eq.name+'</span>'+
+      html+='<div class="rackitem" style="height:'+(it.eq.u*PX_PER_U)+'px" data-inst="'+it.instId+'" data-shape="'+it.eq.shape+'">'+
+        '<button type="button" class="ri-n" data-detail="'+it.eq.shape+'" aria-label="'+it.eq.name+', show component detail">'+it.eq.name+'</button>'+
         '<span class="ri-u">'+it.eq.u+'U</span>'+
-        '<button type="button" data-remove="'+it.instId+'" aria-label="Remove">&times;</button>'+
+        '<button type="button" class="ri-x" data-remove="'+it.instId+'" aria-label="Remove '+it.eq.name+'">&times;</button>'+
       '</div>';
     });
     var remaining=rackU-used;
@@ -395,19 +415,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     wrap.querySelectorAll('button[data-remove]').forEach(function(btn){
       btn.addEventListener('click',function(e){ e.stopPropagation(); removeInst(parseInt(btn.dataset.remove,10)); });
     });
-    /* clicking a unit in the elevation explains it, so the diagram teaches
-       rather than just tallying U-space */
+    wrap.querySelectorAll('button[data-detail]').forEach(function(btn){
+      btn.addEventListener('click',function(e){ e.stopPropagation(); showDetail(btn.dataset.detail); });
+    });
+    /* clicking anywhere else on a unit in the elevation explains it too, so the
+       diagram teaches rather than just tallying U-space */
     wrap.querySelectorAll('.rackitem[data-shape]').forEach(function(row){
       row.addEventListener('click',function(){ showDetail(row.dataset.shape); });
     });
     if(view3d) render3D();
   }
 
+  /* renderRack and renderChips rebuild wholesale with innerHTML, which destroys
+     the button that was just pressed and drops focus to <body> -- a keyboard
+     user was thrown back to the top of the document on every removal. Put focus
+     on the remove button that takes the vacated slot, or on the nearest control
+     that still means something once the rack is empty. */
+  function refocusAfterRemove(pos){
+    var btns=document.querySelectorAll(view3d?'#rackChips button[data-remove3d]':'.rackitem button[data-remove]');
+    if(btns.length){ btns[Math.min(pos,btns.length-1)].focus(); return; }
+    var fallback=view3d?$('tab3d'):$('addBtn');
+    if(fallback) fallback.focus();
+  }
+
   function removeInst(id){
+    var pos=0;
+    for(var i=0;i<items.length;i++){ if(items[i].instId===id){ pos=i; break; } }
     items=items.filter(function(it){return it.instId!==id;});
     renderRack();
     renderBudgets();
     $('checklist').classList.remove('show');
+    refocusAfterRemove(pos);
   }
 
   /* ---------- 3D elevation ----------
@@ -422,8 +460,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     var rackU=parseInt($('rackUSel').value,10);
     dispose3d=VF3D.mountRack($('rack3d'), items.map(function(it){
       return {shape:it.eq.shape, u:it.eq.u, color:it.eq.color};
-    }), rackU);
+    }), rackU, {label:rackLabel(rackU)});
     renderChips();
+  }
+
+  /* Names the 3D canvas after what is actually in the rack, so the view is
+     described rather than announced as a generic 3D model. */
+  function rackLabel(rackU){
+    if(!items.length) return rackU+'U rack elevation, empty';
+    var names=items.map(function(it){return it.eq.name;}).join(', ');
+    return rackU+'U rack elevation containing '+items.length+' item'+(items.length===1?'':'s')+': '+names;
   }
 
   function renderChips(){
@@ -431,15 +477,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if(!items.length){ box.innerHTML='<span class="chipnone">Rack is empty &mdash; add equipment from the panel.</span>'; return; }
     box.innerHTML=items.map(function(it){
       var thumb=(window.VFCV?VFCV.thumbHTML(it.eq.shape,20):'');
-      return '<span class="chip" data-shape="'+it.eq.shape+'" title="Click to see what this is">'+
-             (thumb||'<i style="background:'+it.eq.color+'"></i>')+it.eq.name+
-             '<button type="button" data-remove3d="'+it.instId+'" aria-label="Remove '+it.eq.name+'">&times;</button></span>';
+      return '<span class="chip" data-shape="'+it.eq.shape+'">'+
+             '<button type="button" class="chip-info" data-detail="'+it.eq.shape+'" aria-label="'+it.eq.name+', show component detail">'+
+             (thumb||'<i style="background:'+it.eq.color+'"></i>')+it.eq.name+'</button>'+
+             '<button type="button" class="chip-x" data-remove3d="'+it.instId+'" aria-label="Remove '+it.eq.name+'">&times;</button></span>';
     }).join('');
     box.querySelectorAll('button[data-remove3d]').forEach(function(btn){
       btn.addEventListener('click',function(e){ e.stopPropagation(); removeInst(parseInt(btn.dataset.remove3d,10)); });
     });
-    box.querySelectorAll('.chip[data-shape]').forEach(function(ch){
-      ch.addEventListener('click',function(){ showDetail(ch.dataset.shape); });
+    box.querySelectorAll('button[data-detail]').forEach(function(btn){
+      btn.addEventListener('click',function(e){ e.stopPropagation(); showDetail(btn.dataset.detail); });
     });
   }
 
@@ -449,6 +496,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     $('tab3d').classList.toggle('on',is3d);
     $('tab2d').setAttribute('aria-selected',is3d?'false':'true');
     $('tab3d').setAttribute('aria-selected',is3d?'true':'false');
+    /* Roving tabindex: only the selected tab is a tab stop, so Tab steps past
+       the tablist into the panel instead of through every tab in turn. */
+    $('tab2d').tabIndex=is3d?-1:0;
+    $('tab3d').tabIndex=is3d?0:-1;
     $('rackInner').hidden=is3d;
     $('rack3dPane').hidden=!is3d;
     if(is3d){ render3D(); }
@@ -457,6 +508,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
   $('tab2d').addEventListener('click',function(){ setView(false); });
   $('tab3d').addEventListener('click',function(){ setView(true); });
+
+  /* The markup already declares the ARIA tabs pattern, so honour the keys it
+     implies: arrows move between tabs, Home and End jump to the ends. Without
+     these a screen reader announces "tab 1 of 2" and the arrows do nothing. */
+  $('viewTabs').addEventListener('keydown',function(e){
+    var tabs=[$('tab2d'),$('tab3d')];
+    var i=tabs.indexOf(document.activeElement);
+    if(i<0) return;
+    var next;
+    switch(e.key){
+      case 'ArrowRight': case 'ArrowDown': next=(i+1)%tabs.length; break;
+      case 'ArrowLeft':  case 'ArrowUp':   next=(i-1+tabs.length)%tabs.length; break;
+      case 'Home': next=0; break;
+      case 'End':  next=tabs.length-1; break;
+      default: return;
+    }
+    e.preventDefault();
+    setView(next===1);
+    tabs[next].focus();
+  });
 
   /* ---------- budgets (live readout, not pass/fail -- that's the Check button) ---------- */
   function totals(){
@@ -482,10 +553,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     var uPct=Math.min(100,(t.usedU/Math.max(1,t.rackU))*100);
     var wPct=Math.min(100,(t.usedW/Math.max(1,t.wattBudget))*100);
     var lPct=Math.min(100,(t.usedLbs/Math.max(1,t.weightLimit))*100);
+    announceBudgets();
     $('budgetRow').innerHTML=
       '<div class="budget"><div class="bl">U-space</div><div class="bv'+(t.usedU>t.rackU?' over':'')+'">'+t.usedU+' / '+t.rackU+'U</div><div class="bbar"><i class="'+barClass(t.usedU,t.rackU)+'" style="width:'+uPct+'%"></i></div></div>'+
       '<div class="budget"><div class="bl">Circuit power (80% derated)</div><div class="bv'+(t.usedW>t.wattBudget?' over':'')+'">'+Math.round(t.usedW)+' / '+Math.round(t.wattBudget)+'W</div><div class="bbar"><i class="'+barClass(t.usedW,t.wattBudget)+'" style="width:'+wPct+'%"></i></div></div>'+
       '<div class="budget"><div class="bl">Weight</div><div class="bv'+(t.usedLbs>t.weightLimit?' over':'')+'">'+t.usedLbs+' / '+t.weightLimit+' lb</div><div class="bbar"><i class="'+barClass(t.usedLbs,t.weightLimit)+'" style="width:'+lPct+'%"></i></div></div>';
+  }
+
+  /* Debounced: the budget row is rewritten on every keystroke in the circuit
+     and weight fields, and announcing each intermediate value would bury the
+     one the user actually settled on. */
+  var liveTimer=null, liveArmed=false;
+  function announceBudgets(){
+    /* Stays quiet for the first render: the region is populated as the page
+       loads, and announcing the opening state is noise, not a change. */
+    if(!liveArmed){ liveArmed=true; return; }
+    clearTimeout(liveTimer);
+    liveTimer=setTimeout(function(){
+      var t=totals();
+      $('budgetLive').textContent=
+        t.usedU+' of '+t.rackU+'U used, '+
+        Math.round(t.usedW)+' of '+Math.round(t.wattBudget)+' watts, '+
+        t.usedLbs+' of '+t.weightLimit+' pounds.';
+    },700);
   }
 
   ['rackUSel','ampsInput','voltsSel','weightInput'].forEach(function(id){
@@ -516,15 +606,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
   function renderChecks(checks){
     var list=$('checklist');
+    /* Shown before it is filled: a region that is still display:none when its
+       content arrives is not reliably picked up by assistive technology. */
+    list.classList.add('show');
     list.innerHTML=checks.map(function(c){
       return '<div class="checkcard '+(c.pass?'pass':'fail')+'"><div class="cx">'+(c.pass?'✓':'✗')+'</div><div><div class="ct">'+c.title+'</div><div class="cm">'+c.msg+'</div></div></div>';
     }).join('');
-    list.classList.add('show');
     var passCount=checks.filter(function(c){return c.pass;}).length;
     if(window.vfGtag)window.vfGtag('event','rack_check_design',{pass_count:passCount,total_checks:checks.length,item_count:items.length});
   }
   $('checkBtn').addEventListener('click',function(){
     renderChecks(runChecks());
+    /* Pressing Check used to leave focus on the button and scroll the results
+       into view -- visible, but silent and out of reach of the caret. Moving
+       focus into the results puts a keyboard user at what they just asked for
+       and makes a screen reader read it out. */
+    $('checklist').focus({preventScroll:true});
     $('checklist').scrollIntoView({behavior:'smooth',block:'start'});
   });
 
@@ -549,6 +646,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   function toast(msg){
     var t=$('vfToast');
     if(!t){ t=document.createElement('div'); t.id='vfToast';
+      /* Copy link gave no confirmation at all without a pointer on the toast. */
+      t.setAttribute('role','status'); t.setAttribute('aria-live','polite');
       t.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--solid-bg);color:var(--solid-fg);padding:10px 18px;font-family:var(--mono);font-size:12.5px;z-index:200;border:1px solid var(--signal)';
       document.body.appendChild(t);
     }
