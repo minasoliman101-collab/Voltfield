@@ -25,7 +25,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <title>Data Center, Solar &amp; BESS Electrical Calculators | Voltfield</title>
 <link rel="canonical" href="https://voltfield.org/">
 <meta name="description" content="Free electrical power calculators, guides and practice tools for data center, solar and battery-storage projects. Every calculator shows its method. No signup.">
-<meta name="keywords" content="electrical power calculators, data center electrical design, solar electrical calculators, BESS sizing, one-line diagram practice, grid interconnection process, FEOC compliance, transformer sizing, arc-flash calculator, voltage drop calculator">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Voltfield">
 <meta property="og:title" content="Electrical Power Calculators &amp; Practice Tools for Data Centers, Solar &amp; BESS">
@@ -39,8 +38,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="twitter:description" content="Free calculators, guides and practice boards for data center, solar and battery-storage power. No signup.">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
- {"@type":"Organization","name":"Voltfield","description":"An independent engineering reference for electrical power equipment in data centers, solar and battery storage: free calculators that show their method, in-depth technical guides, a plain-language glossary, and interactive boards for practicing electrical design. Voltfield sells nothing.","telephone":"+1-850-686-1378","email":"Help@voltfield.org"},
- {"@type":"WebSite","dateModified":"2026-09-30","name":"Voltfield","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"site-search.html?q={search_term_string}"},"query-input":"required name=search_term_string"}}
+ {"@type":"Organization","@id":"https://voltfield.org/#organization","name":"Voltfield","url":"https://voltfield.org/","description":"An independent engineering reference for electrical power equipment in data centers, solar and battery storage: free calculators that show their method, in-depth technical guides, a plain-language glossary, and interactive boards for practicing electrical design. Voltfield sells nothing.","telephone":"+1-850-686-1378","email":"Help@voltfield.org","logo":{"@type":"ImageObject","@id":"https://voltfield.org/#logo","url":"https://voltfield.org/icons/icon-512.png","contentUrl":"https://voltfield.org/icons/icon-512.png","width":512,"height":512,"caption":"Voltfield"},"image":{"@id":"https://voltfield.org/#logo"},"knowsAbout":["Electrical power distribution","Data center electrical infrastructure","Utility-scale solar","Battery energy storage systems","Transformers","Switchgear","Grid interconnection","Arc flash analysis"]},
+ {"@type":"WebSite","@id":"https://voltfield.org/#website","url":"https://voltfield.org/","name":"Voltfield","description":"Free electrical power calculators, guides and practice tools for data center, solar and battery-storage projects.","publisher":{"@id":"https://voltfield.org/#organization"},"inLanguage":"en-US","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://voltfield.org/site-search.html?q={search_term_string}"},"query-input":"required name=search_term_string"}},
+ {"@type":"WebPage","@id":"https://voltfield.org/#webpage","url":"https://voltfield.org/","name":"Data Center, Solar & BESS Electrical Calculators | Voltfield","description":"Free electrical power calculators, guides and practice tools for data center, solar and battery-storage projects. Every calculator shows its method. No signup.","isPartOf":{"@id":"https://voltfield.org/#website"},"about":{"@id":"https://voltfield.org/#organization"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://voltfield.org/social/social-index.jpg","width":1200,"height":630},"inLanguage":"en-US","dateModified":"2026-11-08"},
+ {"@type":"ItemList","@id":"https://voltfield.org/#featured-guides","name":"Featured technical guides","itemListOrder":"https://schema.org/ItemListUnordered","numberOfItems":6,"itemListElement":[
+  {"@type":"ListItem","position":1,"url":"https://voltfield.org/guide-transformer-nameplate.html","name":"How to Read a Transformer Nameplate"},
+  {"@type":"ListItem","position":2,"url":"https://voltfield.org/guide-grid-interconnection-process.html","name":"The Grid Interconnection Process, Explained"},
+  {"@type":"ListItem","position":3,"url":"https://voltfield.org/guide-feoc-compliance.html","name":"FEOC Compliance for Solar & Storage"},
+  {"@type":"ListItem","position":4,"url":"https://voltfield.org/guide-bess-fire-safety-nfpa-855.html","name":"BESS Fire Safety: NFPA 855 & UL 9540A"},
+  {"@type":"ListItem","position":5,"url":"https://voltfield.org/guide-transformer-lead-times.html","name":"Why Transformer Lead Times Stretch Past 3 Years"},
+  {"@type":"ListItem","position":6,"url":"https://voltfield.org/guide-liquid-vs-air-cooling.html","name":"Liquid vs. Air Cooling for AI Racks"}
+ ]},
+ {"@type":"ItemList","@id":"https://voltfield.org/#practice-tools","name":"Practice tools","numberOfItems":3,"itemListElement":[
+  {"@type":"ListItem","position":1,"item":{"@type":"WebApplication","@id":"https://voltfield.org/voltfield-sandbox.html#app","name":"One-Line Diagram Sandbox","url":"https://voltfield.org/voltfield-sandbox.html","applicationCategory":"DesignApplication","browserRequirements":"Requires JavaScript and WebGL","operatingSystem":"Any","publisher":{"@id":"https://voltfield.org/#organization"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}},
+  {"@type":"ListItem","position":2,"item":{"@type":"WebApplication","@id":"https://voltfield.org/voltfield-pod-designer.html#app","name":"POD & Skid Designer","url":"https://voltfield.org/voltfield-pod-designer.html","applicationCategory":"DesignApplication","browserRequirements":"Requires JavaScript and WebGL","operatingSystem":"Any","publisher":{"@id":"https://voltfield.org/#organization"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}},
+  {"@type":"ListItem","position":3,"item":{"@type":"WebApplication","@id":"https://voltfield.org/voltfield-rack-builder.html#app","name":"Rack Elevation Builder","url":"https://voltfield.org/voltfield-rack-builder.html","applicationCategory":"DesignApplication","browserRequirements":"Requires JavaScript and WebGL","operatingSystem":"Any","publisher":{"@id":"https://voltfield.org/#organization"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}}
+ ]}
 ]}
 </script>
 <link rel="manifest" href="manifest.json">
@@ -124,9 +137,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   flex-shrink:0}
 /* The floor was 42px, which is what a 375px phone actually got -- 6.8vw is
    only 25px there, so the clamp never scaled and the headline ran to four
-   lines. A lower floor with a steeper slope reaches the same 76px on desktop
-   while fitting a phone in two. */
-.hero h1{font-size:clamp(33px,7.6vw,76px);line-height:1.04;letter-spacing:-.042em;
+   lines. A lower floor with a steeper slope reaches the same ceiling on
+   desktop while fitting a phone in two.
+
+   The ceiling came down from 76px when the headline stopped being the slogan
+   ("Size it, spec it, check your work", 34 characters) and became the thing
+   the page is actually about, which runs 56. At 76px that was four lines deep
+   and pushed the search field under the fold on a laptop; 58px holds it to
+   two lines in the ~560px copy column. The slogan now opens the lede. */
+.hero h1{font-size:clamp(31px,5.6vw,58px);line-height:1.06;letter-spacing:-.038em;
   font-weight:700}
 /* Amber emphasis on the headline. A background gradient was tried first and
    is wrong here: the phrase wraps across two lines, and a gradient paints a
@@ -142,6 +161,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   text-decoration-skip-ink:none}
 .hero .lede{margin-top:22px;font-size:19px;line-height:1.6;color:var(--ink-2);
   max-width:610px}
+/* The slogan that used to be the h1, now leading the lede so the voice is
+   kept while the headline carries the subject. Full ink weight so it still
+   reads as the first thing, not as bold-for-emphasis inside a paragraph. */
+.hero .lede .lede-slug{color:var(--ink);font-weight:650}
 
 /* ---------- hero search ----------
    Was a hard-edged white box with a 2px amber frame and a shouting SEARCH
@@ -396,7 +419,12 @@ footer{background:var(--ink);color:#93A7BD;padding:64px 24px 44px;font-size:14px
   margin-top:20px}
 footer .in{max-width:var(--shell);margin:0 auto;display:grid;gap:36px}
 @media(min-width:780px){footer .in{grid-template-columns:2.1fr 1fr 1fr 1fr}}
-footer h2,footer h4{font-size:13px;letter-spacing:.02em;color:#fff;margin-bottom:14px;font-weight:600}
+footer h2,footer h4,footer .ft-h{font-size:13px;letter-spacing:.02em;color:#fff;margin:0 0 14px;font-weight:600;max-width:none}
+/* .ft-h is a <p> holding a footer column label. These are navigation labels,
+   not document structure -- as <h2> they put "Sectors", "Compliance" and
+   "About" into the page outline alongside the real sections. The two link
+   columns are <nav aria-labelledby> now, so the grouping is still announced.
+   margin and max-width are reset because core's `footer p` rule applies. */
 footer p{line-height:1.7;max-width:480px;font-size:13px;color:#7F94AC}
 footer li{list-style:none;padding:5px 0;font-size:13.5px}
 footer a{color:#93A7BD;text-decoration:none;transition:color var(--dur) var(--ease)}
@@ -443,12 +471,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site">
-  <a class="logo" href="index.html" aria-label="Voltfield home">
+  <a class="logo" href="/" aria-label="Voltfield home">
     <span class="bolt"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
     <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
   </a>
       <nav class="hnav">
-    <a href="index.html" class="on">Home</a>
+    <a href="/" class="on">Home</a>
     <div class="navdrop" id="toolsDrop">
       <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
       <div class="navdrop-menu toolpane">
@@ -494,8 +522,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="hero-in">
     <div class="hero-copy">
       <div class="hero-eyebrow"><span class="dot"></span> Free electrical power tools &middot; no signup</div>
-      <h1>Size it, spec it, <em>check your work</em></h1>
-      <p class="lede">Free calculators, guides and practice tools for the electrical side of data center, solar and battery-storage projects. Every calculator shows its method; every practice board checks your work.</p>
+      <h1>Electrical calculators for <em>data centers, solar &amp; BESS</em></h1>
+      <p class="lede"><b class="lede-slug">Size it, spec it, check your work.</b> Free calculators, guides and practice tools for the electrical side of data center, solar and battery-storage projects. Every calculator shows its method; every practice board checks what you built.</p>
       <div class="herosearch">
         <form action="site-search.html" method="get" id="heroSearchForm" role="search">
           <svg class="mag" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M12.5 12.5 17 17" stroke-linecap="round"/></svg>
@@ -559,8 +587,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="pathgrid">
     <div class="path path-a">
       <div class="pi"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="9" y="5" width="22" height="30" rx="3"/><rect x="13" y="9" width="14" height="6" rx="1" fill="currentColor" stroke="none" opacity=".35"/><circle cx="15" cy="22" r="1.7" fill="currentColor" stroke="none"/><circle cx="20" cy="22" r="1.7" fill="currentColor" stroke="none"/><circle cx="25" cy="22" r="1.7" fill="currentColor" stroke="none"/><circle cx="15" cy="28" r="1.7" fill="currentColor" stroke="none"/><circle cx="20" cy="28" r="1.7" fill="currentColor" stroke="none"/><circle cx="25" cy="28" r="1.7" fill="currentColor" stroke="none"/></svg></div>
-      <h3>Work it out</h3>
-      <p>Twenty calculators &mdash; voltage drop, transformer sizing, arc-flash incident energy, cable ampacity, fault current &mdash; each showing the method, not just the answer.</p>
+      <h3>Work it out: calculators</h3>
+      <p>Twenty-five calculators &mdash; voltage drop, transformer sizing, arc-flash incident energy, cable ampacity, fault current &mdash; each showing the method, not just the answer.</p>
       <div class="plinks">
         <a href="engineering-calculators.html">All calculators <span class="ar" aria-hidden="true">&rarr;</span></a>
         <a href="specification-checklist.html">Specification checklist <span class="ar" aria-hidden="true">&rarr;</span></a>
@@ -569,8 +597,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="path path-b">
       <div class="pi"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M8 7h17l7 7v19a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2z"/><path d="M25 7v7h7" stroke-width="1.8"/><path d="M12 21h16M12 27h11" stroke-width="1.8"/></svg></div>
-      <h3>Understand it</h3>
-      <p>Thirty-three guides, each written to answer a single question &mdash; how a nameplate reads, what an arc-flash boundary is, why PUE lies to you &mdash; plus a plain-language glossary.</p>
+      <h3>Understand it: guides &amp; glossary</h3>
+      <p>Fifty-two guides, each written to answer a single question &mdash; how a nameplate reads, what an arc-flash boundary is, why PUE lies to you &mdash; plus a plain-language glossary.</p>
       <div class="plinks">
         <a href="guides.html">52 technical guides <span class="ar" aria-hidden="true">&rarr;</span></a>
         <a href="glossary.html">Glossary, 56 terms <span class="ar" aria-hidden="true">&rarr;</span></a>
@@ -579,7 +607,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="path path-c">
       <div class="pi"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="7" cy="20" r="3"/><path d="M10 20h6"/><rect x="16" y="15" width="8" height="10" rx="1.5" fill="currentColor" stroke="none" opacity=".35"/><rect x="16" y="15" width="8" height="10" rx="1.5"/><path d="M24 20h6"/><circle cx="33" cy="20" r="3"/></svg></div>
-      <h3>Practice it</h3>
+      <h3>Practice it: design boards</h3>
       <p>Open boards for laying out real equipment &mdash; a one-line, a packaged power module, a rack elevation &mdash; with the result checked against sizing, load and code rules as you build.</p>
       <div class="plinks">
         <a href="voltfield-sandbox.html">One-line sandbox <span class="ar" aria-hidden="true">&rarr;</span></a>
@@ -650,35 +678,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p>No overviews, no listicles. Each one takes a single thing engineers actually get asked and works through it properly.</p>
   </div>
   <div class="gdgrid">
-    <a class="gdcard" href="guide-transformer-nameplate.html">
+    <a class="gdcard has-thumb" href="guide-transformer-nameplate.html">
+      <span class="gd-thumb"><picture><source srcset="images/parts/dc-pad-mount-transformers.webp" type="image/webp"><img src="images/parts/dc-pad-mount-transformers.jpg" width="340" height="340" alt="Pad-mount distribution transformer" loading="lazy" decoding="async"></picture></span>
       <h3>How to Read a Transformer Nameplate</h3>
       <p>kVA ratings, cooling class codes, impedance, BIL and vector group: what every field means, and which ones decide the rest of your design.</p>
       <span class="gsub">Transformers &amp; substation</span>
+      <time class="gdate" datetime="2026-08-23">Updated August 23, 2026</time>
     </a>
-    <a class="gdcard" href="guide-grid-interconnection-process.html">
+    <a class="gdcard has-thumb" href="guide-grid-interconnection-process.html">
+      <span class="gd-thumb"><picture><source srcset="images/parts/re-collector-substation-transformers.webp" type="image/webp"><img src="images/parts/re-collector-substation-transformers.jpg" width="340" height="340" alt="Collector substation step-up transformer" loading="lazy" decoding="async"></picture></span>
       <h3>The Grid Interconnection Process, Explained</h3>
       <p>What happens between filing a request and energizing: queue position, the study sequence, cluster studies and the agreement &mdash; with ERCOT, MISO and PJM compared.</p>
       <span class="gsub">Grid interconnection</span>
+      <time class="gdate" datetime="2026-08-23">Updated August 23, 2026</time>
     </a>
-    <a class="gdcard" href="guide-feoc-compliance.html">
+    <a class="gdcard has-thumb" href="guide-feoc-compliance.html">
+      <span class="gd-thumb"><picture><source srcset="images/parts/re-bifacial-modules.webp" type="image/webp"><img src="images/parts/re-bifacial-modules.jpg" width="340" height="340" alt="Bifacial solar module" loading="lazy" decoding="async"></picture></span>
       <h3>FEOC Compliance for Solar &amp; Storage</h3>
       <p>What the FEOC rules mean for a project, what documentation to gather, and how they interact with the domestic content bonus.</p>
       <span class="gsub">Compliance</span>
+      <time class="gdate" datetime="2026-08-23">Updated August 23, 2026</time>
     </a>
-    <a class="gdcard" href="guide-bess-fire-safety-nfpa-855.html">
+    <a class="gdcard has-thumb" href="guide-bess-fire-safety-nfpa-855.html">
+      <span class="gd-thumb"><picture><source srcset="images/parts/bess-aerosol-clean-agent-suppression.webp" type="image/webp"><img src="images/parts/bess-aerosol-clean-agent-suppression.jpg" width="340" height="340" alt="Aerosol clean-agent fire suppression unit for battery enclosures" loading="lazy" decoding="async"></picture></span>
       <h3>BESS Fire Safety: NFPA 855 &amp; UL 9540A</h3>
       <p>What NFPA 855 requires for battery storage, and how UL 9540A test data sets separation distances and suppression.</p>
       <span class="gsub">Battery storage</span>
+      <time class="gdate" datetime="2026-08-23">Updated August 23, 2026</time>
     </a>
-    <a class="gdcard" href="guide-transformer-lead-times.html">
+    <a class="gdcard has-thumb" href="guide-transformer-lead-times.html">
+      <span class="gd-thumb"><picture><source srcset="images/parts/dc-dry-type-cast-resin-transformers.webp" type="image/webp"><img src="images/parts/dc-dry-type-cast-resin-transformers.jpg" width="340" height="340" alt="Dry-type cast-resin transformer" loading="lazy" decoding="async"></picture></span>
       <h3>Why Transformer Lead Times Stretch Past 3 Years</h3>
       <p>What is driving the power transformer shortage, and how to plan a project schedule around it.</p>
       <span class="gsub">Transformers &amp; substation</span>
+      <time class="gdate" datetime="2026-08-23">Updated August 23, 2026</time>
     </a>
-    <a class="gdcard" href="guide-liquid-vs-air-cooling.html">
+    <a class="gdcard has-thumb" href="guide-liquid-vs-air-cooling.html">
+      <span class="gd-thumb"><picture><source srcset="images/parts/dc-coolant-distribution-units-cdu.webp" type="image/webp"><img src="images/parts/dc-coolant-distribution-units-cdu.jpg" width="340" height="340" alt="Coolant distribution unit for liquid-cooled racks" loading="lazy" decoding="async"></picture></span>
       <h3>Liquid vs. Air Cooling for AI Racks</h3>
       <p>Why GPU rack density is pushing data centers to liquid: direct-to-chip, immersion and rear-door heat exchangers compared.</p>
       <span class="gsub">Data center power &amp; cooling</span>
+      <time class="gdate" datetime="2026-08-24">Updated August 24, 2026</time>
     </a>
   </div>
   <a class="section-more" href="guides.html">All 52 guides and 17 equipment references <span class="ar" aria-hidden="true">&rarr;</span></a>
@@ -702,6 +742,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p>Every figure on the site carries a basis, and the methodology page sets out how each is derived, what it is good for, and where it should not be relied on.</p>
       <a class="btn btn-ghost" href="methodology.html">Read the methodology</a>
     </div>
+  </div>
 </div>
 
 <div class="ad-unit" data-ad="footer"></div>
@@ -717,22 +758,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study. Product images are original, AI-generated representations of each part type, for illustration only; they are not photographs of specific equipment. News links point to third-party publishers; Voltfield does not control or endorse their content.</p>
     </div>
-    <div><h2>Sectors</h2><ul>
+    <nav aria-labelledby="ft-sectors"><p class="ft-h" id="ft-sectors">Sectors</p><ul>
       <li><a href="data-centers.html">Grid &amp; data center power</a></li>
       <li><a href="renewables.html">Solar / wind BOS</a></li>
       <li><a href="battery-storage.html">Storage systems</a></li>
-    </ul></div>
-    <div><h2>Compliance</h2><ul>
+    </ul></nav>
+    <div><p class="ft-h">Compliance</p><ul>
       <li>UL &middot; IEEE &middot; ANSI C57</li>
       <li>NFPA 855 &middot; UL 9540A</li>
       <li>Buy America / FEOC</li>
     </ul></div>
-    <div><h2>About</h2><ul>
+    <nav aria-labelledby="ft-about"><p class="ft-h" id="ft-about">About</p><ul>
       <li><a href="about.html">About Voltfield</a></li>
       <li><a href="methodology.html">Methodology</a></li>
       <li><a href="packets.html">Reference packets</a></li>
       <li><a href="privacy-policy.html">Privacy policy</a></li>
-    </ul></div>
+    </ul></nav>
   </div>
 </footer>
 <!-- voltfield-catalog-data.js is deliberately NOT loaded here. It is 94 KB --

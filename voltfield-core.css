@@ -926,6 +926,16 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
 .gdcard p{font-size:14.5px;line-height:1.55;color:var(--slate);margin:0}
 .gdcard .gsub{font-family:var(--mono);font-size:10.5px;letter-spacing:.02em;
   color:var(--slate);margin-top:auto;padding-top:8px;border-top:1px solid var(--line)}
+/* "Updated <date>" under the category. The date shown is the guide's own
+   Article dateModified, not the sitemap lastmod -- the two disagree, because
+   lastmod gets bumped by any file touch (a script or asset change) while the
+   prose may not have moved in months. Printing lastmod here would be telling
+   the reader something the page itself contradicts. */
+.gdcard .gdate{display:block;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.02em;color:var(--slate);opacity:.8;margin-top:4px}
+/* .gsub takes the margin-top:auto that pushes the pair to the card's foot, so
+   when a date follows it the date must not claim it too. */
+.gdcard .gsub + .gdate{margin-top:4px}
 .gsec{font-size:23px;letter-spacing:-.026em;color:var(--ink);margin:44px 0 4px;
   padding-bottom:10px;border-bottom:1px solid var(--line);font-weight:600}
 .gsec:first-of-type{margin-top:8px}
