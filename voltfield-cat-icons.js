@@ -133,7 +133,7 @@ const VF_FILE_ICON_MAP = {
 };
 
 /* (sector|category) -> icon id. Every family now renders an icon (no more
-   real photos in the catalog), so this covers all 81 categories, not just
+   real photos in the catalog), so this covers all 80 categories, not just
    the ones that had duplicate photos. Used whenever a file isn't in the
    more-specific VF_FILE_ICON_MAP above. */
 const VF_CAT_ICON_MAP = {
