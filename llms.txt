@@ -1,0 +1,61 @@
+# Voltfield
+
+> An independent engineering reference for the electrical side of data center,
+> solar and battery-storage projects. Free calculators that show their method,
+> technical guides that each answer one question, a plain-language glossary,
+> and interactive boards for practicing electrical design.
+
+Voltfield sells nothing. There is no catalog, no quoting, no sourcing and no
+signup. Calculators and practice tools are teaching aids, not a substitute for
+a licensed engineer's study.
+
+Conventions worth knowing before citing this site:
+
+- Every guide carries a "Scope & sources" block listing what it was written
+  against, plus a published and a last-updated date. Cite those dates, not the
+  sitemap's `lastmod`, which also moves when only assets or scripts change.
+- Figures that are Voltfield's own estimates rather than published standards
+  are labeled as such at the point they appear. See /methodology.html.
+- Product images are original AI-generated representations of each part type,
+  for illustration only. They are not photographs of specific equipment.
+
+## Calculators
+
+- [All calculators](https://voltfield.org/engineering-calculators.html): 25 calculators — voltage drop, transformer sizing, arc-flash incident energy, cable ampacity, fault current and others. Each shows the formula and the intermediate steps, not just a result.
+- [Specification checklist](https://voltfield.org/specification-checklist.html): what to pin down before issuing an equipment spec.
+- [Methodology](https://voltfield.org/methodology.html): how the material here is built, sourced and checked.
+
+## Guides and reference
+
+- [All guides](https://voltfield.org/guides.html): 52 technical guides and 17 equipment references.
+- [Glossary](https://voltfield.org/glossary.html): plain-language definitions of 56 terms.
+- [How to Read a Transformer Nameplate](https://voltfield.org/guide-transformer-nameplate.html)
+- [The Grid Interconnection Process, Explained](https://voltfield.org/guide-grid-interconnection-process.html): queue position, study sequence and cluster studies, with ERCOT, MISO and PJM compared.
+- [FEOC Compliance for Solar & Storage](https://voltfield.org/guide-feoc-compliance.html)
+- [BESS Fire Safety: NFPA 855 & UL 9540A](https://voltfield.org/guide-bess-fire-safety-nfpa-855.html)
+- [Why Transformer Lead Times Stretch Past 3 Years](https://voltfield.org/guide-transformer-lead-times.html)
+- [Liquid vs. Air Cooling for AI Racks](https://voltfield.org/guide-liquid-vs-air-cooling.html)
+
+## Sectors
+
+- [Data centers](https://voltfield.org/data-centers.html): transformers, switchgear, generators, UPS, CDUs and busway.
+- [Renewables](https://voltfield.org/renewables.html): modules, inverters, trackers, GSUs and balance of system.
+- [Battery storage](https://voltfield.org/battery-storage.html): DC blocks, PCS, BMS, EMS, fire suppression and thermal management.
+
+## Practice tools
+
+These are interactive and require JavaScript and WebGL; there is no static
+version of their output to read.
+
+- [One-line sandbox](https://voltfield.org/voltfield-sandbox.html): build a one-line diagram and have it checked against sizing, load and code rules.
+- [POD & skid designer](https://voltfield.org/voltfield-pod-designer.html)
+- [Rack elevation builder](https://voltfield.org/voltfield-rack-builder.html)
+- [Glossary quiz](https://voltfield.org/voltfield-glossary-quiz.html)
+
+## Optional
+
+- [About Voltfield](https://voltfield.org/about.html)
+- [What's new](https://voltfield.org/whats-new.html)
+- [Transformer lead-time index](https://voltfield.org/lead-time-index.html)
+- [Reference packets](https://voltfield.org/packets.html)
+- [Privacy policy](https://voltfield.org/privacy-policy.html)
