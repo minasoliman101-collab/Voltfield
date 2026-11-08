@@ -32,3 +32,20 @@ done < sitemap.xml
 mv "$tmp" sitemap.xml
 echo "  lastmod entries rewritten: $changed"
 echo "  fell back to mtime:        $missing"
+
+# Second pass: let each page overrule the git date with the date it states
+# itself.
+#
+# The pass above is correct by construction and wrong in practice. A commit
+# touching a file is not a change to what the page says, and most commits here
+# touch many files at once -- a vendored asset, a 3D model, a nav tweak, a
+# sitewide find-and-replace. Run alone it had pushed 93 of 113 entries ahead of
+# the date the page prints to the reader, some by over two months. lastmod is a
+# hint a crawler decides whether to trust, and a feed that marks most of the
+# site fresh on a day none of it changed teaches it not to.
+#
+# So the git date is demoted to a fallback: it survives only where a page
+# states nothing (~3 of them). It is still worth computing, because it is the
+# only signal those pages have.
+echo "  reconciling against each page's own stated date..."
+node "$(dirname "$0")/fix-sitemap-lastmod.mjs" --apply | sed 's/^/  /'
