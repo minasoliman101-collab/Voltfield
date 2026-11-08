@@ -3,7 +3,7 @@
   "short_name": "VOLTFIELD",
   "description": "Sourcing reference data, engineering calculators, and procurement tools — data centers, renewables, battery storage, oil & gas, and MRO.",
   "id": "./",
-  "start_url": "./index.html?source=pwa",
+  "start_url": "./?source=pwa",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",

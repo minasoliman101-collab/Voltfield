@@ -15,11 +15,15 @@
    v124: calculators moved off the hub onto their own pages; shared logic and
    styles in voltfield-calculators.js/.css.
    v125: guide reading aids and the one-row phone header, both in core.css. */
-const VERSION = 'voltfield-v143';
+const VERSION = 'voltfield-v144';
 
 const CORE = [
+  /* './' only. './index.html' used to be listed beside it: the two were the
+     same bytes under two URLs, so it was a wasted entry, and once /index.html
+     became a 301 to / (see _redirects) it became a breaking one -- cache.addAll
+     rejects a redirected response, and a single rejection fails the whole
+     install, taking the service worker down with it. */
   './',
-  './index.html',
   './guides.html',
   './voltfield-supply-catalog.html',
   './voltfield-suppliers.html',
@@ -128,7 +132,7 @@ self.addEventListener('fetch', e => {
         })
         .catch(() =>
           caches.match(req, { ignoreSearch: true })
-            .then(r => r || caches.match('./index.html'))
+            .then(r => r || caches.match('./'))
         )
     );
     return;
