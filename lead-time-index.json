@@ -4,7 +4,7 @@
   "region": "North America",
   "lastUpdated": "2026-10",
   "reviewCadence": "monthly",
-  "license": "Free to cite or embed with attribution and a link back to https://voltfield.org/lead-time-index.html",
+  "license": "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/) -- free to cite or embed with attribution and a link back to https://voltfield.org/lead-time-index.html",
   "basisNote": "Every figure carries a 'basis' describing where it comes from, so anyone citing this index can see exactly what kind of number they are quoting. Figures marked 'modeled' are Voltfield's own derived estimates and should be attributed to Voltfield, not presented as survey or manufacturer data.",
   "basisTypes": {
     "modeled": "Derived from Voltfield's catalog reference data and distributor/mill network. A Voltfield estimate, not a third-party measurement.",

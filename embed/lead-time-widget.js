@@ -4,6 +4,24 @@
   var TREND_ICON={up:'▲',down:'▼',flat:'■'};
   var TREND_COLOR={up:'#C43D2E',down:'#2E7D4F',flat:'#5B6B7E'};
 
+  /* True when the host page already credits us in its own markup: a
+     .vf-credit near the widget, or any link to lead-time-index.html among its
+     siblings. Deliberately generous about placement -- people move the credit
+     line around, and a false positive only costs the in-widget footer, while
+     a false negative shows the credit twice. */
+  function hasExternalCredit(el){
+    var scope = el.parentNode || document;
+    if (scope.querySelector && scope.querySelector('.vf-credit')) return true;
+    var sibs = scope.children || [];
+    for (var i = 0; i < sibs.length; i++){
+      if (sibs[i] === el) continue;
+      var a = sibs[i].matches && sibs[i].matches('a') ? sibs[i]
+            : (sibs[i].querySelector ? sibs[i].querySelector('a') : null);
+      if (a && a.getAttribute('href') && a.getAttribute('href').indexOf('lead-time-index') !== -1) return true;
+    }
+    return false;
+  }
+
   function render(el,data){
     var sectorKey=el.getAttribute('data-sector')||'dc';
     var limit=parseInt(el.getAttribute('data-limit'),10)||0;
@@ -44,11 +62,25 @@
       table.appendChild(tr);
     });
     wrap.appendChild(table);
-    var ft=document.createElement('div'); ft.className='ft';
-    var a=document.createElement('a'); a.href=SITE_URL; a.target='_blank'; a.rel='noopener';
-    a.textContent='Data via Voltfield Lead-Time Index →';
-    ft.appendChild(a);
-    wrap.appendChild(ft);
+
+    /* Attribution. The snippet on lead-time-index.html now ships a plain
+       <p class="vf-credit"><a href="..."></p> next to the widget, because the
+       footer this function used to draw is useless as a credit: it is created
+       in JavaScript and lives inside a shadow root, so the embedding page's
+       HTML contains no link at all and nothing counts it. Attribution that
+       only a rendering engine can see is not attribution.
+
+       The in-widget footer is kept as the fallback for anyone who pastes the
+       div and the script but drops the credit line, so the data is never
+       shown uncredited. When the host page does carry the credit, drawing it
+       twice just looks like a mistake -- so look for it first. */
+    if (!hasExternalCredit(el)) {
+      var ft = document.createElement('div'); ft.className = 'ft';
+      var a = document.createElement('a'); a.href = SITE_URL; a.target = '_blank'; a.rel = 'noopener';
+      a.textContent = 'Data via Voltfield Lead-Time Index →';
+      ft.appendChild(a);
+      wrap.appendChild(ft);
+    }
     root.appendChild(wrap);
   }
 

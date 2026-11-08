@@ -32,7 +32,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    {"@type":"ListItem","position":2,"name":"Guides","item":"https://voltfield.org/guides.html"},
    {"@type":"ListItem","position":3,"name":"Lead-Time Index","item":"https://voltfield.org/lead-time-index.html"}
  ]},
- {"@type":"Dataset","dateModified":"2026-07","name":"Voltfield Lead-Time Index","description":"Indicative market lead times and pricing across data center, renewable, battery storage, and oilfield equipment. Every figure carries a basis label (modeled, operator-reported, or published) identifying its provenance; figures marked modeled are Voltfield's own derived estimates.","creator":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"},"temporalCoverage":"2026-07","spatialCoverage":"North America","url":"https://voltfield.org/lead-time-index.html","isAccessibleForFree":true,"license":"https://voltfield.org/lead-time-index.html","creditText":"Voltfield Lead-Time Index","variableMeasured":[{"@type":"PropertyValue","name":"Equipment lead time","description":"Indicative order-to-delivery lead time, in weeks"},{"@type":"PropertyValue","name":"Indicative price range","description":"Indicative market price range where lead time is not the governing constraint"}],"distribution":[{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://voltfield.org/lead-time-index.json"}]}
+ {"@type":"Dataset","dateModified":"2026-07","name":"Voltfield Lead-Time Index","description":"Indicative market lead times and pricing across data center, renewable, battery storage, and oilfield equipment. Every figure carries a basis label (modeled, operator-reported, or published) identifying its provenance; figures marked modeled are Voltfield's own derived estimates.","creator":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"},"temporalCoverage":"2026-07","spatialCoverage":"North America","url":"https://voltfield.org/lead-time-index.html","isAccessibleForFree":true,"license":"https://creativecommons.org/licenses/by/4.0/","creditText":"Voltfield Lead-Time Index -- https://voltfield.org/lead-time-index.html","variableMeasured":[{"@type":"PropertyValue","name":"Equipment lead time","description":"Indicative order-to-delivery lead time, in weeks"},{"@type":"PropertyValue","name":"Indicative price range","description":"Indicative market price range where lead time is not the governing constraint"}],"distribution":[{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://voltfield.org/lead-time-index.json"}]}
 ]}
 </script>
 <link rel="manifest" href="manifest.json">
@@ -204,7 +204,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="callout"><b>Using this data elsewhere?</b> Feel free to cite or link to this page (<code>voltfield.org/lead-time-index.html</code>) as a reference for current equipment lead times — that's exactly what it's here for. Please carry the basis label across with the number: a figure marked <i>Modeled</i> should be described as a Voltfield estimate.</div>
 
   <h2>Embed this data on your site</h2>
-  <p>Publishing about equipment lead times or grid buildout? Drop this snippet into your page to embed a live, self-updating lead-time widget for any sector below — it fetches the same data as this page and always reflects the current numbers. Free to use, attribution link included automatically.</p>
+  <p>Publishing about equipment lead times or grid buildout? Drop this snippet into your page to embed a live, self-updating lead-time widget for any sector below — it fetches the same data as this page and always reflects the current numbers. Free to use under CC&nbsp;BY&nbsp;4.0 &mdash; the snippet includes the credit line, so keep it where your readers can see it.</p>
   <div class="embedbox">
     <div class="embedbox-demo">
       <div class="vf-lead-time-widget" data-sector="dc" data-limit="4"></div>
@@ -212,6 +212,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="embedbox-code">
       <div class="ec-label">Paste this where you want the widget to appear</div>
       <pre id="embedSnippet">&lt;div class="vf-lead-time-widget" data-sector="dc" data-limit="4"&gt;&lt;/div&gt;
+&lt;p class="vf-credit"&gt;&lt;a href="https://voltfield.org/lead-time-index.html"&gt;Equipment lead times: Voltfield Lead-Time Index&lt;/a&gt;&lt;/p&gt;
 &lt;script src="https://voltfield.org/embed/lead-time-widget.js" async&gt;&lt;/script&gt;</pre>
       <button type="button" id="copyEmbedBtn">Copy snippet</button>
       <div class="ec-note">Sectors: <code>dc</code> (data centers), <code>re</code> (renewables), <code>bess</code> (battery storage), <code>og</code> (oil &amp; gas). Drop <code>data-limit</code> to show every item in the sector.</div>
@@ -220,7 +221,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p style="font-size:13px;color:var(--slate)">Prefer raw data? The same figures are published as JSON at <a class="inline" href="lead-time-index.json">lead-time-index.json</a> — including the <code>basis</code> field for every row.</p>
 
   <h2>How to cite this index</h2>
-  <p>Writing about equipment lead times? Copy the line below. No permission needed, no attribution fee, no email required — a link back is all we ask.</p>
+  <p>Writing about equipment lead times? Copy the line below. No permission needed, no attribution fee, no email required — a link back is all we ask. Published under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener" target="_blank">CC BY 4.0</a>, which is the same terms written formally.</p>
   <div class="embedbox" style="grid-template-columns:minmax(0,1fr)">
     <div class="embedbox-code">
       <div class="ec-label">Suggested citation</div>
