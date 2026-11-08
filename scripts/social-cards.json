@@ -8,6 +8,22 @@
   "shared": 1
  },
  {
+  "file": "social-amps-to-kw.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Amps to kW Calculator",
+  "subtitle": "Convert amps to kilowatts for single-phase, three-phase and DC circuits, with the power factor term that makes the difference. Free, no signup.",
+  "url": "voltfield.org/calculators/amps-to-kw",
+  "shared": 1
+ },
+ {
+  "file": "social-awg-to-mm2.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "AWG to mm&sup2; Converter",
+  "subtitle": "Convert AWG and kcmil to square millimetres and back, with the nearest IEC standard size. Built from the AWG geometric definition. Free, no signup.",
+  "url": "voltfield.org/calculators/awg-to-mm2",
+  "shared": 1
+ },
+ {
   "file": "social-battery-storage.jpg",
   "eyebrow": "BATTERY STORAGE",
   "title": "Utility-Scale Battery Storage Equipment",
@@ -21,6 +37,22 @@
   "title": "BOM Generator — see every component inside an OEM part",
   "subtitle": "Generate a full component-level Bill of Materials for 150+ engineered part families: transformers, switchgear, inverters, BESS blocks, valves, pumps, motors and more.",
   "url": "voltfield.org/voltfield-bom-generator",
+  "shared": 1
+ },
+ {
+  "file": "social-btu-to-tons.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "BTU to Tons Converter",
+  "subtitle": "Convert BTU/h, tons of refrigeration and kW, including IT load to cooling tons. What a ton actually measures and what the figure leaves out. Free, no signup.",
+  "url": "voltfield.org/calculators/btu-to-tons",
+  "shared": 1
+ },
+ {
+  "file": "social-conduit-fill.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Conduit Fill Calculator",
+  "subtitle": "Check conduit fill with mixed conductor sizes: the Chapter 9 Table 1 caps, what counts toward fill, the 60 percent nipple allowance, and why Annex C can disagree. Free, no signup.",
+  "url": "voltfield.org/calculators/conduit-fill",
   "shared": 1
  },
  {
@@ -312,6 +344,14 @@
   "shared": 1
  },
  {
+  "file": "social-hp-to-kw.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Motor HP to kW Calculator",
+  "subtitle": "Convert motor horsepower to kW output, to kW drawn from the supply, and to full-load amps, with the efficiency term most converters leave out. Free, no signup.",
+  "url": "voltfield.org/calculators/hp-to-kw",
+  "shared": 1
+ },
+ {
   "file": "social-index.jpg",
   "eyebrow": "ENGINEERING REFERENCE",
   "title": "Electrical Calculators for Data Centers, Solar & BESS",
@@ -333,6 +373,30 @@
   "title": "Catalog Insights — lead times and configuration mix at a glance",
   "subtitle": "The reference catalog at a glance: documented configurations by sector, the largest equipment categories, and which families carry the longest lead times.",
   "url": "voltfield.org/voltfield-insights",
+  "shared": 1
+ },
+ {
+  "file": "social-kva-to-amps.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "kVA to Amps Calculator",
+  "subtitle": "Convert a kVA rating to full-load amps for single-phase and three-phase transformers. No power factor needed, and this page explains why. Free, no signup.",
+  "url": "voltfield.org/calculators/kva-to-amps",
+  "shared": 1
+ },
+ {
+  "file": "social-kva-to-kw.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "kVA to kW Converter",
+  "subtitle": "Convert kVA to kW and back, with reactive power. Why there is no fixed conversion factor, where the 0.8 assumption comes from, and why transformers are rated in kVA. Free, no signup.",
+  "url": "voltfield.org/calculators/kva-to-kw",
+  "shared": 1
+ },
+ {
+  "file": "social-kw-to-amps.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "kW to Amps Calculator",
+  "subtitle": "Convert kilowatts to amps for single-phase, three-phase and DC circuits, and get the current a conductor actually has to carry. Free, no signup.",
+  "url": "voltfield.org/calculators/kw-to-amps",
   "shared": 1
  },
  {
@@ -456,11 +520,35 @@
   "shared": 1
  },
  {
+  "file": "social-three-phase-power.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Three-Phase Power Calculator",
+  "subtitle": "Solve for voltage, current, power or power factor in a balanced three-phase system, with line and phase values for delta and wye. Free, no signup.",
+  "url": "voltfield.org/calculators/three-phase-power",
+  "shared": 1
+ },
+ {
+  "file": "social-watts-to-amps.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Watts to Amps Calculator",
+  "subtitle": "Convert watts to amps for DC, single-phase and three-phase circuits, with the power factor and square-root-of-three terms in the right places. Free, no signup.",
+  "url": "voltfield.org/calculators/watts-to-amps",
+  "shared": 1
+ },
+ {
   "file": "social-whats-new.jpg",
   "eyebrow": "ENGINEERING REFERENCE",
   "title": "What's New — Voltfield Changelog",
   "subtitle": "A dated log of every guide, calculator, and tool shipped on Voltfield.",
   "url": "voltfield.org/whats-new",
+  "shared": 1
+ },
+ {
+  "file": "social-wire-size.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Wire Size Calculator",
+  "subtitle": "Size a conductor properly: the 125% continuous-load factor, the termination temperature limit under NEC 110.14(C), and ambient and bundling adjustment. Free, no signup.",
+  "url": "voltfield.org/calculators/wire-size",
   "shared": 1
  }
 ]

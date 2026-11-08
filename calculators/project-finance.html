@@ -17,19 +17,100 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:image" content="https://voltfield.org/social/social-engineering-calculators.jpg">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[
- {"@type":"BreadcrumbList","itemListElement":[
-   {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
-   {"@type":"ListItem","position":2,"name":"Calculators","item":"https://voltfield.org/engineering-calculators.html"},
-   {"@type":"ListItem","position":3,"name":"Project Finance","item":"https://voltfield.org/calculators/project-finance.html"}
- ]},
- {"@type":"WebPage","name":"Project Finance Calculators","description":"Estimate transformer total cost of ownership, MACRS depreciation, investment payback and NPV, and the landed cost of imported equipment. Free, no signup.","url":"https://voltfield.org/calculators/project-finance.html","dateModified":"2026-10-01","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
- {"@type":"FAQPage","mainEntity":[
-   {"@type":"Question","name":"How do you calculate the total cost of ownership of a transformer?","acceptedAnswer":{"@type":"Answer","text":"Add the purchase price to the lifetime cost of its energy losses. No-load loss (core loss) runs continuously whenever the transformer is energized; load loss (winding loss) scales with the square of the load factor. Multiply each by 8760 hours/year and your electricity rate to get an annual loss cost, then extend it over the transformer's service life."}},
-   {"@type":"Question","name":"What is MACRS depreciation and how is it calculated for energy equipment?","acceptedAnswer":{"@type":"Answer","text":"MACRS (Modified Accelerated Cost Recovery System) lets businesses depreciate equipment faster than its useful life using IRS-published percentage tables (5-year and 7-year property are common for energy equipment). This is a simplified estimate only — it doesn't account for bonus depreciation or Section 179 expensing, and isn't tax advice."}},
-   {"@type":"Question","name":"How do you calculate the landed or delivered cost of imported equipment?","acceptedAnswer":{"@type":"Answer","text":"Add the equipment price, freight, duty (equipment price multiplied by the applicable duty rate), and cargo insurance together. The duty rate depends on the item's actual customs classification, which should come from a licensed customs broker, not an estimate."}}
- ]}
-]}
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://voltfield.org/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Calculators",
+     "item": "https://voltfield.org/engineering-calculators.html"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Project Finance",
+     "item": "https://voltfield.org/calculators/project-finance.html"
+    }
+   ]
+  },
+  {
+   "@type": "WebPage",
+   "name": "Project Finance Calculators",
+   "description": "Estimate transformer total cost of ownership, MACRS depreciation, investment payback and NPV, and the landed cost of imported equipment. Free, no signup.",
+   "url": "https://voltfield.org/calculators/project-finance.html",
+   "dateModified": "2026-10-01",
+   "isPartOf": {
+    "@type": "WebSite",
+    "name": "Voltfield",
+    "url": "https://voltfield.org/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Voltfield",
+    "url": "https://voltfield.org/"
+   }
+  },
+  {
+   "@type": "WebApplication",
+   "name": "Equipment Finance Calculators",
+   "description": "Estimate transformer total cost of ownership, MACRS depreciation, investment payback and NPV, and the landed cost of imported equipment. Free, no signup.",
+   "url": "https://voltfield.org/calculators/project-finance.html",
+   "applicationCategory": "UtilitiesApplication",
+   "operatingSystem": "Any (runs in a web browser)",
+   "browserRequirements": "Requires JavaScript",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Voltfield",
+    "url": "https://voltfield.org/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "How do you calculate the total cost of ownership of a transformer?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Add the purchase price to the lifetime cost of its energy losses. No-load loss (core loss) runs continuously whenever the transformer is energized; load loss (winding loss) scales with the square of the load factor. Multiply each by 8760 hours/year and your electricity rate to get an annual loss cost, then extend it over the transformer's service life."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What is MACRS depreciation and how is it calculated for energy equipment?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "MACRS (Modified Accelerated Cost Recovery System) lets businesses depreciate equipment faster than its useful life using IRS-published percentage tables (5-year and 7-year property are common for energy equipment). This is a simplified estimate only — it doesn't account for bonus depreciation or Section 179 expensing, and isn't tax advice."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "How do you calculate the landed or delivered cost of imported equipment?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Add the equipment price, freight, duty (equipment price multiplied by the applicable duty rate), and cargo insurance together. The duty rate depends on the item's actual customs classification, which should come from a licensed customs broker, not an estimate."
+     }
+    }
+   ]
+  }
+ ]
+}
 </script>
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#101B2D">

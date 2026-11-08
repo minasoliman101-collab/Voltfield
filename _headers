@@ -122,6 +122,30 @@
 /voltfield-progress.js
   Cache-Control: public, max-age=600, stale-while-revalidate=86400
 
+# These three were the gap in the policy above rather than exceptions to it:
+# with no rule they fell through to Netlify's default, max-age=0 +
+# must-revalidate, so every page view spent a conditional request on them
+# before anything could run. voltfield-calculators.js is 60 KB and loads on 48
+# pages; voltfield-updates.js loads on 79, very nearly the whole site. Same
+# short max-age as the rest, for the same reason -- they are not
+# content-hashed, so a returning visitor must not be able to pair new markup
+# with an old script.
+/voltfield-calculators.js
+  Cache-Control: public, max-age=600, stale-while-revalidate=86400
+
+/voltfield-calculators.css
+  Cache-Control: public, max-age=600, stale-while-revalidate=86400
+
+/voltfield-cat-icons.js
+  Cache-Control: public, max-age=600, stale-while-revalidate=86400
+
+# Render-blocking on every calculator page, and it had no rule either.
+/voltfield-parts.css
+  Cache-Control: public, max-age=600, stale-while-revalidate=86400
+
+/voltfield-updates.js
+  Cache-Control: public, max-age=600, stale-while-revalidate=86400
+
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
