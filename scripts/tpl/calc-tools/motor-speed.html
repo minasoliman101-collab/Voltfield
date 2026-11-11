@@ -1,0 +1,12 @@
+<!-- Live calculator for calculators/motor-speed.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="msCalc">
+    <h2>Synchronous Speed and Slip</h2>
+    <div class="sub">N = 120 &times; f &divide; poles. Add the nameplate full-load speed to get slip.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="msHz">Frequency</label><select id="msHz"><option value="60" selected>60 Hz</option><option value="50">50 Hz</option></select></div>
+      <div class="est-field"><label for="msPoles">Poles</label><input type="number" id="msPoles" min="2" step="2" placeholder="e.g. 4"></div>
+      <div class="est-field"><label for="msRpm">Full-load speed (rpm)</label><input type="number" id="msRpm" min="0" step="any" placeholder="e.g. 1750"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="msBtn">Calculate</button></div></div>
+    <div class="est-result" id="msResult"></div>
+  </div>

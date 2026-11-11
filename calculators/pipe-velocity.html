@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pipe Velocity Calculator (GPM to ft/s) | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/calculators/pipe-velocity.html">
+<meta name="description" content="Calculate water velocity in a pipe from flow in GPM and inside diameter, with a check against common hydronic design limits. Free, no signup.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Pipe Velocity Calculator">
+<meta property="og:description" content="Calculate water velocity in a pipe from flow in GPM and inside diameter, with a check against common hydronic design limits. Free, no signup.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://voltfield.org/calculators/pipe-velocity.html">
+<meta property="og:image" content="https://voltfield.org/social/social-pipe-velocity.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-pipe-velocity.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"BreadcrumbList","itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
+   {"@type":"ListItem","position":2,"name":"Calculators","item":"https://voltfield.org/engineering-calculators.html"},
+   {"@type":"ListItem","position":3,"name":"Pipe Velocity Calculator","item":"https://voltfield.org/calculators/pipe-velocity.html"}
+ ]},
+ {"@type":"WebPage","name":"Pipe Velocity Calculator","description":"Calculate water velocity in a pipe from flow in GPM and inside diameter, with a check against common hydronic design limits. Free, no signup.","url":"https://voltfield.org/calculators/pipe-velocity.html","dateModified":"2026-11-11","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebApplication","name":"Pipe Velocity Calculator","description":"Calculate water velocity in a pipe from flow in GPM and inside diameter, with a check against common hydronic design limits. Free, no signup.","url":"https://voltfield.org/calculators/pipe-velocity.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"What does the Pipe Velocity calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Water velocity in feet per second is 0.4085 times the flow in GPM, divided by the square of the pipe's inside diameter in inches. Because diameter is squared, one pipe size makes a large difference: the same 240 GPM runs at 6.0 ft/s in 4 inch pipe and 10.4 ft/s in 3 inch. Velocity is the quick test of whether a pipe is the right size. Too fast, and the pipe is noisy, erodes at elbows and tees, and loses a great deal of pressure. Too slow, and air and dirt drop out of the flow instead of being carried to where they can be removed."}},
+   {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"Velocity alone does not give pressure drop, which also depends on pipe roughness, fluid viscosity and every fitting in the run. The limits quoted are design conventions for closed hydronic systems and are not requirements; domestic water, condenser water and process piping follow their own. The inside diameter changes with schedule and material, so the same nominal size gives different velocities in steel, copper and plastic."}}
+ ]}
+]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-calculators.css">
+<link rel="stylesheet" href="/voltfield-component-viz.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/engineering-calculators.html" style="color:var(--slate);text-decoration:none">Calculators</a> / <span style="color:var(--ink)">Pipe Velocity Calculator</span></nav>
+    <div class="eyebrow">Free Calculator &middot; No Signup</div>
+    <h1>Pipe Velocity Calculator</h1>
+    <p class="dek">Calculate water velocity in a pipe from flow in GPM and inside diameter, with a check against common hydronic design limits.</p>
+  </div>
+</section>
+
+<div class="artwrap">
+  <section class="calc-tool" id="calculator" aria-label="Pipe Velocity Calculator">
+  <div class="estimator" id="pvCalc">
+    <h2>Pipe Velocity</h2>
+    <div class="sub">v = 0.4085 &times; GPM &divide; d&sup2;. Use the inside diameter, not the nominal size: 4 in Schedule 40 steel is 4.026 in.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="pvGpm">Flow (GPM)</label><input type="number" id="pvGpm" min="0" step="any" placeholder="e.g. 240"></div>
+      <div class="est-field"><label for="pvId">Inside diameter (in)</label><input type="number" id="pvId" min="0" step="any" placeholder="e.g. 4.026"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="pvBtn">Calculate</button></div></div>
+    <div class="est-result" id="pvResult"></div>
+  </div>
+  </section>
+
+  <p><b>Water velocity in feet per second is 0.4085 times the flow in GPM, divided by the square of the pipe's inside diameter in inches.</b> Because diameter is squared, one pipe size makes a large difference: the same 240 GPM runs at 6.0 ft/s in 4 inch pipe and 10.4 ft/s in 3 inch.</p>
+  <p>Velocity is the quick test of whether a pipe is the right size. Too fast, and the pipe is noisy, erodes at elbows and tees, and loses a great deal of pressure. Too slow, and air and dirt drop out of the flow instead of being carried to where they can be removed.</p>
+
+  <h2>The formula</h2>
+    <div class="formula">v = 0.4085 &times; GPM / d&sup2;</div>
+    <div class="tblwrap"><table class="famtable"><tbody>
+      <tr><td class="num"><b>v</b></td><td>Velocity in feet per second</td></tr>
+      <tr><td class="num"><b>GPM</b></td><td>Flow in US gallons per minute</td></tr>
+      <tr><td class="num"><b>d</b></td><td>Inside diameter of the pipe in inches, which is not the nominal size</td></tr>
+    </tbody></table></div>
+
+  <h2>The equipment</h2>
+  <div data-vfcv-slot="pump"></div>
+
+  <h2>Worked example</h2>
+  <p>240 GPM in 4 inch Schedule 40 steel pipe, which has an inside diameter of 4.026 in:</p>
+  <p>v = 0.4085 &times; 240 / 4.026&sup2; = 98.04 / 16.21 = 6.05 ft/s</p>
+  <p>The same flow in 3 inch Schedule 40, inside diameter 3.068 in, runs at 10.4 ft/s, which is on the fast side for a closed hydronic system.</p>
+
+  <h2>Which standard governs this</h2>
+  <p>The equation is continuity: flow equals velocity times area. Pipe dimensions come from ASME B36.10 for steel pipe. The ASHRAE Handbook gives the customary hydronic sizing limits, commonly quoted as about 4 ft/s in pipe of 2 inches and under and a friction loss of about 4 ft of head per 100 ft in larger pipe.</p>
+
+  <h2>What this calculation does not account for</h2>
+  <p>Velocity alone does not give pressure drop, which also depends on pipe roughness, fluid viscosity and every fitting in the run. The limits quoted are design conventions for closed hydronic systems and are not requirements; domestic water, condenser water and process piping follow their own. The inside diameter changes with schedule and material, so the same nominal size gives different velocities in steel, copper and plastic.</p>
+    <div class="callout"><b>This is a screening estimate.</b> It is here to get you to the right order of magnitude and the right conversation — not to replace a stamped calculation by a qualified engineer.</div>
+
+  <h2>Common mistakes</h2>
+  <p>Entering the nominal pipe size as the diameter. Using Schedule 40 dimensions for Schedule 80 or for copper tube. Judging a pipe on velocity and never checking the pressure drop. Sizing every pipe to the same velocity regardless of diameter, which makes small pipes noisy and large ones needlessly big.</p>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2>Related</h2>
+    <div class="rel">
+      <a href="/calculators/chilled-water-flow.html">Chilled Water Flow Calculator</a>
+      <a href="/calculators/pump-power.html">Pump Power Calculator</a>
+      <a href="/calculators/affinity-laws.html">Pump &amp; Fan Affinity Laws Calculator</a>
+      <a href="/guide-crac-vs-crah.html">CRAC vs. CRAH</a>
+      <a href="/data-centers/cooling.html">Data Center Cooling Equipment</a>
+      <a href="/engineering-calculators.html">All calculators</a>
+    </div>
+
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new calculators and guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/calculators/pipe-velocity.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+
+  <aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>Calculate water velocity in a pipe from flow in GPM and inside diameter, with a check against common hydronic design limits. Free, no signup.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>The equation is continuity: flow equals velocity times area. Pipe dimensions come from ASME B36.10 for steel pipe. The ASHRAE Handbook gives the customary hydronic sizing limits, commonly quoted as about 4 ft/s in pipe of 2 inches and under and a friction loss of about 4 ft of head per 100 ft in larger pipe.</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>Velocity alone does not give pressure drop, which also depends on pipe roughness, fluid viscosity and every fitting in the run. The limits quoted are design conventions for closed hydronic systems and are not requirements; domestic water, condenser water and process piping follow their own. The inside diameter changes with schedule and material, so the same nominal size gives different velocities in steel, copper and plastic. This is a screening estimate, not a stamped calculation.</dd>
+      <dt>Provenance</dt>
+      <dd>Last reviewed November 11, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labelled as estimates. Worked examples are arithmetic you can reproduce against the <a href="#calculator">calculator at the top of this page</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+    </dl>
+  </aside>
+
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h4>Voltfield</h4>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h4>Sectors</h4><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h4>Compliance</h4><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="/voltfield-component-viz.js" defer></script>
+<script src="/voltfield-calculators.js" defer></script>
+<script src="/voltfield-site-config.js"></script>
+<script src="/voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

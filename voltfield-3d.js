@@ -2338,6 +2338,238 @@
     return g;
   }
 
+  /* ================= mechanical plant (Nov 2026) =================
+     The cooling side of a data center is as much pumps, chillers and heat
+     rejection as it is CRAHs, and none of it had a model. Same vocabulary as
+     everything above: sector colour on the painted casing, real materials on
+     the parts that are not painted, and every pipe going somewhere. */
+
+  /* A flanged pipe stub along +/-X or +/-Y, with a bolted flange at the open end. */
+  function flangedStub(THREE, g, pipeM, flangeM, boltM, from, to, r){
+    tube(THREE, g, pipeM, from, to, r, 16);
+    const fl = new THREE.Mesh(new THREE.CylinderGeometry(r * 1.55, r * 1.55, 0.07, segs(18)), flangeM);
+    fl.position.set(to[0], to[1], to[2]);
+    const d = new THREE.Vector3(to[0] - from[0], to[1] - from[1], to[2] - from[2]).normalize();
+    fl.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d);
+    g.add(fl);
+    for (let i = 0; i < 8; i++) {
+      const a = (i / 8) * Math.PI * 2;
+      const b = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.10, 6), boltM);
+      /* a ring of bolts in the plane of the flange */
+      const u = Math.abs(d.y) > 0.9 ? new THREE.Vector3(1, 0, 0) : new THREE.Vector3(0, 1, 0);
+      const v = new THREE.Vector3().crossVectors(d, u).normalize();
+      const w = new THREE.Vector3().crossVectors(d, v).normalize();
+      b.position.set(
+        to[0] + (v.x * Math.cos(a) + w.x * Math.sin(a)) * r * 1.28,
+        to[1] + (v.y * Math.cos(a) + w.y * Math.sin(a)) * r * 1.28,
+        to[2] + (v.z * Math.cos(a) + w.z * Math.sin(a)) * r * 1.28);
+      b.quaternion.copy(fl.quaternion);
+      g.add(b);
+    }
+  }
+
+  /* Base-mounted end-suction centrifugal pump: motor, coupling guard, bearing
+     frame and volute on one steel baseplate. Suction enters on the shaft axis,
+     discharge leaves vertically -- the arrangement the name describes. */
+  function buildPump(THREE, color){
+    const M = mats(THREE, color); const g = new THREE.Group();
+    const AX = 1.05;                                   // shaft centreline height
+
+    /* Baseplate on a concrete inertia pad. */
+    g.add(box(THREE, M.concrete, 4.3, 0.22, 1.7, 0, 0.11, 0));
+    g.add(box(THREE, M.dark, 4.0, 0.12, 1.3, 0, 0.28, 0));
+    for (const x of [-1.8, -0.6, 0.6, 1.8]) for (const z of [-0.56, 0.56])
+      g.add(cyl(THREE, M.steel, 0.05, 0.05, 0.10, 6, x, 0.37, z));              // anchor bolts
+
+    /* Motor, left: finned frame, end bells, terminal box, fan cowl. */
+    const mx = -1.05;
+    const frame = cyl(THREE, M.castIron, 0.52, 0.52, 1.30, 24, mx, AX, 0);
+    frame.rotation.z = Math.PI / 2; g.add(frame);
+    for (let i = 0; i < 16; i++) {
+      const a = (i / 16) * Math.PI * 2;
+      g.add(box(THREE, M.castIron, 1.22, 0.07, 0.05, mx, AX + Math.sin(a) * 0.55, Math.cos(a) * 0.55));
+    }
+    for (const s of [-1, 1]) {
+      const eb = cyl(THREE, M.dark, 0.55, 0.50, 0.16, 22, mx + s * 0.72, AX, 0);
+      eb.rotation.z = Math.PI / 2; g.add(eb);
+    }
+    const cowl = cyl(THREE, M.dark, 0.52, 0.46, 0.34, 20, mx - 0.96, AX, 0);
+    cowl.rotation.z = Math.PI / 2; g.add(cowl);
+    g.add(box(THREE, M.dark, 0.44, 0.26, 0.40, mx, AX + 0.62, 0));              // terminal box
+    g.add(cyl(THREE, M.brass, 0.05, 0.05, 0.12, 8, mx, AX + 0.62, 0.26).rotateX(Math.PI / 2));  // gland
+    for (const z of [-0.36, 0.36]) g.add(box(THREE, M.castIron, 0.9, 0.5, 0.12, mx, 0.58, z));   // feet
+
+    /* Coupling guard between motor and pump. */
+    const guard = cyl(THREE, M.gold, 0.30, 0.30, 0.52, 18, 0.02, AX, 0);
+    guard.rotation.z = Math.PI / 2; g.add(guard);
+    g.add(box(THREE, M.gold, 0.52, 0.42, 0.62, 0.02, 0.62, 0));
+
+    /* Bearing frame, then the volute casing in the sector colour. */
+    const bf = cyl(THREE, M.castIron, 0.30, 0.34, 0.62, 18, 0.62, AX, 0);
+    bf.rotation.z = Math.PI / 2; g.add(bf);
+    g.add(box(THREE, M.castIron, 0.36, 0.62, 0.50, 0.62, 0.62, 0));             // frame foot
+    const vol = cyl(THREE, M.body, 0.74, 0.74, 0.46, 30, 1.18, AX, 0);
+    vol.rotation.z = Math.PI / 2; g.add(vol);
+    const back = cyl(THREE, M.body, 0.60, 0.74, 0.14, 26, 0.90, AX, 0);
+    back.rotation.z = Math.PI / 2; g.add(back);
+    /* casing bolts are a ring in the YZ plane, so place them by hand */
+    for (let i = 0; i < 12; i++) {
+      const a = (i / 12) * Math.PI * 2;
+      const b = cyl(THREE, M.steel, 0.035, 0.035, 0.06, 6, 1.43, AX + Math.sin(a) * 0.64, Math.cos(a) * 0.64);
+      b.rotation.z = Math.PI / 2; g.add(b);
+    }
+    g.add(box(THREE, M.body, 0.40, 0.42, 0.9, 1.18, 0.55, 0));                  // casing foot
+
+    /* Suction on the shaft axis, discharge tangential and vertical. */
+    flangedStub(THREE, g, M.body, M.body, M.steel, [1.40, AX, 0], [2.02, AX, 0], 0.30);
+    flangedStub(THREE, g, M.body, M.body, M.steel, [1.18, AX + 0.50, 0.30], [1.18, AX + 1.25, 0.30], 0.24);
+    /* Gauge tapping and drain plug. */
+    tube(THREE, g, M.brass, [1.18, AX + 0.95, 0.54], [1.18, AX + 0.95, 0.74], 0.025, 8);
+    const gauge = cyl(THREE, M.stainless, 0.11, 0.11, 0.05, 16, 1.18, AX + 0.95, 0.78);
+    gauge.rotation.x = Math.PI / 2; g.add(gauge);
+    g.add(cyl(THREE, M.brass, 0.05, 0.05, 0.08, 6, 1.18, AX - 0.76, 0));
+
+    decal(THREE, g, {key: 'pump-np', w: 0.34, h: 0.22, x: mx, y: AX + 0.05, z: 0.605, cw: 280, ch: 180, metal: 0.35, rough: 0.42,
+      draw: npDraw('CENTRIFUGAL PUMP', [['FLOW', '500 GPM'], ['HEAD', '80 FT'], ['MOTOR', '15 HP']])});
+    return g;
+  }
+
+  /* Air-cooled chiller: a long skid with V-bank condenser coils and a row of
+     fans on top, compressors and the evaporator barrel underneath. */
+  function buildChiller(THREE, color){
+    const M = mats(THREE, color); const g = new THREE.Group();
+    const blk = new THREE.MeshStandardMaterial({color: 0x1E2226, metalness: .1, roughness: .7});
+    const fin = new THREE.MeshStandardMaterial({color: 0x8F99A3, metalness: .75, roughness: .45});
+    const L = 4.6, W = 1.9, H = 2.5;
+
+    g.add(box(THREE, M.concrete, L + 0.5, 0.18, W + 0.5, 0, 0.09, 0));
+    for (const z of [-W / 2 + 0.06, W / 2 - 0.06]) g.add(box(THREE, M.dark, L, 0.18, 0.12, 0, 0.27, z));   // base rails
+    for (const x of [-L / 2 + 0.06, 0, L / 2 - 0.06]) g.add(box(THREE, M.dark, 0.12, 0.18, W, x, 0.27, 0));
+
+    /* Corner and intermediate posts carrying the fan deck. */
+    for (const x of [-L / 2 + 0.06, -L / 6, L / 6, L / 2 - 0.06]) for (const z of [-W / 2 + 0.06, W / 2 - 0.06])
+      g.add(box(THREE, M.body, 0.10, H - 0.36, 0.10, x, 0.36 + (H - 0.36) / 2, z));
+
+    /* Condenser coil slabs down both long sides, upper two thirds. */
+    const coilH = 1.25, coilY = H - 0.30 - coilH / 2;
+    for (const s of [-1, 1]) {
+      g.add(box(THREE, fin, L - 0.3, coilH, 0.10, 0, coilY, s * (W / 2 - 0.10)));
+      for (let i = 0; i < 46; i++)                                                 // fin texture
+        g.add(box(THREE, blk, 0.012, coilH - 0.06, 0.012, -L / 2 + 0.22 + i * ((L - 0.44) / 45), coilY, s * (W / 2 - 0.04)));
+      tubeRun(THREE, g, M.copper, [[-L / 2 + 0.20, coilY + coilH / 2 - 0.08, s * (W / 2 - 0.22)], [L / 2 - 0.20, coilY + coilH / 2 - 0.08, s * (W / 2 - 0.22)]], 0.04);
+    }
+
+    /* Fan deck with a row of condenser fans, each in a short stack with a guard. */
+    g.add(box(THREE, M.body, L, 0.10, W, 0, H - 0.24, 0));
+    for (let i = 0; i < 4; i++) {
+      const x = -L / 2 + L / 8 + i * (L / 4);
+      g.add(cyl(THREE, M.body, 0.50, 0.54, 0.24, 26, x, H - 0.08, 0));           // stack
+      g.add(cyl(THREE, blk, 0.46, 0.46, 0.02, 24, x, H - 0.06, 0));              // dark throat
+      g.add(cyl(THREE, M.steel, 0.12, 0.12, 0.10, 12, x, H + 0.00, 0));          // hub
+      for (let k = 0; k < 5; k++) {
+        const bl = box(THREE, M.galv, 0.82, 0.02, 0.16, x, H - 0.01, 0);
+        bl.rotation.y = (k / 5) * Math.PI; bl.rotation.x = 0.18; g.add(bl);
+      }
+      for (let k = 1; k <= 3; k++) {                                              // guard rings
+        const r = k * 0.155;
+        const ring = new THREE.Mesh(new THREE.TorusGeometry(r, 0.008, 6, segs(20)), M.steel);
+        ring.rotation.x = Math.PI / 2; ring.position.set(x, H + 0.06, 0); g.add(ring);
+      }
+    }
+
+    /* Below the coils: evaporator barrel, two compressors, control panel. */
+    const evap = cyl(THREE, blk, 0.34, 0.34, L - 1.2, 22, 0.25, 0.80, -0.38);
+    evap.rotation.z = Math.PI / 2; g.add(evap);
+    for (const s of [-1, 1]) {
+      const head = cyl(THREE, M.dark, 0.36, 0.36, 0.10, 22, 0.25 + s * (L - 1.2) / 2, 0.80, -0.38);
+      head.rotation.z = Math.PI / 2; g.add(head);
+    }
+    for (const x of [-0.2, 1.15]) {
+      const c = cyl(THREE, M.castIron, 0.30, 0.30, 0.95, 20, x, 0.78, 0.36);
+      c.rotation.z = Math.PI / 2; g.add(c);
+      g.add(box(THREE, M.castIron, 0.30, 0.22, 0.30, x, 1.10, 0.36));             // terminal box
+      tubeRun(THREE, g, M.copper, [[x + 0.3, 1.0, 0.36], [x + 0.3, 1.25, 0.36], [x + 0.3, 1.25, W / 2 - 0.22]], 0.035);
+    }
+    g.add(box(THREE, M.body, 0.75, 1.55, W - 0.3, -L / 2 + 0.52, 1.20, 0));        // control / starter panel
+    g.add(box(THREE, M.dark, 0.012, 1.40, 0.02, -L / 2 + 0.14, 1.20, 0));              // door seam
+    g.add(box(THREE, M.gold, 0.02, 0.10, 0.10, -L / 2 + 0.135, 1.72, -0.5));
+    g.add(box(THREE, M.lit, 0.02, 0.08, 0.08, -L / 2 + 0.135, 1.72, -0.3));
+    g.add(box(THREE, blk, 0.02, 0.26, 0.38, -L / 2 + 0.135, 1.50, 0.35));         // HMI
+
+    /* Chilled-water supply and return, flanged, at the far end. */
+    flangedStub(THREE, g, M.steel, M.steel, M.stainless, [L / 2 - 0.6, 0.95, -0.38], [L / 2 + 0.28, 0.95, -0.38], 0.15);
+    flangedStub(THREE, g, M.steel, M.steel, M.stainless, [L / 2 - 0.6, 0.62, -0.38], [L / 2 + 0.28, 0.62, -0.38], 0.15);
+
+    decal(THREE, g, {key: 'chiller-np', w: 0.40, h: 0.26, x: -L / 2 + 0.138, y: 0.86, z: -0.36, ry: -Math.PI / 2, cw: 280, ch: 180, metal: 0.35, rough: 0.42,
+      draw: npDraw('AIR-COOLED CHILLER', [['CAPACITY', '150 TONS'], ['LWT', '44 F'], ['REFRIG', 'R-513A']])});
+    return g;
+  }
+
+  /* Induced-draft cooling tower: casing, louvred air inlets low down, fill
+     visible behind them, a fan in a velocity-recovery stack on top, and the
+     cold-water basin with its supply and return. */
+  function buildCoolingTower(THREE, color){
+    const M = mats(THREE, color); const g = new THREE.Group();
+    const blk = new THREE.MeshStandardMaterial({color: 0x1B1E22, metalness: .1, roughness: .8});
+    const W = 2.6, D = 2.6, H = 2.7;
+
+    g.add(box(THREE, M.concrete, W + 0.6, 0.16, D + 0.6, 0, 0.08, 0));
+    for (const x of [-W / 2 + 0.1, W / 2 - 0.1]) for (const z of [-D / 2 + 0.1, D / 2 - 0.1])
+      g.add(box(THREE, M.galv, 0.14, 0.34, 0.14, x, 0.33, z));                      // support steel
+    g.add(box(THREE, M.galv, W, 0.46, D, 0, 0.72, 0));                              // cold-water basin
+    g.add(box(THREE, M.dark, W + 0.02, 0.04, D + 0.02, 0, 0.96, 0));
+
+    /* Air inlet band: dark opening with fill behind tilted louvres on all four sides. */
+    const inY = 1.36, inH = 0.74;
+    g.add(box(THREE, blk, W - 0.10, inH, D - 0.10, 0, inY, 0));
+    for (const x of [-W / 2 + 0.05, W / 2 - 0.05]) for (const z of [-D / 2 + 0.05, D / 2 - 0.05])
+      g.add(box(THREE, M.body, 0.10, inH, 0.10, x, inY, z));                        // corner posts
+    for (let i = 0; i < 6; i++) {
+      const y = inY - inH / 2 + 0.08 + i * ((inH - 0.16) / 5);
+      for (const s of [-1, 1]) {
+        const a = box(THREE, M.galv, W - 0.22, 0.02, 0.14, 0, y, s * (D / 2 - 0.03)); a.rotation.x = s * 0.6; g.add(a);
+        const b = box(THREE, M.galv, 0.14, 0.02, D - 0.22, s * (W / 2 - 0.03), y, 0); b.rotation.z = -s * 0.6; g.add(b);
+      }
+    }
+
+    /* Casing above the inlets, with panel seams and an access door. */
+    const cY = (inY + inH / 2 + H) / 2, cH = H - (inY + inH / 2);
+    g.add(box(THREE, M.body, W, cH, D, 0, cY, 0));
+    for (const x of [-W / 6, W / 6]) g.add(box(THREE, M.dark, 0.02, cH - 0.04, D + 0.012, x, cY, 0));
+    for (const z of [-D / 6, D / 6]) g.add(box(THREE, M.dark, W + 0.012, cH - 0.04, 0.02, 0, cY, z));
+    door(THREE, g, M.body, M.dark, M.stainless, {x: 0.55, y: cY, z: D / 2 + 0.012, w: 0.62, h: cH - 0.22});
+
+    /* Fan deck and velocity-recovery stack with the fan inside it. */
+    g.add(box(THREE, M.dark, W + 0.04, 0.06, D + 0.04, 0, H + 0.03, 0));
+    const stack = new THREE.Mesh(new THREE.CylinderGeometry(1.02, 0.92, 0.62, segs(30), 1, true), M.body);
+    stack.material = M.body.clone(); stack.material.side = THREE.DoubleSide;
+    stack.position.set(0, H + 0.37, 0); g.add(stack);
+    g.add(cyl(THREE, blk, 0.90, 0.90, 0.02, 28, 0, H + 0.08, 0));
+    g.add(cyl(THREE, M.steel, 0.20, 0.20, 0.16, 14, 0, H + 0.36, 0));
+    for (let k = 0; k < 6; k++) {
+      const bl = box(THREE, M.galv, 1.62, 0.025, 0.26, 0, H + 0.36, 0);
+      bl.rotation.y = (k / 6) * Math.PI; bl.rotation.x = 0.22; g.add(bl);
+    }
+    for (let k = 1; k <= 4; k++) {
+      const ring = new THREE.Mesh(new THREE.TorusGeometry(k * 0.24, 0.01, 6, segs(24)), M.steel);
+      ring.rotation.x = Math.PI / 2; ring.position.set(0, H + 0.69, 0); g.add(ring);
+    }
+    /* Fan motor on the deck, belt guard to the stack. */
+    g.add(cyl(THREE, M.castIron, 0.16, 0.16, 0.42, 14, W / 2 - 0.22, H + 0.24, D / 2 - 0.30).rotateZ(Math.PI / 2));
+    g.add(box(THREE, M.gold, 0.50, 0.10, 0.20, W / 2 - 0.55, H + 0.14, D / 2 - 0.42));
+
+    /* Condenser water: hot return up to the distribution deck, cold supply from the basin. */
+    tubeRun(THREE, g, M.steel, [[-W / 2 - 0.55, 0.40, 0.55], [-W / 2 - 0.55, H - 0.25, 0.55], [-W / 2 + 0.05, H - 0.25, 0.55]], 0.11, M.dark);
+    flangedStub(THREE, g, M.steel, M.steel, M.stainless, [-W / 2 + 0.05, 0.72, -0.55], [-W / 2 - 0.50, 0.72, -0.55], 0.13);
+    /* Ladder up one side. */
+    for (const z of [-0.95, -0.65]) g.add(box(THREE, M.galv, 0.03, H - 0.3, 0.03, W / 2 + 0.06, 0.3 + (H - 0.3) / 2 + 0.15, z));
+    for (let i = 0; i < 9; i++) g.add(box(THREE, M.galv, 0.025, 0.025, 0.30, W / 2 + 0.06, 0.55 + i * 0.27, -0.80));
+
+    decal(THREE, g, {key: 'tower-np', w: 0.40, h: 0.26, x: -0.55, y: cY, z: D / 2 + 0.008, cw: 280, ch: 180, metal: 0.35, rough: 0.42,
+      draw: npDraw('COOLING TOWER', [['CAPACITY', '300 TONS'], ['FLOW', '900 GPM'], ['RANGE', '10 F']])});
+    return g;
+  }
+
   const BUILDERS = {
     /* electrical / plant */
     transformer: buildTransformer,
@@ -2350,6 +2582,9 @@
     panel: buildPanel,
     busway: buildBusway,
     cooling: buildCooling,
+    pump: buildPump,
+    chiller: buildChiller,
+    coolingtower: buildCoolingTower,
     /* 19" rack gear */
     server: (T,c) => buildServer(T,c,1),
     server2u: (T,c) => buildServer(T,c,2),

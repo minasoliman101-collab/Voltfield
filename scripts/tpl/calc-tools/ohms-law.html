@@ -1,0 +1,13 @@
+<!-- Live calculator for calculators/ohms-law.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="olCalc">
+    <h2>Ohm's Law</h2>
+    <div class="sub">Fill in any two and leave the other two blank. For DC and for resistive AC loads.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="olV">Voltage (V)</label><input type="number" id="olV" min="0" step="any" placeholder="e.g. 120"></div>
+      <div class="est-field"><label for="olI">Current (A)</label><input type="number" id="olI" min="0" step="any" placeholder="e.g. 10"></div>
+      <div class="est-field"><label for="olR">Resistance (&Omega;)</label><input type="number" id="olR" min="0" step="any" placeholder="leave blank"></div>
+      <div class="est-field"><label for="olP">Power (W)</label><input type="number" id="olP" min="0" step="any" placeholder="leave blank"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="olBtn">Calculate</button></div></div>
+    <div class="est-result" id="olResult"></div>
+  </div>

@@ -28,6 +28,14 @@ const root = path.resolve(import.meta.dirname, '..');
 const TEMPLATE = 'guide-grid-forming-vs-grid-following.html';
 const DATE_ISO = '2026-11-03';
 const DATE_LONG = 'November 3, 2026';
+/* A spec may carry its own `date: 'YYYY-MM-DD'`. Without that, every guide in
+   the file takes the batch date above, and adding a later batch would mean
+   either re-dating the earlier guides or publishing new ones with an old date. */
+function dates(g) {
+  if (!g.date) return { iso: DATE_ISO, long: DATE_LONG };
+  const d = new Date(g.date + 'T12:00:00Z');
+  return { iso: g.date, long: d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) };
+}
 
 /* ---------------------------------------------------------------- specs ---- */
 
@@ -1401,6 +1409,262 @@ const GUIDES = [
   basedOn: ['Transfer switch and UPS operating principles, with NEC Articles 700, 701 and 702 for emergency, legally required and optional standby systems', 'Voltfield’s own guides on UPS topologies and facility redundancy', 'IT equipment ride-through expectations for the transfer-time comparison'],
   notThis: 'A specification or a topology design. Actual transfer times, ride-through capability and bypass behaviour are properties of specific equipment and have to come from manufacturer data. Closed transition and any momentary parallel operation with the utility require that utility’s agreement, and emergency system requirements are set by the applicable NEC articles and the AHJ.',
 },
+
+/* ---- Nov 11, 2026: the mechanical side of the data center ---- */
+{
+  slug: 'guide-crac-vs-crah',
+  date: '2026-11-11',
+  eyebrow: 'Data center cooling',
+  crumb: 'CRAC vs. CRAH',
+  h1: 'CRAC vs. CRAH: What Is the Difference?',
+  title: 'CRAC vs. CRAH: The Difference Explained',
+  headline: 'CRAC vs. CRAH: Compressors, Chilled Water and Which One a Data Center Needs',
+  dek: 'Both stand in the same place and blow cold air at the same racks. One makes its own cooling with a compressor; the other borrows it from a chiller plant. Nearly every other difference follows from that.',
+  description: 'CRAC vs. CRAH explained: a CRAC cools with its own compressor, a CRAH with chilled water from a plant. How each rejects heat, fails, scales and is sized.',
+  ogDesc: 'A CRAC has a compressor. A CRAH has a chilled water coil. What that means for efficiency, redundancy, power and sizing.',
+  keywords: 'CRAC vs CRAH, CRAC unit, CRAH unit, computer room air conditioner, computer room air handler, data center cooling, chilled water, DX cooling',
+  photo: { src: 'images/parts/dc-crah-crac-units', alt: 'A computer-room air handling unit', caption: 'Computer-room cooling unit (illustration)' },
+  takeaways: [
+    'A CRAC (computer room air conditioner) contains a compressor and a refrigerant circuit. A CRAH (computer room air handler) contains only a chilled water coil, fans and a control valve.',
+    'A CRAC is self-contained, so each unit fails alone. A CRAH depends on a chiller plant, so the redundancy has to be built into the plant and the piping.',
+    'Chilled water with CRAHs is usually the more efficient choice at scale; CRACs suit small rooms and sites with no chiller plant.',
+    'Either is sized on sensible cooling in tons or kW at a stated return air temperature, and the rating falls as the return air gets cooler.',
+  ],
+  sections: [
+    { id: 'the-one-line-answer', h2: 'The one-line answer', html: `
+  <p><b>A CRAC makes cold with its own compressor; a CRAH uses chilled water made somewhere else.</b> A CRAC, or computer room air conditioner, is a complete refrigeration machine in a cabinet: compressor, evaporator coil, expansion valve and fans. A CRAH, or computer room air handler, is much simpler. It is a coil with chilled water running through it, a set of fans to push room air across the coil, and a valve to control the water flow.</p>
+  <p>From the aisle they look alike and do the same job, which is why the two names are used loosely. The difference is where the refrigeration happens, and that decides how the system is powered, how it fails and how far it scales.</p>` },
+    { id: 'how-each-one-rejects-heat', h2: 'How each one rejects heat', html: `
+  <p>Heat taken out of the room has to leave the building, and the two types do it differently.</p>
+  <p>A <b>CRAC</b> uses direct expansion, usually shortened to DX. Refrigerant evaporates in the indoor coil, absorbing heat from the air, and is compressed and sent to a condenser. In the common air-cooled arrangement that condenser sits outdoors, joined to the indoor unit by refrigerant pipes. In a glycol-cooled or water-cooled CRAC the condenser is inside the cabinet and a pumped loop carries the heat to a dry cooler or a cooling tower.</p>
+  <p>A <b>CRAH</b> has no refrigerant circuit of its own. Chilled water arrives from a central plant, typically somewhere between 44 and 60&deg;F depending on the design, picks up heat in the coil and returns warmer. The chillers that cool it reject their heat either directly to the air, in an air-cooled chiller, or through condenser water to a cooling tower.</p>
+  <table class="reftable">
+    <tr><th scope="col">CRAC</th><th scope="col">CRAH</th></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Source of cooling</td></tr>
+    <tr><td>Compressor and refrigerant in the unit</td><td>Chilled water from a central plant</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Main electrical load in the unit</td></tr>
+    <tr><td>Compressors and fans</td><td>Fans only</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">What it depends on</td></tr>
+    <tr><td>Its own condenser or dry cooler</td><td>Chillers, pumps and the piping between</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Capacity control</td></tr>
+    <tr><td>Compressor staging or variable speed</td><td>Water valve and fan speed</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Typical home</td></tr>
+    <tr><td>Small and medium rooms, sites with no chiller plant</td><td>Large facilities built around a chiller plant</td></tr>
+  </table>` },
+    { id: 'efficiency-and-scale', h2: 'Efficiency and scale', html: `
+  <p>At small scale a CRAC is hard to beat. There is no plant to build, capacity is added one unit at a time, and a room of a few hundred kilowatts can be cooled by a handful of units with their condensers on the roof.</p>
+  <p>As the load grows, chilled water pulls ahead. Large chillers are more efficient than many small compressors, a central plant can use economizers to cool the water with outside air for much of the year, and water carries heat in far less space than refrigerant lines or air ducts. A CRAH also has only fans to run, and with variable speed fans their power falls with the cube of speed. That relationship is worked through in <a class="inline" href="guide-pump-and-fan-affinity-laws.html">the affinity laws guide</a>.</p>
+  <p>The boundary is not fixed. Pumped-refrigerant economizers have made modern DX systems much more efficient than older ones, and they avoid bringing water into the building at all, which some operators prefer on principle.</p>` },
+    { id: 'redundancy-and-failure', h2: 'Redundancy and failure', html: `
+  <p>This is where the two differ most in practice. A CRAC is independent. If one fails, the others carry on, and N+1 means simply one more unit than the load needs.</p>
+  <p>A CRAH is only as available as the water behind it. A room full of healthy air handlers cools nothing if the chilled water stops, so the redundancy has to reach back through the pumps, the chillers and the pipework, often with two separate loops or a ring main with isolation valves. Concurrent maintainability, the ability to take any one component out of service without losing cooling, is a piping design problem more than an equipment one. The levels are described in <a class="inline" href="guide-n-plus-1-vs-2n-redundancy.html">N+1 vs. 2N redundancy</a>.</p>
+  <p>The two also behave differently when power is lost. CRAH fans draw little enough to be kept on a UPS, and a chilled water system with a storage tank can go on cooling for the minutes it takes generators to start and chillers to restart. Compressors are rarely put on a UPS, so a room cooled by CRACs has no active cooling until the generators are carrying them. At high rack densities the room temperature rises quickly in that gap, which is one reason dense rooms lean toward chilled water or liquid cooling.</p>` },
+    { id: 'sizing-either-one', h2: 'Sizing either one', html: `
+  <p>Both are rated on sensible cooling capacity, the part that lowers air temperature. IT equipment gives off dry heat, so a data center load is almost entirely sensible, and units for this duty are designed to do very little dehumidifying. A comfort air conditioner of the same nominal tonnage delivers noticeably less sensible cooling.</p>
+  <p>The arithmetic starts from the IT load. Take a 200 kW room:</p>
+  <p>200 kW &times; 3,412 = 682,400 BTU/h, and 682,400 / 12,000 = 56.9 tons</p>
+  <p>With units of 30 tons sensible each, two carry the load and a third gives N+1. The <a class="inline" href="calculators/btu-to-tons.html">BTU to tons converter</a> does the conversion, and the <a class="inline" href="calculators/airflow-cfm.html">airflow calculator</a> gives the air those units must move: at a 20&deg;F rise, about 158 CFM for each kW.</p>
+  <p>One caution governs the whole selection. A unit's capacity is quoted at a stated return air temperature, and it falls as the return air gets cooler. A CRAH rated for 30 tons with 95&deg;F return air may deliver well under that if cold supply air is allowed to mix with the return and bring it down to 75&deg;F. That is the practical case for <a class="inline" href="guide-hot-aisle-vs-cold-aisle-containment.html">containment</a>: it is what gets the rated capacity out of the equipment.</p>` },
+    { id: 'common-mistakes', h2: 'Common mistakes', html: `
+  <ul>
+    <li><b>Using the names interchangeably on a specification.</b> One needs refrigerant piping and condensers, the other needs a chilled water plant. They are not substitutes.</li>
+    <li><b>Counting air handlers and forgetting the plant.</b> N+1 CRAHs on a single chilled water loop with one pump is not N+1 cooling.</li>
+    <li><b>Sizing on total capacity.</b> The figure that matters is sensible capacity at the return air temperature the room will actually run at.</li>
+    <li><b>Ignoring the electrical side.</b> A CRAC's compressors are a large motor load in the room, with starting current to match. A CRAH moves that load out to the chiller plant.</li>
+    <li><b>Assuming cooling resumes the moment the generators start.</b> Compressors and chillers have restart delays, and the room goes on heating through them.</li>
+  </ul>` },
+  ],
+  faqs: [
+    { q: 'What does CRAC stand for, and what does CRAH stand for?', a: 'CRAC is computer room air conditioner: a self-contained unit with its own compressor and refrigerant circuit. CRAH is computer room air handler: a unit with a chilled water coil and fans, which relies on a separate chiller plant for cooling.' },
+    { q: 'Is a CRAH more efficient than a CRAC?', a: 'Usually, in a large facility. A CRAH runs only fans, and the central chillers that serve it are more efficient than many small compressors and can use economizers for much of the year. In a small room the plant is not worth building and a CRAC is the sensible choice. Modern DX units with pumped-refrigerant economizers have narrowed the gap.' },
+    { q: 'Does a CRAH need a chiller?', a: 'Yes. A CRAH has no means of making cold. It needs a supply of chilled water, which comes from one or more chillers, with pumps and piping to deliver it. That whole plant has to be as redundant as the cooling is meant to be.' },
+    { q: 'How many CRAC or CRAH units does a room need?', a: 'Convert the IT load to tons of sensible cooling by multiplying kW by 3,412 and dividing by 12,000, divide by the sensible capacity of one unit at the expected return air temperature, round up, and add units for redundancy. A 200 kW room is about 57 tons, so three 30-ton units give N+1.' },
+  ],
+  nextIntro: 'The equipment itself is covered on the <a class="inline" href="data-centers/cooling.html">data center cooling</a> reference page, and where air cooling runs out is the subject of <a class="inline" href="guide-liquid-vs-air-cooling.html">liquid vs. air cooling</a>.',
+  calcs: [
+    ['calculators/btu-to-tons.html', 'BTU to Tons Converter', 'IT load in kW to tons of cooling.'],
+    ['calculators/airflow-cfm.html', 'Airflow (CFM) Calculator', 'The air a heat load needs at a given temperature rise.'],
+    ['calculators/chilled-water-flow.html', 'Chilled Water Flow Calculator', 'GPM from tons and the water temperature difference.'],
+  ],
+  guides: [
+    ['guide-hot-aisle-vs-cold-aisle-containment.html', 'Hot Aisle vs. Cold Aisle Containment'],
+    ['guide-liquid-vs-air-cooling.html', 'Liquid vs. Air Cooling'],
+    ['guide-pue-explained.html', 'PUE Explained'],
+    ['guide-n-plus-1-vs-2n-redundancy.html', 'N+1 vs. 2N Redundancy'],
+  ],
+  covers: 'What separates a CRAC from a CRAH, how each rejects heat, where each is the better fit, how their redundancy and loss-of-power behaviour differ, and how either is sized from an IT load.',
+  basedOn: ['ASHRAE TC 9.9 &mdash; Thermal Guidelines for Data Processing Environments', 'ASHRAE Standard 90.4 &mdash; Energy Standard for Data Centers', 'ANSI/ASHRAE Standard 127 &mdash; method of testing for rating computer and data processing room unitary air conditioners', 'AHRI Standard 1360 &mdash; performance rating of computer and data processing room air conditioners'],
+  notThis: 'A cooling design or an equipment selection. Unit capacities, restart times and water temperatures are properties of specific equipment and come from manufacturer data, and plant redundancy has to be designed for the site.',
+},
+
+{
+  slug: 'guide-hot-aisle-vs-cold-aisle-containment',
+  date: '2026-11-11',
+  eyebrow: 'Data center cooling',
+  crumb: 'Hot Aisle vs. Cold Aisle Containment',
+  h1: 'Hot Aisle vs. Cold Aisle Containment',
+  title: 'Hot Aisle vs. Cold Aisle Containment',
+  headline: 'Hot Aisle vs. Cold Aisle Containment: How Each Works and Which to Choose',
+  dek: 'Both stop cold supply air and hot exhaust air from mixing. The choice between them is about what the rest of the room becomes: a cold room with a hot enclosure in it, or a hot room with a cold one.',
+  description: 'Hot aisle vs. cold aisle containment compared: how each stops air mixing, the effect on cooling capacity and efficiency, working conditions and fire protection.',
+  ogDesc: 'Two ways to stop supply and exhaust air mixing, what each does to the room, and how to choose between them.',
+  keywords: 'hot aisle containment, cold aisle containment, hot aisle vs cold aisle, data center containment, aisle containment, HAC, CAC, data center airflow',
+  photo: null,
+  takeaways: [
+    'Containment is a physical barrier that keeps cold supply air and hot exhaust air apart. Without it they mix, and the cooling units see cooler return air and deliver less.',
+    'Cold aisle containment encloses the cold aisle and leaves the rest of the room hot. Hot aisle containment encloses the hot aisle and leaves the rest of the room cool.',
+    'Hot aisle containment generally gives the higher return air temperature and the more comfortable room, and is the usual choice for a new build. Cold aisle containment is easier to retrofit.',
+    'Blanking panels and sealed cable openings come first. A contained aisle with open rack spaces still leaks.',
+  ],
+  sections: [
+    { id: 'why-contain-at-all', h2: 'Why contain at all', html: `
+  <p><b>Containment exists to stop supply air and exhaust air from mixing.</b> Racks are already arranged in rows that face each other, so that cold aisles are fronts to fronts and hot aisles are backs to backs. That layout separates the two air streams on paper. In an open room it does not hold: cold air spills over the tops and round the ends of the rows without ever passing through a server, and hot exhaust is drawn back to the fronts of the racks that sit furthest from the supply.</p>
+  <p>The first effect is called bypass and the second recirculation, and each costs something. Bypass means the cooling units are moving and cooling air that does no work. Recirculation means some equipment breathes air warmer than was supplied, so the whole room has to be run colder to protect the worst-placed rack. Both lower the temperature of the air returning to the cooling units, and a cooling unit's capacity falls with its return air temperature.</p>
+  <p>Put a barrier between the aisles and all three problems shrink together. The supply temperature can be raised, because every rack now gets air at close to that temperature, and the return air arrives hot, which is how the cooling units were rated in the first place.</p>` },
+    { id: 'cold-aisle-containment', h2: 'Cold aisle containment', html: `
+  <p>Cold aisle containment puts doors at the ends of the cold aisle and a roof over it. Supply air, usually from a raised floor, fills the enclosure and can only leave through the equipment. Everything outside the enclosure is the return path, so the open room runs at exhaust temperature.</p>
+  <p>Its strength is that it fits what is already there. A room with a raised floor and perimeter cooling units needs nothing changed above the racks, which is why this is the common retrofit. The costs are the room itself, which becomes warm everywhere outside the cold aisles, including any equipment standing in the open, and the small volume of cold air held in reserve. If cooling is interrupted, a contained cold aisle has only the air inside it to draw on.</p>` },
+    { id: 'hot-aisle-containment', h2: 'Hot aisle containment', html: `
+  <p>Hot aisle containment encloses the hot aisle instead and gives the exhaust air a route back to the cooling units that does not pass through the room: a ceiling plenum, a duct, or cooling units set into the row itself. The open room becomes the cold supply.</p>
+  <p>This arrangement keeps the hot air hottest, because it is collected at the back of the racks and returned without touching anything else. That gives the cooling units the highest return temperature, and with it the most capacity and the most hours in a year when outside air or a water-side economizer can do the work. The room is comfortable to stand in and holds a large reserve of cool air. A cabinet with a vertical exhaust duct, often called a chimney cabinet, is the same idea applied one rack at a time.</p>
+  <p>The costs are the return path, which has to exist or be built, and the hot aisle. With a wide temperature rise across modern servers the air in a contained hot aisle can pass 100&deg;F, and anyone working at the back of a rack is working in it. Work practices and limits for that are an operational matter the design has to allow for.</p>
+  <table class="reftable">
+    <tr><th scope="col">Cold aisle containment</th><th scope="col">Hot aisle containment</th></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">What the open room becomes</td></tr>
+    <tr><td>Hot: it is the return path</td><td>Cool: it is the supply</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">What it needs</td></tr>
+    <tr><td>Supply into the aisle, usually a raised floor</td><td>A return path: plenum, duct or in-row cooling</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Reserve of cool air if cooling stops</td></tr>
+    <tr><td>Small: the contained aisle only</td><td>Large: the whole room</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Where people are uncomfortable</td></tr>
+    <tr><td>Everywhere outside the cold aisle</td><td>Inside the hot aisle</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Typical use</td></tr>
+    <tr><td>Retrofit of a raised-floor room</td><td>New construction</td></tr>
+  </table>` },
+    { id: 'what-it-does-to-the-numbers', h2: 'What it does to the numbers', html: `
+  <p>The airflow a load needs depends only on the temperature rise across it: CFM equals BTU per hour divided by 1.08 times the rise in degrees Fahrenheit. At a 20&deg;F rise that is about 158 CFM for each kW, and the <a class="inline" href="calculators/airflow-cfm.html">airflow calculator</a> gives the figure for any other.</p>
+  <p>Without containment the cooling units have to supply noticeably more than the equipment draws, because part of what they deliver bypasses the racks. With good containment the two can be brought close together, and fan power falls with the cube of the reduction in speed. The supply temperature can also come up toward the top of the range ASHRAE recommends for equipment inlets, 64 to 81&deg;F (18 to 27&deg;C), instead of being held low to protect the worst rack. Every degree the supply is raised is a degree less work for the chillers and more hours of free cooling.</p>
+  <p>These are the gains that show up in <a class="inline" href="guide-pue-explained.html">PUE</a>. Containment is often the least expensive improvement available to a room that does not have it.</p>` },
+    { id: 'fire-protection', h2: 'Fire protection and other practical points', html: `
+  <p>A roof over an aisle is an obstruction to sprinklers and a barrier to smoke reaching detectors, and a gaseous suppression system has to reach inside the enclosure. NFPA 75 covers the protection of IT equipment rooms and addresses aisle containment specifically. The usual answers are detection and suppression inside the contained aisle, or roof panels that drop away or shrink when heated, and whichever is used has to be agreed with the authority having jurisdiction before it is installed.</p>
+  <p>Containment also only works if the racks themselves are sealed. Every open rack unit is a hole between the two aisles, and so is every unsealed cable opening in a raised floor. Blanking panels and floor grommets are inexpensive, and they come before any doors or roofs.</p>
+  <p>Finally, the cooling controls have to change with the room. Units that were controlled on return air temperature in an open room need to control on supply temperature and on the pressure difference across the containment once the aisles are enclosed. Left on the old strategy they will fight the containment instead of benefiting from it.</p>` },
+    { id: 'common-mistakes', h2: 'Common mistakes', html: `
+  <ul>
+    <li><b>Containing the aisles and leaving the racks open.</b> Missing blanking panels and unsealed floor openings leak as much as a missing door.</li>
+    <li><b>Keeping the old setpoints.</b> Containment allows a higher supply temperature and lower fan speed. If neither is changed, most of the saving is left on the table.</li>
+    <li><b>Treating fire protection as an afterthought.</b> Sprinkler coverage and detection inside the enclosure have to be settled in the design, not after the panels are up.</li>
+    <li><b>Forgetting equipment outside the containment.</b> In a cold-aisle scheme, anything standing in the open room is now in the hot return air.</li>
+    <li><b>Mixing containment types in one room without thinking it through.</b> A cold-contained row next to a hot-contained row leaves no consistent definition of what the room air is.</li>
+  </ul>` },
+  ],
+  faqs: [
+    { q: 'Which is better, hot aisle or cold aisle containment?', a: 'For a new build, hot aisle containment is generally preferred: it returns the hottest air to the cooling units, which gives the most capacity and the most economizer hours, and it leaves the room cool with a large reserve of supply air. Cold aisle containment is usually easier and cheaper to retrofit into a raised-floor room. Either is a large improvement over an open room.' },
+    { q: 'How hot does a contained hot aisle get?', a: 'It is the supply temperature plus the temperature rise across the equipment. With supply air at 75&deg;F and a 25&deg;F rise the hot aisle is at 100&deg;F, and with high-density equipment it can be higher. That is by design, and it is why working time and conditions in the hot aisle have to be managed.' },
+    { q: 'Does containment reduce the cooling a room needs?', a: 'It does not reduce the heat the IT equipment produces, so the cooling load is the same. What it reduces is the energy used to remove that heat: less air has to be moved, the supply temperature can be higher, and the cooling units work at their rated capacity instead of below it.' },
+    { q: 'Do blanking panels really matter?', a: 'Yes. An empty rack space with no blanking panel is an opening directly between the cold aisle and the hot aisle. Hot air recirculates through it to the fronts of neighbouring equipment. Fitting them is the first step in any airflow improvement and a precondition for containment to work.' },
+  ],
+  nextIntro: 'The units that supply the air are compared in <a class="inline" href="guide-crac-vs-crah.html">CRAC vs. CRAH</a>, and the point at which air stops being enough is covered in <a class="inline" href="guide-liquid-vs-air-cooling.html">liquid vs. air cooling</a>.',
+  calcs: [
+    ['calculators/airflow-cfm.html', 'Airflow (CFM) Calculator', 'CFM for a heat load at a given temperature rise.'],
+    ['calculators/pue.html', 'PUE Calculator', 'What the cooling overhead amounts to over a year.'],
+    ['calculators/affinity-laws.html', 'Pump &amp; Fan Affinity Laws Calculator', 'The fan power saved by running slower.'],
+  ],
+  guides: [
+    ['guide-crac-vs-crah.html', 'CRAC vs. CRAH'],
+    ['guide-rack-power-density.html', 'Rack Power Density'],
+    ['guide-pue-explained.html', 'PUE Explained'],
+    ['guide-liquid-vs-air-cooling.html', 'Liquid vs. Air Cooling'],
+  ],
+  covers: 'Why supply and exhaust air mix in an open room and what that costs, how cold aisle and hot aisle containment each work, what each does to room conditions, cooling capacity and efficiency, and the fire protection and control changes containment requires.',
+  basedOn: ['ASHRAE TC 9.9 &mdash; Thermal Guidelines for Data Processing Environments, for recommended equipment inlet temperatures', 'ASHRAE Handbook &mdash; the sensible heat equation', 'NFPA 75 &mdash; Standard for the Fire Protection of Information Technology Equipment', 'ASHRAE Standard 90.4 &mdash; Energy Standard for Data Centers'],
+  notThis: 'An airflow design or a fire protection design. Achievable temperatures depend on the equipment, the room and the cooling plant, and containment has to be coordinated with sprinkler, detection and suppression systems and approved by the authority having jurisdiction.',
+},
+
+{
+  slug: 'guide-pump-and-fan-affinity-laws',
+  date: '2026-11-11',
+  eyebrow: 'Pumps, fans & drives',
+  crumb: 'Pump and Fan Affinity Laws',
+  h1: 'Pump and Fan Affinity Laws Explained',
+  title: 'Pump and Fan Affinity Laws Explained',
+  headline: 'Pump and Fan Affinity Laws: Why Power Falls With the Cube of Speed',
+  dek: 'Three proportionalities describe what happens when a pump or a fan changes speed. The third one, power with the cube of speed, is the reason variable speed drives pay for themselves, and also the reason they sometimes do not.',
+  description: 'The pump and fan affinity laws explained: flow varies with speed, head with its square and power with its cube. With a table, and where the laws break.',
+  ogDesc: 'Flow with speed, head with the square, power with the cube. What the affinity laws save, and when static head breaks them.',
+  keywords: 'affinity laws, pump affinity laws, fan laws, fan affinity laws, cube law, variable speed pump, VFD energy savings, pump speed power',
+  photo: { src: 'images/parts/mro-centrifugal-utility-pumps', alt: 'A centrifugal pump with its motor', caption: 'Centrifugal pump (illustration)' },
+  takeaways: [
+    'Flow changes in proportion to speed, head or pressure with the square of speed, and power with the cube.',
+    'At 80 percent speed a pump or fan delivers 80 percent of the flow for about 51 percent of the power. At 50 percent speed the power is one eighth.',
+    'The cube law holds when the system is all friction. Static head or a fixed pressure setpoint makes the saving smaller, sometimes much smaller.',
+    'The same laws apply to fans, where they are called the fan laws, and they are why running more fans slowly beats running fewer fans fast.',
+  ],
+  sections: [
+    { id: 'the-three-laws', h2: 'The three laws', html: `
+  <p><b>For a given pump or fan, flow is proportional to speed, head is proportional to the square of speed, and power is proportional to the cube of speed.</b> Written out, with N for speed, Q for flow, H for head and P for power:</p>
+  <p>Q&#8322; / Q&#8321; = N&#8322; / N&#8321; &nbsp;&middot;&nbsp; H&#8322; / H&#8321; = (N&#8322; / N&#8321;)&sup2; &nbsp;&middot;&nbsp; P&#8322; / P&#8321; = (N&#8322; / N&#8321;)&sup3;</p>
+  <p>They follow from one another. Power delivered to a fluid is flow times head, so if flow goes with speed and head with its square, their product goes with the cube. The laws apply to centrifugal pumps and to fans alike, because both are machines that add energy to a fluid by spinning it.</p>
+  <table class="reftable">
+    <tr><th scope="col">Speed</th><th scope="col">Flow</th><th scope="col">Head or pressure</th><th scope="col">Power</th></tr>
+    <tr><td>100%</td><td>100%</td><td>100%</td><td>100%</td></tr>
+    <tr><td>90%</td><td>90%</td><td>81%</td><td>73%</td></tr>
+    <tr><td>80%</td><td>80%</td><td>64%</td><td>51%</td></tr>
+    <tr><td>70%</td><td>70%</td><td>49%</td><td>34%</td></tr>
+    <tr><td>60%</td><td>60%</td><td>36%</td><td>22%</td></tr>
+    <tr><td>50%</td><td>50%</td><td>25%</td><td>12.5%</td></tr>
+  </table>
+  <p>The <a class="inline" href="calculators/affinity-laws.html">affinity laws calculator</a> works any pair of speeds.</p>` },
+    { id: 'a-worked-example', h2: 'A worked example', html: `
+  <p>A chilled water pump delivers 500 GPM at 80 ft of head and draws 15 hp at 1,750 rpm. The load falls and the system now needs 400 GPM. A drive slows the pump to 80 percent speed, 1,400 rpm:</p>
+  <p>Flow = 500 &times; 0.80 = 400 GPM</p>
+  <p>Head = 80 &times; 0.80&sup2; = 51.2 ft</p>
+  <p>Power = 15 &times; 0.80&sup3; = 7.68 hp</p>
+  <p>The alternative is to leave the pump at full speed and close a valve until the flow drops to 400 GPM. That pushes the pump back up its curve to a higher head, and the valve throws the extra pressure away. The pump still draws most of its 15 hp. The difference between the two, several horsepower running continuously, is what a variable speed drive is bought to save.</p>` },
+    { id: 'why-it-works-and-when-it-does-not', h2: 'Why it works, and when it does not', html: `
+  <p>The laws describe the machine. Where it actually operates is decided by the system it is connected to, and the cube law for power only follows if the system cooperates.</p>
+  <p>In a closed loop where all the resistance is friction, the pressure needed rises with the square of flow. That is the same shape as the head law, so as the pump slows, the operating point slides down a curve that passes through zero and the pump stays at the same efficiency. This is the case the table describes.</p>
+  <p>Two common conditions break it. The first is <b>static head</b>: a pump lifting water to a cooling tower, or a booster filling a tank, has to produce a fixed height before any flow happens at all. Slow that pump and the flow falls much faster than the speed, reaching nothing while the pump is still turning. The second is a <b>fixed pressure setpoint</b>. Many variable speed systems are controlled to hold a constant differential pressure somewhere in the piping, or a constant static pressure in a duct. That setpoint behaves like static head. The pump or fan cannot slow below the speed that maintains it, and the energy saving is smaller than the cube law promises.</p>
+  <p>This is why the location and value of a pressure setpoint matter so much, and why resetting it downward when the load is light recovers savings that a fixed setpoint leaves behind.</p>` },
+    { id: 'fans-and-running-more-of-them', h2: 'Fans, and running more of them', html: `
+  <p>For fans the same three relationships are called the fan laws, with static pressure in the place of head. They lead to a result that seems backwards at first: it takes less energy to run more fans than the load needs, all of them slowly, than to run just enough of them at full speed.</p>
+  <p>Take a row of cooling units where three fans at full speed deliver the airflow required. Run four at 75 percent speed and the airflow is the same, 4 &times; 0.75 = 3. But each fan now draws 0.75&sup3; = 42 percent of its full power, so the four together draw 1.69 units of power against 3.0. That is 44 percent less energy for the same air. It works because most of the resistance each fan pushes against is inside its own unit, in the coil and the filters, and that resistance falls with the square of the air passing through it. It is the reason redundant cooling units are run alongside the duty units instead of being held as idle standby.</p>
+  <p>The same reasoning is behind <a class="inline" href="guide-hot-aisle-vs-cold-aisle-containment.html">containment</a>: anything that lets the fans slow down, even a little, is repaid at the cube.</p>` },
+    { id: 'limits-in-practice', h2: 'Limits in practice', html: `
+  <p>Speed cannot be reduced without limit. A pump has a minimum flow below which it overheats or runs unstably, and a chiller has a minimum water flow through its evaporator. A motor cooled by a fan on its own shaft loses cooling as it slows. Drives and motors also have losses of their own, a few percent at full speed and a larger share at light load, so the electrical saving is always somewhat less than the saving at the shaft.</p>
+  <p>The laws also run in the other direction. Running a fan or pump at 110 percent of its speed takes 1.10&sup3; = 133 percent of the power, which can overload a motor that was sized with no margin.</p>
+  <p>Finally, a version of the laws applies to changing the impeller diameter instead of the speed, which is how a pump is trimmed to suit a system permanently. It is reliable only for small changes in diameter; beyond that the pump's efficiency shifts and the manufacturer's curve for the trimmed impeller is the thing to use.</p>` },
+    { id: 'common-mistakes', h2: 'Common mistakes', html: `
+  <ul>
+    <li><b>Promising cube-law savings on a system with static head.</b> The saving depends on the system curve, and a pump working mostly against lift saves far less.</li>
+    <li><b>Leaving a high fixed pressure setpoint in place.</b> It acts as static head and caps how far the speed can fall.</li>
+    <li><b>Comparing two different machines.</b> The laws relate one pump or fan to itself at another speed. They do not predict what a different model will do.</li>
+    <li><b>Ignoring minimum flow.</b> Slowing a pump below what the pump or the chiller can tolerate trades an energy saving for a failure.</li>
+    <li><b>Forgetting the laws apply upward.</b> A modest overspeed costs a third more power.</li>
+  </ul>` },
+  ],
+  faqs: [
+    { q: 'What are the three affinity laws?', a: 'For one pump or fan at two speeds: flow is proportional to speed, head or pressure is proportional to the square of speed, and power is proportional to the cube of speed. At 80 percent speed that means 80 percent of the flow, 64 percent of the head and about 51 percent of the power.' },
+    { q: 'How much energy does a variable speed drive save on a pump?', a: 'In a closed loop where the resistance is all friction, power falls with the cube of speed, so running at 80 percent speed uses roughly half the power and 50 percent speed uses one eighth. Where the pump works against static head or a fixed pressure setpoint the saving is smaller, and it has to be worked out from the pump curve and the system curve together. Drive losses take a few percent off the result.' },
+    { q: 'Do the affinity laws apply to fans?', a: 'Yes. They are called the fan laws: airflow is proportional to speed, static pressure to the square of speed and power to the cube. They are why running four cooling fans at 75 percent speed uses about 44 percent less energy than running three at full speed for the same airflow.' },
+    { q: 'Why does throttling a valve waste energy?', a: 'A valve reduces flow by adding resistance. The pump still runs at full speed and moves up its curve to a higher head, and the extra pressure is dissipated across the valve as heat and noise. Slowing the pump produces the lower flow at a lower head, with nothing thrown away.' },
+  ],
+  nextIntro: 'How a drive changes motor speed, and what else it does to a motor circuit, is covered in <a class="inline" href="guide-vfd-vs-soft-starter.html">VFD vs. soft starter</a>. The pumps and cooling units these laws apply to are on the <a class="inline" href="data-centers/cooling.html">data center cooling</a> reference page.',
+  calcs: [
+    ['calculators/affinity-laws.html', 'Pump &amp; Fan Affinity Laws Calculator', 'Flow, head and power at any two speeds.'],
+    ['calculators/pump-power.html', 'Pump Power Calculator', 'Brake horsepower and motor kW from GPM and head.'],
+    ['calculators/motor-speed.html', 'Motor Speed &amp; Slip Calculator', 'Synchronous speed from frequency and poles.'],
+  ],
+  guides: [
+    ['guide-vfd-vs-soft-starter.html', 'VFD vs. Soft Starter'],
+    ['guide-crac-vs-crah.html', 'CRAC vs. CRAH'],
+    ['guide-hot-aisle-vs-cold-aisle-containment.html', 'Hot Aisle vs. Cold Aisle Containment'],
+    ['guide-harmonics-ieee-519.html', 'Harmonics &amp; IEEE 519 Limits'],
+  ],
+  covers: 'The three affinity laws for centrifugal pumps and fans, a worked example and table, why the cube law depends on the system curve, the effect of static head and fixed pressure setpoints, and the practical limits on reducing speed.',
+  basedOn: ['Hydraulic Institute standards for rotodynamic pumps', 'AMCA publications on fan performance, where the relationships are known as the fan laws', 'ASHRAE Handbook &mdash; HVAC Systems and Equipment, chapters on pumps and fans', 'ASHRAE Standard 90.1 &mdash; variable flow requirements for pumps and fans'],
+  notThis: 'A pump or fan selection, or an energy savings estimate for a specific system. Real savings depend on the system curve, the control strategy and the efficiency of the machine and drive across the operating range, and have to be calculated from manufacturer curves.',
+},
 ];
 
 /* ------------------------------------------------------------- builders ---- */
@@ -1426,8 +1690,8 @@ function jsonld(g) {
         image: BASE + 'social/social-generic.jpg',
         author: { '@type': 'Organization', name: 'Voltfield Editorial Team', url: BASE + 'methodology.html' },
         publisher: { '@type': 'Organization', name: 'Voltfield' },
-        datePublished: DATE_ISO + 'T00:00:00-05:00',
-        dateModified: DATE_ISO + 'T00:00:00-05:00',
+        datePublished: dates(g).iso + 'T00:00:00-05:00',
+        dateModified: dates(g).iso + 'T00:00:00-05:00',
         url: BASE + g.slug + '.html',
       },
       { '@type': 'FAQPage', mainEntity: g.faqs.map((f) => ({
@@ -1445,11 +1709,11 @@ function artban(g) {
       <figcaption>${g.photo.caption}</figcaption>
     </figure>` : '';
   const inner = `
-      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="index.html" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">${g.crumb}</span></nav>
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">${g.crumb}</span></nav>
       <div class="eyebrow">${g.eyebrow}</div>
       <h1>${g.h1}</h1>
       <p class="dek">${g.dek}</p>
-      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published ${DATE_LONG}</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>`;
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published ${dates(g).long}</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>`;
   return g.photo
     ? `<section class="artban">\n  <div class="artban-in has-photo">\n    <div class="artban-text">${inner}\n    </div>${photo}\n  </div>\n</section>`
     : `<section class="artban">\n  <div class="artban-in">${inner}\n  </div>\n</section>`;
@@ -1504,7 +1768,7 @@ ${g.guides.map(([h, n]) => `        <li><a href="${h}">${n}</a></li>`).join('\n'
 function provenance(g) {
   return `<aside class="provenance" aria-labelledby="prov-h">
   <details>
-    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published ${DATE_LONG}.</span></summary>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published ${dates(g).long}.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>${g.covers}</dd>
@@ -1513,7 +1777,7 @@ function provenance(g) {
       <dt>What it is not</dt>
       <dd>${g.notThis}</dd>
       <dt>Provenance</dt>
-      <dd>Published ${DATE_LONG}. Written and maintained by the Voltfield editorial team against the sources above. Worked figures in the text are arithmetic the reader can check; nothing here states a measured value.</dd>
+      <dd>Published ${dates(g).long}. Written and maintained by the Voltfield editorial team against the sources above. Worked figures in the text are arithmetic the reader can check; nothing here states a measured value.</dd>
     </dl>
   </details>
   </aside>`;
@@ -1560,7 +1824,12 @@ for (const g of GUIDES) {
   one(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, `<script type="application/ld+json">\n${jsonld(g)}\n</script>`, 'json-ld');
   one(/<section class="artban">[\s\S]*?<\/section>/, artban(g), 'artban');
   one(/<div class="artwrap">[\s\S]*?<\/section>\n\n  <div class="guide-foot">/, body(g) + '\n\n  <div class="guide-foot">', 'body');
-  one(/Suggested citation: Voltfield Editorial Team, &ldquo;[^&]*&rdquo;/, `Suggested citation: Voltfield Editorial Team, &ldquo;${plain(g.h1)}&rdquo;`, 'citation');
+  /* The whole citation, not just the title. Only the title used to be replaced,
+     so every generated guide told readers to cite it as the TEMPLATE's address
+     and the template's date -- the one line on the page written to be copied. */
+  one(/Suggested citation: Voltfield Editorial Team, &ldquo;[\s\S]*?&rdquo; <i>Voltfield<\/i>, updated [^.]*\. https:\/\/voltfield\.org\/[^<\s]*/,
+    `Suggested citation: Voltfield Editorial Team, &ldquo;${plain(g.h1)}${/[?!]$/.test(plain(g.h1)) ? "" : ","}&rdquo; <i>Voltfield</i>, updated ${dates(g).long}. ${url}`, 'citation');
+  s = s.replace(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${url}">`);
   one(/<input type="hidden" name="source" value="[^"]*">/, `<input type="hidden" name="source" value="/${g.slug}.html">`, 'signup source');
   one(/<aside class="provenance"[\s\S]*?<\/aside>/, provenance(g), 'provenance');
 

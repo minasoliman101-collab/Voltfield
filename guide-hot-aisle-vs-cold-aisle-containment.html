@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hot Aisle vs. Cold Aisle Containment | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-hot-aisle-vs-cold-aisle-containment.html">
+<meta property="og:url" content="https://voltfield.org/guide-hot-aisle-vs-cold-aisle-containment.html">
+<meta name="description" content="Hot aisle vs. cold aisle containment compared: how each stops air mixing, the effect on cooling capacity and efficiency, working conditions and fire protection.">
+<meta name="keywords" content="hot aisle containment, cold aisle containment, hot aisle vs cold aisle, data center containment, aisle containment, HAC, CAC, data center airflow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Hot Aisle vs. Cold Aisle Containment">
+<meta property="og:description" content="Two ways to stop supply and exhaust air mixing, what each does to the room, and how to choose between them.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta name="twitter:title" content="Hot Aisle vs. Cold Aisle Containment">
+<meta name="twitter:description" content="Two ways to stop supply and exhaust air mixing, what each does to the room, and how to choose between them.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://voltfield.org/guides.html"},{"@type":"ListItem","position":3,"name":"Hot Aisle vs. Cold Aisle Containment","item":"https://voltfield.org/guide-hot-aisle-vs-cold-aisle-containment.html"}]},{"@type":"Article","headline":"Hot Aisle vs. Cold Aisle Containment: How Each Works and Which to Choose","description":"Hot aisle vs. cold aisle containment compared: how each stops air mixing, the effect on cooling capacity and efficiency, working conditions and fire protection.","image":"https://voltfield.org/social/social-generic.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-11-11T00:00:00-05:00","dateModified":"2026-11-11T00:00:00-05:00","url":"https://voltfield.org/guide-hot-aisle-vs-cold-aisle-containment.html"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which is better, hot aisle or cold aisle containment?","acceptedAnswer":{"@type":"Answer","text":"For a new build, hot aisle containment is generally preferred: it returns the hottest air to the cooling units, which gives the most capacity and the most economizer hours, and it leaves the room cool with a large reserve of supply air. Cold aisle containment is usually easier and cheaper to retrofit into a raised-floor room. Either is a large improvement over an open room."}},{"@type":"Question","name":"How hot does a contained hot aisle get?","acceptedAnswer":{"@type":"Answer","text":"It is the supply temperature plus the temperature rise across the equipment. With supply air at 75&deg;F and a 25&deg;F rise the hot aisle is at 100&deg;F, and with high-density equipment it can be higher. That is by design, and it is why working time and conditions in the hot aisle have to be managed."}},{"@type":"Question","name":"Does containment reduce the cooling a room needs?","acceptedAnswer":{"@type":"Answer","text":"It does not reduce the heat the IT equipment produces, so the cooling load is the same. What it reduces is the energy used to remove that heat: less air has to be moved, the supply temperature can be higher, and the cooling units work at their rated capacity instead of below it."}},{"@type":"Question","name":"Do blanking panels really matter?","acceptedAnswer":{"@type":"Answer","text":"Yes. An empty rack space with no blanking panel is an opening directly between the cold aisle and the hot aisle. Hot air recirculates through it to the fronts of neighbouring equipment. Fitting them is the first step in any airflow improvement and a precondition for containment to work."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in">
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">Hot Aisle vs. Cold Aisle Containment</span></nav>
+      <div class="eyebrow">Data center cooling</div>
+      <h1>Hot Aisle vs. Cold Aisle Containment</h1>
+      <p class="dek">Both stop cold supply air and hot exhaust air from mixing. The choice between them is about what the rest of the room becomes: a cold room with a hot enclosure in it, or a hot room with a cold one.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published November 11, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+  </div>
+</section>
+<div class="artwrap">
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>Containment is a physical barrier that keeps cold supply air and hot exhaust air apart. Without it they mix, and the cooling units see cooler return air and deliver less.</li>
+      <li>Cold aisle containment encloses the cold aisle and leaves the rest of the room hot. Hot aisle containment encloses the hot aisle and leaves the rest of the room cool.</li>
+      <li>Hot aisle containment generally gives the higher return air temperature and the more comfortable room, and is the usual choice for a new build. Cold aisle containment is easier to retrofit.</li>
+      <li>Blanking panels and sealed cable openings come first. A contained aisle with open rack spaces still leaks.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#why-contain-at-all">Why contain at all</a></li>
+      <li><a href="#cold-aisle-containment">Cold aisle containment</a></li>
+      <li><a href="#hot-aisle-containment">Hot aisle containment</a></li>
+      <li><a href="#what-it-does-to-the-numbers">What it does to the numbers</a></li>
+      <li><a href="#fire-protection">Fire protection and other practical points</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+  <h2 id="why-contain-at-all">Why contain at all</h2>
+  <p><b>Containment exists to stop supply air and exhaust air from mixing.</b> Racks are already arranged in rows that face each other, so that cold aisles are fronts to fronts and hot aisles are backs to backs. That layout separates the two air streams on paper. In an open room it does not hold: cold air spills over the tops and round the ends of the rows without ever passing through a server, and hot exhaust is drawn back to the fronts of the racks that sit furthest from the supply.</p>
+  <p>The first effect is called bypass and the second recirculation, and each costs something. Bypass means the cooling units are moving and cooling air that does no work. Recirculation means some equipment breathes air warmer than was supplied, so the whole room has to be run colder to protect the worst-placed rack. Both lower the temperature of the air returning to the cooling units, and a cooling unit's capacity falls with its return air temperature.</p>
+  <p>Put a barrier between the aisles and all three problems shrink together. The supply temperature can be raised, because every rack now gets air at close to that temperature, and the return air arrives hot, which is how the cooling units were rated in the first place.</p>
+  <h2 id="cold-aisle-containment">Cold aisle containment</h2>
+  <p>Cold aisle containment puts doors at the ends of the cold aisle and a roof over it. Supply air, usually from a raised floor, fills the enclosure and can only leave through the equipment. Everything outside the enclosure is the return path, so the open room runs at exhaust temperature.</p>
+  <p>Its strength is that it fits what is already there. A room with a raised floor and perimeter cooling units needs nothing changed above the racks, which is why this is the common retrofit. The costs are the room itself, which becomes warm everywhere outside the cold aisles, including any equipment standing in the open, and the small volume of cold air held in reserve. If cooling is interrupted, a contained cold aisle has only the air inside it to draw on.</p>
+  <div class="ad-unit" data-ad="incontent"></div>
+  <h2 id="hot-aisle-containment">Hot aisle containment</h2>
+  <p>Hot aisle containment encloses the hot aisle instead and gives the exhaust air a route back to the cooling units that does not pass through the room: a ceiling plenum, a duct, or cooling units set into the row itself. The open room becomes the cold supply.</p>
+  <p>This arrangement keeps the hot air hottest, because it is collected at the back of the racks and returned without touching anything else. That gives the cooling units the highest return temperature, and with it the most capacity and the most hours in a year when outside air or a water-side economizer can do the work. The room is comfortable to stand in and holds a large reserve of cool air. A cabinet with a vertical exhaust duct, often called a chimney cabinet, is the same idea applied one rack at a time.</p>
+  <p>The costs are the return path, which has to exist or be built, and the hot aisle. With a wide temperature rise across modern servers the air in a contained hot aisle can pass 100&deg;F, and anyone working at the back of a rack is working in it. Work practices and limits for that are an operational matter the design has to allow for.</p>
+  <table class="reftable">
+    <tr><th scope="col">Cold aisle containment</th><th scope="col">Hot aisle containment</th></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">What the open room becomes</td></tr>
+    <tr><td>Hot: it is the return path</td><td>Cool: it is the supply</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">What it needs</td></tr>
+    <tr><td>Supply into the aisle, usually a raised floor</td><td>A return path: plenum, duct or in-row cooling</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Reserve of cool air if cooling stops</td></tr>
+    <tr><td>Small: the contained aisle only</td><td>Large: the whole room</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Where people are uncomfortable</td></tr>
+    <tr><td>Everywhere outside the cold aisle</td><td>Inside the hot aisle</td></tr>
+    <tr><td colspan="2" style="background:var(--sunk);font-weight:600;color:var(--ink)">Typical use</td></tr>
+    <tr><td>Retrofit of a raised-floor room</td><td>New construction</td></tr>
+  </table>
+  <h2 id="what-it-does-to-the-numbers">What it does to the numbers</h2>
+  <p>The airflow a load needs depends only on the temperature rise across it: CFM equals BTU per hour divided by 1.08 times the rise in degrees Fahrenheit. At a 20&deg;F rise that is about 158 CFM for each kW, and the <a class="inline" href="calculators/airflow-cfm.html">airflow calculator</a> gives the figure for any other.</p>
+  <p>Without containment the cooling units have to supply noticeably more than the equipment draws, because part of what they deliver bypasses the racks. With good containment the two can be brought close together, and fan power falls with the cube of the reduction in speed. The supply temperature can also come up toward the top of the range ASHRAE recommends for equipment inlets, 64 to 81&deg;F (18 to 27&deg;C), instead of being held low to protect the worst rack. Every degree the supply is raised is a degree less work for the chillers and more hours of free cooling.</p>
+  <p>These are the gains that show up in <a class="inline" href="guide-pue-explained.html">PUE</a>. Containment is often the least expensive improvement available to a room that does not have it.</p>
+  <h2 id="fire-protection">Fire protection and other practical points</h2>
+  <p>A roof over an aisle is an obstruction to sprinklers and a barrier to smoke reaching detectors, and a gaseous suppression system has to reach inside the enclosure. NFPA 75 covers the protection of IT equipment rooms and addresses aisle containment specifically. The usual answers are detection and suppression inside the contained aisle, or roof panels that drop away or shrink when heated, and whichever is used has to be agreed with the authority having jurisdiction before it is installed.</p>
+  <p>Containment also only works if the racks themselves are sealed. Every open rack unit is a hole between the two aisles, and so is every unsealed cable opening in a raised floor. Blanking panels and floor grommets are inexpensive, and they come before any doors or roofs.</p>
+  <p>Finally, the cooling controls have to change with the room. Units that were controlled on return air temperature in an open room need to control on supply temperature and on the pressure difference across the containment once the aisles are enclosed. Left on the old strategy they will fight the containment instead of benefiting from it.</p>
+  <h2 id="common-mistakes">Common mistakes</h2>
+  <ul>
+    <li><b>Containing the aisles and leaving the racks open.</b> Missing blanking panels and unsealed floor openings leak as much as a missing door.</li>
+    <li><b>Keeping the old setpoints.</b> Containment allows a higher supply temperature and lower fan speed. If neither is changed, most of the saving is left on the table.</li>
+    <li><b>Treating fire protection as an afterthought.</b> Sprinkler coverage and detection inside the enclosure have to be settled in the design, not after the panels are up.</li>
+    <li><b>Forgetting equipment outside the containment.</b> In a cold-aisle scheme, anything standing in the open room is now in the hot return air.</li>
+    <li><b>Mixing containment types in one room without thinking it through.</b> A cold-contained row next to a hot-contained row leaves no consistent definition of what the room air is.</li>
+  </ul>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Which is better, hot aisle or cold aisle containment?</summary>
+    <p style="margin-top:10px">For a new build, hot aisle containment is generally preferred: it returns the hottest air to the cooling units, which gives the most capacity and the most economizer hours, and it leaves the room cool with a large reserve of supply air. Cold aisle containment is usually easier and cheaper to retrofit into a raised-floor room. Either is a large improvement over an open room.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How hot does a contained hot aisle get?</summary>
+    <p style="margin-top:10px">It is the supply temperature plus the temperature rise across the equipment. With supply air at 75&deg;F and a 25&deg;F rise the hot aisle is at 100&deg;F, and with high-density equipment it can be higher. That is by design, and it is why working time and conditions in the hot aisle have to be managed.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Does containment reduce the cooling a room needs?</summary>
+    <p style="margin-top:10px">It does not reduce the heat the IT equipment produces, so the cooling load is the same. What it reduces is the energy used to remove that heat: less air has to be moved, the supply temperature can be higher, and the cooling units work at their rated capacity instead of below it.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Do blanking panels really matter?</summary>
+    <p style="margin-top:10px">Yes. An empty rack space with no blanking panel is an opening directly between the cold aisle and the hot aisle. Hot air recirculates through it to the fronts of neighbouring equipment. Fitting them is the first step in any airflow improvement and a precondition for containment to work.</p>
+  </details>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The units that supply the air are compared in <a class="inline" href="guide-crac-vs-crah.html">CRAC vs. CRAH</a>, and the point at which air stops being enough is covered in <a class="inline" href="guide-liquid-vs-air-cooling.html">liquid vs. air cooling</a>.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/airflow-cfm.html">Airflow (CFM) Calculator</a>CFM for a heat load at a given temperature rise.</li>
+        <li><a href="calculators/pue.html">PUE Calculator</a>What the cooling overhead amounts to over a year.</li>
+        <li><a href="calculators/affinity-laws.html">Pump &amp; Fan Affinity Laws Calculator</a>The fan power saved by running slower.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-crac-vs-crah.html">CRAC vs. CRAH</a></li>
+        <li><a href="guide-rack-power-density.html">Rack Power Density</a></li>
+        <li><a href="guide-pue-explained.html">PUE Explained</a></li>
+        <li><a href="guide-liquid-vs-air-cooling.html">Liquid vs. Air Cooling</a></li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Hot Aisle vs. Cold Aisle Containment,&rdquo; <i>Voltfield</i>, updated November 11, 2026. https://voltfield.org/guide-hot-aisle-vs-cold-aisle-containment.html</p>
+  </details>
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/guide-hot-aisle-vs-cold-aisle-containment.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+
+<aside class="provenance" aria-labelledby="prov-h">
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published November 11, 2026.</span></summary>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>Why supply and exhaust air mix in an open room and what that costs, how cold aisle and hot aisle containment each work, what each does to room conditions, cooling capacity and efficiency, and the fire protection and control changes containment requires.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>ASHRAE TC 9.9 &mdash; Thermal Guidelines for Data Processing Environments, for recommended equipment inlet temperatures</li><li>ASHRAE Handbook &mdash; the sensible heat equation</li><li>NFPA 75 &mdash; Standard for the Fire Protection of Information Technology Equipment</li><li>ASHRAE Standard 90.4 &mdash; Energy Standard for Data Centers</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>An airflow design or a fire protection design. Achievable temperatures depend on the equipment, the room and the cooling plant, and containment has to be coordinated with sprinkler, detection and suppression systems and approved by the authority having jurisdiction.</dd>
+      <dt>Provenance</dt>
+      <dd>Published November 11, 2026. Written and maintained by the Voltfield editorial team against the sources above. Worked figures in the text are arithmetic the reader can check; nothing here states a measured value.</dd>
+    </dl>
+  </details>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

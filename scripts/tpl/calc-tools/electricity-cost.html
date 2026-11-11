@@ -1,0 +1,12 @@
+<!-- Live calculator for calculators/electricity-cost.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="ecCalc">
+    <h2>Electricity Cost</h2>
+    <div class="sub">Energy charge only. Demand charges, fixed charges and taxes are not included.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="ecKw">Load (kW)</label><input type="number" id="ecKw" min="0" step="any" placeholder="e.g. 10"></div>
+      <div class="est-field"><label for="ecHrs">Hours per day</label><input type="number" id="ecHrs" min="0" max="24" step="any" placeholder="e.g. 24"></div>
+      <div class="est-field"><label for="ecRate">Energy rate ($/kWh)</label><input type="number" id="ecRate" min="0" step="any" placeholder="e.g. 0.12"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="ecBtn">Calculate</button></div></div>
+    <div class="est-result" id="ecResult"></div>
+  </div>

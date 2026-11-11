@@ -1,0 +1,12 @@
+<!-- Live calculator for calculators/chilled-water-flow.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="chwCalc">
+    <h2>Chilled Water Flow</h2>
+    <div class="sub">GPM = BTU/h &divide; (500 &times; &Delta;T). Plain water.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="chwUnit">Load in</label><select id="chwUnit"><option value="tons" selected>Tons</option><option value="kw">kW</option></select></div>
+      <div class="est-field"><label for="chwLoad">Cooling load (tons)</label><input type="number" id="chwLoad" min="0" step="any" placeholder="e.g. 100"></div>
+      <div class="est-field"><label for="chwDt">Water &Delta;T (&deg;F)</label><input type="number" id="chwDt" min="0" step="any" placeholder="e.g. 10"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="chwBtn">Calculate</button></div></div>
+    <div class="est-result" id="chwResult"></div>
+  </div>

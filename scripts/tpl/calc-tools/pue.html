@@ -1,0 +1,12 @@
+<!-- Live calculator for calculators/pue.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="pueCalc">
+    <h2>PUE</h2>
+    <div class="sub">Both figures in kW, measured over the same period. The energy rate is optional and prices the overhead for a year.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="pueTotal">Total facility power (kW)</label><input type="number" id="pueTotal" min="0" step="any" placeholder="e.g. 1500"></div>
+      <div class="est-field"><label for="pueIt">IT equipment power (kW)</label><input type="number" id="pueIt" min="0" step="any" placeholder="e.g. 1000"></div>
+      <div class="est-field"><label for="pueRate">Energy rate ($/kWh)</label><input type="number" id="pueRate" min="0" step="any" placeholder="e.g. 0.08"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="pueBtn">Calculate</button></div></div>
+    <div class="est-result" id="pueResult"></div>
+  </div>

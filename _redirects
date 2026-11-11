@@ -160,6 +160,27 @@
 /calculators/kva-to-amps            /calculators/kva-to-amps.html   301!
 /calculators/hp-to-kw               /calculators/hp-to-kw.html   301!
 /calculators/watts-to-amps          /calculators/watts-to-amps.html   301!
+/calculators/ohms-law               /calculators/ohms-law.html   301!
+/calculators/breaker-size           /calculators/breaker-size.html   301!
+/calculators/amps-to-kva            /calculators/amps-to-kva.html   301!
+/calculators/amps-to-watts          /calculators/amps-to-watts.html   301!
+/calculators/ah-to-kwh              /calculators/ah-to-kwh.html   301!
+/calculators/battery-runtime        /calculators/battery-runtime.html   301!
+/calculators/pue                    /calculators/pue.html   301!
+/calculators/electricity-cost       /calculators/electricity-cost.html   301!
+/calculators/wire-resistance        /calculators/wire-resistance.html   301!
+/calculators/dc-ac-ratio            /calculators/dc-ac-ratio.html   301!
+/calculators/airflow-cfm            /calculators/airflow-cfm.html   301!
+/calculators/chilled-water-flow     /calculators/chilled-water-flow.html   301!
+/calculators/pump-power             /calculators/pump-power.html   301!
+/calculators/pipe-velocity          /calculators/pipe-velocity.html   301!
+/calculators/affinity-laws          /calculators/affinity-laws.html   301!
+/calculators/motor-torque           /calculators/motor-torque.html   301!
+/calculators/motor-speed            /calculators/motor-speed.html   301!
+/calculators/voltage-unbalance      /calculators/voltage-unbalance.html   301!
+/guide-crac-vs-crah                  /guide-crac-vs-crah.html 301!
+/guide-hot-aisle-vs-cold-aisle-containment /guide-hot-aisle-vs-cold-aisle-containment.html 301!
+/guide-pump-and-fan-affinity-laws    /guide-pump-and-fan-affinity-laws.html 301!
 # ---- END generated ----
 
 # ---- directory and new-page aliases (hand-kept) ----

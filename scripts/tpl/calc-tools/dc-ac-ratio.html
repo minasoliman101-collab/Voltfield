@@ -1,0 +1,11 @@
+<!-- Live calculator for calculators/dc-ac-ratio.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="ilrCalc">
+    <h2>DC/AC Ratio</h2>
+    <div class="sub">Array DC nameplate over inverter AC rating. Also called the inverter loading ratio.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="ilrDc">Array DC capacity (kWp)</label><input type="number" id="ilrDc" min="0" step="any" placeholder="e.g. 130"></div>
+      <div class="est-field"><label for="ilrAc">Inverter AC rating (kW)</label><input type="number" id="ilrAc" min="0" step="any" placeholder="e.g. 100"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="ilrBtn">Calculate</button></div></div>
+    <div class="est-result" id="ilrResult"></div>
+  </div>

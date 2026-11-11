@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Motor Speed Calculator (Synchronous RPM &amp; Slip) | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/calculators/motor-speed.html">
+<meta name="description" content="Calculate an AC motor's synchronous speed from frequency and poles, and its slip from the nameplate full-load rpm. Free, no signup.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Motor Speed &amp; Slip Calculator">
+<meta property="og:description" content="Calculate an AC motor's synchronous speed from frequency and poles, and its slip from the nameplate full-load rpm. Free, no signup.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://voltfield.org/calculators/motor-speed.html">
+<meta property="og:image" content="https://voltfield.org/social/social-motor-speed.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-motor-speed.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"BreadcrumbList","itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
+   {"@type":"ListItem","position":2,"name":"Calculators","item":"https://voltfield.org/engineering-calculators.html"},
+   {"@type":"ListItem","position":3,"name":"Motor Speed & Slip Calculator","item":"https://voltfield.org/calculators/motor-speed.html"}
+ ]},
+ {"@type":"WebPage","name":"Motor Speed & Slip Calculator","description":"Calculate an AC motor's synchronous speed from frequency and poles, and its slip from the nameplate full-load rpm. Free, no signup.","url":"https://voltfield.org/calculators/motor-speed.html","dateModified":"2026-11-11","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebApplication","name":"Motor Speed & Slip Calculator","description":"Calculate an AC motor's synchronous speed from frequency and poles, and its slip from the nameplate full-load rpm. Free, no signup.","url":"https://voltfield.org/calculators/motor-speed.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"What does the Motor Speed & Slip calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Synchronous speed in rpm is 120 times the supply frequency divided by the number of poles. At 60 Hz that gives 3,600 rpm for two poles, 1,800 for four, 1,200 for six and 900 for eight. At 50 Hz the same motors run at 3,000, 1,500, 1,000 and 750. An induction motor never quite reaches that speed. The rotor has to turn slower than the rotating field for current to be induced in it, and the shortfall is called slip. A four-pole motor with a nameplate speed of 1,750 rpm is slipping by 50 rpm, or 2.8 percent, at full load."}},
+   {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"Slip is not a fixed property of a motor. It is close to zero at no load and grows roughly in proportion to torque up to full load, so the nameplate figure applies only at rated load, voltage and frequency. Synchronous motors and permanent-magnet motors run at synchronous speed with no slip at all. The pole count is fixed by the winding and cannot be read off the frame."}}
+ ]}
+]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-calculators.css">
+<link rel="stylesheet" href="/voltfield-component-viz.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/engineering-calculators.html" style="color:var(--slate);text-decoration:none">Calculators</a> / <span style="color:var(--ink)">Motor Speed &amp; Slip Calculator</span></nav>
+    <div class="eyebrow">Free Calculator &middot; No Signup</div>
+    <h1>Motor Speed &amp; Slip Calculator</h1>
+    <p class="dek">Calculate an AC motor's synchronous speed from frequency and poles, and its slip from the nameplate full-load rpm.</p>
+  </div>
+</section>
+
+<div class="artwrap">
+  <section class="calc-tool" id="calculator" aria-label="Motor Speed &amp; Slip Calculator">
+  <div class="estimator" id="msCalc">
+    <h2>Synchronous Speed and Slip</h2>
+    <div class="sub">N = 120 &times; f &divide; poles. Add the nameplate full-load speed to get slip.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="msHz">Frequency</label><select id="msHz"><option value="60" selected>60 Hz</option><option value="50">50 Hz</option></select></div>
+      <div class="est-field"><label for="msPoles">Poles</label><input type="number" id="msPoles" min="2" step="2" placeholder="e.g. 4"></div>
+      <div class="est-field"><label for="msRpm">Full-load speed (rpm)</label><input type="number" id="msRpm" min="0" step="any" placeholder="e.g. 1750"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="msBtn">Calculate</button></div></div>
+    <div class="est-result" id="msResult"></div>
+  </div>
+  </section>
+
+  <p><b>Synchronous speed in rpm is 120 times the supply frequency divided by the number of poles.</b> At 60 Hz that gives 3,600 rpm for two poles, 1,800 for four, 1,200 for six and 900 for eight. At 50 Hz the same motors run at 3,000, 1,500, 1,000 and 750.</p>
+  <p>An induction motor never quite reaches that speed. The rotor has to turn slower than the rotating field for current to be induced in it, and the shortfall is called slip. A four-pole motor with a nameplate speed of 1,750 rpm is slipping by 50 rpm, or 2.8 percent, at full load.</p>
+
+  <h2>The formula</h2>
+    <div class="formula">N&#8347; = 120 &times; f / P<br>Slip (%) = (N&#8347; &minus; N) / N&#8347; &times; 100</div>
+    <div class="tblwrap"><table class="famtable"><tbody>
+      <tr><td class="num"><b>N&#8347;</b></td><td>Synchronous speed in rpm</td></tr>
+      <tr><td class="num"><b>f</b></td><td>Supply frequency in hertz</td></tr>
+      <tr><td class="num"><b>P</b></td><td>Number of poles, always an even number</td></tr>
+      <tr><td class="num"><b>N</b></td><td>Actual rotor speed in rpm, from the nameplate at full load</td></tr>
+    </tbody></table></div>
+
+  <h2>The equipment</h2>
+  <div data-vfcv-slot="motor"></div>
+
+  <h2>Worked example</h2>
+  <p>A four-pole motor on a 60 Hz supply:</p>
+  <p>N&#8347; = 120 &times; 60 / 4 = 1,800 rpm</p>
+  <p>With a nameplate full-load speed of 1,750 rpm:</p>
+  <p>Slip = (1,800 &minus; 1,750) / 1,800 &times; 100 = 2.78%</p>
+  <p>On a variable speed drive set to 48 Hz, the same motor's synchronous speed is 1,440 rpm.</p>
+
+  <h2>Which standard governs this</h2>
+  <p>The relation follows from how a rotating magnetic field is produced and is not set by a standard. Nameplate speed, frequency and the tolerances on slip are covered by NEMA MG 1 and IEC 60034-1.</p>
+
+  <h2>What this calculation does not account for</h2>
+  <p>Slip is not a fixed property of a motor. It is close to zero at no load and grows roughly in proportion to torque up to full load, so the nameplate figure applies only at rated load, voltage and frequency. Synchronous motors and permanent-magnet motors run at synchronous speed with no slip at all. The pole count is fixed by the winding and cannot be read off the frame.</p>
+    <div class="callout"><b>This is a screening estimate.</b> It is here to get you to the right order of magnitude and the right conversation — not to replace a stamped calculation by a qualified engineer.</div>
+
+  <h2>Common mistakes</h2>
+  <p>Expecting an induction motor to run at exactly 1,800 or 3,600 rpm. Entering the number of pole pairs where the formula wants poles. Using the full-load slip to estimate speed at light load. Assuming a motor moved from 60 Hz to 50 Hz simply runs slower, with no effect on its voltage requirement or cooling.</p>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2>Related</h2>
+    <div class="rel">
+      <a href="/calculators/motor-torque.html">Motor Torque Calculator</a>
+      <a href="/calculators/affinity-laws.html">Pump &amp; Fan Affinity Laws Calculator</a>
+      <a href="/guide-vfd-vs-soft-starter.html">VFD vs. Soft Starter</a>
+      <a href="/calculators/hp-to-kw.html">Motor HP to kW Calculator</a>
+      <a href="/guide-nec-430-250-motor-fla.html">NEC 430.250 Motor Full-Load Current</a>
+      <a href="/engineering-calculators.html">All calculators</a>
+    </div>
+
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new calculators and guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/calculators/motor-speed.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+
+  <aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>Calculate an AC motor's synchronous speed from frequency and poles, and its slip from the nameplate full-load rpm. Free, no signup.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>The relation follows from how a rotating magnetic field is produced and is not set by a standard. Nameplate speed, frequency and the tolerances on slip are covered by NEMA MG 1 and IEC 60034-1.</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>Slip is not a fixed property of a motor. It is close to zero at no load and grows roughly in proportion to torque up to full load, so the nameplate figure applies only at rated load, voltage and frequency. Synchronous motors and permanent-magnet motors run at synchronous speed with no slip at all. The pole count is fixed by the winding and cannot be read off the frame. This is a screening estimate, not a stamped calculation.</dd>
+      <dt>Provenance</dt>
+      <dd>Last reviewed November 11, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labelled as estimates. Worked examples are arithmetic you can reproduce against the <a href="#calculator">calculator at the top of this page</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+    </dl>
+  </aside>
+
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h4>Voltfield</h4>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h4>Sectors</h4><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h4>Compliance</h4><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="/voltfield-component-viz.js" defer></script>
+<script src="/voltfield-calculators.js" defer></script>
+<script src="/voltfield-site-config.js"></script>
+<script src="/voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

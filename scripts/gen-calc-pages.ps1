@@ -67,7 +67,7 @@ foreach ($ln in $lines) {
     if ($cur) { [void]$recs.Add($cur) }
     $p = $Matches[1].Split('|')
     $cur = [ordered]@{ slug=$p[0]; anchor=$p[1]; h1=$p[2]; title=$p[3]; desc=$p[4];
-                       intro=@(); formula=@(); vars=@(); example=@(); standard=@(); limits=@(); mistakes=@(); related=@() }
+                       intro=@(); formula=@(); vars=@(); example=@(); standard=@(); limits=@(); mistakes=@(); related=@(); viz=@() }
     $sect = $null; continue
   }
   if ($ln -match '^--([a-z]+)\s*$') { $sect = $Matches[1]; continue }
@@ -107,6 +107,13 @@ foreach ($r in $recs) {
   [void]$sb.AppendLine("<meta property=""og:title"" content=""$($r.h1)"">")
   [void]$sb.AppendLine("<meta property=""og:description"" content=""$($r.desc)"">")
   [void]$sb.AppendLine('<meta name="twitter:card" content="summary_large_image">')
+  # og:url and the card tags used to be added by hand after generation, so a
+  # regenerated page lost them. The card itself is drawn by gen-social-cards.ps1.
+  [void]$sb.AppendLine("<meta property=""og:url"" content=""$url"">")
+  [void]$sb.AppendLine("<meta property=""og:image"" content=""https://voltfield.org/social/social-$($r.slug).jpg"">")
+  [void]$sb.AppendLine('<meta property="og:image:width" content="1200">')
+  [void]$sb.AppendLine('<meta property="og:image:height" content="630">')
+  [void]$sb.AppendLine("<meta name=""twitter:image"" content=""https://voltfield.org/social/social-$($r.slug).jpg"">")
   [void]$sb.AppendLine('<script type="application/ld+json">')
   [void]$sb.AppendLine('{"@context":"https://schema.org","@graph":[')
   [void]$sb.AppendLine(' {"@type":"BreadcrumbList","itemListElement":[')
@@ -125,13 +132,18 @@ foreach ($r in $recs) {
   [void]$sb.AppendLine(' ]}')
   [void]$sb.AppendLine(']}')
   [void]$sb.AppendLine('</script>')
-  [void]$sb.Append($hTail.Replace('<link rel="stylesheet" href="/voltfield-core.css">', "<link rel=""stylesheet"" href=""/voltfield-core.css"">`n<link rel=""stylesheet"" href=""/voltfield-calculators.css"">"))
+  $vizCss = ''; $vizJs = ''
+  if ($r.viz.Count -gt 0) {
+    $vizCss = "`n<link rel=""stylesheet"" href=""/voltfield-component-viz.css"">"
+    $vizJs  = "<script src=""/voltfield-component-viz.js"" defer></script>`n"
+  }
+  [void]$sb.Append($hTail.Replace('<link rel="stylesheet" href="/voltfield-core.css">', "<link rel=""stylesheet"" href=""/voltfield-core.css"">`n<link rel=""stylesheet"" href=""/voltfield-calculators.css"">$vizCss"))
   [void]$sb.Append($top)
   [void]$sb.AppendLine('<main id="main" tabindex="-1">')
   [void]$sb.AppendLine('')
   [void]$sb.AppendLine('<section class="artban">')
   [void]$sb.AppendLine('  <div class="artban-in">')
-  [void]$sb.AppendLine("    <nav aria-label=""Breadcrumb"" class=""crumbnav"" style=""font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px""><a href=""/index.html"" style=""color:var(--slate);text-decoration:none"">Home</a> / <a href=""/engineering-calculators.html"" style=""color:var(--slate);text-decoration:none"">Calculators</a> / <span style=""color:var(--ink)"">$($r.h1)</span></nav>")
+  [void]$sb.AppendLine("    <nav aria-label=""Breadcrumb"" class=""crumbnav"" style=""font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px""><a href=""/"" style=""color:var(--slate);text-decoration:none"">Home</a> / <a href=""/engineering-calculators.html"" style=""color:var(--slate);text-decoration:none"">Calculators</a> / <span style=""color:var(--ink)"">$($r.h1)</span></nav>")
   [void]$sb.AppendLine('    <div class="eyebrow">Free Calculator &middot; No Signup</div>')
   [void]$sb.AppendLine("    <h1>$($r.h1)</h1>")
   [void]$sb.AppendLine("    <p class=""dek"">$short</p>")
@@ -156,6 +168,14 @@ foreach ($r in $recs) {
   }
   [void]$sb.AppendLine('    </tbody></table></div>')
   [void]$sb.AppendLine('')
+  # Optional equipment card (a --viz section naming one id from the component
+  # registry in voltfield-component-viz.js). Filled in by voltfield-calculators.js,
+  # which also fetches the 3D library only when "View in 3D" is pressed.
+  if ($r.viz.Count -gt 0) {
+    [void]$sb.AppendLine('  <h2>The equipment</h2>')
+    [void]$sb.AppendLine("  <div data-vfcv-slot=""$($r.viz[0])""></div>")
+    [void]$sb.AppendLine('')
+  }
   [void]$sb.AppendLine('  <h2>Worked example</h2>')
   foreach ($p in $r.example) { [void]$sb.AppendLine("  <p>$p</p>") }
   [void]$sb.AppendLine('')
@@ -232,7 +252,7 @@ foreach ($r in $recs) {
   [void]$sb.AppendLine('</main>')
   # Only the calculator pages carry the signup form, so the script is added here
   # rather than in the shared chrome-bot template.
-  [void]$sb.Append($bot.Replace('<script src="/voltfield-site-config.js"></script>', "<script src=""/voltfield-calculators.js"" defer></script>`n<script src=""/voltfield-site-config.js""></script>`n<script src=""/voltfield-updates.js"" defer></script>"))
+  [void]$sb.Append($bot.Replace('<script src="/voltfield-site-config.js"></script>', "$vizJs<script src=""/voltfield-calculators.js"" defer></script>`n<script src=""/voltfield-site-config.js""></script>`n<script src=""/voltfield-updates.js"" defer></script>"))
 
   [System.IO.File]::WriteAllText((Join-Path $outDir "$($r.slug).html"), $sb.ToString(), $utf8)
   $written++

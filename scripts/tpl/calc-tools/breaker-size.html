@@ -1,0 +1,12 @@
+<!-- Live calculator for calculators/breaker-size.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="bkCalc">
+    <h2>Breaker Size</h2>
+    <div class="sub">125% of the continuous load plus the non-continuous load, rounded up to the next standard rating in NEC 240.6(A). Choose 100% rated only where the breaker and enclosure are listed for it. Not for motor circuits.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="bkCont">Continuous load (A)</label><input type="number" id="bkCont" min="0" step="any" placeholder="e.g. 52"></div>
+      <div class="est-field"><label for="bkNon">Non-continuous load (A)</label><input type="number" id="bkNon" min="0" step="any" placeholder="e.g. 0"></div>
+      <div class="est-field"><label for="bkRated">Breaker and enclosure</label><select id="bkRated"><option value="80" selected>Standard</option><option value="100">100% rated</option></select></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="bkBtn">Calculate</button></div></div>
+    <div class="est-result" id="bkResult"></div>
+  </div>

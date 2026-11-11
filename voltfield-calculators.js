@@ -923,6 +923,299 @@
   });
 
 
+
+  /* ================= Nov 2026: ten more single-purpose calculators =================
+     Each has its own page under calculators/ and its markup in
+     scripts/tpl/calc-tools/. Same conventions as everything above: look the
+     button up by id, do nothing if it is absent, put the headline figure in <b>. */
+  function nv(id){const e=document.getElementById(id);return e?parseFloat(e.value):NaN;}
+  function show(r,html,warn){r.innerHTML=html;r.className='est-result show'+(warn?' warn':'');}
+  function usd(v){return Number(v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function ask(r,text){r.textContent=text;r.className='est-result show';}
+
+  /* Ohm's law: any two of V, I, R, P give the other two. */
+  const olBtn=document.getElementById('olBtn');
+  if(olBtn)olBtn.addEventListener('click',function(){
+    const r=document.getElementById('olResult');
+    let V=nv('olV'),I=nv('olI'),R=nv('olR'),P=nv('olP');
+    const have=[V,I,R,P].filter(function(x){return x>0;}).length;
+    if(have<2){ask(r,'Enter any two of voltage, current, resistance and power.');return;}
+    if(have>2){ask(r,'Enter exactly two values and leave the other two blank. With three or four, the inputs can contradict each other.');return;}
+    let how;
+    if(V>0&&I>0){R=V/I;P=V*I;how='R = V / I and P = V × I';}
+    else if(V>0&&R>0){I=V/R;P=V*V/R;how='I = V / R and P = V² / R';}
+    else if(V>0&&P>0){I=P/V;R=V*V/P;how='I = P / V and R = V² / P';}
+    else if(I>0&&R>0){V=I*R;P=I*I*R;how='V = I × R and P = I² × R';}
+    else if(I>0&&P>0){V=P/I;R=P/(I*I);how='V = P / I and R = P / I²';}
+    else {V=Math.sqrt(P*R);I=Math.sqrt(P/R);how='V = √(P × R) and I = √(P / R)';}
+    show(r,'<b>'+fmt(V,3)+' V</b> · <b>'+fmt(I,3)+' A</b> · <b>'+fmt(R,3)+' Ω</b> · <b>'+fmt(P,3)+' W</b><br>Solved with '+how+'. These hold as written for DC and for a purely resistive AC load.');
+  });
+
+  /* Breaker size: 125% of continuous plus 100% of non-continuous, then the next
+     standard rating. The ratings are the standard ampere ratings of NEC 240.6(A). */
+  const STD_OCPD=[15,20,25,30,35,40,45,50,60,70,80,90,100,110,125,150,175,200,225,250,300,350,400,450,500,600,700,800,1000,1200,1600,2000,2500,3000,4000,5000,6000];
+  const bkBtn=document.getElementById('bkBtn');
+  if(bkBtn)bkBtn.addEventListener('click',function(){
+    const r=document.getElementById('bkResult');
+    const c=nv('bkCont'), n=nv('bkNon');
+    const cont=c>0?c:0, non=n>0?n:0;
+    const full=document.getElementById('bkRated').value==='100';
+    if(!(cont+non>0)){ask(r,'Enter the continuous load, the non-continuous load, or both.');return;}
+    const need=(full?cont:cont*1.25)+non;
+    const std=STD_OCPD.find(function(a){return a>=need-1e-9;});
+    if(!std){show(r,'Minimum rating <b>'+fmt(need,1)+' A</b>, which is above the largest standard rating of 6000 A. The load has to be split across more than one source or feeder.',true);return;}
+    let msg='Minimum rating: <b>'+fmt(need,1)+' A</b> ('+(full?fmt(cont,1)+' A continuous at 100%':fmt(cont,1)+' A × 1.25')+(non>0?' + '+fmt(non,1)+' A non-continuous':'')+'). Next standard size: <b>'+std+' A</b>.';
+    if(std>800) msg+=' Above 800 A the conductor ampacity must be at least the breaker rating; the next-size-up allowance stops at 800 A.';
+    else msg+=' The conductors must also carry '+fmt(need,1)+' A, and the breaker has to protect them at their ampacity.';
+    show(r,msg);
+  });
+
+  /* Amps to kVA */
+  const akBtn=document.getElementById('akBtn');
+  if(akBtn)akBtn.addEventListener('click',function(){
+    const r=document.getElementById('akResult');
+    const I=nv('akI'),V=nv('akV'),three=document.getElementById('akPhase').value==='3';
+    if(!(I>0)||!(V>0)){ask(r,'Enter current and voltage.');return;}
+    const kva=(three?R3:1)*V*I/1000;
+    show(r,'<b>'+fmt(kva)+' kVA</b> apparent power'+(three?', three-phase, so the square root of three is included':', single-phase')+'. No power factor term: kVA is volts times amps. Multiply by power factor for kW.');
+  });
+
+  /* Amps to watts */
+  const awBtn=document.getElementById('awBtn');
+  if(awBtn)awBtn.addEventListener('click',function(){
+    const r=document.getElementById('awResult');
+    const sys=document.getElementById('awPhase').value;
+    const I=nv('awI'),V=nv('awV');
+    const pf=sys==='dc'?1:nv('awPf');
+    if(!(I>0)||!(V>0)){ask(r,'Enter current and voltage.');return;}
+    if(sys!=='dc'&&!(pf>0&&pf<=1)){ask(r,'Enter a power factor between 0 and 1.');return;}
+    const W=(sys==='3'?R3:1)*V*I*pf;
+    let msg='<b>'+fmt(W,1)+' W</b>'+(W>=1000?' ('+fmt(W/1000)+' kW)':'')+' real power.';
+    if(sys==='dc') msg+=' DC, so no power factor applies.';
+    else if(pf<1) msg+=' Apparent power is '+fmt(W/pf,1)+' VA; the difference is what power factor accounts for.';
+    show(r,msg);
+  });
+
+  /* Amp-hours and kilowatt-hours, both ways */
+  const ahDir=document.getElementById('ahDir');
+  if(ahDir){
+    const ahSync=function(){
+      const lab=document.querySelector('label[for="ahVal"]');
+      if(lab) lab.textContent=ahDir.value==='ah'?'Capacity (Ah)':'Energy (kWh)';
+    };
+    ahDir.addEventListener('change',ahSync); ahSync();
+  }
+  const ahBtn=document.getElementById('ahBtn');
+  if(ahBtn)ahBtn.addEventListener('click',function(){
+    const r=document.getElementById('ahResult');
+    const x=nv('ahVal'),V=nv('ahV'),toKwh=ahDir.value==='ah';
+    if(!(x>0)||!(V>0)){ask(r,'Enter the '+(toKwh?'capacity':'energy')+' and the nominal voltage.');return;}
+    if(toKwh){const k=x*V/1000;show(r,'<b>'+fmt(k,3)+' kWh</b> ('+fmt(k*1000,1)+' Wh) at '+fmt(V,2)+' V nominal. This is nameplate energy; what you can use depends on depth of discharge and discharge rate.');}
+    else{const a=x*1000/V;show(r,'<b>'+fmt(a)+' Ah</b> at '+fmt(V,2)+' V nominal. The same energy at a higher voltage is fewer amp-hours, which is why Ah figures cannot be compared across voltages.');}
+  });
+
+  /* Battery runtime: usable energy over load. */
+  const brBtn=document.getElementById('brBtn');
+  if(brBtn)brBtn.addEventListener('click',function(){
+    const r=document.getElementById('brResult');
+    const Ah=nv('brAh'),V=nv('brV'),W=nv('brW'),dod=nv('brDod'),eff=nv('brEff');
+    if(!(Ah>0)||!(V>0)||!(W>0)){ask(r,'Enter capacity, voltage and load.');return;}
+    if(!(dod>0&&dod<=100)||!(eff>0&&eff<=100)){ask(r,'Depth of discharge and efficiency are percentages between 0 and 100.');return;}
+    const usable=Ah*V*(dod/100)*(eff/100);
+    const h=usable/W, hh=Math.floor(h), mm=Math.round((h-hh)*60);
+    const crate=W/(V*Ah);
+    let msg='Estimated runtime: <b>'+fmt(h)+' hours</b> ('+(mm===60?(hh+1)+' h 0 min':hh+' h '+mm+' min')+'). Usable energy '+fmt(usable,0)+' Wh of '+fmt(Ah*V,0)+' Wh nameplate.';
+    const warn=crate>=0.995;
+    if(warn) msg+='<br>The load is about '+fmt(crate,1)+'C. At that rate a lead-acid battery delivers far less than its rated amp-hours, and this estimate will be optimistic.';
+    else if(crate>0.2) msg+=' The load is about '+fmt(crate,2)+'C; lead-acid capacity is rated at a much slower discharge, so expect less than this.';
+    show(r,msg,warn);
+  });
+
+  /* PUE */
+  const pueBtn=document.getElementById('pueBtn');
+  if(pueBtn)pueBtn.addEventListener('click',function(){
+    const r=document.getElementById('pueResult');
+    const T=nv('pueTotal'),IT=nv('pueIt'),rate=nv('pueRate');
+    if(!(T>0)||!(IT>0)){ask(r,'Enter total facility power and IT power.');return;}
+    if(IT>T){show(r,'IT power cannot be greater than total facility power, because the total includes the IT load. Check that both figures are measured over the same period and at the right points.',true);return;}
+    const pue=T/IT, over=T-IT, kwh=over*8760;
+    let msg='PUE <b>'+fmt(pue)+'</b> · DCiE '+fmt(100/pue,1)+'% · overhead <b>'+fmt(over,1)+' kW</b> for cooling, power conversion losses and everything else that is not IT.';
+    msg+=' Held for a year, that overhead is '+fmt(kwh,0)+' kWh';
+    msg+=(rate>0?', about <b>$'+fmt(kwh*rate,0)+'</b> at $'+rate+'/kWh.':'.');
+    show(r,msg);
+  });
+
+  /* Electricity cost */
+  const ecBtn=document.getElementById('ecBtn');
+  if(ecBtn)ecBtn.addEventListener('click',function(){
+    const r=document.getElementById('ecResult');
+    const kw=nv('ecKw'),hrs=nv('ecHrs'),rate=nv('ecRate');
+    if(!(kw>0)||!(hrs>0)||!(rate>0)){ask(r,'Enter the load, hours per day and the energy rate.');return;}
+    if(hrs>24){ask(r,'Hours per day cannot be more than 24.');return;}
+    const day=kw*hrs, yr=day*365, mo=yr/12;
+    show(r,'<b>$'+fmt(yr*rate,0)+' per year</b> ('+fmt(yr,0)+' kWh) · $'+usd(mo*rate)+' per month ('+fmt(mo,0)+' kWh) · $'+usd(day*rate)+' per day ('+fmt(day,1)+' kWh). Energy charge only: demand charges, fixed charges and taxes are extra.');
+  });
+
+  /* Wire resistance, from the same K factors the voltage drop tool uses. */
+  const wrSel=document.getElementById('wrSize');
+  if(wrSel) wrSel.innerHTML=AWG.map(function(a,i){return '<option value="'+i+'"'+(a.n==='12 AWG'?' selected':'')+'>'+a.n+'</option>';}).join('');
+  const wrBtn=document.getElementById('wrBtn');
+  if(wrBtn)wrBtn.addEventListener('click',function(){
+    const r=document.getElementById('wrResult');
+    const L=nv('wrLen'),K=parseFloat(document.getElementById('wrMat').value),a=AWG[+wrSel.value];
+    const loop=document.getElementById('wrPath').value==='2';
+    if(!(L>0)){ask(r,'Enter the length in feet.');return;}
+    const one=K*L/a.cm, tot=loop?2*one:one;
+    show(r,'<b>'+fmt(tot,4)+' Ω</b> '+(loop?'out and back':'one way')+' for '+fmt(L,0)+' ft of '+a.n+' '+(K<15?'copper':'aluminum')+' ('+fmt(K*1000/a.cm,3)+' Ω per 1000 ft). Each amp through it drops '+fmt(tot,4)+' V. DC resistance at about 75°C; AC resistance is higher on large conductors.');
+  });
+
+  /* Solar DC/AC ratio */
+  const ilrBtn=document.getElementById('ilrBtn');
+  if(ilrBtn)ilrBtn.addEventListener('click',function(){
+    const r=document.getElementById('ilrResult');
+    const dc=nv('ilrDc'),ac=nv('ilrAc');
+    if(!(dc>0)||!(ac>0)){ask(r,'Enter the array DC rating and the inverter AC rating.');return;}
+    const k=dc/ac;
+    let msg='DC/AC ratio <b>'+fmt(k)+'</b>. ';
+    if(k<1) msg+='The array is smaller than the inverter, so the inverter never reaches its rating and part of its capacity is unused.';
+    else msg+='At full array output the inverter would be asked for '+fmt((k-1)*100,0)+'% more than its rating and clips the excess. The array reaches nameplate only at standard test conditions, so clipping is confined to the brightest, coolest hours.';
+    show(r,msg);
+  });
+
+
+  /* ================= Nov 2026: mechanical, cooling and motor calculators =================
+     The cooling plant is where most of a data center's non-IT power goes, and
+     its sizing arithmetic is as standard as the electrical side's. US customary
+     units throughout, because the constants (1.08, 500, 3960, 5252) only mean
+     anything in them; each result adds the SI figure. */
+  const BTU_PER_KW=3412.142;
+
+  /* Airflow for a sensible heat load: CFM = BTU/h / (1.08 x dT). */
+  const cfmBtn=document.getElementById('cfmBtn');
+  if(cfmBtn)cfmBtn.addEventListener('click',function(){
+    const r=document.getElementById('cfmResult');
+    const kw=nv('cfmKw'),dt=nv('cfmDt');
+    if(!(kw>0)||!(dt>0)){ask(r,'Enter the heat load and the air temperature rise.');return;}
+    const btu=kw*BTU_PER_KW, cfm=btu/(1.08*dt);
+    let msg='<b>'+fmt(cfm,0)+' CFM</b> ('+fmt(cfm*1.699,0)+' m³/h) to carry '+fmt(kw,1)+' kW at a '+fmt(dt,1)+'°F rise. That is '+fmt(cfm/kw,0)+' CFM per kW.';
+    const warn=dt>40;
+    if(warn) msg+='<br>A rise above about 40°F is beyond what most air-cooled IT equipment is designed for; check the equipment data before designing to it.';
+    else msg+=' Standard air at sea level; at altitude the same heat needs more volume.';
+    show(r,msg,warn);
+  });
+
+  /* Chilled-water flow: GPM = BTU/h / (500 x dT). */
+  const chwUnit=document.getElementById('chwUnit');
+  if(chwUnit){
+    const chwSync=function(){
+      const lab=document.querySelector('label[for="chwLoad"]');
+      if(lab) lab.textContent=chwUnit.value==='tons'?'Cooling load (tons)':'Cooling load (kW)';
+    };
+    chwUnit.addEventListener('change',chwSync); chwSync();
+  }
+  const chwBtn=document.getElementById('chwBtn');
+  if(chwBtn)chwBtn.addEventListener('click',function(){
+    const r=document.getElementById('chwResult');
+    const x=nv('chwLoad'),dt=nv('chwDt');
+    if(!(x>0)||!(dt>0)){ask(r,'Enter the cooling load and the water temperature difference.');return;}
+    const btu=chwUnit.value==='tons'?x*12000:x*BTU_PER_KW;
+    const gpm=btu/(500*dt), tons=btu/12000;
+    show(r,'<b>'+fmt(gpm,1)+' GPM</b> ('+fmt(gpm*0.0630902,2)+' L/s) for '+fmt(tons,1)+' tons at a '+fmt(dt,1)+'°F difference. That is '+fmt(gpm/tons,2)+' GPM per ton. Plain water; a glycol mix needs more flow for the same load.');
+  });
+
+  /* Pump power: water hp = GPM x head x SG / 3960. */
+  const STD_HP=[1,1.5,2,3,5,7.5,10,15,20,25,30,40,50,60,75,100,125,150,200,250,300,350,400,450,500];
+  const ppBtn=document.getElementById('ppBtn');
+  if(ppBtn)ppBtn.addEventListener('click',function(){
+    const r=document.getElementById('ppResult');
+    const q=nv('ppGpm'),h=nv('ppHead'),pe=nv('ppEff'),me=nv('ppMotorEff'),sg=nv('ppSg');
+    if(!(q>0)||!(h>0)){ask(r,'Enter flow and head.');return;}
+    if(!(pe>0&&pe<=100)||!(me>0&&me<=100)||!(sg>0)){ask(r,'Efficiencies are percentages between 0 and 100, and specific gravity must be above zero.');return;}
+    const whp=q*h*sg/3960, bhp=whp/(pe/100), kw=bhp*0.7457/(me/100);
+    const std=STD_HP.find(function(a){return a>=bhp-1e-9;});
+    show(r,'Brake power: <b>'+fmt(bhp)+' hp</b> ('+fmt(bhp*0.7457)+' kW) at the shaft, from '+fmt(whp)+' hp delivered to the water. Electrical input about <b>'+fmt(kw)+' kW</b>. '+(std?'Next standard motor at or above the brake power: <b>'+std+' hp</b>.':'Above 500 hp; outside the standard sizes listed here.')+' Check the motor against the whole pump curve, not this one point.');
+  });
+
+  /* Pipe velocity: v = 0.4085 x GPM / d^2, d in inches. */
+  const pvBtn=document.getElementById('pvBtn');
+  if(pvBtn)pvBtn.addEventListener('click',function(){
+    const r=document.getElementById('pvResult');
+    const q=nv('pvGpm'),d=nv('pvId');
+    if(!(q>0)||!(d>0)){ask(r,'Enter flow and the inside diameter of the pipe.');return;}
+    const v=0.4085*q/(d*d);
+    const warn=v>10;
+    let msg='<b>'+fmt(v)+' ft/s</b> ('+fmt(v*0.3048)+' m/s) in a pipe of '+fmt(d,3)+' in inside diameter.';
+    if(warn) msg+='<br>That is fast for closed hydronic piping. Expect noise, erosion at fittings and a high pressure drop; a larger pipe is the usual answer.';
+    else if(v<2) msg+=' That is slow. Below about 2 ft/s, air and solids are not carried along with the water and tend to collect.';
+    show(r,msg,warn);
+  });
+
+  /* Affinity laws: flow with speed, head with its square, power with its cube. */
+  const alBtn=document.getElementById('alBtn');
+  if(alBtn)alBtn.addEventListener('click',function(){
+    const r=document.getElementById('alResult');
+    const n1=nv('alN1'),n2=nv('alN2'),q=nv('alQ'),h=nv('alH'),p=nv('alP');
+    if(!(n1>0)||!(n2>0)){ask(r,'Enter the original and the new speed.');return;}
+    if(!(q>0)&&!(h>0)&&!(p>0)){ask(r,'Enter at least one of flow, head and power at the original speed.');return;}
+    const k=n2/n1, out=[];
+    if(q>0) out.push('flow <b>'+fmt(q*k,1)+'</b>');
+    if(h>0) out.push('head or pressure <b>'+fmt(h*k*k,1)+'</b>');
+    if(p>0) out.push('power <b>'+fmt(p*k*k*k)+'</b>');
+    show(r,'At '+fmt(k*100,1)+'% speed: '+out.join(' · ')+', each in the units you entered. Flow goes with speed, head with its square and power with its cube, so power is '+fmt(k*k*k*100,1)+'% of the original.');
+  });
+
+  /* Motor torque: T (lb-ft) = 5252 x hp / rpm. */
+  const mtUnit=document.getElementById('mtUnit');
+  if(mtUnit){
+    const mtSync=function(){
+      const lab=document.querySelector('label[for="mtP"]');
+      if(lab) lab.textContent=mtUnit.value==='hp'?'Power (hp)':'Power (kW)';
+    };
+    mtUnit.addEventListener('change',mtSync); mtSync();
+  }
+  const mtBtn=document.getElementById('mtBtn');
+  if(mtBtn)mtBtn.addEventListener('click',function(){
+    const r=document.getElementById('mtResult');
+    const p=nv('mtP'),n=nv('mtRpm');
+    if(!(p>0)||!(n>0)){ask(r,'Enter power and speed.');return;}
+    const hp=mtUnit.value==='hp'?p:p/0.7457;
+    const lbft=5252*hp/n;
+    show(r,'<b>'+fmt(lbft)+' lb-ft</b> (<b>'+fmt(lbft*1.355818)+' N·m</b>) at '+fmt(n,0)+' rpm. This is running torque at that power and speed. Starting and breakdown torque are separate figures from the motor data sheet.');
+  });
+
+  /* Synchronous speed and slip: Ns = 120 f / poles. */
+  const msBtn=document.getElementById('msBtn');
+  if(msBtn)msBtn.addEventListener('click',function(){
+    const r=document.getElementById('msResult');
+    const f=parseFloat(document.getElementById('msHz').value),poles=nv('msPoles'),fl=nv('msRpm');
+    if(!(poles>=2)||poles%2!==0){ask(r,'Poles come in pairs: enter 2, 4, 6, 8 and so on.');return;}
+    const ns=120*f/poles;
+    let msg='Synchronous speed: <b>'+fmt(ns,0)+' rpm</b> for '+poles+' poles at '+f+' Hz.';
+    if(fl>0){
+      if(fl>=ns){show(r,msg+' The full-load speed entered is at or above synchronous speed, which an induction motor cannot reach as a motor. Check the nameplate and the pole count.',true);return;}
+      const slip=(ns-fl)/ns*100;
+      msg+=' Slip at '+fmt(fl,0)+' rpm: <b>'+fmt(slip)+'%</b> ('+fmt(ns-fl,0)+' rpm).';
+    }
+    show(r,msg);
+  });
+
+  /* Voltage unbalance, NEMA definition: largest deviation from the average. */
+  const vuBtn=document.getElementById('vuBtn');
+  if(vuBtn)vuBtn.addEventListener('click',function(){
+    const r=document.getElementById('vuResult');
+    const v=[nv('vuAb'),nv('vuBc'),nv('vuCa')];
+    if(!v.every(function(x){return x>0;})){ask(r,'Enter all three line-to-line voltages.');return;}
+    const avg=(v[0]+v[1]+v[2])/3;
+    const dev=Math.max.apply(null,v.map(function(x){return Math.abs(x-avg);}));
+    const pct=dev/avg*100, rise=2*pct*pct;
+    let msg='Voltage unbalance: <b>'+fmt(pct)+'%</b> (average '+fmt(avg,1)+' V, largest deviation '+fmt(dev,1)+' V).';
+    const warn=pct>1;
+    if(pct>5) msg+='<br>Above 5%. NEMA MG 1 does not recommend running a motor at this level at all.';
+    else if(warn) msg+='<br>Above 1%, where NEMA MG 1 calls for derating the motor. Expect roughly '+fmt(rise,0)+'% more winding temperature rise at full load.';
+    else msg+=' Within the 1% that NEMA MG 1 allows without derating.';
+    show(r,msg,warn);
+  });
+
 })();
 
 /* ---------- usage tracking: which of the 25 calculators actually get used.
@@ -980,4 +1273,34 @@
     /* Typing over an example should replace it, not append to it. */
     filled.forEach(function(i){i.addEventListener('focus',function f(){i.select();i.removeEventListener('focus',f);});});
   });
+})();
+
+/* ---------- equipment card with an on-demand 3D view ----------
+   A calculator page can carry <div data-vfcv-slot="pump"></div>; this fills it
+   from the shared component registry (voltfield-component-viz.js). The 3D
+   library is 190 KB before three.js, and most visitors to a calculator never
+   open the model, so it is fetched on the first click of "View in 3D" rather
+   than with the page. */
+(function(){
+  var slots=document.querySelectorAll('[data-vfcv-slot]');
+  if(!slots.length||!window.VFCV)return;
+  slots.forEach(function(el){
+    var id=el.getAttribute('data-vfcv-slot');
+    if(window.VFCV.has(id)) el.innerHTML=window.VFCV.cardHTML(id);
+  });
+  window.VFCV.bindCards();
+  var loading=null;
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest&&e.target.closest('[data-vfcv-3d]');
+    if(!btn||window.VF3D)return;
+    e.stopPropagation(); e.preventDefault();
+    if(!loading){
+      btn.textContent='Loading 3D…';
+      loading=new Promise(function(res,rej){
+        var s=document.createElement('script'); s.src='/voltfield-3d.js'; s.onload=res; s.onerror=rej;
+        document.head.appendChild(s);
+      });
+      loading.then(function(){btn.click();},function(){btn.textContent='3D view unavailable';});
+    }
+  },true);
 })();

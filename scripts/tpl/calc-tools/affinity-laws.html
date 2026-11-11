@@ -1,0 +1,16 @@
+<!-- Live calculator for calculators/affinity-laws.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="alCalc">
+    <h2>Affinity Laws</h2>
+    <div class="sub">For one pump or fan at two speeds, in a system that is all friction. Enter whichever of flow, head and power you know.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="alN1">Original speed (rpm or %)</label><input type="number" id="alN1" min="0" step="any" placeholder="e.g. 1750"></div>
+      <div class="est-field"><label for="alN2">New speed (rpm or %)</label><input type="number" id="alN2" min="0" step="any" placeholder="e.g. 1400"></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="alQ">Flow at original speed</label><input type="number" id="alQ" min="0" step="any" placeholder="e.g. 500"></div>
+      <div class="est-field"><label for="alH">Head or pressure</label><input type="number" id="alH" min="0" step="any" placeholder="e.g. 80"></div>
+      <div class="est-field"><label for="alP">Power</label><input type="number" id="alP" min="0" step="any" placeholder="e.g. 15"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="alBtn">Calculate</button></div></div>
+    <div class="est-result" id="alResult"></div>
+  </div>

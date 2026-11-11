@@ -1,0 +1,13 @@
+<!-- Live calculator for calculators/wire-resistance.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="wrCalc">
+    <h2>Wire Resistance</h2>
+    <div class="sub">K = 12.9 (copper) or 21.2 (aluminum) ohm&middot;cmil/ft. DC resistance at about 75&deg;C.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="wrSize">Wire size</label><select id="wrSize"></select></div>
+      <div class="est-field"><label for="wrMat">Conductor</label><select id="wrMat"><option value="12.9" selected>Copper</option><option value="21.2">Aluminum</option></select></div>
+      <div class="est-field"><label for="wrLen">Length (ft)</label><input type="number" id="wrLen" min="0" step="any" placeholder="e.g. 100"></div>
+      <div class="est-field"><label for="wrPath">Path</label><select id="wrPath"><option value="1" selected>One way</option><option value="2">Out and back (two-wire circuit)</option></select></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="wrBtn">Calculate</button></div></div>
+    <div class="est-result" id="wrResult"></div>
+  </div>

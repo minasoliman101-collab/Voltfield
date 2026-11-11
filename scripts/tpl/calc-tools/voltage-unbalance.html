@@ -1,0 +1,12 @@
+<!-- Live calculator for calculators/voltage-unbalance.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="vuCalc">
+    <h2>Voltage Unbalance</h2>
+    <div class="sub">NEMA method: largest deviation from the average of the three line-to-line voltages, over that average.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="vuAb">A&ndash;B (V)</label><input type="number" id="vuAb" min="0" step="any" placeholder="e.g. 460"></div>
+      <div class="est-field"><label for="vuBc">B&ndash;C (V)</label><input type="number" id="vuBc" min="0" step="any" placeholder="e.g. 467"></div>
+      <div class="est-field"><label for="vuCa">C&ndash;A (V)</label><input type="number" id="vuCa" min="0" step="any" placeholder="e.g. 450"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="vuBtn">Calculate</button></div></div>
+    <div class="est-result" id="vuResult"></div>
+  </div>

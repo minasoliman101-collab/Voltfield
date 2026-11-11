@@ -5,6 +5,38 @@
   "title": "About Voltfield — an independent engineering reference",
   "subtitle": "A free engineering reference and tools platform for data center, solar and battery-storage power equipment.",
   "url": "voltfield.org/about",
+  "shared": 3
+ },
+ {
+  "file": "social-affinity-laws.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Pump & Fan Affinity Laws Calculator",
+  "subtitle": "Apply the pump and fan affinity laws: enter two speeds and see how flow, head and power change, including the cube-law energy saving. Free, no signup.",
+  "url": "voltfield.org/calculators/affinity-laws",
+  "shared": 1
+ },
+ {
+  "file": "social-ah-to-kwh.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Ah to kWh Calculator",
+  "subtitle": "Convert battery amp-hours to kilowatt-hours and back at any nominal voltage, and see why Ah figures cannot be compared across voltages. Free, no signup.",
+  "url": "voltfield.org/calculators/ah-to-kwh",
+  "shared": 1
+ },
+ {
+  "file": "social-airflow-cfm.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Airflow (CFM) Calculator",
+  "subtitle": "Find the airflow needed to remove a heat load: kW and air temperature rise to CFM, with CFM per kW for server and rack cooling. Free, no signup.",
+  "url": "voltfield.org/calculators/airflow-cfm",
+  "shared": 1
+ },
+ {
+  "file": "social-amps-to-kva.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Amps to kVA Calculator",
+  "subtitle": "Convert amps to kVA for single-phase and three-phase systems. Apparent power is volts times amps, with no power factor term. Free, no signup.",
+  "url": "voltfield.org/calculators/amps-to-kva",
   "shared": 1
  },
  {
@@ -16,11 +48,27 @@
   "shared": 1
  },
  {
+  "file": "social-amps-to-watts.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Amps to Watts Calculator",
+  "subtitle": "Convert amps to watts for DC, single-phase and three-phase circuits, with power factor and the square root of three where they belong. Free, no signup.",
+  "url": "voltfield.org/calculators/amps-to-watts",
+  "shared": 1
+ },
+ {
   "file": "social-awg-to-mm2.jpg",
   "eyebrow": "CALCULATOR",
   "title": "AWG to mm&sup2; Converter",
   "subtitle": "Convert AWG and kcmil to square millimetres and back, with the nearest IEC standard size. Built from the AWG geometric definition. Free, no signup.",
   "url": "voltfield.org/calculators/awg-to-mm2",
+  "shared": 1
+ },
+ {
+  "file": "social-battery-runtime.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Battery Runtime Calculator",
+  "subtitle": "Estimate how long a battery will carry a load from its amp-hours, voltage, usable depth of discharge and inverter efficiency. Free, no signup.",
+  "url": "voltfield.org/calculators/battery-runtime",
   "shared": 1
  },
  {
@@ -40,6 +88,14 @@
   "shared": 1
  },
  {
+  "file": "social-breaker-size.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Breaker Size Calculator",
+  "subtitle": "Size a circuit breaker from the load: 125% of the continuous load plus the non-continuous load, rounded up to the next standard rating. Free, no signup.",
+  "url": "voltfield.org/calculators/breaker-size",
+  "shared": 1
+ },
+ {
   "file": "social-btu-to-tons.jpg",
   "eyebrow": "CALCULATOR",
   "title": "BTU to Tons Converter",
@@ -48,10 +104,18 @@
   "shared": 1
  },
  {
+  "file": "social-chilled-water-flow.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Chilled Water Flow Calculator",
+  "subtitle": "Calculate chilled water flow in GPM from cooling load in tons or kW and the supply-return temperature difference. Free, no signup.",
+  "url": "voltfield.org/calculators/chilled-water-flow",
+  "shared": 1
+ },
+ {
   "file": "social-conduit-fill.jpg",
   "eyebrow": "CALCULATOR",
   "title": "Conduit Fill Calculator",
-  "subtitle": "Check conduit fill with mixed conductor sizes: the Chapter 9 Table 1 caps, what counts toward fill, the 60 percent nipple allowance, and why Annex C can disagree. Free, no signup.",
+  "subtitle": "Check conduit fill with mixed conductor sizes: the Chapter 9 Table 1 caps, what counts toward fill, and the 60 percent nipple allowance. Free, no signup.",
   "url": "voltfield.org/calculators/conduit-fill",
   "shared": 1
  },
@@ -62,6 +126,22 @@
   "subtitle": "Transformers, switchgear, backup power, and cooling infrastructure for hyperscale and colo builds — 1,326 documented configurations with indicative lead times.",
   "url": "voltfield.org/data-centers",
   "shared": 14
+ },
+ {
+  "file": "social-dc-ac-ratio.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "DC/AC Ratio Calculator",
+  "subtitle": "Calculate a solar plant's DC/AC ratio from array DC capacity and inverter AC rating, and see how much the inverter would clip at full output. Free, no signup.",
+  "url": "voltfield.org/calculators/dc-ac-ratio",
+  "shared": 1
+ },
+ {
+  "file": "social-electricity-cost.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Electricity Cost Calculator",
+  "subtitle": "Work out what a load costs to run: kW, hours per day and the energy rate give kWh and cost per day, month and year. Free, no signup.",
+  "url": "voltfield.org/calculators/electricity-cost",
+  "shared": 1
  },
  {
   "file": "social-engineering-calculators.jpg",
@@ -93,7 +173,7 @@
   "title": "Electrical Power Reference for Data Centers, Solar & BESS",
   "subtitle": "Free calculators that show their method, in-depth guides, and practice boards. Nothing on this site is for sale.",
   "url": "voltfield.org",
-  "shared": 21
+  "shared": 24
  },
  {
   "file": "social-glossary.jpg",
@@ -387,7 +467,7 @@
   "file": "social-kva-to-kw.jpg",
   "eyebrow": "CALCULATOR",
   "title": "kVA to kW Converter",
-  "subtitle": "Convert kVA to kW and back, with reactive power. Why there is no fixed conversion factor, where the 0.8 assumption comes from, and why transformers are rated in kVA. Free, no signup.",
+  "subtitle": "Convert kVA to kW and back, with reactive power. Why there is no fixed conversion factor, and where the 0.8 power-factor assumption comes from. Free.",
   "url": "voltfield.org/calculators/kva-to-kw",
   "shared": 1
  },
@@ -413,6 +493,30 @@
   "title": "How Voltfield's Reference Data Works",
   "subtitle": "What's modeled for demonstration, what's crowdsourced, and why nothing on the site is a binding quote.",
   "url": "voltfield.org/methodology",
+  "shared": 1
+ },
+ {
+  "file": "social-motor-speed.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Motor Speed & Slip Calculator",
+  "subtitle": "Calculate an AC motor's synchronous speed from frequency and poles, and its slip from the nameplate full-load rpm. Free, no signup.",
+  "url": "voltfield.org/calculators/motor-speed",
+  "shared": 1
+ },
+ {
+  "file": "social-motor-torque.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Motor Torque Calculator",
+  "subtitle": "Calculate motor torque in lb-ft and N·m from horsepower or kW and speed in rpm, with the 5252 constant explained. Free, no signup.",
+  "url": "voltfield.org/calculators/motor-torque",
+  "shared": 1
+ },
+ {
+  "file": "social-ohms-law.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Ohm's Law Calculator",
+  "subtitle": "Enter any two of voltage, current, resistance and power and get the other two, with the formula used shown. Free, no signup.",
+  "url": "voltfield.org/calculators/ohms-law",
   "shared": 1
  },
  {
@@ -456,11 +560,35 @@
   "shared": 1
  },
  {
+  "file": "social-pipe-velocity.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Pipe Velocity Calculator",
+  "subtitle": "Calculate water velocity in a pipe from flow in GPM and inside diameter, with a check against common hydronic design limits. Free, no signup.",
+  "url": "voltfield.org/calculators/pipe-velocity",
+  "shared": 1
+ },
+ {
   "file": "social-pod-designer.jpg",
   "eyebrow": "ENGINEERING REFERENCE",
   "title": "POD & Skid Designer — size a power block against a target load and redundancy",
   "subtitle": "A free power POD/skid sizing sandbox: pick a transformer, switchgear, distribution, backup, and cooling for a target load, then check sizing and redundancy instantly.",
   "url": "voltfield.org/voltfield-pod-designer",
+  "shared": 1
+ },
+ {
+  "file": "social-pue.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "PUE Calculator",
+  "subtitle": "Calculate data center PUE and DCiE from total facility power and IT power, with the overhead in kW and what it costs over a year. Free, no signup.",
+  "url": "voltfield.org/calculators/pue",
+  "shared": 1
+ },
+ {
+  "file": "social-pump-power.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Pump Power Calculator",
+  "subtitle": "Calculate pump brake horsepower and motor kW from flow in GPM, head in feet and efficiency, and pick the next standard motor size. Free, no signup.",
+  "url": "voltfield.org/calculators/pump-power",
   "shared": 1
  },
  {
@@ -528,6 +656,14 @@
   "shared": 1
  },
  {
+  "file": "social-voltage-unbalance.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Voltage Unbalance Calculator",
+  "subtitle": "Calculate three-phase voltage unbalance from three line-to-line readings by the NEMA method, with the effect on motor heating. Free, no signup.",
+  "url": "voltfield.org/calculators/voltage-unbalance",
+  "shared": 1
+ },
+ {
   "file": "social-watts-to-amps.jpg",
   "eyebrow": "CALCULATOR",
   "title": "Watts to Amps Calculator",
@@ -544,10 +680,18 @@
   "shared": 1
  },
  {
+  "file": "social-wire-resistance.jpg",
+  "eyebrow": "CALCULATOR",
+  "title": "Wire Resistance Calculator",
+  "subtitle": "Find the resistance of a copper or aluminum conductor from its size and length, one way or out and back, in ohms and ohms per 1000 ft. Free, no signup.",
+  "url": "voltfield.org/calculators/wire-resistance",
+  "shared": 1
+ },
+ {
   "file": "social-wire-size.jpg",
   "eyebrow": "CALCULATOR",
   "title": "Wire Size Calculator",
-  "subtitle": "Size a conductor properly: the 125% continuous-load factor, the termination temperature limit under NEC 110.14(C), and ambient and bundling adjustment. Free, no signup.",
+  "subtitle": "Size a conductor properly: the 125% continuous-load factor, the termination temperature limit under NEC 110.14(C), and ambient adjustment. Free, no signup.",
   "url": "voltfield.org/calculators/wire-size",
   "shared": 1
  }

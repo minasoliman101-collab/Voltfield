@@ -1,0 +1,11 @@
+<!-- Live calculator for calculators/pipe-velocity.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="pvCalc">
+    <h2>Pipe Velocity</h2>
+    <div class="sub">v = 0.4085 &times; GPM &divide; d&sup2;. Use the inside diameter, not the nominal size: 4 in Schedule 40 steel is 4.026 in.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="pvGpm">Flow (GPM)</label><input type="number" id="pvGpm" min="0" step="any" placeholder="e.g. 240"></div>
+      <div class="est-field"><label for="pvId">Inside diameter (in)</label><input type="number" id="pvId" min="0" step="any" placeholder="e.g. 4.026"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="pvBtn">Calculate</button></div></div>
+    <div class="est-result" id="pvResult"></div>
+  </div>

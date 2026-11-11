@@ -21,7 +21,7 @@ Conventions worth knowing before citing this site:
 
 ## Calculators
 
-- [All calculators](https://voltfield.org/engineering-calculators.html): 25 calculators — voltage drop, transformer sizing, arc-flash incident energy, cable ampacity, fault current and others. Each shows the formula and the intermediate steps, not just a result.
+- [All calculators](https://voltfield.org/engineering-calculators.html): 43 calculators — voltage drop, transformer sizing, arc-flash incident energy, cable ampacity, fault current and others. Each shows the formula and the intermediate steps, not just a result.
 - [Specification checklist](https://voltfield.org/specification-checklist.html): what to pin down before issuing an equipment spec.
 - [Methodology](https://voltfield.org/methodology.html): how the material here is built, sourced and checked.
 
@@ -35,6 +35,9 @@ Conventions worth knowing before citing this site:
 - [BESS Fire Safety: NFPA 855 & UL 9540A](https://voltfield.org/guide-bess-fire-safety-nfpa-855.html)
 - [Why Transformer Lead Times Stretch Past 3 Years](https://voltfield.org/guide-transformer-lead-times.html)
 - [Liquid vs. Air Cooling for AI Racks](https://voltfield.org/guide-liquid-vs-air-cooling.html)
+- [CRAC vs. CRAH: What Is the Difference?](https://voltfield.org/guide-crac-vs-crah.html): A CRAC cools with its own compressor, a CRAH with chilled water. Heat rejection, redundancy, efficiency and sizing.
+- [Hot Aisle vs. Cold Aisle Containment](https://voltfield.org/guide-hot-aisle-vs-cold-aisle-containment.html): How each stops air mixing, what it does to the room and to cooling capacity, and which to choose.
+- [Pump and Fan Affinity Laws Explained](https://voltfield.org/guide-pump-and-fan-affinity-laws.html): Flow with speed, head with its square, power with its cube, and where static head breaks the rule.
 
 ## Sectors
 

@@ -732,3 +732,571 @@ Reading a ton as a weight or as a size of unit rather than a rate of heat remova
 /guide-pue-explained.html :: PUE Explained
 /calculators/kw-to-amps.html :: kW to Amps Calculator
 /data-centers/cooling.html :: Data Center Cooling
+
+# ---- Nov 11, 2026: ten more single-purpose calculators ----
+
+===ohms-law|ohms-law|Ohm's Law Calculator|Ohm's Law Calculator (Volts, Amps, Ohms, Watts)|Enter any two of voltage, current, resistance and power and get the other two, with the formula used shown. Free, no signup.
+--intro
+<b>Ohm's law says voltage equals current times resistance: V = I &times; R.</b> Add the power relation, P = V &times; I, and any two of the four quantities fix the other two. That is all this calculator does: give it two, and it returns the missing pair and tells you which form of the equations it used.
+It is the right tool for a resistive load on DC, and for a resistive load on AC such as a heater or an incandescent lamp. It is the wrong tool for anything with a motor, a transformer or a power supply in it, where current and voltage are out of step and power factor has to be included.
+--formula
+V = I &times; R
+P = V &times; I = I&sup2; &times; R = V&sup2; / R
+--vars
+V :: Voltage across the load, in volts
+I :: Current through the load, in amperes
+R :: Resistance of the load, in ohms
+P :: Power dissipated in the load, in watts
+--example
+A load draws 10 A from a 120 V supply:
+R = 120 / 10 = 12 &Omega;, and P = 120 &times; 10 = 1,200 W.
+Working the other way, a 1,500 W heater on 120 V:
+I = 1,500 / 120 = 12.5 A, and R = 120&sup2; / 1,500 = 9.6 &Omega;.
+The second form explains why a heating element run at half its rated voltage gives a quarter of its rated heat. Resistance stays the same, and power goes with the square of the voltage.
+--standard
+Ohm's law is a physical relationship, not a code requirement, so no standard governs the arithmetic. What it feeds into is governed: conductor sizing under NEC Article 310 and overcurrent protection under Article 240 both start from the current this kind of calculation produces.
+--limits
+The resistance of a real conductor or heating element changes with temperature, so a figure measured cold is lower than the figure at operating temperature. On AC, this form holds only for a purely resistive load. Motors, transformers, drives and power supplies have reactance, and for those the relationship is between voltage, current and impedance, with power factor in the power equation.
+--mistakes
+Entering three values that do not agree with each other and trusting whichever answer comes out. Using P = V &times; I for an AC load with a power factor below one, which gives volt-amperes, not watts. Using the cold resistance of a lamp or element to predict its running current. Forgetting that halving the voltage quarters the power.
+--related
+/calculators/watts-to-amps.html :: Watts to Amps Calculator
+/calculators/amps-to-watts.html :: Amps to Watts Calculator
+/calculators/wire-resistance.html :: Wire Resistance Calculator
+/calculators/voltage-drop.html :: Voltage Drop Calculator
+/guide-kw-vs-kva.html :: kW vs. kVA Explained
+
+===breaker-size|breaker-size|Breaker Size Calculator|Breaker Size Calculator (125% Continuous Load)|Size a circuit breaker from the load: 125% of the continuous load plus the non-continuous load, rounded up to the next standard rating. Free, no signup.
+--intro
+<b>A standard breaker is sized at 125 percent of the continuous load plus 100 percent of the non-continuous load, then rounded up to the next standard rating.</b> A continuous load is one expected to run at its maximum for three hours or more. The 125 percent figure is the same rule as "load a breaker to only 80 percent", seen from the other side.
+The exception is a breaker and enclosure listed together for operation at 100 percent of rating. With one of those, the continuous load is taken at 100 percent. Such assemblies are common in large frame sizes and uncommon in small ones, and the listing has to say so; it is not a property of the breaker alone.
+--formula
+Minimum rating = (continuous load &times; 1.25) + non-continuous load
+Breaker = next standard ampere rating at or above the minimum
+--vars
+Continuous load :: Current expected to continue at its maximum for three hours or more, in amperes
+Non-continuous load :: Everything else on the circuit, in amperes
+Standard rating :: The standard ampere ratings listed in NEC 240.6(A): 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 110, 125, 150, 175, 200 and upward
+--example
+A feeder carries 52 A of continuous load and nothing else:
+52 &times; 1.25 = 65 A minimum. There is no 65 A standard rating, so the next one up is 70 A.
+Add 10 A of non-continuous load to the same feeder:
+(52 &times; 1.25) + 10 = 75 A minimum, and the next standard rating is 80 A.
+With a 100 percent rated assembly the first case would be 52 A, and the next standard rating is 60 A.
+--standard
+NEC 210.20(A) for branch circuits and 215.3 for feeders set the 125 percent requirement and the exception for assemblies listed at 100 percent. NEC 240.6(A) lists the standard ampere ratings. NEC 240.4(B) permits the next higher standard rating where the conductor ampacity falls between two ratings, for devices rated 800 A or less; above 800 A, 240.4(C) requires the conductor ampacity to be at least the device rating.
+--limits
+This sizes the breaker from the load. It does not size the conductor, and the breaker also has to protect the conductor at its ampacity. It does not cover motor circuits, where NEC Article 430 sets branch-circuit protection as a percentage of full-load current to let the motor start, or transformer protection under Article 450. It says nothing about interrupting rating, which depends on the available fault current, not the load.
+--mistakes
+Sizing the breaker to the load with no 125 percent factor on the continuous part. Applying the 125 percent factor twice, once to the load and again to the breaker. Assuming a breaker is 100 percent rated because of its frame size. Choosing the breaker and then forgetting to check that the conductor it protects has the ampacity. Using this method on a motor circuit.
+--related
+/guide-continuous-load-80-percent-rule.html :: The 80% Rule &amp; Continuous Loads
+/calculators/wire-size.html :: Wire Size Calculator
+/guide-fuse-vs-breaker.html :: Fuse vs. Circuit Breaker
+/guide-interrupting-rating-vs-sccr.html :: Interrupting Rating vs. SCCR
+/calculators/fault-current.html :: Available Fault Current Calculator
+/calculators/kw-to-amps.html :: kW to Amps Calculator
+
+===amps-to-kva|amps-to-kva|Amps to kVA Calculator|Amps to kVA Calculator (1-Phase and 3-Phase)|Convert amps to kVA for single-phase and three-phase systems. Apparent power is volts times amps, with no power factor term. Free, no signup.
+--intro
+<b>kVA is volts times amps divided by a thousand, with a square root of three added for three-phase.</b> There is no power factor in it. Apparent power is what the current and voltage amount to together, whether or not all of it does useful work, and it is what transformers, generators and UPS systems are rated in.
+The usual reason to run this conversion is a measured or nameplate current that has to be compared with a kVA rating: whether a 100 A load fits on a 75 kVA transformer, or how much of a generator a panel is using.
+--formula
+kVA = V &times; I / 1000  [single-phase]
+kVA = 1.732 &times; V &times; I / 1000  [three-phase]
+--vars
+V :: Voltage. Line-to-line for three-phase
+I :: Line current in amperes
+kVA :: Apparent power in kilovolt-amperes
+--example
+A three-phase panel draws 100 A per phase at 480 V:
+kVA = 1.732 &times; 480 &times; 100 / 1000 = 83.1 kVA
+That is more than a 75 kVA transformer is rated for, so the next standard three-phase size, 112.5 kVA, is the one that fits.
+A single-phase 240 V service drawing 200 A:
+kVA = 240 &times; 200 / 1000 = 48 kVA
+--standard
+The arithmetic is definitional. Transformer kVA ratings and the conditions they apply under are set by the IEEE C57 series, and the NEC sizes transformer protection from rated current under Article 450.
+--limits
+The three-phase form assumes a balanced load, with the same current in each phase. On an unbalanced system, use the highest phase current if the question is whether equipment is overloaded. The result is apparent power only. To get real power in kW, multiply by power factor.
+--mistakes
+Leaving out the square root of three on a three-phase system, which understates kVA by 42 percent. Using line-to-neutral voltage in the three-phase formula. Multiplying by power factor, which gives kW, not kVA. Comparing the result with a kW rating as though the two were the same unit.
+--related
+/calculators/kva-to-amps.html :: kVA to Amps Calculator
+/calculators/kva-to-kw.html :: kVA to kW Converter
+/calculators/transformer-sizing.html :: Transformer Sizing Calculator
+/guide-kw-vs-kva.html :: kW vs. kVA Explained
+/calculators/amps-to-kw.html :: Amps to kW Calculator
+
+===amps-to-watts|amps-to-watts|Amps to Watts Calculator|Amps to Watts Calculator (1-Phase, 3-Phase, DC)|Convert amps to watts for DC, single-phase and three-phase circuits, with power factor and the square root of three where they belong. Free, no signup.
+--intro
+<b>Watts are volts times amps on DC. On AC, multiply by power factor as well, and on three-phase by the square root of three.</b> Amps alone do not give watts. The voltage has to be known, which is why 10 A can be 1,200 W on a 120 V circuit and 2,400 W on a 240 V one.
+This is the conversion for a clamp-meter reading that has to become a power figure, or a nameplate current that has to be compared with a supply rated in watts.
+--formula
+W = V &times; I  [DC]
+W = V &times; I &times; PF  [single-phase AC]
+W = 1.732 &times; V &times; I &times; PF  [three-phase AC]
+--vars
+I :: Current in amperes. Line current for three-phase
+V :: Voltage. Line-to-line for three-phase
+PF :: Power factor, between 0 and 1. Unity for a resistive load
+W :: Real power in watts
+--example
+A resistive load drawing 12.5 A on a 120 V circuit:
+W = 120 &times; 12.5 &times; 1.0 = 1,500 W
+A three-phase motor load drawing 63.3 A at 480 V with a power factor of 0.95:
+W = 1.732 &times; 480 &times; 63.3 &times; 0.95 = 49,995 W, or about 50 kW
+Drop the power factor from the second case and the answer is 52.6 kVA. That figure is apparent power, and it overstates the real power by 5 percent.
+--standard
+The arithmetic is definitional. Where the result is used to load a circuit, NEC 210.19(A) and 210.20(A) require conductors and overcurrent devices to be sized at 125 percent of a continuous load.
+--limits
+This is real power at one operating point, at the power factor you enter. It does not know the power factor of your load; if you leave it at 1.0 for a motor or a drive, the answer is volt-amperes labelled as watts. The three-phase form assumes balanced phases.
+--mistakes
+Treating volts times amps as watts on an AC load with a power factor below one. Leaving out the square root of three on three-phase. Using a current measured on one phase of an unbalanced system as though it applied to all three. Quoting a wattage from amps without saying at what voltage.
+--related
+/calculators/watts-to-amps.html :: Watts to Amps Calculator
+/calculators/amps-to-kw.html :: Amps to kW Calculator
+/calculators/amps-to-kva.html :: Amps to kVA Calculator
+/calculators/ohms-law.html :: Ohm's Law Calculator
+/guide-kw-vs-kva.html :: kW vs. kVA Explained
+
+===ah-to-kwh|ah-to-kwh|Ah to kWh Calculator|Ah to kWh Calculator (Amp-Hours to kWh)|Convert battery amp-hours to kilowatt-hours and back at any nominal voltage, and see why Ah figures cannot be compared across voltages. Free, no signup.
+--intro
+<b>Kilowatt-hours are amp-hours times nominal voltage, divided by a thousand.</b> Amp-hours measure charge and kilowatt-hours measure energy, so there is no converting one to the other without the voltage. A 100 Ah battery is 1.2 kWh at 12 V and 4.8 kWh at 48 V.
+This is why cells and small batteries are quoted in amp-hours while storage systems are quoted in kWh or MWh. Energy is the figure that can be compared between systems at different voltages; amp-hours cannot.
+--formula
+kWh = Ah &times; V / 1000
+Ah = kWh &times; 1000 / V
+--vars
+Ah :: Rated capacity in amp-hours
+V :: Nominal voltage of the cell, module or string, in volts
+kWh :: Nameplate energy in kilowatt-hours
+--example
+A 100 Ah battery at 48 V nominal:
+kWh = 100 &times; 48 / 1000 = 4.8 kWh
+A single 280 Ah lithium iron phosphate cell at 3.2 V nominal:
+kWh = 280 &times; 3.2 / 1000 = 0.896 kWh
+Going the other way, 10 kWh at 48 V is 10 &times; 1000 / 48 = 208.3 Ah.
+--standard
+The conversion is definitional. How the amp-hour rating itself is established is not: it depends on the discharge rate, end voltage and temperature the manufacturer tested at, which for stationary lead-acid batteries follows practices such as IEEE 485 and for lithium-ion cells is stated on the cell data sheet.
+--limits
+The result is nameplate energy at nominal voltage. A battery's voltage falls as it discharges, so the energy actually delivered differs somewhat from this figure. It is also not usable energy: depth-of-discharge limits, conversion losses and capacity fade all reduce what a system can deliver, which is what the BESS sizing calculator accounts for.
+--mistakes
+Comparing amp-hour ratings of batteries at different voltages. Using charging voltage or full-charge voltage in place of nominal voltage. Treating nameplate kWh as usable kWh. Adding the amp-hours of cells wired in series, where the voltage adds and the amp-hours do not.
+--related
+/calculators/bess-sizing.html :: BESS Sizing Calculator
+/calculators/battery-runtime.html :: Battery Runtime Calculator
+/guide-bess-c-rate.html :: BESS C-Rate Explained
+/guide-bess-augmentation.html :: BESS Augmentation
+/battery-storage.html :: Battery Storage Systems
+
+===battery-runtime|battery-runtime|Battery Runtime Calculator|Battery Runtime Calculator (UPS &amp; Backup)|Estimate how long a battery will carry a load from its amp-hours, voltage, usable depth of discharge and inverter efficiency. Free, no signup.
+--intro
+<b>Runtime is usable battery energy divided by the load.</b> Usable energy is amp-hours times voltage, reduced by how deeply the battery may be discharged and by what the inverter loses on the way to the load. A 100 Ah, 48 V battery holds 4,800 Wh on the nameplate and delivers noticeably less than that to an AC load.
+The estimate is dependable when the discharge is slow, over several hours. It becomes optimistic as the discharge gets faster, and for a UPS that empties its battery in ten or fifteen minutes it should not be used at all. The calculator flags the discharge rate so you can tell which case you are in.
+--formula
+Usable energy (Wh) = Ah &times; V &times; depth of discharge &times; efficiency
+Runtime (h) = usable energy / load (W)
+--vars
+Ah :: Rated capacity of the battery in amp-hours
+V :: Nominal battery voltage
+Depth of discharge :: The fraction of capacity that may be used, as a percentage
+Efficiency :: Inverter and wiring efficiency between battery and load, as a percentage. Use 100 for a DC load fed directly
+Load :: Power drawn by the load, in watts
+--example
+A 100 Ah, 48 V battery, discharged to 80 percent depth through a 90 percent efficient inverter, carrying 1,000 W:
+Usable energy = 100 &times; 48 &times; 0.80 &times; 0.90 = 3,456 Wh
+Runtime = 3,456 / 1,000 = 3.46 hours, or about 3 h 27 min
+The load is 1,000 W on a 4,800 Wh battery, a little over 0.2C. Raise the load to 4,800 W and the arithmetic says 43 minutes, but a lead-acid battery discharged at 1C delivers far less than its rated amp-hours, so the real figure would be shorter.
+--standard
+For stationary lead-acid batteries, IEEE 485 is the recommended practice for sizing against a duty cycle, and it works from the manufacturer's discharge tables with temperature, aging and design margins applied. IEEE 1184 covers battery selection for UPS systems. A calculation of this kind is the first estimate that comes before either.
+--limits
+Rated amp-hours apply at one discharge rate, commonly the 8, 10 or 20 hour rate for lead-acid. Discharged faster, a lead-acid battery gives up less charge, which this method ignores. It also leaves out temperature, the capacity lost with age, and the end-of-discharge voltage the equipment needs. UPS batteries are specified in watts per cell at a given runtime for exactly this reason, and a UPS runtime should come from those tables.
+--mistakes
+Using nameplate energy with no allowance for depth of discharge or inverter losses. Applying a slow-rate amp-hour rating to a fast discharge. Sizing for a new battery and forgetting it has to meet the runtime at end of life. Confusing the load in watts with the UPS rating in VA.
+--related
+/guide-ups-sizing.html :: How to Size a UPS
+/calculators/ah-to-kwh.html :: Ah to kWh Calculator
+/calculators/bess-sizing.html :: BESS Sizing Calculator
+/guide-bess-c-rate.html :: BESS C-Rate Explained
+/guide-ups-topologies.html :: UPS Topologies
+/calculators/generator-runtime.html :: Generator Runtime Calculator
+
+===pue|pue|PUE Calculator|PUE Calculator (Power Usage Effectiveness)|Calculate data center PUE and DCiE from total facility power and IT power, with the overhead in kW and what it costs over a year. Free, no signup.
+--intro
+<b>PUE is total facility power divided by IT equipment power.</b> A PUE of 1.5 means that for every kilowatt delivered to servers, storage and network equipment, another half kilowatt goes to cooling, power conversion losses, lighting and everything else in the building. A PUE of 1.0 would mean no overhead at all, which no real facility reaches.
+The number is only as good as the two measurements behind it. Both have to cover the same period, the total has to be taken at the utility meter or its equivalent, and the IT figure should be taken as close to the equipment as the metering allows.
+--formula
+PUE = total facility power / IT equipment power
+DCiE = 1 / PUE, as a percentage
+Overhead = total facility power &minus; IT equipment power
+--vars
+Total facility power :: Everything the data center draws, including cooling, UPS and distribution losses and lighting, in kW
+IT equipment power :: Power delivered to servers, storage and network equipment, in kW
+DCiE :: Data center infrastructure efficiency, the reciprocal of PUE
+--example
+A facility draws 1,500 kW in total and delivers 1,000 kW to IT equipment:
+PUE = 1,500 / 1,000 = 1.50, and DCiE = 66.7%
+Overhead = 1,500 &minus; 1,000 = 500 kW
+Held for a year, that overhead is 500 &times; 8,760 = 4,380,000 kWh. At $0.08 per kWh it costs about $350,400. Bringing the same IT load to a PUE of 1.3 would cut the overhead to 300 kW and save 1,752,000 kWh a year.
+--standard
+PUE was introduced by The Green Grid and is standardized as ISO/IEC 30134-2, which defines the measurement points and requires the figure to be based on energy over a full year. A PUE taken from instantaneous power, as this calculator does, is a snapshot and should be labelled as one.
+--limits
+A snapshot PUE moves with the weather and with IT load, so a single reading can be well away from the annual figure. PUE also says nothing about how efficiently the IT equipment uses the power it receives, and it can improve simply because IT load went up while overhead stayed the same. It does not account for water use or for the carbon intensity of the supply.
+--mistakes
+Comparing a design PUE at full load with a measured PUE at partial load. Measuring IT power at the UPS output and so counting distribution losses as IT load. Quoting the best winter reading as the facility's PUE. Comparing PUE between sites in different climates as though it measured the quality of the design alone.
+--related
+/guide-pue-explained.html :: PUE Explained
+/guide-liquid-vs-air-cooling.html :: Liquid vs. Air Cooling
+/calculators/btu-to-tons.html :: BTU to Tons Converter
+/calculators/electricity-cost.html :: Electricity Cost Calculator
+/guide-rack-power-density.html :: Rack Power Density
+/data-centers/cooling.html :: Data Center Cooling Equipment
+
+===electricity-cost|electricity-cost|Electricity Cost Calculator|Electricity Cost Calculator (kW to Annual Cost)|Work out what a load costs to run: kW, hours per day and the energy rate give kWh and cost per day, month and year. Free, no signup.
+--intro
+<b>Energy cost is power times time times the rate: kW &times; hours &times; price per kWh.</b> A 10 kW load running around the clock uses 240 kWh a day and 87,600 kWh a year. At $0.12 per kWh that is $10,512 a year.
+For a load that runs continuously, a useful shortcut follows from the 8,760 hours in a year: each kilowatt costs 8,760 times the rate per year, which at $0.12 is about $1,051 per kW.
+--formula
+Energy (kWh) = load (kW) &times; hours of operation
+Cost = energy (kWh) &times; rate (per kWh)
+--vars
+Load :: Average real power drawn while running, in kW
+Hours per day :: Hours of operation in a day, up to 24
+Rate :: Energy charge per kWh, from the tariff or the bill
+--example
+A 10 kW load running 24 hours a day at $0.12 per kWh:
+Daily: 10 &times; 24 = 240 kWh, costing $28.80
+Yearly: 240 &times; 365 = 87,600 kWh, costing $10,512
+Monthly, taken as a twelfth of the year: 7,300 kWh, costing $876
+The same load running 10 hours a day would use 36,500 kWh a year and cost $4,380.
+--standard
+No engineering standard governs this arithmetic. The rate, and what else appears on the bill, is set by the utility's tariff, and for a commercial or industrial account the tariff is where most of the difficulty lies.
+--limits
+This is the energy charge only. Commercial and industrial tariffs usually add a demand charge on the highest kW drawn in the billing period, which for a large steady load can rival the energy charge, and many add time-of-use rates, power factor penalties, fixed charges and taxes. It also assumes the load draws the same power for every hour it runs; use an average, not the nameplate, for equipment that cycles.
+--mistakes
+Using nameplate power for equipment that rarely runs at nameplate. Multiplying by a blended rate taken from one bill and applying it to a different load shape. Ignoring demand charges on a commercial account. Entering kVA where kW is needed, which overstates the energy by the power factor.
+--related
+/calculators/pue.html :: PUE Calculator
+/calculators/project-finance.html :: Project Finance Calculators
+/calculators/amps-to-kw.html :: Amps to kW Calculator
+/calculators/power-factor.html :: Power Factor Correction Calculator
+/guide-pue-explained.html :: PUE Explained
+
+===wire-resistance|wire-resistance|Wire Resistance Calculator|Wire Resistance Calculator (Copper &amp; Aluminum)|Find the resistance of a copper or aluminum conductor from its size and length, one way or out and back, in ohms and ohms per 1000 ft. Free, no signup.
+--intro
+<b>A conductor's resistance is its length divided by its cross-sectional area, times a constant for the metal.</b> Double the length and resistance doubles. Go up three AWG sizes and the area doubles, so resistance halves. Aluminum has about 1.6 times the resistance of copper at the same size.
+Resistance is what voltage drop and conductor heating come from, so this is the figure underneath both. For a two-wire circuit the current flows out and back, and the resistance that matters is that of both conductors, twice the one-way figure.
+--formula
+R = K &times; L / A
+--vars
+R :: Resistance in ohms
+K :: 12.9 for copper, 21.2 for aluminum, in ohm-circular mils per foot at about 75&deg;C
+L :: Length in feet. One way, or doubled for a two-wire circuit
+A :: Conductor area in circular mils. 12 AWG is 6,530; 4/0 AWG is 211,600
+--example
+100 ft of 12 AWG copper, one way:
+R = 12.9 &times; 100 / 6,530 = 0.1975 &Omega;
+That is 1.975 &Omega; per 1000 ft, in line with the figures NEC Chapter 9, Table 8 gives for 12 AWG copper.
+For a two-wire circuit the current passes through 200 ft of conductor, so the resistance is 0.3951 &Omega;. At 16 A that drops 16 &times; 0.3951 = 6.3 V, which on a 120 V circuit is 5.3 percent, well past the 3 percent usually recommended for a branch circuit.
+--standard
+NEC Chapter 9, Table 8 gives DC resistance for conductors at 75&deg;C, and Table 9 gives AC resistance and reactance for conductors in conduit. Conductor areas in circular mils follow the AWG definition in ASTM B258. The K-factor method used here is an approximation to Table 8.
+--limits
+This is DC resistance at one temperature. Resistance rises with temperature, by roughly 0.4 percent per degree Celsius for copper and aluminum, so a conductor running cooler than 75&deg;C has less. On AC, skin effect and the conduit material raise the effective resistance of large conductors above the DC figure, and reactance adds to the impedance; for sizes above about 4/0, use NEC Table 9. It does not include the resistance of terminations and splices.
+--mistakes
+Using the one-way length for a two-wire circuit. Using copper figures for aluminum conductors. Expecting resistance to halve with each AWG size, when it takes three sizes. Ignoring temperature when comparing a calculated figure with a measurement taken on a cold cable.
+--related
+/calculators/voltage-drop.html :: Voltage Drop Calculator
+/calculators/awg-to-mm2.html :: AWG to mm&sup2; Converter
+/calculators/wire-size.html :: Wire Size Calculator
+/calculators/ohms-law.html :: Ohm's Law Calculator
+/guide-cable-ampacity-derating.html :: Cable Ampacity Derating
+/calculators/ampacity.html :: Cable Ampacity &amp; Conduit Fill
+
+===dc-ac-ratio|dc-ac-ratio|DC/AC Ratio Calculator|DC/AC Ratio Calculator (Inverter Loading Ratio)|Calculate a solar plant's DC/AC ratio from array DC capacity and inverter AC rating, and see how much the inverter would clip at full output. Free, no signup.
+--intro
+<b>The DC/AC ratio is the array's DC nameplate capacity divided by the inverter's AC rating.</b> It is also called the inverter loading ratio. A 130 kW array on a 100 kW inverter has a ratio of 1.30.
+A ratio above 1.0 is deliberate. An array reaches its nameplate output only under standard test conditions, which it rarely sees in the field: modules run hot, the sun is seldom square to them, and wiring and soiling take their share. Oversizing the array fills more of the inverter's capacity for more hours of the day. The price is clipping, where the inverter caps its output during the hours the array could produce more.
+--formula
+DC/AC ratio = array DC capacity (kWp) / inverter AC rating (kW)
+Array DC capacity = number of modules &times; module rating (W) / 1000
+--vars
+Array DC capacity :: Sum of module nameplate ratings at standard test conditions, in kWp
+Inverter AC rating :: Rated continuous AC output of the inverter, in kW
+--example
+A string inverter rated 100 kW AC is fed by 240 modules of 540 W each:
+Array DC capacity = 240 &times; 540 / 1000 = 129.6 kWp
+DC/AC ratio = 129.6 / 100 = 1.30
+If the array ever did reach nameplate, it would offer the inverter 30 percent more than it can pass, and the excess would be clipped. In practice that happens on a limited number of cool, clear hours, which is why a ratio in the region of 1.2 to 1.3 is a common design choice.
+--standard
+The ratio itself is a design figure, not a code limit. The limits that bound it are electrical: NEC 690.7 sets the maximum DC voltage, NEC 690.8 the circuit currents, and the inverter data sheet gives the maximum DC power and short-circuit current its input will accept. An array can satisfy the ratio a developer wants and still exceed one of those.
+--limits
+The ratio does not tell you how much energy is clipped over a year. That depends on the site's irradiance, temperature, tilt and tracking, and it takes an hourly production model to estimate. It is also unaffected by module degradation, which lowers the effective ratio as the plant ages, and it says nothing about whether the string voltage and current fit the inverter's input window.
+--mistakes
+Dividing AC by DC and reporting the inverse. Using the interconnection limit in place of the inverter rating without saying so. Treating the clipping percentage at nameplate as the annual energy loss, which is far smaller. Choosing a ratio from a rule of thumb for a different climate or a different mounting system.
+--related
+/guide-inverter-clipping-ratio.html :: Inverter Clipping &amp; DC:AC Ratio
+/calculators/solar-string.html :: Solar String Sizing Calculator
+/renewables/solar-inverters.html :: Solar Inverters
+/renewables/dc-collection.html :: DC Collection
+/guide-grid-forming-vs-grid-following.html :: Grid-Forming vs. Grid-Following Inverters
+
+# ---- Nov 11, 2026: mechanical, cooling and motor calculators ----
+
+===airflow-cfm|airflow-cfm|Airflow (CFM) Calculator|Airflow CFM Calculator (Heat Load to CFM)|Find the airflow needed to remove a heat load: kW and air temperature rise to CFM, with CFM per kW for server and rack cooling. Free, no signup.
+--intro
+<b>The airflow needed to carry away a heat load is the load in BTU per hour divided by 1.08 times the air temperature rise in degrees Fahrenheit.</b> For 10 kW of IT equipment and a 20&deg;F rise that is about 1,580 CFM, or 158 CFM per kW. Halve the temperature rise and the airflow doubles.
+This is the sum behind every question about whether a rack, a row or a room has enough air. Almost all the electrical power going into IT equipment leaves as heat, so the heat load in kW is the electrical load in kW.
+--viz
+cooling
+--formula
+CFM = BTU/h / (1.08 &times; &Delta;T)
+BTU/h = kW &times; 3,412
+--vars
+CFM :: Airflow in cubic feet per minute
+&Delta;T :: Temperature rise of the air across the equipment, in &deg;F
+1.08 :: A constant for standard air: density 0.075 lb/ft&sup3; &times; specific heat 0.24 BTU/lb&middot;&deg;F &times; 60 minutes
+kW :: Sensible heat load, which for IT equipment is its electrical input
+--example
+A rack drawing 10 kW, with air entering at 75&deg;F and leaving at 95&deg;F:
+BTU/h = 10 &times; 3,412 = 34,121
+CFM = 34,121 / (1.08 &times; 20) = 1,580 CFM, or 158 CFM per kW
+The same rack with a 30&deg;F rise needs 1,053 CFM. Wider temperature rise is the reason high-density equipment can be cooled with less air than its power suggests, and it is also why hot-aisle temperatures have climbed.
+--standard
+The equation is the sensible heat equation from the ASHRAE Handbook of Fundamentals. Inlet temperature limits for IT equipment come from the ASHRAE TC 9.9 thermal guidelines, which recommend 64 to 81&deg;F (18 to 27&deg;C) at the equipment inlet for the common air-cooled classes.
+--limits
+The 1.08 constant is for standard air at sea level. Air is thinner at altitude, so the same heat needs more volume; at 5,000 ft the constant is closer to 0.90. The calculation covers sensible heat only, and it gives the airflow the equipment needs, not what the cooling units must deliver. Bypass and recirculation mean the room supply has to be higher than the sum of the equipment airflows unless containment is good.
+--mistakes
+Using the room temperature difference in place of the rise across the equipment. Forgetting altitude. Assuming the cooling units only need to supply the equipment airflow, with no allowance for air that bypasses the racks. Treating a nameplate power figure as the heat load, when measured draw is usually well below it.
+--related
+/calculators/btu-to-tons.html :: BTU to Tons Converter
+/calculators/chilled-water-flow.html :: Chilled Water Flow Calculator
+/guide-hot-aisle-vs-cold-aisle-containment.html :: Hot Aisle vs. Cold Aisle Containment
+/guide-liquid-vs-air-cooling.html :: Liquid vs. Air Cooling
+/guide-rack-power-density.html :: Rack Power Density
+/data-centers/cooling.html :: Data Center Cooling Equipment
+
+===chilled-water-flow|chilled-water-flow|Chilled Water Flow Calculator|Chilled Water Flow Calculator (GPM per Ton)|Calculate chilled water flow in GPM from cooling load in tons or kW and the supply-return temperature difference. Free, no signup.
+--intro
+<b>Chilled water flow in GPM is the load in BTU per hour divided by 500 times the temperature difference in degrees Fahrenheit.</b> With the load in tons it shortens to GPM = tons &times; 24 / &Delta;T. At the traditional 10&deg;F difference that is 2.4 GPM per ton; at 12&deg;F it is 2.0 and at 16&deg;F it is 1.5.
+The temperature difference is the lever. A wider one moves the same heat with less water, which means smaller pipes and less pump energy. It is why chilled water systems for data centers are designed with wider differences than the old comfort-cooling rule of thumb.
+--viz
+chiller
+--formula
+GPM = BTU/h / (500 &times; &Delta;T)
+GPM = tons &times; 24 / &Delta;T
+--vars
+GPM :: Water flow in US gallons per minute
+&Delta;T :: Difference between return and supply water temperature, in &deg;F
+500 :: A constant for water: 8.33 lb/gal &times; 60 minutes &times; specific heat 1.0 BTU/lb&middot;&deg;F
+tons :: Cooling load in tons of refrigeration, 12,000 BTU/h each
+--example
+A 100 ton load with water supplied at 44&deg;F and returning at 54&deg;F:
+GPM = 100 &times; 24 / 10 = 240 GPM
+Widen the difference to 16&deg;F and the same load needs 150 GPM. Because pump power falls much faster than flow, the saving in pumping energy is larger than the 38 percent cut in flow suggests.
+A 500 kW IT load is 500 &times; 3,412 = 1,706,000 BTU/h, or 142 tons. At a 12&deg;F difference it needs 284 GPM.
+--standard
+The equation is the standard hydronic heat-transfer relation from the ASHRAE Handbook. Chiller ratings are certified under AHRI Standard 550/590, which is where the traditional 44&deg;F leaving water and 2.4 GPM per ton rating condition comes from.
+--limits
+The constant of 500 is for plain water at typical chilled water temperatures. A glycol mix has a lower specific heat and a higher density, so it needs more flow for the same load: roughly 5 to 15 percent more depending on the type and concentration. The result is the flow at the design load. It does not tell you the temperature difference the coils will actually achieve, and a system that returns water colder than designed needs more flow than this.
+--mistakes
+Using 2.4 GPM per ton on a system designed for a wider temperature difference. Applying the water constant to a glycol system. Sizing the pump for design flow and ignoring that low return temperature will ask for more. Mixing up tons of cooling at the coil with the electrical kW of the IT load without converting.
+--related
+/calculators/pump-power.html :: Pump Power Calculator
+/calculators/pipe-velocity.html :: Pipe Velocity Calculator
+/calculators/btu-to-tons.html :: BTU to Tons Converter
+/guide-crac-vs-crah.html :: CRAC vs. CRAH
+/calculators/airflow-cfm.html :: Airflow (CFM) Calculator
+/data-centers/cooling.html :: Data Center Cooling Equipment
+
+===pump-power|pump-power|Pump Power Calculator|Pump Power Calculator (GPM and Head to HP)|Calculate pump brake horsepower and motor kW from flow in GPM, head in feet and efficiency, and pick the next standard motor size. Free, no signup.
+--intro
+<b>Pump power is flow times head divided by 3,960, divided again by the pump's efficiency.</b> Flow in GPM times head in feet over 3,960 gives the power delivered to the water. Dividing by pump efficiency gives the brake horsepower the shaft has to supply, and dividing that by motor efficiency gives the electrical input.
+Head is the pressure the pump adds, expressed as the height of a column of the liquid. It is not the height the water is lifted, unless the system is open. In a closed chilled water loop the static heights cancel and the head is all friction: pipe, fittings, valves, the coil and the chiller.
+--viz
+pump
+--formula
+Water hp = GPM &times; head (ft) &times; SG / 3,960
+Brake hp = water hp / pump efficiency
+Input kW = brake hp &times; 0.7457 / motor efficiency
+--vars
+GPM :: Flow in US gallons per minute
+Head :: Total dynamic head in feet of liquid
+SG :: Specific gravity. 1.0 for water
+Pump efficiency :: From the pump curve at the duty point, as a fraction
+Motor efficiency :: From the motor nameplate, as a fraction
+--example
+A chilled water pump delivering 500 GPM against 80 ft of head, with a pump efficiency of 75 percent and a motor efficiency of 93 percent:
+Water hp = 500 &times; 80 &times; 1.0 / 3,960 = 10.1 hp
+Brake hp = 10.1 / 0.75 = 13.5 hp
+Input kW = 13.5 &times; 0.7457 / 0.93 = 10.8 kW
+The next standard motor at or above 13.5 hp is 15 hp. Running all year, 10.8 kW is about 94,600 kWh.
+--standard
+The equations are the standard pump relations published by the Hydraulic Institute and in the ASHRAE Handbook. Motor efficiency classes and standard horsepower ratings come from NEMA MG 1. ASHRAE Standard 90.1 limits pumping power in building hydronic systems and requires variable flow above certain sizes.
+--limits
+This is one operating point. A pump runs wherever its curve crosses the system curve, and the motor has to be large enough for every point the pump may reach, including runout at low head. The efficiency you enter must be the one at the duty point; away from the best efficiency point it falls quickly. The calculation does not check net positive suction head, which decides whether the pump cavitates.
+--mistakes
+Using the height of the building as the head on a closed loop. Using the pump's peak efficiency for a duty point far from it. Selecting a motor for the design point with nothing in hand for runout. Forgetting specific gravity on a glycol system. Adding the heads of two pumps in parallel, where it is the flows that add.
+--related
+/calculators/affinity-laws.html :: Pump &amp; Fan Affinity Laws Calculator
+/calculators/chilled-water-flow.html :: Chilled Water Flow Calculator
+/calculators/pipe-velocity.html :: Pipe Velocity Calculator
+/guide-pump-and-fan-affinity-laws.html :: Pump and Fan Affinity Laws
+/calculators/hp-to-kw.html :: Motor HP to kW Calculator
+/guide-vfd-vs-soft-starter.html :: VFD vs. Soft Starter
+
+===pipe-velocity|pipe-velocity|Pipe Velocity Calculator|Pipe Velocity Calculator (GPM to ft/s)|Calculate water velocity in a pipe from flow in GPM and inside diameter, with a check against common hydronic design limits. Free, no signup.
+--intro
+<b>Water velocity in feet per second is 0.4085 times the flow in GPM, divided by the square of the pipe's inside diameter in inches.</b> Because diameter is squared, one pipe size makes a large difference: the same 240 GPM runs at 6.0 ft/s in 4 inch pipe and 10.4 ft/s in 3 inch.
+Velocity is the quick test of whether a pipe is the right size. Too fast, and the pipe is noisy, erodes at elbows and tees, and loses a great deal of pressure. Too slow, and air and dirt drop out of the flow instead of being carried to where they can be removed.
+--viz
+pump
+--formula
+v = 0.4085 &times; GPM / d&sup2;
+--vars
+v :: Velocity in feet per second
+GPM :: Flow in US gallons per minute
+d :: Inside diameter of the pipe in inches, which is not the nominal size
+--example
+240 GPM in 4 inch Schedule 40 steel pipe, which has an inside diameter of 4.026 in:
+v = 0.4085 &times; 240 / 4.026&sup2; = 98.04 / 16.21 = 6.05 ft/s
+The same flow in 3 inch Schedule 40, inside diameter 3.068 in, runs at 10.4 ft/s, which is on the fast side for a closed hydronic system.
+--standard
+The equation is continuity: flow equals velocity times area. Pipe dimensions come from ASME B36.10 for steel pipe. The ASHRAE Handbook gives the customary hydronic sizing limits, commonly quoted as about 4 ft/s in pipe of 2 inches and under and a friction loss of about 4 ft of head per 100 ft in larger pipe.
+--limits
+Velocity alone does not give pressure drop, which also depends on pipe roughness, fluid viscosity and every fitting in the run. The limits quoted are design conventions for closed hydronic systems and are not requirements; domestic water, condenser water and process piping follow their own. The inside diameter changes with schedule and material, so the same nominal size gives different velocities in steel, copper and plastic.
+--mistakes
+Entering the nominal pipe size as the diameter. Using Schedule 40 dimensions for Schedule 80 or for copper tube. Judging a pipe on velocity and never checking the pressure drop. Sizing every pipe to the same velocity regardless of diameter, which makes small pipes noisy and large ones needlessly big.
+--related
+/calculators/chilled-water-flow.html :: Chilled Water Flow Calculator
+/calculators/pump-power.html :: Pump Power Calculator
+/calculators/affinity-laws.html :: Pump &amp; Fan Affinity Laws Calculator
+/guide-crac-vs-crah.html :: CRAC vs. CRAH
+/data-centers/cooling.html :: Data Center Cooling Equipment
+
+===affinity-laws|affinity-laws|Pump &amp; Fan Affinity Laws Calculator|Affinity Laws Calculator (Pumps and Fans)|Apply the pump and fan affinity laws: enter two speeds and see how flow, head and power change, including the cube-law energy saving. Free, no signup.
+--intro
+<b>The affinity laws say that flow changes in proportion to speed, head or pressure with the square of speed, and power with the cube.</b> Slow a pump or a fan to 80 percent of its speed and it delivers 80 percent of the flow at 64 percent of the pressure, for 51 percent of the power.
+That cube is the whole case for variable speed drives on pumps and fans. A cooling system rarely needs full flow, and trimming the speed by a fifth nearly halves the energy. Throttling a valve or closing a damper to get the same flow wastes most of that saving as pressure drop.
+--viz
+pump
+--formula
+Q&#8322; / Q&#8321; = N&#8322; / N&#8321;
+H&#8322; / H&#8321; = (N&#8322; / N&#8321;)&sup2;
+P&#8322; / P&#8321; = (N&#8322; / N&#8321;)&sup3;
+--vars
+N :: Rotational speed, in rpm or as a percentage
+Q :: Flow, in GPM for a pump or CFM for a fan
+H :: Head for a pump, or static pressure for a fan
+P :: Shaft power
+--example
+A pump delivers 500 GPM at 80 ft of head and draws 15 hp at 1,750 rpm. A drive slows it to 1,400 rpm, which is 80 percent speed:
+Flow = 500 &times; 0.80 = 400 GPM
+Head = 80 &times; 0.80&sup2; = 51.2 ft
+Power = 15 &times; 0.80&sup3; = 7.68 hp
+The pump moves four fifths of the water for about half the power. At 50 percent speed the power would be one eighth.
+--standard
+The affinity laws are derived from dimensional analysis of centrifugal machines and appear in the Hydraulic Institute standards for pumps and in AMCA publications for fans, where they are called the fan laws. ASHRAE Standard 90.1 relies on them in requiring variable speed on larger pumps and fans.
+--limits
+The laws hold for the same machine in a system whose resistance is all friction, so that the operating point slides along a curve through the origin. A system with static head, such as a pump lifting water to a tower or a fan working against a fixed pressure setpoint, does not follow them: flow falls faster than speed, and the power saving is smaller than the cube predicts. They also assume efficiency stays constant, which is reasonable over a moderate speed range and not at very low speeds. Drive and motor losses are extra.
+--mistakes
+Applying the cube law to a system with significant static head or a fixed pressure setpoint. Forgetting that the same laws make a small overspeed expensive: 110 percent speed takes 133 percent power. Using them to compare two different pumps. Expecting the electrical saving to match the shaft saving exactly, with no allowance for drive losses.
+--related
+/guide-pump-and-fan-affinity-laws.html :: Pump and Fan Affinity Laws
+/calculators/pump-power.html :: Pump Power Calculator
+/guide-vfd-vs-soft-starter.html :: VFD vs. Soft Starter
+/calculators/airflow-cfm.html :: Airflow (CFM) Calculator
+/calculators/motor-speed.html :: Motor Speed &amp; Slip Calculator
+/calculators/electricity-cost.html :: Electricity Cost Calculator
+
+===motor-torque|motor-torque|Motor Torque Calculator|Motor Torque Calculator (HP and RPM to Torque)|Calculate motor torque in lb-ft and N&middot;m from horsepower or kW and speed in rpm, with the 5252 constant explained. Free, no signup.
+--intro
+<b>Torque in pound-feet is 5,252 times horsepower divided by rpm.</b> In SI units, torque in newton-metres is 9,549 times kilowatts divided by rpm. For a given power, a slower shaft carries more torque, which is why a six-pole motor is physically larger than a two-pole motor of the same rating.
+The 5,252 is not a property of motors. It comes from the definition of horsepower, 33,000 foot-pounds per minute, divided by 2&pi; to turn revolutions into radians.
+--viz
+motor
+--formula
+T (lb-ft) = 5,252 &times; hp / rpm
+T (N&middot;m) = 9,549 &times; kW / rpm
+--vars
+T :: Torque at the shaft
+hp, kW :: Shaft output power
+rpm :: Shaft speed in revolutions per minute
+--example
+A 50 hp motor running at its full-load speed of 1,775 rpm:
+T = 5,252 &times; 50 / 1,775 = 147.9 lb-ft, which is 200.6 N&middot;m
+A 50 hp motor with six poles runs near 1,180 rpm and delivers 222.5 lb-ft: the same power, half again the torque.
+--standard
+The relation is definitional. The torque figures that matter for applying a motor, locked-rotor, pull-up and breakdown torque as percentages of full-load torque, are set for each design letter by NEMA MG 1, and by IEC 60034-12 for IEC motors.
+--limits
+This is full-load running torque at the speed you enter. It says nothing about the torque available during starting, which follows its own curve from locked-rotor torque at standstill, through a dip, up to breakdown torque near full speed. On a variable speed drive, a motor can generally deliver rated torque up to base speed and less above it, where it runs at constant power.
+--mistakes
+Using synchronous speed in place of full-load speed. Confusing full-load torque with starting torque when checking whether a load will break away. Mixing horsepower with the SI constant or kilowatts with 5,252. Forgetting that a gearbox multiplies torque by its ratio and divides speed by the same figure.
+--related
+/calculators/motor-speed.html :: Motor Speed &amp; Slip Calculator
+/calculators/hp-to-kw.html :: Motor HP to kW Calculator
+/calculators/motor-start.html :: Motor Starting Voltage Dip Calculator
+/guide-nec-430-250-motor-fla.html :: NEC 430.250 Motor Full-Load Current
+/guide-vfd-vs-soft-starter.html :: VFD vs. Soft Starter
+
+===motor-speed|motor-speed|Motor Speed &amp; Slip Calculator|Motor Speed Calculator (Synchronous RPM &amp; Slip)|Calculate an AC motor's synchronous speed from frequency and poles, and its slip from the nameplate full-load rpm. Free, no signup.
+--intro
+<b>Synchronous speed in rpm is 120 times the supply frequency divided by the number of poles.</b> At 60 Hz that gives 3,600 rpm for two poles, 1,800 for four, 1,200 for six and 900 for eight. At 50 Hz the same motors run at 3,000, 1,500, 1,000 and 750.
+An induction motor never quite reaches that speed. The rotor has to turn slower than the rotating field for current to be induced in it, and the shortfall is called slip. A four-pole motor with a nameplate speed of 1,750 rpm is slipping by 50 rpm, or 2.8 percent, at full load.
+--viz
+motor
+--formula
+N&#8347; = 120 &times; f / P
+Slip (%) = (N&#8347; &minus; N) / N&#8347; &times; 100
+--vars
+N&#8347; :: Synchronous speed in rpm
+f :: Supply frequency in hertz
+P :: Number of poles, always an even number
+N :: Actual rotor speed in rpm, from the nameplate at full load
+--example
+A four-pole motor on a 60 Hz supply:
+N&#8347; = 120 &times; 60 / 4 = 1,800 rpm
+With a nameplate full-load speed of 1,750 rpm:
+Slip = (1,800 &minus; 1,750) / 1,800 &times; 100 = 2.78%
+On a variable speed drive set to 48 Hz, the same motor's synchronous speed is 1,440 rpm.
+--standard
+The relation follows from how a rotating magnetic field is produced and is not set by a standard. Nameplate speed, frequency and the tolerances on slip are covered by NEMA MG 1 and IEC 60034-1.
+--limits
+Slip is not a fixed property of a motor. It is close to zero at no load and grows roughly in proportion to torque up to full load, so the nameplate figure applies only at rated load, voltage and frequency. Synchronous motors and permanent-magnet motors run at synchronous speed with no slip at all. The pole count is fixed by the winding and cannot be read off the frame.
+--mistakes
+Expecting an induction motor to run at exactly 1,800 or 3,600 rpm. Entering the number of pole pairs where the formula wants poles. Using the full-load slip to estimate speed at light load. Assuming a motor moved from 60 Hz to 50 Hz simply runs slower, with no effect on its voltage requirement or cooling.
+--related
+/calculators/motor-torque.html :: Motor Torque Calculator
+/calculators/affinity-laws.html :: Pump &amp; Fan Affinity Laws Calculator
+/guide-vfd-vs-soft-starter.html :: VFD vs. Soft Starter
+/calculators/hp-to-kw.html :: Motor HP to kW Calculator
+/guide-nec-430-250-motor-fla.html :: NEC 430.250 Motor Full-Load Current
+
+===voltage-unbalance|voltage-unbalance|Voltage Unbalance Calculator|Voltage Unbalance Calculator (NEMA Method)|Calculate three-phase voltage unbalance from three line-to-line readings by the NEMA method, with the effect on motor heating. Free, no signup.
+--intro
+<b>Voltage unbalance, by the NEMA definition, is the largest difference between any one line-to-line voltage and the average of the three, divided by that average.</b> Readings of 460, 467 and 450 V average 459 V; the furthest from the average is 450 V, 9 V away, so the unbalance is 1.96 percent.
+A small unbalance in voltage produces a much larger unbalance in motor current, commonly six to ten times as large in percentage terms, and the extra current turns into heat in the windings. This is why a figure that looks trivial is taken seriously.
+--viz
+motor
+--formula
+Unbalance (%) = maximum deviation from average / average &times; 100
+--vars
+Average :: The mean of the three line-to-line voltages
+Maximum deviation :: The largest difference between any one reading and that average
+--example
+Line-to-line readings of 460 V, 467 V and 450 V:
+Average = (460 + 467 + 450) / 3 = 459 V
+Deviations are 1 V, 8 V and 9 V, so the maximum is 9 V
+Unbalance = 9 / 459 &times; 100 = 1.96%
+A common rule of thumb puts the added winding temperature rise at about twice the square of the percentage unbalance: 2 &times; 1.96&sup2; is roughly 8 percent more temperature rise at full load.
+--standard
+NEMA MG 1 defines this method and states that motors are designed to operate at rated load with up to 1 percent voltage unbalance. Above that it gives a derating curve, and it does not recommend operation above 5 percent. ANSI C84.1 recommends that utility systems be designed to limit unbalance to 3 percent at no load. IEC standards define unbalance differently, from the ratio of negative to positive sequence voltage, and the two methods give similar but not identical figures.
+--limits
+The NEMA method uses magnitudes only and ignores phase angle, so it is an approximation to the true sequence-component unbalance. It is taken from line-to-line voltages; using line-to-neutral readings gives a different and usually larger number. Readings should be taken at the motor terminals with the motor running, because unbalance caused by a poor connection only appears under load. The temperature-rise rule is an estimate, and the derating a specific motor needs comes from the NEMA curve or its manufacturer.
+--mistakes
+Dividing the spread between highest and lowest reading by the average, which overstates the result. Using line-to-neutral voltages. Measuring at the switchboard and not at the motor. Chasing an unbalance in the supply when the cause is a single-phase load, a blown capacitor fuse or a high-resistance connection downstream.
+--related
+/calculators/three-phase-power.html :: Three-Phase Power Calculator
+/calculators/voltage-drop.html :: Voltage Drop Calculator
+/guide-harmonics-ieee-519.html :: Harmonics &amp; IEEE 519 Limits
+/calculators/motor-start.html :: Motor Starting Voltage Dip Calculator
+/guide-delta-vs-wye.html :: Delta vs. Wye

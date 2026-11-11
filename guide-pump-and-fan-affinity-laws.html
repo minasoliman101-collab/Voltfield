@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pump and Fan Affinity Laws Explained | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-pump-and-fan-affinity-laws.html">
+<meta property="og:url" content="https://voltfield.org/guide-pump-and-fan-affinity-laws.html">
+<meta name="description" content="The pump and fan affinity laws explained: flow varies with speed, head with its square and power with its cube. With a table, and where the laws break.">
+<meta name="keywords" content="affinity laws, pump affinity laws, fan laws, fan affinity laws, cube law, variable speed pump, VFD energy savings, pump speed power">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Pump and Fan Affinity Laws">
+<meta property="og:description" content="Flow with speed, head with the square, power with the cube. What the affinity laws save, and when static head breaks them.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta name="twitter:title" content="Pump and Fan Affinity Laws">
+<meta name="twitter:description" content="Flow with speed, head with the square, power with the cube. What the affinity laws save, and when static head breaks them.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://voltfield.org/guides.html"},{"@type":"ListItem","position":3,"name":"Pump and Fan Affinity Laws","item":"https://voltfield.org/guide-pump-and-fan-affinity-laws.html"}]},{"@type":"Article","headline":"Pump and Fan Affinity Laws: Why Power Falls With the Cube of Speed","description":"The pump and fan affinity laws explained: flow varies with speed, head with its square and power with its cube. With a table, and where the laws break.","image":"https://voltfield.org/social/social-generic.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-11-11T00:00:00-05:00","dateModified":"2026-11-11T00:00:00-05:00","url":"https://voltfield.org/guide-pump-and-fan-affinity-laws.html"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are the three affinity laws?","acceptedAnswer":{"@type":"Answer","text":"For one pump or fan at two speeds: flow is proportional to speed, head or pressure is proportional to the square of speed, and power is proportional to the cube of speed. At 80 percent speed that means 80 percent of the flow, 64 percent of the head and about 51 percent of the power."}},{"@type":"Question","name":"How much energy does a variable speed drive save on a pump?","acceptedAnswer":{"@type":"Answer","text":"In a closed loop where the resistance is all friction, power falls with the cube of speed, so running at 80 percent speed uses roughly half the power and 50 percent speed uses one eighth. Where the pump works against static head or a fixed pressure setpoint the saving is smaller, and it has to be worked out from the pump curve and the system curve together. Drive losses take a few percent off the result."}},{"@type":"Question","name":"Do the affinity laws apply to fans?","acceptedAnswer":{"@type":"Answer","text":"Yes. They are called the fan laws: airflow is proportional to speed, static pressure to the square of speed and power to the cube. They are why running four cooling fans at 75 percent speed uses about 44 percent less energy than running three at full speed for the same airflow."}},{"@type":"Question","name":"Why does throttling a valve waste energy?","acceptedAnswer":{"@type":"Answer","text":"A valve reduces flow by adding resistance. The pump still runs at full speed and moves up its curve to a higher head, and the extra pressure is dissipated across the valve as heat and noise. Slowing the pump produces the lower flow at a lower head, with nothing thrown away."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in has-photo">
+    <div class="artban-text">
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">Pump and Fan Affinity Laws</span></nav>
+      <div class="eyebrow">Pumps, fans & drives</div>
+      <h1>Pump and Fan Affinity Laws Explained</h1>
+      <p class="dek">Three proportionalities describe what happens when a pump or a fan changes speed. The third one, power with the cube of speed, is the reason variable speed drives pay for themselves, and also the reason they sometimes do not.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published November 11, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+    </div>
+    <figure class="artban-photo">
+      <picture><source srcset="images/parts/mro-centrifugal-utility-pumps.webp" type="image/webp"><img src="images/parts/mro-centrifugal-utility-pumps.jpg" width="340" height="340" alt="A centrifugal pump with its motor" decoding="async" fetchpriority="high"></picture>
+      <figcaption>Centrifugal pump (illustration)</figcaption>
+    </figure>
+  </div>
+</section>
+<div class="artwrap">
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>Flow changes in proportion to speed, head or pressure with the square of speed, and power with the cube.</li>
+      <li>At 80 percent speed a pump or fan delivers 80 percent of the flow for about 51 percent of the power. At 50 percent speed the power is one eighth.</li>
+      <li>The cube law holds when the system is all friction. Static head or a fixed pressure setpoint makes the saving smaller, sometimes much smaller.</li>
+      <li>The same laws apply to fans, where they are called the fan laws, and they are why running more fans slowly beats running fewer fans fast.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#the-three-laws">The three laws</a></li>
+      <li><a href="#a-worked-example">A worked example</a></li>
+      <li><a href="#why-it-works-and-when-it-does-not">Why it works, and when it does not</a></li>
+      <li><a href="#fans-and-running-more-of-them">Fans, and running more of them</a></li>
+      <li><a href="#limits-in-practice">Limits in practice</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+  <h2 id="the-three-laws">The three laws</h2>
+  <p><b>For a given pump or fan, flow is proportional to speed, head is proportional to the square of speed, and power is proportional to the cube of speed.</b> Written out, with N for speed, Q for flow, H for head and P for power:</p>
+  <p>Q&#8322; / Q&#8321; = N&#8322; / N&#8321; &nbsp;&middot;&nbsp; H&#8322; / H&#8321; = (N&#8322; / N&#8321;)&sup2; &nbsp;&middot;&nbsp; P&#8322; / P&#8321; = (N&#8322; / N&#8321;)&sup3;</p>
+  <p>They follow from one another. Power delivered to a fluid is flow times head, so if flow goes with speed and head with its square, their product goes with the cube. The laws apply to centrifugal pumps and to fans alike, because both are machines that add energy to a fluid by spinning it.</p>
+  <table class="reftable">
+    <tr><th scope="col">Speed</th><th scope="col">Flow</th><th scope="col">Head or pressure</th><th scope="col">Power</th></tr>
+    <tr><td>100%</td><td>100%</td><td>100%</td><td>100%</td></tr>
+    <tr><td>90%</td><td>90%</td><td>81%</td><td>73%</td></tr>
+    <tr><td>80%</td><td>80%</td><td>64%</td><td>51%</td></tr>
+    <tr><td>70%</td><td>70%</td><td>49%</td><td>34%</td></tr>
+    <tr><td>60%</td><td>60%</td><td>36%</td><td>22%</td></tr>
+    <tr><td>50%</td><td>50%</td><td>25%</td><td>12.5%</td></tr>
+  </table>
+  <p>The <a class="inline" href="calculators/affinity-laws.html">affinity laws calculator</a> works any pair of speeds.</p>
+  <h2 id="a-worked-example">A worked example</h2>
+  <p>A chilled water pump delivers 500 GPM at 80 ft of head and draws 15 hp at 1,750 rpm. The load falls and the system now needs 400 GPM. A drive slows the pump to 80 percent speed, 1,400 rpm:</p>
+  <p>Flow = 500 &times; 0.80 = 400 GPM</p>
+  <p>Head = 80 &times; 0.80&sup2; = 51.2 ft</p>
+  <p>Power = 15 &times; 0.80&sup3; = 7.68 hp</p>
+  <p>The alternative is to leave the pump at full speed and close a valve until the flow drops to 400 GPM. That pushes the pump back up its curve to a higher head, and the valve throws the extra pressure away. The pump still draws most of its 15 hp. The difference between the two, several horsepower running continuously, is what a variable speed drive is bought to save.</p>
+  <div class="ad-unit" data-ad="incontent"></div>
+  <h2 id="why-it-works-and-when-it-does-not">Why it works, and when it does not</h2>
+  <p>The laws describe the machine. Where it actually operates is decided by the system it is connected to, and the cube law for power only follows if the system cooperates.</p>
+  <p>In a closed loop where all the resistance is friction, the pressure needed rises with the square of flow. That is the same shape as the head law, so as the pump slows, the operating point slides down a curve that passes through zero and the pump stays at the same efficiency. This is the case the table describes.</p>
+  <p>Two common conditions break it. The first is <b>static head</b>: a pump lifting water to a cooling tower, or a booster filling a tank, has to produce a fixed height before any flow happens at all. Slow that pump and the flow falls much faster than the speed, reaching nothing while the pump is still turning. The second is a <b>fixed pressure setpoint</b>. Many variable speed systems are controlled to hold a constant differential pressure somewhere in the piping, or a constant static pressure in a duct. That setpoint behaves like static head. The pump or fan cannot slow below the speed that maintains it, and the energy saving is smaller than the cube law promises.</p>
+  <p>This is why the location and value of a pressure setpoint matter so much, and why resetting it downward when the load is light recovers savings that a fixed setpoint leaves behind.</p>
+  <h2 id="fans-and-running-more-of-them">Fans, and running more of them</h2>
+  <p>For fans the same three relationships are called the fan laws, with static pressure in the place of head. They lead to a result that seems backwards at first: it takes less energy to run more fans than the load needs, all of them slowly, than to run just enough of them at full speed.</p>
+  <p>Take a row of cooling units where three fans at full speed deliver the airflow required. Run four at 75 percent speed and the airflow is the same, 4 &times; 0.75 = 3. But each fan now draws 0.75&sup3; = 42 percent of its full power, so the four together draw 1.69 units of power against 3.0. That is 44 percent less energy for the same air. It works because most of the resistance each fan pushes against is inside its own unit, in the coil and the filters, and that resistance falls with the square of the air passing through it. It is the reason redundant cooling units are run alongside the duty units instead of being held as idle standby.</p>
+  <p>The same reasoning is behind <a class="inline" href="guide-hot-aisle-vs-cold-aisle-containment.html">containment</a>: anything that lets the fans slow down, even a little, is repaid at the cube.</p>
+  <h2 id="limits-in-practice">Limits in practice</h2>
+  <p>Speed cannot be reduced without limit. A pump has a minimum flow below which it overheats or runs unstably, and a chiller has a minimum water flow through its evaporator. A motor cooled by a fan on its own shaft loses cooling as it slows. Drives and motors also have losses of their own, a few percent at full speed and a larger share at light load, so the electrical saving is always somewhat less than the saving at the shaft.</p>
+  <p>The laws also run in the other direction. Running a fan or pump at 110 percent of its speed takes 1.10&sup3; = 133 percent of the power, which can overload a motor that was sized with no margin.</p>
+  <p>Finally, a version of the laws applies to changing the impeller diameter instead of the speed, which is how a pump is trimmed to suit a system permanently. It is reliable only for small changes in diameter; beyond that the pump's efficiency shifts and the manufacturer's curve for the trimmed impeller is the thing to use.</p>
+  <h2 id="common-mistakes">Common mistakes</h2>
+  <ul>
+    <li><b>Promising cube-law savings on a system with static head.</b> The saving depends on the system curve, and a pump working mostly against lift saves far less.</li>
+    <li><b>Leaving a high fixed pressure setpoint in place.</b> It acts as static head and caps how far the speed can fall.</li>
+    <li><b>Comparing two different machines.</b> The laws relate one pump or fan to itself at another speed. They do not predict what a different model will do.</li>
+    <li><b>Ignoring minimum flow.</b> Slowing a pump below what the pump or the chiller can tolerate trades an energy saving for a failure.</li>
+    <li><b>Forgetting the laws apply upward.</b> A modest overspeed costs a third more power.</li>
+  </ul>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What are the three affinity laws?</summary>
+    <p style="margin-top:10px">For one pump or fan at two speeds: flow is proportional to speed, head or pressure is proportional to the square of speed, and power is proportional to the cube of speed. At 80 percent speed that means 80 percent of the flow, 64 percent of the head and about 51 percent of the power.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How much energy does a variable speed drive save on a pump?</summary>
+    <p style="margin-top:10px">In a closed loop where the resistance is all friction, power falls with the cube of speed, so running at 80 percent speed uses roughly half the power and 50 percent speed uses one eighth. Where the pump works against static head or a fixed pressure setpoint the saving is smaller, and it has to be worked out from the pump curve and the system curve together. Drive losses take a few percent off the result.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Do the affinity laws apply to fans?</summary>
+    <p style="margin-top:10px">Yes. They are called the fan laws: airflow is proportional to speed, static pressure to the square of speed and power to the cube. They are why running four cooling fans at 75 percent speed uses about 44 percent less energy than running three at full speed for the same airflow.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why does throttling a valve waste energy?</summary>
+    <p style="margin-top:10px">A valve reduces flow by adding resistance. The pump still runs at full speed and moves up its curve to a higher head, and the extra pressure is dissipated across the valve as heat and noise. Slowing the pump produces the lower flow at a lower head, with nothing thrown away.</p>
+  </details>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">How a drive changes motor speed, and what else it does to a motor circuit, is covered in <a class="inline" href="guide-vfd-vs-soft-starter.html">VFD vs. soft starter</a>. The pumps and cooling units these laws apply to are on the <a class="inline" href="data-centers/cooling.html">data center cooling</a> reference page.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Run the numbers</h3>
+      <ul class="catlink">
+        <li><a href="calculators/affinity-laws.html">Pump &amp; Fan Affinity Laws Calculator</a>Flow, head and power at any two speeds.</li>
+        <li><a href="calculators/pump-power.html">Pump Power Calculator</a>Brake horsepower and motor kW from GPM and head.</li>
+        <li><a href="calculators/motor-speed.html">Motor Speed &amp; Slip Calculator</a>Synchronous speed from frequency and poles.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-vfd-vs-soft-starter.html">VFD vs. Soft Starter</a></li>
+        <li><a href="guide-crac-vs-crah.html">CRAC vs. CRAH</a></li>
+        <li><a href="guide-hot-aisle-vs-cold-aisle-containment.html">Hot Aisle vs. Cold Aisle Containment</a></li>
+        <li><a href="guide-harmonics-ieee-519.html">Harmonics &amp; IEEE 519 Limits</a></li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;Pump and Fan Affinity Laws Explained,&rdquo; <i>Voltfield</i>, updated November 11, 2026. https://voltfield.org/guide-pump-and-fan-affinity-laws.html</p>
+  </details>
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/guide-pump-and-fan-affinity-laws.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+
+<aside class="provenance" aria-labelledby="prov-h">
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published November 11, 2026.</span></summary>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>The three affinity laws for centrifugal pumps and fans, a worked example and table, why the cube law depends on the system curve, the effect of static head and fixed pressure setpoints, and the practical limits on reducing speed.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>Hydraulic Institute standards for rotodynamic pumps</li><li>AMCA publications on fan performance, where the relationships are known as the fan laws</li><li>ASHRAE Handbook &mdash; HVAC Systems and Equipment, chapters on pumps and fans</li><li>ASHRAE Standard 90.1 &mdash; variable flow requirements for pumps and fans</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A pump or fan selection, or an energy savings estimate for a specific system. Real savings depend on the system curve, the control strategy and the efficiency of the machine and drive across the operating range, and have to be calculated from manufacturer curves.</dd>
+      <dt>Provenance</dt>
+      <dd>Published November 11, 2026. Written and maintained by the Voltfield editorial team against the sources above. Worked figures in the text are arithmetic the reader can check; nothing here states a measured value.</dd>
+    </dl>
+  </details>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

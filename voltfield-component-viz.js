@@ -22,7 +22,11 @@
 (function(){
   'use strict';
 
-  const IMG = 'images/parts/';
+  /* Root-absolute on the pages that live one folder down. The registry was only
+     ever used from root-level tools, where the relative path is right (and is
+     what the app wrapper needs); from /calculators/ it pointed at
+     /calculators/images/parts/, which does not exist. */
+  const IMG = (/^\/(calculators|data-centers|renewables|battery-storage)\//.test(location.pathname) ? '/' : '') + 'images/parts/';
 
   /* img: basename in images/parts/ (a .webp + .jpg pair), or null where the
      library genuinely has no illustration for it -- better an honest 3D-only
@@ -76,6 +80,22 @@
       img: 'dc-crah-crac-units',
       what: 'Removes the heat the IT equipment produces.',
       note: 'Cooling load tracks the electrical load closely -- roughly every kW delivered to the racks becomes a kW of heat to reject.'
+    },
+    /* ---------- mechanical plant ---------- */
+    pump: {
+      name: 'Centrifugal pump', shape: 'pump', color: '#2B6CB0', img: null,
+      what: 'Moves chilled or condenser water round the cooling loop.',
+      note: 'Sized on two numbers at once: the flow the load needs and the head the piping loses. Power rises with the cube of speed, which is why slowing a pump with a drive saves far more than throttling a valve.'
+    },
+    chiller: {
+      name: 'Air-cooled chiller', shape: 'chiller', color: '#2B6CB0', img: null,
+      what: 'Cools the water that the air handlers use to cool the room.',
+      note: 'Rated in tons at a stated leaving-water and ambient temperature. Capacity falls on the hottest day, which is the day it is needed most, so the rating conditions matter as much as the tonnage.'
+    },
+    coolingtower: {
+      name: 'Cooling tower', shape: 'coolingtower', color: '#2B6CB0', img: null,
+      what: 'Rejects the heat from a water-cooled chiller to the outside air by evaporation.',
+      note: 'It can only cool water toward the wet-bulb temperature, never below it. The gap between the two is the approach, and a closer approach means a larger tower.'
     },
     genset: {
       name: 'Diesel genset', shape: 'genset', color: '#9C4221',

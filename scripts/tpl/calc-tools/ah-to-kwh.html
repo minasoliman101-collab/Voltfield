@@ -1,0 +1,12 @@
+<!-- Live calculator for calculators/ah-to-kwh.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="ahCalc">
+    <h2>Amp-Hours and Kilowatt-Hours</h2>
+    <div class="sub">Nameplate energy at nominal voltage. Usable energy is lower.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="ahDir">Convert</label><select id="ahDir"><option value="ah" selected>Ah to kWh</option><option value="kwh">kWh to Ah</option></select></div>
+      <div class="est-field"><label for="ahVal">Capacity (Ah)</label><input type="number" id="ahVal" min="0" step="any" placeholder="e.g. 100"></div>
+      <div class="est-field"><label for="ahV">Nominal voltage (V)</label><input type="number" id="ahV" min="0" step="any" placeholder="e.g. 48"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="ahBtn">Calculate</button></div></div>
+    <div class="est-result" id="ahResult"></div>
+  </div>

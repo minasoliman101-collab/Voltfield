@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chilled Water Flow Calculator (GPM per Ton) | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/calculators/chilled-water-flow.html">
+<meta name="description" content="Calculate chilled water flow in GPM from cooling load in tons or kW and the supply-return temperature difference. Free, no signup.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Chilled Water Flow Calculator">
+<meta property="og:description" content="Calculate chilled water flow in GPM from cooling load in tons or kW and the supply-return temperature difference. Free, no signup.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://voltfield.org/calculators/chilled-water-flow.html">
+<meta property="og:image" content="https://voltfield.org/social/social-chilled-water-flow.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-chilled-water-flow.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"BreadcrumbList","itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
+   {"@type":"ListItem","position":2,"name":"Calculators","item":"https://voltfield.org/engineering-calculators.html"},
+   {"@type":"ListItem","position":3,"name":"Chilled Water Flow Calculator","item":"https://voltfield.org/calculators/chilled-water-flow.html"}
+ ]},
+ {"@type":"WebPage","name":"Chilled Water Flow Calculator","description":"Calculate chilled water flow in GPM from cooling load in tons or kW and the supply-return temperature difference. Free, no signup.","url":"https://voltfield.org/calculators/chilled-water-flow.html","dateModified":"2026-11-11","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebApplication","name":"Chilled Water Flow Calculator","description":"Calculate chilled water flow in GPM from cooling load in tons or kW and the supply-return temperature difference. Free, no signup.","url":"https://voltfield.org/calculators/chilled-water-flow.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"What does the Chilled Water Flow calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Chilled water flow in GPM is the load in BTU per hour divided by 500 times the temperature difference in degrees Fahrenheit. With the load in tons it shortens to GPM = tons x 24 / T. At the traditional 10°F difference that is 2.4 GPM per ton; at 12°F it is 2.0 and at 16°F it is 1.5. The temperature difference is the lever. A wider one moves the same heat with less water, which means smaller pipes and less pump energy. It is why chilled water systems for data centers are designed with wider differences than the old comfort-cooling rule of thumb."}},
+   {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"The constant of 500 is for plain water at typical chilled water temperatures. A glycol mix has a lower specific heat and a higher density, so it needs more flow for the same load: roughly 5 to 15 percent more depending on the type and concentration. The result is the flow at the design load. It does not tell you the temperature difference the coils will actually achieve, and a system that returns water colder than designed needs more flow than this."}}
+ ]}
+]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-calculators.css">
+<link rel="stylesheet" href="/voltfield-component-viz.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/engineering-calculators.html" style="color:var(--slate);text-decoration:none">Calculators</a> / <span style="color:var(--ink)">Chilled Water Flow Calculator</span></nav>
+    <div class="eyebrow">Free Calculator &middot; No Signup</div>
+    <h1>Chilled Water Flow Calculator</h1>
+    <p class="dek">Calculate chilled water flow in GPM from cooling load in tons or kW and the supply-return temperature difference.</p>
+  </div>
+</section>
+
+<div class="artwrap">
+  <section class="calc-tool" id="calculator" aria-label="Chilled Water Flow Calculator">
+  <div class="estimator" id="chwCalc">
+    <h2>Chilled Water Flow</h2>
+    <div class="sub">GPM = BTU/h &divide; (500 &times; &Delta;T). Plain water.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="chwUnit">Load in</label><select id="chwUnit"><option value="tons" selected>Tons</option><option value="kw">kW</option></select></div>
+      <div class="est-field"><label for="chwLoad">Cooling load (tons)</label><input type="number" id="chwLoad" min="0" step="any" placeholder="e.g. 100"></div>
+      <div class="est-field"><label for="chwDt">Water &Delta;T (&deg;F)</label><input type="number" id="chwDt" min="0" step="any" placeholder="e.g. 10"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="chwBtn">Calculate</button></div></div>
+    <div class="est-result" id="chwResult"></div>
+  </div>
+  </section>
+
+  <p><b>Chilled water flow in GPM is the load in BTU per hour divided by 500 times the temperature difference in degrees Fahrenheit.</b> With the load in tons it shortens to GPM = tons &times; 24 / &Delta;T. At the traditional 10&deg;F difference that is 2.4 GPM per ton; at 12&deg;F it is 2.0 and at 16&deg;F it is 1.5.</p>
+  <p>The temperature difference is the lever. A wider one moves the same heat with less water, which means smaller pipes and less pump energy. It is why chilled water systems for data centers are designed with wider differences than the old comfort-cooling rule of thumb.</p>
+
+  <h2>The formula</h2>
+    <div class="formula">GPM = BTU/h / (500 &times; &Delta;T)<br>GPM = tons &times; 24 / &Delta;T</div>
+    <div class="tblwrap"><table class="famtable"><tbody>
+      <tr><td class="num"><b>GPM</b></td><td>Water flow in US gallons per minute</td></tr>
+      <tr><td class="num"><b>&Delta;T</b></td><td>Difference between return and supply water temperature, in &deg;F</td></tr>
+      <tr><td class="num"><b>500</b></td><td>A constant for water: 8.33 lb/gal &times; 60 minutes &times; specific heat 1.0 BTU/lb&middot;&deg;F</td></tr>
+      <tr><td class="num"><b>tons</b></td><td>Cooling load in tons of refrigeration, 12,000 BTU/h each</td></tr>
+    </tbody></table></div>
+
+  <h2>The equipment</h2>
+  <div data-vfcv-slot="chiller"></div>
+
+  <h2>Worked example</h2>
+  <p>A 100 ton load with water supplied at 44&deg;F and returning at 54&deg;F:</p>
+  <p>GPM = 100 &times; 24 / 10 = 240 GPM</p>
+  <p>Widen the difference to 16&deg;F and the same load needs 150 GPM. Because pump power falls much faster than flow, the saving in pumping energy is larger than the 38 percent cut in flow suggests.</p>
+  <p>A 500 kW IT load is 500 &times; 3,412 = 1,706,000 BTU/h, or 142 tons. At a 12&deg;F difference it needs 284 GPM.</p>
+
+  <h2>Which standard governs this</h2>
+  <p>The equation is the standard hydronic heat-transfer relation from the ASHRAE Handbook. Chiller ratings are certified under AHRI Standard 550/590, which is where the traditional 44&deg;F leaving water and 2.4 GPM per ton rating condition comes from.</p>
+
+  <h2>What this calculation does not account for</h2>
+  <p>The constant of 500 is for plain water at typical chilled water temperatures. A glycol mix has a lower specific heat and a higher density, so it needs more flow for the same load: roughly 5 to 15 percent more depending on the type and concentration. The result is the flow at the design load. It does not tell you the temperature difference the coils will actually achieve, and a system that returns water colder than designed needs more flow than this.</p>
+    <div class="callout"><b>This is a screening estimate.</b> It is here to get you to the right order of magnitude and the right conversation — not to replace a stamped calculation by a qualified engineer.</div>
+
+  <h2>Common mistakes</h2>
+  <p>Using 2.4 GPM per ton on a system designed for a wider temperature difference. Applying the water constant to a glycol system. Sizing the pump for design flow and ignoring that low return temperature will ask for more. Mixing up tons of cooling at the coil with the electrical kW of the IT load without converting.</p>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2>Related</h2>
+    <div class="rel">
+      <a href="/calculators/pump-power.html">Pump Power Calculator</a>
+      <a href="/calculators/pipe-velocity.html">Pipe Velocity Calculator</a>
+      <a href="/calculators/btu-to-tons.html">BTU to Tons Converter</a>
+      <a href="/guide-crac-vs-crah.html">CRAC vs. CRAH</a>
+      <a href="/calculators/airflow-cfm.html">Airflow (CFM) Calculator</a>
+      <a href="/data-centers/cooling.html">Data Center Cooling Equipment</a>
+      <a href="/engineering-calculators.html">All calculators</a>
+    </div>
+
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new calculators and guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/calculators/chilled-water-flow.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+
+  <aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>Calculate chilled water flow in GPM from cooling load in tons or kW and the supply-return temperature difference. Free, no signup.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>The equation is the standard hydronic heat-transfer relation from the ASHRAE Handbook. Chiller ratings are certified under AHRI Standard 550/590, which is where the traditional 44&deg;F leaving water and 2.4 GPM per ton rating condition comes from.</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>The constant of 500 is for plain water at typical chilled water temperatures. A glycol mix has a lower specific heat and a higher density, so it needs more flow for the same load: roughly 5 to 15 percent more depending on the type and concentration. The result is the flow at the design load. It does not tell you the temperature difference the coils will actually achieve, and a system that returns water colder than designed needs more flow than this. This is a screening estimate, not a stamped calculation.</dd>
+      <dt>Provenance</dt>
+      <dd>Last reviewed November 11, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labelled as estimates. Worked examples are arithmetic you can reproduce against the <a href="#calculator">calculator at the top of this page</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+    </dl>
+  </aside>
+
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h4>Voltfield</h4>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h4>Sectors</h4><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h4>Compliance</h4><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="/voltfield-component-viz.js" defer></script>
+<script src="/voltfield-calculators.js" defer></script>
+<script src="/voltfield-site-config.js"></script>
+<script src="/voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

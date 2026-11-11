@@ -1,0 +1,16 @@
+<!-- Live calculator for calculators/battery-runtime.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="brCalc">
+    <h2>Battery Runtime</h2>
+    <div class="sub">Usable energy over load. Reliable for discharges of several hours; optimistic for fast discharges, and not a substitute for UPS battery tables.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="brAh">Capacity (Ah)</label><input type="number" id="brAh" min="0" step="any" placeholder="e.g. 100"></div>
+      <div class="est-field"><label for="brV">Battery voltage (V)</label><input type="number" id="brV" min="0" step="any" placeholder="e.g. 48"></div>
+      <div class="est-field"><label for="brW">Load (W)</label><input type="number" id="brW" min="0" step="any" placeholder="e.g. 1000"></div>
+    </div>
+    <div class="est-row">
+      <div class="est-field"><label for="brDod">Depth of discharge (%)</label><input type="number" id="brDod" min="1" max="100" step="1" value="80"></div>
+      <div class="est-field"><label for="brEff">Inverter efficiency (%)</label><input type="number" id="brEff" min="1" max="100" step="1" value="90"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="brBtn">Calculate</button></div></div>
+    <div class="est-result" id="brResult"></div>
+  </div>

@@ -1,0 +1,12 @@
+<!-- Live calculator for calculators/amps-to-kva.html. Logic: voltfield-calculators.js. -->
+  <div class="estimator" id="akCalc">
+    <h2>Amps to kVA</h2>
+    <div class="sub">Apparent power from line current and voltage. Use line-to-line voltage for three-phase.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="akPhase">System</label><select id="akPhase"><option value="1">Single-phase</option><option value="3" selected>Three-phase</option></select></div>
+      <div class="est-field"><label for="akI">Current (A)</label><input type="number" id="akI" min="0" step="any" placeholder="e.g. 100"></div>
+      <div class="est-field"><label for="akV">Voltage (V)</label><input type="number" id="akV" min="0" step="any" placeholder="e.g. 480"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="akBtn">Calculate</button></div></div>
+    <div class="est-result" id="akResult"></div>
+  </div>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electricity Cost Calculator (kW to Annual Cost) | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/calculators/electricity-cost.html">
+<meta name="description" content="Work out what a load costs to run: kW, hours per day and the energy rate give kWh and cost per day, month and year. Free, no signup.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Electricity Cost Calculator">
+<meta property="og:description" content="Work out what a load costs to run: kW, hours per day and the energy rate give kWh and cost per day, month and year. Free, no signup.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://voltfield.org/calculators/electricity-cost.html">
+<meta property="og:image" content="https://voltfield.org/social/social-electricity-cost.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-electricity-cost.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"BreadcrumbList","itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},
+   {"@type":"ListItem","position":2,"name":"Calculators","item":"https://voltfield.org/engineering-calculators.html"},
+   {"@type":"ListItem","position":3,"name":"Electricity Cost Calculator","item":"https://voltfield.org/calculators/electricity-cost.html"}
+ ]},
+ {"@type":"WebPage","name":"Electricity Cost Calculator","description":"Work out what a load costs to run: kW, hours per day and the energy rate give kWh and cost per day, month and year. Free, no signup.","url":"https://voltfield.org/calculators/electricity-cost.html","dateModified":"2026-11-11","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"WebApplication","name":"Electricity Cost Calculator","description":"Work out what a load costs to run: kW, hours per day and the energy rate give kWh and cost per day, month and year. Free, no signup.","url":"https://voltfield.org/calculators/electricity-cost.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},
+ {"@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"What does the Electricity Cost calculation account for?","acceptedAnswer":{"@type":"Answer","text":"Energy cost is power times time times the rate: kW x hours x price per kWh. A 10 kW load running around the clock uses 240 kWh a day and 87,600 kWh a year. At $0.12 per kWh that is $10,512 a year. For a load that runs continuously, a useful shortcut follows from the 8,760 hours in a year: each kilowatt costs 8,760 times the rate per year, which at $0.12 is about $1,051 per kW."}},
+   {"@type":"Question","name":"What does it not account for?","acceptedAnswer":{"@type":"Answer","text":"This is the energy charge only. Commercial and industrial tariffs usually add a demand charge on the highest kW drawn in the billing period, which for a large steady load can rival the energy charge, and many add time-of-use rates, power factor penalties, fixed charges and taxes. It also assumes the load draws the same power for every hour it runs; use an average, not the nameplate, for equipment that cycles."}}
+ ]}
+]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-calculators.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/engineering-calculators.html" style="color:var(--slate);text-decoration:none">Calculators</a> / <span style="color:var(--ink)">Electricity Cost Calculator</span></nav>
+    <div class="eyebrow">Free Calculator &middot; No Signup</div>
+    <h1>Electricity Cost Calculator</h1>
+    <p class="dek">Work out what a load costs to run: kW, hours per day and the energy rate give kWh and cost per day, month and year.</p>
+  </div>
+</section>
+
+<div class="artwrap">
+  <section class="calc-tool" id="calculator" aria-label="Electricity Cost Calculator">
+  <div class="estimator" id="ecCalc">
+    <h2>Electricity Cost</h2>
+    <div class="sub">Energy charge only. Demand charges, fixed charges and taxes are not included.</div>
+    <div class="est-row">
+      <div class="est-field"><label for="ecKw">Load (kW)</label><input type="number" id="ecKw" min="0" step="any" placeholder="e.g. 10"></div>
+      <div class="est-field"><label for="ecHrs">Hours per day</label><input type="number" id="ecHrs" min="0" max="24" step="any" placeholder="e.g. 24"></div>
+      <div class="est-field"><label for="ecRate">Energy rate ($/kWh)</label><input type="number" id="ecRate" min="0" step="any" placeholder="e.g. 0.12"></div>
+    </div>
+    <div class="est-row"><div class="est-field"><button type="button" id="ecBtn">Calculate</button></div></div>
+    <div class="est-result" id="ecResult"></div>
+  </div>
+  </section>
+
+  <p><b>Energy cost is power times time times the rate: kW &times; hours &times; price per kWh.</b> A 10 kW load running around the clock uses 240 kWh a day and 87,600 kWh a year. At $0.12 per kWh that is $10,512 a year.</p>
+  <p>For a load that runs continuously, a useful shortcut follows from the 8,760 hours in a year: each kilowatt costs 8,760 times the rate per year, which at $0.12 is about $1,051 per kW.</p>
+
+  <h2>The formula</h2>
+    <div class="formula">Energy (kWh) = load (kW) &times; hours of operation<br>Cost = energy (kWh) &times; rate (per kWh)</div>
+    <div class="tblwrap"><table class="famtable"><tbody>
+      <tr><td class="num"><b>Load</b></td><td>Average real power drawn while running, in kW</td></tr>
+      <tr><td class="num"><b>Hours per day</b></td><td>Hours of operation in a day, up to 24</td></tr>
+      <tr><td class="num"><b>Rate</b></td><td>Energy charge per kWh, from the tariff or the bill</td></tr>
+    </tbody></table></div>
+
+  <h2>Worked example</h2>
+  <p>A 10 kW load running 24 hours a day at $0.12 per kWh:</p>
+  <p>Daily: 10 &times; 24 = 240 kWh, costing $28.80</p>
+  <p>Yearly: 240 &times; 365 = 87,600 kWh, costing $10,512</p>
+  <p>Monthly, taken as a twelfth of the year: 7,300 kWh, costing $876</p>
+  <p>The same load running 10 hours a day would use 36,500 kWh a year and cost $4,380.</p>
+
+  <h2>Which standard governs this</h2>
+  <p>No engineering standard governs this arithmetic. The rate, and what else appears on the bill, is set by the utility's tariff, and for a commercial or industrial account the tariff is where most of the difficulty lies.</p>
+
+  <h2>What this calculation does not account for</h2>
+  <p>This is the energy charge only. Commercial and industrial tariffs usually add a demand charge on the highest kW drawn in the billing period, which for a large steady load can rival the energy charge, and many add time-of-use rates, power factor penalties, fixed charges and taxes. It also assumes the load draws the same power for every hour it runs; use an average, not the nameplate, for equipment that cycles.</p>
+    <div class="callout"><b>This is a screening estimate.</b> It is here to get you to the right order of magnitude and the right conversation — not to replace a stamped calculation by a qualified engineer.</div>
+
+  <h2>Common mistakes</h2>
+  <p>Using nameplate power for equipment that rarely runs at nameplate. Multiplying by a blended rate taken from one bill and applying it to a different load shape. Ignoring demand charges on a commercial account. Entering kVA where kW is needed, which overstates the energy by the power factor.</p>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2>Related</h2>
+    <div class="rel">
+      <a href="/calculators/pue.html">PUE Calculator</a>
+      <a href="/calculators/project-finance.html">Project Finance Calculators</a>
+      <a href="/calculators/amps-to-kw.html">Amps to kW Calculator</a>
+      <a href="/calculators/power-factor.html">Power Factor Correction Calculator</a>
+      <a href="/guide-pue-explained.html">PUE Explained</a>
+      <a href="/engineering-calculators.html">All calculators</a>
+    </div>
+
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new calculators and guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/calculators/electricity-cost.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+
+  <aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>Work out what a load costs to run: kW, hours per day and the energy rate give kWh and cost per day, month and year. Free, no signup.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>No engineering standard governs this arithmetic. The rate, and what else appears on the bill, is set by the utility's tariff, and for a commercial or industrial account the tariff is where most of the difficulty lies.</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>This is the energy charge only. Commercial and industrial tariffs usually add a demand charge on the highest kW drawn in the billing period, which for a large steady load can rival the energy charge, and many add time-of-use rates, power factor penalties, fixed charges and taxes. It also assumes the load draws the same power for every hour it runs; use an average, not the nameplate, for equipment that cycles. This is a screening estimate, not a stamped calculation.</dd>
+      <dt>Provenance</dt>
+      <dd>Last reviewed November 11, 2026. Written and maintained by the Voltfield editorial team &mdash; a small team rather than a named author, which is why estimates are attributed to Voltfield and labelled as estimates. Worked examples are arithmetic you can reproduce against the <a href="#calculator">calculator at the top of this page</a>. See the <a href="/methodology.html">methodology page</a>.</dd>
+    </dl>
+  </aside>
+
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h4>Voltfield</h4>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h4>Sectors</h4><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h4>Compliance</h4><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="/voltfield-calculators.js" defer></script>
+<script src="/voltfield-site-config.js"></script>
+<script src="/voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>
