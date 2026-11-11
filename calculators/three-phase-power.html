@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Three-Phase Power Calculator (Line and Phase Values) | Voltfield</title>
 <link rel="canonical" href="https://voltfield.org/calculators/three-phase-power.html">
+<meta property="og:url" content="https://voltfield.org/calculators/three-phase-power.html">
 <meta name="description" content="Solve for voltage, current, power or power factor in a balanced three-phase system, with line and phase values for delta and wye. Free, no signup.">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="article">
@@ -107,7 +108,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="artwrap">
   <section class="calc-tool" id="calculator" aria-label="Three-Phase Power Calculator">
-  <div class="estimator" id="tpCalc">
+  <div class="estimator" id="tpCalc" data-no-example>
     <h2>Three-Phase Power</h2>
     <div class="sub">Enter any three of line voltage, line current, real power and power factor; the fourth follows. Reports line and phase values for both delta and wye, since that is where the factor of &radic;3 actually goes.</div>
     <div class="est-row">
@@ -150,6 +151,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2>Common mistakes</h2>
   <p>Applying &radic;3 to a single-phase circuit, or omitting it from a three-phase one. Using phase voltage where the formula wants line voltage, which on a 480Y/277 system gives an answer low by a factor of 1.732. Dividing three-phase power by three to get per-phase power and then applying &radic;3 again. Treating a measured line current as the winding current in a delta load. Using the balanced formula on a visibly unbalanced panel. Reading kVA as kW, which only match at unity power factor.</p>
 
+  <div class="ad-unit" data-ad="incontent"></div>
+
   <h2>Related</h2>
     <div class="rel">
       <a href="/calculators/amps-to-kw.html">Amps to kW Calculator</a>
@@ -190,6 +193,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </aside>
 
 </div>
+<div class="ad-unit" data-ad="footer"></div>
 </main>
 <footer>
   <div class="in">
@@ -204,6 +208,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </ul></div>
     <div><h4>Compliance</h4><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
   </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
 </footer>
 <script src="/voltfield-calculators.js" defer></script>
 <script src="/voltfield-site-config.js"></script>

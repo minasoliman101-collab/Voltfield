@@ -55,6 +55,8 @@ version of their output to read.
 ## Optional
 
 - [About Voltfield](https://voltfield.org/about.html)
+- [Contact](https://voltfield.org/contact.html)
+- [Terms of use and engineering disclaimer](https://voltfield.org/terms.html)
 - [What's new](https://voltfield.org/whats-new.html)
 - [Transformer lead-time index](https://voltfield.org/lead-time-index.html)
 - [Reference packets](https://voltfield.org/packets.html)

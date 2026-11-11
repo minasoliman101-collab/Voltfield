@@ -36,3 +36,7 @@
 .refdetails>summary::after{content:"+";font-size:16px;line-height:1}
 .refdetails[open]>summary::after{content:"\2013"}
 .refdetails .reftable{margin:0}
+
+/* Note under a result that came from the worked example the tool opens on
+   (see the end of voltfield-calculators.js). Removed on the first edit. */
+.est-example{margin:8px 0 0;font-family:var(--mono);font-size:11.5px;color:var(--slate)}

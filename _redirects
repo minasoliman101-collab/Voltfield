@@ -162,6 +162,15 @@
 /calculators/watts-to-amps          /calculators/watts-to-amps.html   301!
 # ---- END generated ----
 
+# ---- directory and new-page aliases (hand-kept) ----
+# /calculators/ has 25 pages under it and no index, so trimming a calculator
+# URL back to its folder was a 404. The other three folders already resolve
+# because a same-named .html sits beside them.
+/calculators                        /engineering-calculators.html           301!
+/calculators/                       /engineering-calculators.html           301!
+/contact                            /contact.html                           301!
+/terms                              /terms.html                             301!
+
 # ---- legacy aliases ----
 # Old URLs for pages that were renamed or retired. They used to sit inside the
 # generated block, where the next regeneration would have dropped them.
@@ -199,6 +208,7 @@
 /netlify/*         /   301!
 /app-wrapper/*     /   301!
 /README.md         /   301!
+/SEO-PLAN.md       /   301!
 /APP-STORES.md     /   301!
 /package.json      /   301!
 /package-lock.json /   301!

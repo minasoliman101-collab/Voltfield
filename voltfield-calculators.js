@@ -935,6 +935,49 @@
     if(!btn)return;
     var est=btn.closest('.estimator');
     if(!est||!est.id)return;
+    if(window.__vfExampleRun)return; /* the worked example below is not a use of the tool */
     if(window.vfGtag)window.vfGtag('event','calculator_run',{calc:est.id});
+  });
+})();
+
+/* ---------- open on a worked example, not an empty form ----------
+   Every input already advertises an example in its placeholder ("e.g. 100").
+   A first-time visitor saw a blank form and no result, and had to type three
+   or four numbers before learning what the tool returns; the calculator sites
+   that hold the top results for these queries all open with a filled-in case.
+   So: copy each "e.g. N" placeholder into its empty field and run the tool
+   once. Only fields whose placeholder is a plain number are touched, a field
+   the browser restored a value into is left alone, and a tool is skipped
+   entirely if it carries data-no-example or if the example does not produce a
+   result. The run is flagged so it is not counted as a calculator_run. */
+(function(){
+  var RX=/^e\.g\.\s*(-?\d+(?:\.\d+)?)$/;
+  document.querySelectorAll('.estimator').forEach(function(est){
+    if(est.hasAttribute('data-no-example'))return;
+    var btn=est.querySelector('button[id$="Btn"]');
+    if(!btn)return;
+    var fields=[].slice.call(est.querySelectorAll('input[type="number"]'));
+    if(fields.some(function(i){return i.value!==i.defaultValue;}))return; /* the browser restored what the visitor typed: their state wins */
+    var filled=[];
+    fields.forEach(function(i){if(i.value!=='')return;var m=RX.exec(i.placeholder||'');if(m){i.value=m[1];filled.push(i);}});
+    if(!filled.length)return;
+    window.__vfExampleRun=true;
+    try{btn.click();}finally{window.__vfExampleRun=false;}
+    var res=est.querySelector('.est-result');
+    if(!res||!res.classList.contains('show')||!res.querySelector('b')){
+      /* The example did not give a clean answer for this tool: put it back as it was. */
+      filled.forEach(function(i){i.value='';});
+      if(res){res.className='est-result';res.textContent='';}
+      return;
+    }
+    var note=document.createElement('p');
+    note.className='est-example';
+    note.textContent='Example values shown. Change any input and press '+(btn.textContent||'Calculate').trim()+'.';
+    res.parentNode.insertBefore(note,res.nextSibling);
+    function drop(){if(note.parentNode)note.parentNode.removeChild(note);est.removeEventListener('input',drop);est.removeEventListener('change',drop);}
+    est.addEventListener('input',drop);
+    est.addEventListener('change',drop);
+    /* Typing over an example should replace it, not append to it. */
+    filled.forEach(function(i){i.addEventListener('focus',function f(){i.select();i.removeEventListener('focus',f);});});
   });
 })();

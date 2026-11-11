@@ -165,6 +165,10 @@ const SITE_CONFIG = {
   .ad-unit .ad-lbl{position:absolute;top:4px;left:8px;font:500 8.5px/1 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#8896A6;text-transform:uppercase}
   .ad-unit .ad-ph{width:100%;min-height:90px;border:1px dashed #A7B6C6;background:repeating-linear-gradient(45deg,#E8EDF3,#E8EDF3 12px,#DDE5EC 12px,#DDE5EC 24px);display:flex;align-items:center;justify-content:center;font:500 11px/1.5 'IBM Plex Mono',monospace;color:#8896A6;text-align:center;padding:14px}
   @media(max-width:720px){.ad-unit .ad-box,.ad-unit .ad-ph{min-height:60px}}
+  /* In-content units sit between paragraphs, so the space has to be held
+     before the ad arrives or the text below jumps (CLS). A responsive unit
+     here fills at about 250-280px tall on phones and desktops alike. */
+  .ad-unit[data-ad="incontent"] .ad-box,.ad-unit[data-ad="incontent"] .ad-ph{min-height:280px}
   @media print{.ad-unit{display:none!important}}`;
 
   function boot() {
