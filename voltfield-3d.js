@@ -281,6 +281,12 @@
     /* Skid base with channel ends. */
     g.add(box(THREE, dark, TW + 0.24, 0.16, TD + 0.24, 0, -0.08, 0));
     for (const s of [-1, 1]) g.add(box(THREE, metal, 0.10, 0.20, TD + 0.24, s*(TW/2 + 0.06), -0.06, 0));
+
+    /* Named points for the viewer's callouts (opts.callouts). */
+    callout(THREE, g, 'HV bushings', 0, 2.44, -0.34);
+    callout(THREE, g, 'Conservator tank', -0.55, 2.12, 0.5);
+    callout(THREE, g, 'Cooling radiators', 1.66, 1, 0);
+    callout(THREE, g, 'Rating plate', 0.72, 1.14, 0.74);
     return g;
   }
 
@@ -325,6 +331,7 @@
         const lamp = cyl(THREE, k === 0 ? M.lit : (k === 1 ? signal : dark), 0.028, 0.028, 0.02, 8,
           x - 0.20 + k * 0.09, h*0.68, fz + 0.02);
         lamp.rotation.x = Math.PI/2; g.add(lamp);
+        if (k === 1) blink(lamp, 2.2, i * 0.7, 0.05, 0.9);
       }
 
       /* Middle: breaker compartment door with racking port and handle. */
@@ -428,6 +435,12 @@
     for (const s of [-1, 1]) for (const sz of [-1, 1]) {
       g.add(cyl(THREE, metal, 0.04, 0.04, 0.05, 6, s * (w*n/2 - 0.16), 0.16, sz * (d/2 - 0.12)));
     }
+
+    /* Named points for the viewer's callouts (opts.callouts). */
+    callout(THREE, g, 'Power meter', -0.92, 1.58, 0.55);
+    callout(THREE, g, 'Breaker compartment', 0, 0.86, 0.56);
+    callout(THREE, g, 'Status lamps', 0.75, 1.29, 0.53);
+    callout(THREE, g, 'Rating plate', 1.33, 1.18, 0.1);
     return g;
   }
 
@@ -534,7 +547,7 @@
     for (let i = 0; i < 13; i++) {
       g.add(box(THREE, metal, 0.02, 0.94, 0.035, 1.28, 0.88, -0.46 + i*0.077));
     }
-    fan(THREE, g, metal, blk, {x: 1.12, y: 0.88, z: 0, r: 0.40, blades: 6});
+    fan(THREE, g, metal, blk, {x: 1.12, y: 0.88, z: 0, r: 0.40, blades: 6, axis: 'x', rate: 5});
     /* Fan guard bars across the face. */
     for (let i = 0; i < 5; i++) {
       g.add(box(THREE, metal, 0.02, 0.03, 0.92, 1.06, 0.88 - 0.32 + i*0.16, 0));
@@ -636,6 +649,12 @@
         ['VOLTS', '480Y/277'], ['PF', '0.8'], ['RPM', '1800']
       ])
     });
+
+    /* Named points for the viewer's callouts (opts.callouts). */
+    callout(THREE, g, 'Diesel engine', -0.55, 1.38, 0);
+    callout(THREE, g, 'Alternator', 0.62, 0.74, 0.46);
+    callout(THREE, g, 'Radiator and fan', 1.40, 1.50, 0);
+    callout(THREE, g, 'Controller', 1.02, 0.8, 0.7);
     return g;
   }
 
@@ -1113,18 +1132,80 @@
     }
   }
 
-  /* A fan: outer ring, hub and swept blades. Used on radiators, CRAHs, motors. */
+  /* ---------- motion and callouts ----------
+     Three small conventions the viewer reads after a model is built:
+
+       group.userData.spin    = {axis, rate}   rotate this group, rad/s
+       mesh.userData.blink    = {period, phase, lo, hi}   pulse its emissive
+       object.userData.callout = 'Label'       pin a text label to this point
+
+     A spinning part has to be its own Group: mergeByMaterial batches per
+     parent, so everything inside the group collapses into one mesh that still
+     turns as a unit, and nothing outside it is welded to it. */
+  function spinner(THREE, g, x, y, z, axis, rate){
+    const sp = new THREE.Group();
+    sp.position.set(x, y, z);
+    sp.userData.spin = { axis: axis || 'z', rate: rate == null ? 3 : rate };
+    g.add(sp);
+    return sp;
+  }
+  /* Move a mesh that was positioned in model space into a spinner, keeping it
+     where it was. Lets a builder keep its absolute coordinates. */
+  function toSpin(sp, mesh){
+    mesh.position.sub(sp.position);
+    sp.add(mesh);
+    return mesh;
+  }
+  /* An indicator that pulses. Its material is cloned so that it is not batched
+     with, and does not drag along, every other lamp sharing the original. */
+  function blink(mesh, period, phase, lo, hi){
+    mesh.material = mesh.material.clone();
+    mesh.userData.blink = { period: period || 1.6, phase: phase || 0, lo: lo == null ? 0.05 : lo, hi: hi == null ? 1.1 : hi };
+    return mesh;
+  }
+  function callout(THREE, g, label, x, y, z){
+    const a = new THREE.Object3D();
+    a.position.set(x, y, z);
+    a.userData.callout = label;
+    g.add(a);
+    return a;
+  }
+
+  /* A fan: a dark throat, a rim, and a rotor of pitched blades that turns.
+
+     The first version drew the ring as a solid metal disc with flat blades laid
+     on it, so at any distance a fan read as a grey plate -- on the CRAH, where
+     the two fans are most of the front face, that was the weakest surface on
+     the model. A fan is a hole with something moving in it: the throat is now
+     dark, the blades are pitched so they catch light differently as they turn,
+     and the rotor is a spinner group.
+
+     opts.axis:'x' turns the whole fan to face along X (a genset's radiator fan
+     faces the radiator, not the side of the skid). opts.rate is rad/s. */
   function fan(THREE, g, ring, blade, opts){
     const o = opts, r = o.r || 0.4;
-    const rg = cyl(THREE, ring, r, r, 0.05, 20, o.x, o.y, o.z);
-    rg.rotation.x = Math.PI / 2; g.add(rg);
-    const hub = cyl(THREE, blade, r * 0.22, r * 0.22, 0.07, 10, o.x, o.y, o.z + 0.01);
-    hub.rotation.x = Math.PI / 2; g.add(hub);
+    const holder = new THREE.Group();
+    holder.position.set(o.x || 0, o.y || 0, o.z || 0);
+    if (o.axis === 'x') holder.rotation.y = Math.PI / 2;
+    g.add(holder);
+
+    const throatM = new THREE.MeshStandardMaterial({color: 0x15181C, metalness: .2, roughness: .85});
+    const throat = cyl(THREE, throatM, r * 0.97, r * 0.97, 0.02, 24, 0, 0, -0.012);
+    throat.rotation.x = Math.PI / 2; holder.add(throat);
+    const rim = new THREE.Mesh(new THREE.TorusGeometry(r, r * 0.07, 8, segs(26)), ring);
+    holder.add(rim);
+
+    const rot = spinner(THREE, holder, 0, 0, 0.012, 'z', o.rate == null ? 4.2 : o.rate);
+    const hub = cyl(THREE, blade, r * 0.22, r * 0.20, 0.07, 14, 0, 0, 0.012);
+    hub.rotation.x = Math.PI / 2; rot.add(hub);
     const n = o.blades || 5;
     for (let i = 0; i < n; i++) {
-      const bl = box(THREE, blade, r * 1.5, r * 0.24, 0.02, o.x, o.y, o.z + 0.005);
-      bl.rotation.z = (i / n) * Math.PI;
-      g.add(bl);
+      const a = (i / n) * Math.PI * 2;
+      const bl = box(THREE, ring, r * 0.74, r * 0.30, 0.016, Math.cos(a) * r * 0.57, Math.sin(a) * r * 0.57, 0);
+      bl.rotation.order = 'ZXY';
+      bl.rotation.z = a;
+      bl.rotation.x = 0.50;                       // blade pitch
+      rot.add(bl);
     }
   }
 
@@ -1334,7 +1415,7 @@
       /* Each carrier has a latch handle and an activity LED -- that pairing is
          what makes a drive bay read as a drive bay and not a printed rectangle. */
       g.add(box(THREE, metal, 0.07, bh*0.8, 0.03, bx - 0.15, by, faceZ()+0.015));
-      g.add(box(THREE, M.lit, 0.05, 0.035, 0.02, bx + 0.14, by - bh*0.28, faceZ()+0.015));
+      g.add(blink(box(THREE, M.lit, 0.05, 0.035, 0.02, bx + 0.14, by - bh*0.28, faceZ()+0.015), 0.35 + ((r*cols + c) % 5) * 0.17, (r*cols + c) * 0.9, 0.0, 1.4));
     }
     // vent block on the right, punched rather than printed
     for (let i=0;i<6;i++) for (let r=0;r<(u===1?2:4);r++){
@@ -1343,7 +1424,7 @@
     /* Power button, reset pinhole, status LEDs and a front USB -- the cluster
        of controls at the right-hand end of essentially every rack server. */
     g.add(cyl(THREE, metal, 0.075,0.075,0.035, 12, 1.62, h*0.5, faceZ()+0.01).rotateX(Math.PI/2));
-    g.add(cyl(THREE, M.lit, 0.035,0.035,0.02, 10, 1.78, h*0.72, faceZ()).rotateX(Math.PI/2));
+    g.add(blink(cyl(THREE, M.lit, 0.035,0.035,0.02, 10, 1.78, h*0.72, faceZ()).rotateX(Math.PI/2), 3.0, 0, 0.15, 1.0));
     g.add(cyl(THREE, M.gold, 0.028,0.028,0.02, 10, 1.78, h*0.5, faceZ()).rotateX(Math.PI/2));
     g.add(box(THREE, M.dark, 0.16, 0.07, 0.03, 1.76, h*0.26, faceZ()));   // USB
     /* Pull-out asset tag between the bays and the vents. */
@@ -1385,6 +1466,11 @@
     for (const sx of [-1, 1]) {
       g.add(box(THREE, metal, 0.035, h*0.34, RD - 0.22, sx*(RW/2 + 0.025), h*0.5, -0.06));
     }
+
+    /* Named points for the viewer's callouts (opts.callouts). */
+    callout(THREE, g, 'Drive bays', -0.70, h * 0.5, faceZ() + 0.03);
+    callout(THREE, g, 'Status LEDs', 1.78, h * 0.72, faceZ() + 0.03);
+    callout(THREE, g, 'Rack ears', RW / 2 + 0.07, h * 0.5, RD / 2 + 0.16);
     return g;
   }
   function buildSwitchNet(THREE, color){
@@ -1682,9 +1768,12 @@
 
     /* Drive end: shaft with keyway and a bearing boss. */
     g.add(cyl(THREE, M.dark, 0.26, 0.26, 0.18, 16, 1.24, 1.0, 0).rotateZ(Math.PI/2));
+    /* Everything on the shaft turns as one: shaft, key, coupling half and its
+       set screws. Slow enough to read as rotation rather than a blur. */
+    const rotor = spinner(THREE, g, 0, 1.0, 0, 'x', 2.6);
     const shaft = cyl(THREE, metal, 0.16, 0.16, 0.86, 14, 1.68, 1.0, 0);
-    shaft.rotation.z = Math.PI/2; g.add(shaft);
-    g.add(box(THREE, blk, 0.34, 0.05, 0.09, 1.80, 1.14, 0));                   // key
+    shaft.rotation.z = Math.PI/2; toSpin(rotor, shaft);
+    toSpin(rotor, box(THREE, blk, 0.34, 0.05, 0.09, 1.80, 1.14, 0));           // key
 
     /* Non-drive end: fan cowl with guard slots. */
     const cowl = cyl(THREE, M.dark, 0.80, 0.72, 0.42, 20, -1.42, 1.0, 0);
@@ -1731,10 +1820,10 @@
     /* Coupling half on the shaft, with its set screws -- the drive end now
        drives something. */
     const cph = cyl(THREE, M.dark, 0.28, 0.28, 0.26, 20, 1.92, 1.0, 0);
-    cph.rotation.z = Math.PI/2; g.add(cph);
+    cph.rotation.z = Math.PI/2; toSpin(rotor, cph);
     for (let i = 0; i < 4; i++) {
       const a = (i/4) * Math.PI * 2;
-      g.add(cyl(THREE, metal, 0.030, 0.030, 0.05, 6, 1.92, 1.0 + Math.sin(a)*0.29, Math.cos(a)*0.29));
+      toSpin(rotor, cyl(THREE, metal, 0.030, 0.030, 0.05, 6, 1.92, 1.0 + Math.sin(a)*0.29, Math.cos(a)*0.29));
     }
 
     /* Grease nipples and relief plugs on both bearing housings. */
@@ -1753,6 +1842,12 @@
     for (const sx of [-1, 1]) g.add(cyl(THREE, M.brass, 0.030, 0.030, 0.05, 8, sx*1.06, 0.24, 0.30));
 
     g.add(box(THREE, M.dark, 2.30, 0.10, 1.44, 0, 0.05, 0));                   // base rails
+
+    /* Named points for the viewer's callouts (opts.callouts). */
+    callout(THREE, g, 'Terminal box', -0.05, 2.3, 0.2);
+    callout(THREE, g, 'Drive shaft', 1.75, 1, 0.17);
+    callout(THREE, g, 'Cooling fan', -1.5, 1, 0.72);
+    callout(THREE, g, 'Nameplate', 0.3, 1.44, 0.77);
     return g;
   }
   function buildPanel(THREE, color){
@@ -1876,8 +1971,15 @@
       fan(THREE, g, metal, blk, {x: 0, y: y, z: fz + 0.03, r: 0.38, blades: 7});
       for (let k = 0; k < 4; k++) {                                            // guard rings
         const r = 0.10 + k * 0.09;
-        const ring = cyl(THREE, metal, r, r, 0.012, 18, 0, y, fz + 0.07);
-        ring.rotation.x = Math.PI/2; g.add(ring);
+        /* A wire ring, not a disc. These were solid cylinders, so the largest
+           one covered the whole fan and the unit showed two grey plates where
+           its fans should be. */
+        const ring = new THREE.Mesh(new THREE.TorusGeometry(r, 0.007, 6, segs(22)), metal);
+        ring.position.set(0, y, fz + 0.085); g.add(ring);
+      }
+      for (let k = 0; k < 4; k++) {                                            // guard spokes
+        const sp = box(THREE, metal, 0.74, 0.012, 0.012, 0, y, fz + 0.085);
+        sp.rotation.z = (k / 4) * Math.PI; g.add(sp);
       }
     }
 
@@ -1967,6 +2069,12 @@
     for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
       g.add(cyl(THREE, metal, 0.05, 0.05, 0.06, 8, sx*(W/2 - 0.12), 0.17, sz*(D/2 - 0.12)));
     }
+
+    /* Named points for the viewer's callouts (opts.callouts). */
+    callout(THREE, g, 'EC fans', 0, 1.45, 0.86);
+    callout(THREE, g, 'Filter section', 0, 0.52, 0.82);
+    callout(THREE, g, 'Chilled water pipes', 0.68, 3.3, -0.42);
+    callout(THREE, g, 'Controller', 0.64, 2.44, 0.8);
     return g;
   }
 
@@ -3234,6 +3342,101 @@
          composer. Pulled into a function so the homepage carousel can replace
          the subject without tearing down and rebuilding a WebGL context every
          seven seconds, which is what it used to do. */
+      /* Motion and callouts for the model currently installed (see the
+         conventions above the fan helper). Rebuilt on every install, so a
+         swapped-in model brings its own. */
+      let spinners = [], blinkers = [], anchors = [], coWrap = null, coNodes = [], lastT = 0, coCtr = null;
+      let motionOK = true;
+      try { if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) motionOK = false; } catch (e) {}
+
+      function clearCallouts(){
+        if (coWrap && coWrap.parentNode) coWrap.parentNode.removeChild(coWrap);
+        coWrap = null; coNodes = [];
+      }
+      function buildCallouts(){
+        clearCallouts();
+        if (!o.callouts || !anchors.length) return;
+        if (!document.getElementById('vf3d-co-css')) {
+          const st = document.createElement('style');
+          st.id = 'vf3d-co-css';
+          st.textContent =
+            '.vf3d-co-wrap{position:absolute;inset:0;pointer-events:none;overflow:hidden}' +
+            '.vf3d-co{position:absolute;left:0;top:0;display:flex;align-items:center;gap:7px;white-space:nowrap;' +
+              'font:500 11px/1 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.02em;color:#E8EEF6;' +
+              'transition:opacity .35s ease;will-change:transform}' +
+            '.vf3d-co{align-items:flex-start}.vf3d-co i{margin-top:5px;flex:none;width:9px;height:9px;border-radius:50%;background:#FFC400;box-shadow:0 0 0 3px rgba(255,196,0,.22),0 0 0 1px rgba(16,27,45,.9)}' +
+            '.vf3d-co b{transition:transform .25s ease;font-weight:500;background:rgba(16,27,45,.82);border:1px solid rgba(141,160,184,.35);border-radius:4px;padding:4px 7px}' +
+            '.vf3d-co.is-left{flex-direction:row-reverse}' +
+            '.vf3d-co.is-back{opacity:0}' +
+            '@media(max-width:620px){.vf3d-co b{display:none}}' +
+            '@media(prefers-reduced-motion:reduce){.vf3d-co{transition:none}}';
+          document.head.appendChild(st);
+        }
+        if (getComputedStyle(container).position === 'static') container.style.position = 'relative';
+        coWrap = document.createElement('div');
+        coWrap.className = 'vf3d-co-wrap';
+        /* The same names are in the list for a screen reader, once, rather
+           than as a set of things moving round a canvas. */
+        coWrap.setAttribute('aria-hidden', 'true');
+        coNodes = anchors.map(function(a){
+          const el = document.createElement('span');
+          el.className = 'vf3d-co is-back';
+          const dot = document.createElement('i'), tx = document.createElement('b');
+          tx.textContent = a.userData.callout;
+          el.appendChild(dot); el.appendChild(tx);
+          coWrap.appendChild(el);
+          return el;
+        });
+        container.appendChild(coWrap);
+        if (renderer && renderer.domElement) {
+          renderer.domElement.setAttribute('aria-label', '3D model of ' + (o.label || 'power equipment') +
+            '. Labelled parts: ' + anchors.map(function(a){ return a.userData.callout; }).join(', ') + '.');
+        }
+      }
+      const _cv = new THREE.Vector3(), _cc = new THREE.Vector3(), _cd = new THREE.Vector3();
+      function placeCallouts(){
+        if (!coWrap) return;
+        const cw = container.clientWidth, ch = container.clientHeight;
+        _cc.copy(camera.position).sub(coCtr);
+        for (let i = 0; i < anchors.length; i++) {
+          const el = coNodes[i];
+          anchors[i].getWorldPosition(_cv);
+          /* Facing test against the model's centre: a point on the far side of
+             the model fades out instead of floating over the near side. */
+          _cd.copy(_cv).sub(coCtr);
+          const back = _cd.dot(_cc) < -0.12 * _cd.length() * _cc.length();
+          _cv.project(camera);
+          const x = (_cv.x * 0.5 + 0.5) * cw, y = (-_cv.y * 0.5 + 0.5) * ch;
+          const off = x < 4 || x > cw - 4 || y < 4 || y > ch - 4 || _cv.z > 1;
+          el.classList.toggle('is-back', back || off);
+          const left = x > cw * 0.58;
+          el.classList.toggle('is-left', left);
+          /* Anchor on the dot: its centre is 4.5px in from the leading edge. */
+          el.style.transform = 'translate(' + (left ? 'calc(' + (x + 4.5).toFixed(1) + 'px - 100%)' : (x - 4.5).toFixed(1) + 'px') + ',' + (y - 10).toFixed(1) + 'px)';
+          el._x = x; el._y = y; el._left = left; el._on = !(back || off);
+        }
+        /* Two points that project close together would print their labels on
+           top of each other. The dots stay exactly on their points; only the
+           text of the lower one is pushed down, far enough to clear. */
+        const vis = coNodes.filter(function(e){ return e._on; }).sort(function(a, b){ return a._y - b._y; });
+        const placed = [];
+        for (let i = 0; i < vis.length; i++) {
+          const e = vis[i];
+          /* Horizontal extent of the whole label, whichever side of its dot
+             it sits on. Width is read once; the text never changes. */
+          if (!e._w) e._w = e.offsetWidth || 120;
+          const x0 = e._left ? e._x - e._w : e._x, x1 = e._left ? e._x : e._x + e._w;
+          let ty = e._y;
+          for (let j = 0; j < placed.length; j++) {
+            const p = placed[j];
+            if (x0 < p.x1 + 6 && x1 > p.x0 - 6 && ty < p.ty + 24) ty = p.ty + 24;
+          }
+          placed.push({ x0: x0, x1: x1, ty: ty });
+          const dy = ty - e._y;
+          if (e._dy !== dy) { e._dy = dy; e.lastChild.style.transform = dy ? 'translateY(' + dy.toFixed(1) + 'px)' : ''; }
+        }
+      }
+
       function install(buildFn){
         /* Set around the build and restored after it. Builders run
            synchronously, so no other mount can observe the raised value. */
@@ -3256,6 +3459,15 @@
            against an unmerged one; nothing in the site sets it. */
         if (o.merge !== false) mergeByMaterial(THREE, model);
         scene.add(model);
+
+        spinners = []; blinkers = []; anchors = [];
+        model.traverse(function(n){
+          if (n.userData.spin) spinners.push(n);
+          if (n.userData.blink && n.material) blinkers.push(n);
+          if (n.userData.callout) anchors.push(n);
+        });
+        coCtr = new THREE.Box3().setFromObject(model).getCenter(new THREE.Vector3());
+        buildCallouts();
 
         /* Self-shadowing only -- no ground plane. These shapes are framed on their
            own bounds and several (conductor, busway, the PCB parts) have no ground
@@ -3421,6 +3633,7 @@
          canvases behind them are cached at module scope and are not touched. */
       function uninstall(){
         if (!model) return;
+        clearCallouts(); spinners = []; blinkers = []; anchors = [];
         scene.remove(model);
         model.traverse(function(n){
           if (!n.isMesh && !n.isInstancedMesh && !n.isPoints && !n.isLine) return;
@@ -3533,6 +3746,25 @@
         animId = null;
         if (disposed || !onScreen || document.hidden) return;
         orbit.tick();
+        {
+          const now = performance.now();
+          /* Clamped: the loop pauses off-screen and in a hidden tab, and the
+             first frame back must not spin a fan through the whole absence. */
+          const dt = Math.min(0.05, lastT ? (now - lastT) / 1000 : 0.016);
+          lastT = now;
+          if (motionOK) {
+            for (let i = 0; i < spinners.length; i++) {
+              const sp = spinners[i];
+              sp.rotation[sp.userData.spin.axis] += sp.userData.spin.rate * dt;
+            }
+            for (let i = 0; i < blinkers.length; i++) {
+              const b = blinkers[i].userData.blink;
+              const k = 0.5 + 0.5 * Math.sin((now / 1000 / b.period + b.phase) * Math.PI * 2);
+              blinkers[i].material.emissiveIntensity = b.lo + (b.hi - b.lo) * k * k;
+            }
+          }
+          if (coWrap) placeCallouts();
+        }
         if (composer) composer.render(); else renderer.render(scene, camera);
         animId = requestAnimationFrame(animate);
       }
@@ -3592,6 +3824,7 @@
       /* The composer holds several full-size render targets of its own -- more
          GPU memory than the env map -- so it has to go the same way. */
       if (composer) { try { composer.dispose(); } catch (e) {} composer = null; }
+      if (container) { const cw0 = container.querySelector('.vf3d-co-wrap'); if (cw0) container.removeChild(cw0); }
       if (renderer) {
         renderer.dispose();
         // free the GL context immediately rather than waiting for GC, otherwise
