@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Motor Speed Chart (Poles, RPM and Torque) | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/charts/motor-speed-chart.html">
+<meta name="description" content="AC motor speed chart: synchronous rpm for 2 to 12 poles at 60 Hz and 50 Hz, and the full-load torque per horsepower and per kW at each speed.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Motor Speed Chart">
+<meta property="og:description" content="AC motor speed chart: synchronous rpm for 2 to 12 poles at 60 Hz and 50 Hz, and the full-load torque per horsepower and per kW at each speed.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://voltfield.org/charts/motor-speed-chart.html">
+<meta property="og:image" content="https://voltfield.org/social/social-motor-speed-chart.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-motor-speed-chart.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Reference charts","item":"https://voltfield.org/reference-charts.html"},{"@type":"ListItem","position":3,"name":"Motor Speed Chart","item":"https://voltfield.org/charts/motor-speed-chart.html"}]},{"@type":"WebPage","name":"Motor Speed Chart","description":"AC motor speed chart: synchronous rpm for 2 to 12 poles at 60 Hz and 50 Hz, and the full-load torque per horsepower and per kW at each speed.","url":"https://voltfield.org/charts/motor-speed-chart.html","dateModified":"2026-11-11","inLanguage":"en-US","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What rpm is a 4 pole motor?","acceptedAnswer":{"@type":"Answer","text":"Its synchronous speed is 1,800 rpm at 60 Hz and 1,500 rpm at 50 Hz. A four-pole induction motor at full load typically runs between about 1,725 and 1,780 rpm on 60 Hz."}},{"@type":"Question","name":"How do I tell how many poles a motor has?","acceptedAnswer":{"@type":"Answer","text":"From the nameplate speed. Find the synchronous speed just above it in the chart: about 3,500 rpm is two poles, about 1,750 is four, about 1,150 is six and about 870 is eight, all at 60 Hz."}},{"@type":"Question","name":"Why does a slower motor have more torque?","acceptedAnswer":{"@type":"Answer","text":"Power is torque times speed. For the same power, halving the speed doubles the torque. The motor needs a larger rotor and frame to produce that torque, which is why low-speed motors are bigger and more expensive."}}]}]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+<style>
+.chart-actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 4px}
+.chart-actions button{font:600 12px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:10px 14px;min-height:40px;
+  background:var(--card);color:var(--ink);border:1px solid var(--line-dark);border-radius:var(--r-s,6px);cursor:pointer}
+.chart-actions button:hover{border-color:var(--signal)}
+.chartwrap{overflow-x:auto;margin:14px 0 6px;border:1px solid var(--line);border-radius:var(--r-m,8px)}
+.chartwrap:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+.charttbl{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums}
+.charttbl th,.charttbl td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.charttbl tr:last-child td,.charttbl tbody tr:last-child th{border-bottom:0}
+.charttbl thead th{background:var(--sunk);font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--ink);position:sticky;top:0}
+.charttbl th:first-child,.charttbl td:first-child{text-align:left}
+.charttbl tbody th{font-weight:600;color:var(--ink);background:var(--card);position:sticky;left:0}
+.charttbl tbody td{color:var(--ink-2)}
+.charttbl tbody tr:hover td,.charttbl tbody tr:hover th{background:var(--sunk)}
+.chartcap{font-size:13.5px;color:var(--slate);margin:6px 0 22px}
+@media print{
+  header.site,footer,.chart-actions,.ad-unit,.rel,.provenance,.skip-link,.totop,#themeToggle{display:none!important}
+  .chartwrap{overflow:visible;border:0}
+  .charttbl{font-size:10.5pt}.charttbl th,.charttbl td{padding:4px 8px;white-space:normal}
+  .charttbl thead th,.charttbl tbody th{position:static}
+  body{background:#fff!important;color:#000!important}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/reference-charts.html" style="color:var(--slate);text-decoration:none">Reference charts</a> / <span style="color:var(--ink)">Motor Speed Chart</span></nav>
+    <div class="eyebrow">Reference Chart &middot; Free to Print</div>
+    <h1>Motor Speed Chart</h1>
+    <p class="dek">Synchronous speed for each pole count at 60 Hz and 50 Hz, and how much torque a horsepower is worth at that speed.</p>
+  </div>
+</section>
+
+<div class="artwrap">
+  <p><b>An AC motor's synchronous speed is 120 times the frequency divided by the number of poles.</b> At 60 Hz that is 3,600 rpm for two poles and 1,800 for four. An induction motor runs a few percent below these figures at full load; the shortfall is its slip.</p>
+  <div class="chart-actions">
+    <button type="button" data-chart-print>Print this chart</button>
+    <button type="button" data-chart-csv="motor-speed-chart">Download as CSV</button>
+  </div>
+
+  <h2 id="rpm">Synchronous speed and torque</h2>
+  <div class="chartwrap" tabindex="0" role="region" aria-labelledby="rpm">
+    <table class="charttbl" data-chart="rpm">
+      <thead><tr><th scope="col">Poles</th><th scope="col">60 Hz (rpm)</th><th scope="col">50 Hz (rpm)</th><th scope="col">lb-ft per hp at 60 Hz</th><th scope="col">N&middot;m per kW at 50 Hz</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">2</th><td>3,600</td><td>3,000</td><td>1.46</td><td>3.18</td></tr>
+      <tr><th scope="row">4</th><td>1,800</td><td>1,500</td><td>2.92</td><td>6.37</td></tr>
+      <tr><th scope="row">6</th><td>1,200</td><td>1,000</td><td>4.38</td><td>9.55</td></tr>
+      <tr><th scope="row">8</th><td>900</td><td>750</td><td>5.84</td><td>12.73</td></tr>
+      <tr><th scope="row">10</th><td>720</td><td>600</td><td>7.29</td><td>15.92</td></tr>
+      <tr><th scope="row">12</th><td>600</td><td>500</td><td>8.75</td><td>19.10</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="chartcap">Torque per horsepower is at the 60 Hz synchronous speed; torque per kW is at the 50 Hz speed. Actual full-load torque is slightly higher, because the motor runs slightly slower.</p>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2>How to read it</h2>
+  <p>A nameplate speed of 1,750 or 1,775 rpm means a four-pole motor on 60 Hz, since the nearest synchronous speed above it is 1,800. The difference, 25 to 50 rpm, is the slip at full load.</p>
+  <p>Torque rises as speed falls. A 10 hp motor delivers about 15 lb-ft at two poles and about 58 lb-ft at eight. That is why a slow motor of the same horsepower is physically larger.</p>
+  <p>On a variable speed drive, synchronous speed follows the output frequency: a four-pole motor at 30 Hz has a synchronous speed of 900 rpm.</p>
+
+  <h2>How the values are calculated</h2>
+    <div class="formula">N = 120 &times; f / poles<br>T (lb-ft) = 5,252 &times; hp / rpm<br>T (N&middot;m) = 9,549 &times; kW / rpm</div>
+  <p>Every figure in the chart comes from the formulas above. Nothing is copied from a published table, so any cell can be checked by hand.</p>
+
+  <h2>What this chart does not tell you</h2>
+  <p>These are synchronous speeds. The speed an induction motor actually runs at depends on its load and its design, and comes from the nameplate. Torque figures are running torque at rated power; starting and breakdown torque are separate values set by the motor's design letter.</p>
+    <div class="callout"><b>This is a reference, not a design.</b> It is here to give you the right order of magnitude and a figure to check against. It does not replace the adopted code or a calculation by a qualified engineer.</div>
+
+  <h2>Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What rpm is a 4 pole motor?</summary>
+    <p style="margin-top:10px">Its synchronous speed is 1,800 rpm at 60 Hz and 1,500 rpm at 50 Hz. A four-pole induction motor at full load typically runs between about 1,725 and 1,780 rpm on 60 Hz.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How do I tell how many poles a motor has?</summary>
+    <p style="margin-top:10px">From the nameplate speed. Find the synchronous speed just above it in the chart: about 3,500 rpm is two poles, about 1,750 is four, about 1,150 is six and about 870 is eight, all at 60 Hz.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why does a slower motor have more torque?</summary>
+    <p style="margin-top:10px">Power is torque times speed. For the same power, halving the speed doubles the torque. The motor needs a larger rotor and frame to produce that torque, which is why low-speed motors are bigger and more expensive.</p>
+  </details>
+
+  <h2>Related</h2>
+    <div class="rel">
+      <a href="/calculators/motor-speed.html">Motor Speed &amp; Slip Calculator</a>
+      <a href="/calculators/motor-torque.html">Motor Torque Calculator</a>
+      <a href="/charts/hp-to-kw-chart.html">HP to kW Chart</a>
+      <a href="/guide-vfd-vs-soft-starter.html">VFD vs. Soft Starter</a>
+      <a href="/guide-pump-and-fan-affinity-laws.html">Pump and Fan Affinity Laws</a>
+      <a href="/reference-charts.html">All reference charts</a>
+    </div>
+
+  <aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>AC motor speed chart: synchronous rpm for 2 to 12 poles at 60 Hz and 50 Hz, and the full-load torque per horsepower and per kW at each speed.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>The relation between supply frequency, pole count and rotating field speed</li><li>NEMA MG 1 and IEC 60034-1 &mdash; nameplate speed and ratings</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>These are synchronous speeds. The speed an induction motor actually runs at depends on its load and its design, and comes from the nameplate. Torque figures are running torque at rated power; starting and breakdown torque are separate values set by the motor's design letter.</dd>
+      <dt>Provenance</dt>
+      <dd>Last reviewed November 11, 2026. Computed by Voltfield from the formulas shown on the page and maintained by the Voltfield editorial team. Free to print, cite and link to.</dd>
+    </dl>
+  </aside>
+
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h4>Voltfield</h4>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h4>Sectors</h4><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h4>Compliance</h4><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="/voltfield-site-config.js"></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+<script>
+/* Print, and a CSV of every table on the page. No dependencies. */
+(function(){
+  var p=document.querySelector('[data-chart-print]');
+  if(p)p.addEventListener('click',function(){window.print();});
+  var c=document.querySelector('[data-chart-csv]');
+  if(c)c.addEventListener('click',function(){
+    var out=[];
+    document.querySelectorAll('table.charttbl').forEach(function(t,i){
+      if(i)out.push('');
+      var h=t.closest('.chartwrap').previousElementSibling;
+      if(h)out.push('"'+h.textContent.replace(/"/g,'""')+'"');
+      t.querySelectorAll('tr').forEach(function(r){
+        out.push([].map.call(r.children,function(x){
+          var v=x.textContent.trim().replace(/\u2014/g,'');
+          var n=v.replace(/,/g,'');
+          return /^-?\d+(\.\d+)?$/.test(n)?n:'"'+v.replace(/"/g,'""')+'"';
+        }).join(','));
+      });
+    });
+    out.push('','"Source: voltfield.org'+location.pathname+'"');
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob(['\ufeff'+out.join('\r\n')],{type:'text/csv'}));
+    a.download='voltfield-'+c.getAttribute('data-chart-csv')+'.csv';
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);
+    if(window.vfGtag)window.vfGtag('event','chart_csv',{chart:c.getAttribute('data-chart-csv')});
+  });
+})();
+</script>
+</body>
+</html>

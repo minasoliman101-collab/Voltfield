@@ -1,5 +1,14 @@
 {
   "items": [
+    {"title": "Reference Charts", "url": "reference-charts.html", "category": "Tool", "description": "Printable electrical and cooling reference charts, each computed from a formula shown on the page."},
+    {"title": "AWG Wire Size Chart", "url": "charts/awg-wire-size-chart.html", "category": "Tool", "description": "Diameter, area in cmil and mm², and resistance per 1000 ft for 18 AWG through 1000 kcmil."},
+    {"title": "kVA to Amps Chart", "url": "charts/kva-to-amps-chart.html", "category": "Tool", "description": "Full-load amps for standard transformer sizes at 208, 240, 480 and 600 V."},
+    {"title": "kW to Amps Chart", "url": "charts/kw-to-amps-chart.html", "category": "Tool", "description": "Current for 1 kW to 1,000 kW at 208, 240, 480 and 600 V three-phase, and 120 and 240 V single-phase."},
+    {"title": "Breaker Size Chart", "url": "charts/breaker-size-chart.html", "category": "Tool", "description": "Each standard breaker rating with the continuous load it can carry and what that is in kW."},
+    {"title": "Voltage Drop Chart", "url": "charts/voltage-drop-chart.html", "category": "Tool", "description": "The longest run each copper wire size can make at 3% drop, for 120 V, 240 V and 480 V circuits."},
+    {"title": "Motor Speed Chart", "url": "charts/motor-speed-chart.html", "category": "Tool", "description": "Synchronous speed for 2 to 12 poles at 60 and 50 Hz, with the torque each horsepower produces."},
+    {"title": "HP to kW Chart", "url": "charts/hp-to-kw-chart.html", "category": "Tool", "description": "Standard NEMA horsepower ratings in kW, and standard IEC kW ratings in horsepower."},
+    {"title": "Cooling Load Chart", "url": "charts/cooling-load-chart.html", "category": "Tool", "description": "IT load in kW as BTU/h and tons, with the airflow and chilled water flow each needs."},
     {"title": "Airflow (CFM) Calculator", "url": "calculators/airflow-cfm.html", "category": "Calculator", "description": "The air a heat load needs at a given temperature rise, with CFM per kW."},
     {"title": "Chilled Water Flow Calculator", "url": "calculators/chilled-water-flow.html", "category": "Calculator", "description": "GPM from tons or kW and the supply-return temperature difference."},
     {"title": "Pump Power Calculator", "url": "calculators/pump-power.html", "category": "Calculator", "description": "Brake horsepower and motor kW from GPM, head and efficiency."},

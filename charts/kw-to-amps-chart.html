@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>kW to Amps Chart (Three-Phase and Single-Phase) | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/charts/kw-to-amps-chart.html">
+<meta name="description" content="kW to amps chart for three-phase loads at 208, 240, 480 and 600 V and single-phase loads at 120 and 240 V, with the formula and how power factor changes it.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="kW to Amps Chart">
+<meta property="og:description" content="kW to amps chart for three-phase loads at 208, 240, 480 and 600 V and single-phase loads at 120 and 240 V, with the formula and how power factor changes it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://voltfield.org/charts/kw-to-amps-chart.html">
+<meta property="og:image" content="https://voltfield.org/social/social-kw-to-amps-chart.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-kw-to-amps-chart.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Reference charts","item":"https://voltfield.org/reference-charts.html"},{"@type":"ListItem","position":3,"name":"kW to Amps Chart","item":"https://voltfield.org/charts/kw-to-amps-chart.html"}]},{"@type":"WebPage","name":"kW to Amps Chart","description":"kW to amps chart for three-phase loads at 208, 240, 480 and 600 V and single-phase loads at 120 and 240 V, with the formula and how power factor changes it.","url":"https://voltfield.org/charts/kw-to-amps-chart.html","dateModified":"2026-11-11","inLanguage":"en-US","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many amps is 100 kW at 480 V?","acceptedAnswer":{"@type":"Answer","text":"About 134 A per phase at a power factor of 0.9, on a three-phase supply. At unity power factor it is 120 A, and at 0.8 it is 150 A."}},{"@type":"Question","name":"How many amps is 1 kW?","acceptedAnswer":{"@type":"Answer","text":"It depends on the voltage. On single-phase, 1 kW is 8.3 A at 120 V and 4.2 A at 240 V for a resistive load. On three-phase at 0.9 power factor it is 3.1 A at 208 V and 1.3 A at 480 V."}},{"@type":"Question","name":"Why is the three-phase current lower than single-phase for the same power?","acceptedAnswer":{"@type":"Answer","text":"Three conductors share the power, and the factor of 1.732 in the formula reflects that. For the same voltage and power, the current in each three-phase conductor is the single-phase current divided by 1.732."}}]}]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+<style>
+.chart-actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 4px}
+.chart-actions button{font:600 12px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:10px 14px;min-height:40px;
+  background:var(--card);color:var(--ink);border:1px solid var(--line-dark);border-radius:var(--r-s,6px);cursor:pointer}
+.chart-actions button:hover{border-color:var(--signal)}
+.chartwrap{overflow-x:auto;margin:14px 0 6px;border:1px solid var(--line);border-radius:var(--r-m,8px)}
+.chartwrap:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+.charttbl{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums}
+.charttbl th,.charttbl td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.charttbl tr:last-child td,.charttbl tbody tr:last-child th{border-bottom:0}
+.charttbl thead th{background:var(--sunk);font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--ink);position:sticky;top:0}
+.charttbl th:first-child,.charttbl td:first-child{text-align:left}
+.charttbl tbody th{font-weight:600;color:var(--ink);background:var(--card);position:sticky;left:0}
+.charttbl tbody td{color:var(--ink-2)}
+.charttbl tbody tr:hover td,.charttbl tbody tr:hover th{background:var(--sunk)}
+.chartcap{font-size:13.5px;color:var(--slate);margin:6px 0 22px}
+@media print{
+  header.site,footer,.chart-actions,.ad-unit,.rel,.provenance,.skip-link,.totop,#themeToggle{display:none!important}
+  .chartwrap{overflow:visible;border:0}
+  .charttbl{font-size:10.5pt}.charttbl th,.charttbl td{padding:4px 8px;white-space:normal}
+  .charttbl thead th,.charttbl tbody th{position:static}
+  body{background:#fff!important;color:#000!important}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/reference-charts.html" style="color:var(--slate);text-decoration:none">Reference charts</a> / <span style="color:var(--ink)">kW to Amps Chart</span></nav>
+    <div class="eyebrow">Reference Chart &middot; Free to Print</div>
+    <h1>kW to Amps Chart</h1>
+    <p class="dek">Current for a given real power at the common three-phase and single-phase voltages.</p>
+  </div>
+</section>
+
+<div class="artwrap">
+  <p><b>Three-phase amps are kW times 1,000, divided by 1.732 times the voltage times the power factor.</b> At 480 V and a power factor of 0.9, each kW draws about 1.34 A, so 100 kW is 134 A. The three-phase table below is worked at 0.9; the note under it says how to adjust for any other value.</p>
+  <div class="chart-actions">
+    <button type="button" data-chart-print>Print this chart</button>
+    <button type="button" data-chart-csv="kw-to-amps-chart">Download as CSV</button>
+  </div>
+
+  <h2 id="kw3">Three-phase, power factor 0.9</h2>
+  <div class="chartwrap" tabindex="0" role="region" aria-labelledby="kw3">
+    <table class="charttbl" data-chart="kw3">
+      <thead><tr><th scope="col">kW</th><th scope="col">208 V</th><th scope="col">240 V</th><th scope="col">480 V</th><th scope="col">600 V</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">1</th><td>3.08</td><td>2.67</td><td>1.34</td><td>1.07</td></tr>
+      <tr><th scope="row">2</th><td>6.17</td><td>5.35</td><td>2.67</td><td>2.14</td></tr>
+      <tr><th scope="row">5</th><td>15.4</td><td>13.4</td><td>6.68</td><td>5.35</td></tr>
+      <tr><th scope="row">7.5</th><td>23.1</td><td>20.0</td><td>10.0</td><td>8.02</td></tr>
+      <tr><th scope="row">10</th><td>30.8</td><td>26.7</td><td>13.4</td><td>10.7</td></tr>
+      <tr><th scope="row">15</th><td>46.3</td><td>40.1</td><td>20.0</td><td>16.0</td></tr>
+      <tr><th scope="row">20</th><td>61.7</td><td>53.5</td><td>26.7</td><td>21.4</td></tr>
+      <tr><th scope="row">25</th><td>77.1</td><td>66.8</td><td>33.4</td><td>26.7</td></tr>
+      <tr><th scope="row">30</th><td>92.5</td><td>80.2</td><td>40.1</td><td>32.1</td></tr>
+      <tr><th scope="row">40</th><td>123</td><td>107</td><td>53.5</td><td>42.8</td></tr>
+      <tr><th scope="row">50</th><td>154</td><td>134</td><td>66.8</td><td>53.5</td></tr>
+      <tr><th scope="row">75</th><td>231</td><td>200</td><td>100</td><td>80.2</td></tr>
+      <tr><th scope="row">100</th><td>308</td><td>267</td><td>134</td><td>107</td></tr>
+      <tr><th scope="row">150</th><td>463</td><td>401</td><td>200</td><td>160</td></tr>
+      <tr><th scope="row">200</th><td>617</td><td>535</td><td>267</td><td>214</td></tr>
+      <tr><th scope="row">250</th><td>771</td><td>668</td><td>334</td><td>267</td></tr>
+      <tr><th scope="row">500</th><td>1,542</td><td>1,336</td><td>668</td><td>535</td></tr>
+      <tr><th scope="row">750</th><td>2,313</td><td>2,005</td><td>1,002</td><td>802</td></tr>
+      <tr><th scope="row">1,000</th><td>3,084</td><td>2,673</td><td>1,336</td><td>1,069</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="chartcap">Amps per phase. For another power factor, multiply by 0.9 and divide by yours: at 0.8, the figures are 12.5 percent higher.</p>
+
+  <h2 id="kw1">Single-phase, power factor 1.0</h2>
+  <div class="chartwrap" tabindex="0" role="region" aria-labelledby="kw1">
+    <table class="charttbl" data-chart="kw1">
+      <thead><tr><th scope="col">kW</th><th scope="col">120 V</th><th scope="col">240 V</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">0.5</th><td>4.17</td><td>2.08</td></tr>
+      <tr><th scope="row">1</th><td>8.33</td><td>4.17</td></tr>
+      <tr><th scope="row">1.5</th><td>12.5</td><td>6.25</td></tr>
+      <tr><th scope="row">2</th><td>16.7</td><td>8.33</td></tr>
+      <tr><th scope="row">3</th><td>25.0</td><td>12.5</td></tr>
+      <tr><th scope="row">4</th><td>33.3</td><td>16.7</td></tr>
+      <tr><th scope="row">5</th><td>41.7</td><td>20.8</td></tr>
+      <tr><th scope="row">7.5</th><td>62.5</td><td>31.3</td></tr>
+      <tr><th scope="row">10</th><td>83.3</td><td>41.7</td></tr>
+      <tr><th scope="row">15</th><td>125</td><td>62.5</td></tr>
+      <tr><th scope="row">20</th><td>167</td><td>83.3</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="chartcap">Amps for a resistive load such as a heater. For a load with a lower power factor, divide by it.</p>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2>How to read it</h2>
+  <p>Find the load in the first column and read across to the system voltage. The three-phase figures are line current, the current in each of the three conductors.</p>
+  <p>Power factor matters. The same 100 kW at 480 V draws 120 A at unity power factor, 134 A at 0.9 and 150 A at 0.8. If you do not know the power factor of a motor load, 0.85 is a more cautious assumption than 0.9.</p>
+
+  <h2>How the values are calculated</h2>
+    <div class="formula">I = kW &times; 1000 / (1.732 &times; V &times; PF)&nbsp; [three-phase]<br>I = kW &times; 1000 / (V &times; PF)&nbsp; [single-phase]</div>
+  <p>Every figure in the chart comes from the formulas above. Nothing is copied from a published table, so any cell can be checked by hand.</p>
+
+  <h2>What this chart does not tell you</h2>
+  <p>This is steady-state current at the stated power factor. It is not the current to size a conductor or a breaker from: a continuous load is taken at 125 percent, motors are sized from the code tables and not from nameplate power, and starting current is several times the running figure.</p>
+    <div class="callout"><b>This is a reference, not a design.</b> It is here to give you the right order of magnitude and a figure to check against. It does not replace the adopted code or a calculation by a qualified engineer.</div>
+
+  <h2>Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How many amps is 100 kW at 480 V?</summary>
+    <p style="margin-top:10px">About 134 A per phase at a power factor of 0.9, on a three-phase supply. At unity power factor it is 120 A, and at 0.8 it is 150 A.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How many amps is 1 kW?</summary>
+    <p style="margin-top:10px">It depends on the voltage. On single-phase, 1 kW is 8.3 A at 120 V and 4.2 A at 240 V for a resistive load. On three-phase at 0.9 power factor it is 3.1 A at 208 V and 1.3 A at 480 V.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why is the three-phase current lower than single-phase for the same power?</summary>
+    <p style="margin-top:10px">Three conductors share the power, and the factor of 1.732 in the formula reflects that. For the same voltage and power, the current in each three-phase conductor is the single-phase current divided by 1.732.</p>
+  </details>
+
+  <h2>Related</h2>
+    <div class="rel">
+      <a href="/calculators/kw-to-amps.html">kW to Amps Calculator</a>
+      <a href="/calculators/amps-to-kw.html">Amps to kW Calculator</a>
+      <a href="/calculators/watts-to-amps.html">Watts to Amps Calculator</a>
+      <a href="/charts/kva-to-amps-chart.html">kVA to Amps Chart</a>
+      <a href="/guide-kw-vs-kva.html">kW vs. kVA Explained</a>
+      <a href="/reference-charts.html">All reference charts</a>
+    </div>
+
+  <aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>kW to amps chart for three-phase loads at 208, 240, 480 and 600 V and single-phase loads at 120 and 240 V, with the formula and how power factor changes it.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>The definitions of real power in single-phase and balanced three-phase systems</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>This is steady-state current at the stated power factor. It is not the current to size a conductor or a breaker from: a continuous load is taken at 125 percent, motors are sized from the code tables and not from nameplate power, and starting current is several times the running figure.</dd>
+      <dt>Provenance</dt>
+      <dd>Last reviewed November 11, 2026. Computed by Voltfield from the formulas shown on the page and maintained by the Voltfield editorial team. Free to print, cite and link to.</dd>
+    </dl>
+  </aside>
+
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h4>Voltfield</h4>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h4>Sectors</h4><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h4>Compliance</h4><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="/voltfield-site-config.js"></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+<script>
+/* Print, and a CSV of every table on the page. No dependencies. */
+(function(){
+  var p=document.querySelector('[data-chart-print]');
+  if(p)p.addEventListener('click',function(){window.print();});
+  var c=document.querySelector('[data-chart-csv]');
+  if(c)c.addEventListener('click',function(){
+    var out=[];
+    document.querySelectorAll('table.charttbl').forEach(function(t,i){
+      if(i)out.push('');
+      var h=t.closest('.chartwrap').previousElementSibling;
+      if(h)out.push('"'+h.textContent.replace(/"/g,'""')+'"');
+      t.querySelectorAll('tr').forEach(function(r){
+        out.push([].map.call(r.children,function(x){
+          var v=x.textContent.trim().replace(/\u2014/g,'');
+          var n=v.replace(/,/g,'');
+          return /^-?\d+(\.\d+)?$/.test(n)?n:'"'+v.replace(/"/g,'""')+'"';
+        }).join(','));
+      });
+    });
+    out.push('','"Source: voltfield.org'+location.pathname+'"');
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob(['\ufeff'+out.join('\r\n')],{type:'text/csv'}));
+    a.download='voltfield-'+c.getAttribute('data-chart-csv')+'.csv';
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);
+    if(window.vfGtag)window.vfGtag('event','chart_csv',{chart:c.getAttribute('data-chart-csv')});
+  });
+})();
+</script>
+</body>
+</html>

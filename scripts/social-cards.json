@@ -64,6 +64,14 @@
   "shared": 1
  },
  {
+  "file": "social-awg-wire-size-chart.jpg",
+  "eyebrow": "ENGINEERING REFERENCE",
+  "title": "AWG Wire Size Chart",
+  "subtitle": "AWG wire size chart: diameter in inches and mm, area in circular mils and mm², and copper and aluminum resistance per 1000 ft, from 18 AWG to 1000 kcmil.",
+  "url": "voltfield.org/charts/awg-wire-size-chart",
+  "shared": 1
+ },
+ {
   "file": "social-battery-runtime.jpg",
   "eyebrow": "CALCULATOR",
   "title": "Battery Runtime Calculator",
@@ -85,6 +93,14 @@
   "title": "BOM Generator — see every component inside an OEM part",
   "subtitle": "Generate a full component-level Bill of Materials for 150+ engineered part families: transformers, switchgear, inverters, BESS blocks, valves, pumps, motors and more.",
   "url": "voltfield.org/voltfield-bom-generator",
+  "shared": 1
+ },
+ {
+  "file": "social-breaker-size-chart.jpg",
+  "eyebrow": "ENGINEERING REFERENCE",
+  "title": "Breaker Size Chart",
+  "subtitle": "Breaker size chart: every standard rating from 15 A to 1200 A with its 80 percent continuous load in amps and the equivalent kW at 120, 240, 208 and 480 V.",
+  "url": "voltfield.org/charts/breaker-size-chart",
   "shared": 1
  },
  {
@@ -117,6 +133,14 @@
   "title": "Conduit Fill Calculator",
   "subtitle": "Check conduit fill with mixed conductor sizes: the Chapter 9 Table 1 caps, what counts toward fill, and the 60 percent nipple allowance. Free, no signup.",
   "url": "voltfield.org/calculators/conduit-fill",
+  "shared": 1
+ },
+ {
+  "file": "social-cooling-load-chart.jpg",
+  "eyebrow": "ENGINEERING REFERENCE",
+  "title": "Cooling Load Chart",
+  "subtitle": "Cooling load chart: kW to BTU/h and tons of cooling, CFM per kW by air temperature rise, and chilled water GPM per ton by temperature difference.",
+  "url": "voltfield.org/charts/cooling-load-chart",
   "shared": 1
  },
  {
@@ -424,6 +448,14 @@
   "shared": 1
  },
  {
+  "file": "social-hp-to-kw-chart.jpg",
+  "eyebrow": "ENGINEERING REFERENCE",
+  "title": "HP to kW Chart",
+  "subtitle": "HP to kW conversion chart for standard NEMA motor sizes from 1/2 to 500 hp, and kW to HP for standard IEC motor sizes from 0.37 to 315 kW.",
+  "url": "voltfield.org/charts/hp-to-kw-chart",
+  "shared": 1
+ },
+ {
   "file": "social-hp-to-kw.jpg",
   "eyebrow": "CALCULATOR",
   "title": "Motor HP to kW Calculator",
@@ -456,6 +488,14 @@
   "shared": 1
  },
  {
+  "file": "social-kva-to-amps-chart.jpg",
+  "eyebrow": "ENGINEERING REFERENCE",
+  "title": "kVA to Amps Chart",
+  "subtitle": "kVA to amps chart: full-load current for standard single-phase and three-phase transformer sizes at 120, 208, 240, 480 and 600 V, with the formula.",
+  "url": "voltfield.org/charts/kva-to-amps-chart",
+  "shared": 1
+ },
+ {
   "file": "social-kva-to-amps.jpg",
   "eyebrow": "CALCULATOR",
   "title": "kVA to Amps Calculator",
@@ -469,6 +509,14 @@
   "title": "kVA to kW Converter",
   "subtitle": "Convert kVA to kW and back, with reactive power. Why there is no fixed conversion factor, and where the 0.8 power-factor assumption comes from. Free.",
   "url": "voltfield.org/calculators/kva-to-kw",
+  "shared": 1
+ },
+ {
+  "file": "social-kw-to-amps-chart.jpg",
+  "eyebrow": "ENGINEERING REFERENCE",
+  "title": "kW to Amps Chart",
+  "subtitle": "kW to amps chart for three-phase loads at 208, 240, 480 and 600 V and single-phase loads at 120 and 240 V, with the formula and how power factor changes it.",
+  "url": "voltfield.org/charts/kw-to-amps-chart",
   "shared": 1
  },
  {
@@ -493,6 +541,14 @@
   "title": "How Voltfield's Reference Data Works",
   "subtitle": "What's modeled for demonstration, what's crowdsourced, and why nothing on the site is a binding quote.",
   "url": "voltfield.org/methodology",
+  "shared": 1
+ },
+ {
+  "file": "social-motor-speed-chart.jpg",
+  "eyebrow": "ENGINEERING REFERENCE",
+  "title": "Motor Speed Chart",
+  "subtitle": "AC motor speed chart: synchronous rpm for 2 to 12 poles at 60 Hz and 50 Hz, and the full-load torque per horsepower and per kW at each speed.",
+  "url": "voltfield.org/charts/motor-speed-chart",
   "shared": 1
  },
  {
@@ -600,6 +656,14 @@
   "shared": 1
  },
  {
+  "file": "social-reference-charts.jpg",
+  "eyebrow": "ENGINEERING REFERENCE",
+  "title": "Electrical & Cooling Reference Charts",
+  "subtitle": "8 free electrical and cooling reference charts: wire sizes, voltage drop, breaker sizes, kW and kVA to amps, motor speed and cooling load. Print or download.",
+  "url": "voltfield.org/reference-charts",
+  "shared": 1
+ },
+ {
   "file": "social-renewables.jpg",
   "eyebrow": "RENEWABLES",
   "title": "Solar, Wind & Hybrid Site Equipment",
@@ -653,6 +717,14 @@
   "title": "Three-Phase Power Calculator",
   "subtitle": "Solve for voltage, current, power or power factor in a balanced three-phase system, with line and phase values for delta and wye. Free, no signup.",
   "url": "voltfield.org/calculators/three-phase-power",
+  "shared": 1
+ },
+ {
+  "file": "social-voltage-drop-chart.jpg",
+  "eyebrow": "ENGINEERING REFERENCE",
+  "title": "Voltage Drop Chart",
+  "subtitle": "Voltage drop chart: maximum one-way wire length for a 3 percent drop, by copper wire size and current, for 120 V and 240 V single-phase and 480 V three-phase.",
+  "url": "voltfield.org/charts/voltage-drop-chart",
   "shared": 1
  },
  {

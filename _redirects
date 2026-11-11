@@ -181,6 +181,14 @@
 /guide-crac-vs-crah                  /guide-crac-vs-crah.html 301!
 /guide-hot-aisle-vs-cold-aisle-containment /guide-hot-aisle-vs-cold-aisle-containment.html 301!
 /guide-pump-and-fan-affinity-laws    /guide-pump-and-fan-affinity-laws.html 301!
+/charts/awg-wire-size-chart          /charts/awg-wire-size-chart.html 301!
+/charts/kva-to-amps-chart            /charts/kva-to-amps-chart.html 301!
+/charts/kw-to-amps-chart             /charts/kw-to-amps-chart.html 301!
+/charts/breaker-size-chart           /charts/breaker-size-chart.html 301!
+/charts/voltage-drop-chart           /charts/voltage-drop-chart.html 301!
+/charts/motor-speed-chart            /charts/motor-speed-chart.html 301!
+/charts/hp-to-kw-chart               /charts/hp-to-kw-chart.html 301!
+/charts/cooling-load-chart           /charts/cooling-load-chart.html 301!
 # ---- END generated ----
 
 # ---- directory and new-page aliases (hand-kept) ----
@@ -189,6 +197,9 @@
 # because a same-named .html sits beside them.
 /calculators                        /engineering-calculators.html           301!
 /calculators/                       /engineering-calculators.html           301!
+/charts                             /reference-charts.html                  301!
+/charts/                            /reference-charts.html                  301!
+/reference-charts                   /reference-charts.html                  301!
 /contact                            /contact.html                           301!
 /terms                              /terms.html                             301!
 

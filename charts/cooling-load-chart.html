@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cooling Load Chart (kW to BTU, Tons, CFM, GPM) | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/charts/cooling-load-chart.html">
+<meta name="description" content="Cooling load chart: kW to BTU/h and tons of cooling, CFM per kW by air temperature rise, and chilled water GPM per ton by temperature difference.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Cooling Load Chart">
+<meta property="og:description" content="Cooling load chart: kW to BTU/h and tons of cooling, CFM per kW by air temperature rise, and chilled water GPM per ton by temperature difference.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://voltfield.org/charts/cooling-load-chart.html">
+<meta property="og:image" content="https://voltfield.org/social/social-cooling-load-chart.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-cooling-load-chart.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Reference charts","item":"https://voltfield.org/reference-charts.html"},{"@type":"ListItem","position":3,"name":"Cooling Load Chart","item":"https://voltfield.org/charts/cooling-load-chart.html"}]},{"@type":"WebPage","name":"Cooling Load Chart","description":"Cooling load chart: kW to BTU/h and tons of cooling, CFM per kW by air temperature rise, and chilled water GPM per ton by temperature difference.","url":"https://voltfield.org/charts/cooling-load-chart.html","dateModified":"2026-11-11","inLanguage":"en-US","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many tons of cooling per kW?","acceptedAnswer":{"@type":"Answer","text":"One kW of heat needs 0.284 tons of cooling, because a ton is 3.517 kW. Put the other way, each ton of cooling removes 3.517 kW of heat. A 100 kW IT load needs about 28.4 tons."}},{"@type":"Question","name":"How many CFM per kW of IT load?","acceptedAnswer":{"@type":"Answer","text":"It depends on the temperature rise across the equipment. At a 20°F rise it is about 158 CFM per kW; at 30°F it is about 105. Modern servers are often designed for the wider rise."}},{"@type":"Question","name":"How many GPM per ton of chilled water?","acceptedAnswer":{"@type":"Answer","text":"24 divided by the temperature difference in °F. At the traditional 10°F difference that is 2.4 GPM per ton; at 12°F it is 2.0 and at 16°F it is 1.5."}}]}]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+<style>
+.chart-actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 4px}
+.chart-actions button{font:600 12px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:10px 14px;min-height:40px;
+  background:var(--card);color:var(--ink);border:1px solid var(--line-dark);border-radius:var(--r-s,6px);cursor:pointer}
+.chart-actions button:hover{border-color:var(--signal)}
+.chartwrap{overflow-x:auto;margin:14px 0 6px;border:1px solid var(--line);border-radius:var(--r-m,8px)}
+.chartwrap:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+.charttbl{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums}
+.charttbl th,.charttbl td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.charttbl tr:last-child td,.charttbl tbody tr:last-child th{border-bottom:0}
+.charttbl thead th{background:var(--sunk);font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--ink);position:sticky;top:0}
+.charttbl th:first-child,.charttbl td:first-child{text-align:left}
+.charttbl tbody th{font-weight:600;color:var(--ink);background:var(--card);position:sticky;left:0}
+.charttbl tbody td{color:var(--ink-2)}
+.charttbl tbody tr:hover td,.charttbl tbody tr:hover th{background:var(--sunk)}
+.chartcap{font-size:13.5px;color:var(--slate);margin:6px 0 22px}
+@media print{
+  header.site,footer,.chart-actions,.ad-unit,.rel,.provenance,.skip-link,.totop,#themeToggle{display:none!important}
+  .chartwrap{overflow:visible;border:0}
+  .charttbl{font-size:10.5pt}.charttbl th,.charttbl td{padding:4px 8px;white-space:normal}
+  .charttbl thead th,.charttbl tbody th{position:static}
+  body{background:#fff!important;color:#000!important}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/reference-charts.html" style="color:var(--slate);text-decoration:none">Reference charts</a> / <span style="color:var(--ink)">Cooling Load Chart</span></nav>
+    <div class="eyebrow">Reference Chart &middot; Free to Print</div>
+    <h1>Cooling Load Chart</h1>
+    <p class="dek">A heat load in kilowatts expressed as BTU per hour and tons, and the airflow and chilled water flow needed to carry it away.</p>
+  </div>
+</section>
+
+<div class="artwrap">
+  <p><b>One kilowatt of heat is 3,412 BTU per hour, and one ton of cooling is 12,000 BTU per hour, or 3.517 kW.</b> Nearly all the electricity an IT load draws leaves as heat, so a 100 kW room needs about 28.4 tons of sensible cooling before any allowance for other loads or redundancy.</p>
+  <div class="chart-actions">
+    <button type="button" data-chart-print>Print this chart</button>
+    <button type="button" data-chart-csv="cooling-load-chart">Download as CSV</button>
+  </div>
+
+  <h2 id="load">Heat load</h2>
+  <div class="chartwrap" tabindex="0" role="region" aria-labelledby="load">
+    <table class="charttbl" data-chart="load">
+      <thead><tr><th scope="col">kW</th><th scope="col">BTU/h</th><th scope="col">Tons</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">1</th><td>3,412</td><td>0.284</td></tr>
+      <tr><th scope="row">5</th><td>17,061</td><td>1.42</td></tr>
+      <tr><th scope="row">10</th><td>34,121</td><td>2.84</td></tr>
+      <tr><th scope="row">20</th><td>68,243</td><td>5.69</td></tr>
+      <tr><th scope="row">50</th><td>170,607</td><td>14.2</td></tr>
+      <tr><th scope="row">100</th><td>341,214</td><td>28.4</td></tr>
+      <tr><th scope="row">250</th><td>853,036</td><td>71.1</td></tr>
+      <tr><th scope="row">500</th><td>1,706,071</td><td>142</td></tr>
+      <tr><th scope="row">1,000</th><td>3,412,142</td><td>284</td></tr>
+      <tr><th scope="row">2,000</th><td>6,824,284</td><td>569</td></tr>
+      <tr><th scope="row">5,000</th><td>17,060,710</td><td>1,422</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="chartcap">Sensible heat. For IT equipment, the electrical load in kW is the heat load in kW.</p>
+
+  <h2 id="cfm">Airflow per kW</h2>
+  <div class="chartwrap" tabindex="0" role="region" aria-labelledby="cfm">
+    <table class="charttbl" data-chart="cfm">
+      <thead><tr><th scope="col">Air temperature rise</th><th scope="col">CFM per kW</th><th scope="col">CFM for 10 kW</th><th scope="col">CFM for 100 kW</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">10&deg;F</th><td>316</td><td>3,159</td><td>31,594</td></tr>
+      <tr><th scope="row">15&deg;F</th><td>211</td><td>2,106</td><td>21,063</td></tr>
+      <tr><th scope="row">20&deg;F</th><td>158</td><td>1,580</td><td>15,797</td></tr>
+      <tr><th scope="row">25&deg;F</th><td>126</td><td>1,264</td><td>12,638</td></tr>
+      <tr><th scope="row">30&deg;F</th><td>105</td><td>1,053</td><td>10,531</td></tr>
+      <tr><th scope="row">35&deg;F</th><td>90</td><td>903</td><td>9,027</td></tr>
+      <tr><th scope="row">40&deg;F</th><td>79</td><td>790</td><td>7,898</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="chartcap">Standard air at sea level. A wider temperature rise across the equipment needs less air.</p>
+
+  <h2 id="gpm">Chilled water flow per ton</h2>
+  <div class="chartwrap" tabindex="0" role="region" aria-labelledby="gpm">
+    <table class="charttbl" data-chart="gpm">
+      <thead><tr><th scope="col">Water temperature difference</th><th scope="col">GPM per ton</th><th scope="col">GPM for 100 tons</th><th scope="col">GPM for 500 tons</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">8&deg;F</th><td>3.00</td><td>300</td><td>1,500</td></tr>
+      <tr><th scope="row">10&deg;F</th><td>2.40</td><td>240</td><td>1,200</td></tr>
+      <tr><th scope="row">12&deg;F</th><td>2.00</td><td>200</td><td>1,000</td></tr>
+      <tr><th scope="row">14&deg;F</th><td>1.71</td><td>171</td><td>857</td></tr>
+      <tr><th scope="row">16&deg;F</th><td>1.50</td><td>150</td><td>750</td></tr>
+      <tr><th scope="row">18&deg;F</th><td>1.33</td><td>133</td><td>667</td></tr>
+      <tr><th scope="row">20&deg;F</th><td>1.20</td><td>120</td><td>600</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="chartcap">Plain water. A wider difference between supply and return needs less flow.</p>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2>How to read it</h2>
+  <p>Start with the IT load in kW and read off the tons. Then use the second table for the air that load needs at your design temperature rise, and the third for the chilled water serving the cooling units.</p>
+  <p>The airflow and water flow tables show the same thing from two directions: the wider the temperature difference a system is designed for, the less fluid it has to move. Since fan and pump power fall with the cube of flow, this is where much of a cooling system's efficiency is decided.</p>
+
+  <h2>How the values are calculated</h2>
+    <div class="formula">BTU/h = kW &times; 3,412<br>Tons = BTU/h / 12,000<br>CFM = BTU/h / (1.08 &times; &Delta;T)<br>GPM = tons &times; 24 / &Delta;T</div>
+  <p>Every figure in the chart comes from the formulas above. Nothing is copied from a published table, so any cell can be checked by hand.</p>
+
+  <h2>What this chart does not tell you</h2>
+  <p>These are design-point figures for sensible heat. They leave out lighting, people, heat gain through the building, humidification and the cooling plant's own losses, and they include no redundancy. The air constant of 1.08 applies at sea level; at altitude more air is needed. The water constant applies to plain water, and a glycol mix needs more flow.</p>
+    <div class="callout"><b>This is a reference, not a design.</b> It is here to give you the right order of magnitude and a figure to check against. It does not replace the adopted code or a calculation by a qualified engineer.</div>
+
+  <h2>Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How many tons of cooling per kW?</summary>
+    <p style="margin-top:10px">One kW of heat needs 0.284 tons of cooling, because a ton is 3.517 kW. Put the other way, each ton of cooling removes 3.517 kW of heat. A 100 kW IT load needs about 28.4 tons.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How many CFM per kW of IT load?</summary>
+    <p style="margin-top:10px">It depends on the temperature rise across the equipment. At a 20&deg;F rise it is about 158 CFM per kW; at 30&deg;F it is about 105. Modern servers are often designed for the wider rise.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How many GPM per ton of chilled water?</summary>
+    <p style="margin-top:10px">24 divided by the temperature difference in &deg;F. At the traditional 10&deg;F difference that is 2.4 GPM per ton; at 12&deg;F it is 2.0 and at 16&deg;F it is 1.5.</p>
+  </details>
+
+  <h2>Related</h2>
+    <div class="rel">
+      <a href="/calculators/btu-to-tons.html">BTU to Tons Converter</a>
+      <a href="/calculators/airflow-cfm.html">Airflow (CFM) Calculator</a>
+      <a href="/calculators/chilled-water-flow.html">Chilled Water Flow Calculator</a>
+      <a href="/guide-crac-vs-crah.html">CRAC vs. CRAH</a>
+      <a href="/guide-hot-aisle-vs-cold-aisle-containment.html">Hot Aisle vs. Cold Aisle Containment</a>
+      <a href="/reference-charts.html">All reference charts</a>
+    </div>
+
+  <aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>Cooling load chart: kW to BTU/h and tons of cooling, CFM per kW by air temperature rise, and chilled water GPM per ton by temperature difference.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>The definitions of the BTU and the ton of refrigeration</li><li>ASHRAE Handbook &mdash; the sensible heat equation for air and the heat-transfer relation for water</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>These are design-point figures for sensible heat. They leave out lighting, people, heat gain through the building, humidification and the cooling plant's own losses, and they include no redundancy. The air constant of 1.08 applies at sea level; at altitude more air is needed. The water constant applies to plain water, and a glycol mix needs more flow.</dd>
+      <dt>Provenance</dt>
+      <dd>Last reviewed November 11, 2026. Computed by Voltfield from the formulas shown on the page and maintained by the Voltfield editorial team. Free to print, cite and link to.</dd>
+    </dl>
+  </aside>
+
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h4>Voltfield</h4>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h4>Sectors</h4><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h4>Compliance</h4><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="/voltfield-site-config.js"></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+<script>
+/* Print, and a CSV of every table on the page. No dependencies. */
+(function(){
+  var p=document.querySelector('[data-chart-print]');
+  if(p)p.addEventListener('click',function(){window.print();});
+  var c=document.querySelector('[data-chart-csv]');
+  if(c)c.addEventListener('click',function(){
+    var out=[];
+    document.querySelectorAll('table.charttbl').forEach(function(t,i){
+      if(i)out.push('');
+      var h=t.closest('.chartwrap').previousElementSibling;
+      if(h)out.push('"'+h.textContent.replace(/"/g,'""')+'"');
+      t.querySelectorAll('tr').forEach(function(r){
+        out.push([].map.call(r.children,function(x){
+          var v=x.textContent.trim().replace(/\u2014/g,'');
+          var n=v.replace(/,/g,'');
+          return /^-?\d+(\.\d+)?$/.test(n)?n:'"'+v.replace(/"/g,'""')+'"';
+        }).join(','));
+      });
+    });
+    out.push('','"Source: voltfield.org'+location.pathname+'"');
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob(['\ufeff'+out.join('\r\n')],{type:'text/csv'}));
+    a.download='voltfield-'+c.getAttribute('data-chart-csv')+'.csv';
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);
+    if(window.vfGtag)window.vfGtag('event','chart_csv',{chart:c.getAttribute('data-chart-csv')});
+  });
+})();
+</script>
+</body>
+</html>

@@ -32,6 +32,7 @@ This is a resistance-only calculation. It ignores conductor reactance, which mat
 --mistakes
 Using one-way distance where the formula wants it and then doubling it again — the 2 and the 1.732 already account for the return path. Sizing to ampacity first and never checking drop on a long run. Applying the single-phase formula to a three-phase circuit, which over-states drop by about 15%.
 --related
+/charts/voltage-drop-chart.html :: Voltage Drop Chart
 /voltfield-supply-catalog.html?q=LV%20Power%20Cable :: LV Power Cable
 /voltfield-supply-catalog.html?q=MV%20Power%20Cable :: MV Power Cable
 /data-centers/cabling.html :: Cable &amp; Busbar Sizing
@@ -64,6 +65,7 @@ This sizes for steady-state load only. It does not account for future growth, ha
 --mistakes
 Sizing on kW and never dividing by power factor, which under-sizes by however far PF sits below unity. Sizing exactly to calculated load with no growth allowance. Choosing on kVA alone and leaving %Z to the supplier, which is how switchgear ends up under-rated for the fault current the transformer can deliver.
 --related
+/charts/kva-to-amps-chart.html :: kVA to Amps Chart
 /voltfield-supply-catalog.html?q=Pad-Mount%20Transformers :: Pad-Mount Transformers
 /voltfield-supply-catalog.html?q=Dry-Type%20%2F%20Cast-Resin%20Transformers :: Dry-Type Transformers
 /data-centers/transformers.html :: Data Center Transformers
@@ -406,6 +408,7 @@ This returns real power at the operating point you describe. It is not a demand 
 --mistakes
 Dropping the square root of three on a three-phase circuit, which overstates power by 73 percent. Using unity power factor because the real figure is unknown, which overstates it again. Mixing line-to-line and line-to-neutral voltage on the same calculation. Reading nameplate amps as operating amps: a nameplate states full-load current, and most equipment does not run there.
 --related
+/charts/kw-to-amps-chart.html :: kW to Amps Chart
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
 /calculators/kw-to-amps.html :: kW to Amps Calculator
 /calculators/kva-to-amps.html :: kVA to Amps Calculator
@@ -437,6 +440,7 @@ This is steady-state current at one operating point. It does not apply the 125 p
 --mistakes
 Sizing a conductor on this number alone, with no continuous-load factor and no derating for ambient temperature or conduit fill. Forgetting that the overcurrent device, not the calculated current, is what the conductor must coordinate with. Using the same power factor for a resistive and a motor load. Assuming three-phase current is simply one third of the single-phase figure, which it is not.
 --related
+/charts/kw-to-amps-chart.html :: kW to Amps Chart
 /calculators/amps-to-kw.html :: Amps to kW Calculator
 /calculators/voltage-drop.html :: Voltage Drop Calculator
 /calculators/ampacity.html :: Cable Ampacity &amp; Conduit Fill
@@ -466,6 +470,7 @@ This is full-load current at nameplate rating, not the current your load actuall
 --mistakes
 Dividing by power factor, which belongs in kW calculations and not here. Calculating one side and assuming the other scales with voltage in the wrong direction. Treating full-load amps as operating amps when sizing cooling or estimating losses. Forgetting that a transformer's ability to deliver fault current comes from %Z, so a correctly sized conductor can still sit downstream of under-rated switchgear.
 --related
+/charts/kva-to-amps-chart.html :: kVA to Amps Chart
 /calculators/transformer-sizing.html :: Transformer Sizing Calculator
 /calculators/inrush.html :: Transformer Inrush Calculator
 /calculators/fault-current.html :: Fault Current Calculator
@@ -499,6 +504,7 @@ This covers steady-state operation at full load. It says nothing about starting:
 --mistakes
 Converting horsepower to kilowatts and treating the result as input power, which under-states the supply by the efficiency. Sizing conductors from the calculated current instead of the NEC 430.250 table. Using full-load power factor for a motor that spends its life lightly loaded. Ignoring starting current entirely, which is how a correctly sized feeder still trips on inrush.
 --related
+/charts/hp-to-kw-chart.html :: HP to kW Chart
 /calculators/motor-start.html :: Motor Starting Voltage Dip Calculator
 /calculators/kw-to-amps.html :: kW to Amps Calculator
 /calculators/amps-to-kw.html :: Amps to kW Calculator
@@ -564,6 +570,7 @@ This sizes for ampacity only. It does not check voltage drop, which on a long ru
 --mistakes
 Sizing from the 90&deg;C column because the wire is THHN, when the terminals are listed for 75&deg;C. Applying the 125 percent factor to the derated figure rather than running the two checks separately. Forgetting that the neutral counts as a current-carrying conductor on a circuit with significant harmonic content. Counting only the conductors of one circuit when several share the raceway. Treating a chart found online as authoritative when it states neither the termination temperature nor the ambient it assumed.
 --related
+/charts/awg-wire-size-chart.html :: AWG Wire Size Chart
 /calculators/ampacity.html :: Cable Ampacity &amp; Conduit Fill
 /calculators/voltage-drop.html :: Voltage Drop Calculator
 /guide-cable-ampacity-derating.html :: Cable Ampacity Derating Explained
@@ -595,6 +602,7 @@ This converts area and nothing else. It does not convert ampacity, and the two a
 --mistakes
 Treating the nearest metric size as an equivalent when it is usually several percent away, and substituting downward without noticing. Converting an ampacity figure along with the area. Using the conductor area for conduit fill instead of the overall insulated diameter. Assuming the gauge numbers increase with size. Reading a cmil figure as if it were a mm&sup2; figure, which differs by a factor of about 1,974. Specifying a metric conductor for a North American installation without checking that the terminations are listed for it.
 --related
+/charts/awg-wire-size-chart.html :: AWG Wire Size Chart
 /calculators/wire-size.html :: Wire Size Calculator
 /calculators/ampacity.html :: Cable Ampacity &amp; Conduit Fill
 /calculators/voltage-drop.html :: Voltage Drop Calculator
@@ -727,6 +735,7 @@ This converts capacity units and nothing else. It does not size a cooling system
 --mistakes
 Reading a ton as a weight or as a size of unit rather than a rate of heat removal. Confusing cooling capacity in kW with the electrical power the chiller draws, which differ by the system's efficiency. Sizing cooling from a UPS or transformer rating rather than the actual IT load, which inflates the figure by whatever the equipment is oversized by. Taking nominal tonnage as available capacity at design-day conditions. Adding spare capacity and redundancy as if they were the same thing. Applying the electrical-equals-thermal shortcut to motor loads doing work outside the room.
 --related
+/charts/cooling-load-chart.html :: Cooling Load Chart
 /guide-liquid-vs-air-cooling.html :: Liquid vs. Air Cooling for AI Racks
 /guide-rack-power-density.html :: Rack Power Density Explained
 /guide-pue-explained.html :: PUE Explained
@@ -790,6 +799,7 @@ This sizes the breaker from the load. It does not size the conductor, and the br
 --mistakes
 Sizing the breaker to the load with no 125 percent factor on the continuous part. Applying the 125 percent factor twice, once to the load and again to the breaker. Assuming a breaker is 100 percent rated because of its frame size. Choosing the breaker and then forgetting to check that the conductor it protects has the ampacity. Using this method on a motor circuit.
 --related
+/charts/breaker-size-chart.html :: Breaker Size Chart
 /guide-continuous-load-80-percent-rule.html :: The 80% Rule &amp; Continuous Loads
 /calculators/wire-size.html :: Wire Size Calculator
 /guide-fuse-vs-breaker.html :: Fuse vs. Circuit Breaker
@@ -821,6 +831,7 @@ The three-phase form assumes a balanced load, with the same current in each phas
 --mistakes
 Leaving out the square root of three on a three-phase system, which understates kVA by 42 percent. Using line-to-neutral voltage in the three-phase formula. Multiplying by power factor, which gives kW, not kVA. Comparing the result with a kW rating as though the two were the same unit.
 --related
+/charts/kva-to-amps-chart.html :: kVA to Amps Chart
 /calculators/kva-to-amps.html :: kVA to Amps Calculator
 /calculators/kva-to-kw.html :: kVA to kW Converter
 /calculators/transformer-sizing.html :: Transformer Sizing Calculator
@@ -1005,6 +1016,7 @@ This is DC resistance at one temperature. Resistance rises with temperature, by 
 --mistakes
 Using the one-way length for a two-wire circuit. Using copper figures for aluminum conductors. Expecting resistance to halve with each AWG size, when it takes three sizes. Ignoring temperature when comparing a calculated figure with a measurement taken on a cold cable.
 --related
+/charts/awg-wire-size-chart.html :: AWG Wire Size Chart
 /calculators/voltage-drop.html :: Voltage Drop Calculator
 /calculators/awg-to-mm2.html :: AWG to mm&sup2; Converter
 /calculators/wire-size.html :: Wire Size Calculator
@@ -1068,6 +1080,7 @@ The 1.08 constant is for standard air at sea level. Air is thinner at altitude, 
 --mistakes
 Using the room temperature difference in place of the rise across the equipment. Forgetting altitude. Assuming the cooling units only need to supply the equipment airflow, with no allowance for air that bypasses the racks. Treating a nameplate power figure as the heat load, when measured draw is usually well below it.
 --related
+/charts/cooling-load-chart.html :: Cooling Load Chart
 /calculators/btu-to-tons.html :: BTU to Tons Converter
 /calculators/chilled-water-flow.html :: Chilled Water Flow Calculator
 /guide-hot-aisle-vs-cold-aisle-containment.html :: Hot Aisle vs. Cold Aisle Containment
@@ -1101,6 +1114,7 @@ The constant of 500 is for plain water at typical chilled water temperatures. A 
 --mistakes
 Using 2.4 GPM per ton on a system designed for a wider temperature difference. Applying the water constant to a glycol system. Sizing the pump for design flow and ignoring that low return temperature will ask for more. Mixing up tons of cooling at the coil with the electrical kW of the IT load without converting.
 --related
+/charts/cooling-load-chart.html :: Cooling Load Chart
 /calculators/pump-power.html :: Pump Power Calculator
 /calculators/pipe-velocity.html :: Pipe Velocity Calculator
 /calculators/btu-to-tons.html :: BTU to Tons Converter
@@ -1232,6 +1246,7 @@ This is full-load running torque at the speed you enter. It says nothing about t
 --mistakes
 Using synchronous speed in place of full-load speed. Confusing full-load torque with starting torque when checking whether a load will break away. Mixing horsepower with the SI constant or kilowatts with 5,252. Forgetting that a gearbox multiplies torque by its ratio and divides speed by the same figure.
 --related
+/charts/motor-speed-chart.html :: Motor Speed Chart
 /calculators/motor-speed.html :: Motor Speed &amp; Slip Calculator
 /calculators/hp-to-kw.html :: Motor HP to kW Calculator
 /calculators/motor-start.html :: Motor Starting Voltage Dip Calculator
@@ -1265,6 +1280,7 @@ Slip is not a fixed property of a motor. It is close to zero at no load and grow
 --mistakes
 Expecting an induction motor to run at exactly 1,800 or 3,600 rpm. Entering the number of pole pairs where the formula wants poles. Using the full-load slip to estimate speed at light load. Assuming a motor moved from 60 Hz to 50 Hz simply runs slower, with no effect on its voltage requirement or cooling.
 --related
+/charts/motor-speed-chart.html :: Motor Speed Chart
 /calculators/motor-torque.html :: Motor Torque Calculator
 /calculators/affinity-laws.html :: Pump &amp; Fan Affinity Laws Calculator
 /guide-vfd-vs-soft-starter.html :: VFD vs. Soft Starter

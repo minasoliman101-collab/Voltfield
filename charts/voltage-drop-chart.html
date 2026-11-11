@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voltage Drop Chart (Max Wire Length for 3%) | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/charts/voltage-drop-chart.html">
+<meta name="description" content="Voltage drop chart: maximum one-way wire length for a 3 percent drop, by copper wire size and current, for 120 V and 240 V single-phase and 480 V three-phase.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Voltage Drop Chart">
+<meta property="og:description" content="Voltage drop chart: maximum one-way wire length for a 3 percent drop, by copper wire size and current, for 120 V and 240 V single-phase and 480 V three-phase.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://voltfield.org/charts/voltage-drop-chart.html">
+<meta property="og:image" content="https://voltfield.org/social/social-voltage-drop-chart.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-voltage-drop-chart.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Reference charts","item":"https://voltfield.org/reference-charts.html"},{"@type":"ListItem","position":3,"name":"Voltage Drop Chart","item":"https://voltfield.org/charts/voltage-drop-chart.html"}]},{"@type":"WebPage","name":"Voltage Drop Chart","description":"Voltage drop chart: maximum one-way wire length for a 3 percent drop, by copper wire size and current, for 120 V and 240 V single-phase and 480 V three-phase.","url":"https://voltfield.org/charts/voltage-drop-chart.html","dateModified":"2026-11-11","inLanguage":"en-US","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How far can I run 12 gauge wire on a 20 amp circuit?","acceptedAnswer":{"@type":"Answer","text":"At 120 V, 12 AWG copper carrying a full 20 A reaches a 3 percent voltage drop at about 45 ft one way. At 16 A, the continuous limit for that circuit, it reaches about 57 ft. Beyond that, go up to 10 AWG."}},{"@type":"Question","name":"Is 3 percent voltage drop a code requirement?","acceptedAnswer":{"@type":"Answer","text":"In the NEC it is a recommendation, given in informational notes: 3 percent for a branch circuit or a feeder and 5 percent for the two combined. It becomes a requirement where a local code adopts it, and for some specific equipment such as fire pumps."}},{"@type":"Question","name":"Why does a higher voltage allow a longer run?","acceptedAnswer":{"@type":"Answer","text":"The allowed drop is a percentage of the voltage. Three percent of 240 V is 7.2 V, twice the 3.6 V allowed at 120 V, and for the same power the current is lower as well. That is the main reason long feeders are run at higher voltage."}}]}]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+<style>
+.chart-actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 4px}
+.chart-actions button{font:600 12px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:10px 14px;min-height:40px;
+  background:var(--card);color:var(--ink);border:1px solid var(--line-dark);border-radius:var(--r-s,6px);cursor:pointer}
+.chart-actions button:hover{border-color:var(--signal)}
+.chartwrap{overflow-x:auto;margin:14px 0 6px;border:1px solid var(--line);border-radius:var(--r-m,8px)}
+.chartwrap:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+.charttbl{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums}
+.charttbl th,.charttbl td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.charttbl tr:last-child td,.charttbl tbody tr:last-child th{border-bottom:0}
+.charttbl thead th{background:var(--sunk);font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--ink);position:sticky;top:0}
+.charttbl th:first-child,.charttbl td:first-child{text-align:left}
+.charttbl tbody th{font-weight:600;color:var(--ink);background:var(--card);position:sticky;left:0}
+.charttbl tbody td{color:var(--ink-2)}
+.charttbl tbody tr:hover td,.charttbl tbody tr:hover th{background:var(--sunk)}
+.chartcap{font-size:13.5px;color:var(--slate);margin:6px 0 22px}
+@media print{
+  header.site,footer,.chart-actions,.ad-unit,.rel,.provenance,.skip-link,.totop,#themeToggle{display:none!important}
+  .chartwrap{overflow:visible;border:0}
+  .charttbl{font-size:10.5pt}.charttbl th,.charttbl td{padding:4px 8px;white-space:normal}
+  .charttbl thead th,.charttbl tbody th{position:static}
+  body{background:#fff!important;color:#000!important}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/reference-charts.html" style="color:var(--slate);text-decoration:none">Reference charts</a> / <span style="color:var(--ink)">Voltage Drop Chart</span></nav>
+    <div class="eyebrow">Reference Chart &middot; Free to Print</div>
+    <h1>Voltage Drop Chart</h1>
+    <p class="dek">How far each copper wire size can run before it loses 3 percent of the voltage, at common currents and voltages.</p>
+  </div>
+</section>
+
+<div class="artwrap">
+  <p><b>For a 3 percent drop, the longest one-way run is 0.03 times the voltage times the wire area, divided by the current and a constant.</b> At 120 V, 12 AWG copper carrying 20 A reaches the 3 percent mark at 45 ft. The same wire on a 240 V circuit goes twice as far, because the allowed drop in volts is twice as large.</p>
+  <div class="chart-actions">
+    <button type="button" data-chart-print>Print this chart</button>
+    <button type="button" data-chart-csv="voltage-drop-chart">Download as CSV</button>
+  </div>
+
+  <h2 id="vd120">Maximum one-way length for 3% drop: 120 V single-phase</h2>
+  <div class="chartwrap" tabindex="0" role="region" aria-labelledby="vd120">
+    <table class="charttbl" data-chart="vd120">
+      <thead><tr><th scope="col">Wire size</th><th scope="col">5 A</th><th scope="col">10 A</th><th scope="col">15 A</th><th scope="col">20 A</th><th scope="col">30 A</th><th scope="col">40 A</th><th scope="col">50 A</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">14 AWG</th><td>114</td><td>57</td><td>38</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">12 AWG</th><td>182</td><td>91</td><td>60</td><td>45</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">10 AWG</th><td>289</td><td>144</td><td>96</td><td>72</td><td>48</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">8 AWG</th><td>460</td><td>230</td><td>153</td><td>115</td><td>76</td><td>57</td><td>46</td></tr>
+      <tr><th scope="row">6 AWG</th><td>732</td><td>366</td><td>244</td><td>183</td><td>122</td><td>91</td><td>73</td></tr>
+      <tr><th scope="row">4 AWG</th><td>1,164</td><td>582</td><td>388</td><td>291</td><td>194</td><td>145</td><td>116</td></tr>
+      <tr><th scope="row">3 AWG</th><td>1,468</td><td>734</td><td>489</td><td>367</td><td>244</td><td>183</td><td>146</td></tr>
+      <tr><th scope="row">2 AWG</th><td>1,851</td><td>925</td><td>617</td><td>462</td><td>308</td><td>231</td><td>185</td></tr>
+      <tr><th scope="row">1 AWG</th><td>2,335</td><td>1,167</td><td>778</td><td>583</td><td>389</td><td>291</td><td>233</td></tr>
+      <tr><th scope="row">1/0 AWG</th><td>2,946</td><td>1,473</td><td>982</td><td>736</td><td>491</td><td>368</td><td>294</td></tr>
+      <tr><th scope="row">2/0 AWG</th><td>3,714</td><td>1,857</td><td>1,238</td><td>928</td><td>619</td><td>464</td><td>371</td></tr>
+      <tr><th scope="row">3/0 AWG</th><td>4,682</td><td>2,341</td><td>1,560</td><td>1,170</td><td>780</td><td>585</td><td>468</td></tr>
+      <tr><th scope="row">4/0 AWG</th><td>5,905</td><td>2,952</td><td>1,968</td><td>1,476</td><td>984</td><td>738</td><td>590</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="chartcap">Copper conductors, in feet, rounded down. A dash means that current is more than the conductor may carry, so no length is given.</p>
+
+  <h2 id="vd240">Maximum one-way length for 3% drop: 240 V single-phase</h2>
+  <div class="chartwrap" tabindex="0" role="region" aria-labelledby="vd240">
+    <table class="charttbl" data-chart="vd240">
+      <thead><tr><th scope="col">Wire size</th><th scope="col">15 A</th><th scope="col">20 A</th><th scope="col">30 A</th><th scope="col">40 A</th><th scope="col">50 A</th><th scope="col">60 A</th><th scope="col">80 A</th><th scope="col">100 A</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">14 AWG</th><td>76</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">12 AWG</th><td>121</td><td>91</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">10 AWG</th><td>193</td><td>144</td><td>96</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">8 AWG</th><td>307</td><td>230</td><td>153</td><td>115</td><td>92</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">6 AWG</th><td>488</td><td>366</td><td>244</td><td>183</td><td>146</td><td>122</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">4 AWG</th><td>776</td><td>582</td><td>388</td><td>291</td><td>232</td><td>194</td><td>145</td><td>&mdash;</td></tr>
+      <tr><th scope="row">3 AWG</th><td>978</td><td>734</td><td>489</td><td>367</td><td>293</td><td>244</td><td>183</td><td>146</td></tr>
+      <tr><th scope="row">2 AWG</th><td>1,234</td><td>925</td><td>617</td><td>462</td><td>370</td><td>308</td><td>231</td><td>185</td></tr>
+      <tr><th scope="row">1 AWG</th><td>1,557</td><td>1,167</td><td>778</td><td>583</td><td>467</td><td>389</td><td>291</td><td>233</td></tr>
+      <tr><th scope="row">1/0 AWG</th><td>1,964</td><td>1,473</td><td>982</td><td>736</td><td>589</td><td>491</td><td>368</td><td>294</td></tr>
+      <tr><th scope="row">2/0 AWG</th><td>2,476</td><td>1,857</td><td>1,238</td><td>928</td><td>742</td><td>619</td><td>464</td><td>371</td></tr>
+      <tr><th scope="row">3/0 AWG</th><td>3,121</td><td>2,341</td><td>1,560</td><td>1,170</td><td>936</td><td>780</td><td>585</td><td>468</td></tr>
+      <tr><th scope="row">4/0 AWG</th><td>3,936</td><td>2,952</td><td>1,968</td><td>1,476</td><td>1,181</td><td>984</td><td>738</td><td>590</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="chartcap">Copper conductors, in feet, rounded down. A dash means that current is more than the conductor may carry, so no length is given.</p>
+
+  <h2 id="vd480">Maximum one-way length for 3% drop: 480 V three-phase</h2>
+  <div class="chartwrap" tabindex="0" role="region" aria-labelledby="vd480">
+    <table class="charttbl" data-chart="vd480">
+      <thead><tr><th scope="col">Wire size</th><th scope="col">20 A</th><th scope="col">30 A</th><th scope="col">50 A</th><th scope="col">60 A</th><th scope="col">80 A</th><th scope="col">100 A</th><th scope="col">150 A</th><th scope="col">200 A</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">14 AWG</th><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">12 AWG</th><td>210</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">10 AWG</th><td>334</td><td>222</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">8 AWG</th><td>532</td><td>354</td><td>212</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">6 AWG</th><td>845</td><td>563</td><td>338</td><td>281</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">4 AWG</th><td>1,345</td><td>896</td><td>538</td><td>448</td><td>336</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">3 AWG</th><td>1,695</td><td>1,130</td><td>678</td><td>565</td><td>423</td><td>339</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">2 AWG</th><td>2,138</td><td>1,425</td><td>855</td><td>712</td><td>534</td><td>427</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">1 AWG</th><td>2,696</td><td>1,797</td><td>1,078</td><td>898</td><td>674</td><td>539</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">1/0 AWG</th><td>3,402</td><td>2,268</td><td>1,361</td><td>1,134</td><td>850</td><td>680</td><td>453</td><td>&mdash;</td></tr>
+      <tr><th scope="row">2/0 AWG</th><td>4,289</td><td>2,859</td><td>1,715</td><td>1,429</td><td>1,072</td><td>857</td><td>571</td><td>&mdash;</td></tr>
+      <tr><th scope="row">3/0 AWG</th><td>5,407</td><td>3,604</td><td>2,162</td><td>1,802</td><td>1,351</td><td>1,081</td><td>720</td><td>540</td></tr>
+      <tr><th scope="row">4/0 AWG</th><td>6,818</td><td>4,545</td><td>2,727</td><td>2,272</td><td>1,704</td><td>1,363</td><td>909</td><td>681</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="chartcap">Copper conductors, in feet, rounded down. A dash means that current is more than the conductor may carry, so no length is given.</p>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2>How to read it</h2>
+  <p>Pick the table for your voltage, find the current across the top, and read down to the first wire size whose length is at least the length of your run. Lengths are one way, from source to load.</p>
+  <p>A dash means the current is more than that conductor may carry, so the wire is ruled out before voltage drop is even considered. On short runs ampacity decides the wire size; on long runs voltage drop does.</p>
+  <p>For a 5 percent limit, multiply any length by 1.67. For aluminum, multiply by 0.61. For a different voltage on the same kind of circuit, scale the length in proportion: a 208 V single-phase run is 208/240 of the 240 V figure.</p>
+
+  <h2>How the values are calculated</h2>
+    <div class="formula">L = (0.03 &times; V &times; cmil) / (2 &times; 12.9 &times; I)&nbsp; [single-phase]<br>L = (0.03 &times; V &times; cmil) / (1.732 &times; 12.9 &times; I)&nbsp; [three-phase]</div>
+  <p>Every figure in the chart comes from the formulas above. Nothing is copied from a published table, so any cell can be checked by hand.</p>
+
+  <h2>What this chart does not tell you</h2>
+  <p>The K-factor method uses resistance only. It ignores reactance, which matters on large conductors and long runs, so the lengths for the biggest sizes are optimistic. It assumes copper at about 75&deg;C and a load at the far end. The 3 percent figure is a recommendation in the NEC informational notes for a branch circuit or a feeder, not a requirement, though some equipment and some local codes do require it.</p>
+    <div class="callout"><b>This is a reference, not a design.</b> It is here to give you the right order of magnitude and a figure to check against. It does not replace the adopted code or a calculation by a qualified engineer.</div>
+
+  <h2>Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How far can I run 12 gauge wire on a 20 amp circuit?</summary>
+    <p style="margin-top:10px">At 120 V, 12 AWG copper carrying a full 20 A reaches a 3 percent voltage drop at about 45 ft one way. At 16 A, the continuous limit for that circuit, it reaches about 57 ft. Beyond that, go up to 10 AWG.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Is 3 percent voltage drop a code requirement?</summary>
+    <p style="margin-top:10px">In the NEC it is a recommendation, given in informational notes: 3 percent for a branch circuit or a feeder and 5 percent for the two combined. It becomes a requirement where a local code adopts it, and for some specific equipment such as fire pumps.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why does a higher voltage allow a longer run?</summary>
+    <p style="margin-top:10px">The allowed drop is a percentage of the voltage. Three percent of 240 V is 7.2 V, twice the 3.6 V allowed at 120 V, and for the same power the current is lower as well. That is the main reason long feeders are run at higher voltage.</p>
+  </details>
+
+  <h2>Related</h2>
+    <div class="rel">
+      <a href="/calculators/voltage-drop.html">Voltage Drop Calculator</a>
+      <a href="/calculators/wire-size.html">Wire Size Calculator</a>
+      <a href="/calculators/wire-resistance.html">Wire Resistance Calculator</a>
+      <a href="/charts/awg-wire-size-chart.html">AWG Wire Size Chart</a>
+      <a href="/guide-cable-ampacity-derating.html">Cable Ampacity Derating</a>
+      <a href="/reference-charts.html">All reference charts</a>
+    </div>
+
+  <aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>Voltage drop chart: maximum one-way wire length for a 3 percent drop, by copper wire size and current, for 120 V and 240 V single-phase and 480 V three-phase.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>The K-factor voltage drop method, with K = 12.9 ohm-circular mils per foot for copper</li><li>NEC 210.19 and 215.2 informational notes &mdash; the 3 and 5 percent recommendations</li><li>Conductor ampacity at 75&deg;C, used only to exclude overloaded cells</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>The K-factor method uses resistance only. It ignores reactance, which matters on large conductors and long runs, so the lengths for the biggest sizes are optimistic. It assumes copper at about 75&deg;C and a load at the far end. The 3 percent figure is a recommendation in the NEC informational notes for a branch circuit or a feeder, not a requirement, though some equipment and some local codes do require it.</dd>
+      <dt>Provenance</dt>
+      <dd>Last reviewed November 11, 2026. Computed by Voltfield from the formulas shown on the page and maintained by the Voltfield editorial team. Free to print, cite and link to.</dd>
+    </dl>
+  </aside>
+
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h4>Voltfield</h4>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h4>Sectors</h4><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h4>Compliance</h4><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="/voltfield-site-config.js"></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+<script>
+/* Print, and a CSV of every table on the page. No dependencies. */
+(function(){
+  var p=document.querySelector('[data-chart-print]');
+  if(p)p.addEventListener('click',function(){window.print();});
+  var c=document.querySelector('[data-chart-csv]');
+  if(c)c.addEventListener('click',function(){
+    var out=[];
+    document.querySelectorAll('table.charttbl').forEach(function(t,i){
+      if(i)out.push('');
+      var h=t.closest('.chartwrap').previousElementSibling;
+      if(h)out.push('"'+h.textContent.replace(/"/g,'""')+'"');
+      t.querySelectorAll('tr').forEach(function(r){
+        out.push([].map.call(r.children,function(x){
+          var v=x.textContent.trim().replace(/\u2014/g,'');
+          var n=v.replace(/,/g,'');
+          return /^-?\d+(\.\d+)?$/.test(n)?n:'"'+v.replace(/"/g,'""')+'"';
+        }).join(','));
+      });
+    });
+    out.push('','"Source: voltfield.org'+location.pathname+'"');
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob(['\ufeff'+out.join('\r\n')],{type:'text/csv'}));
+    a.download='voltfield-'+c.getAttribute('data-chart-csv')+'.csv';
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);
+    if(window.vfGtag)window.vfGtag('event','chart_csv',{chart:c.getAttribute('data-chart-csv')});
+  });
+})();
+</script>
+</body>
+</html>

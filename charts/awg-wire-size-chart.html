@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWG Wire Size Chart (Diameter, Area, Resistance) | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/charts/awg-wire-size-chart.html">
+<meta name="description" content="AWG wire size chart: diameter in inches and mm, area in circular mils and mm², and copper and aluminum resistance per 1000 ft, from 18 AWG to 1000 kcmil.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="AWG Wire Size Chart">
+<meta property="og:description" content="AWG wire size chart: diameter in inches and mm, area in circular mils and mm², and copper and aluminum resistance per 1000 ft, from 18 AWG to 1000 kcmil.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://voltfield.org/charts/awg-wire-size-chart.html">
+<meta property="og:image" content="https://voltfield.org/social/social-awg-wire-size-chart.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-awg-wire-size-chart.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Reference charts","item":"https://voltfield.org/reference-charts.html"},{"@type":"ListItem","position":3,"name":"AWG Wire Size Chart","item":"https://voltfield.org/charts/awg-wire-size-chart.html"}]},{"@type":"WebPage","name":"AWG Wire Size Chart","description":"AWG wire size chart: diameter in inches and mm, area in circular mils and mm², and copper and aluminum resistance per 1000 ft, from 18 AWG to 1000 kcmil.","url":"https://voltfield.org/charts/awg-wire-size-chart.html","dateModified":"2026-11-11","inLanguage":"en-US","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why does a smaller AWG number mean a bigger wire?","acceptedAnswer":{"@type":"Answer","text":"The gauge number originally counted the drawing steps used to make the wire. Each pass through a die made it thinner, so more passes, a higher number, meant a finer wire. The modern system keeps that direction and fixes the sizes by formula."}},{"@type":"Question","name":"What comes after 4/0 AWG?","acceptedAnswer":{"@type":"Answer","text":"Sizes larger than 4/0 are given by area in thousands of circular mils: 250 kcmil, 300 kcmil and upward. 4/0 is 211,600 circular mils, so 250 kcmil is the next standard size. The older abbreviation MCM means the same as kcmil."}},{"@type":"Question","name":"How do I convert AWG to mm²?","acceptedAnswer":{"@type":"Answer","text":"Multiply the area in circular mils by 0.0005067. 12 AWG is 6,530 cmil, which is 3.31 mm². Because AWG and metric sizes do not line up, a metric replacement is normally the next standard size above that figure."}}]}]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+<style>
+.chart-actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 4px}
+.chart-actions button{font:600 12px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:10px 14px;min-height:40px;
+  background:var(--card);color:var(--ink);border:1px solid var(--line-dark);border-radius:var(--r-s,6px);cursor:pointer}
+.chart-actions button:hover{border-color:var(--signal)}
+.chartwrap{overflow-x:auto;margin:14px 0 6px;border:1px solid var(--line);border-radius:var(--r-m,8px)}
+.chartwrap:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+.charttbl{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums}
+.charttbl th,.charttbl td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.charttbl tr:last-child td,.charttbl tbody tr:last-child th{border-bottom:0}
+.charttbl thead th{background:var(--sunk);font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--ink);position:sticky;top:0}
+.charttbl th:first-child,.charttbl td:first-child{text-align:left}
+.charttbl tbody th{font-weight:600;color:var(--ink);background:var(--card);position:sticky;left:0}
+.charttbl tbody td{color:var(--ink-2)}
+.charttbl tbody tr:hover td,.charttbl tbody tr:hover th{background:var(--sunk)}
+.chartcap{font-size:13.5px;color:var(--slate);margin:6px 0 22px}
+@media print{
+  header.site,footer,.chart-actions,.ad-unit,.rel,.provenance,.skip-link,.totop,#themeToggle{display:none!important}
+  .chartwrap{overflow:visible;border:0}
+  .charttbl{font-size:10.5pt}.charttbl th,.charttbl td{padding:4px 8px;white-space:normal}
+  .charttbl thead th,.charttbl tbody th{position:static}
+  body{background:#fff!important;color:#000!important}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/reference-charts.html" style="color:var(--slate);text-decoration:none">Reference charts</a> / <span style="color:var(--ink)">AWG Wire Size Chart</span></nav>
+    <div class="eyebrow">Reference Chart &middot; Free to Print</div>
+    <h1>AWG Wire Size Chart</h1>
+    <p class="dek">Every standard size from 18 AWG to 1000 kcmil, with its diameter, its area in circular mils and square millimetres, and its resistance in copper and aluminum.</p>
+  </div>
+</section>
+
+<div class="artwrap">
+  <p><b>In the American Wire Gauge system a smaller number is a larger wire, and every three sizes the area doubles.</b> A 10 AWG conductor has about twice the copper of a 13 AWG and half the resistance; go up six sizes and the diameter doubles. Above 4/0 the gauge numbers stop and sizes are given directly by area, in thousands of circular mils (kcmil).</p>
+  <div class="chart-actions">
+    <button type="button" data-chart-print>Print this chart</button>
+    <button type="button" data-chart-csv="awg-wire-size-chart">Download as CSV</button>
+  </div>
+
+  <h2 id="awg">AWG and kcmil wire sizes</h2>
+  <div class="chartwrap" tabindex="0" role="region" aria-labelledby="awg">
+    <table class="charttbl" data-chart="awg">
+      <thead><tr><th scope="col">Size</th><th scope="col">Diameter (in)</th><th scope="col">Diameter (mm)</th><th scope="col">Area (cmil)</th><th scope="col">Area (mm&sup2;)</th><th scope="col">Copper (&Omega;/1000 ft)</th><th scope="col">Aluminum (&Omega;/1000 ft)</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">18 AWG</th><td>0.0402</td><td>1.02</td><td>1,620</td><td>0.821</td><td>7.963</td><td>13.086</td></tr>
+      <tr><th scope="row">16 AWG</th><td>0.0508</td><td>1.29</td><td>2,580</td><td>1.31</td><td>5.000</td><td>8.217</td></tr>
+      <tr><th scope="row">14 AWG</th><td>0.0641</td><td>1.63</td><td>4,110</td><td>2.08</td><td>3.139</td><td>5.158</td></tr>
+      <tr><th scope="row">12 AWG</th><td>0.0808</td><td>2.05</td><td>6,530</td><td>3.31</td><td>1.975</td><td>3.247</td></tr>
+      <tr><th scope="row">10 AWG</th><td>0.1019</td><td>2.59</td><td>10,380</td><td>5.26</td><td>1.243</td><td>2.042</td></tr>
+      <tr><th scope="row">8 AWG</th><td>0.1285</td><td>3.26</td><td>16,510</td><td>8.37</td><td>0.781</td><td>1.284</td></tr>
+      <tr><th scope="row">6 AWG</th><td>0.1620</td><td>4.11</td><td>26,240</td><td>13.3</td><td>0.492</td><td>0.808</td></tr>
+      <tr><th scope="row">4 AWG</th><td>0.2043</td><td>5.19</td><td>41,740</td><td>21.1</td><td>0.309</td><td>0.508</td></tr>
+      <tr><th scope="row">3 AWG</th><td>0.2294</td><td>5.83</td><td>52,620</td><td>26.7</td><td>0.245</td><td>0.403</td></tr>
+      <tr><th scope="row">2 AWG</th><td>0.2576</td><td>6.54</td><td>66,360</td><td>33.6</td><td>0.194</td><td>0.319</td></tr>
+      <tr><th scope="row">1 AWG</th><td>0.2893</td><td>7.35</td><td>83,690</td><td>42.4</td><td>0.154</td><td>0.253</td></tr>
+      <tr><th scope="row">1/0 AWG</th><td>0.3250</td><td>8.25</td><td>105,600</td><td>53.5</td><td>0.1222</td><td>0.2008</td></tr>
+      <tr><th scope="row">2/0 AWG</th><td>0.3648</td><td>9.27</td><td>133,100</td><td>67.4</td><td>0.0969</td><td>0.1593</td></tr>
+      <tr><th scope="row">3/0 AWG</th><td>0.4096</td><td>10.40</td><td>167,800</td><td>85.0</td><td>0.0769</td><td>0.1263</td></tr>
+      <tr><th scope="row">4/0 AWG</th><td>0.4600</td><td>11.68</td><td>211,600</td><td>107</td><td>0.0610</td><td>0.1002</td></tr>
+      <tr><th scope="row">250 kcmil</th><td>0.5000</td><td>12.70</td><td>250,000</td><td>127</td><td>0.0516</td><td>0.0848</td></tr>
+      <tr><th scope="row">300 kcmil</th><td>0.5477</td><td>13.91</td><td>300,000</td><td>152</td><td>0.0430</td><td>0.0707</td></tr>
+      <tr><th scope="row">350 kcmil</th><td>0.5916</td><td>15.03</td><td>350,000</td><td>177</td><td>0.0369</td><td>0.0606</td></tr>
+      <tr><th scope="row">400 kcmil</th><td>0.6325</td><td>16.06</td><td>400,000</td><td>203</td><td>0.0323</td><td>0.0530</td></tr>
+      <tr><th scope="row">500 kcmil</th><td>0.7071</td><td>17.96</td><td>500,000</td><td>253</td><td>0.0258</td><td>0.0424</td></tr>
+      <tr><th scope="row">600 kcmil</th><td>0.7746</td><td>19.67</td><td>600,000</td><td>304</td><td>0.0215</td><td>0.0353</td></tr>
+      <tr><th scope="row">750 kcmil</th><td>0.8660</td><td>22.00</td><td>750,000</td><td>380</td><td>0.0172</td><td>0.0283</td></tr>
+      <tr><th scope="row">1000 kcmil</th><td>1.0000</td><td>25.40</td><td>1,000,000</td><td>507</td><td>0.0129</td><td>0.0212</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="chartcap">Diameter is that of a solid round conductor of the stated area. A stranded conductor of the same size is slightly larger overall. Resistance is DC, at about 75&deg;C.</p>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2>How to read it</h2>
+  <p>Area in circular mils is the diameter in thousandths of an inch, squared. A wire one mil across is one circular mil; a wire 100 mils across is 10,000. It is a unit invented to avoid &pi; in the arithmetic.</p>
+  <p>Square millimetres are circular mils times 0.0005067. AWG sizes do not land on the standard metric sizes: 12 AWG is 3.31 mm&sup2;, between the IEC sizes of 2.5 and 4 mm&sup2;. When a metric cable replaces an AWG one, the next size up is the safe choice.</p>
+  <p>Resistance is K &times; 1000 / area, with K = 12.9 for copper and 21.2 for aluminum in ohm-circular mils per foot. That is the same approximation the voltage drop calculator uses, and it tracks the 75&deg;C figures in NEC Chapter 9, Table 8 closely.</p>
+
+  <h2>How the values are calculated</h2>
+    <div class="formula">Area (cmil) = (diameter in mils)&sup2;<br>Area (mm&sup2;) = cmil &times; 0.0005067<br>R (&Omega;/1000 ft) = K &times; 1000 / cmil</div>
+  <p>Every figure in the chart comes from the formulas above. Nothing is copied from a published table, so any cell can be checked by hand.</p>
+
+  <h2>What this chart does not tell you</h2>
+  <p>This chart gives geometry and resistance. It does not give ampacity, which depends on insulation temperature rating, how many conductors share a raceway, the ambient temperature and the terminations, and has to come from the adopted code. Resistance is DC; on large conductors carrying AC, skin effect raises the effective figure.</p>
+    <div class="callout"><b>This is a reference, not a design.</b> It is here to give you the right order of magnitude and a figure to check against. It does not replace the adopted code or a calculation by a qualified engineer.</div>
+
+  <h2>Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Why does a smaller AWG number mean a bigger wire?</summary>
+    <p style="margin-top:10px">The gauge number originally counted the drawing steps used to make the wire. Each pass through a die made it thinner, so more passes, a higher number, meant a finer wire. The modern system keeps that direction and fixes the sizes by formula.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What comes after 4/0 AWG?</summary>
+    <p style="margin-top:10px">Sizes larger than 4/0 are given by area in thousands of circular mils: 250 kcmil, 300 kcmil and upward. 4/0 is 211,600 circular mils, so 250 kcmil is the next standard size. The older abbreviation MCM means the same as kcmil.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How do I convert AWG to mm&sup2;?</summary>
+    <p style="margin-top:10px">Multiply the area in circular mils by 0.0005067. 12 AWG is 6,530 cmil, which is 3.31 mm&sup2;. Because AWG and metric sizes do not line up, a metric replacement is normally the next standard size above that figure.</p>
+  </details>
+
+  <h2>Related</h2>
+    <div class="rel">
+      <a href="/calculators/awg-to-mm2.html">AWG to mm&sup2; Converter</a>
+      <a href="/calculators/wire-resistance.html">Wire Resistance Calculator</a>
+      <a href="/calculators/wire-size.html">Wire Size Calculator</a>
+      <a href="/calculators/voltage-drop.html">Voltage Drop Calculator</a>
+      <a href="/charts/voltage-drop-chart.html">Voltage Drop Chart</a>
+      <a href="/reference-charts.html">All reference charts</a>
+    </div>
+
+  <aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>AWG wire size chart: diameter in inches and mm, area in circular mils and mm&sup2;, and copper and aluminum resistance per 1000 ft, from 18 AWG to 1000 kcmil.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>ASTM B258 &mdash; nominal diameters and cross-sectional areas of AWG sizes</li><li>NEC Chapter 9, Table 8 &mdash; conductor properties, for comparison of the resistance figures</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>This chart gives geometry and resistance. It does not give ampacity, which depends on insulation temperature rating, how many conductors share a raceway, the ambient temperature and the terminations, and has to come from the adopted code. Resistance is DC; on large conductors carrying AC, skin effect raises the effective figure.</dd>
+      <dt>Provenance</dt>
+      <dd>Last reviewed November 11, 2026. Computed by Voltfield from the formulas shown on the page and maintained by the Voltfield editorial team. Free to print, cite and link to.</dd>
+    </dl>
+  </aside>
+
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h4>Voltfield</h4>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h4>Sectors</h4><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h4>Compliance</h4><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="/voltfield-site-config.js"></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+<script>
+/* Print, and a CSV of every table on the page. No dependencies. */
+(function(){
+  var p=document.querySelector('[data-chart-print]');
+  if(p)p.addEventListener('click',function(){window.print();});
+  var c=document.querySelector('[data-chart-csv]');
+  if(c)c.addEventListener('click',function(){
+    var out=[];
+    document.querySelectorAll('table.charttbl').forEach(function(t,i){
+      if(i)out.push('');
+      var h=t.closest('.chartwrap').previousElementSibling;
+      if(h)out.push('"'+h.textContent.replace(/"/g,'""')+'"');
+      t.querySelectorAll('tr').forEach(function(r){
+        out.push([].map.call(r.children,function(x){
+          var v=x.textContent.trim().replace(/\u2014/g,'');
+          var n=v.replace(/,/g,'');
+          return /^-?\d+(\.\d+)?$/.test(n)?n:'"'+v.replace(/"/g,'""')+'"';
+        }).join(','));
+      });
+    });
+    out.push('','"Source: voltfield.org'+location.pathname+'"');
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob(['\ufeff'+out.join('\r\n')],{type:'text/csv'}));
+    a.download='voltfield-'+c.getAttribute('data-chart-csv')+'.csv';
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);
+    if(window.vfGtag)window.vfGtag('event','chart_csv',{chart:c.getAttribute('data-chart-csv')});
+  });
+})();
+</script>
+</body>
+</html>
