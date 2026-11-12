@@ -38,6 +38,11 @@
 .chart-actions button{font:600 12px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:10px 14px;min-height:40px;
   background:var(--card);color:var(--ink);border:1px solid var(--line-dark);border-radius:var(--r-s,6px);cursor:pointer}
 .chart-actions button:hover{border-color:var(--signal)}
+.chart-units{display:inline-flex;margin-left:auto;border:1px solid var(--line-dark);border-radius:999px;overflow:hidden}
+.chart-units[hidden]{display:none}
+.chart-actions .chart-units button{border:0;border-radius:0;background:transparent;color:var(--slate);min-height:40px}
+.chart-actions .chart-units button[aria-pressed="true"]{background:var(--signal);color:#101B2D}
+@media(max-width:520px){.chart-units{margin-left:0}}
 .chartwrap{overflow-x:auto;margin:14px 0 6px;border:1px solid var(--line);border-radius:var(--r-m,8px)}
 .chartwrap:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 .charttbl{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums}
@@ -120,8 +125,11 @@
   <div class="chart-actions">
     <button type="button" data-chart-print>Print this chart</button>
     <button type="button" data-chart-csv="awg-wire-size-chart">Download as CSV</button>
+    <span class="chart-units" role="group" aria-label="Units" hidden><button type="button" data-units-btn="us" aria-pressed="true">US</button><button type="button" data-units-btn="metric" aria-pressed="false">Metric</button></span>
   </div>
+  <p class="chartcap" data-units="metric" hidden>Metric tables are shown. The worked examples and formulas further down the page are in US units.</p>
 
+  <div data-units="us">
   <h2 id="awg">AWG and kcmil wire sizes</h2>
   <div class="chartwrap" tabindex="0" role="region" aria-labelledby="awg">
     <table class="charttbl" data-chart="awg">
@@ -154,6 +162,41 @@
     </table>
   </div>
   <p class="chartcap">Diameter is that of a solid round conductor of the stated area. A stranded conductor of the same size is slightly larger overall. Resistance is DC, at about 75&deg;C.</p>
+  </div>
+  <div data-units="metric" hidden>
+  <h2 id="awg-m">AWG and kcmil wire sizes in metric units</h2>
+  <div class="chartwrap" tabindex="0" role="region" aria-labelledby="awg-m">
+    <table class="charttbl" data-chart="awg-m">
+      <thead><tr><th scope="col">Size</th><th scope="col">Diameter (mm)</th><th scope="col">Area (mm&sup2;)</th><th scope="col">Copper (&Omega;/km)</th><th scope="col">Aluminum (&Omega;/km)</th><th scope="col">Next IEC size (mm&sup2;)</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">18 AWG</th><td>1.02</td><td>0.821</td><td>26.1</td><td>42.9</td><td>1</td></tr>
+      <tr><th scope="row">16 AWG</th><td>1.29</td><td>1.31</td><td>16.4</td><td>27.0</td><td>1.5</td></tr>
+      <tr><th scope="row">14 AWG</th><td>1.63</td><td>2.08</td><td>10.3</td><td>16.9</td><td>2.5</td></tr>
+      <tr><th scope="row">12 AWG</th><td>2.05</td><td>3.31</td><td>6.48</td><td>10.7</td><td>4</td></tr>
+      <tr><th scope="row">10 AWG</th><td>2.59</td><td>5.26</td><td>4.08</td><td>6.70</td><td>6</td></tr>
+      <tr><th scope="row">8 AWG</th><td>3.26</td><td>8.37</td><td>2.56</td><td>4.21</td><td>10</td></tr>
+      <tr><th scope="row">6 AWG</th><td>4.11</td><td>13.3</td><td>1.61</td><td>2.65</td><td>16</td></tr>
+      <tr><th scope="row">4 AWG</th><td>5.19</td><td>21.1</td><td>1.01</td><td>1.67</td><td>25</td></tr>
+      <tr><th scope="row">3 AWG</th><td>5.83</td><td>26.7</td><td>0.804</td><td>1.32</td><td>35</td></tr>
+      <tr><th scope="row">2 AWG</th><td>6.54</td><td>33.6</td><td>0.638</td><td>1.05</td><td>35</td></tr>
+      <tr><th scope="row">1 AWG</th><td>7.35</td><td>42.4</td><td>0.506</td><td>0.831</td><td>50</td></tr>
+      <tr><th scope="row">1/0 AWG</th><td>8.25</td><td>53.5</td><td>0.401</td><td>0.659</td><td>70</td></tr>
+      <tr><th scope="row">2/0 AWG</th><td>9.27</td><td>67.4</td><td>0.318</td><td>0.523</td><td>70</td></tr>
+      <tr><th scope="row">3/0 AWG</th><td>10.40</td><td>85.0</td><td>0.252</td><td>0.415</td><td>95</td></tr>
+      <tr><th scope="row">4/0 AWG</th><td>11.68</td><td>107</td><td>0.200</td><td>0.329</td><td>120</td></tr>
+      <tr><th scope="row">250 kcmil</th><td>12.70</td><td>127</td><td>0.169</td><td>0.278</td><td>150</td></tr>
+      <tr><th scope="row">300 kcmil</th><td>13.91</td><td>152</td><td>0.141</td><td>0.232</td><td>185</td></tr>
+      <tr><th scope="row">350 kcmil</th><td>15.03</td><td>177</td><td>0.121</td><td>0.199</td><td>185</td></tr>
+      <tr><th scope="row">400 kcmil</th><td>16.06</td><td>203</td><td>0.106</td><td>0.174</td><td>240</td></tr>
+      <tr><th scope="row">500 kcmil</th><td>17.96</td><td>253</td><td>0.085</td><td>0.139</td><td>300</td></tr>
+      <tr><th scope="row">600 kcmil</th><td>19.67</td><td>304</td><td>0.071</td><td>0.116</td><td>400</td></tr>
+      <tr><th scope="row">750 kcmil</th><td>22.00</td><td>380</td><td>0.056</td><td>0.093</td><td>400</td></tr>
+      <tr><th scope="row">1000 kcmil</th><td>25.40</td><td>507</td><td>0.042</td><td>0.070</td><td>630</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="chartcap">Diameter is that of a solid round conductor of the stated area. The last column is the next standard IEC conductor size at or above the AWG area, which is the usual choice when a metric cable replaces an AWG one. Resistance is DC, at about 75&deg;C.</p>
+  </div>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
@@ -240,12 +283,37 @@
 <script>
 /* Print, and a CSV of every table on the page. No dependencies. */
 (function(){
+  /* US / Metric. Both sets of tables are in the page; this shows one. The
+     switch itself is hidden until this runs, so without JavaScript the reader
+     gets the US tables and no control that does nothing. */
+  var box=document.querySelector('.chart-units');
+  if(box){
+    var metric=false;
+    try{metric=localStorage.getItem('vf_units')==='metric';}catch(e){}
+    try{var q=new URLSearchParams(location.search).get('units');if(q==='metric'||q==='us'){metric=q==='metric';try{localStorage.setItem('vf_units',q);}catch(e){}}}catch(e){}
+    var paint=function(){
+      document.querySelectorAll('[data-units]').forEach(function(el){el.hidden=(el.getAttribute('data-units')==='metric')!==metric;});
+      box.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',((b.getAttribute('data-units-btn')==='metric')===metric)?'true':'false');});
+    };
+    box.hidden=false;
+    box.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var want=b.getAttribute('data-units-btn')==='metric';
+        if(want===metric)return;
+        metric=want;
+        try{localStorage.setItem('vf_units',metric?'metric':'us');}catch(e){}
+        paint();
+        if(window.vfGtag)window.vfGtag('event','units_toggle',{to:metric?'metric':'us',page:location.pathname});
+      });
+    });
+    paint();
+  }
   var p=document.querySelector('[data-chart-print]');
   if(p)p.addEventListener('click',function(){window.print();});
   var c=document.querySelector('[data-chart-csv]');
   if(c)c.addEventListener('click',function(){
     var out=[];
-    document.querySelectorAll('table.charttbl').forEach(function(t,i){
+    [].filter.call(document.querySelectorAll('table.charttbl'),function(t){return !t.closest('[hidden]');}).forEach(function(t,i){
       if(i)out.push('');
       var h=t.closest('.chartwrap').previousElementSibling;
       if(h)out.push('"'+h.textContent.replace(/"/g,'""')+'"');

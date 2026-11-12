@@ -38,6 +38,11 @@
 .chart-actions button{font:600 12px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:10px 14px;min-height:40px;
   background:var(--card);color:var(--ink);border:1px solid var(--line-dark);border-radius:var(--r-s,6px);cursor:pointer}
 .chart-actions button:hover{border-color:var(--signal)}
+.chart-units{display:inline-flex;margin-left:auto;border:1px solid var(--line-dark);border-radius:999px;overflow:hidden}
+.chart-units[hidden]{display:none}
+.chart-actions .chart-units button{border:0;border-radius:0;background:transparent;color:var(--slate);min-height:40px}
+.chart-actions .chart-units button[aria-pressed="true"]{background:var(--signal);color:#101B2D}
+@media(max-width:520px){.chart-units{margin-left:0}}
 .chartwrap{overflow-x:auto;margin:14px 0 6px;border:1px solid var(--line);border-radius:var(--r-m,8px)}
 .chartwrap:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 .charttbl{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums}
@@ -120,8 +125,11 @@
   <div class="chart-actions">
     <button type="button" data-chart-print>Print this chart</button>
     <button type="button" data-chart-csv="voltage-drop-chart">Download as CSV</button>
+    <span class="chart-units" role="group" aria-label="Units" hidden><button type="button" data-units-btn="us" aria-pressed="true">US</button><button type="button" data-units-btn="metric" aria-pressed="false">Metric</button></span>
   </div>
+  <p class="chartcap" data-units="metric" hidden>Metric tables are shown. The worked examples and formulas further down the page are in US units.</p>
 
+  <div data-units="us">
   <h2 id="vd120">Maximum one-way length for 3% drop: 120 V single-phase</h2>
   <div class="chartwrap" tabindex="0" role="region" aria-labelledby="vd120">
     <table class="charttbl" data-chart="vd120">
@@ -144,7 +152,33 @@
     </table>
   </div>
   <p class="chartcap">Copper conductors, in feet, rounded down. A dash means that current is more than the conductor may carry, so no length is given.</p>
+  </div>
+  <div data-units="metric" hidden>
+  <h2 id="vd120-m">Maximum one-way length for 3% drop: 120 V single-phase</h2>
+  <div class="chartwrap" tabindex="0" role="region" aria-labelledby="vd120-m">
+    <table class="charttbl" data-chart="vd120-m">
+      <thead><tr><th scope="col">Wire size</th><th scope="col">5 A</th><th scope="col">10 A</th><th scope="col">15 A</th><th scope="col">20 A</th><th scope="col">30 A</th><th scope="col">40 A</th><th scope="col">50 A</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">14 AWG</th><td>34</td><td>17</td><td>11</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">12 AWG</th><td>55</td><td>27</td><td>18</td><td>13</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">10 AWG</th><td>88</td><td>44</td><td>29</td><td>22</td><td>14</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">8 AWG</th><td>140</td><td>70</td><td>46</td><td>35</td><td>23</td><td>17</td><td>14</td></tr>
+      <tr><th scope="row">6 AWG</th><td>223</td><td>111</td><td>74</td><td>55</td><td>37</td><td>27</td><td>22</td></tr>
+      <tr><th scope="row">4 AWG</th><td>355</td><td>177</td><td>118</td><td>88</td><td>59</td><td>44</td><td>35</td></tr>
+      <tr><th scope="row">3 AWG</th><td>447</td><td>223</td><td>149</td><td>111</td><td>74</td><td>55</td><td>44</td></tr>
+      <tr><th scope="row">2 AWG</th><td>564</td><td>282</td><td>188</td><td>141</td><td>94</td><td>70</td><td>56</td></tr>
+      <tr><th scope="row">1 AWG</th><td>711</td><td>355</td><td>237</td><td>177</td><td>118</td><td>88</td><td>71</td></tr>
+      <tr><th scope="row">1/0 AWG</th><td>898</td><td>449</td><td>299</td><td>224</td><td>149</td><td>112</td><td>89</td></tr>
+      <tr><th scope="row">2/0 AWG</th><td>1,132</td><td>566</td><td>377</td><td>283</td><td>188</td><td>141</td><td>113</td></tr>
+      <tr><th scope="row">3/0 AWG</th><td>1,427</td><td>713</td><td>475</td><td>356</td><td>237</td><td>178</td><td>142</td></tr>
+      <tr><th scope="row">4/0 AWG</th><td>1,799</td><td>899</td><td>599</td><td>449</td><td>299</td><td>224</td><td>179</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="chartcap">Copper conductors, in metres, rounded down. A dash means that current is more than the conductor may carry, so no length is given.</p>
+  </div>
 
+  <div data-units="us">
   <h2 id="vd240">Maximum one-way length for 3% drop: 240 V single-phase</h2>
   <div class="chartwrap" tabindex="0" role="region" aria-labelledby="vd240">
     <table class="charttbl" data-chart="vd240">
@@ -167,7 +201,33 @@
     </table>
   </div>
   <p class="chartcap">Copper conductors, in feet, rounded down. A dash means that current is more than the conductor may carry, so no length is given.</p>
+  </div>
+  <div data-units="metric" hidden>
+  <h2 id="vd240-m">Maximum one-way length for 3% drop: 240 V single-phase</h2>
+  <div class="chartwrap" tabindex="0" role="region" aria-labelledby="vd240-m">
+    <table class="charttbl" data-chart="vd240-m">
+      <thead><tr><th scope="col">Wire size</th><th scope="col">15 A</th><th scope="col">20 A</th><th scope="col">30 A</th><th scope="col">40 A</th><th scope="col">50 A</th><th scope="col">60 A</th><th scope="col">80 A</th><th scope="col">100 A</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">14 AWG</th><td>23</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">12 AWG</th><td>37</td><td>27</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">10 AWG</th><td>58</td><td>44</td><td>29</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">8 AWG</th><td>93</td><td>70</td><td>46</td><td>35</td><td>28</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">6 AWG</th><td>148</td><td>111</td><td>74</td><td>55</td><td>44</td><td>37</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">4 AWG</th><td>236</td><td>177</td><td>118</td><td>88</td><td>71</td><td>59</td><td>44</td><td>&mdash;</td></tr>
+      <tr><th scope="row">3 AWG</th><td>298</td><td>223</td><td>149</td><td>111</td><td>89</td><td>74</td><td>55</td><td>44</td></tr>
+      <tr><th scope="row">2 AWG</th><td>376</td><td>282</td><td>188</td><td>141</td><td>112</td><td>94</td><td>70</td><td>56</td></tr>
+      <tr><th scope="row">1 AWG</th><td>474</td><td>355</td><td>237</td><td>177</td><td>142</td><td>118</td><td>88</td><td>71</td></tr>
+      <tr><th scope="row">1/0 AWG</th><td>598</td><td>449</td><td>299</td><td>224</td><td>179</td><td>149</td><td>112</td><td>89</td></tr>
+      <tr><th scope="row">2/0 AWG</th><td>754</td><td>566</td><td>377</td><td>283</td><td>226</td><td>188</td><td>141</td><td>113</td></tr>
+      <tr><th scope="row">3/0 AWG</th><td>951</td><td>713</td><td>475</td><td>356</td><td>285</td><td>237</td><td>178</td><td>142</td></tr>
+      <tr><th scope="row">4/0 AWG</th><td>1,199</td><td>899</td><td>599</td><td>449</td><td>359</td><td>299</td><td>224</td><td>179</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="chartcap">Copper conductors, in metres, rounded down. A dash means that current is more than the conductor may carry, so no length is given.</p>
+  </div>
 
+  <div data-units="us">
   <h2 id="vd480">Maximum one-way length for 3% drop: 480 V three-phase</h2>
   <div class="chartwrap" tabindex="0" role="region" aria-labelledby="vd480">
     <table class="charttbl" data-chart="vd480">
@@ -190,6 +250,31 @@
     </table>
   </div>
   <p class="chartcap">Copper conductors, in feet, rounded down. A dash means that current is more than the conductor may carry, so no length is given.</p>
+  </div>
+  <div data-units="metric" hidden>
+  <h2 id="vd480-m">Maximum one-way length for 3% drop: 480 V three-phase</h2>
+  <div class="chartwrap" tabindex="0" role="region" aria-labelledby="vd480-m">
+    <table class="charttbl" data-chart="vd480-m">
+      <thead><tr><th scope="col">Wire size</th><th scope="col">20 A</th><th scope="col">30 A</th><th scope="col">50 A</th><th scope="col">60 A</th><th scope="col">80 A</th><th scope="col">100 A</th><th scope="col">150 A</th><th scope="col">200 A</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">14 AWG</th><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">12 AWG</th><td>64</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">10 AWG</th><td>101</td><td>67</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">8 AWG</th><td>162</td><td>108</td><td>64</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">6 AWG</th><td>257</td><td>171</td><td>103</td><td>85</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">4 AWG</th><td>409</td><td>273</td><td>163</td><td>136</td><td>102</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">3 AWG</th><td>516</td><td>344</td><td>206</td><td>172</td><td>129</td><td>103</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">2 AWG</th><td>651</td><td>434</td><td>260</td><td>217</td><td>162</td><td>130</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">1 AWG</th><td>821</td><td>547</td><td>328</td><td>273</td><td>205</td><td>164</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><th scope="row">1/0 AWG</th><td>1,037</td><td>691</td><td>414</td><td>345</td><td>259</td><td>207</td><td>138</td><td>&mdash;</td></tr>
+      <tr><th scope="row">2/0 AWG</th><td>1,307</td><td>871</td><td>522</td><td>435</td><td>326</td><td>261</td><td>174</td><td>&mdash;</td></tr>
+      <tr><th scope="row">3/0 AWG</th><td>1,648</td><td>1,098</td><td>659</td><td>549</td><td>412</td><td>329</td><td>219</td><td>164</td></tr>
+      <tr><th scope="row">4/0 AWG</th><td>2,078</td><td>1,385</td><td>831</td><td>692</td><td>519</td><td>415</td><td>277</td><td>207</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="chartcap">Copper conductors, in metres, rounded down. A dash means that current is more than the conductor may carry, so no length is given.</p>
+  </div>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
@@ -276,12 +361,37 @@
 <script>
 /* Print, and a CSV of every table on the page. No dependencies. */
 (function(){
+  /* US / Metric. Both sets of tables are in the page; this shows one. The
+     switch itself is hidden until this runs, so without JavaScript the reader
+     gets the US tables and no control that does nothing. */
+  var box=document.querySelector('.chart-units');
+  if(box){
+    var metric=false;
+    try{metric=localStorage.getItem('vf_units')==='metric';}catch(e){}
+    try{var q=new URLSearchParams(location.search).get('units');if(q==='metric'||q==='us'){metric=q==='metric';try{localStorage.setItem('vf_units',q);}catch(e){}}}catch(e){}
+    var paint=function(){
+      document.querySelectorAll('[data-units]').forEach(function(el){el.hidden=(el.getAttribute('data-units')==='metric')!==metric;});
+      box.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',((b.getAttribute('data-units-btn')==='metric')===metric)?'true':'false');});
+    };
+    box.hidden=false;
+    box.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var want=b.getAttribute('data-units-btn')==='metric';
+        if(want===metric)return;
+        metric=want;
+        try{localStorage.setItem('vf_units',metric?'metric':'us');}catch(e){}
+        paint();
+        if(window.vfGtag)window.vfGtag('event','units_toggle',{to:metric?'metric':'us',page:location.pathname});
+      });
+    });
+    paint();
+  }
   var p=document.querySelector('[data-chart-print]');
   if(p)p.addEventListener('click',function(){window.print();});
   var c=document.querySelector('[data-chart-csv]');
   if(c)c.addEventListener('click',function(){
     var out=[];
-    document.querySelectorAll('table.charttbl').forEach(function(t,i){
+    [].filter.call(document.querySelectorAll('table.charttbl'),function(t){return !t.closest('[hidden]');}).forEach(function(t,i){
       if(i)out.push('');
       var h=t.closest('.chartwrap').previousElementSibling;
       if(h)out.push('"'+h.textContent.replace(/"/g,'""')+'"');

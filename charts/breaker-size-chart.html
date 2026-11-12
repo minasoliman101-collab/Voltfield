@@ -38,6 +38,11 @@
 .chart-actions button{font:600 12px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:10px 14px;min-height:40px;
   background:var(--card);color:var(--ink);border:1px solid var(--line-dark);border-radius:var(--r-s,6px);cursor:pointer}
 .chart-actions button:hover{border-color:var(--signal)}
+.chart-units{display:inline-flex;margin-left:auto;border:1px solid var(--line-dark);border-radius:999px;overflow:hidden}
+.chart-units[hidden]{display:none}
+.chart-actions .chart-units button{border:0;border-radius:0;background:transparent;color:var(--slate);min-height:40px}
+.chart-actions .chart-units button[aria-pressed="true"]{background:var(--signal);color:#101B2D}
+@media(max-width:520px){.chart-units{margin-left:0}}
 .chartwrap{overflow-x:auto;margin:14px 0 6px;border:1px solid var(--line);border-radius:var(--r-m,8px)}
 .chartwrap:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 .charttbl{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums}
@@ -247,12 +252,37 @@
 <script>
 /* Print, and a CSV of every table on the page. No dependencies. */
 (function(){
+  /* US / Metric. Both sets of tables are in the page; this shows one. The
+     switch itself is hidden until this runs, so without JavaScript the reader
+     gets the US tables and no control that does nothing. */
+  var box=document.querySelector('.chart-units');
+  if(box){
+    var metric=false;
+    try{metric=localStorage.getItem('vf_units')==='metric';}catch(e){}
+    try{var q=new URLSearchParams(location.search).get('units');if(q==='metric'||q==='us'){metric=q==='metric';try{localStorage.setItem('vf_units',q);}catch(e){}}}catch(e){}
+    var paint=function(){
+      document.querySelectorAll('[data-units]').forEach(function(el){el.hidden=(el.getAttribute('data-units')==='metric')!==metric;});
+      box.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',((b.getAttribute('data-units-btn')==='metric')===metric)?'true':'false');});
+    };
+    box.hidden=false;
+    box.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var want=b.getAttribute('data-units-btn')==='metric';
+        if(want===metric)return;
+        metric=want;
+        try{localStorage.setItem('vf_units',metric?'metric':'us');}catch(e){}
+        paint();
+        if(window.vfGtag)window.vfGtag('event','units_toggle',{to:metric?'metric':'us',page:location.pathname});
+      });
+    });
+    paint();
+  }
   var p=document.querySelector('[data-chart-print]');
   if(p)p.addEventListener('click',function(){window.print();});
   var c=document.querySelector('[data-chart-csv]');
   if(c)c.addEventListener('click',function(){
     var out=[];
-    document.querySelectorAll('table.charttbl').forEach(function(t,i){
+    [].filter.call(document.querySelectorAll('table.charttbl'),function(t){return !t.closest('[hidden]');}).forEach(function(t,i){
       if(i)out.push('');
       var h=t.closest('.chartwrap').previousElementSibling;
       if(h)out.push('"'+h.textContent.replace(/"/g,'""')+'"');

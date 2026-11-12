@@ -38,6 +38,11 @@
 .chart-actions button{font:600 12px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:10px 14px;min-height:40px;
   background:var(--card);color:var(--ink);border:1px solid var(--line-dark);border-radius:var(--r-s,6px);cursor:pointer}
 .chart-actions button:hover{border-color:var(--signal)}
+.chart-units{display:inline-flex;margin-left:auto;border:1px solid var(--line-dark);border-radius:999px;overflow:hidden}
+.chart-units[hidden]{display:none}
+.chart-actions .chart-units button{border:0;border-radius:0;background:transparent;color:var(--slate);min-height:40px}
+.chart-actions .chart-units button[aria-pressed="true"]{background:var(--signal);color:#101B2D}
+@media(max-width:520px){.chart-units{margin-left:0}}
 .chartwrap{overflow-x:auto;margin:14px 0 6px;border:1px solid var(--line);border-radius:var(--r-m,8px)}
 .chartwrap:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 .charttbl{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums}
@@ -134,6 +139,9 @@
   <h2>Two kinds of chart</h2>
   <p>Most of the charts here are computed: every figure comes from a formula shown on the page, so any cell can be checked by hand. Two are different. The <a class="inline" href="charts/wire-ampacity-chart.html">wire ampacity chart</a> and the <a class="inline" href="charts/motor-full-load-current-chart.html">motor full-load current chart</a> carry values that correspond to tables in the National Electrical Code. Those pages say so, and the figures that apply to an installation are the ones in the edition your jurisdiction has adopted, with its correction factors applied. The guides to <a class="inline" href="guide-cable-ampacity-derating.html">ampacity derating</a> and <a class="inline" href="guide-nec-430-250-motor-fla.html">NEC 430.250</a> explain the method behind each.</p>
 
+  <h2>US and metric</h2>
+  <p>Four of the charts also come in metric: voltage drop, wire sizes, cooling load and motor current. Each has a US / Metric switch beside its print button, and the choice is remembered and shared with the calculators. The rest have no unit to switch, because amps, volts and kilowatts are the same in both systems.</p>
+
   <h2>Using and sharing these charts</h2>
   <p>Print them, download the data as CSV, and link to them freely. If you reproduce a chart, a link back to the page is appreciated. If you find a figure you can show is wrong, the <a class="inline" href="contact.html">contact page</a> says how to report it.</p>
 </div>
@@ -168,12 +176,37 @@
 <script>
 /* Print, and a CSV of every table on the page. No dependencies. */
 (function(){
+  /* US / Metric. Both sets of tables are in the page; this shows one. The
+     switch itself is hidden until this runs, so without JavaScript the reader
+     gets the US tables and no control that does nothing. */
+  var box=document.querySelector('.chart-units');
+  if(box){
+    var metric=false;
+    try{metric=localStorage.getItem('vf_units')==='metric';}catch(e){}
+    try{var q=new URLSearchParams(location.search).get('units');if(q==='metric'||q==='us'){metric=q==='metric';try{localStorage.setItem('vf_units',q);}catch(e){}}}catch(e){}
+    var paint=function(){
+      document.querySelectorAll('[data-units]').forEach(function(el){el.hidden=(el.getAttribute('data-units')==='metric')!==metric;});
+      box.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',((b.getAttribute('data-units-btn')==='metric')===metric)?'true':'false');});
+    };
+    box.hidden=false;
+    box.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var want=b.getAttribute('data-units-btn')==='metric';
+        if(want===metric)return;
+        metric=want;
+        try{localStorage.setItem('vf_units',metric?'metric':'us');}catch(e){}
+        paint();
+        if(window.vfGtag)window.vfGtag('event','units_toggle',{to:metric?'metric':'us',page:location.pathname});
+      });
+    });
+    paint();
+  }
   var p=document.querySelector('[data-chart-print]');
   if(p)p.addEventListener('click',function(){window.print();});
   var c=document.querySelector('[data-chart-csv]');
   if(c)c.addEventListener('click',function(){
     var out=[];
-    document.querySelectorAll('table.charttbl').forEach(function(t,i){
+    [].filter.call(document.querySelectorAll('table.charttbl'),function(t){return !t.closest('[hidden]');}).forEach(function(t,i){
       if(i)out.push('');
       var h=t.closest('.chartwrap').previousElementSibling;
       if(h)out.push('"'+h.textContent.replace(/"/g,'""')+'"');

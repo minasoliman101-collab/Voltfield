@@ -26,6 +26,14 @@
  * calculator page, the same way gen-guides.mjs stamps guides from a guide, so
  * the chrome cannot drift from the rest of the site.
  *
+ * METRIC. A table may carry a `metric` twin (same shape, metric values). Both
+ * are written into the page; the metric one starts hidden and the US / Metric
+ * switch swaps them, using the same remembered choice as the calculators
+ * (localStorage vf_units, or ?units=metric). Metric values are computed here
+ * from the same formulas, not converted from the rounded US cells, so a
+ * metric cell is not a rounding of a rounding. Tables with no unit to switch
+ * (amps against kW, breaker ratings) have no twin and show in both modes.
+ *
  * After running: node scripts/trust-and-ads-pass.mjs is NOT needed (the shell
  * already carries the footer row and the pages emit their own ad slots), but
  * new slugs still have to go into sitemap.xml, _redirects and search-index.json.
@@ -116,6 +124,7 @@ const hpLabel = (h) => h === 0.5 ? '1/2' : h === 0.75 ? '3/4' : h === 1.5 ? '1-1
 const dash = (v, d = 0) => v == null ? '&mdash;' : f(v, d);
 const amp1 = (v) => v == null ? '&mdash;' : (v % 1 ? f(v, 1) : f(v));
 
+const IEC_MM2 = [0.75, 1, 1.5, 2.5, 4, 6, 10, 16, 25, 35, 50, 70, 95, 120, 150, 185, 240, 300, 400, 500, 630];
 function awgTable() {
   return {
     id: 'awg', title: 'AWG and kcmil wire sizes',
@@ -125,6 +134,16 @@ function awgTable() {
       const dIn = Math.sqrt(cm) / 1000;
       return [n, f(dIn, 4), f(dIn * 25.4, 2), f(cm), sig(cm * 5.067075e-4), f(K_CU * 1000 / cm, cm >= 100000 ? 4 : 3), f(K_AL * 1000 / cm, cm >= 100000 ? 4 : 3)];
     }),
+    metric: {
+      title: 'AWG and kcmil wire sizes in metric units',
+      caption: 'Diameter is that of a solid round conductor of the stated area. The last column is the next standard IEC conductor size at or above the AWG area, which is the usual choice when a metric cable replaces an AWG one. Resistance is DC, at about 75&deg;C.',
+      head: ['Size', 'Diameter (mm)', 'Area (mm&sup2;)', 'Copper (&Omega;/km)', 'Aluminum (&Omega;/km)', 'Next IEC size (mm&sup2;)'],
+      rows: WIRE.map(([n, cm]) => {
+        const mm2 = cm * 5.067075e-4, perKm = (K) => K * 1000 / cm / 0.3048;
+        const iec = IEC_MM2.find(x => x >= mm2 - 1e-9);
+        return [n, f(Math.sqrt(cm) / 1000 * 25.4, 2), sig(mm2), sig(perKm(K_CU)), sig(perKm(K_AL)), iec == null ? '&mdash;' : String(iec)];
+      }),
+    },
   };
 }
 function vdTable(volts, mult, label, amps) {
@@ -134,6 +153,12 @@ function vdTable(volts, mult, label, amps) {
     caption: `Copper conductors, in feet, rounded down. A dash means that current is more than the conductor may carry, so no length is given.`,
     head: ['Wire size', ...amps.map(a => a + ' A')],
     rows: sizes.map(([n, cm]) => [n, ...amps.map(a => a > AMP_LIMIT[n] ? '&mdash;' : f(Math.floor(0.03 * volts * cm / (mult * K_CU * a))))]),
+    metric: {
+      title: `Maximum one-way length for 3% drop: ${label}`,
+      caption: `Copper conductors, in metres, rounded down. A dash means that current is more than the conductor may carry, so no length is given.`,
+      head: ['Wire size', ...amps.map(a => a + ' A')],
+      rows: sizes.map(([n, cm]) => [n, ...amps.map(a => a > AMP_LIMIT[n] ? '&mdash;' : f(Math.floor(0.3048 * 0.03 * volts * cm / (mult * K_CU * a))))]),
+    },
   };
 }
 
@@ -344,10 +369,16 @@ const CHARTS = [
       rows: [1, 5, 10, 20, 50, 100, 250, 500, 1000, 2000, 5000].map(k => [f(k), f(k * 3412.142), sig(k * 3412.142 / 12000)]) },
     { id: 'cfm', title: 'Airflow per kW', caption: 'Standard air at sea level. A wider temperature rise across the equipment needs less air.',
       head: ['Air temperature rise', 'CFM per kW', 'CFM for 10 kW', 'CFM for 100 kW'],
-      rows: [10, 15, 20, 25, 30, 35, 40].map(d => { const c = 3412.142 / (1.08 * d); return [d + '&deg;F', f(c), f(c * 10), f(c * 100)]; }) },
+      rows: [10, 15, 20, 25, 30, 35, 40].map(d => { const c = 3412.142 / (1.08 * d); return [d + '&deg;F', f(c), f(c * 10), f(c * 100)]; }),
+      metric: { title: 'Airflow per kW', caption: 'Standard air at sea level. A wider temperature rise across the equipment needs less air. One kelvin is the same step as one degree Celsius.',
+        head: ['Air temperature rise', 'm&sup3;/h per kW', 'L/s per kW', 'm&sup3;/h for 100 kW'],
+        rows: [5, 8, 10, 12, 15, 18, 20].map(k => { const c = 3412.142 / (1.08 * k * 1.8) * 1.699011; return [k + ' K', f(c), f(c / 3.6, 1), f(c * 100)]; }) } },
     { id: 'gpm', title: 'Chilled water flow per ton', caption: 'Plain water. A wider difference between supply and return needs less flow.',
       head: ['Water temperature difference', 'GPM per ton', 'GPM for 100 tons', 'GPM for 500 tons'],
-      rows: [8, 10, 12, 14, 16, 18, 20].map(d => { const g = 24 / d; return [d + '&deg;F', f(g, 2), f(g * 100), f(g * 500)]; }) },
+      rows: [8, 10, 12, 14, 16, 18, 20].map(d => { const g = 24 / d; return [d + '&deg;F', f(g, 2), f(g * 100), f(g * 500)]; }),
+      metric: { title: 'Chilled water flow per kW', caption: 'Plain water. A wider difference between supply and return needs less flow.',
+        head: ['Water temperature difference', 'L/s per kW', 'L/s for 100 kW', 'm&sup3;/h for 100 kW'],
+        rows: [4, 5, 6, 7, 8, 10, 12].map(k => { const l = 24 / (k * 1.8) * 0.0630902 / 3.516853; return [k + ' K', f(l, 4), f(l * 100, 2), f(l * 100 * 3.6, 1)]; }) } },
   ],
   how: [
     'Start with the IT load in kW and read off the tons. Then use the second table for the air that load needs at your design temperature rise, and the third for the chilled water serving the cooling units.',
@@ -408,9 +439,13 @@ const CHARTS = [
   lead: '<b>For sizing a motor circuit, the full-load current comes from the code table for the motor\'s horsepower and voltage, not from its nameplate.</b> A 50 hp three-phase motor is taken as 65 A at 460 V and 130 A at 230 V. The table figure is used for the conductors, the short-circuit protection and the disconnect; the nameplate current is used only for the overload protection.',
   tables: () => [
     { id: 'three', title: 'Three-phase induction motors', caption: 'Full-load current in amperes, for squirrel-cage and wound-rotor induction motors running at usual speeds with normal torque characteristics. A dash means that size is not listed at that voltage.',
-      head: ['hp', '208 V', '230 V', '460 V', '575 V'], rows: FLC3.map(([hp, v]) => [hpLabel(hp), ...v.map(amp1)]) },
+      head: ['hp', '208 V', '230 V', '460 V', '575 V'], rows: FLC3.map(([hp, v]) => [hpLabel(hp), ...v.map(amp1)]),
+      metric: { title: 'Three-phase induction motors', caption: 'Full-load current in amperes. The table is defined by horsepower; the kW figure is the same rating converted at 0.7457 kW per hp, and is not an IEC standard motor size.',
+        head: ['kW (hp)', '208 V', '230 V', '460 V', '575 V'], rows: FLC3.map(([hp, v]) => [sig(hp * 0.7457) + ' (' + hpLabel(hp) + ')', ...v.map(amp1)]) } },
     { id: 'single', title: 'Single-phase motors', caption: 'Full-load current in amperes.',
-      head: ['hp', '115 V', '230 V'], rows: FLC1.map(([hp, v]) => [hp, ...v.map(amp1)]) },
+      head: ['hp', '115 V', '230 V'], rows: FLC1.map(([hp, v]) => [hp, ...v.map(amp1)]),
+      metric: { title: 'Single-phase motors', caption: 'Full-load current in amperes. The kW figure is the horsepower rating converted at 0.7457 kW per hp.',
+        head: ['kW (hp)', '115 V', '230 V'], rows: FLC1.map(([hp, v]) => { const n = hp.includes('/') ? hp.split('-').reduce((a, p) => a + (p.includes('/') ? p.split('/')[0] / p.split('/')[1] : +p), 0) : +hp; return [sig(n * 0.7457) + ' (' + hp + ')', ...v.map(amp1)]; }) } },
   ],
   how: [
     'Find the motor\'s horsepower and read across to its voltage. The 230 V column also serves motors rated 220 to 240 V, the 460 V column those rated 440 to 480 V, and the 575 V column those rated 550 to 600 V.',
@@ -444,6 +479,11 @@ const STYLE = `<style>
 .chart-actions button{font:600 12px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:10px 14px;min-height:40px;
   background:var(--card);color:var(--ink);border:1px solid var(--line-dark);border-radius:var(--r-s,6px);cursor:pointer}
 .chart-actions button:hover{border-color:var(--signal)}
+.chart-units{display:inline-flex;margin-left:auto;border:1px solid var(--line-dark);border-radius:999px;overflow:hidden}
+.chart-units[hidden]{display:none}
+.chart-actions .chart-units button{border:0;border-radius:0;background:transparent;color:var(--slate);min-height:40px}
+.chart-actions .chart-units button[aria-pressed="true"]{background:var(--signal);color:#101B2D}
+@media(max-width:520px){.chart-units{margin-left:0}}
 .chartwrap{overflow-x:auto;margin:14px 0 6px;border:1px solid var(--line);border-radius:var(--r-m,8px)}
 .chartwrap:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 .charttbl{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums}
@@ -465,6 +505,15 @@ const STYLE = `<style>
 </style>`;
 
 function tableHTML(t) {
+  if (!t.metric) return oneTable(t);
+  return `  <div data-units="us">
+${oneTable(t)}
+  </div>
+  <div data-units="metric" hidden>
+${oneTable({ ...t.metric, id: t.id + '-m' })}
+  </div>`;
+}
+function oneTable(t) {
   const head = t.head.map((h, i) => `<th scope="col">${h}</th>`).join('');
   const rows = t.rows.map(r => '      <tr>' + r.map((c, i) => i === 0 ? `<th scope="row">${c}</th>` : `<td>${c}</td>`).join('') + '</tr>').join('\n');
   return `  <h2 id="${t.id}">${t.title}</h2>
@@ -499,8 +548,10 @@ function mainHTML(c, tables) {
   <p>${c.lead}</p>
   <div class="chart-actions">
     <button type="button" data-chart-print>Print this chart</button>
-    <button type="button" data-chart-csv="${c.slug}">Download as CSV</button>
-  </div>
+    <button type="button" data-chart-csv="${c.slug}">Download as CSV</button>${tables.some(t => t.metric) ? `
+    <span class="chart-units" role="group" aria-label="Units" hidden><button type="button" data-units-btn="us" aria-pressed="true">US</button><button type="button" data-units-btn="metric" aria-pressed="false">Metric</button></span>` : ''}
+  </div>${tables.some(t => t.metric) ? `
+  <p class="chartcap" data-units="metric" hidden>Metric tables are shown. The worked examples and formulas further down the page are in US units.</p>` : ''}
 
 ${tables.map(tableHTML).join('\n\n')}
 
@@ -549,12 +600,37 @@ ${c.related.map(([h, t]) => `      <a href="${up(h)}">${t}</a>`).join('\n')}
 const SCRIPT = `<script>
 /* Print, and a CSV of every table on the page. No dependencies. */
 (function(){
+  /* US / Metric. Both sets of tables are in the page; this shows one. The
+     switch itself is hidden until this runs, so without JavaScript the reader
+     gets the US tables and no control that does nothing. */
+  var box=document.querySelector('.chart-units');
+  if(box){
+    var metric=false;
+    try{metric=localStorage.getItem('vf_units')==='metric';}catch(e){}
+    try{var q=new URLSearchParams(location.search).get('units');if(q==='metric'||q==='us'){metric=q==='metric';try{localStorage.setItem('vf_units',q);}catch(e){}}}catch(e){}
+    var paint=function(){
+      document.querySelectorAll('[data-units]').forEach(function(el){el.hidden=(el.getAttribute('data-units')==='metric')!==metric;});
+      box.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',((b.getAttribute('data-units-btn')==='metric')===metric)?'true':'false');});
+    };
+    box.hidden=false;
+    box.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var want=b.getAttribute('data-units-btn')==='metric';
+        if(want===metric)return;
+        metric=want;
+        try{localStorage.setItem('vf_units',metric?'metric':'us');}catch(e){}
+        paint();
+        if(window.vfGtag)window.vfGtag('event','units_toggle',{to:metric?'metric':'us',page:location.pathname});
+      });
+    });
+    paint();
+  }
   var p=document.querySelector('[data-chart-print]');
   if(p)p.addEventListener('click',function(){window.print();});
   var c=document.querySelector('[data-chart-csv]');
   if(c)c.addEventListener('click',function(){
     var out=[];
-    document.querySelectorAll('table.charttbl').forEach(function(t,i){
+    [].filter.call(document.querySelectorAll('table.charttbl'),function(t){return !t.closest('[hidden]');}).forEach(function(t,i){
       if(i)out.push('');
       var h=t.closest('.chartwrap').previousElementSibling;
       if(h)out.push('"'+h.textContent.replace(/"/g,'""')+'"');
@@ -643,6 +719,9 @@ ${cards}
 
   <h2>Two kinds of chart</h2>
   <p>Most of the charts here are computed: every figure comes from a formula shown on the page, so any cell can be checked by hand. Two are different. The ${L('charts/wire-ampacity-chart.html', 'wire ampacity chart')} and the ${L('charts/motor-full-load-current-chart.html', 'motor full-load current chart')} carry values that correspond to tables in the National Electrical Code. Those pages say so, and the figures that apply to an installation are the ones in the edition your jurisdiction has adopted, with its correction factors applied. The guides to ${L('guide-cable-ampacity-derating.html', 'ampacity derating')} and ${L('guide-nec-430-250-motor-fla.html', 'NEC 430.250')} explain the method behind each.</p>
+
+  <h2>US and metric</h2>
+  <p>Four of the charts also come in metric: voltage drop, wire sizes, cooling load and motor current. Each has a US / Metric switch beside its print button, and the choice is remembered and shared with the calculators. The rest have no unit to switch, because amps, volts and kilowatts are the same in both systems.</p>
 
   <h2>Using and sharing these charts</h2>
   <p>Print them, download the data as CSV, and link to them freely. If you reproduce a chart, a link back to the page is appreciated. If you find a figure you can show is wrong, the ${L('contact.html', 'contact page')} says how to report it.</p>

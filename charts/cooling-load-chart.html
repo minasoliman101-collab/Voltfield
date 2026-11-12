@@ -38,6 +38,11 @@
 .chart-actions button{font:600 12px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:10px 14px;min-height:40px;
   background:var(--card);color:var(--ink);border:1px solid var(--line-dark);border-radius:var(--r-s,6px);cursor:pointer}
 .chart-actions button:hover{border-color:var(--signal)}
+.chart-units{display:inline-flex;margin-left:auto;border:1px solid var(--line-dark);border-radius:999px;overflow:hidden}
+.chart-units[hidden]{display:none}
+.chart-actions .chart-units button{border:0;border-radius:0;background:transparent;color:var(--slate);min-height:40px}
+.chart-actions .chart-units button[aria-pressed="true"]{background:var(--signal);color:#101B2D}
+@media(max-width:520px){.chart-units{margin-left:0}}
 .chartwrap{overflow-x:auto;margin:14px 0 6px;border:1px solid var(--line);border-radius:var(--r-m,8px)}
 .chartwrap:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 .charttbl{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums}
@@ -120,7 +125,9 @@
   <div class="chart-actions">
     <button type="button" data-chart-print>Print this chart</button>
     <button type="button" data-chart-csv="cooling-load-chart">Download as CSV</button>
+    <span class="chart-units" role="group" aria-label="Units" hidden><button type="button" data-units-btn="us" aria-pressed="true">US</button><button type="button" data-units-btn="metric" aria-pressed="false">Metric</button></span>
   </div>
+  <p class="chartcap" data-units="metric" hidden>Metric tables are shown. The worked examples and formulas further down the page are in US units.</p>
 
   <h2 id="load">Heat load</h2>
   <div class="chartwrap" tabindex="0" role="region" aria-labelledby="load">
@@ -143,6 +150,7 @@
   </div>
   <p class="chartcap">Sensible heat. For IT equipment, the electrical load in kW is the heat load in kW.</p>
 
+  <div data-units="us">
   <h2 id="cfm">Airflow per kW</h2>
   <div class="chartwrap" tabindex="0" role="region" aria-labelledby="cfm">
     <table class="charttbl" data-chart="cfm">
@@ -159,7 +167,27 @@
     </table>
   </div>
   <p class="chartcap">Standard air at sea level. A wider temperature rise across the equipment needs less air.</p>
+  </div>
+  <div data-units="metric" hidden>
+  <h2 id="cfm-m">Airflow per kW</h2>
+  <div class="chartwrap" tabindex="0" role="region" aria-labelledby="cfm-m">
+    <table class="charttbl" data-chart="cfm-m">
+      <thead><tr><th scope="col">Air temperature rise</th><th scope="col">m&sup3;/h per kW</th><th scope="col">L/s per kW</th><th scope="col">m&sup3;/h for 100 kW</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">5 K</th><td>596</td><td>165.7</td><td>59,643</td></tr>
+      <tr><th scope="row">8 K</th><td>373</td><td>103.5</td><td>37,277</td></tr>
+      <tr><th scope="row">10 K</th><td>298</td><td>82.8</td><td>29,821</td></tr>
+      <tr><th scope="row">12 K</th><td>249</td><td>69.0</td><td>24,851</td></tr>
+      <tr><th scope="row">15 K</th><td>199</td><td>55.2</td><td>19,881</td></tr>
+      <tr><th scope="row">18 K</th><td>166</td><td>46.0</td><td>16,567</td></tr>
+      <tr><th scope="row">20 K</th><td>149</td><td>41.4</td><td>14,911</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="chartcap">Standard air at sea level. A wider temperature rise across the equipment needs less air. One kelvin is the same step as one degree Celsius.</p>
+  </div>
 
+  <div data-units="us">
   <h2 id="gpm">Chilled water flow per ton</h2>
   <div class="chartwrap" tabindex="0" role="region" aria-labelledby="gpm">
     <table class="charttbl" data-chart="gpm">
@@ -176,6 +204,25 @@
     </table>
   </div>
   <p class="chartcap">Plain water. A wider difference between supply and return needs less flow.</p>
+  </div>
+  <div data-units="metric" hidden>
+  <h2 id="gpm-m">Chilled water flow per kW</h2>
+  <div class="chartwrap" tabindex="0" role="region" aria-labelledby="gpm-m">
+    <table class="charttbl" data-chart="gpm-m">
+      <thead><tr><th scope="col">Water temperature difference</th><th scope="col">L/s per kW</th><th scope="col">L/s for 100 kW</th><th scope="col">m&sup3;/h for 100 kW</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">4 K</th><td>0.0598</td><td>5.98</td><td>21.5</td></tr>
+      <tr><th scope="row">5 K</th><td>0.0478</td><td>4.78</td><td>17.2</td></tr>
+      <tr><th scope="row">6 K</th><td>0.0399</td><td>3.99</td><td>14.4</td></tr>
+      <tr><th scope="row">7 K</th><td>0.0342</td><td>3.42</td><td>12.3</td></tr>
+      <tr><th scope="row">8 K</th><td>0.0299</td><td>2.99</td><td>10.8</td></tr>
+      <tr><th scope="row">10 K</th><td>0.0239</td><td>2.39</td><td>8.6</td></tr>
+      <tr><th scope="row">12 K</th><td>0.0199</td><td>1.99</td><td>7.2</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="chartcap">Plain water. A wider difference between supply and return needs less flow.</p>
+  </div>
 
   <div class="ad-unit" data-ad="incontent"></div>
 
@@ -261,12 +308,37 @@
 <script>
 /* Print, and a CSV of every table on the page. No dependencies. */
 (function(){
+  /* US / Metric. Both sets of tables are in the page; this shows one. The
+     switch itself is hidden until this runs, so without JavaScript the reader
+     gets the US tables and no control that does nothing. */
+  var box=document.querySelector('.chart-units');
+  if(box){
+    var metric=false;
+    try{metric=localStorage.getItem('vf_units')==='metric';}catch(e){}
+    try{var q=new URLSearchParams(location.search).get('units');if(q==='metric'||q==='us'){metric=q==='metric';try{localStorage.setItem('vf_units',q);}catch(e){}}}catch(e){}
+    var paint=function(){
+      document.querySelectorAll('[data-units]').forEach(function(el){el.hidden=(el.getAttribute('data-units')==='metric')!==metric;});
+      box.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',((b.getAttribute('data-units-btn')==='metric')===metric)?'true':'false');});
+    };
+    box.hidden=false;
+    box.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var want=b.getAttribute('data-units-btn')==='metric';
+        if(want===metric)return;
+        metric=want;
+        try{localStorage.setItem('vf_units',metric?'metric':'us');}catch(e){}
+        paint();
+        if(window.vfGtag)window.vfGtag('event','units_toggle',{to:metric?'metric':'us',page:location.pathname});
+      });
+    });
+    paint();
+  }
   var p=document.querySelector('[data-chart-print]');
   if(p)p.addEventListener('click',function(){window.print();});
   var c=document.querySelector('[data-chart-csv]');
   if(c)c.addEventListener('click',function(){
     var out=[];
-    document.querySelectorAll('table.charttbl').forEach(function(t,i){
+    [].filter.call(document.querySelectorAll('table.charttbl'),function(t){return !t.closest('[hidden]');}).forEach(function(t,i){
       if(i)out.push('');
       var h=t.closest('.chartwrap').previousElementSibling;
       if(h)out.push('"'+h.textContent.replace(/"/g,'""')+'"');
