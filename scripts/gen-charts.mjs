@@ -393,8 +393,8 @@ const CHARTS = [
   limits: 'These are design-point figures for sensible heat. They leave out lighting, people, heat gain through the building, humidification and the cooling plant\'s own losses, and they include no redundancy. The air constant of 1.08 applies at sea level; at altitude more air is needed. The water constant applies to plain water, and a glycol mix needs more flow.',
   faqs: [
     ['How many tons of cooling per kW?', 'One kW of heat needs 0.284 tons of cooling, because a ton is 3.517 kW. Put the other way, each ton of cooling removes 3.517 kW of heat. A 100 kW IT load needs about 28.4 tons.'],
-    ['How many CFM per kW of IT load?', 'It depends on the temperature rise across the equipment. At a 20&deg;F rise it is about 158 CFM per kW; at 30&deg;F it is about 105. Modern servers are often designed for the wider rise.'],
-    ['How many GPM per ton of chilled water?', '24 divided by the temperature difference in &deg;F. At the traditional 10&deg;F difference that is 2.4 GPM per ton; at 12&deg;F it is 2.0 and at 16&deg;F it is 1.5.'],
+    ['How many CFM per kW of IT load?', 'It depends on the temperature rise across the equipment. At a 20&deg;F rise it is about 158 CFM per kW; at a 30&deg;F rise it is about 105 CFM per kW. Modern servers are often designed for the wider rise.'],
+    ['How many GPM per ton of chilled water?', '24 divided by the temperature difference in &deg;F. At the traditional 10&deg;F difference that is 2.4 GPM per ton; at a 12&deg;F difference it is 2.0 GPM per ton and at 16&deg;F it is 1.5 GPM per ton.'],
   ],
   related: [['calculators/btu-to-tons.html', 'BTU to Tons Converter'], ['calculators/airflow-cfm.html', 'Airflow (CFM) Calculator'], ['calculators/chilled-water-flow.html', 'Chilled Water Flow Calculator'], ['guide-crac-vs-crah.html', 'CRAC vs. CRAH'], ['guide-hot-aisle-vs-cold-aisle-containment.html', 'Hot Aisle vs. Cold Aisle Containment']],
   basedOn: ['The definitions of the BTU and the ton of refrigeration', 'ASHRAE Handbook &mdash; the sensible heat equation for air and the heat-transfer relation for water'],
@@ -624,12 +624,14 @@ const SCRIPT = `<script>
       b.addEventListener('click',function(){
         var want=b.getAttribute('data-units-btn')==='metric';
         if(want===metric)return;
+        if(window.VFUnits){window.VFUnits.set(want);return;}
         metric=want;
         try{localStorage.setItem('vf_units',metric?'metric':'us');}catch(e){}
         paint();
-        if(window.vfGtag)window.vfGtag('event','units_toggle',{to:metric?'metric':'us',page:location.pathname});
       });
     });
+    /* The site-wide switch (header, footer) changed the setting. */
+    document.addEventListener('vf:units',function(e){metric=!!(e.detail&&e.detail.metric);paint();});
     paint();
   }
   var p=document.querySelector('[data-chart-print]');

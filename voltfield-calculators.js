@@ -1317,6 +1317,21 @@
 
     /* The switch, on each tool that has something to switch. */
     const seen=[];
+    function applyUnits(want){
+      if(want===U.metric)return;
+      U.metric=want;
+      paint(true);
+      /* Re-run anything already showing a result, so it is restated in the new units. */
+      seen.forEach(function(e2){
+        const res=e2.querySelector('.est-result'),btn=e2.querySelector('button[id$="Btn"]');
+        if(res&&btn&&res.classList.contains('show')){
+          window.__vfExampleRun=true;
+          try{btn.click();}finally{window.__vfExampleRun=false;}
+        }
+      });
+    }
+    /* The header or footer switch, or a chart's, changed the setting. */
+    document.addEventListener('vf:units',function(e){applyUnits(!!(e.detail&&e.detail.metric));});
     tagged.forEach(function(f){
       const est=f.closest('.estimator');
       if(!est||seen.indexOf(est)>-1)return;
@@ -1327,19 +1342,11 @@
         const b=document.createElement('button');b.type='button';b.textContent=o[1];b.setAttribute('data-units',o[0]);
         b.addEventListener('click',function(){
           const want=o[0]==='metric';
-          if(want===U.metric)return;
-          U.metric=want;
-          try{localStorage.setItem('vf_units',o[0]);}catch(e){}
-          paint(true);
-          /* Re-run anything already showing a result, so it is restated in the new units. */
-          seen.forEach(function(e2){
-            const res=e2.querySelector('.est-result'),btn=e2.querySelector('button[id$="Btn"]');
-            if(res&&btn&&res.classList.contains('show')){
-              window.__vfExampleRun=true;
-              try{btn.click();}finally{window.__vfExampleRun=false;}
-            }
-          });
-          if(window.vfGtag)window.vfGtag('event','units_toggle',{to:o[0]});
+          /* The site-wide setting (voltfield-site-config.js) owns the choice
+             and announces it; applyUnits below is what reacts. Without it,
+             this tool still switches on its own. */
+          if(window.VFUnits)window.VFUnits.set(want);
+          else{applyUnits(want);try{localStorage.setItem('vf_units',o[0]);}catch(e){}}
         });
         box.appendChild(b);
       });

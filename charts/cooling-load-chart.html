@@ -18,7 +18,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:image" content="https://voltfield.org/social/social-cooling-load-chart.jpg">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Reference charts","item":"https://voltfield.org/reference-charts.html"},{"@type":"ListItem","position":3,"name":"Cooling Load Chart","item":"https://voltfield.org/charts/cooling-load-chart.html"}]},{"@type":"WebPage","name":"Cooling Load Chart","description":"Cooling load chart: kW to BTU/h and tons of cooling, CFM per kW by air temperature rise, and chilled water GPM per ton by temperature difference.","url":"https://voltfield.org/charts/cooling-load-chart.html","dateModified":"2026-11-11","inLanguage":"en-US","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many tons of cooling per kW?","acceptedAnswer":{"@type":"Answer","text":"One kW of heat needs 0.284 tons of cooling, because a ton is 3.517 kW. Put the other way, each ton of cooling removes 3.517 kW of heat. A 100 kW IT load needs about 28.4 tons."}},{"@type":"Question","name":"How many CFM per kW of IT load?","acceptedAnswer":{"@type":"Answer","text":"It depends on the temperature rise across the equipment. At a 20°F rise it is about 158 CFM per kW; at 30°F it is about 105. Modern servers are often designed for the wider rise."}},{"@type":"Question","name":"How many GPM per ton of chilled water?","acceptedAnswer":{"@type":"Answer","text":"24 divided by the temperature difference in °F. At the traditional 10°F difference that is 2.4 GPM per ton; at 12°F it is 2.0 and at 16°F it is 1.5."}}]}]}
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Reference charts","item":"https://voltfield.org/reference-charts.html"},{"@type":"ListItem","position":3,"name":"Cooling Load Chart","item":"https://voltfield.org/charts/cooling-load-chart.html"}]},{"@type":"WebPage","name":"Cooling Load Chart","description":"Cooling load chart: kW to BTU/h and tons of cooling, CFM per kW by air temperature rise, and chilled water GPM per ton by temperature difference.","url":"https://voltfield.org/charts/cooling-load-chart.html","dateModified":"2026-11-11","inLanguage":"en-US","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many tons of cooling per kW?","acceptedAnswer":{"@type":"Answer","text":"One kW of heat needs 0.284 tons of cooling, because a ton is 3.517 kW. Put the other way, each ton of cooling removes 3.517 kW of heat. A 100 kW IT load needs about 28.4 tons."}},{"@type":"Question","name":"How many CFM per kW of IT load?","acceptedAnswer":{"@type":"Answer","text":"It depends on the temperature rise across the equipment. At a 20°F rise it is about 158 CFM per kW; at a 30°F rise it is about 105 CFM per kW. Modern servers are often designed for the wider rise."}},{"@type":"Question","name":"How many GPM per ton of chilled water?","acceptedAnswer":{"@type":"Answer","text":"24 divided by the temperature difference in °F. At the traditional 10°F difference that is 2.4 GPM per ton; at a 12°F difference it is 2.0 GPM per ton and at 16°F it is 1.5 GPM per ton."}}]}]}
 </script>
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#101B2D">
@@ -247,11 +247,11 @@
   </details>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How many CFM per kW of IT load?</summary>
-    <p style="margin-top:10px">It depends on the temperature rise across the equipment. At a 20&deg;F rise it is about 158 CFM per kW; at 30&deg;F it is about 105. Modern servers are often designed for the wider rise.</p>
+    <p style="margin-top:10px">It depends on the temperature rise across the equipment. At a 20&deg;F rise it is about 158 CFM per kW; at a 30&deg;F rise it is about 105 CFM per kW. Modern servers are often designed for the wider rise.</p>
   </details>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How many GPM per ton of chilled water?</summary>
-    <p style="margin-top:10px">24 divided by the temperature difference in &deg;F. At the traditional 10&deg;F difference that is 2.4 GPM per ton; at 12&deg;F it is 2.0 and at 16&deg;F it is 1.5.</p>
+    <p style="margin-top:10px">24 divided by the temperature difference in &deg;F. At the traditional 10&deg;F difference that is 2.4 GPM per ton; at a 12&deg;F difference it is 2.0 GPM per ton and at 16&deg;F it is 1.5 GPM per ton.</p>
   </details>
 
   <h2>Related</h2>
@@ -327,12 +327,14 @@
       b.addEventListener('click',function(){
         var want=b.getAttribute('data-units-btn')==='metric';
         if(want===metric)return;
+        if(window.VFUnits){window.VFUnits.set(want);return;}
         metric=want;
         try{localStorage.setItem('vf_units',metric?'metric':'us');}catch(e){}
         paint();
-        if(window.vfGtag)window.vfGtag('event','units_toggle',{to:metric?'metric':'us',page:location.pathname});
       });
     });
+    /* The site-wide switch (header, footer) changed the setting. */
+    document.addEventListener('vf:units',function(e){metric=!!(e.detail&&e.detail.metric);paint();});
     paint();
   }
   var p=document.querySelector('[data-chart-print]');

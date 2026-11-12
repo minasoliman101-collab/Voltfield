@@ -257,3 +257,232 @@ const SITE_CONFIG = {
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initToggle);
   else initToggle();
 })();
+
+/* ---------- units: one setting for the whole site ----------
+   The calculators and the charts each grew a US / Metric switch of their own.
+   This is the single source both now defer to, plus two things neither could
+   do: put a switch on pages that have no tool (guides, glossary, practice
+   questions), and show a metric equivalent beside the US quantities that sit
+   in ordinary text.
+
+     VFUnits.metric()      current choice
+     VFUnits.set(bool)     store it and tell everything on the page
+     'vf:units' on document, detail {metric}   fired on every change
+
+   TEXT. In metric mode, a US quantity in running text is shown as its metric
+   equivalent with the original kept in brackets: "46 m (150 ft)". Both are
+   shown on purpose. These are conversions of what the page says, not a
+   rewrite of it. Left alone: formulas, whose constants only mean anything in
+   the units they were written in; tables; anything with a hand-written metric
+   version (data-u, data-units); anything that already gives its own
+   equivalent; and the pages that state code requirements (see AS_WRITTEN). */
+(function(){
+  var metric=false;
+  try{metric=localStorage.getItem('vf_units')==='metric';}catch(e){}
+  try{var q=new URLSearchParams(location.search).get('units');if(q==='metric'||q==='us'){metric=q==='metric';try{localStorage.setItem('vf_units',q);}catch(e){}}}catch(e){}
+
+  var api={
+    metric:function(){return metric;},
+    set:function(want){
+      want=!!want;
+      if(want===metric)return;
+      metric=want;
+      try{localStorage.setItem('vf_units',metric?'metric':'us');}catch(e){}
+      try{document.dispatchEvent(new CustomEvent('vf:units',{detail:{metric:metric}}));}catch(e){}
+      if(window.vfGtag)window.vfGtag('event','units_toggle',{to:metric?'metric':'us',page:location.pathname});
+    }
+  };
+  window.VFUnits=api;
+
+  /* ---- conversion of quantities in text ---- */
+  function show(v){
+    var a=Math.abs(v), d=a>=100?0:a>=10?1:a>=1?2:3;
+    return Number(v).toLocaleString('en-US',{maximumFractionDigits:d});
+  }
+  function num(s){return parseFloat(String(s).replace(/,/g,''));}
+  /* Cooling "tons" only on pages about cooling: elsewhere a ton is a weight. */
+  var COOLING=/cool|crac|crah|chill|btu|contain|airflow|pue|affinity|pump|liquid|rack-power|data-center/i.test(location.pathname);
+  /* Pages that state code requirements in feet and inches are left as written.
+     The code publishes its own metric figures for those (900 mm, not the 914 mm
+     that 3 ft converts to), and a computed figure beside a requirement would
+     be the wrong number. The unit-converter pages are left alone too: there
+     the conversion is the subject, and the tool does it. */
+  var AS_WRITTEN=/\/guide-nec-|\/charts\/(?:wire-ampacity|motor-full-load-current)-chart|\/calculators\/(?:btu-to-tons|hp-to-kw|awg-to-mm2)/.test(location.pathname);
+
+  var NUM='(?:\\d{1,3}(?:,\\d{3})+|\\d+)(?:\\.\\d+)?';
+  /* [pattern, factor ('temp' for temperature), metric unit, how the metric unit
+     looks in text, for spotting a figure the sentence already gives].
+     Longest patterns first: alternation takes the first that matches. */
+  var RULES=[
+    ['GPM per ton',            0.0630902/3.516853, 'L/s per kW', /L\/s/],
+    ['gal(?:lons)?\\s?(?:\\/|per )\\s?h(?:ou)?r?', 3.785412, 'L/h', /L\/h/],
+    ['gallons?|gal(?![a-z])',  3.785412, 'L', /\d\s?(?:L|litres?|liters?)\b/],
+    ['ft\\/s|feet per second', 0.3048, 'm/s', /m\/s/],
+    ['lb-ft',                  1.355818, 'N·m', /N·m/],
+    ['square feet|sq\\.? ?ft|ft²', 0.092903, 'm²', /m²/],
+    ['feet|foot|ft(?![a-z])',  0.3048, 'm', /\d\s?(?:m|mm|metres?|meters?)\b/],
+    ['inch(?:es)?',            25.4, 'mm', /\d\s?mm\b/],
+    ['in(?=\\s?(?:[.,;:)]|$|inside|diameter|working|Schedule|pipe|rod|wide|deep|thick|long|high|or less|and under|clearance|nominal))', 25.4, 'mm', /\d\s?mm\b/],
+    ['°F|degrees Fahrenheit',  'temp', '', /°C|\d\s?K\b/],
+    ['CFM',                    1.699011, 'm³/h', /m³\/h/],
+    ['GPM',                    0.0630902, 'L/s', /L\/s/],
+    ['BTU\\/h(?:r)?|BTU per hour', 1/3412.142, 'kW', /kW/],
+    ['psi(?![a-z])',           6.894757, 'kPa', /kPa/],
+    ['hp(?![a-z])|HP(?![A-Za-z])|horsepower', 0.7457, 'kW', /kW/],
+    ['tons?(?! of (?:ice|steel|copper|CO))(?![a-z])', COOLING?3.516853:null, 'kW', /kW/]
+  ].filter(function(r){return r[1]!=null;});
+  var UNIT_RE=RULES.map(function(r){return new RegExp('^(?:'+r[0]+')$');});
+  var MASTER=new RegExp('(?:('+NUM+')(\\s?(?:to|and|–|—|-)\\s?))?('+NUM+')(?:\\s?|-)('+RULES.map(function(r){return r[0];}).join('|')+')','g');
+  var HAS_OWN=/^\s?\((?:about |approx\.? |roughly |or )?[\d.,]+(?:\s?(?:to|and|–|-)\s?[\d.,]+)?\s?(?:m\b|mm|kW|K\b|°C|L\b|L\/|kPa|N·m|m³|m²|m\/s)/;
+  var DIFF=/^\s*(?:rise|difference|drop|approach|range|spread|step|higher|lower|wider|warmer|cooler|colder|above|below|per\b|of (?:rise|difference))/i;
+  var DIFF_BEFORE=/(?:rise of|difference of|drop of|by|every|each|per)\s*$/i;
+  var NOT_DIFF=/^\s*(?:ambient|outdoor|outside|leaving|entering|supply|return|inlet|water|air\b)/i;
+  var SKIP='script,style,noscript,code,pre,svg,canvas,input,textarea,select,option,button,label,table,.formula,.pq-ans,.est-result,.est-example,.est-after,.pq-bar,.vf3d-co-wrap,.crumbnav,[data-u],[data-units],.vf-conv,.sub,h1,title';
+
+  function convertText(text,lead){
+    lead=lead||'';
+    MASTER.lastIndex=0;
+    var out=[],last=0,m,any=false;
+    while((m=MASTER.exec(text))){
+      var start=m.index,end=start+m[0].length,unit=m[3+1],a=m[1]!=null?num(m[1]):null,sep=m[2]||'',b=num(m[3]);
+      var before=(lead+text.slice(0,start)).slice(-28),after=text.slice(end,end+34);
+      /* The result of a sum written out in US units ("500 × 0.80 = 400 GPM"):
+         a metric figure there would not be what the arithmetic gives. */
+      if(/=\s*$/.test(before))continue;
+      /* A dimension set by the code (the 24 in conduit nipple), which the code
+         states in metric as its own round figure. */
+      if(/nipple/i.test(text.slice(Math.max(0,start-90),end+40)))continue;
+      /* the figure is itself a bracketed equivalent, or is followed by one */
+      if(/\(\s*(?:about |approx\.? |roughly )?$/.test(before)||HAS_OWN.test(after))continue;
+      /* "ft" as the start of a longer word */
+      if(/[A-Za-z0-9]/.test(text.charAt(end))&&unit!=='in')continue;
+      /* a fraction or a slash-separated list: "3/4 inch", "10/20/40 ft" */
+      if(text.charAt(start-1)==='/'||text.charAt(start+(m[1]||'').length)==='/')continue;
+      /* "33,000 foot-pounds" is not a length */
+      if(/^-?pounds?/.test(after))continue;
+      /* "ohms per 1000 ft" is a unit, not a distance */
+      if(a==null&&b===1000&&/per\s$/.test(before))continue;
+      /* "and" joins a range only after "between": "Category 2 and 3 ft" is not one */
+      if(a!=null&&/and/.test(sep)&&!/between\s$/i.test(before)){
+        start+=m[1].length+sep.length;a=null;sep='';
+        before=(lead+text.slice(0,start)).slice(-28);
+        if(text.charAt(start-1)==='/')continue;
+      }
+      var ri=-1;for(var i=0;i<UNIT_RE.length;i++){if(UNIT_RE[i].test(unit)){ri=i;break;}}
+      if(ri<0)continue;
+      var rule=RULES[ri],res;
+      /* The sentence already gives the metric figure ("147.9 lb-ft, which is
+         200.6 N·m"; "a 200 kW room is about 57 tons"). Adding it again only
+         produces "200 kW (57 tons)" beside "200 kW". */
+      if(rule[3].test(text.slice(Math.max(0,start-60),start)+' | '+text.slice(end,end+45)))continue;
+      if(rule[1]==='temp'){
+        /* A difference converts by 5/9; a temperature also loses its 32. The
+           wording decides where it can. Where it cannot, a figure of 40 or
+           under is taken as a difference: on this site those are rises and
+           spreads ("at 12°F it is 2.0"), and real temperatures run higher. */
+        var hi=Math.max(b,a==null?b:a);
+        var isDiff=DIFF.test(after)||DIFF_BEFORE.test(before)||(hi<=40&&!NOT_DIFF.test(after));
+        var f=isDiff?function(x){return x*5/9;}:function(x){return (x-32)*5/9;};
+        res=(a!=null?show(f(a))+sep:'')+show(f(b))+(isDiff?' K':'°C');
+      }else{
+        res=(a!=null?show(a*rule[1])+sep:'')+show(b*rule[1])+' '+rule[2];
+      }
+      out.push(text.slice(last,start),{us:text.slice(start,end),metric:res});
+      last=end;any=true;
+    }
+    if(!any)return null;
+    out.push(text.slice(last));
+    return out;
+  }
+
+  var applied=false;
+  function annotate(){
+    var root=document.querySelector('main')||document.body;
+    if(!root||applied||AS_WRITTEN)return;
+    applied=true;
+    var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:function(n){
+      if(!n.nodeValue||!/\d/.test(n.nodeValue))return NodeFilter.FILTER_REJECT;
+      var p=n.parentElement;
+      return (p&&!p.closest(SKIP))?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
+    }});
+    var nodes=[],n;
+    while((n=w.nextNode()))nodes.push(n);
+    nodes.forEach(function(node){
+      /* what comes just before this text node, for "= <b>56.9 tons</b>" */
+      var pv=node.previousSibling||(node.parentNode&&node.parentNode.previousSibling);
+      var parts=convertText(node.nodeValue,pv?String(pv.textContent||'').slice(-28):'');
+      if(!parts)return;
+      var frag=document.createDocumentFragment();
+      parts.forEach(function(p){
+        if(typeof p==='string'){if(p)frag.appendChild(document.createTextNode(p));return;}
+        var s=document.createElement('span');
+        s.className='vf-conv';s.setAttribute('data-us',p.us);
+        s.textContent=p.metric+' ('+p.us+')';
+        frag.appendChild(s);
+      });
+      node.parentNode.replaceChild(frag,node);
+    });
+  }
+  function restore(){
+    if(!applied)return;
+    applied=false;
+    document.querySelectorAll('.vf-conv').forEach(function(s){
+      var p=s.parentNode;p.replaceChild(document.createTextNode(s.getAttribute('data-us')),s);p.normalize();
+    });
+  }
+
+  /* ---- the switch: in the header on wide screens, in the footer row always ---- */
+  var buttons=[];
+  function paintButtons(){
+    buttons.forEach(function(b){
+      if(b.getAttribute('data-vfu')==='toggle'){
+        b.textContent=metric?'m':'ft';
+        b.setAttribute('aria-label','Units: '+(metric?'metric':'US')+'. Switch to '+(metric?'US':'metric'));
+        b.setAttribute('title',metric?'Metric units. Switch to US':'US units. Switch to metric');
+      }else{
+        b.setAttribute('aria-pressed',((b.getAttribute('data-vfu')==='metric')===metric)?'true':'false');
+      }
+    });
+  }
+  function build(){
+    var st=document.createElement('style');
+    st.textContent='#unitsToggle{font:600 12px/1 "IBM Plex Mono",ui-monospace,monospace;min-width:40px}'+
+      '@media(max-width:700px){#unitsToggle{display:none}}'+
+      '.foot-units{display:inline-flex;align-items:center;gap:8px;margin-left:auto;font-size:13px}'+
+      '.foot-units span{color:#7F94AC}'+
+      '.foot-units button{font:inherit;background:transparent;border:0;border-bottom:1px solid transparent;color:#93A7BD;padding:5px 2px;cursor:pointer}'+
+      '.foot-units button[aria-pressed="true"]{color:#fff;border-bottom-color:#FFC400}'+
+      '@media(max-width:520px){.foot-units{margin-left:0;width:100%}}'+
+      '@media print{#unitsToggle,.foot-units{display:none}}';
+    document.head.appendChild(st);
+
+    var host=document.querySelector('.headright');
+    if(host&&!document.getElementById('unitsToggle')){
+      var hb=document.createElement('button');
+      hb.type='button';hb.id='unitsToggle';hb.className='themetoggle';hb.setAttribute('data-vfu','toggle');
+      hb.addEventListener('click',function(){api.set(!metric);});
+      host.insertBefore(hb,host.firstChild);
+      buttons.push(hb);
+    }
+    var foot=document.querySelector('footer .foot-legal');
+    if(foot&&!foot.querySelector('.foot-units')){
+      var box=document.createElement('span');
+      box.className='foot-units';box.setAttribute('role','group');box.setAttribute('aria-label','Units');
+      var lab=document.createElement('span');lab.textContent='Units';box.appendChild(lab);
+      [['us','US'],['metric','Metric']].forEach(function(o){
+        var b=document.createElement('button');b.type='button';b.textContent=o[1];b.setAttribute('data-vfu',o[0]);
+        b.addEventListener('click',function(){api.set(o[0]==='metric');});
+        box.appendChild(b);buttons.push(b);
+      });
+      foot.appendChild(box);
+    }
+    paintButtons();
+    if(metric)annotate();
+  }
+  document.addEventListener('vf:units',function(){
+    paintButtons();
+    if(metric)annotate();else restore();
+  });
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();

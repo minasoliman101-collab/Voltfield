@@ -269,12 +269,14 @@
       b.addEventListener('click',function(){
         var want=b.getAttribute('data-units-btn')==='metric';
         if(want===metric)return;
+        if(window.VFUnits){window.VFUnits.set(want);return;}
         metric=want;
         try{localStorage.setItem('vf_units',metric?'metric':'us');}catch(e){}
         paint();
-        if(window.vfGtag)window.vfGtag('event','units_toggle',{to:metric?'metric':'us',page:location.pathname});
       });
     });
+    /* The site-wide switch (header, footer) changed the setting. */
+    document.addEventListener('vf:units',function(e){metric=!!(e.detail&&e.detail.metric);paint();});
     paint();
   }
   var p=document.querySelector('[data-chart-print]');
