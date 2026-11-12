@@ -355,7 +355,7 @@ const SITE_CONFIG = {
   var DIFF=/^\s*(?:rise|difference|drop|approach|range|spread|step|higher|lower|wider|warmer|cooler|colder|above|below|per\b|of (?:rise|difference))/i;
   var DIFF_BEFORE=/(?:rise of|difference of|drop of|by|every|each|per)\s*$/i;
   var NOT_DIFF=/^\s*(?:ambient|outdoor|outside|leaving|entering|supply|return|inlet|water|air\b)/i;
-  var SKIP='script,style,noscript,code,pre,svg,canvas,input,textarea,select,option,button,label,table,.formula,.pq-ans,.est-result,.est-example,.est-after,.pq-bar,.vf3d-co-wrap,.crumbnav,[data-u],[data-units],.vf-conv,.sub,h1,title';
+  var SKIP='script,style,noscript,code,pre,svg,canvas,input,textarea,select,option,button,label,table,.formula,.pq-ans,.est-result,.est-example,.est-after,.pq-bar,.ps-list,.vf3d-co-wrap,.crumbnav,[data-u],[data-units],.vf-conv,.sub,h1,title';
 
   function convertText(text,lead){
     lead=lead||'';

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Calculation Sheet: Save &amp; Print Results | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/project-sheet.html">
+<meta property="og:url" content="https://voltfield.org/project-sheet.html">
+<meta name="description" content="Keep the results of several electrical and cooling calculations on one sheet, add notes, and print or save it as a PDF. Stored in your browser, no account.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Project Calculation Sheet">
+<meta property="og:description" content="Keep the results of several electrical and cooling calculations on one sheet, add notes, and print or save it as a PDF. Stored in your browser, no account.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-about.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-about.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Calculators","item":"https://voltfield.org/engineering-calculators.html"},{"@type":"ListItem","position":3,"name":"Project Calculation Sheet","item":"https://voltfield.org/project-sheet.html"}]},{"@type":"WebPage","name":"Project Calculation Sheet","description":"Keep the results of several electrical and cooling calculations on one sheet, add notes, and print or save it as a PDF. Stored in your browser, no account.","url":"https://voltfield.org/project-sheet.html","dateModified":"2026-11-12","inLanguage":"en-US","isPartOf":{"@type":"WebSite","name":"Voltfield","url":"https://voltfield.org/"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"}}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="voltfield-calculators.css">
+<style>
+.ps-meta{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin:6px 0 12px}
+.ps-name{flex:1 1 320px}
+.ps-name input{width:100%}
+.ps-date{font-family:var(--mono);font-size:12px;color:var(--slate);padding-bottom:10px}
+.ps-actions{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px}
+.ps-actions button,.ps-item button{font:600 12px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:10px 14px;min-height:40px;
+  background:var(--card);color:var(--ink);border:1px solid var(--line-dark);border-radius:var(--r-s,6px);cursor:pointer}
+.ps-actions button:hover,.ps-item button:hover{border-color:var(--signal)}
+.ps-actions .ps-danger{margin-left:auto;color:var(--slate)}
+.artwrap .ps-list{list-style:none;padding:0;margin:0;counter-reset:ps}
+.ps-note-print{display:none}
+.ps-item{counter-increment:ps;background:var(--card);border:1px solid var(--line-dark);border-radius:var(--r-m,8px);padding:16px 18px;margin:0 0 12px}
+.ps-item h2{font-size:17px;margin:0 0 8px;display:flex;gap:10px;align-items:baseline}
+.ps-item h2::before{content:counter(ps) ".";font-family:var(--mono);font-size:13px;color:var(--slate)}
+.ps-res{font-size:15.5px;line-height:1.55;margin:0 0 10px;color:var(--ink)}
+.ps-in{display:flex;flex-wrap:wrap;gap:4px 18px;margin:0 0 10px;padding:0;font-size:13.5px;color:var(--ink-2)}
+.ps-in div{display:flex;gap:6px}
+.ps-in dt{color:var(--slate)}
+.ps-in dd{margin:0;font-variant-numeric:tabular-nums}
+.ps-note{width:100%;min-height:42px;font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--line-dark);border-radius:var(--r-s,6px);background:var(--bg,transparent);color:var(--ink);resize:vertical}
+.ps-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.ps-row a{font-size:13.5px}
+.ps-row .ps-when{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--slate)}
+.ps-item button{padding:7px 10px;min-height:32px;font-size:11px}
+.ps-link{display:none}
+.print-head,.print-foot{display:none}
+@media(max-width:520px){.ps-actions .ps-danger{margin-left:0}}
+@page{size:letter portrait;margin:13mm 12mm 14mm}
+@media print{
+  header.site,footer,.ad-unit,.skip-link,.totop,.crumbnav,.eyebrow,.dek,.web-only,.ps-actions,.ps-item button,#psEmpty,#themeToggle,#unitsToggle{display:none!important}
+  html,body{background:#fff!important}
+  html[data-theme] main *,main *{color:#000!important;background:transparent!important;box-shadow:none!important}
+  .artban{padding:0!important;border:0!important;margin:0!important}
+  .artban-in,.artwrap{max-width:none!important;padding:0!important;margin:0!important}
+  .print-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1.5pt solid #000;padding-bottom:3pt;margin-bottom:8pt;font:700 10pt/1.2 var(--mono);letter-spacing:.06em}
+  .print-head span{font-weight:400;letter-spacing:0;font-size:8.5pt}
+  h1{font-size:17pt!important;margin:0 0 6pt!important}
+  .ps-meta{margin:0 0 8pt;gap:10pt}
+  .ps-name label{display:none}
+  .ps-name input{border:0!important;padding:0!important;font-size:12pt!important;font-weight:600}
+  .ps-name input:placeholder-shown{display:none}
+  .ps-date{padding:0;font-size:8.5pt}
+  .ps-item{border:0!important;border-top:.5pt solid #999!important;border-radius:0;padding:7pt 0 5pt;margin:0;break-inside:avoid;page-break-inside:avoid}
+  .ps-item h2{font-size:11pt!important;margin:0 0 3pt!important}
+  .artwrap .ps-res{font-size:10pt;line-height:1.4;margin:0 0 3pt}
+  .ps-in{font-size:8.5pt;margin:0 0 3pt}
+  /* a textarea prints at its box height, not its text height: print the text */
+  .ps-note{display:none!important}
+  .ps-note-print{display:block;font-size:9pt;font-style:italic;white-space:pre-wrap;margin:0 0 2pt}
+  .ps-note-print:empty{display:none}
+  .ps-row{margin-top:2pt}
+  .ps-row a.ps-open{display:none}
+  .ps-link{display:block;font-size:7pt;word-break:break-all;color:#444!important}
+  .ps-row .ps-when{margin-left:0;font-size:7.5pt}
+  .print-foot{display:block;margin-top:9pt;padding-top:4pt;border-top:.5pt solid #000;font-size:7.5pt!important;line-height:1.35}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Power &amp; cooling engineering reference</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>43 tools, electrical and cooling</em></a>
+            <a href="reference-charts.html"><b>Reference charts</b><em>Printable tables: wire, breakers, cooling load</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+            <a href="practice-questions.html"><b>Practice questions</b><em>64 questions with worked solutions</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/" style="color:var(--slate);text-decoration:none">Home</a> / <a href="engineering-calculators.html" style="color:var(--slate);text-decoration:none">Calculators</a> / <span style="color:var(--ink)">Project sheet</span></nav>
+    <div class="eyebrow">Your Saved Results</div>
+    <div class="print-head" aria-hidden="true">VOLTFIELD <span>voltfield.org</span></div>
+    <h1>Project Calculation Sheet</h1>
+    <p class="dek">The results you have saved from the calculators, on one page you can annotate and print.</p>
+  </div>
+</section>
+<div class="artwrap">
+
+  <noscript><p class="callout">The project sheet is kept in your browser and needs JavaScript to show it.</p></noscript>
+
+  <div id="psFull" hidden>
+    <div class="ps-meta">
+      <div class="est-field ps-name"><label for="psName">Project or job name</label><input type="text" id="psName" maxlength="120" placeholder="e.g. Building C feeder check" autocomplete="off"></div>
+      <div class="ps-date" id="psDate"></div>
+    </div>
+    <div class="ps-actions">
+      <button type="button" id="psPrint">Print or save as PDF</button>
+      <button type="button" id="psCopy">Copy as text</button>
+      <button type="button" id="psClear" class="ps-danger">Clear the sheet</button>
+    </div>
+    <ol class="ps-list" id="psList"></ol>
+    <p class="print-foot">Results from the calculators at voltfield.org, saved and printed by the reader. Each is a screening estimate from the inputs shown, by the method given on that calculator&rsquo;s page. Not a design, and not a substitute for the adopted code or a calculation by a qualified engineer.</p>
+  </div>
+
+  <div id="psEmpty">
+    <p><b>Nothing saved yet.</b> Run any calculator, then press <b>Save to project sheet</b> under the result. It appears here with its inputs, and you can add as many as the job needs.</p>
+    <div class="rel">
+      <a href="calculators/voltage-drop.html">Voltage drop</a>
+      <a href="calculators/wire-size.html">Wire size</a>
+      <a href="calculators/transformer-sizing.html">Transformer sizing</a>
+      <a href="calculators/breaker-size.html">Breaker size</a>
+      <a href="calculators/btu-to-tons.html">Cooling load</a>
+      <a href="engineering-calculators.html">All calculators</a>
+    </div>
+  </div>
+
+  <div class="web-only">
+  <h2>What the sheet is for</h2>
+  <p>A real job is rarely one calculation. Sizing a feeder means a load current, a wire size, a voltage drop check and a breaker; a small plant room means a heat load, an airflow and a pump. The sheet keeps those results together, in the order you saved them, with the inputs that produced each one, so the working can be read by someone else or by you next week.</p>
+  <p>Each line keeps a link that reopens its calculator with the same inputs. Change a figure there, save again, and the line is replaced with the new result.</p>
+
+  <h2>Where it is kept</h2>
+  <p>In this browser, on this device, and nowhere else. There is no account and nothing is uploaded, which means the sheet is private and also that it does not travel: it will not be on your phone if you built it on your laptop, and clearing your browser&rsquo;s site data removes it. To keep a copy or pass it on, print it, save it as a PDF, or copy it as text.</p>
+
+  <div class="callout"><b>These are screening estimates.</b> The sheet records what the calculators returned for the inputs shown. It is a way to keep your working together, not a design document, and it does not replace the adopted code or a calculation by a qualified engineer.</div>
+  </div>
+
+</div>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent engineering reference for electrical power and cooling equipment in data centers, solar and battery storage. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h2>About</h2><ul>
+      <li><a href="about.html">About Voltfield — an independent engineering reference</a></li>
+      <li><a href="methodology.html">Methodology</a></li>
+      <li><a href="packets.html">Reference packets</a></li>
+      <li><a href="privacy-policy.html">Privacy policy</a></li>
+    </ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+<script>
+(function(){
+  var KEY='vf_project',META='vf_project_meta';
+  var full=document.getElementById('psFull'),empty=document.getElementById('psEmpty'),listEl=document.getElementById('psList');
+  var nameEl=document.getElementById('psName'),dateEl=document.getElementById('psDate');
+  if(!full||!listEl)return;
+  function read(){try{var a=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(a)?a.filter(function(x){return x&&typeof x==='object'&&x.r;}):[];}catch(e){return [];}}
+  function write(a){try{localStorage.setItem(KEY,JSON.stringify(a));}catch(e){}}
+  function meta(){try{var m=JSON.parse(localStorage.getItem(META)||'{}');return m&&typeof m==='object'?m:{};}catch(e){return {};}}
+  function setMeta(m){try{localStorage.setItem(META,JSON.stringify(m));}catch(e){}}
+  function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
+  function when(d){try{return new Date(d).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});}catch(e){return '';}}
+  /* Only links back into this site's own calculators are made clickable: the
+     list is the visitor's own storage, but nothing read from storage should be
+     able to put an arbitrary address behind a link. */
+  function safe(u){try{var x=new URL(u,location.href);return (x.origin===location.origin||x.origin==='https://voltfield.org')&&x.pathname.indexOf('/calculators/')===0?x.href:null;}catch(e){return null;}}
+
+  function draw(){
+    var items=read();
+    full.hidden=!items.length;empty.hidden=!!items.length;
+    listEl.textContent='';
+    items.forEach(function(it,idx){
+      var li=el('li','ps-item');
+      li.appendChild(el('h2',null,String(it.t||'Calculation')));
+      li.appendChild(el('p','ps-res',String(it.r)));
+      if(Array.isArray(it.i)&&it.i.length){
+        var dl=el('dl','ps-in');
+        it.i.forEach(function(p){if(!Array.isArray(p))return;var d=el('div');d.appendChild(el('dt',null,String(p[0])+':'));d.appendChild(el('dd',null,String(p[1])));dl.appendChild(d);});
+        li.appendChild(dl);
+      }
+      var note=el('textarea','ps-note');note.placeholder='Note for this line (optional)';note.value=String(it.n||'');
+      note.setAttribute('aria-label','Note for '+String(it.t||'this calculation'));note.maxLength=600;
+      note.addEventListener('input',function(){var a=read();if(a[idx]){a[idx].n=note.value;write(a);}});
+      var np=el('div','ps-note-print',note.value);
+      note.addEventListener('input',function(){np.textContent=note.value;});
+      li.appendChild(note);li.appendChild(np);
+      var row=el('div','ps-row');
+      var href=safe(it.u);
+      if(href){
+        var a=el('a','inline ps-open','Reopen with these inputs');a.href=href;row.appendChild(a);
+      }
+      function move(by,label){var b=el('button',null,label);b.type='button';b.addEventListener('click',function(){var a=read(),j=idx+by;if(j<0||j>=a.length)return;var t=a[idx];a[idx]=a[j];a[j]=t;write(a);draw();});return b;}
+      if(idx>0)row.appendChild(move(-1,'Move up'));
+      if(idx<items.length-1)row.appendChild(move(1,'Move down'));
+      var rm=el('button',null,'Remove');rm.type='button';
+      rm.addEventListener('click',function(){var a=read();a.splice(idx,1);write(a);draw();});
+      row.appendChild(rm);
+      row.appendChild(el('span','ps-when',it.d?'Saved '+when(it.d):''));
+      li.appendChild(row);
+      if(href)li.appendChild(el('div','ps-link',href.replace(/^https?:\/\//,'')));
+      listEl.appendChild(li);
+    });
+    dateEl.textContent=items.length?items.length+(items.length===1?' result':' results')+' \u00b7 '+when(Date.now()):'';
+  }
+
+  nameEl.value=String(meta().name||'');
+  nameEl.addEventListener('input',function(){var m=meta();m.name=nameEl.value;setMeta(m);});
+  document.getElementById('psPrint').addEventListener('click',function(){
+    if(window.vfGtag)window.vfGtag('event','project_print',{n:read().length});
+    window.print();
+  });
+  document.getElementById('psCopy').addEventListener('click',function(){
+    var b=this,out=[];
+    if(nameEl.value)out.push(nameEl.value,'');
+    read().forEach(function(it,i){
+      out.push((i+1)+'. '+(it.t||'Calculation'));
+      out.push('   '+it.r);
+      if(Array.isArray(it.i)&&it.i.length)out.push('   Inputs: '+it.i.map(function(p){return p[0]+' '+p[1];}).join('; '));
+      if(it.n)out.push('   Note: '+it.n);
+      var h=safe(it.u);if(h)out.push('   '+h);
+      out.push('');
+    });
+    out.push('From the calculators at voltfield.org. Screening estimates, not a design.');
+    var text=out.join('\n');
+    (navigator.clipboard?navigator.clipboard.writeText(text):Promise.reject()).then(function(){
+      b.textContent='Copied';setTimeout(function(){b.textContent='Copy as text';},1600);
+    },function(){b.textContent='Copy failed';setTimeout(function(){b.textContent='Copy as text';},1800);});
+  });
+  /* Two presses, not a dialog: the first arms it and says what it will do. */
+  var clr=document.getElementById('psClear'),armed=null;
+  clr.addEventListener('click',function(){
+    if(!armed){clr.textContent='Press again to remove all';armed=setTimeout(function(){armed=null;clr.textContent='Clear the sheet';},4000);return;}
+    clearTimeout(armed);armed=null;clr.textContent='Clear the sheet';
+    write([]);draw();
+  });
+  /* saved from a calculator in another tab */
+  window.addEventListener('storage',function(e){if(e.key===KEY)draw();});
+  draw();
+})();
+</script>
+</body>
+</html>

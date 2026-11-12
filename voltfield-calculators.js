@@ -1493,6 +1493,9 @@
     function linkFor(est){
       return (EMB?EMB.page:location.origin+location.pathname)+'?'+query(est)+(ests.length>1?'#'+est.id:'');
     }
+    /* The project sheet's list. Newest last; capped so it cannot grow without end. */
+    function projRead(){try{const a=JSON.parse(localStorage.getItem('vf_project')||'[]');return Array.isArray(a)?a:[];}catch(e){return [];}}
+    function projWrite(a){try{localStorage.setItem('vf_project',JSON.stringify(a.slice(-60)));return true;}catch(e){return false;}}
     function copy(text,btn){
       const done=function(ok){const o=btn.textContent;btn.textContent=ok?'Copied':'Copy failed';setTimeout(function(){btn.textContent=o;},1500);};
       if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){done(true);},function(){done(false);});return;}
@@ -1517,7 +1520,38 @@
         copy((h?h.textContent.trim()+': ':'')+res.innerText.replace(/\s+/g,' ').trim()+'\n'+linkFor(est),b2);
         if(window.vfGtag)window.vfGtag('event','calc_share',{calc:est.id,kind:'result'});
       });
-      share.appendChild(b1);share.appendChild(b2);bar.appendChild(share);
+      share.appendChild(b1);share.appendChild(b2);
+      /* Save to the project sheet (project-sheet.html): a list of results kept
+         in this browser, so a job that takes five calculators ends as one page.
+         Not offered in an embedded copy, where the storage would be the host
+         site's and the sheet would not be there to open. */
+      if(!EMB){
+        const b3=document.createElement('button');b3.type='button';b3.textContent='Save to project sheet';
+        const sheet=document.createElement('a');sheet.className='est-proj';sheet.href='/project-sheet.html';
+        const count=function(){const n=projRead().length;sheet.textContent='Project sheet ('+n+')';sheet.hidden=!n;};
+        b3.addEventListener('click',function(){
+          const h=est.querySelector('h2');
+          const link=linkFor(est);
+          const item={u:link,c:est.id,t:h?h.textContent.trim():document.title,
+            r:res.innerText.replace(/\s+/g,' ').trim(),
+            i:fieldsOf(est).filter(function(f){return f.value!==''&&f.offsetParent!==null;}).map(function(f){
+              const l=est.querySelector('label[for="'+f.id+'"]');
+              const v=f.tagName==='SELECT'?(f.options[f.selectedIndex]?f.options[f.selectedIndex].textContent:f.value):f.value;
+              return [l?l.textContent.trim():f.id,v];
+            }),
+            d:Date.now()};
+          /* the same inputs saved twice is one line, moved to the end */
+          const list=projRead().filter(function(x){return x.u!==link;});
+          list.push(item);
+          const ok=projWrite(list);
+          b3.textContent=ok?'Saved':'Could not save';
+          setTimeout(function(){b3.textContent='Save to project sheet';},1500);
+          count();
+          if(window.vfGtag)window.vfGtag('event','project_save',{calc:est.id});
+        });
+        share.appendChild(b3);share.appendChild(sheet);count();
+      }
+      bar.appendChild(share);
 
       const make=CHAIN[est.id];
       if(make){

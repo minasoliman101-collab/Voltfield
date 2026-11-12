@@ -48,6 +48,9 @@
 .est-share button{font:600 11px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:9px 12px;min-height:36px;
   background:transparent;color:var(--ink-2);border:1px solid var(--line-dark);border-radius:var(--r-s,6px);cursor:pointer}
 .est-share button:hover{color:var(--ink);border-color:var(--signal)}
+.est-share a.est-proj{display:inline-flex;align-items:center;min-height:36px;padding:0 4px;font:600 11px/1 var(--mono);letter-spacing:.04em;
+  text-transform:uppercase;color:var(--link);text-decoration:underline;text-underline-offset:3px}
+.est-share a.est-proj[hidden]{display:none}
 .est-next{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font-size:14px}
 .est-next span{font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--slate)}
 .est-next a{display:inline-flex;align-items:center;min-height:32px;padding:5px 11px;border:1px solid var(--line-dark);border-radius:999px;
