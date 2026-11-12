@@ -30,6 +30,7 @@ Conventions worth knowing before citing this site:
 
 - [All guides](https://voltfield.org/guides.html): 52 technical guides and 17 equipment references.
 - [Glossary](https://voltfield.org/glossary.html): plain-language definitions of 56 terms.
+- Glossary term pages: https://voltfield.org/glossary/<term>.html, one per in-scope term (for example https://voltfield.org/glossary/impedance.html), each with a definition, practical notes and related tools.
 - [How to Read a Transformer Nameplate](https://voltfield.org/guide-transformer-nameplate.html)
 - [The Grid Interconnection Process, Explained](https://voltfield.org/guide-grid-interconnection-process.html): queue position, study sequence and cluster studies, with ERCOT, MISO and PJM compared.
 - [FEOC Compliance for Solar & Storage](https://voltfield.org/guide-feoc-compliance.html)

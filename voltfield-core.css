@@ -1110,3 +1110,6 @@ footer .foot-legal{max-width:var(--shell);margin:34px auto 0;padding-top:18px;
 footer .foot-legal a{padding:5px 0;text-decoration:underline;text-underline-offset:3px;
   text-decoration-color:rgba(147,167,189,.45)}
 footer > .foot-legal:first-child{margin-top:0;padding-top:0;border-top:0}
+
+/* Glossary entry -> its own page (glossary/<id>.html, from scripts/gen-glossary-pages.mjs). */
+.term .term-more{margin-top:8px;font-family:var(--mono);font-size:12px;letter-spacing:.01em}

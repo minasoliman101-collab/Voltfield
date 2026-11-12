@@ -189,6 +189,51 @@
 /charts/motor-speed-chart            /charts/motor-speed-chart.html 301!
 /charts/hp-to-kw-chart               /charts/hp-to-kw-chart.html 301!
 /charts/cooling-load-chart           /charts/cooling-load-chart.html 301!
+/glossary/ampacity                   /glossary/ampacity.html 301!
+/glossary/ansi-c57                   /glossary/ansi-c57.html 301!
+/glossary/arc-flash-boundary         /glossary/arc-flash-boundary.html 301!
+/glossary/ats-sts                    /glossary/ats-sts.html 301!
+/glossary/augmentation               /glossary/augmentation.html 301!
+/glossary/backtracking               /glossary/backtracking.html 301!
+/glossary/bifacial-gain              /glossary/bifacial-gain.html 301!
+/glossary/bil                        /glossary/bil.html 301!
+/glossary/black-start                /glossary/black-start.html 301!
+/glossary/bos                        /glossary/bos.html 301!
+/glossary/busway                     /glossary/busway.html 301!
+/glossary/cdu                        /glossary/cdu.html 301!
+/glossary/clipping                   /glossary/clipping.html 301!
+/glossary/crah-crac                  /glossary/crah-crac.html 301!
+/glossary/c-rate                     /glossary/c-rate.html 301!
+/glossary/dc-block                   /glossary/dc-block.html 301!
+/glossary/dc-ac-ratio                /glossary/dc-ac-ratio.html 301!
+/glossary/derating                   /glossary/derating.html 301!
+/glossary/domestic-content-bonus     /glossary/domestic-content-bonus.html 301!
+/glossary/dry-type                   /glossary/dry-type.html 301!
+/glossary/feoc                       /glossary/feoc.html 301!
+/glossary/goes                       /glossary/goes.html 301!
+/glossary/grid-forming               /glossary/grid-forming.html 301!
+/glossary/gsu                        /glossary/gsu.html 301!
+/glossary/impedance                  /glossary/impedance.html 301!
+/glossary/incident-energy            /glossary/incident-energy.html 301!
+/glossary/interrupting-rating        /glossary/interrupting-rating.html 301!
+/glossary/itc                        /glossary/itc.html 301!
+/glossary/k-factor                   /glossary/k-factor.html 301!
+/glossary/kva-vs-kw                  /glossary/kva-vs-kw.html 301!
+/glossary/lfp-nmc                    /glossary/lfp-nmc.html 301!
+/glossary/mccb                       /glossary/mccb.html 301!
+/glossary/metal-clad                 /glossary/metal-clad.html 301!
+/glossary/mppt                       /glossary/mppt.html 301!
+/glossary/n-plus-1                   /glossary/n-plus-1.html 301!
+/glossary/nfpa-70e                   /glossary/nfpa-70e.html 301!
+/glossary/nfpa-855                   /glossary/nfpa-855.html 301!
+/glossary/pcs                        /glossary/pcs.html 301!
+/glossary/pue                        /glossary/pue.html 301!
+/glossary/safe-harbor                /glossary/safe-harbor.html 301!
+/glossary/sccr                       /glossary/sccr.html 301!
+/glossary/selective-coordination     /glossary/selective-coordination.html 301!
+/glossary/soc-soh                    /glossary/soc-soh.html 301!
+/glossary/ul-9540a                   /glossary/ul-9540a.html 301!
+/glossary/vector-group               /glossary/vector-group.html 301!
 # ---- END generated ----
 
 # ---- directory and new-page aliases (hand-kept) ----
@@ -197,6 +242,7 @@
 # because a same-named .html sits beside them.
 /calculators                        /engineering-calculators.html           301!
 /calculators/                       /engineering-calculators.html           301!
+/glossary/                          /glossary.html                          301!
 /charts                             /reference-charts.html                  301!
 /charts/                            /reference-charts.html                  301!
 /reference-charts                   /reference-charts.html                  301!
