@@ -1216,6 +1216,215 @@
     show(r,msg,warn);
   });
 
+
+  /* ================= shareable results and next steps =================
+     Two things a result could not do: be sent to someone, and be carried into
+     the next calculation.
+
+     SHARE. A tool's inputs are written into the address as ?id=value pairs,
+     keyed by the element ids the tool already has. Opening such an address
+     fills the form and runs it. After any calculation the address bar is
+     updated the same way, so copying the URL is enough; the buttons are there
+     for people who would not think to. Each page has a static canonical, so
+     these variants are not separate pages to a search engine.
+
+     NEXT. Under a result, links to the tools that would normally come next,
+     with this result already filled in: a current goes on to wire size,
+     breaker size and voltage drop; a flow goes on to pump power and pipe
+     velocity. The figures are recomputed here from the inputs with the same
+     formulas the tools use, so nothing is scraped out of the result text. */
+  const CHAIN = (function(){
+    const r2=function(x){return Math.round(x*100)/100;};
+    const amps=function(I){return fmt(I,1)+' A';};
+    function fromCurrent(I,ph,V){
+      if(!(I>0))return [];
+      const out=[['Size the wire for '+amps(I),'wire-size',{wsLoad:r2(I)}],['Size the breaker','breaker-size',{bkCont:r2(I)}]];
+      if(ph!=='dc'&&V>0)out.push(['Check voltage drop','voltage-drop',{vdPhase:ph,vdI:r2(I),vdV:V}]);
+      return out;
+    }
+    return {
+      k2aCalc:function(v,s){const ph=s('k2aPhase'),kw=v('k2aKw'),V=v('k2aV'),pf=ph==='dc'?1:v('k2aPf');
+        if(!(kw>0&&V>0&&pf>0))return [];return fromCurrent(kw*1000/((ph==='3'?R3:1)*V*pf),ph,V);},
+      w2aCalc:function(v,s){const ph=s('w2aPhase'),W=v('w2aW'),V=v('w2aV'),pf=ph==='dc'?1:v('w2aPf');
+        if(!(W>0&&V>0&&pf>0))return [];return fromCurrent(W/((ph==='3'?R3:1)*V*pf),ph,V);},
+      kva2aCalc:function(v,s){const ph=s('kva2aPhase'),k=v('kva2aKva'),V=v('kva2aV');
+        if(!(k>0&&V>0))return [];const I=k*1000/((ph==='3'?R3:1)*V);
+        return [['Size the wire for '+amps(I),'wire-size',{wsLoad:r2(I)}],['Check voltage drop','voltage-drop',{vdPhase:ph,vdI:r2(I),vdV:V}]];},
+      a2kCalc:function(v,s){const ph=s('a2kPhase'),I=v('a2kI'),V=v('a2kV'),pf=ph==='dc'?1:v('a2kPf');
+        if(!(I>0&&V>0&&pf>0))return [];const kw=(ph==='3'?R3:1)*V*I*pf/1000;
+        const out=[['What '+fmt(kw,1)+' kW costs to run','electricity-cost',{ecKw:r2(kw),ecHrs:24}]];
+        if(ph!=='dc')out.push(['Size a transformer for it','transformer-sizing',{xfPhase:ph,xfKw:r2(kw),xfPf:pf,xfV:V}]);
+        return out;},
+      awCalc:function(v,s){const ph=s('awPhase'),I=v('awI'),V=v('awV'),pf=ph==='dc'?1:v('awPf');
+        if(!(I>0&&V>0&&pf>0))return [];const kw=(ph==='3'?R3:1)*V*I*pf/1000;
+        return [['What '+fmt(kw,2)+' kW costs to run','electricity-cost',{ecKw:r2(kw),ecHrs:24}]].concat(fromCurrent(I,ph,V).slice(0,2));},
+      akCalc:function(v,s){const ph=s('akPhase'),I=v('akI'),V=v('akV');
+        if(!(I>0&&V>0))return [];const k=(ph==='3'?R3:1)*V*I/1000;
+        return [['Convert '+fmt(k,1)+' kVA to kW','kva-to-kw',{ptKva:r2(k),ptPf:0.9}],['Size the wire for '+amps(I),'wire-size',{wsLoad:r2(I)}]];},
+      xfCalc:function(v,s){const ph=s('xfPhase'),kw=v('xfKw'),pf=v('xfPf'),V=v('xfV');
+        if(!(kw>0&&pf>0&&V>0))return [];const std=STD_KVA.find(function(k){return k>=kw/pf-1e-9;});
+        if(!std)return [];
+        const out=[['Full-load amps of a '+std+' kVA unit','kva-to-amps',{kva2aPhase:ph,kva2aKva:std,kva2aV:V}]];
+        if(ph==='3')out.push(['Fault current it can deliver','fault-current',{faultKva:std,faultV:V}]);
+        out.push(['Its inrush current','inrush',{inKva:std,inV:V}]);
+        return out;},
+      wsCalc:function(v,s){const I=v('wsLoad');if(!(I>0))return [];
+        return [['Check voltage drop on the run','voltage-drop',{vdI:I,vdMat:s('wsMat')==='Al'?'21.2':'12.9'}],
+                ['Size the breaker','breaker-size',s('wsCont')==='1'?{bkCont:I}:{bkCont:0,bkNon:I}]];},
+      bkCalc:function(v){const c=v('bkCont')>0?v('bkCont'):0,n=v('bkNon')>0?v('bkNon'):0;
+        if(!(c+n>0)||(c>0&&n>0))return [];
+        return [['Size the wire for this load','wire-size',{wsLoad:c||n,wsCont:c>0?'1':'0'}]];},
+      vdCalc:function(v,s){const I=v('vdI'),D=v('vdD');if(!(I>0&&D>0))return [];
+        return [['Resistance of this run','wire-resistance',{wrSize:s('vdSize'),wrMat:s('vdMat'),wrLen:D,wrPath:s('vdPhase')==='1'?'2':'1'}],
+                ['Size the breaker','breaker-size',{bkCont:I}]];},
+      faultCalc:function(v){const k=v('faultKva'),z=v('faultZ'),V=v('faultV');if(!(k>0&&z>0&&V>0))return [];
+        const isc=k*1000/(R3*V*z/100);
+        return [['Estimate arc-flash energy at '+fmt(isc/1000,1)+' kA','arc-flash',{afV:r2(V/1000),afIbf:r2(isc/1000)}]];},
+      pfCalc:function(v){const kw=v('pfKw'),t=v('pfTarget');if(!(kw>0&&t>0))return [];
+        return [['Current after correction','kw-to-amps',{k2aPhase:'3',k2aKw:kw,k2aPf:t}]];},
+      hp2kCalc:function(v){const hp=v('hp2kHp');if(!(hp>0))return [];
+        return [['Torque at the shaft','motor-torque',{mtUnit:'hp',mtP:hp}],['Voltage dip when it starts','motor-start',{motorHp:hp}]];},
+      msCalc:function(v){const n=v('msRpm');if(!(n>0))return [];
+        return [['Torque at '+fmt(n,0)+' rpm','motor-torque',{mtRpm:n}]];},
+      ppCalc:function(v){const q=v('ppGpm'),h=v('ppHead'),pe=v('ppEff'),me=v('ppMotorEff'),sg=v('ppSg')>0?v('ppSg'):1;
+        if(!(q>0&&h>0&&pe>0&&me>0))return [];const bhp=q*h*sg/3960/(pe/100),kw=bhp*0.7457/(me/100);
+        return [['What a drive saves at 80% speed','affinity-laws',{alN1:100,alN2:80,alQ:q,alH:h,alP:r2(bhp)}],
+                ['What '+fmt(kw,1)+' kW costs to run','electricity-cost',{ecKw:r2(kw),ecHrs:24}],
+                ['Velocity in the pipe','pipe-velocity',{pvGpm:q}]];},
+      chwCalc:function(v,s){const x=v('chwLoad'),dt=v('chwDt');if(!(x>0&&dt>0))return [];
+        const gpm=(s('chwUnit')==='tons'?x*12000:x*BTU_PER_KW)/(500*dt);
+        return [['Pump power for '+fmt(gpm,0)+' GPM','pump-power',{ppGpm:r2(gpm)}],['Velocity in the pipe','pipe-velocity',{pvGpm:r2(gpm)}]];},
+      cfmCalc:function(v){const kw=v('cfmKw');if(!(kw>0))return [];
+        return [['Chilled water for '+fmt(kw,1)+' kW','chilled-water-flow',{chwUnit:'kw',chwLoad:kw}],['Convert to tons of cooling','btu-to-tons',{btUnit:'kw',btVal:kw}]];},
+      pueCalc:function(v){const T=v('pueTotal'),IT=v('pueIt'),rate=v('pueRate');if(!(T>IT&&IT>0))return [];
+        const p={ecKw:r2(T-IT),ecHrs:24};if(rate>0)p.ecRate=rate;
+        return [['Cost of the '+fmt(T-IT,0)+' kW overhead','electricity-cost',p],['Airflow for the IT load','airflow-cfm',{cfmKw:IT}]];},
+      ahCalc:function(v,s){const x=v('ahVal'),V=v('ahV');if(!(x>0&&V>0))return [];
+        const ah=s('ahDir')==='ah'?x:x*1000/V;
+        return [['How long it runs a load','battery-runtime',{brAh:r2(ah),brV:V}]];},
+      ecCalc:function(v){const kw=v('ecKw');if(!(kw>0))return [];
+        return [['Current this load draws','kw-to-amps',{k2aKw:kw}]];}
+    };
+  })();
+
+  (function(){
+    const ests=[].slice.call(document.querySelectorAll('.estimator[id]'));
+    if(!ests.length)return;
+    const fieldsOf=function(est){return [].slice.call(est.querySelectorAll('input[type="number"][id],select[id]'));};
+    const here=location.pathname.replace(/[^/]*$/,'');
+
+    function query(est){
+      const p=new URLSearchParams();
+      fieldsOf(est).forEach(function(f){ if(f.value!=='') p.set(f.id,f.value); });
+      return p.toString();
+    }
+    function linkFor(est){
+      return location.origin+location.pathname+'?'+query(est)+(ests.length>1?'#'+est.id:'');
+    }
+    function copy(text,btn){
+      const done=function(ok){const o=btn.textContent;btn.textContent=ok?'Copied':'Copy failed';setTimeout(function(){btn.textContent=o;},1500);};
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){done(true);},function(){done(false);});return;}
+      try{const t=document.createElement('textarea');t.value=text;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();const ok=document.execCommand('copy');t.remove();done(ok);}catch(e){done(false);}
+    }
+
+    function decorate(est,userRun){
+      const res=est.querySelector('.est-result');
+      let bar=est.querySelector('.est-after');
+      if(!res||!res.classList.contains('show')||!res.querySelector('b')){ if(bar)bar.remove(); return; }
+      if(!bar){
+        bar=document.createElement('div');bar.className='est-after';
+        res.parentNode.insertBefore(bar,res.nextSibling);
+      }
+      bar.textContent='';
+      const share=document.createElement('div');share.className='est-share';
+      const b1=document.createElement('button');b1.type='button';b1.textContent='Copy link to this result';
+      b1.addEventListener('click',function(){copy(linkFor(est),b1);if(window.vfGtag)window.vfGtag('event','calc_share',{calc:est.id,kind:'link'});});
+      const b2=document.createElement('button');b2.type='button';b2.textContent='Copy result';
+      b2.addEventListener('click',function(){
+        const h=est.querySelector('h2');
+        copy((h?h.textContent.trim()+': ':'')+res.innerText.replace(/\s+/g,' ').trim()+'\n'+linkFor(est),b2);
+        if(window.vfGtag)window.vfGtag('event','calc_share',{calc:est.id,kind:'result'});
+      });
+      share.appendChild(b1);share.appendChild(b2);bar.appendChild(share);
+
+      const make=CHAIN[est.id];
+      if(make){
+        let steps=[];
+        try{
+          steps=make(function(id){const e=document.getElementById(id);return e?parseFloat(e.value):NaN;},
+                     function(id){const e=document.getElementById(id);return e?e.value:'';})||[];
+        }catch(e){steps=[];try{console.error("[chain]",est.id,e);}catch(_){}}
+        steps=steps.filter(Boolean);
+        if(steps.length){
+          const next=document.createElement('div');next.className='est-next';
+          const lab=document.createElement('span');lab.textContent='Next, with this result:';next.appendChild(lab);
+          steps.forEach(function(s){
+            const a=document.createElement('a');
+            a.href=here+s[1]+'.html?'+new URLSearchParams(s[2]).toString()+'#calculator';
+            a.textContent=s[0];
+            a.addEventListener('click',function(){if(window.vfGtag)window.vfGtag('event','calc_chain',{from:est.id,to:s[1]});});
+            next.appendChild(a);
+          });
+          bar.appendChild(next);
+        }
+      }
+      if(userRun&&history.replaceState){
+        try{history.replaceState(null,'',location.pathname+'?'+query(est)+(ests.length>1?'#'+est.id:''));}catch(e){}
+      }
+    }
+
+    /* After the tool's own handler has run (it is bound on the button, so it
+       has finished by the time the click reaches the document). Deferred one
+       tick because the worked-example pass may withdraw a result it just made. */
+    document.addEventListener('click',function(e){
+      const btn=e.target.closest&&e.target.closest('button[id$="Btn"]');
+      if(!btn)return;
+      const est=btn.closest('.estimator[id]');
+      if(!est)return;
+      const userRun=!window.__vfExampleRun;
+      setTimeout(function(){decorate(est,userRun);},0);
+    });
+
+    /* Arriving on a shared or chained link: fill what the address names, then
+       run. Only fields that belong to a tool on this page are touched, selects
+       only take a value they already offer, and number inputs reject anything
+       that is not a number on their own. */
+    let params;
+    try{params=new URLSearchParams(location.search);}catch(e){return;}
+    ests.forEach(function(est){
+      const fields=fieldsOf(est).filter(function(f){return params.has(f.id);});
+      if(!fields.length)return;
+      /* selects first: several tools show or relabel inputs when one changes */
+      fields.sort(function(a,b){return (a.tagName==='SELECT'?0:1)-(b.tagName==='SELECT'?0:1);});
+      let set=0;
+      fields.forEach(function(f){
+        const val=params.get(f.id);
+        if(f.tagName==='SELECT'){
+          if(![].some.call(f.options,function(o){return o.value===val;}))return;
+          f.value=val;f.dispatchEvent(new Event('change',{bubbles:true}));set++;
+        }else if(val!==''&&isFinite(Number(val))){
+          f.value=val;set++;
+        }
+      });
+      if(!set)return;
+      est.setAttribute('data-no-example','');   /* the visitor's values, not the worked example */
+      const btn=est.querySelector('button[id$="Btn"]');
+      if(!btn)return;
+      window.__vfExampleRun=true;
+      try{btn.click();}finally{window.__vfExampleRun=false;}
+      /* A chained link often carries only part of what the next tool needs: a
+         current, but not the length of the run. Put the cursor in the first
+         field still empty, so the one thing left to do is obvious. */
+      const res=est.querySelector('.est-result');
+      if(res&&!res.querySelector('b')){
+        const empty=[].filter.call(est.querySelectorAll('input[type="number"]'),function(i){return i.value===''&&i.offsetParent!==null;})[0];
+        /* After load: the jump to #calculator happens later than this script and takes focus back. */
+        if(empty){const go=function(){setTimeout(function(){try{empty.focus({preventScroll:true});}catch(e){empty.focus();}},60);};if(document.readyState==="complete")go();else window.addEventListener("load",go);}
+      }
+      if(window.vfGtag)window.vfGtag('event','calculator_link_open',{calc:est.id});
+    });
+  })();
+
 })();
 
 /* ---------- usage tracking: which of the 25 calculators actually get used.
@@ -1231,6 +1440,8 @@
     if(window.__vfExampleRun)return; /* the worked example below is not a use of the tool */
     if(window.vfGtag)window.vfGtag('event','calculator_run',{calc:est.id});
   });
+
+
 })();
 
 /* ---------- open on a worked example, not an empty form ----------

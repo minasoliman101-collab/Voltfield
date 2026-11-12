@@ -40,3 +40,18 @@
 /* Note under a result that came from the worked example the tool opens on
    (see the end of voltfield-calculators.js). Removed on the first edit. */
 .est-example{margin:8px 0 0;font-family:var(--mono);font-size:11.5px;color:var(--slate)}
+
+/* Under a result: share buttons, then links that carry the result into the
+   next tool (see "shareable results and next steps" in voltfield-calculators.js). */
+.est-after{margin-top:10px;display:grid;gap:10px}
+.est-share{display:flex;flex-wrap:wrap;gap:8px}
+.est-share button{font:600 11px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:9px 12px;min-height:36px;
+  background:transparent;color:var(--ink-2);border:1px solid var(--line-dark);border-radius:var(--r-s,6px);cursor:pointer}
+.est-share button:hover{color:var(--ink);border-color:var(--signal)}
+.est-next{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font-size:14px}
+.est-next span{font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--slate)}
+.est-next a{display:inline-flex;align-items:center;min-height:32px;padding:5px 11px;border:1px solid var(--line-dark);border-radius:999px;
+  color:var(--link);text-decoration:none;background:var(--card)}
+.est-next a:hover{border-color:var(--signal)}
+.est-next a::after{content:"→";margin-left:6px;opacity:.7}
+@media print{.est-after{display:none}}
