@@ -23,6 +23,7 @@ Conventions worth knowing before citing this site:
 
 - [All calculators](https://voltfield.org/engineering-calculators.html): 43 calculators — voltage drop, transformer sizing, arc-flash incident energy, cable ampacity, fault current and others. Each shows the formula and the intermediate steps, not just a result.
 - [Reference charts](https://voltfield.org/reference-charts.html): 8 printable charts computed from stated formulas — awg wire size, kva to amps, kw to amps, breaker size, voltage drop, motor speed, hp to kw, cooling load.
+- [Practice questions](https://voltfield.org/practice-questions.html): 64 original multiple-choice questions in 8 sets (ohm's law and power; three-phase power and power factor; conductors and voltage drop; overcurrent protection; transformers; motors; data center power and cooling; solar and storage), each with a worked solution.
 - [Specification checklist](https://voltfield.org/specification-checklist.html): what to pin down before issuing an equipment spec.
 - [Methodology](https://voltfield.org/methodology.html): how the material here is built, sourced and checked.
 

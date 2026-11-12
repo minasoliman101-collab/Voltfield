@@ -1,5 +1,14 @@
 {
   "items": [
+    {"title": "Practice Questions", "url": "practice-questions.html", "category": "Tool", "description": "64 multiple-choice electrical practice questions in 8 sets, each with a worked solution."},
+    {"title": "Ohm's Law and Power: Practice Questions", "url": "practice/ohms-law-and-power.html", "category": "Tool", "description": "8 questions with solutions. Voltage, current, resistance, power and energy on DC and resistive AC circuits."},
+    {"title": "Three-Phase Power and Power Factor: Practice Questions", "url": "practice/three-phase-and-power-factor.html", "category": "Tool", "description": "8 questions with solutions. Line current, kVA, kW, kvar, power factor correction and the square root of three."},
+    {"title": "Conductors and Voltage Drop: Practice Questions", "url": "practice/conductors-and-voltage-drop.html", "category": "Tool", "description": "8 questions with solutions. Circular mils, resistance, voltage drop by the K-factor method and the 125 percent rule."},
+    {"title": "Overcurrent Protection: Practice Questions", "url": "practice/overcurrent-protection.html", "category": "Tool", "description": "8 questions with solutions. Continuous loads, the 125 percent rule, standard ratings, interrupting rating and SCCR."},
+    {"title": "Transformers: Practice Questions", "url": "practice/transformers.html", "category": "Tool", "description": "8 questions with solutions. Full-load current, impedance and fault current, sizing from load, and nameplate terms."},
+    {"title": "Motors: Practice Questions", "url": "practice/motors.html", "category": "Tool", "description": "8 questions with solutions. Synchronous speed, slip, torque, horsepower and kW, voltage unbalance and the affinity laws."},
+    {"title": "Data Center Power and Cooling: Practice Questions", "url": "practice/data-center-power-and-cooling.html", "category": "Tool", "description": "8 questions with solutions. PUE, redundancy, cooling load in tons, airflow per kW and chilled water flow."},
+    {"title": "Solar and Storage: Practice Questions", "url": "practice/solar-and-storage.html", "category": "Tool", "description": "8 questions with solutions. Array capacity, DC/AC ratio, clipping, amp-hours and kWh, C-rate and runtime."},
     {"title": "Vector group", "url": "glossary/vector-group.html", "category": "Glossary", "description": "A transformer's winding configuration and the phase displacement between its primary and secondary, written as codes like Dyn11."},
     {"title": "SoC and SoH", "url": "glossary/soc-soh.html", "category": "Glossary", "description": "State of charge is how full a battery is right now; state of health is how much of its original capacity remains after aging."},
     {"title": "Selective coordination", "url": "glossary/selective-coordination.html", "category": "Glossary", "description": "Arranging protective devices so that only the one nearest a fault opens, leaving everything upstream energized."},

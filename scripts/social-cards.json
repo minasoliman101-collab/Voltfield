@@ -205,7 +205,7 @@
   "title": "Glossary — Energy & Industrial Equipment Terms Explained",
   "subtitle": "Plain-language definitions for the standards and terms that show up across energy infrastructure and industrial power equipment.",
   "url": "voltfield.org/glossary",
-  "shared": 2
+  "shared": 47
  },
  {
   "file": "social-guide-415v-vs-480v-distribution.jpg",
@@ -630,6 +630,14 @@
   "subtitle": "A free power POD/skid sizing sandbox: pick a transformer, switchgear, distribution, backup, and cooling for a target load, then check sizing and redundancy instantly.",
   "url": "voltfield.org/voltfield-pod-designer",
   "shared": 1
+ },
+ {
+  "file": "social-practice-questions.jpg",
+  "eyebrow": "ENGINEERING REFERENCE",
+  "title": "Electrical Practice Questions",
+  "subtitle": "64 free electrical practice questions with worked solutions, in 8 sets: Ohm's law, three-phase power, voltage drop, breakers, transformers, motors and more.",
+  "url": "voltfield.org/practice-questions",
+  "shared": 9
  },
  {
   "file": "social-pue.jpg",

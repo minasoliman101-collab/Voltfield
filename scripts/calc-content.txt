@@ -40,6 +40,7 @@ Using one-way distance where the formula wants it and then doubling it again —
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
 /calculators/ampacity.html :: Cable Ampacity Calculator
 /calculators/motor-start.html :: Motor Starting Voltage Dip Calculator
+/practice/conductors-and-voltage-drop.html :: Practice Questions: Conductors and Voltage Drop
 
 ===transformer-sizing|transformer-sizing|Transformer Sizing Calculator|Transformer Sizing Calculator (kW to kVA)|Convert a kW load to the kVA rating you need, round to the nearest standard ANSI/IEEE C57.12.00 nameplate, and get full-load amps. Free, no signup.
 --intro
@@ -76,6 +77,7 @@ Sizing on kW and never dividing by power factor, which under-sizes by however fa
 /guide-transformer-impedance.html :: Transformer Impedance (%Z) Explained
 /calculators/inrush.html :: Transformer Inrush Calculator
 /calculators/power-factor.html :: Power Factor Correction Calculator
+/practice/transformers.html :: Practice Questions: Transformers
 
 ===fault-current|fault-current|Available Fault Current Calculator|Fault Current Calculator (Short Circuit)|Estimate available symmetrical fault current at a transformer secondary from kVA, voltage and %Z, and check equipment withstand ratings. Free, no signup.
 --intro
@@ -108,6 +110,7 @@ Using the calculated value as a final number instead of commissioning a study. F
 /guide-fully-rated-vs-series-rated.html :: Fully Rated vs. Series Rated Breakers
 /calculators/arc-flash.html :: Arc-Flash Incident Energy Calculator
 /calculators/transformer-sizing.html :: Transformer Sizing Calculator
+/practice/transformers.html :: Practice Questions: Transformers
 
 ===arc-flash|arc-flash|Arc-Flash Incident Energy Calculator|Arc-Flash Incident Energy Calculator|Estimate arc-flash incident energy and boundary with the Lee and Doughty equations, as a first pass before a full IEEE 1584 study. Free, no signup.
 --intro
@@ -201,6 +204,7 @@ Sizing to usable energy and ordering that as nameplate. Ignoring degradation, th
 /guide-ups-sizing.html :: How to Size a UPS
 /calculators/solar-string.html :: Solar String Sizing Calculator
 /calculators/generator-runtime.html :: Generator Runtime Calculator
+/practice/solar-and-storage.html :: Practice Questions: Solar and Storage
 
 ===solar-string|solar-string|Solar String Sizing Calculator|Solar String Sizing Calculator (Voc / Vmp)|Apply module temperature coefficients to site design temperatures to find maximum and minimum string length against inverter voltage limits. Free, no signup.
 --intro
@@ -263,6 +267,7 @@ Correcting to unity rather than to a target just below it, which risks over-corr
 /guide-harmonics-ieee-519.html :: Harmonics &amp; IEEE 519 Explained
 /calculators/transformer-sizing.html :: Transformer Sizing Calculator
 /calculators/generator-runtime.html :: Generator Runtime Calculator
+/practice/three-phase-and-power-factor.html :: Practice Questions: Three-Phase Power and Power Factor
 
 ===motor-start|motor-start|Motor Starting Voltage Dip Calculator|Motor Starting Voltage Dip Calculator|Estimate bus voltage dip when a large motor starts across the line, using locked-rotor kVA against source short-circuit kVA. Free, no signup.
 --intro
@@ -447,6 +452,7 @@ Sizing a conductor on this number alone, with no continuous-load factor and no d
 /guide-continuous-load-80-percent-rule.html :: The 80% Rule &amp; Continuous Loads
 /guide-cable-ampacity-derating.html :: Cable Ampacity Derating
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
+/practice/three-phase-and-power-factor.html :: Practice Questions: Three-Phase Power and Power Factor
 
 ===kva-to-amps|kva-to-amps|kVA to Amps Calculator|kVA to Amps Calculator (Transformer Full-Load Amps)|Convert a kVA rating to full-load amps for single-phase and three-phase transformers. No power factor needed, and this page explains why. Free, no signup.
 --intro
@@ -477,6 +483,7 @@ Dividing by power factor, which belongs in kW calculations and not here. Calcula
 /guide-transformer-nameplate.html :: How to Read a Transformer Nameplate
 /guide-transformer-impedance.html :: Transformer Impedance (%Z)
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
+/practice/transformers.html :: Practice Questions: Transformers
 
 ===hp-to-kw|hp-to-kw|Motor HP to kW Calculator|Motor HP to kW Calculator (and HP to Amps)|Convert motor horsepower to kW output, to kW drawn from the supply, and to full-load amps, with the efficiency term most converters leave out. Free, no signup.
 --intro
@@ -511,6 +518,7 @@ Converting horsepower to kilowatts and treating the result as input power, which
 /voltfield-supply-catalog.html?q=AC%20Motors :: AC Motors
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
 /calculators/power-factor.html :: Power Factor Correction Calculator
+/practice/motors.html :: Practice Questions: Motors
 
 ===watts-to-amps|watts-to-amps|Watts to Amps Calculator|Watts to Amps Calculator (1-Phase, 3-Phase, DC)|Convert watts to amps for DC, single-phase and three-phase circuits, with the power factor and square-root-of-three terms in the right places. Free, no signup.
 --intro
@@ -544,6 +552,7 @@ Using the DC form on an AC circuit, which omits power factor. Assuming unity pow
 /calculators/ampacity.html :: Cable Ampacity &amp; Conduit Fill
 /calculators/voltage-drop.html :: Voltage Drop Calculator
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
+/practice/ohms-law-and-power.html :: Practice Questions: Ohm's Law and Power
 
 ===wire-size|ampacity|Wire Size Calculator|Wire Size Calculator (What Size Wire for X Amps)|Size a conductor properly: the 125% continuous-load factor, the termination temperature limit under NEC 110.14(C), and ambient and bundling adjustment. Free, no signup.
 --intro
@@ -577,6 +586,8 @@ Sizing from the 90&deg;C column because the wire is THHN, when the terminals are
 /guide-continuous-load-80-percent-rule.html :: The 80% Rule &amp; Continuous Loads
 /calculators/kw-to-amps.html :: kW to Amps Calculator
 /guide-nec-250-122-egc-sizing.html :: Sizing the Equipment Grounding Conductor
+/practice/conductors-and-voltage-drop.html :: Practice Questions: Conductors and Voltage Drop
+
 ===awg-to-mm2|awg-to-mm2|AWG to mm&sup2; Converter|AWG to mm&sup2; Converter (Wire Size Conversion)|Convert AWG and kcmil to square millimetres and back, with the nearest IEC standard size. Built from the AWG geometric definition. Free, no signup.
 --intro
 AWG is not an arbitrary list of sizes. It is a geometric progression, and knowing that is the difference between looking a number up and understanding what it means: the diameter of gauge n is 0.005 inch multiplied by 92 raised to the power (36 minus n) over 39. Every size in the system falls out of that one expression.
@@ -707,6 +718,7 @@ Applying &radic;3 to a single-phase circuit, or omitting it from a three-phase o
 /guide-delta-vs-wye.html :: Delta vs. Wye Connections Explained
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
 /calculators/wire-size.html :: Wire Size Calculator
+/practice/three-phase-and-power-factor.html :: Practice Questions: Three-Phase Power and Power Factor
 
 ===btu-to-tons|btu-to-tons|BTU to Tons Converter|BTU to Tons Calculator (Cooling Capacity)|Convert BTU/h, tons of refrigeration and kW, including IT load to cooling tons. What a ton actually measures and what the figure leaves out. Free, no signup.
 --intro
@@ -774,6 +786,7 @@ Entering three values that do not agree with each other and trusting whichever a
 /calculators/wire-resistance.html :: Wire Resistance Calculator
 /calculators/voltage-drop.html :: Voltage Drop Calculator
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
+/practice/ohms-law-and-power.html :: Practice Questions: Ohm's Law and Power
 
 ===breaker-size|breaker-size|Breaker Size Calculator|Breaker Size Calculator (125% Continuous Load)|Size a circuit breaker from the load: 125% of the continuous load plus the non-continuous load, rounded up to the next standard rating. Free, no signup.
 --intro
@@ -806,6 +819,7 @@ Sizing the breaker to the load with no 125 percent factor on the continuous part
 /guide-interrupting-rating-vs-sccr.html :: Interrupting Rating vs. SCCR
 /calculators/fault-current.html :: Available Fault Current Calculator
 /calculators/kw-to-amps.html :: kW to Amps Calculator
+/practice/overcurrent-protection.html :: Practice Questions: Overcurrent Protection
 
 ===amps-to-kva|amps-to-kva|Amps to kVA Calculator|Amps to kVA Calculator (1-Phase and 3-Phase)|Convert amps to kVA for single-phase and three-phase systems. Apparent power is volts times amps, with no power factor term. Free, no signup.
 --intro
@@ -899,6 +913,7 @@ Comparing amp-hour ratings of batteries at different voltages. Using charging vo
 /guide-bess-c-rate.html :: BESS C-Rate Explained
 /guide-bess-augmentation.html :: BESS Augmentation
 /battery-storage.html :: Battery Storage Systems
+/practice/solar-and-storage.html :: Practice Questions: Solar and Storage
 
 ===battery-runtime|battery-runtime|Battery Runtime Calculator|Battery Runtime Calculator (UPS &amp; Backup)|Estimate how long a battery will carry a load from its amp-hours, voltage, usable depth of discharge and inverter efficiency. Free, no signup.
 --intro
@@ -931,6 +946,7 @@ Using nameplate energy with no allowance for depth of discharge or inverter loss
 /guide-bess-c-rate.html :: BESS C-Rate Explained
 /guide-ups-topologies.html :: UPS Topologies
 /calculators/generator-runtime.html :: Generator Runtime Calculator
+/practice/solar-and-storage.html :: Practice Questions: Solar and Storage
 
 ===pue|pue|PUE Calculator|PUE Calculator (Power Usage Effectiveness)|Calculate data center PUE and DCiE from total facility power and IT power, with the overhead in kW and what it costs over a year. Free, no signup.
 --intro
@@ -962,6 +978,7 @@ Comparing a design PUE at full load with a measured PUE at partial load. Measuri
 /calculators/electricity-cost.html :: Electricity Cost Calculator
 /guide-rack-power-density.html :: Rack Power Density
 /data-centers/cooling.html :: Data Center Cooling Equipment
+/practice/data-center-power-and-cooling.html :: Practice Questions: Data Center Power and Cooling
 
 ===electricity-cost|electricity-cost|Electricity Cost Calculator|Electricity Cost Calculator (kW to Annual Cost)|Work out what a load costs to run: kW, hours per day and the energy rate give kWh and cost per day, month and year. Free, no signup.
 --intro
@@ -1023,6 +1040,7 @@ Using the one-way length for a two-wire circuit. Using copper figures for alumin
 /calculators/ohms-law.html :: Ohm's Law Calculator
 /guide-cable-ampacity-derating.html :: Cable Ampacity Derating
 /calculators/ampacity.html :: Cable Ampacity &amp; Conduit Fill
+/practice/conductors-and-voltage-drop.html :: Practice Questions: Conductors and Voltage Drop
 
 ===dc-ac-ratio|dc-ac-ratio|DC/AC Ratio Calculator|DC/AC Ratio Calculator (Inverter Loading Ratio)|Calculate a solar plant's DC/AC ratio from array DC capacity and inverter AC rating, and see how much the inverter would clip at full output. Free, no signup.
 --intro
@@ -1053,6 +1071,7 @@ Dividing AC by DC and reporting the inverse. Using the interconnection limit in 
 /guide-grid-forming-vs-grid-following.html :: Grid-Forming vs. Grid-Following Inverters
 
 # ---- Nov 11, 2026: mechanical, cooling and motor calculators ----
+/practice/solar-and-storage.html :: Practice Questions: Solar and Storage
 
 ===airflow-cfm|airflow-cfm|Airflow (CFM) Calculator|Airflow CFM Calculator (Heat Load to CFM)|Find the airflow needed to remove a heat load: kW and air temperature rise to CFM, with CFM per kW for server and rack cooling. Free, no signup.
 --intro
@@ -1087,6 +1106,7 @@ Using the room temperature difference in place of the rise across the equipment.
 /guide-liquid-vs-air-cooling.html :: Liquid vs. Air Cooling
 /guide-rack-power-density.html :: Rack Power Density
 /data-centers/cooling.html :: Data Center Cooling Equipment
+/practice/data-center-power-and-cooling.html :: Practice Questions: Data Center Power and Cooling
 
 ===chilled-water-flow|chilled-water-flow|Chilled Water Flow Calculator|Chilled Water Flow Calculator (GPM per Ton)|Calculate chilled water flow in GPM from cooling load in tons or kW and the supply-return temperature difference. Free, no signup.
 --intro
@@ -1121,6 +1141,7 @@ Using 2.4 GPM per ton on a system designed for a wider temperature difference. A
 /guide-crac-vs-crah.html :: CRAC vs. CRAH
 /calculators/airflow-cfm.html :: Airflow (CFM) Calculator
 /data-centers/cooling.html :: Data Center Cooling Equipment
+/practice/data-center-power-and-cooling.html :: Practice Questions: Data Center Power and Cooling
 
 ===pump-power|pump-power|Pump Power Calculator|Pump Power Calculator (GPM and Head to HP)|Calculate pump brake horsepower and motor kW from flow in GPM, head in feet and efficiency, and pick the next standard motor size. Free, no signup.
 --intro
@@ -1252,6 +1273,7 @@ Using synchronous speed in place of full-load speed. Confusing full-load torque 
 /calculators/motor-start.html :: Motor Starting Voltage Dip Calculator
 /guide-nec-430-250-motor-fla.html :: NEC 430.250 Motor Full-Load Current
 /guide-vfd-vs-soft-starter.html :: VFD vs. Soft Starter
+/practice/motors.html :: Practice Questions: Motors
 
 ===motor-speed|motor-speed|Motor Speed &amp; Slip Calculator|Motor Speed Calculator (Synchronous RPM &amp; Slip)|Calculate an AC motor's synchronous speed from frequency and poles, and its slip from the nameplate full-load rpm. Free, no signup.
 --intro
@@ -1286,6 +1308,7 @@ Expecting an induction motor to run at exactly 1,800 or 3,600 rpm. Entering the 
 /guide-vfd-vs-soft-starter.html :: VFD vs. Soft Starter
 /calculators/hp-to-kw.html :: Motor HP to kW Calculator
 /guide-nec-430-250-motor-fla.html :: NEC 430.250 Motor Full-Load Current
+/practice/motors.html :: Practice Questions: Motors
 
 ===voltage-unbalance|voltage-unbalance|Voltage Unbalance Calculator|Voltage Unbalance Calculator (NEMA Method)|Calculate three-phase voltage unbalance from three line-to-line readings by the NEMA method, with the effect on motor heating. Free, no signup.
 --intro

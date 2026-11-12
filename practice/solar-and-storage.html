@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solar &amp; Battery Storage Practice Questions | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/practice/solar-and-storage.html">
+<meta name="description" content="8 solar and storage practice questions with solutions:array capacity, dc/ac ratio, clipping, amp-hours and kwh, c-rate and runtime.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Solar and Storage: Practice Questions">
+<meta property="og:description" content="8 solar and storage practice questions with solutions:array capacity, dc/ac ratio, clipping, amp-hours and kwh, c-rate and runtime.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://voltfield.org/practice/solar-and-storage.html">
+<meta property="og:image" content="https://voltfield.org/social/social-practice-questions.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-practice-questions.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Practice questions","item":"https://voltfield.org/practice-questions.html"},{"@type":"ListItem","position":3,"name":"Solar and Storage","item":"https://voltfield.org/practice/solar-and-storage.html"}]},{"@type":"Quiz","name":"Solar and Storage: Practice Questions","description":"8 solar and storage practice questions with solutions:array capacity, dc/ac ratio, clipping, amp-hours and kwh, c-rate and runtime.","url":"https://voltfield.org/practice/solar-and-storage.html","dateModified":"2026-11-11","inLanguage":"en-US","educationalLevel":"intermediate","learningResourceType":"Practice problem","about":{"@type":"Thing","name":"Solar and Storage"},"publisher":{"@type":"Organization","name":"Voltfield","url":"https://voltfield.org/"},"hasPart":[{"@type":"Question","eduQuestionType":"Multiple choice","text":"An array has 240 modules rated 540 W each. What is its DC capacity?","suggestedAnswer":[{"@type":"Answer","position":0,"text":"1,296.0 kWp"},{"@type":"Answer","position":2,"text":"54.0 kWp"},{"@type":"Answer","position":3,"text":"13.0 kWp"}],"acceptedAnswer":{"@type":"Answer","position":1,"text":"129.6 kWp","answerExplanation":{"@type":"Comment","text":"240 × 540 W = 129,600 W = 129.6 kWp."}}},{"@type":"Question","eduQuestionType":"Multiple choice","text":"That 129.6 kWp array is connected to a 100 kW inverter. What is the DC/AC ratio?","suggestedAnswer":[{"@type":"Answer","position":0,"text":"1.03"},{"@type":"Answer","position":1,"text":"29.60"},{"@type":"Answer","position":2,"text":"0.77"}],"acceptedAnswer":{"@type":"Answer","position":3,"text":"1.30","answerExplanation":{"@type":"Comment","text":"DC/AC ratio = array DC capacity / inverter AC rating = 129.6 / 100 = 1.30. Dividing the other way gives 0.77, the inverse."}}},{"@type":"Question","eduQuestionType":"Multiple choice","text":"What is inverter clipping?","suggestedAnswer":[{"@type":"Answer","position":0,"text":"Damage to the inverter caused by overvoltage."},{"@type":"Answer","position":2,"text":"The inverter shutting down in low light."},{"@type":"Answer","position":3,"text":"Energy lost as heat in the DC cables."}],"acceptedAnswer":{"@type":"Answer","position":1,"text":"The inverter limiting its output to its AC rating when the array could supply more.","answerExplanation":{"@type":"Comment","text":"When the array offers more than the inverter can convert, the inverter moves off the maximum power point and the output flattens at its rating. The energy is never produced; nothing is damaged. It is usually a deliberate consequence of a DC/AC ratio above 1.0."}}},{"@type":"Question","eduQuestionType":"Multiple choice","text":"A battery is rated 100 Ah at a nominal 48 V. What is its nameplate energy?","suggestedAnswer":[{"@type":"Answer","position":0,"text":"2.08 kWh"},{"@type":"Answer","position":1,"text":"0.48 kWh"},{"@type":"Answer","position":2,"text":"48.00 kWh"}],"acceptedAnswer":{"@type":"Answer","position":3,"text":"4.80 kWh","answerExplanation":{"@type":"Comment","text":"kWh = Ah × V / 1,000 = 100 × 48 / 1,000 = 4.80 kWh. Amp-hours cannot be converted to energy without the voltage."}}},{"@type":"Question","eduQuestionType":"Multiple choice","text":"A storage project is rated 100 MW and 400 MWh. What is its C-rate?","suggestedAnswer":[{"@type":"Answer","position":0,"text":"4C"},{"@type":"Answer","position":2,"text":"0.4C"},{"@type":"Answer","position":3,"text":"2.5C"}],"acceptedAnswer":{"@type":"Answer","position":1,"text":"0.25C","answerExplanation":{"@type":"Comment","text":"C-rate is power divided by energy: 100 / 400 = 0.25C. The inverse, four, is the duration in hours, which is how such a project is usually described."}}},{"@type":"Question","eduQuestionType":"Multiple choice","text":"A battery system is discharged at a steady 0.5C. About how long does a full discharge take?","suggestedAnswer":[{"@type":"Answer","position":0,"text":"1 hour"},{"@type":"Answer","position":1,"text":"4 hours"},{"@type":"Answer","position":2,"text":"30 minutes"}],"acceptedAnswer":{"@type":"Answer","position":3,"text":"2 hours","answerExplanation":{"@type":"Comment","text":"Duration in hours is one divided by the C-rate: 1 / 0.5 = 2 hours. At 1C it is one hour, and at 0.25C four."}}},{"@type":"Question","eduQuestionType":"Multiple choice","text":"A 100 Ah, 48 V battery may be discharged to 80 percent depth and feeds a 1,000 W load through an inverter that is 90 percent efficient. Estimate the runtime.","suggestedAnswer":[{"@type":"Answer","position":0,"text":"4.32 hours"},{"@type":"Answer","position":1,"text":"3.84 hours"},{"@type":"Answer","position":2,"text":"4.80 hours"}],"acceptedAnswer":{"@type":"Answer","position":3,"text":"3.46 hours","answerExplanation":{"@type":"Comment","text":"Usable energy = 100 × 48 × 0.80 × 0.90 = 3,456 Wh. Runtime = 3,456 / 1,000 = 3.46 hours. Leaving out the inverter loss gives 3.84, and leaving out the depth of discharge gives 4.32."}}},{"@type":"Question","eduQuestionType":"Multiple choice","text":"A system must deliver 2,000 kWh of usable energy. With a 90 percent depth of discharge and 90 percent round-trip efficiency, what nameplate energy is needed?","suggestedAnswer":[{"@type":"Answer","position":1,"text":"2,222 kWh"},{"@type":"Answer","position":2,"text":"1,620 kWh"},{"@type":"Answer","position":3,"text":"2,000 kWh"}],"acceptedAnswer":{"@type":"Answer","position":0,"text":"2,469 kWh","answerExplanation":{"@type":"Comment","text":"Nameplate = usable / (DoD × efficiency) = 2,000 / (0.90 × 0.90) = 2,469 kWh. Multiplying by the two factors instead of dividing gives a nameplate smaller than the usable energy, which cannot be right."}}}]}]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+<style>
+.pq-bar{position:sticky;top:var(--vf-header-h,64px);z-index:5;display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin:18px 0 8px;padding:10px 14px;
+  background:var(--card);border:1px solid var(--line-dark);border-radius:var(--r-m,8px);font-family:var(--mono);font-size:12px;color:var(--ink-2)}
+.pq-bar b{color:var(--ink)}
+.pq-bar button,.pq button{font:600 11px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:9px 12px;min-height:36px;cursor:pointer;
+  border-radius:var(--r-s,6px);border:1px solid var(--line-dark);background:transparent;color:var(--ink-2)}
+.pq-bar button{margin-left:auto}
+.pq{border:1px solid var(--line);border-radius:var(--r-m,8px);padding:18px 20px 16px;margin:18px 0;background:var(--card)}
+.pq h2{font-size:13px;font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--slate);margin:0 0 8px}
+.pq .pq-stem{font-size:17px;line-height:1.5;color:var(--ink);margin:0 0 12px}
+.pq fieldset{border:0;padding:0;margin:0 0 12px;display:grid;gap:8px}
+.pq legend{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.pq label{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;min-height:44px;border:1px solid var(--line);border-radius:var(--r-s,6px);cursor:pointer;color:var(--ink-2)}
+.pq label:hover{border-color:var(--line-dark)}
+.pq input[type=radio]{margin-top:3px;accent-color:var(--signal)}
+.pq label.is-right{border-color:#2E7D4F;background:rgba(46,125,79,.12);color:var(--ink)}
+.pq label.is-wrong{border-color:#B4452C;background:rgba(180,69,44,.10)}
+.pq .pq-check{background:var(--signal);color:#101B2D;border-color:var(--signal)}
+.pq .pq-fb{font-family:var(--mono);font-size:12.5px;margin:10px 0 0;min-height:1.2em}
+.pq .pq-fb.ok{color:#2E7D4F}.pq .pq-fb.no{color:#B4452C}
+[data-theme="dark"] .pq .pq-fb.ok{color:#7FCC9B}[data-theme="dark"] .pq .pq-fb.no{color:#F0A08C}
+.pq details{margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+.pq summary{cursor:pointer;font-family:var(--mono);font-size:12px;letter-spacing:.03em;color:var(--link)}
+.pq details p{margin:10px 0 0;font-size:15px}
+.pq .pq-ans{font-family:var(--mono);font-size:12.5px;color:var(--slate)}
+@media print{.pq-bar,.pq-check,.ad-unit{display:none!important}.pq details{display:block}.pq details>*{display:block}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Engineering reference &amp; equipment data</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>20 tools, method shown for each</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/practice-questions.html" style="color:var(--slate);text-decoration:none">Practice questions</a> / <span style="color:var(--ink)">Solar and Storage</span></nav>
+    <div class="eyebrow">Practice Questions &middot; 8 With Solutions</div>
+    <h1>Solar and Storage: Practice Questions</h1>
+    <p class="dek">Array capacity, DC/AC ratio, clipping, amp-hours and kWh, C-rate and runtime.</p>
+  </div>
+</section>
+
+<div class="artwrap">
+  <p>Solar and storage sizing is mostly ratios: array to inverter, power to energy, usable to nameplate. Each question gives every figure it needs.</p>
+  <div class="pq-bar" id="pqBar" hidden><span></span><button type="button">Start over</button></div>
+
+  <section class="pq" data-answer="1" aria-labelledby="q1">
+    <h2 id="q1">Question 1</h2>
+    <p class="pq-stem">An array has 240 modules rated 540 W each. What is its DC capacity?</p>
+    <fieldset>
+      <legend>Choices for question 1</legend>
+      <label><input type="radio" name="q1" value="0"><span><b>A.</b> 1,296.0 kWp</span></label>
+      <label><input type="radio" name="q1" value="1"><span><b>B.</b> 129.6 kWp</span></label>
+      <label><input type="radio" name="q1" value="2"><span><b>C.</b> 54.0 kWp</span></label>
+      <label><input type="radio" name="q1" value="3"><span><b>D.</b> 13.0 kWp</span></label>
+    </fieldset>
+    <details>
+      <summary>Show the worked solution</summary>
+      <p class="pq-ans">Answer: B. 129.6 kWp</p>
+      <p>240 &times; 540 W = 129,600 W = <b>129.6 kWp</b>.</p>
+      <p>Related: <a class="inline" href="/calculators/dc-ac-ratio.html">DC/AC Ratio Calculator</a></p>
+    </details>
+  </section>
+
+  <section class="pq" data-answer="3" aria-labelledby="q2">
+    <h2 id="q2">Question 2</h2>
+    <p class="pq-stem">That 129.6 kWp array is connected to a 100 kW inverter. What is the DC/AC ratio?</p>
+    <fieldset>
+      <legend>Choices for question 2</legend>
+      <label><input type="radio" name="q2" value="0"><span><b>A.</b> 1.03</span></label>
+      <label><input type="radio" name="q2" value="1"><span><b>B.</b> 29.60</span></label>
+      <label><input type="radio" name="q2" value="2"><span><b>C.</b> 0.77</span></label>
+      <label><input type="radio" name="q2" value="3"><span><b>D.</b> 1.30</span></label>
+    </fieldset>
+    <details>
+      <summary>Show the worked solution</summary>
+      <p class="pq-ans">Answer: D. 1.30</p>
+      <p>DC/AC ratio = array DC capacity / inverter AC rating = 129.6 / 100 = <b>1.30</b>. Dividing the other way gives 0.77, the inverse.</p>
+      <p>Related: <a class="inline" href="/calculators/dc-ac-ratio.html">DC/AC Ratio Calculator</a></p>
+    </details>
+  </section>
+
+  <section class="pq" data-answer="1" aria-labelledby="q3">
+    <h2 id="q3">Question 3</h2>
+    <p class="pq-stem">What is inverter clipping?</p>
+    <fieldset>
+      <legend>Choices for question 3</legend>
+      <label><input type="radio" name="q3" value="0"><span><b>A.</b> Damage to the inverter caused by overvoltage.</span></label>
+      <label><input type="radio" name="q3" value="1"><span><b>B.</b> The inverter limiting its output to its AC rating when the array could supply more.</span></label>
+      <label><input type="radio" name="q3" value="2"><span><b>C.</b> The inverter shutting down in low light.</span></label>
+      <label><input type="radio" name="q3" value="3"><span><b>D.</b> Energy lost as heat in the DC cables.</span></label>
+    </fieldset>
+    <details>
+      <summary>Show the worked solution</summary>
+      <p class="pq-ans">Answer: B. The inverter limiting its output to its AC rating when the array could supply more.</p>
+      <p>When the array offers more than the inverter can convert, the inverter moves off the maximum power point and the output flattens at its rating. The energy is never produced; nothing is damaged. It is usually a deliberate consequence of a DC/AC ratio above 1.0.</p>
+      <p>Related: <a class="inline" href="/glossary/clipping.html">Glossary: Inverter Clipping</a></p>
+    </details>
+  </section>
+
+  <section class="pq" data-answer="3" aria-labelledby="q4">
+    <h2 id="q4">Question 4</h2>
+    <p class="pq-stem">A battery is rated 100 Ah at a nominal 48 V. What is its nameplate energy?</p>
+    <fieldset>
+      <legend>Choices for question 4</legend>
+      <label><input type="radio" name="q4" value="0"><span><b>A.</b> 2.08 kWh</span></label>
+      <label><input type="radio" name="q4" value="1"><span><b>B.</b> 0.48 kWh</span></label>
+      <label><input type="radio" name="q4" value="2"><span><b>C.</b> 48.00 kWh</span></label>
+      <label><input type="radio" name="q4" value="3"><span><b>D.</b> 4.80 kWh</span></label>
+    </fieldset>
+    <details>
+      <summary>Show the worked solution</summary>
+      <p class="pq-ans">Answer: D. 4.80 kWh</p>
+      <p>kWh = Ah &times; V / 1,000 = 100 &times; 48 / 1,000 = <b>4.80 kWh</b>. Amp-hours cannot be converted to energy without the voltage.</p>
+      <p>Related: <a class="inline" href="/calculators/ah-to-kwh.html">Ah to kWh Calculator</a></p>
+    </details>
+  </section>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <section class="pq" data-answer="1" aria-labelledby="q5">
+    <h2 id="q5">Question 5</h2>
+    <p class="pq-stem">A storage project is rated 100 MW and 400 MWh. What is its C-rate?</p>
+    <fieldset>
+      <legend>Choices for question 5</legend>
+      <label><input type="radio" name="q5" value="0"><span><b>A.</b> 4C</span></label>
+      <label><input type="radio" name="q5" value="1"><span><b>B.</b> 0.25C</span></label>
+      <label><input type="radio" name="q5" value="2"><span><b>C.</b> 0.4C</span></label>
+      <label><input type="radio" name="q5" value="3"><span><b>D.</b> 2.5C</span></label>
+    </fieldset>
+    <details>
+      <summary>Show the worked solution</summary>
+      <p class="pq-ans">Answer: B. 0.25C</p>
+      <p>C-rate is power divided by energy: 100 / 400 = <b>0.25C</b>. The inverse, four, is the duration in hours, which is how such a project is usually described.</p>
+      <p>Related: <a class="inline" href="/glossary/c-rate.html">Glossary: C-Rate</a></p>
+    </details>
+  </section>
+
+  <section class="pq" data-answer="3" aria-labelledby="q6">
+    <h2 id="q6">Question 6</h2>
+    <p class="pq-stem">A battery system is discharged at a steady 0.5C. About how long does a full discharge take?</p>
+    <fieldset>
+      <legend>Choices for question 6</legend>
+      <label><input type="radio" name="q6" value="0"><span><b>A.</b> 1 hour</span></label>
+      <label><input type="radio" name="q6" value="1"><span><b>B.</b> 4 hours</span></label>
+      <label><input type="radio" name="q6" value="2"><span><b>C.</b> 30 minutes</span></label>
+      <label><input type="radio" name="q6" value="3"><span><b>D.</b> 2 hours</span></label>
+    </fieldset>
+    <details>
+      <summary>Show the worked solution</summary>
+      <p class="pq-ans">Answer: D. 2 hours</p>
+      <p>Duration in hours is one divided by the C-rate: 1 / 0.5 = <b>2 hours</b>. At 1C it is one hour, and at 0.25C four.</p>
+      <p>Related: <a class="inline" href="/guide-bess-c-rate.html">BESS C-Rate Explained</a></p>
+    </details>
+  </section>
+
+  <section class="pq" data-answer="3" aria-labelledby="q7">
+    <h2 id="q7">Question 7</h2>
+    <p class="pq-stem">A 100 Ah, 48 V battery may be discharged to 80 percent depth and feeds a 1,000 W load through an inverter that is 90 percent efficient. Estimate the runtime.</p>
+    <fieldset>
+      <legend>Choices for question 7</legend>
+      <label><input type="radio" name="q7" value="0"><span><b>A.</b> 4.32 hours</span></label>
+      <label><input type="radio" name="q7" value="1"><span><b>B.</b> 3.84 hours</span></label>
+      <label><input type="radio" name="q7" value="2"><span><b>C.</b> 4.80 hours</span></label>
+      <label><input type="radio" name="q7" value="3"><span><b>D.</b> 3.46 hours</span></label>
+    </fieldset>
+    <details>
+      <summary>Show the worked solution</summary>
+      <p class="pq-ans">Answer: D. 3.46 hours</p>
+      <p>Usable energy = 100 &times; 48 &times; 0.80 &times; 0.90 = 3,456 Wh. Runtime = 3,456 / 1,000 = <b>3.46 hours</b>. Leaving out the inverter loss gives 3.84, and leaving out the depth of discharge gives 4.32.</p>
+      <p>Related: <a class="inline" href="/calculators/battery-runtime.html">Battery Runtime Calculator</a></p>
+    </details>
+  </section>
+
+  <section class="pq" data-answer="0" aria-labelledby="q8">
+    <h2 id="q8">Question 8</h2>
+    <p class="pq-stem">A system must deliver 2,000 kWh of usable energy. With a 90 percent depth of discharge and 90 percent round-trip efficiency, what nameplate energy is needed?</p>
+    <fieldset>
+      <legend>Choices for question 8</legend>
+      <label><input type="radio" name="q8" value="0"><span><b>A.</b> 2,469 kWh</span></label>
+      <label><input type="radio" name="q8" value="1"><span><b>B.</b> 2,222 kWh</span></label>
+      <label><input type="radio" name="q8" value="2"><span><b>C.</b> 1,620 kWh</span></label>
+      <label><input type="radio" name="q8" value="3"><span><b>D.</b> 2,000 kWh</span></label>
+    </fieldset>
+    <details>
+      <summary>Show the worked solution</summary>
+      <p class="pq-ans">Answer: A. 2,469 kWh</p>
+      <p>Nameplate = usable / (DoD &times; efficiency) = 2,000 / (0.90 &times; 0.90) = <b>2,469 kWh</b>. Multiplying by the two factors instead of dividing gives a nameplate smaller than the usable energy, which cannot be right.</p>
+      <p>Related: <a class="inline" href="/calculators/bess-sizing.html">BESS Sizing Calculator</a></p>
+    </details>
+  </section>
+
+  <h2>Keep going</h2>
+    <div class="rel">
+      <a href="/practice/ohms-law-and-power.html">Next set: Ohm's Law and Power</a>
+      <a href="/practice-questions.html">All practice questions</a>
+      <a href="/engineering-calculators.html">Calculators</a>
+      <a href="/reference-charts.html">Reference charts</a>
+    </div>
+
+  <aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>8 multiple-choice questions on solar and storage, each with a worked solution and a link to the calculator or guide it draws on.</dd>
+      <dt>What it is not</dt>
+      <dd>An official examination, or questions taken from one. These are original questions for study and self-testing. They are not affiliated with any licensing body, and passing them is not evidence of competence to do electrical work.</dd>
+      <dt>Provenance</dt>
+      <dd>Last reviewed November 11, 2026. Written by the Voltfield editorial team. Every numerical answer is computed from the formula shown in its solution, and the wrong choices are computed from specific common mistakes. If you can show an answer is wrong, the <a class="inline" href="/contact.html">contact page</a> says how to report it.</dd>
+    </dl>
+  </aside>
+
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h4>Voltfield</h4>
+      <p>An independent engineering reference for electrical power equipment in data centers, solar and battery storage. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h4>Sectors</h4><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+    </ul></div>
+    <div><h4>Compliance</h4><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="/voltfield-site-config.js"></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+<script>
+/* Answer checking and a running score. The questions, choices and solutions are
+   all in the page already; without this script the reader opens each solution
+   to see the answer. Progress is kept in this browser only. */
+(function(){
+  var qs=[].slice.call(document.querySelectorAll('.pq')); if(!qs.length)return;
+  var key='vf_pq_'+location.pathname, bar=document.getElementById('pqBar'), state={};
+  try{state=JSON.parse(localStorage.getItem(key)||'{}')||{};}catch(e){state={};}
+  function score(){
+    var done=0,right=0;
+    qs.forEach(function(q,i){if(state[i]!=null){done++;if(String(state[i])===q.getAttribute('data-answer'))right++;}});
+    if(bar)bar.querySelector('span').innerHTML='<b>'+done+'</b> of '+qs.length+' answered &middot; <b>'+right+'</b> correct';
+    return {done:done,right:right};
+  }
+  function mark(q,i,pick,announce){
+    var ans=q.getAttribute('data-answer'), fb=q.querySelector('.pq-fb'), ok=String(pick)===ans;
+    q.querySelectorAll('label').forEach(function(l){
+      var v=l.querySelector('input').value; l.classList.remove('is-right','is-wrong');
+      if(v===ans)l.classList.add('is-right'); else if(v===String(pick))l.classList.add('is-wrong');
+    });
+    q.querySelectorAll('input').forEach(function(r){r.checked=r.value===String(pick);});
+    fb.className='pq-fb '+(ok?'ok':'no');
+    fb.textContent=ok?'Correct.':'Not quite. The answer is '+'ABCD'.charAt(+ans)+'. The worked solution is below.';
+    if(!ok||announce)q.querySelector('details').open=true;
+  }
+  qs.forEach(function(q,i){
+    var btn=document.createElement('button');btn.type='button';btn.className='pq-check';btn.textContent='Check answer';
+    var fb=document.createElement('p');fb.className='pq-fb';fb.setAttribute('role','status');fb.setAttribute('aria-live','polite');
+    var det=q.querySelector('details');q.insertBefore(btn,det);q.insertBefore(fb,det);
+    btn.addEventListener('click',function(){
+      var c=q.querySelector('input:checked');
+      if(!c){fb.className='pq-fb';fb.textContent='Choose an answer first.';return;}
+      state[i]=+c.value;try{localStorage.setItem(key,JSON.stringify(state));}catch(e){}
+      mark(q,i,state[i],false);
+      var s=score();
+      if(window.vfGtag){window.vfGtag('event','practice_answer',{page:location.pathname,q:i+1,correct:String(state[i])===q.getAttribute('data-answer')});
+        if(s.done===qs.length)window.vfGtag('event','practice_complete',{page:location.pathname,score:s.right});}
+    });
+    if(state[i]!=null)mark(q,i,state[i],false);
+  });
+  if(bar){
+    bar.hidden=false;
+    bar.querySelector('button').addEventListener('click',function(){
+      state={};try{localStorage.removeItem(key);}catch(e){}
+      qs.forEach(function(q){
+        q.querySelectorAll('label').forEach(function(l){l.classList.remove('is-right','is-wrong');});
+        q.querySelectorAll('input').forEach(function(r){r.checked=false;});
+        var fb=q.querySelector('.pq-fb');fb.className='pq-fb';fb.textContent='';q.querySelector('details').open=false;
+      });
+      score();window.scrollTo({top:0,behavior:'smooth'});
+    });
+  }
+  score();
+})();
+</script>
+</body>
+</html>

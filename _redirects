@@ -234,6 +234,14 @@
 /glossary/soc-soh                    /glossary/soc-soh.html 301!
 /glossary/ul-9540a                   /glossary/ul-9540a.html 301!
 /glossary/vector-group               /glossary/vector-group.html 301!
+/practice/ohms-law-and-power         /practice/ohms-law-and-power.html 301!
+/practice/three-phase-and-power-factor /practice/three-phase-and-power-factor.html 301!
+/practice/conductors-and-voltage-drop /practice/conductors-and-voltage-drop.html 301!
+/practice/overcurrent-protection     /practice/overcurrent-protection.html 301!
+/practice/transformers               /practice/transformers.html 301!
+/practice/motors                     /practice/motors.html 301!
+/practice/data-center-power-and-cooling /practice/data-center-power-and-cooling.html 301!
+/practice/solar-and-storage          /practice/solar-and-storage.html 301!
 # ---- END generated ----
 
 # ---- directory and new-page aliases (hand-kept) ----
@@ -243,6 +251,9 @@
 /calculators                        /engineering-calculators.html           301!
 /calculators/                       /engineering-calculators.html           301!
 /glossary/                          /glossary.html                          301!
+/practice                           /practice-questions.html                301!
+/practice/                          /practice-questions.html                301!
+/practice-questions                 /practice-questions.html                301!
 /charts                             /reference-charts.html                  301!
 /charts/                            /reference-charts.html                  301!
 /reference-charts                   /reference-charts.html                  301!

@@ -1,0 +1,50 @@
+[
+ {
+  "slug": "ohms-law-and-power",
+  "name": "Ohm's Law and Power",
+  "blurb": "Voltage, current, resistance, power and energy on DC and resistive AC circuits.",
+  "n": 8
+ },
+ {
+  "slug": "three-phase-and-power-factor",
+  "name": "Three-Phase Power and Power Factor",
+  "blurb": "Line current, kVA, kW, kvar, power factor correction and the square root of three.",
+  "n": 8
+ },
+ {
+  "slug": "conductors-and-voltage-drop",
+  "name": "Conductors and Voltage Drop",
+  "blurb": "Circular mils, resistance, voltage drop by the K-factor method and the 125 percent rule.",
+  "n": 8
+ },
+ {
+  "slug": "overcurrent-protection",
+  "name": "Overcurrent Protection",
+  "blurb": "Continuous loads, the 125 percent rule, standard ratings, interrupting rating and SCCR.",
+  "n": 8
+ },
+ {
+  "slug": "transformers",
+  "name": "Transformers",
+  "blurb": "Full-load current, impedance and fault current, sizing from load, and nameplate terms.",
+  "n": 8
+ },
+ {
+  "slug": "motors",
+  "name": "Motors",
+  "blurb": "Synchronous speed, slip, torque, horsepower and kW, voltage unbalance and the affinity laws.",
+  "n": 8
+ },
+ {
+  "slug": "data-center-power-and-cooling",
+  "name": "Data Center Power and Cooling",
+  "blurb": "PUE, redundancy, cooling load in tons, airflow per kW and chilled water flow.",
+  "n": 8
+ },
+ {
+  "slug": "solar-and-storage",
+  "name": "Solar and Storage",
+  "blurb": "Array capacity, DC/AC ratio, clipping, amp-hours and kWh, C-rate and runtime.",
+  "n": 8
+ }
+]
