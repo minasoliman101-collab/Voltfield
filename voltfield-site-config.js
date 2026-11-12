@@ -210,10 +210,28 @@ const SITE_CONFIG = {
 (function () {
   const A = SITE_CONFIG.analytics;
   if (!A || A.provider !== 'ga4' || !A.measurementId) return;
-  const s = document.createElement('script');
-  s.async = true;
-  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(A.measurementId);
-  document.head.appendChild(s);
+  /* The tag is the largest download on every page (about 190 KB), and injected
+     from the head it competed with the stylesheet and the fonts for the
+     connection and with first paint for the main thread. Nothing is lost by
+     waiting: the calls below queue in dataLayer with their own timestamp and
+     are sent when the tag arrives. So it is fetched once the page has loaded,
+     or after four seconds if load is slow, or on the way out if the reader
+     leaves first. */
+  let injected = false;
+  function inject() {
+    if (injected) return;
+    injected = true;
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(A.measurementId);
+    document.head.appendChild(s);
+  }
+  if (document.readyState === 'complete') setTimeout(inject, 0);
+  else {
+    window.addEventListener('load', function () { setTimeout(inject, 0); });
+    setTimeout(inject, 4000);
+    document.addEventListener('visibilitychange', function () { if (document.hidden) inject(); });
+  }
   window.dataLayer = window.dataLayer || [];
   function gtag() { window.dataLayer.push(arguments); }
   gtag('js', new Date());

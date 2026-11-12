@@ -161,3 +161,10 @@
 # but not immutable -- regenerating one reuses its filename.
 /images/tools/*
   Cache-Control: public, max-age=604800
+
+# PDF copies of the reference charts, printed from the chart pages by
+# scripts/gen-chart-pdfs.mjs. Kept out of search: the page is the thing to
+# rank, and a reader who lands on a bare PDF has no way back to the site.
+/charts/pdf/*
+  Cache-Control: public, max-age=86400
+  X-Robots-Tag: noindex

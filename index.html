@@ -906,18 +906,47 @@ footer .foot-brand b{font-size:18px;color:#fff;font-weight:600;letter-spacing:-.
   var conn=navigator.connection||{};
   if(conn.saveData||/2g/.test(conn.effectiveType||'')) return;
 
+  /* Fetch without running. A preload puts the two files in the cache and lets
+     the browser compile the module off the main thread; nothing executes until
+     load() below. */
+  function warm(){
+    [['modulepreload','/vendor/three/build/three.module.min.js'],['preload','voltfield-3d.js']].forEach(function(p){
+      var l=document.createElement('link');
+      l.rel=p[0]; l.href=p[1];
+      if(p[0]==='preload') l.as='script';
+      document.head.appendChild(l);
+    });
+  }
+
   function whenVisible(){
     if(!('IntersectionObserver' in window)){ setTimeout(load,200); return; }
-    /* A viewport of lead time. At rootMargin 0 the fetch only started once the
-       stage was already on screen, so the reader watched the placeholder for as
-       long as 1.4MB of module took to arrive and compile. Starting a screen
-       early costs the reader who never scrolls that far nothing at all, which
-       is the whole point of the gate. */
+    /* Two gates, because fetching and running cost different things.
+
+       FETCH a viewport early, so the files are already here when the stage
+       arrives. That costs the reader who never scrolls that far some data and
+       no time.
+
+       RUN only when part of the stage is really on screen. Building the model
+       and compiling its shaders holds the main thread for about two seconds on
+       a mid-range phone (measured: 2.1 s of blocking, the whole of this page's
+       total). With one gate at 800px that work started straight after load on
+       every phone, because the stage sits just under the first screen there,
+       so the reader who was only reading the headline, or reaching for the
+       search box, got a page that would not respond to a tap. Now it happens
+       when they scroll to it, and the placeholder holds the space until then. */
+    var pre=new IntersectionObserver(function(entries){
+      if(!entries[entries.length-1].isIntersecting) return;
+      pre.disconnect();
+      warm();
+    },{rootMargin:'800px 0px'});
+    pre.observe(stage);
     var io=new IntersectionObserver(function(entries){
       if(!entries[entries.length-1].isIntersecting) return;
       io.disconnect();
-      load();
-    },{rootMargin:'800px 0px'});
+      /* off the back of the scroll that brought it here, not in the middle of it */
+      if('requestIdleCallback' in window) requestIdleCallback(load,{timeout:600});
+      else setTimeout(load,60);
+    },{threshold:0.15});
     io.observe(stage);
   }
 

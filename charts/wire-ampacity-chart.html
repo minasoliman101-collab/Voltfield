@@ -54,12 +54,46 @@
 .charttbl tbody td{color:var(--ink-2)}
 .charttbl tbody tr:hover td,.charttbl tbody tr:hover th{background:var(--sunk)}
 .chartcap{font-size:13.5px;color:var(--slate);margin:6px 0 22px}
+.chart-actions a.chart-pdf{display:inline-flex;align-items:center;font:600 12px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:10px 14px;min-height:40px;
+  background:var(--card);color:var(--ink);border:1px solid var(--line-dark);border-radius:var(--r-s,6px);text-decoration:none}
+.chart-actions a.chart-pdf:hover{border-color:var(--signal)}
+.chart-actions a.chart-pdf[hidden]{display:none}
+.print-head,.print-foot{display:none}
+/* The printed sheet, which is also what the PDF downloads are made from
+   (scripts/gen-chart-pdfs.mjs prints these pages). It is a reference sheet,
+   not the web page on paper: the title, the tables, how the figures were
+   arrived at and where it came from. The explanation, the questions and the
+   links stay on the site, and the sheet says where that is. */
+@page{size:letter portrait;margin:12mm 11mm 13mm}
 @media print{
-  header.site,footer,.chart-actions,.ad-unit,.rel,.provenance,.skip-link,.totop,#themeToggle{display:none!important}
-  .chartwrap{overflow:visible;border:0}
-  .charttbl{font-size:10.5pt}.charttbl th,.charttbl td{padding:4px 8px;white-space:normal}
-  .charttbl thead th,.charttbl tbody th{position:static}
-  body{background:#fff!important;color:#000!important}
+  header.site,footer,.chart-actions,.ad-unit,.rel,.provenance,.skip-link,.totop,.crumbnav,.eyebrow,.web-only,#themeToggle,#unitsToggle{display:none!important}
+  html,body{background:#fff!important}
+  /* html[data-theme] so these outrank the dark theme, which sets its panel
+     colours with !important: a sheet printed from a dark screen is still black on white */
+  html[data-theme] main *,main *{color:#000!important;background:transparent!important;box-shadow:none!important}
+  html[data-theme] main .formula,html[data-theme] main .callout,html[data-theme] main .formula *,html[data-theme] main .callout *{color:#000!important;background:#fff!important}
+  .artban{padding:0!important;border:0!important;margin:0!important}
+  .artban-in,.artwrap{max-width:none!important;padding:0!important;margin:0!important}
+  .print-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1.5pt solid #000;padding-bottom:3pt;margin-bottom:8pt;font:700 10pt/1.2 var(--mono);letter-spacing:.06em}
+  .print-head span{font-weight:400;letter-spacing:0;font-size:8.5pt}
+  h1{font-size:19pt!important;line-height:1.15!important;margin:0 0 3pt!important}
+  .dek{font-size:9.5pt!important;margin:0 0 6pt!important;max-width:none!important}
+  .artwrap>p{font-size:9pt;line-height:1.4;margin:0 0 6pt}
+  h2{font-size:11.5pt!important;margin:10pt 0 3pt!important;break-after:avoid;page-break-after:avoid}
+  .chartwrap{overflow:visible;border:0;margin:0}
+  .charttbl{font-size:8.5pt;border:.5pt solid #999}
+  .charttbl th,.charttbl td{padding:2.2pt 6pt;white-space:nowrap;border-bottom:.5pt solid #bbb}
+  .charttbl thead{display:table-header-group}
+  html[data-theme] .charttbl thead th,.charttbl thead th{position:static;background:#e6e6e6!important;font-size:7.5pt;border-bottom:.75pt solid #000;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .charttbl tbody th{position:static}
+  html[data-theme] .charttbl tbody tr:nth-child(even) th,html[data-theme] .charttbl tbody tr:nth-child(even) td{background:#f3f3f3!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .charttbl tr{break-inside:avoid;page-break-inside:avoid}
+  .chartcap{font-size:8pt!important;margin:3pt 0 0!important}
+  .formula{font-size:8.5pt!important;padding:5pt 8pt!important;border:.5pt solid #999!important;margin:3pt 0!important;break-inside:avoid}
+  .callout{font-size:8pt!important;padding:5pt 8pt!important;border:.5pt solid #999!important;margin:6pt 0!important;break-inside:avoid}
+  .vf-conv{white-space:normal}
+  .print-foot{display:block;margin-top:9pt;padding-top:4pt;border-top:.5pt solid #000;font-size:7.5pt!important;line-height:1.35}
+  a{text-decoration:none!important}
 }
 </style>
 </head>
@@ -115,6 +149,7 @@
   <div class="artban-in">
     <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/reference-charts.html" style="color:var(--slate);text-decoration:none">Reference charts</a> / <span style="color:var(--ink)">Wire Ampacity Chart</span></nav>
     <div class="eyebrow">Reference Chart &middot; Free to Print</div>
+    <div class="print-head" aria-hidden="true">VOLTFIELD <span>voltfield.org/charts/wire-ampacity-chart.html</span></div>
     <h1>Wire Ampacity Chart</h1>
     <p class="dek">Allowable ampacity for copper and aluminum conductors at the three insulation temperature ratings, and the factors that reduce it.</p>
   </div>
@@ -124,6 +159,7 @@
   <p><b>Ampacity is the current a conductor can carry continuously without exceeding its temperature rating, and it depends on the insulation rating as much as on the wire size.</b> A 6 AWG copper conductor is good for 55 A at 60&deg;C, 65 A at 75&deg;C and 75 A at 90&deg;C. Those figures hold for not more than three current-carrying conductors together at an ambient of 30&deg;C (86&deg;F). Anything hotter or more crowded reduces them.</p>
   <div class="chart-actions">
     <button type="button" data-chart-print>Print this chart</button>
+    <a class="chart-pdf" data-chart-pdf="wire-ampacity-chart" href="/charts/pdf/voltfield-wire-ampacity-chart.pdf" download>Download PDF</a>
     <button type="button" data-chart-csv="wire-ampacity-chart">Download as CSV</button>
   </div>
 
@@ -218,11 +254,13 @@
 
   <div class="ad-unit" data-ad="incontent"></div>
 
+  <div class="web-only">
   <h2>How to read it</h2>
   <p>Find the wire size and read across to the column for the temperature rating that governs. That is usually not the insulation rating. Equipment terminals are rated 60&deg;C or 75&deg;C, and the conductor must not carry more than its ampacity in the column matching the lowest-rated termination. In general, circuits of 100 A or less use the 60&deg;C column unless the equipment is marked for 75&deg;C, and larger circuits use 75&deg;C.</p>
   <p>A 90&deg;C conductor earns its higher figure in a different way. Its 90&deg;C ampacity is the starting point for the correction factors, so it absorbs a hot ambient or a crowded raceway better. Take 4 AWG copper with 90&deg;C insulation at 40&deg;C ambient with six current-carrying conductors: 95 &times; 0.91 &times; 0.80 = 69.2 A, which is then compared with the 85 A the 75&deg;C termination column allows. The smaller figure, 69.2 A, is the ampacity.</p>
   <p>The smallest sizes have a further limit that the table does not show. Whatever their ampacity, the overcurrent device is generally limited to 15 A for 14 AWG copper, 20 A for 12 AWG and 30 A for 10 AWG.</p>
   <p>A continuous load is taken at 125 percent before any of this, so a conductor for an 80 A continuous load needs an ampacity of 100 A.</p>
+  </div>
 
   <h2>Where the values come from</h2>
   <p>The ampacities correspond to NEC Table 310.16, the ambient correction factors to Table 310.15(B)(1), and the adjustment factors to Table 310.15(C)(1). They are reproduced here for reference and are not computed by Voltfield. Editions of the code differ, table numbers have changed between editions, and local amendments apply, so check any value you intend to rely on against the edition your jurisdiction has adopted.</p>
@@ -231,7 +269,9 @@
   <h2>What this chart does not tell you</h2>
   <p>The chart covers conductors in a raceway, cable or directly buried, up to 500 kcmil. It does not cover conductors in free air, which carry more; cables in tray, flexible cords, or conductors rated above 2,000 V, which have their own tables; or the rooftop and other special conditions the code treats separately. It does not tell you the overcurrent device, and it does not check voltage drop, which on a long run sets the size before ampacity does.</p>
     <div class="callout"><b>This is a reference, not a design.</b> It is here to give you the right order of magnitude and a figure to check against. It does not replace the adopted code or a calculation by a qualified engineer.</div>
+  <p class="print-foot">From voltfield.org/charts/wire-ampacity-chart.html, where the notes on reading this chart and a calculator for other cases are. Reviewed November 11, 2026. Free to print, copy and share.</p>
 
+  <div class="web-only">
   <h2>Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
     <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What size wire do I need for 100 amps?</summary>
@@ -260,6 +300,7 @@
       <a href="/glossary/ampacity.html">Glossary: Ampacity</a>
       <a href="/reference-charts.html">All reference charts</a>
     </div>
+  </div>
 
   <aside class="provenance" aria-labelledby="prov-h">
     <h2 id="prov-h">Scope &amp; sources</h2>
@@ -336,6 +377,9 @@
   }
   var p=document.querySelector('[data-chart-print]');
   if(p)p.addEventListener('click',function(){window.print();});
+  [].forEach.call(document.querySelectorAll('[data-chart-pdf]'),function(a){
+    a.addEventListener('click',function(){if(window.vfGtag)window.vfGtag('event','chart_pdf',{chart:a.getAttribute('data-chart-pdf')});});
+  });
   var c=document.querySelector('[data-chart-csv]');
   if(c)c.addEventListener('click',function(){
     var out=[];

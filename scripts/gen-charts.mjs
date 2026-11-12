@@ -500,12 +500,46 @@ const STYLE = `<style>
 .charttbl tbody td{color:var(--ink-2)}
 .charttbl tbody tr:hover td,.charttbl tbody tr:hover th{background:var(--sunk)}
 .chartcap{font-size:13.5px;color:var(--slate);margin:6px 0 22px}
+.chart-actions a.chart-pdf{display:inline-flex;align-items:center;font:600 12px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:10px 14px;min-height:40px;
+  background:var(--card);color:var(--ink);border:1px solid var(--line-dark);border-radius:var(--r-s,6px);text-decoration:none}
+.chart-actions a.chart-pdf:hover{border-color:var(--signal)}
+.chart-actions a.chart-pdf[hidden]{display:none}
+.print-head,.print-foot{display:none}
+/* The printed sheet, which is also what the PDF downloads are made from
+   (scripts/gen-chart-pdfs.mjs prints these pages). It is a reference sheet,
+   not the web page on paper: the title, the tables, how the figures were
+   arrived at and where it came from. The explanation, the questions and the
+   links stay on the site, and the sheet says where that is. */
+@page{size:letter portrait;margin:12mm 11mm 13mm}
 @media print{
-  header.site,footer,.chart-actions,.ad-unit,.rel,.provenance,.skip-link,.totop,#themeToggle{display:none!important}
-  .chartwrap{overflow:visible;border:0}
-  .charttbl{font-size:10.5pt}.charttbl th,.charttbl td{padding:4px 8px;white-space:normal}
-  .charttbl thead th,.charttbl tbody th{position:static}
-  body{background:#fff!important;color:#000!important}
+  header.site,footer,.chart-actions,.ad-unit,.rel,.provenance,.skip-link,.totop,.crumbnav,.eyebrow,.web-only,#themeToggle,#unitsToggle{display:none!important}
+  html,body{background:#fff!important}
+  /* html[data-theme] so these outrank the dark theme, which sets its panel
+     colours with !important: a sheet printed from a dark screen is still black on white */
+  html[data-theme] main *,main *{color:#000!important;background:transparent!important;box-shadow:none!important}
+  html[data-theme] main .formula,html[data-theme] main .callout,html[data-theme] main .formula *,html[data-theme] main .callout *{color:#000!important;background:#fff!important}
+  .artban{padding:0!important;border:0!important;margin:0!important}
+  .artban-in,.artwrap{max-width:none!important;padding:0!important;margin:0!important}
+  .print-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1.5pt solid #000;padding-bottom:3pt;margin-bottom:8pt;font:700 10pt/1.2 var(--mono);letter-spacing:.06em}
+  .print-head span{font-weight:400;letter-spacing:0;font-size:8.5pt}
+  h1{font-size:19pt!important;line-height:1.15!important;margin:0 0 3pt!important}
+  .dek{font-size:9.5pt!important;margin:0 0 6pt!important;max-width:none!important}
+  .artwrap>p{font-size:9pt;line-height:1.4;margin:0 0 6pt}
+  h2{font-size:11.5pt!important;margin:10pt 0 3pt!important;break-after:avoid;page-break-after:avoid}
+  .chartwrap{overflow:visible;border:0;margin:0}
+  .charttbl{font-size:8.5pt;border:.5pt solid #999}
+  .charttbl th,.charttbl td{padding:2.2pt 6pt;white-space:nowrap;border-bottom:.5pt solid #bbb}
+  .charttbl thead{display:table-header-group}
+  html[data-theme] .charttbl thead th,.charttbl thead th{position:static;background:#e6e6e6!important;font-size:7.5pt;border-bottom:.75pt solid #000;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .charttbl tbody th{position:static}
+  html[data-theme] .charttbl tbody tr:nth-child(even) th,html[data-theme] .charttbl tbody tr:nth-child(even) td{background:#f3f3f3!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .charttbl tr{break-inside:avoid;page-break-inside:avoid}
+  .chartcap{font-size:8pt!important;margin:3pt 0 0!important}
+  .formula{font-size:8.5pt!important;padding:5pt 8pt!important;border:.5pt solid #999!important;margin:3pt 0!important;break-inside:avoid}
+  .callout{font-size:8pt!important;padding:5pt 8pt!important;border:.5pt solid #999!important;margin:6pt 0!important;break-inside:avoid}
+  .vf-conv{white-space:normal}
+  .print-foot{display:block;margin-top:9pt;padding-top:4pt;border-top:.5pt solid #000;font-size:7.5pt!important;line-height:1.35}
+  a{text-decoration:none!important}
 }
 </style>`;
 
@@ -544,6 +578,7 @@ function mainHTML(c, tables) {
   <div class="artban-in">
     <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/reference-charts.html" style="color:var(--slate);text-decoration:none">Reference charts</a> / <span style="color:var(--ink)">${c.h1}</span></nav>
     <div class="eyebrow">Reference Chart &middot; Free to Print</div>
+    <div class="print-head" aria-hidden="true">VOLTFIELD <span>voltfield.org/charts/${c.slug}.html</span></div>
     <h1>${c.h1}</h1>
     <p class="dek">${c.dek}</p>
   </div>
@@ -554,17 +589,21 @@ ${c.leadM ? `  <p data-units="us">${c.lead}</p>
   <p data-units="metric" hidden>${c.leadM}</p>` : `  <p>${c.lead}</p>`}
   <div class="chart-actions">
     <button type="button" data-chart-print>Print this chart</button>
+${tables.some(t => t.metric) ? `    <a class="chart-pdf" data-units="us" data-chart-pdf="${c.slug}" href="/charts/pdf/voltfield-${c.slug}.pdf" download>Download PDF</a>
+    <a class="chart-pdf" data-units="metric" data-chart-pdf="${c.slug}-metric" href="/charts/pdf/voltfield-${c.slug}-metric.pdf" download hidden>Download PDF</a>` : `    <a class="chart-pdf" data-chart-pdf="${c.slug}" href="/charts/pdf/voltfield-${c.slug}.pdf" download>Download PDF</a>`}
     <button type="button" data-chart-csv="${c.slug}">Download as CSV</button>${tables.some(t => t.metric) ? `
     <span class="chart-units" role="group" aria-label="Units" hidden><button type="button" data-units-btn="us" aria-pressed="true">US</button><button type="button" data-units-btn="metric" aria-pressed="false">Metric</button></span>` : ''}
   </div>${tables.some(t => t.metric) ? `
-  <p class="chartcap" data-units="metric" hidden>${c.leadM || c.formulaM ? 'Metric tables are shown. The questions and answers further down the page are in US units.' : 'Metric tables are shown. The text further down the page is in US units.'}</p>` : ''}
+  <p class="chartcap web-only" data-units="metric" hidden>${c.leadM || c.formulaM ? 'Metric tables are shown. The questions and answers further down the page are in US units.' : 'Metric tables are shown. The text further down the page is in US units.'}</p>` : ''}
 
 ${tables.map(tableHTML).join('\n\n')}
 
   <div class="ad-unit" data-ad="incontent"></div>
 
+  <div class="web-only">
   <h2>How to read it</h2>
 ${c.how.map(p => `  <p>${p}</p>`).join('\n')}
+  </div>
 
   <h2>${c.calcTitle || 'How the values are calculated'}</h2>
 ${c.codeTable ? `  <p>${c.source}</p>
@@ -575,7 +614,9 @@ ${c.codeTable ? `  <p>${c.source}</p>
   <h2>What this chart does not tell you</h2>
   <p>${c.limits}</p>
     <div class="callout"><b>This is a reference, not a design.</b> It is here to give you the right order of magnitude and a figure to check against. It does not replace the adopted code or a calculation by a qualified engineer.</div>
+  <p class="print-foot">From voltfield.org/charts/${c.slug}.html, where the notes on reading this chart and a calculator for other cases are. Reviewed ${DATE_LONG}. Free to print, copy and share.</p>
 
+  <div class="web-only">
   <h2>Frequently asked questions</h2>
 ${faq}
 
@@ -584,6 +625,7 @@ ${faq}
 ${c.related.map(([h, t]) => `      <a href="${up(h)}">${t}</a>`).join('\n')}
       <a href="/reference-charts.html">All reference charts</a>
     </div>
+  </div>
 
   <aside class="provenance" aria-labelledby="prov-h">
     <h2 id="prov-h">Scope &amp; sources</h2>
@@ -636,6 +678,9 @@ const SCRIPT = `<script>
   }
   var p=document.querySelector('[data-chart-print]');
   if(p)p.addEventListener('click',function(){window.print();});
+  [].forEach.call(document.querySelectorAll('[data-chart-pdf]'),function(a){
+    a.addEventListener('click',function(){if(window.vfGtag)window.vfGtag('event','chart_pdf',{chart:a.getAttribute('data-chart-pdf')});});
+  });
   var c=document.querySelector('[data-chart-csv]');
   if(c)c.addEventListener('click',function(){
     var out=[];
@@ -733,7 +778,7 @@ ${cards}
   <p>Four of the charts also come in metric: voltage drop, wire sizes, cooling load and motor current. Each has a US / Metric switch beside its print button, and the choice is remembered and shared with the calculators. The rest have no unit to switch, because amps, volts and kilowatts are the same in both systems.</p>
 
   <h2>Using and sharing these charts</h2>
-  <p>Print them, download the data as CSV, and link to them freely. If you reproduce a chart, a link back to the page is appreciated. If you find a figure you can show is wrong, the ${L('contact.html', 'contact page')} says how to report it.</p>
+  <p>Print them, download each one as a PDF or its data as CSV, and link to them freely. If you reproduce a chart, a link back to the page is appreciated. If you find a figure you can show is wrong, the ${L('contact.html', 'contact page')} says how to report it.</p>
 </div>
 <div class="ad-unit" data-ad="footer"></div>
 </main>`;
