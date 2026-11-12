@@ -83,6 +83,13 @@
   Cache-Control: public, max-age=1800, stale-while-revalidate=3600
   Access-Control-Allow-Origin: *
 
+# The embeddable calculators. Other sites load this script, and through it the
+# site's own stylesheet and calculator code, so an hour is as long as a fix
+# should take to reach them.
+/embed/calculator-widget.js
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Access-Control-Allow-Origin: *
+
 /embed/lead-time-widget.js
   Cache-Control: public, max-age=3600, stale-while-revalidate=86400
   Access-Control-Allow-Origin: *

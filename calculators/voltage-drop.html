@@ -206,14 +206,16 @@
     <p style="margin-top:10px">3% of 480 V is 14.4 V, and 3% of 120 V is 3.6 V. The 5% totals are 24 V and 6 V.</p>
   </details>
 
-  <h2>Embed this calculator</h2>
-  <p>Writing about this, or teaching it? Paste the snippet below into any web page to add a working copy of the calculator above. It is free, runs entirely in the reader&rsquo;s browser, sends nothing anywhere, and links back to this page for the method.</p>
+  <h2 id="embed">Embed this calculator</h2>
+  <p>Writing about this, or teaching it? Paste the snippet below into any web page to put a working copy of the calculator above on it. It is free, it is the same calculator as the one on this page, and nothing the reader types is sent anywhere. It keeps a link back here for the method. <a class="inline" href="/embed-calculators.html">All embeddable calculators and options</a>.</p>
     <div class="vf-embed code-only">
       <div class="vf-embed-code">
-        <pre id="embedSnippet">&lt;div class="vf-calc-widget" data-calc="voltage-drop"&gt;&lt;/div&gt;
+        <pre id="embedSnippet">&lt;div class="vf-calc-widget" data-calc="voltage-drop"&gt;
+  &lt;a href="https://voltfield.org/calculators/voltage-drop.html"&gt;Voltage Drop Calculator&lt;/a&gt; by Voltfield
+&lt;/div&gt;
 &lt;script src="https://voltfield.org/embed/calculator-widget.js" async&gt;&lt;/script&gt;</pre>
         <button type="button" id="copyEmbedBtn">Copy snippet</button>
-        <p class="vf-embed-note">Also available: <code>voltage-drop</code>, <code>transformer-sizing</code> and <code>power-factor</code>. Change <code>data-calc</code> to switch.</p>
+        <p class="vf-embed-note">Add <code>data-theme="dark"</code> for a dark page, or <code>data-units="metric"</code> to open in metric where the calculator has both.</p>
       </div>
     </div>
     <script>
@@ -223,6 +225,7 @@
         var t=document.getElementById('embedSnippet').textContent;
         (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){
           b.textContent='Copied';setTimeout(function(){b.textContent='Copy snippet';},1800);
+          if(window.vfGtag)window.vfGtag('event','embed_copy',{calc:'voltage-drop'});
         },function(){b.textContent='Select the text to copy';setTimeout(function(){b.textContent='Copy snippet';},2200);});
       });
     })();

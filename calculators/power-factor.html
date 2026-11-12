@@ -146,14 +146,16 @@
   <h2>Common mistakes</h2>
   <p>Correcting to unity rather than to a target just below it, which risks over-correction as load varies. Installing capacitors on a harmonic-heavy bus without a detuning reactor. Sizing from a peak-demand reading and leaving the bank connected through the night.</p>
 
-  <h2>Embed this calculator</h2>
-  <p>Writing about this, or teaching it? Paste the snippet below into any web page to add a working copy of the calculator above. It is free, runs entirely in the reader&rsquo;s browser, sends nothing anywhere, and links back to this page for the method.</p>
+  <h2 id="embed">Embed this calculator</h2>
+  <p>Writing about this, or teaching it? Paste the snippet below into any web page to put a working copy of the calculator above on it. It is free, it is the same calculator as the one on this page, and nothing the reader types is sent anywhere. It keeps a link back here for the method. <a class="inline" href="/embed-calculators.html">All embeddable calculators and options</a>.</p>
     <div class="vf-embed code-only">
       <div class="vf-embed-code">
-        <pre id="embedSnippet">&lt;div class="vf-calc-widget" data-calc="power-factor"&gt;&lt;/div&gt;
+        <pre id="embedSnippet">&lt;div class="vf-calc-widget" data-calc="power-factor"&gt;
+  &lt;a href="https://voltfield.org/calculators/power-factor.html"&gt;Power Factor Correction Calculator&lt;/a&gt; by Voltfield
+&lt;/div&gt;
 &lt;script src="https://voltfield.org/embed/calculator-widget.js" async&gt;&lt;/script&gt;</pre>
         <button type="button" id="copyEmbedBtn">Copy snippet</button>
-        <p class="vf-embed-note">Also available: <code>voltage-drop</code>, <code>transformer-sizing</code> and <code>power-factor</code>. Change <code>data-calc</code> to switch.</p>
+        <p class="vf-embed-note">Add <code>data-theme="dark"</code> for a dark page, or <code>data-units="metric"</code> to open in metric where the calculator has both.</p>
       </div>
     </div>
     <script>
@@ -163,12 +165,11 @@
         var t=document.getElementById('embedSnippet').textContent;
         (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){
           b.textContent='Copied';setTimeout(function(){b.textContent='Copy snippet';},1800);
+          if(window.vfGtag)window.vfGtag('event','embed_copy',{calc:'power-factor'});
         },function(){b.textContent='Select the text to copy';setTimeout(function(){b.textContent='Copy snippet';},2200);});
       });
     })();
     </script>
-
-  <div class="ad-unit" data-ad="incontent"></div>
 
   <h2>Related</h2>
     <div class="rel">

@@ -1251,6 +1251,8 @@
   const U={metric:false};
   try{U.metric=localStorage.getItem('vf_units')==='metric';}catch(e){}
   try{const q=new URLSearchParams(location.search).get('units');if(q==='metric'||q==='us'){U.metric=q==='metric';try{localStorage.setItem('vf_units',q);}catch(e){}}}catch(e){}
+  /* Embedded on another site: the snippet says which units to open in. */
+  if(window.VF_EMBED&&window.VF_EMBED.units)U.metric=window.VF_EMBED.units==='metric';
 
   /* kind: [factor US->metric, decimals shown, US unit as it appears in the label, metric unit] */
   const UNIT_KIND={
@@ -1477,7 +1479,11 @@
     const ests=[].slice.call(document.querySelectorAll('.estimator[id]'));
     if(!ests.length)return;
     const fieldsOf=function(est){return [].slice.call(est.querySelectorAll('input[type="number"][id],select[id]'));};
-    const here=location.pathname.replace(/[^/]*$/,'');
+    /* Set by embed/calculator-widget.js when this tool is running inside another
+       site's page. There the document has no address of its own, so the links
+       this builds have to name the calculator's page on voltfield.org outright. */
+    const EMB=window.VF_EMBED||null;
+    const here=EMB?EMB.base:location.pathname.replace(/[^/]*$/,'');
 
     function query(est){
       const p=new URLSearchParams();
@@ -1485,7 +1491,7 @@
       return p.toString();
     }
     function linkFor(est){
-      return location.origin+location.pathname+'?'+query(est)+(ests.length>1?'#'+est.id:'');
+      return (EMB?EMB.page:location.origin+location.pathname)+'?'+query(est)+(ests.length>1?'#'+est.id:'');
     }
     function copy(text,btn){
       const done=function(ok){const o=btn.textContent;btn.textContent=ok?'Copied':'Copy failed';setTimeout(function(){btn.textContent=o;},1500);};
@@ -1528,13 +1534,14 @@
             const a=document.createElement('a');
             a.href=here+s[1]+'.html?'+new URLSearchParams(s[2]).toString()+'#calculator';
             a.textContent=s[0];
+            if(EMB){a.target='_blank';a.rel='noopener';}
             a.addEventListener('click',function(){if(window.vfGtag)window.vfGtag('event','calc_chain',{from:est.id,to:s[1]});});
             next.appendChild(a);
           });
           bar.appendChild(next);
         }
       }
-      if(userRun&&history.replaceState){
+      if(userRun&&!EMB&&history.replaceState){
         try{history.replaceState(null,'',location.pathname+'?'+query(est)+(ests.length>1?'#'+est.id:''));}catch(e){}
       }
     }

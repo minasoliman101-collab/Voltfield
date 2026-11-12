@@ -189,11 +189,10 @@ foreach ($r in $recs) {
   [void]$sb.AppendLine('  <h2>Common mistakes</h2>')
   foreach ($p in $r.mistakes) { [void]$sb.AppendLine("  <p>$p</p>") }
   [void]$sb.AppendLine('')
-  # Calculators that embed/calculator-widget.js supports get an "Embed this
-  # calculator" block. Keep this list in step with CALCS in that file.
-  if (@('voltage-drop','transformer-sizing','power-factor') -contains $r.slug) {
-    [void]$sb.Append($embedTpl.Replace('{{SLUG}}', $r.slug))
-  }
+  # Every calculator is embeddable: embed/calculator-widget.js is generated from
+  # these pages by scripts/gen-embed-widget.mjs, which has to be re-run after a
+  # new calculator is added.
+  [void]$sb.Append($embedTpl.Replace('{{SLUG}}', $r.slug).Replace('{{TITLE}}', $r.h1))
   [void]$sb.AppendLine('  <h2>Related</h2>')
   [void]$sb.AppendLine('    <div class="rel">')
   foreach ($l in $r.related) {
