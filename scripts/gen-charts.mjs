@@ -10,10 +10,17 @@
  * a formula the page states, so a reader can check any cell and the chart
  * cannot drift from the calculator that uses the same formula. That is also
  * the line the site already draws in its guides: explain a code table's method,
- * do not reproduce the table. So there is deliberately no NEC 310.16 ampacity
- * chart and no NEC 430.250 motor current chart here. The voltage drop chart
- * uses conductor ampacity only to blank out cells that would overload the
- * wire, which is a check, not a copy.
+ * do not reproduce the table.
+ *
+ * TWO EXCEPTIONS, added Nov 2026 at the owner's request: wire-ampacity-chart
+ * and motor-full-load-current-chart. Those carry values that correspond to
+ * NEC Tables 310.16, 430.248 and 430.250. They are DATA, typed in below, not
+ * computed, so they are the two charts here that can be wrong in a way the
+ * script cannot catch. Each is marked `codeTable: true`, which swaps the
+ * "computed from a formula" wording on the page for a statement of where the
+ * values come from and an instruction to check them against the adopted code.
+ * Check them against the code book before changing anything, and again when a
+ * new edition is adopted.
  *
  * The page shell (head boilerplate, header, footer) is taken from an existing
  * calculator page, the same way gen-guides.mjs stamps guides from a guide, so
@@ -52,6 +59,62 @@ const K_CU = 12.9, K_AL = 21.2;
    out voltage-drop cells where the current would overload the wire. */
 const AMP_LIMIT = { '14 AWG': 15, '12 AWG': 20, '10 AWG': 30, '8 AWG': 50, '6 AWG': 65, '4 AWG': 85, '3 AWG': 100, '2 AWG': 115, '1 AWG': 130, '1/0 AWG': 150, '2/0 AWG': 175, '3/0 AWG': 200, '4/0 AWG': 230 };
 const STD_OCPD = [15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 110, 125, 150, 175, 200, 225, 250, 300, 350, 400, 450, 500, 600, 700, 800, 1000, 1200];
+
+/* Allowable ampacities, not more than three current-carrying conductors in a
+   raceway, cable or earth, 30 degC ambient. [60, 75, 90 degC]. The same values
+   the cable ampacity calculator has always carried (voltfield-calculators.js,
+   NEC_AMPACITY); keep the two in step. Stops at 500 kcmil because that is as
+   far as the checked data goes. */
+const AMPACITY = [
+  ['14 AWG', [15, 20, 25], null],
+  ['12 AWG', [20, 25, 30], [15, 20, 25]],
+  ['10 AWG', [30, 35, 40], [25, 30, 35]],
+  ['8 AWG', [40, 50, 55], [35, 40, 45]],
+  ['6 AWG', [55, 65, 75], [40, 50, 55]],
+  ['4 AWG', [70, 85, 95], [55, 65, 75]],
+  ['3 AWG', [85, 100, 115], [65, 75, 85]],
+  ['2 AWG', [95, 115, 130], [75, 90, 100]],
+  ['1 AWG', [110, 130, 145], [85, 100, 115]],
+  ['1/0 AWG', [125, 150, 170], [100, 120, 135]],
+  ['2/0 AWG', [145, 175, 195], [115, 135, 150]],
+  ['3/0 AWG', [165, 200, 225], [130, 155, 175]],
+  ['4/0 AWG', [195, 230, 260], [150, 180, 205]],
+  ['250 kcmil', [215, 255, 290], [170, 205, 230]],
+  ['300 kcmil', [240, 285, 320], [195, 230, 260]],
+  ['350 kcmil', [260, 310, 350], [210, 250, 280]],
+  ['400 kcmil', [280, 335, 380], [225, 270, 305]],
+  ['500 kcmil', [320, 380, 430], [260, 310, 350]],
+];
+/* Ambient correction, 30 degC base: ambient -> [60, 75, 90 degC insulation]. */
+const AMB_CORR = [[30, [1.00, 1.00, 1.00]], [35, [0.91, 0.94, 0.96]], [40, [0.82, 0.88, 0.91]], [45, [0.71, 0.82, 0.87]], [50, [0.58, 0.75, 0.82]], [55, [0.41, 0.67, 0.76]], [60, [null, 0.58, 0.71]]];
+/* Adjustment for more than three current-carrying conductors. */
+const CCC_ADJ = [['4 to 6', 80], ['7 to 9', 70], ['10 to 20', 50], ['21 to 30', 45], ['31 to 40', 40], ['41 and above', 35]];
+/* Three-phase induction motors, full-load current in amperes: hp -> [208, 230, 460, 575 V]. */
+const FLC3 = [
+  [0.5, [2.4, 2.2, 1.1, 0.9]], [0.75, [3.5, 3.2, 1.6, 1.3]], [1, [4.6, 4.2, 2.1, 1.7]], [1.5, [6.6, 6.0, 3.0, 2.4]], [2, [7.5, 6.8, 3.4, 2.7]],
+  [3, [10.6, 9.6, 4.8, 3.9]], [5, [16.7, 15.2, 7.6, 6.1]], [7.5, [24.2, 22, 11, 9]], [10, [30.8, 28, 14, 11]], [15, [46.2, 42, 21, 17]],
+  [20, [59.4, 54, 27, 22]], [25, [74.8, 68, 34, 27]], [30, [88, 80, 40, 32]], [40, [114, 104, 52, 41]], [50, [143, 130, 65, 52]],
+  [60, [169, 154, 77, 62]], [75, [211, 192, 96, 77]], [100, [273, 248, 124, 99]], [125, [343, 312, 156, 125]], [150, [396, 360, 180, 144]],
+  [200, [528, 480, 240, 192]], [250, [null, null, 302, 242]], [300, [null, null, 361, 289]], [350, [null, null, 414, 336]], [400, [null, null, 477, 382]],
+  [450, [null, null, 515, 412]], [500, [null, null, 590, 472]],
+];
+/* Single-phase motors: hp -> [115, 230 V]. */
+const FLC1 = [['1/6', [4.4, 2.2]], ['1/4', [5.8, 2.9]], ['1/3', [7.2, 3.6]], ['1/2', [9.8, 4.9]], ['3/4', [13.8, 6.9]], ['1', [16, 8]], ['1-1/2', [20, 10]], ['2', [24, 12]], ['3', [34, 17]], ['5', [56, 28]], ['7-1/2', [80, 40]], ['10', [100, 50]]];
+/* Sanity checks the data can be given: the table itself is built so that the
+   230 V column is twice the 460 V column and the 208 V column is 1.1 times the
+   230 V one. A typing slip in one cell breaks the pattern and stops the build. */
+for (const [hp, [v208, v230, v460]] of FLC3) {
+  if (v230 != null && Math.abs(v230 - 2 * v460) > 0.051) throw new Error('FLC3 230 V is not 2 x 460 V at ' + hp + ' hp');
+  if (v208 != null && Math.abs(v208 - 1.1 * v230) > 0.51) throw new Error('FLC3 208 V is not 1.1 x 230 V at ' + hp + ' hp');
+}
+for (const [hp, [v115, v230]] of FLC1) if (Math.abs(v115 - 2 * v230) > 0.051) throw new Error('FLC1 115 V is not 2 x 230 V at ' + hp + ' hp');
+for (const [n, cu, al] of AMPACITY) {
+  if (!(cu[0] <= cu[1] && cu[1] <= cu[2])) throw new Error('ampacity not rising with temperature at ' + n);
+  if (al && !(al[0] < cu[0] && al[2] < cu[2])) throw new Error('aluminum not below copper at ' + n);
+}
+const hpLabel = (h) => h === 0.5 ? '1/2' : h === 0.75 ? '3/4' : h === 1.5 ? '1-1/2' : h === 7.5 ? '7-1/2' : String(h);
+const dash = (v, d = 0) => v == null ? '&mdash;' : f(v, d);
+const amp1 = (v) => v == null ? '&mdash;' : (v % 1 ? f(v, 1) : f(v));
 
 function awgTable() {
   return {
@@ -300,6 +363,73 @@ const CHARTS = [
   related: [['calculators/btu-to-tons.html', 'BTU to Tons Converter'], ['calculators/airflow-cfm.html', 'Airflow (CFM) Calculator'], ['calculators/chilled-water-flow.html', 'Chilled Water Flow Calculator'], ['guide-crac-vs-crah.html', 'CRAC vs. CRAH'], ['guide-hot-aisle-vs-cold-aisle-containment.html', 'Hot Aisle vs. Cold Aisle Containment']],
   basedOn: ['The definitions of the BTU and the ton of refrigeration', 'ASHRAE Handbook &mdash; the sensible heat equation for air and the heat-transfer relation for water'],
 },
+{
+  slug: 'wire-ampacity-chart', badge: 'AMP', codeTable: true,
+  h1: 'Wire Ampacity Chart', title: 'Wire Ampacity Chart (Copper & Aluminum)',
+  card: 'Allowable ampacity for copper and aluminum, 14 AWG to 500 kcmil, at 60, 75 and 90&deg;C, with the correction factors.',
+  desc: 'Wire ampacity chart for copper and aluminum conductors from 14 AWG to 500 kcmil at 60, 75 and 90&deg;C, with ambient temperature and bundling correction factors.',
+  dek: 'Allowable ampacity for copper and aluminum conductors at the three insulation temperature ratings, and the factors that reduce it.',
+  lead: '<b>Ampacity is the current a conductor can carry continuously without exceeding its temperature rating, and it depends on the insulation rating as much as on the wire size.</b> A 6 AWG copper conductor is good for 55 A at 60&deg;C, 65 A at 75&deg;C and 75 A at 90&deg;C. Those figures hold for not more than three current-carrying conductors together at an ambient of 30&deg;C (86&deg;F). Anything hotter or more crowded reduces them.',
+  tables: () => [
+    { id: 'cu', title: 'Copper', caption: 'Amperes. Not more than three current-carrying conductors in a raceway, cable or directly buried, at 30&deg;C ambient.',
+      head: ['Size', '60&deg;C', '75&deg;C', '90&deg;C'], rows: AMPACITY.map(([n, cu]) => [n, ...cu.map(v => f(v))]) },
+    { id: 'al', title: 'Aluminum and copper-clad aluminum', caption: 'Amperes, on the same basis. A dash means the size is not used in that material.',
+      head: ['Size', '60&deg;C', '75&deg;C', '90&deg;C'], rows: AMPACITY.map(([n, , al]) => [n, ...(al || [null, null, null]).map(v => dash(v))]) },
+    { id: 'ambient', title: 'Ambient temperature correction', caption: 'Multiply the ampacity by the factor for the insulation rating when the ambient is above 30&deg;C. A dash means the conductor may not be used at that ambient.',
+      head: ['Ambient', '60&deg;C insulation', '75&deg;C insulation', '90&deg;C insulation'],
+      rows: AMB_CORR.map(([t, fs]) => [t + '&deg;C (' + Math.round(t * 9 / 5 + 32) + '&deg;F)', ...fs.map(v => dash(v, 2))]) },
+    { id: 'bundling', title: 'More than three current-carrying conductors', caption: 'Multiply the ampacity by this percentage when more than three current-carrying conductors share a raceway or cable.',
+      head: ['Current-carrying conductors', 'Percent of ampacity'], rows: CCC_ADJ.map(([n, p]) => [n, p + '%']) },
+  ],
+  how: [
+    'Find the wire size and read across to the column for the temperature rating that governs. That is usually not the insulation rating. Equipment terminals are rated 60&deg;C or 75&deg;C, and the conductor must not carry more than its ampacity in the column matching the lowest-rated termination. In general, circuits of 100 A or less use the 60&deg;C column unless the equipment is marked for 75&deg;C, and larger circuits use 75&deg;C.',
+    'A 90&deg;C conductor earns its higher figure in a different way. Its 90&deg;C ampacity is the starting point for the correction factors, so it absorbs a hot ambient or a crowded raceway better. Take 4 AWG copper with 90&deg;C insulation at 40&deg;C ambient with six current-carrying conductors: 95 &times; 0.91 &times; 0.80 = 69.2 A, which is then compared with the 85 A the 75&deg;C termination column allows. The smaller figure, 69.2 A, is the ampacity.',
+    'The smallest sizes have a further limit that the table does not show. Whatever their ampacity, the overcurrent device is generally limited to 15 A for 14 AWG copper, 20 A for 12 AWG and 30 A for 10 AWG.',
+    'A continuous load is taken at 125 percent before any of this, so a conductor for an 80 A continuous load needs an ampacity of 100 A.',
+  ],
+  calcTitle: 'Where the values come from',
+  source: 'The ampacities correspond to NEC Table 310.16, the ambient correction factors to Table 310.15(B)(1), and the adjustment factors to Table 310.15(C)(1). They are reproduced here for reference and are not computed by Voltfield. Editions of the code differ, table numbers have changed between editions, and local amendments apply, so check any value you intend to rely on against the edition your jurisdiction has adopted.',
+  limits: 'The chart covers conductors in a raceway, cable or directly buried, up to 500 kcmil. It does not cover conductors in free air, which carry more; cables in tray, flexible cords, or conductors rated above 2,000 V, which have their own tables; or the rooftop and other special conditions the code treats separately. It does not tell you the overcurrent device, and it does not check voltage drop, which on a long run sets the size before ampacity does.',
+  faqs: [
+    ['What size wire do I need for 100 amps?', 'For a 100 A circuit on 75&deg;C terminations, 3 AWG copper (100 A) or 1 AWG aluminum (100 A) meets the ampacity before any correction. If the 100 A is a continuous load, the conductor needs 125 A, which is 1 AWG copper or 2/0 aluminum. Hot ambient or bundled conductors can push the size up further.'],
+    ['Why are there three ampacities for the same wire?', 'Each column is for an insulation temperature rating. Insulation that tolerates more heat lets the same copper carry more current. Which column you may use depends on the insulation and, more often, on the temperature rating of the terminals it lands on.'],
+    ['Can I use the 90&deg;C column?', 'Only for applying correction and adjustment factors, in most installations. Terminals are rarely rated above 75&deg;C, so the final ampacity cannot exceed the 60&deg;C or 75&deg;C figure for that size. The 90&deg;C value is the starting point for derating, not the answer.'],
+    ['How much does bundling reduce ampacity?', 'With four to six current-carrying conductors together, ampacity falls to 80 percent. With seven to nine it is 70 percent, and with ten to twenty it is 50 percent. A neutral that carries only unbalanced current is generally not counted.'],
+  ],
+  related: [['calculators/wire-size.html', 'Wire Size Calculator'], ['guide-cable-ampacity-derating.html', 'Cable Ampacity Derating'], ['calculators/ampacity.html', 'Cable Ampacity &amp; Conduit Fill'], ['charts/awg-wire-size-chart.html', 'AWG Wire Size Chart'], ['charts/voltage-drop-chart.html', 'Voltage Drop Chart'], ['glossary/ampacity.html', 'Glossary: Ampacity']],
+  basedOn: ['NEC Table 310.16 &mdash; allowable ampacities of insulated conductors', 'NEC 310.15 &mdash; ambient correction and adjustment factors', 'NEC 110.14(C) &mdash; temperature limitations of terminations', 'NEC 240.4(D) &mdash; overcurrent protection of small conductors'],
+},
+{
+  slug: 'motor-full-load-current-chart', badge: 'FLC', codeTable: true,
+  h1: 'Motor Full-Load Current Chart', title: 'Motor Full-Load Current Chart (FLA by HP)',
+  card: 'Full-load current by horsepower for three-phase motors at 208, 230, 460 and 575 V, and single-phase at 115 and 230 V.',
+  desc: 'Motor full-load current chart: amps by horsepower for three-phase induction motors at 208, 230, 460 and 575 V and single-phase motors at 115 and 230 V.',
+  dek: 'Full-load current by horsepower for three-phase and single-phase motors, as used to size motor circuit conductors and protection.',
+  lead: '<b>For sizing a motor circuit, the full-load current comes from the code table for the motor\'s horsepower and voltage, not from its nameplate.</b> A 50 hp three-phase motor is taken as 65 A at 460 V and 130 A at 230 V. The table figure is used for the conductors, the short-circuit protection and the disconnect; the nameplate current is used only for the overload protection.',
+  tables: () => [
+    { id: 'three', title: 'Three-phase induction motors', caption: 'Full-load current in amperes, for squirrel-cage and wound-rotor induction motors running at usual speeds with normal torque characteristics. A dash means that size is not listed at that voltage.',
+      head: ['hp', '208 V', '230 V', '460 V', '575 V'], rows: FLC3.map(([hp, v]) => [hpLabel(hp), ...v.map(amp1)]) },
+    { id: 'single', title: 'Single-phase motors', caption: 'Full-load current in amperes.',
+      head: ['hp', '115 V', '230 V'], rows: FLC1.map(([hp, v]) => [hp, ...v.map(amp1)]) },
+  ],
+  how: [
+    'Find the motor\'s horsepower and read across to its voltage. The 230 V column also serves motors rated 220 to 240 V, the 460 V column those rated 440 to 480 V, and the 575 V column those rated 550 to 600 V.',
+    'Branch-circuit conductors for a single motor are sized at 125 percent of this current. For a 50 hp, 460 V motor that is 65 &times; 1.25 = 81.3 A, and the conductor is then chosen from the ampacity table.',
+    'The same current is the base for the short-circuit and ground-fault protective device, which is sized as a percentage of it that depends on the type of device, and is deliberately well above the running current so that the motor can start.',
+    'Overload protection is the one thing sized from the nameplate. It protects the motor itself, so it follows the current that particular motor draws.',
+  ],
+  calcTitle: 'Where the values come from',
+  source: 'The three-phase currents correspond to NEC Table 430.250 and the single-phase currents to Table 430.248. They are reproduced here for reference and are not computed by Voltfield. The figures are the same pattern throughout: the 230 V current is twice the 460 V current, and the 208 V current is ten percent higher than the 230 V one. Check any value you intend to rely on against the edition of the code your jurisdiction has adopted.',
+  limits: 'These are code values for sizing, and they are deliberately conservative. An actual motor, particularly a high-efficiency one, usually draws less. The tables do not cover low-speed motors of 1,200 rpm or less, high-torque motors or multispeed motors, which can draw more and are sized from the nameplate. They do not give locked-rotor current, and they do not size the overload device.',
+  faqs: [
+    ['How many amps does a 10 hp motor draw?', 'For circuit sizing, a 10 hp three-phase motor is taken as 14 A at 460 V, 28 A at 230 V and 30.8 A at 208 V. A single-phase 10 hp motor at 230 V is taken as 50 A.'],
+    ['Why not just use the nameplate current?', 'A motor can be replaced with another of the same horsepower that draws more. Sizing the conductors and short-circuit protection from the table means the circuit remains adequate for any standard motor of that rating. The nameplate current is used for overload protection, which is matched to the motor actually installed.'],
+    ['What size wire for a 50 hp motor at 460 V?', 'The table current is 65 A. At 125 percent the conductor needs an ampacity of 81.3 A, which 4 AWG copper provides in the 75&deg;C column at 85 A. Ambient temperature, bundling and voltage drop can require a larger size.'],
+    ['Is full-load current the same as starting current?', 'No. A motor started across the line draws roughly six times its full-load current for a few seconds, and more for some designs. That is why the short-circuit protection is set well above full-load current while the overload protection is set close to it.'],
+  ],
+  related: [['guide-nec-430-250-motor-fla.html', 'NEC 430.250 Motor Full-Load Current'], ['charts/wire-ampacity-chart.html', 'Wire Ampacity Chart'], ['calculators/hp-to-kw.html', 'Motor HP to kW Calculator'], ['calculators/motor-start.html', 'Motor Starting Voltage Dip Calculator'], ['charts/hp-to-kw-chart.html', 'HP to kW Chart'], ['practice/motors.html', 'Practice Questions: Motors']],
+  basedOn: ['NEC Table 430.250 &mdash; full-load current, three-phase alternating-current motors', 'NEC Table 430.248 &mdash; full-load current, single-phase alternating-current motors', 'NEC 430.6(A) &mdash; use of table values and nameplate values', 'NEC 430.22 &mdash; conductors for a single motor'],
+},
 ];
 
 /* ------------------------------------------------------------ builders ---- */
@@ -379,9 +509,10 @@ ${tables.map(tableHTML).join('\n\n')}
   <h2>How to read it</h2>
 ${c.how.map(p => `  <p>${p}</p>`).join('\n')}
 
-  <h2>How the values are calculated</h2>
-    <div class="formula">${c.formula}</div>
-  <p>Every figure in the chart comes from the formulas above. Nothing is copied from a published table, so any cell can be checked by hand.</p>
+  <h2>${c.calcTitle || 'How the values are calculated'}</h2>
+${c.codeTable ? `  <p>${c.source}</p>
+    <div class="callout"><b>These are code values, not Voltfield\'s.</b> NEC and National Electrical Code are trademarks of the National Fire Protection Association, which publishes the code. Voltfield is not affiliated with it. The published code, in the edition adopted where you are, is the authority.</div>` : `    <div class="formula">${c.formula}</div>
+  <p>Every figure in the chart comes from the formulas above. Nothing is copied from a published table, so any cell can be checked by hand.</p>`}
 
   <h2>What this chart does not tell you</h2>
   <p>${c.limits}</p>
@@ -406,7 +537,7 @@ ${c.related.map(([h, t]) => `      <a href="${up(h)}">${t}</a>`).join('\n')}
       <dt>What it is not</dt>
       <dd>${c.limits}</dd>
       <dt>Provenance</dt>
-      <dd>Last reviewed ${DATE_LONG}. Computed by Voltfield from the formulas shown on the page and maintained by the Voltfield editorial team. Free to print, cite and link to.</dd>
+      <dd>Last reviewed ${DATE_LONG}. ${c.codeTable ? 'Values correspond to the code tables named above and were checked for internal consistency when the page was built; they are not a substitute for the code.' : 'Computed by Voltfield from the formulas shown on the page.'} Maintained by the Voltfield editorial team. Free to print, cite and link to.</dd>
     </dl>
   </aside>
 
@@ -491,7 +622,7 @@ for (const c of CHARTS) {
 
 if (!only.length) {
   const cards = CHARTS.map(c => `    <a class="gdcard has-thumb" href="charts/${c.slug}.html"><span class="gd-thumb is-badge" aria-hidden="true">${c.badge}</span><h3>${c.h1}</h3><p>${c.card}</p></a>`).join('\n');
-  const desc = `${CHARTS.length} free electrical and cooling reference charts: wire sizes, voltage drop, breaker sizes, kW and kVA to amps, motor speed and cooling load. Print or download.`;
+  const desc = `${CHARTS.length} electrical and cooling reference charts: wire sizes, ampacity, voltage drop, breakers, motor current, kW and kVA to amps, cooling load. Printable.`;
   const main = `<main id="main" tabindex="-1">
 
 <section class="artban">
@@ -510,8 +641,8 @@ if (!only.length) {
 ${cards}
   </div>
 
-  <h2>What is not here, and why</h2>
-  <p>There is no ampacity chart and no motor full-load current chart. Those are tables in the National Electrical Code, and the figures that apply to an installation are the ones in the edition your jurisdiction has adopted, with its correction and adjustment factors applied. Voltfield explains the method in its guides to ${L('guide-cable-ampacity-derating.html', 'ampacity derating')} and ${L('guide-nec-430-250-motor-fla.html', 'NEC 430.250')}, and the ${L('calculators/wire-size.html', 'wire size calculator')} works a conductor through both checks.</p>
+  <h2>Two kinds of chart</h2>
+  <p>Most of the charts here are computed: every figure comes from a formula shown on the page, so any cell can be checked by hand. Two are different. The ${L('charts/wire-ampacity-chart.html', 'wire ampacity chart')} and the ${L('charts/motor-full-load-current-chart.html', 'motor full-load current chart')} carry values that correspond to tables in the National Electrical Code. Those pages say so, and the figures that apply to an installation are the ones in the edition your jurisdiction has adopted, with its correction factors applied. The guides to ${L('guide-cable-ampacity-derating.html', 'ampacity derating')} and ${L('guide-nec-430-250-motor-fla.html', 'NEC 430.250')} explain the method behind each.</p>
 
   <h2>Using and sharing these charts</h2>
   <p>Print them, download the data as CSV, and link to them freely. If you reproduce a chart, a link back to the page is appreciated. If you find a figure you can show is wrong, the ${L('contact.html', 'contact page')} says how to report it.</p>

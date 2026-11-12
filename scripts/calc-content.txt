@@ -170,6 +170,7 @@ Using the 90&deg;C column when the terminations are only rated 75&deg;C — the 
 /guide-cable-ampacity-derating.html :: Cable Ampacity Derating Explained
 /calculators/voltage-drop.html :: Voltage Drop Calculator
 /calculators/fault-current.html :: Available Fault Current Calculator
+/charts/wire-ampacity-chart.html :: Wire Ampacity Chart
 
 ===bess-sizing|bess-sizing|BESS Sizing Calculator|BESS Sizing Calculator (kW and kWh)|Convert a critical load and backup duration into usable energy, then into the nameplate kWh you need once depth of discharge and round-trip efficiency are applied.
 --intro
@@ -296,6 +297,7 @@ Using full-load kVA instead of locked-rotor kVA, which understates the dip by a 
 /guide-generator-sizing.html :: How to Size a Standby Generator
 /calculators/voltage-drop.html :: Voltage Drop Calculator
 /calculators/generator-runtime.html :: Generator Runtime Calculator
+/charts/motor-full-load-current-chart.html :: Motor Full-Load Current Chart
 
 ===inrush|inrush|Transformer Inrush Current Calculator|Transformer Inrush Current Calculator|Estimate magnetizing inrush current on transformer energisation as a multiple of full-load amps, for upstream breaker and fuse selection. Free, no signup.
 --intro
@@ -519,6 +521,7 @@ Converting horsepower to kilowatts and treating the result as input power, which
 /guide-kw-vs-kva.html :: kW vs. kVA Explained
 /calculators/power-factor.html :: Power Factor Correction Calculator
 /practice/motors.html :: Practice Questions: Motors
+/charts/motor-full-load-current-chart.html :: Motor Full-Load Current Chart
 
 ===watts-to-amps|watts-to-amps|Watts to Amps Calculator|Watts to Amps Calculator (1-Phase, 3-Phase, DC)|Convert watts to amps for DC, single-phase and three-phase circuits, with the power factor and square-root-of-three terms in the right places. Free, no signup.
 --intro
@@ -587,6 +590,7 @@ Sizing from the 90&deg;C column because the wire is THHN, when the terminals are
 /calculators/kw-to-amps.html :: kW to Amps Calculator
 /guide-nec-250-122-egc-sizing.html :: Sizing the Equipment Grounding Conductor
 /practice/conductors-and-voltage-drop.html :: Practice Questions: Conductors and Voltage Drop
+/charts/wire-ampacity-chart.html :: Wire Ampacity Chart
 
 ===awg-to-mm2|awg-to-mm2|AWG to mm&sup2; Converter|AWG to mm&sup2; Converter (Wire Size Conversion)|Convert AWG and kcmil to square millimetres and back, with the nearest IEC standard size. Built from the AWG geometric definition. Free, no signup.
 --intro
@@ -820,6 +824,7 @@ Sizing the breaker to the load with no 125 percent factor on the continuous part
 /calculators/fault-current.html :: Available Fault Current Calculator
 /calculators/kw-to-amps.html :: kW to Amps Calculator
 /practice/overcurrent-protection.html :: Practice Questions: Overcurrent Protection
+/charts/wire-ampacity-chart.html :: Wire Ampacity Chart
 
 ===amps-to-kva|amps-to-kva|Amps to kVA Calculator|Amps to kVA Calculator (1-Phase and 3-Phase)|Convert amps to kVA for single-phase and three-phase systems. Apparent power is volts times amps, with no power factor term. Free, no signup.
 --intro
@@ -1274,6 +1279,7 @@ Using synchronous speed in place of full-load speed. Confusing full-load torque 
 /guide-nec-430-250-motor-fla.html :: NEC 430.250 Motor Full-Load Current
 /guide-vfd-vs-soft-starter.html :: VFD vs. Soft Starter
 /practice/motors.html :: Practice Questions: Motors
+/charts/motor-full-load-current-chart.html :: Motor Full-Load Current Chart
 
 ===motor-speed|motor-speed|Motor Speed &amp; Slip Calculator|Motor Speed Calculator (Synchronous RPM &amp; Slip)|Calculate an AC motor's synchronous speed from frequency and poles, and its slip from the nameplate full-load rpm. Free, no signup.
 --intro

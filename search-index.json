@@ -1,5 +1,7 @@
 {
   "items": [
+    {"title": "Motor Full-Load Current Chart", "url": "charts/motor-full-load-current-chart.html", "category": "Tool", "description": "Full-load current by horsepower for three-phase motors at 208, 230, 460 and 575 V, and single-phase at 115 and 230 V."},
+    {"title": "Wire Ampacity Chart", "url": "charts/wire-ampacity-chart.html", "category": "Tool", "description": "Allowable ampacity for copper and aluminum, 14 AWG to 500 kcmil, at 60, 75 and 90°C, with the correction factors."},
     {"title": "Practice Questions", "url": "practice-questions.html", "category": "Tool", "description": "64 multiple-choice electrical practice questions in 8 sets, each with a worked solution."},
     {"title": "Ohm's Law and Power: Practice Questions", "url": "practice/ohms-law-and-power.html", "category": "Tool", "description": "8 questions with solutions. Voltage, current, resistance, power and energy on DC and resistive AC circuits."},
     {"title": "Three-Phase Power and Power Factor: Practice Questions", "url": "practice/three-phase-and-power-factor.html", "category": "Tool", "description": "8 questions with solutions. Line current, kVA, kW, kvar, power factor correction and the square root of three."},

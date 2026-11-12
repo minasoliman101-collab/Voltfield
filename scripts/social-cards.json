@@ -467,7 +467,7 @@
   "file": "social-index.jpg",
   "eyebrow": "ENGINEERING REFERENCE",
   "title": "Electrical Calculators for Data Centers, Solar & BESS",
-  "subtitle": "Free calculators, guides and practice boards for the electrical side of data center, solar and battery-storage projects. Every calculator shows its method; every board checks your work.",
+  "subtitle": "Free calculators, charts, guides and practice questions for the electrical and cooling side of data center, solar and battery-storage projects. Every calculator shows its method.",
   "url": "voltfield.org",
   "shared": 1
  },
@@ -541,6 +541,14 @@
   "title": "How Voltfield's Reference Data Works",
   "subtitle": "What's modeled for demonstration, what's crowdsourced, and why nothing on the site is a binding quote.",
   "url": "voltfield.org/methodology",
+  "shared": 1
+ },
+ {
+  "file": "social-motor-full-load-current-chart.jpg",
+  "eyebrow": "ENGINEERING REFERENCE",
+  "title": "Motor Full-Load Current Chart",
+  "subtitle": "Motor full-load current chart: amps by horsepower for three-phase induction motors at 208, 230, 460 and 575 V and single-phase motors at 115 and 230 V.",
+  "url": "voltfield.org/charts/motor-full-load-current-chart",
   "shared": 1
  },
  {
@@ -667,7 +675,7 @@
   "file": "social-reference-charts.jpg",
   "eyebrow": "ENGINEERING REFERENCE",
   "title": "Electrical & Cooling Reference Charts",
-  "subtitle": "8 free electrical and cooling reference charts: wire sizes, voltage drop, breaker sizes, kW and kVA to amps, motor speed and cooling load. Print or download.",
+  "subtitle": "10 electrical and cooling reference charts: wire sizes, ampacity, voltage drop, breakers, motor current, kW and kVA to amps, cooling load. Printable.",
   "url": "voltfield.org/reference-charts",
   "shared": 1
  },
@@ -757,6 +765,14 @@
   "title": "What's New — Voltfield Changelog",
   "subtitle": "A dated log of every guide, calculator, and tool shipped on Voltfield.",
   "url": "voltfield.org/whats-new",
+  "shared": 1
+ },
+ {
+  "file": "social-wire-ampacity-chart.jpg",
+  "eyebrow": "ENGINEERING REFERENCE",
+  "title": "Wire Ampacity Chart",
+  "subtitle": "Wire ampacity chart for copper and aluminum conductors from 14 AWG to 500 kcmil at 60, 75 and 90°C, with ambient temperature and bundling correction factors.",
+  "url": "voltfield.org/charts/wire-ampacity-chart",
   "shared": 1
  },
  {

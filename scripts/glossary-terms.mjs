@@ -23,7 +23,7 @@ export const TERMS = {
   more: ['Ampacity is not a property of the wire alone. The same conductor has a different ampacity in free air, in a conduit with two others, in a conduit with eight others, and in a hot attic. The published figure assumes a stated ambient temperature and no more than three current-carrying conductors together, and each departure from those conditions lowers it.',
          'There is also a second limit that has nothing to do with the conductor. Equipment terminals are rated for 60 or 75&deg;C, and the circuit is limited by the lowest-rated termination in it. A conductor insulated for 90&deg;C can use its higher rating for derating arithmetic, but it still has to be sized so the terminal stays within its own limit.'],
   points: ['Ampacity is a thermal limit: it is the current at which the insulation reaches its rated temperature.', 'Two checks decide a conductor size, the termination rating and the derated ampacity, and the larger answer governs.', 'On long runs voltage drop, not ampacity, usually sets the size.'],
-  links: [C('wire-size', 'Wire Size Calculator'), G('guide-cable-ampacity-derating', 'Cable Ampacity Derating'), C('ampacity', 'Cable Ampacity &amp; Conduit Fill'), H('awg-wire-size-chart', 'AWG Wire Size Chart')],
+  links: [C('wire-size', 'Wire Size Calculator'), G('guide-cable-ampacity-derating', 'Cable Ampacity Derating'), H('wire-ampacity-chart', 'Wire Ampacity Chart'), H('awg-wire-size-chart', 'AWG Wire Size Chart')],
   see: ['derating', 'interrupting-rating'],
 },
 'ansi-c57': {

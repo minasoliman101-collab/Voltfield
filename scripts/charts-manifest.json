@@ -46,5 +46,17 @@
   "h1": "Cooling Load Chart",
   "card": "IT load in kW as BTU/h and tons, with the airflow and chilled water flow each needs.",
   "badge": "BTU"
+ },
+ {
+  "slug": "wire-ampacity-chart",
+  "h1": "Wire Ampacity Chart",
+  "card": "Allowable ampacity for copper and aluminum, 14 AWG to 500 kcmil, at 60, 75 and 90°C, with the correction factors.",
+  "badge": "AMP"
+ },
+ {
+  "slug": "motor-full-load-current-chart",
+  "h1": "Motor Full-Load Current Chart",
+  "card": "Full-load current by horsepower for three-phase motors at 208, 230, 460 and 575 V, and single-phase at 115 and 230 V.",
+  "badge": "FLC"
  }
 ]
