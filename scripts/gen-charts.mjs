@@ -172,6 +172,7 @@ const CHARTS = [
   desc: 'AWG wire size chart: diameter in inches and mm, area in circular mils and mm&sup2;, and copper and aluminum resistance per 1000 ft, from 18 AWG to 1000 kcmil.',
   dek: 'Every standard size from 18 AWG to 1000 kcmil, with its diameter, its area in circular mils and square millimetres, and its resistance in copper and aluminum.',
   lead: '<b>In the American Wire Gauge system a smaller number is a larger wire, and every three sizes the area doubles.</b> A 10 AWG conductor has about twice the copper of a 13 AWG and half the resistance; go up six sizes and the diameter doubles. Above 4/0 the gauge numbers stop and sizes are given directly by area, in thousands of circular mils (kcmil).',
+  formulaM: `Area (mm&sup2;) = &pi; / 4 &times; d&sup2;, with d in mm<br>R (&Omega;/km) = &rho; &times; 1000 / A, with &rho; = ${f(K_CU * 5.067075e-4 / 0.3048, 4)} for copper and ${f(K_AL * 5.067075e-4 / 0.3048, 4)} for aluminum, in &Omega;&middot;mm&sup2;/m`,
   tables: () => [awgTable()],
   how: [
     'Area in circular mils is the diameter in thousandths of an inch, squared. A wire one mil across is one circular mil; a wire 100 mils across is 10,000. It is a unit invented to avoid &pi; in the arithmetic.',
@@ -280,6 +281,8 @@ const CHARTS = [
   desc: 'Voltage drop chart: maximum one-way wire length for a 3 percent drop, by copper wire size and current, for 120 V and 240 V single-phase and 480 V three-phase.',
   dek: 'How far each copper wire size can run before it loses 3 percent of the voltage, at common currents and voltages.',
   lead: '<b>For a 3 percent drop, the longest one-way run is 0.03 times the voltage times the wire area, divided by the current and a constant.</b> At 120 V, 12 AWG copper carrying 20 A reaches the 3 percent mark at 45 ft. The same wire on a 240 V circuit goes twice as far, because the allowed drop in volts is twice as large.',
+  leadM: `<b>For a 3 percent drop, the longest one-way run is 0.03 times the voltage times the wire area, divided by the current and a constant.</b> At 120 V, 12 AWG copper (3.31 mm&sup2;) carrying 20 A reaches the 3 percent mark at ${f(Math.floor(0.3048 * 0.03 * 120 * 6530 / (2 * K_CU * 20)))} m. The same wire on a 240 V circuit goes twice as far, because the allowed drop in volts is twice as large.`,
+  formulaM: `L = (0.03 &times; V &times; A) / (2 &times; ${f(K_CU * 5.067075e-4 / 0.3048, 4)} &times; I)&nbsp; [single-phase]<br>L = (0.03 &times; V &times; A) / (1.732 &times; ${f(K_CU * 5.067075e-4 / 0.3048, 4)} &times; I)&nbsp; [three-phase]<br>L in metres, A in mm&sup2;, copper at about 75&deg;C`,
   tables: () => [
     vdTable(120, 2, '120 V single-phase', [5, 10, 15, 20, 30, 40, 50]),
     vdTable(240, 2, '240 V single-phase', [15, 20, 30, 40, 50, 60, 80, 100]),
@@ -363,6 +366,8 @@ const CHARTS = [
   desc: 'Cooling load chart: kW to BTU/h and tons of cooling, CFM per kW by air temperature rise, and chilled water GPM per ton by temperature difference.',
   dek: 'A heat load in kilowatts expressed as BTU per hour and tons, and the airflow and chilled water flow needed to carry it away.',
   lead: '<b>One kilowatt of heat is 3,412 BTU per hour, and one ton of cooling is 12,000 BTU per hour, or 3.517 kW.</b> Nearly all the electricity an IT load draws leaves as heat, so a 100 kW room needs about 28.4 tons of sensible cooling before any allowance for other loads or redundancy.',
+  leadM: '<b>One kilowatt of electrical load is one kilowatt of heat to remove; in US units that is 3,412 BTU per hour, and a ton of cooling is 3.517 kW.</b> Nearly all the electricity an IT load draws leaves as heat, so a 100 kW room needs 100 kW of sensible cooling, about 28.4 tons, before any allowance for other loads or redundancy.',
+  formulaM: `m&sup3;/h = kW &times; ${f(3412.142 * 1.699011 / (1.08 * 1.8))} / &Delta;T (K)<br>L/s of water = kW / (${f(1 / (24 / 1.8 * 0.0630902 / 3.516853), 2)} &times; &Delta;T (K))<br>Tons = kW / 3.517`,
   tables: () => [
     { id: 'load', title: 'Heat load', caption: 'Sensible heat. For IT equipment, the electrical load in kW is the heat load in kW.',
       head: ['kW', 'BTU/h', 'Tons'],
@@ -545,13 +550,14 @@ function mainHTML(c, tables) {
 </section>
 
 <div class="artwrap">
-  <p>${c.lead}</p>
+${c.leadM ? `  <p data-units="us">${c.lead}</p>
+  <p data-units="metric" hidden>${c.leadM}</p>` : `  <p>${c.lead}</p>`}
   <div class="chart-actions">
     <button type="button" data-chart-print>Print this chart</button>
     <button type="button" data-chart-csv="${c.slug}">Download as CSV</button>${tables.some(t => t.metric) ? `
     <span class="chart-units" role="group" aria-label="Units" hidden><button type="button" data-units-btn="us" aria-pressed="true">US</button><button type="button" data-units-btn="metric" aria-pressed="false">Metric</button></span>` : ''}
   </div>${tables.some(t => t.metric) ? `
-  <p class="chartcap" data-units="metric" hidden>Metric tables are shown. The worked examples and formulas further down the page are in US units.</p>` : ''}
+  <p class="chartcap" data-units="metric" hidden>${c.leadM || c.formulaM ? 'Metric tables are shown. The questions and answers further down the page are in US units.' : 'Metric tables are shown. The text further down the page is in US units.'}</p>` : ''}
 
 ${tables.map(tableHTML).join('\n\n')}
 
@@ -562,7 +568,8 @@ ${c.how.map(p => `  <p>${p}</p>`).join('\n')}
 
   <h2>${c.calcTitle || 'How the values are calculated'}</h2>
 ${c.codeTable ? `  <p>${c.source}</p>
-    <div class="callout"><b>These are code values, not Voltfield\'s.</b> NEC and National Electrical Code are trademarks of the National Fire Protection Association, which publishes the code. Voltfield is not affiliated with it. The published code, in the edition adopted where you are, is the authority.</div>` : `    <div class="formula">${c.formula}</div>
+    <div class="callout"><b>These are code values, not Voltfield\'s.</b> NEC and National Electrical Code are trademarks of the National Fire Protection Association, which publishes the code. Voltfield is not affiliated with it. The published code, in the edition adopted where you are, is the authority.</div>` : `${c.formulaM ? `    <div class="formula" data-units="us">${c.formula}</div>
+    <div class="formula" data-units="metric" hidden>${c.formulaM}</div>` : `    <div class="formula">${c.formula}</div>`}
   <p>Every figure in the chart comes from the formulas above. Nothing is copied from a published table, so any cell can be checked by hand.</p>`}
 
   <h2>What this chart does not tell you</h2>

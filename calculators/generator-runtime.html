@@ -122,16 +122,32 @@
 
 
   <h2>The formula</h2>
+  <div data-u="us">
     <div class="formula">Runtime (hrs) = Fuel tank capacity (gal) / Fuel consumption rate (gal/hr)</div>
     <div class="tblwrap"><table class="famtable"><tbody>
       <tr><td class="num"><b>Tank capacity</b></td><td>Usable fuel volume, which is less than nominal capacity once the unusable heel is excluded</td></tr>
       <tr><td class="num"><b>Consumption rate</b></td><td>Gallons per hour at the expected load, from the genset spec sheet</td></tr>
     </tbody></table></div>
+  </div>
+  <div data-u="metric" hidden>
+    <div class="formula">Runtime (h) = Fuel tank capacity (L) / Fuel consumption rate (L/h)</div>
+    <div class="tblwrap"><table class="famtable"><tbody>
+      <tr><td class="num"><b>Tank capacity</b></td><td>Usable fuel volume, which is less than nominal capacity once the unusable heel is excluded</td></tr>
+      <tr><td class="num"><b>Consumption rate</b></td><td>Litres per hour at the expected load, from the genset spec sheet</td></tr>
+    </tbody></table></div>
+  </div>
 
   <h2>Worked example</h2>
+  <div data-u="us">
   <p>A 500 kW diesel set with a 1,000 gallon tank, consuming 26 gal/hr at 75% load:</p>
   <p>Runtime = 1000 / 26 = 38.5 hours</p>
   <p>At 25% load the same set might burn 11 gal/hr, giving about 90 hours — more than twice as long from the same tank.</p>
+  </div>
+  <div data-u="metric" hidden>
+  <p>A 500 kW diesel set with a 3,785 litre tank, consuming 98 L/h at 75% load:</p>
+  <p>Runtime = 3,785 / 98 = 38.6 hours</p>
+  <p>At 25% load the same set might burn 42 L/h, giving about 90 hours &mdash; more than twice as long from the same tank.</p>
+  </div>
 
   <h2>Which standard governs this</h2>
   <p>Emergency and standby system requirements come from NFPA 110, which classifies systems by how long they must run without refueling. On-site fuel storage is governed by NFPA 30 and local fire code.</p>

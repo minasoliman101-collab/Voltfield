@@ -111,7 +111,7 @@
   <section class="calc-tool" id="calculator" aria-label="Voltage Drop Calculator">
   <div class="estimator" id="vdCalc">
     <h2>Voltage Drop</h2>
-    <div class="sub">K = 12.9 (copper) or 21.2 (aluminum) ohm&middot;cmil/ft — approximate, ignores conductor reactance. Best for runs under ~250 ft.</div>
+    <div class="sub"><span data-u="us">K = 12.9 (copper) or 21.2 (aluminum) ohm&middot;cmil/ft — approximate, ignores conductor reactance. Best for runs under ~250 ft.</span><span data-u="metric" hidden>&rho; = 0.0214 (copper) or 0.0352 (aluminum) &Omega;&middot;mm&sup2;/m &mdash; approximate, ignores conductor reactance. Best for runs under about 75 m.</span></div>
     <div class="est-row">
       <div class="est-field"><label for="vdPhase">Phase</label><select id="vdPhase"><option value="1">Single-phase</option><option value="3" selected>Three-phase</option></select></div>
       <div class="est-field"><label for="vdMat">Conductor</label><select id="vdMat"><option value="12.9">Copper</option><option value="21.2">Aluminum</option></select></div>
@@ -131,6 +131,7 @@
 
 
   <h2>The formula</h2>
+  <div data-u="us">
     <div class="formula">VD = (2 &times; K &times; I &times; D) / CM  [single-phase]<br>VD = (1.732 &times; K &times; I &times; D) / CM  [three-phase]</div>
     <div class="tblwrap"><table class="famtable"><tbody>
       <tr><td class="num"><b>K</b></td><td>Resistivity constant: 12.9 for copper, 21.2 for aluminum, in ohm-cmil/ft</td></tr>
@@ -139,12 +140,31 @@
       <tr><td class="num"><b>CM</b></td><td>Conductor cross-section in circular mils</td></tr>
       <tr><td class="num"><b>2 or 1.732</b></td><td>Accounts for the return path: two conductors single-phase, the square root of three for three-phase</td></tr>
     </tbody></table></div>
+  </div>
+  <div data-u="metric" hidden>
+    <div class="formula">VD = (2 &times; &rho; &times; I &times; L) / A&nbsp; [single-phase]<br>VD = (1.732 &times; &rho; &times; I &times; L) / A&nbsp; [three-phase]</div>
+    <div class="tblwrap"><table class="famtable"><tbody>
+      <tr><td class="num"><b>&rho;</b></td><td>Resistivity: 0.0214 for copper, 0.0352 for aluminum, in &Omega;&middot;mm&sup2;/m at about 75&deg;C. These are the K factors 12.9 and 21.2 expressed in metric units</td></tr>
+      <tr><td class="num"><b>I</b></td><td>Load current in amperes</td></tr>
+      <tr><td class="num"><b>L</b></td><td>One-way circuit length in metres</td></tr>
+      <tr><td class="num"><b>A</b></td><td>Conductor cross-section in mm&sup2;. AWG sizes are not round numbers in metric: 2 AWG is 33.6 mm&sup2; and 4/0 is 107 mm&sup2;</td></tr>
+      <tr><td class="num"><b>2 or 1.732</b></td><td>Accounts for the return path: two conductors single-phase, the square root of three for three-phase</td></tr>
+    </tbody></table></div>
+  </div>
 
   <h2>Worked example</h2>
+  <div data-u="us">
   <p>A 100 A three-phase load at 480 V, 150 ft away, on 2 AWG copper (66,360 cmil):</p>
   <p>VD = (1.732 &times; 12.9 &times; 100 &times; 150) / 66,360 = 5.05 V</p>
   <p>As a percentage: 5.05 / 480 = 1.05%. Comfortably inside 3%.</p>
   <p>Move the same load to 400 ft and it becomes 13.5 V, or 2.8% — still inside the limit, but with nothing left for the branch circuit beyond it.</p>
+  </div>
+  <div data-u="metric" hidden>
+  <p>A 100 A three-phase load at 480 V, 45 m away, on 2 AWG copper (33.6 mm&sup2;):</p>
+  <p>VD = (1.732 &times; 0.0214 &times; 100 &times; 45) / 33.6 = 4.97 V</p>
+  <p>As a percentage: 4.97 / 480 = 1.04%. Comfortably inside 3%.</p>
+  <p>Move the same load to 120 m and it becomes 13.3 V, or 2.8% &mdash; still inside the limit, but with nothing left for the branch circuit beyond it.</p>
+  </div>
 
   <h2>Which standard governs this</h2>
   <p>The K-factor method is the standard hand calculation. NEC 210.19(A) and 215.2(A) informational notes give the 3% branch and 5% total figures. For exact work, IEEE Std 141 (the Red Book) covers the full method with reactance included.</p>

@@ -127,7 +127,7 @@
     <button type="button" data-chart-csv="awg-wire-size-chart">Download as CSV</button>
     <span class="chart-units" role="group" aria-label="Units" hidden><button type="button" data-units-btn="us" aria-pressed="true">US</button><button type="button" data-units-btn="metric" aria-pressed="false">Metric</button></span>
   </div>
-  <p class="chartcap" data-units="metric" hidden>Metric tables are shown. The worked examples and formulas further down the page are in US units.</p>
+  <p class="chartcap" data-units="metric" hidden>Metric tables are shown. The questions and answers further down the page are in US units.</p>
 
   <div data-units="us">
   <h2 id="awg">AWG and kcmil wire sizes</h2>
@@ -206,7 +206,8 @@
   <p>Resistance is K &times; 1000 / area, with K = 12.9 for copper and 21.2 for aluminum in ohm-circular mils per foot. That is the same approximation the voltage drop calculator uses, and it tracks the 75&deg;C figures in NEC Chapter 9, Table 8 closely.</p>
 
   <h2>How the values are calculated</h2>
-    <div class="formula">Area (cmil) = (diameter in mils)&sup2;<br>Area (mm&sup2;) = cmil &times; 0.0005067<br>R (&Omega;/1000 ft) = K &times; 1000 / cmil</div>
+    <div class="formula" data-units="us">Area (cmil) = (diameter in mils)&sup2;<br>Area (mm&sup2;) = cmil &times; 0.0005067<br>R (&Omega;/1000 ft) = K &times; 1000 / cmil</div>
+    <div class="formula" data-units="metric" hidden>Area (mm&sup2;) = &pi; / 4 &times; d&sup2;, with d in mm<br>R (&Omega;/km) = &rho; &times; 1000 / A, with &rho; = 0.0214 for copper and 0.0352 for aluminum, in &Omega;&middot;mm&sup2;/m</div>
   <p>Every figure in the chart comes from the formulas above. Nothing is copied from a published table, so any cell can be checked by hand.</p>
 
   <h2>What this chart does not tell you</h2>

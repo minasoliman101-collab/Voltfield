@@ -109,7 +109,7 @@
   <section class="calc-tool" id="calculator" aria-label="Pipe Velocity Calculator">
   <div class="estimator" id="pvCalc">
     <h2>Pipe Velocity</h2>
-    <div class="sub">v = 0.4085 &times; GPM &divide; d&sup2;. Use the inside diameter, not the nominal size: 4 in Schedule 40 steel is 4.026 in.</div>
+    <div class="sub"><span data-u="us">v = 0.4085 &times; GPM &divide; d&sup2;. Use the inside diameter, not the nominal size: 4 in Schedule 40 steel is 4.026 in.</span><span data-u="metric" hidden>v = 1,273 &times; L/s &divide; d&sup2;, with d in millimetres. Use the inside diameter, not the nominal size: DN 100 Schedule 40 steel is 102.3 mm.</span></div>
     <div class="est-row">
       <div class="est-field"><label for="pvGpm">Flow (GPM)</label><input type="number" id="pvGpm" min="0" step="any" placeholder="e.g. 240"></div>
       <div class="est-field"><label for="pvId">Inside diameter (in)</label><input type="number" id="pvId" min="0" step="any" placeholder="e.g. 4.026"></div>
@@ -119,24 +119,48 @@
   </div>
   </section>
 
+  <div data-u="us">
   <p><b>Water velocity in feet per second is 0.4085 times the flow in GPM, divided by the square of the pipe's inside diameter in inches.</b> Because diameter is squared, one pipe size makes a large difference: the same 240 GPM runs at 6.0 ft/s in 4 inch pipe and 10.4 ft/s in 3 inch.</p>
   <p>Velocity is the quick test of whether a pipe is the right size. Too fast, and the pipe is noisy, erodes at elbows and tees, and loses a great deal of pressure. Too slow, and air and dirt drop out of the flow instead of being carried to where they can be removed.</p>
+  </div>
+  <div data-u="metric" hidden>
+  <p><b>Water velocity in metres per second is 1,273 times the flow in litres per second, divided by the square of the pipe's inside diameter in millimetres.</b> Because diameter is squared, one pipe size makes a large difference: the same 15 L/s runs at 1.8 m/s in DN 100 pipe and 3.1 m/s in DN 80.</p>
+  <p>Velocity is the quick test of whether a pipe is the right size. Too fast, and the pipe is noisy, erodes at elbows and tees, and loses a great deal of pressure. Too slow, and air and dirt drop out of the flow instead of being carried to where they can be removed.</p>
+  </div>
 
   <h2>The formula</h2>
+  <div data-u="us">
     <div class="formula">v = 0.4085 &times; GPM / d&sup2;</div>
     <div class="tblwrap"><table class="famtable"><tbody>
       <tr><td class="num"><b>v</b></td><td>Velocity in feet per second</td></tr>
       <tr><td class="num"><b>GPM</b></td><td>Flow in US gallons per minute</td></tr>
       <tr><td class="num"><b>d</b></td><td>Inside diameter of the pipe in inches, which is not the nominal size</td></tr>
     </tbody></table></div>
+  </div>
+  <div data-u="metric" hidden>
+    <div class="formula">v = 1,273 &times; Q / d&sup2;</div>
+    <div class="tblwrap"><table class="famtable"><tbody>
+      <tr><td class="num"><b>v</b></td><td>Velocity in metres per second</td></tr>
+      <tr><td class="num"><b>Q</b></td><td>Flow in litres per second</td></tr>
+      <tr><td class="num"><b>d</b></td><td>Inside diameter of the pipe in millimetres, which is not the nominal size</td></tr>
+      <tr><td class="num"><b>1,273</b></td><td>From the area of a circle: 4 / &pi;, with the units converted</td></tr>
+    </tbody></table></div>
+  </div>
 
   <h2>The equipment</h2>
   <div data-vfcv-slot="pump"></div>
 
   <h2>Worked example</h2>
+  <div data-u="us">
   <p>240 GPM in 4 inch Schedule 40 steel pipe, which has an inside diameter of 4.026 in:</p>
   <p>v = 0.4085 &times; 240 / 4.026&sup2; = 98.04 / 16.21 = 6.05 ft/s</p>
   <p>The same flow in 3 inch Schedule 40, inside diameter 3.068 in, runs at 10.4 ft/s, which is on the fast side for a closed hydronic system.</p>
+  </div>
+  <div data-u="metric" hidden>
+  <p>15 L/s in DN 100 (4 inch) Schedule 40 steel pipe, which has an inside diameter of 102.3 mm:</p>
+  <p>v = 1,273 &times; 15 / 102.3&sup2; = 19,095 / 10,465 = 1.82 m/s</p>
+  <p>The same flow in DN 80 (3 inch) Schedule 40, inside diameter 77.9 mm, runs at 3.15 m/s, which is on the fast side for a closed hydronic system.</p>
+  </div>
 
   <h2>Which standard governs this</h2>
   <p>The equation is continuity: flow equals velocity times area. Pipe dimensions come from ASME B36.10 for steel pipe. The ASHRAE Handbook gives the customary hydronic sizing limits, commonly quoted as about 4 ft/s in pipe of 2 inches and under and a friction loss of about 4 ft of head per 100 ft in larger pipe.</p>

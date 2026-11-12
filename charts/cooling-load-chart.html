@@ -121,13 +121,14 @@
 </section>
 
 <div class="artwrap">
-  <p><b>One kilowatt of heat is 3,412 BTU per hour, and one ton of cooling is 12,000 BTU per hour, or 3.517 kW.</b> Nearly all the electricity an IT load draws leaves as heat, so a 100 kW room needs about 28.4 tons of sensible cooling before any allowance for other loads or redundancy.</p>
+  <p data-units="us"><b>One kilowatt of heat is 3,412 BTU per hour, and one ton of cooling is 12,000 BTU per hour, or 3.517 kW.</b> Nearly all the electricity an IT load draws leaves as heat, so a 100 kW room needs about 28.4 tons of sensible cooling before any allowance for other loads or redundancy.</p>
+  <p data-units="metric" hidden><b>One kilowatt of electrical load is one kilowatt of heat to remove; in US units that is 3,412 BTU per hour, and a ton of cooling is 3.517 kW.</b> Nearly all the electricity an IT load draws leaves as heat, so a 100 kW room needs 100 kW of sensible cooling, about 28.4 tons, before any allowance for other loads or redundancy.</p>
   <div class="chart-actions">
     <button type="button" data-chart-print>Print this chart</button>
     <button type="button" data-chart-csv="cooling-load-chart">Download as CSV</button>
     <span class="chart-units" role="group" aria-label="Units" hidden><button type="button" data-units-btn="us" aria-pressed="true">US</button><button type="button" data-units-btn="metric" aria-pressed="false">Metric</button></span>
   </div>
-  <p class="chartcap" data-units="metric" hidden>Metric tables are shown. The worked examples and formulas further down the page are in US units.</p>
+  <p class="chartcap" data-units="metric" hidden>Metric tables are shown. The questions and answers further down the page are in US units.</p>
 
   <h2 id="load">Heat load</h2>
   <div class="chartwrap" tabindex="0" role="region" aria-labelledby="load">
@@ -231,7 +232,8 @@
   <p>The airflow and water flow tables show the same thing from two directions: the wider the temperature difference a system is designed for, the less fluid it has to move. Since fan and pump power fall with the cube of flow, this is where much of a cooling system's efficiency is decided.</p>
 
   <h2>How the values are calculated</h2>
-    <div class="formula">BTU/h = kW &times; 3,412<br>Tons = BTU/h / 12,000<br>CFM = BTU/h / (1.08 &times; &Delta;T)<br>GPM = tons &times; 24 / &Delta;T</div>
+    <div class="formula" data-units="us">BTU/h = kW &times; 3,412<br>Tons = BTU/h / 12,000<br>CFM = BTU/h / (1.08 &times; &Delta;T)<br>GPM = tons &times; 24 / &Delta;T</div>
+    <div class="formula" data-units="metric" hidden>m&sup3;/h = kW &times; 2,982 / &Delta;T (K)<br>L/s of water = kW / (4.18 &times; &Delta;T (K))<br>Tons = kW / 3.517</div>
   <p>Every figure in the chart comes from the formulas above. Nothing is copied from a published table, so any cell can be checked by hand.</p>
 
   <h2>What this chart does not tell you</h2>

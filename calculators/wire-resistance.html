@@ -108,7 +108,7 @@
   <section class="calc-tool" id="calculator" aria-label="Wire Resistance Calculator">
   <div class="estimator" id="wrCalc">
     <h2>Wire Resistance</h2>
-    <div class="sub">K = 12.9 (copper) or 21.2 (aluminum) ohm&middot;cmil/ft. DC resistance at about 75&deg;C.</div>
+    <div class="sub"><span data-u="us">K = 12.9 (copper) or 21.2 (aluminum) ohm&middot;cmil/ft. DC resistance at about 75&deg;C.</span><span data-u="metric" hidden>&rho; = 0.0214 (copper) or 0.0352 (aluminum) &Omega;&middot;mm&sup2;/m. DC resistance at about 75&deg;C.</span></div>
     <div class="est-row">
       <div class="est-field"><label for="wrSize">Wire size</label><select id="wrSize"></select></div>
       <div class="est-field"><label for="wrMat">Conductor</label><select id="wrMat"><option value="12.9" selected>Copper</option><option value="21.2">Aluminum</option></select></div>
@@ -124,6 +124,7 @@
   <p>Resistance is what voltage drop and conductor heating come from, so this is the figure underneath both. For a two-wire circuit the current flows out and back, and the resistance that matters is that of both conductors, twice the one-way figure.</p>
 
   <h2>The formula</h2>
+  <div data-u="us">
     <div class="formula">R = K &times; L / A</div>
     <div class="tblwrap"><table class="famtable"><tbody>
       <tr><td class="num"><b>R</b></td><td>Resistance in ohms</td></tr>
@@ -131,12 +132,30 @@
       <tr><td class="num"><b>L</b></td><td>Length in feet. One way, or doubled for a two-wire circuit</td></tr>
       <tr><td class="num"><b>A</b></td><td>Conductor area in circular mils. 12 AWG is 6,530; 4/0 AWG is 211,600</td></tr>
     </tbody></table></div>
+  </div>
+  <div data-u="metric" hidden>
+    <div class="formula">R = &rho; &times; L / A</div>
+    <div class="tblwrap"><table class="famtable"><tbody>
+      <tr><td class="num"><b>R</b></td><td>Resistance in ohms</td></tr>
+      <tr><td class="num"><b>&rho;</b></td><td>0.0214 for copper, 0.0352 for aluminum, in &Omega;&middot;mm&sup2;/m at about 75&deg;C</td></tr>
+      <tr><td class="num"><b>L</b></td><td>Length in metres. One way, or doubled for a two-wire circuit</td></tr>
+      <tr><td class="num"><b>A</b></td><td>Conductor area in mm&sup2;. 12 AWG is 3.31; 4/0 AWG is 107</td></tr>
+    </tbody></table></div>
+  </div>
 
   <h2>Worked example</h2>
+  <div data-u="us">
   <p>100 ft of 12 AWG copper, one way:</p>
   <p>R = 12.9 &times; 100 / 6,530 = 0.1975 &Omega;</p>
   <p>That is 1.975 &Omega; per 1000 ft, in line with the figures NEC Chapter 9, Table 8 gives for 12 AWG copper.</p>
   <p>For a two-wire circuit the current passes through 200 ft of conductor, so the resistance is 0.3951 &Omega;. At 16 A that drops 16 &times; 0.3951 = 6.3 V, which on a 120 V circuit is 5.3 percent, well past the 3 percent usually recommended for a branch circuit.</p>
+  </div>
+  <div data-u="metric" hidden>
+  <p>30 m of 12 AWG copper, one way:</p>
+  <p>R = 0.0214 &times; 30 / 3.31 = 0.1944 &Omega;</p>
+  <p>That is 6.48 &Omega; per km.</p>
+  <p>For a two-wire circuit the current passes through 60 m of conductor, so the resistance is 0.3889 &Omega;. At 16 A that drops 16 &times; 0.3889 = 6.2 V, which on a 120 V circuit is 5.2 percent, well past the 3 percent usually recommended for a branch circuit.</p>
+  </div>
 
   <h2>Which standard governs this</h2>
   <p>NEC Chapter 9, Table 8 gives DC resistance for conductors at 75&deg;C, and Table 9 gives AC resistance and reactance for conductors in conduit. Conductor areas in circular mils follow the AWG definition in ASTM B258. The K-factor method used here is an approximation to Table 8.</p>

@@ -109,7 +109,7 @@
   <section class="calc-tool" id="calculator" aria-label="Chilled Water Flow Calculator">
   <div class="estimator" id="chwCalc">
     <h2>Chilled Water Flow</h2>
-    <div class="sub">GPM = BTU/h &divide; (500 &times; &Delta;T). Plain water.</div>
+    <div class="sub"><span data-u="us">GPM = BTU/h &divide; (500 &times; &Delta;T). Plain water.</span><span data-u="metric" hidden>L/s = kW &divide; (4.18 &times; &Delta;T in kelvin). Plain water.</span></div>
     <div class="est-row">
       <div class="est-field"><label for="chwUnit">Load in</label><select id="chwUnit"><option value="tons" selected>Tons</option><option value="kw">kW</option></select></div>
       <div class="est-field"><label for="chwLoad">Cooling load (tons)</label><input type="number" id="chwLoad" min="0" step="any" placeholder="e.g. 100"></div>
@@ -120,10 +120,17 @@
   </div>
   </section>
 
+  <div data-u="us">
   <p><b>Chilled water flow in GPM is the load in BTU per hour divided by 500 times the temperature difference in degrees Fahrenheit.</b> With the load in tons it shortens to GPM = tons &times; 24 / &Delta;T. At the traditional 10&deg;F difference that is 2.4 GPM per ton; at 12&deg;F it is 2.0 and at 16&deg;F it is 1.5.</p>
   <p>The temperature difference is the lever. A wider one moves the same heat with less water, which means smaller pipes and less pump energy. It is why chilled water systems for data centers are designed with wider differences than the old comfort-cooling rule of thumb.</p>
+  </div>
+  <div data-u="metric" hidden>
+  <p><b>Chilled water flow in litres per second is the load in kilowatts divided by 4.18 times the temperature difference in kelvin.</b> At a 5.5 K difference that is 0.043 L/s for each kW; at 7 K it is 0.034 and at 9 K it is 0.027.</p>
+  <p>The temperature difference is the lever. A wider one moves the same heat with less water, which means smaller pipes and less pump energy. It is why chilled water systems for data centers are designed with wider differences than the old comfort-cooling rule of thumb.</p>
+  </div>
 
   <h2>The formula</h2>
+  <div data-u="us">
     <div class="formula">GPM = BTU/h / (500 &times; &Delta;T)<br>GPM = tons &times; 24 / &Delta;T</div>
     <div class="tblwrap"><table class="famtable"><tbody>
       <tr><td class="num"><b>GPM</b></td><td>Water flow in US gallons per minute</td></tr>
@@ -131,15 +138,32 @@
       <tr><td class="num"><b>500</b></td><td>A constant for water: 8.33 lb/gal &times; 60 minutes &times; specific heat 1.0 BTU/lb&middot;&deg;F</td></tr>
       <tr><td class="num"><b>tons</b></td><td>Cooling load in tons of refrigeration, 12,000 BTU/h each</td></tr>
     </tbody></table></div>
+  </div>
+  <div data-u="metric" hidden>
+    <div class="formula">Q (L/s) = P (kW) / (4.18 &times; &Delta;T)</div>
+    <div class="tblwrap"><table class="famtable"><tbody>
+      <tr><td class="num"><b>Q</b></td><td>Water flow in litres per second</td></tr>
+      <tr><td class="num"><b>&Delta;T</b></td><td>Difference between return and supply water temperature, in kelvin</td></tr>
+      <tr><td class="num"><b>4.18</b></td><td>The specific heat of water in kJ/kg&middot;K, with one litre taken as one kilogram</td></tr>
+      <tr><td class="num"><b>P</b></td><td>Cooling load in kW. One ton of refrigeration is 3.517 kW</td></tr>
+    </tbody></table></div>
+  </div>
 
   <h2>The equipment</h2>
   <div data-vfcv-slot="chiller"></div>
 
   <h2>Worked example</h2>
+  <div data-u="us">
   <p>A 100 ton load with water supplied at 44&deg;F and returning at 54&deg;F:</p>
   <p>GPM = 100 &times; 24 / 10 = 240 GPM</p>
   <p>Widen the difference to 16&deg;F and the same load needs 150 GPM. Because pump power falls much faster than flow, the saving in pumping energy is larger than the 38 percent cut in flow suggests.</p>
   <p>A 500 kW IT load is 500 &times; 3,412 = 1,706,000 BTU/h, or 142 tons. At a 12&deg;F difference it needs 284 GPM.</p>
+  </div>
+  <div data-u="metric" hidden>
+  <p>A 350 kW load with water supplied at 7&deg;C and returning at 12.5&deg;C:</p>
+  <p>Q = 350 / (4.18 &times; 5.5) = 15.2 L/s</p>
+  <p>Widen the difference to 9 K and the same load needs 9.3 L/s. Because pump power falls much faster than flow, the saving in pumping energy is larger than the 39 percent cut in flow suggests.</p>
+  </div>
 
   <h2>Which standard governs this</h2>
   <p>The equation is the standard hydronic heat-transfer relation from the ASHRAE Handbook. Chiller ratings are certified under AHRI Standard 550/590, which is where the traditional 44&deg;F leaving water and 2.4 GPM per ton rating condition comes from.</p>

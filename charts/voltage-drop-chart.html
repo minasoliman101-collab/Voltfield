@@ -121,13 +121,14 @@
 </section>
 
 <div class="artwrap">
-  <p><b>For a 3 percent drop, the longest one-way run is 0.03 times the voltage times the wire area, divided by the current and a constant.</b> At 120 V, 12 AWG copper carrying 20 A reaches the 3 percent mark at 45 ft. The same wire on a 240 V circuit goes twice as far, because the allowed drop in volts is twice as large.</p>
+  <p data-units="us"><b>For a 3 percent drop, the longest one-way run is 0.03 times the voltage times the wire area, divided by the current and a constant.</b> At 120 V, 12 AWG copper carrying 20 A reaches the 3 percent mark at 45 ft. The same wire on a 240 V circuit goes twice as far, because the allowed drop in volts is twice as large.</p>
+  <p data-units="metric" hidden><b>For a 3 percent drop, the longest one-way run is 0.03 times the voltage times the wire area, divided by the current and a constant.</b> At 120 V, 12 AWG copper (3.31 mm&sup2;) carrying 20 A reaches the 3 percent mark at 13 m. The same wire on a 240 V circuit goes twice as far, because the allowed drop in volts is twice as large.</p>
   <div class="chart-actions">
     <button type="button" data-chart-print>Print this chart</button>
     <button type="button" data-chart-csv="voltage-drop-chart">Download as CSV</button>
     <span class="chart-units" role="group" aria-label="Units" hidden><button type="button" data-units-btn="us" aria-pressed="true">US</button><button type="button" data-units-btn="metric" aria-pressed="false">Metric</button></span>
   </div>
-  <p class="chartcap" data-units="metric" hidden>Metric tables are shown. The worked examples and formulas further down the page are in US units.</p>
+  <p class="chartcap" data-units="metric" hidden>Metric tables are shown. The questions and answers further down the page are in US units.</p>
 
   <div data-units="us">
   <h2 id="vd120">Maximum one-way length for 3% drop: 120 V single-phase</h2>
@@ -284,7 +285,8 @@
   <p>For a 5 percent limit, multiply any length by 1.67. For aluminum, multiply by 0.61. For a different voltage on the same kind of circuit, scale the length in proportion: a 208 V single-phase run is 208/240 of the 240 V figure.</p>
 
   <h2>How the values are calculated</h2>
-    <div class="formula">L = (0.03 &times; V &times; cmil) / (2 &times; 12.9 &times; I)&nbsp; [single-phase]<br>L = (0.03 &times; V &times; cmil) / (1.732 &times; 12.9 &times; I)&nbsp; [three-phase]</div>
+    <div class="formula" data-units="us">L = (0.03 &times; V &times; cmil) / (2 &times; 12.9 &times; I)&nbsp; [single-phase]<br>L = (0.03 &times; V &times; cmil) / (1.732 &times; 12.9 &times; I)&nbsp; [three-phase]</div>
+    <div class="formula" data-units="metric" hidden>L = (0.03 &times; V &times; A) / (2 &times; 0.0214 &times; I)&nbsp; [single-phase]<br>L = (0.03 &times; V &times; A) / (1.732 &times; 0.0214 &times; I)&nbsp; [three-phase]<br>L in metres, A in mm&sup2;, copper at about 75&deg;C</div>
   <p>Every figure in the chart comes from the formulas above. Nothing is copied from a published table, so any cell can be checked by hand.</p>
 
   <h2>What this chart does not tell you</h2>

@@ -1307,6 +1307,8 @@
           f._pair={from:was,to:f.value};
         }
       });
+      /* The explanatory text has a metric twin too (scripts/add-metric-prose.mjs). */
+      document.querySelectorAll('[data-u]').forEach(function(el){el.hidden=(el.getAttribute('data-u')==='metric')!==U.metric;});
       document.querySelectorAll('.est-units button').forEach(function(b){
         const on=(b.getAttribute('data-units')==='metric')===U.metric;
         b.setAttribute('aria-pressed',on?'true':'false');

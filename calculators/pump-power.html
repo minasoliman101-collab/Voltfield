@@ -109,7 +109,7 @@
   <section class="calc-tool" id="calculator" aria-label="Pump Power Calculator">
   <div class="estimator" id="ppCalc">
     <h2>Pump Power</h2>
-    <div class="sub">Water hp = GPM &times; head &times; SG &divide; 3,960. One duty point; check the motor against the whole pump curve.</div>
+    <div class="sub"><span data-u="us">Water hp = GPM &times; head &times; SG &divide; 3,960. One duty point; check the motor against the whole pump curve.</span><span data-u="metric" hidden>Water power in kW = L/s &times; head in metres &times; SG &divide; 102. One duty point; check the motor against the whole pump curve.</span></div>
     <div class="est-row">
       <div class="est-field"><label for="ppGpm">Flow (GPM)</label><input type="number" id="ppGpm" min="0" step="any" placeholder="e.g. 500"></div>
       <div class="est-field"><label for="ppHead">Total head (ft)</label><input type="number" id="ppHead" min="0" step="any" placeholder="e.g. 80"></div>
@@ -124,10 +124,17 @@
   </div>
   </section>
 
+  <div data-u="us">
   <p><b>Pump power is flow times head divided by 3,960, divided again by the pump's efficiency.</b> Flow in GPM times head in feet over 3,960 gives the power delivered to the water. Dividing by pump efficiency gives the brake horsepower the shaft has to supply, and dividing that by motor efficiency gives the electrical input.</p>
   <p>Head is the pressure the pump adds, expressed as the height of a column of the liquid. It is not the height the water is lifted, unless the system is open. In a closed chilled water loop the static heights cancel and the head is all friction: pipe, fittings, valves, the coil and the chiller.</p>
+  </div>
+  <div data-u="metric" hidden>
+  <p><b>Pump power in kilowatts is flow in litres per second times head in metres, divided by 102, and divided again by the pump's efficiency.</b> Flow times head over 102 gives the power delivered to the water. Dividing by pump efficiency gives the power the shaft has to supply, and dividing that by motor efficiency gives the electrical input.</p>
+  <p>Head is the pressure the pump adds, expressed as the height of a column of the liquid. It is not the height the water is lifted, unless the system is open. In a closed chilled water loop the static heights cancel and the head is all friction: pipe, fittings, valves, the coil and the chiller.</p>
+  </div>
 
   <h2>The formula</h2>
+  <div data-u="us">
     <div class="formula">Water hp = GPM &times; head (ft) &times; SG / 3,960<br>Brake hp = water hp / pump efficiency<br>Input kW = brake hp &times; 0.7457 / motor efficiency</div>
     <div class="tblwrap"><table class="famtable"><tbody>
       <tr><td class="num"><b>GPM</b></td><td>Flow in US gallons per minute</td></tr>
@@ -136,16 +143,37 @@
       <tr><td class="num"><b>Pump efficiency</b></td><td>From the pump curve at the duty point, as a fraction</td></tr>
       <tr><td class="num"><b>Motor efficiency</b></td><td>From the motor nameplate, as a fraction</td></tr>
     </tbody></table></div>
+  </div>
+  <div data-u="metric" hidden>
+    <div class="formula">Water kW = Q (L/s) &times; H (m) &times; SG / 102<br>Shaft kW = water kW / pump efficiency<br>Input kW = shaft kW / motor efficiency</div>
+    <div class="tblwrap"><table class="famtable"><tbody>
+      <tr><td class="num"><b>Q</b></td><td>Flow in litres per second</td></tr>
+      <tr><td class="num"><b>H</b></td><td>Total dynamic head in metres of liquid</td></tr>
+      <tr><td class="num"><b>SG</b></td><td>Specific gravity. 1.0 for water</td></tr>
+      <tr><td class="num"><b>102</b></td><td>A constant for water: 1,000 divided by the acceleration of gravity, 9.81 m/s&sup2;</td></tr>
+      <tr><td class="num"><b>Pump efficiency</b></td><td>From the pump curve at the duty point, as a fraction</td></tr>
+      <tr><td class="num"><b>Motor efficiency</b></td><td>From the motor nameplate, as a fraction</td></tr>
+    </tbody></table></div>
+  </div>
 
   <h2>The equipment</h2>
   <div data-vfcv-slot="pump"></div>
 
   <h2>Worked example</h2>
+  <div data-u="us">
   <p>A chilled water pump delivering 500 GPM against 80 ft of head, with a pump efficiency of 75 percent and a motor efficiency of 93 percent:</p>
   <p>Water hp = 500 &times; 80 &times; 1.0 / 3,960 = 10.1 hp</p>
   <p>Brake hp = 10.1 / 0.75 = 13.5 hp</p>
   <p>Input kW = 13.5 &times; 0.7457 / 0.93 = 10.8 kW</p>
   <p>The next standard motor at or above 13.5 hp is 15 hp. Running all year, 10.8 kW is about 94,600 kWh.</p>
+  </div>
+  <div data-u="metric" hidden>
+  <p>A chilled water pump delivering 30 L/s against 24 m of head, with a pump efficiency of 75 percent and a motor efficiency of 93 percent:</p>
+  <p>Water kW = 30 &times; 24 &times; 1.0 / 102 = 7.1 kW</p>
+  <p>Shaft kW = 7.1 / 0.75 = 9.4 kW</p>
+  <p>Input kW = 9.4 / 0.93 = 10.1 kW</p>
+  <p>The next standard IEC motor at or above 9.4 kW is 11 kW. Running all year, 10.1 kW is about 88,500 kWh.</p>
+  </div>
 
   <h2>Which standard governs this</h2>
   <p>The equations are the standard pump relations published by the Hydraulic Institute and in the ASHRAE Handbook. Motor efficiency classes and standard horsepower ratings come from NEMA MG 1. ASHRAE Standard 90.1 limits pumping power in building hydronic systems and requires variable flow above certain sizes.</p>

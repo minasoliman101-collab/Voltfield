@@ -109,7 +109,7 @@
   <section class="calc-tool" id="calculator" aria-label="Airflow (CFM) Calculator">
   <div class="estimator" id="cfmCalc">
     <h2>Airflow for a Heat Load</h2>
-    <div class="sub">CFM = BTU/h &divide; (1.08 &times; &Delta;T). Sensible heat, standard air at sea level.</div>
+    <div class="sub"><span data-u="us">CFM = BTU/h &divide; (1.08 &times; &Delta;T). Sensible heat, standard air at sea level.</span><span data-u="metric" hidden>m&sup3;/h = kW &times; 2,982 &divide; &Delta;T in kelvin. Sensible heat, standard air at sea level.</span></div>
     <div class="est-row">
       <div class="est-field"><label for="cfmKw">Heat load (kW)</label><input type="number" id="cfmKw" min="0" step="any" placeholder="e.g. 10"></div>
       <div class="est-field"><label for="cfmDt">Air temperature rise (&deg;F)</label><input type="number" id="cfmDt" min="0" step="any" placeholder="e.g. 20"></div>
@@ -119,10 +119,17 @@
   </div>
   </section>
 
+  <div data-u="us">
   <p><b>The airflow needed to carry away a heat load is the load in BTU per hour divided by 1.08 times the air temperature rise in degrees Fahrenheit.</b> For 10 kW of IT equipment and a 20&deg;F rise that is about 1,580 CFM, or 158 CFM per kW. Halve the temperature rise and the airflow doubles.</p>
   <p>This is the sum behind every question about whether a rack, a row or a room has enough air. Almost all the electrical power going into IT equipment leaves as heat, so the heat load in kW is the electrical load in kW.</p>
+  </div>
+  <div data-u="metric" hidden>
+  <p><b>The airflow needed to carry away a heat load, in cubic metres per hour, is the load in kilowatts times 2,982, divided by the air temperature rise in kelvin.</b> For 10 kW of IT equipment and an 11 K rise that is about 2,711 m&sup3;/h, or 271 m&sup3;/h per kW. Halve the temperature rise and the airflow doubles.</p>
+  <p>This is the sum behind every question about whether a rack, a row or a room has enough air. Almost all the electrical power going into IT equipment leaves as heat, so the heat load in kW is the electrical load in kW.</p>
+  </div>
 
   <h2>The formula</h2>
+  <div data-u="us">
     <div class="formula">CFM = BTU/h / (1.08 &times; &Delta;T)<br>BTU/h = kW &times; 3,412</div>
     <div class="tblwrap"><table class="famtable"><tbody>
       <tr><td class="num"><b>CFM</b></td><td>Airflow in cubic feet per minute</td></tr>
@@ -130,15 +137,32 @@
       <tr><td class="num"><b>1.08</b></td><td>A constant for standard air: density 0.075 lb/ft&sup3; &times; specific heat 0.24 BTU/lb&middot;&deg;F &times; 60 minutes</td></tr>
       <tr><td class="num"><b>kW</b></td><td>Sensible heat load, which for IT equipment is its electrical input</td></tr>
     </tbody></table></div>
+  </div>
+  <div data-u="metric" hidden>
+    <div class="formula">Q (m&sup3;/h) = P (kW) &times; 2,982 / &Delta;T (K)<br>Q (m&sup3;/s) = P (kW) / (1.2 &times; 1.006 &times; &Delta;T)</div>
+    <div class="tblwrap"><table class="famtable"><tbody>
+      <tr><td class="num"><b>Q</b></td><td>Airflow, in cubic metres per hour or per second</td></tr>
+      <tr><td class="num"><b>&Delta;T</b></td><td>Temperature rise of the air across the equipment, in kelvin. One kelvin is the same step as one degree Celsius</td></tr>
+      <tr><td class="num"><b>2,982</b></td><td>A constant for standard air: 3,600 seconds divided by density 1.2 kg/m&sup3; and specific heat 1.006 kJ/kg&middot;K</td></tr>
+      <tr><td class="num"><b>P</b></td><td>Sensible heat load, which for IT equipment is its electrical input</td></tr>
+    </tbody></table></div>
+  </div>
 
   <h2>The equipment</h2>
   <div data-vfcv-slot="cooling"></div>
 
   <h2>Worked example</h2>
+  <div data-u="us">
   <p>A rack drawing 10 kW, with air entering at 75&deg;F and leaving at 95&deg;F:</p>
   <p>BTU/h = 10 &times; 3,412 = 34,121</p>
   <p>CFM = 34,121 / (1.08 &times; 20) = 1,580 CFM, or 158 CFM per kW</p>
   <p>The same rack with a 30&deg;F rise needs 1,053 CFM. Wider temperature rise is the reason high-density equipment can be cooled with less air than its power suggests, and it is also why hot-aisle temperatures have climbed.</p>
+  </div>
+  <div data-u="metric" hidden>
+  <p>A rack drawing 10 kW, with air entering at 24&deg;C and leaving at 35&deg;C:</p>
+  <p>Q = 10 &times; 2,982 / 11 = 2,711 m&sup3;/h, or 271 m&sup3;/h per kW</p>
+  <p>The same rack with a 17 K rise needs 1,754 m&sup3;/h. Wider temperature rise is the reason high-density equipment can be cooled with less air than its power suggests, and it is also why hot-aisle temperatures have climbed.</p>
+  </div>
 
   <h2>Which standard governs this</h2>
   <p>The equation is the sensible heat equation from the ASHRAE Handbook of Fundamentals. Inlet temperature limits for IT equipment come from the ASHRAE TC 9.9 thermal guidelines, which recommend 64 to 81&deg;F (18 to 27&deg;C) at the equipment inlet for the common air-cooled classes.</p>
