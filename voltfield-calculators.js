@@ -33,7 +33,7 @@
     const vd=(mult*K*I*D)/cm;
     const pct=(vd/V)*100;
     const warn=pct>3;
-    r.innerHTML='Voltage drop: <b>'+fmt(vd)+' V</b> ('+fmt(pct)+'%) over '+D+' ft of '+AWG[+vdSel.value].n+'.'+(warn?' <br>This exceeds the common 3% branch-circuit guideline — consider a larger conductor.':' Within the common 3% branch-circuit guideline.');
+    r.innerHTML='Voltage drop: <b>'+fmt(vd)+' V</b> ('+fmt(pct)+'%) over '+lenFt(D)+' of '+AWG[+vdSel.value].n+'.'+(warn?' <br>This exceeds the common 3% branch-circuit guideline — consider a larger conductor.':' Within the common 3% branch-circuit guideline.');
     r.className='est-result show'+(warn?' warn':'');
   });
 
@@ -239,9 +239,9 @@
       E=k*Math.pow(D,-exp)*t*bracket;
       Dc=Math.pow(k*t*bracket/thresh,1/exp);
       if(F<16||F>50){warn=true;warnMsg+=' Bolted fault current is outside the 16-50 kA range the Doughty equations were fit to — treat this result as extrapolated, not validated.';}
-      if(D<18){warn=true;warnMsg+=' Working distance under 18 in is outside the Doughty equations\' validated range.';}
+      if(D<17.99){warn=true;warnMsg+=' Working distance under '+(U.metric?'457 mm':'18 in')+' is outside the Doughty equations\' validated range.';}
     }
-    r.innerHTML='Estimated incident energy: <b>'+fmt(E)+' cal/cm&sup2;</b> at '+D+' in. Arc-flash boundary (at '+thresh+' cal/cm&sup2;): <b>'+fmt(Dc)+' in</b> ('+fmt(Dc/12)+' ft). Select PPE with an arc rating (ATPV/EBT) at or above the incident energy figure.'+warnMsg;
+    r.innerHTML='Estimated incident energy: <b>'+fmt(E)+' cal/cm&sup2;</b> at '+lenIn(D,1)+'. Arc-flash boundary (at '+thresh+' cal/cm&sup2;): '+(U.metric?'<b>'+fmt(Dc*25.4,0)+' mm</b> ('+fmt(Dc*0.0254)+' m)':'<b>'+fmt(Dc)+' in</b> ('+fmt(Dc/12)+' ft)')+'. Select PPE with an arc rating (ATPV/EBT) at or above the incident energy figure.'+warnMsg;
     r.className='est-result show'+(warn?' warn':'');
   });
 
@@ -260,7 +260,7 @@
     const L=Lft*0.3048, d=dIn*0.0254;
     const R=(rho/(2*Math.PI*L))*(Math.log(4*L/d)-1);
     const warn=R>25;
-    r.innerHTML='Estimated resistance to earth: <b>'+fmt(R,1)+' &Omega;</b> for a '+Lft+' ft, '+dIn+'in-diameter rod in '+fmt(rho,0)+' &Omega;&middot;m soil.'+(warn?' <br>Exceeds the commonly cited 25&Omega; single-electrode benchmark — a supplemental electrode, longer/multiple rods, or soil treatment is the typical next step.':' Within the commonly cited 25&Omega; single-electrode benchmark.');
+    r.innerHTML='Estimated resistance to earth: <b>'+fmt(R,1)+' &Omega;</b> for a '+(U.metric?fmt(L,2)+' m, '+fmt(dIn*25.4,1)+' mm-diameter':fmt(Lft,2)+' ft, '+dIn+'in-diameter')+' rod in '+fmt(rho,0)+' &Omega;&middot;m soil.'+(warn?' <br>Exceeds the commonly cited 25&Omega; single-electrode benchmark — a supplemental electrode, longer/multiple rods, or soil treatment is the typical next step.':' Within the commonly cited 25&Omega; single-electrode benchmark.');
     r.className='est-result show'+(warn?' warn':'');
   });
 
@@ -1066,7 +1066,7 @@
     const loop=document.getElementById('wrPath').value==='2';
     if(!(L>0)){ask(r,'Enter the length in feet.');return;}
     const one=K*L/a.cm, tot=loop?2*one:one;
-    show(r,'<b>'+fmt(tot,4)+' Ω</b> '+(loop?'out and back':'one way')+' for '+fmt(L,0)+' ft of '+a.n+' '+(K<15?'copper':'aluminum')+' ('+fmt(K*1000/a.cm,3)+' Ω per 1000 ft). Each amp through it drops '+fmt(tot,4)+' V. DC resistance at about 75°C; AC resistance is higher on large conductors.');
+    show(r,'<b>'+fmt(tot,4)+' Ω</b> '+(loop?'out and back':'one way')+' for '+lenFt(L)+' of '+a.n+' '+(K<15?'copper':'aluminum')+' ('+(U.metric?fmt(K*1000/a.cm/0.3048,3)+' Ω per km':fmt(K*1000/a.cm,3)+' Ω per 1000 ft')+'). Each amp through it drops '+fmt(tot,4)+' V. DC resistance at about 75°C; AC resistance is higher on large conductors.');
   });
 
   /* Solar DC/AC ratio */
@@ -1097,9 +1097,11 @@
     const kw=nv('cfmKw'),dt=nv('cfmDt');
     if(!(kw>0)||!(dt>0)){ask(r,'Enter the heat load and the air temperature rise.');return;}
     const btu=kw*BTU_PER_KW, cfm=btu/(1.08*dt);
-    let msg='<b>'+fmt(cfm,0)+' CFM</b> ('+fmt(cfm*1.699,0)+' m³/h) to carry '+fmt(kw,1)+' kW at a '+fmt(dt,1)+'°F rise. That is '+fmt(cfm/kw,0)+' CFM per kW.';
+    let msg=U.metric
+      ?'<b>'+fmt(cfm*1.699,0)+' m³/h</b> ('+fmt(cfm,0)+' CFM) to carry '+fmt(kw,1)+' kW at a '+fmt(dt*5/9,1)+' K rise. That is '+fmt(cfm*1.699/kw,0)+' m³/h per kW.'
+      :'<b>'+fmt(cfm,0)+' CFM</b> ('+fmt(cfm*1.699,0)+' m³/h) to carry '+fmt(kw,1)+' kW at a '+fmt(dt,1)+'°F rise. That is '+fmt(cfm/kw,0)+' CFM per kW.';
     const warn=dt>40;
-    if(warn) msg+='<br>A rise above about 40°F is beyond what most air-cooled IT equipment is designed for; check the equipment data before designing to it.';
+    if(warn) msg+='<br>A rise above about '+(U.metric?'22 K':'40°F')+' is beyond what most air-cooled IT equipment is designed for; check the equipment data before designing to it.';
     else msg+=' Standard air at sea level; at altitude the same heat needs more volume.';
     show(r,msg,warn);
   });
@@ -1120,11 +1122,15 @@
     if(!(x>0)||!(dt>0)){ask(r,'Enter the cooling load and the water temperature difference.');return;}
     const btu=chwUnit.value==='tons'?x*12000:x*BTU_PER_KW;
     const gpm=btu/(500*dt), tons=btu/12000;
-    show(r,'<b>'+fmt(gpm,1)+' GPM</b> ('+fmt(gpm*0.0630902,2)+' L/s) for '+fmt(tons,1)+' tons at a '+fmt(dt,1)+'°F difference. That is '+fmt(gpm/tons,2)+' GPM per ton. Plain water; a glycol mix needs more flow for the same load.');
+    const kwc=btu/BTU_PER_KW, glyc=' Plain water; a glycol mix needs more flow for the same load.';
+    show(r,U.metric
+      ?'<b>'+fmt(gpm*0.0630902,2)+' L/s</b> ('+fmt(gpm,1)+' GPM) for '+fmt(kwc,1)+' kW at a '+fmt(dt*5/9,1)+' K difference. That is '+fmt(gpm*0.0630902/kwc,3)+' L/s per kW.'+glyc
+      :'<b>'+fmt(gpm,1)+' GPM</b> ('+fmt(gpm*0.0630902,2)+' L/s) for '+fmt(tons,1)+' tons at a '+fmt(dt,1)+'°F difference. That is '+fmt(gpm/tons,2)+' GPM per ton.'+glyc);
   });
 
   /* Pump power: water hp = GPM x head x SG / 3960. */
   const STD_HP=[1,1.5,2,3,5,7.5,10,15,20,25,30,40,50,60,75,100,125,150,200,250,300,350,400,450,500];
+  const STD_KW=[0.37,0.55,0.75,1.1,1.5,2.2,3,4,5.5,7.5,11,15,18.5,22,30,37,45,55,75,90,110,132,160,200,250,315];
   const ppBtn=document.getElementById('ppBtn');
   if(ppBtn)ppBtn.addEventListener('click',function(){
     const r=document.getElementById('ppResult');
@@ -1133,7 +1139,10 @@
     if(!(pe>0&&pe<=100)||!(me>0&&me<=100)||!(sg>0)){ask(r,'Efficiencies are percentages between 0 and 100, and specific gravity must be above zero.');return;}
     const whp=q*h*sg/3960, bhp=whp/(pe/100), kw=bhp*0.7457/(me/100);
     const std=STD_HP.find(function(a){return a>=bhp-1e-9;});
-    show(r,'Brake power: <b>'+fmt(bhp)+' hp</b> ('+fmt(bhp*0.7457)+' kW) at the shaft, from '+fmt(whp)+' hp delivered to the water. Electrical input about <b>'+fmt(kw)+' kW</b>. '+(std?'Next standard motor at or above the brake power: <b>'+std+' hp</b>.':'Above 500 hp; outside the standard sizes listed here.')+' Check the motor against the whole pump curve, not this one point.');
+    const bkw=bhp*0.7457, stdKw=STD_KW.find(function(a){return a>=bkw-1e-9;});
+    show(r,(U.metric
+      ?'Shaft power: <b>'+fmt(bkw)+' kW</b> ('+fmt(bhp)+' hp), from '+fmt(whp*0.7457)+' kW delivered to the water. Electrical input about <b>'+fmt(kw)+' kW</b>. '+(stdKw?'Next standard IEC motor at or above the shaft power: <b>'+stdKw+' kW</b>.':'Above 315 kW; outside the standard sizes listed here.')
+      :'Brake power: <b>'+fmt(bhp)+' hp</b> ('+fmt(bkw)+' kW) at the shaft, from '+fmt(whp)+' hp delivered to the water. Electrical input about <b>'+fmt(kw)+' kW</b>. '+(std?'Next standard motor at or above the brake power: <b>'+std+' hp</b>.':'Above 500 hp; outside the standard sizes listed here.'))+' Check the motor against the whole pump curve, not this one point.');
   });
 
   /* Pipe velocity: v = 0.4085 x GPM / d^2, d in inches. */
@@ -1144,9 +1153,11 @@
     if(!(q>0)||!(d>0)){ask(r,'Enter flow and the inside diameter of the pipe.');return;}
     const v=0.4085*q/(d*d);
     const warn=v>10;
-    let msg='<b>'+fmt(v)+' ft/s</b> ('+fmt(v*0.3048)+' m/s) in a pipe of '+fmt(d,3)+' in inside diameter.';
+    let msg=U.metric
+      ?'<b>'+fmt(v*0.3048)+' m/s</b> ('+fmt(v)+' ft/s) in a pipe of '+fmt(d*25.4,1)+' mm inside diameter.'
+      :'<b>'+fmt(v)+' ft/s</b> ('+fmt(v*0.3048)+' m/s) in a pipe of '+fmt(d,3)+' in inside diameter.';
     if(warn) msg+='<br>That is fast for closed hydronic piping. Expect noise, erosion at fittings and a high pressure drop; a larger pipe is the usual answer.';
-    else if(v<2) msg+=' That is slow. Below about 2 ft/s, air and solids are not carried along with the water and tend to collect.';
+    else if(v<2) msg+=' That is slow. Below about '+(U.metric?'0.6 m/s':'2 ft/s')+', air and solids are not carried along with the water and tend to collect.';
     show(r,msg,warn);
   });
 
@@ -1180,7 +1191,7 @@
     if(!(p>0)||!(n>0)){ask(r,'Enter power and speed.');return;}
     const hp=mtUnit.value==='hp'?p:p/0.7457;
     const lbft=5252*hp/n;
-    show(r,'<b>'+fmt(lbft)+' lb-ft</b> (<b>'+fmt(lbft*1.355818)+' N·m</b>) at '+fmt(n,0)+' rpm. This is running torque at that power and speed. Starting and breakdown torque are separate figures from the motor data sheet.');
+    show(r,(U.metric?'<b>'+fmt(lbft*1.355818)+' N·m</b> ('+fmt(lbft)+' lb-ft)':'<b>'+fmt(lbft)+' lb-ft</b> (<b>'+fmt(lbft*1.355818)+' N·m</b>)')+' at '+fmt(n,0)+' rpm. This is running torque at that power and speed. Starting and breakdown torque are separate figures from the motor data sheet.');
   });
 
   /* Synchronous speed and slip: Ns = 120 f / poles. */
@@ -1216,6 +1227,152 @@
     show(r,msg,warn);
   });
 
+
+  /* ================= metric units =================
+     Every handler above does its arithmetic in the units its formula is
+     written in -- feet, inches, GPM, degrees F -- because that is where the
+     constants (12.9, 1.08, 500, 3960, 0.4085) come from, and rewriting twenty
+     formulas to take either system would be twenty chances to get one wrong.
+
+     So the formulas are left alone and the conversion happens at the edges:
+
+       IN.   A field listed in UNIT_FIELDS shows metric units and holds a
+             metric number. In the capture phase of a Calculate click its value
+             is swapped for the US equivalent, the handler runs as it always
+             has, and the metric number is put back before anything else reads
+             the field.
+       OUT.  The handlers that print a unit call lenFt()/lenIn() and check
+             U.metric, so the result leads with the system in use.
+       LINKS. Shared and chained links always carry US values (usVal), so a
+             link means the same thing whichever system the reader has chosen;
+             on arrival the value is converted for display.
+
+     The choice is remembered in localStorage and applies to every tool. */
+  const U={metric:false};
+  try{U.metric=localStorage.getItem('vf_units')==='metric';}catch(e){}
+  try{const q=new URLSearchParams(location.search).get('units');if(q==='metric'||q==='us'){U.metric=q==='metric';try{localStorage.setItem('vf_units',q);}catch(e){}}}catch(e){}
+
+  /* kind: [factor US->metric, decimals shown, US unit as it appears in the label, metric unit] */
+  const UNIT_KIND={
+    ft:[0.3048,2,'ft','m'], in:[25.4,1,'in','mm'], gpm:[0.0630902,2,'GPM','L/s'],
+    dF:[5/9,2,'°F','K'], gal:[3.785412,0,'gal','L'], galh:[3.785412,1,'gal/hr','L/h']
+  };
+  /* field id: [kind, metric example for the placeholder] */
+  const UNIT_FIELDS={
+    vdD:['ft',45], wrLen:['ft',30], cfmDt:['dF',11], chwDt:['dF',5.5],
+    ppGpm:['gpm',30], ppHead:['ft',24], pvGpm:['gpm',15], pvId:['in',102.3],
+    afDist:['in',457], gndLen:['ft',3], genTank:['gal',1900], genRate:['galh',83]
+  };
+  function rnd(x,d){const p=Math.pow(10,d);return Math.round(x*p)/p;}
+  function toUS(id,x){const k=UNIT_KIND[UNIT_FIELDS[id][0]];return x/k[0];}
+  function toMetric(id,x){const k=UNIT_KIND[UNIT_FIELDS[id][0]];return rnd(x*k[0],k[1]);}
+  /* The value of a field in US units, whatever is on screen. */
+  function usVal(f){
+    if(!f||f.value==='')return f?f.value:'';
+    if(U.metric&&UNIT_FIELDS[f.id]&&f.type==='number'){const x=parseFloat(f.value);return isFinite(x)?String(rnd(toUS(f.id,x),4)):f.value;}
+    return f.value;
+  }
+  /* A US value (from a link) as it should appear in the field. */
+  function showVal(id,v){
+    if(U.metric&&UNIT_FIELDS[id]){const x=parseFloat(v);return isFinite(x)?String(toMetric(id,x)):v;}
+    return v;
+  }
+  function lenFt(ft,d){return U.metric?fmt(ft*0.3048,d==null?1:d)+' m':fmt(ft,d==null?1:d)+' ft';}
+  function lenIn(inch,d){return U.metric?fmt(inch*25.4,0)+' mm':fmt(inch,d==null?2:d)+' in';}
+
+  (function(){
+    const tagged=Object.keys(UNIT_FIELDS).map(function(id){return document.getElementById(id);}).filter(Boolean);
+    if(!tagged.length)return;
+    tagged.forEach(function(f){
+      const lab=document.querySelector('label[for="'+f.id+'"]');
+      f._lab=lab; f._labUS=lab?lab.textContent:''; f._phUS=f.getAttribute('placeholder')||''; f._stepUS=f.getAttribute('step'); f._minUS=f.getAttribute('min');
+    });
+    function paint(convertValues){
+      tagged.forEach(function(f){
+        const k=UNIT_KIND[UNIT_FIELDS[f.id][0]];
+        if(f._lab) f._lab.textContent=U.metric?f._labUS.replace('('+k[2]+')','('+k[3]+')'):f._labUS;
+        if(f._phUS) f.setAttribute('placeholder',U.metric?'e.g. '+UNIT_FIELDS[f.id][1]:f._phUS);
+        if(U.metric){f.setAttribute('step','any');f.setAttribute('min','0');}
+        else{ if(f._stepUS!=null)f.setAttribute('step',f._stepUS); if(f._minUS!=null)f.setAttribute('min',f._minUS); }
+        if(convertValues&&f.value!==''){
+          /* Switching there and back must not drift: 500 GPM shown as 31.55 L/s
+             would come back as 500.08. If the field still holds exactly what the
+             last switch put there, the number it replaced is restored. */
+          const was=f.value;
+          if(f._pair&&f._pair.to===was){ f.value=f._pair.from; }
+          else{
+            const x=parseFloat(was);
+            if(isFinite(x)) f.value=String(U.metric?toMetric(f.id,x):rnd(toUS(f.id,x),2));
+          }
+          f._pair={from:was,to:f.value};
+        }
+      });
+      document.querySelectorAll('.est-units button').forEach(function(b){
+        const on=(b.getAttribute('data-units')==='metric')===U.metric;
+        b.setAttribute('aria-pressed',on?'true':'false');
+      });
+    }
+
+    /* The switch, on each tool that has something to switch. */
+    const seen=[];
+    tagged.forEach(function(f){
+      const est=f.closest('.estimator');
+      if(!est||seen.indexOf(est)>-1)return;
+      seen.push(est);
+      const box=document.createElement('div');
+      box.className='est-units';box.setAttribute('role','group');box.setAttribute('aria-label','Units');
+      [['us','US'],['metric','Metric']].forEach(function(o){
+        const b=document.createElement('button');b.type='button';b.textContent=o[1];b.setAttribute('data-units',o[0]);
+        b.addEventListener('click',function(){
+          const want=o[0]==='metric';
+          if(want===U.metric)return;
+          U.metric=want;
+          try{localStorage.setItem('vf_units',o[0]);}catch(e){}
+          paint(true);
+          /* Re-run anything already showing a result, so it is restated in the new units. */
+          seen.forEach(function(e2){
+            const res=e2.querySelector('.est-result'),btn=e2.querySelector('button[id$="Btn"]');
+            if(res&&btn&&res.classList.contains('show')){
+              window.__vfExampleRun=true;
+              try{btn.click();}finally{window.__vfExampleRun=false;}
+            }
+          });
+          if(window.vfGtag)window.vfGtag('event','units_toggle',{to:o[0]});
+        });
+        box.appendChild(b);
+      });
+      const h=est.querySelector('h2');
+      if(h&&h.nextSibling)est.insertBefore(box,h.nextSibling);else est.insertBefore(box,est.firstChild);
+    });
+
+    /* Fields that ship with a default value (the rod length) are US numbers. */
+    if(U.metric){
+      tagged.forEach(function(f){
+        if(f.value!==''){const x=parseFloat(f.value);if(isFinite(x)){f.value=String(toMetric(f.id,x));f.defaultValue=f.value;}}
+      });
+    }
+    paint(false);
+
+    /* IN: hand the formulas US numbers for the length of one click. */
+    let held=[];
+    document.addEventListener('click',function(e){
+      if(!U.metric)return;
+      const btn=e.target.closest&&e.target.closest('button[id$="Btn"]');
+      const est=btn&&btn.closest('.estimator');
+      if(!est)return;
+      held=tagged.filter(function(f){return est.contains(f)&&f.value!=='';});
+      held.forEach(function(f){
+        f._shown=f.value;
+        const x=parseFloat(f.value);
+        if(isFinite(x)) f.value=String(toUS(f.id,x));
+      });
+    },true);
+    document.addEventListener('click',function(){
+      if(!held.length)return;
+      held.forEach(function(f){f.value=f._shown;});
+      held=[];
+    });
+  })();
 
   /* ================= shareable results and next steps =================
      Two things a result could not do: be sent to someone, and be carried into
@@ -1315,7 +1472,7 @@
 
     function query(est){
       const p=new URLSearchParams();
-      fieldsOf(est).forEach(function(f){ if(f.value!=='') p.set(f.id,f.value); });
+      fieldsOf(est).forEach(function(f){ if(f.value!=='') p.set(f.id,usVal(f)); });
       return p.toString();
     }
     function linkFor(est){
@@ -1351,7 +1508,7 @@
       if(make){
         let steps=[];
         try{
-          steps=make(function(id){const e=document.getElementById(id);return e?parseFloat(e.value):NaN;},
+          steps=make(function(id){const e=document.getElementById(id);return e?parseFloat(usVal(e)):NaN;},
                      function(id){const e=document.getElementById(id);return e?e.value:'';})||[];
         }catch(e){steps=[];try{console.error("[chain]",est.id,e);}catch(_){}}
         steps=steps.filter(Boolean);
@@ -1403,7 +1560,7 @@
           if(![].some.call(f.options,function(o){return o.value===val;}))return;
           f.value=val;f.dispatchEvent(new Event('change',{bubbles:true}));set++;
         }else if(val!==''&&isFinite(Number(val))){
-          f.value=val;set++;
+          f.value=showVal(f.id,val);set++;
         }
       });
       if(!set)return;

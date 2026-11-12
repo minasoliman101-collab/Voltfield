@@ -55,3 +55,14 @@
 .est-next a:hover{border-color:var(--signal)}
 .est-next a::after{content:"→";margin-left:6px;opacity:.7}
 @media print{.est-after{display:none}}
+
+/* US / Metric switch on the tools that have a unit to switch (see "metric
+   units" in voltfield-calculators.js). Floated so it sits level with the
+   tool's heading without changing any template. */
+.est-units{float:right;display:inline-flex;margin:-34px 0 6px 12px;border:1px solid var(--line-dark);border-radius:999px;overflow:hidden}
+.est-units button{font:600 11px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:8px 12px;min-height:32px;
+  background:transparent;color:var(--slate);border:0;cursor:pointer}
+.est-units button[aria-pressed="true"]{background:var(--signal);color:#101B2D}
+.est-units button:focus-visible{outline:2px solid var(--signal);outline-offset:-2px}
+@media(max-width:520px){.est-units{float:none;margin:0 0 10px}}
+@media print{.est-units{display:none}}
