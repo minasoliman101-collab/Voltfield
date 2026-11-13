@@ -29,6 +29,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import moreSets from './practice-sets-2.mjs';
+import WHY from './practice-why.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 process.chdir(root);
@@ -347,6 +348,20 @@ const TOPICS = [];
 
 /* batch 2: sets 10 to 17, in their own file */
 TOPICS.push(...moreSets({ num, con, f, R3, C, G, T }));
+
+/* reasons for the wrong choices of the first eight sets, kept in practice-why.mjs */
+{
+  const txt = (s) => String(s).replace(/<[^>]+>/g, '').replace(/&deg;/g, '°').replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ').trim();
+  const hit = new Set();
+  for (const t of TOPICS) for (const q of t.q) {
+    if (q.why) continue;
+    const m = WHY.filter(([k]) => txt(q.stem).startsWith(txt(k)));
+    if (m.length !== 1) throw new Error((m.length ? 'more than one' : 'no') + ' practice-why.mjs entry for: ' + txt(q.stem));
+    q.why = m[0][1]; hit.add(m[0][0]);
+  }
+  const unused = WHY.filter(([k]) => !hit.has(k)).map(([k]) => k);
+  if (unused.length) throw new Error('practice-why.mjs entries that match no question: ' + unused.join(' | '));
+}
 
 /* ----------------------------------------------------------------- builders */
 const plain = (s) => String(s).replace(/<[^>]+>/g, '').replace(/&mdash;/g, '—').replace(/&amp;/g, '&').replace(/&sup2;/g, '²').replace(/&sup3;/g, '³')
