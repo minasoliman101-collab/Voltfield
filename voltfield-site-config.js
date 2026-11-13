@@ -217,9 +217,23 @@ const SITE_CONFIG = {
      are sent when the tag arrives. So it is fetched once the page has loaded,
      or after four seconds if load is slow, or on the way out if the reader
      leaves first. */
+  /* Automated browsers and local previews are not readers. Test runs against
+     the live site (headless Chrome, Lighthouse, link checkers) set
+     navigator.webdriver or say so in the user agent; counting them made more
+     than half of recorded sessions noise. The calls below still queue, so
+     nothing that fires an event breaks; the tag is just never fetched. */
+  const notAReader = (function () {
+    try {
+      if (navigator.webdriver) return true;
+      if (/HeadlessChrome|Chrome-Lighthouse|Lighthouse|PageSpeed|GTmetrix|Pingdom|PhantomJS|Puppeteer|Playwright|bot\/|crawler|spider/i.test(navigator.userAgent || '')) return true;
+      const h = location.hostname;
+      if (location.protocol === 'file:' || h === 'localhost' || h === '127.0.0.1' || h === '[::1]' || /\.(localhost|test)$/.test(h)) return true;
+    } catch (e) { /* treat as a reader */ }
+    return false;
+  })();
   let injected = false;
   function inject() {
-    if (injected) return;
+    if (injected || notAReader) return;
     injected = true;
     const s = document.createElement('script');
     s.async = true;
