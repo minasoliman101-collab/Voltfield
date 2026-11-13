@@ -28,6 +28,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import moreSets from './practice-sets-2.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 process.chdir(root);
@@ -343,6 +344,9 @@ const TOPICS = [];
         ['With protection only at the service, any downstream ground fault blacks out the whole facility.', 'The second level is at the feeders, not at every branch circuit.', 'The protection stays at the service; a second level is added below it.']),
     ] });
 }
+
+/* batch 2: sets 10 to 17, in their own file */
+TOPICS.push(...moreSets({ num, con, f, R3, C, G, T }));
 
 /* ----------------------------------------------------------------- builders */
 const plain = (s) => String(s).replace(/<[^>]+>/g, '').replace(/&mdash;/g, '—').replace(/&amp;/g, '&').replace(/&sup2;/g, '²').replace(/&sup3;/g, '³')

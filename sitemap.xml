@@ -1225,6 +1225,60 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/practice/transformer-full-load-current.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/kw-to-amps.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/amps-to-kw-and-kva.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/motor-current-and-power.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/voltage-drop-calculations.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/fault-current-calculations.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/energy-demand-and-efficiency.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/cooling-load-calculations.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-1-000-kva-transformer-has-an-impedance-of-5-75-percent-what-is-its.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/practice/questions/a-1-500-kva-480-v-three-phase-transformer-has-an-impedance-of-5-75.html</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -1261,7 +1315,37 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/practice/questions/a-120-v-single-phase-circuit-carries-15-a-at-a-power-factor-of-0-9-what.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-120-v-two-wire-circuit-carries-15-a-over-a-one-way-distance-of-150-ft.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-2-000-kva-480-v-three-phase-transformer-has-an-impedance-of-5-75.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-25-hp-motor-has-a-full-load-efficiency-of-91-percent-what-electrical.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/practice/questions/a-400-kw-load-runs-at-a-power-factor-of-0-75-how-much-capacitance-is.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-48-v-dc-circuit-runs-25-ft-one-way-in-6-awg-copper-26-240-circular.html</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1279,7 +1363,37 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/practice/questions/a-50-kva-240-v-single-phase-transformer-has-an-impedance-of-2-5-percent.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-500-kva-208-v-three-phase-transformer-has-an-impedance-of-4-5-percent.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-60-hz-motor-has-a-synchronous-speed-of-900-rpm-how-many-poles-does-it.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-75-kva-208-v-three-phase-transformer-has-an-impedance-of-3-5-percent.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/practice/questions/a-75-kva-three-phase-transformer-steps-480-v-down-to-208-v-what-is-its.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-750-kva-480-v-three-phase-transformer-has-an-impedance-of-5-75-percent.html</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1309,6 +1423,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/practice/questions/a-busway-tap-off-carries-63-a-per-phase-at-415-v-three-phase-with-a.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/practice/questions/a-calculation-gives-a-minimum-rating-of-112-a-what-is-the-next-standard.html</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -1316,6 +1436,30 @@
   </url>
   <url>
     <loc>https://voltfield.org/practice/questions/a-centrifugal-fan-in-a-system-with-no-static-head-is-slowed-to-80.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-centrifugal-pump-in-a-system-with-no-static-head-is-slowed-to-half.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-chiller-draws-250-kw-from-a-480-v-three-phase-supply-at-a-power-factor.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-chiller-is-rated-150-tons-what-is-that-in-kilowatts-of-cooling.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-circuit-has-too-much-voltage-drop-the-conductor-is-replaced-with-one.html</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1333,7 +1477,19 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/practice/questions/a-cooling-load-is-360-000-btu-per-hour-how-many-tons-is-that.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/practice/questions/a-cooling-load-needs-three-chillers-to-carry-it-how-many-chillers-does-a.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-cooling-load-of-900-tons-is-served-by-chillers-of-300-tons-each-how.html</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1346,6 +1502,36 @@
   </url>
   <url>
     <loc>https://voltfield.org/practice/questions/a-data-center-draws-1-500-kw-in-total-of-which-1-000-kw-reaches-the-it.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-data-center-has-an-it-load-of-1-000-kw-and-a-pue-of-1-4-how-much.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-dc-load-draws-5-kw-from-a-48-v-battery-system-what-current-flows.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-facility-used-200-000-kwh-in-a-720-hour-month-with-a-peak-demand-of.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-facility-uses-200-000-kwh-in-a-month-with-a-peak-demand-of-500-kw.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-feeder-carries-200-a-per-phase-at-480-v-three-phase-with-a-power.html</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1369,7 +1555,19 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/practice/questions/a-group-of-server-racks-draws-100-kw-from-a-415-v-three-phase-supply-at.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/practice/questions/a-heating-element-is-rated-2-000-w-at-240-v-its-resistance-does-not.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-liquid-cooled-rack-rejects-80-kw-to-water-which-warms-by-10-k-as-it.html</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1381,7 +1579,91 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/practice/questions/a-load-draws-a-steady-75-kw-around-the-clock-how-much-energy-does-it-use.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-load-is-moved-from-120-v-to-240-v-and-draws-the-same-power-with-the.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-motor-control-center-feeder-carries-100-a-per-phase-at-600-v-three.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-motor-delivers-150-lb-ft-of-torque-at-1-750-rpm-what-is-its-output-in.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-motor-draws-18-5-kw-from-a-400-v-three-phase-supply-at-a-power-factor.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-motor-has-a-table-full-load-current-of-65-a-its-branch-circuit.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-panel-draws-50-kw-from-a-208-v-three-phase-supply-at-a-power-factor-of.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-panel-feeder-carries-150-a-per-phase-at-208-v-three-phase-what-is-the.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-panelboard-with-a-short-circuit-current-rating-of-22-ka-is-to-be.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-pump-motor-draws-2-2-kw-from-a-240-v-single-phase-supply-at-a-power.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/practice/questions/a-rack-dissipates-10-kw-and-the-air-passing-through-it-rises-by-20-f.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-rack-dissipates-5-kw-and-the-air-passing-through-it-rises-by-25-f-what.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-rack-dissipates-8-kw-and-receives-1-000-cfm-of-air-by-how-much-does.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-resistance-heater-is-rated-1-kw-at-120-v-single-phase-what-current.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-resistance-heater-is-rated-10-kw-at-240-v-single-phase-what-current.html</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1399,13 +1681,49 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/practice/questions/a-single-phase-240-v-circuit-carries-40-a-to-a-resistance-heater-what.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-single-phase-240-v-circuit-runs-120-ft-one-way-in-10-awg-copper-10-380.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-single-phase-240-v-feeder-runs-150-ft-in-1-0-awg-aluminum-105-600.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-six-pole-60-hz-induction-motor-runs-with-3-percent-slip-what-is-its.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/practice/questions/a-storage-project-is-rated-100-mw-and-400-mwh-what-is-its-c-rate.html</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/practice/questions/a-switchboard-main-carries-800-a-per-phase-at-480-v-three-phase-what-is.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/practice/questions/a-system-must-deliver-2-000-kwh-of-usable-energy-with-a-90-percent-depth.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-three-phase-208-v-feeder-runs-200-ft-in-4-awg-copper-41-740-circular.html</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1423,7 +1741,19 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/practice/questions/a-three-phase-load-draws-120-a-at-480-v-and-a-power-meter-shows-85-kw.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/practice/questions/a-three-phase-load-of-300-kw-has-a-power-factor-of-0-9-which-standard.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-transformer-has-an-impedance-of-5-percent-assuming-an-unlimited.html</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1441,6 +1771,24 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/practice/questions/a-ups-loses-20-8-kw-as-heat-what-is-that-in-btu-per-hour.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-ups-loses-20-8-kw-continuously-at-0-10-per-kwh-what-does-that-loss.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-ups-supplies-a-500-kw-load-at-an-efficiency-of-96-percent-how-much.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/practice/questions/an-array-has-240-modules-rated-540-w-each-what-is-its-dc-capacity.html</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -1453,7 +1801,25 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/practice/questions/chilled-water-has-to-carry-away-500-kw-of-heat-with-a-12-f-difference.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/practice/questions/compared-with-a-copper-conductor-of-the-same-size-an-aluminum-conductor.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/estimate-the-full-load-current-of-a-100-hp-460-v-three-phase-motor-with.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/for-a-3-percent-drop-on-a-480-v-three-phase-feeder-carrying-90-a-in-2.html</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1484,6 +1850,12 @@
   </url>
   <url>
     <loc>https://voltfield.org/practice/questions/how-many-tons-of-sensible-cooling-does-a-200-kw-it-load-require-before.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/how-much-heat-does-a-50-kw-it-load-reject-in-btu-per-hour.html</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1561,6 +1933,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/practice/questions/two-ups-systems-carry-the-same-load-one-is-94-percent-efficient-and-the.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/practice/questions/what-does-a-transformers-bil-rating-describe.html</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -1585,13 +1963,61 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/practice/questions/what-is-the-full-load-current-of-a-150-kva-three-phase-transformer-at.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-is-the-full-load-current-of-a-25-kva-single-phase-transformer-at.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/practice/questions/what-is-the-full-load-current-of-a-50-kva-three-phase-supply-at-208-v.html</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://voltfield.org/practice/questions/what-is-the-full-load-primary-current-of-a-1-000-kva-three-phase.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-is-the-full-load-secondary-current-of-a-112-5-kva-three-phase.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-is-the-full-load-secondary-current-of-a-2-000-kva-three-phase.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-is-the-full-load-secondary-current-of-a-300-kva-three-phase.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-is-the-full-load-secondary-current-of-a-45-kva-three-phase.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://voltfield.org/practice/questions/what-is-the-full-load-secondary-current-of-a-500-kva-three-phase.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-is-the-full-load-secondary-current-of-a-750-kva-three-phase.html</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1640,6 +2066,12 @@
   </url>
   <url>
     <loc>https://voltfield.org/practice/questions/what-must-a-circuit-breakers-interrupting-rating-be-compared-with.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-torque-does-a-15-kw-motor-deliver-at-1-460-rpm-in-newton-metres.html</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

@@ -52,5 +52,53 @@
   "name": "Ground-Fault Protection of Equipment",
   "blurb": "When NEC 230.95 requires GFPE, how the disconnect rating is judged, the maximum settings, the exceptions and the on-site test.",
   "n": 10
+ },
+ {
+  "slug": "transformer-full-load-current",
+  "name": "Transformer Full-Load Current",
+  "blurb": "kVA to amps at common transformer sizes and voltages, single-phase and three-phase, primary and secondary.",
+  "n": 8
+ },
+ {
+  "slug": "kw-to-amps",
+  "name": "kW to Amps",
+  "blurb": "Converting kilowatts to amperes on single-phase, three-phase and DC circuits, with and without power factor.",
+  "n": 8
+ },
+ {
+  "slug": "amps-to-kw-and-kva",
+  "name": "Amps to kW and kVA",
+  "blurb": "Working from a measured current to real power, apparent power and power factor, single-phase and three-phase.",
+  "n": 8
+ },
+ {
+  "slug": "motor-current-and-power",
+  "name": "Motor Current and Power",
+  "blurb": "Input power from horsepower and efficiency, full-load current from first principles, speed, poles and torque.",
+  "n": 8
+ },
+ {
+  "slug": "voltage-drop-calculations",
+  "name": "Voltage Drop Calculations",
+  "blurb": "Voltage drop in volts and percent, single-phase, three-phase and DC, copper and aluminum, and sizing a conductor to a limit.",
+  "n": 8
+ },
+ {
+  "slug": "fault-current-calculations",
+  "name": "Fault Current Calculations",
+  "blurb": "Available fault current from transformer kVA and impedance, the infinite-bus method, and comparing it with equipment ratings.",
+  "n": 8
+ },
+ {
+  "slug": "energy-demand-and-efficiency",
+  "name": "Energy, Demand and Efficiency",
+  "blurb": "Kilowatt-hours, demand charges, load factor, UPS losses and what they cost over a year.",
+  "n": 8
+ },
+ {
+  "slug": "cooling-load-calculations",
+  "name": "Cooling Load Calculations",
+  "blurb": "Kilowatts to BTU per hour and tons, airflow for a rack, chilled water flow, and liquid cooling flow in metric units.",
+  "n": 8
  }
 ]
