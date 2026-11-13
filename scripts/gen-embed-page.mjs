@@ -52,7 +52,7 @@ ${list.map(([s, t]) => `      <option value="${s}"${s === first[0] ? ' selected'
 
   <div class="vf-embed code-only">
     <div class="vf-embed-code">
-      <pre id="embedSnippet">${snippet(first[0], first[1])}</pre>
+      <pre id="embedSnippet" tabindex="0">${snippet(first[0], first[1])}</pre>
       <button type="button" id="copyEmbedBtn">Copy snippet</button>
     </div>
   </div>

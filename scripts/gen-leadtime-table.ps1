@@ -46,7 +46,7 @@ foreach ($k in $SEC.Keys) {
   $secLws = @($rows | ForEach-Object { [int]$_.lw })
   [void]$sb.AppendLine("  <h3>$(Esc $SEC[$k].label)</h3>")
   [void]$sb.AppendLine("  <p class=""ltsub"">$($rows.Count) families &middot; $(($secLws | Measure-Object -Minimum).Minimum) to $(($secLws | Measure-Object -Maximum).Maximum) weeks</p>")
-  [void]$sb.AppendLine("  <div class=""idxwrap""><table class=""idxtable"" style=""--SECCOLOR:var($($SEC[$k].var))"">")
+  [void]$sb.AppendLine("  <div class=""idxwrap"" tabindex=""0""><table class=""idxtable"" style=""--SECCOLOR:var($($SEC[$k].var))"">")
   [void]$sb.AppendLine('    <thead><tr><th scope="col">Equipment family</th><th scope="col">Category</th><th scope="col">Indicative lead time</th></tr></thead>')
   [void]$sb.AppendLine('    <tbody>')
   foreach ($f in $rows) {

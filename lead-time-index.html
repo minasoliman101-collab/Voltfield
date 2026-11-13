@@ -54,7 +54,7 @@
 .idxtable .trend-flat{color:var(--slate)}
 .idxwrap{overflow-x:auto}
 .idxtable{min-width:560px}
-.basis{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;white-space:nowrap;border:1px solid transparent}
+.basis{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;white-space:nowrap;border:1px solid transparent}
 .basis-modeled{background:#EDEFF2;color:#5B6B7E;border-color:#C4CFDA}
 .basis-operator{background:var(--tint-ok);color:var(--ok-ink);border-color:#B7D6C4}
 .basis-published{background:#E4ECF7;color:#2B6CB0;border-color:#B9CDE8}
@@ -203,7 +203,7 @@ html[data-theme="dark"] .idxtable .lt.short{background:#16301F;color:#8FCBA6}
     </div>
     <div class="embedbox-code">
       <div class="ec-label">Paste this where you want the widget to appear</div>
-      <pre id="embedSnippet">&lt;div class="vf-lead-time-widget" data-sector="dc" data-limit="4"&gt;&lt;/div&gt;
+      <pre id="embedSnippet" tabindex="0">&lt;div class="vf-lead-time-widget" data-sector="dc" data-limit="4"&gt;&lt;/div&gt;
 &lt;p class="vf-credit"&gt;&lt;a href="https://voltfield.org/lead-time-index.html"&gt;Equipment lead times: Voltfield Lead-Time Index&lt;/a&gt;&lt;/p&gt;
 &lt;script src="https://voltfield.org/embed/lead-time-widget.js" async&gt;&lt;/script&gt;</pre>
       <button type="button" id="copyEmbedBtn">Copy snippet</button>
@@ -217,7 +217,7 @@ html[data-theme="dark"] .idxtable .lt.short{background:#16301F;color:#8FCBA6}
   <div class="embedbox" style="grid-template-columns:minmax(0,1fr)">
     <div class="embedbox-code">
       <div class="ec-label">Suggested citation</div>
-      <pre id="citeSnippet">Voltfield Lead-Time Index, North America, July 2026.
+      <pre id="citeSnippet" tabindex="0">Voltfield Lead-Time Index, North America, July 2026.
 https://voltfield.org/lead-time-index.html</pre>
       <button type="button" id="copyCiteBtn">Copy citation</button>
       <div class="ec-note">Please carry the row's <b>basis</b> label across with the figure — e.g. &ldquo;an estimated 160 weeks, per Voltfield's modeled index&rdquo; rather than presenting a modeled number as a surveyed one.</div>
@@ -241,7 +241,7 @@ https://voltfield.org/lead-time-index.html</pre>
   </div>
 
   <h2>Data Centers</h2>
-  <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--dc)">
+  <div class="idxwrap" tabindex="0"><table class="idxtable" style="--SECCOLOR:var(--dc)">
     <caption>Data Center Power &amp; Backup Equipment</caption>
     <thead><tr><th scope="col">Equipment</th><th scope="col">Current lead time / price</th><th scope="col">Trend</th><th scope="col">Basis</th></tr></thead>
     <tbody>
@@ -255,7 +255,7 @@ https://voltfield.org/lead-time-index.html</pre>
   </table></div>
 
   <h2>Renewables</h2>
-  <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--re)">
+  <div class="idxwrap" tabindex="0"><table class="idxtable" style="--SECCOLOR:var(--re)">
     <caption>Solar, Wind &amp; Hybrid Equipment</caption>
     <thead><tr><th scope="col">Equipment</th><th scope="col">Current lead time / price</th><th scope="col">Trend</th><th scope="col">Basis</th></tr></thead>
     <tbody>
@@ -267,7 +267,7 @@ https://voltfield.org/lead-time-index.html</pre>
   </table></div>
 
   <h2>Battery Storage</h2>
-  <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--bess)">
+  <div class="idxwrap" tabindex="0"><table class="idxtable" style="--SECCOLOR:var(--bess)">
     <caption>Utility-Scale BESS Equipment</caption>
     <thead><tr><th scope="col">Equipment</th><th scope="col">Current lead time / price</th><th scope="col">Trend</th><th scope="col">Basis</th></tr></thead>
     <tbody>
@@ -276,7 +276,7 @@ https://voltfield.org/lead-time-index.html</pre>
   </table></div>
 
   <h2>Oil &amp; Gas</h2>
-  <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--og)">
+  <div class="idxwrap" tabindex="0"><table class="idxtable" style="--SECCOLOR:var(--og)">
     <caption>Drilling &amp; Completions Equipment</caption>
     <thead><tr><th scope="col">Equipment</th><th scope="col">Current lead time / price</th><th scope="col">Trend</th><th scope="col">Basis</th></tr></thead>
     <tbody>
@@ -311,7 +311,7 @@ https://voltfield.org/lead-time-index.html</pre>
   <p class="ltnote">Every figure here is the same value rendered on the family and category pages &mdash; one source, so they cannot drift apart. All are indicative reference figures, not quotes.</p>
   <h3>Data Centers</h3>
   <p class="ltsub">50 families &middot; 4 to 180 weeks</p>
-  <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--dc)">
+  <div class="idxwrap" tabindex="0"><table class="idxtable" style="--SECCOLOR:var(--dc)">
     <thead><tr><th scope="col">Equipment family</th><th scope="col">Category</th><th scope="col">Indicative lead time</th></tr></thead>
     <tbody>
       <tr><td>Gas Turbine Generators</td><td>Backup Power</td><td><span class="lt long">180 wk</span></td></tr>
@@ -368,7 +368,7 @@ https://voltfield.org/lead-time-index.html</pre>
   </table></div>
   <h3>Renewables</h3>
   <p class="ltsub">42 families &middot; 2 to 144 weeks</p>
-  <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--re)">
+  <div class="idxwrap" tabindex="0"><table class="idxtable" style="--SECCOLOR:var(--re)">
     <thead><tr><th scope="col">Equipment family</th><th scope="col">Category</th><th scope="col">Indicative lead time</th></tr></thead>
     <tbody>
       <tr><td>GSU Transformers</td><td>GSU &amp; MV Transformers</td><td><span class="lt long">144 wk</span></td></tr>
@@ -417,7 +417,7 @@ https://voltfield.org/lead-time-index.html</pre>
   </table></div>
   <h3>Battery Storage</h3>
   <p class="ltsub">20 families &middot; 8 to 32 weeks</p>
-  <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--bess)">
+  <div class="idxwrap" tabindex="0"><table class="idxtable" style="--SECCOLOR:var(--bess)">
     <thead><tr><th scope="col">Equipment family</th><th scope="col">Category</th><th scope="col">Indicative lead time</th></tr></thead>
     <tbody>
       <tr><td>Grid-Forming PCS</td><td>Power Conversion</td><td><span class="lt mid">32 wk</span></td></tr>
@@ -444,7 +444,7 @@ https://voltfield.org/lead-time-index.html</pre>
   </table></div>
   <h3>Oil &amp; Gas</h3>
   <p class="ltsub">33 families &middot; 2 to 36 weeks</p>
-  <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--og)">
+  <div class="idxwrap" tabindex="0"><table class="idxtable" style="--SECCOLOR:var(--og)">
     <thead><tr><th scope="col">Equipment family</th><th scope="col">Category</th><th scope="col">Indicative lead time</th></tr></thead>
     <tbody>
       <tr><td>BOPs (Annular / Ram)</td><td>Pressure Control</td><td><span class="lt mid">36 wk</span></td></tr>
@@ -484,7 +484,7 @@ https://voltfield.org/lead-time-index.html</pre>
   </table></div>
   <h3>Industrial Supply (MRO)</h3>
   <p class="ltsub">89 families &middot; 1 to 8 weeks</p>
-  <div class="idxwrap"><table class="idxtable" style="--SECCOLOR:var(--mro)">
+  <div class="idxwrap" tabindex="0"><table class="idxtable" style="--SECCOLOR:var(--mro)">
     <thead><tr><th scope="col">Equipment family</th><th scope="col">Category</th><th scope="col">Indicative lead time</th></tr></thead>
     <tbody>
       <tr><td>Coils &amp; Heat Exchangers</td><td>HVAC &amp; Refrigeration</td><td><span class="lt short">8 wk</span></td></tr>

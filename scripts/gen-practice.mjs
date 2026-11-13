@@ -499,6 +499,7 @@ ${q.choices.map((c, k) => `      <label><input type="radio" name="q${i + 1}" val
 <div class="artwrap">
   <p><b>Pick a set, answer the questions, and check each one as you go.</b> Every question has four choices, and the wrong ones are not random: each is what you get from a particular mistake, such as leaving out the square root of three or using a one-way length where the current goes out and back. The solution names the mistake as well as the method.</p>
 
+  <h2 class="vf-sr-only">Question sets</h2>
   <div class="gdgrid">
 ${cards}
   </div>

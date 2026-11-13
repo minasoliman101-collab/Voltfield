@@ -3293,7 +3293,7 @@
             'plus and minus zoom, Home resets the view, and Space starts or stops ' +
             'the automatic rotation. The specifications shown elsewhere on this ' +
             'page do not depend on this view.';
-          document.body.appendChild(help);
+          ((cvs.closest && cvs.closest('main,[role=main],section[aria-label],aside,header,footer')) || document.querySelector('main') || document.body).appendChild(help);
         }
         cvs.setAttribute('aria-describedby', 'vf3d-help');
       })();

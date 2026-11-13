@@ -41,8 +41,8 @@
       '.vfw .eq{color:#22334C}'+
       '.vfw .val{font-weight:600;text-align:right;white-space:nowrap;color:#101B2D}'+
       '.vfw .tr{padding-left:6px;font-size:10px}'+
-      '.vfw .ft{padding:8px 12px;font-size:10.5px;background:#fff;border-top:1px solid #C4CFDA}'+
-      '.vfw .ft a{color:#E5AC00;text-decoration:none;font-weight:600}'+
+      '.vfw .ft{padding:8px 12px;font-size:12px;background:#fff;border-top:1px solid #C4CFDA}'+
+      '.vfw .ft a{color:#101B2D;text-decoration-color:#E5AC00;text-decoration:none;font-weight:600}'+
       '.vfw .ft a:hover{text-decoration:underline}';
     root.appendChild(style);
 

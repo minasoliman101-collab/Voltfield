@@ -468,7 +468,7 @@ const SITE_CONFIG = {
       '@media(max-width:700px){#unitsToggle{display:none}}'+
       '.foot-units{display:inline-flex;align-items:center;gap:8px;margin-left:auto;font-size:13px}'+
       '.foot-units span{color:#7F94AC}'+
-      '.foot-units button{font:inherit;background:transparent;border:0;border-bottom:1px solid transparent;color:#93A7BD;padding:5px 2px;cursor:pointer}'+
+      '.foot-units button{font:inherit;background:transparent;border:0;border-bottom:1px solid transparent;color:#93A7BD;padding:6px 4px;min-width:28px;min-height:28px;cursor:pointer}'+
       '.foot-units button[aria-pressed="true"]{color:#fff;border-bottom-color:#FFC400}'+
       '@media(max-width:520px){.foot-units{margin-left:0;width:100%}}'+
       '@media print{#unitsToggle,.foot-units{display:none}}';

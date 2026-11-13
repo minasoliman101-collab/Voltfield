@@ -767,6 +767,7 @@ if (!only.length) {
 <div class="artwrap">
   <p><b>Each chart here answers one lookup question and shows how its numbers were worked out.</b> They sit beside the ${L('engineering-calculators.html', 'calculators')}: a calculator gives one answer for your inputs, a chart shows the whole range at once, which is what you want on a wall, in a truck or in a submittal.</p>
 
+  <h2 class="vf-sr-only">All charts</h2>
   <div class="gdgrid">
 ${cards}
   </div>

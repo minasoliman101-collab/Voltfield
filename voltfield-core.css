@@ -372,7 +372,7 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
 }
 .provenance dl{margin:0;display:grid;gap:10px}
 .provenance dt{
-  font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;
   color:var(--slate);margin-bottom:2px;
 }
 .provenance dd{margin:0;font-size:14px;line-height:1.65;color:var(--ink-2)}
@@ -633,7 +633,7 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
 /* ---------- share bar ---------- */
 .sharebar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 26px;
   padding-bottom:20px;border-bottom:1px solid var(--line)}
-.sharebar-lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;
+.sharebar-lbl{font-family:var(--mono);font-size:11.5px;letter-spacing:.07em;
   text-transform:uppercase;color:var(--slate);margin-right:4px}
 .sharebtn{border:1px solid var(--line);background:var(--card);color:var(--ink-2);
   font-family:var(--disp);font-weight:500;font-size:13.5px;letter-spacing:-.008em;
@@ -891,7 +891,7 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
 .newscard .nc-body{padding:16px 18px 18px;flex:1;display:flex;flex-direction:column}
 .newscard .nc-tag{display:flex;align-items:center;gap:9px;margin-bottom:10px;
   border-bottom:0;padding:0}
-.newscard .nc-sec{font-family:var(--mono);font-size:10px;font-weight:500;
+.newscard .nc-sec{font-family:var(--mono);font-size:11px;font-weight:500;
   letter-spacing:.07em;color:#fff;padding:3px 9px;border-radius:var(--r-pill);
   text-transform:uppercase}
 .newscard .nc-date{font-family:var(--mono);font-size:11px;color:var(--slate)}
@@ -903,7 +903,7 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
 
 .catq{padding:18px;gap:9px}
 .catq .cq-icon{width:30px;height:30px}
-.catq .cq-sec{font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;
+.catq .cq-sec{font-family:var(--mono);font-size:11px;letter-spacing:.07em;
   text-transform:uppercase;color:#fff;padding:3px 9px;border-radius:var(--r-pill);
   align-self:flex-start}
 .catq h3,.catq h4{font-size:16px;letter-spacing:-.02em}
@@ -966,7 +966,7 @@ a:hover>.vf-cat-icon,a:focus-visible>.vf-cat-icon,
 footer{background:var(--ink);color:#93A7BD;padding:60px 24px 44px;font-size:14px}
 footer .in{max-width:var(--shell);margin:0 auto;display:grid;gap:34px}
 @media(min-width:780px){footer .in{grid-template-columns:2.1fr 1fr 1fr 1fr}}
-footer h2,footer h3,footer h4,footer h5{font-family:var(--disp);font-size:13px;letter-spacing:.01em;
+footer h2,footer h3,footer h4,footer h5{font-family:var(--disp);font-size:13px;letter-spacing:.01em;line-height:1.15;
   text-transform:none;color:#fff;margin-bottom:14px;font-weight:600}
 footer p{line-height:1.7;max-width:480px;font-size:13px;color:#7F94AC}
 footer li{list-style:none;padding:5px 0;font-family:var(--body);font-size:13.5px}
@@ -1113,3 +1113,5 @@ footer > .foot-legal:first-child{margin-top:0;padding-top:0;border-top:0}
 
 /* Glossary entry -> its own page (glossary/<id>.html, from scripts/gen-glossary-pages.mjs). */
 .term .term-more{margin-top:8px;font-family:var(--mono);font-size:12px;letter-spacing:.01em}
+/* a11y: breadcrumb size */
+.crumbnav,.crumbnav a,.crumbnav span{font-size:12px}
