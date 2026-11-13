@@ -46,5 +46,11 @@
   "name": "Solar and Storage",
   "blurb": "Array capacity, DC/AC ratio, clipping, amp-hours and kWh, C-rate and runtime.",
   "n": 8
+ },
+ {
+  "slug": "ground-fault-protection",
+  "name": "Ground-Fault Protection of Equipment",
+  "blurb": "When NEC 230.95 requires GFPE, how the disconnect rating is judged, the maximum settings, the exceptions and the on-site test.",
+  "n": 10
  }
 ]

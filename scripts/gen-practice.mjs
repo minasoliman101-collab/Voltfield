@@ -16,7 +16,15 @@
  * search engine. The script on the page only adds answer checking and a score.
  *
  * Nothing here quotes a code table. Where a question touches the NEC it tests
- * the method (125 percent, next standard size), not a table lookup.
+ * the method (125 percent, next standard size), not a table lookup. The one
+ * exception is a set flagged `code: true`, which tests code RULES (thresholds
+ * and settings stated in a section's text). Those are typed in, not computed,
+ * so they carry an edition note and need checking against the code book.
+ *
+ * Every question also gets its own page, practice/questions/<slug>.html, with
+ * the choices, the answer and the worked solution. People search for single
+ * exam-style questions, and a page that answers exactly one is what matches.
+ * The slug comes from the question text, so rewording a question moves its URL.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -24,7 +32,7 @@ import path from 'node:path';
 const root = path.resolve(import.meta.dirname, '..');
 process.chdir(root);
 const TEMPLATE = 'calculators/ohms-law.html';
-const DATE_ISO = '2026-11-11', DATE_LONG = 'November 11, 2026';
+const DATE_ISO = '2026-11-13', DATE_LONG = 'November 13, 2026';
 const BASE = 'https://voltfield.org/';
 const R3 = Math.sqrt(3);
 const f = (v, d = 0) => Number(v).toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
@@ -34,8 +42,10 @@ const nextStd = (a) => STD_OCPD.find(x => x >= a - 1e-9);
 /* num(): a numerical question. `ans` and each of `wrong` are numbers; they are
    formatted to `d` decimals with `unit`. con(): a conceptual question, correct
    choice first. Both get their choices shuffled deterministically. */
-const num = (stem, ans, wrong, unit, d, sol, link) => ({ stem, choices: [ans, ...wrong].map(v => `${f(v, d)}${unit ? ' ' + unit : ''}`), sol, link });
-const con = (stem, right, wrong, sol, link) => ({ stem, choices: [right, ...wrong], sol, link });
+const num = (stem, ans, wrong, unit, d, sol, link, why) => ({ stem, choices: [ans, ...wrong].map(v => `${f(v, d)}${unit ? ' ' + unit : ''}`), sol, link, why });
+/* `why` is optional: three short reasons, one per wrong choice, in the order
+   the wrong choices are given. They are shown on the question's own page. */
+const con = (stem, right, wrong, sol, link, why) => ({ stem, choices: [right, ...wrong], sol, link, why });
 const C = (slug, t) => [`calculators/${slug}.html`, t];
 const G = (slug, t) => [`${slug}.html`, t];
 const T = (slug, t) => [`glossary/${slug}.html`, t];
@@ -276,6 +286,63 @@ const TOPICS = [];
         `Nameplate = usable / (DoD &times; efficiency) = 2,000 / (0.90 &times; 0.90) = <b>${f(np)} kWh</b>. Multiplying by the two factors instead of dividing gives a nameplate smaller than the usable energy, which cannot be right.`, C('bess-sizing', 'BESS Sizing Calculator')),
     ] });
 }
+{ // 9  CODE RULES: typed in from NEC 230.95, 215.10, 517.17 and 695.6. Check against the code book.
+  const GF = G('guide-ground-fault-protection', 'Ground-Fault Protection &amp; NEC 230.95');
+  TOPICS.push({ slug: 'ground-fault-protection', badge: 'GFPE', name: 'Ground-Fault Protection of Equipment', code: true,
+    title: 'NEC 230.95 Ground-Fault Practice Questions',
+    desc: '10 practice questions on NEC 230.95 ground-fault protection of equipment, with worked answers: the 1,000 A threshold, settings, exceptions and testing.',
+    blurb: 'When NEC 230.95 requires GFPE, how the disconnect rating is judged, the maximum settings, the exceptions and the on-site test.',
+    intro: 'Ground-fault protection of equipment is a short rule that produces a lot of exam questions, because almost every word in it can be tested: the system type, the voltage to ground, the ampere rating and how that rating is judged. These ten questions cover each of those in turn. They follow the wording of the 2023 National Electrical Code.',
+    q: [
+      con('Which of these services requires ground-fault protection of equipment under NEC 230.95?',
+        'A 480Y/277 V solidly grounded wye service with a 1,200 A service disconnect.',
+        ['A 208Y/120 V solidly grounded wye service with a 2,000 A service disconnect.', 'A 480 V ungrounded delta service with a 1,600 A service disconnect.', 'A 480Y/277 V solidly grounded wye service with an 800 A service disconnect.'],
+        'Three conditions must all be met: a solidly grounded wye system, more than 150 volts to ground (and not more than 1,000 volts phase-to-phase), and a service disconnect rated 1,000 amperes or more. Only the 480Y/277 V, 1,200 A service meets all three.', GF,
+        ['A 208Y/120 V system has 120 volts to ground, which is not more than 150, so the rule does not apply at any ampere rating.', 'The rule covers solidly grounded wye systems. An ungrounded delta is outside it.', 'The voltage and system type qualify, but 800 A is below the 1,000 A threshold.']),
+      con('At what service disconnect rating does NEC 230.95 begin to require ground-fault protection of equipment?',
+        '1,000 amperes or more', ['800 amperes or more', '1,200 amperes or more', '2,000 amperes or more'],
+        'The requirement applies to each service disconnecting means rated <b>1,000 amperes or more</b>, on a solidly grounded wye service of more than 150 volts to ground.', GF,
+        ['800 A is a common frame size but it is below the threshold.', '1,200 A is the maximum pickup setting of the protection, not the rating at which it becomes required.', '2,000 A is well above the threshold; the rule starts at 1,000 A.']),
+      con('What is the maximum setting permitted for the ground-fault protection required by NEC 230.95?',
+        '1,200 amperes', ['1,000 amperes', '3,000 amperes', '600 amperes'],
+        'The maximum setting of the ground-fault protection is <b>1,200 amperes</b>. Lower settings are allowed and are often needed to coordinate with devices downstream.', GF,
+        ['1,000 A is the disconnect rating at which the protection becomes required, not its maximum setting.', '3,000 A is the fault current at which the maximum time delay is specified.', '600 A is a permitted setting, but it is not the maximum.']),
+      con('For ground-fault currents of 3,000 amperes or more, what is the maximum time delay NEC 230.95 permits?',
+        'One second', ['Ten seconds', 'One minute', 'One-tenth of a second'],
+        'The maximum time delay is <b>one second</b> for ground-fault currents equal to or greater than 3,000 amperes. An arcing ground fault does a great deal of damage in that time, which is why shorter delays are normally set where coordination allows.', GF,
+        ['Ten seconds is ten times the permitted maximum.', 'One minute would let an arcing fault destroy the equipment.', 'One-tenth of a second is permitted, but it is not the maximum.']),
+      con('A 480Y/277 V service has a 1,200 A fused switch as its service disconnect, fitted with 800 A fuses. Is ground-fault protection of equipment required?',
+        'Yes, because the rating is that of the largest fuse the switch can accept.',
+        ['No, because the fuses installed are rated below 1,000 A.', 'No, because the rule applies only to circuit breakers.', 'Only if the calculated load is more than 1,000 A.'],
+        'The rating of the service disconnect is taken as the rating of the largest fuse that can be installed. A 1,200 A switch can accept 1,200 A fuses, so it is a 1,200 A disconnect for this rule and protection is required, whatever fuses are fitted today.', GF,
+        ['The fuses fitted today do not set the rating; the largest fuse the switch can take does.', 'The rule applies to fused switches and circuit breakers alike.', 'The calculated load does not enter into it. The rating of the disconnect does.']),
+      con('A service disconnect is a circuit breaker whose continuous-current trip can be adjusted up to 1,200 A. It is set to 800 A. On a 480Y/277 V service, how is its rating judged for NEC 230.95?',
+        'As 1,200 A, the highest setting to which the trip can be adjusted.',
+        ['As 800 A, the setting in use.', 'As the calculated load on the service.', 'As the ampacity of the service conductors.'],
+        'For a circuit breaker the rating is the highest continuous-current trip setting for which the installed overcurrent device is rated or can be adjusted. A breaker that can be turned up to 1,200 A is a 1,200 A disconnect, so ground-fault protection is required.', GF,
+        ['Turning the trip down does not take the breaker out of the rule, because it can be turned back up.', 'The load is not the test; the rating of the disconnect is.', 'Conductor ampacity is a separate matter from the rating of the disconnect.']),
+      con('To which of these does the ground-fault protection requirement of NEC 230.95 NOT apply?',
+        'A service disconnect for a continuous industrial process where a non-orderly shutdown would introduce additional or increased hazards.',
+        ['A service disconnect in a building with an automatic sprinkler system.', 'A service disconnect supplied by an underground service lateral.', 'A service disconnect located outdoors.'],
+        'The exception covers a service disconnect for a continuous industrial process where a non-orderly shutdown will introduce additional or increased hazards. In that case tripping on a ground fault could be more dangerous than the fault.', GF,
+        ['Sprinklers have no bearing on the requirement.', 'Whether the service is overhead or underground makes no difference.', 'The location of the disconnect does not change the requirement.']),
+      con('When must the ground-fault protection system required by NEC 230.95 be performance tested?',
+        'When it is first installed on site, with a written record kept.',
+        ['Only at the factory, before shipment.', 'Only if the inspector asks for it.', 'Only after the first ground fault occurs.'],
+        'The system must be performance tested when first installed on site, in accordance with the instructions provided with the equipment, and a written record of the test must be made available to the authority having jurisdiction. Wiring errors, especially at the neutral sensor, are normally found by this test.', GF,
+        ['A factory test cannot find field wiring errors, which are the usual cause of failure.', 'The test is a requirement in itself, not something done on request.', 'Waiting for a fault means finding out the protection does not work when it is needed.']),
+      con('How does ground-fault protection of equipment (GFPE) differ from a ground-fault circuit interrupter (GFCI)?',
+        'GFPE protects equipment and is set in hundreds of amperes; a GFCI protects people and trips at a few milliamperes.',
+        ['They are two names for the same device.', 'GFPE protects people; a GFCI protects equipment.', 'GFPE is for DC circuits and a GFCI is for AC circuits.'],
+        'A Class A GFCI is a personnel protection device that trips at about 5 milliamperes. GFPE exists to limit damage to equipment from arcing ground faults, with pickups that may be as high as 1,200 amperes. Neither can do the other\'s job.', GF,
+        ['They differ by a factor of many thousands in the current at which they act.', 'This has the two the wrong way round.', 'Both are used on AC systems; the difference is purpose and sensitivity.']),
+      con('In a health care facility, where ground-fault protection is provided on the service disconnect, what else does the NEC require?',
+        'An additional step of ground-fault protection on the next level of feeder disconnects, under 517.17.',
+        ['Nothing further; protection at the service is sufficient.', 'Ground-fault protection on every branch circuit.', 'Removal of the protection from the service disconnect.'],
+        'NEC 517.17 requires an additional step of ground-fault protection in the next level of feeder disconnecting means downstream toward the load, and the two levels must be selective. A ground fault on a feeder then opens the feeder device and leaves the rest of the facility energized.', GF,
+        ['With protection only at the service, any downstream ground fault blacks out the whole facility.', 'The second level is at the feeders, not at every branch circuit.', 'The protection stays at the service; a second level is added below it.']),
+    ] });
+}
 
 /* ----------------------------------------------------------------- builders */
 const plain = (s) => String(s).replace(/<[^>]+>/g, '').replace(/&mdash;/g, '—').replace(/&amp;/g, '&').replace(/&sup2;/g, '²').replace(/&sup3;/g, '³')
@@ -294,8 +361,23 @@ function arrange(q, ti, qi) {
   for (let i = 3; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
   const choices = order.map(i => q.choices[i]);
   if (new Set(choices.map(plain)).size !== 4) throw new Error('duplicate choices in: ' + plain(q.stem));
-  return { choices, correct: order.indexOf(0) };
+  if (q.why && q.why.length !== 3) throw new Error('why needs three entries in: ' + plain(q.stem));
+  return { choices, correct: order.indexOf(0), whyBy: q.why ? order.map(i => (i === 0 ? null : q.why[i - 1])) : null };
 }
+
+/* One URL per question, taken from its wording. */
+const used = new Set();
+function slugFor(stem) {
+  const words = plain(stem).toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, ' ').trim().split(' ');
+  let s = '';
+  for (const w of words) { if ((s + '-' + w).length > 72) break; s = s ? s + '-' + w : w; }
+  let out = s, n = 2;
+  while (used.has(out)) out = s + '-' + n++;
+  used.add(out);
+  return out;
+}
+const clipH = (s, n) => attr(clip(s, n));
+const clip = (s, n) => { s = plain(s); if (s.length <= n) return s; const c = s.slice(0, n - 1); return c.slice(0, c.lastIndexOf(' ')).replace(/[,;:.\s]+$/, '') + '…'; };
 
 const STYLE = `<style>
 .pq-bar{position:sticky;top:var(--vf-header-h,64px);z-index:5;display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin:18px 0 8px;padding:10px 14px;
@@ -322,6 +404,16 @@ const STYLE = `<style>
 .pq summary{cursor:pointer;font-family:var(--mono);font-size:12px;letter-spacing:.03em;color:var(--link)}
 .pq details p{margin:10px 0 0;font-size:15px}
 .pq .pq-ans{font-family:var(--mono);font-size:12.5px;color:var(--slate)}
+.pq .pq-own{margin:10px 0 0;font-family:var(--mono);font-size:12px}
+.pq-one h1{font-size:clamp(22px,3.4vw,30px);line-height:1.25;letter-spacing:-.02em}
+.pq-why{margin:10px 0 0;padding-left:20px}
+.pq-why li{font-size:15px;margin-bottom:6px;color:var(--ink-2)}
+.pq-list{margin:10px 0 0;padding-left:22px}
+.pq-list li{margin-bottom:7px;font-size:15px}
+.pq-list li.is-here{color:var(--slate)}
+.pq-nav{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0}
+.pq-nav a{flex:1 1 220px;padding:12px 14px;min-height:44px;border:1px solid var(--line-dark);border-radius:var(--r-s,6px);text-decoration:none;color:var(--ink);font-size:14.5px;background:var(--card)}
+.pq-nav a span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--slate);margin-bottom:4px}
 @media print{.pq-bar,.pq-check,.ad-unit{display:none!important}.pq details{display:block}.pq details>*{display:block}}
 </style>`;
 
@@ -385,7 +477,7 @@ function stamp(tpl, o) {
   let s = tpl;
   const one = (re, to, label) => { if (!re.test(s)) throw new Error(o.file + ': no match for ' + label); s = s.replace(re, to); };
   const url = BASE + o.file;
-  one(/<title>[^<]*<\/title>/, `<title>${attr(o.title)} | Voltfield</title>`, 'title');
+  one(/<title>[^<]*<\/title>/, `<title>${attr(o.title)}${o.bareTitle ? '' : ' | Voltfield'}</title>`, 'title');
   one(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${url}">`, 'canonical');
   one(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${url}">`, 'og:url');
   one(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${attr(o.desc)}">`, 'description');
@@ -404,13 +496,20 @@ function stamp(tpl, o) {
 
 /* ---------------------------------------------------------------------- run */
 const tpl = fs.readFileSync(TEMPLATE, 'utf8').replace(/\r\n/g, '\n');
-fs.mkdirSync('practice', { recursive: true });
+fs.mkdirSync('practice/questions', { recursive: true });
 let total = 0;
+const QDIR = 'practice/questions/';
+/* arrange and name every question first, so set pages can link to them */
+const SETS = TOPICS.map((t, ti) => t.q.map((q, qi) => ({ ...q, ...arrange(q, ti, qi), slug: slugFor(q.stem) })));
+const written = new Set();
+const PROV = (t) => (t.code
+  ? `Last reviewed ${DATE_LONG}. Written by the Voltfield editorial team. These questions test rules stated in the 2023 National Electrical Code, and each solution names the section it comes from. Other editions word some of these rules differently, and an examination is marked against the edition it names, so check the one you are working to. If you can show an answer is wrong, the <a class="inline" href="/contact.html">contact page</a> says how to report it.`
+  : `Last reviewed ${DATE_LONG}. Written by the Voltfield editorial team. Every numerical answer is computed from the formula shown in its solution, and the wrong choices are computed from specific common mistakes. If you can show an answer is wrong, the <a class="inline" href="/contact.html">contact page</a> says how to report it.`);
 TOPICS.forEach((t, ti) => {
   const file = `practice/${t.slug}.html`, url = BASE + file;
-  const qs = t.q.map((q, qi) => ({ ...q, ...arrange(q, ti, qi) }));
+  const qs = SETS[ti];
   total += qs.length;
-  const desc = `${qs.length} ${plain(t.name).toLowerCase()} practice questions with solutions:${plain(t.blurb).replace(/\.$/, '').toLowerCase()}.`;
+  const desc = t.desc || `${qs.length} ${plain(t.name).toLowerCase()} practice questions with solutions: ${plain(t.blurb).replace(/\.$/, '').toLowerCase()}.`;
   const next = TOPICS[(ti + 1) % TOPICS.length];
   const main = `<main id="main" tabindex="-1">
 
@@ -439,6 +538,7 @@ ${q.choices.map((c, k) => `      <label><input type="radio" name="q${i + 1}" val
       <p class="pq-ans">Answer: ${LET[q.correct]}. ${q.choices[q.correct]}</p>
       <p>${q.sol}</p>
       <p>Related: <a class="inline" href="/${q.link[0]}">${q.link[1]}</a></p>
+      <p class="pq-own"><a class="inline" href="/${QDIR}${q.slug}.html">This question on its own page</a></p>
     </details>
   </section>${i === 3 ? '\n\n  <div class="ad-unit" data-ad="incontent"></div>' : ''}`).join('\n\n')}
 
@@ -458,18 +558,103 @@ ${q.choices.map((c, k) => `      <label><input type="radio" name="q${i + 1}" val
       <dt>What it is not</dt>
       <dd>An official examination, or questions taken from one. These are original questions for study and self-testing. They are not affiliated with any licensing body, and passing them is not evidence of competence to do electrical work.</dd>
       <dt>Provenance</dt>
-      <dd>Last reviewed ${DATE_LONG}. Written by the Voltfield editorial team. Every numerical answer is computed from the formula shown in its solution, and the wrong choices are computed from specific common mistakes. If you can show an answer is wrong, the <a class="inline" href="/contact.html">contact page</a> says how to report it.</dd>
+      <dd>${PROV(t)}</dd>
     </dl>
   </aside>
 
 </div>
 <div class="ad-unit" data-ad="footer"></div>
 </main>`;
-  const ld = { '@context': 'https://schema.org', '@graph': [
-    { '@type': 'BreadcrumbList', itemListElement: [
+  const crumbs = [
       { '@type': 'ListItem', position: 1, name: 'Home', item: BASE },
       { '@type': 'ListItem', position: 2, name: 'Practice questions', item: BASE + 'practice-questions.html' },
-      { '@type': 'ListItem', position: 3, name: plain(t.name), item: url } ] },
+      { '@type': 'ListItem', position: 3, name: plain(t.name), item: url } ];
+
+  /* one page per question */
+  qs.forEach((q, i) => {
+    const qfile = `${QDIR}${q.slug}.html`, qurl = BASE + qfile;
+    const prev = qs[(i + qs.length - 1) % qs.length], nxt = qs[(i + 1) % qs.length];
+    const isCalc = q.link[0].startsWith('calculators/'), isChart = q.link[0].startsWith('charts/');
+    const tryIt = isCalc ? `The <a class="inline" href="/${q.link[0]}">${q.link[1]}</a> runs the same calculation with any values you give it, and shows the formula it used. Change one input at a time to see which way the answer moves.`
+      : isChart ? `The <a class="inline" href="/${q.link[0]}">${q.link[1]}</a> lists the values this question draws on, so you can check neighbouring cases.`
+      : `<a class="inline" href="/${q.link[0]}">${q.link[1]}</a> covers the background to this question in full.`;
+    let qdesc = clip(`Answer: ${plain(q.choices[q.correct])}. ${plain(q.sol)}`, 156);
+    if (qdesc.length < 100) { const add = ` A ${plain(t.name).toLowerCase()} practice question with its worked solution.`; qdesc += (qdesc.length + add.length <= 158 ? add : ' A practice question with its worked solution.'); }
+    const qmain = `<main id="main" tabindex="-1">
+
+<section class="artban pq-one">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/" style="color:var(--slate);text-decoration:none">Home</a> / <a href="/practice-questions.html" style="color:var(--slate);text-decoration:none">Practice questions</a> / <a href="/practice/${t.slug}.html" style="color:var(--slate);text-decoration:none">${t.name}</a> / <span style="color:var(--ink)">Question ${i + 1}</span></nav>
+    <div class="eyebrow">Practice Question &middot; With Worked Solution</div>
+    <h1>${q.stem}</h1>
+    <p class="dek">Question ${i + 1} of ${qs.length} in the set on ${plain(t.name).toLowerCase()}. Choose an answer, then open the solution to see the working.</p>
+  </div>
+</section>
+
+<div class="artwrap">
+  <section class="pq" data-answer="${q.correct}" aria-labelledby="q1">
+    <h2 id="q1">Choose an answer</h2>
+    <fieldset>
+      <legend>${attr(q.stem)}</legend>
+${q.choices.map((c, k) => `      <label><input type="radio" name="q1" value="${k}"><span><b>${LET[k]}.</b> ${c}</span></label>`).join('\n')}
+    </fieldset>
+    <details>
+      <summary>Show the answer and worked solution</summary>
+      <p class="pq-ans">Answer: ${LET[q.correct]}. ${q.choices[q.correct]}</p>
+      <p>${q.sol}</p>${q.whyBy ? `
+      <p><b>Why the other choices are wrong</b></p>
+      <ul class="pq-why">
+${q.choices.map((c, k) => (k === q.correct ? '' : `        <li><b>${LET[k]}. ${c}</b> ${q.whyBy[k]}</li>`)).filter(Boolean).join('\n')}
+      </ul>` : ''}
+    </details>
+  </section>
+
+  <h2>${isCalc ? 'Try it with your own numbers' : 'Read more on this'}</h2>
+  <p>${tryIt}</p>
+
+  <div class="pq-nav">
+    <a href="/${QDIR}${prev.slug}.html"><span>Previous question</span>${clipH(prev.stem, 90)}</a>
+    <a href="/${QDIR}${nxt.slug}.html"><span>Next question</span>${clipH(nxt.stem, 90)}</a>
+  </div>
+
+  <h2>All ${qs.length} questions in this set</h2>
+  <ol class="pq-list">
+${qs.map((x, k) => (k === i ? `    <li class="is-here">${clipH(x.stem, 120)} (this question)</li>` : `    <li><a class="inline" href="/${QDIR}${x.slug}.html">${clipH(x.stem, 120)}</a></li>`)).join('\n')}
+  </ol>
+  <div class="rel">
+    <a href="/practice/${t.slug}.html">Take the whole set with a score</a>
+    <a href="/practice-questions.html">All practice questions</a>
+  </div>
+
+  <aside class="provenance" aria-labelledby="prov-h">
+    <h2 id="prov-h">Scope &amp; sources</h2>
+    <dl>
+      <dt>What this is</dt>
+      <dd>An original practice question written for study, with its answer and working. It is not taken from any licensing or certification examination and is not affiliated with one.</dd>
+      <dt>Provenance</dt>
+      <dd>${PROV(t)}</dd>
+    </dl>
+  </aside>
+
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+</main>`;
+    const qld = { '@context': 'https://schema.org', '@graph': [
+      { '@type': 'BreadcrumbList', itemListElement: [...crumbs, { '@type': 'ListItem', position: 4, name: 'Question ' + (i + 1), item: qurl }] },
+      { '@type': 'Quiz', name: clip(q.stem, 110), description: qdesc, url: qurl, dateModified: DATE_ISO, inLanguage: 'en-US',
+        educationalLevel: 'intermediate', learningResourceType: 'Practice problem', about: { '@type': 'Thing', name: plain(t.name) },
+        isPartOf: { '@type': 'Quiz', name: plain(t.name) + ': Practice Questions', url },
+        publisher: { '@type': 'Organization', name: 'Voltfield', url: BASE },
+        hasPart: [{ '@type': 'Question', eduQuestionType: 'Multiple choice', text: plain(q.stem),
+          suggestedAnswer: q.choices.map((c, k) => ({ '@type': 'Answer', position: k, text: plain(c) })).filter((a, k) => k !== q.correct),
+          acceptedAnswer: { '@type': 'Answer', position: q.correct, text: plain(q.choices[q.correct]), answerExplanation: { '@type': 'Comment', text: plain(q.sol) } } }] },
+    ] };
+    fs.writeFileSync(qfile, stamp(tpl, { file: qfile, title: clip(q.stem, 60), bareTitle: true, desc: qdesc, h1: clip(q.stem, 90), ld: qld, main: qmain, script: true }));
+    written.add(q.slug + '.html');
+  });
+
+  const ld = { '@context': 'https://schema.org', '@graph': [
+    { '@type': 'BreadcrumbList', itemListElement: crumbs },
     { '@type': 'Quiz', name: plain(t.name) + ': Practice Questions', description: desc, url, dateModified: DATE_ISO, inLanguage: 'en-US',
       educationalLevel: 'intermediate', learningResourceType: 'Practice problem', about: { '@type': 'Thing', name: plain(t.name) },
       publisher: { '@type': 'Organization', name: 'Voltfield', url: BASE },
@@ -508,7 +693,7 @@ ${cards}
   <p>Work each question on paper before looking at the choices. If your answer is not among them, that tells you something before you have checked anything. When you get one wrong, read the solution and then try the linked calculator with different numbers until the method is familiar. Your answers are kept in your browser, so you can leave a set and come back to it.</p>
 
   <h2>What these are and are not</h2>
-  <p>These are original questions written for study. They are not taken from any licensing or certification examination and are not affiliated with one. Where a question touches the National Electrical Code it tests a method, such as taking a continuous load at 125 percent, and not a table lookup, so it does not depend on which edition you are working to. For the terms themselves there is also a ${A('voltfield-glossary-quiz.html', 'glossary quiz')}, and the ${A('voltfield-sandbox.html', 'one-line practice sandbox')} lets you build a system and have it checked.</p>
+  <p>These are original questions written for study. They are not taken from any licensing or certification examination and are not affiliated with one. Where a question touches the National Electrical Code it tests a method, such as taking a continuous load at 125 percent, and not a table lookup, so it does not depend on which edition you are working to. The one exception is the set on ground-fault protection, which tests rules stated in the code itself and says which edition it follows. Every question also has a page of its own, linked from its solution, if you want to send one to somebody. For the terms themselves there is also a ${A('voltfield-glossary-quiz.html', 'glossary quiz')}, and the ${A('voltfield-sandbox.html', 'one-line practice sandbox')} lets you build a system and have it checked.</p>
 </div>
 <div class="ad-unit" data-ad="footer"></div>
 </main>`;
@@ -523,4 +708,23 @@ ${cards}
   console.log(`  wrote practice-questions.html (desc ${desc.length})`);
   fs.writeFileSync('scripts/practice-manifest.json', JSON.stringify(TOPICS.map(t => ({ slug: t.slug, name: plain(t.name), blurb: plain(t.blurb), n: t.q.length })), null, 1));
 }
-console.log('practice sets: ' + TOPICS.length + ', questions: ' + total);
+/* question pages that no longer have a question behind them */
+for (const fn of fs.readdirSync(QDIR)) if (fn.endsWith('.html') && !written.has(fn)) { fs.unlinkSync(QDIR + fn); console.log('  removed stale ' + QDIR + fn); }
+
+/* sitemap: one entry per set and per question, dated today; stale question entries removed */
+{
+  const raw = fs.readFileSync('sitemap.xml', 'utf8'), crlf = raw.includes('\r\n');
+  let x = raw.replace(/\r\n/g, '\n');
+  const entry = (loc, pr) => `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${DATE_ISO}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>${pr}</priority>\n  </url>\n`;
+  x = x.replace(/  <url>\n    <loc>https:\/\/voltfield\.org\/practice\/questions\/[^<]*<\/loc>[\s\S]*?<\/url>\n/g, '');
+  const want = [[BASE + 'practice-questions.html', '0.7'], ...TOPICS.map(t => [BASE + 'practice/' + t.slug + '.html', '0.7']), ...[...written].sort().map(fn => [BASE + QDIR + fn, '0.5'])];
+  let added = 0;
+  for (const [loc, pr] of want) {
+    const re = new RegExp('(<loc>' + loc.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '</loc>\\n\\s*<lastmod>)[^<]*');
+    if (re.test(x)) x = x.replace(re, '$1' + DATE_ISO);
+    else { x = x.replace('</urlset>', () => entry(loc, pr) + '</urlset>'); added++; }
+  }
+  fs.writeFileSync('sitemap.xml', crlf ? x.replace(/\n/g, '\r\n') : x);
+  console.log(`  sitemap: ${want.length} practice URLs, ${added} newly listed since the last question-page set`);
+}
+console.log('practice sets: ' + TOPICS.length + ', questions: ' + total + ', question pages: ' + written.size);

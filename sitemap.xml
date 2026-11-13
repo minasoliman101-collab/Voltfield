@@ -1154,55 +1154,55 @@
   </url>
   <url>
     <loc>https://voltfield.org/practice-questions.html</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://voltfield.org/practice/ohms-law-and-power.html</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://voltfield.org/practice/three-phase-and-power-factor.html</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://voltfield.org/practice/conductors-and-voltage-drop.html</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://voltfield.org/practice/overcurrent-protection.html</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://voltfield.org/practice/transformers.html</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://voltfield.org/practice/motors.html</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://voltfield.org/practice/data-center-power-and-cooling.html</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://voltfield.org/practice/solar-and-storage.html</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1217,5 +1217,455 @@
     <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/ground-fault-protection.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-1-500-kva-480-v-three-phase-transformer-has-an-impedance-of-5-75.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-1-500-w-heater-is-connected-to-a-120-v-circuit-what-current-does-it.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-10-kw-load-runs-24-hours-a-day-at-an-energy-rate-of-0-12-per-kwh-what.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-100-ah-48-v-battery-may-be-discharged-to-80-percent-depth-and-feeds-a.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-100-ton-cooling-load-is-served-by-chilled-water-with-a-10-f-difference.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-120-v-circuit-has-a-voltage-drop-of-6-32-v-what-is-that-as-a.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-400-kw-load-runs-at-a-power-factor-of-0-75-how-much-capacitance-is.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-480-v-three-phase-wye-system-has-what-voltage-from-any-line-to-neutral.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-480y-277-v-service-has-a-1-200-a-fused-switch-as-its-service.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-75-kva-three-phase-transformer-steps-480-v-down-to-208-v-what-is-its.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-balanced-three-phase-load-draws-75-kw-at-480-v-with-a-power-factor-of.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-battery-is-rated-100-ah-at-a-nominal-48-v-what-is-its-nameplate-energy.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-battery-system-is-discharged-at-a-steady-0-5c-about-how-long-does-a.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-breaker-and-its-enclosure-are-listed-for-operation-at-100-percent-of.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-calculation-gives-a-minimum-rating-of-112-a-what-is-the-next-standard.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-centrifugal-fan-in-a-system-with-no-static-head-is-slowed-to-80.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-conductor-with-90-c-insulation-is-terminated-on-equipment-whose.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-continuous-load-of-80-a-is-to-be-supplied-before-any-adjustment-for.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-cooling-load-needs-three-chillers-to-carry-it-how-many-chillers-does-a.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-current-of-2-a-flows-through-a-30-resistor-how-much-power-does-the.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-data-center-draws-1-500-kw-in-total-of-which-1-000-kw-reaches-the-it.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-feeder-supplies-40-a-of-continuous-load-and-20-a-of-non-continuous.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-feeder-supplies-a-continuous-load-of-52-a-and-nothing-else-what-is-the.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-four-pole-60-hz-induction-motor-runs-at-1-750-rpm-at-full-load-what-is.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-heating-element-is-rated-2-000-w-at-240-v-its-resistance-does-not.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-load-draws-400-kw-at-a-power-factor-of-0-8-what-is-its-apparent-power.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-rack-dissipates-10-kw-and-the-air-passing-through-it-rises-by-20-f.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-resistor-of-8-is-connected-across-a-120-v-supply-what-current-flows.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-service-disconnect-is-a-circuit-breaker-whose-continuous-current-trip.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-storage-project-is-rated-100-mw-and-400-mwh-what-is-its-c-rate.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-system-must-deliver-2-000-kwh-of-usable-energy-with-a-90-percent-depth.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-three-phase-480-v-feeder-runs-150-ft-in-4-0-awg-copper-211-600.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-three-phase-feeder-carries-100-a-per-phase-at-480-v-what-is-the.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-three-phase-load-of-300-kw-has-a-power-factor-of-0-9-which-standard.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-transformer-nameplate-shows-the-vector-group-dyn11-what-does-it.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/a-two-wire-120-v-circuit-runs-100-ft-one-way-in-12-awg-copper-6-530.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/an-array-has-240-modules-rated-540-w-each-what-is-its-dc-capacity.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/at-what-service-disconnect-rating-does-nec-230-95-begin-to-require.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/compared-with-a-copper-conductor-of-the-same-size-an-aluminum-conductor.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/for-a-3-percent-voltage-drop-what-is-the-longest-one-way-run-of-12-awg.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/for-ground-fault-currents-of-3-000-amperes-or-more-what-is-the-maximum.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/how-does-a-short-circuit-current-rating-sccr-differ-from-an-interrupting.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/how-does-ground-fault-protection-of-equipment-gfpe-differ-from-a-ground.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/how-many-tons-of-sensible-cooling-does-a-200-kw-it-load-require-before.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/in-a-delta-connected-winding-how-does-line-current-compare-with-the.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/in-a-health-care-facility-where-ground-fault-protection-is-provided-on.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/in-a-selectively-coordinated-system-what-happens-when-a-fault-occurs-on.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/in-that-facility-the-overhead-is-500-kw-if-it-holds-for-a-whole-year-how.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/in-the-awg-system-what-happens-to-the-cross-sectional-area-of-a.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/on-an-ac-circuit-with-a-power-factor-below-1-0-which-statement-is-true.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/that-129-6-kwp-array-is-connected-to-a-100-kw-inverter-what-is-the-dc-ac.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/that-50-hp-motor-has-a-full-load-efficiency-of-93-percent-what.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/the-same-400-kw-load-at-a-power-factor-of-0-8-draws-how-much-reactive.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/the-three-line-to-line-voltages-at-a-motor-are-460-v-467-v-and-450-v-by.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/to-which-of-these-does-the-ground-fault-protection-requirement-of-nec.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/two-transformers-have-the-same-kva-and-voltage-one-has-4-percent.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-does-a-transformers-bil-rating-describe.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-is-a-k-rated-transformer-designed-to-do.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-is-inverter-clipping.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-is-the-essential-difference-between-a-crac-and-a-crah.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-is-the-full-load-current-of-a-50-kva-three-phase-supply-at-208-v.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-is-the-full-load-secondary-current-of-a-500-kva-three-phase.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-is-the-largest-continuous-load-a-standard-20-a-breaker-may-carry.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-is-the-maximum-setting-permitted-for-the-ground-fault-protection.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-is-the-output-of-a-50-hp-motor-in-kilowatts.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-is-the-resistance-of-500-ft-of-2-awg-copper-66-360-circular-mils.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-is-the-resistance-of-a-1-500-w-120-v-heating-element-at-its.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-is-the-synchronous-speed-of-a-four-pole-motor-on-a-60-hz-supply.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-is-the-synchronous-speed-of-a-six-pole-motor-on-a-50-hz-supply.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-must-a-circuit-breakers-interrupting-rating-be-compared-with.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/what-torque-does-a-50-hp-motor-deliver-at-1-775-rpm.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/when-must-the-ground-fault-protection-system-required-by-nec-230-95-be.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/which-of-these-services-requires-ground-fault-protection-of-equipment.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://voltfield.org/practice/questions/with-hot-aisle-containment-what-is-the-condition-of-the-open-room.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>
