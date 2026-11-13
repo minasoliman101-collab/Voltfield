@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Inverter Clipping &amp; DC:AC Ratio | Voltfield</title>
+<title>DC/AC Ratio &amp; Inverter Clipping in Solar Plants | Voltfield</title>
 <link rel="canonical" href="https://voltfield.org/guide-inverter-clipping-ratio.html">
 <meta property="og:url" content="https://voltfield.org/guide-inverter-clipping-ratio.html">
-<meta name="description" content="Why utility-scale solar oversizes the DC array on purpose, how DC:AC ratio and clipping work, and typical ratios by site irradiance profile.">
+<meta name="description" content="DC/AC ratio and inverter clipping explained: how to calculate the ratio, why solar plants oversize the DC array, typical values of 1.2 to 1.3, and the cost.">
 <meta name="keywords" content="inverter clipping ratio, DC AC ratio solar, ILR inverter loading ratio, solar inverter oversizing, clipping losses solar, utility-scale solar DC AC ratio">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Voltfield">
@@ -26,7 +26,7 @@
    {"@type":"ListItem","position":2,"name":"Insights","item":"https://voltfield.org/voltfield-insights.html"},
    {"@type":"ListItem","position":3,"name":"Inverter Clipping Ratio Explained","item":"https://voltfield.org/guide-inverter-clipping-ratio.html"}
  ]},
- {"@type":"Article","headline":"Inverter Clipping Ratio Explained: DC:AC Ratio for Solar","description":"Why utility-scale solar sites oversize the DC array on purpose, how DC:AC ratio (ILR) and clipping actually work, typical ratios by site profile, and how to model the tradeoff before locking a BOM.","image":"https://voltfield.org/social/social-guide-inverter-clipping-ratio.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-08-23T00:00:00-05:00","dateModified":"2026-08-24T00:00:00-05:00","url":"https://voltfield.org/guide-inverter-clipping-ratio.html"},
+ {"@type":"Article","headline":"Inverter Clipping Ratio Explained: DC:AC Ratio for Solar","description":"Why utility-scale solar sites oversize the DC array on purpose, how DC:AC ratio (ILR) and clipping actually work, typical ratios by site profile, and how to model the tradeoff before locking a BOM.","image":"https://voltfield.org/social/social-guide-inverter-clipping-ratio.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-08-23T00:00:00-05:00","dateModified": "2026-11-12T00:00:00-06:00","url":"https://voltfield.org/guide-inverter-clipping-ratio.html"},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"What is inverter clipping?","acceptedAnswer":{"@type":"Answer","text":"Clipping happens when the DC array produces more power than the inverter's AC rating can output, so the inverter caps output at its rated maximum during the highest-irradiance hours -- the excess DC capacity above that cap goes unused for those hours."}},
    {"@type":"Question","name":"Why would a developer intentionally cause clipping?","acceptedAnswer":{"@type":"Answer","text":"Oversizing the DC array relative to the inverter (a DC:AC ratio above 1.0) raises energy production during low- and moderate-irradiance hours, when the array isn't near the inverter's cap. The extra energy captured across those hours usually outweighs the energy lost to clipping during the few peak hours, as long as the ratio is chosen correctly for the site."}},
@@ -120,13 +120,14 @@
       <li>The right ratio varies by site, so model it before locking the bill of materials.</li>
     </ul>
   </section>
-  <details class="pagetoc"><summary>On this page &middot; 6 sections</summary>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
     <ol>
       <li><a href="#the-ratio-and-the-terminology">The ratio and the terminology</a></li>
       <li><a href="#what-clipping-actually-is">What clipping actually is</a></li>
       <li><a href="#why-oversizing-still-wins">Why oversizing still wins</a></li>
       <li><a href="#typical-ratios-and-why-they-vary-by-site">Typical ratios, and why they vary by site</a></li>
       <li><a href="#modeling-it-before-locking-the-bom">Modeling it before locking the BOM</a></li>
+      <li><a href="#quick-answers">Quick answers</a></li>
       <li><a href="#faq">Frequently asked questions</a></li>
     </ol>
   </details>
@@ -159,6 +160,20 @@
   <div class="ad-unit" data-ad="incontent"></div>
 
 
+
+  <h2 id="quick-answers">Quick answers</h2>
+  <h3>How do you calculate the DC/AC ratio?</h3>
+  <p>Divide the DC array nameplate by the inverter AC rating. A 130 MWdc array on 100 MWac of inverters has a ratio of 1.3.</p>
+  <h3>Is DC/AC ratio the same as inverter loading ratio?</h3>
+  <p>Yes. Inverter loading ratio (ILR), DC/AC ratio and DC:AC ratio are three names for the same number.</p>
+  <h3>What is a good DC/AC ratio?</h3>
+  <p>Most utility-scale sites run 1.2 to 1.3. The right figure for a site comes from production modeling against its irradiance profile and its module and inverter costs, not from a rule of thumb.</p>
+  <h3>Does clipping damage the inverter?</h3>
+  <p>No. The inverter limits its output to its rating and leaves the rest of the available DC power unused. It is a planned operating condition, not an overload.</p>
+  <h3>How much energy does clipping lose?</h3>
+  <p>At ratios around 1.2 to 1.3 it is typically a small share of annual energy, on the order of a few percent, and it climbs quickly as the ratio goes higher. The exact figure is site-specific, which is why it is modeled.</p>
+  <h3>Can a battery recover clipped energy?</h3>
+  <p>Yes, if the battery is DC-coupled, meaning it sits on the DC side of the inverter. It can charge from power the inverter would otherwise clip and discharge it later.</p>
 
   <h2 id="faq">Frequently asked questions</h2>
   <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
@@ -233,7 +248,7 @@
 
 <aside class="provenance" aria-labelledby="prov-h">
   <details>
-    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published August 23, 2026 &middot; last updated August 24, 2026.</span></summary>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published August 23, 2026 &middot; last updated November 12, 2026.</span></summary>
     <dl>
       <dt>What this covers</dt>
       <dd>Why DC/AC ratios above unity are normal, how clipping losses behave, and how to reason about the trade-off.</dd>
