@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ground-Fault Protection (GFP) &amp; NEC 230.95 | Voltfield</title>
+<title>NEC 230.95 Ground-Fault Protection (GFPE) Rules | Voltfield</title>
 <link rel="canonical" href="https://voltfield.org/guide-ground-fault-protection.html">
 <meta property="og:url" content="https://voltfield.org/guide-ground-fault-protection.html">
-<meta name="description" content="Ground-fault protection explained: why arcing faults evade overcurrent protection, NEC 230.95 settings, sensing methods, coordination, and GFP vs. GFCI.">
+<meta name="description" content="When NEC 230.95 requires GFPE: disconnects of 1,000 A or more, over 150 V to ground. Settings, the fuse-rating rule, exceptions and worked exam-style questions.">
 <meta name="keywords" content="ground fault protection, NEC 230.95, GFP settings 1200 A, ground fault protection of equipment, GFPE vs GFCI, arcing ground fault, modified differential ground fault">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Voltfield">
@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="Ground-Fault Protection Explained">
 <meta name="twitter:description" content="Why arcing ground faults evade overcurrent protection, what NEC 230.95 requires, and why GFP is easy to get wrong.">
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://voltfield.org/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://voltfield.org/guides.html"}, {"@type": "ListItem", "position": 3, "name": "Ground-Fault Protection Explained", "item": "https://voltfield.org/guide-ground-fault-protection.html"}]}, {"@type": "Article", "headline": "Ground-Fault Protection Explained: NEC 230.95, Sensing and Coordination", "description": "Ground-fault protection explained: why arcing faults evade overcurrent protection, NEC 230.95 settings, sensing methods, coordination, and GFP vs. GFCI.", "image": "https://voltfield.org/social/social-guide-ground-fault-protection.jpg", "author": {"@type": "Organization", "name": "Voltfield Editorial Team", "url": "https://voltfield.org/methodology.html"}, "publisher": {"@type": "Organization", "name": "Voltfield"}, "datePublished": "2026-09-29T00:00:00-05:00", "dateModified": "2026-09-29T00:00:00-05:00", "url": "https://voltfield.org/guide-ground-fault-protection.html"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "When is ground-fault protection required by the NEC?", "acceptedAnswer": {"@type": "Answer", "text": "NEC 230.95 requires equipment ground-fault protection on solidly grounded wye services with more than 150 V to ground, for each service disconnect rated 1,000 A or more. In practice, that means large 480Y/277 V services. Similar rules apply to large feeder and building disconnects."}}, {"@type": "Question", "name": "What are the NEC 230.95 GFP settings?", "acceptedAnswer": {"@type": "Answer", "text": "A maximum pickup of 1,200 A, and a maximum time delay of one second for ground-fault currents of 3,000 A or more. Lower settings are allowed, and are often needed for coordination with downstream devices."}}, {"@type": "Question", "name": "What is the difference between GFP and GFCI?", "acceptedAnswer": {"@type": "Answer", "text": "A GFCI protects people and trips at a few milliamps. Class A devices trip at 6 mA or less under UL 943. Equipment GFP protects equipment from arcing ground faults, with pickups in the hundreds of amps. They aren't interchangeable."}}, {"@type": "Question", "name": "Why does GFP trip when there is no ground fault?", "acceptedAnswer": {"@type": "Answer", "text": "Usually because of the neutral: a missing or reversed neutral CT, a CT on the wrong side of the neutral-to-ground bond, or a multi-source system where neutral current returns by more than one path. The required on-site performance test is where these errors are normally found."}}]}]}
+{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://voltfield.org/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://voltfield.org/guides.html"}, {"@type": "ListItem", "position": 3, "name": "Ground-Fault Protection Explained", "item": "https://voltfield.org/guide-ground-fault-protection.html"}]}, {"@type": "Article", "headline": "Ground-Fault Protection Explained: NEC 230.95, Sensing and Coordination", "description": "Ground-fault protection explained: why arcing faults evade overcurrent protection, NEC 230.95 settings, sensing methods, coordination, and GFP vs. GFCI.", "image": "https://voltfield.org/social/social-guide-ground-fault-protection.jpg", "author": {"@type": "Organization", "name": "Voltfield Editorial Team", "url": "https://voltfield.org/methodology.html"}, "publisher": {"@type": "Organization", "name": "Voltfield"}, "datePublished": "2026-09-29T00:00:00-05:00", "dateModified": "2026-11-12T00:00:00-05:00", "url": "https://voltfield.org/guide-ground-fault-protection.html"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "When is ground-fault protection required by the NEC?", "acceptedAnswer": {"@type": "Answer", "text": "NEC 230.95 requires equipment ground-fault protection on solidly grounded wye services with more than 150 V to ground, for each service disconnect rated 1,000 A or more. In practice, that means large 480Y/277 V services. Similar rules apply to large feeder and building disconnects."}}, {"@type": "Question", "name": "What are the NEC 230.95 GFP settings?", "acceptedAnswer": {"@type": "Answer", "text": "A maximum pickup of 1,200 A, and a maximum time delay of one second for ground-fault currents of 3,000 A or more. Lower settings are allowed, and are often needed for coordination with downstream devices."}}, {"@type": "Question", "name": "What is the difference between GFP and GFCI?", "acceptedAnswer": {"@type": "Answer", "text": "A GFCI protects people and trips at a few milliamps. Class A devices trip at 6 mA or less under UL 943. Equipment GFP protects equipment from arcing ground faults, with pickups in the hundreds of amps. They aren't interchangeable."}}, {"@type": "Question", "name": "Why does GFP trip when there is no ground fault?", "acceptedAnswer": {"@type": "Answer", "text": "Usually because of the neutral: a missing or reversed neutral CT, a CT on the wrong side of the neutral-to-ground bond, or a multi-source system where neutral current returns by more than one path. The required on-site performance test is where these errors are normally found."}}]}]}
 </script>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#101B2D">
@@ -108,10 +108,11 @@
       <li>GFP on the main alone means any downstream ground fault trips the whole service, and the on-site performance test is required.</li>
     </ul>
   </section>
-  <details class="pagetoc"><summary>On this page &middot; 8 sections</summary>
+  <details class="pagetoc"><summary>On this page &middot; 9 sections</summary>
     <ol>
       <li><a href="#why-overcurrent-protection-isnt-enough">Why overcurrent protection isn't enough</a></li>
       <li><a href="#what-nec-230-95-requires">What NEC 230.95 requires</a></li>
+      <li><a href="#nec-230-95-questions-answered">NEC 230.95 questions, answered</a></li>
       <li><a href="#how-gfp-senses-a-ground-fault">How GFP senses a ground fault</a></li>
       <li><a href="#coordination-why-gfp-on-the-main-alone-is-a-prob">Coordination: why GFP on the main alone is a problem</a></li>
       <li><a href="#gfp-is-not-gfci">GFP is not GFCI</a></li>
@@ -136,6 +137,28 @@
   </ul>
   <p>Similar requirements apply to large feeder disconnects (NEC 215.10) and building disconnects (240.13) where there's no GFP upstream. Health care facilities need an additional level of ground-fault protection on feeders, so that a downstream fault doesn't take out the whole service.</p>
   <p>Emergency systems work differently. The NEC doesn't require equipment GFP on an emergency system's alternate source, because tripping the generator on a ground fault defeats the point of having it. Instead, it requires <b>ground-fault indication</b>, so the fault is alarmed and can be found.</p>
+
+  <h2 id="nec-230-95-questions-answered">NEC 230.95 questions, answered</h2>
+  <p>Short answers to the questions that come up most on exams and plan reviews. Each one follows from the rule above.</p>
+  <h3>At what rating does NEC 230.95 require ground-fault protection?</h3>
+  <p>For each service disconnecting means rated <b>1,000 amperes or more</b>, on a solidly grounded wye service with more than 150 volts to ground and not more than 1,000 volts phase-to-phase.</p>
+  <h3>Does a 1,000 A service disconnect on a 208Y/120 V system need GFPE?</h3>
+  <p><b>No.</b> A 208Y/120 V system has 120 volts to ground, which is not more than 150 volts, so 230.95 does not apply at any ampere rating. The same holds for a 1,200 A switchboard at 208Y/120 V.</p>
+  <h3>Does 480Y/277 V switchgear with a 1,000 A main breaker need GFPE?</h3>
+  <p><b>Yes.</b> It is solidly grounded wye, 277 volts to ground, and the disconnect is rated 1,000 A. This is the most common place the requirement applies. Set beside a 1,200 A switchboard at 208Y/120 V, only the 480Y/277 V equipment needs it.</p>
+  <h3>Is GFPE required for a 1,000 A disconnect fitted with 800 A fuses on a 480Y/277 V service?</h3>
+  <p><b>Yes.</b> The rating that counts is the largest fuse that can be installed in the switch, not the fuse fitted today. A 1,000 A switch can take a 1,000 A fuse, so it is a 1,000 A disconnect for this rule.</p>
+  <h3>How is the rating judged for an adjustable circuit breaker?</h3>
+  <p>By the <b>highest continuous-current trip setting</b> the installed breaker is rated for or can be adjusted to. Turning a 1,200 A breaker down to 800 A does not take it out of the rule.</p>
+  <h3>Does 230.95 apply to a continuous industrial process?</h3>
+  <p>The ground-fault provisions <b>shall not apply</b> to a service disconnect for a continuous industrial process where a non-orderly shutdown will introduce additional or increased hazards.</p>
+  <h3>On a large service such as 3,000 A, will the phase overcurrent device clear a ground fault anyway?</h3>
+  <p><b>No.</b> An arcing ground fault on a 480Y/277 V system can sustain itself at a few hundred amperes, well below the pickup of a 3,000 A device. The larger the service, the wider that gap, which is the reason the rule exists.</p>
+  <h3>Which section requires a second level of ground-fault protection on feeders?</h3>
+  <p><b>NEC 517.17</b>, for health care facilities. Where ground-fault protection is provided on the service or feeder disconnect under 230.95 or 215.10, an additional step is required in the next level of feeder disconnects toward the load, so that a downstream fault clears there and not at the service.</p>
+  <h3>What are the maximum settings?</h3>
+  <p>A pickup of no more than <b>1,200 amperes</b>, and a time delay of no more than <b>one second</b> for ground-fault currents of 3,000 amperes or more.</p>
+  <p>Wording and section numbers shift between NEC editions, and an exam is marked against the edition it names. Check the edition your jurisdiction or course has adopted.</p>
 
   <h2 id="how-gfp-senses-a-ground-fault">How GFP senses a ground fault</h2>
   <table class="reftable">
