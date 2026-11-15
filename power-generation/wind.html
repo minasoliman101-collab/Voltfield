@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wind Farm Equipment Reference: Turbines to Substation | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/power-generation/wind.html">
+<meta property="og:url" content="https://voltfield.org/power-generation/wind.html">
+<meta name="description" content="How a wind plant makes power, the turbine power equation and power curve, turbine types, the collector system and substation equipment, and what makes wind logistics hard.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Wind Farm Equipment Reference: Turbines to Substation">
+<meta property="og:description" content="How a wind plant makes power, the turbine power equation and power curve, turbine types, the collector system and substation equipment, and what makes wind logistics hard.">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Power generation and grid","item":"https://voltfield.org/power-generation.html"},{"@type":"ListItem","position":3,"name":"Wind power","item":"https://voltfield.org/power-generation/wind.html"}]},{"@type":"FAQPage","dateModified":"2026-11-15","mainEntity":[{"@type":"Question","name":"How is wind turbine power calculated?","acceptedAnswer":{"@type":"Answer","text":"Power equals one half times air density times rotor swept area times wind speed cubed times the power coefficient. With density in kg per cubic meter, area in square meters and speed in meters per second, the result is in watts."}},{"@type":"Question","name":"What is the Betz limit?","acceptedAnswer":{"@type":"Answer","text":"The theoretical maximum fraction of the wind s kinetic energy a rotor can extract, 16/27 or about 59.3 percent. Real turbines achieve somewhat less than 50 percent."}},{"@type":"Question","name":"What is the difference between a Type 3 and a Type 4 wind turbine?","acceptedAnswer":{"@type":"Answer","text":"A Type 3 turbine uses a doubly-fed induction generator: the stator connects directly to the grid and a converter rated at roughly a third of the machine feeds the rotor. A Type 4 turbine passes all of its power through a full-scale converter, which decouples the generator from the grid."}}]}]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+<link rel="stylesheet" href="/voltfield-templates.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Power &amp; cooling engineering reference</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>43 tools, electrical and cooling</em></a>
+            <a href="/reference-charts.html"><b>Reference charts</b><em>Printable tables: wire, breakers, cooling load</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+            <a href="/templates.html"><b>Templates</b><em>Purchase order, bill of lading, proof of delivery</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+            <a href="/practice-questions.html"><b>Practice questions</b><em>64 questions with worked solutions</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/formulas.html"><b>Formulas</b><em>Power, generation, storage and cooling</em></a>
+            <a href="/drawings.html"><b>Drawings</b><em>Typical single-line diagrams and symbols</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav"><a href="/">Home</a> / <a href="/power-generation.html">Power generation and grid</a> / <span aria-current="page">Wind power</span></nav>
+    <h1>Wind Power Plants: Turbines, Collector Systems and Substations</h1>
+    <p class="dek">Why wind speed matters three times over, what is inside a turbine and between the turbines and the grid, and why the blades decide the delivery plan.</p>
+  </div>
+</section>
+
+<div class="artwrap secwrap">
+  <p><b>A wind turbine converts the kinetic energy of moving air into shaft power, and a generator converts that into electricity. The power available rises with the cube of the wind speed, which is the single most important fact in wind energy.</b> Double the wind speed and there is eight times the power in it. That is why siting and hub height matter so much, and why a turbine spends most of its life well below its rating.</p>
+
+  <h2 id="how">How it makes power</h2>
+  <div class="fx-eq" role="math">P = &frac12; &times; &rho; &times; A &times; v&sup3; &times; C<sub>p</sub></div>
+  <p>Here &rho; is air density, about 1.225 kg/m&sup3; at sea level, A is the area swept by the rotor in m&sup2;, v is wind speed in m/s, and C<sub>p</sub> is the fraction of the wind&rsquo;s power the rotor captures. C<sub>p</sub> cannot exceed 0.593, the Betz limit, and good modern rotors reach somewhat under 0.5.</p>
+  <p>A rotor 150 m in diameter sweeps 17,671 m&sup2;. In an 8 m/s wind, with C<sub>p</sub> of 0.45, it captures 0.5 &times; 1.225 &times; 17,671 &times; 512 &times; 0.45, about 2.5 MW. At 10 m/s the same rotor would capture nearly twice that.</p>
+  <p>Because swept area goes with the square of the diameter, a longer blade pays twice. Because of the cube law, a small error in the wind resource estimate becomes a large error in energy.</p>
+
+  <h2 id="equipment">Main equipment</h2>
+  <div class="tt-wrap"><table class="reftable">
+    <tr><th scope="col">Equipment</th><th scope="col">What it does</th><th scope="col">What a specification pins down</th></tr>
+    <tr><td><b>Rotor and blades</b></td><td>Capture the wind. Pitch control turns the blades to limit power above rated wind speed.</td><td>Diameter, wind class, noise and icing provisions</td></tr>
+    <tr><td><b>Nacelle and drivetrain</b></td><td>Houses the gearbox (or a direct-drive generator), brake and yaw system.</td><td>Geared or direct drive, service access, condition monitoring</td></tr>
+    <tr><td><b>Generator and converter</b></td><td>Type 3 is a doubly-fed induction generator with a partial-scale converter. Type 4 puts all the power through a full-scale converter.</td><td>Grid code capability: fault ride-through, reactive range, frequency response</td></tr>
+    <tr><td><b>Tower and foundation</b></td><td>Carry the nacelle to hub height.</td><td>Hub height, site soil data, transport limits on section diameter</td></tr>
+    <tr><td><b>Turbine transformer</b></td><td>Steps the generator voltage, often 690 V, up to collector voltage. In the nacelle, the tower base or on a pad.</td><td>kVA, voltage, impedance, fluid type, duty cycle</td></tr>
+    <tr><td><b>Collector system</b></td><td>Underground cable circuits, typically 34.5 kV, that gather turbines into feeders.</td><td>Cable size and ampacity, grounding, feeder protection</td></tr>
+    <tr><td><b>Collector substation</b></td><td>Feeder breakers, the main power transformer and the high-voltage breaker at the point of interconnection.</td><td>MVA, voltage, impedance, breaker ratings, relaying</td></tr>
+    <tr><td><b>Reactive compensation</b></td><td>Capacitor banks, reactors or a STATCOM to meet voltage requirements at the interconnection.</td><td>Set by the interconnection study</td></tr>
+    <tr><td><b>SCADA and met mast</b></td><td>Plant control, and measurement of the wind itself.</td><td>Interfaces with the grid operator</td></tr>
+  </table></div>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2 id="numbers">Numbers worth knowing</h2>
+  <ul>
+    <li><b>Cut-in wind speed</b> is roughly 3 to 4 m/s. Below it the turbine does not generate.</li>
+    <li><b>Rated wind speed</b> is roughly 11 to 13 m/s. Above it, pitch control holds output at the rating.</li>
+    <li><b>Cut-out wind speed</b> is around 25 m/s, where the turbine shuts down to protect itself.</li>
+    <li><b>Capacity factor</b> for onshore wind commonly falls between about 25% and 45% depending on the site and the machine. A 3 MW turbine at 35% produces about 9,200 MWh a year.</li>
+    <li><b>Air density matters.</b> Cold, dense air at sea level carries more power than warm air at altitude at the same speed.</li>
+  </ul>
+
+  <h2 id="buying">Buying and shipping it</h2>
+  <p>Turbines are bought under a turbine supply agreement, usually with a long-term service agreement and a guaranteed power curve and availability. The buyer&rsquo;s balance-of-plant scope is the foundations, collector system, substation and interconnection. Logistics shape everything: blades tens of meters long and tower sections at the limit of road clearances need route surveys, permits, escorts and sometimes road modifications, and deliveries have to be sequenced to the crane. A blade damaged in transit is expensive and slow to replace, so receiving inspection and clear records at handover matter more here than almost anywhere.</p>
+
+  <h2 id="tools">Calculators, guides and templates</h2>
+  <div class="gdgrid">
+    <a class="gdcard" href="/calculators/voltage-drop.html"><h3>Voltage drop</h3><p>Drop on a collector or feeder circuit</p></a>
+    <a class="gdcard" href="/calculators/transformer-sizing.html"><h3>Transformer sizing</h3><p>kVA for a load, to the next standard rating</p></a>
+    <a class="gdcard" href="/calculators/power-factor.html"><h3>Power factor</h3><p>kVAR needed to correct power factor</p></a>
+    <a class="gdcard" href="/guide-grid-forming-vs-grid-following.html"><h3>Grid-forming vs. grid-following</h3><p>How converter-based plants behave on the grid</p></a>
+    <a class="gdcard" href="/guide-grid-interconnection-process.html"><h3>Grid interconnection process</h3><p>Studies, queue and agreements</p></a>
+    <a class="gdcard" href="/templates/proof-of-delivery.html"><h3>Proof of delivery template</h3><p>Receiving inspection at the truck</p></a>
+  </div>
+
+  <h2 id="questions">Questions</h2>
+  <details class="tfaq"><summary>How is wind turbine power calculated?</summary><p>Power equals one half times air density times rotor swept area times wind speed cubed times the power coefficient. With density in kg per cubic meter, area in square meters and speed in meters per second, the result is in watts.</p></details>
+  <details class="tfaq"><summary>What is the Betz limit?</summary><p>The theoretical maximum fraction of the wind&rsquo;s kinetic energy a rotor can extract, 16/27 or about 59.3 percent. Real turbines achieve somewhat less than 50 percent.</p></details>
+  <details class="tfaq"><summary>What is the difference between a Type 3 and a Type 4 wind turbine?</summary><p>A Type 3 turbine uses a doubly-fed induction generator: the stator connects directly to the grid and a converter rated at roughly a third of the machine feeds the rotor. A Type 4 turbine passes all of its power through a full-scale converter, which decouples the generator from the grid.</p></details>
+
+  <h2 id="sources">Scope and sources</h2>
+  <p>This page is a general reference. Figures are typical ranges for orientation, not data for any particular machine or site, and nothing here replaces a manufacturer&rsquo;s data or an engineering study. It draws on:</p>
+  <ul>
+    <li>IEC 61400-1 &mdash; wind turbine design requirements and wind classes</li>
+    <li>IEC 61400-12-1 &mdash; power performance measurement</li>
+    <li>IEEE 2800 &mdash; interconnection of inverter-based resources with transmission systems</li>
+  </ul>
+  <p class="provenance">Published November 15, 2026. Other sectors: <a class="inline" href="/power-generation/gas-turbines.html">gas turbines and combined cycle</a>, <a class="inline" href="/power-generation/hydro.html">hydropower</a>, <a class="inline" href="/power-generation/nuclear.html">nuclear power</a>, <a class="inline" href="/power-generation/transmission-substations.html">transmission and substations</a>. Spotted an error? <a class="inline" href="/contact.html">Tell us</a>.</p>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent reference for power generation, data center and energy storage projects, for the people who specify, buy and ship the equipment. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+      <li><a href="/power-generation.html">Power Generation &amp; Grid</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="/voltfield-site-config.js"></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+
+</body>
+</html>

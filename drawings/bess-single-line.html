@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BESS Single-Line Diagram (Typical, Free SVG) | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/drawings/bess-single-line.html">
+<meta property="og:url" content="https://voltfield.org/drawings/bess-single-line.html">
+<meta name="description" content="A typical battery energy storage system single-line diagram, from the point of interconnection through the transformer and PCS to the battery, with auxiliary power. Free SVG.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="BESS Single-Line Diagram (Typical, Free SVG)">
+<meta property="og:description" content="A typical battery energy storage system single-line diagram, from the point of interconnection through the transformer and PCS to the battery, with auxiliary power. Free SVG.">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Drawings","item":"https://voltfield.org/drawings.html"},{"@type":"ListItem","position":3,"name":"Battery storage single-line diagram","item":"https://voltfield.org/drawings/bess-single-line.html"}]},{"@type":"FAQPage","dateModified":"2026-11-15","mainEntity":[{"@type":"Question","name":"What does this battery storage single-line diagram show?","acceptedAnswer":{"@type":"Answer","text":"The point of interconnection feeds through a disconnect and breaker to a main power transformer and a medium-voltage bus. Each battery block connects through a feeder breaker, a pad-mounted transformer, a power conversion system and a DC disconnect to the battery. An auxiliary transformer supplies cooling, battery management and fire systems."}}]}]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+<link rel="stylesheet" href="/voltfield-templates.css">
+<style>
+.sld{display:block;width:100%;height:auto;color:var(--ink)}
+.sld-frame{background:var(--card);border:1px solid var(--line-dark);border-radius:var(--r-lg);padding:18px;margin:8px 0 10px;overflow-x:auto}
+.sld-frame .sld{min-width:620px}
+.artwrap.dwgwrap{max-width:1000px}
+.artwrap.dwgwrap > *{max-width:720px}
+.artwrap.dwgwrap > .sld-frame,.artwrap.dwgwrap > .tpl-actions,.artwrap.dwgwrap > .gdgrid,.artwrap.dwgwrap > .tt-wrap{max-width:none}
+.artwrap p.sld-cap{font-size:14px;color:var(--slate)}
+@media print{header.site,footer,.artban,.ad-unit,.skip-link,.web-only,.dwgwrap > :not(.sld-frame):not(.sld-cap){display:none !important}
+  .sld-frame{border:0;padding:0}.sld{color:#000}.artwrap.dwgwrap{max-width:none;padding:0}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Power &amp; cooling engineering reference</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>43 tools, electrical and cooling</em></a>
+            <a href="/reference-charts.html"><b>Reference charts</b><em>Printable tables: wire, breakers, cooling load</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+            <a href="/templates.html"><b>Templates</b><em>Purchase order, bill of lading, proof of delivery</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+            <a href="/practice-questions.html"><b>Practice questions</b><em>64 questions with worked solutions</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/formulas.html"><b>Formulas</b><em>Power, generation, storage and cooling</em></a>
+            <a href="/drawings.html"><b>Drawings</b><em>Typical single-line diagrams and symbols</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav"><a href="/">Home</a> / <a href="/drawings.html">Drawings</a> / <span aria-current="page">Battery storage single-line diagram</span></nav>
+    <h1>Battery Energy Storage (BESS) Single-Line Diagram: A Typical Arrangement</h1>
+    <p class="dek">A grid-connected battery plant drawn from the interconnection down to the cells, including the auxiliary power it cannot run without.</p>
+  </div>
+</section>
+
+<div class="artwrap dwgwrap">
+  <div class="tpl-actions web-only" role="group" aria-label="Drawing actions">
+    <button type="button" class="btn btn-primary" data-dl="bess-single-line">Download SVG</button>
+    <button type="button" class="btn btn-ghost" data-print>Print or save as PDF</button>
+  </div>
+  <div class="sld-frame">
+<svg class="sld" viewBox="0 0 820 548" width="820" height="548" role="img" aria-labelledby="sldT sldD" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-family="IBM Plex Sans, Arial, sans-serif" font-size="12.5"><title id="sldT">Typical battery energy storage system single-line diagram</title><desc id="sldD">The point of interconnection feeds through a disconnect and breaker to a main power transformer and a medium-voltage bus. Each battery block connects through a feeder breaker, a pad-mounted transformer, a power conversion system and a DC disconnect to the battery. An auxiliary transformer supplies cooling, battery management and fire systems.</desc><style>text{fill:currentColor;stroke:none}text.sub{font-size:11px;opacity:.72}text.in{font-size:12px;font-weight:600}.dot,.fill{fill:currentColor}</style><circle cx="330" cy="40" r="16"/><text x="330" y="45" text-anchor="middle" class="in">~</text><line x1="330" y1="56" x2="330" y2="70"/><text x="356" y="37" text-anchor="start">Point of interconnection</text><text x="356" y="51" text-anchor="start" class="sub">Utility system</text><line x1="330" y1="70" x2="330" y2="82"/><line x1="330" y1="102" x2="341" y2="83"/><circle cx="330" cy="82" r="2" class="dot"/><circle cx="330" cy="102" r="2" class="dot"/><line x1="330" y1="102" x2="330" y2="114"/><text x="352" y="96" text-anchor="start">Disconnect switch</text><line x1="330" y1="114" x2="330" y2="128"/><rect x="322" y="128" width="16" height="16"/><line x1="330" y1="144" x2="330" y2="158"/><text x="352" y="133" text-anchor="start">High-voltage circuit breaker</text><text x="352" y="147" text-anchor="start" class="sub">With revenue metering</text><line x1="330" y1="158" x2="330" y2="168"/><circle cx="330" cy="180" r="12"/><circle cx="330" cy="196" r="12"/><line x1="330" y1="208" x2="330" y2="218"/><text x="354" y="192" text-anchor="start">Main power transformer</text><line x1="330" y1="218" x2="330" y2="232"/><rect x="322" y="232" width="16" height="16"/><line x1="330" y1="248" x2="330" y2="262"/><text x="352" y="244" text-anchor="start">Main breaker</text><line x1="330" y1="262" x2="330" y2="288"/><line x1="60" y1="288" x2="710" y2="288" stroke-width="5"/><text x="60" y="279" text-anchor="start">Medium-voltage bus</text><line x1="110" y1="288" x2="110" y2="302"/><rect x="102" y="302" width="16" height="16"/><line x1="110" y1="318" x2="110" y2="332"/><text x="132" y="314" text-anchor="start">Feeder breaker</text><line x1="110" y1="332" x2="110" y2="342"/><circle cx="110" cy="354" r="12"/><circle cx="110" cy="370" r="12"/><line x1="110" y1="382" x2="110" y2="392"/><text x="134" y="366" text-anchor="start">Pad-mounted transformer</text><line x1="110" y1="392" x2="110" y2="402"/><rect x="86" y="402" width="48" height="34" rx="2"/><text x="110" y="424" text-anchor="middle" class="in">~ / =</text><line x1="110" y1="436" x2="110" y2="446"/><text x="144" y="416" text-anchor="start">Power conversion</text><text x="144" y="430" text-anchor="start" class="sub">system (PCS)</text><line x1="110" y1="446" x2="110" y2="458"/><line x1="110" y1="478" x2="121" y2="459"/><circle cx="110" cy="458" r="2" class="dot"/><circle cx="110" cy="478" r="2" class="dot"/><line x1="110" y1="478" x2="110" y2="490"/><text x="132" y="465" text-anchor="start">DC disconnect</text><text x="132" y="479" text-anchor="start" class="sub">and fuses</text><line x1="110" y1="490" x2="110" y2="502"/><line x1="97" y1="502" x2="123" y2="502"/><line x1="103" y1="508" x2="117" y2="508" stroke-width="3"/><line x1="97" y1="514" x2="123" y2="514"/><line x1="103" y1="520" x2="117" y2="520" stroke-width="3"/><text x="132" y="508" text-anchor="start">Battery block 1</text><text x="132" y="522" text-anchor="start" class="sub">With BMS</text><line x1="350" y1="288" x2="350" y2="302"/><rect x="342" y="302" width="16" height="16"/><line x1="350" y1="318" x2="350" y2="332"/><text x="372" y="314" text-anchor="start">Feeder breaker</text><line x1="350" y1="332" x2="350" y2="342"/><circle cx="350" cy="354" r="12"/><circle cx="350" cy="370" r="12"/><line x1="350" y1="382" x2="350" y2="392"/><text x="374" y="366" text-anchor="start">Pad-mounted transformer</text><line x1="350" y1="392" x2="350" y2="402"/><rect x="326" y="402" width="48" height="34" rx="2"/><text x="350" y="424" text-anchor="middle" class="in">~ / =</text><line x1="350" y1="436" x2="350" y2="446"/><text x="384" y="416" text-anchor="start">Power conversion</text><text x="384" y="430" text-anchor="start" class="sub">system (PCS)</text><line x1="350" y1="446" x2="350" y2="458"/><line x1="350" y1="478" x2="361" y2="459"/><circle cx="350" cy="458" r="2" class="dot"/><circle cx="350" cy="478" r="2" class="dot"/><line x1="350" y1="478" x2="350" y2="490"/><text x="372" y="465" text-anchor="start">DC disconnect</text><text x="372" y="479" text-anchor="start" class="sub">and fuses</text><line x1="350" y1="490" x2="350" y2="502"/><line x1="337" y1="502" x2="363" y2="502"/><line x1="343" y1="508" x2="357" y2="508" stroke-width="3"/><line x1="337" y1="514" x2="363" y2="514"/><line x1="343" y1="520" x2="357" y2="520" stroke-width="3"/><text x="372" y="508" text-anchor="start">Battery blocks 2 to n</text><text x="372" y="522" text-anchor="start" class="sub">With BMS</text><line x1="620" y1="288" x2="620" y2="302"/><rect x="612" y="302" width="16" height="16"/><line x1="620" y1="318" x2="620" y2="332"/><text x="642" y="314" text-anchor="start">Auxiliary breaker</text><line x1="620" y1="332" x2="620" y2="342"/><circle cx="620" cy="354" r="12"/><circle cx="620" cy="370" r="12"/><line x1="620" y1="382" x2="620" y2="392"/><text x="644" y="366" text-anchor="start">Auxiliary transformer</text><line x1="620" y1="392" x2="620" y2="410"/><path d="M613 410H627L620 422Z" class="fill"/><text x="620" y="438" text-anchor="middle">Auxiliary loads</text><text x="620" y="452" text-anchor="middle" class="sub">Cooling, BMS, fire system</text></svg>
+  </div>
+  <p class="sld-cap">A typical arrangement for learning. It carries no ratings on purpose and is not a design. Symbols are explained in the <a class="inline" href="/drawings.html#symbols">legend</a>.</p>
+
+  <h2 id="reading">Reading it from the top</h2>
+  <dl class="tnotes">
+    <dt>Point of interconnection</dt><dd>Power flows both ways here. A storage plant is a load when charging and a generator when discharging, and it is studied as both.</dd>
+    <dt>Main power transformer</dt><dd>Sized for the plant&rsquo;s power rating in MW, not its energy in MWh. Duration changes the number of battery containers, not the transformer.</dd>
+    <dt>Medium-voltage bus</dt><dd>Collects the blocks. Larger plants split it into sections.</dd>
+    <dt>Pad-mounted transformer</dt><dd>Matches the converter&rsquo;s AC voltage to the collector voltage. Frequently one transformer serves two converters.</dd>
+    <dt>Power conversion system</dt><dd>A bidirectional inverter: it rectifies to charge and inverts to discharge. Whether it is grid-following or <a class="inline" href="/guide-grid-forming-vs-grid-following.html">grid-forming</a> decides what services the plant can provide.</dd>
+    <dt>DC disconnect and fuses</dt><dd>Isolate each battery container from the converter and clear DC faults, which do not have the current zeros that help an AC breaker.</dd>
+    <dt>Battery</dt><dd>Racks of modules in series and parallel, supervised by a battery management system. Power against energy is the <a class="inline" href="/guide-bess-c-rate.html">C-rate</a>.</dd>
+    <dt>Auxiliary transformer and loads</dt><dd>Cooling, controls, and fire detection and suppression. These loads are large, run in every state and count against round-trip efficiency. Many sites give them a backup supply.</dd>
+  </dl>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2 id="real">What a real single-line adds</h2>
+  <p>A single-line diagram for construction is a controlled document that an engineer is responsible for. Compared with this one it would also show:</p>
+  <ul>
+    <li>Power and energy ratings, voltages and impedances</li>
+    <li>Protection on both the AC and DC sides, including ground-fault detection on the DC bus</li>
+    <li>The plant controller and energy management system</li>
+    <li>Backup supply to the auxiliary bus so that cooling and fire systems survive a grid outage</li>
+    <li>Fire alarm and emergency shutdown interfaces required by <a class="inline" href="/guide-bess-fire-safety-nfpa-855.html">NFPA 855</a></li>
+    <li>Any co-located solar, which may share the transformer and the interconnection</li>
+  </ul>
+
+  <h2 id="related">Related</h2>
+  <ul>
+    <li><a class="inline" href="/battery-storage.html">Battery storage reference</a></li>
+    <li><a class="inline" href="/calculators/bess-sizing.html">BESS sizing calculator</a></li>
+    <li><a class="inline" href="/guide-bess-augmentation.html">BESS augmentation</a></li>
+    <li><a class="inline" href="/guide-bess-fire-safety-nfpa-855.html">BESS fire safety and NFPA 855</a></li>
+    <li><a class="inline" href="/drawings.html">All drawings</a></li>
+  </ul>
+  <p class="provenance">Published November 15, 2026. Free to use and adapt with a link back to this page. Spotted an error? <a class="inline" href="/contact.html">Tell us</a>.</p>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+<script>
+(function(){var b=document.querySelector('[data-dl]');if(!b)return;b.addEventListener('click',function(){
+var s=document.querySelector('svg.sld').cloneNode(true);s.setAttribute('style','color:#111;background:#fff');
+var a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['<?xml version="1.0" encoding="UTF-8"?>'+new XMLSerializer().serializeToString(s)],{type:'image/svg+xml'}));
+a.download='voltfield-'+b.getAttribute('data-dl')+'.svg';document.body.appendChild(a);a.click();a.remove();});
+var p=document.querySelector('[data-print]');if(p)p.addEventListener('click',function(){window.print();});})();
+</script>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent reference for power generation, data center and energy storage projects, for the people who specify, buy and ship the equipment. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+      <li><a href="/power-generation.html">Power Generation &amp; Grid</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="/voltfield-site-config.js"></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+
+</body>
+</html>

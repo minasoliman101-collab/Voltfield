@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engineering Formulas: Electrical, Power Generation, Cooling | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/formulas.html">
+<meta property="og:url" content="https://voltfield.org/formulas.html">
+<meta name="description" content="54 engineering formulas with variables and assumptions: three-phase power, voltage drop, transformers, motors, wind, hydro, solar, battery storage and cooling.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Engineering Formulas: Electrical, Power Generation, Cooling">
+<meta property="og:description" content="54 engineering formulas with variables and assumptions: three-phase power, voltage drop, transformers, motors, wind, hydro, solar, battery storage and cooling.">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Formulas","item":"https://voltfield.org/formulas.html"}]},{"@type":"FAQPage","dateModified":"2026-11-15","mainEntity":[{"@type":"Question","name":"What is the formula for three-phase power?","acceptedAnswer":{"@type":"Answer","text":"Real power is P = 3 line-to-line voltage line current power factor. Leave out the power factor and you have apparent power in VA."}},{"@type":"Question","name":"How do you convert kW to amps?","acceptedAnswer":{"@type":"Answer","text":"For three-phase: amps = kW 1000 / ( 3 volts power factor). For single-phase: amps = kW 1000 / (volts power factor)."}},{"@type":"Question","name":"How much airflow does 1 kW of IT load need?","acceptedAnswer":{"@type":"Answer","text":"About 3,160 divided by the air temperature rise in F, in CFM, for standard air at sea level. At a 20 F rise that is roughly 158 CFM per kW."}}]}]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+<link rel="stylesheet" href="/voltfield-templates.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Power &amp; cooling engineering reference</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>43 tools, electrical and cooling</em></a>
+            <a href="/reference-charts.html"><b>Reference charts</b><em>Printable tables: wire, breakers, cooling load</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+            <a href="/templates.html"><b>Templates</b><em>Purchase order, bill of lading, proof of delivery</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+            <a href="/practice-questions.html"><b>Practice questions</b><em>64 questions with worked solutions</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/formulas.html"><b>Formulas</b><em>Power, generation, storage and cooling</em></a>
+            <a href="/drawings.html"><b>Drawings</b><em>Typical single-line diagrams and symbols</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav"><a href="/">Home</a> / <span aria-current="page">Formulas</span></nav>
+    <h1>Engineering Formulas for Power, Generation and Cooling</h1>
+    <p class="dek">54 formulas on one page, each with its variables and what it assumes. Where there is a calculator that runs it, the link is on the card.</p>
+  </div>
+</section>
+
+<div class="artwrap fxwrap">
+  <p><b>This is the page to keep open while reading a data sheet or checking someone else&rsquo;s number.</b> The formulas run from the circuit basics through distribution, motors, generation by turbine, wind, water and sun, battery storage and cooling. Constants that hide an assumption, such as 1.08 for air and 500 for water, say what they assume.</p>
+
+  <label class="web-only" for="fxFilter" style="display:block;font-size:14px;font-weight:600;color:var(--ink);margin-top:20px">Find a formula</label>
+  <input class="fx-filter web-only" type="search" id="fxFilter" placeholder="e.g. voltage drop, torque, heat rate" autocomplete="off">
+  <p class="fx-count web-only" id="fxCount" role="status"></p>
+
+  <nav class="fx-jump" aria-label="Sections" style="margin-top:18px">
+    <a href="#circuits">Circuit basics</a>
+    <a href="#ac-power">AC and three-phase power</a>
+    <a href="#conductors">Conductors and protection</a>
+    <a href="#transformers">Transformers and fault current</a>
+    <a href="#motors">Motors, pumps and fans</a>
+    <a href="#generation">Power generation</a>
+    <a href="#storage">Battery storage</a>
+    <a href="#cooling">Cooling and data center</a>
+  </nav>
+
+  <section class="fx-sec" aria-labelledby="circuits">
+    <h2 id="circuits">Circuit basics</h2>
+    <div class="fx-grid">
+      <div class="fx">
+        <h3>Ohm&rsquo;s law</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Ohm&rsquo;s law formula">V = I &times; R</div>
+        <p class="fx-vars">V volts, I amps, R ohms</p><p>Rearranged: I = V / R and R = V / I.</p>
+        <a class="fx-go" href="/calculators/ohms-law.html">Ohm&rsquo;s law calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Power in a DC or resistive circuit</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Power in a DC or resistive circuit formula">P = V &times; I = I&sup2; &times; R = V&sup2; / R</div>
+        <p class="fx-vars">P watts</p><p>The I&sup2;R form is the one that explains conductor heating and line losses.</p>
+        <a class="fx-go" href="/calculators/ohms-law.html">Ohm&rsquo;s law calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Energy</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Energy formula">E = P &times; t</div>
+        <p class="fx-vars">E in kWh, P in kW, t in hours</p><p>Cost is energy times the rate: kWh &times; $/kWh.</p>
+        <a class="fx-go" href="/calculators/electricity-cost.html">Electricity cost calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Conductor resistance</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Conductor resistance formula">R = &rho; &times; L / A</div>
+        <p class="fx-vars">&rho; resistivity, L length, A cross-section</p><p>Resistivity rises with temperature, so resistance tables state the temperature they are for.</p>
+        <a class="fx-go" href="/calculators/wire-resistance.html">Wire resistance calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Resistors in series and parallel</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Resistors in series and parallel formula">R<sub>s</sub> = R<sub>1</sub> + R<sub>2</sub> &nbsp;&nbsp; 1/R<sub>p</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub></div>
+        <p>Two in parallel: R<sub>p</sub> = R<sub>1</sub>R<sub>2</sub> / (R<sub>1</sub> + R<sub>2</sub>).</p>
+        
+      </div>
+      <div class="fx">
+        <h3>Reactance and impedance</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Reactance and impedance formula">X<sub>L</sub> = 2&pi;fL &nbsp;&nbsp; X<sub>C</sub> = 1 / (2&pi;fC) &nbsp;&nbsp; Z = &radic;(R&sup2; + (X<sub>L</sub> &minus; X<sub>C</sub>)&sup2;)</div>
+        <p class="fx-vars">f hertz, L henries, C farads, Z ohms</p><p>In an AC circuit Ohm&rsquo;s law uses Z in place of R.</p>
+        
+      </div>
+    </div>
+  </section>
+
+  <section class="fx-sec" aria-labelledby="ac-power">
+    <h2 id="ac-power">AC and three-phase power</h2>
+    <div class="fx-grid">
+      <div class="fx">
+        <h3>Single-phase real power</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Single-phase real power formula">P = V &times; I &times; PF</div>
+        <p class="fx-vars">P watts, PF power factor</p>
+        <a class="fx-go" href="/calculators/watts-to-amps.html">Watts to amps calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Three-phase real power</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Three-phase real power formula">P = &radic;3 &times; V<sub>LL</sub> &times; I &times; PF</div>
+        <p class="fx-vars">V<sub>LL</sub> line-to-line volts, I line amps</p><p>&radic;3 is about 1.732.</p>
+        <a class="fx-go" href="/calculators/three-phase-power.html">Three-phase power calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Three-phase apparent power</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Three-phase apparent power formula">S = &radic;3 &times; V<sub>LL</sub> &times; I</div>
+        <p class="fx-vars">S in VA; divide by 1,000 for kVA</p><p>Equipment is rated in kVA because its heating depends on current, whatever the power factor.</p>
+        <a class="fx-go" href="/calculators/amps-to-kva.html">Amps to kVA calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Current from kW, three-phase</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Current from kW, three-phase formula">I = kW &times; 1000 / (&radic;3 &times; V<sub>LL</sub> &times; PF)</div>
+        
+        <a class="fx-go" href="/calculators/kw-to-amps.html">kW to amps calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Power triangle</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Power triangle formula">S&sup2; = P&sup2; + Q&sup2; &nbsp;&nbsp; PF = P / S</div>
+        <p class="fx-vars">P kW, Q kVAR, S kVA</p><p>kW = kVA &times; PF.</p>
+        <a class="fx-go" href="/calculators/kva-to-kw.html">kVA to kW calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Power factor correction</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Power factor correction formula">Q<sub>c</sub> = P &times; (tan &phi;<sub>1</sub> &minus; tan &phi;<sub>2</sub>)</div>
+        <p class="fx-vars">Q<sub>c</sub> kVAR of capacitors, &phi; = arccos(PF) before and after</p>
+        <a class="fx-go" href="/calculators/power-factor.html">Power factor calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Line and phase voltage, wye</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Line and phase voltage, wye formula">V<sub>LL</sub> = &radic;3 &times; V<sub>LN</sub></div>
+        <p>Which is why 480Y/277 V and 208Y/120 V come in pairs.</p>
+        <a class="fx-go" href="/guide-delta-vs-wye.html">Delta vs. wye guide <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="fx-sec" aria-labelledby="conductors">
+    <h2 id="conductors">Conductors and protection</h2>
+    <div class="fx-grid">
+      <div class="fx">
+        <h3>Voltage drop, single-phase</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Voltage drop, single-phase formula">VD = 2 &times; I &times; R &times; L / 1000</div>
+        <p class="fx-vars">R ohms per 1,000 ft, L one-way feet</p><p>The 2 accounts for the return conductor.</p>
+        <a class="fx-go" href="/calculators/voltage-drop.html">Voltage drop calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Voltage drop, three-phase</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Voltage drop, three-phase formula">VD = &radic;3 &times; I &times; R &times; L / 1000</div>
+        <p class="fx-vars">R ohms per 1,000 ft, L one-way feet</p><p>This resistance-only form is close for small conductors. Large conductors need reactance included.</p>
+        <a class="fx-go" href="/calculators/voltage-drop.html">Voltage drop calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Percent voltage drop</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Percent voltage drop formula">%VD = VD / V<sub>source</sub> &times; 100</div>
+        <p>Common design targets are 3% on a branch or feeder and 5% overall.</p>
+        <a class="fx-go" href="/calculators/voltage-drop.html">Voltage drop calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Continuous load</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Continuous load formula">OCPD &ge; 1.25 &times; I<sub>continuous</sub> + I<sub>noncontinuous</sub></div>
+        <p class="fx-vars">A continuous load runs three hours or more</p><p>The same thing seen from the other side: a standard breaker carries 80% of its rating continuously.</p>
+        <a class="fx-go" href="/calculators/breaker-size.html">Breaker size calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Corrected ampacity</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Corrected ampacity formula">I<sub>allowed</sub> = I<sub>table</sub> &times; F<sub>temperature</sub> &times; F<sub>bundling</sub></div>
+        <p class="fx-vars">Factors from the adopted electrical code</p>
+        <a class="fx-go" href="/calculators/ampacity.html">Ampacity calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Conduit fill</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Conduit fill formula">Fill % = &Sigma; conductor area / conduit internal area &times; 100</div>
+        <p class="fx-vars">Areas include insulation</p>
+        <a class="fx-go" href="/calculators/conduit-fill.html">Conduit fill calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Voltage unbalance</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Voltage unbalance formula">% unbalance = max deviation from average / average &times; 100</div>
+        <p class="fx-vars">Using the three line-to-line voltages</p><p>The NEMA definition. A few percent of unbalance causes a much larger current unbalance in a motor.</p>
+        <a class="fx-go" href="/calculators/voltage-unbalance.html">Voltage unbalance calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <section class="fx-sec" aria-labelledby="transformers">
+    <h2 id="transformers">Transformers and fault current</h2>
+    <div class="fx-grid">
+      <div class="fx">
+        <h3>Full-load current, three-phase</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Full-load current, three-phase formula">I<sub>FL</sub> = kVA &times; 1000 / (&radic;3 &times; V<sub>LL</sub>)</div>
+        <p>Single-phase: I = kVA &times; 1000 / V.</p>
+        <a class="fx-go" href="/calculators/kva-to-amps.html">kVA to amps calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Turns ratio</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Turns ratio formula">V<sub>p</sub> / V<sub>s</sub> = N<sub>p</sub> / N<sub>s</sub> = I<sub>s</sub> / I<sub>p</sub></div>
+        <p class="fx-vars">p primary, s secondary, N turns</p><p>Voltage goes with turns, current goes against them.</p>
+        
+      </div>
+      <div class="fx">
+        <h3>kVA needed for a load</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="kVA needed for a load formula">kVA = kW / PF</div>
+        <p>Then add margin and round up to a standard rating.</p>
+        <a class="fx-go" href="/calculators/transformer-sizing.html">Transformer sizing calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Fault current at the secondary</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Fault current at the secondary formula">I<sub>SC</sub> = I<sub>FL</sub> &times; 100 / %Z</div>
+        <p class="fx-vars">%Z nameplate impedance</p><p>Assumes an infinite source, so it is the upper bound. A 5.75% unit lets through about 17 times full-load current.</p>
+        <a class="fx-go" href="/calculators/fault-current.html">Fault current calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Efficiency</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Efficiency formula">&eta; = P<sub>out</sub> / (P<sub>out</sub> + P<sub>no-load</sub> + P<sub>load</sub>)</div>
+        <p class="fx-vars">Load loss scales with the square of loading</p><p>Peak efficiency falls where load loss equals no-load loss.</p>
+        
+      </div>
+    </div>
+  </section>
+
+  <section class="fx-sec" aria-labelledby="motors">
+    <h2 id="motors">Motors, pumps and fans</h2>
+    <div class="fx-grid">
+      <div class="fx">
+        <h3>Synchronous speed</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Synchronous speed formula">n<sub>s</sub> = 120 &times; f / p</div>
+        <p class="fx-vars">n rpm, f hertz, p number of poles</p><p>A 4-pole motor on 60 Hz: 1,800 rpm.</p>
+        <a class="fx-go" href="/calculators/motor-speed.html">Motor speed calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Slip</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Slip formula">s = (n<sub>s</sub> &minus; n) / n<sub>s</sub></div>
+        <p class="fx-vars">n actual shaft speed</p>
+        
+      </div>
+      <div class="fx">
+        <h3>Torque</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Torque formula">T = 5252 &times; hp / rpm</div>
+        <p class="fx-vars">T in lb&middot;ft</p><p>Metric: T (N&middot;m) = 9550 &times; kW / rpm.</p>
+        <a class="fx-go" href="/calculators/motor-torque.html">Motor torque calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Horsepower to kilowatts</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Horsepower to kilowatts formula">kW = hp &times; 0.746</div>
+        <p>That is shaft power. Electrical input is shaft power divided by efficiency.</p>
+        <a class="fx-go" href="/calculators/hp-to-kw.html">hp to kW calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Motor input current, three-phase</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Motor input current, three-phase formula">I = hp &times; 746 / (&radic;3 &times; V &times; &eta; &times; PF)</div>
+        <p class="fx-vars">&eta; efficiency as a decimal</p><p>For sizing conductors and protection, codes use table currents, not this figure.</p>
+        
+      </div>
+      <div class="fx">
+        <h3>Affinity laws</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Affinity laws formula">Q &prop; N &nbsp;&nbsp; H &prop; N&sup2; &nbsp;&nbsp; P &prop; N&sup3;</div>
+        <p class="fx-vars">Q flow, H head or pressure, P power, N speed</p><p>At 80% speed a fan or pump draws about half the power. Static head weakens the cube law.</p>
+        <a class="fx-go" href="/calculators/affinity-laws.html">Affinity laws calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Pump power</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Pump power formula">bhp = GPM &times; head &times; SG / (3960 &times; &eta;)</div>
+        <p class="fx-vars">head in feet, SG specific gravity, &eta; pump efficiency</p>
+        <a class="fx-go" href="/calculators/pump-power.html">Pump power calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Pipe velocity</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Pipe velocity formula">v = 0.4085 &times; GPM / d&sup2;</div>
+        <p class="fx-vars">v ft/s, d inside diameter in inches</p>
+        <a class="fx-go" href="/calculators/pipe-velocity.html">Pipe velocity calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="fx-sec" aria-labelledby="generation">
+    <h2 id="generation">Power generation</h2>
+    <div class="fx-grid">
+      <div class="fx">
+        <h3>Capacity factor</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Capacity factor formula">CF = energy produced / (rated power &times; hours in the period)</div>
+        <p>A 100 MW plant that makes 350,400 MWh in a year ran at a 40% capacity factor.</p>
+        
+      </div>
+      <div class="fx">
+        <h3>Heat rate and efficiency</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Heat rate and efficiency formula">&eta; = 3412 / heat rate</div>
+        <p class="fx-vars">Heat rate in Btu per kWh</p><p>A heat rate of 6,824 Btu/kWh is 50% efficient. Lower is better.</p>
+        
+      </div>
+      <div class="fx">
+        <h3>Fuel input</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Fuel input formula">MMBtu/h = MW &times; heat rate / 1000</div>
+        <p class="fx-vars">Heat rate in Btu per kWh</p>
+        
+      </div>
+      <div class="fx">
+        <h3>Generator frequency</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Generator frequency formula">f = n &times; p / 120</div>
+        <p class="fx-vars">n rpm, p poles</p><p>A 2-pole machine makes 60 Hz at 3,600 rpm, a 4-pole machine at 1,800 rpm.</p>
+        <a class="fx-go" href="/calculators/motor-speed.html">Speed and poles calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Generator runtime</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Generator runtime formula">hours = usable fuel / fuel burn rate</div>
+        <p class="fx-vars">Burn rate at the actual load, not at nameplate</p>
+        <a class="fx-go" href="/calculators/generator-runtime.html">Generator runtime calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Wind turbine power</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Wind turbine power formula">P = &frac12; &times; &rho; &times; A &times; v&sup3; &times; C<sub>p</sub></div>
+        <p class="fx-vars">&rho; air density (about 1.225 kg/m&sup3;), A swept area m&sup2;, v wind speed m/s</p><p>Power goes with the cube of wind speed. C<sub>p</sub> cannot exceed the Betz limit of 0.593.</p>
+        
+      </div>
+      <div class="fx">
+        <h3>Hydro power</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Hydro power formula">P = &eta; &times; &rho; &times; g &times; Q &times; H</div>
+        <p class="fx-vars">&rho; 1,000 kg/m&sup3;, g 9.81 m/s&sup2;, Q flow m&sup3;/s, H net head m</p><p>In kW: about 9.81 &times; &eta; &times; Q &times; H.</p>
+        
+      </div>
+      <div class="fx">
+        <h3>Solar array output</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Solar array output formula">P = P<sub>STC</sub> &times; (G / 1000) &times; [1 + &gamma; &times; (T<sub>cell</sub> &minus; 25)]</div>
+        <p class="fx-vars">G irradiance W/m&sup2;, &gamma; power temperature coefficient per &deg;C (negative)</p><p>Before inverter, wiring and soiling losses.</p>
+        
+      </div>
+      <div class="fx">
+        <h3>Maximum string voltage</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Maximum string voltage formula">V<sub>max</sub> = N &times; V<sub>oc</sub> &times; [1 + &beta; &times; (T<sub>min</sub> &minus; 25)]</div>
+        <p class="fx-vars">N modules in series, &beta; V<sub>oc</sub> temperature coefficient per &deg;C (negative)</p><p>Voltage is highest on the coldest morning, which sets the string length.</p>
+        <a class="fx-go" href="/calculators/solar-string.html">Solar string calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>DC/AC ratio</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="DC/AC ratio formula">ILR = P<sub>DC, array</sub> / P<sub>AC, inverter</sub></div>
+        <p>Also called inverter loading ratio.</p>
+        <a class="fx-go" href="/calculators/dc-ac-ratio.html">DC/AC ratio calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Levelized cost of energy</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Levelized cost of energy formula">LCOE = &Sigma; [cost<sub>t</sub> / (1 + r)<sup>t</sup>] / &Sigma; [energy<sub>t</sub> / (1 + r)<sup>t</sup>]</div>
+        <p class="fx-vars">r discount rate, t year</p><p>Costs are capital, fuel and O&amp;M over the plant life.</p>
+        <a class="fx-go" href="/calculators/project-finance.html">Project finance calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="fx-sec" aria-labelledby="storage">
+    <h2 id="storage">Battery storage</h2>
+    <div class="fx-grid">
+      <div class="fx">
+        <h3>Amp-hours to energy</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Amp-hours to energy formula">kWh = Ah &times; V / 1000</div>
+        <p class="fx-vars">V nominal voltage</p>
+        <a class="fx-go" href="/calculators/ah-to-kwh.html">Ah to kWh calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>C-rate</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="C-rate formula">C = P / E</div>
+        <p class="fx-vars">P power in kW, E energy in kWh</p><p>Duration at full power is 1 / C. A 0.25C system is a four-hour system.</p>
+        <a class="fx-go" href="/guide-bess-c-rate.html">C-rate guide <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Runtime</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Runtime formula">t = E &times; DoD &times; &eta; / P</div>
+        <p class="fx-vars">DoD usable depth of discharge, &eta; discharge efficiency</p>
+        <a class="fx-go" href="/calculators/battery-runtime.html">Battery runtime calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Round-trip efficiency</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Round-trip efficiency formula">RTE = energy out / energy in</div>
+        <p class="fx-vars">Measured at the same point, AC to AC</p>
+        
+      </div>
+      <div class="fx">
+        <h3>Nameplate energy for a required delivery</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Nameplate energy for a required delivery formula">E<sub>nameplate</sub> = E<sub>required</sub> / (DoD &times; &eta; &times; end-of-life fraction)</div>
+        <p>Capacity fades, so the day-one system is larger than the contract figure or is augmented later.</p>
+        <a class="fx-go" href="/calculators/bess-sizing.html">BESS sizing calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="fx-sec" aria-labelledby="cooling">
+    <h2 id="cooling">Cooling and data center</h2>
+    <div class="fx-grid">
+      <div class="fx">
+        <h3>Electrical load to heat</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Electrical load to heat formula">BTU/h = W &times; 3.412</div>
+        <p>Essentially all power drawn by IT equipment ends up as heat in the room.</p>
+        <a class="fx-go" href="/calculators/btu-to-tons.html">BTU to tons calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Tons of refrigeration</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Tons of refrigeration formula">tons = BTU/h / 12,000</div>
+        <p class="fx-vars">1 ton = 3.517 kW of heat</p>
+        <a class="fx-go" href="/calculators/btu-to-tons.html">BTU to tons calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Airflow for a heat load</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Airflow for a heat load formula">CFM = BTU/h / (1.08 &times; &Delta;T)</div>
+        <p class="fx-vars">&Delta;T air temperature rise in &deg;F</p><p>1.08 is for standard air at sea level. Per kW that is about 3,160 / &Delta;T.</p>
+        <a class="fx-go" href="/calculators/airflow-cfm.html">Airflow (CFM) calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>Chilled water flow</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="Chilled water flow formula">GPM = BTU/h / (500 &times; &Delta;T)</div>
+        <p class="fx-vars">&Delta;T water temperature rise in &deg;F</p><p>500 is for plain water. From tons: GPM = tons &times; 24 / &Delta;T.</p>
+        <a class="fx-go" href="/calculators/chilled-water-flow.html">Chilled water flow calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fx">
+        <h3>PUE</h3>
+        <div class="fx-eq" tabindex="0" role="math" aria-label="PUE formula">PUE = total facility energy / IT equipment energy</div>
+        <p>1.0 would mean every watt reaches the IT load.</p>
+        <a class="fx-go" href="/calculators/pue.html">PUE calculator <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <h2 id="use">Using these</h2>
+  <ul>
+    <li><b>Check the units before the arithmetic.</b> Most wrong answers come from kW where kVA was meant, line-to-neutral voltage where line-to-line was meant, or a one-way length where the formula wants the round trip.</li>
+    <li><b>A formula gives a number, a code gives a requirement.</b> Conductor and breaker sizes are set by the adopted electrical code and its tables. These relations explain the tables; they do not replace them.</li>
+    <li><b>Want the whole range at once?</b> The <a class="inline" href="/reference-charts.html">reference charts</a> tabulate several of these, and the <a class="inline" href="/practice-questions.html">practice questions</a> work them with numbers.</li>
+  </ul>
+  <p class="provenance">Published November 15, 2026. Spotted an error, or a formula that should be here? <a class="inline" href="/contact.html">Tell us</a>.</p>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+<script>
+(function(){var i=document.getElementById('fxFilter'),c=document.getElementById('fxCount');if(!i)return;
+var cards=[].slice.call(document.querySelectorAll('.fx')),secs=[].slice.call(document.querySelectorAll('.fx-sec'));
+i.addEventListener('input',function(){var w=i.value.toLowerCase().split(' ').filter(Boolean),n=0;
+cards.forEach(function(k){var t=k.textContent.toLowerCase(),ok=w.every(function(x){return t.indexOf(x)>-1;});k.classList.toggle('fx-hide',!ok);if(ok)n++;});
+secs.forEach(function(s){s.hidden=!s.querySelector('.fx:not(.fx-hide)');});
+c.textContent=w.length?(n+' of '+cards.length+' formulas shown'):'';});})();
+</script>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent reference for power generation, data center and energy storage projects, for the people who specify, buy and ship the equipment. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+      <li><a href="/power-generation.html">Power Generation &amp; Grid</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="/voltfield-site-config.js"></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+
+</body>
+</html>

@@ -175,3 +175,10 @@
 /charts/pdf/*
   Cache-Control: public, max-age=86400
   X-Robots-Tag: noindex
+
+# Templates and formulas pages: same short cache as the other shared assets.
+/voltfield-templates.css
+  Cache-Control: public, max-age=600, stale-while-revalidate=86400
+
+/voltfield-templates.js
+  Cache-Control: public, max-age=600, stale-while-revalidate=86400

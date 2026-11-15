@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuclear Plant Electrical Systems &amp; Equipment Qualification | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/power-generation/nuclear.html">
+<meta property="og:url" content="https://voltfield.org/power-generation/nuclear.html">
+<meta name="description" content="How a nuclear plant makes power, PWR and BWR, the electrical systems from main generator to Class 1E safety power, and why nuclear-grade procurement is different.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Nuclear Plant Electrical Systems &amp; Equipment Qualification">
+<meta property="og:description" content="How a nuclear plant makes power, PWR and BWR, the electrical systems from main generator to Class 1E safety power, and why nuclear-grade procurement is different.">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Power generation and grid","item":"https://voltfield.org/power-generation.html"},{"@type":"ListItem","position":3,"name":"Nuclear power","item":"https://voltfield.org/power-generation/nuclear.html"}]},{"@type":"FAQPage","dateModified":"2026-11-15","mainEntity":[{"@type":"Question","name":"What is Class 1E equipment?","acceptedAnswer":{"@type":"Answer","text":"The safety classification for electrical equipment and systems that are essential to emergency reactor shutdown, containment isolation, reactor core cooling and containment and reactor heat removal, or otherwise essential in preventing a significant release of radioactive material."}},{"@type":"Question","name":"What is the difference between a PWR and a BWR?","acceptedAnswer":{"@type":"Answer","text":"In a pressurized water reactor the water in the reactor is kept under high pressure so it does not boil, and it heats a separate circuit through steam generators. In a boiling water reactor the water boils in the reactor vessel and that steam drives the turbine directly."}},{"@type":"Question","name":"What is commercial-grade dedication?","acceptedAnswer":{"@type":"Answer","text":"A process for accepting an item that was not made under a nuclear quality assurance program for use in a safety-related application. The item s critical characteristics are identified and verified by inspection, testing or supplier survey, after which it is treated as a basic component."}}]}]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+<link rel="stylesheet" href="/voltfield-templates.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Power &amp; cooling engineering reference</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>43 tools, electrical and cooling</em></a>
+            <a href="/reference-charts.html"><b>Reference charts</b><em>Printable tables: wire, breakers, cooling load</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+            <a href="/templates.html"><b>Templates</b><em>Purchase order, bill of lading, proof of delivery</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+            <a href="/practice-questions.html"><b>Practice questions</b><em>64 questions with worked solutions</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/formulas.html"><b>Formulas</b><em>Power, generation, storage and cooling</em></a>
+            <a href="/drawings.html"><b>Drawings</b><em>Typical single-line diagrams and symbols</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav"><a href="/">Home</a> / <a href="/power-generation.html">Power generation and grid</a> / <span aria-current="page">Nuclear power</span></nav>
+    <h1>Nuclear Power Plants: Electrical Systems and Equipment Qualification</h1>
+    <p class="dek">The turbine hall of a nuclear plant looks like any large steam plant. What sets it apart is the electrical system that must keep cooling running whatever happens, and the paperwork behind every part in it.</p>
+  </div>
+</section>
+
+<div class="artwrap secwrap">
+  <p><b>A nuclear plant uses the heat of fission to make steam, and from there it is a steam power plant: turbine, generator, step-up transformer, grid.</b> The difference is that a reactor keeps producing decay heat after it is shut down, so the plant needs reliable electrical power for cooling even when it is generating none. Much of the electrical design, and nearly all of what is distinctive about procurement, follows from that requirement.</p>
+
+  <h2 id="how">How it makes power</h2>
+  <p>In a <b>pressurized water reactor</b> (PWR), water in the reactor circuit is kept under pressure so it does not boil, and passes its heat through steam generators to a separate circuit that drives the turbine. In a <b>boiling water reactor</b> (BWR), water boils in the reactor vessel and the steam goes directly to the turbine. Most operating reactors are one of the two.</p>
+  <p>Steam conditions are modest compared with a fossil plant, so thermal efficiency is lower, typically around a third.</p>
+  <div class="fx-eq" role="math">Electrical output = thermal power &times; efficiency</div>
+  <p>A reactor rated 3,400 MW thermal at 33% produces about 1,120 MW electrical. The rest is rejected through the condenser, which is why these plants sit beside large bodies of water or cooling towers. What nuclear plants lack in efficiency they make up in running hours: capacity factors above 90% are normal for the United States fleet.</p>
+
+  <h2 id="equipment">Main equipment</h2>
+  <div class="tt-wrap"><table class="reftable">
+    <tr><th scope="col">Equipment</th><th scope="col">What it does</th><th scope="col">What a specification pins down</th></tr>
+    <tr><td><b>Main generator</b></td><td>Large synchronous machine, often above 1,000 MVA, hydrogen and water cooled. Four-pole machines at 1,800 rpm are common because of the steam conditions.</td><td>MVA, voltage, cooling, excitation</td></tr>
+    <tr><td><b>Isolated-phase bus and main transformers</b></td><td>Carry output to the switchyard, often as banks of single-phase units with a spare.</td><td>MVA, impedance, losses, spare strategy</td></tr>
+    <tr><td><b>Unit auxiliary transformers</b></td><td>Feed plant loads from the generator while the unit is running.</td><td>MVA, impedance for motor starting and fault duty</td></tr>
+    <tr><td><b>Startup or reserve transformers</b></td><td>Feed plant loads from the grid: the offsite power source.</td><td>Independent circuits from the switchyard</td></tr>
+    <tr><td><b>Class 1E distribution</b></td><td>Safety-related switchgear, load centers and motor control centers, in redundant, physically separated divisions.</td><td>Qualification, separation, independence</td></tr>
+    <tr><td><b>Emergency diesel generators</b></td><td>Onsite standby source for each safety division. Start and accept load automatically within seconds.</td><td>Rating for the sequenced safety loads, start reliability, fuel storage</td></tr>
+    <tr><td><b>Station batteries and DC systems</b></td><td>Supply control power, breaker operation and vital instrumentation when AC is lost.</td><td>Duty cycle, capacity margin, qualification</td></tr>
+    <tr><td><b>Vital AC inverters</b></td><td>Uninterruptible supply for reactor protection and instrumentation.</td><td>Redundancy, transfer behavior</td></tr>
+    <tr><td><b>Reactor coolant and feedwater pump motors</b></td><td>Among the largest motors on site, at medium voltage.</td><td>Starting duty, inertia, environment</td></tr>
+  </table></div>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2 id="numbers">Numbers worth knowing</h2>
+  <ul>
+    <li><b>Class 1E</b> is the safety classification of electrical equipment essential to emergency reactor shutdown, containment isolation, core cooling and heat removal.</li>
+    <li><b>Redundancy is by division.</b> Each safety division has its own switchgear, diesel generator and battery, separated physically and electrically so that one failure cannot disable both.</li>
+    <li><b>Two offsite circuits</b> plus the onsite diesel generators is the usual basis. Loss of all of them is a station blackout, which plants are required to be able to cope with for a defined time.</li>
+    <li><b>Capacity factor</b> is typically above 90%, with refueling outages every 18 to 24 months as the main planned downtime.</li>
+    <li><b>Small modular reactors</b> are designs of up to roughly 300 MW electrical per module, intended to be factory-built. Several rely more on passive cooling and so on less safety-related AC power.</li>
+  </ul>
+
+  <h2 id="buying">Buying and shipping it</h2>
+  <p>Safety-related equipment is bought under a nuclear quality assurance program: in the United States, 10 CFR Part 50 Appendix B, normally implemented through ASME NQA-1. Suppliers are audited and placed on an approved list before they can be used. The equipment itself must be qualified, with documented evidence that it will perform through its service life and under accident conditions (IEEE 323) and during and after an earthquake (IEEE 344). Defects must be reportable under 10 CFR Part 21. Where no qualified supplier exists, a commercial item can be accepted through commercial-grade dedication, which verifies its critical characteristics by test and inspection. All of this means the documentation is a deliverable as real as the hardware, traceability runs to the individual part, and lead times and prices are well beyond those of the commercial equivalent. Non-safety equipment on the same site is bought much like that of any large power plant.</p>
+
+  <h2 id="tools">Calculators, guides and templates</h2>
+  <div class="gdgrid">
+    <a class="gdcard" href="/calculators/battery-runtime.html"><h3>Battery runtime</h3><p>Runtime from capacity and load</p></a>
+    <a class="gdcard" href="/calculators/generator-runtime.html"><h3>Generator runtime</h3><p>Hours from stored fuel at a given load</p></a>
+    <a class="gdcard" href="/calculators/motor-start.html"><h3>Motor starting</h3><p>Starting current and voltage dip</p></a>
+    <a class="gdcard" href="/guide-vendor-qualification.html"><h3>How to qualify an equipment vendor</h3><p>Approved lists, audits and scorecards</p></a>
+    <a class="gdcard" href="/templates/inspection-test-plan.html"><h3>Inspection and test plan template</h3><p>Hold, witness and review points</p></a>
+    <a class="gdcard" href="/guide-n-plus-1-vs-2n-redundancy.html"><h3>N+1 vs. 2N redundancy</h3><p>The same idea in data center terms</p></a>
+  </div>
+
+  <h2 id="questions">Questions</h2>
+  <details class="tfaq"><summary>What is Class 1E equipment?</summary><p>The safety classification for electrical equipment and systems that are essential to emergency reactor shutdown, containment isolation, reactor core cooling and containment and reactor heat removal, or otherwise essential in preventing a significant release of radioactive material.</p></details>
+  <details class="tfaq"><summary>What is the difference between a PWR and a BWR?</summary><p>In a pressurized water reactor the water in the reactor is kept under high pressure so it does not boil, and it heats a separate circuit through steam generators. In a boiling water reactor the water boils in the reactor vessel and that steam drives the turbine directly.</p></details>
+  <details class="tfaq"><summary>What is commercial-grade dedication?</summary><p>A process for accepting an item that was not made under a nuclear quality assurance program for use in a safety-related application. The item&rsquo;s critical characteristics are identified and verified by inspection, testing or supplier survey, after which it is treated as a basic component.</p></details>
+
+  <h2 id="sources">Scope and sources</h2>
+  <p>This page is a general reference. Figures are typical ranges for orientation, not data for any particular machine or site, and nothing here replaces a manufacturer&rsquo;s data or an engineering study. It draws on:</p>
+  <ul>
+    <li>10 CFR Part 50, Appendix A (General Design Criterion 17, electric power systems) and Appendix B (quality assurance criteria)</li>
+    <li>10 CFR Part 21 &mdash; reporting of defects and noncompliance</li>
+    <li>ASME NQA-1 &mdash; quality assurance requirements for nuclear facility applications</li>
+    <li>IEEE 308, IEEE 323 and IEEE 344 &mdash; Class 1E power systems, equipment qualification and seismic qualification</li>
+  </ul>
+  <p class="provenance">Published November 15, 2026. Other sectors: <a class="inline" href="/power-generation/gas-turbines.html">gas turbines and combined cycle</a>, <a class="inline" href="/power-generation/wind.html">wind power</a>, <a class="inline" href="/power-generation/hydro.html">hydropower</a>, <a class="inline" href="/power-generation/transmission-substations.html">transmission and substations</a>. Spotted an error? <a class="inline" href="/contact.html">Tell us</a>.</p>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent reference for power generation, data center and energy storage projects, for the people who specify, buy and ship the equipment. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+      <li><a href="/power-generation.html">Power Generation &amp; Grid</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="/voltfield-site-config.js"></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+
+</body>
+</html>

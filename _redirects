@@ -268,6 +268,35 @@
 /charts                             /reference-charts.html                  301!
 /charts/                            /reference-charts.html                  301!
 /reference-charts                   /reference-charts.html                  301!
+/templates                          /templates.html                         301!
+/templates/                         /templates.html                         301!
+/formulas                           /formulas.html                          301!
+/templates/purchase-order           /templates/purchase-order.html          301!
+/templates/bill-of-lading           /templates/bill-of-lading.html          301!
+/templates/proof-of-delivery        /templates/proof-of-delivery.html       301!
+/power-generation                           /power-generation.html 301!
+/power-generation/gas-turbines              /power-generation/gas-turbines.html 301!
+/power-generation/wind                      /power-generation/wind.html 301!
+/power-generation/hydro                     /power-generation/hydro.html 301!
+/power-generation/nuclear                   /power-generation/nuclear.html 301!
+/power-generation/transmission-substations  /power-generation/transmission-substations.html 301!
+/drawings                                   /drawings.html 301!
+/drawings/substation-single-line            /drawings/substation-single-line.html 301!
+/drawings/solar-plant-single-line           /drawings/solar-plant-single-line.html 301!
+/drawings/bess-single-line                  /drawings/bess-single-line.html 301!
+/drawings/data-center-single-line           /drawings/data-center-single-line.html 301!
+/templates/expediting-log                   /templates/expediting-log.html 301!
+/templates/inspection-test-plan             /templates/inspection-test-plan.html 301!
+/templates/vendor-scorecard                 /templates/vendor-scorecard.html 301!
+/templates/packing-list                     /templates/packing-list.html 301!
+/power-generation/                          /power-generation.html 301!
+/drawings/                                  /drawings.html 301!
+/templates/rfq                      /templates/rfq.html 301!
+/templates/bid-tabulation           /templates/bid-tabulation.html 301!
+/guide-vendor-qualification         /guide-vendor-qualification.html 301!
+/guide-how-to-compare-equipment-bids/guide-how-to-compare-equipment-bids.html 301!
+/guide-incoterms-for-equipment      /guide-incoterms-for-equipment.html 301!
+/guide-fat-vs-sat                   /guide-fat-vs-sat.html 301!
 /contact                            /contact.html                           301!
 /terms                              /terms.html                             301!
 

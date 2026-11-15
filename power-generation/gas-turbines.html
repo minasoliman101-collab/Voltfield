@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gas Turbine &amp; Combined-Cycle Plant Equipment Reference | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/power-generation/gas-turbines.html">
+<meta property="og:url" content="https://voltfield.org/power-generation/gas-turbines.html">
+<meta name="description" content="How simple-cycle and combined-cycle gas plants make power, the main equipment and what to specify, heat rate and efficiency, ambient derating, and what drives procurement.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Gas Turbine &amp; Combined-Cycle Plant Equipment Reference">
+<meta property="og:description" content="How simple-cycle and combined-cycle gas plants make power, the main equipment and what to specify, heat rate and efficiency, ambient derating, and what drives procurement.">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Power generation and grid","item":"https://voltfield.org/power-generation.html"},{"@type":"ListItem","position":3,"name":"Gas turbines and combined cycle","item":"https://voltfield.org/power-generation/gas-turbines.html"}]},{"@type":"FAQPage","dateModified":"2026-11-15","mainEntity":[{"@type":"Question","name":"What is the difference between simple cycle and combined cycle?","acceptedAnswer":{"@type":"Answer","text":"A simple-cycle plant is a gas turbine driving a generator, with the exhaust heat released to the air. A combined-cycle plant captures that exhaust heat in a heat recovery steam generator and uses the steam to drive a second, steam turbine, which raises efficiency from roughly 35 to 42 percent to roughly 55 to 60 percent or a little more."}},{"@type":"Question","name":"What is heat rate?","acceptedAnswer":{"@type":"Answer","text":"The fuel energy a plant uses to produce one kilowatt-hour of electricity, usually in Btu per kWh. Lower is better. Efficiency equals 3,412 divided by the heat rate."}},{"@type":"Question","name":"Why does a gas turbine produce less power on a hot day?","acceptedAnswer":{"@type":"Answer","text":"A gas turbine moves a fixed volume of air. Hot air is less dense, so less mass flows through the machine and less fuel can be burned, which reduces output and worsens heat rate. High altitude has the same effect."}}]}]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+<link rel="stylesheet" href="/voltfield-templates.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Power &amp; cooling engineering reference</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>43 tools, electrical and cooling</em></a>
+            <a href="/reference-charts.html"><b>Reference charts</b><em>Printable tables: wire, breakers, cooling load</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+            <a href="/templates.html"><b>Templates</b><em>Purchase order, bill of lading, proof of delivery</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+            <a href="/practice-questions.html"><b>Practice questions</b><em>64 questions with worked solutions</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/formulas.html"><b>Formulas</b><em>Power, generation, storage and cooling</em></a>
+            <a href="/drawings.html"><b>Drawings</b><em>Typical single-line diagrams and symbols</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav"><a href="/">Home</a> / <a href="/power-generation.html">Power generation and grid</a> / <span aria-current="page">Gas turbines and combined cycle</span></nav>
+    <h1>Gas Turbine and Combined-Cycle Power Plants: Equipment Reference</h1>
+    <p class="dek">How a gas plant turns fuel into megawatts, what the main equipment is and what a specification has to pin down, and why a turbine makes less power on a hot afternoon.</p>
+  </div>
+</section>
+
+<div class="artwrap secwrap">
+  <p><b>A gas turbine burns fuel in compressed air and expands the hot gas through a turbine that drives a generator. Run on its own that is a simple-cycle plant. Add a boiler on the exhaust and a steam turbine, and it is a combined-cycle plant that gets roughly half as much power again from the same fuel.</b> Simple-cycle units start fast and are used for peaking. Combined-cycle plants are more efficient and run for longer hours.</p>
+
+  <h2 id="how">How it makes power</h2>
+  <p>The measure that matters is <b>heat rate</b>: the fuel energy needed to make one kilowatt-hour, in Btu per kWh. Efficiency follows directly from it.</p>
+  <div class="fx-eq" role="math">&eta; = 3412 / heat rate</div>
+  <p>A heat rate of 9,750 Btu/kWh is 35% efficient. A heat rate of 6,200 is 55%. Modern simple-cycle machines fall broadly between 35% and 42%, and combined-cycle plants between about 55% and a little over 60%, on a lower-heating-value basis. Always check whether a quoted heat rate is on a lower or a higher heating value basis: for natural gas the two differ by about 10%, and comparing one bidder&rsquo;s LHV figure with another&rsquo;s HHV figure is a classic error.</p>
+  <div class="fx-eq" role="math">Fuel input (MMBtu/h) = MW &times; heat rate / 1000</div>
+  <p>A 250 MW block at 6,400 Btu/kWh burns 1,600 MMBtu of gas an hour.</p>
+
+  <h2 id="equipment">Main equipment</h2>
+  <div class="tt-wrap"><table class="reftable">
+    <tr><th scope="col">Equipment</th><th scope="col">What it does</th><th scope="col">What a specification pins down</th></tr>
+    <tr><td><b>Gas turbine</b></td><td>Compressor, combustor and turbine on one shaft. Sets the plant rating.</td><td>Output and heat rate at site conditions, fuel, emissions, start time, turndown</td></tr>
+    <tr><td><b>Generator</b></td><td>Converts shaft power to electrical power, typically at 13.8 to 25 kV.</td><td>MVA, power factor, voltage, cooling method (air, hydrogen, water), short-circuit ratio</td></tr>
+    <tr><td><b>Heat recovery steam generator (HRSG)</b></td><td>Boiler on the turbine exhaust in a combined cycle.</td><td>Pressure levels, duct firing, cycling capability</td></tr>
+    <tr><td><b>Steam turbine</b></td><td>Expands HRSG steam for the extra output of a combined cycle.</td><td>Inlet conditions, condenser type, shaft arrangement</td></tr>
+    <tr><td><b>Generator step-up transformer (GSU)</b></td><td>Raises generator voltage to transmission voltage.</td><td>MVA, voltage ratio, impedance, losses, cooling class, taps</td></tr>
+    <tr><td><b>Isolated-phase bus and generator breaker</b></td><td>Carries generator current to the GSU; the breaker lets the plant be started from the grid through the GSU.</td><td>Continuous and momentary current, enclosure cooling</td></tr>
+    <tr><td><b>Unit auxiliary and station service transformers</b></td><td>Feed the plant&rsquo;s own pumps, fans and controls.</td><td>MVA for starting the largest motor, voltage, impedance</td></tr>
+    <tr><td><b>Excitation system and protection</b></td><td>Controls generator voltage and reactive power; protects the machine.</td><td>Response, limiters, grid code requirements, relay scheme</td></tr>
+    <tr><td><b>Balance of plant</b></td><td>Fuel gas conditioning, inlet air filtration, emissions control (SCR), cooling system, black-start supply.</td><td>Fuel pressure, site air quality, permit limits, water availability</td></tr>
+  </table></div>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2 id="numbers">Numbers worth knowing</h2>
+  <ul>
+    <li><b>Ratings are quoted at ISO conditions:</b> 15&deg;C (59&deg;F), sea level, 60% relative humidity. A site is rarely at ISO conditions.</li>
+    <li><b>Output falls as ambient temperature rises,</b> because hot air is less dense and the compressor moves less mass. A rough guide is a fraction of a percent per degree Fahrenheit, which adds up to a double-digit loss on a very hot day. Inlet cooling recovers some of it.</li>
+    <li><b>Output falls with altitude</b> for the same reason, by roughly 3% to 4% per 1,000 ft.</li>
+    <li><b>Part-load efficiency is worse than full-load efficiency.</b> A heat rate guarantee is for a stated load point.</li>
+    <li><b>The plant consumes some of its own output.</b> Net output is gross output less auxiliary load, and guarantees should say which is meant.</li>
+  </ul>
+
+  <h2 id="buying">Buying and shipping it</h2>
+  <p>The turbine, the GSU transformer and the HRSG are the long-lead items and set the project schedule, so they are often ordered before the rest of the design is complete. Performance is bought on guarantees: output and heat rate at defined site conditions, proven by a performance test with agreed correction curves, with damages for a shortfall. Most owners also sign a long-term service agreement covering scheduled maintenance of the hot gas path, which over the life of the plant can cost as much as the machine. Transport is a project in itself: turbines, generators and GSUs are among the heaviest loads that move by road and rail.</p>
+
+  <h2 id="tools">Calculators, guides and templates</h2>
+  <div class="gdgrid">
+    <a class="gdcard" href="/calculators/transformer-sizing.html"><h3>Transformer sizing</h3><p>kVA for a load, to the next standard rating</p></a>
+    <a class="gdcard" href="/calculators/fault-current.html"><h3>Fault current</h3><p>Available fault current at a transformer secondary</p></a>
+    <a class="gdcard" href="/calculators/generator-runtime.html"><h3>Generator runtime</h3><p>Hours from stored fuel at a given load</p></a>
+    <a class="gdcard" href="/guide-pad-mount-vs-gsu-transformers.html"><h3>Pad-mount vs. GSU transformers</h3><p>What makes a step-up transformer different</p></a>
+    <a class="gdcard" href="/guide-generator-sizing.html"><h3>Generator sizing</h3><p>Sizing standby generators for a load</p></a>
+    <a class="gdcard" href="/formulas.html#generation"><h3>Generation formulas</h3><p>Heat rate, capacity factor, fuel input</p></a>
+  </div>
+
+  <h2 id="questions">Questions</h2>
+  <details class="tfaq"><summary>What is the difference between simple cycle and combined cycle?</summary><p>A simple-cycle plant is a gas turbine driving a generator, with the exhaust heat released to the air. A combined-cycle plant captures that exhaust heat in a heat recovery steam generator and uses the steam to drive a second, steam turbine, which raises efficiency from roughly 35 to 42 percent to roughly 55 to 60 percent or a little more.</p></details>
+  <details class="tfaq"><summary>What is heat rate?</summary><p>The fuel energy a plant uses to produce one kilowatt-hour of electricity, usually in Btu per kWh. Lower is better. Efficiency equals 3,412 divided by the heat rate.</p></details>
+  <details class="tfaq"><summary>Why does a gas turbine produce less power on a hot day?</summary><p>A gas turbine moves a fixed volume of air. Hot air is less dense, so less mass flows through the machine and less fuel can be burned, which reduces output and worsens heat rate. High altitude has the same effect.</p></details>
+
+  <h2 id="sources">Scope and sources</h2>
+  <p>This page is a general reference. Figures are typical ranges for orientation, not data for any particular machine or site, and nothing here replaces a manufacturer&rsquo;s data or an engineering study. It draws on:</p>
+  <ul>
+    <li>ISO 2314 and ASME PTC 22 &mdash; gas turbine acceptance and performance testing, including ISO reference conditions</li>
+    <li>ASME PTC 46 &mdash; overall plant performance</li>
+    <li>IEEE C50.13 &mdash; cylindrical-rotor synchronous generators</li>
+    <li>IEEE C57.116 &mdash; guide for transformers directly connected to generators</li>
+  </ul>
+  <p class="provenance">Published November 15, 2026. Other sectors: <a class="inline" href="/power-generation/wind.html">wind power</a>, <a class="inline" href="/power-generation/hydro.html">hydropower</a>, <a class="inline" href="/power-generation/nuclear.html">nuclear power</a>, <a class="inline" href="/power-generation/transmission-substations.html">transmission and substations</a>. Spotted an error? <a class="inline" href="/contact.html">Tell us</a>.</p>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent reference for power generation, data center and energy storage projects, for the people who specify, buy and ship the equipment. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+      <li><a href="/power-generation.html">Power Generation &amp; Grid</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="/voltfield-site-config.js"></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+
+</body>
+</html>

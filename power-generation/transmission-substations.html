@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Substation &amp; Transmission Equipment Reference | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/power-generation/transmission-substations.html">
+<meta property="og:url" content="https://voltfield.org/power-generation/transmission-substations.html">
+<meta name="description" content="Why power is transmitted at high voltage, what each piece of substation equipment does and what to specify, common bus arrangements, and what drives lead time.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Substation &amp; Transmission Equipment Reference">
+<meta property="og:description" content="Why power is transmitted at high voltage, what each piece of substation equipment does and what to specify, common bus arrangements, and what drives lead time.">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Power generation and grid","item":"https://voltfield.org/power-generation.html"},{"@type":"ListItem","position":3,"name":"Transmission and substations","item":"https://voltfield.org/power-generation/transmission-substations.html"}]},{"@type":"FAQPage","dateModified":"2026-11-15","mainEntity":[{"@type":"Question","name":"Why is electricity transmitted at high voltage?","acceptedAnswer":{"@type":"Answer","text":"For a given power, higher voltage means lower current, and line losses rise with the square of the current. Doubling the voltage halves the current and cuts the resistive loss to a quarter, which makes long-distance transmission economic."}},{"@type":"Question","name":"What is the difference between a circuit breaker and a disconnect switch?","acceptedAnswer":{"@type":"Answer","text":"A circuit breaker can interrupt load current and fault current. A disconnect switch cannot: it is opened only after the breaker has interrupted the current, to give a visible isolating gap so equipment can be worked on safely."}},{"@type":"Question","name":"What is a breaker-and-a-half scheme?","acceptedAnswer":{"@type":"Answer","text":"A substation bus arrangement with two main buses and three breakers in series between them for every two circuits, so each circuit is served by one and a half breakers. Any breaker or either bus can be taken out of service without interrupting a circuit."}}]}]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+<link rel="stylesheet" href="/voltfield-templates.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Power &amp; cooling engineering reference</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>43 tools, electrical and cooling</em></a>
+            <a href="/reference-charts.html"><b>Reference charts</b><em>Printable tables: wire, breakers, cooling load</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+            <a href="/templates.html"><b>Templates</b><em>Purchase order, bill of lading, proof of delivery</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+            <a href="/practice-questions.html"><b>Practice questions</b><em>64 questions with worked solutions</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/formulas.html"><b>Formulas</b><em>Power, generation, storage and cooling</em></a>
+            <a href="/drawings.html"><b>Drawings</b><em>Typical single-line diagrams and symbols</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav"><a href="/">Home</a> / <a href="/power-generation.html">Power generation and grid</a> / <span aria-current="page">Transmission and substations</span></nav>
+    <h1>Transmission and Substations: Equipment Reference</h1>
+    <p class="dek">Every generator and every large load meets the grid at a substation. This is what is inside the fence, why it is arranged the way it is, and what a specification has to say.</p>
+  </div>
+</section>
+
+<div class="artwrap secwrap">
+  <p><b>Transmission moves bulk power at high voltage, and substations are where voltage is changed, circuits are switched and faults are cleared.</b> A generating plant, a data center campus and a battery project all connect through one, and the substation is frequently the item that sets the project schedule, since it holds the equipment with the longest lead times.</p>
+
+  <h2 id="how">How it makes power</h2>
+  <p>The reason for high voltage is in two formulas. Power delivered on a three-phase line is</p>
+  <div class="fx-eq" role="math">P = &radic;3 &times; V &times; I &times; PF</div>
+  <p>and the power lost as heat in the conductors is</p>
+  <div class="fx-eq" role="math">P<sub>loss</sub> = 3 &times; I&sup2; &times; R</div>
+  <p>For the same power, doubling the voltage halves the current, and halving the current cuts the loss to a quarter. Moving 100 MW at 0.95 power factor takes about 4,400 A at 13.8 kV and about 440 A at 138 kV. The higher voltage needs taller structures and more insulation, and that cost is what is traded against losses when a transmission voltage is chosen.</p>
+
+  <h2 id="equipment">Main equipment</h2>
+  <div class="tt-wrap"><table class="reftable">
+    <tr><th scope="col">Equipment</th><th scope="col">What it does</th><th scope="col">What a specification pins down</th></tr>
+    <tr><td><b>Power transformer</b></td><td>Changes voltage between transmission, subtransmission and distribution levels.</td><td>MVA and cooling stages, voltage ratio, impedance, losses, tap changer, sound level</td></tr>
+    <tr><td><b>Circuit breaker</b></td><td>Interrupts load and fault current. SF<sub>6</sub> gas at high voltage, vacuum at medium voltage, with SF<sub>6</sub>-free designs increasingly available.</td><td>Voltage, continuous current, interrupting rating, operating duty</td></tr>
+    <tr><td><b>Disconnect switch</b></td><td>Provides a visible isolating gap for maintenance. Does not interrupt fault current.</td><td>Voltage, current, motor or manual operation, grounding blades</td></tr>
+    <tr><td><b>Instrument transformers</b></td><td>Current and voltage transformers scale primary quantities for relays and meters.</td><td>Ratio, accuracy class, burden, relaying or metering duty</td></tr>
+    <tr><td><b>Surge arresters</b></td><td>Clamp lightning and switching overvoltages to protect insulation.</td><td>Rating, continuous operating voltage, energy class, location</td></tr>
+    <tr><td><b>Bus and structures</b></td><td>Rigid or strain bus that ties the equipment together.</td><td>Ampacity, short-circuit forces, clearances</td></tr>
+    <tr><td><b>Protection and control</b></td><td>Relays that detect faults and trip breakers, plus SCADA and communications.</td><td>Protection scheme, redundancy, utility requirements</td></tr>
+    <tr><td><b>Capacitor banks and reactors</b></td><td>Supply or absorb reactive power to hold voltage.</td><td>MVAR, switching steps, set by system studies</td></tr>
+    <tr><td><b>Grounding grid</b></td><td>Buried conductor network that limits step and touch voltages during a fault.</td><td>Soil resistivity, fault current and clearing time</td></tr>
+    <tr><td><b>Control house and DC system</b></td><td>Houses relays and the station battery that trips breakers when AC is lost.</td><td>Battery duty cycle, redundancy</td></tr>
+  </table></div>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2 id="numbers">Numbers worth knowing</h2>
+  <ul>
+    <li><b>Voltage classes</b> in North America: distribution up to about 35 kV, subtransmission 46 to 69 kV, transmission 115 kV to 345 kV, and extra-high voltage at 500 kV and 765 kV.</li>
+    <li><b>Bus arrangements</b> trade cost against reliability. A <b>single bus</b> is cheapest, and a bus fault or breaker maintenance takes everything out. A <b>ring bus</b> gives each circuit two breakers with one breaker per circuit overall. <b>Breaker-and-a-half</b> uses three breakers for every two circuits and is standard at large transmission stations. <b>Double bus, double breaker</b> is the most reliable and the most expensive.</li>
+    <li><b>Transformer impedance sets fault current.</b> Available fault current on the secondary is about the full-load current times 100 divided by the percent impedance.</li>
+    <li><b>Air-insulated or gas-insulated.</b> Gas-insulated switchgear takes a fraction of the land of an air-insulated yard and costs considerably more, so it is used where space is tight.</li>
+    <li><b>HVDC</b> is used for very long lines, submarine cables and ties between grids that are not synchronized.</li>
+  </ul>
+
+  <h2 id="buying">Buying and shipping it</h2>
+  <p>Large power transformers and high-voltage breakers are the long-lead items, and a substation schedule is built backward from their delivery dates. Transformers are evaluated on total owning cost, not price, with losses capitalized. The interconnecting utility&rsquo;s standards usually govern ratings, relay types and approved manufacturers, so obtain them before writing a specification. A large transformer ships partly disassembled and without oil, with an impact recorder, on specialized rail or road equipment under permit; it is then assembled, vacuum-filled and tested on site, which is a scope someone has to own in the order.</p>
+
+  <h2 id="tools">Calculators, guides and templates</h2>
+  <div class="gdgrid">
+    <a class="gdcard" href="/calculators/fault-current.html"><h3>Fault current</h3><p>Available fault current at a transformer secondary</p></a>
+    <a class="gdcard" href="/calculators/kva-to-amps.html"><h3>kVA to amps</h3><p>Full-load current of a transformer</p></a>
+    <a class="gdcard" href="/calculators/grounding.html"><h3>Grounding</h3><p>Grounding calculations</p></a>
+    <a class="gdcard" href="/guide-ansi-device-numbers.html"><h3>ANSI device numbers</h3><p>The relay numbers on a one-line</p></a>
+    <a class="gdcard" href="/guide-transformer-impedance.html"><h3>Transformer impedance</h3><p>What %Z means and what it sets</p></a>
+    <a class="gdcard" href="/guide-how-to-compare-equipment-bids.html"><h3>How to compare equipment bids</h3><p>Loss evaluation with A and B factors</p></a>
+    <a class="gdcard" href="/guide-transformer-lead-times.html"><h3>Transformer lead times</h3><p>Why they are long and what moves them</p></a>
+    <a class="gdcard" href="/drawings/substation-single-line.html"><h3>Substation single-line diagram</h3><p>A typical arrangement, drawn</p></a>
+  </div>
+
+  <h2 id="questions">Questions</h2>
+  <details class="tfaq"><summary>Why is electricity transmitted at high voltage?</summary><p>For a given power, higher voltage means lower current, and line losses rise with the square of the current. Doubling the voltage halves the current and cuts the resistive loss to a quarter, which makes long-distance transmission economic.</p></details>
+  <details class="tfaq"><summary>What is the difference between a circuit breaker and a disconnect switch?</summary><p>A circuit breaker can interrupt load current and fault current. A disconnect switch cannot: it is opened only after the breaker has interrupted the current, to give a visible isolating gap so equipment can be worked on safely.</p></details>
+  <details class="tfaq"><summary>What is a breaker-and-a-half scheme?</summary><p>A substation bus arrangement with two main buses and three breakers in series between them for every two circuits, so each circuit is served by one and a half breakers. Any breaker or either bus can be taken out of service without interrupting a circuit.</p></details>
+
+  <h2 id="sources">Scope and sources</h2>
+  <p>This page is a general reference. Figures are typical ranges for orientation, not data for any particular machine or site, and nothing here replaces a manufacturer&rsquo;s data or an engineering study. It draws on:</p>
+  <ul>
+    <li>IEEE C57.12.00 &mdash; general requirements for liquid-immersed power transformers</li>
+    <li>IEEE C37.04 and C37.06 &mdash; ratings for high-voltage circuit breakers</li>
+    <li>IEEE 80 &mdash; guide for safety in AC substation grounding</li>
+    <li>IEEE 605 &mdash; guide for bus design in air-insulated substations</li>
+  </ul>
+  <p class="provenance">Published November 15, 2026. Other sectors: <a class="inline" href="/power-generation/gas-turbines.html">gas turbines and combined cycle</a>, <a class="inline" href="/power-generation/wind.html">wind power</a>, <a class="inline" href="/power-generation/hydro.html">hydropower</a>, <a class="inline" href="/power-generation/nuclear.html">nuclear power</a>. Spotted an error? <a class="inline" href="/contact.html">Tell us</a>.</p>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent reference for power generation, data center and energy storage projects, for the people who specify, buy and ship the equipment. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+      <li><a href="/power-generation.html">Power Generation &amp; Grid</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="/voltfield-site-config.js"></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+
+</body>
+</html>

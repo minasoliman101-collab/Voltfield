@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Compare Equipment Bids (Bid Tabulation) | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-how-to-compare-equipment-bids.html">
+<meta property="og:url" content="https://voltfield.org/guide-how-to-compare-equipment-bids.html">
+<meta name="description" content="How to compare bids for transformers, switchgear and other equipment: level the scope, tabulate exceptions and terms, and evaluate transformer losses to find the lowest total cost.">
+<meta name="keywords" content="bid tabulation, bid comparison, how to compare bids, total evaluated cost, transformer loss evaluation, A and B factors, total owning cost, bid leveling">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="How to Compare Equipment Bids">
+<meta property="og:description" content="Level the scope, list the exceptions, add the cost of losses. A method for comparing equipment bids on one basis.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta name="twitter:title" content="How to Compare Equipment Bids">
+<meta name="twitter:description" content="Level the scope, list the exceptions, add the cost of losses. A method for comparing equipment bids on one basis.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://voltfield.org/guides.html"},{"@type":"ListItem","position":3,"name":"How to Compare Equipment Bids","item":"https://voltfield.org/guide-how-to-compare-equipment-bids.html"}]},{"@type":"Article","headline":"How to Compare Equipment Bids: Why the Lowest Price Is Often Not the Lowest Cost","description":"How to compare bids for transformers, switchgear and other equipment: level the scope, tabulate exceptions and terms, and evaluate transformer losses to find the lowest total cost.","image":"https://voltfield.org/social/social-generic.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-11-15T00:00:00-05:00","dateModified":"2026-11-15T00:00:00-05:00","url":"https://voltfield.org/guide-how-to-compare-equipment-bids.html"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a bid tabulation?","acceptedAnswer":{"@type":"Answer","text":"A table that lists each bidder’s price, scope, technical data, delivery and commercial terms side by side on the same basis, so the bids can be compared fairly and the reason for the award is recorded."}},{"@type":"Question","name":"What are A and B factors in a transformer bid evaluation?","acceptedAnswer":{"@type":"Answer","text":"They are dollar values per kilowatt that an owner assigns to transformer losses. A applies to no-load loss and B to load loss. Total owning cost is the purchase price plus A times the no-load loss plus B times the load loss, and bids are compared on that total."}},{"@type":"Question","name":"Should I always pick the lowest bid?","acceptedAnswer":{"@type":"Answer","text":"Pick the lowest bid only after the scopes have been leveled, exceptions resolved and operating costs added. The lowest price on the cover page is often missing scope, carries exceptions to the specification or has higher losses."}},{"@type":"Question","name":"How many bids do I need?","acceptedAnswer":{"@type":"Answer","text":"Three is the usual minimum for a meaningful comparison, and many organizations’ procurement rules require it. For long-lead equipment with few qualified manufacturers, fewer may be all that is available; record why."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Power &amp; cooling engineering reference</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>43 tools, electrical and cooling</em></a>
+            <a href="reference-charts.html"><b>Reference charts</b><em>Printable tables: wire, breakers, cooling load</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+            <a href="templates.html"><b>Templates</b><em>Purchase order, bill of lading, proof of delivery</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+            <a href="practice-questions.html"><b>Practice questions</b><em>64 questions with worked solutions</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="formulas.html"><b>Formulas</b><em>Power, generation, storage and cooling</em></a>
+            <a href="drawings.html"><b>Drawings</b><em>Typical single-line diagrams and symbols</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in">
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">How to Compare Equipment Bids</span></nav>
+      <div class="eyebrow">Procurement & logistics</div>
+      <h1>How to Compare Equipment Bids: Bid Tabulation and Total Evaluated Cost</h1>
+      <p class="dek">Three quotes for the same transformer rarely describe the same transformer. A bid tabulation puts them on one basis, and a loss evaluation shows what each will cost to own. Both fit on a page.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published November 15, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+  </div>
+</section>
+<div class="artwrap">
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>Bids can only be compared once they describe the same scope. Leveling the scope comes before comparing the price.</li>
+      <li>Read the exceptions and clarifications first. That is where a low price is usually explained.</li>
+      <li>For transformers, add the cost of losses: total owning cost = price + A &times; no-load loss + B &times; load loss.</li>
+      <li>Lead time, payment terms, warranty and documentation are part of the comparison, and should be written down beside the price.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#what-a-bid-tab-is">What a bid tabulation is</a></li>
+      <li><a href="#level-the-scope">Step 1: level the scope</a></li>
+      <li><a href="#read-the-exceptions">Step 2: read the exceptions</a></li>
+      <li><a href="#evaluate-losses">Step 3: add the cost of losses</a></li>
+      <li><a href="#compare-the-terms">Step 4: compare the terms that are not a price</a></li>
+      <li><a href="#recommend-and-record">Step 5: recommend, and write down why</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+  <h2 id="what-a-bid-tab-is">What a bid tabulation is</h2>
+  <p><b>A bid tabulation is a table with the bidders across the top and everything that matters down the side: price, scope, technical data, delivery and commercial terms.</b> Its job is to put every bid on the same basis so that the differences between them are visible, and to leave a record of why one was chosen.</p>
+  <p>It only works if every bidder was asked the same question. That is the purpose of a proper <a class="inline" href="templates/rfq.html">request for quotation</a>: one specification, one data sheet to fill in, one set of commercial terms, and one deadline. When bidders are given different information, the table compares the bidders&rsquo; guesses.</p>
+  <h2 id="level-the-scope">Step 1: level the scope</h2>
+  <p>Before looking at totals, go line by line and mark what each bid includes. The usual gaps are:</p>
+  <ul>
+    <li><b>Freight and unloading.</b> One bid is delivered to site, another is priced at the factory. See the <a class="inline" href="guide-incoterms-for-equipment.html">Incoterms guide</a>.</li>
+    <li><b>Accessories and options.</b> Monitoring, surge arresters, special paint, seismic bracing, spare parts.</li>
+    <li><b>Testing.</b> Routine tests only, or the optional tests the specification asked for. Witness testing included or extra. See <a class="inline" href="guide-fat-vs-sat.html">FAT vs. SAT</a>.</li>
+    <li><b>Site services.</b> Assembly, oil filling, commissioning support, training.</li>
+    <li><b>Taxes and duties.</b></li>
+  </ul>
+  <p>Where a bid leaves something out, ask the bidder for a price, in writing, and enter it. If time does not allow, enter the highest price any other bidder gave for that item and mark it as an allowance. What you must not do is compare a complete bid with an incomplete one and call the difference a saving.</p>
+  <div class="ad-unit" data-ad="incontent"></div>
+  <h2 id="read-the-exceptions">Step 2: read the exceptions</h2>
+  <p>Every serious bid has a section called exceptions, clarifications or deviations. It lists where the offer departs from your specification and your terms. Typical entries: a different impedance, a lower temperature rating, a substitute component manufacturer, a shorter warranty, a cap on liability, a refusal of liquidated damages.</p>
+  <p>Each exception is one of three things. It is acceptable as it stands, it is acceptable at a price, or it disqualifies the bid. Decide which, with the engineer for technical items and whoever owns the contract terms for commercial ones, and record the decision in the table. A bid with no exceptions listed deserves a second look as well: either the bidder complies in full, or the bidder did not read the specification.</p>
+  <h2 id="evaluate-losses">Step 3: add the cost of losses</h2>
+  <p>A transformer consumes energy every hour it is energized. <b>No-load loss</b> is drawn by the core all the time, whatever the load. <b>Load loss</b> is drawn in the windings and rises with the square of the load. Over a service life of decades the cost of that energy can rival the purchase price, and two bids at a similar price can differ a great deal in losses.</p>
+  <p>The standard way to bring losses into the comparison is to give each kilowatt of loss a present value and add it to the price:</p>
+  <p><b>Total owning cost = purchase price + (A &times; no-load loss) + (B &times; load loss)</b></p>
+  <p>A and B are in dollars per kilowatt. The owner sets them from its energy cost, the expected loading, the years of service and its discount rate. A is always the larger, since no-load loss runs continuously. State both factors in the request for quotation, so bidders can design to them, and require guaranteed loss figures with a stated tolerance.</p>
+  <p>An example, with round illustrative numbers that are not market prices, and assumed factors of A = $8,000 per kW and B = $2,500 per kW:</p>
+  <table class="reftable">
+    <tr><th scope="col"></th><th scope="col">Bidder 1</th><th scope="col">Bidder 2</th></tr>
+    <tr><td>Purchase price</td><td>$100,000</td><td>$94,000</td></tr>
+    <tr><td>No-load loss</td><td>2.5 kW</td><td>3.4 kW</td></tr>
+    <tr><td>Load loss</td><td>22 kW</td><td>26 kW</td></tr>
+    <tr><td>A &times; no-load loss</td><td>$20,000</td><td>$27,200</td></tr>
+    <tr><td>B &times; load loss</td><td>$55,000</td><td>$65,000</td></tr>
+    <tr><td><b>Total owning cost</b></td><td><b>$175,000</b></td><td><b>$186,200</b></td></tr>
+  </table>
+  <p>Bidder 2 is $6,000 cheaper to buy and $11,200 more expensive to own. The same reasoning applies, with different inputs, to the efficiency of a UPS, a motor or a chiller: wherever equipment runs for years, the energy it wastes belongs in the comparison.</p>
+  <h2 id="compare-the-terms">Step 4: compare the terms that are not a price</h2>
+  <p>Some differences cannot be turned into dollars cleanly, and they still decide projects. Put them in the table in plain words:</p>
+  <ul>
+    <li><b>Lead time,</b> stated from the same starting point for each bidder: from order, or from drawing approval. These can differ by months. Note how long the drawing cycle is and whether the date is guaranteed.</li>
+    <li><b>Payment terms.</b> A large payment with the order costs money and removes leverage. Compare the milestones side by side.</li>
+    <li><b>Warranty.</b> Length, when it starts, and whether it covers removal, shipping and reinstallation or only the repair.</li>
+    <li><b>Late delivery.</b> Whether liquidated damages were accepted, and at what rate and cap.</li>
+    <li><b>Where it is built and tested,</b> and by whom. This matters for domestic content rules and for witness testing.</li>
+    <li><b>Service and spares</b> after delivery.</li>
+    <li><b>Validity.</b> How long the price holds, and whether it is fixed or tied to a metals index.</li>
+  </ul>
+  <h2 id="recommend-and-record">Step 5: recommend, and write down why</h2>
+  <p>The finished table should let someone who was not in the room see why the recommended bidder was chosen. State the basis in a sentence: lowest total owning cost among technically compliant bids that meet the required date, for example. If the recommendation is not the lowest evaluated cost, say what outweighed it. Keep the bids, the clarification emails and the table together. The <a class="inline" href="templates/bid-tabulation.html">bid tabulation template</a> has a place for each of these.</p>
+  <p>Treat bidders evenly throughout. A clarification that changes the scope goes to all of them, and one bidder&rsquo;s price is never shown to another.</p>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is a bid tabulation?</summary>
+    <p style="margin-top:10px">A table that lists each bidder&rsquo;s price, scope, technical data, delivery and commercial terms side by side on the same basis, so the bids can be compared fairly and the reason for the award is recorded.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What are A and B factors in a transformer bid evaluation?</summary>
+    <p style="margin-top:10px">They are dollar values per kilowatt that an owner assigns to transformer losses. A applies to no-load loss and B to load loss. Total owning cost is the purchase price plus A times the no-load loss plus B times the load loss, and bids are compared on that total.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Should I always pick the lowest bid?</summary>
+    <p style="margin-top:10px">Pick the lowest bid only after the scopes have been leveled, exceptions resolved and operating costs added. The lowest price on the cover page is often missing scope, carries exceptions to the specification or has higher losses.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">How many bids do I need?</summary>
+    <p style="margin-top:10px">Three is the usual minimum for a meaningful comparison, and many organizations&rsquo; procurement rules require it. For long-lead equipment with few qualified manufacturers, fewer may be all that is available; record why.</p>
+  </details>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">The comparison starts with a request that asks every bidder the same question and ends with an order that records what was agreed. The loss terms used here are explained in <a class="inline" href="guide-transformer-nameplate.html">how to read a transformer nameplate</a> and <a class="inline" href="guide-transformer-impedance.html">transformer impedance</a>.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Use the templates</h3>
+      <ul class="catlink">
+        <li><a href="templates/rfq.html">Request for Quotation Template</a>Scope, bid instructions and the data bidders must return.</li>
+        <li><a href="templates/bid-tabulation.html">Bid Tabulation Template</a>Three bidders side by side, price and terms.</li>
+        <li><a href="templates/purchase-order.html">Purchase Order Template</a>With equipment terms: drawings, tests, documents.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-vendor-qualification.html">How to Qualify an Equipment Vendor</a></li>
+        <li><a href="guide-incoterms-for-equipment.html">Incoterms 2020 for Heavy Equipment</a></li>
+        <li><a href="guide-fat-vs-sat.html">FAT vs. SAT</a></li>
+        <li><a href="guide-transformer-lead-times.html">Transformer Lead Times</a></li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;How to Compare Equipment Bids: Bid Tabulation and Total Evaluated Cost,&rdquo; <i>Voltfield</i>, updated November 15, 2026. https://voltfield.org/guide-how-to-compare-equipment-bids.html</p>
+  </details>
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/guide-how-to-compare-equipment-bids.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+
+<aside class="provenance" aria-labelledby="prov-h">
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published November 15, 2026.</span></summary>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>How to build a bid tabulation for engineered equipment: leveling scope, handling exceptions, evaluating transformer losses with A and B factors, comparing lead time and commercial terms, and recording the recommendation.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>IEEE C57.120 &mdash; Guide for Loss Evaluation of Distribution and Power Transformers and Reactors</li><li>IEEE C57.12.00 &mdash; general requirements for liquid-immersed transformers, for loss definitions and tolerances</li><li>General competitive procurement practice</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A set of loss evaluation factors for your system, or procurement rules for your organization. A and B factors must be derived from your own energy costs, loading and financial assumptions, and the figures in the example are illustrative only.</dd>
+      <dt>Provenance</dt>
+      <dd>Published November 15, 2026. Written and maintained by the Voltfield editorial team against the sources above. Worked figures in the text are arithmetic the reader can check; nothing here states a measured value.</dd>
+    </dl>
+  </details>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent reference for power generation, data center and energy storage projects, for the people who specify, buy and ship the equipment. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+      <li><a href="power-generation.html">Power Generation &amp; Grid</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

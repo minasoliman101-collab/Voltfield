@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Center Single-Line Diagram (Typical, Free SVG) | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/drawings/data-center-single-line.html">
+<meta property="og:url" content="https://voltfield.org/drawings/data-center-single-line.html">
+<meta name="description" content="A typical data center single-line diagram: utility and standby generator through a transfer switch to the switchboard, UPS, PDU and racks, with the cooling plant. Free SVG.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Data Center Single-Line Diagram (Typical, Free SVG)">
+<meta property="og:description" content="A typical data center single-line diagram: utility and standby generator through a transfer switch to the switchboard, UPS, PDU and racks, with the cooling plant. Free SVG.">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Drawings","item":"https://voltfield.org/drawings.html"},{"@type":"ListItem","position":3,"name":"Data center single-line diagram","item":"https://voltfield.org/drawings/data-center-single-line.html"}]},{"@type":"FAQPage","dateModified":"2026-11-15","mainEntity":[{"@type":"Question","name":"What does this data center single-line diagram show?","acceptedAnswer":{"@type":"Answer","text":"A utility service with transformer and main breaker, and a standby generator with its breaker, feed an automatic transfer switch. The switch feeds a low-voltage main switchboard. One branch runs through a UPS with battery, an output breaker and a PDU transformer to the IT racks. Other branches feed the cooling plant and building loads."}}]}]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+<link rel="stylesheet" href="/voltfield-templates.css">
+<style>
+.sld{display:block;width:100%;height:auto;color:var(--ink)}
+.sld-frame{background:var(--card);border:1px solid var(--line-dark);border-radius:var(--r-lg);padding:18px;margin:8px 0 10px;overflow-x:auto}
+.sld-frame .sld{min-width:620px}
+.artwrap.dwgwrap{max-width:1000px}
+.artwrap.dwgwrap > *{max-width:720px}
+.artwrap.dwgwrap > .sld-frame,.artwrap.dwgwrap > .tpl-actions,.artwrap.dwgwrap > .gdgrid,.artwrap.dwgwrap > .tt-wrap{max-width:none}
+.artwrap p.sld-cap{font-size:14px;color:var(--slate)}
+@media print{header.site,footer,.artban,.ad-unit,.skip-link,.web-only,.dwgwrap > :not(.sld-frame):not(.sld-cap){display:none !important}
+  .sld-frame{border:0;padding:0}.sld{color:#000}.artwrap.dwgwrap{max-width:none;padding:0}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Power &amp; cooling engineering reference</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>43 tools, electrical and cooling</em></a>
+            <a href="/reference-charts.html"><b>Reference charts</b><em>Printable tables: wire, breakers, cooling load</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+            <a href="/templates.html"><b>Templates</b><em>Purchase order, bill of lading, proof of delivery</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+            <a href="/practice-questions.html"><b>Practice questions</b><em>64 questions with worked solutions</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/formulas.html"><b>Formulas</b><em>Power, generation, storage and cooling</em></a>
+            <a href="/drawings.html"><b>Drawings</b><em>Typical single-line diagrams and symbols</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav"><a href="/">Home</a> / <a href="/drawings.html">Drawings</a> / <span aria-current="page">Data center single-line diagram</span></nav>
+    <h1>Data Center Single-Line Diagram: A Typical Power Path</h1>
+    <p class="dek">One power path of a data center, from the utility and the generator to the rack, and where the cooling plant fits.</p>
+  </div>
+</section>
+
+<div class="artwrap dwgwrap">
+  <div class="tpl-actions web-only" role="group" aria-label="Drawing actions">
+    <button type="button" class="btn btn-primary" data-dl="data-center-single-line">Download SVG</button>
+    <button type="button" class="btn btn-ghost" data-print>Print or save as PDF</button>
+  </div>
+  <div class="sld-frame">
+<svg class="sld" viewBox="0 0 760 530" width="760" height="530" role="img" aria-labelledby="sldT sldD" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" font-family="IBM Plex Sans, Arial, sans-serif" font-size="12.5"><title id="sldT">Typical data center single-line diagram, one power path</title><desc id="sldD">A utility service with transformer and main breaker, and a standby generator with its breaker, feed an automatic transfer switch. The switch feeds a low-voltage main switchboard. One branch runs through a UPS with battery, an output breaker and a PDU transformer to the IT racks. Other branches feed the cooling plant and building loads.</desc><style>text{fill:currentColor;stroke:none}text.sub{font-size:11px;opacity:.72}text.in{font-size:12px;font-weight:600}.dot,.fill{fill:currentColor}</style><circle cx="250" cy="40" r="16"/><text x="250" y="45" text-anchor="middle" class="in">~</text><line x1="250" y1="56" x2="250" y2="70"/><text x="276" y="44" text-anchor="start">Utility service</text><line x1="250" y1="70" x2="250" y2="80"/><circle cx="250" cy="92" r="12"/><circle cx="250" cy="108" r="12"/><line x1="250" y1="120" x2="250" y2="130"/><text x="274" y="104" text-anchor="start">Service transformer</text><line x1="250" y1="130" x2="250" y2="144"/><rect x="242" y="144" width="16" height="16"/><line x1="250" y1="160" x2="250" y2="174"/><text x="272" y="156" text-anchor="start">Main breaker</text><circle cx="510" cy="40" r="16"/><text x="510" y="45" text-anchor="middle" class="in">G</text><line x1="510" y1="56" x2="510" y2="70"/><text x="536" y="44" text-anchor="start">Standby generator</text><line x1="510" y1="70" x2="510" y2="84"/><rect x="502" y="84" width="16" height="16"/><line x1="510" y1="100" x2="510" y2="114"/><text x="532" y="96" text-anchor="start">Generator breaker</text><line x1="510" y1="114" x2="510" y2="174"/><rect x="210" y="174" width="340" height="36" rx="2"/><text x="380" y="197" text-anchor="middle" class="in">Automatic transfer switch (ATS)</text><line x1="380" y1="210" x2="380" y2="244"/><line x1="60" y1="244" x2="700" y2="244" stroke-width="5"/><text x="60" y="235" text-anchor="start">Low-voltage main switchboard</text><line x1="160" y1="244" x2="160" y2="258"/><rect x="152" y="258" width="16" height="16"/><line x1="160" y1="274" x2="160" y2="288"/><text x="182" y="270" text-anchor="start">UPS input breaker</text><line x1="160" y1="288" x2="160" y2="298"/><rect x="136" y="298" width="48" height="34" rx="2"/><text x="160" y="320" text-anchor="middle" class="in">UPS</text><line x1="160" y1="332" x2="160" y2="342"/><text x="126" y="319" text-anchor="end" class="sub">UPS</text><line x1="184" y1="315" x2="250" y2="315"/><line x1="250" y1="315" x2="250" y2="327"/><line x1="237" y1="327" x2="263" y2="327"/><line x1="243" y1="333" x2="257" y2="333" stroke-width="3"/><line x1="237" y1="339" x2="263" y2="339"/><line x1="243" y1="345" x2="257" y2="345" stroke-width="3"/><text x="272" y="340" text-anchor="start">Battery</text><line x1="160" y1="342" x2="160" y2="356"/><rect x="152" y="356" width="16" height="16"/><line x1="160" y1="372" x2="160" y2="386"/><text x="182" y="368" text-anchor="start">UPS output breaker</text><line x1="160" y1="386" x2="160" y2="396"/><circle cx="160" cy="408" r="12"/><circle cx="160" cy="424" r="12"/><line x1="160" y1="436" x2="160" y2="446"/><text x="184" y="420" text-anchor="start">PDU transformer</text><line x1="160" y1="446" x2="160" y2="464"/><path d="M153 464H167L160 476Z" class="fill"/><text x="160" y="492" text-anchor="middle">IT racks</text><text x="160" y="506" text-anchor="middle" class="sub">Critical load</text><line x1="430" y1="244" x2="430" y2="258"/><rect x="422" y="258" width="16" height="16"/><line x1="430" y1="274" x2="430" y2="288"/><text x="452" y="270" text-anchor="start">Mechanical breaker</text><line x1="430" y1="288" x2="430" y2="306"/><path d="M423 306H437L430 318Z" class="fill"/><text x="430" y="334" text-anchor="middle">Cooling plant</text><text x="430" y="348" text-anchor="middle" class="sub">Chillers, pumps, CRAHs</text><line x1="620" y1="244" x2="620" y2="258"/><rect x="612" y="258" width="16" height="16"/><line x1="620" y1="274" x2="620" y2="288"/><text x="642" y="270" text-anchor="start">House breaker</text><line x1="620" y1="288" x2="620" y2="306"/><path d="M613 306H627L620 318Z" class="fill"/><text x="620" y="334" text-anchor="middle">Lighting and</text><text x="620" y="348" text-anchor="middle" class="sub">building loads</text></svg>
+  </div>
+  <p class="sld-cap">A typical arrangement for learning. It carries no ratings on purpose and is not a design. Symbols are explained in the <a class="inline" href="/drawings.html#symbols">legend</a>.</p>
+
+  <h2 id="reading">Reading it from the top</h2>
+  <dl class="tnotes">
+    <dt>Utility service and transformer</dt><dd>The normal source. The service transformer steps utility medium voltage down to the building&rsquo;s distribution voltage, 480 V or 415 V in North America: see <a class="inline" href="/guide-415v-vs-480v-distribution.html">415 V vs. 480 V</a>.</dd>
+    <dt>Standby generator</dt><dd>The alternate source. It has to carry the IT load and the cooling that keeps it alive. See <a class="inline" href="/guide-generator-sizing.html">generator sizing</a>.</dd>
+    <dt>Automatic transfer switch</dt><dd>Senses loss of utility, signals the generator to start and moves the load to it. The load sees a short break. Larger sites use breaker pairs in switchgear to do the same job. See <a class="inline" href="/guide-ats-vs-sts-vs-static-bypass.html">ATS vs. STS vs. static bypass</a>.</dd>
+    <dt>Main switchboard</dt><dd>Divides power between the critical load, the mechanical plant and the building.</dd>
+    <dt>UPS and battery</dt><dd>Carries the IT load through the seconds between utility failure and the generator taking over, and cleans up the supply the rest of the time. See <a class="inline" href="/guide-ups-topologies.html">UPS topologies</a> and <a class="inline" href="/guide-ups-sizing.html">UPS sizing</a>.</dd>
+    <dt>PDU transformer</dt><dd>Steps down to the voltage the rack power supplies use and distributes it to rack-level branch circuits.</dd>
+    <dt>IT racks</dt><dd>The critical load. Nearly every watt delivered here becomes heat the cooling plant must remove.</dd>
+    <dt>Cooling plant</dt><dd>Usually not on the UPS, so it stops when utility fails and restarts on generator. That gap is a design decision in its own right at high rack densities.</dd>
+  </dl>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2 id="real">What a real single-line adds</h2>
+  <p>A single-line diagram for construction is a controlled document that an engineer is responsible for. Compared with this one it would also show:</p>
+  <ul>
+    <li>A second, independent path. This drawing is a single path (N). Real facilities duplicate some or all of it: see <a class="inline" href="/guide-n-plus-1-vs-2n-redundancy.html">N+1 vs. 2N</a> and <a class="inline" href="/guide-uptime-institute-tiers.html">Uptime Institute tiers</a></li>
+    <li>UPS static bypass and maintenance bypass</li>
+    <li>Ratings: transformer kVA and impedance, breaker frame and trip, bus ampacity and short-circuit rating</li>
+    <li>Ground-fault protection on the main, and surge protection</li>
+    <li>Protective relays and metering, including the meters behind a PUE figure</li>
+    <li>Static transfer switches or dual-corded loads at the rack</li>
+  </ul>
+
+  <h2 id="related">Related</h2>
+  <ul>
+    <li><a class="inline" href="/data-centers.html">Data center equipment reference</a></li>
+    <li><a class="inline" href="/voltfield-sandbox.html">One-line sandbox: build your own</a></li>
+    <li><a class="inline" href="/guide-rack-power-density.html">Rack power density</a></li>
+    <li><a class="inline" href="/calculators/pue.html">PUE calculator</a></li>
+    <li><a class="inline" href="/drawings.html">All drawings</a></li>
+  </ul>
+  <p class="provenance">Published November 15, 2026. Free to use and adapt with a link back to this page. Spotted an error? <a class="inline" href="/contact.html">Tell us</a>.</p>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+<script>
+(function(){var b=document.querySelector('[data-dl]');if(!b)return;b.addEventListener('click',function(){
+var s=document.querySelector('svg.sld').cloneNode(true);s.setAttribute('style','color:#111;background:#fff');
+var a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['<?xml version="1.0" encoding="UTF-8"?>'+new XMLSerializer().serializeToString(s)],{type:'image/svg+xml'}));
+a.download='voltfield-'+b.getAttribute('data-dl')+'.svg';document.body.appendChild(a);a.click();a.remove();});
+var p=document.querySelector('[data-print]');if(p)p.addEventListener('click',function(){window.print();});})();
+</script>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent reference for power generation, data center and energy storage projects, for the people who specify, buy and ship the equipment. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+      <li><a href="/power-generation.html">Power Generation &amp; Grid</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="/voltfield-site-config.js"></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+
+</body>
+</html>

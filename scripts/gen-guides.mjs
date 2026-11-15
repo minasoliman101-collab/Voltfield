@@ -23,6 +23,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { PROCUREMENT } from './guide-specs-procurement.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const TEMPLATE = 'guide-grid-forming-vs-grid-following.html';
@@ -1665,6 +1666,7 @@ const GUIDES = [
   basedOn: ['Hydraulic Institute standards for rotodynamic pumps', 'AMCA publications on fan performance, where the relationships are known as the fan laws', 'ASHRAE Handbook &mdash; HVAC Systems and Equipment, chapters on pumps and fans', 'ASHRAE Standard 90.1 &mdash; variable flow requirements for pumps and fans'],
   notThis: 'A pump or fan selection, or an energy savings estimate for a specific system. Real savings depend on the system curve, the control strategy and the efficiency of the machine and drive across the operating range, and have to be calculated from manufacturer curves.',
 },
+...PROCUREMENT,
 ];
 
 /* ------------------------------------------------------------- builders ---- */
@@ -1750,7 +1752,7 @@ ${faqBlocks}
     <p class="ns-intro">${g.nextIntro}</p>
     <div class="ns-grid">
       <div class="ns-col">
-      <h3 id="calcLinks">Run the numbers</h3>
+      <h3 id="calcLinks">${g.calcsHead || 'Run the numbers'}</h3>
       <ul class="catlink">
 ${g.calcs.map(([h, n, d]) => `        <li><a href="${h}">${n}</a>${d}</li>`).join('\n')}
       </ul>

@@ -1,9 +1,11 @@
 # Voltfield
 
-> An independent engineering reference for the electrical side of data center,
-> solar and battery-storage projects. Free calculators that show their method,
-> technical guides that each answer one question, a plain-language glossary,
-> and interactive boards for practicing electrical design.
+> An independent reference for power generation, data center and energy
+> storage projects, for the people who specify, buy and ship the equipment.
+> Free calculators and formulas that show their method, technical guides that
+> each answer one question, typical single-line diagrams, procurement and
+> logistics templates, a plain-language glossary, and interactive boards for
+> practicing electrical design.
 
 Voltfield sells nothing. There is no catalog, no quoting, no sourcing and no
 signup. Calculators and practice tools are teaching aids, not a substitute for
@@ -23,6 +25,10 @@ Conventions worth knowing before citing this site:
 
 - [All calculators](https://voltfield.org/engineering-calculators.html): 43 calculators — voltage drop, transformer sizing, arc-flash incident energy, cable ampacity, fault current and others. Each shows the formula and the intermediate steps, not just a result.
 - [Reference charts](https://voltfield.org/reference-charts.html): 10 printable charts. Eight are computed from stated formulas — awg wire size, kva to amps, kw to amps, breaker size, voltage drop, motor speed, hp to kw, cooling load. Two carry code-table values: wire ampacity and motor full-load current.
+- [Formula reference](https://voltfield.org/formulas.html): 54 formulas with variables and assumptions, covering circuits, three-phase power, conductors, transformers, motors, power generation (heat rate, capacity factor, wind, hydro, solar), battery storage and cooling.
+- [Templates](https://voltfield.org/templates.html): nine fillable, printable procurement and logistics documents, each with field-by-field notes: [request for quotation](https://voltfield.org/templates/rfq.html), [bid tabulation](https://voltfield.org/templates/bid-tabulation.html), [purchase order](https://voltfield.org/templates/purchase-order.html), [expediting log](https://voltfield.org/templates/expediting-log.html), [inspection and test plan](https://voltfield.org/templates/inspection-test-plan.html), [vendor scorecard](https://voltfield.org/templates/vendor-scorecard.html), [packing list](https://voltfield.org/templates/packing-list.html), [bill of lading](https://voltfield.org/templates/bill-of-lading.html), [proof of delivery](https://voltfield.org/templates/proof-of-delivery.html).
+- [Drawings library](https://voltfield.org/drawings.html): typical single-line diagrams, free as SVG, each explained element by element: [substation](https://voltfield.org/drawings/substation-single-line.html), [solar plant](https://voltfield.org/drawings/solar-plant-single-line.html), [battery storage](https://voltfield.org/drawings/bess-single-line.html), [data center](https://voltfield.org/drawings/data-center-single-line.html). Typical arrangements for learning, with no ratings; not designs.
+- [Power generation and grid](https://voltfield.org/power-generation.html): sector references covering how each plant makes power, main equipment and what to specify: [gas turbines and combined cycle](https://voltfield.org/power-generation/gas-turbines.html), [wind](https://voltfield.org/power-generation/wind.html), [hydropower](https://voltfield.org/power-generation/hydro.html), [nuclear](https://voltfield.org/power-generation/nuclear.html), [transmission and substations](https://voltfield.org/power-generation/transmission-substations.html). Figures are typical ranges.
 - [Practice questions](https://voltfield.org/practice-questions.html): 64 original multiple-choice questions in 8 sets (ohm's law and power; three-phase power and power factor; conductors and voltage drop; overcurrent protection; transformers; motors; data center power and cooling; solar and storage), each with a worked solution.
 - [Specification checklist](https://voltfield.org/specification-checklist.html): what to pin down before issuing an equipment spec.
 - [Methodology](https://voltfield.org/methodology.html): how the material here is built, sourced and checked.
@@ -41,6 +47,10 @@ Conventions worth knowing before citing this site:
 - [CRAC vs. CRAH: What Is the Difference?](https://voltfield.org/guide-crac-vs-crah.html): A CRAC cools with its own compressor, a CRAH with chilled water. Heat rejection, redundancy, efficiency and sizing.
 - [Hot Aisle vs. Cold Aisle Containment](https://voltfield.org/guide-hot-aisle-vs-cold-aisle-containment.html): How each stops air mixing, what it does to the room and to cooling capacity, and which to choose.
 - [Pump and Fan Affinity Laws Explained](https://voltfield.org/guide-pump-and-fan-affinity-laws.html): Flow with speed, head with its square, power with its cube, and where static head breaks the rule.
+- [How to Qualify an Equipment Vendor](https://voltfield.org/guide-vendor-qualification.html): What to check before a manufacturer goes on the bid list, and a scorecard of factual measures after award.
+- [How to Compare Equipment Bids](https://voltfield.org/guide-how-to-compare-equipment-bids.html): Bid tabulation: level the scope, resolve exceptions and add the cost of transformer losses with A and B factors.
+- [Incoterms 2020 for Heavy Equipment](https://voltfield.org/guide-incoterms-for-equipment.html): EXW, FCA, CPT, CIP, DAP, DPU and DDP: where risk and cost change hands, and which rules fit engineered equipment.
+- [FAT vs. SAT: Factory and Site Acceptance Testing](https://voltfield.org/guide-fat-vs-sat.html): What each test proves, witness and hold points, the inspection and test plan, and the punch list.
 
 ## Sectors
 

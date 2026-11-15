@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAT vs. SAT: Factory and Site Acceptance Tests | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/guide-fat-vs-sat.html">
+<meta property="og:url" content="https://voltfield.org/guide-fat-vs-sat.html">
+<meta name="description" content="FAT vs. SAT explained: what a factory acceptance test and a site acceptance test each prove, witness and hold points, the inspection and test plan, and how to handle a punch list.">
+<meta name="keywords" content="FAT vs SAT, factory acceptance test, site acceptance test, witness test, hold point, inspection and test plan, ITP, punch list, routine tests transformer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="FAT vs. SAT">
+<meta property="og:description" content="What a factory acceptance test and a site acceptance test each prove, and how witness points and punch lists work.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://voltfield.org/social/social-generic.jpg">
+<meta name="twitter:title" content="FAT vs. SAT">
+<meta name="twitter:description" content="What a factory acceptance test and a site acceptance test each prove, and how witness points and punch lists work.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://voltfield.org/guides.html"},{"@type":"ListItem","position":3,"name":"FAT vs. SAT","item":"https://voltfield.org/guide-fat-vs-sat.html"}]},{"@type":"Article","headline":"FAT vs. SAT: What Is Tested at the Factory, What Is Tested on Site, and Who Signs","description":"FAT vs. SAT explained: what a factory acceptance test and a site acceptance test each prove, witness and hold points, the inspection and test plan, and how to handle a punch list.","image":"https://voltfield.org/social/social-generic.jpg","author":{"@type":"Organization","name":"Voltfield Editorial Team","url":"https://voltfield.org/methodology.html"},"publisher":{"@type":"Organization","name":"Voltfield"},"datePublished":"2026-11-15T00:00:00-05:00","dateModified":"2026-11-15T00:00:00-05:00","url":"https://voltfield.org/guide-fat-vs-sat.html"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between FAT and SAT?","acceptedAnswer":{"@type":"Answer","text":"A factory acceptance test is done at the manufacturer before shipment to prove the equipment meets the specification. A site acceptance test is done after installation to prove it was not damaged in transit, was installed correctly and works with the real system."}},{"@type":"Question","name":"Is a factory acceptance test mandatory?","acceptedAnswer":{"@type":"Answer","text":"Manufacturers perform routine tests on every unit as their standards require, but a FAT witnessed by the buyer happens only if the purchase order calls for it. For major equipment it is strongly advisable."}},{"@type":"Question","name":"What is the difference between a hold point and a witness point?","acceptedAnswer":{"@type":"Answer","text":"At a hold point the manufacturer cannot proceed until the buyer has attended or released the point in writing. At a witness point the buyer is notified and may attend, but work continues if the buyer does not come."}},{"@type":"Question","name":"What is an inspection and test plan?","acceptedAnswer":{"@type":"Answer","text":"A document that lists every inspection and test in order, with the procedure, the acceptance criteria and the buyer’s involvement at each step: hold, witness or review of records."}}]}]}
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="voltfield-fonts.css">
+<link rel="alternate" type="application/rss+xml" title="VOLTFIELD Insights &amp; Guides" href="feed.xml">
+<link rel="stylesheet" href="voltfield-core.css">
+<link rel="stylesheet" href="voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Power &amp; cooling engineering reference</small></span>
+  </a>
+      <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="engineering-calculators.html"><b>Engineering calculators</b><em>43 tools, electrical and cooling</em></a>
+            <a href="reference-charts.html"><b>Reference charts</b><em>Printable tables: wire, breakers, cooling load</em></a>
+            <a href="specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+            <a href="templates.html"><b>Templates</b><em>Purchase order, bill of lading, proof of delivery</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+            <a href="practice-questions.html"><b>Practice questions</b><em>64 questions with worked solutions</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="formulas.html"><b>Formulas</b><em>Power, generation, storage and cooling</em></a>
+            <a href="drawings.html"><b>Drawings</b><em>Typical single-line diagrams and symbols</em></a>
+            <a href="voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="guides.html">Guides</a>
+    <a href="engineering-calculators.html">Calculators</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="artban">
+  <div class="artban-in">
+      <nav aria-label="Breadcrumb" class="crumbnav" style="font-family:var(--mono);font-size:11px;color:var(--slate);margin-bottom:12px"><a href="/" style="color:var(--slate);text-decoration:none">Home</a> / <a href="guides.html" style="color:var(--slate);text-decoration:none">Guides</a> / <span style="color:var(--ink)">FAT vs. SAT</span></nav>
+      <div class="eyebrow">Procurement & logistics</div>
+      <h1>FAT vs. SAT: Factory and Site Acceptance Testing Explained</h1>
+      <p class="dek">A factory acceptance test proves the equipment was built right before it ships. A site acceptance test proves it arrived intact and was installed right. Each catches problems the other cannot, and both have to be written into the order to exist.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--slate);margin-top:14px"><span>By <b style="color:var(--ink);font-weight:600">Voltfield Editorial Team</b></span><span>&middot;</span><span>Published November 15, 2026</span><span>&middot;</span><a href="methodology.html" style="color:var(--slate);text-decoration:underline;display:inline-block;min-height:24px;padding-block:4px;line-height:16px">How we source &amp; verify this</a></div>
+  </div>
+</section>
+<div class="artwrap">
+  <section class="takeaways" aria-labelledby="tk-h">
+    <h2 id="tk-h">Key takeaways</h2>
+    <ul>
+      <li>FAT happens at the manufacturer before shipment and checks the equipment against the specification and approved drawings.</li>
+      <li>SAT happens after installation and checks that nothing was damaged in transit and that the equipment works in its real surroundings.</li>
+      <li>A problem found at the factory is fixed by the people and tools that built the equipment. The same problem found on site costs many times more.</li>
+      <li>Witness and hold points must be in the purchase order. So must the rule that equipment does not ship until the punch list is closed or agreed.</li>
+    </ul>
+  </section>
+  <details class="pagetoc"><summary>On this page &middot; 7 sections</summary>
+    <ol>
+      <li><a href="#the-difference">The difference in one paragraph</a></li>
+      <li><a href="#what-a-fat-covers">What a FAT covers</a></li>
+      <li><a href="#witness-and-hold-points">Witness points, hold points and the ITP</a></li>
+      <li><a href="#the-punch-list">The punch list and release for shipment</a></li>
+      <li><a href="#what-a-sat-covers">What a SAT covers</a></li>
+      <li><a href="#common-mistakes">Common mistakes</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ol>
+  </details>
+  <h2 id="the-difference">The difference in one paragraph</h2>
+  <p><b>A factory acceptance test (FAT) is carried out at the manufacturer&rsquo;s works before the equipment ships, to show that it meets the specification. A site acceptance test (SAT) is carried out after the equipment is installed, to show that it survived the journey and works where it will be used.</b> The FAT is the buyer&rsquo;s last chance to have a fault corrected in the factory. The SAT is the first proof that the installed system does its job.</p>
+  <table class="reftable">
+    <tr><th scope="col"></th><th scope="col">FAT</th><th scope="col">SAT</th></tr>
+    <tr><td>Where</td><td>Manufacturer&rsquo;s works</td><td>Project site, installed</td></tr>
+    <tr><td>When</td><td>Before shipment</td><td>After installation, before or during commissioning</td></tr>
+    <tr><td>Proves</td><td>Built to specification and drawings</td><td>Undamaged, correctly installed, works with the real system</td></tr>
+    <tr><td>Run by</td><td>Manufacturer, witnessed by buyer</td><td>Contractor or testing firm, often with manufacturer support</td></tr>
+    <tr><td>Ends with</td><td>Release for shipment</td><td>Acceptance, energization or handover</td></tr>
+  </table>
+  <h2 id="what-a-fat-covers">What a FAT covers</h2>
+  <p>The content depends on the equipment, and the governing standard names the tests. Standards generally sort tests into <b>routine tests</b>, done on every unit, and <b>design tests</b> (also called type tests), done once on a representative unit to prove the design. A buyer normally receives routine test results for its own units and design test reports from an earlier identical or similar unit, unless the order pays for the design tests to be repeated.</p>
+  <ul>
+    <li><b>Transformers:</b> ratio, polarity and phase relation, winding resistance, no-load loss and excitation current, load loss and impedance, dielectric tests, and for liquid-filled units a leak test. The measured losses are the ones compared with the guaranteed figures from the <a class="inline" href="guide-how-to-compare-equipment-bids.html">bid evaluation</a>.</li>
+    <li><b>Switchgear and switchboards:</b> a check against the drawings, wiring and control checks, mechanical operation and interlocks, dielectric tests, and functional tests of protection and control with relays set and trip circuits proven.</li>
+    <li><b>Generators and UPS:</b> load tests in steps up to rated load, transient response to load steps, alarms and shutdowns, and for a UPS the transfers to and from bypass and battery.</li>
+    <li><b>Packaged systems,</b> such as power skids and battery containers: an integrated test with everything connected, including controls, communications and fire detection interfaces.</li>
+  </ul>
+  <p>Alongside the electrical tests there is a visual and dimensional inspection: nameplate data, bill of materials, paint, labels, terminal markings, and the anchoring and cable entry details the site crew is counting on.</p>
+  <div class="ad-unit" data-ad="incontent"></div>
+  <h2 id="witness-and-hold-points">Witness points, hold points and the ITP</h2>
+  <p>The document that organizes all this is the <b>inspection and test plan</b> (ITP). It lists each inspection and test in sequence, the procedure and acceptance criteria for it, and what the buyer&rsquo;s involvement is. That involvement comes in three levels:</p>
+  <ul>
+    <li><b>Hold point.</b> Work stops until the buyer has attended or has released the point in writing.</li>
+    <li><b>Witness point.</b> The buyer is notified and may attend. If the buyer does not come, the work goes on.</li>
+    <li><b>Review.</b> The buyer receives the records afterwards.</li>
+  </ul>
+  <p>Ask for the ITP with the approval drawings and agree it before fabrication. Put the notice period for witness points in the order: ten working days is common, since travel has to be booked. And decide who attends. A witness who does not know the equipment can only confirm that a test took place.</p>
+  <h2 id="the-punch-list">The punch list and release for shipment</h2>
+  <p>Almost every FAT finds something: a mislabelled terminal, a relay setting, a missing accessory, sometimes a failed test. Each finding goes on a punch list with an owner and a date. The decision that matters is which items must be closed <b>before shipment</b> and which can be finished on site.</p>
+  <p>The rule of thumb is simple. Anything that needs factory tools, factory people or a retest stays at the factory. Agreeing to &ldquo;fix it on site&rdquo; moves the cost and the schedule risk to the project, and field repairs to a transformer or a tested assembly are rarely as good as factory ones. The order should say that the equipment is not released for shipment until the buyer signs the release, and should tie a payment milestone to that signature.</p>
+  <p>The FAT report, the test data and the closed punch list travel with the documents the order requires. Check them against the delivery when it arrives, using the <a class="inline" href="templates/proof-of-delivery.html">proof of delivery</a>.</p>
+  <h2 id="what-a-sat-covers">What a SAT covers</h2>
+  <p>Transport and installation are hard on equipment. A SAT starts with what the journey may have changed and then moves to what the factory could not test:</p>
+  <ul>
+    <li><b>Receiving checks:</b> impact recorder readings, pressure or oil level, visible damage.</li>
+    <li><b>Repeat of selected factory tests</b> to compare with the FAT values: insulation resistance, turns ratio, winding resistance, contact resistance. A change from the factory figure is the signal to look for.</li>
+    <li><b>Installation checks:</b> anchoring, clearances, grounding and bonding, cable terminations and torque, phasing.</li>
+    <li><b>Functional tests with the real system:</b> protection trips to the actual breakers, interlocks between pieces of equipment from different vendors, controls and monitoring through to the plant system.</li>
+    <li><b>Energization and load,</b> with readings recorded.</li>
+  </ul>
+  <p>Site testing of electrical equipment is commonly specified to recognized acceptance testing standards, which give the tests and expected values for each equipment type. Whether the SAT is the same thing as commissioning or one step within it varies from project to project, so define it in the contract.</p>
+  <h2 id="common-mistakes">Common mistakes</h2>
+  <ul>
+    <li><b>Not putting the FAT in the order.</b> A witness test requested after award is a change order.</li>
+    <li><b>Waiving the FAT to save schedule.</b> The time saved is usually spent several times over on site.</li>
+    <li><b>Accepting design test reports from a unit that is not really similar.</b></li>
+    <li><b>Shipping with an open punch list and no agreement on who closes it.</b></li>
+    <li><b>Skipping the comparison between site and factory values.</b> A site test result means most when set beside the factory one.</li>
+    <li><b>Treating a signed delivery receipt as acceptance.</b> Acceptance comes after the SAT.</li>
+  </ul>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the difference between FAT and SAT?</summary>
+    <p style="margin-top:10px">A factory acceptance test is done at the manufacturer before shipment to prove the equipment meets the specification. A site acceptance test is done after installation to prove it was not damaged in transit, was installed correctly and works with the real system.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">Is a factory acceptance test mandatory?</summary>
+    <p style="margin-top:10px">Manufacturers perform routine tests on every unit as their standards require, but a FAT witnessed by the buyer happens only if the purchase order calls for it. For major equipment it is strongly advisable.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is the difference between a hold point and a witness point?</summary>
+    <p style="margin-top:10px">At a hold point the manufacturer cannot proceed until the buyer has attended or released the point in writing. At a witness point the buyer is notified and may attend, but work continues if the buyer does not come.</p>
+  </details>
+  <details style="background:var(--card);border:1px solid var(--line-dark);padding:14px 18px;margin-bottom:10px">
+    <summary style="font-family:var(--disp);font-weight:600;font-size:15.5px;cursor:pointer">What is an inspection and test plan?</summary>
+    <p style="margin-top:10px">A document that lists every inspection and test in order, with the procedure, the acceptance criteria and the buyer&rsquo;s involvement at each step: hold, witness or review of records.</p>
+  </details>
+  <section class="nextsteps" aria-labelledby="next-h">
+    <h2 id="next-h">Next steps</h2>
+    <p class="ns-intro">Tests have to be asked for in the request for quotation and fixed in the purchase order, with a payment milestone tied to passing them. What a short-circuit study expects of the tested equipment is covered in <a class="inline" href="guide-short-circuit-studies-breaker-coordination.html">short-circuit studies and breaker coordination</a>.</p>
+    <div class="ns-grid">
+      <div class="ns-col">
+      <h3 id="calcLinks">Use the templates</h3>
+      <ul class="catlink">
+        <li><a href="templates/purchase-order.html">Purchase Order Template</a>With equipment terms: drawings, tests, documents.</li>
+        <li><a href="templates/rfq.html">Request for Quotation Template</a>Scope, bid instructions and the data bidders must return.</li>
+        <li><a href="templates/proof-of-delivery.html">Proof of Delivery Template</a>Delivery receipt with a receiving inspection.</li>
+      </ul>
+      </div>
+      <div class="ns-col">
+      <h3 id="relatedGuides">Read next</h3>
+      <ul>
+        <li><a href="guide-how-to-compare-equipment-bids.html">How to Compare Equipment Bids</a></li>
+        <li><a href="guide-vendor-qualification.html">How to Qualify an Equipment Vendor</a></li>
+        <li><a href="guide-transformer-nameplate.html">How to Read a Transformer Nameplate</a></li>
+        <li><a href="guide-incoterms-for-equipment.html">Incoterms 2020 for Heavy Equipment</a></li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="guide-foot">
+  <div class="sharebar" id="shareBar">
+    <span class="sharebar-lbl">Share this guide:</span>
+    <button type="button" class="sharebtn" id="shareNativeBtn" style="display:none">Share &rarr;</button>
+    <a class="sharebtn" id="shareLinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="sharebtn" id="shareTwitter" target="_blank" rel="noopener">X</a>
+    <a class="sharebtn" id="shareEmail">Email</a>
+    <button type="button" class="sharebtn" id="shareCopyBtn">Copy link</button>
+  </div>
+  <details class="gf-cite" id="citeThis"><summary>Cite or link to this guide</summary>
+    <p>Free to quote with attribution. Suggested citation: Voltfield Editorial Team, &ldquo;FAT vs. SAT: Factory and Site Acceptance Testing Explained,&rdquo; <i>Voltfield</i>, updated November 15, 2026. https://voltfield.org/guide-fat-vs-sat.html</p>
+  </details>
+  <div class="vf-updates">
+    <p class="vfu-h"><b>Get new guides by email</b></p>
+    <p class="vfu-p">One short email when a new guide or calculator is published, at most once a month. Your address is used for nothing else.</p>
+    <form class="vfu-form" name="site-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="site-updates">
+      <input type="hidden" name="source" value="/guide-fat-vs-sat.html">
+      <p class="vfu-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="vfu-sr" for="vfu-email">Email address</label>
+      <input id="vfu-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+      <button type="submit">Subscribe</button>
+      <p class="vfu-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  </div>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+
+
+<aside class="provenance" aria-labelledby="prov-h">
+  <details>
+    <summary><h2 id="prov-h">Scope &amp; sources</h2><span class="prov-meta">Published November 15, 2026.</span></summary>
+    <dl>
+      <dt>What this covers</dt>
+      <dd>What factory and site acceptance tests each prove, typical FAT content for transformers, switchgear, generators, UPS and packaged systems, routine and design tests, inspection and test plans with hold and witness points, punch lists, release for shipment, and typical SAT content.</dd>
+      <dt>Based on</dt>
+      <dd><ul><li>IEEE C57.12.00 and C57.12.90 &mdash; transformer test classification and test code</li><li>IEEE C37.20 series &mdash; production tests for metal-enclosed switchgear</li><li>ANSI/NETA ATS &mdash; Standard for Acceptance Testing Specifications for Electrical Power Equipment and Systems</li><li>IEC 62381 &mdash; factory acceptance test, site acceptance test and site integration test for automation systems, for the terminology</li></ul></dd>
+      <dt>What it is not</dt>
+      <dd>A test procedure or a list of the tests your equipment requires. Those come from the governing equipment standard, the specification and the manufacturer&rsquo;s procedures.</dd>
+      <dt>Provenance</dt>
+      <dd>Published November 15, 2026. Written and maintained by the Voltfield editorial team against the sources above. Worked figures in the text are arithmetic the reader can check; nothing here states a measured value.</dd>
+    </dl>
+  </details>
+  </aside>
+</main>
+
+
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent reference for power generation, data center and energy storage projects, for the people who specify, buy and ship the equipment. Nothing on this site is for sale, and nothing is sourced, quoted or supplied through it. Calculators and practice tools are teaching aids, not a substitute for a licensed engineer's study.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="battery-storage.html">Storage Systems</a></li>
+      <li><a href="power-generation.html">Power Generation &amp; Grid</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="voltfield-site-config.js"></script>
+<script src="voltfield-updates.js" defer></script>
+<script>
+</script>
+<script>
+(function(){
+  const bar=document.getElementById('shareBar');
+  if(!bar)return;
+  const url=location.href;
+  const title=document.title.replace(/\s*\|\s*VOLTFIELD.*$/,'');
+  const li=document.getElementById('shareLinkedIn'), tw=document.getElementById('shareTwitter'), em=document.getElementById('shareEmail');
+  if(li)li.href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  if(tw)tw.href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(title);
+  if(em)em.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title+'\n\n'+url);
+  const nativeBtn=document.getElementById('shareNativeBtn');
+  if(navigator.share&&nativeBtn){
+    nativeBtn.style.display='';
+    [li,tw].forEach(el=>{if(el)el.style.display='none';});
+    nativeBtn.addEventListener('click',()=>{navigator.share({title,url}).catch(()=>{});});
+  }
+  const copyBtn=document.getElementById('shareCopyBtn');
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const orig=copyBtn.textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=orig,1600);
+    },()=>{copyBtn.textContent='Copy failed';setTimeout(()=>copyBtn.textContent=orig,1600);});
+  });
+})();
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+</body>
+</html>

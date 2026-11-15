@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inspection and Test Plan Template (Free ITP) | Voltfield</title>
+<link rel="canonical" href="https://voltfield.org/templates/inspection-test-plan.html">
+<meta property="og:url" content="https://voltfield.org/templates/inspection-test-plan.html">
+<meta name="description" content="A free inspection and test plan template for manufactured equipment: each inspection and test with its procedure, acceptance criteria, and hold, witness and review points.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Voltfield">
+<meta property="og:title" content="Inspection and Test Plan Template (Free ITP)">
+<meta property="og:description" content="A free inspection and test plan template for manufactured equipment: each inspection and test with its procedure, acceptance criteria, and hold, witness and review points.">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://voltfield.org/"},{"@type":"ListItem","position":2,"name":"Templates","item":"https://voltfield.org/templates.html"},{"@type":"ListItem","position":3,"name":"Inspection and test plan","item":"https://voltfield.org/templates/inspection-test-plan.html"}]},{"@type":"FAQPage","dateModified":"2026-11-15","mainEntity":[{"@type":"Question","name":"What is an inspection and test plan?","acceptedAnswer":{"@type":"Answer","text":"A document listing each inspection and test carried out on a product during manufacture, in sequence, with the procedure, the acceptance criteria, the records produced and the involvement of each party at each step."}},{"@type":"Question","name":"Who prepares the ITP?","acceptedAnswer":{"@type":"Answer","text":"The manufacturer normally drafts it, because it follows the manufacturer s process. The buyer reviews it, adds its hold, witness and review points, and both parties approve it before fabrication."}},{"@type":"Question","name":"What is the difference between a hold point and a witness point?","acceptedAnswer":{"@type":"Answer","text":"At a hold point the work must stop until the named party has attended or given written release. At a witness point the party is notified and may attend, but the work goes ahead if it does not."}},{"@type":"Question","name":"Is an ITP the same as a quality plan?","acceptedAnswer":{"@type":"Answer","text":"No. A quality plan describes how the manufacturer s quality system is applied to the order as a whole. The ITP is the specific list of inspections and tests for the product, and is often one section of the quality plan."}}]}]}
+</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#101B2D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VOLTFIELD">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/voltfield-fonts.css">
+<link rel="stylesheet" href="/voltfield-core.css">
+<link rel="stylesheet" href="/voltfield-dark-mode.css">
+<script>(function(){try{var t=localStorage.getItem('vf_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="/voltfield-parts.css">
+<link rel="stylesheet" href="/voltfield-templates.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site">
+  <a class="logo" href="/" aria-label="Voltfield home">
+    <span class="bolt"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#101B2D"/></svg></span>
+    <span class="wordmark">Voltfield<small>Power &amp; cooling engineering reference</small></span>
+  </a>
+    <nav class="hnav">
+    <a href="/">Home</a>
+    <div class="navdrop" id="toolsDrop">
+      <button class="navdrop-btn" type="button">Tools <svg aria-hidden="true" class="car" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5L8 3.5"/></svg></button>
+      <div class="navdrop-menu toolpane">
+        <div class="tp-grid">
+          <div class="tp-col">
+            <span class="navdrop-grp">Calculate</span>
+            <a href="/engineering-calculators.html"><b>Engineering calculators</b><em>43 tools, electrical and cooling</em></a>
+            <a href="/reference-charts.html"><b>Reference charts</b><em>Printable tables: wire, breakers, cooling load</em></a>
+            <a href="/specification-checklist.html"><b>Specification checklist</b><em>What a complete equipment spec has to carry</em></a>
+            <a href="/templates.html"><b>Templates</b><em>Purchase order, bill of lading, proof of delivery</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Design &amp; practice</span>
+            <a href="/voltfield-sandbox.html"><b>One-line sandbox</b><em>Build a one-line and have it checked</em></a>
+            <a href="/voltfield-pod-designer.html"><b>POD &amp; skid designer</b><em>Lay out a packaged power module</em></a>
+            <a href="/voltfield-rack-builder.html"><b>Rack elevation builder</b><em>Plan an elevation against load and weight</em></a>
+            <a href="/practice-questions.html"><b>Practice questions</b><em>64 questions with worked solutions</em></a>
+          </div>
+          <div class="tp-col">
+            <span class="navdrop-grp">Look it up</span>
+            <a href="/glossary.html"><b>Glossary</b><em>56 terms, defined plainly</em></a>
+            <a href="/formulas.html"><b>Formulas</b><em>Power, generation, storage and cooling</em></a>
+            <a href="/drawings.html"><b>Drawings</b><em>Typical single-line diagrams and symbols</em></a>
+            <a href="/voltfield-identify.html"><b>Identify a part</b><em>Work back from a nameplate</em></a>
+            <a href="/guides.html"><b>Engineering guides</b><em>Plain-English explainers with worked examples</em></a>
+          </div>
+        </div>
+        <a class="tp-all" href="/free-tools.html">All free tools &rarr;</a>
+      </div>
+    </div>
+    <a href="/guides.html">Guides</a>
+    <a href="/engineering-calculators.html">Calculators</a>
+    <a href="/glossary.html">Glossary</a>
+    <a href="/whats-new.html">What's new</a>
+    <a href="/site-search.html">Search</a>
+  </nav>
+  <div class="headright">
+    <button class="navtoggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+<section class="artban">
+  <div class="artban-in">
+    <nav aria-label="Breadcrumb" class="crumbnav"><a href="/">Home</a> / <a href="/templates.html">Templates</a> / <span aria-current="page">Inspection and test plan</span></nav>
+    <h1>Inspection and Test Plan (ITP) Template</h1>
+    <p class="dek">Every inspection and test in order, what counts as a pass, and whether the buyer holds, witnesses or reviews it. Fill it in here, then print it or save it as a PDF.</p>
+  </div>
+</section>
+
+<div class="artwrap tplwrap">
+  <p><b>An inspection and test plan lists every inspection and test a piece of equipment goes through during manufacture, in sequence, with the acceptance criteria for each and the part each party plays.</b> The vendor normally drafts it and the buyer marks where it wants to be present. Agreed before fabrication starts, it replaces a great many arguments later about what was supposed to be checked, to what standard, and whether anyone was told.</p>
+
+  <div class="tpl-actions web-only" role="group" aria-label="Template actions">
+    <button type="button" class="btn btn-primary" data-act="print">Print or save as PDF</button>
+    <button type="button" class="btn btn-ghost" data-act="example">Fill with an example</button>
+    <button type="button" class="btn btn-ghost" data-act="csv">Download lines as CSV</button>
+    <button type="button" class="btn btn-ghost" data-act="clear">Clear</button>
+  </div>
+  <p class="tpl-hint web-only" id="tplStatus" role="status">Printing an empty form gives you a blank template. What you type stays in this browser and is not sent anywhere.</p>
+
+  <form class="tpl-doc" id="tplDoc" data-key="itp" data-name="inspection-test-plan" autocomplete="off" onsubmit="return false">
+    <div class="tdoc-head">
+      <div class="tdoc-title"><b>Inspection and Test Plan</b></div>
+      <div class="tdoc-meta"><div class="tf"><label for="itp_itp_no">ITP number</label><input id="itp_itp_no" name="itp_itp_no" type="text" autocomplete="off" data-ex="ITP-0148-01"></div><div class="tf"><label for="itp_itp_rev">Revision</label><input id="itp_itp_rev" name="itp_itp_rev" type="text" autocomplete="off" data-ex="A"></div><div class="tf"><label for="itp_itp_date">Date</label><input id="itp_itp_date" name="itp_itp_date" type="date" autocomplete="off" data-ex="2026-12-18"></div></div>
+    </div>
+    <div class="tg tg4"><div class="tf"><label for="itp_po">PO number</label><input id="itp_po" name="itp_po" type="text" autocomplete="off" data-ex="PO-2026-0148"></div><div class="tf"><label for="itp_vendor">Vendor and factory</label><input id="itp_vendor" name="itp_vendor" type="text" autocomplete="off" data-ex="Example Transformer Co., Milwaukee"></div><div class="tf"><label for="itp_equip">Equipment and tag numbers</label><input id="itp_equip" name="itp_equip" type="text" autocomplete="off" data-ex="2500 kVA transformers T-1, T-2"></div><div class="tf"><label for="itp_spec">Governing specification and standard</label><input id="itp_spec" name="itp_spec" type="text" autocomplete="off" data-ex="Spec 26 12 19 rev 2; IEEE C57.12.00"></div></div>
+    <div class="tt-wrap"><table class="tt" data-table="itp_steps" data-ex="[[&quot;1&quot;,&quot;Material certificates for critical components&quot;,&quot;Vendor QP-07&quot;,&quot;Core steel grade, conductor and bushings as approved&quot;,&quot;P&quot;,&quot;R&quot;,&quot;Mill and supplier certificates&quot;],[&quot;2&quot;,&quot;In-process inspection at agreed stages&quot;,&quot;Vendor QP-11&quot;,&quot;Per vendor quality plan&quot;,&quot;P&quot;,&quot;R&quot;,&quot;Inspection records&quot;],[&quot;3&quot;,&quot;Visual and dimensional inspection against approved drawings&quot;,&quot;Approved drawings&quot;,&quot;Dimensions, anchoring and cable entries within drawing tolerances&quot;,&quot;P&quot;,&quot;W&quot;,&quot;Inspection checklist&quot;],[&quot;4&quot;,&quot;Nameplate and bill of materials check&quot;,&quot;Data sheet DS-01&quot;,&quot;Nameplate matches order and data sheet&quot;,&quot;P&quot;,&quot;W&quot;,&quot;Nameplate photo&quot;],[&quot;5&quot;,&quot;Wiring, control and interlock checks&quot;,&quot;Approved schematics&quot;,&quot;Point-to-point correct; devices operate&quot;,&quot;P&quot;,&quot;W&quot;,&quot;Marked-up schematic&quot;],[&quot;6&quot;,&quot;Routine electrical tests&quot;,&quot;IEEE C57.12.90&quot;,&quot;Ratio, resistance, losses and impedance within guarantees and standard tolerances; dielectric tests passed&quot;,&quot;P&quot;,&quot;W&quot;,&quot;Certified test report&quot;],[&quot;7&quot;,&quot;Functional test of protection, controls and alarms&quot;,&quot;Vendor test procedure&quot;,&quot;Each alarm and trip operates at its setting&quot;,&quot;P&quot;,&quot;W&quot;,&quot;Test record&quot;],[&quot;8&quot;,&quot;Paint, labels and final inspection&quot;,&quot;Specification section 2.8&quot;,&quot;Color, thickness and labels as specified&quot;,&quot;P&quot;,&quot;W&quot;,&quot;Inspection checklist&quot;],[&quot;9&quot;,&quot;Packing and preservation for shipment&quot;,&quot;Vendor packing procedure&quot;,&quot;Blocking, impact recorder fitted, openings sealed&quot;,&quot;P&quot;,&quot;R&quot;,&quot;Packing photos&quot;],[&quot;10&quot;,&quot;Release for shipment&quot;,&quot;Purchase order&quot;,&quot;Punch list closed or agreed in writing&quot;,&quot;P&quot;,&quot;H&quot;,&quot;Signed release&quot;]]" data-pre="[[&quot;1&quot;,&quot;Material certificates for critical components&quot;,&quot;&quot;,&quot;&quot;,&quot;P&quot;,&quot;R&quot;,&quot;&quot;],[&quot;2&quot;,&quot;In-process inspection at agreed stages&quot;,&quot;&quot;,&quot;&quot;,&quot;P&quot;,&quot;R&quot;,&quot;&quot;],[&quot;3&quot;,&quot;Visual and dimensional inspection against approved drawings&quot;,&quot;&quot;,&quot;&quot;,&quot;P&quot;,&quot;W&quot;,&quot;&quot;],[&quot;4&quot;,&quot;Nameplate and bill of materials check&quot;,&quot;&quot;,&quot;&quot;,&quot;P&quot;,&quot;W&quot;,&quot;&quot;],[&quot;5&quot;,&quot;Wiring, control and interlock checks&quot;,&quot;&quot;,&quot;&quot;,&quot;P&quot;,&quot;W&quot;,&quot;&quot;],[&quot;6&quot;,&quot;Routine electrical tests&quot;,&quot;&quot;,&quot;&quot;,&quot;P&quot;,&quot;W&quot;,&quot;&quot;],[&quot;7&quot;,&quot;Functional test of protection, controls and alarms&quot;,&quot;&quot;,&quot;&quot;,&quot;P&quot;,&quot;W&quot;,&quot;&quot;],[&quot;8&quot;,&quot;Paint, labels and final inspection&quot;,&quot;&quot;,&quot;&quot;,&quot;P&quot;,&quot;W&quot;,&quot;&quot;],[&quot;9&quot;,&quot;Packing and preservation for shipment&quot;,&quot;&quot;,&quot;&quot;,&quot;P&quot;,&quot;R&quot;,&quot;&quot;],[&quot;10&quot;,&quot;Release for shipment&quot;,&quot;&quot;,&quot;&quot;,&quot;P&quot;,&quot;H&quot;,&quot;&quot;]]"  data-rows="10">
+<thead><tr><th scope="col" class="w6">No.</th><th scope="col" class="mid">Inspection or test</th><th scope="col" class="w16 ta">Procedure or standard</th><th scope="col" class="ta">Acceptance criteria</th><th scope="col" class="w8">Vendor</th><th scope="col" class="w8">Buyer</th><th scope="col" class="w14 ta">Record</th></tr></thead>
+<tbody><tr><td class="w6"><input type="text" autocomplete="off" data-col="no" aria-label="No."></td><td class="mid"><textarea rows="1" data-col="desc" aria-label="Inspection or test"></textarea></td><td class="w16 ta"><textarea rows="1" data-col="ref" aria-label="Procedure or standard"></textarea></td><td class="ta"><textarea rows="1" data-col="acc" aria-label="Acceptance criteria"></textarea></td><td class="w8"><input type="text" autocomplete="off" data-col="v" aria-label="Vendor"></td><td class="w8"><input type="text" autocomplete="off" data-col="b" aria-label="Buyer"></td><td class="w14 ta"><textarea rows="1" data-col="rec" aria-label="Record"></textarea></td></tr></tbody></table></div>
+<p class="tt-add web-only"><button type="button" class="tbtn" data-add>Add a line</button> <button type="button" class="tbtn" data-del>Remove last line</button></p>
+    <p class="tfoot">P = performs. H = hold point: work does not proceed until this party attends or releases the point in writing. W = witness point: this party is notified and may attend; work proceeds if it does not. R = reviews the record afterwards.</p>
+    <div class="tg tg2"><div class="tf"><label for="itp_notice">Notice for hold and witness points</label><textarea id="itp_notice" name="itp_notice" rows="2" data-ex="10 working days written notice to the buyer contact. A missed hold point is repeated at vendor cost."></textarea></div><div class="tf"><label for="itp_notes">Notes</label><textarea id="itp_notes" name="itp_notes" rows="2" data-ex="Design test reports from an identical unit to be submitted with the approval drawings."></textarea></div></div>
+    <div class="tsign"><div class="tsig"><span class="tsig-line"></span><span class="tsig-lab">Vendor quality: name, signature, date</span></div><div class="tsig"><span class="tsig-line"></span><span class="tsig-lab">Buyer: name, signature, date</span></div></div>
+  </form>
+
+  <div class="ad-unit" data-ad="incontent"></div>
+
+  <h2 id="fields">What goes in each field</h2>
+  <dl class="tnotes">
+    <dt>Inspection or test</dt><dd>One line per activity, in the order it happens. The starting list here is generic. Replace it with the tests your governing standard and specification actually require; for the usual content by equipment type see <a class="inline" href="/guide-fat-vs-sat.html">FAT vs. SAT</a>.</dd>
+    <dt>Procedure or standard</dt><dd>The document that says how the step is done: a clause of a standard, a specification section or a vendor procedure number. If nothing can be cited, nobody has agreed how the test is run.</dd>
+    <dt>Acceptance criteria</dt><dd>What a pass looks like, as a figure or a reference to where the figure is. &ldquo;Satisfactory&rdquo; is not a criterion. For guaranteed values such as losses and impedance, state the guarantee and the tolerance.</dd>
+    <dt>Vendor and buyer columns</dt><dd>Enter P, H, W or R for each party on each line. The vendor performs almost everything. The buyer chooses its level of involvement, and should choose sparingly: every hold point is a place where the buyer can stop the factory, and so a place where the buyer can cause delay.</dd>
+    <dt>Hold points</dt><dd>Reserve them for steps that cannot be inspected or undone afterwards, and for release for shipment. State the notice period and what happens if a hold point is passed without release.</dd>
+    <dt>Record</dt><dd>The piece of paper that proves the step was done. These records together make up the quality dossier delivered with the equipment.</dd>
+    <dt>Revision</dt><dd>An ITP changes as drawings are approved. Control it like a drawing, with a revision letter and both signatures on each issue.</dd>
+  </dl>
+
+  <h2 id="mistakes">Mistakes that cost money later</h2>
+  <ul>
+    <li>Agreeing the ITP after fabrication has started, when early inspection stages have already passed.</li>
+    <li>Acceptance criteria that do not state a value.</li>
+    <li>Making everything a hold point, then being unable to attend.</li>
+    <li>No notice period, so the invitation to witness arrives two days before the test.</li>
+    <li>Releasing for shipment by email with punch list items still open and unassigned.</li>
+  </ul>
+
+  <h2 id="questions">Questions</h2>
+  <details class="tfaq"><summary>What is an inspection and test plan?</summary><p>A document listing each inspection and test carried out on a product during manufacture, in sequence, with the procedure, the acceptance criteria, the records produced and the involvement of each party at each step.</p></details>
+  <details class="tfaq"><summary>Who prepares the ITP?</summary><p>The manufacturer normally drafts it, because it follows the manufacturer&rsquo;s process. The buyer reviews it, adds its hold, witness and review points, and both parties approve it before fabrication.</p></details>
+  <details class="tfaq"><summary>What is the difference between a hold point and a witness point?</summary><p>At a hold point the work must stop until the named party has attended or given written release. At a witness point the party is notified and may attend, but the work goes ahead if it does not.</p></details>
+  <details class="tfaq"><summary>Is an ITP the same as a quality plan?</summary><p>No. A quality plan describes how the manufacturer&rsquo;s quality system is applied to the order as a whole. The ITP is the specific list of inspections and tests for the product, and is often one section of the quality plan.</p></details>
+
+  <p class="callout">This is a general-purpose template to help you lay a document out clearly. It is not legal advice, and it does not replace your company&rsquo;s terms, your carrier&rsquo;s tariff or the requirements of any regulation that applies to your shipment.</p>
+
+  <h2 id="related">Related</h2>
+  <ul>
+    <li><a class="inline" href="/templates/expediting-log.html">Expediting log template</a></li>
+    <li><a class="inline" href="/templates/purchase-order.html">Purchase order template</a></li>
+    <li><a class="inline" href="/guide-fat-vs-sat.html">FAT vs. SAT</a></li>
+    <li><a class="inline" href="/specification-checklist.html">Specification checklist</a></li>
+    <li><a class="inline" href="/templates.html">All templates</a></li>
+  </ul>
+  <p class="provenance">Published November 15, 2026. Spotted something wrong or missing? <a class="inline" href="/contact.html">Tell us</a>.</p>
+</div>
+<div class="ad-unit" data-ad="footer"></div>
+</main>
+<footer>
+  <div class="in">
+    <div>
+      <h2>Voltfield</h2>
+      <p>An independent reference for power generation, data center and energy storage projects, for the people who specify, buy and ship the equipment. Nothing on this site is for sale. Price ranges are indicative market benchmarks (North America), published as reference data — actual figures vary with configuration, quantity and manufacturer.</p>
+    </div>
+    <div><h2>Sectors</h2><ul>
+      <li><a href="/data-centers.html">Grid &amp; Data Center Power</a></li>
+      <li><a href="/renewables.html">Solar / Wind BOS</a></li>
+      <li><a href="/battery-storage.html">Storage Systems</a></li>
+      <li><a href="/power-generation.html">Power Generation &amp; Grid</a></li>
+    </ul></div>
+    <div><h2>Compliance</h2><ul><li>UL · IEEE · ANSI C57</li><li>NFPA 855 · UL 9540A</li><li>Buy America / FEOC screening</li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="About this site">
+    <a href="/about.html">About</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy-policy.html">Privacy policy</a>
+    <a href="/terms.html">Terms of use</a>
+  </nav>
+</footer>
+<script src="/voltfield-site-config.js"></script>
+<script>
+</script>
+<script>(function(){var b=document.getElementById("navToggle");if(b)b.addEventListener("click",function(){var n=document.querySelector(".hnav");if(!n)return;var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+<script>(function(){var d=document.getElementById("toolsDrop");if(!d)return;var b=d.querySelector(".navdrop-btn");b.addEventListener("click",function(e){e.stopPropagation();d.classList.toggle("open");});document.addEventListener("click",function(){d.classList.remove("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.classList.remove("open");});})();</script>
+<script src="/voltfield-templates.js" defer></script>
+</body>
+</html>
