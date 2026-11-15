@@ -1645,6 +1645,10 @@
     var est=btn.closest('.estimator');
     if(!est||!est.id)return;
     if(window.__vfExampleRun)return; /* the worked example below is not a use of the tool */
+    if(window.__vfLiveRun){ /* a live recalculation: one use of the tool, not one per keystroke */
+      if(est.dataset.vfLiveCounted)return;
+      est.dataset.vfLiveCounted='1';
+    }
     if(window.vfGtag)window.vfGtag('event','calculator_run',{calc:est.id});
   });
 
@@ -1683,7 +1687,7 @@
     }
     var note=document.createElement('p');
     note.className='est-example';
-    note.textContent='Example values shown. Change any input and press '+(btn.textContent||'Calculate').trim()+'.';
+    note.textContent='Example values shown. Change any input and the result updates.';
     res.parentNode.insertBefore(note,res.nextSibling);
     function drop(){if(note.parentNode)note.parentNode.removeChild(note);est.removeEventListener('input',drop);est.removeEventListener('change',drop);}
     est.addEventListener('input',drop);
@@ -1691,6 +1695,85 @@
     /* Typing over an example should replace it, not append to it. */
     filled.forEach(function(i){i.addEventListener('focus',function f(){i.select();i.removeEventListener('focus',f);});});
   });
+})();
+
+/* ---------- results follow the inputs ----------
+   The form used to wait for its button. Someone comparing two wire sizes or
+   three distances pressed it every time, and a changed input left a stale
+   answer on screen until they did. Now any edit re-runs the tool's own button
+   handler after a short pause, so there is one code path for the math. The
+   button stays for keyboard users and for anyone who expects one. A tool can
+   opt out with data-no-live. Enter in a field runs it at once. */
+(function(){
+  document.querySelectorAll('.estimator').forEach(function(est){
+    if(est.hasAttribute('data-no-live'))return;
+    var btn=est.querySelector('button[id$="Btn"]');
+    if(!btn)return;
+    var t=0;
+    function run(){
+      t=0;
+      window.__vfLiveRun=true;
+      try{btn.click();}finally{window.__vfLiveRun=false;}
+    }
+    function later(e){
+      var el=e.target;
+      if(!el||!el.matches||!el.matches('input,select'))return;
+      clearTimeout(t);
+      t=setTimeout(run,e.type==='change'?0:260);
+    }
+    est.addEventListener('input',later);
+    est.addEventListener('change',later);
+    est.addEventListener('keydown',function(e){
+      if(e.key!=='Enter'||!e.target.matches||!e.target.matches('input'))return;
+      e.preventDefault();clearTimeout(t);run();
+    });
+  });
+})();
+
+/* ---------- "On this page" for a calculator page ----------
+   Built from the page's own h2 headings, so a regenerated page needs nothing
+   added to its template. Styled as a sticky rail on wide screens and a row of
+   links under the tool on narrow ones (voltfield-calculators.css). */
+(function(){
+  var tool=document.querySelector('.artwrap > .calc-tool');
+  if(!tool)return;
+  var wrap=tool.parentNode;
+  var heads=[].filter.call(wrap.children,function(el){return el.tagName==='H2';});
+  if(heads.length<3)return;
+  var used={};
+  [].forEach.call(document.querySelectorAll('[id]'),function(el){used[el.id]=1;});
+  var nav=document.createElement('nav');
+  nav.className='calc-toc'+(wrap.querySelector('.pagejump')?' rail-only':'');
+  nav.setAttribute('aria-label','On this page');
+  var box=document.createElement('div');box.className='calc-toc-in';
+  var lab=document.createElement('p');lab.textContent='On this page';box.appendChild(lab);
+  var links=[];
+  function add(id,text,target){
+    var a=document.createElement('a');a.href='#'+id;a.textContent=text;box.appendChild(a);links.push([a,target]);
+  }
+  if(tool.id)add(tool.id,'Calculator',tool);
+  heads.forEach(function(h){
+    if(!h.id){
+      var base=(h.textContent||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,48)||'section';
+      var id=base,n=2;
+      while(used[id])id=base+'-'+(n++);
+      used[id]=1;h.id=id;
+    }
+    add(h.id,(h.textContent||'').trim(),h);
+  });
+  nav.appendChild(box);
+  wrap.insertBefore(nav,tool.nextSibling);
+  /* Mark the section being read. The last heading above a line a third of the
+     way down the window is the current one. */
+  var tick=0;
+  function mark(){
+    tick=0;
+    var line=window.innerHeight/3,cur=links[0];
+    links.forEach(function(l){if(l[1].getBoundingClientRect().top<=line)cur=l;});
+    links.forEach(function(l){if(l===cur)l[0].setAttribute('aria-current','true');else l[0].removeAttribute('aria-current');});
+  }
+  window.addEventListener('scroll',function(){if(!tick)tick=requestAnimationFrame(mark);},{passive:true});
+  mark();
 })();
 
 /* ---------- equipment card with an on-demand 3D view ----------

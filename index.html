@@ -456,6 +456,30 @@ footer .foot-brand b{font-size:18px;color:#fff;font-weight:600;letter-spacing:-.
   .herosearch form{flex-wrap:wrap;border-radius:var(--r-lg)}
   .herosearch button[type=submit]{width:100%}
 }
+
+/* ---------- Nov 2026 trim ---------- */
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.hero-cta .btn{min-height:50px;padding:0 24px;font-size:16px}
+.herosearch{margin-top:22px}
+.showcase-cap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.showcase-cap a{flex-shrink:0;font-size:14px;font-weight:600;color:#101B2D;background:var(--signal);
+  border-radius:var(--r-pill);padding:9px 16px;text-decoration:none;min-height:38px;display:inline-flex;align-items:center;gap:4px}
+.showcase-cap a:hover{filter:brightness(1.06)}
+.morerow{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px;margin-top:28px}
+.morerow a:not(.btn){font-weight:600;color:var(--ink);text-decoration:underline;text-decoration-color:var(--line-strong);
+  text-underline-offset:4px;min-height:24px}
+.morerow a:not(.btn):hover{text-decoration-color:var(--signal)}
+.section.sectors{padding-top:56px;padding-bottom:56px}
+.section.sectors .section-head{margin-bottom:20px}
+.section.sectors h2{font-size:24px}
+.secrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.secrow a{display:grid;grid-template-columns:auto 1fr;column-gap:10px;row-gap:4px;align-items:center;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px 20px;text-decoration:none;
+  transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+.secrow a:hover{border-color:var(--line-dark);box-shadow:var(--sh-2)}
+.secrow .sc-dot{width:9px;height:9px;border-radius:50%}
+.secrow b{font-size:17px;font-weight:600;color:var(--ink);letter-spacing:-.02em}
+.secrow a > span:last-child{grid-column:1 / -1;font-size:14.5px;line-height:1.5;color:var(--slate)}
 </style>
 </head>
 <body>
@@ -515,7 +539,11 @@ footer .foot-brand b{font-size:18px;color:#fff;font-weight:600;letter-spacing:-.
     <div class="hero-copy">
       <div class="hero-eyebrow"><span class="dot"></span> Free electrical &amp; cooling tools &middot; no signup</div>
       <h1>Electrical &amp; cooling calculators for <em>data centers, solar &amp; BESS</em></h1>
-      <p class="lede"><b class="lede-slug">Size it, spec it, check your work.</b> Free calculators, charts, guides and practice questions for the electrical and cooling side of data center, solar and battery-storage projects. Every calculator shows its method; every practice board checks what you built.</p>
+      <p class="lede"><b class="lede-slug">Size it, spec it, check your work.</b> Forty-three free calculators that show their method, with guides and practice boards for data center, solar and battery-storage projects.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="engineering-calculators.html">Open the calculators</a>
+        <a class="btn btn-ghost" href="guides.html">Read the guides</a>
+      </div>
       <div class="herosearch">
         <form action="site-search.html" method="get" id="heroSearchForm" role="search">
           <svg class="mag" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M12.5 12.5 17 17" stroke-linecap="round"/></svg>
@@ -524,12 +552,12 @@ footer .foot-brand b{font-size:18px;color:#fff;font-weight:600;letter-spacing:-.
           <div class="kbsearch-results" id="heroSearchSuggest" role="listbox"></div>
         </form>
         <div class="hint">
-          <span>Start with:</span>
-          <a href="voltfield-sandbox.html">One-line sandbox</a>
-          <a href="voltfield-pod-designer.html">POD designer</a>
-          <a href="guide-grid-interconnection-process.html">Grid interconnection</a>
-          <a href="guide-feoc-compliance.html">FEOC compliance</a>
-          <a href="charts/cooling-load-chart.html">Cooling load chart</a>
+          <span>Most used:</span>
+          <a href="calculators/voltage-drop.html">Voltage drop</a>
+          <a href="calculators/wire-size.html">Wire size</a>
+          <a href="calculators/kw-to-amps.html">kW to amps</a>
+          <a href="calculators/transformer-sizing.html">Transformer sizing</a>
+          <a href="calculators/airflow-cfm.html">Airflow (CFM)</a>
         </div>
       </div>
     </div>
@@ -541,8 +569,11 @@ footer .foot-brand b{font-size:18px;color:#fff;font-weight:600;letter-spacing:-.
         </div>
       </div>
       <div class="showcase-cap">
-        <b id="showcaseName">Interactive equipment models</b>
-        <span id="showcaseHint">35 procedural 3D models across the practice tools</span>
+        <div>
+          <b id="showcaseName">Interactive equipment models</b>
+          <span id="showcaseHint">35 procedural 3D models across the practice tools</span>
+        </div>
+        <a id="showcaseGo" href="free-tools.html">See the tools <span aria-hidden="true">&rarr;</span></a>
       </div>
     </div>
   </div>
@@ -569,70 +600,29 @@ footer .foot-brand b{font-size:18px;color:#fff;font-weight:600;letter-spacing:-.
      filled client-side from practice state by voltfield-progress.js. -->
 <div class="resume" id="resumeBand" hidden></div>
 
-<!-- ==================== THREE ENTRY POINTS ====================
-     Was fourteen cards in a dark panel captioned START HERE. -->
-<div class="section">
+<!-- ==================== CALCULATORS ====================
+     Was "Three ways in" (three cards carrying eleven links) followed by a
+     separate cooling section. Both pointed at the same pages the nav, the hero
+     and the footer already offer. One section now: six calculators, electrical
+     and cooling together, and one line to the rest. -->
+<div class="section" id="calculators">
   <div class="section-head">
-    <div class="section-eyebrow">Start here</div>
-    <h2>Three ways in</h2>
-    <p>Most people arrive with one of three questions. Each of these opens onto the rest.</p>
-  </div>
-  <div class="pathgrid">
-    <div class="path path-a">
-      <div class="pi"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="9" y="5" width="22" height="30" rx="3"/><rect x="13" y="9" width="14" height="6" rx="1" fill="currentColor" stroke="none" opacity=".35"/><circle cx="15" cy="22" r="1.7" fill="currentColor" stroke="none"/><circle cx="20" cy="22" r="1.7" fill="currentColor" stroke="none"/><circle cx="25" cy="22" r="1.7" fill="currentColor" stroke="none"/><circle cx="15" cy="28" r="1.7" fill="currentColor" stroke="none"/><circle cx="20" cy="28" r="1.7" fill="currentColor" stroke="none"/><circle cx="25" cy="28" r="1.7" fill="currentColor" stroke="none"/></svg></div>
-      <h3>Work it out: calculators</h3>
-      <p>Forty-three calculators &mdash; voltage drop, transformer sizing, fault current, arc-flash incident energy, pump power, airflow and chilled water flow &mdash; each showing the method, not just the answer.</p>
-      <div class="plinks">
-        <a href="engineering-calculators.html">All calculators <span class="ar" aria-hidden="true">&rarr;</span></a>
-        <a href="reference-charts.html">Reference charts <span class="ar" aria-hidden="true">&rarr;</span></a>
-        <a href="practice-questions.html">Practice questions <span class="ar" aria-hidden="true">&rarr;</span></a>
-        <a href="specification-checklist.html">Specification checklist <span class="ar" aria-hidden="true">&rarr;</span></a>
-        <a href="voltfield-glossary-quiz.html">Test yourself <span class="ar" aria-hidden="true">&rarr;</span></a>
-      </div>
-    </div>
-    <div class="path path-b">
-      <div class="pi"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M8 7h17l7 7v19a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2z"/><path d="M25 7v7h7" stroke-width="1.8"/><path d="M12 21h16M12 27h11" stroke-width="1.8"/></svg></div>
-      <h3>Understand it: guides &amp; glossary</h3>
-      <p>Fifty-five guides, each written to answer a single question &mdash; how a nameplate reads, what an arc-flash boundary is, how a CRAC differs from a CRAH, why PUE lies to you &mdash; plus a plain-language glossary.</p>
-      <div class="plinks">
-        <a href="guides.html">55 technical guides <span class="ar" aria-hidden="true">&rarr;</span></a>
-        <a href="glossary.html">Glossary, 56 terms <span class="ar" aria-hidden="true">&rarr;</span></a>
-        <a href="methodology.html">How this material is built <span class="ar" aria-hidden="true">&rarr;</span></a>
-      </div>
-    </div>
-    <div class="path path-c">
-      <div class="pi"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="7" cy="20" r="3"/><path d="M10 20h6"/><rect x="16" y="15" width="8" height="10" rx="1.5" fill="currentColor" stroke="none" opacity=".35"/><rect x="16" y="15" width="8" height="10" rx="1.5"/><path d="M24 20h6"/><circle cx="33" cy="20" r="3"/></svg></div>
-      <h3>Practice it: design boards</h3>
-      <p>Open boards for laying out real equipment &mdash; a one-line, a packaged power module, a rack elevation &mdash; with the result checked against sizing, load and code rules as you build.</p>
-      <div class="plinks">
-        <a href="voltfield-sandbox.html">One-line sandbox <span class="ar" aria-hidden="true">&rarr;</span></a>
-        <a href="voltfield-pod-designer.html">POD &amp; skid designer <span class="ar" aria-hidden="true">&rarr;</span></a>
-        <a href="voltfield-rack-builder.html">Rack elevation builder <span class="ar" aria-hidden="true">&rarr;</span></a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ==================== COOLING ====================
-     Added Nov 2026. The site grew a mechanical side -- airflow, chilled water,
-     pumps, containment -- and the home page still read as electrical only.
-     Nearly every watt an IT load draws leaves as heat, so the two sides are
-     sized from the same number, which is the point this section makes. -->
-<div class="section" id="cooling">
-  <div class="section-head">
-    <div class="section-eyebrow">Cooling &amp; mechanical</div>
-    <h2>Every kilowatt in comes out as heat</h2>
-    <p>The electrical load and the cooling load of a data hall are the same number seen from two sides. These take it from kW to tons, to air, to chilled water and to the pump that moves it.</p>
+    <h2>Start with a calculator</h2>
+    <p>Each opens on a worked example and recalculates as you type. The electrical load and the cooling load of a data hall are the same number seen from two sides, so both are here.</p>
   </div>
   <div class="gdgrid">
-    <a class="gdcard has-thumb" href="calculators/airflow-cfm.html"><span class="gd-thumb is-badge" aria-hidden="true">CFM</span><h3>Airflow (CFM) Calculator</h3><p>The air a heat load needs at a given temperature rise, with CFM per kW.</p></a>
-    <a class="gdcard has-thumb" href="calculators/chilled-water-flow.html"><span class="gd-thumb is-badge" aria-hidden="true">GPM</span><h3>Chilled Water Flow Calculator</h3><p>Flow from tons or kW and the supply-return temperature difference.</p></a>
-    <a class="gdcard has-thumb" href="calculators/pump-power.html"><span class="gd-thumb is-badge" aria-hidden="true">kW</span><h3>Pump Power Calculator</h3><p>Shaft power and motor size from flow, head and efficiency, in US or metric units.</p></a>
-    <a class="gdcard has-thumb" href="charts/cooling-load-chart.html"><span class="gd-thumb is-badge" aria-hidden="true">BTU</span><h3>Cooling Load Chart</h3><p>kW as BTU/h and tons, with airflow per kW and water flow per ton.</p></a>
-    <a class="gdcard has-thumb" href="guide-crac-vs-crah.html"><span class="gd-thumb is-badge" aria-hidden="true">CRAH</span><h3>CRAC vs. CRAH</h3><p>One has a compressor, the other borrows cooling from a chiller plant. What follows from that.</p></a>
-    <a class="gdcard has-thumb" href="guide-hot-aisle-vs-cold-aisle-containment.html"><span class="gd-thumb is-badge" aria-hidden="true">HAC</span><h3>Hot Aisle vs. Cold Aisle Containment</h3><p>How each stops supply and exhaust air mixing, and which to choose.</p></a>
+    <a class="gdcard has-thumb" href="calculators/voltage-drop.html"><span class="gd-thumb is-badge" aria-hidden="true">V%</span><h3>Voltage Drop</h3><p>Drop on a feeder against the 3% and 5% limits, and the conductor that fixes it.</p></a>
+    <a class="gdcard has-thumb" href="calculators/wire-size.html"><span class="gd-thumb is-badge" aria-hidden="true">AWG</span><h3>Wire Size</h3><p>The termination limit and the derating check, both run for a given load.</p></a>
+    <a class="gdcard has-thumb" href="calculators/transformer-sizing.html"><span class="gd-thumb is-badge" aria-hidden="true">kVA</span><h3>Transformer Sizing</h3><p>A kW load to the kVA it needs, rounded to the next standard rating.</p></a>
+    <a class="gdcard has-thumb" href="calculators/kw-to-amps.html"><span class="gd-thumb is-badge" aria-hidden="true">kW&rarr;A</span><h3>kW to Amps</h3><p>Power to conductor current, with the 125% continuous-load figure.</p></a>
+    <a class="gdcard has-thumb" href="calculators/airflow-cfm.html"><span class="gd-thumb is-badge" aria-hidden="true">CFM</span><h3>Airflow (CFM)</h3><p>The air a heat load needs at a given temperature rise, with CFM per kW.</p></a>
+    <a class="gdcard has-thumb" href="calculators/chilled-water-flow.html"><span class="gd-thumb is-badge" aria-hidden="true">GPM</span><h3>Chilled Water Flow</h3><p>Flow from tons or kW and the supply-return temperature difference.</p></a>
   </div>
-  <a class="section-more" href="engineering-calculators.html">All cooling and electrical calculators <span class="ar" aria-hidden="true">&rarr;</span></a>
+  <div class="morerow">
+    <a class="btn btn-primary" href="engineering-calculators.html">All 43 calculators</a>
+    <a href="reference-charts.html">Reference charts</a>
+    <a href="practice-questions.html">Practice questions</a>
+  </div>
 </div>
 
 <!-- ==================== PRACTICE FEATURE ====================
@@ -640,7 +630,6 @@ footer .foot-brand b{font-size:18px;color:#fff;font-weight:600;letter-spacing:-.
 <section class="feature">
   <div class="feature-in">
     <div>
-      <div class="section-eyebrow">Practice tools</div>
       <h2>Get it wrong here, not on site</h2>
       <p>Three open boards for laying out real equipment and having the result checked against sizing, load and code rules &mdash; with 35 procedural 3D models of the actual kit behind them.</p>
       <div class="flinks">
@@ -652,47 +641,12 @@ footer .foot-brand b{font-size:18px;color:#fff;font-weight:600;letter-spacing:-.
   </div>
 </section>
 
-<!-- ==================== SECTORS ==================== -->
-<div class="section">
-  <div class="section-head">
-    <div class="section-eyebrow">Reference by sector</div>
-    <h2>Three sectors of power and cooling equipment</h2>
-    <p>Each opens onto the guides, reference specifications and standards for that sector.</p>
-  </div>
-  <div class="secgrid">
-    <a class="seccard" href="data-centers.html">
-      <svg class="sc-icon" viewBox="0 0 40 40" fill="none" stroke="#2C3E57" stroke-width="2" aria-hidden="true"><rect x="9" y="6" width="22" height="28" rx="2.5" fill="#EDF1F6"/><path d="M9 14h22M9 22h22M9 30h22"/><circle cx="26" cy="10" r="1.5" fill="#FFC400" stroke="none"/><circle cx="26" cy="18" r="1.5" fill="#FFC400" stroke="none"/><circle cx="26" cy="26" r="1.5" fill="#FFC400" stroke="none"/></svg>
-      <div class="sc-hd"><span class="sc-dot" aria-hidden="true" style="background:var(--dc)"></span><h3>Data centers</h3></div>
-      <p>Transformers, switchgear, generators, UPS and busway, and the chillers, air handlers and CDUs that cool them, for hyperscale and colo builds.</p>
-      <div class="sc-cats"><span>Transformers</span><span>Switchgear</span><span>Cooling</span></div>
-      <div class="sc-foot"><span class="go">Guides &amp; reference &rarr;</span></div>
-    </a>
-    <a class="seccard" href="renewables.html">
-      <svg class="sc-icon" viewBox="0 0 40 40" fill="none" stroke="#2C3E57" stroke-width="2" aria-hidden="true"><path d="M20 6v6M20 28v6M6 20h6M28 20h6M10 10l4 4M26 26l4 4M30 10l-4 4M14 26l-4 4"/><circle cx="20" cy="20" r="7" fill="#EDF1F6"/></svg>
-      <div class="sc-hd"><span class="sc-dot" aria-hidden="true" style="background:var(--re)"></span><h3>Renewables</h3></div>
-      <p>Modules, inverters, trackers, GSUs and balance of system for solar, wind and hybrid sites.</p>
-      <div class="sc-cats"><span>Inverters</span><span>Trackers</span><span>Wire &amp; cable</span></div>
-      <div class="sc-foot"><span class="go">Guides &amp; reference &rarr;</span></div>
-    </a>
-    <a class="seccard" href="battery-storage.html">
-      <svg class="sc-icon" viewBox="0 0 40 40" fill="none" stroke="#2C3E57" stroke-width="2" aria-hidden="true"><rect x="10" y="8" width="20" height="26" rx="2.5" fill="#EDF1F6"/><rect x="16" y="4" width="8" height="4" rx="1" fill="#FFC400" stroke="none"/><path d="M15 16h10M15 22h10M15 28h6"/></svg>
-      <div class="sc-hd"><span class="sc-dot" aria-hidden="true" style="background:var(--bess)"></span><h3>Battery storage</h3></div>
-      <p>DC blocks, PCS, BMS, EMS, fire suppression and thermal management for utility-scale BESS.</p>
-      <div class="sc-cats"><span>Storage blocks</span><span>PCS</span><span>Safety</span></div>
-      <div class="sc-foot"><span class="go">Guides &amp; reference &rarr;</span></div>
-    </a>
-  </div>
-</div>
-
-<div class="ad-unit" data-ad="leaderboard"></div>
-
 <!--NEWS-START-->
 <div class="band band-card">
 <div class="section">
   <div class="section-head">
-    <div class="section-eyebrow">Written here</div>
     <h2>Guides that answer one question each</h2>
-    <p>No overviews, no listicles. Each one takes a single thing engineers actually get asked and works through it properly.</p>
+    <p>Each one takes a single thing engineers get asked and works through it properly.</p>
   </div>
   <div class="gdgrid">
     <a class="gdcard has-thumb" href="guide-transformer-nameplate.html">
@@ -738,29 +692,27 @@ footer .foot-brand b{font-size:18px;color:#fff;font-weight:600;letter-spacing:-.
       <time class="gdate" datetime="2026-08-24">Updated August 24, 2026</time>
     </a>
   </div>
-  <a class="section-more" href="guides.html">All 55 guides and 17 equipment references <span class="ar" aria-hidden="true">&rarr;</span></a>
+  <a class="section-more" href="guides.html">All 55 guides <span class="ar" aria-hidden="true">&rarr;</span></a>
 </div>
 </div>
 <!--NEWS-END-->
 
-<!-- ==================== CLOSING ====================
-     Replaces the old gradient CTA band plus the separate packets section. -->
-<div class="section" style="padding-top:0">
-  <div class="endgrid">
-    <div class="endcard">
-      <div class="ek">Start somewhere</div>
-      <h3>Not sure what you need yet?</h3>
-      <p>The tools hub lists everything on the site in one place &mdash; every calculator, every practice board and the glossary quiz. Nothing needs an account.</p>
-      <a class="btn btn-primary" href="free-tools.html">Browse all free tools</a>
-    </div>
-    <div class="endcard">
-      <div class="ek">How this is made</div>
-      <h3>Where the numbers come from</h3>
-      <p>Every figure on the site carries a basis, and the methodology page sets out how each is derived, what it is good for, and where it should not be relied on.</p>
-      <a class="btn btn-ghost" href="methodology.html">Read the methodology</a>
-    </div>
+<!-- ==================== SECTORS ====================
+     Three full cards with icons, chips and a footer line became one row. -->
+<div class="section sectors">
+  <div class="section-head">
+    <h2>Or browse by sector</h2>
+  </div>
+  <div class="secrow">
+    <a href="data-centers.html"><span class="sc-dot" aria-hidden="true" style="background:var(--dc)"></span><b>Data centers</b><span>Transformers, switchgear, UPS, generators and the cooling plant</span></a>
+    <a href="renewables.html"><span class="sc-dot" aria-hidden="true" style="background:var(--re)"></span><b>Renewables</b><span>Modules, inverters, trackers and balance of system</span></a>
+    <a href="battery-storage.html"><span class="sc-dot" aria-hidden="true" style="background:var(--bess)"></span><b>Battery storage</b><span>DC blocks, PCS, BMS and fire safety for utility-scale BESS</span></a>
   </div>
 </div>
+
+<div class="ad-unit" data-ad="leaderboard"></div>
+
+
 
 <div class="ad-unit" data-ad="footer"></div>
 <button class="totop" id="toTopBtn" aria-label="Back to top" title="Back to top">&uarr;</button>
@@ -830,12 +782,12 @@ footer .foot-brand b{font-size:18px;color:#fff;font-weight:600;letter-spacing:-.
   try{ reduce=matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
 
   var PICKS=[
-    {id:'transformer',color:'#2B6CB0',name:'Pad-mount transformer',hint:'Sized in the calculators, placed in the POD designer'},
-    {id:'switchgear', color:'#2B6CB0',name:'LV switchgear',        hint:'Fault-current and arc-flash checks run against it'},
-    {id:'genset',     color:'#9C4221',name:'Diesel genset',        hint:'Backup power in the POD & Skid designer'},
-    {id:'server2u',   color:'#2B6CB0',name:'2U rack server',       hint:'Stacked in the rack elevation builder'},
-    {id:'cooling',    color:'#2B6CB0',name:'CRAH unit',            hint:'Cooling load tracks the electrical load'},
-    {id:'motor',      color:'#5B6B7E',name:'AC induction motor',   hint:'The load at the end of a practice one-line'}
+    {id:'transformer',color:'#2B6CB0',name:'Pad-mount transformer',hint:'Sized in the calculators, placed in the POD designer',url:'calculators/transformer-sizing.html',go:'Size one'},
+    {id:'switchgear', color:'#2B6CB0',name:'LV switchgear',        hint:'Fault-current and arc-flash checks run against it',url:'calculators/fault-current.html',go:'Check fault current'},
+    {id:'genset',     color:'#9C4221',name:'Diesel genset',        hint:'Backup power in the POD & Skid designer',url:'voltfield-pod-designer.html',go:'Open the POD designer'},
+    {id:'server2u',   color:'#2B6CB0',name:'2U rack server',       hint:'Stacked in the rack elevation builder',url:'voltfield-rack-builder.html',go:'Open the rack builder'},
+    {id:'cooling',    color:'#2B6CB0',name:'CRAH unit',            hint:'Cooling load tracks the electrical load',url:'calculators/airflow-cfm.html',go:'Work out the airflow'},
+    {id:'motor',      color:'#5B6B7E',name:'AC induction motor',   hint:'The load at the end of a practice one-line',url:'voltfield-sandbox.html',go:'Open the one-line sandbox'}
   ];
   var i=Math.floor(Math.random()*PICKS.length), handle=null, timer=null, onScreen=true;
 
@@ -863,6 +815,8 @@ footer .foot-brand b{font-size:18px;color:#fff;font-weight:600;letter-spacing:-.
     }
     document.getElementById('showcaseName').textContent=p.name;
     document.getElementById('showcaseHint').textContent=p.hint;
+    var go=document.getElementById('showcaseGo');
+    if(go&&p.url){go.href=p.url;go.firstChild.nodeValue=p.go+' ';}
     i++;
     if(!reduce) timer=setTimeout(show,7000);
   }

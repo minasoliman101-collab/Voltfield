@@ -1,22 +1,38 @@
 /* VOLTFIELD calculator UI (estimator boxes). Loaded by every page that
    carries a working calculator; moved out of engineering-calculators.html. */
-.estimator{background:var(--card);border:1px solid var(--line-dark);padding:20px;margin:16px 0 26px;scroll-margin-top:80px}
+.estimator{background:var(--card);border:1px solid var(--line-dark);border-radius:var(--r-lg);padding:24px;
+  margin:16px 0 26px;scroll-margin-top:80px;box-shadow:var(--sh-1)}
 /* The panel heading is an h2 so the page heading order runs h1 -> h2 without a
-   skipped level. letter-spacing and line-height are pinned because the global
-   h2 rule sets its own, and these panels should look exactly as before. */
-.estimator h2,.estimator h3{font-family:var(--disp);font-weight:700;font-size:19px;color:var(--ink);
-  letter-spacing:-.021em;line-height:1.15;margin-top:0;margin-bottom:4px}
-.estimator .sub{font-size:12.5px;color:var(--slate);margin-bottom:14px}
-.est-row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:10px}
-.est-field{display:flex;flex-direction:column;gap:4px}
-.est-field label{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--slate)}
-.est-field input,.est-field select{width:140px;border:1px solid var(--line-dark);padding:8px 10px;font-family:var(--mono);font-size:14px;background:var(--card)}
-.est-field button{background:var(--solid-bg);color:var(--solid-fg);border:0;padding:9px 16px;font-family:var(--disp);font-weight:700;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase}
-.est-field button:hover{background:transparent;color:var(--ink)}
-.est-result{font-family:var(--mono);font-size:13.5px;color:var(--ink);background:var(--card);border:1px solid var(--line);padding:12px 14px;margin-top:4px;display:none;line-height:1.6}
+   skipped level. */
+.estimator h2,.estimator h3{font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);
+  letter-spacing:-.021em;line-height:1.15;margin-top:0;margin-bottom:6px}
+.estimator .sub{font-size:13.5px;line-height:1.5;color:var(--slate);margin-bottom:18px;max-width:560px}
+/* One grid for every row, so a field in the second row sits under the field
+   above it. auto-fill, not auto-fit: a short last row keeps the column width
+   of the row before it. */
+.est-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:14px 12px;
+  align-items:end;margin-bottom:14px}
+.est-field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.est-field label{font-family:var(--body);font-size:13px;font-weight:500;line-height:1.3;color:var(--ink-2)}
+/* 16px: below that iOS zooms the page when a field takes focus. */
+.est-field input,.est-field select{width:100%;min-height:44px;border:1px solid var(--line-control);
+  border-radius:var(--r-sm);padding:9px 12px;font-family:var(--body);font-size:16px;
+  font-variant-numeric:tabular-nums;color:var(--ink);background:var(--card)}
+.est-field input:focus,.est-field select:focus{outline:2px solid var(--signal);outline-offset:1px;border-color:var(--ink)}
+.est-field button{width:100%;min-height:44px;background:var(--solid-bg);color:var(--solid-fg);border:0;
+  border-radius:var(--r-sm);padding:10px 18px;font-family:var(--disp);font-weight:600;font-size:15px;cursor:pointer}
+.est-field button:hover{filter:brightness(1.12)}
+/* The answer. The first bold figure in a result is the number the visitor
+   came for, so it is set at headline size inside its sentence. */
+.est-result{font-family:var(--body);font-size:15.5px;color:var(--ink-2);background:var(--sunk);
+  border:1px solid var(--line);border-left:3px solid var(--signal);border-radius:var(--r);
+  padding:16px 18px;margin-top:6px;display:none;line-height:1.6}
 .est-result.show{display:block}
-.est-result b{color:var(--link)}
-.est-result.warn{border-color:var(--og);background:#FBF1EC}
+.est-result b{color:var(--ink);font-weight:600}
+.est-result b:first-of-type{display:inline-block;vertical-align:baseline;font-family:var(--disp);font-size:30px;font-weight:700;
+  line-height:1.3;letter-spacing:-.02em;margin:0 2px;font-variant-numeric:tabular-nums}
+.est-result table b:first-of-type,.est-result li b:first-of-type{display:inline;font:inherit;font-weight:600;margin:0;letter-spacing:0}
+.est-result.warn{border-color:var(--line);border-left-color:var(--og);background:var(--tint-warn)}
 /* The calculator sits directly under the page heading. */
 .calc-tool{margin:8px 0 30px}
 .calc-tool .estimator{margin:0 0 18px}
@@ -39,20 +55,20 @@
 
 /* Note under a result that came from the worked example the tool opens on
    (see the end of voltfield-calculators.js). Removed on the first edit. */
-.est-example{margin:8px 0 0;font-family:var(--mono);font-size:11.5px;color:var(--slate)}
+.est-example{margin:8px 0 0;font-family:var(--body);font-size:13px;color:var(--slate)}
 
 /* Under a result: share buttons, then links that carry the result into the
    next tool (see "shareable results and next steps" in voltfield-calculators.js). */
-.est-after{margin-top:10px;display:grid;gap:10px}
+.est-after{margin-top:14px;display:grid;gap:12px}
 .est-share{display:flex;flex-wrap:wrap;gap:8px}
-.est-share button{font:600 11px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:9px 12px;min-height:36px;
-  background:transparent;color:var(--ink-2);border:1px solid var(--line-dark);border-radius:var(--r-s,6px);cursor:pointer}
+.est-share button{font:500 13px/1 var(--body);padding:9px 12px;min-height:36px;
+  background:transparent;color:var(--slate);border:1px solid var(--line);border-radius:var(--r-sm);cursor:pointer}
 .est-share button:hover{color:var(--ink);border-color:var(--signal)}
-.est-share a.est-proj{display:inline-flex;align-items:center;min-height:36px;padding:0 4px;font:600 11px/1 var(--mono);letter-spacing:.04em;
-  text-transform:uppercase;color:var(--link);text-decoration:underline;text-underline-offset:3px}
+.est-share a.est-proj{display:inline-flex;align-items:center;min-height:36px;padding:0 4px;font:500 13px/1 var(--body);
+  color:var(--link);text-decoration:underline;text-underline-offset:3px}
 .est-share a.est-proj[hidden]{display:none}
 .est-next{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font-size:14px}
-.est-next span{font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--slate)}
+.est-next span{font-size:13px;color:var(--slate)}
 .est-next a{display:inline-flex;align-items:center;min-height:32px;padding:5px 11px;border:1px solid var(--line-dark);border-radius:999px;
   color:var(--link);text-decoration:none;background:var(--card)}
 .est-next a:hover{border-color:var(--signal)}
@@ -69,3 +85,35 @@
 .est-units button:focus-visible{outline:2px solid var(--signal);outline-offset:-2px}
 @media(max-width:520px){.est-units{float:none;margin:0 0 10px}}
 @media print{.est-units{display:none}}
+
+/* ---------- calculator page layout ----------
+   The page was one 672px column on any screen: on a desktop monitor that is a
+   third of the width, with the tool no larger than a paragraph and ten
+   sections below it reachable only by scrolling. From 1100px the page takes a
+   wider shell: the same reading column, plus a rail on the right that lists
+   the sections and stays in view. :has() rather than a class from script, so
+   the width is right on first paint and nothing shifts when the script runs.
+   Below 1100px the same list sits under the tool as a row of links. */
+.calc-toc{margin:0 0 26px}
+.calc-toc.rail-only{display:none}
+.calc-toc p{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--slate);margin:0 0 8px;line-height:1.4}
+.calc-toc-in{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.calc-toc-in p{flex-basis:100%}
+.calc-toc a{font-size:13.5px;padding:6px 12px;min-height:32px;display:inline-flex;align-items:center;
+  border:1px solid var(--line-dark);border-radius:var(--r-pill);color:var(--ink-2);background:var(--card);text-decoration:none}
+.calc-toc a:hover{color:var(--ink);border-color:var(--ink-2)}
+@media(min-width:1100px){
+  main:has(.calc-tool) .artban-in{max-width:1000px}
+  .artwrap:has(>.calc-tool){max-width:1048px;padding-right:328px;position:relative}
+  .calc-toc,.calc-toc.rail-only{display:block;position:absolute;top:48px;right:24px;bottom:0;width:240px;margin:0}
+  .calc-toc-in{position:sticky;top:88px;display:block;border-left:1px solid var(--line);padding:2px 0 2px 0}
+  .calc-toc-in p{padding-left:16px;margin-bottom:10px}
+  .calc-toc a{display:block;min-height:0;border:0;border-left:2px solid transparent;margin-left:-1px;border-radius:0;
+    background:transparent;padding:6px 0 6px 15px;font-size:14px;line-height:1.35;color:var(--slate)}
+  .calc-toc a:hover{color:var(--ink);border-color:transparent;border-left-color:var(--line-strong)}
+  .calc-toc a[aria-current="true"]{color:var(--ink);font-weight:600;border-left-color:var(--signal)}
+}
+@media print{.calc-toc{display:none}}
+/* One field per line on a phone; four across from a tablet up. */
+@media(max-width:520px){.est-row{grid-template-columns:1fr}}

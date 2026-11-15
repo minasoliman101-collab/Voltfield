@@ -1115,3 +1115,36 @@ footer > .foot-legal:first-child{margin-top:0;padding-top:0;border-top:0}
 .term .term-more{margin-top:8px;font-family:var(--mono);font-size:12px;letter-spacing:.01em}
 /* a11y: breadcrumb size */
 .crumbnav,.crumbnav a,.crumbnav span{font-size:12px}
+
+/* ---------- index pages (calculators, charts, practice sets) ----------
+   A page that is a grid of cards was held to the 720px article column, so 43
+   calculators ran two across for nine screens. A page whose .artwrap directly
+   holds a card grid now takes the full shell; its prose keeps the reading
+   width. :has() so the generators that write these pages need no change. */
+.artwrap:has(> .gdgrid){max-width:var(--shell)}
+.artwrap:has(> .gdgrid) > p,.artwrap:has(> .gdgrid) > details,.artwrap:has(> .gdgrid) > .vf-updates,
+.artwrap:has(> .gdgrid) > h2:not(.gsec){max-width:720px}
+main:has(.artwrap > .gdgrid) .artban-in{max-width:calc(var(--shell) - 48px)}
+/* Filter box added by voltfield-site-config.js on the longer index pages. */
+.hubfilter{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:6px 0 4px}
+.hubfilter input{flex:1 1 280px;max-width:440px;min-height:46px;padding:10px 14px;font-family:var(--body);font-size:16px;
+  color:var(--ink);background:var(--card);border:1px solid var(--line-control);border-radius:var(--r)}
+.hubfilter input:focus{outline:2px solid var(--signal);outline-offset:1px;border-color:var(--ink)}
+.hubfilter span{font-size:14px;color:var(--slate)}
+.hub-hide{display:none !important}
+
+/* ---------- header nav: say each thing once ----------
+   Calculators, Glossary and Guides were top-level items and also rows inside
+   the Tools menu, and Home repeated the logo. The markup is written into every
+   page by several generators, so the repeats are removed here, in the one file
+   they all load, and a regenerated page cannot bring them back. */
+.hnav > a[href="/"],.hnav > a[href="/index.html"],.hnav > a[href="index.html"],.hnav > a[href="../index.html"],
+.toolpane a[href$="engineering-calculators.html"],.toolpane a[href$="glossary.html"],.toolpane a[href$="guides.html"]{display:none}
+
+/* Guides index: groups of different lengths sat in a two-column grid, so a
+   short group left a hole beside a long one. Columns instead: each group
+   takes the next free space. */
+@media(min-width:901px){
+  .hubgrid{display:block;columns:2;column-gap:14px}
+  .hubgrid > .hubgroup{break-inside:avoid;margin:0 0 14px}
+}

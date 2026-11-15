@@ -518,3 +518,45 @@ const SITE_CONFIG = {
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
   else build();
 })();
+
+/* ---------- filter box on the long index pages ----------
+   The calculators index lists 60 cards under seven headings and had no way to
+   narrow them. On any page whose article column holds card grids with twenty
+   or more cards between them, put one text box above the first grid: it hides
+   cards that do not match and any heading left with nothing under it. */
+(function(){
+  if(!document.querySelector)return;
+  var wrap=document.querySelector('.artwrap');
+  if(!wrap)return;
+  var grids=[].filter.call(wrap.children,function(el){return el.classList&&el.classList.contains('gdgrid');});
+  if(!grids.length)return;
+  var cards=[];
+  grids.forEach(function(g){[].forEach.call(g.querySelectorAll('.gdcard'),function(c){cards.push(c);});});
+  if(cards.length<20)return;
+  var first=grids[0];
+  var anchor=first.previousElementSibling&&first.previousElementSibling.tagName==='H2'?first.previousElementSibling:first;
+  var box=document.createElement('div');box.className='hubfilter';
+  var inp=document.createElement('input');inp.type='search';inp.id='hubFilter';
+  inp.placeholder='Filter '+cards.length+' tools, e.g. voltage drop, kVA, pump';
+  inp.setAttribute('aria-label','Filter the tools on this page');inp.autocomplete='off';
+  var out=document.createElement('span');out.setAttribute('role','status');out.setAttribute('aria-live','polite');
+  box.appendChild(inp);box.appendChild(out);
+  wrap.insertBefore(box,anchor);
+  var text=cards.map(function(c){return (c.textContent||'').toLowerCase();});
+  function apply(){
+    var words=inp.value.toLowerCase().split(/ +/).filter(Boolean),shown=0;
+    cards.forEach(function(c,i){
+      var ok=words.every(function(w){return text[i].indexOf(w)!==-1;});
+      c.classList.toggle('hub-hide',!ok);if(ok)shown++;
+    });
+    grids.forEach(function(g){
+      var any=!!g.querySelector('.gdcard:not(.hub-hide)');
+      g.classList.toggle('hub-hide',!any);
+      /* the heading, and a line of text between it and the grid */
+      var p=g.previousElementSibling,n=0;
+      while(p&&n<2&&(p.tagName==='H2'||p.tagName==='P')){p.classList.toggle('hub-hide',!any);if(p.tagName==='H2')break;p=p.previousElementSibling;n++;}
+    });
+    out.textContent=words.length?(shown?shown+' of '+cards.length+' shown':'Nothing matches. Try a shorter word.'):'';
+  }
+  inp.addEventListener('input',apply);
+})();
